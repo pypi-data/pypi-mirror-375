@@ -1,0 +1,25 @@
+name: Unit Testing
+on: [push]
+jobs:
+  unit-test:
+    name: 🧪 Unit Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔔 Check out
+        uses: actions/checkout@v3
+
+      - name: 🏗️ python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: ⬇️ Python PDM
+        uses: pdm-project/setup-pdm@v4
+        with:
+          cache: true
+
+      - name: ⬇️ Python Dependencies
+        run: pdm sync -G:all
+
+      - name: 🏃 pytest
+        run: pdm run pytest -xv

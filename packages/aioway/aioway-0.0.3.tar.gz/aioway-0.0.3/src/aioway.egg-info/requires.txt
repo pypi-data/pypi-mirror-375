@@ -1,0 +1,12 @@
+lark>=1.2.2
+numpy>=2.2.6
+pandas>=2.2.3
+rich>=14.0.0
+tensordict>=0.8.3
+torch>=2.7.0
+
+[faiss]
+faiss-cpu>=1.11.0
+
+[ibis]
+ibis>=3.3.0
