@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: pibert
+Version: 0.1.0
+Summary: Physics-Informed BERT-style Transformer for Multiscale PDE Modeling
+Home-page: https://github.com/yourusername/pibert
+Author: Somyajit Chakraborty, Chen Xizhong
+Author-email: Somyajit Chakraborty <somyajit.chakraborty@example.com>, Chen Xizhong <chen.xizhong@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/yourusername/pibert
+Project-URL: Bug Tracker, https://github.com/yourusername/pibert/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest >=6.0.0 ; extra == 'dev'
+Requires-Dist: jupyter >=1.0.0 ; extra == 'dev'
+Requires-Dist: black >=22.0.0 ; extra == 'dev'
+Requires-Dist: flake8 >=4.0.0 ; extra == 'dev'
+Provides-Extra: full
+Requires-Dist: pywt >=1.2.0 ; extra == 'full'
+
