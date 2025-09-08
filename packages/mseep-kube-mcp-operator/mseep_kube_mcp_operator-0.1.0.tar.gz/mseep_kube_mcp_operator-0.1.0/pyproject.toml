@@ -1,0 +1,70 @@
+[project]
+name = "mseep-kube-mcp-operator"
+dynamic = [
+    "version",
+]
+description = "MCP operator and sidecar"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "httpx",
+    "kopf",
+    "kubernetes",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "python-semantic-release",
+    "pre-commit",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[tool.pytest.ini_options]
+addopts = "--cov=sidecar --cov=mcp_operator --cov-report=term --cov-fail-under=80"
+
+[tool.setuptools.packages.find]
+where = [
+    ".",
+]
+include = [
+    "mcp_operator*",
+    "sidecar*",
+]
+exclude = [
+    "charts*",
+    "tests*",
+]
+
+[tool.setuptools.dynamic.version]
+attr = "mcp_operator.__version__"
+
+[tool.semantic_release]
+version_variable = "mcp_operator/__init__.py:__version__"
+changelog_file = "CHANGELOG.md"
+branch = "main"
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = [
+    "feat",
+    "fix",
+    "chore",
+    "docs",
+    "refactor",
+    "style",
+    "test",
+]
+
+[build-system]
+requires = [
+    "setuptools>=42",
+]
+build-backend = "setuptools.build_meta"

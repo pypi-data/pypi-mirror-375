@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+mcp_operator/__init__.py
+mcp_operator/mcp_operator.py
+mseep_kube_mcp_operator.egg-info/PKG-INFO
+mseep_kube_mcp_operator.egg-info/SOURCES.txt
+mseep_kube_mcp_operator.egg-info/dependency_links.txt
+mseep_kube_mcp_operator.egg-info/requires.txt
+mseep_kube_mcp_operator.egg-info/top_level.txt
+sidecar/__init__.py
+sidecar/main.py
+tests/test_operator.py
+tests/test_operator_extra.py
+tests/test_sidecar.py

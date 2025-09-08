@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: mseep-kube-mcp-operator
+Version: 0.1.0
+Summary: MCP operator and sidecar
+Author-email: mseep <support@skydeck.ai>
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: httpx
+Requires-Dist: kopf
+Requires-Dist: kubernetes
+Requires-Dist: pyyaml
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: python-semantic-release; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
