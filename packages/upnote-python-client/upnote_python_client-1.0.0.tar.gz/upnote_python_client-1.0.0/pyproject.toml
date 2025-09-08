@@ -1,0 +1,88 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "upnote-python-client"
+version = "1.0.0"
+description = "A Python client for UpNote using URL schemes to create and manage notes"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "UpNote Python Client Team", email = "upnote.python.client@gmail.com"}
+]
+maintainers = [
+    {name = "UpNote Python Client Team", email = "upnote.python.client@gmail.com"}
+]
+keywords = ["upnote", "notes", "markdown", "productivity", "url-scheme", "x-callback-url"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows", 
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+    "Topic :: Text Processing",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Utilities",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.7"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/upnote-python/upnote-python-client"
+Documentation = "https://github.com/upnote-python/upnote-python-client/blob/main/docs/API_REFERENCE.md"
+Repository = "https://github.com/upnote-python/upnote-python-client"
+"Bug Reports" = "https://github.com/upnote-python/upnote-python-client/issues"
+Changelog = "https://github.com/upnote-python/upnote-python-client/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "twine>=3.0",
+    "wheel>=0.36",
+]
+
+[tool.setuptools]
+packages = ["upnote_python_client"]
+
+[tool.setuptools.package-data]
+upnote_python_client = ["*.md"]
+
+[tool.black]
+line-length = 88
+target-version = ['py37']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
