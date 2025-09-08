@@ -1,0 +1,12 @@
+numpy
+opencv-python
+scikit-learn
+pillow
+matplotlib
+tqdm
+
+[dev]
+pytest
+black
+flake8
+mypy
