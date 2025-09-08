@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/llmpop/__init__.py
+src/llmpop/init_llm.py
+src/llmpop/monitor_resources.py
+src/llmpop/py.typed
+src/llmpop/version.py
+src/llmpop.egg-info/PKG-INFO
+src/llmpop.egg-info/SOURCES.txt
+src/llmpop.egg-info/dependency_links.txt
+src/llmpop.egg-info/requires.txt
+src/llmpop.egg-info/top_level.txt
+tests/test_init_llm.py
+tests/test_llm_readable_guide.py
+tests/test_monitor_resources.py
