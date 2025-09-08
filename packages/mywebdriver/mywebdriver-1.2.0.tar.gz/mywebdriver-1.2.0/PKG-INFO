@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: mywebdriver
+Version: 1.2.0
+Summary: A quick library to install your webdriver according to your browser version
+Home-page: https://github.com/gabriellopesdesouza2002/mywebdriver
+Author: Gabriel Lopes de Souza
+Author-email: gabriellopesdesouza2002@gmail.com
+License: MIT License
+Keywords: A quick library to install your webdriver according to your browser version
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# mywebdriver - A quick library to install your webdriver according to your browser version
+
+## Instalation
+
+`pip install -U mywebdriver`
+
+## Use
+
+```python
+from mywebdriver.chrome.chromedriver import ChromeDriverDownloader
+
+PATH_CHOMEDRIVER = ChromeDriverDownloader(directory_for_download='bin').download_chromedriver()
+```
