@@ -1,0 +1,19 @@
+[project]
+name = "parsedat-bedrock"
+version = "1.0.0"
+description = "Lightweight Little-Endian NBT -> JSON CLI utility for Minecraft Bedrock level.dat files"
+authors = [
+    {name = "DJ Stomp",email = "85457381+DJStompZone@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+parsedat-bedrock = "parsedat_bedrock.__main__:main"
