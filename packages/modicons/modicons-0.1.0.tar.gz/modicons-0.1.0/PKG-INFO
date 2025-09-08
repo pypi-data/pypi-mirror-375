@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: modicons
+Version: 0.1.0
+Summary: Namespace for modicon packages
+Project-URL: Homepage, https://github.com/kostia-tarnashynskyi/modicons
+Project-URL: Documentation, https://github.com/kostia-tarnashynskyi/modicons#readme
+Project-URL: Repository, https://github.com/kostia-tarnashynskyi/modicons
+Author-email: Kostia Tarnashynskyi <kostia.tarnashynskyi@gmail.com>
+Maintainer-email: Kostia Tarnashynskyi <kostia.tarnashynskyi@gmail.com>
+License-Expression: MIT
+License-File: LICENSE
+Keywords: di,python
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.11
+Requires-Dist: modicon>=0.1.1
+Description-Content-Type: text/markdown
+
+# modicons
+namespace  for Modicon`s modules 
