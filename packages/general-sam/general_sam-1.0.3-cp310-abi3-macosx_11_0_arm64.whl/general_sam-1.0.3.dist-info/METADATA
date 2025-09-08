@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: general_sam
+Version: 1.0.3
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Dist: pytest ; extra == 'test'
+Provides-Extra: test
+License-File: LICENSE-APACHE
+License-File: LICENSE-MIT
+Home-Page: https://github.com/ModelTC/general-sam-py
+Requires-Python: >=3.10
