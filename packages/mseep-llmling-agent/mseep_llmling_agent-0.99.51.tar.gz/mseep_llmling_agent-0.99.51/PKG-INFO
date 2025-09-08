@@ -1,0 +1,131 @@
+Metadata-Version: 2.4
+Name: mseep-llmling-agent
+Version: 0.99.51
+Summary: A brand new AI framework.  Fully async. Excellently typed. Pydantic-Ai + LiteLLM support. Human in the loop. Unique messaging features.
+Project-URL: Documentation, https://phil65.github.io/llmling-agent/
+Project-URL: Source, https://github.com/phil65/llmling-agent
+Project-URL: Issues, https://github.com/phil65/llmling-agent/issues
+Project-URL: Discussions, https://github.com/phil65/llmling-agent/discussions
+Project-URL: Code coverage, https://app.codecov.io/gh/phil65/llmling-agent
+Author-email: mseep <support@skydeck.ai>
+License: MIT License
+        
+        Copyright (c) 2024, Philipp Temminghoff
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Pydantic
+Classifier: Framework :: Pydantic :: 2
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Topic :: Documentation
+Classifier: Topic :: Internet
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+Requires-Python: >=3.12
+Requires-Dist: aiosqlite>=0.19.0
+Requires-Dist: anyenv>=0.3.0
+Requires-Dist: bigtree>=0.23.1
+Requires-Dist: fastmcp>=2.3.4
+Requires-Dist: griffe>=1.5.4
+Requires-Dist: jinjarope
+Requires-Dist: llmling-models
+Requires-Dist: llmling>=1.0.0
+Requires-Dist: mcp>=1.2.0
+Requires-Dist: morefs[asynclocal]
+Requires-Dist: prompt-toolkit>=3.0.48
+Requires-Dist: promptantic>=0.4.5
+Requires-Dist: psygnal>=0.11.1
+Requires-Dist: pydantic
+Requires-Dist: pydantic-ai-slim>=1.0.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: schemez>=0.0.1
+Requires-Dist: slashed>=0.1.0
+Requires-Dist: sqlmodel>=0.0.22
+Requires-Dist: tokonomics>=0.1.2
+Requires-Dist: toprompt>=0.0.1
+Requires-Dist: typer
+Requires-Dist: typing-extensions
+Requires-Dist: upathtools>=0.1.0
+Provides-Extra: agentops
+Requires-Dist: agentops; extra == 'agentops'
+Provides-Extra: arize
+Requires-Dist: arize; extra == 'arize'
+Requires-Dist: arize-otel; extra == 'arize'
+Requires-Dist: arize-phoenix-otel; extra == 'arize'
+Requires-Dist: openinference-instrumentation-litellm; extra == 'arize'
+Requires-Dist: openinference-instrumentation-openai; extra == 'arize'
+Provides-Extra: braintrust
+Requires-Dist: autoevals; (python_version < '3.14') and extra == 'braintrust'
+Requires-Dist: braintrust; extra == 'braintrust'
+Provides-Extra: clipboard
+Requires-Dist: clipman; extra == 'clipboard'
+Provides-Extra: composio
+Requires-Dist: composio-core; extra == 'composio'
+Requires-Dist: composio-openai; extra == 'composio'
+Provides-Extra: default
+Requires-Dist: pydantic-ai[logfire]; (python_version < '3.14') and extra == 'default'
+Provides-Extra: events
+Requires-Dist: aioimaplib>=2.0.1; extra == 'events'
+Requires-Dist: croniter>=6.0.0; extra == 'events'
+Requires-Dist: watchfiles; (python_version < '3.14') and extra == 'events'
+Provides-Extra: git
+Requires-Dist: pygit2; (python_version < '3.14') and extra == 'git'
+Provides-Extra: image
+Requires-Dist: pillow; (python_version < '3.14') and extra == 'image'
+Provides-Extra: langsmith
+Requires-Dist: langsmith; (python_version < '3.14') and extra == 'langsmith'
+Provides-Extra: litellm
+Requires-Dist: litellm; (python_version < '3.14') and extra == 'litellm'
+Provides-Extra: logfire
+Requires-Dist: logfire; extra == 'logfire'
+Provides-Extra: mcp-run
+Requires-Dist: mcpx-py; extra == 'mcp-run'
+Provides-Extra: mem0
+Requires-Dist: mem0ai>=0.1.48; (python_version < '3.14') and extra == 'mem0'
+Provides-Extra: mlflow
+Requires-Dist: mlflow>=2.20.1; (python_version < '3.14') and extra == 'mlflow'
+Provides-Extra: remote
+Requires-Dist: websockets>=14.2; extra == 'remote'
+Provides-Extra: server
+Requires-Dist: fastapi; extra == 'server'
+Requires-Dist: uvicorn; extra == 'server'
+Requires-Dist: websockets; extra == 'server'
+Provides-Extra: supabase
+Requires-Dist: supabase; extra == 'supabase'
+Provides-Extra: textual
+Requires-Dist: pygments; extra == 'textual'
+Requires-Dist: textual>=1.0.0; extra == 'textual'
+Requires-Dist: textualicious; extra == 'textual'
+Provides-Extra: tiktoken
+Requires-Dist: tiktoken; (python_version < '3.14') and extra == 'tiktoken'
+Provides-Extra: upsonic
+Requires-Dist: upsonic; extra == 'upsonic'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

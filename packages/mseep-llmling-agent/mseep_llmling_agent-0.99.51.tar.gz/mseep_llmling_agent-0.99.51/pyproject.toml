@@ -1,0 +1,406 @@
+[tool.hatch.version]
+source = "regex_commit"
+commit_extra_args = [
+    "-e",
+]
+path = "src/llmling_agent/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/llmling_agent",
+    "src/llmling_agent_web",
+    "src/llmling_agent_config",
+    "src/llmling_agent_cli",
+    "src/llmling_agent_tools",
+    "src/llmling_agent_commands",
+    "src/llmling_agent_examples",
+    "src/llmling_agent_providers",
+    "src/llmling_agent_storage",
+    "src/llmling_agent_functional",
+    "src/llmling_agent_docs",
+    "src/llmling_agent_events",
+    "src/llmling_agent_converters",
+    "src/llmling_agent_prompts",
+    "src/llmling_agent_models",
+    "src/llmling_agent_mcp",
+    "src/llmling_agent_input",
+    "src/llmling_agent_observability",
+    "src/llmling_agent_running",
+    "src/llmling_agent_server",
+    "src/llmling_textual",
+]
+
+[tool.uv]
+default-groups = [
+    "dev",
+    "lint",
+    "docs",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+log_cli = true
+python_files = [
+    "test_*.py",
+]
+pythonpath = [
+    "src",
+]
+log_level = "ERROR"
+asyncio_default_fixture_loop_scope = "function"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+asyncio_mode = "auto"
+addopts = "-m 'not slow'"
+markers = [
+    "asyncio: mark test as async",
+    "slow: marks tests as slow",
+    "unit: marks tests as unit tests",
+    "integration: marks tests as integration tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning:pydantic.*:",
+    "ignore::UserWarning:pydantic.*:",
+    "ignore::DeprecationWarning:litellm.*:",
+    "ignore::DeprecationWarning:typer.*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "@overload",
+    "except ImportError",
+    "if __name__ == \"__main__\":",
+]
+
+[tool.logfire]
+ignore_no_config = true
+
+[tool.mypy]
+python_version = "3.12"
+disable_error_code = [
+    "misc",
+    "import",
+]
+pretty = true
+check_untyped_defs = true
+exclude = [
+    "venv/",
+    ".venv/",
+    "tests/",
+]
+plugins = [
+    "pydantic.mypy",
+]
+
+[tool.ruff]
+line-length = 90
+extend-exclude = [
+    "docs",
+]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "A",
+    "B",
+    "BLE",
+    "C",
+    "C4",
+    "COM",
+    "D",
+    "E",
+    "EM",
+    "EXE",
+    "F",
+    "FA",
+    "FLY",
+    "G",
+    "I",
+    "ICN",
+    "INP",
+    "INT",
+    "ISC",
+    "N",
+    "PERF",
+    "PIE",
+    "PLE",
+    "PLC",
+    "PLR",
+    "PT",
+    "PTH",
+    "PYI",
+    "Q",
+    "RET",
+    "RSE",
+    "RUF",
+    "SIM",
+    "SLF",
+    "SLOT",
+    "T10",
+    "TC",
+    "TID",
+    "TRY",
+    "UP",
+    "W",
+    "YTT",
+]
+ignore = [
+    "C408",
+    "C901",
+    "COM812",
+    "D100",
+    "D102",
+    "D103",
+    "D105",
+    "D107",
+    "D203",
+    "D204",
+    "D213",
+    "D401",
+    "D408",
+    "D413",
+    "ISC001",
+    "PLC0415",
+    "PLR0912",
+    "PLR0913",
+    "SLF001",
+    "TRY003",
+    "TC006",
+]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+force-sort-within-sections = true
+combine-as-imports = true
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "E402",
+    "I001",
+]
+"scripts/*" = [
+    "INP001",
+]
+
+[tool.ruff.format]
+preview = true
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.12"
+pythonPlatform = "All"
+typeCheckingMode = "basic"
+deprecateTypingAliases = true
+reportMissingTypeStubs = false
+reportUnusedCallResult = false
+reportUnknownVariableType = false
+reportAny = false
+reportImplicitOverride = false
+reportUnusedFunction = false
+reportImplicitStringConcatenation = false
+reportIgnoreCommentWithoutRule = false
+reportUnannotatedClassAttribute = false
+reportSelfClsParameterName = false
+reportPrivateImportUsage = false
+
+[tool.mknodes]
+allowed-commit-types = [
+    "fix",
+    "feat",
+    "refactor",
+    "docs",
+    "test",
+    "build",
+    "chore",
+]
+docstring-style = "google"
+
+[build-system]
+requires = [
+    "hatchling",
+    "hatch-regex-commit",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-llmling-agent"
+description = "A brand new AI framework.  Fully async. Excellently typed. Pydantic-Ai + LiteLLM support. Human in the loop. Unique messaging features."
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dynamic = [
+    "version",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Documentation",
+    "Topic :: Software Development",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+    "Framework :: Pydantic",
+    "Framework :: Pydantic :: 2",
+]
+keywords = []
+requires-python = ">=3.12"
+dependencies = [
+    "llmling>=1.0.0",
+    "pydantic",
+    "prompt-toolkit>=3.0.48",
+    "promptantic>=0.4.5",
+    "pydantic_ai_slim>=1.0.0",
+    "llmling-models",
+    "python-dotenv>=1.0.1",
+    "sqlmodel>=0.0.22",
+    "aiosqlite>=0.19.0",
+    "typer",
+    "psygnal>=0.11.1",
+    "tokonomics>=0.1.2",
+    "slashed>=0.1.0",
+    "toprompt>=0.0.1",
+    "mcp>=1.2.0",
+    "jinjarope",
+    "griffe>=1.5.4",
+    "morefs[asynclocal]",
+    "bigtree>=0.23.1",
+    "typing_extensions",
+    "upathtools>=0.1.0",
+    "anyenv>=0.3.0",
+    "schemez>=0.0.1",
+    "fastmcp>=2.3.4",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.scripts]
+llmling-agent = "llmling_agent.__main__:cli"
+
+[project.optional-dependencies]
+server = [
+    "fastapi",
+    "uvicorn",
+    "websockets",
+]
+clipboard = [
+    "clipman",
+]
+tiktoken = [
+    "tiktoken; python_version < '3.14'",
+]
+composio = [
+    "composio_core",
+    "composio_openai",
+]
+mcp_run = [
+    "mcpx-py",
+]
+upsonic = [
+    "upsonic",
+]
+supabase = [
+    "supabase",
+]
+events = [
+    "watchfiles; python_version < '3.14'",
+    "aioimaplib>=2.0.1",
+    "croniter>=6.0.0",
+]
+textual = [
+    "textual>=1.0.0",
+    "textualicious",
+    "pygments",
+]
+litellm = [
+    "litellm; python_version < '3.14'",
+]
+image = [
+    "pillow; python_version < '3.14'",
+]
+remote = [
+    "websockets>=14.2",
+]
+mem0 = [
+    "mem0ai>=0.1.48; python_version < '3.14'",
+]
+logfire = [
+    "logfire",
+]
+agentops = [
+    "agentops",
+]
+braintrust = [
+    "braintrust",
+    "autoevals; python_version < '3.14'",
+]
+git = [
+    "pygit2; python_version < '3.14'",
+]
+arize = [
+    "arize",
+    "arize-otel",
+    "arize-phoenix-otel",
+    "openinference-instrumentation-litellm",
+    "openinference-instrumentation-openai",
+]
+mlflow = [
+    "mlflow>=2.20.1; python_version < '3.14'",
+]
+langsmith = [
+    "langsmith; python_version < '3.14'",
+]
+default = [
+    "pydantic_ai[logfire]; python_version < '3.14'",
+]
+
+[project.urls]
+Documentation = "https://phil65.github.io/llmling-agent/"
+Source = "https://github.com/phil65/llmling-agent"
+Issues = "https://github.com/phil65/llmling-agent/issues"
+Discussions = "https://github.com/phil65/llmling-agent/discussions"
+"Code coverage" = "https://app.codecov.io/gh/phil65/llmling-agent"
+
+[project.entry-points."jinjarope.environment"]
+llmling_agent = "llmling_agent.utils:setup_env"
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pytest-xdist",
+    "pyreadline3",
+    "devtools",
+    "pytest-asyncio>=0.24.0",
+    "openapi_spec_validator; python_version < '3.14'",
+]
+benchmark = [
+    "pyinstrument",
+]
+lint = [
+    "ruff",
+    "mypy",
+]
+docs = [
+    "mkdocs-mknodes",
+    "mkdocs-material",
+]
