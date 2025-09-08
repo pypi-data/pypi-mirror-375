@@ -1,0 +1,16 @@
+affine
+dask
+dask-image
+distributed
+geomad
+numexpr
+numpy
+rasterio>=1.3.2
+odc-geo
+scikit-image
+toolz
+xarray
+
+[s3]
+boto3
+odc-cloud
