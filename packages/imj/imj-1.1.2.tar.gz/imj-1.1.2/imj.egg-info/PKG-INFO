@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: imj
+Version: 1.1.2
+Summary: Python client for i.marcusj.org
+Home-page: https://github.com/AgeOfMarcus/imj
+Author: AgeOfMarcus
+Author-email: marcus@marcusweinberger.com
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: summary
+
+# imj
+
+Python client for [i.marcusj.tech](https://i.marcusj.tech)
