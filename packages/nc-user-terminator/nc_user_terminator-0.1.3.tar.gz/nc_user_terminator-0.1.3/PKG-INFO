@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: nc-user-terminator
+Version: 0.1.3
+Summary: OAuth client wrapper for multi-tenant projects
+Author: bw_song
+Author-email: m132777096902@gmail.com
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Dynamic: author-email
+Dynamic: description-content-type
+Dynamic: requires-python

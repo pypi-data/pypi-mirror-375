@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nc-user-terminator"
+version = "0.1.3"
+description = "OAuth client wrapper for multi-tenant projects"
+authors = [
+    { name = "bw_song" }
+]
+requires-python = ">=3.8"
+dependencies = []
