@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: ButtonPad
+Version: 0.2.0
+Summary: A simple Tkinter-based GUI framework for making a grid of buttons, text boxes, and labels.
+Author-email: Al Sweigart <al@inventwithpython.com>
+Requires-Python: >=3.8
+Requires-Dist: tkmacosx==1.0.3; sys_platform == "darwin"
+Requires-Dist: pymsgbox>=1.0.9
