@@ -1,0 +1,48 @@
+[project]
+name = "pooolify"
+version = "0.1.0"
+description = "pooolify: Code-centric Python framework for multi-agent LLM orchestration with FastAPI + SSE and PostgreSQL persistence"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "pooolify maintainers" }]
+license = { text = "MIT" }
+dependencies = [
+  "fastapi>=0.110",
+  "pydantic>=2.6",
+  "uvicorn>=0.30",
+  "httpx>=0.27",
+  "openai>=1.40.0",
+  "psycopg[binary]>=3.2",
+  "python-dotenv>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Pooolingforest/pooolifyAI"
+
+[project.scripts]
+pooolify = "pooolify.cli:main"
+
+[tool.uv]
+# Optional: hints for uv users
+dev-dependencies = [
+  "pytest",
+  "anyio",
+]
+
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+packages = ["pooolify"]
+include = [
+  "pooolify/**",
+  "README.md",
+  "LICENSE",
+]
+exclude = [
+  "pooolify/examples/01_web_ui/node_modules/**",
+  "pooolify/dist/**",
+  "**/__pycache__/**",
+  "**/*.pyc",
+]
