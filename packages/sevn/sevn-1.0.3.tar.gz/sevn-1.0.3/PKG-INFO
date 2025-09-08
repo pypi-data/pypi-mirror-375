@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: sevn
+Version: 1.0.3
+Summary: A secure environment variable manager
+Home-page: https://github.com/thoerner/sevn
+Author: Tim Hoerner
+Author-email: thoerner@gmail.com
+License: UNKNOWN
+Project-URL: Bug Reports, https://github.com/thoerner/sevn/issues
+Project-URL: Source, https://github.com/thoerner/sevn
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development
+Requires-Python: >=3.9
+License-File: LICENSE
+
+UNKNOWN
+
