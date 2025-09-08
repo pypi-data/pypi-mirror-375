@@ -1,0 +1,10 @@
+[project]
+name = "pooolify-example"
+version = "0.0.1"
+requires-python = ">=3.10"
+dependencies = [
+  "pooolify>=0.3.0",
+]
+
+[tool.uv]
+# Add dev-only dependencies here if needed
