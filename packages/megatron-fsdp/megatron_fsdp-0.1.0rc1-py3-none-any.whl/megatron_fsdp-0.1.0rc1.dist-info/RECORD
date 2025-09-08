@@ -1,0 +1,12 @@
+megatron_fsdp/__init__.py,sha256=_p_l-GJtzDEYrm3UzWJamslSgmYw5MyPdhMbW4F2AM4,1514
+megatron_fsdp/distributed_data_parallel_config.py,sha256=lGBew-_mGx689OuJf-qhY1xkVa5u8ZDbnlT0KQL5USw,6800
+megatron_fsdp/fully_shard.py,sha256=-Id_DmL4CH3aULUJzI8vx7uEE1ZGsEzU_qp61gCWKnE,18090
+megatron_fsdp/megatron_fsdp.py,sha256=seJuYuT9cnc50lwgvz-LcwRenVDm0REl3HFrsMtykTQ,52688
+megatron_fsdp/package_info.py,sha256=l25f5rDa07sH9NtPGzYRUgzlYsA9U5Sg-fBsxNhlobA,992
+megatron_fsdp/param_and_grad_buffer.py,sha256=5ivaMXjneSPlka1_8_yzvcxTHphS8-7FCVIl52Qy4ck,169854
+megatron_fsdp/uneven_dtensor.py,sha256=V3SAs3yAm7zYX_Odvfz5Rc8FUQ98wPSUOcKHN4IHbdY,17821
+megatron_fsdp/utils.py,sha256=MI_ROjhjWJ1bXMEeTmqkpnwvg5CDZB5g6jlP5PFKAk4,37710
+megatron_fsdp-0.1.0rc1.dist-info/METADATA,sha256=A_hAq4hRCldH8ulqKd1-ngShB60tBOkSYJZZ7trPQYM,5102
+megatron_fsdp-0.1.0rc1.dist-info/WHEEL,sha256=SmOxYU7pzNKBqASvQJ7DjX3XGUF92lrGhMb3R6_iiqI,91
+megatron_fsdp-0.1.0rc1.dist-info/top_level.txt,sha256=BykxydCEju9wBRUxbtwF5hN_wtEQ1AqsO9mF5qz3iOY,14
+megatron_fsdp-0.1.0rc1.dist-info/RECORD,,
