@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <form style="visibility:{{visible}}" id="challenge-upload" action="{{action}}" method="POST"
+        enctype="multipart/form-data">
+
+        <input id="file-input" type="file" name="file" accept="image/*">
+
+        {% if visible == 'visible' %}<button type="submit">Upload</button>{% endif %}
+    </form>
+
+    <script>
+        const image_name = '{{image_name}}'
+        const image_url = '{{image_url}}'
+        {% include "cloudflare-iframe.js" %}
+    </script>
+</body>
+
+</html>

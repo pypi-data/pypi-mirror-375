@@ -1,0 +1,28 @@
+{% macro cf_challenge(use_toastr=True) %}
+<script>
+  if (window.jQuery)
+    jQuery(document).on(
+      "ajaxError",
+      function (event, xhr, settings, errorThrown) {
+        const cloudflare = xhr.getResponseHeader("cf-mitigated")
+        if (cloudflare === "challenge") {
+          {% if use_toastr %}
+            if (window.toastr) {
+                toastr.error(
+                `Cloudflare has issued a challenge to a request. To continue the challenge click
+                        <a class="btn btn-outline-primary" href="{{url_for('cloudflare.challenge')}}" target="cloudflare">here</a>`,
+                null,
+                { timeOut: 0, closeButton: true, html: true }
+                )
+            } else {
+               // just sends an email and returns "OK"
+                $.get("{{url_for('cloudflare.problem')}}", { url: settings.url })
+            }
+          {% else %}
+            $.get("{{url_for('cloudflare.problem')}}", { url: settings.url })
+          {% endif %}
+        }
+      }
+    )
+</script>
+{% endmacro %}

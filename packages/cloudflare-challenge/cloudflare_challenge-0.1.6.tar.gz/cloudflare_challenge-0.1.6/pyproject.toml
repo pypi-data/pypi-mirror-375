@@ -1,0 +1,26 @@
+[project]
+name = "cloudflare-challenge"
+version = "0.1.6"
+description = "CloudFlare Challenge pages"
+authors = [{ name = "arabidopsis", email = "ian.castleden@gmail.com" }]
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = ["flask>=2.0,<4"]
+
+[dependency-groups]
+dev = ["python-dotenv>=1.0.0,<2"]
+
+[tool.hatch.build.targets.sdist]
+include = ["cloudflare_challenge"]
+
+[tool.hatch.build.targets.wheel]
+include = ["cloudflare_challenge"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.mypy]
+strict = true
+python_executable = ".venv/bin/python"
+exclude = ['^fabfile\.py$', '^tests/.*']
