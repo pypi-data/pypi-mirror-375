@@ -1,0 +1,63 @@
+Metadata-Version: 2.4
+Name: docx_translate
+Version: 1.0.1
+Summary: A Python tool for translating docx files
+Home-page: https://github.com/suqingdong/docx_translate
+Author: suqingdong
+Author-email: suqingdong1114@gmail.com
+License: MIT License
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Requires-Dist: loguru
+Requires-Dist: googletranslate-python
+Requires-Dist: python-docx
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
+
+# A Python tool for translating docx files
+
+## Installation
+
+```bash
+pip install docx_translate
+```
+
+## Usage
+
+### Use in CMD
+
+```bash
+docx_translate --help
+
+docx_translate --version
+
+docx_translate input.docx -o output.docx
+
+docx_translate input.docx -o output.ja.docx -t ja
+```
+
+### Use in Python
+
+```python
+from docx_translate.core.translate import DocxTranslator
+
+trans = DocxTranslator(target='en')
+trans.translate_docx('input.docx', 'output.docx')
+```
