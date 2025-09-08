@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package core_system.customer.v1;
+
+import "messages/customer/request.proto";
+import "messages/customer/response.proto";
+
+option py_generic_services = true;
+
+// CustomerService 정의
+service CustomerService {
+    rpc GetCustomersByShop(GetCustomersByShopRequest) returns (GetCustomersByShopResponse);
+}
