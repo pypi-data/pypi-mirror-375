@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: iLaplace
+Version: 4.0.0
+Summary: A Python library for high-precision numerical inverse Laplace transform using C++ (SymEngine) and Symbolic (SymPy).
+Author: Mohammad Hossein Rostami
+Author-email: MHRo.R84@Gmail.com
+Keywords: laplace,inverse laplace,numerical,symbolic,python,c++,symengine,sympy,high precision
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Description-Content-Type: text/markdown
+License-File: LICENCE.txt
+Requires-Dist: sympy>=1.0
+Requires-Dist: pybind11>=2.0
