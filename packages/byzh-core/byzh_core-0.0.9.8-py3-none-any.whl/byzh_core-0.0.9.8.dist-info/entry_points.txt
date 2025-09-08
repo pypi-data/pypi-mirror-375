@@ -1,0 +1,2 @@
+[console_scripts]
+b_zip = byzh.core.__main__:b_zip
