@@ -1,0 +1,62 @@
+Metadata-Version: 2.4
+Name: advanced-face-age-recognition-module
+Version: 1.0.0
+Summary: AFADS: on-device face age estimation with simple 18+ gating, Tkinter/Pygame/Webcam demos
+Author: Your Name
+License: MIT
+Project-URL: Homepage, https://example.com/afads
+Project-URL: Issues, https://example.com/afads/issues
+Keywords: face,age,estimation,verification,AFADS
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Security
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: insightface>=0.7.3
+Requires-Dist: onnxruntime>=1.17.0
+Requires-Dist: opencv-python>=4.9.0.80
+Requires-Dist: numpy>=1.26.0
+Requires-Dist: fastapi>=0.111.0
+Requires-Dist: uvicorn>=0.30.0
+Requires-Dist: pillow>=10.3.0
+Requires-Dist: pygame>=2.5.2
+Dynamic: license-file
+
+# AFADS — Advanced Face Age Detection System
+
+Local, on-device face age estimation using InsightFace. Includes demos for webcam (Tkinter), Pygame UI, and a REST API.
+
+## Install
+
+```bash
+python -m venv .venv && . .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -e .
+# or, after you publish:
+# pip install advanced-face-age-recognition-module
+```
+
+## Quick Start
+
+```python
+from afads import AFADS
+engine = AFADS()
+print(engine.assess("selfie.jpg", return_dict=True))
+```
+
+## Demos
+
+- `python -m afads.extras.afads_webcam_consent` — webcam with consent popup + live overlay
+- `python -m afads.extras.pygame_webcam` — Pygame viewer with keys to toggle rules
+- `uvicorn afads.extras.afads_server:app --reload` — REST server + simple HTML form
+
+## Rules
+
+- If any age detected → allow
+- If age ≥ 18 → require `prob_over_18 ≥ 0.85` (or 0.90 for stricter)
+
+## Privacy
+
+This library runs fully on-device. Ask for consent before using the camera. Do not store images by default.
