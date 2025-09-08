@@ -1,0 +1,20 @@
+[report]
+exclude_lines =
+    # no cover
+    if INTERACTIVE:
+    if GRAPHS:
+    def _computeOneSlice(z):
+
+
+[run]
+omit =
+     */test/*
+     */orientationpy/plotting.py
+     */orientationpy/__init__.py
+
+source = orientationpy
+
+concurrency = multiprocessing
+
+[html]
+directory = coverage

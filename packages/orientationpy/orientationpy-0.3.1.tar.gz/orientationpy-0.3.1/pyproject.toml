@@ -1,0 +1,84 @@
+[project]
+name = "orientationpy"
+dynamic = ["version"]
+description = "Package for greyscale orientation analysis on 2D and 3D images"
+readme = "README.rst"
+requires-python = ">=3.7"
+license = {text = "GPLv3"}
+keywords = ["orientation", "structure tensor", "greylevel", "image analysis"]
+authors = [{ name = "Edward Andò", email = "edward.ando@epfl.ch" },
+           { name = "Florian Aymanns", email = "florian.aymanns@epfl.ch"},
+           { name = "Daniel Sage", email = "daniel.sage@epfl.ch"},
+           { name = "Mallory Wittwer", email = "mallory.wittwer@epfl.ch"},
+           { name = "Alexandru Vasile", email = "vasilealexandrupetru@gmail.com"},
+           ]
+#history = {file = "HISTORY.rst"}
+maintainers = [
+  {name = "Edward Andò", email = "edward.ando@epfl.ch"},
+  {name = "Florian Aymanns", email = "florian.aymanns@epfl.ch"},
+]
+
+classifiers=[
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+    "matplotlib>=3.1.3",
+    "scipy",
+    "numpy",
+    "numba>=0.57.1",
+    "numba_progress"
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+  "pytest-cov[all]",
+  "tox",
+]
+examples = [
+    "tifffile",
+    "pyvista[jupyter]",
+    "scikit-image",
+]
+docs = [
+    "orientationpy[examples]",
+    "sphinx",
+    "sphinx_rtd_theme",
+    "sphinx-gallery",
+    "sphinx_design",
+]
+dev = [
+    "orientationpy[test]",
+    "orientationpy[examples]",
+    "pip-tools",
+    "twine",
+    "pre-commit",
+    "wheel>=0.22",
+    "setuptools_scm",
+]
+
+[project.urls]
+homepage = "https://epfl-center-for-imaging.gitlab.io/orientationpy/index.html"
+documentation = "https://readthedocs.org"
+repository = "https://gitlab.com/epfl-center-for-imaging/orientationpy"
+
+[build-system]
+requires = ["setuptools>=64", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools_scm]
+write_to = "src/orientationpy/_version.py"

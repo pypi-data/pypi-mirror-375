@@ -1,0 +1,62 @@
+default:
+  image: python:3.9
+  cache:
+    paths:
+      - .pip-cache/
+  before_script:
+    - pip install --upgrade pip
+
+stages:
+  - build
+  - test
+  - pages
+  - deploy
+
+build:
+  stage: build
+  before_script:
+    - pip install build
+  script:
+    - make build
+  artifacts:
+    paths:
+      - dist/
+
+test:
+  stage: test
+  before_script:
+    - pip install dist/*.whl
+    - pip install .[test]
+  script:
+    - make test-all
+
+pages:
+  variables:
+    GIT_SUBMODULE_STRATEGY: normal
+  stage: pages
+  script:
+    - pip install .[docs]
+    # Required to build the docs with interactive pyvista otherwise you get "ImportError: libXrender.so.1: cannot open shared object file: No such file or directory"
+    - pip install --index-url https://gitlab.kitware.com/api/v4/projects/13/packages/pypi/simple vtk-osmesa
+    - pip install pytest-cov[all]
+    - make docs
+    - mkdir public
+    - mv docs/_build/html/* public
+    - make coverage
+    - mv coverage public
+  coverage: '/TOTAL.*\s+(\d+\%)/'
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  before_script:
+    - pip install twine
+  script:
+    - TWINE_PASSWORD=${PYPI_TOKEN} TWINE_USERNAME=__token__ python -m twine upload dist/*
+
+  rules:
+    - if: $CI_COMMIT_TAG
