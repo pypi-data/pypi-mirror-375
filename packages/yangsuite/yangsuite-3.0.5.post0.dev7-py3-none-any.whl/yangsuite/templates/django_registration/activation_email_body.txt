@@ -1,0 +1,10 @@
+Hi {{ user.username }},
+
+A YANG Suite account has been created for you on {{ site.name }}.
+
+Please click on the link below to activate it:
+
+{{ scheme }}://{{ site.domain }}/accounts/activate/{{ activation_key }}
+
+Thanks,
+YANG Suite Admin.

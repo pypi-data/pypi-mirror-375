@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="{% static 'yangsuite/js/jquery-1.11.2.min.js' %}"></script>
+<script src="{% static 'yangsuite/js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'yangsuite/js/jstree/jstree.js' %}"></script>
+<script src="{% static 'yangsuite/js/jstree/jstreegrid.js' %}"></script>
+<script src="{% static 'yangsuite/js/js.cookie.js' %}"></script>
+<script src="{% static 'yangsuite/js/yangsuite.js' %}"></script>
+{% block javascript %}
+{% endblock javascript %}
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'yangsuite/favicon/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'yangsuite/favicon/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'yangsuite/favicon/favicon-16x16.png' %}">
+<link rel="manifest" href="{% static 'yangsuite/favicon/manifest.json' %}">
+<link rel="mask-icon" href="{% static 'yangsuite/favicon/safari-pinned-tab.svg' %}" color="#1bbeed">
+<link rel="shortcut icon" href="{% static 'yangsuite/favicon/favicon.ico' %}">
+<meta name="apple-mobile-web-app-title" content="YANG Suite">
+<meta name="application-name" content="YANG Suite">
+<meta name="msapplication-config" content="{% static 'yangsuite/favicon/browserconfig.xml' %}">
+<meta name="theme-color" content="#1bbeed">
+<link rel="stylesheet" href="{% static 'yangsuite/js/jstree/themes/default/style.min.css' %}"/>
+{% block cui-css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/cui-standard-1.2.2.min.css' %}"/>
+{% endblock cui-css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/excite-bike/jquery-ui.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'yangsuite/css/yangsuite-cui.css' %}"/>
+{% block css %}
+{% endblock css %}
+{% block head %}
+{% endblock head %}
+</head>
+<body class="cui">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe id="ys-gtm" height="0" width="0"
+      style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <div class="content-fluid">
+  <nav class="sidebar">
+    <div class="sidebar__header">
+      <div class="sidebar__header-title">Cisco YANG Suite</div>
+    </div>
+    <ul id="ytool-nav">
+<!-- START plugin menus -->
+{% for title, entries in yangsuite_menus.items %}
+      <li class="sidebar__drawer">
+        <a class="dropdown-toggle ytool-white-label" href="#"
+           data-toggle="dropdown" role="button"
+           aria-haspopup="true" aria-expanded="false">
+          {{title}}
+          <span class="caret"></span>
+        </a>
+        <ul>
+    {% for entry in entries %}
+        {% if entry.text == '--' %}
+          <!-- <li role="separator" class="divider"></li> -->
+        {% else %}
+          <li class="sidebar__item"><a href="{{ entry.url }}"
+                 {% if title == 'Help' %}target="_blank"{% endif %}>
+              {{ entry.text }}</a></li>
+        {% endif %}
+    {% endfor %}
+        </ul>
+      </li>
+{% endfor %}
+<!-- End plugin menus -->
+      <li class="sidebar__item"><a href="{% url 'help' %}">Help</a></li>
+    </ul>
+    <div id="ys-modediv" style="padding-left: 4px"></div>
+  </nav>
+  <main>
+    <header class="header header--compressed">
+      <div class="header-bar container">
+        <a class="btn btn--small btn--icon toggle-menu">
+          <span class="icon-list-menu"></span>
+        </a>
+        <a class="header-bar__logo" href="{% url 'home' %}">
+          <img alt="Cisco YANG Suite" src="{% static 'yangsuite/favicon/yangsuite.png' %}">
+        </a>
+        <div class="header-bar__main">
+          <div class="header-breadcrumbs">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-static"><a href="{% url 'home' %}">YANG Suite</a></li>
+              {% block breadcrumbs %}{% endblock %}
+            </ul>
+          </div>
+          <div class="header-heading">
+            <h1 class="page-title">{% block page-title %}YANG Suite{% endblock %}</h1>
+            <div class="header-utilities" id="progress-header">
+              <div id="ys-progress" style="width:100%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="header-toolbar">
+          {% if user.is_authenticated %}
+          <a class="avatar" href="{% url 'user_profile' %}">
+            {{ user.username }}
+          </a>
+          <a class="btn btn--small btn--icon"
+             href="{% url 'logout' %}" title="Sign out">
+            <span class="icon-sign-out"></span>
+          </a>
+          {% else %}
+          <a class="avatar">anonymous user</a>
+          <a class="btn btn--small btn--icon"
+             href="{% url 'login' %}" title="Sign in">
+            <span class="icon-sign-in"></span>
+          </a>
+          {% endif %}
+          <a class="btn btn--small btn--icon"
+             href="mailto:yangsuite-support-ext@cisco.com?Subject=Feedback"
+             title="Submit Feedback">
+            <span class="icon-feedback"></span>
+          </a>
+          <a class="btn btn--small btn--primary btn--icon"
+             href="{% block help_url %}{% url 'help' %}{% endblock %}"
+             title="Help">
+            <span class="icon-help"></span>
+          </a>
+       </div>
+      </div>
+    </header>
+
+{% block body %}
+{% endblock body %}
+    <div id="ytool-dialog" title="YANG Suite"></div>
+    <div id="ytool-logout-dialog" title="YANG Suite"></div>
+    <div id="ytool-email-dialog" title="YANG Suite">
+      <label id="ytool-email-id">Please provide your Company Email-ID</label>
+      <input type="text" style="z-index:10000" name="Email-ID" required="true"/>
+    </div>
+<script>
+$(function() {
+
+    $(".toggle-menu").click(function() {
+        $(".sidebar").toggleClass("sidebar--hidden");
+    });
+
+    $(".sidebar__drawer > a").click(function() {
+        $(this).parent().toggleClass('sidebar__drawer--opened');
+    });
+
+    $( "#ytool-dialog" ).dialog({autoOpen: false});
+    $( "#ytool-email-dialog").dialog({autoOpen: false});
+
+    $.getJSON("/yangsuite/plugins/mode", function(retObj) {
+        if (retObj.mode) {
+            $("#ys-modediv").append(retObj.mode);
+        }
+    })
+});
+</script>
+{% block script %}
+{% endblock script %}
+</div>
+</main>
+</body>
+</html>
