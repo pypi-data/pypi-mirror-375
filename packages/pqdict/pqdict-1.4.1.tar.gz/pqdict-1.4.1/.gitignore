@@ -1,0 +1,20 @@
+*.py[co]
+__pycache__
+.venv/
+
+# setup and build #
+*.egg-info/
+.tox/
+docs/_*
+dist/
+build/
+MANIFEST
+
+# OS-generated files #
+.DS_Store
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+_scratch
