@@ -1,0 +1,10 @@
+Metadata-Version: 2.3
+Name: jason-plugin-emoji-sentence
+Version: 0.1.3
+Summary: This is a add emoji to sentence function
+Author: liyh
+Author-email: liyh <yh_li@realtoptv.com>
+Requires-Dist: mcp[cli]>=1.13.1
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+

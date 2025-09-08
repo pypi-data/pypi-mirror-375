@@ -1,0 +1,19 @@
+[project]
+name = "jason-plugin-emoji-sentence"
+version = "0.1.3"
+description = "This is a add emoji to sentence function"
+readme = "README.md"
+authors = [
+    { name = "liyh", email = "yh_li@realtoptv.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.13.1",
+]
+
+[project.scripts]
+jason-plugin-emoji-sentence = "jason_plugin_emoji_sentence:main"
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
