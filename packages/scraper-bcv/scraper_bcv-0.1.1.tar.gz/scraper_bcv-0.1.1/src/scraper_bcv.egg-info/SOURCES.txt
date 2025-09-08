@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+setup.cfg
+src/scraper_bcv/__init__.py
+src/scraper_bcv/__main__.py
+src/scraper_bcv/bcv_client.py
+src/scraper_bcv/cli.py
+src/scraper_bcv.egg-info/PKG-INFO
+src/scraper_bcv.egg-info/SOURCES.txt
+src/scraper_bcv.egg-info/dependency_links.txt
+src/scraper_bcv.egg-info/entry_points.txt
+src/scraper_bcv.egg-info/requires.txt
+src/scraper_bcv.egg-info/top_level.txt
+tests/test_bcv_client.py

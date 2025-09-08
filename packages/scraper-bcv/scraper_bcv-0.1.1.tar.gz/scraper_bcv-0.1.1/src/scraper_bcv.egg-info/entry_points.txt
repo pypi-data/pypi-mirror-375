@@ -1,0 +1,2 @@
+[console_scripts]
+scraper-bcv = scraper_bcv.cli:main
