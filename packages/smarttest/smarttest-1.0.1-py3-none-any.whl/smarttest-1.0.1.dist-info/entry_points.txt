@@ -1,0 +1,3 @@
+[console_scripts]
+smarttest = smarttest.cli:main
+smarttest-app = smarttest.app:main
