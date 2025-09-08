@@ -1,0 +1,185 @@
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'dcspy'
+authors = [{name = 'Michal Plichta'}]
+maintainers = [{name = 'Michal Plichta'}]
+description = 'Software for integrating DCS Planes with Logitech keyboards (with and without LCD), mice and headphones.'
+license = 'MIT'
+license-files = ['LICENSE.md', 'src/dcspy/resources/license.txt']
+requires-python = '>=3.9'
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Console',
+    'Environment :: Win32 (MS Windows)',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: Microsoft :: Windows :: Windows 10',
+    'Operating System :: Microsoft :: Windows :: Windows 11',
+    'Topic :: Games/Entertainment',
+    'Topic :: Games/Entertainment :: Simulation',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: System :: Hardware',
+    'Topic :: Utilities',
+]
+keywords = [
+    'dcsworld', 'dcs', 'digital combat simulator', 'eagle dynamics',
+    'logitech', 'logitech sdk', 'logitech keyboard', 'logitech gaming', 'logitech mouse', 'logitech headphone',
+    'G19', 'G510', 'G15', 'G13',
+    'G910', 'G710', 'G110', 'G103', 'G105',
+    'G11', 'G35', 'G633', 'G930', 'G933',
+    'G600', 'G300', 'G400', 'G700', 'G9', 'MX518', 'G402', 'G502', 'G602',
+]
+dynamic = ['version', 'readme']
+dependencies = [
+    'cffi',
+    'eval-type-backport ; python_version < "3.10"',
+    'gitpython',
+    'lupa',
+    'packaging',
+    'pillow',
+    'psutil',
+    'pydantic',
+    'pyside6',
+    'pyyaml',
+    'requests',
+    'typing-extensions',
+]
+
+[project.urls]
+Homepage = 'https://github.com/emcek/dcspy'
+Documentation = 'https://dcspy.readthedocs.io/en/latest/'
+Source = 'https://github.com/emcek/dcspy.git'
+Changelog = 'https://github.com/emcek/dcspy/blob/master/CHANGELOG.md'
+
+[project.scripts]
+dcspy_cli = 'dcspy.run:run'
+
+[project.gui-scripts]
+dcspy = 'dcspy.run:run'
+
+[project.optional-dependencies]
+test = [
+    'interrogate',
+    'isort',
+    'lxml',
+    'mypy',
+    'pip-audit',
+    'pytest',
+    'pytest-codspeed',
+    'pytest-cov',
+    'pytest-qt ; sys_platform == "win32"',
+    'pytest-randomly',
+    'ruff',
+    'types-cffi',
+    'types-lupa',
+    'types-pillow',
+    'types-psutil',
+    'types-pyyaml',
+    'types-requests',
+]
+docs = [
+    'black',
+    'mkdocs',
+    'mkdocs-gen-files',
+    'mkdocs-literate-nav',
+    'mkdocs-material',
+    'mkdocs-plantuml',
+    'mkdocs-section-index',
+    'mkdocstrings',
+    'mkdocstrings-python',
+    'plantuml',
+]
+
+[tool.setuptools.dynamic]
+version = {attr = 'dcspy.models.__version__'}
+readme = {file = 'README.md', content-type = 'text/markdown'}
+
+[tool.setuptools.packages.find]
+where = ['src/']
+include = ['dcspy*']
+exclude = ['dcspy.tests*']
+
+[tool.setuptools.package-data]
+dcspy = [
+    'resources/*.*',
+    'img/dcspy_white.ico',
+    'img/dcspy_black.ico',
+    'img/splash.png',
+    'py.typed',
+]
+
+[tool.pytest.ini_options]
+addopts = ['-q']
+pythonpath = ['src']
+testpaths = ['tests']
+markers = [
+    'qt6: marks tests for Qt6 verfification',
+    'slow: marks tests as slow',
+    'e2e: marks test as E2E',
+]
+
+[tool.interrogate]
+ignore-init-method = false
+ignore-init-module = true
+ignore-magic = true
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = true
+ignore-nested-functions = false
+ignore-nested-classes = true
+ignore-setters = false
+fail-under = 90
+verbose = 1
+quiet = false
+exclude = ['tests/test_*', 'src/dcspy/qtgui_rc.py']
+
+[tool.ruff]
+line-length = 160
+lint.select = ['E', 'F', 'C90', 'D', 'RUF']
+lint.ignore = ['D100', 'D101','D104', 'D105', 'D203', 'D204', 'D212', 'RUF001', 'RUF010']
+extend-exclude = [
+    'qtgui_rc.py',
+    'tests/',
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 5
+
+[tool.mypy]
+#ignore_missing_imports = true
+#no_warn_no_return = true
+#check_untyped_defs = true
+html_report = 'mypyhtml'
+exclude = [
+    '/qt_gui\.py$',
+    '/qtgui_rc\.py$',
+    'tests/',
+]
+
+[[tool.mypy.overrides]]
+module = 'dcspy.qt_gui'
+follow_imports = 'skip'
+
+[tool.isort]
+line_length = 160
+
+[tool.uv.sources]
+dcspy = { workspace = true }
+PySide6-stubs = { git = 'https://github.com/python-qt-tools/PySide6-stubs.git' }
+
+[dependency-groups]
+dev = [
+    'dcspy[docs,test]',
+    'detect-test-pollution',
+    'nuitka',
+    'pre-commit',
+    'PySide6-stubs',
+]
