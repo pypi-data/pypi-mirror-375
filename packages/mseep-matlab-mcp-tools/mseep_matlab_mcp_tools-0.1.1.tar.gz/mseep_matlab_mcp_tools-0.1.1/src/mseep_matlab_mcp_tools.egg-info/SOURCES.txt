@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/matlab_mcp/__init__.py
+src/matlab_mcp/engine.py
+src/matlab_mcp/models.py
+src/matlab_mcp/server.py
+src/mseep_matlab_mcp_tools.egg-info/PKG-INFO
+src/mseep_matlab_mcp_tools.egg-info/SOURCES.txt
+src/mseep_matlab_mcp_tools.egg-info/dependency_links.txt
+src/mseep_matlab_mcp_tools.egg-info/entry_points.txt
+src/mseep_matlab_mcp_tools.egg-info/requires.txt
+src/mseep_matlab_mcp_tools.egg-info/top_level.txt
+tests/test_comprehensive_optimization.py
+tests/test_compression.py
+tests/test_workspace_optimization.py
