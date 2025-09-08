@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: market-data-source
+Version: 0.3.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Rust
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+License-File: LICENSE
+Summary: High-performance financial data generation with Python bindings. Rust-powered market data simulation for Python data scientists and quantitative researchers.
+Keywords: market-data,synthetic-data,financial-data,trading,backtesting,quantitative-finance,ohlc,tick-data
+Home-Page: https://github.com/destenson/market-data-source
+Author: Market Data Source Contributors
+Maintainer: Market Data Source Contributors
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Project-URL: Homepage, https://github.com/destenson/market-data-source
+Project-URL: Documentation, https://github.com/destenson/market-data-source#readme
+Project-URL: Repository, https://github.com/destenson/market-data-source
+Project-URL: Issues, https://github.com/destenson/market-data-source/issues
+
+# Market Data Source (Python Interface)
+
+[![PyPI](https://img.shields.io/pypi/v/market_data_source?color=blue&label=PyPI%20Version&logo=pypi&logoColor=white)](https://pypi.org/project/market_data_source/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/market_data_source?color=blue&logo=python&logoColor=white)](https://pypi.org/project/market_data_source/)
+[![PyPI - License](https://img.shields.io/pypi/l/market_data_source?color=blue&logo=opensourceinitiative&logoColor=white)](https://pypi.org/project/market_data_source/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/destenson/market-data-source/ci.yml?branch=main&label=Build%20Status&logo=github&logoColor=white)](https://github.com/destenson/market-data-source/actions)
+
+This directory contains the Python bindings for the Market Data Source library, enabling seamless integration of high-performance financial data generation into Python applications.
+
