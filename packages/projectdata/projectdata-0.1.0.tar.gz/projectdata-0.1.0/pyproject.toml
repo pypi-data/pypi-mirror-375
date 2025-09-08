@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "projectdata"
+version = "0.1.0"
+authors = [
+  { name="Asher Baraban", email="asher.baraban@gmail.com" },
+]
+description = ""
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License", # Choose your license
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+]
+# You still need pandas as a dependency for the user to read the files.
+dependencies = [
+    "pandas",
+]
+
+# Tell setuptools to treat the 'projectdata' folder as a package
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["projectdata"]
+
+# This is the crucial part: include the CSV files inside the package.
+[tool.setuptools.package-data]
+projectdata = ["*.csv"]
