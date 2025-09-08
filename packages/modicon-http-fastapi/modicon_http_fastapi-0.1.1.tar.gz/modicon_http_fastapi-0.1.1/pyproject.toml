@@ -1,0 +1,58 @@
+[project]
+name = "modicon-http-fastapi"
+version = "0.1.1"
+description = "Modicon HTTP FastAPI Integration"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Kostia Tarnashynskyi", email = "kostia.tarnashynskyi@gmail.com" },
+]
+maintainers = [
+    { name = "Kostia Tarnashynskyi", email = "kostia.tarnashynskyi@gmail.com" },
+]
+keywords = [
+    "fastapi",
+    "rest",
+    "http",
+    "api",
+    "web",
+    "di",
+    "dependency injection",
+    "framework",
+    "python",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "dependency-injector>=4.48.1",
+    "fastapi>=0.116.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/kostia-tarnashynskyi/modicon-rest-fastapi"
+Documentation = "https://github.com/kostia-tarnashynskyi/modicon-rest-fastapi#readme"
+Repository = "https://github.com/kostia-tarnashynskyi/modicon-rest-fastapi"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/modicon",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "pytest-cov>=6.3.0",
+]
