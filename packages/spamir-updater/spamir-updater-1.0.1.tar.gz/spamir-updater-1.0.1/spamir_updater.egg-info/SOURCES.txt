@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+baseplate_app.py
+config.json.example
+requirements.txt
+setup.py
+lib/__init__.py
+lib/encryption.py
+lib/network.py
+lib/updater_client.py
+lib/utils.py
+spamir_updater.egg-info/PKG-INFO
+spamir_updater.egg-info/SOURCES.txt
+spamir_updater.egg-info/dependency_links.txt
+spamir_updater.egg-info/entry_points.txt
+spamir_updater.egg-info/requires.txt
+spamir_updater.egg-info/top_level.txt
