@@ -1,0 +1,17 @@
+django_bulk_triggers/__init__.py,sha256=YugW2W_ReyoOVIrTRL4_BY00-GxLFtHtT2moglpBdoc,179
+django_bulk_triggers/conditions.py,sha256=cNCApXOtzgmCVzhPydRqZvGRintG2OUBz9lhZcaGxLg,6388
+django_bulk_triggers/constants.py,sha256=3x1H1fSUUNo0DZONN7GUVDuySZctTR-jtByBHmAIX5w,303
+django_bulk_triggers/context.py,sha256=TytPI9HpkWDqcBMeHE_ozt2vFTZU3q5fmCNiGnKzJHA,2340
+django_bulk_triggers/decorators.py,sha256=pUiUqV6L9oJfrvcxaYy2SbjWx3vTxNNxu3vq9go_vHc,8325
+django_bulk_triggers/engine.py,sha256=VwSIkvpPFURsTxkxHGNI3ddU1WVd8ftmFDUl7Mox_M0,2699
+django_bulk_triggers/enums.py,sha256=YPVc3qOwd23_iLWNT1KaA4RbJJ0CM12jGlt86ZiTgr4,387
+django_bulk_triggers/handler.py,sha256=bBltCA8COkwjy4RrYhzEX7Q1PQpmpOy4NHjUNx_u4Ds,6396
+django_bulk_triggers/manager.py,sha256=_Up5g-l1V1avEqmC-pzWjca_aHTEDDYZIC9IGQNi_qw,3887
+django_bulk_triggers/models.py,sha256=-nYJVHVdSEAZRbog5_v7W2XaCm9bkwxlCBw0ap9bwyI,4478
+django_bulk_triggers/priority.py,sha256=EDRYBgHfEuDTdY5RMXzvkyEoC5vChk48lepQ8A416Zs,385
+django_bulk_triggers/queryset.py,sha256=Kg25v6Tqe6UA4l4tJf997IIc668Yx9vofU71HTCp3WM,102060
+django_bulk_triggers/registry.py,sha256=surw9LRjpyu8uh8PvBiBOxKXyn7LUYlhi4JeteeFlzw,1389
+django_bulk_triggers-0.1.1.dist-info/LICENSE,sha256=dguKIcbDGeZD-vXWdLyErPUALYOvtX_fO4Zjhq481uk,1088
+django_bulk_triggers-0.1.1.dist-info/METADATA,sha256=TlmoC7_DaGoqZDZy-kEPmTPYN_0aY7v2Ji2zXm8pwaI,9338
+django_bulk_triggers-0.1.1.dist-info/WHEEL,sha256=b4K_helf-jlQoXBBETfwnf4B04YC67LOev0jo4fX5m8,88
+django_bulk_triggers-0.1.1.dist-info/RECORD,,
