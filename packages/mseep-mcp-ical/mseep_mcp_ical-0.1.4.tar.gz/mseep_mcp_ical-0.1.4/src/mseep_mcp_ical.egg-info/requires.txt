@@ -1,0 +1,5 @@
+loguru>=0.7.3
+mcp[cli]>=1.2.1
+pyobjc>=11.0
+openai-agents>=0.0.12
+pydantic==2.10.6
