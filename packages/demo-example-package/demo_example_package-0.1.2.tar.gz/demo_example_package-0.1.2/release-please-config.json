@@ -1,0 +1,16 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "python",
+      "package-name": "demo-example-package",
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "demo_example_package/__init__.py",
+          "glob": false
+        }
+      ]
+    }
+  }
+}
