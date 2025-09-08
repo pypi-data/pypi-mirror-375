@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: mtc_token_healing
+Version: 0.3.0
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Dist: pytest ; extra == 'test'
+Provides-Extra: test
+Home-Page: https://github.com/ModelTC/mtc-token-healing
+Requires-Python: >=3.10
