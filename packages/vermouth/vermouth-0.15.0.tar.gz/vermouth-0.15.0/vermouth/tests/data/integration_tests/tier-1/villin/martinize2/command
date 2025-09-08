@@ -1,0 +1,9 @@
+martinize2
+-f ../aa.pdb
+-x cg.pdb
+-o topol.top
+-ff martini22p
+-mutate A-MET53:VAL
+-resid input
+-noscfix
+-maxwarn missing-flag:1

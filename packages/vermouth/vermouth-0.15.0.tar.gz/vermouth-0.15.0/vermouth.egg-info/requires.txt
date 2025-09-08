@@ -1,0 +1,10 @@
+pbr
+numpy
+networkx>=2.0
+scipy
+
+[PyCifRW]
+PyCifRW
+
+[mdtraj]
+mdtraj
