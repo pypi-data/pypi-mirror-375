@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+pyreads/__init__.py
+pyreads/_http.py
+pyreads/_parser.py
+pyreads/core.py
+pyreads/models.py
+pyreads.egg-info/PKG-INFO
+pyreads.egg-info/SOURCES.txt
+pyreads.egg-info/dependency_links.txt
+pyreads.egg-info/requires.txt
+pyreads.egg-info/top_level.txt
