@@ -1,0 +1,32 @@
+{% extends 'allianceauth/base-bs5.html' %}
+{% load i18n %}
+{% load navactive %}
+
+{% block page_title %}{% translate "milalliancetaxes" %}{% endblock %}
+
+{% block header_nav_collapse_left %}
+        <li class="nav-item">
+            <a class="nav-link {% navactive request 'milalliancetaxes:add_character' %}" href="{% url 'milalliancetaxes:add_character' %}">
+		    {% translate 'Add CEO' %}
+	        </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% navactive request 'milalliancetaxes:redirect_to_current_month' %}" href="{% url 'milalliancetaxes:redirect_to_current_month' %}">
+		    {% translate 'Taxes' %}
+	        </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% navactive request 'milalliancetaxes:admin_panel' %}" href="{% url 'milalliancetaxes:admin_panel' %}">
+		    {% translate 'Admin Panel' %}
+	        </a>
+        </li>
+{% endblock header_nav_collapse_left %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <h1 class="page-header text-center">{% translate "Alliance Taxes" %}</h1>
+    </div>
+    <div class="container-fluid mt-3 px-0">
+        {% block milalliancetaxes_content %}{% endblock milalliancetaxes_content %}
+    </div>
+{% endblock content %}
