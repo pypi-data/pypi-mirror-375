@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/fantacalciosimulator/__init__.py
+src/fantacalciosimulator/lib.py
+src/fantacalciosimulator/loader.py
+src/fantacalciosimulator/player.py
+src/fantacalciosimulator/playerstats.py
+src/fantacalciosimulator/probabilistic_season.py
+src/fantacalciosimulator/role.py
+src/fantacalciosimulator/team.py
+src/fantacalciosimulator.egg-info/PKG-INFO
+src/fantacalciosimulator.egg-info/SOURCES.txt
+src/fantacalciosimulator.egg-info/dependency_links.txt
+src/fantacalciosimulator.egg-info/requires.txt
+src/fantacalciosimulator.egg-info/top_level.txt
