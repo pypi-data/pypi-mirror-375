@@ -1,0 +1,63 @@
+[project]
+name = "codedev"
+version = "3.0.0"
+description = "Advanced AI Coding Assistant with Terminal Integration"
+readme = "README.md"
+authors = [
+    {name = "Ashok Kumar", email = "contact@ashokumar.in"}
+]
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["ai", "coding", "assistant", "terminal", "automation", "ollama", "code-generation"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+    "Environment :: Console",
+]
+dependencies = [
+    "requests>=2.31.0",
+    "prompt-toolkit>=3.0.39",
+    "rich>=13.4.2",
+    "pyyaml>=6.0.1",
+    "click>=8.1.6",
+    "colorama>=0.4.6",
+    "watchdog>=3.0.0",
+    "jsonschema>=4.18.0",
+    "httpx>=0.24.0",
+    "anyio>=4.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://ashokumar.in"
+Repository = "https://github.com/ashokumar06/codedev"
+"Bug Reports" = "https://github.com/ashokumar06/codedev/issues"
+Documentation = "https://ashokumar.in/codedev"
+
+[project.scripts]
+codedev = "ai_coder:main"
+cdev = "ai_coder:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ai_coder*"]
+
+
