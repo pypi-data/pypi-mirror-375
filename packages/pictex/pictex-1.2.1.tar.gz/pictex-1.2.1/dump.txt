@@ -1,0 +1,4512 @@
+------------------------------------------------------------------------------------------
+file: src\pictex\__init__.py
+------------------------------------------------------------------------------------------
+"""
+pictex: A Python library for creating complex visual compositions and beautifully styled images.
+"""
+
+from .builders import Canvas, Text, Row, Column, Image, Element
+from .models.public import *
+from .bitmap_image import BitmapImage
+from .vector_image import VectorImage
+
+__version__ = "1.1.1"
+
+__all__ = [
+    "Canvas",
+    "Text",
+    "Row",
+    "Column",
+    "Image",
+    "Element",
+    "Style",
+    "SolidColor",
+    "LinearGradient",
+    "Shadow",
+    "OutlineStroke",
+    "FontSmoothing",
+    "TextAlign",
+    "FontStyle",
+    "FontWeight",
+    "TextWrap",
+    "TextDecoration",
+    "BitmapImage",
+    "VectorImage",
+    "CropMode",
+    "Box",
+    "Padding",
+    "Margin",
+    "Border",
+    "BorderRadius",
+    "BorderRadiusValue",
+    "BackgroundImage",
+    "BackgroundImageSizeMode",
+    "SizeValue",
+    "SizeValueMode",
+    "Position",
+    "PositionMode",
+    "HorizontalDistribution",
+    "HorizontalAlignment",
+    "VerticalDistribution",
+    "VerticalAlignment",
+]
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\bitmap_image.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+from typing import Literal
+import skia
+import numpy as np
+from .models import Box
+import os
+
+class BitmapImage:
+    """A wrapper around a rendered raster image.
+
+    This class holds the pixel data from a rendered image and provides
+    convenient methods to save it to a file or convert it to other common
+    formats like NumPy arrays or Pillow (PIL) Images.
+
+    Objects of this class are typically created by calling `Canvas.render()`.
+
+    Example:
+        ```python
+        # Assuming 'canvas' is a pre-configured Canvas object
+        image = canvas.render("Hello World")
+
+        # Save the image to a file
+        image.save("output.png")
+
+        # Get a NumPy array for use with OpenCV or other libraries
+        import cv2
+        cv2_image = image.to_numpy()
+        cv2.imshow("Render", cv2_image)
+        cv2.waitKey(0)
+        ```
+
+    Attributes:
+        content_box (Box): The bounding box of the content (text + padding),
+            relative to the image's top-left corner.
+        width (int): The total width of the image in pixels.
+        height (int): The total height of the image in pixels.
+        skia_image (skia.Image): The underlying raw `skia.Image` object for
+            advanced use cases.
+    """
+
+    def __init__(self, skia_image: skia.Image, content_box: Box):
+        """Initializes the Image wrapper.
+
+        Note:
+            This constructor is intended for internal use by the library,
+            typically called from `Canvas.render()`.
+
+        Args:
+            skia_image: The underlying `skia.Image` object.
+            content_box: The calculated bounding box of the content area.
+        """
+        self._skia_image = skia_image
+        self._content_box = content_box
+
+    @property
+    def content_box(self) -> Box:
+        """Gets the bounding box of the content area."""
+        return self._content_box
+
+    @property
+    def width(self) -> int:
+        """Gets the width of the image in pixels."""
+        return self._skia_image.width()
+
+    @property
+    def height(self) -> int:
+        """Gets the height of the image in pixels."""
+        return self._skia_image.height()
+
+    @property
+    def skia_image(self) -> skia.Image:
+        """Gets the raw, underlying `skia.Image` object."""
+        return self._skia_image
+
+    def to_bytes(self) -> bytes:
+        """Returns the raw pixel data as a byte string.
+
+        The format of the byte string is 32-bit BGRA, with 8 bits per
+        component.
+
+        Returns:
+            A byte string containing the raw pixel data.
+        """
+        return self._skia_image.tobytes()
+
+    def to_numpy(self, mode: Literal['RGBA', 'BGRA', 'RGB', 'Grayscale'] = 'RGBA') -> np.ndarray:
+        """Converts the image to a NumPy array in the specified channel order.
+
+        Args:
+            mode (Literal['RGBA', 'BGRA', 'RGB', 'Grayscale'], optional):
+                The desired channel order or format for the output array.
+                Defaults to 'RGBA', the most common format for image processing.
+                - 'RGBA': Red, Green, Blue, Alpha.
+                - 'BGRA': Blue, Green, Red, Alpha. Compatible with OpenCV.
+                - 'RGB': Red, Green, Blue. Alpha channel is discarded.
+                - 'Grayscale': Converts the image to a single-channel grayscale.
+
+        Returns:
+            A NumPy array representing the image. The shape will be
+            (height, width, 4) for RGBA/BGRA, (height, width, 3) for RGB,
+            and (height, width) for Grayscale.
+        """
+        bgra_array = np.frombuffer(self.to_bytes(), dtype=np.uint8).reshape(
+            (self.height, self.width, 4)
+        )
+        mode = mode.lower()
+
+        if mode == 'rgba':
+            return bgra_array[:, :, [2, 1, 0, 3]]  # Swap R and B channels
+
+        if mode == 'bgra':
+            return bgra_array
+
+        if mode == 'rgb':
+            return bgra_array[:, :, [2, 1, 0]]
+
+        if mode == 'grayscale':
+            rgb_array = bgra_array[:, :, [2, 1, 0]]
+            return np.dot(rgb_array[..., :3], [0.2989, 0.5870, 0.1140]).astype(np.uint8)
+
+        raise ValueError(f"Unsupported mode: '{mode}'. Expected 'RGBA', 'BGRA', 'RGB', or 'Grayscale'.")
+
+    def to_pillow(self) -> "PillowImage":
+        """Converts the image to a Pillow (PIL) Image object.
+
+        The returned Pillow Image will be in 'RGBA' mode.
+
+        Returns:
+            A `PIL.Image.Image` object.
+
+        Raises:
+            ImportError: If the Pillow library is not installed.
+        """
+        try:
+            from PIL import Image as PillowImage
+        except ImportError:
+            raise ImportError(
+                "Pillow is not installed. Please install it with 'pip install Pillow'."
+            )
+
+        return PillowImage.fromarray(self.to_numpy(), mode='RGBA')
+
+    def save(self, output_path: str, quality: int = 100) -> None:
+        """Saves the image to a file.
+
+        The output format is inferred from the file extension. Supported
+        formats are PNG, JPEG, and WebP. Defaults to PNG if the extension
+        is unknown.
+
+        Args:
+            output_path: The path to save the output image (e.g., 'image.png').
+            quality: An integer from 0 to 100 indicating image quality. This
+                is only used for lossy formats like JPEG and WebP. It is
+                ignored for PNG.
+
+        Raises:
+            RuntimeError: If Skia fails to encode the image to the specified
+                format.
+            IOError: If there is an error writing the file to disk.
+        """
+        ext = os.path.splitext(output_path)[1].lower()
+        format_map = {
+            ".png": skia.EncodedImageFormat.kPNG,
+            ".jpg": skia.EncodedImageFormat.kJPEG,
+            ".jpeg": skia.EncodedImageFormat.kJPEG,
+            ".webp": skia.EncodedImageFormat.kWEBP,
+        }
+        # Default to PNG if the format is not recognized
+        fmt = format_map.get(ext, skia.EncodedImageFormat.kPNG)
+
+        data = self._skia_image.encodeToData(fmt, quality)
+        if data is None:
+            raise RuntimeError(f"Failed to encode image to format '{fmt}'")
+
+        with open(output_path, "wb") as f:
+            f.write(data.bytes())
+
+    def show(self) -> None:
+        """Displays the image using the default Pillow viewer.
+
+        This method is useful for debugging in scripts and interactive
+        environments like Jupyter notebooks.
+
+        Raises:
+            ImportError: If the Pillow library is not installed.
+        """
+        self.to_pillow().show()
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\__init__.py
+------------------------------------------------------------------------------------------
+from .canvas import Canvas
+from .container import Container
+from .element import Element
+from .row import Row
+from .stylable import Stylable
+from .text import Text
+from .image import Image
+from .column import Column
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\canvas.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+from typing import Union
+from .element import Element
+from .row import Row
+from .stylable import Stylable
+from ..models import *
+from ..bitmap_image import BitmapImage
+from ..vector_image import VectorImage
+from ..renderer import Renderer
+from .with_size_mixin import WithSizeMixin
+
+class Canvas(Stylable, WithSizeMixin):
+    """The main user-facing class for composing images.
+
+    This class implements a fluent builder pattern to define a builders template,
+    which can then be used to render multiple elements. Each styling method returns
+    the instance of the class, allowing for method chaining.
+
+    Example:
+        ```python
+        canvas = Canvas()
+        image = (
+            canvas.font_family("Arial")
+            .font_size(24)
+            .color("blue")
+            .add_shadow(offset=(2, 2), blur_radius=3, color="black")
+            .render("Hello, ", Text("World!").color("red"))
+        )
+        image.save("output.png")
+        ```
+    """
+
+    def render(
+            self,
+            *elements: Union[Element, str],
+            crop_mode: CropMode = CropMode.NONE,
+            font_smoothing: Union[FontSmoothing, str] = FontSmoothing.SUBPIXEL,
+    ) -> BitmapImage:
+        """Renders an image from the given elements using the configured builders.
+
+        Args:
+            elements: The elements to be rendered. The strings received are converted to Text elements.
+            crop_mode: The cropping strategy for the final canvas.
+                - `SMART`: Tightly crops to only visible pixels.
+                - `CONTENT_BOX`: Crops to the text + padding area.
+                - `NONE`: No cropping, includes all effect boundaries (default).
+            font_smoothing: The font smoothing mode. Accepts either `FontSmoothing.SUBPIXEL`
+                or `FontSmoothing.STANDARD`, or their string equivalents (`"subpixel"` or `"standard"`).
+
+        Returns:
+            An `Image` object containing the rendered result.
+        """
+        font_smoothing = font_smoothing if isinstance(font_smoothing, FontSmoothing) else FontSmoothing(font_smoothing)
+        renderer = Renderer()
+        element = Row(*elements)
+        element._style = self._style
+        root = element._to_node()
+        return renderer.render_as_bitmap(root, crop_mode, font_smoothing)
+
+    def render_as_svg(self, *elements: Union[Element, str], embed_font: bool = True) -> VectorImage:
+        """Renders the given elements as a scalable vector graphic (SVG).
+
+        This method produces a vector-based image, ideal for web use and
+        applications requiring resolution independence.
+
+        Args:
+            elements: The elements to be rendered. The strings received are converted to Text elements.
+            embed_font: If `True` (default), any custom font files (`.ttf`/`.otf`)
+                provided will be embedded directly into the SVG. This
+                ensures perfect visual fidelity across all devices but
+                increases file size. A warning will be issued if a system
+                font is used with this option enabled. If `False`, the SVG will
+                reference the font by name, relying on the viewing system to
+                have the font installed.
+
+        Returns:
+            A `VectorImage` object containing the SVG data.
+        """
+        renderer = Renderer()
+        element = Row(*elements)
+        element._style = self._style
+        root = element._to_node()
+        return renderer.render_as_svg(root, embed_font)
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\column.py
+------------------------------------------------------------------------------------------
+from typing import Union
+from .container import Container
+from ..models import VerticalDistribution, HorizontalAlignment
+from ..nodes import Node, ColumnNode
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+
+class Column(Container):
+    """A layout builder that arranges its children vertically.
+
+    A `Column` stacks its children one on top of another. It's a fundamental
+    container for creating top-to-bottom layouts.
+
+    Example:
+        ```python
+        from pictex import Column, Text
+
+        # Create a user info block with centered text.
+        user_info = Column(
+            Text("Alex Doe").font_size(24).font_weight(700),
+            Text("Graphic Designer").color("#657786")
+        ).gap(5).horizontal_align('center')
+        ```
+    """
+
+    def _build_node(self, nodes: list[Node]) -> Node:
+        return ColumnNode(self._style, nodes)
+
+    def vertical_distribution(self, mode: Union[VerticalDistribution, str]) -> Self:
+        """
+        Sets how children are distributed along the vertical axis,
+        especially when there is extra space.
+
+        Args:
+            mode: Distribution mode. Can be 'top', 'center', 'bottom',
+                  'space-between', 'space-around', or 'space-evenly'.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        if isinstance(mode, str):
+            mode = VerticalDistribution(mode.lower())
+        self._style.vertical_distribution.set(mode)
+        return self
+
+    def horizontal_align(self, mode: Union[HorizontalAlignment, str]) -> Self:
+        """
+        Sets how children are aligned along the horizontal axis within the column.
+
+        Args:
+            mode: Alignment mode. Can be 'left', 'center', 'right', or 'stretch'.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        if isinstance(mode, str):
+            mode = HorizontalAlignment(mode.lower())
+        self._style.horizontal_alignment.set(mode)
+        return self
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\container.py
+------------------------------------------------------------------------------------------
+from typing import Union
+from .element import Element
+from .text import Text
+from copy import deepcopy
+from ..nodes import Node
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+
+class Container(Element):
+
+    def __init__(self, *children: Union[Element, str]):
+        super().__init__()
+        self._children: list[Element] = self._parse_children(*children)
+
+    def gap(self, value: float) -> Self:
+        """
+        Sets a fixed space between each child element along the main axis.
+
+        This is often simpler than adding margins to each child individually.
+
+        Args:
+            value: The space, in pixels, to add between children.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.gap.set(value)
+        return self
+
+    def _to_node(self) -> Node:
+        children_nodes = []
+        for child in self._children:
+            children_nodes.append(child._to_node())
+        return self._build_node(children_nodes)
+
+    def _build_node(self, nodes: list[Node]) -> Node:
+        raise NotImplementedError()
+
+    def _parse_children(self, *children: Union[Element, str]) -> list[Element]:
+        parsed_children = []
+        for child in list(children):
+            if isinstance(child, str):
+                child = Text(child)
+            else:
+                child = deepcopy(child)
+            parsed_children.append(child)
+
+        return parsed_children
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\element.py
+------------------------------------------------------------------------------------------
+from .stylable import Stylable
+from .with_position_mixin import WithPositionMixin
+from .with_size_mixin import WithSizeMixin
+from ..nodes import Node
+
+class Element(Stylable, WithPositionMixin, WithSizeMixin):
+
+    def _to_node(self) -> Node:
+        raise NotImplementedError()
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\image.py
+------------------------------------------------------------------------------------------
+from .element import Element
+from .with_size_mixin import WithSizeMixin
+from ..nodes import Node, RowNode
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+
+class Image(Element, WithSizeMixin):
+    """A builder for displaying and styling raster images.
+
+    The `Image` builder is the primary way to include images (like JPG or PNG)
+    in your composition. By default, it sizes itself to the natural dimensions
+    of the image file. You can override this with `.size()` and
+    style it like any other element, applying borders, rounded corners, and shadows.
+
+    Example:
+        ```python
+        from pictex import Image
+
+        # Create a circular avatar from an image file.
+        avatar = (
+            Image("avatar.jpg")
+            .size(100, 100)
+            .border_radius('50%')
+            .border(3, "white")
+        )
+        ```
+    """
+
+    def __init__(self, path: str):
+        super().__init__()
+        self._path = path
+        self.background_image(self._path)
+        self.fit_background_image()
+        self._resize_factor = 1.0
+
+    def resize(self, factor: float) -> Self:
+        """
+        Resizes the image by a multiplier factor.
+
+        A factor of 1.0 maintains the original size. A factor of 1.1 increases
+        the size by 10%, and 0.9 decreases it by 10%. This method adjusts
+        both width and height while preserving the aspect ratio.
+
+        This provides a more intuitive way to scale an image compared to
+        setting an absolute size. A subsequent call to `.size()` will
+        override the effect of this method.
+
+        Example:
+            ```python
+            # Renders an image at half its original size
+            Image("path/to/image.png").resize(0.5)
+
+            # Renders an image 50% larger
+            Image("path/to/image.png").resize(1.5)
+            ```
+
+        Args:
+            factor: The multiplier for resizing the image. Must be a
+                positive number.
+
+        Returns:
+            Self: The instance for method chaining.
+
+        Raises:
+            ValueError: If the factor is not a positive number.
+        """
+        if factor <= 0:
+            raise ValueError("Resize factor must be a positive number.")
+
+        self._resize_factor = factor
+        return self
+
+    def _to_node(self) -> Node:
+        if self._resize_factor != 1.0:
+            image = self._style.background_image.get().get_skia_image()
+            if not image:
+                raise ValueError(f"Unable to load image '{self._path}'")
+            width = image.width()
+            height = image.height()
+            self.size(width * self._resize_factor, height * self._resize_factor)
+
+        return RowNode(self._style, [])
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\row.py
+------------------------------------------------------------------------------------------
+from typing import Union
+from .container import Container
+from ..nodes import Node, RowNode
+from ..models import HorizontalDistribution, VerticalAlignment
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+
+class Row(Container):
+    """A layout builder that arranges its children horizontally.
+
+    A `Row` places its children one after another in a left-to-right sequence.
+    It's a fundamental container for creating side-by-side layouts.
+
+    Example:
+        ```python
+        from pictex import Row, Image, Text
+
+        # Create a user banner with an avatar and text aligned vertically.
+        user_banner = Row(
+            Image("avatar.jpg").size(60, 60).border_radius('50%'),
+            Text("Username").font_size(24)
+        ).gap(15).vertical_align('center')
+        ```
+    """
+
+    def _build_node(self, nodes: list[Node]) -> Node:
+        return RowNode(self._style, nodes)
+
+    def horizontal_distribution(self, mode: Union[HorizontalDistribution, str]) -> Self:
+        """
+        Sets how children are distributed along the horizontal axis,
+        especially when there is extra space.
+
+        Args:
+            mode: Distribution mode. Can be 'left', 'center', 'right',
+                  'space-between', 'space-around', or 'space-evenly'.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        if isinstance(mode, str):
+            mode = HorizontalDistribution(mode.lower())
+        self._style.horizontal_distribution.set(mode)
+        return self
+
+    def vertical_align(self, mode: Union[VerticalAlignment, str]) -> Self:
+        """
+        Sets how children are aligned along the vertical axis within the row.
+
+        Args:
+            mode: Alignment mode. Can be 'top', 'center', 'bottom', or 'stretch'.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        if isinstance(mode, str):
+            mode = VerticalAlignment(mode.lower())
+        self._style.vertical_alignment.set(mode)
+        return self
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\stylable.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+from typing import Optional, Union, overload, Literal
+from pathlib import Path
+from ..models import *
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+
+class Stylable:
+
+    def __init__(self):
+        self._style = Style()
+
+    def font_family(self, family: Union[str, Path]) -> Self:
+        """Sets the font family or a path to a font file.
+
+        Args:
+            family: The name of the font family or a `Path` object to a font file.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.font_family.set(str(family))
+        return self
+
+    def font_fallbacks(self, *fonts: Union[str, Path]) -> Self:
+        """Specifies a list of fallback fonts.
+
+        These fonts are used for characters not supported by the primary font.
+
+        Args:
+            *fonts: A sequence of font names or `Path` objects to font files.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.font_fallbacks.set([str(font) for font in fonts])
+        return self
+
+    def font_size(self, size: float) -> Self:
+        """Sets the font size in points.
+
+        Args:
+            size: The new font size.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.font_size.set(size)
+        return self
+
+    def font_weight(self, weight: Union[FontWeight, int]) -> Self:
+        """Sets the font weight.
+
+        Args:
+            weight: The font weight, e.g., `FontWeight.BOLD` or `700`.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.font_weight.set(weight if isinstance(weight, FontWeight) else FontWeight(weight))
+        return self
+
+    def font_style(self, style: Union[FontStyle, str]) -> Self:
+        """Sets the font builders.
+
+        Args:
+            style: The font builders, e.g., `FontStyle.ITALIC`.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.font_style.set(style if isinstance(style, FontStyle) else FontStyle(style))
+        return self
+
+    def line_height(self, multiplier: float) -> Self:
+        """Sets the line height as a multiplier of the font size.
+
+        For example, a value of 1.5 corresponds to 150% line spacing.
+
+        Args:
+            multiplier: The line height multiplier.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.line_height.set(multiplier)
+        return self
+
+    def color(self, color: Union[str, PaintSource]) -> Self:
+        """Sets the text color or gradient.
+
+        Args:
+            color: A color string (e.g., "red", "#FF0000") or a `PaintSource` object.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.color.set(self._build_color(color))
+        return self
+
+    def text_shadows(self, *shadows: Shadow) -> Self:
+        """Sets the shadow effects for the text. This style is inherited.
+
+        This method applies one or more shadows to the text, replacing any
+        previously set text shadows.
+
+        Args:
+            *shadows: A sequence of one or more `Shadow` objects to be
+                applied to the text.
+
+        Returns:
+            The `Self` instance for method chaining.
+        """
+        self._style.text_shadows.set(list(shadows))
+        return self
+
+    def box_shadows(self, *shadows: Shadow) -> Self:
+        """Sets the shadow effects for the element box. This style is not inherited.
+
+        This method applies one or more shadows to the box, replacing any
+        previously set box shadows.
+
+        Args:
+            *shadows: A sequence of one or more `Shadow` objects to be
+                applied to the box.
+
+        Returns:
+            The `Self` instance for method chaining.
+        """
+        self._style.box_shadows.set(list(shadows))
+        return self
+
+    def text_stroke(self, width: float, color: Union[str, PaintSource]) -> Self:
+        """Adds an outline stroke to the text.
+
+        Args:
+            width: The width of the outline stroke.
+            color: The color of the outline.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.text_stroke.set(OutlineStroke(width=width, color=self._build_color(color)))
+        return self
+
+    def underline(
+        self,
+        thickness: float = 2.0,
+        color: Optional[Union[str, PaintSource]] = None
+    ) -> Self:
+        """Adds an underline text decoration.
+
+        Args:
+            thickness: The thickness of the underline.
+            color: The color of the underline. If `None`, the main text color is used.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        decoration_color = self._build_color(color) if color else None
+        self._style.underline.set(TextDecoration(
+            color=decoration_color,
+            thickness=thickness
+        ))
+        return self
+
+    def strikethrough(
+        self,
+        thickness: float = 2.0,
+        color: Optional[Union[str, PaintSource]] = None
+    ) -> Self:
+        """Adds a strikethrough text decoration.
+
+        Args:
+            thickness: The thickness of the strikethrough line.
+            color: The color of the line. If `None`, the main text color is used.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        decoration_color = self._build_color(color) if color else None
+        self._style.strikethrough.set(TextDecoration(
+            color=decoration_color,
+            thickness=thickness
+        ))
+        return self
+
+    @overload
+    def padding(self, all: float) -> Self: ...
+
+    @overload
+    def padding(self, vertical: float, horizontal: float) -> Self: ...
+
+    @overload
+    def padding(
+        self, top: float, right: float, bottom: float, left: float
+    ) -> Self: ...
+
+    def padding(self, *args: Union[float, int]) -> Self:
+        """Sets padding around the element, similar to CSS.
+
+        This method accepts one, two, or four values to specify the padding
+        for the top, right, bottom, and left sides.
+
+        Args:
+            *args:
+                - One value: all four sides.
+                - Two values: vertical, horizontal.
+                - Four values: top, right, bottom, left.
+
+        Returns:
+            The `Self` instance for chaining.
+
+        Raises:
+            TypeError: If the number of arguments is not 1, 2, or 4.
+        """
+        if len(args) == 1:
+            value = float(args[0])
+            self._style.padding.set(Padding(value, value, value, value))
+        elif len(args) == 2:
+            vertical = float(args[0])
+            horizontal = float(args[1])
+            self._style.padding.set(Padding(vertical, horizontal, vertical, horizontal))
+        elif len(args) == 4:
+            top, right, bottom, left = map(float, args)
+            self._style.padding.set(Padding(top, right, bottom, left))
+        else:
+            raise TypeError(
+                f"padding() takes 1, 2, or 4 arguments but got {len(args)}")
+
+        return self
+
+    @overload
+    def margin(self, all: float) -> Self: ...
+
+    @overload
+    def margin(self, vertical: float, horizontal: float) -> Self: ...
+
+    @overload
+    def margin(
+        self, top: float, right: float, bottom: float, left: float
+    ) -> Self: ...
+
+    def margin(self, *args: Union[float, int]) -> Self:
+        """Sets margin around the element, similar to CSS.
+
+        This method accepts one, two, or four values to specify the margin
+        for the top, right, bottom, and left sides.
+
+        Args:
+            *args:
+                - One value: all four sides.
+                - Two values: vertical, horizontal.
+                - Four values: top, right, bottom, left.
+
+        Returns:
+            The `Self` instance for chaining.
+
+        Raises:
+            TypeError: If the number of arguments is not 1, 2, or 4.
+        """
+        if len(args) == 1:
+            value = float(args[0])
+            self._style.margin.set(Margin(value, value, value, value))
+        elif len(args) == 2:
+            vertical = float(args[0])
+            horizontal = float(args[1])
+            self._style.margin.set(Margin(vertical, horizontal, vertical, horizontal))
+        elif len(args) == 4:
+            top, right, bottom, left = map(float, args)
+            self._style.margin.set(Margin(top, right, bottom, left))
+        else:
+            raise TypeError(
+                f"margin() takes 1, 2, or 4 arguments but got {len(args)}")
+
+        return self
+
+    def background_color(self, color: Union[str, PaintSource]) -> Self:
+        """Sets the background color or gradient.
+
+        Args:
+            color: A color string or a `PaintSource` object.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.background_color.set(self._build_color(color))
+        return self
+
+    def background_image(
+        self,
+        path: str,
+        size_mode: Union[BackgroundImageSizeMode, Literal["cover", "contain", "tile"]] = BackgroundImageSizeMode.COVER
+    ) -> Self:
+        """Sets a background image for the element.
+
+        Args:
+            path (str): The path to the image file.
+            size_mode (Union[BackgroundImageSizeMode, str]): The fitting strategy.
+                Can be 'cover', 'contain', or 'tile'.
+                - 'cover': The image is resized to completely cover the element's box,
+                  maintaining its aspect ratio. The image may be cropped.
+                - 'contain': The image is resized to fit entirely within the box,
+                  maintaining its aspect ratio. This may leave empty space.
+                - 'tile': The image is tiled at its original size without resizing.
+
+        Returns:
+            Self: The instance for method chaining.
+        """
+        if isinstance(size_mode, str):
+            size_mode = BackgroundImageSizeMode(size_mode.lower())
+
+        self._style.background_image.set(
+            BackgroundImage(path=path, size_mode=size_mode)
+        )
+        return self
+
+    def border(
+        self,
+        width: float,
+        color: Union[str, PaintSource],
+        style: Union[str, BorderStyle] = BorderStyle.SOLID
+    ) -> Self:
+        """
+        Sets the border for the element.
+
+        Args:
+            width: The width of the border in pixels.
+            color: The color of the border (e.g., "red", "#FF0000") or a PaintSource object.
+            style: The style of the borderline. Can be 'solid', 'dashed', or 'dotted'.
+
+        Returns:
+            The `Self` instance for method chaining.
+        """
+        border_color = self._build_color(color)
+        if isinstance(style, str):
+            style = BorderStyle(style.lower())
+
+        self._style.border.set(
+            Border(width=width, color=border_color, style=style)
+        )
+        return self
+
+    @overload
+    def border_radius(self, all: Union[float, str]) -> Self: ...
+    @overload
+    def border_radius(self, top_bottom: Union[float, str], left_right: Union[float, str]) -> Self: ...
+    @overload
+    def border_radius(self, top_left: Union[float, str], top_right: Union[float, str], bottom_right: Union[float, str], bottom_left: Union[float, str]) -> Self: ...
+
+    def border_radius(self, *args: Union[float, str]) -> Self:
+        """
+        Sets the corner radius for the background, similar to CSS border-radius.
+        Accepts absolute values (pixels) or percentages as strings (e.g., "50%").
+
+        Args:
+            *args:
+                - One value: all four corners.
+                - Two values: [top-left, bottom-right], [top-right, bottom-left].
+                - Four values: [top-left], [top-right], [bottom-right], [bottom-left].
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        if len(args) == 1:
+            val = self._parse_radius_value(args[0])
+            self._style.border_radius.set(BorderRadius(val, val, val, val))
+        elif len(args) == 2:
+            val1 = self._parse_radius_value(args[0])
+            val2 = self._parse_radius_value(args[1])
+            self._style.border_radius.set(BorderRadius(val1, val2, val1, val2))
+        elif len(args) == 4:
+            tl, tr, br, bl = map(self._parse_radius_value, args)
+            self._style.border_radius.set(BorderRadius(tl, tr, br, bl))
+        else:
+            raise TypeError(f"border_radius() takes 1, 2, or 4 arguments but got {len(args)}")
+
+        return self
+
+    def text_align(self, alignment: Union[TextAlign, str]) -> Self:
+        """Sets the text alignment for multi-line text.
+
+        Args:
+            alignment: The alignment, e.g., `Alignment.CENTER` or `"center"`.
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.text_align.set(alignment if isinstance(alignment, TextAlign) else TextAlign(alignment))
+        return self
+
+    def text_wrap(self, wrap: Union[TextWrap, str]) -> Self:
+        """Sets how text should wrap within its container.
+
+        Args:
+            wrap: The wrapping behavior, e.g., `TextWrap.NORMAL` or `"normal"` (allow wrapping),
+                  or `TextWrap.NOWRAP` or `"nowrap"` (prevent wrapping).
+
+        Returns:
+            The `Self` instance for chaining.
+        """
+        self._style.text_wrap.set(wrap if isinstance(wrap, TextWrap) else TextWrap(wrap))
+        return self
+
+    def _build_color(self, color: Union[str, PaintSource]) -> PaintSource:
+        """Internal helper to create a SolidColor from a string.
+
+        Args:
+            color: The color string or `PaintSource` object.
+
+        Returns:
+            A `PaintSource` object.
+        """
+        return SolidColor.from_str(color) if isinstance(color, str) else color
+
+    def _parse_radius_value(self, value: Union[float, int, str]) -> BorderRadiusValue:
+        if isinstance(value, str) and value.endswith('%'):
+            return BorderRadiusValue(value=float(value.rstrip('%')), mode='percent')
+        elif isinstance(value, (int, float)):
+            return BorderRadiusValue(value=float(value), mode='absolute')
+        raise TypeError(f"Unsupported type for radius: {type(value).__name__}")
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\text.py
+------------------------------------------------------------------------------------------
+from .element import Element
+from ..nodes import Node, TextNode
+
+class Text(Element):
+    """The fundamental builder for creating and styling text.
+
+    This is the primary content builder for displaying strings. A `Text` builder
+    can have its own unique styles that override any styles inherited from its
+    parent containers, allowing for fine-grained control over typography.
+
+    Example:
+        ```python
+        from pictex import Row, Text
+
+        # Create a row where each Text element has its own style.
+        styled_text = Row(
+            Text("Hello, ").font_size(30),
+            Text("PicTex!").font_size(30).color("blue").font_weight("bold")
+        )
+        ```
+    """
+
+    def __init__(self, text: str):
+        super().__init__()
+        self._text = text
+
+    def _to_node(self) -> Node:
+        return TextNode(self._style, self._text)
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\with_position_mixin.py
+------------------------------------------------------------------------------------------
+from typing import Union, Tuple
+from ..models import Position, Style, PositionMode
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+
+class WithPositionMixin:
+
+    _style: Style
+
+    def absolute_position(
+            self,
+            x: Union[float, int, str],
+            y: Union[float, int, str],
+            x_offset: float = 0,
+            y_offset: float = 0
+    ) -> Self:
+        """Sets the element's position relative to the root canvas.
+
+        This method removes the element from the normal layout flow (`Row` or
+        `Column`) and positions it based on the absolute dimensions of the
+        entire canvas. The (0, 0) coordinate is the top-left corner of the
+        final rendered image, ignoring any margin, border, or padding set on
+        the root container.
+
+        This is ideal for global overlays like watermarks or headers that should
+        be placed at a fixed position on the final image.
+
+        The coordinate system (`x`, `y`) supports three modes:
+        - **Absolute (pixels)**: `absolute_position(100, 250)`
+        - **Percentage**: `absolute_position("50%", "100%")`
+        - **Keyword Alignment**: `absolute_position("center", "top")`
+
+        Args:
+            x (Union[float, int, str]): The horizontal position value. Can be an
+                absolute pixel value, a percentage string (e.g., "50%"), or an
+                alignment keyword ("left", "center", "right").
+            y (Union[float, int, str]): The vertical position value. Can be an
+                absolute pixel value, a percentage string (e.g., "75%"), or an
+                alignment keyword ("top", "center", "bottom").
+            x_offset (float, optional): An additional horizontal offset in
+                pixels. Defaults to 0.
+            y_offset (float, optional): An additional vertical offset in
+                pixels. Defaults to 0.
+
+        Returns:
+            Self: The instance for method chaining.
+        """
+        return self._set_position(x, y, x_offset, y_offset, PositionMode.ABSOLUTE)
+
+    def position(
+            self,
+            x: Union[float, int, str],
+            y: Union[float, int, str],
+            x_offset: float = 0,
+            y_offset: float = 0
+    ) -> Self:
+        """Sets the element's position relative to its direct parent's content area.
+
+        This method removes the element from the normal layout flow (`Row` or
+        `Column`) and positions it relative to its immediate parent. The (0, 0)
+        coordinate is the top-left corner *inside* the parent's padding and
+        border. The element will be correctly offset by its parent's position.
+
+        This is ideal for creating overlays within a component, such as placing a
+        badge on an image or custom-placing text inside a styled container.
+
+        The coordinate system (`x`, `y`) supports three modes:
+        - **Absolute (pixels)**: `position(100, 250)`
+        - **Percentage**: `position("50%", "100%")`
+        - **Keyword Alignment**: `position("center", "top")`
+
+        Args:
+            x (Union[float, int, str]): The horizontal position value. Can be an
+                absolute pixel value, a percentage string (e.g., "50%"), or an
+                alignment keyword ("left", "center", "right").
+            y (Union[float, int, str]): The vertical position value. Can be an
+                absolute pixel value, a percentage string (e.g., "75%"), or an
+                alignment keyword ("top", "center", "bottom").
+            x_offset (float, optional): An additional horizontal offset in
+                pixels. Defaults to 0.
+            y_offset (float, optional): An additional vertical offset in
+                pixels. Defaults to 0.
+
+        Returns:
+            Self: The instance for method chaining.
+        """
+        return self._set_position(x, y, x_offset, y_offset, PositionMode.RELATIVE)
+
+    def _set_position(
+            self,
+            x: Union[float, int, str],
+            y: Union[float, int, str],
+            x_offset: float,
+            y_offset: float,
+            mode: PositionMode
+    ) -> Self:
+        container_ax, content_ax = self._parse_anchor(x, axis='x')
+        container_ay, content_ay = self._parse_anchor(y, axis='y')
+        x_offset = x + x_offset if isinstance(x, (float, int)) else x_offset
+        y_offset = y + y_offset if isinstance(y, (float, int)) else y_offset
+
+        self._style.position.set(Position(
+            container_anchor_x=container_ax,
+            content_anchor_x=content_ax,
+            x_offset=x_offset,
+            container_anchor_y=container_ay,
+            content_anchor_y=content_ay,
+            y_offset=y_offset,
+            mode=mode
+        ))
+        return self
+
+    def _parse_anchor(self, value: Union[str, int, float], axis: str) -> Tuple[float, float]:
+        if not isinstance(value, str):
+            return 0, 0
+
+        if value.endswith('%'):
+            container_anchor = float(value.rstrip('%')) / 100
+            return container_anchor, 0.0
+
+        keywords = {
+            'x': {'left': (0.0, 0.0), 'center': (0.5, 0.5), 'right': (1.0, 1.0)},
+            'y': {'top': (0.0, 0.0), 'center': (0.5, 0.5), 'bottom': (1.0, 1.0)}
+        }
+
+        if value in keywords[axis]:
+            return keywords[axis][value]
+
+        raise ValueError(f"Invalid keyword '{value}' for axis '{axis}'")
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\builders\with_size_mixin.py
+------------------------------------------------------------------------------------------
+from typing import Union, Optional, Literal
+from ..models import Style, SizeValue, SizeValueMode
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+
+class WithSizeMixin:
+    _style: Style
+
+    def _parse_size_value(self, value: Optional[Union[float, int, str]]) -> SizeValue:
+        if isinstance(value, (int, float)):
+            return SizeValue(SizeValueMode('absolute'), float(value))
+
+        if not isinstance(value, str):
+            raise TypeError(f"Unsupported type for size: '{value}' ({type(value).__name__}). "
+                            "Expected float, int, or 'number%'.")
+
+        if value.endswith('%'):
+            return SizeValue(SizeValueMode('percent'), float(value.rstrip('%')))
+
+        return SizeValue(SizeValueMode(value))
+
+    def size(
+            self,
+            width: Optional[Union[float, int, Literal['auto', 'fit-content', 'fit-background-image', 'fill-available']]] = None,
+            height: Optional[Union[float, int, Literal['auto', 'fit-content', 'fit-background-image', 'fill-available']]] = None,
+    ) -> Self:
+        """Sets the explicit size of the element's box using the border-box model.
+
+        The width and height are defined independently and control the total
+        dimensions of the element, including its padding and border.
+
+        Each dimension supports several modes:
+
+        - **`'auto'`**: The size is context-dependent. It typically
+          behaves like `'fit-content'`, but will yield to parent layout
+          constraints, such as stretching to fill the space in a `Row` or
+          `Column` with align `stretch`. This is the default behavior.
+
+        - **`'fit-content'`**: The size is explicitly set to wrap the element's
+          content. This will override parent constraints like `stretch`.
+
+        - **`'fit-background-image'`**: The size is explicitly set to match the
+          dimensions of the element's background image.
+
+        - **`'fill-available'`**: The element becomes flexible and will expand or shrink to
+          occupy a share of the available space in its parent container.
+
+        - **Absolute (pixels)**: An `int` or `float` value (e.g., `200`) sets a
+          fixed size.
+
+        - **Percentage**: A `str` ending with `%` (e.g., `"50%"`) sets the size
+          relative to the parent container's content area.
+
+        Args:
+            width (Union[float, int, str]): The horizontal size value.
+                Defaults to "auto".
+            height (Union[float, int, str]): The vertical size value.
+                Defaults to "auto".
+
+        Returns:
+            Self: The instance for method chaining.
+        """
+
+        if width is not None:
+            parsed_width = self._parse_size_value(width)
+            self._style.width.set(parsed_width)
+
+        if height is not None:
+            parsed_height = self._parse_size_value(height)
+            self._style.height.set(parsed_height)
+
+        return self
+
+    def fit_background_image(self) -> Self:
+        """Adjusts the element's size to match its background image dimensions.
+
+        This is a convenience method that sets the element's width and height
+        to fit the natural size of the background image. It is a shortcut for
+        calling `size(width='fit-background-image', height='fit-background-image')`.
+
+        This is particularly useful for ensuring an element, like a Row or Column,
+        perfectly contains its background image without distortion or cropping,
+        allowing other content to be layered on top.
+
+        The behavior can be overridden by a subsequent call to `.size()`.
+
+        Example:
+            ```python
+            # A Row that automatically sizes itself to the 'background.png'
+            # before rendering text on top of it.
+            Row()
+                .background_image("path/to/background.png")
+                .fit_background_image()
+                .render(Text("Text over the full image").position("center", "center"))
+            ```
+
+        Returns:
+            Self: The instance for method chaining.
+        """
+
+        return self.size("fit-background-image", "fit-background-image")
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\exceptions.py
+------------------------------------------------------------------------------------------
+class FontNotFoundWarning(Warning):
+    """
+        Warning raised when a user defined font is not found.
+        Either a system font or a font file.
+
+        PicTex will continue the execution with the next fallback font if defined,
+        otherwise the default system font will be used.
+    """
+    pass
+
+class SystemFontCanNotBeEmbeddedInSvgWarning(Warning):
+    """
+        Warning raised when a user render a image as svg,
+        with the flag `embed_fonts = True`, but system fonts are being used.
+
+        The system fonts can't be embedded in a SVG file.
+        PicTex will continue the execution are ignore the system fonts in the final SVG.
+    """
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\layout\__init__.py
+------------------------------------------------------------------------------------------
+from .size_resolver import SizeResolver
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\layout\size_resolver.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+from typing import TYPE_CHECKING
+import skia
+
+if TYPE_CHECKING:
+    from ..nodes import Node
+    from ..models import SizeValue
+
+class SizeResolver:
+
+    def __init__(self, node: Node):
+        self._node = node
+        self._intrinsic_bounds: skia.Rect | None = None
+    
+    def resolve_width(self) -> int:
+        forced_width = self._node.forced_size[0]
+        if forced_width is not None:
+            spacing = self._get_horizontal_spacing()
+            return max(0, forced_width - spacing)
+
+        return self._resolve_width_from_style()
+
+    def resolve_height(self) -> int:
+        forced_height = self._node.forced_size[1]
+        if forced_height is not None:
+            spacing = self._get_vertical_spacing()
+            return max(0, forced_height - spacing)
+
+        return self._resolve_height_from_style()
+    
+    def _get_horizontal_spacing(self) -> float:
+        padding = self._node.computed_styles.padding.get()
+        border = self._node.computed_styles.border.get()
+        border_width = border.width if border else 0
+        return padding.left + padding.right + (border_width * 2)
+    
+    def _get_vertical_spacing(self) -> float:
+        padding = self._node.computed_styles.padding.get()
+        border = self._node.computed_styles.border.get()
+        border_width = border.width if border else 0
+        return padding.top + padding.bottom + (border_width * 2)
+
+    def _get_axis_size(self, value: 'SizeValue', axis: str, outer_space: float) -> float:
+        if value.mode == 'absolute':
+            return value.value - outer_space
+        if value.mode == 'percent':
+            return self._get_parent_percent_axis_size(axis, value.value / 100.0) - outer_space
+        if value.mode == 'fit-content' or value.mode == 'auto':
+            return self._get_intrinsic_axis_size(axis)
+        if value.mode == 'fill-available':
+            return self._get_parent_available_axis_size_per_child(axis)
+        if value.mode == 'fit-background-image':
+            return self._get_background_image_axis_size(axis) - outer_space
+        raise ValueError(f"Unsupported size mode: {value.mode}")
+    
+    def _get_intrinsic_axis_size(self, axis: str) -> float:
+        if axis == 'width':
+            return self._node.compute_intrinsic_width()
+        return self._node.compute_intrinsic_height()
+
+    def _get_background_image_axis_size(self, axis: str) -> float:
+        background_image = self._node.computed_styles.background_image.get()
+        if not background_image:
+            raise ValueError("Cannot use 'fit-background-image' on an element without a background image.")
+
+        image = background_image.get_skia_image()
+        if not image:
+            raise ValueError(f"Background image for node could not be loaded: {background_image.path}")
+
+        return getattr(image, axis)()
+
+    def _get_parent_percent_axis_size(self, axis: str, factor: float) -> float:
+        parent = self._node.parent
+        if not parent:
+            raise ValueError("Cannot use 'percent' size on a root element without a parent.")
+
+        parent_size = getattr(parent.computed_styles, axis).get()
+        if not parent_size or parent_size.mode == 'fit-content' or parent_size.mode == 'auto':
+            raise ValueError("Cannot use 'percent' size if parent element has 'fit-content' size.")
+
+        if axis == 'width':
+            return parent.content_width * factor
+        elif axis == 'height':
+            return parent.content_height * factor
+        
+        raise ValueError(f"Unknown axis: {axis}")
+
+    def _get_parent_available_axis_size_per_child(self, axis: str) -> float:
+        parent = self._node.parent
+        if not parent:
+            raise ValueError("Cannot use 'fill-available' size on a root element without a parent.")
+
+        parent_size_style = getattr(parent.computed_styles, axis).get()
+        if not parent_size_style or parent_size_style.mode == 'fit-content' or parent_size_style.mode == 'auto':
+            raise ValueError("Cannot use 'fill-available' size if parent element has 'fit-content' size.")
+        
+        # We just return the intrinsic size as a placeholder, this should be recalculated in the second phase
+        return self._get_intrinsic_axis_size(axis)
+
+    def _resolve_width_from_style(self) -> int:
+        width = self._node.computed_styles.width.get()
+        if not width:
+            return self._node.compute_intrinsic_width()
+
+        spacing = self._get_horizontal_spacing()
+        box_width = self._get_axis_size(width, "width", spacing)
+        return max(0, box_width)
+
+    def _resolve_height_from_style(self) -> int:
+        height = self._node.computed_styles.height.get()
+        if not height:
+            return self._node.compute_intrinsic_height()
+
+        spacing = self._get_vertical_spacing()
+        box_height = self._get_axis_size(height, "height", spacing)
+        return max(0, box_height)
+
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\__init__.py
+------------------------------------------------------------------------------------------
+"""This package contains all the data models used to define a builders in pictex."""
+
+from .public import *
+from .internal import *
+
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\internal\__init__.py
+------------------------------------------------------------------------------------------
+from .render import RenderProps, RenderMetrics
+from .text import Line, TextRun
+from .typeface import TypefaceSource, TypefaceLoadingInfo
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\internal\render.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+import skia
+from ..public import CropMode, FontSmoothing
+
+@dataclass
+class RenderMetrics:
+    """A helper class to store all calculated dimensions for rendering."""
+    bounds: skia.Rect
+    background_rect: skia.Rect
+    text_rect: skia.Rect
+    draw_origin: tuple[float, float]
+
+@dataclass(frozen=True)
+class RenderProps:
+    is_svg: bool
+    crop_mode: CropMode
+    font_smoothing: FontSmoothing
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\internal\text.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+import skia
+
+@dataclass
+class TextRun:
+    """Represents a segment of text that can be rendered with a single font."""
+    text: str
+    font: skia.Font
+    width: float = 0.0
+
+@dataclass
+class Line:
+    """Represents a full line composed of multiple TextRuns."""
+    runs: list[TextRun]
+    width: float
+    height: float
+    bounds: skia.Rect
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\internal\typeface.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+import skia
+from enum import Enum
+from typing import Optional
+
+class TypefaceSource(str, Enum):
+    SYSTEM = "system"
+    FILE = "file"
+
+@dataclass
+class TypefaceLoadingInfo:
+    typeface: skia.Typeface
+    source: TypefaceSource
+    filepath: Optional[str] # only valid on 'file' fonts
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\__init__.py
+------------------------------------------------------------------------------------------
+from .effects import Shadow, OutlineStroke
+from .style import Style
+from .typography import FontStyle, FontWeight, FontSmoothing, TextAlign, TextWrap
+from .paint_source import PaintSource
+from .color import SolidColor
+from .linear_gradient import LinearGradient
+from .decoration import TextDecoration
+from .crop import CropMode
+from .box import Box
+from .position import Position, PositionMode
+from .size import SizeValue, SizeValueMode
+from .layout import Margin, Padding, HorizontalDistribution, VerticalAlignment, HorizontalAlignment, VerticalDistribution
+from .background import BackgroundImage, BackgroundImageSizeMode
+from .border import Border, BorderStyle, BorderRadiusValue, BorderRadius
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\background.py
+------------------------------------------------------------------------------------------
+from copy import deepcopy
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Optional
+import skia
+
+class BackgroundImageSizeMode(str, Enum):
+    COVER = "cover"
+    CONTAIN = "contain"
+    TILE = "tile"
+
+@dataclass
+class BackgroundImage:
+    path: str
+    size_mode: BackgroundImageSizeMode = BackgroundImageSizeMode.COVER
+
+    _skia_image: Optional[skia.Image] = field(default=None, repr=False, init=False)
+
+    def get_skia_image(self) -> Optional[skia.Image]:
+        if self._skia_image is None:
+            try:
+                self._skia_image = skia.Image.open(self.path)
+            except Exception:
+                raise ValueError(f"Could not load background image from: {self.path}")
+        return self._skia_image
+
+    def __deepcopy__(self, memo):
+        return BackgroundImage(
+            path=deepcopy(self.path, memo),
+            size_mode=deepcopy(self.size_mode, memo)
+        )
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\border.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Literal
+from .paint_source import PaintSource
+from .color import SolidColor
+import skia
+
+class BorderStyle(str, Enum):
+    SOLID = "solid"
+    DASHED = "dashed"
+    DOTTED = "dotted"
+
+@dataclass
+class Border:
+    width: float = 1.0
+    color: PaintSource = field(default_factory=lambda: SolidColor(0, 0, 0))
+    style: BorderStyle = BorderStyle.SOLID
+
+@dataclass
+class BorderRadiusValue:
+    value: float = 0
+    mode: Literal['absolute', 'percent'] = 'absolute'
+
+@dataclass
+class BorderRadius:
+    top_left: BorderRadiusValue
+    top_right: BorderRadiusValue
+    bottom_right: BorderRadiusValue
+    bottom_left: BorderRadiusValue
+
+    def has_any_radius(self) -> bool:
+        return any(r.value > 0 for r in [self.top_left, self.top_right, self.bottom_right, self.bottom_left])
+
+    def apply_corner_radius(self, rect: skia.Rect, radius_offset: float = 0) -> skia.RRect:
+        rounded_rect = skia.RRect()
+        radii_tuples = self.get_absolute_radii(
+            rect.width(),
+            rect.height()
+        )
+        adjusted_radii_tuples = [
+            (max(0, rx - radius_offset), max(0, ry - radius_offset))
+            for rx, ry in radii_tuples
+        ]
+
+        rounded_rect.setRectRadii(rect, adjusted_radii_tuples)
+        return rounded_rect
+
+    def get_absolute_radii(self, box_width: float, box_height: float) -> list[tuple[float, float]]:
+        radii = []
+        for corner_value in [self.top_left, self.top_right, self.bottom_right, self.bottom_left]:
+            if corner_value.mode == 'percent':
+                rx = box_width * (corner_value.value / 100.0)
+                ry = box_height * (corner_value.value / 100.0)
+                radii.append((rx, ry))
+            else: # absolute
+                radii.append((corner_value.value, corner_value.value))
+        return radii
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\box.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Box:
+    """Represents a rectangular area with position and size."""
+    x: int
+    y: int
+    width: int
+    height: int
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\color.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+from dataclasses import dataclass
+import skia
+
+from .paint_source import PaintSource
+
+NAMED_COLORS = {
+    'black': '#000000',
+    'white': '#ffffff',
+    'red': '#ff0000',
+    'green': '#008000',
+    'blue': '#0000ff',
+    'yellow': '#ffff00',
+    'cyan': '#00ffff',
+    'magenta': '#ff00ff',
+    'silver': '#c0c0c0',
+    'gray': '#808080',
+    'maroon': '#800000',
+    'olive': '#808000',
+    'purple': '#800080',
+    'teal': '#008080',
+    'navy': '#000080',
+    'orange': '#ffa500',
+    'gold': '#ffd700',
+    'pink': '#ffc0cb',
+}
+
+
+@dataclass(frozen=True)
+class SolidColor(PaintSource):
+    """Represents a solid color with RGBA components.
+
+    This class provides a structured way to handle solid colors, with methods
+    for creating instances from various string formats like hex codes or
+    standard color names.
+
+    Attributes:
+        r (int): The red component of the color (0-255).
+        g (int): The green component of the color (0-255).
+        b (int): The blue component of the color (0-255).
+        a (int): The alpha (opacity) component of the color (0-255), where
+            255 is fully opaque. Defaults to 255.
+    """
+    r: int
+    g: int
+    b: int
+    a: int = 255
+
+    @classmethod
+    def _from_hex(cls, hex_str: str) -> SolidColor:
+        """Creates a SolidColor object from a hexadecimal string.
+
+        Supports various hex formats: '#RGB', '#RRGGBB', and '#RRGGBBAA'.
+
+        Args:
+            hex_str: The hexadecimal color string.
+
+        Returns:
+            A new `SolidColor` instance.
+
+        Raises:
+            ValueError: If the hex string format is invalid.
+        """
+        hex_str = hex_str.lstrip('#')
+
+        if len(hex_str) == 3:  # Expand short form like #F0C to #FF00CC
+            hex_str = "".join(c * 2 for c in hex_str)
+
+        if len(hex_str) == 8:  # RRGGBBAA
+            r, g, b, a = (int(hex_str[i:i + 2], 16) for i in (0, 2, 4, 6))
+            return cls(r, g, b, a)
+        elif len(hex_str) == 6:  # RRGGBB
+            r, g, b = (int(hex_str[i:i + 2], 16) for i in (0, 2, 4))
+            return cls(r, g, b)
+        else:
+            raise ValueError(f"Invalid hex color format: '{hex_str}'")
+
+    @classmethod
+    def from_str(cls, value: str) -> SolidColor:
+        """Creates a SolidColor object from a general color string.
+
+        This method acts as a factory, supporting standard color names
+        (e.g., 'red', 'blue') and hexadecimal codes.
+
+        Args:
+            value: The color string to parse.
+
+        Returns:
+            A new `SolidColor` instance.
+
+        Raises:
+            ValueError: If the color name is unknown or the format is invalid.
+        """
+        clean_value = value.strip().lower()
+        if clean_value.startswith('#'):
+            return cls._from_hex(clean_value)
+
+        hex_code = NAMED_COLORS.get(clean_value)
+        if hex_code:
+            return cls._from_hex(hex_code)
+
+        raise ValueError(f"Unknown color name or format: '{value}'")
+
+    def apply_to_paint(self, paint: skia.Paint, bounds: skia.Rect) -> None:
+        """Applies this solid color to a Skia Paint object.
+
+        This method is part of the `PaintSource` interface and is used by the
+        rendering engine.
+
+        Args:
+            paint: The `skia.Paint` object to modify.
+            bounds: The bounding box of the area to be painted. This is not
+                used for solid colors but is part of the interface for
+                compatibility with gradients.
+        """
+        paint.setColor(skia.Color(self.r, self.g, self.b, self.a))
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\crop.py
+------------------------------------------------------------------------------------------
+from enum import Enum
+
+class CropMode(Enum):
+    """
+    Defines how the final image canvas should be cropped.
+    """
+    SMART = "smart"
+    CONTENT_BOX = "content_box"
+    NONE = "none"
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\decoration.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+from dataclasses import dataclass
+from enum import Enum
+from typing import Optional
+
+from .color import SolidColor
+
+@dataclass
+class TextDecoration:
+    """Represents a line drawn over, under, or through the text."""
+    color: Optional[SolidColor] = None  # If None, use the text's color.
+    thickness: float = 4.0
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\effects.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass, field
+from .color import SolidColor
+from .paint_source import PaintSource
+
+@dataclass
+class Shadow:
+    """Represents a drop shadow effect for an element.
+
+    Attributes:
+        offset (tuple[float, float]): A tuple `(dx, dy)` specifying the
+            horizontal and vertical offset of the shadow from the element.
+            Positive `dx` values shift the shadow to the right, and positive
+            `dy` values shift it downward. Defaults to `(2, 2)`.
+        blur_radius (float): The radius of the Gaussian blur applied to the
+            shadow's shape. Larger values create a softer, more diffused
+            shadow, while a value of 0 results in a sharp, un-blurred shadow.
+            Defaults to `2.0`.
+        color (SolidColor|str): The color of the shadow, specified as a
+            string or a `SolidColor` object. Defaults to a semi-transparent black,
+            equivalent to `rgba(0, 0, 0, 0.5)`.
+
+    Example:
+        ```python
+        from pictex import Text, Shadow
+
+        # A soft, standard drop shadow for a box
+        soft_shadow = Shadow(
+            offset=(3, 3),
+            blur_radius=5,
+            color="black"
+        )
+
+        # Applying a single shadow to a box
+        element_with_shadow = Row().box_shadows(soft_shadow)
+
+        # Applying multiple shadows to text for a neon glow effect
+        neon_text = Text("Glow").text_shadows(
+            Shadow(blur_radius=4, color="cyan"),
+            Shadow(blur_radius=8, color="magenta"),
+            Shadow(blur_radius=12, color="blue")
+        )
+        ```
+    """
+    offset: tuple[float, float] = (2, 2)
+    blur_radius: float = 2.0
+    color: SolidColor = field(default_factory=lambda: SolidColor(0, 0, 0, a=128))
+
+    def __post_init__(self):
+        self.color = SolidColor.from_str(self.color) if isinstance(self.color, str) else self.color
+        if not isinstance(self.color, SolidColor):
+             raise TypeError("Argument 'color' must be a SolidColor object or a valid color string.")
+
+@dataclass
+class OutlineStroke:
+    """Represents an outline text stroke."""
+    width: float = 2.0
+    color: PaintSource = field(default_factory=lambda: SolidColor(0, 0, 0))
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\layout.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+from enum import Enum
+
+@dataclass
+class Margin:
+    top: float = 0
+    right: float = 0
+    bottom: float = 0
+    left: float = 0
+
+@dataclass
+class Padding:
+    top: float = 0
+    right: float = 0
+    bottom: float = 0
+    left: float = 0
+
+class HorizontalDistribution(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+    SPACE_BETWEEN = "space-between"
+    SPACE_AROUND = "space-around"
+    SPACE_EVENLY = "space-evenly"
+
+class VerticalAlignment(str, Enum):
+    TOP = "top"
+    CENTER = "center"
+    BOTTOM = "bottom"
+    STRETCH = "stretch"
+
+class VerticalDistribution(str, Enum):
+    TOP = "top"
+    CENTER = "center"
+    BOTTOM = "bottom"
+    SPACE_BETWEEN = "space-between"
+    SPACE_AROUND = "space-around"
+    SPACE_EVENLY = "space-evenly"
+
+class HorizontalAlignment(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+    STRETCH = "stretch"
+
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\linear_gradient.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+from typing import Sequence, Optional
+import skia
+
+from .paint_source import PaintSource
+from .color import SolidColor
+
+@dataclass
+class LinearGradient(PaintSource):
+    """
+    Represents a linear gradient fill, smoothly transitioning between colors
+    along a straight line.
+
+    The gradient's direction and color distribution are controlled by its
+    parameters. This class allows for creating rich, colorful fills for
+    text and backgrounds.
+
+    Attributes:
+        colors (Sequence[Color]): A sequence of two or more Color objects
+            that define the key colors of the gradient.
+        stops (Optional[Sequence[float]]): A sequence of numbers between 0.0
+            and 1.0 that specify the position of each color in the `colors`
+            sequence. The length of `stops` must match the length of `colors`.
+            If `None`, the colors are distributed evenly along the gradient line.
+            For example, for `colors` with 3 colors, `stops=[0.0, 0.5, 1.0]`
+            would place the second color exactly in the middle of the gradient.
+        start_point (tuple[float, float]): A tuple `(x, y)` representing the
+            starting point of the gradient line. Coordinates are relative to the
+            object's bounding box, where (0.0, 0.0) is the top-left corner and
+            (1.0, 1.0) is the bottom-right corner.
+        end_point (tuple[float, float]): A tuple `(x, y)` representing the
+            ending point of the gradient line. The gradient is drawn along the
+            line connecting `start_point` to `end_point`.
+
+    Example:
+        # A simple horizontal gradient from red to blue
+        ```python
+        horizontal_gradient = LinearGradient(
+            colors=['#FF0000', 'blue']
+        )
+        ```
+
+        # A vertical gradient from top (yellow) to bottom (orange)
+        ```python
+        vertical_gradient = LinearGradient(
+            colors=['yellow', 'orange'],
+            start_point=(0.5, 0.0),
+            end_point=(0.5, 1.0)
+        )
+        ```
+
+        # A diagonal gradient with a custom color stop
+        ```python
+        diagonal_gradient = LinearGradient(
+            colors=[
+                'magenta',
+                'cyan',
+                'yellow'
+            ],
+            stops=[0.0, 0.2, 1.0] # 'cyan' is positioned 20% along the gradient
+        )
+        ```
+    """
+    colors: Sequence[SolidColor]
+    stops: Optional[Sequence[float]] = None
+    start_point: tuple[float, float] = (0.0, 0.5)
+    end_point: tuple[float, float] = (1.0, 0.5)
+
+    def __post_init__(self):
+        self.colors = [
+            SolidColor.from_str(c) if isinstance(c, str) else c
+            for c in self.colors
+        ]
+        if not all(isinstance(c, SolidColor) for c in self.colors):
+             raise TypeError("All items in 'colors' must be Color objects or valid color strings.")
+
+    def apply_to_paint(self, paint: skia.Paint, bounds: skia.Rect) -> None:
+        """Creates a linear gradient shader and applies it to the paint."""
+        if not self.colors:
+            return
+
+        skia_colors = [skia.Color(c.r, c.g, c.b, c.a) for c in self.colors]
+        
+        # Convert relative points to absolute coordinates based on the bounds
+        p1 = (
+            bounds.left() + self.start_point[0] * bounds.width(),
+            bounds.top() + self.start_point[1] * bounds.height()
+        )
+        p2 = (
+            bounds.left() + self.end_point[0] * bounds.width(),
+            bounds.top() + self.end_point[1] * bounds.height()
+        )
+
+        shader = skia.GradientShader.MakeLinear(
+            points=[p1, p2],
+            colors=skia_colors,
+            positions=self.stops
+        )
+        paint.setShader(shader)
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\paint_source.py
+------------------------------------------------------------------------------------------
+from abc import ABC, abstractmethod
+import skia
+
+class PaintSource(ABC):
+    """
+    Abstract base class for anything that can be used as a source for a skia.Paint.
+    This includes solid colors, gradients, patterns, etc.
+    """
+    
+    @abstractmethod
+    def apply_to_paint(self, paint: skia.Paint, bounds: skia.Rect) -> None:
+        """
+        Configures the given skia.Paint object to use this source.
+
+        Args:
+            paint: The skia.Paint object to modify.
+            bounds: The bounding box of the shape being painted. This is crucial
+                    for calculating relative coordinates for gradients.
+        """
+        pass
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\position.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+from enum import Enum
+from typing import Tuple
+
+class PositionMode(str, Enum):
+    ABSOLUTE = 'absolute'
+    RELATIVE = 'relative'
+
+@dataclass
+class Position:
+    container_anchor_x: float = 0.0
+    container_anchor_y: float = 0.0
+
+    content_anchor_x: float = 0.0
+    content_anchor_y: float = 0.0
+
+    x_offset: float = 0.0
+    y_offset: float = 0.0
+
+    mode: PositionMode = PositionMode.ABSOLUTE
+
+    def get_relative_position(self, content_width: int, content_height: int, container_width: int, container_height: int) -> Tuple[float, float]:
+        container_point_x = container_width * self.container_anchor_x
+        container_point_y = container_height * self.container_anchor_y
+
+        content_offset_x = content_width * self.content_anchor_x
+        content_offset_y = content_height * self.content_anchor_y
+
+        final_x = container_point_x - content_offset_x + self.x_offset
+        final_y = container_point_y - content_offset_y + self.y_offset
+
+        return final_x, final_y
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\size.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass
+from enum import Enum
+from typing import NamedTuple
+
+class SizeValueMode(str, Enum):
+    AUTO = 'auto'
+    ABSOLUTE = 'absolute'
+    PERCENT = 'percent'
+    FIT_CONTENT = 'fit-content'
+    FILL_AVAILABLE = 'fill-available'
+    FIT_BACKGROUND_IMAGE = 'fit-background-image'
+
+class SizeValue(NamedTuple):
+    mode: SizeValueMode
+    value: float = 0
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\style.py
+------------------------------------------------------------------------------------------
+from dataclasses import dataclass, field, fields
+from typing import Optional
+from .border import Border, BorderRadius
+from .background import BackgroundImage
+from .effects import Shadow, OutlineStroke
+from .layout import Margin, Padding, HorizontalDistribution, VerticalAlignment, HorizontalAlignment, VerticalDistribution
+from .position import Position
+from .style_property import StyleProperty
+from .typography import TextAlign, FontWeight, FontStyle, TextWrap
+from .paint_source import PaintSource
+from .decoration import TextDecoration
+from .color import SolidColor
+from .size import SizeValue
+
+
+@dataclass
+class Style:
+    """
+    A comprehensive container for all text styling properties.
+    This is the core data model for the library.
+    """
+    # Properties that can be inherited.
+    font_family: StyleProperty[Optional[str]] = field(default_factory=lambda: StyleProperty(None))
+    font_fallbacks: StyleProperty[list[str]] = field(default_factory=lambda: StyleProperty([]))
+    font_size: StyleProperty[float] = field(default_factory=lambda: StyleProperty(50))
+    font_weight: StyleProperty[FontWeight] = field(default_factory=lambda: StyleProperty(FontWeight.NORMAL))
+    font_style: StyleProperty[FontStyle] = field(default_factory=lambda: StyleProperty(FontStyle.NORMAL))
+    line_height: StyleProperty[float] = field(default_factory=lambda: StyleProperty(1.0))  # Multiplier for the font size, like in CSS
+    text_align: StyleProperty[TextAlign] = field(default_factory=lambda: StyleProperty(TextAlign.LEFT))
+    color: StyleProperty[PaintSource] = field(default_factory=lambda: StyleProperty(SolidColor(0, 0, 0)))
+    text_shadows: StyleProperty[list[Shadow]] = field(default_factory=lambda: StyleProperty([]))
+    text_stroke: StyleProperty[Optional[OutlineStroke]] = field(default_factory=lambda: StyleProperty(None))
+    underline: StyleProperty[Optional[TextDecoration]] = field(default_factory=lambda: StyleProperty(None))
+    strikethrough: StyleProperty[Optional[TextDecoration]] = field(default_factory=lambda: StyleProperty(None))
+    text_wrap: StyleProperty[TextWrap] = field(default_factory=lambda: StyleProperty(TextWrap.NORMAL))
+
+    # Properties that cannot be inherited.
+    box_shadows: StyleProperty[list[Shadow]] = field(default_factory=lambda: StyleProperty([], inheritable=False))
+    padding: StyleProperty[Padding] = field(default_factory=lambda: StyleProperty(Padding(), inheritable=False))
+    margin: StyleProperty[Margin] = field(default_factory=lambda: StyleProperty(Margin(), inheritable=False))
+    background_color: StyleProperty[Optional[PaintSource]] = field(default_factory=lambda: StyleProperty(None, inheritable=False))
+    background_image: StyleProperty[Optional[BackgroundImage]] = field(default_factory=lambda: StyleProperty(None, inheritable=False))
+    border: StyleProperty[Optional[Border]] = field(default_factory=lambda: StyleProperty(None, inheritable=False))
+    border_radius: StyleProperty[Optional[BorderRadius]] = field(default_factory=lambda: StyleProperty(None, inheritable=False))
+    position: StyleProperty[Optional[Position]] = field(default_factory=lambda: StyleProperty(None, inheritable=False))
+    width: StyleProperty[Optional[SizeValue]] = field(default_factory=lambda: StyleProperty(None, inheritable=False))
+    height: StyleProperty[Optional[SizeValue]] = field(default_factory=lambda: StyleProperty(None, inheritable=False))
+    horizontal_distribution: StyleProperty[HorizontalDistribution] = field(
+        default_factory=lambda: StyleProperty(HorizontalDistribution.LEFT, inheritable=False)
+    )
+    vertical_alignment: StyleProperty[VerticalAlignment] = field(
+        default_factory=lambda: StyleProperty(VerticalAlignment.TOP, inheritable=False)
+    )
+    vertical_distribution: StyleProperty[VerticalDistribution] = field(
+        default_factory=lambda: StyleProperty(VerticalDistribution.TOP, inheritable=False)
+    )
+    horizontal_alignment: StyleProperty[HorizontalAlignment] = field(
+        default_factory=lambda: StyleProperty(HorizontalAlignment.LEFT, inheritable=False)
+    )
+    gap: StyleProperty[float] = field(default_factory=lambda: StyleProperty(0.0, inheritable=False))
+
+    def is_explicit(self, field_name: str) -> bool:
+        property: Optional[StyleProperty] = getattr(self, field_name)
+        if not property:
+            raise ValueError(f"Field '{field_name}' doesn't exist.")
+        return property.was_set
+
+    def is_inheritable(self, field_name: str) -> bool:
+        property: Optional[StyleProperty] = getattr(self, field_name)
+        if not property:
+            raise ValueError(f"Field '{field_name}' doesn't exist.")
+        return property.is_inheritable
+
+    def get_field_names(self) -> list[str]:
+        return [f.name for f in fields(self)]
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\style_property.py
+------------------------------------------------------------------------------------------
+from typing import TypeVar, Generic
+
+T = TypeVar("T")
+
+class StyleProperty(Generic[T]):
+    def __init__(self, default: T, inheritable: bool = True):
+        self._value = default
+        self._default = default
+        self._inheritable = inheritable
+        self._was_set = False
+
+    @property
+    def was_set(self):
+        return self._was_set
+
+    @property
+    def is_inheritable(self) -> bool:
+        return self._inheritable
+
+    def get(self) -> T:
+        """
+        Returns the wrapped value.
+        IMPORTANT: the returned value mustn't be used to set its internal state. You must set the internal state calling set().
+        For example, if get() returns a list, you can't modify the returned list internal state directly,
+        you must create a new instance and call set() with the new value.
+        """
+        return self._value
+
+    def set(self, new_value: T):
+        self._value = new_value
+        self._was_set = True
+
+    def reset(self):
+        self._value = self._default
+        self._was_set = False
+
+    def __call__(self) -> T:
+        return self._value
+
+    def __repr__(self):
+        return f"{self._value} (set={self._was_set}, inheritable={self._inheritable})"
+
+    def __eq__(self, other):
+        return self._value == other
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\models\public\typography.py
+------------------------------------------------------------------------------------------
+from enum import Enum
+import skia
+
+class TextAlign(str, Enum):
+    """Text alignment options. Useful in multi-line text blocks."""
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+class FontStyle(str, Enum):
+    """Represents the builders of a font. Useful for variable fonts. """
+    NORMAL = "normal"
+    ITALIC = "italic"
+    OBLIQUE = "oblique"
+
+    def to_skia_slant(self):
+        SLANT_MAP = {
+            FontStyle.NORMAL: skia.FontStyle.kUpright_Slant,
+            FontStyle.ITALIC: skia.FontStyle.kItalic_Slant,
+            FontStyle.OBLIQUE: skia.FontStyle.kOblique_Slant,
+        }
+        return SLANT_MAP[self.value]
+
+class FontWeight(int, Enum):
+    THIN = 100
+    EXTRA_LIGHT = 200
+    LIGHT = 300
+    NORMAL = 400
+    MEDIUM = 500
+    SEMI_BOLD = 600
+    BOLD = 700
+    EXTRA_BOLD = 800
+    BLACK = 900
+
+class FontSmoothing(str, Enum):
+    """Defines the antialiasing strategy for text rendering."""
+    SUBPIXEL = "subpixel"
+    STANDARD = "standard"
+
+class TextWrap(str, Enum):
+    """Defines how text should wrap within its container."""
+    NORMAL = "normal"  # Allow wrapping (default)
+    NOWRAP = "nowrap"  # Prevent wrapping
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\nodes\__init__.py
+------------------------------------------------------------------------------------------
+from .node import Node
+from .row_node import RowNode
+from .text_node import TextNode
+from .column_node import ColumnNode
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\nodes\column_node.py
+------------------------------------------------------------------------------------------
+from typing import Tuple, Callable
+from .node import Node
+from .container_node import ContainerNode
+from ..models import HorizontalAlignment, VerticalDistribution, SizeValueMode
+import skia
+
+class ColumnNode(ContainerNode):
+
+    def _apply_stretch_constraints(self):
+        """
+        Apply horizontal stretch constraints to children with auto width.
+        """
+        alignment = self.computed_styles.horizontal_alignment.get()
+        if alignment != HorizontalAlignment.STRETCH:
+            return
+
+        children = self._get_positionable_children()
+        for child in children:
+            child_width = child.computed_styles.width.get()
+            if child_width and child_width.mode != SizeValueMode.AUTO:
+                continue
+
+            child._forced_size = (self.content_width, self._forced_size[1])
+
+    def _apply_fill_available_constraints(self):
+        """
+        Apply height constraints to children with fill-available height.
+        """
+        children = self._get_positionable_children()
+        fixed_children_height = 0
+        flexible_children: list[Node] = []
+        user_gap = self.computed_styles.gap.get()
+
+        for child in children:
+            child_height_style = child.computed_styles.height.get()
+            if child_height_style and child_height_style.mode == SizeValueMode.FILL_AVAILABLE:
+                flexible_children.append(child)
+            else:
+                fixed_children_height += child.size[1]
+
+        if not flexible_children:
+            return
+
+        total_gap_space = user_gap * (len(children) - 1) if len(children) > 1 else 0
+        remaining_space = self.content_height - fixed_children_height - total_gap_space
+        space_per_flexible_child = max(0, remaining_space / len(flexible_children))
+
+        for child in flexible_children:
+            child._forced_size = (self._forced_size[0], space_per_flexible_child)
+
+    def compute_intrinsic_width(self) -> int:
+        children = self._get_positionable_children()
+        if not children:
+            return 0
+
+        return max(child.margin_bounds.width() for child in children)
+    
+    def compute_intrinsic_height(self) -> int:
+        children = self._get_positionable_children()
+        if not children:
+            return 0
+
+        gap = self.computed_styles.gap.get()
+        total_gap = gap * (len(children) - 1)
+        total_children_height = sum(child.margin_bounds.height() for child in children)
+        return total_children_height + total_gap
+
+    def _calculate_children_relative_positions(self, children: list[Node], get_child_bounds: Callable[[Node], skia.Rect]) -> list[Tuple[float, float]]:
+        positions = []
+        user_gap = self.computed_styles.gap.get()
+        alignment = self.computed_styles.horizontal_alignment.get()
+        start_y, distribution_gap = self._distribute_vertically(user_gap, children)
+
+        final_gap = user_gap + distribution_gap
+        current_y = start_y
+        for child in children:
+            child_bounds = get_child_bounds(child)
+            child_width = child_bounds.width()
+            container_width = self.content_bounds.width()
+            child_x = self.content_bounds.left()
+
+            if alignment == HorizontalAlignment.CENTER:
+                child_x += (container_width - child_width) / 2
+            elif alignment == HorizontalAlignment.RIGHT:
+                child_x += container_width - child_width
+
+            positions.append((child_x, current_y))
+            current_y += child_bounds.height() + final_gap
+
+        return positions
+
+    def _distribute_vertically(self, user_gap: float, children: list[Node]) -> Tuple[float, float]:
+        distribution = self.computed_styles.vertical_distribution.get()
+        container_height = self.content_bounds.height()
+        children_total_height = sum(child.margin_bounds.height() for child in children)
+        total_gap_space = user_gap * (len(children) - 1)
+        extra_space = container_height - children_total_height - total_gap_space
+
+        start_y = self.content_bounds.top()
+        distribution_gap = 0
+        if distribution == VerticalDistribution.BOTTOM:
+            start_y += extra_space
+        elif distribution == VerticalDistribution.CENTER:
+            start_y += extra_space / 2
+        elif distribution == VerticalDistribution.SPACE_BETWEEN and len(children) > 1:
+            distribution_gap = extra_space / (len(children) - 1)
+        elif distribution == VerticalDistribution.SPACE_AROUND:
+            distribution_gap = extra_space / len(children)
+            start_y += distribution_gap / 2
+        elif distribution == VerticalDistribution.SPACE_EVENLY:
+            distribution_gap = extra_space / (len(children) + 1)
+            start_y += distribution_gap
+
+        return start_y, distribution_gap
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\nodes\container_node.py
+------------------------------------------------------------------------------------------
+from typing import Tuple, Callable
+from .node import Node
+from ..painters import Painter, BackgroundPainter, BorderPainter
+from ..models import Style
+import skia
+
+class ContainerNode(Node):
+
+    def __init__(self, style: Style, children: list[Node]) -> None:
+        super().__init__(style)
+        self._set_children(children)
+        self.clear()
+
+    def _calculate_children_relative_positions(self, children: list[Node], get_child_bounds: Callable[[Node], skia.Rect]) -> list[Tuple[float, float]]:
+        raise NotImplemented
+    
+    def _compute_paint_bounds(self) -> skia.Rect:
+        paint_bounds = skia.Rect.MakeEmpty()
+
+        children = self._get_positionable_children()
+        positions = self._calculate_children_relative_positions(children, lambda node: node.margin_bounds)
+        for i, child in enumerate(children):
+            position = positions[i]
+            child_bounds_shifted = child.paint_bounds.makeOffset(position[0], position[1])
+            paint_bounds.join(child_bounds_shifted)
+
+        paint_bounds.join(self._compute_shadow_bounds(self.border_bounds, self.computed_styles.box_shadows.get()))
+        paint_bounds.join(self.margin_bounds)
+        return paint_bounds
+
+    def _get_painters(self) -> list[Painter]:
+        return [
+            BackgroundPainter(self.computed_styles, self.border_bounds, self._render_props.is_svg),
+            BorderPainter(self.computed_styles, self.border_bounds),
+        ]
+
+    def _setup_absolute_position(self, x: float = 0, y: float = 0) -> None:
+        super()._setup_absolute_position(x, y)
+        x, y = self._absolute_position
+        positionable_children = self._get_positionable_children()
+        positions = self._calculate_children_relative_positions(positionable_children, lambda node: node.margin_bounds)
+        for i, child in enumerate(positionable_children):
+            position = positions[i]
+            child._setup_absolute_position(x + position[0], y + position[1])
+
+        non_positionable_children = self._get_non_positionable_children()
+        for child in non_positionable_children:
+            child._setup_absolute_position()
+
+    def _before_calculating_bounds(self) -> None:
+        super()._before_calculating_bounds()
+        self._apply_stretch_constraints()
+        self._apply_fill_available_constraints()
+
+    def _apply_stretch_constraints(self):
+        """
+        Apply stretch-specific constraints to children that have auto sizing.
+        This is overridden by RowNode and ColumnNode with specific stretch logic.
+        """
+        pass
+
+    def _apply_fill_available_constraints(self):
+        """
+        Apply fill-available constraints to children that use fill-available sizing.
+        This is overridden by RowNode and ColumnNode with specific fill-available logic.
+        """
+        pass
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\nodes\node.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+from copy import deepcopy
+from typing import Optional, Tuple
+import skia
+from ..models import Style, Shadow, PositionMode, RenderProps, CropMode
+from ..painters import Painter
+from ..utils import create_composite_shadow_filter, clone_skia_rect, to_int_skia_rect, cached_property, Cacheable
+from ..layout import SizeResolver
+
+class Node(Cacheable):
+
+    def __init__(self, style: Style):
+        super().__init__()
+        self._raw_style = style
+        self._parent: Optional[Node] = None
+        self._children: list[Node] = []
+        self._render_props: Optional[RenderProps] = None
+        self._absolute_position: Optional[Tuple[float, float]] = None
+        self._forced_size: Tuple[int, int] = (None, None)
+
+    @property
+    def parent(self) -> Node:
+        return self._parent
+
+    @property
+    def children(self) -> list[Node]:
+        return self._children
+
+    @cached_property()
+    def computed_styles(self) -> Style:
+        return self._compute_styles()
+
+    @cached_property(group='bounds')
+    def size(self) -> Tuple[int, int]:
+        return (self.border_bounds.width(), self.border_bounds.height())
+    
+    @cached_property(group='bounds')
+    def content_width(self) -> int:
+        return SizeResolver(self).resolve_width()
+
+    @cached_property(group='bounds')
+    def content_height(self) -> int:
+        return SizeResolver(self).resolve_height()
+
+    @property
+    def absolute_position(self) -> Optional[Tuple[float, float]]:
+        return self._absolute_position
+
+    @property
+    def forced_size(self) -> Tuple[int, int]:
+        return self._forced_size
+
+    @cached_property(group='bounds')
+    def padding_bounds(self):
+        return to_int_skia_rect(self._compute_padding_bounds())
+
+    @cached_property(group='bounds')
+    def border_bounds(self):
+        return to_int_skia_rect(self._compute_border_bounds())
+
+    @cached_property(group='bounds')
+    def margin_bounds(self):
+        return to_int_skia_rect(self._compute_margin_bounds())
+
+    @cached_property(group='bounds')
+    def content_bounds(self) -> skia.Rect:
+        return to_int_skia_rect(skia.Rect.MakeWH(self.content_width, self.content_height))
+
+    @cached_property(group='bounds')
+    def paint_bounds(self) -> skia.Rect:
+        return to_int_skia_rect(self._compute_paint_bounds())
+
+    def _compute_padding_bounds(self) -> skia.Rect:
+        """
+        Compute the box bounds, relative to the node box size, (0, 0).
+        """
+        content_bounds = self.content_bounds
+        padding = self.computed_styles.padding.get()
+        return skia.Rect.MakeLTRB(
+            content_bounds.left() - padding.left,
+            content_bounds.top() - padding.top,
+            content_bounds.right() + padding.right,
+            content_bounds.bottom() + padding.bottom
+        )
+
+    def _compute_border_bounds(self) -> skia.Rect:
+        """
+        Compute the box bounds, relative to the node box size, (0, 0).
+        """
+        padding_bounds = self.padding_bounds
+        border = self.computed_styles.border.get()
+        if not border:
+            return clone_skia_rect(padding_bounds)
+
+        return skia.Rect.MakeLTRB(
+            padding_bounds.left() - border.width,
+            padding_bounds.top() - border.width,
+            padding_bounds.right() + border.width,
+            padding_bounds.bottom() + border.width
+        )
+
+    def _compute_margin_bounds(self) -> skia.Rect:
+        """
+        Compute the layout bounds (box + margin), relative to the node box size, (0, 0).
+        """
+        border_bounds = self.border_bounds
+        margin = self.computed_styles.margin.get()
+        return skia.Rect.MakeLTRB(
+            border_bounds.left() - margin.left,
+            border_bounds.top() - margin.top,
+            border_bounds.right() + margin.right,
+            border_bounds.bottom() + margin.bottom
+        )
+
+    def _compute_paint_bounds(self) -> skia.Rect:
+        """
+        Compute the paint bounds, including anything that will be painted for this node, even outside the box (like shadows).
+        The final result is relative to the node box size, (0, 0).
+        """
+        raise NotImplementedError("_compute_paint_bounds() is not implemented")
+
+    def _get_painters(self) -> list[Painter]:
+        raise NotImplementedError("_get_painters() is not implemented")
+    
+    def compute_intrinsic_width(self) -> skia.Rect:
+        """
+        Compute the intrinsic width. That is, ignoring any size strategy set.
+        It measures the actual content (if the strategy is 'fit-content', then it's the same that self.content_width)
+        """
+        raise NotImplementedError("compute_intrinsic_width() is not implemented")
+    
+    def compute_intrinsic_height(self) -> skia.Rect:
+        """
+        Compute the intrinsic height. That is, ignoring any size strategy set.
+        It measures the actual content (if the strategy is 'fit-content', then it's the same that self.content_height)
+        """
+        raise NotImplementedError("compute_intrinsic_height() is not implemented")
+
+    def prepare_tree_for_rendering(self, render_props: RenderProps) -> None:
+        """
+        Prepares the node and its children to be rendered.
+        It's meant to be called in the root node.
+        """
+        self.clear()
+        self._init_render_dependencies(render_props)
+        self._before_calculating_bounds()
+        self._clear_bounds()
+        self._calculate_bounds()
+        self._setup_absolute_position()
+
+    def _init_render_dependencies(self, render_props: RenderProps) -> None:
+        self._render_props = render_props
+        for child in self._children:
+            child._init_render_dependencies(render_props)
+
+    def _calculate_bounds(self) -> None:
+        for child in self._children:
+            child._calculate_bounds()
+
+        bounds = self._get_all_bounds()
+        offset_x, offset_y = -self.margin_bounds.left(), -self.margin_bounds.top()
+        for bound in bounds:
+            bound.offset(offset_x, offset_y)
+
+    def _get_all_bounds(self) -> list[skia.Rect]:
+        return [
+            self.content_bounds,
+            self.padding_bounds,
+            self.border_bounds,
+            self.margin_bounds,
+            self.paint_bounds,
+        ]
+
+    def _setup_absolute_position(self, x: float = 0, y: float = 0) -> None:
+        position = self.computed_styles.position.get()
+        if not position or not self._parent:
+            self._absolute_position = (x, y)
+            return
+
+        self_width, self_height = self.size
+        if position.mode == PositionMode.RELATIVE:
+            parent_content_bounds = self._parent.content_bounds
+            parent_position = self._parent.absolute_position
+            self_position = position.get_relative_position(self_width, self_height, parent_content_bounds.width(), parent_content_bounds.height())
+            self._absolute_position = (
+                parent_position[0] + parent_content_bounds.left() + self_position[0],
+                parent_position[1] + parent_content_bounds.top() + self_position[1]
+            )
+        else:
+            root = self._get_root()
+            root_width, root_height = root.size
+            self._absolute_position = position.get_relative_position(self_width, self_height, root_width, root_height)
+
+    def paint(self, canvas: skia.Canvas) -> None:
+        canvas.save()
+        x, y = self.absolute_position
+        canvas.translate(x, y)
+        for painter in self._get_painters():
+            painter.paint(canvas)
+
+        canvas.restore()
+
+        for child in self._children:
+            child.paint(canvas)
+
+    def clear(self):
+        for child in self._children:
+            child.clear()
+
+        self._render_props = None
+        self._absolute_position = None
+        self._forced_size: Tuple[int, int] = (None, None)
+        self.clear_cache()
+
+    def _clear_bounds(self):
+        """
+        Resets only the calculated layout and bounds information.
+        This is a more targeted version of clear().
+        """
+        for child in self._children:
+            child._clear_bounds()
+
+        self.clear_cache('bounds')
+
+    def _compute_styles(self) -> Style:
+        parent_computed_styles = self._parent.computed_styles if self._parent else None
+        computed_styles = deepcopy(self._raw_style)
+        if not parent_computed_styles:
+            return computed_styles
+
+        field_names = computed_styles.get_field_names()
+        for field_name in field_names:
+            if not computed_styles.is_inheritable(field_name):
+                continue
+            if computed_styles.is_explicit(field_name):
+                continue
+
+            parent_field_value = deepcopy(getattr(parent_computed_styles, field_name))
+            setattr(computed_styles, field_name, parent_field_value)
+
+        return computed_styles
+
+    def _compute_shadow_bounds(self, source_bounds: skia.Rect, shadows: list[Shadow]) -> skia.Rect:
+        # I don't like this. It only makes sense because it is only being used by paint bounds calculation
+        #  However, that responsibility is not clear by the method name.
+        #  I mean, if you want to get the shadow bounds in another scenario, this "if" statement don't make any sense.
+        if self._render_props.crop_mode == CropMode.CONTENT_BOX:
+            return source_bounds
+        filter = create_composite_shadow_filter(shadows)
+        if filter:
+            return filter.computeFastBounds(source_bounds)
+        return source_bounds
+
+    def _set_children(self, nodes: list[Node]):
+        for node in nodes:
+            node._parent = self
+        self._children = nodes
+
+    def _get_root(self) -> Optional[Node]:
+        root = self
+        while root._parent:
+            root = root._parent
+        return root
+
+    def _get_positionable_children(self) -> list[Node]:
+        return [child for child in self.children if child.computed_styles.position.get() is None]
+    
+    def _get_non_positionable_children(self) -> list[Node]:
+        return [child for child in self.children if child.computed_styles.position.get() is not None]
+
+    def _before_calculating_bounds(self) -> None:
+        """
+        The idea of this method is calculate those values that are needed to re-calculate the bounds.
+        So, every bound calculated in this process, will be removed.
+        For example, we can calculate the text node parent width to the text-wrap feature,
+        or we can calculate how much width/height should have each node with fill-available size.
+        """
+        for child in self._children:
+            child._before_calculating_bounds()
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\nodes\row_node.py
+------------------------------------------------------------------------------------------
+from typing import Tuple, Callable
+from .container_node import ContainerNode
+from .node import Node
+from ..models import VerticalAlignment, HorizontalDistribution, SizeValueMode
+import skia
+
+class RowNode(ContainerNode):
+
+    def compute_intrinsic_width(self) -> int:
+        children = self._get_positionable_children()
+        if not children:
+            return 0
+
+        gap = self.computed_styles.gap.get()
+        total_gap = gap * (len(children) - 1)
+        total_children_width = sum(child.margin_bounds.width() for child in children)
+        return total_children_width + total_gap
+    
+    def compute_intrinsic_height(self) -> int:
+        children = self._get_positionable_children()
+        if not children:
+            return 0
+
+        return max(child.margin_bounds.height() for child in children)
+    
+    def _apply_stretch_constraints(self):
+        """
+        Apply vertical stretch constraints to children with auto height.
+        """
+        alignment = self.computed_styles.vertical_alignment.get()
+        if alignment != VerticalAlignment.STRETCH:
+            return
+        
+        children = self._get_positionable_children()
+        for child in children:
+            child_height = child.computed_styles.height.get()
+            if child_height and child_height.mode != SizeValueMode.AUTO:
+                continue
+
+            child._forced_size = (child._forced_size[0], self.content_height)
+
+    def _apply_fill_available_constraints(self):
+        """
+        Apply width constraints to children with fill-available.
+        """
+        children = self._get_positionable_children()
+        fixed_children_width = 0
+        flexible_children: list[Node] = []
+        user_gap = self.computed_styles.gap.get()
+
+        for child in children:
+            child_width_style = child.computed_styles.width.get()
+            if child_width_style and child_width_style.mode == SizeValueMode.FILL_AVAILABLE:
+                flexible_children.append(child)
+            else:
+                fixed_children_width += child.size[0]
+
+        if not flexible_children:
+            return
+
+        total_gap_space = user_gap * (len(children) - 1) if len(children) > 1 else 0
+        remaining_space = self.content_width - fixed_children_width - total_gap_space
+        space_per_flexible_child = max(0, remaining_space / len(flexible_children))
+
+        for child in flexible_children:
+            child._forced_size = (space_per_flexible_child, child._forced_size[1])
+
+    def _calculate_children_relative_positions(self, children: list[Node], get_child_bounds: Callable[[Node], skia.Rect]) -> list[Tuple[float, float]]:
+        positions = []
+        alignment = self.computed_styles.vertical_alignment.get()
+        user_gap = self.computed_styles.gap.get()
+        distribution_gap, start_x = self._distribute_horizontally(user_gap, children)
+
+        final_gap = user_gap + distribution_gap
+        current_x = start_x
+        for child in children:
+            child_bounds = get_child_bounds(child)
+            child_height = child_bounds.height()
+            container_height = self.content_bounds.height()
+            child_y = self.content_bounds.top()
+
+            if alignment == VerticalAlignment.CENTER:
+                child_y += (container_height - child_height) / 2
+            elif alignment == VerticalAlignment.BOTTOM:
+                child_y += container_height - child_height
+
+            positions.append((current_x, child_y))
+            current_x += child_bounds.width() + final_gap
+
+        return positions
+
+    def _distribute_horizontally(self, user_gap: float, children: list[Node]) -> Tuple[float, float]:
+        distribution = self.computed_styles.horizontal_distribution.get()
+        container_width = self.content_bounds.width()
+        children_total_width = sum(child.margin_bounds.width() for child in children)
+        total_gap_space = user_gap * (len(children) - 1)
+        extra_space = container_width - children_total_width - total_gap_space
+
+        start_x = self.content_bounds.left()
+        distribution_gap = 0
+        if distribution == HorizontalDistribution.RIGHT:
+            start_x += extra_space
+        elif distribution == HorizontalDistribution.CENTER:
+            start_x += extra_space / 2
+        elif distribution == HorizontalDistribution.SPACE_BETWEEN and len(children) > 1:
+            distribution_gap = extra_space / (len(children) - 1)
+        elif distribution == HorizontalDistribution.SPACE_AROUND:
+            distribution_gap = extra_space / len(children)
+            start_x += distribution_gap / 2
+        elif distribution == HorizontalDistribution.SPACE_EVENLY:
+            distribution_gap = extra_space / (len(children) + 1)
+            start_x += distribution_gap
+
+        return distribution_gap, start_x
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\nodes\text_node.py
+------------------------------------------------------------------------------------------
+from typing import Optional
+import skia
+from .node import Node
+from ..models import TextDecoration, Style, RenderProps, Line
+from ..text import FontManager, TextShaper
+from ..painters import Painter, BackgroundPainter, TextPainter, DecorationPainter, BorderPainter
+from ..utils import clone_skia_rect, cached_property, cached_method
+
+class TextNode(Node):
+
+    def __init__(self, style: Style, text: str):
+        super().__init__(style)
+        self._text = text
+        self._font_manager: Optional[FontManager] = None
+        self._text_shaper: Optional[TextShaper] = None
+        self._text_wrap_width: Optional[int] = None
+
+    @property
+    def text(self) -> str:
+        return self._text
+
+    @cached_property('bounds')
+    def text_bounds(self) -> Optional[skia.Rect]:
+        return self._compute_text_bounds()
+
+    @cached_property('bounds')
+    def shaped_lines(self) -> list[Line]:
+        return self._text_shaper.shape(self._text, self._text_wrap_width)
+
+    def _init_render_dependencies(self, render_props: RenderProps):
+        super()._init_render_dependencies(render_props)
+        self._font_manager = FontManager(self.computed_styles, self._render_props.font_smoothing)
+        self._text_shaper = TextShaper(self.computed_styles, self._font_manager)
+
+    def clear(self):
+        super().clear()
+        self._font_manager = None
+        self._text_shaper = None
+        self._text_wrap_width = None
+
+    def _get_painters(self) -> list[Painter]:
+        return [
+            BackgroundPainter(self.computed_styles, self.border_bounds, self._render_props.is_svg),
+            BorderPainter(self.computed_styles, self.border_bounds),
+            TextPainter(self.computed_styles, self._font_manager, self.text_bounds, self.content_bounds, self.shaped_lines, self._render_props.is_svg),
+            DecorationPainter(self.computed_styles, self._font_manager, self.text_bounds, self.shaped_lines),
+        ]
+
+    # We are including the decorations as part of the TextNode content.
+    #  However, we could include them only in paint bounds, remove them from here.
+    @cached_method('bounds')
+    def _compute_intrinsic_content_bounds(self) -> skia.Rect:
+        line_gap = self.computed_styles.line_height.get() * self.computed_styles.font_size.get()
+        content_bounds = skia.Rect.MakeEmpty()
+        primary_font = self._font_manager.get_primary_font()
+        font_metrics = primary_font.getMetrics()
+        current_y = self.text_bounds.top() - font_metrics.fAscent
+
+        for line in self.shaped_lines:
+            # This is not correct actually... the X position should be also calculated, doing something similar that the DecorationPainter
+            #  However... I think it shouldn't cause any issue
+            line_bounds = line.bounds.makeOffset(0, current_y)
+
+            self._add_decoration_bounds(content_bounds, self.computed_styles.underline.get(), line_bounds, current_y + font_metrics.fUnderlinePosition)
+            self._add_decoration_bounds(content_bounds, self.computed_styles.strikethrough.get(), line_bounds, current_y + font_metrics.fStrikeoutPosition)
+
+            current_y += line_gap
+
+        content_bounds.join(self.text_bounds)
+        return content_bounds
+    
+    def compute_intrinsic_width(self) -> int:
+        return self._compute_intrinsic_content_bounds().width()
+    
+    def compute_intrinsic_height(self) -> int:
+        return self._compute_intrinsic_content_bounds().height()
+
+    def _add_decoration_bounds(
+            self,
+            dest_bounds: skia.Rect,
+            decoration: Optional[TextDecoration],
+            line_bounds: skia.Rect,
+            line_y: float
+    ) -> None:
+        if not decoration:
+            return
+        half_thickness = decoration.thickness / 2
+        decoration_bounds = skia.Rect.MakeLTRB(
+            line_bounds.left(),
+            line_y - half_thickness,
+            line_bounds.right(),
+            line_y + half_thickness
+        )
+        dest_bounds.join(decoration_bounds)
+
+    def _compute_paint_bounds(self) -> skia.Rect:
+        paint_bounds = clone_skia_rect(self.margin_bounds)
+        paint_bounds.join(self.content_bounds)
+        paint_bounds.join(self._compute_shadow_bounds(self.text_bounds, self.computed_styles.text_shadows.get()))
+        paint_bounds.join(self._compute_shadow_bounds(self.border_bounds, self.computed_styles.box_shadows.get()))
+        return paint_bounds
+
+    def _compute_text_bounds(self) -> skia.Rect:
+        line_gap = self.computed_styles.line_height.get() * self.computed_styles.font_size.get()
+        current_y = 0
+        text_bounds = skia.Rect.MakeEmpty()
+
+        for line in self.shaped_lines:
+            line_bounds = line.bounds.makeOffset(0, current_y)
+            text_bounds.join(line_bounds)
+            current_y += line_gap
+
+        return text_bounds
+
+    def _get_all_bounds(self) -> list[skia.Rect]:
+        return super()._get_all_bounds() + [self.text_bounds]
+    
+    def _before_calculating_bounds(self) -> None:
+        super()._before_calculating_bounds()
+
+        if not self._parent:
+            return
+        
+        text_wrap_style = self.computed_styles.text_wrap.get()
+        if text_wrap_style.value == 'nowrap':
+            return None
+        
+        # If element has positioning, disable text wrapping.
+        # Positioned elements exist outside the normal layout flow.
+        position_style = self.computed_styles.position.get()
+        if position_style is not None:
+            return None
+        
+        width_constraint = self.get_nearest_ancestor_width_constraint()
+        if width_constraint is None:
+            return
+        
+        padding = self.computed_styles.padding.get()
+        border = self.computed_styles.border.get()
+        border_width = border.width if border else 0
+        horizontal_spacing = padding.left + padding.right + (border_width * 2)
+        content_width = width_constraint - horizontal_spacing
+        
+        self._text_wrap_width = max(0, content_width)
+
+    def get_nearest_ancestor_width_constraint(self) -> int:
+        ancestor = self._parent
+        while ancestor:
+            width_style = ancestor.computed_styles.width.get()
+            if width_style and width_style.mode not in ['auto', 'fit-content']:
+                return ancestor.content_width
+            
+            if ancestor.forced_size[0] is not None:
+                return ancestor.content_width
+            
+            ancestor = ancestor.parent
+        
+        return None
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\painters\__init__.py
+------------------------------------------------------------------------------------------
+from .painter import Painter
+from .background import BackgroundPainter
+from .text_decoration import DecorationPainter
+from .text import TextPainter
+from .border import BorderPainter
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\painters\background.py
+------------------------------------------------------------------------------------------
+import skia
+from .painter import Painter
+from ..utils import create_composite_shadow_filter
+from ..models import Style, BackgroundImageSizeMode
+
+class BackgroundPainter(Painter):
+
+    def __init__(self, style: Style, box_bounds: skia.Rect, is_svg: bool):
+        super().__init__(style)
+        self._box_bounds = box_bounds
+        self._is_svg = is_svg
+
+    def paint(self, canvas: skia.Canvas) -> None:
+        rounded_box_rect = self._build_rounded_box_rect()
+        self._paint_box_shadows(canvas, rounded_box_rect)
+        self._paint_background_color(canvas, rounded_box_rect)
+        self._paint_background_image(canvas, rounded_box_rect)
+
+    def _build_rounded_box_rect(self) -> skia.RRect:
+        box_radius = self._style.border_radius.get()
+        if not box_radius:
+            return skia.RRect.MakeRect(self._box_bounds)
+
+        return box_radius.apply_corner_radius(self._box_bounds)
+
+    def _paint_box_shadows(self, canvas: skia.Canvas, box_rect: skia.RRect):
+        if self._is_svg:
+            return
+
+        paint = skia.Paint(AntiAlias=True)
+        shadow_filter = create_composite_shadow_filter(self._style.box_shadows.get(), should_remove_content=True)
+        if shadow_filter:
+            paint.setImageFilter(shadow_filter)
+            canvas.drawRRect(box_rect, paint)
+
+    def _paint_background_color(self, canvas: skia.Canvas, box_rect: skia.RRect) -> None:
+        background_color = self._style.background_color.get()
+        if not background_color:
+            return
+
+        paint = skia.Paint(AntiAlias=True)
+        background_color.apply_to_paint(paint, self._box_bounds)
+        canvas.drawRRect(box_rect, paint)
+
+    def _paint_background_image(self, canvas: skia.Canvas, box_rect: skia.RRect):
+        background_image_info = self._style.background_image.get()
+        if not background_image_info:
+            return
+
+        original_image = background_image_info.get_skia_image()
+        if not original_image:
+            return
+
+        sampling_options = skia.SamplingOptions(skia.FilterMode.kLinear, skia.MipmapMode.kLinear)
+        canvas.save()
+        canvas.clipRRect(box_rect, doAntiAlias=True)
+
+        paint = skia.Paint(AntiAlias=True)
+        if background_image_info.size_mode == BackgroundImageSizeMode.TILE:
+            shader = original_image.makeShader(
+                skia.TileMode.kRepeat,
+                skia.TileMode.kRepeat,
+                sampling_options
+            )
+            paint.setShader(shader)
+            canvas.drawRect(self._box_bounds, paint)
+            canvas.restore()
+            return
+
+        src_rect, dst_rect = self._calculate_cover_contain_rects(
+            image_width=original_image.width(),
+            image_height=original_image.height(),
+            box_rect=self._box_bounds,
+            mode=background_image_info.size_mode
+        )
+
+        image_to_resize = original_image.makeSubset(src_rect.roundOut())
+        resized_image = image_to_resize.resize(
+            width=int(dst_rect.width()),
+            height=int(dst_rect.height()),
+            options=sampling_options
+        )
+
+        if not resized_image:
+            return
+
+        canvas.drawImage(
+            resized_image,
+            dst_rect.left(),
+            dst_rect.top(),
+            sampling_options,
+            paint
+        )
+
+        canvas.restore()
+
+    def _calculate_cover_contain_rects(
+            self, image_width: float, image_height: float, box_rect: skia.Rect, mode: BackgroundImageSizeMode):
+
+        box_width = box_rect.width()
+        box_height = box_rect.height()
+        img_aspect = image_width / image_height
+        box_aspect = box_width / box_height
+
+        if mode == BackgroundImageSizeMode.COVER:
+            if img_aspect > box_aspect:
+                new_src_width = image_height * box_aspect
+                src_x_offset = (image_width - new_src_width) / 2
+                src_rect = skia.Rect.MakeXYWH(src_x_offset, 0, new_src_width, image_height)
+                return src_rect, box_rect
+
+            new_src_height = image_width / box_aspect
+            src_y_offset = (image_height - new_src_height) / 2
+            src_rect = skia.Rect.MakeXYWH(0, src_y_offset, image_width, new_src_height)
+            return src_rect, box_rect
+
+        elif mode == BackgroundImageSizeMode.CONTAIN:
+            src_rect = skia.Rect.MakeWH(image_width, image_height)
+            if img_aspect > box_aspect:
+                new_dst_height = box_width / img_aspect
+                dst_y_offset = (box_height - new_dst_height) / 2
+                dst_rect = skia.Rect.MakeXYWH(box_rect.left(), box_rect.top() + dst_y_offset, box_width, new_dst_height)
+                return src_rect, dst_rect
+
+            new_dst_width = box_height * img_aspect
+            dst_x_offset = (box_width - new_dst_width) / 2
+            dst_rect = skia.Rect.MakeXYWH(box_rect.left() + dst_x_offset, box_rect.top(), new_dst_width, box_height)
+            return src_rect, dst_rect
+
+        raise ValueError(f"Unknown mode: {mode}")
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\painters\border.py
+------------------------------------------------------------------------------------------
+from typing import Optional
+from .painter import Painter
+from ..models import Style, Border, BorderStyle
+import skia
+
+class BorderPainter(Painter):
+
+    def __init__(self, style: Style, box_bounds: skia.Rect):
+        super().__init__(style)
+        self._box_bounds = box_bounds
+
+    def paint(self, canvas: skia.Canvas) -> None:
+        border = self._style.border.get()
+        if not border or border.width <= 0:
+            return
+
+        paint = skia.Paint(
+            AntiAlias=True,
+            Style=skia.Paint.kStroke_Style,
+            StrokeWidth=border.width
+        )
+        border.color.apply_to_paint(paint, self._box_bounds)
+
+        path_effect = self._create_path_effect(border, paint)
+        if path_effect:
+            paint.setPathEffect(path_effect)
+
+        box_radius = self._style.border_radius.get()
+
+        # This is a little bit hacky: first the inset is because Skia draws the half of the stroke inside and the other half outside.
+        #  So, we use inset with the half of the width to draw the border stroke over a smaller rect, achieving a final border inside the box.
+        #  Then, we noticed some pixels between the borderline and the edge of the box background.
+        #  For that reason, we made an outset with 0.5. This is not perfect, probably some border pixels are drawn outside the final box.
+        inset = border.width / 2
+        stroke_bounds = self._box_bounds.makeInset(inset, inset)
+        rrect = box_radius.apply_corner_radius(stroke_bounds, inset) if box_radius else skia.RRect.MakeRect(stroke_bounds)
+        canvas.drawRRect(rrect, paint)
+
+    def _create_path_effect(self, border: Border, paint: skia.Paint) -> Optional[skia.PathEffect]:
+        if border.style == BorderStyle.DASHED:
+            dash_length = border.width * 2
+            gap_length = border.width * 1.5
+            return skia.DashPathEffect.Make([dash_length, gap_length], 0)
+
+        if border.style == BorderStyle.DOTTED:
+            paint.setStrokeCap(skia.Paint.kRound_Cap)
+            return skia.DashPathEffect.Make([0, border.width * 2], 0)
+
+        return None
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\painters\painter.py
+------------------------------------------------------------------------------------------
+from abc import ABC, abstractmethod
+from ..models import Style
+import skia
+
+class Painter(ABC):
+    
+    def __init__(self, style: Style):
+        self._style: Style = style
+
+    @abstractmethod
+    def paint(self, canvas: skia.Canvas) -> None:
+        raise NotImplemented()
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\painters\text.py
+------------------------------------------------------------------------------------------
+from .painter import Painter
+from ..text import FontManager
+from ..utils import create_composite_shadow_filter, get_line_x_position
+from typing import Optional
+import skia
+from ..models import Style, Line
+
+class TextPainter(Painter):
+
+    def __init__(
+            self,
+            style: Style,
+            font_manager: FontManager,
+            text_bounds: skia.Rect,
+            parent_bounds: skia.Rect,
+            lines: list[Line],
+            is_svg: bool
+    ):
+        super().__init__(style)
+        self._font_manager = font_manager
+        self._text_bounds = text_bounds
+        self._parent_bounds = parent_bounds
+        self._is_svg = is_svg
+        self._lines: list[Line] = lines
+
+    def paint(self, canvas: skia.Canvas) -> None:
+        paint = skia.Paint(AntiAlias=True)
+        self._style.color.get().apply_to_paint(paint, self._text_bounds)
+        self._add_shadows_to_paint(paint)
+        self._draw_text(canvas, paint)
+
+    def _add_shadows_to_paint(self, paint: skia.Paint) -> None:
+        if self._is_svg:
+            return
+
+        filter = create_composite_shadow_filter(self._style.text_shadows.get())
+        if not filter:
+            return
+        paint.setImageFilter(filter)
+
+    def _draw_text(self, canvas: skia.Canvas, paint: skia.Paint) -> None:
+        primary_font = self._font_manager.get_primary_font()
+        font_metrics = primary_font.getMetrics()
+        current_y = self._text_bounds.top() - font_metrics.fAscent
+        line_gap = self._style.line_height.get() * self._style.font_size.get()
+        block_width = self._parent_bounds.width()
+        outline_paint = self._build_outline_paint()
+        
+        for line in self._lines:
+            draw_x_start = self._text_bounds.x() + get_line_x_position(line.width, block_width, self._style.text_align.get())
+            current_x = draw_x_start
+            
+            for run in line.runs:
+                if outline_paint:
+                    canvas.drawString(run.text, current_x, current_y, run.font, outline_paint)
+                canvas.drawString(run.text, current_x, current_y, run.font, paint)
+                current_x += run.width
+            
+            current_y += line_gap
+
+    def _build_outline_paint(self) -> Optional[skia.Paint]:
+        outline = self._style.text_stroke.get()
+        if not outline:
+            return None
+        
+        paint = skia.Paint(
+            AntiAlias=True,
+            Style=skia.Paint.kStroke_Style,
+            StrokeWidth=outline.width
+        )
+        outline.color.apply_to_paint(paint, self._text_bounds)
+        return paint
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\painters\text_decoration.py
+------------------------------------------------------------------------------------------
+from typing import Optional
+from .painter import Painter
+from ..text import FontManager
+from ..utils import get_line_x_position
+from ..models import TextDecoration, Style, Line
+import skia
+
+class DecorationPainter(Painter):
+
+    def __init__(self, style: Style, font_manager: FontManager, text_bounds: skia.Rect, lines: list[Line]):
+        super().__init__(style)
+        self._font_manager = font_manager
+        self._text_bounds = text_bounds
+        self._lines = lines
+
+    def paint(self, canvas: skia.Canvas) -> None:
+        primary_font = self._font_manager.get_primary_font()
+        font_metrics = primary_font.getMetrics()
+        line_gap = self._style.line_height.get() * self._style.font_size.get()
+        current_y = self._text_bounds.top() - font_metrics.fAscent
+        block_width = self._text_bounds.width()
+        
+        for line in self._lines:
+            if not line.runs:
+                current_y += line_gap
+                continue
+
+            line_x_start = self._text_bounds.x() + get_line_x_position(line.width, block_width, self._style.text_align.get())
+            self._draw_decoration(canvas, self._style.underline.get(), line_x_start, current_y + font_metrics.fUnderlinePosition, line.width)
+            self._draw_decoration(canvas, self._style.strikethrough.get(), line_x_start, current_y + font_metrics.fStrikeoutPosition, line.width)
+
+            current_y += line_gap
+
+    def _draw_decoration(
+            self,
+            canvas: skia.Canvas,
+            decoration: Optional[TextDecoration],
+            line_x_start: float,
+            line_y: float,
+            line_width: float
+    ) -> None:
+        if not decoration:
+            return
+
+        paint = skia.Paint(AntiAlias=True, StrokeWidth=decoration.thickness)
+        half_thickness = decoration.thickness / 2
+        if decoration.color:
+            color = decoration.color
+            bounds = skia.Rect.MakeLTRB(
+                line_x_start,
+                line_y - half_thickness,
+                line_x_start + line_width,
+                line_y + half_thickness
+            )
+            color.apply_to_paint(paint, bounds)
+        else:
+            color = self._style.color.get()
+            color.apply_to_paint(paint, self._text_bounds)
+
+        canvas.drawLine(line_x_start, line_y, line_x_start + line_width, line_y, paint)
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\renderer\__init__.py
+------------------------------------------------------------------------------------------
+from .renderer import Renderer
+
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\renderer\image_processor.py
+------------------------------------------------------------------------------------------
+import skia
+from ..models import CropMode, Box
+from typing import Optional
+import numpy as np
+from ..bitmap_image import BitmapImage
+from ..nodes import Node
+from .. import utils
+from math import ceil
+
+class ImageProcessor:
+
+    def process(self, root: Node, image: skia.Image, crop_mode: CropMode) -> BitmapImage:
+        content_rect = utils.clone_skia_rect(root.border_bounds)
+        content_rect.offset(-root.paint_bounds.left(), -root.paint_bounds.top())
+        if crop_mode == CropMode.SMART:
+            crop_rect = self._get_trim_rect(image)
+            if crop_rect:
+                image = image.makeSubset(crop_rect)
+                content_rect.offset(-crop_rect.left(), -crop_rect.top())
+        
+        content_box = Box(
+            x=int(content_rect.left()),
+            y=int(content_rect.top()),
+            width=int(ceil(content_rect.width())),
+            height=int(ceil(content_rect.height()))
+        )
+
+        return BitmapImage(skia_image=image, content_box=content_box)
+
+    def _get_trim_rect(self, image: skia.Image) -> Optional[skia.Rect]:
+        """
+        Crops the image by removing transparent borders.
+        """
+        width, height = image.width(), image.height()
+        if width == 0 or height == 0:
+            return None
+        
+        pixels = np.frombuffer(image.tobytes(), dtype=np.uint8).reshape((height, width, 4))
+        alpha_channel = pixels[:, :, 3]
+        coords = np.argwhere(alpha_channel > 0)
+        if coords.size == 0:
+            # Image is fully transparent
+            return None
+
+        y_min, x_min = coords.min(axis=0)
+        y_max, x_max = coords.max(axis=0)
+        return skia.IRect.MakeLTRB(x_min, y_min, x_max + 1, y_max + 1)
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\renderer\renderer.py
+------------------------------------------------------------------------------------------
+import skia
+from ..models import FontSmoothing
+from ..models import CropMode
+from .image_processor import ImageProcessor
+from .vector_image_processor import VectorImageProcessor
+from ..models import RenderProps
+from ..bitmap_image import BitmapImage
+from ..vector_image import VectorImage
+from ..nodes import Node
+
+class Renderer:
+
+    def render_as_bitmap(self, root: Node, crop_mode: CropMode, font_smoothing: FontSmoothing) -> BitmapImage:
+        """Renders the nodes with the given builders, generating a bitmap image."""
+        root.prepare_tree_for_rendering(RenderProps(False, crop_mode, font_smoothing))
+
+        canvas_bounds = root.paint_bounds
+        image_info = skia.ImageInfo.MakeN32Premul(int(canvas_bounds.width()), int(canvas_bounds.height()))
+        surface = skia.Surface(image_info)
+        canvas = surface.getCanvas()
+        canvas.clear(skia.ColorTRANSPARENT)
+        canvas.translate(-canvas_bounds.left(), -canvas_bounds.top())
+
+        root.paint(canvas)
+        del canvas
+        final_image = surface.makeImageSnapshot()
+        return ImageProcessor().process(root, final_image, crop_mode)
+    
+    def render_as_svg(self, root: Node, embed_fonts: bool) -> VectorImage:
+        """Renders the text with the given builders, generating a vector image."""
+        # If support shadows in the near future, we should use CropMode.NONE.
+        root.prepare_tree_for_rendering(RenderProps(True, CropMode.CONTENT_BOX, FontSmoothing.SUBPIXEL))
+
+        canvas_bounds = root.paint_bounds
+        stream = skia.DynamicMemoryWStream()
+        canvas = skia.SVGCanvas.Make(canvas_bounds, stream)
+        canvas.clear(skia.ColorTRANSPARENT)
+        canvas.translate(-canvas_bounds.left(), -canvas_bounds.top())
+
+        root.paint(canvas)
+        del canvas
+        return VectorImageProcessor().process(stream, embed_fonts, root)
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\renderer\vector_image_processor.py
+------------------------------------------------------------------------------------------
+import skia
+import base64
+import re
+from ..models import TypefaceSource, TypefaceLoadingInfo
+import warnings
+from ..exceptions import SystemFontCanNotBeEmbeddedInSvgWarning
+from ..nodes import Node, TextNode
+from ..text import TypefaceLoader
+import xml.etree.ElementTree as ET
+from ..vector_image import VectorImage
+from ..models import Shadow, Style
+from typing import Optional
+import os
+
+class VectorImageProcessor:
+    
+    def process(self, stream: skia.DynamicMemoryWStream, embed_fonts: bool, root: Node) -> VectorImage:
+        data = stream.detachAsData()
+        svg = bytes(data).decode("utf-8")
+        fonts = self._get_used_fonts(root)
+        typefaces = self._map_to_file_typefaces(fonts, embed_fonts)
+        svg = self._fix_text_attributes(svg, typefaces)
+        # svg = self._add_shadows(svg, root.computed_styles)
+        svg = self._embed_fonts_in_svg(svg, typefaces, embed_fonts)
+        return VectorImage(svg)
+    
+    def _get_used_fonts(self, root: Node) -> list[skia.Font]:
+        fonts = []
+        for child in root.children:
+            if not isinstance(child, TextNode):
+                fonts.extend(self._get_used_fonts(child))
+                continue
+
+            for line in child.shaped_lines:
+                for run in line.runs:
+                    if run.font not in fonts:
+                        fonts.append(run.font)
+
+        return fonts
+    
+    def _map_to_file_typefaces(self, fonts: list[skia.Font], should_warn_for_system_fonts: bool) -> list[TypefaceLoadingInfo]:
+        typefaces = []
+        for font in fonts:
+            loading_info = TypefaceLoader.get_typeface_loading_info(font.getTypeface())
+            if not loading_info:
+                # TODO: use logging.error / logging.warn to avoid break the execution
+                # raise RuntimeError(
+                #     f"Unexpected error. Font '{font.getTypeface().getFamilyName()}' was "
+                #     "loaded without using TypefaceLoader?"
+                # )
+                continue
+       
+            if loading_info.source == TypefaceSource.SYSTEM:
+                if should_warn_for_system_fonts:
+                    warning_message = (
+                        f"Font '{font.getTypeface().getFamilyName()}' is a system font and cannot be embedded. "
+                        "The SVG will rely on the font being installed on the viewer's system."
+                    )
+                    warnings.warn(warning_message, SystemFontCanNotBeEmbeddedInSvgWarning)
+                continue
+
+            typefaces.append(loading_info)
+        return typefaces
+    
+    def _embed_fonts_in_svg(self, svg: str, typefaces: list[TypefaceLoadingInfo], embed_fonts: bool) -> str:
+        css = self._get_css_code_for_typefaces(typefaces, embed_fonts)
+        defs = f"""
+<defs>
+    <builders type="text/css">
+        {css}
+    </builders>
+</defs>
+            """
+
+        svg_tag_pattern = re.compile(r"<svg[^>]*>")
+        match = svg_tag_pattern.search(svg)
+        if not match:
+            # TODO: use logging.error / logging.warn to avoid break the execution
+            # raise RuntimeError(f"Unexpected error. Invalid SVG content: '{svg}'")
+            return svg
+
+        insert_position = match.end()
+        svg = (
+            svg[:insert_position] +
+            defs +
+            svg[insert_position:]
+        )
+        svg = self._add_prefix_to_font_families(svg, typefaces)
+        return svg
+
+    def _get_css_code_for_typefaces(self, typefaces: list[TypefaceLoadingInfo], embed_fonts: bool) -> str:
+        format_map = {
+            "ttf": "truetype",
+            "otf": "opentype",
+            "woff": "woff",
+            "woff2": "woff2",
+        }
+        
+        css = ""
+        for typeface in typefaces:
+            font_family = self._get_svg_family_name(typeface.typeface)
+            filepath = typeface.filepath
+            try:
+                with open(filepath, "rb") as font_file:
+                    font_data = font_file.read()
+            except IOError as e:
+                continue
+            
+            src = os.path.normpath(filepath).replace("\\", "/")
+            if embed_fonts:
+                encoded_font = base64.b64encode(font_data).decode("utf-8")
+                file_extension = filepath.lower().split('.')[-1]
+                font_format = format_map.get(file_extension, "truetype")
+                src = f"data:font/{file_extension};base64,{encoded_font}') format('{font_format}"
+
+            css += f"""
+@font-face {{
+    font-family: '{font_family}';
+    src: url('{src}');
+}}
+            """
+        
+        return css
+
+    def _get_svg_family_name(self, typeface: skia.Typeface) -> str:
+        family_names = list(map(lambda fn: fn[0], typeface.getFamilyNames()))
+        return ", ".join(family_names)
+    
+    def _add_prefix_to_font_families(self, svg: str, typefaces: list[TypefaceLoadingInfo]) -> str:
+        for typeface in typefaces:
+            font_family = self._get_svg_family_name(typeface.typeface)
+            svg = svg.replace(f"'{font_family}'", f"'pictex-{font_family}'")
+            svg = svg.replace(f'"{font_family}"', f'"pictex-{font_family}"')
+        return svg
+    
+    def _fix_text_attributes(self, svg: str, typefaces: list[TypefaceLoadingInfo]) -> str:
+        """
+        It applies two different fixes over the SVG generated via Skia:
+        1. Removes the <text> font-x builders attributes in static fonts
+           When you load a static font, let's say Lato-Bold.ttf, it already includes the weight statically.
+           However, the SVG generated by Skia is adding the attribute "font-weight" to <text>.
+           This causes that some SVG viewers (like a Chrome browser) add extra faux weights (because of the argument).
+           These builders arguments are not needed, since font is static and those styles are already included.
+           We need to remove them, otherwise the SVG generated will be different from the PNG, and it can overflow the bounds of the SVG.
+        2. If "font-weight" is present on <text>, we need to set it correctly.
+           For some unknown reason, Skia is generating the SVG with a wrong value for the font-weight attribute.
+        """
+        ET.register_namespace("", "http://www.w3.org/2000/svg")
+        root = ET.fromstring(svg)
+        elements = root.findall(".//{http://www.w3.org/2000/svg}text")
+        for tf in typefaces:
+            is_variable_font = tf.typeface.getVariationDesignParameters()
+            font_family = self._get_svg_family_name(tf.typeface)
+            for text_elem in elements:
+                if text_elem.attrib.get("font-family", None) != font_family:
+                    continue
+
+                if is_variable_font:
+                    # We fix the font-weight if it's present on variable fonts
+                    font_weight = text_elem.attrib.get("font-weight", None)
+                    if font_weight is not None:
+                        text_elem.attrib["font-weight"] = str(tf.typeface.fontStyle().weight())
+                else:
+                    # We remove the attributes in static fonts
+                    text_elem.attrib.pop("font-builders", None)
+                    text_elem.attrib.pop("font-weight", None)
+
+        return ET.tostring(root, encoding="unicode")
+
+    '''
+    This is the basic idea to support shadows, however we should do something like this for each text/box.
+    This work fine in version 0.3, since we always have one single Node.
+    '''
+    # def _add_shadows(self, svg: str, style: Style):
+    #     ET.register_namespace("", "http://www.w3.org/2000/svg")
+    #     root = ET.fromstring(svg)
+    #
+    #     filter = self._build_shadow_svg_filter(root, style.text_shadows.get(), "text-shadow")
+    #     if filter:
+    #         for text_element in root.findall(".//{http://www.w3.org/2000/svg}text"):
+    #             text_element.set("filter", filter)
+    #
+    #     filter = self._build_shadow_svg_filter(root, style.box_shadows.get(), "box-shadow")
+    #     if filter:
+    #         background = self._get_background_element(root)
+    #         if background is not None:
+    #             background.set("filter", filter)
+    #
+    #     return ET.tostring(root, encoding="unicode")
+    #
+    # def _build_shadow_svg_filter(self, root: ET.Element, shadows: list[Shadow], prefix: str) -> Optional[str]:
+    #     if not shadows:
+    #         return None
+    #
+    #     defs_element = ET.Element("defs")
+    #     root.insert(0, defs_element)
+    #
+    #     filter_urls = []
+    #     for i, shadow in enumerate(shadows):
+    #         filter_id = f"{prefix}-{i}"
+    #         filter_urls.append(f"url(#{filter_id})")
+    #
+    #         filter_element = ET.Element("filter", {
+    #             "id": filter_id,
+    #             "x": "-50%", "y": "-50%", "width": "200%", "height": "200%"
+    #         })
+    #
+    #         ET.SubElement(filter_element, "feOffset", {
+    #             "dx": str(shadow.offset[0]),
+    #             "dy": str(shadow.offset[1]),
+    #             "in": "SourceAlpha",
+    #             "result": "offset"
+    #         })
+    #
+    #         input_for_composite = "offset"
+    #         if hasattr(shadow, 'blur_radius') and shadow.blur_radius > 0:
+    #             ET.SubElement(filter_element, "feGaussianBlur", {
+    #                 "in": "offset",
+    #                 "stdDeviation": str(shadow.blur_radius),
+    #                 "result": "blurred"
+    #             })
+    #             input_for_composite = "blurred"
+    #
+    #         shadow_color = f"#{shadow.color.r:02x}{shadow.color.g:02x}{shadow.color.b:02x}"
+    #         shadow_opacity = str(shadow.color.a / 255.0)
+    #         ET.SubElement(filter_element, "feFlood", {
+    #             "flood-color": shadow_color,
+    #             "flood-opacity": shadow_opacity,
+    #             "result": "color"
+    #         })
+    #
+    #         ET.SubElement(filter_element, "feComposite", {
+    #             "in": "color",
+    #             "in2": input_for_composite,
+    #             "operator": "in",
+    #             "result": "shadow"
+    #         })
+    #
+    #         merge_element = ET.SubElement(filter_element, "feMerge")
+    #         ET.SubElement(merge_element, "feMergeNode", {"in": "shadow"})
+    #         ET.SubElement(merge_element, "feMergeNode", {"in": "SourceGraphic"})
+    #
+    #         defs_element.append(filter_element)
+    #
+    #     return " ".join(filter_urls)
+    #
+    # def _get_background_element(self, root: ET.Element) -> Optional[ET.Element]:
+    #     """
+    #         Skia uses <rect> to represent the background when it doesn't have radius corner
+    #         When it has radius corner, it uses <path> (and a very complex one)
+    #         For this reason, we can't be sure what element is the background
+    #         The fix we decided to use an invisible <rect> that Skia is always generating before the background
+    #         This is something fragile, but it's the fix for now.
+    #         Another fix could be adding a custom invisible marker element before drawing the background,
+    #         then we would use that element to find the background.
+    #     """
+    #
+    #     first_rect = root.find("{http://www.w3.org/2000/svg}rect")
+    #     if first_rect is None:
+    #         return None
+    #
+    #     siblings = list(root)
+    #     first_rect_index = siblings.index(first_rect)
+    #     if first_rect_index + 1 < len(siblings):
+    #         return siblings[first_rect_index + 1]
+    #
+    #     return None
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\text\__init__.py
+------------------------------------------------------------------------------------------
+from .font_manager import FontManager
+from .text_shaper import TextShaper
+from .typeface_loader import TypefaceLoader
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\text\font_manager.py
+------------------------------------------------------------------------------------------
+import skia
+import os
+import struct
+from typing import List, Optional
+import warnings
+from ..models import Style, FontStyle, FontSmoothing
+from ..exceptions import FontNotFoundWarning
+from .typeface_loader import TypefaceLoader
+
+class FontManager:
+
+    def __init__(self, style: Style, font_smoothing: FontSmoothing):
+        self._style = style
+        self._font_smoothing = font_smoothing
+        self._primary_font = self._create_font(self._style.font_family.get())
+        self._fallback_font_typefaces = self._prepare_fallbacks()
+
+    def get_primary_font(self) -> skia.Font:
+        return self._primary_font
+
+    def get_fallback_font_typefaces(self) -> List[skia.Typeface]:
+        return self._fallback_font_typefaces
+    
+    def _create_font(self, font_path_or_name: Optional[str]) -> skia.Font:
+        typeface = self._create_font_typeface(font_path_or_name)
+        if not typeface:
+            typeface = TypefaceLoader.load_default()
+        font = skia.Font(typeface, self._style.font_size.get())
+        if self._font_smoothing == FontSmoothing.SUBPIXEL:
+            font.setEdging(skia.Font.Edging.kSubpixelAntiAlias)
+            font.setSubpixel(True)
+        else: # STANDARD
+            font.setEdging(skia.Font.Edging.kAntiAlias)
+            font.setSubpixel(False)
+        return font
+
+    def _create_font_typeface(self, font_path_or_name: Optional[str]) -> skia.Typeface:
+        if font_path_or_name is None:
+            return TypefaceLoader.load_default()
+
+        if not os.path.exists(font_path_or_name):
+            return self._create_system_font_typeface(font_path_or_name)
+        
+        typeface = TypefaceLoader.load_from_file(font_path_or_name)
+        if not typeface:
+            raise ValueError(
+                f"Failed to load font from '{font_path_or_name}'. "
+                "The file might be corrupted or in an unsupported format."
+            )
+        
+        if typeface.getVariationDesignParameters():
+            return self._apply_variations_to_variable_font(typeface)
+        
+        return typeface
+    
+    def _create_system_font_typeface(self, font_family: str) -> Optional[skia.Font]:
+        font_style = skia.FontStyle(
+            weight=self._style.font_weight.get(),
+            width=skia.FontStyle.kNormal_Width,
+            slant=self._style.font_style.get().to_skia_slant()
+        )
+        typeface = TypefaceLoader.load_system_font(font_family, font_style)
+        actual_font_family = typeface.getFamilyName()
+        if actual_font_family.lower() != font_family.lower():
+            warning_message = f"Font '{font_family}' was not found. It will be ignored."
+            warnings.warn(FontNotFoundWarning(warning_message))
+            return None
+        
+        return typeface
+    
+    def _apply_variations_to_variable_font(self, typeface: skia.Typeface) -> skia.Typeface:
+        variations = {
+            'wght': float(self._style.font_weight.get()),
+            'ital': 1.0 if self._style.font_style.get() == FontStyle.ITALIC else 0.0,
+            'slnt': -12.0 if self._style.font_style.get() == FontStyle.OBLIQUE else 0.0,
+        }
+        to_four_char_code = lambda tag: struct.unpack('!I', tag.encode('utf-8'))[0]
+        available_axes_tags = { axis.tag for axis in typeface.getVariationDesignParameters() }
+        coordinates_list = [
+            skia.FontArguments.VariationPosition.Coordinate(axis=to_four_char_code(tag), value=value)
+            for tag, value in variations.items()
+            if to_four_char_code(tag) in available_axes_tags
+        ]
+
+        if not coordinates_list:
+            return typeface
+        
+        coordinates = skia.FontArguments.VariationPosition.Coordinates(coordinates_list)
+        variation_position = skia.FontArguments.VariationPosition(coordinates)
+        font_args = skia.FontArguments()
+        font_args.setVariationDesignPosition(variation_position)
+        return TypefaceLoader.clone_with_arguments(typeface, font_args)
+
+    def _prepare_fallbacks(self) -> List[skia.Font]:
+        user_fallbacks = [self._create_font_typeface(fb) for fb in self._style.font_fallbacks.get()]
+        return list(filter(lambda e: e, user_fallbacks))
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\text\text_shaper.py
+------------------------------------------------------------------------------------------
+import skia
+from typing import List
+from .typeface_loader import TypefaceLoader
+from .font_manager import FontManager
+from ..models import Style, Line, TextRun
+
+class TextShaper:
+    def __init__(self, style: Style, font_manager: FontManager):
+        self._style = style
+        self._font_manager = font_manager
+
+    def shape(self, text: str, max_width: float = None) -> List[Line]:
+        """
+        Breaks a text string into lines and runs, applying font fallbacks.
+        This is the core of the text shaping and fallback logic.
+        If max_width is provided, performs word wrapping.
+        """
+
+        shaped_lines: list[Line] = []
+        font_height = self._get_primary_font_height()
+        
+        for line_text in text.split('\n'):
+            if not line_text:
+                shaped_lines.append(self._create_empty_line())
+                continue
+            
+            if max_width is not None:
+                wrapped_lines = self._wrap_line_to_width(line_text, max_width)
+                for wrapped_line_text in wrapped_lines:
+                    if not wrapped_line_text:
+                        shaped_lines.append(self._create_empty_line())
+                        continue
+                    runs: list[TextRun] = self._split_line_in_runs(wrapped_line_text)
+                    line = self._create_line(runs, font_height)
+                    shaped_lines.append(line)
+            else:
+                runs: list[TextRun] = self._split_line_in_runs(line_text)
+                line = self._create_line(runs, font_height)
+                shaped_lines.append(line)
+        
+        return shaped_lines
+
+    def _get_primary_font_height(self) -> float:
+        font_metrics = self._font_manager.get_primary_font().getMetrics()
+        return -font_metrics.fAscent + font_metrics.fDescent + font_metrics.fLeading
+
+    def _create_empty_line(self) -> Line:
+        """Handle empty lines by creating a placeholder with correct height"""
+
+        primary_font = self._font_manager.get_primary_font()
+        line = Line(runs=[], height=0, width=0, bounds=skia.Rect.MakeEmpty())
+        font_metrics = primary_font.getMetrics()
+        line.bounds = skia.Rect.MakeLTRB(0, font_metrics.fAscent, 0, font_metrics.fDescent)
+        return line
+    
+    def _create_line(self, runs: list[TextRun], font_height: float) -> Line:
+        line_width = 0
+        for run in runs:
+            run.width = run.font.measureText(run.text)
+            line_width += run.width
+
+        return Line(runs=runs, width=line_width, height=font_height, bounds=skia.Rect.MakeWH(line_width, font_height))
+    
+    def _split_line_in_runs(self, line_text: str) -> list[TextRun]:
+        primary_font = self._font_manager.get_primary_font()
+        line_runs: list[TextRun] = []
+        current_run_text = ""
+
+        for char in line_text:
+            if self._is_glyph_supported_for_typeface(char, primary_font.getTypeface()):
+                current_run_text += char
+                continue
+
+            if current_run_text:
+                run = TextRun(current_run_text, primary_font)
+                line_runs.append(run)
+                current_run_text = ""
+
+            fallback_font = self._get_fallback_font_for_glyph(char, primary_font)
+            is_same_font_than_last_run = len(line_runs) > 0 and line_runs[-1].font.getTypeface() == fallback_font.getTypeface()
+            if is_same_font_than_last_run:
+                # we join contiguous runs with same font
+                line_runs[-1] = TextRun(line_runs[-1].text + char, fallback_font)
+            else:
+                line_runs.append(TextRun(char, fallback_font))
+        
+        # Add the last run
+        if current_run_text:
+            run = TextRun(current_run_text, primary_font)
+            line_runs.append(run)
+        
+        return line_runs
+
+    def _get_fallback_font_for_glyph(self, glyph: str, primary_font: skia.Font) -> skia.Font:
+        fallback_typefaces = self._font_manager.get_fallback_font_typefaces()
+        for typeface in fallback_typefaces:
+            if self._is_glyph_supported_for_typeface(glyph, typeface):
+                fallback_font = primary_font.makeWithSize(primary_font.getSize())
+                fallback_font.setTypeface(typeface)
+                return fallback_font
+
+        # if we don't find a font supporting the glyph, we try to find one in the system
+        font_style = skia.FontStyle(
+            weight=self._style.font_weight.get(),
+            width=skia.FontStyle.kNormal_Width,
+            slant=self._style.font_style.get().to_skia_slant()
+        )
+        system_typeface = TypefaceLoader.load_for_glyph(glyph, font_style)
+        if system_typeface:
+            fallback_font = primary_font.makeWithSize(primary_font.getSize())
+            fallback_font.setTypeface(system_typeface)
+            return fallback_font
+
+        # if we don't find any font in the system supporting the glyph, we just use the primary font
+        return primary_font
+
+    def _is_glyph_supported_for_typeface(self, glyph: str, typeface: skia.Typeface) -> bool:
+        return typeface.unicharToGlyph(ord(glyph)) != 0
+
+    def _wrap_line_to_width(self, text: str, max_width: float) -> List[str]:
+        """
+        Wraps a single line of text to fit within the specified width.
+        Words are treated as indivisible units.
+        """
+        if not text.strip():
+            return ['']
+        
+        words = text.split()
+        if not words:
+            return ['']
+        
+        primary_font = self._font_manager.get_primary_font()
+        wrapped_lines = []
+        current_line = []
+        current_width = 0
+        space_width = primary_font.measureText(' ')
+        
+        for word in words:
+            word_width = self._measure_word_width(word)
+            
+            # If this is the first word in the line, add it regardless of width
+            if not current_line:
+                current_line.append(word)
+                current_width = word_width
+                continue
+            
+            # Check if adding this word would exceed the max width
+            potential_width = current_width + space_width + word_width
+            
+            if potential_width <= max_width:
+                # Word fits, add it to current line
+                current_line.append(word)
+                current_width = potential_width
+            else:
+                # Word doesn't fit, start a new line
+                wrapped_lines.append(' '.join(current_line))
+                current_line = [word]
+                current_width = word_width
+        
+        # Add the last line if it has content
+        if current_line:
+            wrapped_lines.append(' '.join(current_line))
+        
+        return wrapped_lines if wrapped_lines else ['']
+    
+    def _measure_word_width(self, word: str) -> float:
+        """
+        Measures the width of a word, accounting for font fallbacks.
+        """
+        primary_font = self._font_manager.get_primary_font()
+        total_width = 0
+        current_run_text = ""
+        
+        for char in word:
+            if self._is_glyph_supported_for_typeface(char, primary_font.getTypeface()):
+                current_run_text += char
+                continue
+            
+            # Measure current run with primary font
+            if current_run_text:
+                total_width += primary_font.measureText(current_run_text)
+                current_run_text = ""
+            
+            # Measure fallback character
+            fallback_font = self._get_fallback_font_for_glyph(char, primary_font)
+            total_width += fallback_font.measureText(char)
+        
+        # Measure remaining text with primary font
+        if current_run_text:
+            total_width += primary_font.measureText(current_run_text)
+        
+        return total_width
+    
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\text\typeface_loader.py
+------------------------------------------------------------------------------------------
+from typing import Optional
+from ..models import TypefaceLoadingInfo, TypefaceSource
+import skia
+
+class TypefaceLoader:
+    _typefaces_loading_info: list[TypefaceLoadingInfo] = []
+    _font_manager: skia.FontMgr = None
+
+    @staticmethod
+    def load_default() -> skia.Typeface:
+        return TypefaceLoader._save(skia.Typeface.MakeDefault(), TypefaceSource.SYSTEM)
+
+    @staticmethod
+    def load_from_file(filepath: str) -> Optional[skia.Typeface]:
+        return TypefaceLoader._save(skia.Typeface.MakeFromFile(filepath), TypefaceSource.FILE, filepath)
+
+    @staticmethod
+    def load_system_font(family: str, style: skia.FontStyle = None) -> skia.Typeface:
+        """
+            Creates a new reference to the typeface that most closely
+            matches the requested familyName and fontStyle.
+            Will never return null.
+        """
+        return TypefaceLoader._save(skia.Typeface(family, style), TypefaceSource.SYSTEM)
+
+    @staticmethod
+    def load_for_glyph(glyph: str, style: skia.FontStyle) -> Optional[skia.Typeface]:
+        system_typeface = TypefaceLoader._get_font_manager().matchFamilyStyleCharacter(
+            "",
+            style,
+            [],
+            ord(glyph)
+        )
+        return TypefaceLoader._save(system_typeface, TypefaceSource.SYSTEM)
+
+    @staticmethod
+    def clone_with_arguments(typeface: skia.Typeface, arguments: skia.FontArguments) -> skia.Typeface:
+        typeface_loading_info = TypefaceLoader.get_typeface_loading_info(typeface)
+        if not typeface_loading_info:
+            raise RuntimeError("Impossible to clone typeface: it was not loaded")
+
+        new_typeface = typeface.makeClone(arguments)
+        typeface_loading_info.typeface = new_typeface
+        return new_typeface
+    
+    @staticmethod
+    def get_typeface_loading_info(typeface: skia.Typeface) -> Optional[TypefaceLoadingInfo]:
+        for loading_info in TypefaceLoader._typefaces_loading_info:
+            if loading_info.typeface == typeface:
+                return loading_info
+        return None
+
+    @staticmethod
+    def _save(typeface: Optional[skia.Typeface], source: TypefaceSource, filepath: Optional[str] = None) -> Optional[skia.Typeface]:
+        if not typeface:
+            return None
+        
+        TypefaceLoader._typefaces_loading_info.append(TypefaceLoadingInfo(typeface, source, filepath))
+        return typeface
+
+    @staticmethod
+    def _get_font_manager() -> skia.FontMgr:
+        if TypefaceLoader._font_manager is None:
+            TypefaceLoader._font_manager = skia.FontMgr()
+        return TypefaceLoader._font_manager
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\utils\__init__.py
+------------------------------------------------------------------------------------------
+from .alignment import get_line_x_position
+from .shadow import create_composite_shadow_filter
+from .cache import cached_method, cached_property, Cacheable
+from math import ceil, floor
+import skia
+
+def clone_skia_rect(rect: skia.Rect) -> skia.Rect:
+    return skia.Rect.MakeLTRB(rect.left(), rect.top(), rect.right(), rect.bottom())
+
+def to_int_skia_rect(rect: skia.Rect) -> skia.Rect:
+    return skia.Rect.MakeLTRB(
+        floor(rect.left()),
+        floor(rect.top()),
+        ceil(rect.right()),
+        ceil(rect.bottom()),
+    )
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\utils\alignment.py
+------------------------------------------------------------------------------------------
+from ..models import TextAlign
+
+def get_line_x_position(line_width: float, block_width: float, align: TextAlign) -> float:
+    if align == TextAlign.RIGHT:
+        return block_width - line_width
+    if align == TextAlign.CENTER:
+        return (block_width - line_width) / 2
+    
+    return 0 # Alignment.LEFT
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\utils\cache.py
+------------------------------------------------------------------------------------------
+from functools import wraps
+from collections import defaultdict
+from typing import Optional
+
+class _CachedPropertyDescriptor:
+
+    def __init__(self, func, group):
+        self._func = func
+        self._group = group
+        self._cache_attr_name = f"_cache_{func.__name__}"
+        self.__doc__ = func.__doc__
+
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self
+
+        if hasattr(instance, self._cache_attr_name):
+            return getattr(instance, self._cache_attr_name)
+
+        value = self._func(instance)
+        setattr(instance, self._cache_attr_name, value)
+        instance._cache_registry[self._group].add(self._cache_attr_name)
+
+        return value
+
+def cached_property(group: str = 'ungrouped'):
+    def decorator(func):
+        return _CachedPropertyDescriptor(func, group)
+    return decorator
+
+def cached_method(group: str = 'ungrouped'):
+    
+    def decorator(func):
+        cache_attr_name = f"_cache_{func.__name__}"
+
+        @wraps(func)
+        def wrapper(instance, *args, **kwargs):
+            if not hasattr(instance, cache_attr_name):
+                setattr(instance, cache_attr_name, {})
+
+                if not hasattr(instance, '_cache_registry'):
+                    instance._cache_registry = defaultdict(set)
+                instance._cache_registry[group].add(cache_attr_name)
+
+            cache = getattr(instance, cache_attr_name)
+            key = (args, tuple(sorted(kwargs.items())))
+
+            if key in cache:
+                return cache[key]
+
+            result = func(instance, *args, **kwargs)
+            cache[key] = result
+            return result
+
+        return wrapper
+    
+    return decorator
+
+class Cacheable:
+    def __init__(self) -> None:
+        self._cache_registry = defaultdict(set)
+    
+    def clear_cache(self, filter_by_group: Optional[str] = None) -> None:
+        items_to_remove = []
+        if filter_by_group is None:
+            items_to_remove = [key for cache_keys in self._cache_registry.values() for key in cache_keys]
+            self._cache_registry.clear()
+        elif filter_by_group in self._cache_registry:
+            items_to_remove = self._cache_registry[filter_by_group]
+            del self._cache_registry[filter_by_group]
+
+        for item in items_to_remove:
+            delattr(self, item)
+
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\utils\shadow.py
+------------------------------------------------------------------------------------------
+import skia
+from typing import Optional
+from ..models import Shadow
+
+def create_composite_shadow_filter(shadows: list[Shadow], should_remove_content: bool = False) -> Optional[skia.ImageFilter]:
+    if len(shadows) == 0:
+        return None
+
+    skia_shadow_filters = []
+    filter = lambda **kwargs: skia.ImageFilters.DropShadowOnly(**kwargs) if should_remove_content else skia.ImageFilters.DropShadow(**kwargs)
+    for shadow in shadows:
+        skia_shadow_filters.append(
+            filter(
+                dx=shadow.offset[0], dy=shadow.offset[1],
+                sigmaX=shadow.blur_radius, sigmaY=shadow.blur_radius,
+                color=skia.Color(
+                    shadow.color.r, shadow.color.g,
+                    shadow.color.b, shadow.color.a
+                )
+            )
+        )
+
+    if len(skia_shadow_filters) == 1:
+        return skia_shadow_filters[0]
+
+    composite_filter = skia_shadow_filters[0]
+    for i in range(1, len(skia_shadow_filters)):
+        composite_filter = skia.ImageFilters.Compose(skia_shadow_filters[i], composite_filter)
+
+    return composite_filter
+
+
+------------------------------------------------------------------------------------------
+file: src\pictex\vector_image.py
+------------------------------------------------------------------------------------------
+from __future__ import annotations
+
+class VectorImage:
+    """Represents a rendered vector image in SVG format.
+
+    This class holds the SVG data generated by a rendering operation and provides
+    convenient methods for saving it to a file or displaying it in rich
+    environments like Jupyter Notebooks.
+
+    Objects of this class are typically created by calling `Canvas.render_as_svg()`.
+
+    Example:
+        ```python
+        # Assuming 'canvas' is a pre-configured Canvas object
+        vector_image = canvas.render_as_svg("Vector Text")
+        
+        # Save the image to a .svg file
+        vector_image.save("output.svg")
+        ```
+
+    Attributes:
+        svg (str): The raw SVG content as a string.
+    """
+
+    def __init__(self, svg_content: str):
+        """Initializes the VectorImage.
+
+        Note:
+            This constructor is intended for internal use by the library,
+            typically called from `Canvas.render_as_svg()`.
+
+        Args:
+            svg_content: The full SVG content as a string.
+        """
+        self._svg_content = svg_content
+
+    @property
+    def svg(self) -> str:
+        """Gets the raw SVG content as a string."""
+        return self._svg_content
+
+    def save(self, output_path: str) -> None:
+        """Saves the SVG image to a file.
+
+        The file is saved with UTF-8 encoding.
+
+        Args:
+            output_path: The path where the output file will be saved
+                (e.g., 'image.svg').
+
+        Raises:
+            IOError: If there is an error writing the file to disk.
+        """
+        # Ensure the output path has a .svg extension if not provided
+        if not output_path.lower().endswith('.svg'):
+            output_path += '.svg'
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(self._svg_content)
+
+    def __str__(self) -> str:
+        """Returns the SVG content as a string.
+
+        This allows for direct printing of the object to view its SVG source.
+
+        Example:
+            vector_image = canvas.render_as_svg("Hi")
+            print(vector_image)
+            '<svg>...</svg>'
+
+        Returns:
+            The raw SVG content.
+        """
+        return self._svg_content
+
+    def _repr_svg_(self) -> str:
+        """Provides SVG representation for IPython environments.
+
+        This is a special method used by Jupyter Notebooks and IPython to
+        display the object directly as a rendered SVG image in an output cell.
+
+        Returns:
+            The raw SVG content, which is then rendered by the frontend.
+        """
+        return self._svg_content
+
+
