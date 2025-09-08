@@ -1,0 +1,4 @@
+[console_scripts]
+synapse = synapse_lang.cli:main
+synapse-bench = synapse_lang.benchmark:main
+synapse-repl = synapse_lang.repl:main
