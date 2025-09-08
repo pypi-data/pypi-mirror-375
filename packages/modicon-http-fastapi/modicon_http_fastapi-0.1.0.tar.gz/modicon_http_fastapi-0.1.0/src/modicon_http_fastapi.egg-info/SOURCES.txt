@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/modicon/__init__.py
+src/modicon/rest/__init__.py
+src/modicon/rest/fastapi/__init__.py
+src/modicon/rest/fastapi/container.py
+src/modicon_http_fastapi.egg-info/PKG-INFO
+src/modicon_http_fastapi.egg-info/SOURCES.txt
+src/modicon_http_fastapi.egg-info/dependency_links.txt
+src/modicon_http_fastapi.egg-info/requires.txt
+src/modicon_http_fastapi.egg-info/top_level.txt
