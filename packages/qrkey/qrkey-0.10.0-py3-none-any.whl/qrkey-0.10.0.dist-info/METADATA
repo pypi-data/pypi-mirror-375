@@ -1,0 +1,68 @@
+Metadata-Version: 2.4
+Name: qrkey
+Version: 0.10.0
+Summary: Swarm robotics deployments made easy.
+Project-URL: Documentation, https://github.com/DotBots/qrkey#readme
+Project-URL: Issues, https://github.com/DotBots/qrkey/issues
+Project-URL: Source, https://github.com/DotBots/qrkey
+Author-email: Alexandre Abadie <alexandre.abadie@inria.fr>
+License-Expression: BSD-3-Clause
+License-File: AUTHORS
+License-File: LICENSE.txt
+Keywords: robotics,swarm,ux
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Requires-Python: >=3.11
+Requires-Dist: cryptography>=43.0.1
+Requires-Dist: fastapi-mqtt>=2.2.0
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: gmqtt>=0.7.0
+Requires-Dist: httpx>=0.27.2
+Requires-Dist: joserfc>=1.0.0
+Requires-Dist: pydantic-settings>=2.1.0
+Requires-Dist: segno>=1.6.0
+Requires-Dist: semver>=3.0.2
+Requires-Dist: structlog>=24.4.0
+Requires-Dist: uvicorn>=0.32.0
+Requires-Dist: websockets>=15.0.1
+Description-Content-Type: text/markdown
+
+# Qrkey
+
+[![PyPI - Version](https://img.shields.io/pypi/v/qrkey.svg)](https://pypi.org/project/qrkey)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/qrkey.svg)](https://pypi.org/project/qrkey)
+[![NPM - Version](https://img.shields.io/npm/v/qrkey.svg)](https://npmjs.org/package/qrkey)
+
+<p align="center">
+  <img src="qrkey.png" width="328"/>
+</p>
+
+## Summary
+
+Qrkey is a library implementing a protocol designed to facilitate the
+deployment of robots swarm.
+The protocol relies on [MQTT](https://en.wikipedia.org/wiki/MQTT) so that a
+Qrkey server is reachable even with a private IP address.
+Access to the swarm is managed by a QR code based authentication scheme.
+
+## Installation
+
+- Python server library:
+
+```console
+pip install qrkey
+```
+
+- Node client library:
+
+```console
+npm i qrkey
+```
+
+## License
+
+`qrkey` is distributed under the terms of the [BSD-3-Clause](https://spdx.org/licenses/BSD-3-Clause.html) license.
