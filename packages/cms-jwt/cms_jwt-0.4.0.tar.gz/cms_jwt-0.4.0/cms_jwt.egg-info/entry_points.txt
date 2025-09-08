@@ -1,0 +1,2 @@
+[cms.djangoapp]
+cms_jwt = cms_jwt_import_auth.apps:CMSJWTImportAuthConfig
