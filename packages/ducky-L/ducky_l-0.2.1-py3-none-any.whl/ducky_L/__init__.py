@@ -1,0 +1,1 @@
+from .modulo import poner, variable, si, bucle, LSL, consola_var, consola_nor, CA, CC, eliminar_carpeta, copiar_archivo, leer_json, escribir_json, desencriptar, encriptar, generar_clave, hora, password
