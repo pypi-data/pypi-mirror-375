@@ -1,0 +1,12 @@
+type: workflow
+name: user_hunt
+alias: userhunt
+description: User account search
+tags: [user_account]
+input_types:
+  - slug
+  - string
+
+tasks:
+  maigret:
+    description: Hunt user accounts
