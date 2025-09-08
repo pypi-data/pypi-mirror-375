@@ -1,0 +1,13 @@
+include LICENSE.txt
+include README.rst
+include CHANGELOG.rst
+include *.yml
+
+# doc
+recursive-include doc *.bat
+recursive-include doc *.py
+recursive-include doc *.rst
+recursive-include doc Makefile
+
+# tests
+recursive-include tests *.py

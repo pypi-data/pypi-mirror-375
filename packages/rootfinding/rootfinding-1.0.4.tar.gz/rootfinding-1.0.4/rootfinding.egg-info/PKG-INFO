@@ -1,0 +1,79 @@
+Metadata-Version: 2.4
+Name: rootfinding
+Version: 1.0.4
+Summary: Find roots of scalar functions
+Home-page: https://github.com/gerlero/rootfinding
+Author: Gabriel S. Gerlero
+Author-email: ggerlero@cimec.unl.edu.ar
+Project-URL: Documentation, https://rootfinding.readthedocs.io
+Project-URL: Bug Tracker, https://github.com/gerlero/rootfinding/issues
+Classifier: Development Status :: 7 - Inactive
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Operating System :: OS Independent
+Requires-Python: !=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7
+License-File: LICENSE.txt
+Provides-Extra: test
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: check-manifest; extra == "test"
+Provides-Extra: doc
+Requires-Dist: sphinx; extra == "doc"
+Requires-Dist: sphinx_rtd_theme; extra == "doc"
+Provides-Extra: dev
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: check-manifest; extra == "dev"
+Requires-Dist: sphinx; extra == "dev"
+Requires-Dist: sphinx_rtd_theme; extra == "dev"
+Dynamic: license-file
+
+``rootfinding``: find roots of scalar functions
+===============================================
+
+**⚠️ This project is deprecated and no longer maintained**
+
+.. image:: https://img.shields.io/pypi/v/rootfinding.svg
+   :target: https://pypi.org/project/rootfinding/
+   :alt: PyPI
+
+.. image:: https://github.com/gerlero/rootfinding/workflows/CI/badge.svg
+   :target: https://github.com/gerlero/rootfinding/actions
+   :alt: GitHub Actions - CI
+
+.. image:: https://img.shields.io/codecov/c/gh/gerlero/rootfinding
+  :target: https://codecov.io/gh/gerlero/rootfinding
+  :alt: codecov - Code coverage
+
+.. image:: https://img.shields.io/readthedocs/rootfinding.svg
+   :target: https://rootfinding.readthedocs.io
+   :alt: Read the Docs - Documentation
+
+.. image:: https://img.shields.io/pypi/pyversions/rootfinding.svg
+   :target: https://pypi.org/project/rootfinding/
+   :alt: PyPI - Python Version
+
+.. image:: https://img.shields.io/pypi/l/rootfinding.svg
+   :target: https://github.com/gerlero/rootfinding/blob/master/LICENSE.txt
+   :alt: PyPI - License
+
+
+``rootfinding`` finds roots by bisecting a bracketing interval until the value of the function can be considered sufficiently close to zero. The scheme differs slightly from the implementation of bisection in SciPy_: it is better suited for cases where a maximum acceptable residual is a more useful termination criterion than a tolerance for the argument variable, and can lead to fewer function evaluations overall.
+
+The small library also contains functionality to automatically search for a bracket of a root when one is not known. While the library will always start by checking the inputs, it is possible to avoid redundant function calls by providing known values of the function—similarly, objects returned (and exceptions raised) by the library helpfully include function values that may be of interest. ``rootfinding`` was first developed as an internal module of our other project Fronts_.
+
+To use this library, install ``rootfinding`` from PyPI_ as ``$ pip install rootfinding``. Alternatively, you may copy the ``rootfinding.py`` file from the source code directly into your project (you must retain the copyright notice and license).
+
+.. _SciPy: https://docs.scipy.org/doc/scipy/reference/optimize.html#scalar-functions
+.. _Fronts: https://github.com/gerlero/fronts
+.. _PyPI: https://pypi.org/project/rootfinding
+
+.. doc-inclusion-marker
+
+Documentation is available on `Read the Docs`_.
+
+.. _Read the Docs: https://rootfinding.readthedocs.io
