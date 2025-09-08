@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package core_system.shop.v1;
+
+import "messages/shop/request.proto";
+import "messages/shop/response.proto";
+
+option py_generic_services = true;
+
+// ShopService 정의
+service ShopService {
+    rpc GetShopList(GetShopListRequest) returns (GetShopListResponse);
+    rpc GetShopDetail(GetShopDetailRequest) returns (GetShopDetailResponse);
+}

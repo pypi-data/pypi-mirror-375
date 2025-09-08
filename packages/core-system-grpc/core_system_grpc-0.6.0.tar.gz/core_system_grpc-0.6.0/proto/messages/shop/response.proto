@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package core_system.shop.v1;
+
+import "messages/shop/common.proto";
+import "messages/common/pagination.proto";
+
+// Shop 목록 조회 응답 메시지
+message GetShopListResponse {
+    repeated Shop result = 1;
+    int32 length = 2;
+}
+
+// Shop 상세 조회 응답 메시지
+message GetShopDetailResponse {
+    Shop result = 1;
+}

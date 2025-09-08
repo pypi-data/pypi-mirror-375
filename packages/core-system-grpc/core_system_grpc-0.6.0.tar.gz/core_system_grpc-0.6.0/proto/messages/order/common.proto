@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package core_system.order.v1;
+
+import "messages/customer/common.proto";
+import "messages/product/common.proto";
+
+// Shop 정보 메시지 (embed용)
+message Shop {
+    string id = 1;
+    optional string shop_name = 2;
+    optional string domain = 3;
+    optional string platform_id = 4;
+    optional string created_at = 5;
+    optional string updated_at = 6;
+}
+
+// Order 정보 메시지
+message Order {
+    string id = 1;
+    string shop_id = 2;
+    optional string customer_id = 3;
+    optional string customer_group_id = 4;
+    optional string order_id = 5;
+    optional string platform_id = 6;
+    optional string order_status = 7;
+    optional string buyer_name = 8;
+    optional string member_id = 9;
+    optional string order_date = 10;
+    optional string payment_date = 11;
+    optional string order_place_id = 12;
+    optional string shipping_status = 13;
+    string order_price_amount = 14;
+    string shipping_fee = 15;
+    string points_spent_amount = 16;
+    string credits_spent_amount = 17;
+    string coupon_discount_price = 18;
+    string coupon_shipping_fee_amount = 19;
+    string membership_discount_amount = 20;
+    string shipping_fee_discount_amount = 21;
+    string set_product_discount_amount = 22;
+    string app_discount_amount = 23;
+    string point_incentive_amount = 24;
+    string total_amount_due = 25;
+    string payment_amount = 26;
+    string market_other_discount_amount = 27;
+    string upsell_amount = 28;
+    string is_upsell = 29;
+    string first_order = 30;
+    optional string updated_at = 31;
+    
+    // Embed 필드들 (선택적)
+    optional Shop shop = 32;
+    optional core_system.customer.v1.Customer customer = 33;
+    optional core_system.customer.v1.CustomerGroup customer_group = 34;
+    repeated OrderItem order_items = 35;
+    repeated OrderReceiver order_receivers = 36;
+}
+
+// OrderItem 정보 메시지
+message OrderItem {
+    string id = 1;
+    string shop_id = 2;
+    optional string order_id = 3;
+    optional string product_id = 4;
+    optional string customer_id = 5;
+    optional string order_item_code = 6;
+    optional string platform_id = 7;
+    optional string request_undone = 8;
+    optional string variant_code = 9;
+    string quantity = 10;
+    optional string option_id = 11;
+    optional string option_value = 12;
+    optional string option_value_json = 13;
+    optional string option_value_default = 14;
+    string product_price = 15;
+    string option_price = 16;
+    optional string additional_discount_price = 17;
+    optional string order_status = 18;
+    optional string ordered_date = 19;
+    optional string shipped_date = 20;
+    optional string delivered_date = 21;
+    optional string shipping_company_name = 22;
+    optional string tracking_no = 23;
+    repeated string labels = 24;
+    optional string status_code = 25;
+    string is_upsell = 26;
+}
+
+// OrderBenefit 정보 메시지
+message OrderBenefit {
+    string id = 1;
+    optional string order_id = 2;
+    optional string order_item_code = 3;
+    optional string benefit_no = 4;
+    optional string platform_id = 5;
+    optional string benefit_title = 6;
+    optional string benefit_name = 7;
+    optional string benefit_code = 8;
+    optional string benefit_percent = 9;
+    optional string benefit_value = 10;
+}
+
+// OrderReceiver 정보 메시지
+message OrderReceiver {
+    string id = 1;
+    optional string shop_id = 2;
+    optional string order_id = 3;
+    optional string name = 4;
+    optional string name_furigana = 5;
+    optional string phone = 6;
+    optional string cellphone = 7;
+    optional string virtual_phone_no = 8;
+    optional string zipcode = 9;
+    optional string address1 = 10;
+    optional string address2 = 11;
+    optional string address_state = 12;
+    optional string address_city = 13;
+    optional string address_street = 14;
+    optional string address_full = 15;
+    optional string name_en = 16;
+    optional string city_en = 17;
+    optional string state_en = 18;
+    optional string street_en = 19;
+    optional string country_code = 20;
+    optional string country_name = 21;
+    optional string country_name_en = 22;
+    optional string shipping_message = 23;
+    optional string clearance_information_type = 24;
+    optional string clearance_information = 25;
+    optional string wished_delivery_date = 26;
+    optional string wished_delivery_time = 27;
+    optional string shipping_code = 28;
+    optional string change_default_shipping_address = 29;
+    optional string use_fast_delivery_date = 30;
+    optional string use_fast_delivery_time = 31;
+    string is_active = 32;
+    optional string created_at = 33;
+    optional string updated_at = 34;
+}

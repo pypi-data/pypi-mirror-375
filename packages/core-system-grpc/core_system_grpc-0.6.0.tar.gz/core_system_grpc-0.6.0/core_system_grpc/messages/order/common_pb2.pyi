@@ -1,0 +1,253 @@
+from messages.customer import common_pb2 as _common_pb2
+from messages.product import common_pb2 as _common_pb2_1
+from google.protobuf.internal import containers as _containers
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from collections.abc import Iterable as _Iterable, Mapping as _Mapping
+from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
+DESCRIPTOR: _descriptor.FileDescriptor
+
+class Shop(_message.Message):
+    __slots__ = ("id", "shop_name", "domain", "platform_id", "created_at", "updated_at")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    SHOP_NAME_FIELD_NUMBER: _ClassVar[int]
+    DOMAIN_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_ID_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    shop_name: str
+    domain: str
+    platform_id: str
+    created_at: str
+    updated_at: str
+    def __init__(self, id: _Optional[str] = ..., shop_name: _Optional[str] = ..., domain: _Optional[str] = ..., platform_id: _Optional[str] = ..., created_at: _Optional[str] = ..., updated_at: _Optional[str] = ...) -> None: ...
+
+class Order(_message.Message):
+    __slots__ = ("id", "shop_id", "customer_id", "customer_group_id", "order_id", "platform_id", "order_status", "buyer_name", "member_id", "order_date", "payment_date", "order_place_id", "shipping_status", "order_price_amount", "shipping_fee", "points_spent_amount", "credits_spent_amount", "coupon_discount_price", "coupon_shipping_fee_amount", "membership_discount_amount", "shipping_fee_discount_amount", "set_product_discount_amount", "app_discount_amount", "point_incentive_amount", "total_amount_due", "payment_amount", "market_other_discount_amount", "upsell_amount", "is_upsell", "first_order", "updated_at", "shop", "customer", "customer_group", "order_items", "order_receivers")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    SHOP_ID_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_ID_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_GROUP_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ID_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_STATUS_FIELD_NUMBER: _ClassVar[int]
+    BUYER_NAME_FIELD_NUMBER: _ClassVar[int]
+    MEMBER_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_DATE_FIELD_NUMBER: _ClassVar[int]
+    PAYMENT_DATE_FIELD_NUMBER: _ClassVar[int]
+    ORDER_PLACE_ID_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_STATUS_FIELD_NUMBER: _ClassVar[int]
+    ORDER_PRICE_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_FEE_FIELD_NUMBER: _ClassVar[int]
+    POINTS_SPENT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    CREDITS_SPENT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    COUPON_DISCOUNT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    COUPON_SHIPPING_FEE_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    MEMBERSHIP_DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_FEE_DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    SET_PRODUCT_DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    APP_DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    POINT_INCENTIVE_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_AMOUNT_DUE_FIELD_NUMBER: _ClassVar[int]
+    PAYMENT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    MARKET_OTHER_DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    UPSELL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    IS_UPSELL_FIELD_NUMBER: _ClassVar[int]
+    FIRST_ORDER_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
+    SHOP_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_GROUP_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ITEMS_FIELD_NUMBER: _ClassVar[int]
+    ORDER_RECEIVERS_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    shop_id: str
+    customer_id: str
+    customer_group_id: str
+    order_id: str
+    platform_id: str
+    order_status: str
+    buyer_name: str
+    member_id: str
+    order_date: str
+    payment_date: str
+    order_place_id: str
+    shipping_status: str
+    order_price_amount: str
+    shipping_fee: str
+    points_spent_amount: str
+    credits_spent_amount: str
+    coupon_discount_price: str
+    coupon_shipping_fee_amount: str
+    membership_discount_amount: str
+    shipping_fee_discount_amount: str
+    set_product_discount_amount: str
+    app_discount_amount: str
+    point_incentive_amount: str
+    total_amount_due: str
+    payment_amount: str
+    market_other_discount_amount: str
+    upsell_amount: str
+    is_upsell: str
+    first_order: str
+    updated_at: str
+    shop: Shop
+    customer: _common_pb2.Customer
+    customer_group: _common_pb2.CustomerGroup
+    order_items: _containers.RepeatedCompositeFieldContainer[OrderItem]
+    order_receivers: _containers.RepeatedCompositeFieldContainer[OrderReceiver]
+    def __init__(self, id: _Optional[str] = ..., shop_id: _Optional[str] = ..., customer_id: _Optional[str] = ..., customer_group_id: _Optional[str] = ..., order_id: _Optional[str] = ..., platform_id: _Optional[str] = ..., order_status: _Optional[str] = ..., buyer_name: _Optional[str] = ..., member_id: _Optional[str] = ..., order_date: _Optional[str] = ..., payment_date: _Optional[str] = ..., order_place_id: _Optional[str] = ..., shipping_status: _Optional[str] = ..., order_price_amount: _Optional[str] = ..., shipping_fee: _Optional[str] = ..., points_spent_amount: _Optional[str] = ..., credits_spent_amount: _Optional[str] = ..., coupon_discount_price: _Optional[str] = ..., coupon_shipping_fee_amount: _Optional[str] = ..., membership_discount_amount: _Optional[str] = ..., shipping_fee_discount_amount: _Optional[str] = ..., set_product_discount_amount: _Optional[str] = ..., app_discount_amount: _Optional[str] = ..., point_incentive_amount: _Optional[str] = ..., total_amount_due: _Optional[str] = ..., payment_amount: _Optional[str] = ..., market_other_discount_amount: _Optional[str] = ..., upsell_amount: _Optional[str] = ..., is_upsell: _Optional[str] = ..., first_order: _Optional[str] = ..., updated_at: _Optional[str] = ..., shop: _Optional[_Union[Shop, _Mapping]] = ..., customer: _Optional[_Union[_common_pb2.Customer, _Mapping]] = ..., customer_group: _Optional[_Union[_common_pb2.CustomerGroup, _Mapping]] = ..., order_items: _Optional[_Iterable[_Union[OrderItem, _Mapping]]] = ..., order_receivers: _Optional[_Iterable[_Union[OrderReceiver, _Mapping]]] = ...) -> None: ...
+
+class OrderItem(_message.Message):
+    __slots__ = ("id", "shop_id", "order_id", "product_id", "customer_id", "order_item_code", "platform_id", "request_undone", "variant_code", "quantity", "option_id", "option_value", "option_value_json", "option_value_default", "product_price", "option_price", "additional_discount_price", "order_status", "ordered_date", "shipped_date", "delivered_date", "shipping_company_name", "tracking_no", "labels", "status_code", "is_upsell")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    SHOP_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ID_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_ID_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ITEM_CODE_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_ID_FIELD_NUMBER: _ClassVar[int]
+    REQUEST_UNDONE_FIELD_NUMBER: _ClassVar[int]
+    VARIANT_CODE_FIELD_NUMBER: _ClassVar[int]
+    QUANTITY_FIELD_NUMBER: _ClassVar[int]
+    OPTION_ID_FIELD_NUMBER: _ClassVar[int]
+    OPTION_VALUE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_VALUE_JSON_FIELD_NUMBER: _ClassVar[int]
+    OPTION_VALUE_DEFAULT_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_PRICE_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_DISCOUNT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    ORDER_STATUS_FIELD_NUMBER: _ClassVar[int]
+    ORDERED_DATE_FIELD_NUMBER: _ClassVar[int]
+    SHIPPED_DATE_FIELD_NUMBER: _ClassVar[int]
+    DELIVERED_DATE_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_COMPANY_NAME_FIELD_NUMBER: _ClassVar[int]
+    TRACKING_NO_FIELD_NUMBER: _ClassVar[int]
+    LABELS_FIELD_NUMBER: _ClassVar[int]
+    STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
+    IS_UPSELL_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    shop_id: str
+    order_id: str
+    product_id: str
+    customer_id: str
+    order_item_code: str
+    platform_id: str
+    request_undone: str
+    variant_code: str
+    quantity: str
+    option_id: str
+    option_value: str
+    option_value_json: str
+    option_value_default: str
+    product_price: str
+    option_price: str
+    additional_discount_price: str
+    order_status: str
+    ordered_date: str
+    shipped_date: str
+    delivered_date: str
+    shipping_company_name: str
+    tracking_no: str
+    labels: _containers.RepeatedScalarFieldContainer[str]
+    status_code: str
+    is_upsell: str
+    def __init__(self, id: _Optional[str] = ..., shop_id: _Optional[str] = ..., order_id: _Optional[str] = ..., product_id: _Optional[str] = ..., customer_id: _Optional[str] = ..., order_item_code: _Optional[str] = ..., platform_id: _Optional[str] = ..., request_undone: _Optional[str] = ..., variant_code: _Optional[str] = ..., quantity: _Optional[str] = ..., option_id: _Optional[str] = ..., option_value: _Optional[str] = ..., option_value_json: _Optional[str] = ..., option_value_default: _Optional[str] = ..., product_price: _Optional[str] = ..., option_price: _Optional[str] = ..., additional_discount_price: _Optional[str] = ..., order_status: _Optional[str] = ..., ordered_date: _Optional[str] = ..., shipped_date: _Optional[str] = ..., delivered_date: _Optional[str] = ..., shipping_company_name: _Optional[str] = ..., tracking_no: _Optional[str] = ..., labels: _Optional[_Iterable[str]] = ..., status_code: _Optional[str] = ..., is_upsell: _Optional[str] = ...) -> None: ...
+
+class OrderBenefit(_message.Message):
+    __slots__ = ("id", "order_id", "order_item_code", "benefit_no", "platform_id", "benefit_title", "benefit_name", "benefit_code", "benefit_percent", "benefit_value")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ITEM_CODE_FIELD_NUMBER: _ClassVar[int]
+    BENEFIT_NO_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_ID_FIELD_NUMBER: _ClassVar[int]
+    BENEFIT_TITLE_FIELD_NUMBER: _ClassVar[int]
+    BENEFIT_NAME_FIELD_NUMBER: _ClassVar[int]
+    BENEFIT_CODE_FIELD_NUMBER: _ClassVar[int]
+    BENEFIT_PERCENT_FIELD_NUMBER: _ClassVar[int]
+    BENEFIT_VALUE_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    order_id: str
+    order_item_code: str
+    benefit_no: str
+    platform_id: str
+    benefit_title: str
+    benefit_name: str
+    benefit_code: str
+    benefit_percent: str
+    benefit_value: str
+    def __init__(self, id: _Optional[str] = ..., order_id: _Optional[str] = ..., order_item_code: _Optional[str] = ..., benefit_no: _Optional[str] = ..., platform_id: _Optional[str] = ..., benefit_title: _Optional[str] = ..., benefit_name: _Optional[str] = ..., benefit_code: _Optional[str] = ..., benefit_percent: _Optional[str] = ..., benefit_value: _Optional[str] = ...) -> None: ...
+
+class OrderReceiver(_message.Message):
+    __slots__ = ("id", "shop_id", "order_id", "name", "name_furigana", "phone", "cellphone", "virtual_phone_no", "zipcode", "address1", "address2", "address_state", "address_city", "address_street", "address_full", "name_en", "city_en", "state_en", "street_en", "country_code", "country_name", "country_name_en", "shipping_message", "clearance_information_type", "clearance_information", "wished_delivery_date", "wished_delivery_time", "shipping_code", "change_default_shipping_address", "use_fast_delivery_date", "use_fast_delivery_time", "is_active", "created_at", "updated_at")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    SHOP_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    NAME_FURIGANA_FIELD_NUMBER: _ClassVar[int]
+    PHONE_FIELD_NUMBER: _ClassVar[int]
+    CELLPHONE_FIELD_NUMBER: _ClassVar[int]
+    VIRTUAL_PHONE_NO_FIELD_NUMBER: _ClassVar[int]
+    ZIPCODE_FIELD_NUMBER: _ClassVar[int]
+    ADDRESS1_FIELD_NUMBER: _ClassVar[int]
+    ADDRESS2_FIELD_NUMBER: _ClassVar[int]
+    ADDRESS_STATE_FIELD_NUMBER: _ClassVar[int]
+    ADDRESS_CITY_FIELD_NUMBER: _ClassVar[int]
+    ADDRESS_STREET_FIELD_NUMBER: _ClassVar[int]
+    ADDRESS_FULL_FIELD_NUMBER: _ClassVar[int]
+    NAME_EN_FIELD_NUMBER: _ClassVar[int]
+    CITY_EN_FIELD_NUMBER: _ClassVar[int]
+    STATE_EN_FIELD_NUMBER: _ClassVar[int]
+    STREET_EN_FIELD_NUMBER: _ClassVar[int]
+    COUNTRY_CODE_FIELD_NUMBER: _ClassVar[int]
+    COUNTRY_NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNTRY_NAME_EN_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    CLEARANCE_INFORMATION_TYPE_FIELD_NUMBER: _ClassVar[int]
+    CLEARANCE_INFORMATION_FIELD_NUMBER: _ClassVar[int]
+    WISHED_DELIVERY_DATE_FIELD_NUMBER: _ClassVar[int]
+    WISHED_DELIVERY_TIME_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_CODE_FIELD_NUMBER: _ClassVar[int]
+    CHANGE_DEFAULT_SHIPPING_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    USE_FAST_DELIVERY_DATE_FIELD_NUMBER: _ClassVar[int]
+    USE_FAST_DELIVERY_TIME_FIELD_NUMBER: _ClassVar[int]
+    IS_ACTIVE_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    shop_id: str
+    order_id: str
+    name: str
+    name_furigana: str
+    phone: str
+    cellphone: str
+    virtual_phone_no: str
+    zipcode: str
+    address1: str
+    address2: str
+    address_state: str
+    address_city: str
+    address_street: str
+    address_full: str
+    name_en: str
+    city_en: str
+    state_en: str
+    street_en: str
+    country_code: str
+    country_name: str
+    country_name_en: str
+    shipping_message: str
+    clearance_information_type: str
+    clearance_information: str
+    wished_delivery_date: str
+    wished_delivery_time: str
+    shipping_code: str
+    change_default_shipping_address: str
+    use_fast_delivery_date: str
+    use_fast_delivery_time: str
+    is_active: str
+    created_at: str
+    updated_at: str
+    def __init__(self, id: _Optional[str] = ..., shop_id: _Optional[str] = ..., order_id: _Optional[str] = ..., name: _Optional[str] = ..., name_furigana: _Optional[str] = ..., phone: _Optional[str] = ..., cellphone: _Optional[str] = ..., virtual_phone_no: _Optional[str] = ..., zipcode: _Optional[str] = ..., address1: _Optional[str] = ..., address2: _Optional[str] = ..., address_state: _Optional[str] = ..., address_city: _Optional[str] = ..., address_street: _Optional[str] = ..., address_full: _Optional[str] = ..., name_en: _Optional[str] = ..., city_en: _Optional[str] = ..., state_en: _Optional[str] = ..., street_en: _Optional[str] = ..., country_code: _Optional[str] = ..., country_name: _Optional[str] = ..., country_name_en: _Optional[str] = ..., shipping_message: _Optional[str] = ..., clearance_information_type: _Optional[str] = ..., clearance_information: _Optional[str] = ..., wished_delivery_date: _Optional[str] = ..., wished_delivery_time: _Optional[str] = ..., shipping_code: _Optional[str] = ..., change_default_shipping_address: _Optional[str] = ..., use_fast_delivery_date: _Optional[str] = ..., use_fast_delivery_time: _Optional[str] = ..., is_active: _Optional[str] = ..., created_at: _Optional[str] = ..., updated_at: _Optional[str] = ...) -> None: ...

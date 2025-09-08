@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package core_system.shop.v1;
+
+// Shop 정보 메시지
+message Shop {
+    string id = 1;
+    string company_id = 2;
+    string shop_no = 3;
+    optional string name = 4;
+    optional string site_name = 5;
+    optional string logo = 6;
+    optional string created_at = 7;
+    optional string service_started_at = 8;
+    optional string base_domain = 9;
+    optional string primary_domain = 10;
+    string main_status = 11;
+    optional string sub_status = 12;
+    string timezone = 13;
+    optional string previous_main_status = 14;
+    string short_code = 15;
+    string is_visible = 16;
+}
+
+// ShopDetail 정보 메시지
+message ShopDetail {
+    string id = 1;
+    string shop_id = 2;
+    optional string category = 3;
+    string default = 4;
+    string active = 5;
+    string terms_and_privacy_agreement = 6;
+    optional string terms_and_privacy_agreement_agreed_at = 7;
+    string number_of_monthly_orders = 8;
+    optional string number_of_employees = 9;
+    string is_used_personal_data_masking = 10;
+    string is_cafe24_pro = 11;
+    string webhook_active_status = 12;
+    optional string webhook_active_updated_at = 13;
+    optional string webhook_blacklist_event_type = 14;
+    optional string webhook_active_status_reason = 15;
+}
+
+// ShopApp 정보 메시지
+message ShopApp {
+    string id = 1;
+    string shop_id = 2;
+    string app_id = 3;
+    optional string installed_at = 4;
+    optional string removed_at = 5;
+    string main_status = 6;
+    optional string key_metric = 7;
+    string is_deleted = 8;
+    optional string deleted_at = 9;
+    string migrate_status = 10;
+}
+
+// ShopServiceItem 정보 메시지 (ShopService 모델을 나타냄)
+message ShopServiceItem {
+    string id = 1;
+    string shop_id = 2;
+    string service_id = 3;
+    string main_status = 4;
+    optional string sub_status = 5;
+    string is_used_trial_subscription = 6;
+    optional string installed_at = 7;
+    optional string live_at = 8;
+    optional string stopped_at = 9;
+    string subscription_conversion_method = 10;
+}
