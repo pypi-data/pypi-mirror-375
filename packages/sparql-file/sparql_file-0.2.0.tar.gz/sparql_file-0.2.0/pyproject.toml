@@ -1,0 +1,37 @@
+[project]
+name = "sparql-file"
+version = "0.2.0"
+description = "A simple SPARQL 1.1 endpoint based on a file."
+authors = [
+    {name = "Natanael Arndt",email = "arndtn@gmail.com"}
+]
+license = {text = "GPL-3.0-or-later"}
+readme = "README.md"
+requires-python = ">=3.9,<4.0.0"
+dependencies = [
+    "rdflib-endpoint (>=0.5.1,<0.6.0)",
+    "uvicorn (>=0.34.0,<0.35.0)",
+]
+
+[project.optional-dependencies]
+cli = [ "typer>=0.16.1,<0.17.0" ]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+fastapi = {extras = ["standard"], version = "^0.115.8"}
+ruff = "^0.9.6"
+simpsons-rdf = "^0.3.0"
+httpx = "^0.28.1"
+pytest = "^8.4.2"
+
+[project.scripts]
+sparql-file = "sparql_file.cli:app"
+
+[project.urls]
+homepage = "https://github.com/AKSW/sparql-file"
+"Bug Tracker" = "https://github.com/AKSW/sparql-file/issues"
+repository = "https://github.com/AKSW/sparql-file.git"
