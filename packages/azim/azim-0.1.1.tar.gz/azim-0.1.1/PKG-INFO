@@ -1,0 +1,46 @@
+Metadata-Version: 2.3
+Name: azim
+Version: 0.1.1
+Summary: Python IM(Instant Messaging) Chat Libs
+Keywords: im,chat,libs,sdk,lark,telegram,discord,slack
+Author: hhglory
+Author-email: hhglory <hhglory@outlook.com>
+Requires-Dist: lark-oapi>=1.4.22
+Requires-Dist: loguru>=0.7.3
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
+# azim
+
+## Install
+
+```ruby
+pip install azim
+
+# or 
+uv add azim
+```
+
+## IM Services
+
+### Open Source IM Services
+
+- ✅ [Mattermost](https://github.com/mattermost/mattermost-server)
+- ✅ [Matrix](https://github.com/matrix-org/matrix-synapse)
+- ✅ [RocketChat](https://github.com/RocketChat/Rocket.Chat)
+- ✅ [Zulip](https://github.com/zulip/zulip)
+
+### 🇺🇸 EN IM Services
+
+- ✅ [Telegram](https://telegram.org/)
+- ✅ [Discord](https://discord.com/)
+- ✅ [Slack](https://slack.com/)
+- ✅ [Signal](https://signal.org/)
+- ✅ [WhatsApp](https://www.whatsapp.com/)
+- ✅ [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+
+### 🇨🇳 CN IM Services
+
+- ✅ 飞书/Lark
+- ✅ 企业微信
+- ✅ 钉钉
