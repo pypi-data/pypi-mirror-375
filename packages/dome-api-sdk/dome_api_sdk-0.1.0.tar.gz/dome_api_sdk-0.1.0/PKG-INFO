@@ -1,0 +1,162 @@
+Metadata-Version: 2.4
+Name: dome-api-sdk
+Version: 0.1.0
+Summary: The Dome SDK - A comprehensive Python SDK for Dome API
+Project-URL: Homepage, https://www.domeapi.io/
+Project-URL: Documentation, https://docs.domeapi.io/
+Author-email: Kurush Dubash <kurush@domeapi.io>, Kunal Roy <kunal@domeapi.io>
+License: MIT License
+        
+        Copyright (c) 2025 Dome
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: api,client,dome,prediction markets,python,sdk
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Typing :: Typed
+Requires-Python: >=3.8
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: typing-extensions>=4.5.0; python_version < '3.10'
+Provides-Extra: dev
+Requires-Dist: black>=23.0; extra == 'dev'
+Requires-Dist: build>=0.10; extra == 'dev'
+Requires-Dist: flake8>=6.0; extra == 'dev'
+Requires-Dist: isort>=5.12; extra == 'dev'
+Requires-Dist: mypy>=1.0; extra == 'dev'
+Requires-Dist: pre-commit>=3.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0; extra == 'dev'
+Requires-Dist: pytest-httpx>=0.21.0; extra == 'dev'
+Requires-Dist: pytest>=7.0; extra == 'dev'
+Requires-Dist: twine>=4.0; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: mkdocs-material>=9.0; extra == 'docs'
+Requires-Dist: mkdocs>=1.4; extra == 'docs'
+Requires-Dist: mkdocstrings[python]>=0.20; extra == 'docs'
+Provides-Extra: test
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'test'
+Requires-Dist: pytest-cov>=4.0; extra == 'test'
+Requires-Dist: pytest-httpx>=0.21.0; extra == 'test'
+Requires-Dist: pytest>=7.0; extra == 'test'
+Description-Content-Type: text/markdown
+
+# Dome Python SDK
+
+[![PyPI version](https://badge.fury.io/py/dome-api-sdk.svg)](https://badge.fury.io/py/dome-api-sdk)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Type checked: mypy](https://img.shields.io/badge/type%20checked-mypy-blue.svg)](https://mypy.readthedocs.io/)
+
+A comprehensive, type-safe, async-first Python SDK for [Dome API](https://www.domeapi.io/).
+
+
+## Installation
+
+```bash
+# Using pip
+pip install dome-api-sdk
+
+# Using poetry  
+poetry add dome-api-sdk
+
+# Using pipenv
+pipenv install dome-api-sdk
+```
+
+
+### Configuration
+
+The SDK accepts the following configuration options:
+
+```python
+from dome_api_sdk import DomeClient
+
+config = {
+    "api_key": "your-api-key",           # Authentication token
+}
+
+client = DomeClient(config)
+```
+
+### Environment Variables
+
+You can also configure the SDK using environment variables:
+
+```bash
+export DOME_API_KEY="your-api-key"
+```
+
+```python
+from dome_api_sdk import DomeClient
+
+# Will automatically use DOME_API_KEY from environment
+client = DomeClient()
+```
+
+### Async Usage
+
+```python
+import asyncio
+from dome_api_sdk import DomeClient
+
+async def example():
+    async with DomeClient({"api_key": "your-api-key"}) as dome:
+        # Use the client
+        health = await dome.health_check()
+        return health
+
+result = asyncio.run(example())
+```
+
+This ensures proper cleanup of HTTP connections.
+
+
+## Development
+
+### Setting up the Development Environment
+
+1. Clone the repository:
+```bash
+git clone https://github.com/dome/dome-sdk-py.git
+cd dome-sdk-py
+```
+
+2. Install development dependencies:
+```bash
+make dev-setup
+```
+
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Authors
+
+- **Kurush Dubash** - [kurush@dome.com](mailto:kurush@dome.com)
+- **Kunal Roy** - [kunal@dome.com](mailto:kunal@dome.com)
