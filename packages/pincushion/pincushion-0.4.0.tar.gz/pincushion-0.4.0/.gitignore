@@ -1,0 +1,11 @@
+*.log
+uv.lock
+.DS_Store
+*__pycache__
+archives
+dist
+2025-summer-institute
+archive-collection/
+archive-user/
+cookies.txt
+build.sh
