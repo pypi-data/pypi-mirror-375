@@ -1,0 +1,21 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+phenofect/ChillDay.py
+phenofect/Preprocessing.py
+phenofect/Variables.py
+phenofect/__init__.py
+phenofect.egg-info/PKG-INFO
+phenofect.egg-info/SOURCES.txt
+phenofect.egg-info/dependency_links.txt
+phenofect.egg-info/requires.txt
+phenofect.egg-info/top_level.txt
+phenofect/Data/OBS_phenology_data (autumn).csv
+phenofect/Data/OBS_phenology_data.csv
+phenofect/Data/azalea_phenology_data.csv
+phenofect/Data/cherry_phenology_data.csv
+phenofect/Data/daily_meteorological_data.csv
+phenofect/Data/daylen_temperature_data.csv
+phenofect/Data/forsythia_phenology_data.csv
+phenofect/Data/monthly_meteorological_data.csv
