@@ -1,0 +1,23 @@
+Metadata-Version: 2.3
+Name: flix-cli
+Version: 1.6.5
+Summary: A high efficient, powerful and fast movie scraper.
+License: GPLv3
+Author: DemonKingSwarn
+Author-email: rockingswarn@gmail.com
+Requires-Python: >=3.10,<4.0
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: beautifulsoup4 (==4.10.0)
+Requires-Dist: colorama (==0.4.5)
+Requires-Dist: httpx (==0.28.1)
+Requires-Dist: krfzf-py (==0.0.4)
+Requires-Dist: pycryptodomex (==3.14.1)
+Requires-Dist: regex (==2025.9.1)
+Description-Content-Type: text/plain
+
+
