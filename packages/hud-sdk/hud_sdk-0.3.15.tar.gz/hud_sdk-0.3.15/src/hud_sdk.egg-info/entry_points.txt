@@ -1,0 +1,2 @@
+[console_scripts]
+hud-run = hud_sdk.entrypoint:main
