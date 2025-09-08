@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: zstd-asgi
+Version: 0.3
+Summary: Zstd compression ASGI middleware
+Home-page: https://github.com/tuffnatty/zstd-asgi
+Author: Phil Krylov
+Author-email: phil@krylov.eu
+License: MIT
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+License-File: LICENSE.md
+Requires-Dist: starlette>=0.22.0
+Requires-Dist: zstandard>=0.22.0
+
+A compression ASGI middleware using zstd.
+
+Built using starlette under the hood, it can be used as a drop in replacement
+to GZipMiddleware for Starlette or FastAPI, if you have a client that supports
+it.
