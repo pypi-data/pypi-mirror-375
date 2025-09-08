@@ -1,0 +1,4 @@
+jsonschema
+python-keycloak<4,>=3.9.1
+requests<3,>=2.25
+urllib3<3,>=1.26
