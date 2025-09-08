@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/panda_math/__init__.py
+src/panda_math/matrix.py
+src/panda_math/vector.py
+src/panda_math.egg-info/PKG-INFO
+src/panda_math.egg-info/SOURCES.txt
+src/panda_math.egg-info/dependency_links.txt
+src/panda_math.egg-info/requires.txt
+src/panda_math.egg-info/top_level.txt
