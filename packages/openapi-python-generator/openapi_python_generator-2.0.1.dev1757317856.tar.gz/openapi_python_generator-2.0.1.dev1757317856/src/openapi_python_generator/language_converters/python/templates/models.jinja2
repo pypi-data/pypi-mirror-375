@@ -1,0 +1,24 @@
+from typing import *
+from pydantic import BaseModel, Field
+{%  for property in properties %}
+{% if property.type.import_types is not none %}
+{% for import_type in property.type.import_types %}
+{{ import_type }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+class {{ schema_name }}(BaseModel):
+    """
+    {% if schema.title %}{{ schema.title }}{% else %}{{ schema_name }}{% endif %} model
+    {% if schema.description %}
+    {{ schema.description }}
+    {% endif %}
+    {% if parent_comment %}
+    {{ parent_comment }}
+    {% endif %}
+    """
+    {% for property in properties %}
+
+    {{ property.name | replace("@","") | replace("-","_") }} : {{ property.type.converted_type | safe }} = Field(alias="{{ property.name }}" {% if not property.required %}, default = {{ property.default }} {% endif %})
+    {% endfor %}
