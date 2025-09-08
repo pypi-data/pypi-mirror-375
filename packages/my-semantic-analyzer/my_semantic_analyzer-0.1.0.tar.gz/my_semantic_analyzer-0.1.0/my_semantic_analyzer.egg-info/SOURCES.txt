@@ -1,0 +1,11 @@
+LICENSE.txt
+README.md
+pyproject.toml
+setup.py
+my_semantic_analyzer/__init__.py
+my_semantic_analyzer/semantic_analyzer.py
+my_semantic_analyzer.egg-info/PKG-INFO
+my_semantic_analyzer.egg-info/SOURCES.txt
+my_semantic_analyzer.egg-info/dependency_links.txt
+my_semantic_analyzer.egg-info/top_level.txt
+tests/test_analyzer.py
