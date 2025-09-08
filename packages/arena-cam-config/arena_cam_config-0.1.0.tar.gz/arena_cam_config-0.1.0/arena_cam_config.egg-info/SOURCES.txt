@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+requirements.txt
+setup.py
+arena_cam_config/__init__.py
+arena_cam_config/main.py
+arena_cam_config.egg-info/PKG-INFO
+arena_cam_config.egg-info/SOURCES.txt
+arena_cam_config.egg-info/dependency_links.txt
+arena_cam_config.egg-info/entry_points.txt
+arena_cam_config.egg-info/requires.txt
+arena_cam_config.egg-info/top_level.txt
