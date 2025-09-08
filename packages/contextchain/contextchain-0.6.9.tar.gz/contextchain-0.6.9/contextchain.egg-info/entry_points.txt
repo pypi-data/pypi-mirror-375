@@ -1,0 +1,2 @@
+[console_scripts]
+contextchain = contextchain.cli.test_main:cli
