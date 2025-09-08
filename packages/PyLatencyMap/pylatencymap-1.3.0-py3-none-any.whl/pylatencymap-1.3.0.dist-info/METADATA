@@ -1,0 +1,500 @@
+Metadata-Version: 2.4
+Name: PyLatencyMap
+Version: 1.3.0
+Summary: CLI heat maps for latency histograms (frequency & intensity) — single-file tool
+Author-email: Luca Canali <Luca.Canali@cern.ch>
+License:                                  Apache License
+                                   Version 2.0, January 2004
+                                http://www.apache.org/licenses/
+        
+           TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+        
+           1. Definitions.
+        
+              "License" shall mean the terms and conditions for use, reproduction,
+              and distribution as defined by Sections 1 through 9 of this document.
+        
+              "Licensor" shall mean the copyright owner or entity authorized by
+              the copyright owner that is granting the License.
+        
+              "Legal Entity" shall mean the union of the acting entity and all
+              other entities that control, are controlled by, or are under common
+              control with that entity. For the purposes of this definition,
+              "control" means (i) the power, direct or indirect, to cause the
+              direction or management of such entity, whether by contract or
+              otherwise, or (ii) ownership of fifty percent (50%) or more of the
+              outstanding shares, or (iii) beneficial ownership of such entity.
+        
+              "You" (or "Your") shall mean an individual or Legal Entity
+              exercising permissions granted by this License.
+        
+              "Source" form shall mean the preferred form for making modifications,
+              including but not limited to software source code, documentation
+              source, and configuration files.
+        
+              "Object" form shall mean any form resulting from mechanical
+              transformation or translation of a Source form, including but
+              not limited to compiled object code, generated documentation,
+              and conversions to other media types.
+        
+              "Work" shall mean the work of authorship, whether in Source or
+              Object form, made available under the License, as indicated by a
+              copyright notice that is included in or attached to the work
+              (an example is provided in the Appendix below).
+        
+              "Derivative Works" shall mean any work, whether in Source or Object
+              form, that is based on (or derived from) the Work and for which the
+              editorial revisions, annotations, elaborations, or other modifications
+              represent, as a whole, an original work of authorship. For the purposes
+              of this License, Derivative Works shall not include works that remain
+              separable from, or merely link (or bind by name) to the interfaces of,
+              the Work and Derivative Works thereof.
+        
+              "Contribution" shall mean any work of authorship, including
+              the original version of the Work and any modifications or additions
+              to that Work or Derivative Works thereof, that is intentionally
+              submitted to Licensor for inclusion in the Work by the copyright owner
+              or by an individual or Legal Entity authorized to submit on behalf of
+              the copyright owner. For the purposes of this definition, "submitted"
+              means any form of electronic, verbal, or written communication sent
+              to the Licensor or its representatives, including but not limited to
+              communication on electronic mailing lists, source code control systems,
+              and issue tracking systems that are managed by, or on behalf of, the
+              Licensor for the purpose of discussing and improving the Work, but
+              excluding communication that is conspicuously marked or otherwise
+              designated in writing by the copyright owner as "Not a Contribution."
+        
+              "Contributor" shall mean Licensor and any individual or Legal Entity
+              on behalf of whom a Contribution has been received by Licensor and
+              subsequently incorporated within the Work.
+        
+           2. Grant of Copyright License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              copyright license to reproduce, prepare Derivative Works of,
+              publicly display, publicly perform, sublicense, and distribute the
+              Work and such Derivative Works in Source or Object form.
+        
+           3. Grant of Patent License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              (except as stated in this section) patent license to make, have made,
+              use, offer to sell, sell, import, and otherwise transfer the Work,
+              where such license applies only to those patent claims licensable
+              by such Contributor that are necessarily infringed by their
+              Contribution(s) alone or by combination of their Contribution(s)
+              with the Work to which such Contribution(s) was submitted. If You
+              institute patent litigation against any entity (including a
+              cross-claim or counterclaim in a lawsuit) alleging that the Work
+              or a Contribution incorporated within the Work constitutes direct
+              or contributory patent infringement, then any patent licenses
+              granted to You under this License for that Work shall terminate
+              as of the date such litigation is filed.
+        
+           4. Redistribution. You may reproduce and distribute copies of the
+              Work or Derivative Works thereof in any medium, with or without
+              modifications, and in Source or Object form, provided that You
+              meet the following conditions:
+        
+              (a) You must give any other recipients of the Work or
+                  Derivative Works a copy of this License; and
+        
+              (b) You must cause any modified files to carry prominent notices
+                  stating that You changed the files; and
+        
+              (c) You must retain, in the Source form of any Derivative Works
+                  that You distribute, all copyright, patent, trademark, and
+                  attribution notices from the Source form of the Work,
+                  excluding those notices that do not pertain to any part of
+                  the Derivative Works; and
+        
+              (d) If the Work includes a "NOTICE" text file as part of its
+                  distribution, then any Derivative Works that You distribute must
+                  include a readable copy of the attribution notices contained
+                  within such NOTICE file, excluding those notices that do not
+                  pertain to any part of the Derivative Works, in at least one
+                  of the following places: within a NOTICE text file distributed
+                  as part of the Derivative Works; within the Source form or
+                  documentation, if provided along with the Derivative Works; or,
+                  within a display generated by the Derivative Works, if and
+                  wherever such third-party notices normally appear. The contents
+                  of the NOTICE file are for informational purposes only and
+                  do not modify the License. You may add Your own attribution
+                  notices within Derivative Works that You distribute, alongside
+                  or as an addendum to the NOTICE text from the Work, provided
+                  that such additional attribution notices cannot be construed
+                  as modifying the License.
+        
+              You may add Your own copyright statement to Your modifications and
+              may provide additional or different license terms and conditions
+              for use, reproduction, or distribution of Your modifications, or
+              for any such Derivative Works as a whole, provided Your use,
+              reproduction, and distribution of the Work otherwise complies with
+              the conditions stated in this License.
+        
+           5. Submission of Contributions. Unless You explicitly state otherwise,
+              any Contribution intentionally submitted for inclusion in the Work
+              by You to the Licensor shall be under the terms and conditions of
+              this License, without any additional terms or conditions.
+              Notwithstanding the above, nothing herein shall supersede or modify
+              the terms of any separate license agreement you may have executed
+              with Licensor regarding such Contributions.
+        
+           6. Trademarks. This License does not grant permission to use the trade
+              names, trademarks, service marks, or product names of the Licensor,
+              except as required for reasonable and customary use in describing the
+              origin of the Work and reproducing the content of the NOTICE file.
+        
+           7. Disclaimer of Warranty. Unless required by applicable law or
+              agreed to in writing, Licensor provides the Work (and each
+              Contributor provides its Contributions) on an "AS IS" BASIS,
+              WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+              implied, including, without limitation, any warranties or conditions
+              of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+              PARTICULAR PURPOSE. You are solely responsible for determining the
+              appropriateness of using or redistributing the Work and assume any
+              risks associated with Your exercise of permissions under this License.
+        
+           8. Limitation of Liability. In no event and under no legal theory,
+              whether in tort (including negligence), contract, or otherwise,
+              unless required by applicable law (such as deliberate and grossly
+              negligent acts) or agreed to in writing, shall any Contributor be
+              liable to You for damages, including any direct, indirect, special,
+              incidental, or consequential damages of any character arising as a
+              result of this License or out of the use or inability to use the
+              Work (including but not limited to damages for loss of goodwill,
+              work stoppage, computer failure or malfunction, or any and all
+              other commercial damages or losses), even if such Contributor
+              has been advised of the possibility of such damages.
+        
+           9. Accepting Warranty or Additional Liability. While redistributing
+              the Work or Derivative Works thereof, You may choose to offer,
+              and charge a fee for, acceptance of support, warranty, indemnity,
+              or other liability obligations and/or rights consistent with this
+              License. However, in accepting such obligations, You may act only
+              on Your own behalf and on Your sole responsibility, not on behalf
+              of any other Contributor, and only if You agree to indemnify,
+              defend, and hold each Contributor harmless for any liability
+              incurred by, or claims asserted against, such Contributor by reason
+              of your accepting any such warranty or additional liability.
+        
+           END OF TERMS AND CONDITIONS
+        
+           APPENDIX: How to apply the Apache License to your work.
+        
+              To apply the Apache License to your work, attach the following
+              boilerplate notice, with the fields enclosed by brackets "{}"
+              replaced with your own identifying information. (Don't include
+              the brackets!)  The text should be enclosed in the appropriate
+              comment syntax for the file format. We also recommend that a
+              file or class name and description of purpose be included on the
+              same "printed page" as the copyright notice for easier
+              identification within third-party archives.
+        
+           Copyright {yyyy} {name of copyright owner}
+        
+           Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at
+        
+               http://www.apache.org/licenses/LICENSE-2.0
+        
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.
+        
+        
+Project-URL: Homepage, https://github.com/LucaCanali/PyLatencyMap
+Project-URL: Repository, https://github.com/LucaCanali/PyLatencyMap
+Project-URL: Issues, https://github.com/LucaCanali/PyLatencyMap/issues
+Project-URL: Changelog, https://github.com/LucaCanali/PyLatencyMap/releases
+Keywords: latency,heatmap,cli,performance,histogram
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Operating System :: OS Independent
+Classifier: Environment :: Console
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: System :: Monitoring
+Classifier: Topic :: Terminals
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# PyLatencyMap — Latency Heat Maps Visualizer
+
+**PyLatencyMap** is a terminal-based visualizer for **latency histograms**.  
+It’s intended to help with performance tuning and troubleshooting.
+
+It renders two scrolling heat maps—**Frequency** and **Intensity**—so you can see how latency distributions evolve over time.  
+Works from the command line and plays nicely with sources that output latency histograms (Oracle wait histograms,
+BPF/bcc, DTrace, SystemTap, tracefiles, etc.).
+
+---
+
+## 📦 Installation
+
+From PyPI:
+
+```bash
+pip install PyLatencyMap
+```
+
+Check it’s on PATH (one of):
+
+```bash
+latencymap --help
+# or
+python -m LatencyMap --help
+```
+
+### Alternative: clone the project
+
+```bash
+git clone https://github.com/LucaCanali/PyLatencyMap
+cd PyLatencyMap
+python LatencyMap.py --help
+```
+
+> Requires **Python 3.x** and a terminal that supports **ANSI colors**.
+
+---
+
+## 🚀 Quick Start
+Try PyLatencyMap with sample data
+
+Sample data is provided in `SampleData/`. For a quick visualization:
+
+```bash
+pip install PyLatencyMap
+cat SampleData/example_latency_data.txt | latencymap
+```
+
+Optionally slow down playback:
+
+```bash
+cat SampleData/example_latency_data.txt | latencymap --screen_delay=0.2
+```
+
+---
+
+## 📚 Examples
+
+The following assume the visualizer is installed `pip install PyLatencyMap` and available as
+`latencymap` (or as `python -m LatencyMap`).
+
+### Oracle RDBMS investigations with wait histograms (microsecond buckets)
+
+```bash
+# Oracle troubleshooting, measure I/O random reads and sample every 3 seconds
+sqlplus -S system/manager@mydb \
+  @Event_histograms_oracle/ora_latency_micro.sql "db file sequential read" 3 \
+| latencymap
+
+# Oracle troubleshooting, measure commit time
+sqlplus -S / as sysdba \
+  @Event_histograms_oracle/ora_latency_micro.sql "log file sync" 3 \
+| latencymap
+```
+
+### Linux tro BPF/bcc (Linux)
+
+```bash
+# Requires bcc installed and sudo privileges
+sudo bash
+dnf install bcc*
+
+python -u BPF-bcc/pylatencymap-biolatency.py -QT 3 100|python LatencyMap.py
+```
+
+### Oracle 10046 trace (microsecond buckets)
+
+```bash
+# Parse 10046 trace, filter for "db file sequential read" waits
+cat SampleData/test_10046_tracefile.trc|python 10046_trace_oracle/10046_connector.py |python LatencyMap.py
+```
+
+### SystemTap (Linux block I/O)
+
+```bash
+# Requires compatible kernel, debuginfo, and stap privileges
+# Install SystemTap and prepare the system on Fedora/RHEL:
+sudo bash
+dnf install -y systemtap systemtap-runtime
+stap-prep
+
+stap -v SystemTap/blockio_rq_issue_pylatencymap.stp 3 | python LatencyMap.py
+
+# Example with recorded data
+cat SampleData/test_SystemTap_data.txt|python SystemTap/systemtap_connector.py|python LatencyMap.py
+```
+
+### DTrace (Solaris/Illumos, macOS)
+```bash
+# example with a DTrace script measuring pread latency
+dtrace -s DTrace/pread_latency.d |python DTrace/dtrace_connector.py |python LatencyMap.py
+```
+
+> PyLatencyMap is **pipe-friendly**: a data source emits records, you may pass them through an optional connector to adapt the format, and finally pipe to the visualizer:
+
+```bash
+data_source | [optional_connector] | latencymap [options]
+# or
+data_source | [optional_connector] | python -m LatencyMap [options]
+```
+---
+
+## 🧠 Why two heat maps?
+
+Rendering latency **histograms over time** is a 3D problem (latency × time × magnitude). Heat maps make it tractable—but you need **two projections**:
+
+1) **Frequency heat map** — *How often* events land in each bucket (events/sec).
+2) **Intensity heat map** — *How much time* those events consume (ms/sec or unit/sec).
+
+A system might show a bright band < 1 ms in **Frequency** (most ops are fast) while a thin, hotter band around 8–20 ms in **Intensity** reveals a tail that dominates end-to-end time. Both views matter.
+
+---
+
+## 📥 Input Format (record-oriented)
+
+PyLatencyMap reads **tagged records** from `stdin`. Each record is delimited by `<begin record>` / `<end record>` and contains metadata plus **cumulative counts per bucket** (the tool computes deltas between records).
+
+```
+<begin record>
+timestamp,microsec,<epoch_usecs>,<human_readable_ts>
+latencyunit,<millisec|microsec|nanosec>
+label,<free text>
+datasource,<|bpf|systemtap|dtrace|oracle>
+<power_of_two_value>,<cumulative_count>
+<power_of_two_value>,<cumulative_count>
+...
+<end record>
+```
+
+**Conventions**
+
+- `latencyunit` declares the unit used by **bucket values**; the Y-axis labels are always shown in **milliseconds**.
+- Buckets must be **powers of two** (e.g., `1, 2, 4, 8, …, 2^N` in the declared unit).
+- Counts are **cumulative** within each bucket; PyLatencyMap computes per-interval deltas → rates.
+- `datasource` influences how **Intensity** is approximated from counts:
+    - `oracle`: ~ `0.75 * bucket_value * waits`
+    - `bpf  / systemtap` / `dtrace`: ~ `1.5 * bucket_value * waits`
+- See `SampleData/example_latency_data.txt` for a concrete example.
+
+---
+
+## 🔧 Command-line Options
+
+```text
+--num_records=INT       Number of time intervals (columns). Default: 90
+--min_bucket=INT        Lower bucket exponent (log2). -1 = autotune (default)
+--max_bucket=INT        Upper bucket exponent (log2). 64 = autotune (default)
+--frequency_maxval=F    Fix the color scale max for frequency; -1 = auto (default)
+--intensity_maxval=F    Fix the color scale max for intensity; -1 = auto (default)
+--screen_delay=FLOAT    Delay (s) between screens; useful for replays. Default: 0.1
+--debug_level=INT       0..5 (verbosity/diagnostics). Default: 0
+```
+
+**Notes**
+
+- Bucket “exponents” are base-2 exponents of the bucket’s upper bound in the **declared unit** (see Input Format).
+- With `microsec` inputs (common), autotune sets `min_bucket = 7` (i.e., **128 µs**) and a compact vertical range.
+- Fixing `*_maxval` is useful to make colors comparable across runs.
+
+---
+
+## 🧭 Reading the Canvas
+
+- **Axes**
+    - **X** = time, **newest at the right** (the chart fills on the right edge and scrolls left).
+    - **Y** = latency buckets in **milliseconds**:
+        - sub-ms rows: `.512, .256, …`; bottom row is `<.128`
+        - ≥ 1 ms rows: `1, 2, 4, 8, …` (no leading dot)
+- **Top map** (**Frequency**) = events/sec per bucket.
+- **Bottom map** (**Intensity**) = time waited per sec (shown as `(<unit>/sec)`; labels are still in **ms**).
+
+**Patterns to watch**
+
+- **Two stable bands** → bimodal storage (e.g., cache vs. disk)
+- **Thin hot streak at high ms** → tail outliers dominate; check saturation/retries/throttling
+- **Upward drift in both maps** → generalized contention; correlate with system/DB metrics
+
+---
+
+## 🧪 Record & Replay
+
+PyLatencyMap works live, but you can also record input to a file and replay it later (slower, with `--screen_delay`).
+You can record a live feed to a file using Linux's `tee` for later analysis or playback:
+
+```bash
+# Record
+data_source | tee /tmp/latency_feed.txt | optional_connector | latencymap
+
+# Replay later (slower)
+cat /tmp/latency_feed.txt | optional_connector | latencymap --screen_delay=0.2
+```
+
+---
+
+## 🛠️ Tips & Troubleshooting
+
+- **Empty or all-white map**: ensure your data stream contains *changing* cumulative counts and valid `<begin/end record>` tags.
+- **Units look off**: confirm `latencyunit` is correct (`millisec|microsec|nanosec`).
+- **Too few/too many rows**: override bucket range with `--min_bucket` / `--max_bucket`.
+- **Colors don’t show**: use a terminal with ANSI color support; avoid piping through pagers that strip escapes.
+- **Normalization across runs**: pin the color scales with `--frequency_maxval` and `--intensity_maxval`.
+
+---
+
+## 📂 Repository Layout (if you cloned)
+
+```
+LatencyMap.py            # Main visualizer (this tool)
+SampleData/              # Example recorded inputs
+SystemTap/, BPF-bcc/, DTrace/
+Event_histograms_oracle/, AWR_oracle/, 10046_trace_oracle/
+NetApp_Cmode/
+Example*.sh              # Turnkey scripts per source
+tnsnames.ora             # Helper for Oracle examples
+pyproject.toml           # Packaging metadata
+LICENSE                  # Project license
+dist/                    # Built artifacts (when present)
+```
+
+---
+
+## 📌 Versions
+
+- **v1.3.0** (September 2025) — Minor refactor and testing with Python, BPF, and Oracle versions
+- **v1.2.x** (2014–2016) — stability updates and examples expansion
+- **v1.0** (September 2013) — initial release
+
+---
+
+## 👤 Author & Contact
+
+**Luca Canali** — CERN  
+📧 Luca.Canali@cern.ch  
+🌐 https://cern.ch/canali
+
+---
+
+## 📖 References
+
+- Blog posts:
+    - http://externaltable.blogspot.com/2013/08/pylatencymap-performance-tool-to-drill.html
+    - http://externaltable.blogspot.com/2013/09/getting-started-with-pylatencymap.html
+    - http://externaltable.blogspot.com/2015/03/heat-map-visualization-for-systemtap.html
+    - http://externaltable.blogspot.com/2015/07/heat-map-visualization-of-latency.html
+- Related project: **OraLatencyMap** — https://github.com/LucaCanali/OraLatencyMap
+- Inspiration: Brendan Gregg, *Visualizing System Latency* and heat-map tooling
+
+---
+
+## 📄 License
+
+See **LICENSE** in the repository.
