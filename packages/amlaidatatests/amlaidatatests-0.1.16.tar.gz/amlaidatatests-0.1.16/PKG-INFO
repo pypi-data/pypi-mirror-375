@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: amlaidatatests
+Version: 0.1.16
+Summary: Data tests for Google AML AI
+Home-page: https://amlaidatatests.readthedocs.io/en/latest/
+Author: Matthew Shipton
+Author-email: matthew.shipton@groundtruthai.net
+License: Apache-2.0
+Project-URL: Documentation, https://amlaidatatests.readthedocs.io/en/latest/
+Project-URL: Source, https://github.com/ground-truth-ai/amlaidatatests/
+Project-URL: Tracker, https://github.com/ground-truth-ai/amlaidatatests/issues
+Project-URL: Download, https://pypi.org/project/amlaidatatests/#files
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown; charset=UTF-8
+License-File: LICENSE.md
+Requires-Dist: ibis-framework[bigquery]<10,>=9.2
+Requires-Dist: importlib-metadata; python_version < "3.10"
+Requires-Dist: pytest
+Requires-Dist: omegaconf
+Requires-Dist: pytz
+Requires-Dist: simple_parsing
+Provides-Extra: duckdb
+Requires-Dist: ibis-framework[duckdb]>=9.2; extra == "duckdb"
+Provides-Extra: testing
+Requires-Dist: setuptools; extra == "testing"
+Requires-Dist: pytest; extra == "testing"
+Dynamic: license
+Dynamic: license-file
+
+### AMLAIDatatests
+
+User guide and documentation for amlaidatatests are located at https://amlaidatatests.readthedocs.io/en/latest/.
+
+To build the docs:
+1. `sphinx-autobuild docs docs/_build/html`
+
+#### Issues
+
+Please raise any issues with amlaidatatests at on [github](https://github.com/ground-truth-ai/amlaidatatests/issues).

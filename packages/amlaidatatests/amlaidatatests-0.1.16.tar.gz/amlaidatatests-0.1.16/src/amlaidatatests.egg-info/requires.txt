@@ -1,0 +1,15 @@
+ibis-framework[bigquery]<10,>=9.2
+pytest
+omegaconf
+pytz
+simple_parsing
+
+[:python_version < "3.10"]
+importlib-metadata
+
+[duckdb]
+ibis-framework[duckdb]>=9.2
+
+[testing]
+setuptools
+pytest
