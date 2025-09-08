@@ -1,0 +1,46 @@
+Metadata-Version: 2.3
+Name: azcex
+Version: 0.1.0
+Summary: Add your description here
+Keywords: python cex libs,cex,Python Centralized Crypto Exchange Libs
+Author: hhglory
+Author-email: hhglory <hhglory@outlook.com>
+Requires-Dist: loguru>=0.7.3
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
+# azcex
+
+- CEX = Centralized Crypto Exchange(中心化数字货币交易所)
+
+## Install
+
+```bash
+pip install azcex
+
+# or
+uv add azcex
+```
+
+## Exchanges
+
+> cn 🇨🇳
+
+- ✅ [Binance](https://www.binance.com/)
+- ❎ [OKX](https://www.okx.com/)
+- ❎ [Bitget](https://www.bitget.com/)
+- ❎ [Bybit](https://www.bybit.com/)
+- ❎ [Huobi](https://www.huobi.com/)
+- ❎ [Gate.io](https://www.gate.io/)
+
+> us 🇺🇸
+
+- ❎ [Coinbase](https://www.coinbase.com/)
+- ❎ [Bitfinex](https://www.bitfinex.com/)
+- ❎ [Kraken](https://www.kraken.com/)
+- ❎ [Gemini](https://www.gemini.com/)
+- ❎ [Bitstamp](https://www.bitstamp.net/)
+- ✅ [Poloniex](https://www.poloniex.com/)
+- ✅ [BitMEX](https://www.bitmex.com/)
+- ✅ [FTX](https://ftx.com/)
+- ✅ [KuCoin](https://www.kucoin.com/)
