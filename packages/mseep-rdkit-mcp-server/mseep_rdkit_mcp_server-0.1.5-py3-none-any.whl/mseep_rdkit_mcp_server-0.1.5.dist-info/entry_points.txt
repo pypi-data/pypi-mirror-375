@@ -1,0 +1,2 @@
+[console_scripts]
+rdkit-mcp-server = rdkit_mcp_server.__main__:main
