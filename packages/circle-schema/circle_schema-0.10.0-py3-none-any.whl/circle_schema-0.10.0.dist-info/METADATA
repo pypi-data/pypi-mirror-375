@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: circle-schema
+Version: 0.10.0
+Summary: Python bindings for circle schema for project ONE
+Home-page: https://github.com/Samsung/ONE
+Author: nnfw
+Author-email: nnfw@samsung.com
+Keywords: Samsung,ONE,AI,AI framework,circle
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: flatbuffers>=1.11
+Requires-Dist: numpy
+
+# circle-schema
+
+circle-schema package enables reading and writing circle files in python.
