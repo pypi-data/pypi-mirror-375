@@ -1,0 +1,73 @@
+### shell-lib
+
+`shell-lib` module is designed to simplify writing Shell-like scripts.
+
+1. Avoid using the complex Shell syntax, use Python syntax for readability.
+
+2. Use Python's exception mechanism to avoid Shell's tedious error checking.
+
+3. Encapsulate common file system operations, and provide commonly used parameters such as whether to overwrite. These functions are distributed in different modules in Python stdlib.
+
+4. Lightweight, only use Python stdlib.
+
+### Usage
+
+```python
+    #!/usr/bin/python3
+    from shell_lib import sh
+
+    # `with sh:` effect: When there is an uncaught exception,
+    # exit the *entire program* and return an non-zero exit code.
+    # If .run() method fails, return the error exit code from it.
+    #
+    # If you don't want to exit the *entire program*, don't use
+    # `with sh:` and handle exceptions yourself.
+    FILE = "hello.txt"
+    with sh:
+        path = sh.path("my_project")
+        sh.create_dir(path)
+        # `with sh.cd(path):` will return to the previous working directory.
+        # If you don't want to return, don't use the 'with' statement.
+        with sh.cd(path):
+            sh.run(f"echo 'Hello, World!' > {FILE}")
+            print(sh.get_file_info(FILE).size)
+        sh.remove_dir(path)
+```
+
+### API
+
+```python
+    # File and Directory Operations
+    sh.home_dir() -> Path
+    sh.path(path: Union[str, Path]) -> Path
+
+    sh.create_dir(path: Union[str, Path], *, exist_ok: bool = False) -> None
+    sh.remove_dir(path: Union[str, Path], *, ignore_missing: bool = False) -> None
+    sh.remove_file(path: Union[str, Path], *, ignore_missing: bool = False) -> None
+    sh.copy_file(src: Union[str, Path], dst: Union[str, Path], *, overwrite: bool = False) -> None
+    sh.copy_dir(src: Union[str, Path], dst: Union[str, Path], *, overwrite: bool = False) -> None
+    sh.move_file(src: Union[str, Path], dst: Union[str, Path], *, overwrite: bool = False) -> None
+    sh.move_dir(src: Union[str, Path], dst: Union[str, Path], *, overwrite: bool = False) -> None
+    sh.rename_file(src: Union[str, Path], dst: Union[str, Path]) -> None
+    sh.rename_dir(src: Union[str, Path], dst: Union[str, Path]) -> None
+
+    sh.list_dir(path: Union[str, Path]) -> List[str]
+    sh.walk_dir(top_dir: Union[str, Path]) -> Generator[Tuple[str, str]]
+    sh.cd(path: Union[str, Path, None])  # Supports 'with' statement for temporary directory change
+
+    sh.get_file_info(path: Union[str, Path]) -> FileSystemEntryInfo
+    sh.exists(path: Union[str, Path]) -> bool
+    sh.is_file(path: Union[str, Path]) -> bool
+    sh.is_dir(path: Union[str, Path]) -> bool
+    sh.get_path_parts(path: Union[str, Path]) -> Tuple[str, str]
+    sh.join_path(*parts: str) -> str
+
+    # Shell Command Execution
+    sh.run(command: str, *,
+        print_output: bool = True,
+        text: bool = True,
+        fail_on_error: bool = True) -> subprocess.CompletedProcess
+
+    # Script Control
+    sh.exit(exit_code: int = 0) -> None
+```
