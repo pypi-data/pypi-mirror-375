@@ -1,0 +1,170 @@
+[build-system]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pawnstack"
+description = "pawnstack: A modern Python library for Infrastructure as Code (IaC), offering tools for system monitoring, HTTP utilities, and more."
+license = { text = "MIT License" }
+keywords = ["Python IaC", "Infrastructure as Code", "system monitoring", "pawnstack tools"]
+requires-python = ">=3.9"
+authors = [
+    { name = "Jinwoo", email = "jinwoo@parametacorp.com" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    "certifi>=2023.7.22",
+    "charset-normalizer>=3.3.0",
+    "idna>=3.4",
+    "requests>=2.31.0",
+    "urllib3>=2.0.0",
+    "PyYAML>=6.0.1",
+    "parameterized>=0.9.0",
+    "rich>=13.0.0,<15.0.0",
+    "typer>=0.9.0,<1.0.0",
+    "pydantic>=2.0.0,<3.0.0",
+    "httpx>=0.25.0,<1.0.0",
+    "websocket-client>=1.6.0",
+    "tabulate>=0.9.0",
+    "aiohttp>=3.8.6",
+    "aiofiles>=23.0.0",
+    "python-dotenv>=1.0.0",
+    "tqdm>=4.66.0",
+    "psutil>=5.9.0",
+    "dnspython>=2.4.0",
+    "Jinja2>=3.1.0",
+    "pyfiglet>=1.0.0",
+    "aiometer>=0.3.0",
+]
+dynamic = ["readme", "version"]
+
+[project.optional-dependencies]
+blockchain = [
+    "eth-keyfile>=0.7.0,<1.0.0",
+    "coincurve>=18.0.0,<19.0.0",
+    "secp256k1>=0.14.0,<1.0.0",
+]
+
+cloud = [
+    "boto3>=1.34.0,<2.0.0",
+    "aioboto3>=11.0.0,<12.0.0",
+]
+
+docker = [
+    "aiodocker>=0.21.0,<1.0.0",
+]
+
+redis = [
+    "redis>=5.0.0,<6.0.0",
+    "aioredis>=2.0.0,<3.0.0",
+]
+
+database = [
+    "sqlalchemy>=2.0.0,<3.0.0",
+    "asyncpg>=0.29.0,<1.0.0",
+    "aiomysql>=0.2.0,<1.0.0",
+]
+
+messaging = [
+    "slack-sdk>=3.27.0,<4.0.0",
+    "discord.py>=2.3.0,<3.0.0",
+]
+
+monitoring = [
+    "prometheus-client>=0.19.0,<1.0.0",
+    "grafana-api>=1.0.0,<2.0.0",
+]
+
+performance = [
+    "uvloop>=0.19.0,<1.0.0; sys_platform != 'win32'",
+    "orjson>=3.9.0,<4.0.0",
+    "msgpack>=1.0.0,<2.0.0",
+]
+
+full = [
+    "pawnstack[blockchain,cloud,docker,redis,database,messaging,monitoring,performance]",
+]
+
+[project.scripts]
+pawns = "pawnstack.cli.main:main"
+
+[project.urls]
+Changelog = "https://github.com/JINWOO-J/pawnstack/blob/main/CHANGELOG.md"
+Documentation = "https://pawnstack.readthedocs.io"
+Homepage = "https://pawnstack.readthedocs.io"
+Source = "https://github.com/JINWOO-J/pawnstack"
+
+[tool.hatch.version]
+path = "pawnstack/__version__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/pawnstack",
+    "/README.md",
+    "/CHANGELOG.md",
+]
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = """
+
+## Release Information
+
+"""
+
+[tool.ruff]
+select = ["E", "F", "I", "B", "PIE"]
+ignore = ["B904", "B028"]
+line-length = 120
+
+[tool.ruff.isort]
+combine-as-imports = true
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+addopts = "-rxXs --strict-markers"
+filterwarnings = [
+    "error",
+]
+markers = [
+    "copied_from(source, changes=None): mark test as copied from somewhere else, along with a description of changes made to accommodate our test setup",
+    "network: marks tests which require network connection. Used in 3rd-party build environments that have network disabled."
+]
+
+[tool.coverage.run]
+omit = ["venv/*"]
+include = ["pawnstack/*", "tests/*"]
+
+[tool.pyright]
+include = ["pawnstack", "tests"]
+pythonPath = "."
+reportMissingImports = false

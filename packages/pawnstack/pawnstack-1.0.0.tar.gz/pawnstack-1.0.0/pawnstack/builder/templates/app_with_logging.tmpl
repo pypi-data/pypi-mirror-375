@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+from pawnstack.utils.file import get_script_path
+from pawnstack.output import dump
+from pawnstack.log import AppLogger
+from pawnstack.config import pawn
+
+
+
+import sys
+import time
+from pawnstack.utils.operate import Daemon  # Assuming Daemon is moved to utils.operate
+
+
+__version__ = "0.1.0"
+
+
+
+def print_banner():
+    banner_text = """
+    {{ banner | indent(4) }}
+    """
+    print(banner_text)
+
+
+def main():
+    app_name = "{{ app_name }}"
+    current_path = get_script_path(__file__)
+
+    # Configure pawnstack
+    pawn.configure(
+        PAWN_PATH=current_path,
+        PAWN_LOGGER={
+            "log_level": "INFO",
+            "stdout_level": "INFO",
+            "log_path": f"{current_path}/logs",
+            "use_hook_exception": True,
+        },
+        app_name=app_name,
+    )
+
+    logger = AppLogger().get_logger()
+
+    logger.info("Logger initialized.")
+    logger.info(f"Running {app_name} v{__version__}")
+    logger.debug("This is a debug message.")
+    logger.error("This is an error message.")
+
+    # You can access config values like this:
+    logger.info(f"PawnStack Path: {pawn.get('PAWN_PATH')}")
+    dump(pawn.to_dict())
+
+    
+    logger.info("Starting daemon process...")
+    while True:
+        # Main daemon loop
+        logger.info("Daemon is running...")
+        time.sleep(10)
+    
+
+
+if __name__ == "__main__":
+    try:
+        
+        if len(sys.argv) < 2:
+            print(f"Usage: {sys.argv[0]} [start|stop|restart]")
+            sys.exit(1)
+
+        command = sys.argv[1]
+        pid_file = f"/tmp/{app_name}.pid"
+
+        daemon = Daemon(
+            pidfile=pid_file,
+            func=main
+        )
+
+        if command == "start":
+            print(f"Starting {app_name} daemon...")
+            daemon.start()
+        elif command == "stop":
+            print(f"Stopping {app_name} daemon...")
+            daemon.stop()
+        elif command == "restart":
+            print(f"Restarting {app_name} daemon...")
+            daemon.restart()
+        else:
+            print(f"Unknown command: {command}")
+            sys.exit(1)
+        
+    except KeyboardInterrupt:
+        print("\nProcess interrupted by user.")
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {e}", exc_info=True)

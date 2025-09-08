@@ -1,0 +1,10 @@
+"""버전 정보"""
+
+__title__ = "pawnstack"
+__description__ = "PawnStack: 차세대 Infrastructure as Code (IaC) Python 라이브러리"
+__url__ = "https://github.com/jinwoo-j/pawnstack"
+__version__ = "1.0.0"
+__author__ = "Jinwoo Jeong"
+__author_email__ = "jinwoo@parametacorp.com"
+__license__ = "MIT"
+__copyright__ = "Copyright 2024 Jinwoo Jeong"
