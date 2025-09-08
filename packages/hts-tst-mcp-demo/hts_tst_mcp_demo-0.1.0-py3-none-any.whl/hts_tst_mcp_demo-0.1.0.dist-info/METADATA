@@ -1,0 +1,11 @@
+Metadata-Version: 2.3
+Name: hts-tst-mcp-demo
+Version: 0.1.0
+Summary: Add your description here
+Author: tianshi
+Author-email: tianshi <tianshi.huang@soucaigroup.com>
+Requires-Dist: fastmcp>=2.12.2
+Requires-Dist: pandas>=2.3.2
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
