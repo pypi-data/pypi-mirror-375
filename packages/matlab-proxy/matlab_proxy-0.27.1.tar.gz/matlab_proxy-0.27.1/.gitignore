@@ -1,0 +1,16 @@
+*.egg-info/
+.eggs/
+__pycache__/
+build/
+dist/
+.venv*/
+htmlcov/
+.coverage
+*.key
+*.pem
+.python-version
+coverage.xml
+.ipynb_checkpoints/
+*.ipynb
+.env
+matlab_proxy/gui
