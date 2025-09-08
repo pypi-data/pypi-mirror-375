@@ -1,0 +1,11 @@
+click
+requests
+tomli
+
+[code-quality]
+black
+ruff
+
+[testing]
+pytest
+requests-mock
