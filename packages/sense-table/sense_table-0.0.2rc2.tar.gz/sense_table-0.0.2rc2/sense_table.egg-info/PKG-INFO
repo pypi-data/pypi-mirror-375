@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: sense-table
+Version: 0.0.2rc2
+Summary: Smoothly make sense of your large-scale multi-modal tabular data
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: boto3>=1.39.11
+Requires-Dist: click>=8.1.8
+Requires-Dist: duckdb>=1.2.1
+Requires-Dist: flask>=3.1.0
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: pytz>=2025.2
+Requires-Dist: requests>=2.32.3
