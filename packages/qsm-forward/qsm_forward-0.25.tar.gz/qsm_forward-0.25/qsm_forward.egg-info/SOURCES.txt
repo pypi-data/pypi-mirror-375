@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+qsm_forward/__init__.py
+qsm_forward/main.py
+qsm_forward/qsm_forward.py
+qsm_forward.egg-info/PKG-INFO
+qsm_forward.egg-info/SOURCES.txt
+qsm_forward.egg-info/dependency_links.txt
+qsm_forward.egg-info/entry_points.txt
+qsm_forward.egg-info/requires.txt
+qsm_forward.egg-info/top_level.txt
+tests/test_qsm_forward.py
