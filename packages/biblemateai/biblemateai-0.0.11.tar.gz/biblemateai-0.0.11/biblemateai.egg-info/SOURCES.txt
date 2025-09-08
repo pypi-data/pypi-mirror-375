@@ -1,0 +1,15 @@
+setup.py
+biblemateai/README.md
+biblemateai/__init__.py
+biblemateai/main.py
+biblemateai/package_name.txt
+biblemateai/requirements.txt
+biblemateai.egg-info/PKG-INFO
+biblemateai.egg-info/SOURCES.txt
+biblemateai.egg-info/dependency_links.txt
+biblemateai.egg-info/entry_points.txt
+biblemateai.egg-info/requires.txt
+biblemateai.egg-info/top_level.txt
+biblemateai/core/systems.py
+biblemateai/ui/info.py
+biblemateai/ui/prompts.py
