@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: mseep-pywss
+Version: 0.2.7
+Summary: This Is A Web/WebSocket Server By Python
+Home-page: https://github.com/czasg/pywss
+Author: mseep
+Author-email: support@skydeck.ai
+License: MIT
+Classifier: Programming Language :: Python :: 3.8
+License-File: LICENSE
+Requires-Dist: loggus>=0.1.1
+Requires-Dist: pydantic
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+Package managed by MseeP.ai
