@@ -1,0 +1,15 @@
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include tests *.py
+exclude *.log
+exclude *.tmp
+exclude .env*
+exclude **/secrets*
+exclude **/credentials*
+exclude **/.git*
+exclude **/node_modules*
+exclude **/target*
+exclude **/build*
+exclude **/__pycache__*
+exclude **/.pytest_cache*

@@ -1,0 +1,92 @@
+Metadata-Version: 2.4
+Name: pex-demo-stepanmatula
+Version: 1.0.7
+Summary: Flask web application built with Jenkins CI/CD pipeline - PEX Demo
+Home-page: https://github.com/StepanMatula/pex
+Author: Stepan
+Author-email: stmatu@softserveinc.com
+License: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Framework :: Flask
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Flask>=3.0.0
+Requires-Dist: gunicorn>=21.2.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.3; extra == "dev"
+Requires-Dist: requests>=2.31.0; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# PEX Demo - Stepan Matula
+
+A Flask web application demonstrating Jenkins CI/CD pipeline with PyPI publishing.
+
+## Features
+
+- RESTful API endpoints (`/`, `/health`, `/info`)
+- Health check endpoint for monitoring
+- Application info with build metadata
+- Complete Jenkins CI/CD Pipeline (6 stages)
+- Docker containerization support
+- Automated PyPI publishing
+
+## Installation
+
+```bash
+pip install pex-demo-stepanmatula
+```
+
+## Usage
+
+### As a console command:
+```bash
+pex-demo
+```
+
+### As a Python module:
+```python
+from app import app
+app.run()
+```
+
+## API Endpoints
+
+- `GET /` - Main application endpoint
+- `GET /health` - Health check endpoint  
+- `GET /info` - Application information
+
+## Development
+
+This package was built using Jenkins CI/CD pipeline with the following stages:
+1. Build & Setup
+2. Test & Quality Assurance  
+3. Manual Approval
+4. Deploy & Archive
+5. Package Preparation
+6. PyPI Publication
+
+## License
+
+MIT License
