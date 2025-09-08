@@ -1,0 +1,23 @@
+pyyaml>=5.4
+
+[all]
+
+[all:python_version < "3.11"]
+tomli>=1.2.0
+
+[dev]
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
+mypy>=1.0.0
+ruff>=0.1.0
+black>=23.0.0
+pre-commit>=3.0.0
+build>=0.10.0
+twine>=4.0.0
+types-PyYAML>=6.0.0
+
+[toml]
+
+[toml:python_version < "3.11"]
+tomli>=1.2.0
