@@ -1,0 +1,143 @@
+# bigtools
+
+python 工具箱，实现了一些实用的函数、类和赋值了一批常用变量，方便调用，减少工程代码量。
+
+## 安装
+
+```
+pip install bigtools
+```
+    
+
+## 使用
+每个函数、类、变量均有两种导入的方法，视不同情况选择适合的写法。为了更好的说明这个项目的情况，创建这个README我会尽量使用第二种写法。实际工程中我会使用第一种写法，简单直接。
+
+```python3
+# 例：
+# 第一种写法，简单直接
+from bigtools import generate_hash_value
+# 第二种写法，包路径清晰
+from bigtools.hash_tools import generate_hash_value
+```
+
+### 1. 使用函数或类
+以生成hash值为例：
+```python3
+# 导入包
+from bigtools import generate_hash_value
+# 第二种写法
+# from bigtools.hash_tools import generate_hash_value
+
+
+hash_value = generate_hash_value('python工具箱')  # 默认使用md5，可选sha1、sha256 等等
+print(hash_value)
+```
+### 2. 使用变量
+2.1 以使用 headers 为例：
+```python3
+from bigtools import headers
+# 第二种写法
+# from bigtools.default_data import headers
+
+print(headers)
+
+import requests
+url = ''
+requests.get(url=url, headers=headers)
+```
+2.2 以使用 ContentType 为例：
+大写字母开头的是类(type is class)，类里包含已赋值的变量，可用.来加载变量
+
+```python3
+from bigtools import ContentType
+
+# 第二种写法
+# from bigtools.default_data import ContentType
+print(ContentType.app_json_headers)
+
+# 发送post请求，获取数据
+import requests
+url = ''
+data = ''
+response = requests.post(url=url, data=data, headers=ContentType.app_json_headers)
+print(response)
+```
+## 实现清单
+### 1. 已实现的函数或类
+```python3
+from bigtools.db_tools import mongo_client, async_mongo_client, MinioClinet, RedisClient
+from bigtools.hash_tools import generate_hash_value, get_new_hash_object_dict
+from bigtools.jieba_tools import get_keywords_from_text
+from bigtools.log_tools import set_log, SetLog
+from bigtools.yaml_tools import load_yaml, load_all_yaml, write_yaml
+from bigtools.path_tools import check_make_dir, get_execution_dir, get_file_type, get_execution_file_name
+from bigtools.requests_tools import get_requests_session, download, save_response_data
+from bigtools.similarity_tools import cosine_similarity, edit_distance
+from bigtools.sign_tools import generate_sign, generate_fused_sign, parse_sign, merge_str, merge_algorithm_dict
+from bigtools.sign_tools import insert_middle, verify_easy_sign, generate_easy_sign, generate_fixed_sign
+from bigtools.sign_tools import generate_fixed_encoded_sign, verify_fixed_encoded_sign, verify_sign_by_api
+from bigtools.sign_tools import async_verify_sign_by_api, common_verify_sign, async_common_verify_sign
+from bigtools.stopwords import stopwords
+from bigtools.more_tools import extract_ip, get_file_size, equally_split_list_or_str, json_validate, load_config
+from bigtools.more_tools import set_env, load_env, FuncTimer, time_sleep, count_str_start_or_end_word_num
+from bigtools.more_tools import is_chinese, is_english, is_number, generate_random_string
+from bigtools.exception_tools import DealRequestException, ExceptionHandler
+```
+### 2. 已赋值的变量和实例化的类
+详情见于 bigtools.default_data
+
+#### 2.1 已赋值的变量
+```python3
+from bigtools.default_data import headers
+from bigtools.default_data import user_agents
+from bigtools.default_data import random_headers
+from bigtools.default_data import en_letter
+from bigtools.default_data import numbers
+```
+
+#### 2.2 已实例化的类
+##### 2.2.1 headers里常用的几种 Content-Type
+```python3
+from bigtools.default_data import ContentType
+
+print(
+ContentType.app_json,
+ContentType.app_xwfu,
+ContentType.app_xml,
+ContentType.mul_fd,
+ContentType.text_xml,
+ContentType.app_json_headers,
+ContentType.app_xwfu_headers,
+ContentType.app_xml_headers,
+ContentType.mul_fd_headers,
+ContentType.text_xml_headers
+)
+```
+##### 2.2.2 常用的几种日期格式
+```python3
+from bigtools.default_data import DateType
+"""
+用于编写代码时提示，不建议写入代码里。写入会代码增加阅读难度。
+实现了以下常用日期格式：
+YYYY-MM-DD
+YYYY年MM月DD日
+YYYY.MM.DD
+YYYYMMDD
+YYYY/MM/DD
+"""
+# YYYY-MM-DD
+print(DateType.type_1)
+# YYYY年MM月DD日
+print(DateType.type_2)
+# YYYY.MM.DD
+print(DateType.type_3)
+# YYYYMMDD
+print(DateType.type_4)
+# YYYY/MM/DD
+print(DateType.type_5)
+```
+##### 2.2.3 re (正则表达式)里常用的 pattern
+```python3
+from bigtools.default_data import RePattern
+print(RePattern.window_INITIAL_STATE)
+```
