@@ -1,0 +1,17 @@
+ligttools/__init__.py,sha256=swAEQ8v4msmcnDIHUiHQMFOpXpE4a2XnwVfX6IR8msg,109
+ligttools/convert.py,sha256=ykxMDW4D_KSsHkk5BCCjT3OJyF-D50wpVJl7H-v_b6w,4126
+ligttools/search.py,sha256=dPGA47M3mTB6zmxqkrIkn3GcY2G0dOUMJDsJu_1Z99M,2405
+ligttools/serve.py,sha256=BjZlMFSfkRXpXmVACV6ZixmjT-9MgxAoQ5cIk2u9EMY,1438
+ligttools/converters/__init__.py,sha256=as5IcTPBjTYtasgh3XTJIiE-VuZ1Dlva4IKnroH7waU,1372
+ligttools/converters/base.py,sha256=U--ZZfL194WMKb5h7_dABcilqYFfAS7NAjaCRShNXwQ,524
+ligttools/converters/cldf_converter.py,sha256=rBKS-lX4yhYk9_bTJX39woaTF_epFpQT7CqGd4UWrAo,10538
+ligttools/converters/flex_converter.py,sha256=Kz9eUsqYrNN8es_nPFdYbg076YSQUfpOlUAWE1IlnGo,792
+ligttools/converters/glottolog-codes.txt,sha256=do0smmxlUrUmczIM6FLqXNyrPds8MRw0ey9J6faxzqo,440825
+ligttools/converters/toolbox_converter.py,sha256=tqCOM7qZQWntdwRY2ywPDsYrpqb-39VGtzUN0XiFmpc,461
+ligttools/query/__init__.py,sha256=ZsNX60S1OBpM5UY9Qz6XKV_bQnhGLz0p6VwR9xb3XcE,2387
+ligttools/query/sparql.py,sha256=JN2TxQ2UYjxCGw2oAvTco0uYmKVgJDGoN77kWYRdXQE,1921
+ligttools-0.3.1.dist-info/METADATA,sha256=XTybnfWIRAaI7YmO2fIGciPbUzUXFQLA3A5DRc0I7O8,7879
+ligttools-0.3.1.dist-info/WHEEL,sha256=qtCwoSJWgHk21S1Kb4ihdzI2rlJ1ZKaIurTj_ngOhyQ,87
+ligttools-0.3.1.dist-info/entry_points.txt,sha256=YRDnotFvAPxE3SiguBGQsAaUe9CCPmRlWvNIa_HED3M,158
+ligttools-0.3.1.dist-info/licenses/LICENSE,sha256=tuj98teOA0tgFiKwQu7me_e2Wyx9PlV7PyTpoqs-R6o,1061
+ligttools-0.3.1.dist-info/RECORD,,

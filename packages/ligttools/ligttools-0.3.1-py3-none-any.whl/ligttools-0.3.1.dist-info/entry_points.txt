@@ -1,0 +1,5 @@
+[console_scripts]
+enligten = ligttools.serve:main
+ligt-convert = ligttools.convert:main
+ligt-search = ligttools.search:main
+ligt-serve = ligttools.serve:main
