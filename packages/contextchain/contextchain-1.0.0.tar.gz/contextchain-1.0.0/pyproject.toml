@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contextchain"
+version = "1.0.0"  
+authors = [
+    { name = "Nihal Nazeer", email = "Nhaal160@gmail.com" }
+]
+description = "A pipeline execution framework with MongoDB and ChromaDB integration for AI and full-stack workflows"
+readme = "Readme.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pymongo>=4.13.2",
+    "requests>=2.32.4",
+    "pydantic>=2.11.7",
+    "urllib3<2",
+    "python-dotenv>=1.0.0",
+    "click>=8.1.7",
+    "pyyaml>=6.0.1",
+    "colorama>=0.4.6",
+    "chromadb>=0.5.0",  # For vector DB integration
+    "sentence-transformers>=3.0.1",  # For text embeddings
+    "networkx>=3.3",  # For DAG-based parallel execution
+    "fastapi>=0.111.0",  # For potential API server
+    "uvicorn>=0.29.0",  # For serving FastAPI
+    "bitsandbytes>=0.43.1",  # For optimized LLM inference
+    "torch>=2.3.0",  # For sentence-transformers and LLM support
+    "pytest>=8.2.0",  # For testing
+    "mkdocs>=1.5.3"  # For documentation
+]
+
+[project.urls]
+"Homepage" = "https://github.com/nihalnazeer/contextchain"
+"Bug Tracker" = "https://github.com/nihalnazeer/contextchain/issues"
+
+[project.scripts]
+contextchain = "contextchain.cli.main:cli"  # Corrected from test_main to main
+
+[tool.setuptools]
+packages = {find = {}}
+include-package-data = true
