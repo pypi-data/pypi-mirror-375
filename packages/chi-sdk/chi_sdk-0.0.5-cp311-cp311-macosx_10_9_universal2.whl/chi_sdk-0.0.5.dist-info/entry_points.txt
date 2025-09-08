@@ -1,0 +1,3 @@
+[console_scripts]
+chi-admin = chi_sdk.admin:main
+chi-tui = chi_sdk.tui_runner.runner:main
