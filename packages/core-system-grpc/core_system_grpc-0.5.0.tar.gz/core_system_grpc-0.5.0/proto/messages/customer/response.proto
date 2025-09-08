@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package core_system.customer.v1;
+
+import "messages/customer/common.proto";
+import "messages/common/pagination.proto";
+
+// Customer 조회 응답 메시지
+message GetCustomersByShopResponse {
+    repeated Customer customers = 1;
+    core_system.common.v1.PaginationResponse pagination = 2;
+}

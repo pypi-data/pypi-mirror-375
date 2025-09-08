@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package core_system.customer.v1;
+
+// Customer 정보 메시지
+message Customer {
+    int32 id = 1;
+    int32 shop_id = 2;
+    string member_id = 3;
+    optional string platform_id = 4;
+    optional string name = 5;
+    optional string cellphone = 6;
+    optional string email = 7;
+    optional string birthday = 8;
+    optional string created_date = 9;
+    optional string last_login_date = 10;
+    optional string last_order_date = 11;
+    bool is_empty_basket = 12;
+    bool sms = 13;
+    bool news_mail = 14;
+    optional string gender = 15;
+    optional string updated_at = 16;
+    bool is_non_member = 17;
+    bool is_deleted = 18;
+    optional int32 customer_group_id = 19;
+}

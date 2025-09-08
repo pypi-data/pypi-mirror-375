@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package core_system.order.v1;
+
+// Order 정보 메시지
+message Order {
+    int32 id = 1;
+    int32 shop_id = 2;
+    optional int32 customer_id = 3;
+    optional int32 customer_group_id = 4;
+    optional string order_id = 5;
+    optional string platform_id = 6;
+    optional string order_status = 7;
+    optional string buyer_name = 8;
+    optional string member_id = 9;
+    optional string order_date = 10;
+    optional string payment_date = 11;
+    optional string order_place_id = 12;
+    optional string shipping_status = 13;
+    int64 order_price_amount = 14;
+    int32 shipping_fee = 15;
+    int32 points_spent_amount = 16;
+    int32 credits_spent_amount = 17;
+    int32 coupon_discount_price = 18;
+    int32 coupon_shipping_fee_amount = 19;
+    int32 membership_discount_amount = 20;
+    int32 total_amount = 21;
+    int32 total_discount_amount = 22;
+    int32 total_payment_amount = 23;
+    optional string created_date = 24;
+    optional string updated_at = 25;
+    bool is_deleted = 26;
+}
+
+// OrderItem 정보 메시지
+message OrderItem {
+    int32 id = 1;
+    int32 shop_id = 2;
+    optional int32 order_id = 3;
+    optional int32 product_id = 4;
+    optional int32 customer_id = 5;
+    optional string order_item_code = 6;
+    optional string platform_id = 7;
+    optional string request_undone = 8;
+    optional string variant_code = 9;
+    int32 quantity = 10;
+    optional string option_id = 11;
+    optional string option_value = 12;
+    optional string option_value_default = 13;
+    int32 product_price = 14;
+    int32 option_price = 15;
+    optional int32 additional_discount_price = 16;
+    optional string order_status = 17;
+    optional string ordered_date = 18;
+    optional string shipped_date = 19;
+    optional string created_date = 20;
+    optional string updated_at = 21;
+    bool is_deleted = 22;
+}
