@@ -1,0 +1,233 @@
+import numpy as np
+import pytest
+
+from pyodys import RKSolverWithButcherTableau, PyOdysError
+from pyodys import ButcherTableau
+from pyodys import ODEProblem
+
+# To execute the tests, run python -m pytest -v, from the working directory edo/
+
+class ExponentialDecay(ODEProblem):
+    """
+    Simple test system: u'(t) = -u, solution u(t) = exp(-t).
+    """
+    def __init__(self, u0=1.0, t_init=0.0, t_final=1.0):
+        super().__init__(t_init, t_final, u0)
+
+    def evaluate_at(self, t, u):
+        return -u
+
+    def jacobian_at(self, t, u):
+        return np.array([[-1.0]])
+
+
+@pytest.mark.parametrize("method", ButcherTableau.available_schemes())
+def test_solver_runs_and_matches_exact_solution(method):
+    system = ExponentialDecay()
+    tableau = ButcherTableau.par_nom(method)
+    solver = RKSolverWithButcherTableau(butcher_tableau=tableau, 
+                                           initial_step_size=0.01)
+
+    temps, solutions = solver.resoud(system)
+    exact = np.exp(-system.t_final)
+
+    assert np.isclose(solutions[-1][0], exact, rtol=1e-2), \
+        f"{method} failed: got {solutions[-1][0]}, expected {exact}"
+
+
+@pytest.mark.parametrize("method_name", [m for m in ButcherTableau.available_schemes()
+                                          if ButcherTableau.par_nom(m).with_prediction])
+def test_solver_adaptive_step_runs(method_name):
+    """Test adaptive stepping for schemes that support it."""
+    tableau = ButcherTableau.par_nom(method_name)
+    solver = RKSolverWithButcherTableau(tableau,
+                                           initial_step_size=1.0e-5,
+                                           adaptive_time_stepping=True,
+                                           min_step_size=1e-6,
+                                           max_step_size=0.5,
+                                           target_relative_error=1e-4)
+    system = ExponentialDecay()
+
+    temps, solutions = solver.resoud(system)
+
+    # Check shapes
+    assert solutions.shape[0] == len(temps)
+    assert solutions.shape[1] == system.initial_state.size
+
+    # Check solution is monotonic decay
+    assert np.all(np.diff(solutions.flatten()) <= 0)
+
+def test_invalid_tableau_type_raises():
+    """Check that passing a wrong type to the solver raises TypeError."""
+    with pytest.raises(TypeError):
+        RKSolverWithButcherTableau(butcher_tableau="not_a_tableau")
+
+# Define a stiff problem
+class StiffProblem(ODEProblem):
+    def __init__(self, t_init, t_final, initial_state):
+        super().__init__(t_init, t_final, initial_state)
+        
+    def evaluate_at(self, t, u):
+        x, y = u
+        dxdt = -100.0*x + 99.0*y
+        dydt = -y
+        return np.array([dxdt, dydt])
+    
+    def jacobian_at(self, t, u):
+        x, y = u
+        jacobian = np.array([
+            [-100.0, 99.0],
+            [ 0.0, -1.0]
+        ])
+        return jacobian
+
+def exact_solution(t):
+    return np.array([2.0*np.exp(-t) - np.exp(-100.0 * t), 2.0 * np.exp(-t)])
+
+@pytest.mark.parametrize("method_name", [m for m in ButcherTableau.available_schemes()
+                                          if ButcherTableau.par_nom(m).with_prediction])
+def test_step_size_adjustment_time_limits(method_name):
+    """Test that step size is clipped to min/max limits."""
+    tableau = ButcherTableau.par_nom(method_name)
+    solver = RKSolverWithButcherTableau(butcher_tableau=tableau,
+                                           initial_step_size=1e-4, 
+                                           adaptive_time_stepping=True,
+                                           min_step_size=1e-8, 
+                                           max_step_size=1.0,
+                                           target_relative_error=1e-8, 
+                                           progress_interval_in_time=1.0, 
+                                           max_jacobian_refresh=1)
+    
+
+    system = StiffProblem(t_init=0.0, t_final=1.0, initial_state=[1.0,2.0])
+    temps, solutions = solver.resoud(system)
+
+    steps = np.diff(temps)
+    assert np.all(steps >= 1e-8)
+    assert np.all(steps <= 1.0)
+
+@pytest.mark.parametrize("method_name", [m for m in ButcherTableau.available_schemes()
+                                          if ButcherTableau.par_nom(m).with_prediction])
+def test_solver_adaptive_step_runs_and_matches_exact_solution(method_name):
+    """Test that step size is clipped to min/max limits."""
+    tableau = ButcherTableau.par_nom(method_name)
+    solver = RKSolverWithButcherTableau(tableau,
+                                           initial_step_size=1e-4,
+                                           adaptive_time_stepping=True,
+                                           min_step_size=1e-8, 
+                                           max_step_size=1.0,
+                                           target_relative_error=1e-8, 
+                                           progress_interval_in_time=1.0, 
+                                           max_jacobian_refresh=1)
+    
+
+    system = StiffProblem(t_init=0.0, t_final=1.0, initial_state=[1.0,2.0])
+    temps, solutions = solver.resoud(system)
+
+    for i, t in enumerate(temps):
+            numerical_solution = solutions[i]
+            exact = exact_solution(t)
+            assert np.allclose(numerical_solution, exact, rtol=1e-5, atol=1e-8)
+
+def test_invalid_tableau_raises():
+    with pytest.raises(TypeError):
+        RKSolverWithButcherTableau(butcher_tableau="not_a_tableau")
+
+def test_missing_initial_step_size_raises():
+    bt = ButcherTableau.par_nom(ButcherTableau.available_schemes()[0])
+    with pytest.raises(ValueError):
+        RKSolverWithButcherTableau(butcher_tableau=bt, initial_step_size=None)
+
+def test_adaptive_missing_args_raise():
+    bt = ButcherTableau.par_nom(ButcherTableau.available_schemes()[0])
+    # missing min/max
+    with pytest.raises(TypeError):
+        RKSolverWithButcherTableau(butcher_tableau=bt, initial_step_size=0.1,
+                                   adaptive_time_stepping=True, min_step_size=None,
+                                   max_step_size=0.1, target_relative_error=1e-3)
+    # missing target_relative_error
+    with pytest.raises(TypeError):
+        RKSolverWithButcherTableau(butcher_tableau=bt, initial_step_size=0.1,
+                                   adaptive_time_stepping=True, min_step_size=1e-6,
+                                   max_step_size=0.1, target_relative_error=None)
+
+def test_export_creates_csv(tmp_path):
+    bt = ButcherTableau.par_nom(ButcherTableau.available_schemes()[0])
+    prefix = str(tmp_path / "results/out")
+    solver = RKSolverWithButcherTableau(butcher_tableau=bt,
+                                        initial_step_size=0.1,
+                                        export_prefix=prefix,
+                                        export_interval=1)
+    times = np.array([0.0, 0.1, 0.2])
+    sol = np.array([[1.0], [0.9], [0.81]])
+    solver._export(times, sol)
+    file = f"{prefix}_00001.csv"
+    assert tmp_path.joinpath("results/out_00001.csv").exists()
+    with open(file) as f:
+        header = f.readline().strip().split(",")
+    assert header[0] == "t"
+
+def test_detect_jacobian_sparsity_dense_and_sparse():
+    bt = ButcherTableau.par_nom(ButcherTableau.available_schemes()[0])
+    solver = RKSolverWithButcherTableau(bt, initial_step_size=0.1)
+    system = ExponentialDecay()
+    solver._detect_jacobian_sparsity(system, 0.0, system.initial_state)
+    assert solver._jacobian_is_sparse is False
+
+    # force sparse Jacobian
+    import scipy.sparse as sp
+    class SparseSystem(ExponentialDecay):
+        def jacobian_at(self, t, u):
+            return sp.csr_matrix((1,1))
+    solver._detect_jacobian_sparsity(SparseSystem(), 0.0, np.array([1.0]))
+    assert solver._jacobian_is_sparse is True
+
+def test_check_step_size_rejects_large_error():
+    bt = ButcherTableau.par_nom(ButcherTableau.available_schemes()[0])
+    solver = RKSolverWithButcherTableau(bt, initial_step_size=0.1)
+    U_approx = np.array([1.0])
+    U_pred = np.array([0.0])  # huge error
+    new_step, accepted = solver._check_step_size(U_approx, U_pred,
+                                                 step_size=0.1,
+                                                 target_relative_error=1e-6,
+                                                 order=2,
+                                                 min_step_size=1e-6,
+                                                 max_step_size=1.0,
+                                                 current_time=0.0,
+                                                 t_final=1.0)
+    assert accepted == False
+    assert new_step >= 1e-6
+
+class NonlinearProblem(ODEProblem):
+    """Pathological nonlinear system that makes Newton iterations struggle."""
+    def __init__(self):
+        super().__init__(0.0, 1.0, np.array([1.0]))
+
+    def evaluate_at(self, t, u):
+        return np.array([np.sin(u[0]) + 10.0])
+
+    def jacobian_at(self, t, u):
+        return np.array([[np.cos(u[0])]])
+
+@pytest.mark.parametrize("method_name", [m for m in ButcherTableau.available_schemes()
+                                          if ButcherTableau.from_name(m).is_implicit])
+def test_newton_failure_flag_triggered(method_name):
+    """Force Newton failure by limiting max iterations to 1."""
+    tableau = ButcherTableau.par_nom(method_name)
+    
+    solver = RKSolverWithButcherTableau(
+        butcher_tableau=tableau,
+        initial_step_size=0.1,
+        adaptive_time_stepping=False,
+        newton_nmax=1,  # ensures Newton fails
+        newton_atol=1e-12,
+        newton_rtol=1e-12,
+        max_jacobian_refresh=0
+    )
+    try:
+        system = NonlinearProblem()
+        temps, solutions = solver.resoud(system)
+    except PyOdysError:
+        pass
+
+    assert solver.newton_failed is True
