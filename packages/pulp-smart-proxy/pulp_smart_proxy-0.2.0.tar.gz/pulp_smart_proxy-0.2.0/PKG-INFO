@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: pulp-smart-proxy
+Version: 0.2.0
+Summary: pulp-smart-proxy plugin for the Pulp Project
+Author: The Foreman Project
+Project-URL: Homepage, https://theforeman.org
+Project-URL: Repository, https://github.com/theforeman/pulp_smart_proxy
+Project-URL: Bug Tracker, https://github.com/theforeman/pulp_smart_proxy/issues
+Project-URL: Changelog, https://github.com/theforeman/pulp_smart_proxy/blob/develop/CHANGES.md
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Framework :: Django
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pulpcore<3.85,>=3.49.0
+Dynamic: license-file
+
+# pulp-smart-proxy
+
+A Pulp plugin to support being a Foreman Smart Proxy.
+
+For more information, please see the [documentation](docs/index.md) or the [Pulp project page](https://pulpproject.org/).
+
+
+How to File an Issue
+--------------------
+
+File through this project's GitHub issues and appropriate labels.
+
+> **WARNING** Is this security related? If so, please follow the [Security Disclosures](https://docs.pulpproject.org/pulpcore/bugs-features.html#security-bugs) procedure.
