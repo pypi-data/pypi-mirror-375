@@ -1,0 +1,15 @@
+LICENSE
+README.md
+setup.py
+scpair/__init__.py
+scpair/evaluator.py
+scpair/loss.py
+scpair/model.py
+scpair/pairedVAE.py
+scpair/scVI_distribution.py
+scpair/utils.py
+scpair.egg-info/PKG-INFO
+scpair.egg-info/SOURCES.txt
+scpair.egg-info/dependency_links.txt
+scpair.egg-info/requires.txt
+scpair.egg-info/top_level.txt
