@@ -1,0 +1,5 @@
+[console_scripts]
+dcspy_cli = dcspy.run:run
+
+[gui_scripts]
+dcspy = dcspy.run:run
