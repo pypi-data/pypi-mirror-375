@@ -1,0 +1,67 @@
+Metadata-Version: 2.4
+Name: adif-mcp
+Version: 0.3.7
+Summary: ADIF MCP core engine with plugin support (LoTW, eQSL, QRZ, Clublog)
+Project-URL: Homepage, https://adif-mcp.com
+Project-URL: Repository, https://github.com/your-org/adif-mcp
+Project-URL: Issues, https://github.com/your-org/adif-mcp/issues
+Project-URL: ADIF Spec, https://adif.org.uk/315/ADIF_315.htm
+Project-URL: LoTW, https://lotw.arrl.org/
+Project-URL: eQSL, https://www.eqsl.cc/
+Project-URL: Club Log, https://clublog.org/
+Project-URL: QRZ, https://www.qrz.com/
+Author: KI7MT
+License: MIT
+License-File: LICENSE
+Classifier: Environment :: Console
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Utilities
+Requires-Python: >=3.11
+Requires-Dist: click>=8.1.7
+Requires-Dist: keyring>=25.6.0
+Requires-Dist: requests>=2.32.5
+Requires-Dist: typing-extensions>=4.15.0
+Provides-Extra: all
+Requires-Dist: cli-test-helpers>=0.3.0; extra == 'all'
+Requires-Dist: interrogate>=1.7.0; extra == 'all'
+Requires-Dist: keyring>=25.2; extra == 'all'
+Requires-Dist: pytest>=8.3; extra == 'all'
+Requires-Dist: ruff>=0.6.8; extra == 'all'
+Provides-Extra: dev
+Requires-Dist: interrogate>=1.7.0; extra == 'dev'
+Requires-Dist: ruff>=0.6.8; extra == 'dev'
+Provides-Extra: keyring
+Requires-Dist: keyring>=25.2; extra == 'keyring'
+Provides-Extra: test
+Requires-Dist: cli-test-helpers>=0.3.0; extra == 'test'
+Requires-Dist: pytest>=8.3; extra == 'test'
+Description-Content-Type: text/markdown
+
+ADIF-MCP
+
+⚠️ Status: Deprecated – Python implementation is frozen
+The Python codebase (≤ v0.3.6) is no longer maintained.
+Future development is moving to Java 21 + JavaFX.
+
+Documentation
+	•	User & Developer Docs: https://adif-mcp.com
+	•	Release notes & tags: GitHub Releases
+
+Python Legacy
+	•	The last working Python release: v0.3.6
+	•	A tombstone branch preserves the Python sources for reference.
+	•	All new development is happening in Java.
+
+Migration Plan
+	•	Existing CLI concepts (personas, providers, creds, sync) will re-emerge in Java.
+	•	MkDocs remains the user-facing documentation system.
+	•	Developer API docs will move to Javadoc.
+
+License
+
+MIT © KI7MT
