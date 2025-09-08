@@ -1,0 +1,13 @@
+CHANGES
+=======
+
+2.10.2
+------
+
+* Improve overload type hints with keyword-only args for better mypy compatibility
+* Add @overload type hints for shell and shell2 methods with Literal types
+* Initial plan
+* fix(screenrecord): Fixed cli commands for screen recording using scrcpy
+* Fix UnboundLocalError in reverse\_list function when no reverse forwards are configured
+* Initial plan
+* update doc
