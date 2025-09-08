@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ page_title|default:"Contact Support" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .django-telegram-support {
+      font-family: system-ui, sans-serif;
+      max-width: 720px;       
+      margin: 2rem auto;      
+      padding: 0 1rem;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+
+    .django-telegram-support body {
+      font-family: system-ui, sans-serif;
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+
+    .django-telegram-support label {
+      display: block;
+      margin: .5rem 0 .25rem;
+    }
+
+    .django-telegram-support input,
+    .django-telegram-support textarea {
+      width: 100%;
+      padding: .6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .django-telegram-support button {
+      margin-top: 1rem;
+      padding: .6rem 1rem;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .django-telegram-support .messages {
+      margin: 1rem 0;
+    }
+
+    .django-telegram-support .msg {
+      padding: .6rem .8rem;
+      border-radius: 8px;
+      margin-bottom: .5rem;
+    }
+
+    .django-telegram-support .success {
+      background: #e8f7ee;
+    }
+
+    .django-telegram-support .error {
+      background: #fde8e8;
+    }
+
+    .django-telegram-support small {
+      color: #666;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="django-telegram-support">
+    <h1>{{ page_title|default:"Contact Support" }}</h1>
+
+    <div class="messages">
+      {% if messages %}
+        {% for m in messages %}
+          <div class="msg {{ m.tags }}">{{ m }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <label for="{{ form.email.id_for_label }}">Your email</label>
+      {{ form.email }}
+
+      <label for="{{ form.message.id_for_label }}">Message</label>
+      {{ form.message }}
+
+      {{ form.website }} {# honeypot #}
+
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>
