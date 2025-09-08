@@ -1,0 +1,91 @@
+# argo-mon-library
+
+ARGO Monitoring Service library: A simple python library for interacting with the ARGO Monitoring Service REST API
+
+The ARGO Monitoring service is designed to monitor the status, availability, and reliability of services provided by electronic infrastructures with moderate to high complexity. Its web API provides the Serving Layer, used for retrieving the Status, Availability, and Reliability reports as well as the actual raw metric results. This library intends to provide access to basic functionality of the API, in a simple and intuitive way.
+
+You may find more information pertaining to the service and its web API on the [ARGO Monitoring Service](https://argoeu.github.io/argo-monitoring/docs/intro) and [ARGO web API](https://argoeu.github.io/argo-web-api/) documentation pages.
+
+## Library installation
+
+The library been tested with Python versions 3.9, 3.11, and 3.12 on Rocky 9. In order to install the library, you'll need to check out the source, have python setuptools installed and run
+
+```bash
+python3 ./setup.py build && \
+  sudo python3 ./setup.py install
+```
+
+Alternatively, on RHEL-based systems with rpm-build and python3-dev installed, you may run
+
+```bash
+mkdir -p ~/rpmbuild/SOURCES && \
+  python3 ./setup.py build && \
+  python3 ./setup.py bdist_rpm && \
+  cp dist/argo-mon-library-0.1.0.tar.gz && \
+  rpmbuild -bb argo-mon-library.spec
+```
+
+to create an RPM file for each supported python version under ~/rpmbuild/RPMS/noarch, and then use rpm / dnf to install the desired RPM packages, e.g.
+
+```bash
+sudo dnf install ~/rpmbuild/RPMS/noarch/python3-argo-mon-library-0.1.0-1.el9.noarch.rpm
+```
+
+for version `0.1.0-1` of the library using the default (platform) python.
+
+## Authentication
+
+The Argo Monitoring library needs a valid API key to authenticate against the service's REST API. Each API key gives access to a specific tenant. Once a valid key has been obtained, a monitoring service object may be initialized as follows:
+
+```python
+from argo_mon_library import ArgoMonitoringService
+mon = ArgoMonitoringService(endpoint="mon_endpoint", apikey="your_api_key")
+```
+
+## Examples
+
+In the `examples` folder, you may find the following library usage examples:
+
+* getting a list of reports for a tenant (`examples/get_reports.py`)
+* getting the status for each endpoint of all groups defined in a report
+* getting daily/monthy A/R results for groups defined in a report
+
+Help on running each example is available by running the example with `-h`.
+
+### Listing reports
+
+Assuming you've saved your API key in a file under `~/mon.key`, you may run the first example against the development instance of the service with
+
+```bash
+python3 ./examples/get_reports.py --host api.devel.mon.argo.grnet.gr --api-key ~/mon.key -f
+```
+
+This will print out a list of reports for the tenant, along with some information about the report, such as thresholds and the topology schema group hierarchy
+
+### Getting report endpoint statuses
+
+To get status data for endpoints belonging to groups of a report, run
+
+```bash
+python3 ./examples/get_endpoint_statuses.py --host api.devel.mon.argo.grnet.gr --api-key ~/mon.key -f --report REPORTNAME --start-date YYYY-MM-DD
+```
+
+where `REPORTNAME` is the name of a report, as listed in the 1st example, and `YYYY-MM-DD` is an ISO formated date. An optional end date may be passed with `--end-date YYY-MM-DD`, which otherwise defaults to the day defined by `--start-date`.
+
+### Getting report A/R results
+
+To get daily A/R results for all groups in a report, run
+
+```bash
+python3 ./examples/get_group_results.py --host api.devel.mon.argo.grnet.gr --api-key ~/mon.key -f --report REPORTNAME --start-date YYYY-MM-DD
+```
+
+where `REPORTNAME` is the name of a report, as listed in the 1st example, and `YYYY-MM-DD` is an ISO formated date. An optional end date may be passed with `--end-date YYY-MM-DD`, which otherwise defaults to the day defined by `--start-date`. Additionally,
+
+* The optional argument `--monthly` may be specified to fetch results with a monthy granularity, instead of daily.
+* The optional argument `--supergroup SUPERGROUPNAME` may be specified, in order to fetch results for a specific top-level group (supergroup)
+* The optional argument `--group GROUNAME` may be specified in order to fetch results for specific group of each supergroup, instead of all groups
+
+## Environment variables
+
+* `DEBUG`: Set to any truthy value in order to have debugging information printed to stdout, for development pusposes.

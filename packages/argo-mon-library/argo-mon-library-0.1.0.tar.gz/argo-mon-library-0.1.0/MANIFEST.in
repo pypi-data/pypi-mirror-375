@@ -1,0 +1,6 @@
+graft pymod
+graft examples
+include README.md
+include argo-mon-library.spec
+
+recursive-exclude pymod *.pyc *.pyo
