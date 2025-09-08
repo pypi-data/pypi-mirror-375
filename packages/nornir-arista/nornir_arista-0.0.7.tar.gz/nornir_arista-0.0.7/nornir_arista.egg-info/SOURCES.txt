@@ -1,0 +1,14 @@
+LICENSE
+README.md
+setup.py
+nornir_arista/__init__.py
+nornir_arista.egg-info/PKG-INFO
+nornir_arista.egg-info/SOURCES.txt
+nornir_arista.egg-info/dependency_links.txt
+nornir_arista.egg-info/requires.txt
+nornir_arista.egg-info/top_level.txt
+nornir_arista/connections/__init__.py
+nornir_arista/tasks/__init__.py
+nornir_arista/tasks/arista_config.py
+nornir_arista/tasks/arista_get.py
+nornir_arista/tasks/report.py
