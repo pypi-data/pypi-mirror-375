@@ -1,0 +1,2 @@
+[console_scripts]
+tensorneflow = tensorneflow.__main__:main
