@@ -1,0 +1,39 @@
+[project]
+name = "apis-highlighter-ng"
+version = "0.6.3"
+description = "Highlighter for the APIS project"
+authors = [{ name = "Birger Schacht", email ="birger.schacht@oeaw.ac.at" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+	"apis-core-rdf>=0.29.0",
+	"Django>=4.1"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["apis_highlighter"]
+
+[project.urls]
+source = "https://github.com/acdh-oeaw/apis-highlighter-ng"
+changelog = "https://github.com/acdh-oeaw/apis-highlighter-ng/blob/main/CHANGELOG.md"
+issues = "https://github.com/acdh-oeaw/apis-highlighter-ng/issues"
+
+[tool.uv]
+dev-dependencies = [
+    "deptry==0.23",
+    "djlint==1.36.4",
+    "ruff==0.11.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.djlint]
+indent=2
+profile="django"
+extension="html"
+blank_line_before_tag="block,if"
+blank_line_after_tag="endif,endblock"
+format_js=false
