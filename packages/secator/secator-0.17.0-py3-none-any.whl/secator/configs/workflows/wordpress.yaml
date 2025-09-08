@@ -1,0 +1,19 @@
+type: workflow
+name: wordpress
+alias: wordpress
+description: Wordpress vulnerability scan
+tags: [http, wordpress, vulnerability]
+input_types:
+  - url
+
+tasks:
+  _group/hunt_wordpress:
+    nuclei:
+      description: Nuclei Wordpress scan
+      tags: [wordpress]
+
+    wpscan:
+      description: WPScan
+
+    wpprobe:
+      description: WPProbe
