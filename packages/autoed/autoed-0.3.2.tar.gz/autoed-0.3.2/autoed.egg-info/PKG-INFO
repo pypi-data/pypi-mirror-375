@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: autoed
+Version: 0.3.2
+License: BSD-3-Clause
+License-File: LICENSE
+Requires-Dist: argcomplete
+Requires-Dist: watchdog==4.0.0
+Requires-Dist: numpy
+Requires-Dist: nexgen>=0.8.5
+Requires-Dist: h5py
+Requires-Dist: argparse
+Requires-Dist: python-daemon
+Requires-Dist: pathlib
+Requires-Dist: psutil
+Requires-Dist: attr
+Requires-Dist: hdf5plugin
+Requires-Dist: matplotlib
+Requires-Dist: pydantic
+Requires-Dist: uvicorn
+Provides-Extra: server
+Requires-Dist: fastapi[standard]; extra == "server"
+Requires-Dist: pyyaml; extra == "server"
+Requires-Dist: python-jose; extra == "server"
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
