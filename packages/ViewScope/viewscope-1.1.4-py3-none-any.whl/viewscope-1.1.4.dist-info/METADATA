@@ -1,0 +1,246 @@
+Metadata-Version: 2.4
+Name: ViewScope
+Version: 1.1.4
+Summary: Android UI inspection and automation tool
+Author-email: Sydeng IndieDev <s_329379@163.com>
+License: MIT
+Project-URL: Homepage, https://github.com/viewscope/viewscope
+Project-URL: Repository, https://github.com/viewscope/viewscope
+Project-URL: Documentation, https://viewscope.readthedocs.io
+Project-URL: Bug Tracker, https://github.com/viewscope/viewscope/issues
+Keywords: android,ui,automation,testing,uiautomator
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: Software Development :: Quality Assurance
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi==0.116.1
+Requires-Dist: uvicorn==0.35.0
+Requires-Dist: pydantic==2.11.7
+Requires-Dist: uiautomator2==3.4.0
+Requires-Dist: pillow==11.3.0
+Requires-Dist: adbutils==2.9.4
+Requires-Dist: httpx==0.28.1
+Requires-Dist: python-jose[cryptography]==3.5.0
+Requires-Dist: websockets==15.0.1
+
+# Android View Scope
+
+> Modern Android UI element inspector, similar to weditor functionality, built with Vue.js 3 + FastAPI
+
+## Features
+
+- **Modern Tech Stack** - Vue.js 3 + Element Plus + FastAPI
+- **Device Management** - Auto-detect and manage Android devices
+- **Real-time Screenshots** - High-quality PNG screenshot capture
+- **Interactive Element Selection** - SVG interaction layer, click to select UI elements
+- **UI Hierarchy Structure** - Complete interface hierarchy tree display
+- **Code Generation** - Auto-generate uiautomator2 locator code
+- **Multiple Locator Strategies** - Resource-ID, text, XPath and other methods
+
+## Project Structure
+
+```
+viewscope/
+├── frontend/          # Vue.js 3 前端项目
+│   ├── src/
+│   │   ├── views/     # 页面组件
+│   │   ├── stores/    # 状态管理 (Pinia)
+│   │   └── components/
+│   ├── package.json
+│   └── vite.config.js
+├── backend/           # FastAPI 后端项目  
+│   ├── main.py        # 应用入口
+│   ├── core/          # 核心模块
+│   │   ├── device_manager.py  # 设备管理
+│   │   ├── ui_analyzer.py     # UI分析
+│   │   └── code_generator.py  # 代码生成
+│   ├── api/           # API路由
+│   │   ├── devices.py
+│   │   ├── screenshot.py
+│   │   └── ...
+│   └── requirements.txt
+├── start.bat          # 一键启动脚本
+└── README.md
+```
+
+## Quick Start
+
+### One-Click Launch (Recommended)
+
+Simply install via pip and run:
+```bash
+pip install ViewScope
+viewscope
+```
+
+The command will automatically:
+1. Start backend API service (port 8060+)
+2. Launch web interface in browser
+
+### Manual Development Setup
+
+#### Backend
+```bash
+cd backend
+pip install -r requirements.txt
+python main.py
+```
+
+#### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Prerequisites
+
+### System Requirements
+- Windows 10/11 / macOS / Linux
+- Python 3.8+
+- Android SDK (ADB available)
+
+### Device Requirements
+- Android 4.4+
+- USB debugging enabled
+- Device connected via ADB
+
+### Environment Verification
+```bash
+# Check Python
+python --version
+
+# Check ADB
+adb version
+
+# Check device connection
+adb devices
+```
+
+## Usage
+
+1. **Launch Application**
+   - Run `viewscope` command
+   - Browser opens automatically
+
+2. **Connect Device**
+   - Select device from top toolbar
+   - Click "Refresh Current View" button
+
+3. **Element Selection**
+   - Click any UI element in screenshot
+   - Element details show in right panel
+
+4. **Code Generation**
+   - Switch to "Code Generation" tab
+   - View auto-generated uiautomator2 code
+   - Click "Copy Code" button
+
+5. **UI Hierarchy View**
+   - Switch to "UI Hierarchy" tab
+   - Browse complete interface tree structure
+   - Use search to locate specific elements
+
+## API Documentation
+
+After starting backend service, visit http://localhost:8060/docs for complete API documentation.
+
+### Main Endpoints
+
+- `GET /api/devices` - Get device list
+- `POST /api/screenshot` - Take screenshot and get UI structure
+- `GET /api/ui-hierarchy` - Get UI hierarchy structure
+- `POST /api/code/generate` - Generate locator code
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Device Not Detected**
+   ```bash
+   # Check ADB connection
+   adb devices
+   # Restart ADB service
+   adb kill-server
+   adb start-server
+   ```
+
+2. **Screenshot Failed**
+   - Ensure device has authorized USB debugging
+   - Check if device is locked
+   - Try reconnecting device
+
+3. **Frontend Cannot Access Backend**
+   - Check if backend started on port 8060
+   - Confirm firewall settings
+   - Check browser console errors
+
+4. **Dependency Installation Failed**
+   ```bash
+   # Python dependencies
+   pip install -r requirements.txt -i https://pypi.douban.com/simple
+   ```
+
+## Development
+
+### Tech Stack
+- **Frontend**: Vue.js 3, Element Plus, SVG, Pinia
+- **Backend**: FastAPI, uiautomator2, Pillow
+- **Build Tools**: Vite, Python uvicorn
+
+### Development Environment
+```bash
+# Backend hot reload
+uvicorn main:app --reload --host 0.0.0.0 --port 8060
+
+# Frontend hot reload
+npm run dev
+```
+
+## Build & Deploy
+
+### Frontend Build
+```bash
+cd frontend
+npm run build
+```
+
+### Package Distribution
+```bash
+pip install build twine
+python -m build
+twine upload dist/*
+```
+
+## Contributing
+
+1. Fork this repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
+
+## License
+
+This project is licensed under MIT License - see [LICENSE](LICENSE) file for details
+
+## Acknowledgments
+
+- [uiautomator2](https://github.com/openatx/uiautomator2) - Android automation framework
+- [Vue.js](https://vuejs.org/) - Progressive JavaScript framework
+- [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
+- [Element Plus](https://element-plus.org/) - Vue.js UI component library
+
+---
+
+For issues or suggestions, welcome to submit Issues or Pull Requests!
