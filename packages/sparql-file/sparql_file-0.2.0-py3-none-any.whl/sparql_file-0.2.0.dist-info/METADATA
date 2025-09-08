@@ -1,0 +1,87 @@
+Metadata-Version: 2.3
+Name: sparql-file
+Version: 0.2.0
+Summary: A simple SPARQL 1.1 endpoint based on a file.
+License: GPL-3.0-or-later
+Author: Natanael Arndt
+Author-email: arndtn@gmail.com
+Requires-Python: >=3.9,<4.0.0
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: cli
+Requires-Dist: rdflib-endpoint (>=0.5.1,<0.6.0)
+Requires-Dist: typer (>=0.16.1,<0.17.0) ; extra == "cli"
+Requires-Dist: uvicorn (>=0.34.0,<0.35.0)
+Project-URL: Bug Tracker, https://github.com/AKSW/sparql-file/issues
+Project-URL: Homepage, https://github.com/AKSW/sparql-file
+Project-URL: Repository, https://github.com/AKSW/sparql-file.git
+Description-Content-Type: text/markdown
+
+# SPARQL File
+
+Serve an RDF file as an [RDFLib](https://rdflib.readthedocs.io/) Graph through a SPARQL endpoint served as [fastapi](https://fastapi.tiangolo.com/) with [rdflib-endpoint](https://pypi.org/project/rdflib-endpoint/) ([github](https://github.com/vemonet/rdflib-endpoint)).
+
+## CLI Installation
+
+```sh
+$ pipx install sparql-file[cli]
+```
+
+## Usage
+
+```sh
+$ sparql-file --help
+```
+
+## Development Install
+
+```sh
+$ task install
+```
+
+or
+
+```sh
+$ poetry install
+```
+
+## Run Locally
+
+```sh
+$ GRAPH_FILE=graph.ttl task serve:dev
+# or
+$ GRAPH_FILE=graph.ttl task serve:uvicorn
+```
+
+or
+
+```sh
+$ GRAPH_FILE=graph.ttl poetry run fastapi dev sparql_file/env.py
+# or
+$ GRAPH_FILE=graph.ttl poetry run uvicorn sparql_file.env:app --host '' --port 8080
+```
+
+## Run With Podman/Docker (local build)
+
+```sh
+$ task build
+$ podman run -d --rm -v /path/to/graph_file.ttl:/data/graph.ttl:z -p 8080:8080 localhost/sparql-file:latest
+```
+
+## Run With Podman/Docker (ghcr.io registry build)
+
+```sh
+$ GRAPH_FILE=graph.ttl task serve:container
+```
+
+or
+
+```sh
+$ podman run -d --rm -e GRAPH_FILE="/data/graph.ttl" -v /path/to/graph_file.ttl:/data/graph.ttl:z -p 8080:8080 ghcr.io/aksw/sparql-file:main
+```
+
