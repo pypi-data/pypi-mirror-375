@@ -1,0 +1,3 @@
+[console_scripts]
+vd = visidata.main:vd_cli
+visidata = visidata.main:vd_cli

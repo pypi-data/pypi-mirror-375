@@ -1,0 +1,100 @@
+python-dateutil
+
+[:platform_system == "Windows"]
+windows-curses>=2.4.1
+
+[:python_version < "3.9"]
+importlib_resources
+
+[:python_version >= "3.13"]
+standard-mailcap
+
+[all]
+python-dateutil
+requests
+lxml
+openpyxl>=2.4
+xlrd
+xlwt
+h5py
+psycopg2-binary
+boto3
+pyshp
+mapbox-vector-tile
+pypng
+fonttools
+sas7bdat
+xport>=3
+PyYAML>=5.1
+dpkt
+dnslib
+namestand
+datapackage
+pdfminer.six
+tabula
+vobject
+tabulate
+wcwidth
+zstandard
+odfpy
+urllib3
+seaborn
+matplotlib
+sh
+psutil
+numpy
+pyconll
+msgpack
+brotli
+fecfile
+requests_cache
+beautifulsoup4
+Faker
+praw
+matrix_client
+zulip
+pyairtable
+
+[all:python_version < "3.11"]
+pandas>=1.0.5
+tomli
+
+[all:python_version < "3.9"]
+backports.zoneinfo
+
+[all:python_version <= "3.7"]
+pyarrow_hotfix
+pyarrow
+
+[all:python_version >= "3.11"]
+pandas>=1.5.3
+
+[all:python_version >= "3.8"]
+pyarrow>=14.0.1
+
+[test]
+brotli
+dnslib
+dpkt
+fecfile
+Faker
+h5py
+lxml
+msgpack
+odfpy
+openpyxl
+pandas>=1.5.3
+pyarrow
+pyconll
+pypng
+pytest
+PyYAML>=5.1
+tabulate
+tomli
+wcwidth
+xport>=3.0
+
+[windows-curses]
+
+[windows-curses:platform_system == "Windows"]
+windows-curses>=2.4.1
