@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: pyrogram-xydevs
+Version: 2.0.107
+Summary: My custom fork of Pyrogram with extra tweaks
+Author-email: Xylence <hello@xydevs.com>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: tgcrypto>=1.2.5
+Requires-Dist: pyaes>=1.6.1

@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrogram-xydevs"
+version = "2.0.107"
+description = "My custom fork of Pyrogram with extra tweaks"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+  { name = "Xylence", email = "hello@xydevs.com" }
+]
+license = { text = "MIT" }
+dependencies = [
+  "tgcrypto>=1.2.5",
+  "pyaes>=1.6.1"
+]
