@@ -1,0 +1,13 @@
+[console_scripts]
+autoed = autoed.autoed:main
+autoed_add_to_database = autoed.report.misc:add_to_database
+autoed_beam_center = autoed.beam_position.beam_center:main
+autoed_generate_config = autoed.global_config:save_default
+autoed_generate_report = autoed.report.report_generator:run
+autoed_multiplex = autoed.process.multiplex:main
+autoed_plot_spots = autoed.process.plot_spots:main
+autoed_process = autoed.process.process_static:main
+autoed_server = autoed.server:run
+autoed_slurm = autoed.process.slurm:main
+autoed_txt_report = autoed.report.txt_report:main
+autoed_watch = autoed.watch:main
