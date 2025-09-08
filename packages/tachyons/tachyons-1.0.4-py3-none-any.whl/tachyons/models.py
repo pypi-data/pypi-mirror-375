@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+"""
+<license>
+  * Copyright (C) 2024-2025 Abdelmathin Habachi, contact@abdelmathin.com.
+  *
+  * https://abdelmathin.com
+  * https://github.com/Abdelmathin/tachyons
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining
+  * a copy of this software and associated documentation files (the
+  * "Software"), to deal in the Software without restriction, including
+  * without limitation the rights to use, copy, modify, merge, publish,
+  * distribute, sublicense, and/or sell copies of the Software, and to
+  * permit persons to whom the Software is furnished to do so, subject to
+  * the following conditions:
+  *
+  * The above copyright notice and this permission notice shall be
+  * included in all copies or substantial portions of the Software.
+  *
+  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  *
+  * File   : tachyons/models.py
+  * Created: 2025/08/30 22:47:34 GMT+1
+  * Updated: 2025/08/30 23:44:36 GMT+1
+</license>
+"""
+__author__ = "Abdelmathin Habachi"
+__github__ = "https://github.com/Abdelmathin/tachyons"
+
+class TachyonsBaseModel:
+	__tablename__ = None
+	def __init_subclass__(self, *args, **kwargs):
+		if not self.__name__.endswith("Model"):
+			raise TypeError(
+				f"Class {self.__name__} must end with 'Model' to be a valid Tachyons model."
+			)
+		if not self.__tablename__:
+			self.__tablename__ = self.__name__[:-len("Model")].lower()
+
+	def __init__(self, jobject: dict = None):
+		self._jobject = jobject
+
+	def __json__(self):
+		return self._jobject
