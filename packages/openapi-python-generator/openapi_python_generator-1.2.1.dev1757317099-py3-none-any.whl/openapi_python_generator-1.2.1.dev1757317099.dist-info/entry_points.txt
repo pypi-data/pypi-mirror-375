@@ -1,0 +1,3 @@
+[console_scripts]
+openapi-python-generator=openapi_python_generator.__main__:main
+
