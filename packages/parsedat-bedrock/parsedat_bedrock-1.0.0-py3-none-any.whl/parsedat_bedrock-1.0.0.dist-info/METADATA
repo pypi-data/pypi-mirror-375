@@ -1,0 +1,48 @@
+Metadata-Version: 2.3
+Name: parsedat-bedrock
+Version: 1.0.0
+Summary: Lightweight Little-Endian NBT -> JSON CLI utility for Minecraft Bedrock level.dat files
+Author: DJ Stomp
+Author-email: 85457381+DJStompZone@users.noreply.github.com
+Requires-Python: >=3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Description-Content-Type: text/markdown
+
+# ParseDAT Bedrock
+
+A command line utility that reads a Minecraft Bedrock `level.dat` file (Little-Endian NBT) and outputs the data as JSON.
+
+## Usage
+
+```bash
+parsedat-bedrock /path/to/level.dat --out world.json --pretty
+parsedat-bedrock /path/to/level.dat --stdout
+parsedat-bedrock /path/to/level.dat --preserve-types --pretty
+```
+
+## Features
+
+* Automatically detect compression algorithm: gzip, zlib, or uncompressed
+* Parse NBT tags (0..12): `End`, `Byte`, `Short`, `Int`, `Long`, `Float`, `Double`,
+  `Byte_Array`, `String`, `List`, `Compound`, `Int_Array`, `Long_Array`
+* Emits clean JSON values (default)
+* Emits typed JSON if --preserve-types flag is used
+* Validates tag 0 termination (where applicable)
+* No external dependencies
+
+## Notes
+
+This script assumes the input file is Bedrock-style NBTLE, opposed to Java’s Big-Endian NBT.
+
+## Author
+
+[DJ Stomp](https://github.com/DJStompZone)
+
+
+## License
+
+MIT License. See the [LICENSE](LICENSE) file for more details.
+

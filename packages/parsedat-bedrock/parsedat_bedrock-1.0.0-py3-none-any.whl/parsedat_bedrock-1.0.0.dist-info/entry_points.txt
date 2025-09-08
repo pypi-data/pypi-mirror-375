@@ -1,0 +1,3 @@
+[console_scripts]
+parsedat-bedrock=parsedat_bedrock.__main__:main
+
