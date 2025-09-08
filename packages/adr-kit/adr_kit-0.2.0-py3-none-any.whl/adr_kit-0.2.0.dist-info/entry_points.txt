@@ -1,0 +1,3 @@
+[console_scripts]
+adr-kit = adr_kit.cli:app
+adr-kit-mcp = adr_kit.mcp.server:run_stdio_server
