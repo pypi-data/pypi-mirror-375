@@ -1,0 +1,109 @@
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from typing import ClassVar as _ClassVar, Optional as _Optional
+
+DESCRIPTOR: _descriptor.FileDescriptor
+
+class Order(_message.Message):
+    __slots__ = ("id", "shop_id", "customer_id", "customer_group_id", "order_id", "platform_id", "order_status", "buyer_name", "member_id", "order_date", "payment_date", "order_place_id", "shipping_status", "order_price_amount", "shipping_fee", "points_spent_amount", "credits_spent_amount", "coupon_discount_price", "coupon_shipping_fee_amount", "membership_discount_amount", "total_amount", "total_discount_amount", "total_payment_amount", "created_date", "updated_at", "is_deleted")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    SHOP_ID_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_ID_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_GROUP_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ID_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_STATUS_FIELD_NUMBER: _ClassVar[int]
+    BUYER_NAME_FIELD_NUMBER: _ClassVar[int]
+    MEMBER_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_DATE_FIELD_NUMBER: _ClassVar[int]
+    PAYMENT_DATE_FIELD_NUMBER: _ClassVar[int]
+    ORDER_PLACE_ID_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_STATUS_FIELD_NUMBER: _ClassVar[int]
+    ORDER_PRICE_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    SHIPPING_FEE_FIELD_NUMBER: _ClassVar[int]
+    POINTS_SPENT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    CREDITS_SPENT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    COUPON_DISCOUNT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    COUPON_SHIPPING_FEE_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    MEMBERSHIP_DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_DISCOUNT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_PAYMENT_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    CREATED_DATE_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
+    IS_DELETED_FIELD_NUMBER: _ClassVar[int]
+    id: int
+    shop_id: int
+    customer_id: int
+    customer_group_id: int
+    order_id: str
+    platform_id: str
+    order_status: str
+    buyer_name: str
+    member_id: str
+    order_date: str
+    payment_date: str
+    order_place_id: str
+    shipping_status: str
+    order_price_amount: int
+    shipping_fee: int
+    points_spent_amount: int
+    credits_spent_amount: int
+    coupon_discount_price: int
+    coupon_shipping_fee_amount: int
+    membership_discount_amount: int
+    total_amount: int
+    total_discount_amount: int
+    total_payment_amount: int
+    created_date: str
+    updated_at: str
+    is_deleted: bool
+    def __init__(self, id: _Optional[int] = ..., shop_id: _Optional[int] = ..., customer_id: _Optional[int] = ..., customer_group_id: _Optional[int] = ..., order_id: _Optional[str] = ..., platform_id: _Optional[str] = ..., order_status: _Optional[str] = ..., buyer_name: _Optional[str] = ..., member_id: _Optional[str] = ..., order_date: _Optional[str] = ..., payment_date: _Optional[str] = ..., order_place_id: _Optional[str] = ..., shipping_status: _Optional[str] = ..., order_price_amount: _Optional[int] = ..., shipping_fee: _Optional[int] = ..., points_spent_amount: _Optional[int] = ..., credits_spent_amount: _Optional[int] = ..., coupon_discount_price: _Optional[int] = ..., coupon_shipping_fee_amount: _Optional[int] = ..., membership_discount_amount: _Optional[int] = ..., total_amount: _Optional[int] = ..., total_discount_amount: _Optional[int] = ..., total_payment_amount: _Optional[int] = ..., created_date: _Optional[str] = ..., updated_at: _Optional[str] = ..., is_deleted: bool = ...) -> None: ...
+
+class OrderItem(_message.Message):
+    __slots__ = ("id", "shop_id", "order_id", "product_id", "customer_id", "order_item_code", "platform_id", "request_undone", "variant_code", "quantity", "option_id", "option_value", "option_value_default", "product_price", "option_price", "additional_discount_price", "order_status", "ordered_date", "shipped_date", "created_date", "updated_at", "is_deleted")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    SHOP_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ID_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_ID_FIELD_NUMBER: _ClassVar[int]
+    CUSTOMER_ID_FIELD_NUMBER: _ClassVar[int]
+    ORDER_ITEM_CODE_FIELD_NUMBER: _ClassVar[int]
+    PLATFORM_ID_FIELD_NUMBER: _ClassVar[int]
+    REQUEST_UNDONE_FIELD_NUMBER: _ClassVar[int]
+    VARIANT_CODE_FIELD_NUMBER: _ClassVar[int]
+    QUANTITY_FIELD_NUMBER: _ClassVar[int]
+    OPTION_ID_FIELD_NUMBER: _ClassVar[int]
+    OPTION_VALUE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_VALUE_DEFAULT_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_PRICE_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_DISCOUNT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    ORDER_STATUS_FIELD_NUMBER: _ClassVar[int]
+    ORDERED_DATE_FIELD_NUMBER: _ClassVar[int]
+    SHIPPED_DATE_FIELD_NUMBER: _ClassVar[int]
+    CREATED_DATE_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
+    IS_DELETED_FIELD_NUMBER: _ClassVar[int]
+    id: int
+    shop_id: int
+    order_id: int
+    product_id: int
+    customer_id: int
+    order_item_code: str
+    platform_id: str
+    request_undone: str
+    variant_code: str
+    quantity: int
+    option_id: str
+    option_value: str
+    option_value_default: str
+    product_price: int
+    option_price: int
+    additional_discount_price: int
+    order_status: str
+    ordered_date: str
+    shipped_date: str
+    created_date: str
+    updated_at: str
+    is_deleted: bool
+    def __init__(self, id: _Optional[int] = ..., shop_id: _Optional[int] = ..., order_id: _Optional[int] = ..., product_id: _Optional[int] = ..., customer_id: _Optional[int] = ..., order_item_code: _Optional[str] = ..., platform_id: _Optional[str] = ..., request_undone: _Optional[str] = ..., variant_code: _Optional[str] = ..., quantity: _Optional[int] = ..., option_id: _Optional[str] = ..., option_value: _Optional[str] = ..., option_value_default: _Optional[str] = ..., product_price: _Optional[int] = ..., option_price: _Optional[int] = ..., additional_discount_price: _Optional[int] = ..., order_status: _Optional[str] = ..., ordered_date: _Optional[str] = ..., shipped_date: _Optional[str] = ..., created_date: _Optional[str] = ..., updated_at: _Optional[str] = ..., is_deleted: bool = ...) -> None: ...

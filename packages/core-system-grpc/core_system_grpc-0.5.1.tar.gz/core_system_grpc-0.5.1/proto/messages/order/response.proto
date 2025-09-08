@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package core_system.order.v1;
+
+import "messages/order/common.proto";
+import "messages/common/pagination.proto";
+
+// Order 조회 응답 메시지
+message GetOrdersByShopResponse {
+    repeated Order result = 1;
+    int32 length = 2;
+}
+
+// OrderItem 조회 응답 메시지
+message GetOrderItemsByShopResponse {
+    repeated OrderItem result = 1;
+    int32 length = 2;
+}
