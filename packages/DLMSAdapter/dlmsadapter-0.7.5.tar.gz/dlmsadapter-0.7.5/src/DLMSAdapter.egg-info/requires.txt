@@ -1,0 +1,8 @@
+DLMS-SPODES<0.88,>=0.86.17
+StructResult>=0.8.4
+semver>=3.0.2
+
+[dev]
+mypy>=1.5.0
+ruff>=0.11
+types-requests
