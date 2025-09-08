@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yggdrasill-sdk"
+version = "0.0.0a0"
+description = "Reserved placeholder for the Yggdrasill SDK project."
+readme = "README.md"
+requires-python = ">=4.0"
+license = {text = "Proprietary"}
+authors = [{name="Mihail Costin Leonte", email="mail@mcleonte.com"}]
+# urls = { Homepage = "https://.com" }
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Programming Language :: Python :: 3",
+]
