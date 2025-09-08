@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smarttest"
+version = "1.0.1"
+description = "Intelligent Python code testing library with real-time error detection"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+    {name = "SmartTest Team", email = "team@smarttest.dev"},
+]
+maintainers = [
+    {name = "SmartTest Team", email = "team@smarttest.dev"},
+]
+keywords = [
+    "python",
+    "testing",
+    "code-quality",
+    "error-detection",
+    "real-time",
+    "monitoring",
+    "development",
+    "tools",
+    "linter",
+    "static-analysis",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Environment :: X11 Applications",
+    "Environment :: Win32 (MS Windows)",
+    "Environment :: MacOS X",
+]
+dependencies = [
+    "colorama>=0.4.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "mypy>=0.800",
+]
+docs = [
+    "sphinx>=4.0",
+    "sphinx-rtd-theme>=0.5",
+    "myst-parser>=0.15",
+]
+
+[project.urls]
+Homepage = "https://github.com/smarttest/smarttest"
+Documentation = "https://smarttest.readthedocs.io/"
+Repository = "https://github.com/smarttest/smarttest.git"
+"Bug Tracker" = "https://github.com/smarttest/smarttest/issues"
+"Source Code" = "https://github.com/smarttest/smarttest"
+
+[project.scripts]
+smarttest = "smarttest.cli:main"
+smarttest-app = "smarttest.app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["smarttest*"]
+
+[tool.setuptools.package-data]
+smarttest = ["*.py", "*.md", "*.txt"]
