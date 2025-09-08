@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "AhmetX-LogHero"
+version = "1.0.0"
+authors = [
+    {name = "Ahmet KAHRAMAN (AhmetXHero)", email = "ahmetxhero@gmail.com"},
+]
+description = "System log analyzer for detecting suspicious activities"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.7"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Security",
+]
+keywords = ["log", "analysis", "security", "ssh", "brute-force", "system", "administration"]
+dependencies = [
+    "click>=8.0.0",
+    "colorama>=0.4.4",
+    "python-dateutil>=2.8.0",
+    "tabulate>=0.9.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ahmetxhero/AhmetX-LogHero"
+"Bug Reports" = "https://github.com/ahmetxhero/AhmetX-LogHero/issues"
+"Source" = "https://github.com/ahmetxhero/AhmetX-LogHero"
+
+[project.scripts]
+loghero = "loghero.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["loghero*"]
