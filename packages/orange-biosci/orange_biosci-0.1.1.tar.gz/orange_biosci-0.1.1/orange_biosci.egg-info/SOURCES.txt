@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+orange3biosci/__init__.py
+orange3biosci/icons/biosci-category-icon.svg
+orange3biosci/icons/preprocessing-icon.svg
+orange3biosci/widgets/__init__.py
+orange3biosci/widgets/geo_preprocessor.py
+orange_biosci.egg-info/PKG-INFO
+orange_biosci.egg-info/SOURCES.txt
+orange_biosci.egg-info/dependency_links.txt
+orange_biosci.egg-info/entry_points.txt
+orange_biosci.egg-info/top_level.txt
