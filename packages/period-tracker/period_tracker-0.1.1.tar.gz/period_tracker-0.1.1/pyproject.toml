@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "period-tracker"
+version = "0.1.1"
+authors = [
+  { name="Daniel Taylor", email="kingorgg@gmail.com" },
+]
+dependencies = ["tkcalendar", "matplotlib"]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Repository = "https://codeberg.org/kingorgg/period_tracker.git"
+Issues = "https://codeberg.org/kingorgg/period_tracker/issues"
+
+[project.optional-dependencies]
+dev = ["black", "pytest"]
+
+[project.scripts]
+period-tracker = "period_tracker.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
