@@ -1,0 +1,10 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools", "wheel"]
+
+[project]
+authors = [{ name="Ding Yi", email="donexistence@gmail.com" }]
+description = "Done tools."
+name = "dyd"
+license = "MIT"
+version = "0.0.1"
