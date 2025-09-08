@@ -1,0 +1,3 @@
+[console_scripts]
+webviscrawler = app:parse_run
+webvisualiser = vis:main
