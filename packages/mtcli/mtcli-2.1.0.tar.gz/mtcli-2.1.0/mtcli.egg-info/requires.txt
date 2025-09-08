@@ -1,0 +1,5 @@
+click<9.0.0,>=8.2.1
+metatrader5<6.0.0,>=5.0.5260
+
+[build]
+pyinstaller
