@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "zmp-manual-backend"
+version = "0.4.4"
+description = "Backend service for ZMP manual management"
+authors = ["stiron <lesch1@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+colorlog = "^6.9.0"
+python-dotenv = "^1.0.1"
+fastapi = "^0.110.0"
+uvicorn = "^0.27.1"
+sse-starlette = "^1.8.2"
+aiofiles = "^24.1.0"
+python-multipart = "^0.0.9"
+asyncio = "^3.4.3"
+gitpython = "^3.1.44"
+deepl = "^1.21.1"
+pillow = "^10.2.0"
+itsdangerous = "^2.1.2"
+starlette-csrf = "^1.4.4"
+# Authentication dependencies
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+requests = "^2.31.0"
+pydantic = {extras = ["email"], version = "^2.10.6"}
+cryptography = "^44.0.2"
+pyjwt = {extras = ["crypto"], version = "^2.10.1"}
+zmp-notion-exporter = "^0.3.7"
+zmp-md-translator = "0.2.8"
+fastmcp = "^2.9.2"
+boto3 = "^1.39.3"
+
+
+[tool.poetry.group.quality.dependencies]
+pre-commit = "^4.1.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.0.0"
+pytest-watch = "^4.2.0"
+certifi = "^2025.1.31"
+pytest-asyncio = "^0.25.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
