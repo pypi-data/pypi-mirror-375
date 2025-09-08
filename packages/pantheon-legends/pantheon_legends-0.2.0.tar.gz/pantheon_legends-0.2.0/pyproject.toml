@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pantheon-legends"
+version = "0.2.0"
+description = "Python framework for implementing financial market analysis legend engines with type-aware Traditional vs Scanner distinction"
+authors = [
+    {name = "SpartanDigital", email = "spartandigital@icloud.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+keywords = ["finance", "trading", "technical-analysis", "market-analysis", "legends"]
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "mypy>=1.0",
+    "isort>=5.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/SpartanDigitalDotNet/pantheon-legends"
+Repository = "https://github.com/SpartanDigitalDotNet/pantheon-legends"
+Documentation = "https://spartandigitaldotnet.github.io/pantheon-legends"
+"Bug Tracker" = "https://github.com/SpartanDigitalDotNet/pantheon-legends/issues"
+
+[tool.setuptools.packages.find]
+include = ["legends*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
