@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hexaboost"
+version = "0.1.2"
+description = "Generador de proyectos escalables con arquitectura hexagonal"
+authors = [
+    { name="Tu Nombre", email="tuemail@example.com" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["click"]
+
+[project.scripts]
+hexaboost = "hexaboost.cli.main:cli"
+
+[tool.setuptools]
+packages = ["hexaboost"]

@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+hexaboost/__init__.py
+hexaboost.egg-info/PKG-INFO
+hexaboost.egg-info/SOURCES.txt
+hexaboost.egg-info/dependency_links.txt
+hexaboost.egg-info/entry_points.txt
+hexaboost.egg-info/requires.txt
+hexaboost.egg-info/top_level.txt
+tests/test_init.py
+tests/test_init_cmd.py
+tests/test_new.py
+tests/test_new_cmd.py
+tests/test_sync_readme.py
+tests/test_sync_readme_cmd.py
