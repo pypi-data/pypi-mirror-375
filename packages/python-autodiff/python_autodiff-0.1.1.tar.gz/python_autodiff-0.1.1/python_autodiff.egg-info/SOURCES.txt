@@ -1,0 +1,16 @@
+README.md
+setup.py
+autodiff/Graph.py
+autodiff/Tensor.py
+autodiff/__init__.py
+autodiff/gradients.py
+autodiff/nodes/Const.py
+autodiff/nodes/Node.py
+autodiff/nodes/Operator.py
+autodiff/nodes/Var.py
+autodiff/nodes/__init__.py
+python_autodiff.egg-info/PKG-INFO
+python_autodiff.egg-info/SOURCES.txt
+python_autodiff.egg-info/dependency_links.txt
+python_autodiff.egg-info/requires.txt
+python_autodiff.egg-info/top_level.txt

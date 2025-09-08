@@ -1,0 +1,153 @@
+<img src="https://raw.githubusercontent.com/OmPanchal/Autodiff/refs/heads/main/autodiff/Autodiff.png"></img>
+
+[autodiff](https://github.com/OmPanchal/autodiff) is an Automatic Differentiation library created purely using [numpy](https://numpy.org) and python which allows users to evaluate the derivatives of multivariable functions. 
+
+This is an improvement to the automatic differentiation system featured in [bren](https://github.com/OmPanchal/bren), which tackles two main limitations of the library. First, it allows for higher derivatives to be calculated with the previous version being limited to only the first. Next, this new version introduces reusability of already traversed graph structures.
+
+# **Install**
+To install the latest version of autodiff, run the following command in your terminal.
+```
+pip install python-autodiff
+```
+
+# **How it works**
+autodiff works by using numpy containers to automatically generate computation graphs whenever operations are performed on a `Tensor` object. Initially, when a tensor is instantiated, it stores a `Variable` node. Whenever an operation is performed on a tensor, it will create another tensor that stores an `Operation` node. This operation node will contain an attribute that contains its inputs, therefore creating a connection between the nodes. Thus, doing this with many operation nodes will create a computation graph.
+
+The `Graph` object will be responsible for traversing these computation graphs and generating gradient functions. The `gradient` method will be responsible for evaluating the derivatives, taking in a tensor as a *dy* and a list of tensors as *dx* and outputting a list of evaluated derivatives with respect to each of the tensors in *dx*. 
+ 
+When the gradient function is called, it first checks if a gradient function for the pair of *dy* and *dx* tensor exists; if it does, it simply outputs the value of that function. Otherwise, it will perform a depth first search of the computation graph of *dy* and at each operation node it will determine the correct gradient function to use and apply it to the current set of inputs. This result will be multiplied with the result from the previous operation node. Doing this would implement the process of multiplying many derivatives, which is done in the chain rule. 
+ 
+This chain of operations performed, operation node by operation node will be performed on a `Tensor` object (until a Variable node is reached), which will create a computation graph of its own. This, in essence, would be the computation graph of the derivative of *dy* with respect to the *dx* referenced by the Variable node. 
+ 
+This new computation graph can now be used to generate a reusable function for this specific pair of *dy* and *dx*, making this process more reusable. If the same derivative needed to be calculated again, then *dy*'s graph structure would not need to be traversed again. As a result, this would make the process of finding derivatives reusable and faster. 
+ 
+Additionally, the computation graph of the derivative could itself be traversed again giving the derivative of a derivative, thus the second derivative. This could be applied repeatedly to give many more higher order derivatives.
+
+
+**Your first autodiff program**
+```python
+import autodiff as ad
+
+# Create a Tensor object
+a = ad.Tensor([1, 2, 3, 4])
+# Perform an operation on it
+b = a ** 2
+
+# Create a graph object and add a as a variable
+graph = ad.Graph()
+graph.add_variables(a)
+
+# find the gradient of b with respect to a 
+gradients = graph.gradient(b, [a])
+print(gradients) # [array([2., 4., 6., 8.])]
+```
+
+# **Example Projects**
+Here are two example projects that showcase this library in use.
+
+### Higher derivative graph plotter
+This project displays the ability of this library to calculate higher order derivatives and showcases in a visual manner through plotting their graphs.
+
+**Step 1**: Create a tensor that contains a range of values and perform an operation on it.
+```python
+import autodiff as ad
+import numpy as np
+import matplotlib.pyplot as plt
+
+a = ad.Tensor(np.arange(-2, 2, 0.01), dtype="float64")
+
+d = np.sin((a ** 2) * np.tanh(a)) 
+```
+
+**Step 2**: Instanciate a graph object and add `a` as a variable.
+```python
+g = ad.Graph()
+g.add_variables(a)
+```
+
+**Step 3**: Plot the function and its derivatives and display the graphs.
+``` python
+# the _i attribute allows you to access the value of the tensor
+plt.plot(d._i)
+
+labels = ["function"]
+
+# loop for as many derivatives as you wish to take
+for i in range(3):
+	# plot the (i+1)th gradient of b
+	plt.plot(g.gradient(d, [a], i + 1)[0])
+	labels.append(f"derivative {i + 1}")
+
+# display the graph
+plt.legend(labels)
+plt.show()
+```
+
+### Neural network for XOR dataset
+
+This project shows how this library can be used to create a simple neural network to be fit on the XOR data. As we can see, only the forward function has been explicitly written, the backpropagation is handled by the `Graph` object.
+
+Although simple, this project acts as an example of how this library can be used to create neural networks. It also shows how easy it is to scale this model (by changing the dataset or adding more layers for example) without having to change much of the code.
+
+**Step 1**: Initialise the `Graph` object, Dataset and the model parameters.
+```python
+import autodiff as ad
+import numpy as np
+
+g = ad.Graph()
+
+# Dataset
+X = ad.Tensor([[[0], [0]], [[0], [1]], [[1], [0]], [[1], [1]]], dtype="float64")
+Y = ad.Tensor([[0], [1], [1], [0]], dtype="float64")
+
+# Model parameters
+W1 = ad.Tensor(np.random.rand(160, 2), dtype="float64")
+B1 = ad.Tensor(np.random.rand(160, 1), dtype="float64")
+
+W2 = ad.Tensor(np.random.rand(1, 160), dtype="float64")
+B2 = ad.Tensor(np.random.rand(1, 1), dtype="float64")
+
+```
+
+**Step 2**: Define the forward propagation function.
+``` python
+def forward(x):
+	Z1 = np.matmul(W1, x) + B1
+	A1 = np.tanh(Z1)
+
+	Z2 = np.matmul(W2, A1) + B2
+
+	return Z2
+```
+
+**Step 3**: Train the model for 1000 epochs. This will involve performing forward propagation, calculating the error and performing backward propagation. Backward propation will be performed using the `Graph` object. **Here, updating the values of x and y at each iteration is very important as it allows different values to be inputting into the gradient functions.**
+```python
+for i in range(1000):
+	for x, y in zip(X, Y):
+		parameters = [W1, B1, W2, B2]
+
+		# update the values of x and y
+		g.add_variables(*parameters, x, y)
+
+		# perform forward propagation
+		Z2 = forward(x)
+
+		# calculate and display the error
+		E = (y - Z2) ** 2
+		print(E)
+
+		# Find the gradients of E with respect to all the parameters 
+		for param, gradient in zip(parameters, g.gradient(E, parameters)):
+			# update the parameter values
+			param.assign(param._i - (0.01 * gradient))
+```
+
+
+**Step 4**: As the model is now trained, lets run the forward function on `X` to view the model's predictions.
+```python
+print("predictions")
+
+# for a larger dataset, the test set would be used here
+for x in X:
+	print(forward(x)) 
+```
