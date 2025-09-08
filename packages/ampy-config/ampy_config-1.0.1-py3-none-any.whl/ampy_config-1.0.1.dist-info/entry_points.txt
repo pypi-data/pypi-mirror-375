@@ -1,0 +1,2 @@
+[console_scripts]
+ampy-config = ampy_config.cli:main
