@@ -1,0 +1,143 @@
+Metadata-Version: 2.4
+Name: pooolify
+Version: 0.2.0
+Summary: pooolify: Code-centric Python framework for multi-agent LLM orchestration with FastAPI + SSE and PostgreSQL persistence
+Project-URL: Homepage, https://github.com/Pooolingforest/pooolifyAI
+Author: pooolify maintainers
+License: MIT
+Requires-Python: >=3.10
+Requires-Dist: fastapi>=0.110
+Requires-Dist: httpx>=0.27
+Requires-Dist: openai>=1.40.0
+Requires-Dist: psycopg[binary]>=3.2
+Requires-Dist: pydantic>=2.6
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: uvicorn>=0.30
+Description-Content-Type: text/markdown
+
+pooolify — Code‑Centric Multi‑Agent AI Framework (Python)
+
+Overview
+
+- Purpose: Orchestrate multiple LLM‑powered agents to collaboratively solve complex tasks.
+- Focus: Developer Experience (DX), extensibility, and installable Python package.
+- Core: FastAPI + SSE, PostgreSQL persistence, code‑declared agents and tools, provider‑agnostic LLM layer with cost tracking.
+
+Key Features
+
+- Manager‑Agent driven orchestration with DAG planning and parallel execution (asyncio).
+- Code‑declared Agents (`pydantic`) and Tools (Python classes) with a simple runtime.
+- FastAPI endpoints with Server‑Sent Events for plan/route/thought summaries/tool traces.
+- PostgreSQL persistence for sessions, messages, costs, plans, tool calls, and feedback.
+- Limits per request (steps, depth, duration) configured in code.
+
+Repository Layout
+
+pooolify-project/
+├─ pyproject.toml
+├─ README.md
+├─ pooolify/ # Framework core
+│ ├─ **init**.py
+│ ├─ config.py
+│ ├─ api/
+│ ├─ core/
+│ ├─ agents/
+│ ├─ tools/
+│ ├─ llm/
+│ └─ persistence/
+├─ examples/
+│ └─ 01_basic_chatbot/
+│ ├─ main.py
+│ ├─ my_agents.py
+│ ├─ my_tools.py
+│ ├─ .env
+│ └─ prompts/
+│ └─ my_agent.prompt
+│ └─ 02_multi_agent/
+│ ├─ main.py
+│ ├─ agents.py
+│ ├─ tools.py
+│ ├─ data/kb.json
+│ └─ prompts/
+│ ├─ researcher.prompt
+│ ├─ calculator.prompt
+│ └─ writer.prompt
+└─ tests/
+
+Install (dev)
+
+- Editable install to dogfood the framework while building examples.
+
+  pip install -e .
+
+Env setup
+
+- Copy and adjust the environment file:
+
+  cp .env.example .env
+
+  # then edit .env as needed (API_TOKEN, DATABASE_URL, etc.)
+
+Environment
+
+- Use uv (recommended) or regular venv. Configure env via .env or real env vars:
+  - APP_ENV=dev|staging|prod
+  - DATABASE_URL=postgresql+psycopg://user:pass@host:5432/db
+  - API_TOKEN=your_api_token
+  - LLM_OPENAI_API_KEY=sk-...
+
+Run the example
+
+- Start example 01 (basic):
+
+  uvicorn examples.01_basic_chatbot.main:app --reload
+
+- Test health:
+
+  curl http://localhost:8000/v1/healthz
+
+- Stream chat (SSE):
+
+  curl -H "Accept: text/event-stream" -H "Authorization: Bearer $API_TOKEN" \
+   -N http://localhost:8000/v1/chat/stream -d '{"session_id":"demo","query":"안녕?"}'
+
+- Start example 02 (multi-agent):
+
+  uvicorn examples.02_multi_agent.main:app --reload
+
+- Stream multi-agent (SSE):
+
+  curl -H "Accept: text/event-stream" \
+   -N http://localhost:8000/v1/chat/stream -d '{"session_id":"demo2","query":"SSE가 뭐야? 2+2는?"}'
+
+Manager limits in code
+
+- Set request limits when instantiating the core app:
+
+  from pooolify.core import PooolifyApp
+  from pooolify.core import ManagerLimits
+
+  core = PooolifyApp(limits=ManagerLimits(max_steps=20, max_depth=4, max_duration_s=120))
+
+  # register agents ...
+
+FastAPI Endpoints
+
+- POST /v1/chat/stream (SSE): main streaming interface.
+- POST /v1/chat: non‑streaming response.
+- POST /v1/sessions: create a session id.
+- GET /v1/sessions/{id}/messages: public conversation messages.
+- GET /v1/healthz, GET /v1/readyz: health endpoints.
+
+Security
+
+- Simple bearer token via `Authorization: Bearer <token>`; wire to `API_TOKEN`.
+
+Persistence
+
+- Tables are created on startup if missing (see pooolify/persistence/schema.py for DDL).
+
+Notes
+
+- Supported models are 'gpt-5' and 'gpt-5-high'. Gemini is temporarily unsupported.
+- SSE Thought summaries are structured; raw chain‑of‑thought is never emitted.
