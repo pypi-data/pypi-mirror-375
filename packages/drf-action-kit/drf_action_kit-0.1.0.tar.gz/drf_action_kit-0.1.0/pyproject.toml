@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drf-action-kit"
+version = "0.1.0"
+description = "DRF mixins & viewsets with action-based serializer support."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name="Erdi Mollahüseyinoğlu", email="erdimollahuseyinoglu@gmail.com" }
+]
+license = { text="MIT" }
+dependencies = [
+    "djangorestframework>=3.14"
+]
+keywords = ["django", "drf", "serializers", "viewset", "action-based"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Framework :: Django",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]

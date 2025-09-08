@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+drf_action_kit/__init__.py
+drf_action_kit/action_serializer.py
+drf_action_kit/exceptions.py
+drf_action_kit.egg-info/PKG-INFO
+drf_action_kit.egg-info/SOURCES.txt
+drf_action_kit.egg-info/dependency_links.txt
+drf_action_kit.egg-info/requires.txt
+drf_action_kit.egg-info/top_level.txt
