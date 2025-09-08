@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "modicon"
+version = "0.1.0"
+description = "Modular DI Container"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Kostia Tarnashynskyi", email = "kostia.tarnashynskyi@gmail.com" },
+]
+maintainers = [
+    { name = "Kostia Tarnashynskyi", email = "kostia.tarnashynskyi@gmail.com" },
+]
+keywords = [
+    "di",
+    "python",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/kostia-tarnashynskyi/modicon"
+Documentation = "https://github.com/kostia-tarnashynskyi/modicon#readme"
+Repository = "https://github.com/kostia-tarnashynskyi/modicon"
+
+[tool.hatch.build.targets.wheel]
+packages = ["modicon"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/modicon",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "pytest-cov>=6.3.0",
+]
