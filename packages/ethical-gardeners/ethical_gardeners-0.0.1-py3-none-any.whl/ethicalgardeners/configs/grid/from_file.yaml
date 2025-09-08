@@ -1,0 +1,11 @@
+init_method: "from_file"
+
+# Common parameters for every init method
+min_pollution: 0
+max_pollution: 100
+pollution_increment: 1
+num_seeds_returned: 1
+collisions_on: true
+
+# Parameters for init_from_file
+file_path: "./grid_config.txt"
