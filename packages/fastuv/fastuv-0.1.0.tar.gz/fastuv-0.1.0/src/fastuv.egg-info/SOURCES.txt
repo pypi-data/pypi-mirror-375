@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/fastuv/__init__.py
+src/fastuv/hello.py
+src/fastuv.egg-info/PKG-INFO
+src/fastuv.egg-info/SOURCES.txt
+src/fastuv.egg-info/dependency_links.txt
+src/fastuv.egg-info/entry_points.txt
+src/fastuv.egg-info/top_level.txt
+src/fastuv/cli/__init__.py
+src/fastuv/cli/config_manager.py
+src/fastuv/cli/main.py
