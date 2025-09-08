@@ -1,0 +1,11 @@
+name: napari-vascilia
+display_name: VASCilia
+schema_version: 0.1.0
+contributions:
+  commands:
+    - id: napari-vascilia.initialize_ui
+      python_name: napari_vascilia.Napari_VASCilia_v1_4_0:initialize_vascilia_ui
+      title: Initialize UI
+  widgets:
+    - command: napari-vascilia.initialize_ui
+      display_name: VASCilia UI
