@@ -1,0 +1,28 @@
+[build-system]
+requires = ["maturin>=1.8,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "conecta"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["version"]
+dependencies = [
+]
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+manifest-path = "conecta-python/Cargo.toml"
+
+[dependency-groups]
+dev = [
+    "arro3-core>=0.5.1",
+    "black>=25.1.0",
+    "nanoarrow>=0.7.0",
+    "polars>=1.31.0",
+    "pyarrow>=21.0.0",
+]
