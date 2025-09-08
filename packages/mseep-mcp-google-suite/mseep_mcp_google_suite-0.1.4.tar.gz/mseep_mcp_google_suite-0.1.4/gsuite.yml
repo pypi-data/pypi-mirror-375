@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  mcp_gsuite:
+    image: josedu90/mcp-google-suite:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env.production
+    networks:
+      - 316adsNet
+    volumes:
+      - ./server-creds.json:/app/server-creds.json:ro
+      - ./auth.keys.json:/app/auth.keys.json:ro
+      - ./logs:/app/logs
+      - ./src:/app/src
+
+
+networks:
+  316adsNet:
+    external: true

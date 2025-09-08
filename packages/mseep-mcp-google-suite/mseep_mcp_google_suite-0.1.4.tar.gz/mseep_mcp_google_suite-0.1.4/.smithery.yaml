@@ -1,0 +1,48 @@
+name: mcp-google-suite
+description: Conjunto de herramientas MCP para Google Workspace (Docs, Drive, Sheets)
+runtime: docker
+
+docker:
+  image: josedu90/mcp-google-suite:latest
+  command: python3 -m mcp_google_suite
+  ports:
+    - 3001
+
+tools:
+  - id: docs_create
+    name: Crear documento en Google Docs
+    parameters:
+      title:
+        type: string
+        required: true
+        description: Título del documento a crear
+      content:
+        type: string
+        required: false
+        description: Contenido inicial del documento
+
+  - id: drive_search_files
+    name: Buscar archivos en Google Drive
+    parameters:
+      query:
+        type: string
+        required: true
+        description: Consulta de búsqueda
+      page_size:
+        type: number
+        required: false
+        description: Número de resultados
+
+  - id: sheets_create
+    name: Crear hoja de cálculo
+    parameters:
+      title:
+        type: string
+        required: true
+        description: Nombre del archivo
+      sheets:
+        type: array
+        required: false
+        description: Lista de hojas a crear
+
+# Puedes agregar más herramientas MCP aquí siguiendo el mismo patrón
