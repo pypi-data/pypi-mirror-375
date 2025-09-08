@@ -1,0 +1,118 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "headless-waf-builder"
+version = "1.0.0"
+description = "Headless Wagtail Advanced Form Builder - Complete REST API for modern frontend frameworks"
+readme = "README.md"
+license = {text = "BSD"}
+authors = [
+    {name = "Richard Blake (Octave)", email = "richard.blake@octave.nz"},
+    {name = "Dan Brosnan (Octave)", email = "dan.brosnan@octave.nz"},
+    {name = "Vincent Tran (Octave)", email = "vincent@octave.nz"}
+]
+maintainers = [
+    {name = "Richard Blake (Octave)", email = "richard.blake@octave.nz"},
+    {name = "Dan Brosnan (Octave)", email = "dan.brosnan@octave.nz"},
+    {name = "Vincent Tran (Octave)", email = "vincent@octave.nz"}
+]
+keywords = ["wagtail", "django", "forms", "headless", "cms", "api", "rest"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Wagtail :: 6",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Content Management System",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "Django>=4.2",       # Django 4.2 minimum required version
+    "Wagtail>=6.4",      # Wagtail 6.4 minimum required version
+    "wagtailextraicons", # Octave NZ's custom icons for Wagtail
+    "django-ninja",      # Core requirement for headless API
+    "pydantic>=2.0",     # For schema validation
+    "psycopg[binary]",   # PostgreSQL adapter (modern psycopg v3)
+    "django-recaptcha",  # For reCAPTCHA protection
+    "celery",            # For background email processing
+    "redis",             # For Celery backend
+]
+
+[project.optional-dependencies]
+dev = [
+    "django-extensions",
+    "pytest",
+    "pytest-django",
+    "pytest-cov",
+    "black",
+    "isort",
+    "flake8",
+    "pre-commit",
+    "mkdocs",
+    "mkdocs-material",
+]
+test = [
+    "pytest",
+    "pytest-django",
+    "pytest-cov",
+    "coverage",
+]
+
+[project.urls]
+Homepage = "https://github.com/octavenz/headless-waf-builder"
+Documentation = "https://octavenz.github.io/headless-waf-builder/"
+Repository = "https://github.com/octavenz/headless-waf-builder"
+"Bug Tracker" = "https://github.com/octavenz/headless-waf-builder/issues"
+Changelog = "https://github.com/octavenz/headless-waf-builder/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+headless_waf_builder = [
+    "templates/**/*.html",
+    "static/**/*",
+    "migrations/*.py",
+]
+
+# Development tools configuration
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  migrations
+  | venv
+  | env
+  | .env
+  | .venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+skip = ["migrations", "venv", "env", ".env", ".venv"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "build_test.settings.dev"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "--cov=headless_waf_builder --cov-report=html --cov-report=term-missing" 
