@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: lokis-duplicates
+Version: 0.1.0
+Summary: A Python library by Loki to find duplicate values in lists, strings, and more.
+Home-page: https://github.com/your-username/lokis-duplicates
+Author: Lokeshwaran (Loki)
+Author-email: your-email@example.com
+License: MIT
+Keywords: duplicates,lokis,find duplicates,python
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+License-File: LICENSE
+
