@@ -1,0 +1,17 @@
+[build-system]
+requires = ["uv_build >= 0.7.19, <0.9.0"]
+build-backend = "uv_build"
+
+[project]
+name = "ResistorEnDeCode"
+version = "0.1.2"
+dependencies = [ "PySide6" ]
+requires-python = ">= 3.13"
+authors = [{name = "Alfredo Cubitos"}]
+description = "Tool to decode or encode resistance color codes"
+readme = "README.md"
+keywords = ["color codes","smd","electronic","E24"]
+
+
+[project.urls]
+Homepage = "https://github.com/AlfredoCubitos/ResistorEnDeCode"
