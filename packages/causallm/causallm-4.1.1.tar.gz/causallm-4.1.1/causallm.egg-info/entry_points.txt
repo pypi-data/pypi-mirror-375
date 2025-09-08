@@ -1,0 +1,2 @@
+[console_scripts]
+causallm = causallm.cli:cli_entry_point
