@@ -1,0 +1,3 @@
+[console_scripts]
+spaceworld = spaceworld.cli:main
+sw = spaceworld.cli:main
