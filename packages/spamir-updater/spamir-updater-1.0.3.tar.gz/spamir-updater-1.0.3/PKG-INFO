@@ -1,0 +1,27 @@
+Metadata-Version: 2.1
+Name: spamir-updater
+Version: 1.0.3
+Summary: Secure automatic update client for Python applications with encrypted communication and package verification
+Home-page: https://github.com/spamir/spamir-updater
+Author: Spamir
+Author-email: spamirorg@proton.me
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Software Distribution
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+UNKNOWN
+
