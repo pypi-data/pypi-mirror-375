@@ -1,0 +1,39 @@
+[package]
+name = "optik"
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "optik"
+crate-type = ["rlib"]
+
+[lints]
+workspace = true
+
+[dependencies]
+clarabel.workspace = true
+nalgebra.workspace = true
+nlopt.workspace = true
+ordered-float.workspace = true
+petgraph.workspace = true
+rand.workspace = true
+rand_chacha.workspace = true
+rayon.workspace = true
+urdf-rs.workspace = true
+
+[[example]]
+name = "example"
+path = "../../examples/example.rs"
+
+[dev-dependencies]
+approx = "0.5"
+criterion = "0.7"
+serde = "1.0"
+serde_json = "1.0"
+
+[[bench]]
+name = "bench"
+harness = false

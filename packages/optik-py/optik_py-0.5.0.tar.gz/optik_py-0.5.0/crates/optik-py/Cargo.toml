@@ -1,0 +1,25 @@
+[package]
+name = "optik-py"
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "optik"
+crate-type = ["cdylib"]
+
+[lints]
+workspace = true
+
+[build-dependencies]
+pyo3-build-config = "0.26"
+
+[dependencies]
+nalgebra.workspace = true
+optik.workspace = true
+pyo3.workspace = true
+
+[features]
+extension-module = ["pyo3/extension-module"]

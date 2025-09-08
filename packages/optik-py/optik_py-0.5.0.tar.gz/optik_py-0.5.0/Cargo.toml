@@ -1,0 +1,35 @@
+[workspace]
+resolver = "2"
+members = ["crates/optik-py"]
+
+[workspace.package]
+authors = ["Kyle Cesare <kcesare@gmail.com>"]
+version = "0.5.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+rust-version = "1.85"
+
+[workspace.dependencies]
+optik = { path = "crates/optik" }
+
+# Solver
+clarabel = "0.11"
+nalgebra = { version = "0.34", features = [ "rand", "serde-serialize" ] }
+nlopt = { git = "https://github.com/kylc/rust-nlopt.git", branch = "optik-patches" }
+ordered-float = "4.2"
+petgraph = "0.7"
+rand = "0.9"
+rand_chacha = "0.9"
+rayon = "1.10"
+urdf-rs = "0.9"
+
+# Python
+pyo3 = { version = "0.25", features = ["abi3-py38"] }
+
+[workspace.lints.rust]
+non_snake_case = "allow"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+opt-level = 3
