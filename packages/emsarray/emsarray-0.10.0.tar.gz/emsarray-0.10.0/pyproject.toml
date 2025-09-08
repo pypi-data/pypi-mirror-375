@@ -1,0 +1,156 @@
+[build-system]
+requires = [
+	"setuptools >= 35.0.2",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emsarray"
+version = "0.10.0"
+description = "xarray extension that supports multiple geometry conventions"
+authors = [
+	{name = "Coastal Environmental Modelling team, Oceans and Atmosphere, CSIRO", email = "coasts@csiro.au"},
+]
+license = {file = "LICENSE"}
+requires-python = ">=3.11"
+dependencies = [
+	"bottleneck >=1.3",
+	"geojson >=3.1",
+	"netcdf4 >=1.6.4",
+	"numpy >=1.25",
+	"packaging >=23.2",
+	"shapely >=2.0",
+	"pyshp >=2.3",
+	"xarray[parallel] >=2024.1",
+]
+
+dynamic = ["readme"]
+
+[project.urls]
+Documentation = "https://emsarray.readthedocs.io/"
+"Release notes" = "https://emsarray.readthedocs.io/en/stable/releases/0.10.0/"
+Source = "https://github.com/csiro-coasts/emsarray/"
+
+[project.optional-dependencies]
+plot = [
+	"cartopy >=0.22",
+	"matplotlib >=3.8",
+	"pykdtree >=1.3",
+	"cfunits >= 3.3",
+]
+
+tutorial = [
+	"pooch >=1.8",
+]
+
+complete = [
+	"emsarray[plot,tutorial]",
+]
+
+docs = [
+	"emsarray[complete]",
+	"sphinx ~=6.2.1",
+	"sphinx_book_theme ~=1.0.1",
+	"livereload~=2.6.3",
+]
+
+testing = [
+	"emsarray[complete]",
+	"pytest",
+	"pytest-cov",
+	"pytest-mpl",
+	"mypy",
+	"pandas-stubs",
+	"types-pytz",
+	"flake8",
+	"isort",
+	"freezegun",
+]
+
+[project.scripts]
+emsarray = "emsarray.cli:main"
+
+[project.entry-points."emsarray.conventions"]
+ArakawaC = "emsarray.conventions.arakawa_c:ArakawaC"
+CFGrid1D = "emsarray.conventions.grid:CFGrid1D"
+CFGrid2D = "emsarray.conventions.grid:CFGrid2D"
+ShocSimple = "emsarray.conventions.shoc:ShocSimple"
+ShocStandard = "emsarray.conventions.shoc:ShocStandard"
+UGrid = "emsarray.conventions.ugrid:UGrid"
+# emsarray.conventions end - marker used by docs
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mypkg = ["py.typed"]
+
+[tool.pytest.ini_options]
+addopts = [
+	# TODO Work around till the mpl-baseline-path ini option is included in the
+	# next pytest-mpl release.
+	"--mpl-baseline-path", "tests/baseline_images",
+]
+
+testpaths = ["tests"]
+filterwarnings = [
+	"error",
+]
+markers = [
+	"matplotlib: Tests that involve matplotlib and plotting",
+	"tutorial: Tests that involve the tutorial datasets",
+]
+
+mpl-use-full-test-name = true
+# TODO This option will be included in the next version of pytest-mpl.
+# Till then, it is added using addopts above
+# mpl-baseline-path = "tests/baseline_images"
+
+[tool.mypy]
+python_version = "3.11"
+
+disallow_untyped_defs = true
+warn_return_any = true
+warn_unused_configs = true
+
+mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
+
+[[tool.mypy.overrides]]
+# These modules do not (yet) have type stubs, so they need to be explicitly ignored
+module = [
+	"cartopy.*",
+	"cftime.*",
+	"cfunits.*",
+	"cryptography.*",
+	"geojson.*",
+	"matplotlib.*",
+	"netCDF4.*",
+	"pooch.*",
+	"pytest.*",
+	"shapefile.*",
+	"shapely.*",
+	"traitlets.*",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+warn_return_any = false
+
+[tool.isort]
+multi_line_output = 5
+known_first_party = "emsarray,tests"
+
+[tool.coverage.run]
+source_pkgs = ["emsarray"]
+
+[tool.coverage.report]
+exclude_lines = [
+	"# pragma: no cover",
+	"@abc\\.abstract",
+	"if TYPE_CHECKING:",
+]
