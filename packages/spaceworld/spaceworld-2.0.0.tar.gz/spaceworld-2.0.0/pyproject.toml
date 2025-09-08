@@ -1,0 +1,148 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spaceworld"
+version = "2.0.0"
+authors = [
+    { name = "binobinos", email = "binobinos.dev@gmail.com" },
+]
+description = "Spaceworld is a new generation Cli framework for convenient development of your teams written in Python 3.12+ with support for asynchronous commands"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+keywords = ["python", "shell", "cli", "performance", "terminal", "async", "python3", "typehints", "spaceworld"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "Topic :: System :: Shells",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Terminals",
+    "Topic :: Software Development :: User Interfaces",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pyttsx3>=2.99",
+]
+
+[project.scripts]
+spaceworld = "spaceworld.cli:main"
+sw = "spaceworld.cli:main"
+
+[tool.black]
+line-length = 140
+target-version = ['py312']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 140
+known_first_party = ["core"]
+
+[tool.pydocstyle]
+ignore = [
+    "D100",
+    "D203",
+    "D212",
+    "D213",
+    "D214",
+    "D413",
+    "D407",
+    "D417",
+    "D406",
+    "D102",
+    "D101",
+]
+match = "(?!_).*"
+match-dir = "(?!_).*"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+ignore_missing_imports = true
+ignore_errors = true
+
+[tool.flake8]
+max-line-length = 140
+max-complexity = 18
+select = "B,C,E,F,W,T4,B9"
+exclude = ".git,__pycache__,build,dist,.venv,venv"
+filename = "*.py"
+
+[tool.pylint]
+max-line-length = 140
+disable = [
+    "missing-docstring",
+    "too-few-public-methods",
+    "import-error",
+    "protected-access",
+    "duplicate-code"
+]
+
+[tool.semantic_release]
+version_source = "tag"
+version_variable = "pyproject.toml:version"
+commit_parser = "conventional"
+major_tag = "major"
+minor_tag = "minor"
+patch_tag = "patch"
+changelog_capitalize = true
+changelog_scope = true
+upload_to_release = true
+upload_to_pypi = true
+
+
+changelog_exclude_commits = [
+    "typo",
+    "style",
+    "refactor"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "core/tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --cov=core --cov-report=xml"
+
+[project.urls]
+Homepage = "https://github.com/Binobinos/SpaceWorld"
+Changelog = "https://github.com/Binobinos/Spaceworld/blob/main/CHANGELOG.md"
+Releases = "https://github.com/Binobinos/SpaceWorld/releases"
+Documentation = "https://spaceworld.binobinos.com/"
+Bug = "https://github.com/Binobinos/SpaceWorld/issues"
+
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["spaceworld"]
+
+[tool.setuptools.package-data]
+spaceworld = ["py.typed"]
+"*" = ["*.py", "**/*.py"]
