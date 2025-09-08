@@ -1,0 +1,2 @@
+[console_scripts]
+pawns = pawnstack.cli.main:main
