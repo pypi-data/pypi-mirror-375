@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/dcx_mcp_sse.egg-info/PKG-INFO
+src/dcx_mcp_sse.egg-info/SOURCES.txt
+src/dcx_mcp_sse.egg-info/dependency_links.txt
+src/dcx_mcp_sse.egg-info/requires.txt
+src/dcx_mcp_sse.egg-info/top_level.txt
+src/mcp_sse_fetch_weather/__init__.py
+src/mcp_sse_fetch_weather/__main__.py
+src/mcp_sse_fetch_weather/server.py
