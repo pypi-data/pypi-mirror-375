@@ -1,0 +1,3 @@
+[console_scripts]
+vg_create_vhost = vg_exec.create_vhost:main
+vg_remove_vhost = vg_exec.remove_vhost:main
