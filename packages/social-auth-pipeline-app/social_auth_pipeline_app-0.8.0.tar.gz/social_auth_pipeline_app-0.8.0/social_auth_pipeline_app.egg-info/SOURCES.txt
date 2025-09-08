@@ -1,0 +1,13 @@
+setup.py
+fullname_plugin/__init__.py
+fullname_plugin/apps.py
+fullname_plugin/pipeline.py
+fullname_plugin/settings/__init__.py
+fullname_plugin/settings/common.py
+fullname_plugin/settings/lms.py
+fullname_plugin/settings/production.py
+social_auth_pipeline_app.egg-info/PKG-INFO
+social_auth_pipeline_app.egg-info/SOURCES.txt
+social_auth_pipeline_app.egg-info/dependency_links.txt
+social_auth_pipeline_app.egg-info/entry_points.txt
+social_auth_pipeline_app.egg-info/top_level.txt
