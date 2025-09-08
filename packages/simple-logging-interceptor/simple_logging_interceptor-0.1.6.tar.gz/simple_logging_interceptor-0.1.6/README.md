@@ -1,0 +1,128 @@
+# Logging Interceptor
+
+A lightweight Python decorator for logging function calls, arguments, return values, execution time, and exceptions.  
+Designed to be simple, reusable, and project-agnostic.
+
+---
+
+## ✨ Features
+
+- **Automatic log saving**: All logs are saved by default to a `.logs/` folder.
+- **Timestamped log files**: Each run creates a new file named like `interceptor_2025-09-07_17-15-30.log`.
+- **Custom log directory**: Change the default folder at runtime via `set_log_directory('/path/to/logs')`.
+- **Built‑in Parser**: Programmatically parse one log file or all `.log` files in a folder and save structured **JSONL** to `.parsed_logs/`.
+
+---
+
+## 📦 Installation
+
+Install from PyPI:
+
+```bash
+pip install simple-logging-interceptor
+```
+
+---
+
+## 🚀 Quick Start
+
+```python
+from simple_logging_interceptor.decorators import simple_logging_interceptor, set_log_directory
+
+@simple_logging_interceptor
+def add(a, b):
+    return a + b
+
+@simple_logging_interceptor
+def greet(name, age=None):
+    if age:
+        return f"Hello {name}, you are {age} years old!"
+    return f"Hello {name}!"
+
+print(add(2, 3))
+print(greet("Alice"))
+print(greet("Bob", age=30))
+
+# Change log directory at runtime (creates a new timestamped file there)
+set_log_directory("/tmp/custom_logs")
+print(add(10, 20))
+```
+
+### Example log output
+```
+2025-09-07 17:15:30 - INFO - Calling: add with args=(2, 3), kwargs={}
+2025-09-07 17:15:30 - INFO - Returned from add -> 5 (took 0.0021 ms)
+2025-09-07 17:15:30 - INFO - Calling: greet with args=('Bob',), kwargs={'age': 30}
+2025-09-07 17:15:30 - INFO - Returned from greet -> Hello Bob, you are 30 years old! (took 0.0043 ms)
+2025-09-07 17:15:30 - INFO - Logging directory changed to: /tmp/custom_logs, file=interceptor_2025-09-07_17-15-30.log
+2025-09-07 17:15:30 - INFO - Calling: add with args=(10, 20), kwargs={}
+2025-09-07 17:15:30 - INFO - Returned from add -> 30 (took 0.0015 ms)
+```
+
+> ℹ️ **No import-time side effects**: log files are only created when a decorated function runs or when you call `set_log_directory(...)`.
+
+---
+
+## 🧩 Parser Utilities
+
+The library includes a parser to convert logs into structured records and save them as **JSON Lines** files under `.parsed_logs/`.
+
+### 1) Parse a single file
+
+```python
+from pathlib import Path
+from simple_logging_interceptor.parser import parse_and_save
+
+records = parse_and_save(Path(".logs/interceptor_2025-09-07_12-36-26.log"))
+print(len(records), "records parsed")
+print(records[0])  # {'func': 'add', 'args': (2, 3), 'kwargs': {}, 'start_ts': '...', ...}
+```
+This will create:
+```
+.parsed_logs/
+  interceptor_2025-09-07_12-36-26.jsonl
+```
+
+### 2) Parse all `.log` files in a folder
+
+```python
+from simple_logging_interceptor.parser import parse_folder
+
+# Non-recursive: only files directly inside ./logs
+summary = parse_folder(".logs")
+
+# Recursive (search subfolders too):
+summary_recursive = parse_folder(".logs", recursive=True)
+
+print(summary)
+# [{'input': '.logs/interceptor_2025-09-07_12-36-26.log',
+#   'output': '.parsed_logs/interceptor_2025-09-07_12-36-26.jsonl',
+#   'count': 4}, ...]
+```
+
+### JSONL schema (one record per line)
+
+Each record may contain:
+```json
+{
+  "func": "add",
+  "args": [2, 3],
+  "kwargs": {},
+  "start_ts": "2025-09-07 12:36:26",
+  "start_level": "INFO",
+  "end_ts": "2025-09-07 12:36:26",
+  "end_level": "INFO",
+  "result": 5,
+  "elapsed_ms": 0.7,
+  "exception": null,
+  "traceback": null
+}
+```
+
+For exceptions, `result`/`elapsed_ms` may be missing and `exception`/`traceback` are populated.
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
