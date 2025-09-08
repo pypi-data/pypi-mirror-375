@@ -1,0 +1,7 @@
+*.lock
+*.pyc
+*.dirlock
+*.egg-info
+.idea
+
+venv/
