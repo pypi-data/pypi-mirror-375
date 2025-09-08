@@ -1,0 +1,17 @@
+ReadMe.md
+pyproject.toml
+setup.py
+Algebra_with_SymPy.egg-info/PKG-INFO
+Algebra_with_SymPy.egg-info/SOURCES.txt
+Algebra_with_SymPy.egg-info/dependency_links.txt
+Algebra_with_SymPy.egg-info/requires.txt
+Algebra_with_SymPy.egg-info/top_level.txt
+algebra_with_sympy/__init__.py
+algebra_with_sympy/algebraic_equation.py
+algebra_with_sympy/preparser.py
+algebra_with_sympy/version.py
+tests/__init__.py
+tests/test_algebraic_equation.py
+tests/test_extension_of_sympy_functions.py
+tests/test_numerics.py
+tests/test_preparser.py
