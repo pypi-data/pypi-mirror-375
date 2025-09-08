@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "advanced-face-age-recognition-module"
+version = "1.0.0"
+description = "AFADS: on-device face age estimation with simple 18+ gating, Tkinter/Pygame/Webcam demos"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name="Your Name"}]
+keywords = ["face", "age", "estimation", "verification", "AFADS"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Security",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+  "insightface>=0.7.3",
+  "onnxruntime>=1.17.0",
+  "opencv-python>=4.9.0.80",
+  "numpy>=1.26.0",
+  "fastapi>=0.111.0",
+  "uvicorn>=0.30.0",
+  "pillow>=10.3.0",
+  "pygame>=2.5.2"
+]
+
+[project.urls]
+Homepage = "https://example.com/afads"
+Issues = "https://example.com/afads/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["afads*"]

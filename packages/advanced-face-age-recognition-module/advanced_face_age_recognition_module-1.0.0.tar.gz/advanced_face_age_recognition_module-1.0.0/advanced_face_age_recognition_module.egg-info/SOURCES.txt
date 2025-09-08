@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+advanced_face_age_recognition_module.egg-info/PKG-INFO
+advanced_face_age_recognition_module.egg-info/SOURCES.txt
+advanced_face_age_recognition_module.egg-info/dependency_links.txt
+advanced_face_age_recognition_module.egg-info/requires.txt
+advanced_face_age_recognition_module.egg-info/top_level.txt
+afads/__init__.py
+afads/afads.py
+afads/extras/afads_server.py
+afads/extras/afads_webcam_consent.py
+afads/extras/pygame_webcam.py
