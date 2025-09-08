@@ -1,0 +1,103 @@
+# orchagent-python (SDK)
+
+Python SDK for the Orchagent API: auth, threads, runs, SSE, approvals, and a simple chat helper.
+
+## Install (dev)
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -U pip wheel
+pip install -e .
+```
+
+## Quickstart
+
+```python
+from orchagent import OrchClient
+
+client = OrchClient(base_url="http://localhost:8080")
+client.auth.login(email="you@example.com", password="pass123", save=True)
+
+# Create a thread from a workflow JSON file
+tid = client.threads.create_from_file("example_workflows/composio_calendar_hil_chat.json")
+
+# Start a run
+run = client.runs.send_message(tid, user_prompt="Hi", secrets={
+    "providers": {"openai": {"api_key": "sk-..."}}
+})
+
+# Stream events
+for evt in client.runs.stream_events(run["run_id"]):
+    print(evt["type"], evt.get("message"))
+```
+
+See `examples/` for more.
+
+## Configuration
+
+- Base URL: set `ORCHAGENT_BASE_URL` or pass `base_url` to `OrchClient`.
+- Token file: defaults to `~/.orchagent/token.json` (0600 perms). You can override via `ORCHAGENT_TOKEN_FILE`.
+- Timeout: `ORCHAGENT_TIMEOUT` (seconds), default 30.
+
+## SDK Surface
+
+- `client.auth.register(email, password, profile?, save=True) -> token`
+- `client.auth.login(email, password, save=True) -> token`
+- `client.auth.set_token(token, save=True)` / `client.auth.get_token()`
+- `client.threads.create(spec: dict) -> thread_id`
+- `client.threads.create_from_file(path: str) -> thread_id`
+- `client.threads.set_secrets(thread_id, secrets: dict) -> None`
+- `client.threads.history(thread_id, limit=20) -> Iterable[HistoryItem]`
+- `client.runs.send_message(thread_id, user_prompt, inputs?, secrets?) -> {run_id}`
+- `client.runs.stream_events(run_id) -> Iterable[dict]` (SSE replay + live)
+- `client.runs.resume(run_id) -> dict`
+- `client.approvals.approve(run_id, tool, server="mcp", args_keys=list[str]) -> dict`
+- `client.approvals.clear(all=False, user_id=None) -> dict`
+- `orchagent.chat.ChatSession(client, thread_id).ask(prompt, inputs?, secrets?) -> Iterable[dict]`
+
+## Secrets & Precedence
+
+The server merges secrets with this override order (highest to lowest):
+
+1) Run-time secrets: body.secrets in `POST /threads/{id}/messages`
+2) Thread secrets: `POST /threads/{id}/secrets`
+3) Workflow secrets: `secrets` in the workflow JSON
+4) Environment variables (e.g., `OPENAI_API_KEY`)
+
+Placeholders like `{{providers.openai.api_key}}`, `{{OPENAI_API_KEY}}`, and `{{inputs.user_id}}` resolve from the merged secrets first, then env.
+
+Provider examples (pass as `secrets` arg):
+
+- OpenAI standard
+```json
+{"providers": {"openai": {"api_key": "sk-..."}}}
+```
+
+- OpenAI-compatible (custom base_url)
+```json
+{"providers": {"openai": {"api_key": "sk-...", "base_url": "https://compatible.example/api"}}}
+```
+
+- Anthropic
+```json
+{"providers": {"anthropic": {"api_key": "sk-ant-..."}}}
+```
+
+- Gemini (Google GenAI)
+```json
+{"providers": {"google_genai": {"api_key": "AIza..."}}}
+```
+
+- Ollama (local)
+```json
+{"providers": {"ollama": {"base_url": "http://localhost:11434"}}}
+```
+
+- Tavily (MCP key used in URLs)
+```json
+{"TAVILY_API_KEY": "tvly-...", "providers": {"openai": {"api_key": "sk-..."}}}
+```
+
+## HIL (Auth Required) Flows
+
+When the API emits `auth.required`, the event contains `instruction` and a `redirect_url`. Use `client.runs.resume(run_id)` after the user completes OAuth. The CLI handles this interactively; the SDK surfaces the event so you can implement your own prompt/UX.
