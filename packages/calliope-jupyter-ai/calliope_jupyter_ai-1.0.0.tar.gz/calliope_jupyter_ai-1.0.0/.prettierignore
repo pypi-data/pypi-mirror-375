@@ -1,0 +1,9 @@
+# Local NPM dependencies
+**/node_modules
+
+# Build artifacts
+**/lib
+**/labextension/*
+
+# Local caches
+**/.mypy_cache
