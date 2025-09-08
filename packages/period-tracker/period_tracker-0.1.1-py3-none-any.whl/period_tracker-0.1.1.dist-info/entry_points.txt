@@ -1,0 +1,2 @@
+[console_scripts]
+period-tracker = period_tracker.__main__:main
