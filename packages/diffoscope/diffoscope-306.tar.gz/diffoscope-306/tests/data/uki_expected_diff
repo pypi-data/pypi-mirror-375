@@ -1,0 +1,25 @@
+@@ -3,19 +3,19 @@
+   sha256: c973da2beb6e3dcc136cfbdb4366802b13036151812f105924c887d0d642693e
+   text:
+     sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
+     systemd-stub,1,The systemd Developers,systemd,257,https://systemd.io/
+     systemd-stub.fedora,1,Fedora Linux,systemd,257~devel-g8dc40c2^,https://bugzilla.redhat.com/
+     uki,1,UKI,uki,1,https://uapi-group.org/specifications/specs/unified_kernel_image/
+ .osrel:
+-  size: 4 bytes
+-  sha256: 890cabe271136403326f8252c59cfdd47160fa63fe7a37801d3bffc1dbbf03f3
++  size: 6 bytes
++  sha256: 81d93757457f988523814ae0009837ae893f38d3fe123f2c37896f118b4c7804
+   text:
+-    arch
++    debian
+ .uname:
+   size: 4 bytes
+-  sha256: 49b513c0cc7f8b9f7e64c436a8eee1548b2cf5f907f4345992013a5662550942
++  sha256: e4d86b820871b1f065479509c0993f26763118991aa84a9b33c6027d209729d7
+   text:
+-    6.11
++    6.12
+ .linux:
+   size: 6 bytes
+   sha256: 6923dd1bc0460082c5d55a831908c24a282860b7f1cd6c2b79cf1bc8857c639c
