@@ -1,0 +1,211 @@
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from typing import ClassVar as _ClassVar, Optional as _Optional
+
+DESCRIPTOR: _descriptor.FileDescriptor
+
+class Product(_message.Message):
+    __slots__ = ("id", "shop_id", "product_no", "product_code", "product_name", "price", "retail_price", "price_content", "display", "selling", "cultural_tax_deduction", "summary_description", "buy_limit_by_product", "repurchase_restriction", "single_purchase_restriction", "buy_unit_type", "buy_unit", "order_quantity_limit_type", "minimum_quantity", "maximum_quantity", "adult_certification", "detail_image", "list_image", "tiny_image", "small_image", "has_option", "use_naverpay", "naverpay_type", "supplier_code", "sold_out", "pc_discount_price", "mobile_discount_price", "exposure_group_list", "use_kakaopay", "description", "mobile_description", "separated_mobile_description", "simple_description", "is_subscription_shipment", "created_date", "updated_date", "updated_at", "category_no", "option_type", "option_list_type", "option_preset_code", "select_one_by_option", "option_preset_name", "use_additional_option", "use_attached_file_option", "sale_upsell_30day", "sale_upsell", "sale_total_30day", "sale_total", "inquiry_count", "recommend_group_count", "recommend_common_exclusion", "promotion_common_exclusion", "max_discount", "basic_discount", "is_deleted")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    SHOP_ID_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_NO_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_CODE_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_NAME_FIELD_NUMBER: _ClassVar[int]
+    PRICE_FIELD_NUMBER: _ClassVar[int]
+    RETAIL_PRICE_FIELD_NUMBER: _ClassVar[int]
+    PRICE_CONTENT_FIELD_NUMBER: _ClassVar[int]
+    DISPLAY_FIELD_NUMBER: _ClassVar[int]
+    SELLING_FIELD_NUMBER: _ClassVar[int]
+    CULTURAL_TAX_DEDUCTION_FIELD_NUMBER: _ClassVar[int]
+    SUMMARY_DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    BUY_LIMIT_BY_PRODUCT_FIELD_NUMBER: _ClassVar[int]
+    REPURCHASE_RESTRICTION_FIELD_NUMBER: _ClassVar[int]
+    SINGLE_PURCHASE_RESTRICTION_FIELD_NUMBER: _ClassVar[int]
+    BUY_UNIT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    BUY_UNIT_FIELD_NUMBER: _ClassVar[int]
+    ORDER_QUANTITY_LIMIT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    MINIMUM_QUANTITY_FIELD_NUMBER: _ClassVar[int]
+    MAXIMUM_QUANTITY_FIELD_NUMBER: _ClassVar[int]
+    ADULT_CERTIFICATION_FIELD_NUMBER: _ClassVar[int]
+    DETAIL_IMAGE_FIELD_NUMBER: _ClassVar[int]
+    LIST_IMAGE_FIELD_NUMBER: _ClassVar[int]
+    TINY_IMAGE_FIELD_NUMBER: _ClassVar[int]
+    SMALL_IMAGE_FIELD_NUMBER: _ClassVar[int]
+    HAS_OPTION_FIELD_NUMBER: _ClassVar[int]
+    USE_NAVERPAY_FIELD_NUMBER: _ClassVar[int]
+    NAVERPAY_TYPE_FIELD_NUMBER: _ClassVar[int]
+    SUPPLIER_CODE_FIELD_NUMBER: _ClassVar[int]
+    SOLD_OUT_FIELD_NUMBER: _ClassVar[int]
+    PC_DISCOUNT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    MOBILE_DISCOUNT_PRICE_FIELD_NUMBER: _ClassVar[int]
+    EXPOSURE_GROUP_LIST_FIELD_NUMBER: _ClassVar[int]
+    USE_KAKAOPAY_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    MOBILE_DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    SEPARATED_MOBILE_DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    SIMPLE_DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    IS_SUBSCRIPTION_SHIPMENT_FIELD_NUMBER: _ClassVar[int]
+    CREATED_DATE_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_DATE_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
+    CATEGORY_NO_FIELD_NUMBER: _ClassVar[int]
+    OPTION_TYPE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_LIST_TYPE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_PRESET_CODE_FIELD_NUMBER: _ClassVar[int]
+    SELECT_ONE_BY_OPTION_FIELD_NUMBER: _ClassVar[int]
+    OPTION_PRESET_NAME_FIELD_NUMBER: _ClassVar[int]
+    USE_ADDITIONAL_OPTION_FIELD_NUMBER: _ClassVar[int]
+    USE_ATTACHED_FILE_OPTION_FIELD_NUMBER: _ClassVar[int]
+    SALE_UPSELL_30DAY_FIELD_NUMBER: _ClassVar[int]
+    SALE_UPSELL_FIELD_NUMBER: _ClassVar[int]
+    SALE_TOTAL_30DAY_FIELD_NUMBER: _ClassVar[int]
+    SALE_TOTAL_FIELD_NUMBER: _ClassVar[int]
+    INQUIRY_COUNT_FIELD_NUMBER: _ClassVar[int]
+    RECOMMEND_GROUP_COUNT_FIELD_NUMBER: _ClassVar[int]
+    RECOMMEND_COMMON_EXCLUSION_FIELD_NUMBER: _ClassVar[int]
+    PROMOTION_COMMON_EXCLUSION_FIELD_NUMBER: _ClassVar[int]
+    MAX_DISCOUNT_FIELD_NUMBER: _ClassVar[int]
+    BASIC_DISCOUNT_FIELD_NUMBER: _ClassVar[int]
+    IS_DELETED_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    shop_id: str
+    product_no: str
+    product_code: str
+    product_name: str
+    price: str
+    retail_price: str
+    price_content: str
+    display: str
+    selling: str
+    cultural_tax_deduction: str
+    summary_description: str
+    buy_limit_by_product: str
+    repurchase_restriction: str
+    single_purchase_restriction: str
+    buy_unit_type: str
+    buy_unit: str
+    order_quantity_limit_type: str
+    minimum_quantity: str
+    maximum_quantity: str
+    adult_certification: str
+    detail_image: str
+    list_image: str
+    tiny_image: str
+    small_image: str
+    has_option: str
+    use_naverpay: str
+    naverpay_type: str
+    supplier_code: str
+    sold_out: str
+    pc_discount_price: str
+    mobile_discount_price: str
+    exposure_group_list: str
+    use_kakaopay: str
+    description: str
+    mobile_description: str
+    separated_mobile_description: str
+    simple_description: str
+    is_subscription_shipment: str
+    created_date: str
+    updated_date: str
+    updated_at: str
+    category_no: str
+    option_type: str
+    option_list_type: str
+    option_preset_code: str
+    select_one_by_option: str
+    option_preset_name: str
+    use_additional_option: str
+    use_attached_file_option: str
+    sale_upsell_30day: str
+    sale_upsell: str
+    sale_total_30day: str
+    sale_total: str
+    inquiry_count: str
+    recommend_group_count: str
+    recommend_common_exclusion: str
+    promotion_common_exclusion: str
+    max_discount: str
+    basic_discount: str
+    is_deleted: str
+    def __init__(self, id: _Optional[str] = ..., shop_id: _Optional[str] = ..., product_no: _Optional[str] = ..., product_code: _Optional[str] = ..., product_name: _Optional[str] = ..., price: _Optional[str] = ..., retail_price: _Optional[str] = ..., price_content: _Optional[str] = ..., display: _Optional[str] = ..., selling: _Optional[str] = ..., cultural_tax_deduction: _Optional[str] = ..., summary_description: _Optional[str] = ..., buy_limit_by_product: _Optional[str] = ..., repurchase_restriction: _Optional[str] = ..., single_purchase_restriction: _Optional[str] = ..., buy_unit_type: _Optional[str] = ..., buy_unit: _Optional[str] = ..., order_quantity_limit_type: _Optional[str] = ..., minimum_quantity: _Optional[str] = ..., maximum_quantity: _Optional[str] = ..., adult_certification: _Optional[str] = ..., detail_image: _Optional[str] = ..., list_image: _Optional[str] = ..., tiny_image: _Optional[str] = ..., small_image: _Optional[str] = ..., has_option: _Optional[str] = ..., use_naverpay: _Optional[str] = ..., naverpay_type: _Optional[str] = ..., supplier_code: _Optional[str] = ..., sold_out: _Optional[str] = ..., pc_discount_price: _Optional[str] = ..., mobile_discount_price: _Optional[str] = ..., exposure_group_list: _Optional[str] = ..., use_kakaopay: _Optional[str] = ..., description: _Optional[str] = ..., mobile_description: _Optional[str] = ..., separated_mobile_description: _Optional[str] = ..., simple_description: _Optional[str] = ..., is_subscription_shipment: _Optional[str] = ..., created_date: _Optional[str] = ..., updated_date: _Optional[str] = ..., updated_at: _Optional[str] = ..., category_no: _Optional[str] = ..., option_type: _Optional[str] = ..., option_list_type: _Optional[str] = ..., option_preset_code: _Optional[str] = ..., select_one_by_option: _Optional[str] = ..., option_preset_name: _Optional[str] = ..., use_additional_option: _Optional[str] = ..., use_attached_file_option: _Optional[str] = ..., sale_upsell_30day: _Optional[str] = ..., sale_upsell: _Optional[str] = ..., sale_total_30day: _Optional[str] = ..., sale_total: _Optional[str] = ..., inquiry_count: _Optional[str] = ..., recommend_group_count: _Optional[str] = ..., recommend_common_exclusion: _Optional[str] = ..., promotion_common_exclusion: _Optional[str] = ..., max_discount: _Optional[str] = ..., basic_discount: _Optional[str] = ..., is_deleted: _Optional[str] = ...) -> None: ...
+
+class ProductOption(_message.Message):
+    __slots__ = ("id", "product_id", "option_code", "option_name", "required_option", "option_display_type", "is_basic_option", "is_additional_option", "is_attached_file_option")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_ID_FIELD_NUMBER: _ClassVar[int]
+    OPTION_CODE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_NAME_FIELD_NUMBER: _ClassVar[int]
+    REQUIRED_OPTION_FIELD_NUMBER: _ClassVar[int]
+    OPTION_DISPLAY_TYPE_FIELD_NUMBER: _ClassVar[int]
+    IS_BASIC_OPTION_FIELD_NUMBER: _ClassVar[int]
+    IS_ADDITIONAL_OPTION_FIELD_NUMBER: _ClassVar[int]
+    IS_ATTACHED_FILE_OPTION_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    product_id: str
+    option_code: str
+    option_name: str
+    required_option: str
+    option_display_type: str
+    is_basic_option: str
+    is_additional_option: str
+    is_attached_file_option: str
+    def __init__(self, id: _Optional[str] = ..., product_id: _Optional[str] = ..., option_code: _Optional[str] = ..., option_name: _Optional[str] = ..., required_option: _Optional[str] = ..., option_display_type: _Optional[str] = ..., is_basic_option: _Optional[str] = ..., is_additional_option: _Optional[str] = ..., is_attached_file_option: _Optional[str] = ...) -> None: ...
+
+class ProductOptionValue(_message.Message):
+    __slots__ = ("id", "product_option_id", "option_image_file", "option_link_image", "option_color", "option_text", "value_no", "additional_amount", "option_display_type", "additional_option_text_length", "size_limit")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_OPTION_ID_FIELD_NUMBER: _ClassVar[int]
+    OPTION_IMAGE_FILE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_LINK_IMAGE_FIELD_NUMBER: _ClassVar[int]
+    OPTION_COLOR_FIELD_NUMBER: _ClassVar[int]
+    OPTION_TEXT_FIELD_NUMBER: _ClassVar[int]
+    VALUE_NO_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    OPTION_DISPLAY_TYPE_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_OPTION_TEXT_LENGTH_FIELD_NUMBER: _ClassVar[int]
+    SIZE_LIMIT_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    product_option_id: str
+    option_image_file: str
+    option_link_image: str
+    option_color: str
+    option_text: str
+    value_no: str
+    additional_amount: str
+    option_display_type: str
+    additional_option_text_length: str
+    size_limit: str
+    def __init__(self, id: _Optional[str] = ..., product_option_id: _Optional[str] = ..., option_image_file: _Optional[str] = ..., option_link_image: _Optional[str] = ..., option_color: _Optional[str] = ..., option_text: _Optional[str] = ..., value_no: _Optional[str] = ..., additional_amount: _Optional[str] = ..., option_display_type: _Optional[str] = ..., additional_option_text_length: _Optional[str] = ..., size_limit: _Optional[str] = ...) -> None: ...
+
+class ProductVariant(_message.Message):
+    __slots__ = ("id", "product_id", "variant_code", "custom_variant_code", "options", "display", "selling", "additional_amount", "use_inventory", "important_inventory", "inventory_control_type", "display_soldout", "quantity", "safety_inventory")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    PRODUCT_ID_FIELD_NUMBER: _ClassVar[int]
+    VARIANT_CODE_FIELD_NUMBER: _ClassVar[int]
+    CUSTOM_VARIANT_CODE_FIELD_NUMBER: _ClassVar[int]
+    OPTIONS_FIELD_NUMBER: _ClassVar[int]
+    DISPLAY_FIELD_NUMBER: _ClassVar[int]
+    SELLING_FIELD_NUMBER: _ClassVar[int]
+    ADDITIONAL_AMOUNT_FIELD_NUMBER: _ClassVar[int]
+    USE_INVENTORY_FIELD_NUMBER: _ClassVar[int]
+    IMPORTANT_INVENTORY_FIELD_NUMBER: _ClassVar[int]
+    INVENTORY_CONTROL_TYPE_FIELD_NUMBER: _ClassVar[int]
+    DISPLAY_SOLDOUT_FIELD_NUMBER: _ClassVar[int]
+    QUANTITY_FIELD_NUMBER: _ClassVar[int]
+    SAFETY_INVENTORY_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    product_id: str
+    variant_code: str
+    custom_variant_code: str
+    options: str
+    display: str
+    selling: str
+    additional_amount: str
+    use_inventory: str
+    important_inventory: str
+    inventory_control_type: str
+    display_soldout: str
+    quantity: str
+    safety_inventory: str
+    def __init__(self, id: _Optional[str] = ..., product_id: _Optional[str] = ..., variant_code: _Optional[str] = ..., custom_variant_code: _Optional[str] = ..., options: _Optional[str] = ..., display: _Optional[str] = ..., selling: _Optional[str] = ..., additional_amount: _Optional[str] = ..., use_inventory: _Optional[str] = ..., important_inventory: _Optional[str] = ..., inventory_control_type: _Optional[str] = ..., display_soldout: _Optional[str] = ..., quantity: _Optional[str] = ..., safety_inventory: _Optional[str] = ...) -> None: ...
