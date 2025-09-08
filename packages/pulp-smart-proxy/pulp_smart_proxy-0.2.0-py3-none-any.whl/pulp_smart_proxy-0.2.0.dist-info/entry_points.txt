@@ -1,0 +1,2 @@
+[pulpcore.plugin]
+pulp_smart_proxy = pulp_smart_proxy:default_app_config
