@@ -1,0 +1,16 @@
+[console_scripts]
+d3dtools-info = d3dtools.describe:main
+evaluate = d3dtools.evaluate:main
+evaluate_sensor = d3dtools.evaluate_sensor:main
+getfacez = d3dtools.getfacez:main
+ncrain = d3dtools.ncrain:main
+sensor = d3dtools.sensor:main
+shp2ldb = d3dtools.shp2ldb:main
+shp2pli = d3dtools.shpbc2pli:main
+shp2pliz = d3dtools.shpdike2pliz:main
+shp2pol = d3dtools.shpblock2pol:main
+shp2xyz = d3dtools.shp2xyz:main
+shpbc2pli = d3dtools.shpbc2pli:main
+shpblock2pol = d3dtools.shpblock2pol:main
+shpdike2pliz = d3dtools.shpdike2pliz:main
+snorain = d3dtools.snorain:main
