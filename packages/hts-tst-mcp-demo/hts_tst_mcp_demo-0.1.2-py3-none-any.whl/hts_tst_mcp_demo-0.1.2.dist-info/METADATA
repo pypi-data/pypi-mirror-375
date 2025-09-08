@@ -1,0 +1,15 @@
+Metadata-Version: 2.3
+Name: hts-tst-mcp-demo
+Version: 0.1.2
+Summary: Add your description here
+Author: tianshi
+Author-email: tianshi <tianshi.huang@soucaigroup.com>
+Requires-Dist: fastmcp>=2.12.2
+Requires-Dist: pandas>=2.3.2
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
+# 这是一个mcp的测试工具
+# 没有实际工具左右
+# 不建议下载此工具
+# 后续此工具会下架删除
