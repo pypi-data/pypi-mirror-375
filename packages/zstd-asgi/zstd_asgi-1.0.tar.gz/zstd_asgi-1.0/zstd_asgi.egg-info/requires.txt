@@ -1,0 +1,4 @@
+starlette>=0.22.0
+
+[:python_version < "3.14.0"]
+backports.zstd>=0.4
