@@ -1,0 +1,17 @@
+pyodys/__init__.py,sha256=8bx8yteKwLlzdgbBOIcfbdwjmcZvWifstLdHMY6QiTs,247
+pyodys/__main__.py,sha256=ULzVVwlQYWNC3L51JRRevm-ryuWu2qZvMqyrXuwkIss,2640
+pyodys/solveurs/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+pyodys/solveurs/runge_kutta/ButcherTableau.py,sha256=hf2JNvE0-1fEl8eNOZySPzrM4S33ZnsSy44vwHuWx5o,13496
+pyodys/solveurs/runge_kutta/RKSolverWithButcherTableau.py,sha256=eVX9iJXnnjDrNj68qXVSadweuk_-MBeRadJUVYwCQhk,31725
+pyodys/solveurs/runge_kutta/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+pyodys/solveurs/runge_kutta/butcher_tableaus_data/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+pyodys/solveurs/runge_kutta/butcher_tableaus_data/available_butcher_table_data_to_json.py,sha256=vBBYU5gjm3O6WmZmAUropNhHuIKFjSjhfHnY7GYz0TE,12529
+pyodys/systemes/ODEProblem.py,sha256=2x3-nNo30N1PBj6L6nS-tuU0FYvZ4HgoI2aWSBAAVbE,4759
+pyodys/systemes/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+pyodys/utils/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+pyodys/utils/interpolation.py,sha256=HbvXghVsEQ92RYVFrXeR_1LUgfcO59yjg7UrGvLWfTQ,3536
+pyodys-0.0.6.dist-info/licenses/LICENSE,sha256=288R0_9_U55SmLHqbWhsoKif4lbSTJBOldeDR0TIOKQ,1097
+pyodys-0.0.6.dist-info/METADATA,sha256=J0j3Hlk1YT0ZN2Ij2vO0M69niZGXwLbKww6beKHEcDc,1791
+pyodys-0.0.6.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+pyodys-0.0.6.dist-info/top_level.txt,sha256=xA6WRv20wolU8wX0YiRHTTzUMPspwF2Xbl7J4-xCylk,7
+pyodys-0.0.6.dist-info/RECORD,,
