@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+py3_apollo/__init__.py
+py3_apollo/apollo_client.py
+py3_apollo_client.egg-info/PKG-INFO
+py3_apollo_client.egg-info/SOURCES.txt
+py3_apollo_client.egg-info/dependency_links.txt
+py3_apollo_client.egg-info/requires.txt
+py3_apollo_client.egg-info/top_level.txt
