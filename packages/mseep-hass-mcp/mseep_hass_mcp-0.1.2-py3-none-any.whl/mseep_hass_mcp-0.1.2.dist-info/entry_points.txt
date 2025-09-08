@@ -1,0 +1,3 @@
+[console_scripts]
+hass-mcp = app.run:main
+test = pytest:main
