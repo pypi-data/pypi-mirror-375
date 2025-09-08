@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-telegram-support"
+version = "0.1.0"
+description = "Reusable Django support/contact form that sends messages to Telegram."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{ name = "Andrei Mazur", email = "agrshkv@gmail.com" }]
+license = { text = "MIT" }
+keywords = ["django", "telegram", "support", "contact", "form"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Internet :: WWW/HTTP",
+]
+dependencies = [
+  "Django>=4.2",
+  "requests>=2.31",
+]
+
+[tool.setuptools.packages.find]
+include = ["django_telegram_support*"]
+
+[tool.setuptools.package-data]
+"django_telegram_support" = [
+  "templates/django_telegram_support/*.html"
+]

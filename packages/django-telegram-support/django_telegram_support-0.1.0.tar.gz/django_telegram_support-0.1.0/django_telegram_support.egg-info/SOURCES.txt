@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+django_telegram_support/__init__.py
+django_telegram_support/apps.py
+django_telegram_support/conf.py
+django_telegram_support/forms.py
+django_telegram_support/telegram.py
+django_telegram_support/urls.py
+django_telegram_support/views.py
+django_telegram_support.egg-info/PKG-INFO
+django_telegram_support.egg-info/SOURCES.txt
+django_telegram_support.egg-info/dependency_links.txt
+django_telegram_support.egg-info/requires.txt
+django_telegram_support.egg-info/top_level.txt
+django_telegram_support/templates/django_telegram_support/support_form.html
