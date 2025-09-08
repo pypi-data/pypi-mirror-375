@@ -1,0 +1,5 @@
+[console_scripts]
+quip-mcp-server = src.server:main
+
+[uvx]
+quip-mcp-server = src.server:main
