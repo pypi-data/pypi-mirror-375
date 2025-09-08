@@ -1,0 +1,2 @@
+[console_scripts]
+artiik-demo = context_manager.examples.agent_example:demo_agent
