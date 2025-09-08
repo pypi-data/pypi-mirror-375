@@ -1,0 +1,108 @@
+# Dyngle
+
+## Run lightweight local workflows
+
+Dyngle is a simple workflow runner that executes sequences of commands defined in configuration files. It's like a lightweight combination of Make and a task runner, designed for automating common development and operational tasks.
+
+## Basic usage
+
+Create a configuration file (e.g., `.dyngle.yml`) with your workflows:
+
+```yaml
+dyngle:
+  operations:
+    build:
+      - python -m pip install -e .
+      - python -m pytest
+    deploy:
+      - docker build -t myapp .
+      - docker push myapp
+    clean:
+      - rm -rf __pycache__
+      - rm -rf .pytest_cache
+```
+
+Run an operation:
+
+```bash
+dyngle run build
+```
+
+## Configuration
+
+Dyngle reads configuration from YAML files. You can specify the config file location using:
+
+- `--config` command line option
+- `DYNGLE_CONFIG` environment variable  
+- `.dyngle.yml` in current directory
+- `~/.dyngle.yml` in home directory
+
+The configuration has 2 parts: `operations:` and `expressions`.
+
+## Data
+
+Dyngle maintains a block of data throughout operations, which is parsed from YAML in stdin.
+
+## Operations
+
+Operations contain steps as a YAML array. The lifecycle of an operation is:
+
+1. Load input data if it exists from YAML on stdin (if no tty)
+2. Perform template rendering on a step, using data and expressions (see below)
+3. Execute the step in a subprocess
+4. Continue with the next step
+
+Note that operations in the config are _not_ full shell lines. They are passed directly to the system.
+
+## Templates
+
+Prior to running commands, the line containing that command is processed as a template. Entries from the data set can be substituted into the command line using Jinja-like expressions in double-curly brackets (`{{` and `}}`).
+
+For example, if stdin contains the following data:
+
+```yaml
+name: Francis
+```
+
+And the command looks like:
+
+``` yaml
+- echo "Hello {{name}}!"
+```
+
+Then the command will output "Hello Francis!".
+
+
+## Expressions
+
+Configs can also contain expressions, written in Python, that can also be referenced in operation steps.
+
+```yaml
+dyngle:
+  expressions:
+    say-hello: >-
+        'Hello ' + name + '!'
+  operations:
+    say-hello: echo {{say-hello}}
+```
+
+Expressions can use a controlled subset of the Python standard library, including:
+
+- Built-in data types such as `str()`
+- Essential built-in functions such as `len()`
+- The core modules from the `datetime` package (but some methods such as `strftime()` will fail)
+- A specialized function called `formatted()` to perform string formatting operations on a `datetime` object
+- A restricted version of `Path()` that only operates within the current working directory
+- Various other useful utilities, mostly read-only, such as the `math` module
+
+## Security
+
+Commands are executed using Python's `subprocess.run()` with arguments split in a shell-like fashion. The shell is not used, which reduces the likelihood of shell injection attacks. However, note that Dyngle is not robust to malicious configuration. Use with caution.
+
+## Quick installation (MacOS)
+
+```bash
+brew install python@3.11
+python3.11 -m pip install pipx
+pipx install dyngle
+```
