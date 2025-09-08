@@ -1,0 +1,40 @@
+name: Bump version number
+on:
+  workflow_dispatch:
+    inputs:
+      version_part:
+        type: choice
+        description: Part of version number to bump
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version_number: ${{steps.new_version_number.outputs.version_number}}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: git setup
+        run: |
+          git config --global user.name 'tandem-ai'
+          git config --global user.email 'hello@tandemai.com'
+      - name: Run bump2version
+        run: |
+          pip install bump2version
+          bump2version ${{ github.event.inputs.version_part }}
+      - name: get new version number
+        id: new_version_number
+        run: |
+          new_ver=$(cat setup.cfg | grep current_version | awk -F "=" '{print $2}' | xargs)
+          echo "version_number=$new_ver" >> $GITHUB_OUTPUT
+      - name: Push to GitHub
+        run: |
+          git push --follow-tags
