@@ -1,0 +1,119 @@
+from typing import List, Optional, Tuple
+
+from pypdf import PageObject, PdfReader
+
+from dedoc.attachments_extractors.abstract_attachment_extractor import AbstractAttachmentsExtractor
+from dedoc.data_structures.attached_file import AttachedFile
+
+
+class PDFAttachmentsExtractor(AbstractAttachmentsExtractor):
+    """
+    Extract attachments from pdf files.
+    """
+    def __init__(self, *, config: Optional[dict] = None) -> None:
+        from dedoc.extensions import recognized_extensions, recognized_mimes
+        super().__init__(config=config, recognized_extensions=recognized_extensions.pdf_like_format, recognized_mimes=recognized_mimes.pdf_like_format)
+
+    def extract(self, file_path: str, parameters: Optional[dict] = None) -> List[AttachedFile]:
+        """
+        Get attachments from the given pdf document.
+
+        Look to the :class:`~dedoc.attachments_extractors.AbstractAttachmentsExtractor` documentation to get the information about \
+        the methods' parameters.
+        """
+        import os
+        from dedoc.utils.parameter_utils import get_param_attachments_dir, get_param_need_content_analysis
+        from pypdf.errors import PdfReadError
+
+        parameters = {} if parameters is None else parameters
+        filename = os.path.basename(file_path)
+
+        with open(file_path, "rb") as handler:
+            try:
+                reader = PdfReader(handler)
+            except Exception as e:
+                self.logger.warning(f"can't handle {filename}, get {e}")
+                return []
+            attachments = []
+            try:
+                attachments.extend(self.__get_root_attachments(reader))
+            except PdfReadError:
+                self.logger.warning(f"{filename} is broken")
+            try:
+                attachments.extend(self.__get_page_level_attachments(reader))
+            except PdfReadError:
+                self.logger.warning(f"{filename} is broken")
+
+        need_content_analysis = get_param_need_content_analysis(parameters)
+        attachments_dir = get_param_attachments_dir(parameters, file_path)
+        return self._content2attach_file(content=attachments, tmpdir=attachments_dir, need_content_analysis=need_content_analysis, parameters=parameters)
+
+    def __get_notes(self, page: PageObject) -> List[Tuple[str, bytes]]:
+        from dedoc.utils.utils import convert_datetime
+
+        attachments = []
+        if "/Annots" in page.keys():
+            for annot in page["/Annots"]:
+                # Other subtypes, such as /Link, cause errors
+                subtype = annot.get_object().get("/Subtype")
+                if subtype == "/FileAttachment":
+                    name = annot.get_object()["/FS"]["/UF"]
+                    data = annot.get_object()["/FS"]["/EF"]["/F"].get_data()  # The file containing the stream data.
+                    attachments.append([name, data])
+                if subtype == "/Text" and annot.get_object().get("/Name") == "/Comment":  # it is messages (notes) in PDF
+                    note = annot.get_object()
+                    created_time = convert_datetime(note["/CreationDate"]) if "/CreationDate" in note else None
+                    modified_time = convert_datetime(note["/M"]) if "/M" in note else None
+                    user = note.get("/T")
+                    data = note.get("/Contents", "")
+
+                    name, content = self.__create_note(content=data, modified_time=modified_time, created_time=created_time, author=user)
+                    attachments.append((name, bytes(content)))
+        return attachments
+
+    def __get_page_level_attachments(self, reader: PdfReader) -> List[Tuple[str, bytes]]:
+        attachments = []
+        for page in reader.pages:
+            attachments_on_page = self.__get_notes(page)
+            attachments.extend(attachments_on_page)
+
+        return attachments
+
+    def __get_root_attachments(self, reader: PdfReader) -> List[Tuple[str, bytes]]:
+        """
+        Retrieves the file attachments of the PDF as a dictionary of file names and the file data as a bytestring.
+
+        :return: dictionary of filenames and bytestrings
+        """
+        import uuid
+
+        attachments = []
+        catalog = reader.trailer["/Root"]
+        if "/Names" in catalog.keys() and "/EmbeddedFiles" in catalog["/Names"].keys() and "/Names" in catalog["/Names"]["/EmbeddedFiles"].keys():
+            file_names = catalog["/Names"]["/EmbeddedFiles"]["/Names"]
+            for f in file_names:
+                if isinstance(f, str):
+                    data_index = file_names.index(f) + 1
+                    dict_object = file_names[data_index].get_object()
+                    if "/EF" in dict_object and "/F" in dict_object["/EF"]:
+                        data = dict_object["/EF"]["/F"].get_data()
+                        name = dict_object.get("/UF", f"pdf_attach_{uuid.uuid4()}")
+                        attachments.append((name, data))
+
+        return attachments
+
+    def __create_note(self, content: str, modified_time: int, created_time: int, author: str, size: int = None) -> [str, bytes]:
+        import json
+        from dedoc.utils.utils import get_unique_name
+
+        filename = get_unique_name("note.json")
+        note_dict = {
+            "content": content,
+            "modified_time": modified_time,
+            "created_time": created_time,
+            "size": size if size else len(content),
+            "author": author
+        }
+        encode_data = json.dumps(note_dict).encode("utf-8")
+
+        return filename, encode_data
