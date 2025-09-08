@@ -1,0 +1,17 @@
+limitor/__init__.py,sha256=I8VQN2MyLB3xaFmwRgtGX3L4W5n78hEPRVuheZOJ6Qc,3212
+limitor/base.py,sha256=eo9oiWlGORql5O3ivIX0fShSSWTujAnLfQL_9MCZI1c,2122
+limitor/configs.py,sha256=450lnM4aOnM0UkQoQmOOzxDKoRQgIMDNBYercNrmiak,1147
+limitor/extra/__init__.py,sha256=599ohyeGIiAHvDfXKpLQ7aFt2oo5Gj_L8vZd0YCIttQ,40
+limitor/extra/leaky_bucket/__init__.py,sha256=fZ7nM5ZToI0Q4XFKiez8lBFL94VC5hJuqVIYj0jpuI4,53
+limitor/extra/leaky_bucket/core.py,sha256=v0IK0VqjNk9KqXQBcVyJxj7GghjGs2prWbqL0I36mWc,8472
+limitor/generic_cell_rate/__init__.py,sha256=eXD80yvMlQ5DO6jLaWS_k_L1q6cXHTVzlcKc3WRXeMU,42
+limitor/generic_cell_rate/core.py,sha256=1VIRE1xBEMu753POifdUWCQ7VT5FhAxkQYUHVfkEsTM,17340
+limitor/leaky_bucket/__init__.py,sha256=N35sG0YToi_zg9BQ2xsu_tRx75o2xJnqToikKqJujic,32
+limitor/leaky_bucket/core.py,sha256=3NiHV7OAbhCzyq8Ls_O34-GTcUMjehde4IQ_ABBCj8A,8357
+limitor/token_bucket/__init__.py,sha256=d7yiiS1PF0gDdFf1fxNCId4v0kSM_F4Cz-jUKPrMziE,32
+limitor/token_bucket/core.py,sha256=GFX0b83VUL1U83pwg2eJUKo8FwcGiVOJ3meKup9tfmQ,8451
+limitor-0.3.1.dist-info/licenses/LICENSE,sha256=QwcOLU5TJoTeUhuIXzhdCEEDDvorGiC6-3YTOl4TecE,11356
+limitor-0.3.1.dist-info/METADATA,sha256=i82pOBsMSc7SYuczfyRbY3n5n-8c4C_K1WLlD28HxnI,12066
+limitor-0.3.1.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+limitor-0.3.1.dist-info/top_level.txt,sha256=iQoCIJB64PDkdnGqkao9hKJpa_2IYsLofY862bFUvE4,8
+limitor-0.3.1.dist-info/RECORD,,
