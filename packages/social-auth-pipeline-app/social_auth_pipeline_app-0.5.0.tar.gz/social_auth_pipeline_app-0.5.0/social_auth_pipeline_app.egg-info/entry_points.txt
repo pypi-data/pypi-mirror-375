@@ -1,0 +1,5 @@
+[cms.djangoapp]
+cms_social = fullname_plugin.apps:SocialAuthPipelineCMSConfig
+
+[lms.djangoapp]
+lms_social = fullname_plugin.apps:SocialAuthPipelineLMSConfig
