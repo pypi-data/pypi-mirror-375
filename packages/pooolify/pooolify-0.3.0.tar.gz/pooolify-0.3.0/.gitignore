@@ -1,0 +1,35 @@
+# Environment
+.env
+.env.local
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# Envs
+.venv/
+.uv/
+
+# IDE
+.idea/
+.vscode/
+
+__pycache__/
+*.py[cod]
+*.class
+
+# Node / Vite
+node_modules/
+dist/
+.vite/
+*.log
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+*.local
+*.DS_Store
+.verify-venv/
+.test-verify/
+.tmp-verify/
