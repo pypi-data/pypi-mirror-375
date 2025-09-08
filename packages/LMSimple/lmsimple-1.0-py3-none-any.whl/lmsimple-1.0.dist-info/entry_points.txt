@@ -1,0 +1,2 @@
+[console_scripts]
+lmsimple = lmsimple.__init__:main

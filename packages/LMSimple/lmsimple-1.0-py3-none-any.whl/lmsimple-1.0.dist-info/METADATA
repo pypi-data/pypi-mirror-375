@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: LMSimple
+Version: 1.0
+Summary: Auto sync your itemsets, perks and spells with mobalytics.gg ones on champion selection.
+License-File: LICENSE
+Requires-Python: >=3.13
+Requires-Dist: aiohttp>=3.12.15
+Requires-Dist: selectolax>=0.3.34
+Requires-Dist: websockets>=15.0.1
+Description-Content-Type: text/markdown
+
+# README.md
+
+Auto sync your itemsets, perks and spells with mobalytics.gg ones on champion selection.
