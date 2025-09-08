@@ -1,0 +1,11 @@
+LICENCE.md
+README.md
+pyproject.toml
+src/main.py
+src/crawlerugo/__init__.py
+src/crawlerugo/crawler.py
+src/crawlerugo.egg-info/PKG-INFO
+src/crawlerugo.egg-info/SOURCES.txt
+src/crawlerugo.egg-info/dependency_links.txt
+src/crawlerugo.egg-info/top_level.txt
+tests/test_crawl.py
