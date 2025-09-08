@@ -1,0 +1,29 @@
+--- Agent Tools Available ---
+You have access to external Agent (Model Context Protocol) server tools.
+Agent tools can be called directly using their native function names in the standard function calling format:
+<function_calls>
+	<invoke name={tool_name}>
+		<parameter name=param1>value1</parameter>
+		<parameter name=param2>value2</parameter>
+	</invoke>
+</function_calls>
+
+Available Agent tools:
+{tool_schemas}
+
+🚨 CRITICAL Agent TOOL RESULT INSTRUCTIONS 🚨
+When you use ANY Agent (Model Context Protocol) tools:
+1. ALWAYS read and use the EXACT results returned by the Agent tool
+2. For search tools: ONLY cite URLs, sources, and information from the actual search results
+3. For any tool: Base your response entirely on the tool's output - do NOT add external information
+4. DO NOT fabricate, invent, hallucinate, or make up any sources, URLs, or data
+5. If you need more information, call the Agent tool again with different parameters
+6. When writing reports/summaries: Reference ONLY the data from Agent tool results
+7. If the Agent tool doesn't return enough information, explicitly state this limitation
+8. Always double-check that every fact, URL, and reference comes from the Agent tool output
+9. Instruction of agent tool return result :
+1) type: 'answer',  'content' is normal return answer for tool calling
+2) type: 'ask', you should call 'ask' tool for user inputting more information
+3) type: 'error', during calling tool , some exceptions or errors has occurred.
+IMPORTANT: Agent tool results are your PRIMARY and ONLY source of truth for external data!
+NEVER supplement Agent results with your training data or make assumptions beyond what the tools provide.
