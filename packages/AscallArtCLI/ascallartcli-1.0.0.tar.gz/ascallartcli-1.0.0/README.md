@@ -1,0 +1,249 @@
+### **AscallArtCLI**
+
+---
+
+- **The `AscallArtCLI` library is a Python library for formatting text in the command line `(CLI)` using `colors`, `backgrounds`, and pre-made `tags`.**
+- **The library aims to make the messages of programs or scripts clearer and more professional for both developers and users.**
+
+---
+
+### **Features**
+- **Multiple text colors `(red, green, blue, yellow, orange, purple, etc.).`**
+- **Colorful `backgrounds` that support most operating systems.**
+- Ready-made tags such as: 
+- `[START]`
+- `[END]`
+- `[sign]`
+- `[Enter]`
+- `[ERROR]`
+- `[INFO]`
+- `[Information]`
+- `[Working]`
+- `[NotWorking]`
+- `[warning]`
+- `[Complete]`
+- `[successfully]`
+- `[Failed]`
+- `[please]`
+- `[Question]`
+- `[Help]`
+- `[other]`
+- `[notice]`
+- `[note]`
+- `[Running]`
+- `[Ready]`
+- `[DONE]`
+- `[Loading]`
+- `[OK]`
+- `[Okay]`
+- `[stop]`
+- `[Critical]`
+- `[paused]`
+- `[Retrying]`
+- `[Skip]`
+- `[SCAN]`
+- `[Chacking]`
+- `[Hacking]`
+- `[security]`
+- `[AI]`
+- `[Press]`
+- `[Confirm]`.
+- **Easy integration with any `CLI` project (tools, scanners, scripts).**
+- **Lightweight library with no external dependencies (Pure Python).**
+
+---
+
+### **Installation**
+
+```
+$ pip install AscallArtCLI
+```
+
+---
+
+### **Linux OR Mac**
+
+```
+$ pip install AscallArtCLI --break-system-packages
+```
+
+### **OR**
+
+```
+pip install -r requirements.txt --break-system-packages
+```
+
+### **OR**
+
+- **This code is for viewing how it is installed automatically in case you encounter problems in the Linux system.**
+
+```bash
+#!/bin/bash
+# -*- coding: utf-8 -*-
+# Copyright (c) 2025
+# By : Mohammed Al-Baqer
+
+set -e
+
+echo "[Virtual Environment Setup]"
+
+# Detect Operating System
+OS=$(uname -s)
+
+# Create Virtual Environment
+python3 -m venv venv
+
+# Activate Virtual Environment
+source venv/bin/activate
+
+# Dry-run installation (test only)
+pip install --dry-run -r requirements.txt
+
+echo ""
+echo "Virtual Environment created successfully"
+echo "[Starting Installation]"
+echo ""
+
+if [[ "$OS" == "Linux" ]]; then
+    # Install with --break-system-packages (⚠ risky)
+    pip install -r requirements.txt --break-system-packages
+elif [[ "$OS" == "Darwin" ]]; then
+    # Darwin = macOS
+    pip install -r requirements.txt
+else
+    echo "⚠ Unsupported OS detected: $OS"
+    echo "Proceeding with normal installation..."
+    pip install -r requirements.txt
+fi
+
+echo ""
+echo "[Installation Completed]"
+```
+---
+```
+$ bash setup.sh
+```
+---
+
+### **How Working?**
+### **Tags**
+```Python
+from AscallArtCLI.Tags import(
+    START,
+    END,
+    sign,
+    Enter,
+    ERROR,
+    INFO,
+    Information,
+    Working,
+    NotWorking,
+    warning,
+    Complete,
+    successfully,
+    Failed,
+    please,
+    Question,
+    Help,
+    other,
+    notice,
+    note,
+    Running,
+    Ready,
+    DONE,
+    Loading,
+    OK,
+    Okay,
+    stop,
+    Critical,
+    paused,
+    Retrying,
+    Skip,
+    SCAN,
+    Chacking,
+    Hacking,
+    security,
+    AI,
+    Press,
+    Confirm
+)
+```
+
+```Python
+
+# Method 1: Import a specific constantfrom Tags import START, END, INFO
+
+print(START + "The process has started now.")
+print(END + "The process is now complete.")
+print(INFO + "There is information.")
+```
+### **OutPut**
+
+```python
+[START] The process has started now.
+[END] The process is now complete.
+[INFO] There is information.
+```
+
+---
+
+```Python
+# Method 2: Import all (thanks to the __all__ list)
+from AscallArtCLI.Tags import *
+
+print(OK + "The operation was successful.")
+print(ERROR + "Something went wrong!")
+```
+
+### **OutPut**
+
+```Python
+[ok] The operation was successful.
+[ERROR] Something went wrong!
+```
+
+---
+
+### **Colors**
+```Python
+S = "\033[0m"        # Reset
+R = "\033[91;1m"     # Red
+G = "\033[92;1m"     # Green
+B = "\033[94;1m"     # Blue
+Y = "\033[93;1m"     # Yellow
+C = "\033[96;1m"     # Cyan
+M = "\033[95;1m"     # Magenta
+W = "\033[97;1m"     # White
+D = "\033[90;1m"     # Grey
+P = "\033[38;5;198m" # Pink
+O = "\033[38;5;202m" # Orange
+```
+
+```Python
+from AscallArtCLI.Colors import(R, G, B, Y, D, C, P, O, W, M, S)
+```
+
+---
+
+### **BackGround**
+
+```Python
+Reset = "\033[0m"         # Reset
+Black = "\033[40m"        # Black
+Dark = "\033[40m"         # Dark
+Red = "\033[41m"          # Red
+Green = "\033[42m"        # Green
+Yellow = "\033[43m"       # Yellow
+Blue = "\033[44m"         # Blue
+Magenta = "\033[45m"      # Magenta
+Cyan = "\033[46m"         # Cyan
+White = "\033[47m"        # White
+Orange = "\033[48;5;202m" # Orange
+Pink = "\033[48;5;198m"   # Pink
+```
+
+```Python
+from AscallArtCLI.BackGround import(Red, Green, Blue, Black, Yellow, Cyan, Orange, Pink, Magenta, White, Reset)
+```
+
+---
