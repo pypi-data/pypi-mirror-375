@@ -1,0 +1,17 @@
+ai_coder/__init__.py,sha256=CkaMCXjIhLZ6fDz-RdeuCBsKCOwYSAWoFAippQbTI2w,375
+ai_coder/cli.py,sha256=J4899oQpVeq3jpCD4z80O3pSAM5jMUBcFLOMZ66DtJ8,19176
+ai_coder/main.py,sha256=HhXM79zEmyVHrQRNJfl9XfBXMng2436c70mpk7qY6cQ,19540
+ai_coder/server.py,sha256=TsNiSoYHe-fCYq1tVkobZTY0VV9l3vGnGeYi3lFSn04,3289
+ai_coder/tools/files.py,sha256=4YvnQ4SFdJv3hvk4bY-1vjDdCXRY4Ox0nMI_45jaSF8,2564
+ai_coder/tools/ollama.py,sha256=15cbItI5OmgXvAKR6m35xZh3cpW2qpeEO3zQFZzS-Cs,2416
+ai_coder/tools/shell.py,sha256=PEw3uO3RQQUk-MGg8OTtzezKnQeLv7w6n_qzoZ884Qg,962
+ai_coder/utils/__init__.py,sha256=zEBFAQulDXG3sAxzHSgi7m2eP9JRvNpTRw8JiWuTfJ0,26
+ai_coder/utils/fsx.py,sha256=WWoRiQFZCyg7gfgI5INbwaSMduGz3YEm00KxxtCIlTg,693
+ai_coder/utils/logger.py,sha256=b1WscmzhaaRXJs6MWDEt0RNLcDiE1Xme0ixMZBk0IGg,688
+codedev-3.0.0.data/data/share/codedev/config/default.yaml,sha256=NOsxbf2g_Xi12eeq7uSngx5uGTy7Taoztz4gv6Axubk,1490
+codedev-3.0.0.dist-info/licenses/LICENSE,sha256=OqhGp2jB0otbP1XR5Fe8QyK17TzQ4xZLcOx6gs6cw1k,1068
+codedev-3.0.0.dist-info/METADATA,sha256=y1YRs0tgm7DRo6URBKU226ElCEIC6VRXKeMTs57ouJk,18586
+codedev-3.0.0.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+codedev-3.0.0.dist-info/entry_points.txt,sha256=WlnK88Wxk4PyHxi08nxfRofJjy8orJwfsTxhcQ3EL0M,63
+codedev-3.0.0.dist-info/top_level.txt,sha256=9HdV2LWv6H1zqUnwtHeg3FTjxlMirZPAXR1xIPfQpt8,9
+codedev-3.0.0.dist-info/RECORD,,
