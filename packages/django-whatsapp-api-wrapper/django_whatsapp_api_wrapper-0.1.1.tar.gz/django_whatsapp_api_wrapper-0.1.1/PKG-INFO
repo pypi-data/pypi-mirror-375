@@ -1,0 +1,132 @@
+Metadata-Version: 2.3
+Name: django-whatsapp-api-wrapper
+Version: 0.1.1
+Summary: 
+License: MIT
+Author: Your Name
+Author-email: you@example.com
+Requires-Python: >=3.11,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: dev
+Requires-Dist: build (==1.2.1) ; extra == "dev"
+Requires-Dist: django (>=4.2)
+Requires-Dist: dotenv (>=0.9.9,<0.10.0)
+Requires-Dist: nox (==2024.4.15) ; extra == "dev"
+Requires-Dist: python-dotenv (>=1.0,<2.0)
+Requires-Dist: twine (==5.1.1) ; extra == "dev"
+Description-Content-Type: text/markdown
+
+# django-whatsapp-api-wrapper
+
+Um wrapper simples para enviar mensagens via WhatsApp Cloud API e expor um endpoint de webhook, pronto para integrar em qualquer projeto Django.
+
+## Instalação
+
+```bash
+python -m pip install django-whatsapp-api-wrapper
+```
+
+## Configuração (Django)
+
+1) Adicione o app em `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    "django_whatsapp_api_wrapper",
+]
+```
+
+2) Inclua as URLs no `urls.py` principal:
+
+```python
+from django.urls import path, include
+
+urlpatterns = [
+    # ...
+    path("whatsapp-api-wrapper/", include("django_whatsapp_api_wrapper.urls")),
+]
+```
+
+3) Defina as variáveis de ambiente (ou no seu `.env`):
+
+```bash
+TOKEN=
+PACKAGE_VERSION=0.1.1
+API_VERSION=v23.0
+PHONE_NUMBER_ID=
+WHATSAPP_VERIFY_TOKEN=
+```
+
+O endpoint de webhook ficará disponível em:
+
+- GET/POST: `/whatsapp-api-wrapper/webhook/`
+- Verificação (GET): `/whatsapp-api-wrapper/webhook/?hub.mode=subscribe&hub.verify_token=<TOKEN>&hub.challenge=123`
+
+## Extensibilidade do Webhook
+
+Você pode customizar o processamento do webhook no projeto hospedeiro de duas formas:
+
+- Via setting com handler plugável:
+
+```python
+# settings.py
+WHATSAPP_WEBHOOK_HANDLER = "meuapp.whatsapp.handle_webhook"
+```
+
+```python
+# meuapp/whatsapp.py
+from django.http import JsonResponse
+
+def handle_webhook(request, payload):
+    # sua lógica aqui (salvar eventos, acionar tasks, etc)
+    return JsonResponse({"ok": True})
+```
+
+- Via signal `webhook_event_received`:
+
+```python
+from django.dispatch import receiver
+from django_whatsapp_api_wrapper.signals import webhook_event_received
+
+@receiver(webhook_event_received)
+def on_whatsapp_event(sender, payload, request, **kwargs):
+    # sua lógica aqui
+    pass
+```
+
+## Uso Rápido (envio de mensagens)
+
+```python
+from django_whatsapp_api_wrapper import WhatsApp
+
+wp = WhatsApp()
+
+# Template
+language = {"code": "pt_BR"}
+template = {"name": "opa", "language": language}
+m = wp.build_message(to="5521980340830", type="template", data=template)
+m.send()
+
+# Texto
+data = {"preview_url": False, "body": "será que só funciona?"}
+m2 = wp.build_message(to="+5521994740431", type="text", data=data)
+m2.send()
+```
+
+## Notas
+
+- Nome do pacote no PyPI: `django-whatsapp-api-wrapper`
+- Nome do módulo/import: `django_whatsapp_api_wrapper`
