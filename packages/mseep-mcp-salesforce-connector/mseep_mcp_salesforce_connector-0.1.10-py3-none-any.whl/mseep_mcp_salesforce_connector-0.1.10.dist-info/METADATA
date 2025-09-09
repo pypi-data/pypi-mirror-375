@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-salesforce-connector
+Version: 0.1.10
+Summary: A Model Context Protocol (MCP) server implementation for Salesforce integration
+Project-URL: Homepage, https://github.com/smn2gnt/MCP-Salesforce
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: llm,mcp,salesforce
+Requires-Python: >=3.11
+Requires-Dist: mcp
+Requires-Dist: python-dotenv
+Requires-Dist: simple-salesforce
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
