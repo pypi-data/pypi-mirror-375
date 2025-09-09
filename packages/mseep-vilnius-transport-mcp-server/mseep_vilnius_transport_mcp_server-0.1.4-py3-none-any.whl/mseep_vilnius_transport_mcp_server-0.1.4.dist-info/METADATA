@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-vilnius-transport-mcp-server
+Version: 0.1.4
+Summary: This is Vilnius transport MCP server for claude desktop proof of concept
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Requires-Dist: anthropic>=0.44.0
+Requires-Dist: gtfs-kit>=10.1.1
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: logging>=0.4.9.6
+Requires-Dist: mcp>=1.2.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

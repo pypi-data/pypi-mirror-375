@@ -1,0 +1,2 @@
+[console_scripts]
+vilnius-transport = vilnius_transport_mcp_server.transport:main
