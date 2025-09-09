@@ -1,0 +1,134 @@
+Metadata-Version: 2.3
+Name: veeink-mcp-server
+Version: 0.1.5
+Summary: veeink的MCP服务
+Author: wlf
+Author-email: wlf <fwl7747@126.com>
+Requires-Dist: mcp[cli]>=1.13.1
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+
+
+````markdown
+# veeink-mcp-server
+
+A simple [FastMCP](https://pypi.org/project/fastmcp/) server example built with Python.  
+This project demonstrates how to expose custom **tools** and **resources** over the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
+
+---
+
+## 🚀 Features
+
+- ⚡ Built with [FastMCP](https://pypi.org/project/fastmcp/)  
+- 🔧 Provides a simple `add(a, b)` tool  
+- 📡 Supports dynamic greeting resources (`greeting://{name}`)  
+- 🖥️ Works over **stdio** (default), **SSE**, or **Streamable HTTP** transports  
+
+---
+
+## 📦 Installation
+
+```bash
+pip install veeink-mcp-server
+````
+
+Or using [uv](https://github.com/astral-sh/uv):
+
+```bash
+uv tool install veeink-mcp-server
+```
+
+---
+
+## 🖥️ Usage
+
+After installation, run the MCP server:
+
+```bash
+veeink-mcp-server
+```
+
+By default it runs with `stdio` transport, but you can also configure:
+
+```python
+def main() -> None:
+    mcp.run(transport="stdio")            # Default
+    # mcp.run(transport="sse")            # SSE transport
+    # mcp.run(transport="streamable-http") # Streamable HTTP transport
+```
+
+---
+
+## 🔧 Example Tools & Resources
+
+This server exposes:
+
+### 1. Tool: `add`
+
+```python
+@mcp.tool()
+def add(a: int, b: int) -> dict:
+    """Add two numbers"""
+    return {"result": a + b}
+```
+
+✅ Example call:
+
+```json
+{"tool": "add", "args": {"a": 2, "b": 3}}
+```
+
+Response:
+
+```json
+{"result": 5}
+```
+
+---
+
+### 2. Resource: `greeting://{name}`
+
+```python
+@mcp.resource("greeting://{name}")
+def get_greeting(name: str) -> str:
+    """Get a personalized greeting"""
+    return f"Hello, {name}!"
+```
+
+✅ Example call:
+
+```json
+{"resource": "greeting://Alice"}
+```
+
+Response:
+
+```
+Hello, Alice!
+```
+
+---
+
+## 🛠 Development
+
+Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/veeink-mcp-server.git
+cd veeink-mcp-server
+```
+
+Install in editable mode:
+
+```bash
+pip install -e .
+```
+
+Run the server:
+
+```bash
+veeink-mcp-server
+```
+
+

@@ -1,0 +1,19 @@
+[project]
+name = "veeink-mcp-server"
+version = "0.1.5"
+description = "veeink的MCP服务"
+readme = "README.md"
+authors = [
+    { name = "wlf", email = "fwl7747@126.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.13.1",
+]
+
+[project.scripts]
+veeink-mcp-server = "veeink_mcp_server:main"
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
