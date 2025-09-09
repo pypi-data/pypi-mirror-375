@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: argparse-schemas
+Version: 0.2.0
+Summary: Transform argparse specs to JSON schemas
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/lisa-sgs/argparse-schemas
+Project-URL: Source, https://github.com/lisa-sgs/argparse-schemas
+Project-URL: Issues, https://github.com/lisa-sgs/argparse-schemas/issues
+Project-URL: Changelog, https://github.com/lisa-sgs/argparse-schemas/blob/develop/CHANGELOG.md
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# `argparse` schemas
+
+[![PyPI version](https://img.shields.io/pypi/v/argparse-schemas.svg)](https://pypi.org/project/argparse-schemas/)
+[![Build status](https://img.shields.io/github/actions/workflow/status/lisa-sgs/argparse-schemas/ci.yml?branch=main)](https://github.com/lisa-sgs/argparse-schemas/actions)
+[![Coverage Status](https://coveralls.io/repos/github/lisa-sgs/argparse-schemas/badge.svg?branch=main)](https://coveralls.io/github/lisa-sgs/argparse-schemas?branch=main)
+[![License](https://img.shields.io/pypi/l/argparse-schemas)](https://opensource.org/license/apache-2-0)
+
+Transform between [`argparse`](https://docs.python.org/3/library/argparse) parser specifications and JSON schemas.
+
+This is useful for documenting interface specifications and generating parsers from such specifications.
