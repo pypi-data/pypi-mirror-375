@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zgame"
+version = "1.0.0"
+description = "A beginner-friendly 2D game engine for Python"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Zhvan"}]
+requires-python = ">=3.8"
+dependencies = [
+  "pygame>=2.0"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Zhvan14/zgame"
