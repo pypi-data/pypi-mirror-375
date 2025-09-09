@@ -1,0 +1,15 @@
+eclass_mcp_server/__init__.py,sha256=KNZ1bD9ZGfyZwlv91Ueeega_1lsRDLs2fYQDgNbBdtc,212
+eclass_mcp_server/authentication.py,sha256=CJmnHKEAflE0jr_A3JUKlwAnvjha7QiGsRoB7WsFr_c,7476
+eclass_mcp_server/course_management.py,sha256=vQ7YzpAUy56M1YoBDRyB3ZzwlCkqPnhFR8Rxk3w08W0,2998
+eclass_mcp_server/html_parsing.py,sha256=kPYeHEAeDt5Le09uxRYIh74K7plqkhlH8CS0DmL0i6k,6121
+eclass_mcp_server/server.py,sha256=mhlGF-twx6yd6TG1AaqMlrDICh_NGkeoZoBneQ4oVDM,8673
+eclass_mcp_server/test/__init__.py,sha256=mfPwoVTVhGg99F4-5hIRbTdpPLLu-RaPb4WtYx0zR5k,138
+eclass_mcp_server/test/run_all_tests.py,sha256=vmQJmhHdSN5sz7BvXnVIl7YF7WTSvW0jlJsIfDe_75g,6226
+eclass_mcp_server/test/test_courses.py,sha256=_6oUJHDCzA3tz2d7DlTuPFvElm-oxIUtt-oKC1X37JQ,3124
+eclass_mcp_server/test/test_login.py,sha256=wYE3EamUCjb33aIk8fPkfsSvAiqrM_v-e9JeU0qvWF0,2874
+mseep_eclass_mcp_server-0.1.4.dist-info/licenses/LICENSE,sha256=BOrRwhm7skCATXYP84QJwMnxb2_hEb61cn7XyrRAUQ4,33188
+mseep_eclass_mcp_server-0.1.4.dist-info/METADATA,sha256=HTTdVojWph0xM8g8o9NG3BYEMvEhjuYVtTsuLo0sPkY,435
+mseep_eclass_mcp_server-0.1.4.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+mseep_eclass_mcp_server-0.1.4.dist-info/entry_points.txt,sha256=2OeO_UHgqEkcHKsNl6E_Wr_-GQU6KHejiL0v56HL1qM,61
+mseep_eclass_mcp_server-0.1.4.dist-info/top_level.txt,sha256=EtzEIiRGSqvcusLdxkcu_kYYGrXv89nqRl_D5WSxUgI,18
+mseep_eclass_mcp_server-0.1.4.dist-info/RECORD,,
