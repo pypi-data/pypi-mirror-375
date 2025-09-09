@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-claude-tools
+Version: 0.1.4
+Summary: Multi-tool MCP integration for Claude
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=0.1.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
