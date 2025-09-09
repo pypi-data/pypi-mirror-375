@@ -1,0 +1,1 @@
+import{u,h as n,i as e}from"./index-BImkz5Jx.js";function c(){const t=u(),s=n(()=>[e.RESELLER,e.SUPER_ADMIN].includes(t.authUser.role)),r=n(()=>[e.RESELLER,e.SUPER_ADMIN].includes(t.authUser.role)),o=n(()=>[e.DOMAIN_ADMIN,e.RESELLER,e.SUPER_ADMIN].includes(t.authUser.role));return{canSetRole:s,canAddDomain:r,canViewDomain:o}}export{c as u};
