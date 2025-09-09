@@ -1,0 +1,145 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-memcord"
+version = "2.2.2"
+description = "MCP server for chat memory management with summarization and file sharing"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=0.3.0",
+    "nltk>=3.8",
+    "aiofiles>=23.0",
+    "pydantic>=2.0.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "pdfplumber>=0.10.0",
+    "pandas>=2.0.0",
+    "trafilatura>=1.8.0",
+    "python-magic>=0.4.27",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-mock>=3.10.0",
+    "pytest-cov>=4.0.0",
+    "pytest-benchmark>=4.0.0",
+    "factory-boy>=3.3.0",
+    "selenium>=4.15.0",
+    "webdriver-manager>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "psutil>=5.9.0",
+]
+
+[project.scripts]
+memcord = "memcord.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/memcord",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "README.md",
+    "pyproject.toml",
+]
+
+[tool.black]
+line-length = 88
+target-version = [
+    "py38",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+python_classes = [
+    "Test*",
+]
+python_functions = [
+    "test_*",
+]
+addopts = [
+    "--strict-markers",
+    "--disable-warnings",
+    "--tb=short",
+    "-v",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "mcp: MCP protocol tests",
+    "ui: UI automation tests",
+    "slow: Slow running tests",
+    "requires_external: Tests requiring external services",
+    "requires_claude_desktop: Tests requiring Claude Desktop",
+    "requires_claude_desktop_ui: Tests requiring Claude Desktop UI access",
+    "selenium: Browser automation tests",
+]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = [
+    "src/memcord",
+]
+omit = [
+    "tests/*",
+    "src/memcord/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+[dependency-groups]
+dev = [
+    "factory-boy>=3.3.3",
+    "psutil>=7.0.0",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.0.0",
+    "pytest-benchmark>=5.1.0",
+    "pytest-cov>=6.2.1",
+    "pytest-mock>=3.14.1",
+    "selenium>=4.34.0",
+]
