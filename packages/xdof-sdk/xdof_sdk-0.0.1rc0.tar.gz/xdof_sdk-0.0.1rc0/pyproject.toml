@@ -1,0 +1,42 @@
+[project]
+name = "xdof-sdk"
+version = "0.0.1rc0"
+description = "Useful libraries for interacting with xdof data and services."
+readme = "README.md"
+authors = [
+    { name = "Michael Luo", email = "mluogh@xdof.ai" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "mink>=0.0.11,<1.0.0",
+    "mujoco>=3.0.0,<4.0.0",
+    "numpy>=1.0.0", # Do we need to specify this?
+    "numpy-quaternion>=2023.0.4",
+    "opencv-python>=4.0.0",
+    "pydantic>=2.0.0,<3.0.0",
+    "pytest>=8.0.0",
+    "rerun-sdk>=0.24.0",
+    "tyro>=0.9.26",
+]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.0",
+]
+
+[project.scripts]
+sdk = "sdk:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 88
+lint.ignore = [
+    "B019",
+]
+
+[tool.pyright]
+reportMissingImports = "none"
+reportAttributeAccessIssue = "none"
