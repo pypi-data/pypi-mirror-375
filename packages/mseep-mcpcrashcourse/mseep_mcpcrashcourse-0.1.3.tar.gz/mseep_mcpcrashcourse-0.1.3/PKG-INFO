@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-mcpcrashcourse
+Version: 0.1.3
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+Requires-Dist: langchain-groq>=0.3.2
+Requires-Dist: mcp-use>=1.2.7
+Requires-Dist: mcp[cli]>=1.6.0
+
+Package managed by MseeP.ai
