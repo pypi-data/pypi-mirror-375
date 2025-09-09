@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run sb3</title>
+
+    <style>
+        #project {
+            width: 480px;
+            height: 360px;
+        }
+    </style>
+
+</head>
+<body>
+<script src="scaffolding-with-music.js"></script>
+<div id="project"></div>
+
+<script>
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Then scaffolding is exported as a global variable
+    const scaffolding = new Scaffolding.Scaffolding();
+
+    scaffolding.width = 480;
+    scaffolding.height = 360;
+    scaffolding.resizeMode = 'preserve-ratio'; // or 'dynamic-resize' or 'stretch'
+    scaffolding.editableLists = false;
+    scaffolding.shouldConnectPeripherals = true;
+    scaffolding.usePackagedRuntime = false;
+
+    scaffolding.setup();
+    const elem = document.getElementById('project');
+    console.log(elem);
+    scaffolding.appendTo(elem);
+
+
+    // await scaffolding.loadProject();
+    const data = new URLSearchParams(window.location.search).get("project");
+    let bindata = atob(data.replace(/_/g, '/').replace(/-/g, '+'));
+    bindata = Uint8Array.from(bindata, c => c.charCodeAt(0));
+    const output = [];
+
+    const timeout = new URLSearchParams(window.location.search).get("timeout");
+
+    (async () => {
+        await scaffolding.loadProject(bindata);
+        console.log("RUNTIME: Project loaded.");
+
+        const vm = scaffolding.vm;
+        const runtime = vm.runtime;
+        let done = false;
+
+        function exit(exitCode) {
+            if (done) {
+                // If we already started the exit process, don't start queueing another
+                return;
+            }
+
+            done = true;
+            output.push({
+                type: "exit_code",
+                content: exitCode.toString(),
+            })
+            window.alert(`RUNTIME: PROJECT DONE`);
+        }
+
+        function consoleOutput(type, content = undefined) {
+            output.push({
+                type: type,
+                content: content
+            })
+        }
+
+        /**
+         *
+         * @param name {string}
+         * @param procCodeArgs {string}
+         * @param callback {function (string, any)?}
+         */
+        function registerConsoleOutputProc(name, procCodeArgs = '', callback=undefined) {
+            // noinspection JSUnresolvedReference
+            vm.addAddonBlock({
+                procedureCode: `\u200B\u200B${name}\u200B\u200B${procCodeArgs}`,
+                arguments: ["content"],
+                callback: ({content}, util) => {
+                    consoleOutput(name, content);
+                    if (callback !== undefined) {
+                        callback(content, util);
+                    }
+                }
+            })
+        }
+
+        // following code is from goboscript.ide by aspizu
+        registerConsoleOutputProc('log', ' %s');
+        registerConsoleOutputProc('warn', ' %s');
+        registerConsoleOutputProc('error', ' %s');
+        registerConsoleOutputProc('breakpoint', '', (content, util) => {
+            exit(1);
+        });
+
+        runtime.addListener('SAY', (target, type, msg) => {
+            if (msg !== '') {
+                consoleOutput(type, msg);
+            }
+        });
+
+        runtime.addListener('PROJECT_RUN_STOP', () => {
+            exit('0');
+        });
+
+        // once the project is started and is ready to run, it should run
+        // it won't if it's empty (I think)
+        // add a time check, starting on PROJECT_START,
+        // and checking if PROJECT_RUN_START occurs within `timeout` milliseconds
+        runtime.addListener('PROJECT_START', async () => {
+            const time = Date.now();
+            console.log(`PROJECT_START: ${time}; WAITING FOR ${timeout}ms`);
+
+            let project_run_started = false;
+            runtime.addListener('PROJECT_RUN_START', () => {
+                project_run_started = true;
+            })
+
+            await delay(timeout);
+            if ((Date.now() - project_run_started) > timeout) {
+                console.log(`CHECKING PROJECT RUN STATUS: ${project_run_started}; T=${Date.now()}`)
+
+                if (!project_run_started) {
+                    output.push({
+                        type: "did_not_run",
+                        content: `Project failed to run within ${timeout} ms. Is it empty?`,
+                    })
+                    exit("1")
+                }
+            }
+        });
+
+        // This small function helps see the scratch vm's event listener stuff in practice. useful for testing.
+        const logOnEvent = (type) => {
+            runtime.addListener(type, () => {
+                console.log(`RUNTIME EVENT: ${type}`);
+            });
+        }
+
+        // logOnEvent("PROJECT_START");
+        // logOnEvent("PROJECT_RUN_START");
+        // logOnEvent("VISUAL_REPORT");
+        // logOnEvent("RUNTIME_STARTED");
+        // logOnEvent("RUNTIME_DISPOSED");
+
+        console.log("GREENFLAG");
+        scaffolding.greenFlag();
+    })();
+
+</script>
+</body>
+</html>
