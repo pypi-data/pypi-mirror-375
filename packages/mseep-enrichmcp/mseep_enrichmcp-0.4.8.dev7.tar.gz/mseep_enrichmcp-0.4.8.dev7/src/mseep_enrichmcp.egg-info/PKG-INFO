@@ -1,0 +1,57 @@
+Metadata-Version: 2.4
+Name: mseep-enrichmcp
+Version: 0.4.8.dev7
+Summary: Transform Your Data Model into an MCP API
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: Featureform Team <team@featureform.com>
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/featureform/enrichmcp
+Project-URL: Documentation, https://featureform.com/enrichmcp
+Project-URL: Repository, https://github.com/featureform/enrichmcp
+Project-URL: Issues, https://github.com/featureform/enrichmcp/issues
+Project-URL: Discussions, https://github.com/featureform/enrichmcp/discussions
+Project-URL: Changelog, https://github.com/featureform/enrichmcp/releases
+Keywords: mcp,ai,agents,llm,model-context-protocol,pydantic,api,data-model,orm,agentic,enrichment
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Typing :: Typed
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: pydantic<3.0.0,>=2.0.0
+Requires-Dist: mcp-python>=0.1.0
+Requires-Dist: typing-extensions<5.0.0,>=4.5.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=1.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0.0; extra == "dev"
+Requires-Dist: ruff>=0.8.0; extra == "dev"
+Requires-Dist: pyright>=1.1.402; extra == "dev"
+Requires-Dist: pre-commit>=3.5.0; extra == "dev"
+Requires-Dist: mkdocs>=1.5.0; extra == "dev"
+Requires-Dist: mkdocs-material>=9.5.0; extra == "dev"
+Requires-Dist: mkdocstrings[python]>=0.24.0; extra == "dev"
+Requires-Dist: aiosqlite>=0.19.0; extra == "dev"
+Requires-Dist: sqlalchemy>=2.0.0; extra == "dev"
+Requires-Dist: sqlalchemy2-stubs>=0.0.2a5; extra == "dev"
+Requires-Dist: mcp_use>=1.0.0; extra == "dev"
+Provides-Extra: sqlalchemy
+Requires-Dist: sqlalchemy>=2.0.0; extra == "sqlalchemy"
+Requires-Dist: sqlalchemy2-stubs>=0.0.2a5; extra == "sqlalchemy"
+Requires-Dist: aiosqlite>=0.19.0; extra == "sqlalchemy"
+Provides-Extra: all
+Requires-Dist: sqlalchemy>=2.0.0; extra == "all"
+Requires-Dist: sqlalchemy2-stubs>=0.0.2a5; extra == "all"
+Requires-Dist: aiosqlite>=0.19.0; extra == "all"
+Requires-Dist: mcp_use>=1.0.0; extra == "all"
+Dynamic: license-file
+
+Package managed by MseeP.ai
