@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: sconekc
+Version: 0.1.1
+Summary: SCONEKC Module for Keycloak interaction
+Author: Scontain GmbH, Germany
+License: The MIT License
+Keywords: keycloak,scone,confidential,confidential computing,enclave
+Description-Content-Type: text/markdown
+Requires-Dist: cryptography>=3.4.8
+Requires-Dist: requests>=2.25.1
+Requires-Dist: flask>=3.1.1
+Dynamic: author
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
+
+SCONEKC is a Module to interact with Keycloak and get access token and validation token. Keycloak ported to confidential computing on [SCONE](https://scontain.com "SCONE")
