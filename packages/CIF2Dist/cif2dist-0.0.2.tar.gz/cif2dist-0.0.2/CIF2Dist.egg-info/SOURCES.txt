@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+CIF2Dist.egg-info/PKG-INFO
+CIF2Dist.egg-info/SOURCES.txt
+CIF2Dist.egg-info/dependency_links.txt
+CIF2Dist.egg-info/entry_points.txt
+CIF2Dist.egg-info/requires.txt
+CIF2Dist.egg-info/top_level.txt
+cif2dist/__init__.py
+cif2dist/cli.py
+cif2dist/core.py
