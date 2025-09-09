@@ -1,0 +1,13 @@
+garth<0.6.0,>=0.5.14
+mcp<2.0.0,>=1.9.0
+
+[dev]
+ipython
+ipdb
+ipykernel
+mcp[cli]
+
+[linting]
+ruff
+mypy
+types-requests
