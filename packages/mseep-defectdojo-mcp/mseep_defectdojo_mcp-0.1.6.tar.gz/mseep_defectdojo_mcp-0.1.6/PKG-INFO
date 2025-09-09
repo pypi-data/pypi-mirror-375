@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: mseep-defectdojo-mcp
+Version: 0.1.6
+Summary: DefectDojo MCP server for integrating with DefectDojo vulnerability management system
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/jamiesonio/defectdojo-mcp
+Project-URL: Repository, https://github.com/jamiesonio/defectdojo-mcp
+Project-URL: Issue Tracker, https://github.com/jamiesonio/defectdojo-mcp/issues
+Keywords: defectdojo,appsec,mcp,devsecops,llm
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.6.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
