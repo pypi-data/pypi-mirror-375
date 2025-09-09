@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: mseep-jnews-mcp-server
+Version: 0.1.6
+Summary: 一个提供热点新闻头条信息功能的模型上下文协议（Model Context Protocol）服务器。
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]>=1.4.1
+
+Package managed by MseeP.ai
