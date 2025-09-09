@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: telekinesis
+Version: 0.1.88
+Summary: Open Source, End-to-End Encrypted, Anywhere-to-Anywhere, Remote Procedure Calls.
+Author-email: "Telekinesis, Inc." <support@telekinesis.cloud>
+Project-URL: Homepage, https://github.com/telekinesis-cloud/telekinesis
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: websockets>=11.0
+Requires-Dist: cryptography>=35.0
+Requires-Dist: bson>=0.5.10
+Requires-Dist: ujson>=4.0.0
+Requires-Dist: packaging>=20.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-asyncio; extra == "dev"
+Dynamic: license-file
+
+# Telekinesis - Python Package
+
+See [telekinesis github repo](https://github.com/e-neuman/telekinesis)
