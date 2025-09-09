@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-llm-bridge
+Version: 0.1.4
+Summary: Bridge between MCP protocol and LLM clients
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE.md
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: python-dotenv>=0.19.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: asyncio>=3.4.3
+Requires-Dist: aiohttp>=3.8.0
+Requires-Dist: typing-extensions>=4.0.0
+Requires-Dist: colorlog>=6.9.0
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == "test"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "test"
+Requires-Dist: pytest-mock>=3.10.0; extra == "test"
+Requires-Dist: pytest-aiohttp>=1.0.4; extra == "test"
+Dynamic: license-file
+
+Package managed by MseeP.ai
