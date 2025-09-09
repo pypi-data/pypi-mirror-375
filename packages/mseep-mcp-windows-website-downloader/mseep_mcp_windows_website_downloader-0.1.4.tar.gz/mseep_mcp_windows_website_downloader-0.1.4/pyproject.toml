@@ -1,0 +1,46 @@
+[build-system]
+requires = [
+    "setuptools>=45",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-mcp-windows-website-downloader"
+version = "0.1.4"
+description = "Simple MCP server for downloading documentation websites"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp>=3.8.0",
+    "beautifulsoup4>=4.9.0",
+    "mcp-python>=0.1.0",
+    "lxml>=4.9.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black>=22.0",
+    "isort>=5.0",
+]
+
+[project.scripts]
+mcp-windows-website-downloader = "mcp_windows_website_downloader.server:main"
+
+[project.entry-points."mcp.servers"]
+mcp-windows-website-downloader = "mcp_windows_website_downloader.server:main"
+
+[tool.setuptools]
+packages = [
+    "mcp_windows_website_downloader",
+]
+
+[tool.setuptools.package-dir]
+"" = "src"

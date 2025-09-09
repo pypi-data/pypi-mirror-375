@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_windows_website_downloader/__init__.py
+src/mcp_windows_website_downloader/__main__.py
+src/mcp_windows_website_downloader/downloader.py
+src/mcp_windows_website_downloader/server.py
+src/mcp_windows_website_downloader/utils.py
+src/mseep_mcp_windows_website_downloader.egg-info/PKG-INFO
+src/mseep_mcp_windows_website_downloader.egg-info/SOURCES.txt
+src/mseep_mcp_windows_website_downloader.egg-info/dependency_links.txt
+src/mseep_mcp_windows_website_downloader.egg-info/entry_points.txt
+src/mseep_mcp_windows_website_downloader.egg-info/requires.txt
+src/mseep_mcp_windows_website_downloader.egg-info/top_level.txt
+tests/test_server.py

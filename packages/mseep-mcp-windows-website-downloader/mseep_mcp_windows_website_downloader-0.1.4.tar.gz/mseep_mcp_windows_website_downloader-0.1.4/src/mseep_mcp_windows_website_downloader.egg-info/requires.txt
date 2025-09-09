@@ -1,0 +1,9 @@
+aiohttp>=3.8.0
+beautifulsoup4>=4.9.0
+mcp-python>=0.1.0
+lxml>=4.9.0
+
+[dev]
+pytest>=6.0
+black>=22.0
+isort>=5.0
