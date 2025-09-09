@@ -1,0 +1,75 @@
+[project]
+name = "scri"
+dynamic = ["version"]
+description = "Time-dependent functions of spin-weighted spherical harmonics on future null infinity"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [
+  { name = "Michael Boyle", email = "michael.oliver.boyle@gmail.com" }
+]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Physics",
+  "Topic :: Scientific/Engineering :: Astronomy"
+]
+dependencies = [
+  "numpy >=2.0",
+  "scipy >=1.13",
+  "numba >=0.60.0",
+  "h5py >=3",
+  "numpy-quaternion >=2024.0.2",
+  "spherical-functions >=2022.4",
+  "spinsfast >=2022.4",
+  "sxs >=2022.4.0",
+  "tqdm >=4.63.1"
+]
+
+[project.urls]
+Homepage = "https://github.com/moble/scri"
+Documentation = "https://scri.readthedocs.io/"
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "scri/__version__.py"
+
+[tool.hatch.envs.test]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+  "black"
+]
+[tool.hatch.envs.test.scripts]
+# Run these as `hatch run test:test`
+test = "pytest {args:tests}"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+norecursedirs = ".* build dist *.egg-info install ENV gh-pages __pycache__"
+junit_family="xunit2"
+addopts = "-v --tb=short --doctest-glob=''"
+
+
+[tool.black]
+line-length = 120
+target-version = ["py310","py311","py312"]
+
+
+[tool.yapf]
+allow_split_before_default_or_named_assigns = false
+column_limit = 120
+dedent_closing_brackets = true
+disable_ending_comma_heuristic = true
+join_multiple_lines = false
+split_before_arithmetic_operator = true
+split_before_expression_after_opening_paren = true
+split_before_first_argument = true
