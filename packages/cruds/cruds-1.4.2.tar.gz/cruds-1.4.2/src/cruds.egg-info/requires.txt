@@ -1,0 +1,13 @@
+certifi>=2024.2.2
+urllib3<3.0.0,>=2.5.0
+PyYAML<7.0.0,>=6.0.1
+jsonschema<5.0.0,>=4.21.1
+
+[develop]
+pre-commit
+pytest
+pytest-cov
+ruff
+
+[rtd]
+sphinx
