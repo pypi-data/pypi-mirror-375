@@ -1,0 +1,6 @@
+mcp[cli]>=1.8.1
+pydantic-settings>=2.10.1
+ruff>=0.12.1
+
+[test]
+pytest>=8.4.1
