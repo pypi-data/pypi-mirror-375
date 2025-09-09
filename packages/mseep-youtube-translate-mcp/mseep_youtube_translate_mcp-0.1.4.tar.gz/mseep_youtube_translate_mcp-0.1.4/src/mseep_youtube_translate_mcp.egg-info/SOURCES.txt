@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_youtube_translate_mcp.egg-info/PKG-INFO
+src/mseep_youtube_translate_mcp.egg-info/SOURCES.txt
+src/mseep_youtube_translate_mcp.egg-info/dependency_links.txt
+src/mseep_youtube_translate_mcp.egg-info/entry_points.txt
+src/mseep_youtube_translate_mcp.egg-info/requires.txt
+src/mseep_youtube_translate_mcp.egg-info/top_level.txt
+src/youtube_translate_mcp/__init__.py
+src/youtube_translate_mcp/__main__.py
+src/youtube_translate_mcp/server.py

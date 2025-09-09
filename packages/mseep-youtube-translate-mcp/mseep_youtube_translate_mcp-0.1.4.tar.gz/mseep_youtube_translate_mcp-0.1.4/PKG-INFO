@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-youtube-translate-mcp
+Version: 0.1.4
+Summary: YouTube Translate MCP server for accessing YouTube video transcripts and translations
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.3.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
