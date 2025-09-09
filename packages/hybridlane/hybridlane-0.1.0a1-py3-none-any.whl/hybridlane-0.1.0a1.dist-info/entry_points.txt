@@ -1,0 +1,3 @@
+[pennylane.plugins]
+hybrid.bosonicqiskit = hybridlane.devices:BosonicQiskitDevice
+
