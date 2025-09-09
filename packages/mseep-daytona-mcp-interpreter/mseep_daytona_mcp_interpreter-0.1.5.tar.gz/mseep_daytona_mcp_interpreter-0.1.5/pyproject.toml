@@ -1,0 +1,29 @@
+[project]
+name = "mseep-daytona-mcp-interpreter"
+version = "0.1.5"
+description = "A Daytona MCP server for Python code interpretation"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "pydantic>=2.10.6",
+    "python-dotenv>=1.0.1",
+    "httpx>=0.24.0",
+    "daytona-sdk>=0.10.5",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+daytona-interpreter = "daytona_mcp_interpreter.server:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
