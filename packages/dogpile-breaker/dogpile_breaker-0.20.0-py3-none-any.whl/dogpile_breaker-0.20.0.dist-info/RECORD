@@ -1,0 +1,13 @@
+dogpile_breaker/__init__.py,sha256=zQ42tk3_0Z4lwP4GwBwW_gsr30S9PRcB2tZk2DJtAOU,517
+dogpile_breaker/api.py,sha256=2RA4CRmE2tsBZXIOWGDjdHU0d7SW-81EOgkpUl9AYjk,18446
+dogpile_breaker/backends/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+dogpile_breaker/backends/circut_breaker_fallback_backend.py,sha256=phKp3XYH9dKz4LMr0OD7Zy1XdCPqsWWwes-cAXrbGJI,6134
+dogpile_breaker/backends/memory_backend.py,sha256=behoZfuCPkAVjqES3EPGflKXwgwyHvqnYg15XwexJB8,3762
+dogpile_breaker/backends/redis_backend.py,sha256=CoFMAjG7SZpArKkzyticBM9NuCGvb980ISvsy5F17Z0,7302
+dogpile_breaker/backends/redis_client.py,sha256=uVU9ikz6ywwAnamTq0RtO8lkWRnYktBG2VwHaFv-5YQ,3743
+dogpile_breaker/exceptions.py,sha256=AocThYjfIS31ARCNURTeKFDScKSr17Izs5TEjIqkLnk,261
+dogpile_breaker/models.py,sha256=npCsDneaKnG5wFhyNDTlhWUmMmyD0kK0UyYiK-ZLKiA,3602
+dogpile_breaker/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+dogpile_breaker-0.20.0.dist-info/WHEEL,sha256=Jb20R3Ili4n9P1fcwuLup21eQ5r9WXhs4_qy7VTrgPI,79
+dogpile_breaker-0.20.0.dist-info/METADATA,sha256=Jxo3YSMmewEj_t5BUAJRV_qQiy9bnQ9fC5EeXZw0Bbg,14196
+dogpile_breaker-0.20.0.dist-info/RECORD,,
