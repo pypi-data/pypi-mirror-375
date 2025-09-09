@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "yamja"
+version = "0.2.0"
+description = "Opinionated library for handling yaml configuration files and jinja2 templates"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    { name = "mobarski", email = "mobarski@gmail.com" }
+]
+keywords = ["yaml", "jinja2", "configuration", "templates"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "jinja2>=3.1.4",
+    "pyyaml>=6.0.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/mobarski/yamja"
+Repository = "https://github.com/mobarski/yamja.git"
+Documentation = "https://github.com/mobarski/yamja#readme"
+"Bug Tracker" = "https://github.com/mobarski/yamja/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["yamja"]

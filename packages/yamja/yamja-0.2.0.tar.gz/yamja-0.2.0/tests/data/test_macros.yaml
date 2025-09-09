@@ -1,0 +1,13 @@
+templates:
+  example_upper: Hello {{ macro.upper(name) }}
+  example_lower: Hello {{ macro.lower(name) }}
+
+macros:
+  upper: |
+    {% macro upper(text) %}
+    {{- text|upper -}}
+    {% endmacro %}
+  lower: |
+    {% macro lower(text) %}
+    {{- text|lower -}}
+    {% endmacro %}
