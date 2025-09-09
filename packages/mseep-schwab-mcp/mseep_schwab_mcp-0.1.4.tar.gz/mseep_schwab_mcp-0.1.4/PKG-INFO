@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-schwab-mcp
+Version: 0.1.4
+Summary: Schwab Model Context Protocol (MCP) for the Schwab API
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: anyio>=4.9.0
+Requires-Dist: click>=8.1.8
+Requires-Dist: mcp>=1.4.1
+Requires-Dist: platformdirs>=4.3.7
+Requires-Dist: pyyaml>=6.0.2
+Dynamic: license-file
+
+Package managed by MseeP.ai
