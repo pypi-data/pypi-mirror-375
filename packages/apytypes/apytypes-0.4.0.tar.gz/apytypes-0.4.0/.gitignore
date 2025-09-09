@@ -1,0 +1,31 @@
+__pycache__/
+builddir/
+.vscode/
+.spyproject/
+*.so
+*~
+_version.py
+_version.pyi
+
+# Apple debugging symbol files
+*.dSYM
+
+# Documentation ignores
+docs/_build/
+docs/xml/
+docs/examples/
+docs/sg_execution_times.rst
+docs/*.png
+comparison/*.png
+
+# C++ source ignores
+*.gcda
+*.gcno
+*.o
+.clangd
+
+subprojects/*/
+benchmark/benchmark.png
+**/berkeley_tests/
+
+**/vunit_out/*

@@ -1,0 +1,126 @@
+name: Coverage
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+        os: ["ubuntu-latest", "ubuntu-24.04-arm"]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -yy lcov
+        python -m pip install --upgrade pip
+        python -m pip install pytest-cov gcovr ninja meson-python numpy setuptools_scm
+    - name: Install APyTypes
+      run: |
+        git fetch --tags
+        export CPPFLAGS='-O0 --coverage -fprofile-abs-path'
+        python -m pip install --no-deps --no-build-isolation -v --editable .
+        unset CPPFLAGS
+    - name: Test with pytest
+      run: |
+        pytest lib/test --cov-report=xml --cov=lib --log-level=DEBUG --color=yes
+    - name: Format coverage data
+      if: ${{ !cancelled()}}
+      run: |
+        lcov --rc branch_coverage=1 --rc geninfo_unexecuted_blocks=1 \
+          --ignore-errors mismatch,mismatch --ignore-errors unused \
+          --ignore-errors mismatch --capture --directory . \
+          --output-file coverage.info
+        lcov --rc branch_coverage=1 --rc geninfo_unexecuted_blocks=1 \
+          --ignore-errors mismatch,mismatch --ignore-errors unused \
+          --ignore-errors mismatch --extract coverage.info $PWD/src/'*'
+        lcov --rc branch_coverage=1 --rc geninfo_unexecuted_blocks=1 \
+          --ignore-errors mismatch,mismatch --ignore-errors unused \
+          --ignore-errors mismatch --list coverage.info
+        find . -name '*.gc*' -delete
+        # gcovr --xml-pretty --exclude-unreachable-branches --print-summary -o cobertura.xml --root $PWD
+    - name: Upload coverage reports to Codecov
+      if: ${{ !cancelled()}}
+      uses: codecov/codecov-action@fdcc8476540edceab3de004e990f80d881c6cc00  # v5.5.0
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+        os: ["macos-13", "macos-14"]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      with:
+        fetch-tags: true
+        fetch-depth: 0
+        persist-credentials: false
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        brew update
+        # Periodically, Homebrew updates Python and fails to overwrite the
+        # existing not-managed-by-Homebrew copy without explicitly being told
+        # to do so. GitHub/Azure continues to avoid fixing their runner images:
+        # https://github.com/actions/runner-images/issues/9966
+        # so force an overwrite even if there are no Python updates.
+        # We don't even care about Homebrew's Python because we use the one
+        # from actions/setup-python.
+        for python_package in $(brew list | grep python@); do
+          brew unlink ${python_package}
+          brew link --overwrite ${python_package}
+        done
+        # Workaround for https://github.com/actions/runner-images/issues/10984
+        brew uninstall --ignore-dependencies --force pkg-config@0.29.2
+        brew install ninja
+        python -m pip install --upgrade pip
+        python -m pip install pytest-cov gcovr ninja meson-python numpy setuptools_scm
+    - name: Install APyTypes
+      run: |
+        git fetch --tags
+        export CPPFLAGS='-fprofile-instr-generate=default.%m.profraw'
+        export CPPFLAGS="$CPPFLAGS -fcoverage-mapping -O0"
+        python -m pip install --no-deps --no-build-isolation -v --editable .
+        unset CPPFLAGS
+    - name: Test with pytest
+      run: |
+        pytest lib/test --cov-report=xml --cov=lib --log-level=DEBUG --color=yes
+    - name: Format coverage data
+      if: ${{ !cancelled()}}
+      run: |
+            xcrun llvm-profdata merge -sparse default.*.profraw \
+              -o default.profdata
+            xcrun llvm-cov export -format="lcov" build/*/*.so \
+              -instr-profile default.profdata > info.lcov
+    - name: Upload coverage reports to Codecov
+      if: ${{ !cancelled()}}
+      uses: codecov/codecov-action@fdcc8476540edceab3de004e990f80d881c6cc00  # v5.5.0
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
