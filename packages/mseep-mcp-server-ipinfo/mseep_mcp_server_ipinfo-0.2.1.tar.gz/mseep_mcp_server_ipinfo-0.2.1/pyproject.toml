@@ -1,0 +1,45 @@
+[project]
+name = "mseep-mcp-server-ipinfo"
+version = "0.2.1"
+description = "IP Geolocation Server for MCP"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: System :: Networking",
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.9.0",
+    "ipinfo>=5.1.1",
+    "pydantic>=2.10.6",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/briandconnelly/mcp-server-ipinfo.git"
+Issues = "https://github.com/briandconnelly/mcp-server-ipinfo/issues"
+
+[project.scripts]
+mcp-server-ipinfo = "mcp_server_ipinfo.server:mcp.run"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

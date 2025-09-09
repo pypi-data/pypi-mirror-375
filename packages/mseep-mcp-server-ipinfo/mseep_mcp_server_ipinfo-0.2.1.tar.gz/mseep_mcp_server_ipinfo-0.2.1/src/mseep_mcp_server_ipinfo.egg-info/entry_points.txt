@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-server-ipinfo = mcp_server_ipinfo.server:mcp.run
