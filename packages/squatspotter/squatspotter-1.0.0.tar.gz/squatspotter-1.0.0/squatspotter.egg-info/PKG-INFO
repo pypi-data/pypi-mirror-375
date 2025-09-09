@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: squatspotter
+Version: 1.0.0
+Summary: Outil de détection et de surveillance du typosquatting.
+Author-email: Paul Berra <paul.berra.pro@gmail.com>
+Description-Content-Type: text/markdown
+Requires-Dist: certifi==2025.8.3
+Requires-Dist: charset-normalizer==3.4.3
+Requires-Dist: colorama==0.4.6
+Requires-Dist: dnspython==2.8.0
+Requires-Dist: filelock==3.19.1
+Requires-Dist: idna==3.10
+Requires-Dist: python-dotenv==1.1.1
+Requires-Dist: requests==2.32.5
+Requires-Dist: requests-file==2.1.0
+Requires-Dist: tldextract==5.3.0
+Requires-Dist: tqdm==4.67.1
+Requires-Dist: urllib3==2.5.0
+Provides-Extra: dev

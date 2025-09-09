@@ -1,0 +1,15 @@
+pyproject.toml
+squatspotter/__init__.py
+squatspotter/cli.py
+squatspotter/core.py
+squatspotter/dnschecker.py
+squatspotter/listMaker.py
+squatspotter/notifications.py
+squatspotter/reporting.py
+squatspotter/utils.py
+squatspotter.egg-info/PKG-INFO
+squatspotter.egg-info/SOURCES.txt
+squatspotter.egg-info/dependency_links.txt
+squatspotter.egg-info/entry_points.txt
+squatspotter.egg-info/requires.txt
+squatspotter.egg-info/top_level.txt

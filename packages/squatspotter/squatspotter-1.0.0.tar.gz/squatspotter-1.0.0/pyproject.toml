@@ -1,0 +1,42 @@
+# Fichier de configuration du projet SquatSpotter
+
+[project]
+# --- Informations générales sur le projet ---
+name = "squatspotter"
+version = "1.0.0"
+description = "Outil de détection et de surveillance du typosquatting."
+readme = "README.md"
+
+# --- Dépendances de production (l'équivalent de requirements.txt) ---
+dependencies = [
+    "certifi==2025.8.3",
+    "charset-normalizer==3.4.3",
+    "colorama==0.4.6",
+    "dnspython==2.8.0",
+    "filelock==3.19.1",
+    "idna==3.10",
+    "python-dotenv==1.1.1",
+    "requests==2.32.5",
+    "requests-file==2.1.0",
+    "tldextract==5.3.0",
+    "tqdm==4.67.1",
+    "urllib3==2.5.0"
+]
+
+# --- MODIFICATION : Syntaxe plus robuste pour les auteurs ---
+[[project.authors]]
+name = "Paul Berra"
+email = "paul.berra.pro@gmail.com"
+
+
+[project.scripts]
+# --- Point d'entrée pour la ligne de commande ---
+squatspotter = "squatspotter.cli:main"
+
+[project.optional-dependencies]
+# --- Dépendances de développement (pour les tests, le style, etc.) ---
+dev = []
+
+[tool.setuptools]
+# --- Configuration pour trouver automatiquement votre code ---
+packages = ["squatspotter"]
