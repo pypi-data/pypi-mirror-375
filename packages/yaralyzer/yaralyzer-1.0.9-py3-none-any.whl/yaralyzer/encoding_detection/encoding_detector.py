@@ -1,0 +1,145 @@
+"""
+`EncodingDetector` class for managing chardet encoding detection.
+"""
+from operator import attrgetter
+from typing import List
+
+import chardet
+from rich import box
+from rich.padding import Padding
+from rich.table import Table
+
+from yaralyzer.config import YaralyzerConfig
+from yaralyzer.encoding_detection.encoding_assessment import ENCODING, EncodingAssessment
+from yaralyzer.util.logging import log
+
+CONFIDENCE_SCORE_RANGE = range(0, 101)
+
+
+class EncodingDetector:
+    """
+    Manager class to ease dealing with the encoding detection library `chardet`.
+
+    Each instance of this class manages a `chardet.detect_all()` scan on a single set of bytes.
+
+    Attributes:
+        bytes (bytes): The bytes to analyze.
+        bytes_len (int): The length of the bytes.
+        table (Table): A rich `Table` object summarizing the chardet results.
+        assessments (List[EncodingAssessment]): List of `EncodingAssessment` objects from `chardet` results.
+        unique_assessments (List[EncodingAssessment]): Unique assessments by encoding, highest confidence only.
+        raw_chardet_assessments (List[dict]): Raw list of dicts returned by `chardet.detect_all()`.
+        force_decode_assessments (List[EncodingAssessment]): Assessments above force decode threshold.
+        force_display_assessments (List[EncodingAssessment]): Assessments above force display threshold.
+        has_any_idea (Optional[bool]): `True` if `chardet` had any idea what the encoding might be,
+            `False` if not, `None` if `chardet` wasn't run yet.
+        force_display_threshold (float): `[class variable]` Default confidence threshold for forcing display
+            in decoded table.
+        force_decode_threshold (float): `[class variable]` Default confidence threshold for forcing a decode attempt.
+    """
+
+    # Default value for encodings w/confidences below this will not be displayed in the decoded table
+    force_display_threshold = 20.0
+    # Default value for what chardet.detect() confidence % should we force a decode with an obscure encoding.
+    force_decode_threshold = 50.0
+
+    def __init__(self, _bytes: bytes) -> None:
+        """
+        Args:
+            _bytes (bytes): The bytes to analyze with `chardet`.
+        """
+        self.bytes = _bytes
+        self.bytes_len = len(_bytes)
+        self.table = _empty_chardet_results_table()
+
+        # Skip chardet if there's not enough bytes available
+        if not self.has_enough_bytes():
+            log.debug(f"{self.bytes_len} is not enough bytes to run chardet.detect()")
+            self._set_empty_results()
+            self.has_any_idea = None  # not false!
+            return
+
+        # Unique by encoding, ignoring language.  Ordered from highest to lowest confidence
+        self.unique_assessments = []
+        self.raw_chardet_assessments = chardet.detect_all(self.bytes, ignore_threshold=True)
+
+        if len(self.raw_chardet_assessments) == 1 and self.raw_chardet_assessments[0][ENCODING] is None:
+            log.info(f"chardet.detect() has no idea what the encoding is, result: {self.raw_chardet_assessments}")
+            self._set_empty_results()
+            self.has_any_idea = False
+            return
+
+        self.has_any_idea = True
+        self.assessments = [EncodingAssessment(a) for a in self.raw_chardet_assessments]
+        self._uniquify_results_and_build_table()
+        self.force_decode_assessments = self.assessments_above_confidence(type(self).force_decode_threshold)
+        self.force_display_assessments = self.assessments_above_confidence(type(self).force_display_threshold)
+
+    def get_encoding_assessment(self, encoding: str) -> EncodingAssessment:
+        """
+        Get the `chardet` assessment for a specific encoding.
+
+        Args:
+            encoding (str): The encoding to look for.
+
+        Returns:
+            EncodingAssessment: Assessment for the given encoding if it exists, otherwise a dummy with 0 confidence.
+        """
+        assessment = next((r for r in self.unique_assessments if r.encoding == encoding), None)
+        return assessment or EncodingAssessment.dummy_encoding_assessment(encoding)
+
+    def has_enough_bytes(self) -> bool:
+        """Return `True` if we have enough bytes to run `chardet.detect()`."""
+        return self.bytes_len >= YaralyzerConfig.args.min_chardet_bytes
+
+    def assessments_above_confidence(self, cutoff: float) -> List[EncodingAssessment]:
+        """Return the assessments above the given confidence cutoff."""
+        return [a for a in self.unique_assessments if a.confidence >= cutoff]
+
+    def __rich__(self) -> Padding:
+        return Padding(self.table, (0, 0, 0, 0))
+
+    def _uniquify_results_and_build_table(self) -> None:
+        """Keep the highest result per encoding, ignoring the language `chardet` has indicated."""
+        already_seen_encodings = {}
+
+        for i, result in enumerate(self.assessments):
+            if result.confidence < YaralyzerConfig.args.min_chardet_table_confidence:
+                continue
+
+            self.table.add_row(f"{i + 1}", result.encoding_label, result.confidence_text)
+
+            # self.unique_assessments retains one result per encoding possibility (the highest confidence one)
+            # Some encodings are not language specific and for those we don't care about the language
+            if result.encoding not in already_seen_encodings:
+                self.unique_assessments.append(result)
+                already_seen_encodings[result.encoding] = result
+            else:
+                log.debug(f"Skipping chardet result {result} (already saw {already_seen_encodings[result.encoding]})")
+
+        self.unique_assessments.sort(key=attrgetter('confidence'), reverse=True)
+
+    def _set_empty_results(self) -> None:
+        """Set empty results for when `chardet` can't help us."""
+        self.assessments = []
+        self.unique_assessments = []
+        self.raw_chardet_assessments = []
+        self.force_decode_assessments = []
+        self.force_display_assessments = []
+
+
+def _empty_chardet_results_table() -> Table:
+    """Returns an empty `Table` with appropriate columns for `chardet` results."""
+    table = Table(
+        'Rank', 'Encoding', 'Confidence',
+        title='chardet.detect results',
+        title_style='color(153) italic dim',
+        header_style='off_white',
+        style='dim',
+        box=box.SIMPLE,
+        show_edge=False,
+        collapse_padding=True
+    )
+
+    table.columns[0].justify = 'right'
+    return table
