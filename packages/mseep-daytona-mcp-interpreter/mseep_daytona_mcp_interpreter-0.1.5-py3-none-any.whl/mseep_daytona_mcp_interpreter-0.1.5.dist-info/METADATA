@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-daytona-mcp-interpreter
+Version: 0.1.5
+Summary: A Daytona MCP server for Python code interpretation
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.0.0
+Requires-Dist: pydantic>=2.10.6
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: daytona-sdk>=0.10.5
+Dynamic: license-file
+
+Package managed by MseeP.ai
