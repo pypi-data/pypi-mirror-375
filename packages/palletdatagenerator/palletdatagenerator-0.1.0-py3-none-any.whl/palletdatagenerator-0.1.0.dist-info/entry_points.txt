@@ -1,0 +1,2 @@
+[console_scripts]
+palletgen = palletdatagenerator.cli:main
