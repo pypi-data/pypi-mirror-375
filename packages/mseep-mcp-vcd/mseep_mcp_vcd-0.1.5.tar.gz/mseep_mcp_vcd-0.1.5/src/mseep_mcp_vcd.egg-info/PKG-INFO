@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-vcd
+Version: 0.1.5
+Summary: A model context protocol (MCP) server for value change dump (VCD) waveforms.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: ipykernel>=6.29.5
+Requires-Dist: mcp>=1.1.2
+Dynamic: license-file
+
+Package managed by MseeP.ai
