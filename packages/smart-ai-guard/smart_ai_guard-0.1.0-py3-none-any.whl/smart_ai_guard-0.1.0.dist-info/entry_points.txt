@@ -1,0 +1,2 @@
+[console_scripts]
+ai-guard = ai_guard.analyzer:main
