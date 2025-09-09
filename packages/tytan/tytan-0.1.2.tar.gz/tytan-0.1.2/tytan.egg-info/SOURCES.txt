@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+requirements.txt
+setup.py
+tytan/__init__.py
+tytan/_version.py
+tytan/auto_array.py
+tytan/compile.py
+tytan/sampler.py
+tytan/symbol.py
+tytan.egg-info/PKG-INFO
+tytan.egg-info/SOURCES.txt
+tytan.egg-info/dependency_links.txt
+tytan.egg-info/requires.txt
+tytan.egg-info/top_level.txt
