@@ -1,0 +1,20 @@
+[project]
+name = "probeX" 
+version = "0.1.3c"
+description = "A sample project for pytest"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name="gavin", email="ygydev@163.com" }
+]
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://github.com/"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+probeX = "probeX.start:main"
