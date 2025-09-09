@@ -1,0 +1,17 @@
+app/api.py,sha256=TqOot7FbYF400DuihZFZg16N7jDJfvRAfV9Jtd9UmA0,911
+app/config.py,sha256=i0u7qTEtkDRRkyARmyFAEh6Hr6khq_cZSvBRUPTJIB0,205
+app/controllers/resources.py,sha256=-r35yBW0qwjuFw9XnoyoQn_c1abdaa4YNkXLGOkhX7I,4907
+app/handlers/commons.py,sha256=IcsRjGZrmuNpox7DHt2jPOJA0kIvWNLBDHWqVOWGH2A,1510
+app/handlers/errors.py,sha256=QrWPBQx38GZgFwPP8xUve2VNzCQXTTOX6ye0Ctrtr0A,4877
+app/handlers/exceptions.py,sha256=5fy7vHjoTgIf93-gRXWORtCFjyPi2Ix5uX6XQFuswfc,2786
+app/handlers/messages.py,sha256=1qbjvCOoDHpFvbCB-CuhLHJmSqVfcM0ruku5805IsZ4,2922
+app/handlers/resources.py,sha256=hgwbsP18B3sYZGCg9UbJ5fO_4aZ0uqj3Ke3TcJOz7oo,580
+app/handlers/singleton.py,sha256=i60pOnAQsGYcMLrxkklsIzyhadTDYSQFD_fUD3Mtsnc,257
+app/handlers/validators.py,sha256=Xm44IxeepRUjwuMaK2kXmQoDjkbdPmYTwcweZz0zxDE,1966
+app/models/db_json_content.py,sha256=6AuCNTR2rdZToVn-kuP272Swju6K3_2phMAQcKkJOEM,7565
+app/views/routes.py,sha256=SXaWEWKB3-ewd4FvYXIc1vqxg6pD7rmX9x-h-MoE3hE,2686
+ya_json_server-0.24.1.dist-info/LICENSE,sha256=kH6TNAc-AoJlrSBYt7aZkQxcImT4LO4cWH-hdqnehQ8,11358
+ya_json_server-0.24.1.dist-info/METADATA,sha256=Kc8-G_4S8L0uJ1elpLD4KGi9fKkodk9vMC-swuwtD2U,4558
+ya_json_server-0.24.1.dist-info/WHEEL,sha256=b4K_helf-jlQoXBBETfwnf4B04YC67LOev0jo4fX5m8,88
+ya_json_server-0.24.1.dist-info/entry_points.txt,sha256=f5zcGNMaGO-dP5L90RVAUfIuE9S4l_N2P68ZGg1JoMA,48
+ya_json_server-0.24.1.dist-info/RECORD,,
