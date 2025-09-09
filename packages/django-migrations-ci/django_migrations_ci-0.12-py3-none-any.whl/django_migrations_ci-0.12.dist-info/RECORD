@@ -1,0 +1,17 @@
+django_migrations_ci/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+django_migrations_ci/backends/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+django_migrations_ci/backends/mysql.py,sha256=ybW1aOAACePumd09K5SZH0Bzty5SVdK1K-HQmNZNeEs,1173
+django_migrations_ci/backends/postgresql.py,sha256=gr9LJOD2Q8zsRtUbabSjNFP6Yr9_pIOx0jhN3w_jli8,996
+django_migrations_ci/backends/sqlite.py,sha256=y2fsvx8_hvaVbgvhzXZ4TZ_qc3E-jxRDVwQJAPZKqSk,346
+django_migrations_ci/conf.py,sha256=oE33gc49apqXkVHIBje_COTI5b1ERW8lyG5JZca6E5o,655
+django_migrations_ci/django.py,sha256=ZW339B_OWJUnNVbCBMhruIkUamSDD81Bf5OSXhCY47Q,8809
+django_migrations_ci/management/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+django_migrations_ci/management/commands/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+django_migrations_ci/management/commands/migrateci.py,sha256=YXQQkPQ63SsBRjs07LKGrglyEnnE7WTfB7fqzIC7Do0,6806
+django_migrations_ci/pytest_plugin.py,sha256=lijulON9LH8DUagVtatRXheBvNBvemmma8VuVXnDLUs,2513
+django_migrations_ci/shell.py,sha256=0h73moqRqTF3CTo8E6qX6r18Fupwi6YE-jci4LxOZ3s,595
+django_migrations_ci-0.12.dist-info/LICENSE,sha256=1XPAwGIuNDFbpalIwjhM24zw1Wa8CNjbzhBPtw-FNcY,1071
+django_migrations_ci-0.12.dist-info/METADATA,sha256=6GHcNXDSCUs-LZBqv4rkrI-ULAfyLg0f9_qkygzjt_I,6698
+django_migrations_ci-0.12.dist-info/WHEEL,sha256=Nq82e9rUAnEjt98J6MlVmMCZb-t9cYE2Ir1kpBmnWfs,88
+django_migrations_ci-0.12.dist-info/entry_points.txt,sha256=PaJ3SxwlbtMOkCvA_bWGLJQVljefZzvgGNfjpGtSJu0,57
+django_migrations_ci-0.12.dist-info/RECORD,,
