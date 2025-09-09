@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "leaguewizard"
+dynamic = ["version"]
+description = "Auto sync your itemsets, perks and spells with mobalytics.gg ones on champion selection."
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.12.15",
+    "pillow>=11.3.0",
+    "pystray>=0.19.5",
+    "selectolax>=0.3.34",
+    "websockets>=15.0.1",
+]
+authors = [{ name = "Hamburgão", email = "amburgao@users.noreply.github.com" }]
+maintainers = [
+    { name = "Hamburgão", email = "amburgao@users.noreply.github.com" },
+]
+keywords = [
+    "automation",
+    "builds",
+    "runes",
+    "league of legends",
+    "league",
+    "lol",
+    "simplerunes",
+    "leaguewizard",
+    "lcu",
+]
+
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Games/Entertainment",
+
+    # Specify the Python versions you support here.
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.scripts]
+leaguewizard = "leaguewizard.__init__:main"
+
+[project.urls]
+#DOWNLOAD = 
+#Documentation = "https://readthedocs.org"Homepage = "https://github.com/amburgao/leaguewizard"
+Repository = "https://github.com/amburgao/leaguewizard.git"
+Issues = "https://github.com/me/amburgao/leaguewizard"
+Changelog = "https://github.com/amburgao/leaguewizard/blob/master/CHANGELOG.md"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1",
+    "pyinstaller>=6.15.0",
+    "ruff>=0.12.11",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.ruff]
+unsafe-fixes = true
+show-fixes = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+fixable = ["ALL"]
+extend-unsafe-fixes = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"backend.py" = ["ALL"]
+"models.py" = ["D", "N"]
+"constants.py" = ["D"]
+
+[tool.mypy]
+follow_untyped_imports = true
