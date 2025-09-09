@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: wformat
+Version: 0.1.3
+Summary: Opinionated code formatter for C++ code.
+Author: Ziwei Wei
+License-Expression: MIT
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: test
+Requires-Dist: pytest>=7.0; extra == "test"
+Provides-Extra: build
+Requires-Dist: build; extra == "build"
+Requires-Dist: twine; extra == "build"
+Requires-Dist: wheel; extra == "build"
+Requires-Dist: pyinstaller<7,>=6.15; extra == "build"
+Dynamic: license-file
+
+# WFormat
+
+Opinionated code formatter for C++ code.
+
+## Availability
+
+limit: only support Format Document in IDEs for now
+
+### Visual Studio Code
+
+- [x] win-x64
+- [ ] win-arm64
+- [x] macos
+- [x] linux-64
+- [ ] linux-arm64
+
+### Visual Studio
+
+- [x] win-x64
+- [ ] win-arm64
+
+### XCode
+
+- [ ] macos
+
+### Python Package Index(PyPI)
+
+- [x] win-x64
+- [ ] win-arm64
+- [x] macos
+- [ ] linux-64
+- [ ] linux-arm64
+
+## Tutorials
+
+### Installation
+
+#### Use Visual Studio Code Extension
+
+Install ```wformat``` from extension market.
+
+In any C++ file, Press ```ctrl + alt + P``` to bring up the command menu.
+
+Type ```Format Document With...``` select ```Config Default Formatter...``` pick ```wformat```.
+
+Next time you call ```Format Document```, vscode will use ```wformat```.
+
+#### Use Visual Studio Extension
+
+Install ```wformat``` from extension market.
+
+By default, you can only click ```Run WFormat``` in your Right Click Menu to format on the file.
+
+You can find ```wformat.General```(or search ```wformat```) in ```Tools > Options``` menu.
+
+By change ```Override default formatter``` to ```True```, you can use Format Document(```ctrl + K```, ```ctrl + D```) with wformat instead.
+
+#### Use as console app from Python Package Index (PyPI)
+
+Run ```pip install wformat```, then you can use ```wformat``` in your console.
+
+### Usage
+
+Run ```wformat -v``` to check your current version.
+
+Run ```wformat``` or ```wformat -h``` to get the usage help doc.
+Find developer friendly use examples under the ```tutorials:``` section.
