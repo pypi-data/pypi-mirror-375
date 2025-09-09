@@ -1,0 +1,40 @@
+[project]
+name = "pyHomee"
+version = "1.3.3"
+description = "a python library to interact with homee"
+readme = "README.md"
+license = "MIT"
+requires-python = ">= 3.11"
+dependencies = [
+    "aiohttp>=3.11",
+    "websockets>=13",
+]
+authors = [
+  {name = "Taraman17"}
+]
+classifiers=[
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Repository = "https://github.com/Taraman17/pyHomee"
+
+[build-system]
+requires = ["setuptools >= 80.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+branch = "master"
+commit_parser = "conventional"
+upload_to_PyPI = true
+upload_to_release = true
+
+[tool.semantic_release.changelog.default_templates]
+changelog_file = "CHANGELOG.md"
+output_format = "md"
+
+[tool.setuptools]
+packages = ["pyHomee"]
+include-package-data = false
