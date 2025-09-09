@@ -1,0 +1,197 @@
+# A Bug/Leakage Prevention and File Management System.
+
+A lightweight, dependency-free Python module for managing structured text-based data with validation, backup, and recovery features. Ideal for small-scale data storage, prototypes, or personal tools that need structure without the overhead of a full database.
+
+---
+
+## 🚀 Features
+
+- ✅ Safe read/write with structure validation (1D & 2D lists)
+- ➕ Append support with consistency checks
+- ❌ Granular delete with filters (cutoff, keep, reverse, size)
+- 💾 Backup and 📸 Snapshot support
+- 🧹 Debug and auto-clean corrupted files
+- 📚 Built-in mini-guide
+- 🎗️ Supports Multiple Console usage
+- 🗂️ Clean folder/files organization.
+- 💪 Strong anti-corruption and Tamper mechanism
+
+---
+
+## Why Use This Package?
+* a data tool for web-scraping and real-time dashboard.
+* perfect for quick prototyping, automation, or lightweight apps.
+* Zero setup overhead — no SQL, no migrations, just plain text files.
+* Built-in concurrency and validation — reduce bugs and data corruption.
+* Auto-debugging — self-healing files to avoid downtime.
+* Ideal for web scraping, automation pipelines, and small apps where a full database is overkill.
+
+
+## 📦 Core Functions
+
+### `w(txt_name: str, write_list: list) -> None`
+
+Write (or reset) the contents of a file, validating structure before saving to all backup locations.
+
+### `r(txt_name: str, set_new: list | None = [], notify_new: bool = True) -> list | None`
+
+Read file contents. If the file is missing, return `set_new` and optionally notify user of new file creation.
+
+### `a(txt_name: str, append_list: list) -> list`
+
+Append new rows to an existing file after validating structure. Returns the updated list.
+
+### `d(txt_name: str, ...) -> tuple[int, list]`
+
+Delete matching rows with flexible options:
+- `del_list`: values to delete
+- `index`: column index for 2D deletion
+- `cutoff`: max deletions per value
+- `keep`: retain only N per value
+- `reverse`: delete from end
+- `size`: trim to max N items
+
+### `backup(txt_name: str, display=True)`
+
+Create a manual backup of a file or all (`txt_name="*"`).
+
+### `snapshot(txt_name: str, unit, gap, begin=0, display=True)`
+
+Take time-based snapshots if eligible. Supports:
+- `unit`: `'minute'`, `'hour'`, `'day'`, `'month'`, etc.
+- `gap`: how much time must pass
+- `begin`: used for daily-based triggers
+
+### `debug(txt_name, is_2D=None, clean=None, length=None, display=True)`
+
+Scan and optionally auto-clean a file that fails validation. Great for corrupted data recovery.
+
+### `help()`
+
+Opens the interactive mini-guide documentation tool.
+
+---
+
+## 📁 File Organization
+
+Each file is saved as a `.txt` in a structured folder. All backups and snapshots are handled automatically.
+
+Other folders:
+- `Backup 💾/` – Manual backups
+- `Snapshot 📸/` – A timed backup
+
+Validation files:
+- `*_validation.txt` – Schema registry per file
+
+---
+
+**Usage Examples**
+
+---
+
+**Write (w): Overwrite data**
+
+* `w("students", ["Alice", "Bob"])`
+  Overwrites the file "students" with a 1D list.
+
+* `w("scores", [[1, "Math", 80], [2, "Science", 90]])`
+  Overwrites the file "scores" with a 2D list.
+
+---
+
+**Read (r): Read data, or set new if missing**
+
+* `r("students")`
+  Reads the content of "students".
+
+* `r("new_file", [], notify_new=True)`
+  If "new\_file" doesn't exist, sets it with an empty list and optionally notifies.
+
+---
+
+**Append (a): Add new entries**
+
+* `a("students", ["Charlie"])`
+  Appends "Charlie" to the 1D list "students".
+
+* `a("scores", [[3, "English", 85], [4, "Math", 75]])`
+  Appends rows to the 2D list "scores".
+
+---
+
+**Delete (d): Various modes**
+
+Delete by value in 1D:
+
+* `d("students", ["Bob"])`
+  Deletes "Bob" from the list.
+
+Multi-row delete in 1D:
+
+* `d("students", ["Bob", "Charlie"])`
+  Deletes both "Bob" and "Charlie" if found.
+
+Delete by value in 2D:
+
+* `d("scores", [2], index=0)`
+  Deletes rows where the first element (ID) is 2.
+
+* `d("scores", ["Math"], index=1, cutoff=1)`
+  Deletes only the first occurrence where subject is "Math".
+
+* `d("scores", ["Math"], index=1, keep=1)`
+  Keeps only one row with subject "Math", deletes the rest.
+
+* `d("scores", size=2)`
+  Trims the list to the last 2 entries.
+
+* `d("scores", ["English"], index=1, reverse=True)`
+  Deletes rows with "English" in reverse order (from last to first).
+
+Multi-index delete (like SQL WHERE conditions):
+
+* `d("scores", [[2, "Science"]], index=[0, 1])`
+  Deletes rows where ID is 2 and subject is "Science".
+
+* `d("scores", [[1, "Math", 80]], index=[0, 1, 2])` or `index="*"`
+  Deletes the exact row \[1, "Math", 80].
+
+OR condition with multi-index matching:
+
+* `d("scores", [[1, 80], [4, 75]], index=[0, 2])`
+  Deletes rows where (ID is 1 and score is 80) OR (ID is 4 and score is 75).
+
+---
+
+**Backup and Snapshot**
+
+* `backup("students")`
+  Manually backs up the "students" file.
+
+* `backup("*")`
+  Backs up all files.
+
+* `snapshot("students", "day", 1)`
+  Creates a snapshot of "students" if a day has passed.
+
+* `snapshot("*", "hour", 6)`
+  Snapshots all files every 6 hours.
+
+---
+
+**Debugging**
+
+* `debug("students", is_2D=False, clean=True)`
+  Cleans and checks 1D data in "students".
+
+* `debug("scores", is_2D=True, length=3)`
+  Checks 2D data in "scores" for correct 3-column format.
+
+---
+
+**Help**
+
+* `help()`
+  Displays the usage guide.
+
+---
