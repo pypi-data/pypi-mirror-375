@@ -1,0 +1,236 @@
+2025-09-09 15:38:51,732 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:38:51,732 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:38:51,732 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:38:51,782 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:38:51,783 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:38:51,783 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:38:51,783 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:38:52,693 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:38:52,700 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:38:52,700 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:38:52,700 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:39:17,552 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:39:17,552 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:39:17,552 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:39:17,600 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:39:17,600 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:39:17,601 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:39:17,601 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:39:17,889 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:39:35,849 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:39:35,852 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:39:35,854 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:39:58,372 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:39:58,372 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:39:58,372 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:39:58,424 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:39:58,424 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:39:58,425 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:39:58,425 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:39:58,713 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:40:01,546 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154001_a0a5f389/t.apk
+2025-09-09 15:40:01,546 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:40:01,547 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:40:01,548 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:40:22,450 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:40:22,450 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:40:22,450 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:40:22,503 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:40:22,503 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:40:22,503 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:40:22,504 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:40:22,792 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:40:39,886 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154022_b373a73e/t.apk
+2025-09-09 15:40:50,760 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:40:50,761 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:40:50,762 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:40:53,268 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:40:53,268 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:40:53,268 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:40:53,320 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:40:53,320 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:40:53,320 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:40:53,321 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:40:53,604 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:40:54,683 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154053_db40cd46/t.apk
+2025-09-09 15:41:00,515 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:41:00,518 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:41:00,520 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:41:16,053 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:41:16,053 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:41:16,053 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:41:16,106 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:41:16,106 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:41:21,184 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:41:21,185 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:41:30,914 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:41:38,058 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154138_a38f62bd/t.apk
+2025-09-09 15:41:38,058 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:41:38,059 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:41:38,060 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:42:07,872 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:42:07,872 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:42:07,873 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:42:07,925 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:42:07,925 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:42:10,008 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:42:10,011 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:42:10,295 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:42:11,117 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154211_a930d24c/t.apk
+2025-09-09 15:42:11,117 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:42:11,118 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:42:11,119 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:42:17,385 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:42:17,385 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:42:17,385 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:42:17,439 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:42:17,440 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:42:19,737 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:42:19,739 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:42:20,065 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:42:51,359 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154228_584999ee/t.apk
+2025-09-09 15:42:51,360 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:42:51,361 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:42:51,361 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:42:56,189 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:42:56,189 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:42:56,189 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:42:56,243 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:42:56,243 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:42:58,690 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:42:58,691 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:42:58,989 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:43:01,936 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154301_d0e8d249/t.apk
+2025-09-09 15:43:01,936 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:43:01,937 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:43:01,938 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:43:30,346 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:43:30,346 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:43:30,346 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:43:30,397 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:43:30,397 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:43:30,397 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:43:30,398 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:43:30,689 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:44:14,960 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909154330_b795448d/t.apk
+2025-09-09 15:49:11,972 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:49:11,975 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:49:11,977 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:49:13,371 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:49:13,371 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:49:13,371 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:49:13,480 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:49:13,480 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:49:13,480 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:49:13,482 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:49:13,792 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:49:28,268 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:49:28,271 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:49:28,273 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:50:59,890 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:50:59,891 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:50:59,891 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:50:59,941 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:50:59,941 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:50:59,941 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:50:59,942 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:51:00,219 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:51:03,903 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:51:03,905 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:51:03,907 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:53:51,786 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:53:51,786 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:53:51,786 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:53:51,841 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:53:51,841 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:53:51,841 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:53:51,841 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:53:52,868 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:53:52,894 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909155352_ca0733e3/t.apk
+2025-09-09 15:53:52,895 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:53:52,896 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:53:52,897 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:58:03,413 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:58:03,414 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:58:03,414 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:58:03,462 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:58:03,462 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:58:03,463 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:58:03,463 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:58:03,762 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:58:23,268 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909155803_a514c814/t.apk
+2025-09-09 15:59:08,195 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:59:08,202 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:59:08,203 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:59:40,008 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:59:40,008 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:59:40,008 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:59:40,058 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:59:40,058 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:59:40,058 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:59:40,058 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:59:40,344 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:59:40,370 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909155940_40ad4550/t.apk
+2025-09-09 15:59:40,371 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 15:59:40,372 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 15:59:40,373 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 15:59:48,250 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 15:59:48,250 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 15:59:48,251 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 15:59:48,283 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 15:59:48,283 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 15:59:48,283 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 15:59:48,284 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 15:59:48,558 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 15:59:48,584 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909155948_0f254589/t.apk
+2025-09-09 16:00:02,043 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 16:00:02,045 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 16:00:02,048 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 16:00:03,906 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 16:00:03,906 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 16:00:03,906 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 16:00:03,958 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 16:00:03,958 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 16:00:03,958 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 16:00:03,959 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 16:00:04,262 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 16:00:04,292 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909160004_fa953c07/t.apk
+2025-09-09 16:00:16,743 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 16:00:16,745 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 16:00:16,747 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 16:00:34,050 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 16:00:34,050 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 16:00:34,050 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 16:00:34,102 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 16:00:34,102 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 16:00:34,102 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 16:00:34,103 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 16:00:34,390 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 16:00:34,408 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909160034_3b8b98ff/t.apk
+2025-09-09 16:00:44,235 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 16:00:44,236 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 16:00:44,238 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 16:17:05,166 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 16:17:05,166 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 16:17:05,166 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 16:17:05,220 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 16:17:05,220 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 16:17:05,220 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 16:17:05,221 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 16:17:06,238 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 16:17:06,262 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909161706_79217e46/t.apk
+2025-09-09 16:17:06,991 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 16:17:07,007 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 16:17:07,008 - ubox_py_sdk.client - INFO - 客户端连接已关闭
+2025-09-09 16:17:47,770 - ubox_py_sdk - INFO - 日志系统已配置 - 级别: DEBUG, 文件输出: ubox/ubox_sdk.log
+2025-09-09 16:17:47,771 - ubox_py_sdk.client - INFO - 本地模式，跳过设备占用流程
+2025-09-09 16:17:47,771 - ubox_py_sdk.client - INFO - 本地模式，使用地址: http://127.0.0.1:26000
+2025-09-09 16:17:47,820 - ubox_py_sdk.client - INFO - 本地地址联通，使用: http://127.0.0.1:26000
+2025-09-09 16:17:47,820 - ubox_py_sdk.device - INFO - 本地模式，跳过续期任务
+2025-09-09 16:17:47,820 - ubox_py_sdk.client - DEBUG - 生成新的JWT token
+2025-09-09 16:17:47,820 - ubox_py_sdk.client - DEBUG - JWT token已更新
+2025-09-09 16:17:48,135 - ubox_py_sdk.client - INFO - 设备已初始化: 181QGEYK222E3 -> http://127.0.0.1:26000 (模式: local, 代理: False)
+2025-09-09 16:17:48,163 - ubox_py_sdk - INFO - 文件直接推送成功: ./t.apk -> /Users/xutianyi/Documents/lain_code/py-project/utest-lab-client-agent/tmp_lab_agent/ubox/181QGEYK222E3/20250909/20250909161748_509c9e5f/t.apk
+2025-09-09 16:17:51,119 - ubox_py_sdk.client - INFO - 并发释放所有设备，共 1 台
+2025-09-09 16:17:51,131 - ubox_py_sdk.device - INFO - 本地模式设备 181QGEYK222E3，无需释放
+2025-09-09 16:17:51,133 - ubox_py_sdk.client - INFO - 客户端连接已关闭
