@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/aws_lambda_manager.egg-info/PKG-INFO
+src/aws_lambda_manager.egg-info/SOURCES.txt
+src/aws_lambda_manager.egg-info/dependency_links.txt
+src/aws_lambda_manager.egg-info/not-zip-safe
+src/aws_lambda_manager.egg-info/requires.txt
+src/aws_lambda_manager.egg-info/top_level.txt
+src/lambda_manager/__init__.py
+src/lambda_manager/lambda_manager.py

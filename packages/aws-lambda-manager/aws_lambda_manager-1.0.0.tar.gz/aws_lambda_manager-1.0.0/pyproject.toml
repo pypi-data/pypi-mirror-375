@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws-lambda-manager"
+version = "1.0.0"
+description = "Herramienta simple y directa para administrar AWS Lambda y EventBridge desde Python"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Edwin Caicedo Venté", email = "ecaicedo@rapicredit.com"}
+]
+maintainers = [
+    {name = "Edwin Caicedo Venté", email = "ecaicedo@rapicredit.com"}
+]
+keywords = ["aws", "lambda", "eventbridge", "boto3", "automation", "serverless", "cloud", "management"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Testing",
+    "Environment :: Console",
+    "Natural Language :: Spanish",
+    "Natural Language :: English",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "boto3>=1.26.0",
+    "botocore>=1.29.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "mypy>=0.800",
+]
+
+[project.urls]
+Homepage = "https://pypi.org/project/lambda-manager/"
+Documentation = "https://pypi.org/project/lambda-manager/"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 88
+target-version = ['py37']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "1.0.0"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
