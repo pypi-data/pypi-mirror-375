@@ -1,0 +1,14 @@
+colored-logging
+matplotlib
+numpy
+rasters
+python-dateutil
+shapely
+
+[dev]
+build
+pytest>=6.0
+pytest-cov
+jupyter
+pytest
+twine
