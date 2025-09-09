@@ -1,0 +1,2 @@
+[console_scripts]
+jenkins_mcp_enterprise = jenkins_mcp_enterprise.server:main
