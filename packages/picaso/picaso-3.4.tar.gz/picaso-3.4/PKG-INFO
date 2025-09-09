@@ -1,0 +1,44 @@
+Metadata-Version: 2.2
+Name: picaso
+Version: 3.4
+Summary: planetary intesity code for atmospheric scattering observations
+Home-page: https://natashabatalha.github.io/picaso
+Download-URL: https://github.com/natashabatalha/picaso
+Author: Natasha E. Batalha
+Author-email: natasha.e.batalha@gmail.com
+License: GPL-3.0
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+License-File: LICENSE
+Requires-Dist: bokeh<3.5.0,>=2.3.0
+Requires-Dist: numpy<1.27
+Requires-Dist: numba
+Requires-Dist: pandas
+Requires-Dist: joblib
+Requires-Dist: photutils
+Requires-Dist: astropy>=3.2.3
+Requires-Dist: matplotlib
+Requires-Dist: pysynphot
+Requires-Dist: sphinx
+Requires-Dist: scipy
+Requires-Dist: virga-exo==2.0
+Requires-Dist: xarray
+Requires-Dist: bibtexparser
+Requires-Dist: netcdf4
+Requires-Dist: h5netcdf
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: download-url
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
+
+README.md

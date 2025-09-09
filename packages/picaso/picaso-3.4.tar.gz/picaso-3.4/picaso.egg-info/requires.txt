@@ -1,0 +1,16 @@
+bokeh<3.5.0,>=2.3.0
+numpy<1.27
+numba
+pandas
+joblib
+photutils
+astropy>=3.2.3
+matplotlib
+pysynphot
+sphinx
+scipy
+virga-exo==2.0
+xarray
+bibtexparser
+netcdf4
+h5netcdf
