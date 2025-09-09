@@ -1,0 +1,31 @@
+[project]
+name = "mseep-beeper-mcp"
+version = "0.1.4"
+description = "a mcp server for interacting with chain"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "eth-account>=0.13.5",
+    "mcp[cli]>=1.4.1",
+    "pytest>=8.3.5",
+    "python-dotenv>=1.0.1",
+    "web3>=7.9.0",
+    "pyyaml>=6.0.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+beeper-mcp = "beeper_mcp:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

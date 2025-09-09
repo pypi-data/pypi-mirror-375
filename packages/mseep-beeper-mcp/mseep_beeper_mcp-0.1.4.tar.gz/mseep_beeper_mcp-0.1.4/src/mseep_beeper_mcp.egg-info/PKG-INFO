@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-beeper-mcp
+Version: 0.1.4
+Summary: a mcp server for interacting with chain
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: eth-account>=0.13.5
+Requires-Dist: mcp[cli]>=1.4.1
+Requires-Dist: pytest>=8.3.5
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: web3>=7.9.0
+Requires-Dist: pyyaml>=6.0.1
+
+Package managed by MseeP.ai
