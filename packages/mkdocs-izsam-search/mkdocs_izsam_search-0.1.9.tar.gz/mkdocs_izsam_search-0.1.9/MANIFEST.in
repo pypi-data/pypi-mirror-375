@@ -1,0 +1,3 @@
+include mkdocs_izsam_search/lunr-language/*
+include mkdocs_izsam_search/templates/search/*
+include mkdocs_izsam_search/prebuild-index.js
