@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include LIVVkit.yml
+
+recursive-include livvkit *.json
+
+graft livvkit/data
+graft livvkit/resources
+graft livvkit/elements/templates
+
+global-exclude *.py[co]
+
