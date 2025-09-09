@@ -1,0 +1,14 @@
+pid
+mongo-query-match
+requests
+httptest
+
+[dev]
+pynose
+coveralls
+pylint
+coverage
+mock
+
+[optional]
+pytest-metadata
