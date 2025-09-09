@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-server-code-extractor = code_extractor.server:main
