@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: hyperqueue
+Version: 0.24.0
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Rust
+Requires-Dist: cloudpickle >=2.0, <4
+Requires-Dist: tqdm >=4.60, <5
+Requires-Dist: pydot >=1.4, <2 ; extra == 'all'
+Provides-Extra: all
+Summary: HyperQueue Python API
+Author: Ada Böhm <ada@kreatrix.org>, Jakub Beránek <berykubik@gmail.com>
+Author-email: Ada Böhm <ada@kreatrix.org>, Jakub Beránek <berykubik@gmail.com>
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+
+# HyperQueue Python binding
+This package provides a Python binding to HyperQueue.
+
+## Development
+1) Install `maturin`
+```bash
+$ pip install maturin
+```
+2) Build the bindings
+```bash
+$ maturin develop
+```
+3) Use the built `hyperqueue` package
+
