@@ -1,0 +1,2 @@
+[console_scripts]
+nrl-test-data-generator = nrl_test_data_generator.cli:cli
