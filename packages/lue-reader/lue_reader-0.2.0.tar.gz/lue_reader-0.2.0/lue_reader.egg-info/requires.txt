@@ -1,0 +1,12 @@
+python-docx>=1.2.0
+striprtf>=0.0.29
+rich>=14.1.0
+PyMuPDF>=1.26.3
+Markdown>=3.8.2
+platformdirs>=4.3.8
+edge-tts>=7.2.0
+
+[kokoro]
+kokoro>=0.9.4
+soundfile>=0.13.1
+huggingface-hub>=0.34.4
