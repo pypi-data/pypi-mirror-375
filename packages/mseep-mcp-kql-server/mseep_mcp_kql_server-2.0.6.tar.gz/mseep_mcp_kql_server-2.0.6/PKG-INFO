@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-kql-server
+Version: 2.0.6
+Summary: AI-Powered MCP server for KQL query execution with intelligent schema memory and context assistance
+Project-URL: Homepage, https://github.com/4R9UN/mcp-kql-server
+Project-URL: Repository, https://github.com/4R9UN/mcp-kql-server.git
+Project-URL: Issues, https://github.com/4R9UN/mcp-kql-server/issues
+Project-URL: Changelog, https://github.com/4R9UN/mcp-kql-server/blob/main/CHANGELOG.md
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Keywords: ai,anthropic,azure,azure-data-explorer,claude,data-analytics,data-explorer,intelligent-caching,kql,kusto,mcp,model-context-protocol,query-execution,schema-memory
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Database
+Classifier: Topic :: Database :: Database Engines/Servers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Requires-Dist: azure-identity<2.0.0,>=1.15.0
+Requires-Dist: azure-kusto-data<6.0.0,>=4.0.0
+Requires-Dist: click<9.0.0,>=8.0.0
+Requires-Dist: colorama<1.0.0,>=0.4.6
+Requires-Dist: fastmcp<3.0.0,>=2.0.0
+Requires-Dist: httpx<1.0.0,>=0.25.0
+Requires-Dist: pydantic<3.0.0,>=2.0.0
+Requires-Dist: python-dotenv<2.0.0,>=1.0.0
+Requires-Dist: requests<3.0.0,>=2.31.0
+Requires-Dist: tabulate<1.0.0,>=0.9.0
+Requires-Dist: tenacity<10.0.0,>=8.0.0
+Requires-Dist: typing-extensions<5.0.0,>=4.0.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
