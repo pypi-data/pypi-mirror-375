@@ -1,0 +1,24 @@
+[project]
+name = "mseep-crypto-feargreed-mcp"
+version = "0.1.4"
+description = "Providing real-time and historical Crypto Fear & Greed Index data"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.4.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-crypto-feargreed-mcp = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
