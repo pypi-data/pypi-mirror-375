@@ -1,0 +1,2 @@
+from .install_deps import install_system_dependencies
+install_system_dependencies()
