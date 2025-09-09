@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-aiven
+Version: 0.1.8
+Summary: An MCP server for Aiven.
+Project-URL: Home, https://github.com/Aiven-Open/mcp-aiven
+Author-email: mseep <support@skydeck.ai>
+License-Expression: Apache-2.0
+License-File: LICENSE
+Requires-Python: >=3.13
+Requires-Dist: aiven-client>=4.5.1
+Requires-Dist: mcp[cli]>=1.3.0
+Requires-Dist: pip-system-certs>=4.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: uvicorn>=0.34.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
