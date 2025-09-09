@@ -1,0 +1,130 @@
+[project]
+name = "flowcean"
+version = "0.7.0b1"
+description = "Automatic generation of models for cyber-physical systems."
+readme = "README.md"
+requires-python = ">=3.10, <4.0"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = []
+authors = [{ name = "The AGenC Team", email = "agenc.team@tuhh.de" }]
+
+dependencies = [
+  "docker>=7.1.0",
+  "grpcio>=1.67.0",
+  "lightning>=2.4.0",
+  "numpy>=1.26.4",
+  "omegaconf>=2.3.0",
+  "opcua>=0.98.13",
+  "polars[style,xlsxwriter]>=1.33.0",
+  "protobuf>=5.28.2",
+  "river>=0.21.0",
+  "rosbags>=0.10.4",
+  "ruamel-yaml>=0.18.6",
+  "scikit-learn>=1.5.2",
+  "scipy>=1.14.1",
+  "sympy>=1.13.1",
+  "torch>=2.5.0",
+  "tqdm>=4.66.5",
+  "typing_extensions>=4.0.0",
+  "xgboost>=3.0.2",
+  "polars-u64-idx>=1.32.3",
+  "cloudpickle>=3.1.1",
+]
+
+[project.optional-dependencies]
+palaestrai = [
+  "midas-mosaik[base]>=2.0.2",
+  "midas-store>=2.1.0a1",
+  "mosaik>=3.5.0",
+  "mosaik_api_v3>=3.0.13",
+  "palaestrai-agents>=3.5.4",
+  "palaestrai>=3.5.8",
+]
+
+[project.urls]
+Documentation = "https://flowcean.me/"
+Issues = "https://github.com/flowcean/flowcean/issues"
+Source = "https://github.com/flowcean/flowcean"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+  "asyncssh>=2.18.0",
+  "basedpyright>=1.31.3",
+  "deptry>=0.22.0",
+  "dvc-ssh>=4.1.1",
+  "dvc-webdav>=3.0.0",
+  "dvc>=3.59.0",
+  "grpcio-tools>=1.67.0",
+  "ipykernel>=6.30.1",
+  "mkdocs-gen-files>=0.5.0",
+  "mkdocs-literate-nav>=0.6.1",
+  "mkdocs-material>=9.5.50",
+  "mkdocs-section-index>=0.3.9",
+  "mkdocs>=1.6.1",
+  "mkdocstrings[python]>=0.27.0",
+  "mypy-protobuf>=3.0.0",
+  "pre-commit>=4.1.0",
+  "pyright>=1.1.394",
+  "pytest-cov>=6.0.0",
+  "pytest>=8.3.4",
+  "ruff>=0.9.2",
+  "typos>=1.35.6",
+]
+
+[tool.uv.workspace]
+members = [
+  "examples/active_learning",
+  "examples/automatic_lashing_platform",
+  "examples/boiler",
+  "examples/coffee_machine",
+  "examples/energy_system",
+  "examples/failure_time_prediction",
+  "examples/linear_data",
+  "examples/one_tank",
+  "examples/robot_localization_failure",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/flowcean"]
+
+[tool.hatch.build.targets.sdist]
+include = ["*.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.pyright]
+ignore = ["src/flowcean/grpc/_generated/*"]
+pythonVersion = "3.10"
+strict = ["src/flowcean/core"]
+typeCheckingMode = "standard"
+
+[tool.poetry.scripts]
+install_clang = "bash -c 'sudo apt-get install -y clang'"
+
+[tool.coverage.run]
+source_pkgs = ["flowcean"]
+omit = ["src/flowcean/grpc/_generated/*"]
+branch = true
+parallel = true
+
+[tool.coverage.report]
+skip_empty = true
+exclude_also = [
+  "pass",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
