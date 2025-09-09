@@ -1,0 +1,38 @@
+[project]
+name = "mseep-vilnius-transport-mcp-server"
+version = "0.1.4"
+description = "This is Vilnius transport MCP server for claude desktop proof of concept"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.44.0",
+    "gtfs-kit>=10.1.1",
+    "httpx>=0.28.1",
+    "logging>=0.4.9.6",
+    "mcp>=1.2.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+vilnius-transport = "vilnius_transport_mcp_server.transport:main"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+artifacts = [
+    "src/vilnius_transport_mcp_server/data/*.zip",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/vilnius_transport_mcp_server",
+]
