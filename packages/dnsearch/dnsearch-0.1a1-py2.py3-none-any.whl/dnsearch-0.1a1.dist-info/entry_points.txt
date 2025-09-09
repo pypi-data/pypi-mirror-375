@@ -1,0 +1,2 @@
+[console_scripts]
+dnsearch = dnsearch.command:main
