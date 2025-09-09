@@ -1,0 +1,10 @@
+requests
+pdfplumber
+beautifulsoup4
+selenium
+urllib3
+
+[dev]
+pytest
+black
+flake8
