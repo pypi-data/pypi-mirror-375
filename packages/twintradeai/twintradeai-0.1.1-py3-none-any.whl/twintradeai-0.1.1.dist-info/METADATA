@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: twintradeai
+Version: 0.1.1
+Summary: Automated trading bot with MetaTrader5, risk management, and FastAPI service
+Author-email: Jawsaukhuchai <jawsaukhuchai@gmail.com>
+License: MIT
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: python-dotenv
+Requires-Dist: pyzmq
+Requires-Dist: pytest
+Requires-Dist: pytest-cov
