@@ -1,0 +1,15 @@
+pandas==2.2.2
+joblib==1.5.1
+matplotlib==3.10.3
+numba<0.62,>=0.59
+numpy<3.0.0,>=2.0.0
+scikit-learn==1.6.1
+scipy==1.15.3
+tqdm==4.67.1
+openpyxl==3.1.5
+pillow==11.2.1
+requests<3,>=2.32
+natsort
+
+[music]
+playsound==1.2.2

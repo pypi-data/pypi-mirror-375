@@ -1,0 +1,35 @@
+MANIFEST.in
+README.md
+setup.py
+src/saxs_assistant/ML.py
+src/saxs_assistant/PDDF_tools.py
+src/saxs_assistant/__init__.py
+src/saxs_assistant/features.py
+src/saxs_assistant/organizer.py
+src/saxs_assistant/rg_tools.py
+src/saxs_assistant/runner.py
+src/saxs_assistant/tutorial.py
+src/saxs_assistant.egg-info/PKG-INFO
+src/saxs_assistant.egg-info/SOURCES.txt
+src/saxs_assistant.egg-info/dependency_links.txt
+src/saxs_assistant.egg-info/requires.txt
+src/saxs_assistant.egg-info/top_level.txt
+src/saxs_assistant/models/__init__.py
+src/saxs_assistant/models/dmax_predictor_2bundle_05262025.joblib
+src/saxs_assistant/models/gmm_cluster_2bundle_05262025.joblib
+src/saxs_assistant/music/Bavarian Seascape.mp3
+src/saxs_assistant/music/Coy Koi.mp3
+src/saxs_assistant/music/Modern Island Jam.mp3
+src/saxs_assistant/music/Palm and Soul.mp3
+src/saxs_assistant/plotting/__init__.py
+src/saxs_assistant/plotting/plot_flagged.py
+src/saxs_assistant/plotting/plot_solved_summary.py
+src/saxs_assistant/rawutils/Profile_Loader.py
+src/saxs_assistant/rawutils/__init__.py
+src/saxs_assistant/rawutils/bift.py
+src/saxs_assistant/rawutils/rawapitry.py
+src/saxs_assistant/rawutils/sascalc.py
+src/saxs_assistant/rawutils/sasexceptions.py
+src/saxs_assistant/rawutils/sasm.py
+src/saxs_assistant/utils/__init__.py
+src/saxs_assistant/utils/helpers.py

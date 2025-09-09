@@ -1,0 +1,5 @@
+#This makes sure the models get added
+include src/saxs_assist/models/*.joblib
+
+# This makes sure the music files get added for if want some tunes
+include src/saxs_assist/music/*.mp3
