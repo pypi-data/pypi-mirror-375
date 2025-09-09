@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: arithematic-mr.sagar
+Version: 0.0.8
+Summary: A simple arithmetic package example
+Author-email: "Mr. Sagar" <sagartallapogu711@gmail.com>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: License
+Dynamic: license-file
+
+# Arithmatic operator
+This is a simple package.you can use to write your content
+
+
+
+from arithematic_mr.sagar import arithematic.py
+
+print(utilities.addition(1,2,3,4))
+
+print(utilities.subtraction(1,2,3,4,5))
+
+
+print(utilities.multiplication(1,5,6,,9))
