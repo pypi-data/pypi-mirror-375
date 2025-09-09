@@ -1,0 +1,16 @@
+currency_converter_erapi/__init__.py,sha256=zPOyzUIvmnwP-ofo80YmNnOPeBQssq2VgOuyFuZWnvo,68
+currency_converter_erapi/apps.py,sha256=pJPnKKzrgTq0ZHCuhKZtZraU7Euq94MsS59xCiwJ5YM,327
+currency_converter_erapi/converter.py,sha256=OnBADMsO7l3a4mNSRWkdPioJynRd5jRHhDzCFAn-D0k,11488
+currency_converter_erapi/exceptions.py,sha256=sWwvlmPRR_IdbinB0h-EZyAPA6U0ImEzomLKDKcosrI,735
+currency_converter_erapi/management/__init__.py,sha256=VWofXDM2T88X6biXc-7-C8UhqOkMtOstUUiUIsIIAGA,61
+currency_converter_erapi/management/commands/__init__.py,sha256=OkGBCmt9PKByvujo5tDwLP0rMMXf2YNuNq2vvtT3xWQ,53
+currency_converter_erapi/management/commands/convert_currency.py,sha256=ssw-4yHP-uW95sQ3vKDJ_MZAxyjRXJNRVCNsPxJoftY,4300
+django_currency_converter_erapi-1.2.0.dist-info/licenses/LICENSE,sha256=-e2liAd7vxePjHMfkZkw37ziG6Of-vs6kVFlZe5dJzI,1088
+tests/__init__.py,sha256=oJzuKjMEJ16enmpcsDGJpsyhZOJ5xpj74fHmKdWNvkU,38
+tests/conftest.py,sha256=tttk3_YwVkwcocTCaoBQHVIktFoGgB4kesGIUhsVXGY,306
+tests/settings.py,sha256=nOMikLy_26xGOm5CUtUdlahitabaFlm1Apd5TDMedCQ,1021
+tests/test_converter.py,sha256=99OqJJ5Ku55JxMsrlvQwRRXNg95hWzMFJz0MzGQz1NI,11543
+django_currency_converter_erapi-1.2.0.dist-info/METADATA,sha256=hxO1pEAUdNQuVc9OBnZ-LxNjvaUl_l5oQPcvaXPyuoE,8239
+django_currency_converter_erapi-1.2.0.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+django_currency_converter_erapi-1.2.0.dist-info/top_level.txt,sha256=2LuTHx4JHg5yjv96QBG-OsvafTVwez8Wloh5lQQyTgM,31
+django_currency_converter_erapi-1.2.0.dist-info/RECORD,,
