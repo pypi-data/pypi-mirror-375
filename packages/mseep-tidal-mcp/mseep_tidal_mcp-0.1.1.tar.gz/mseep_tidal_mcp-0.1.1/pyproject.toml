@@ -1,0 +1,30 @@
+[project]
+name = "mseep-tidal-mcp"
+version = "0.1.1"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.1.0",
+    "mcp[cli]>=1.6.0",
+    "requests>=2.32.3",
+    "tidalapi>=0.8.3",
+]
+description = ""
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+    "mcp_server",
+    "tidal_api",
+]
