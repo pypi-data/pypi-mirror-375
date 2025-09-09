@@ -1,0 +1,19 @@
+numpy
+matplotlib>=3.5
+wxPython>=3.0.2.0
+
+[doc]
+sphinx
+sphinx_rtd_theme
+
+[style]
+pylint
+flake8
+
+[test]
+pytest
+coverage
+pytest-cov
+
+[test:python_version < "3.11"]
+tomli
