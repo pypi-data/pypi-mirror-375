@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-futu-stock-mcp-server
+Version: 0.1.1
+Summary: A Model Context Protocol (MCP) server for accessing Futu OpenAPI functionality
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Requires-Dist: aiohttp
+Requires-Dist: fastapi
+Requires-Dist: futu-api
+Requires-Dist: loguru
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: psutil
+Requires-Dist: pydantic
+Requires-Dist: python-dotenv
+Requires-Dist: uvicorn
+Requires-Dist: websockets
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
