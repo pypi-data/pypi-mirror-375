@@ -1,0 +1,44 @@
+[project]
+name = "mseep-prometeo-mcp"
+version = "0.1.1"
+description = "Prometeo MCP server interface for testing and integration with LLMs."
+requires-python = ">=3.11"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "pydantic<=2.11",
+    "mcp[cli]<=1.8.1",
+    "prometeo==2.0.6",
+    "python-dotenv<=1.1.0",
+    "pyyaml<=6.0.2",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.23",
+    "anyio>=4.0",
+]
+
+[project.scripts]
+mseep-prometeo-mcp = "prometeo_mcp.server:main"
+
+[build-system]
+requires = [
+    "uv",
+    "setuptools",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = [
+    "prometeo_mcp",
+]
