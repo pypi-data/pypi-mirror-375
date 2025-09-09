@@ -1,0 +1,94 @@
+html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+}
+
+button#open-toc {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 32px;
+    height: 32px;
+    z-index: 3;
+    border: 0;
+    background-color: transparent;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABUSURBVFiF7dTBCYBADETRr3VYkIv9N7BrH3rQi+DVDMJ/EMgtJIEBCTZgB47iGkCb7mb5fM13Yw4NfmhcV6h+QQfWgv2kHzAJ40xCKc4kjDMJFXUCYVC7G52u6N4AAAAASUVORK5CYII=);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+button#open-toc.active {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABFAAAARQB+zng/wAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEJSURBVFiFvdXBCoJAEIDhn96ro2+RtyKlToGXXrSDB6ECoUNBncsO7ULIrrq7Mw54kfD7E3UAlsAJOAMr9CcHLsZcAtRAZ44PUCripTGsVwPc/k5oRvTxzthseyc1Ilx4Z2wADp6IvQC+Ad6O6x/7P9SImIxrRATjkhHRuEREMp4SIYbHRIjjIRFq+JQIddxO5YlwfeEqadyO606o//OQiGB8ERHw4nfb+9MBz4jrBY3vgZNeYM4pcD9wrohCGh961TRX+ShuRy0i5CMjHrEOwMcidnPgYhEpeHKEBB4dIYkHR2jgkyNy9Feqb5XnAK0yPhTRAjQz4L6IBiADrsAdhSXimAJ4GDP7Ao3GS7lBEjtAAAAAAElFTkSuQmCC);
+}
+
+nav#toc {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #ffffff;
+    padding: 20px 10%;
+    overflow-y: scroll;
+}
+
+nav#toc ul {
+    list-style: none;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+nav#toc ul li {
+    margin: 10px 0 0 15px;
+}
+
+nav#toc ul li a {
+    text-decoration: none;
+    color: #000000;
+}
+
+nav#toc ul li a.active {
+    font-weight: bold;
+}
+
+nav#toc ul li a:hover {
+    text-decoration: underline;
+}
+
+main#content {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+    overflow-y: scroll;
+}
+
+section.chapter {
+    display: none;
+    width: 80%;
+    max-width: 1000px;
+    min-height: 100%;
+    margin: 0 auto 120px auto;;
+}
+
+.page-break {
+    display: none;
+}
