@@ -1,0 +1,93 @@
+- href: "https://example.com/"
+  expected: "home"
+
+- href: "https://blog.example.com"
+  expected: "blog"
+
+- href: "https://example.medium.com"
+  expected: "blog"
+
+- href: "https://community.ebay.com"
+  expected: "community"
+
+- href: "https://docs.example.com"
+  expected: "documentation"
+
+- href: "https://podcasts.example.com"
+  expected: "podcast"
+
+- href: "https://youtube.com/@example"
+  expected: "social media"
+
+- href: "https://youtu.be/@example"
+  expected: "social media"
+
+- href: "https://t.me/@example"
+  expected: "social media"
+
+- href: "https://telegram.me/@example"
+  expected: "social media"
+
+- href: "https://telegram.org/@example"
+  expected: "social media"
+
+- href: "https://www.tiktok.com/"
+  expected: "social media"
+
+- href: "https://job-boards.greenhouse.io"
+  expected: "jobs"
+
+- href: "https://jobs.lever.co"
+  expected: "jobs"
+
+- href: "https://careers.gravityteam.co"
+  expected: "jobs"
+
+- href: "https://jobs.ashbyhq.com/"
+  expected: "jobs"
+
+- href: "https://trustpilot.com/review/example.com"
+  expected: "reviews"
+
+- href: "https://uk.trustpilot.com/review/example.com"
+  expected: "reviews"
+
+- href: "https://www.x.com/heysamtexas"
+  expected: "social media"
+
+- href: "https://x.com/heysamtexas"
+  expected: "social media"
+
+# tricky false positive for X (twitter)
+- href: "https://box.com/sdlfkjlsdfkjds"
+  expected: "unknown"
+
+- href: "https://www.snapchat.com/add/getcopper"
+  expected: "social media"
+
+- href: "https://se.linkedin.com/in/boom"
+  expected: "social media"
+
+- href: "https://github.com/heysamtexas"
+  expected: "developer profile"
+
+- href: "https://gitlab.com/username"
+  expected: "developer profile"
+
+- href: "https://bitbucket.org/teamname"
+  expected: "developer profile"
+
+- href: "https://github.com/heysamtexas/boom-repo"
+  expected: "code repository"
+
+- href: "https://gitlab.com/user/project"
+  expected: "code repository"
+
+- href: "https://github.com/org/repo/issues"
+  expected: "code repository"
+
+- href: "https://github.com/user/repo/pulls"
+  expected: "code repository"
+
+- href: "https://github.com/user/repo/commits"
+  expected: "code repository"

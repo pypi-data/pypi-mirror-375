@@ -1,0 +1,16 @@
+- href: "https://twitter.com/intent/tweet"
+  expected: "ignored"
+
+- href: "https://facebook.com/sharer"
+  expected: "ignored"
+
+- href: "javascript:"
+  expected: "ignored"
+
+- href: "https://example.com/298394283794832"
+  title: "contact us"
+  expected: "contact"
+
+- href: "https://example.com/298394283794832"
+  title: "contact us "
+  expected: "contact"

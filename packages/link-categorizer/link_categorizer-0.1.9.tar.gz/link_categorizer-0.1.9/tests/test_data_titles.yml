@@ -1,0 +1,43 @@
+- href: "https://example.com/298394283794832"
+  title: "about"
+  expected: "about"
+
+- href: "https://example.com/298394283794832"
+  title: "about us"
+  expected: "about"
+
+- href: "https://example.com/298394283794832"
+  title: "contact"
+  expected: "contact"
+
+- href: "https://example.com/298394283794832"
+  title: "contact us"
+  expected: "contact"
+
+- href: "https://example.com/298394283794832"
+  title: "contact us "
+  expected: "contact"
+
+- href: "https://example.com/298394283794832"
+  title: "This is the super long title where the meaning is now lost but contact us anyway "
+  expected: "unknown"
+
+- href: "https://example.com/298394283794832"
+  title: "Careers"
+  expected: "jobs"
+
+- href: "https://lifeatexpediagroup.com/brands?utm_source=vrbo&%3Butm_medium=homepage%23brands-vrbo"
+  title: "Careers"
+  expected: "jobs"
+
+- href: "https://example.com/298394283794832"
+  title: "Developers"
+  expected: "developers"
+
+- href: "https://example.com/298394283794832"
+  title: "Investor Relations"
+  expected: "investor relations"
+
+- href: "https://example.com/298394283794832"
+  title: "How it works"
+  expected: "how it works"

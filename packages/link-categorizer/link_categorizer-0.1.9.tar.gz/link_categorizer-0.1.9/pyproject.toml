@@ -1,0 +1,99 @@
+[build-system]
+requires = ["hatchling>=1.8.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "link_categorizer"
+version = "0.1.9"
+description = "A Python library that categorizes HTML links based on their domain names, title text, and anchor text."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Sam Texas", email = "dev@simplecto.com"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/heysamtexas/link-categorizer"
+"Bug Tracker" = "https://github.com/heysamtexas/link-categorizer/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/link_categorizer"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=2.21.0",
+    "ruff>=0.11.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.4.0",
+    "bandit[toml]>=1.7.0,<1.8.0",
+    "types-PyYAML>=6.0.0",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py37"
+include = ["src/**/*.py"]
+
+[tool.ruff.lint]
+# Relaxed rules for tests
+ignore = [
+    "E501",
+    "D",
+    "ANN",
+    "S",
+    "PLR",
+    "COM",
+    "T20",
+    "FBT",
+    "EM",
+    "TRY",
+    "N",
+    "ARG",
+    "PTH",
+    "TD",
+    "FIX",
+    "ERA",
+    "TCH",
+    "SIM",
+    "G",
+    "BLE",
+    "RUF",
+]
+select = ["E", "F", "W", "I", "B", "C4", "UP", "YTT", "S", "DTZ", "RSE", "SLF", "SIM", "TID", "TCH", "ARG", "PTH", "ERA", "PD", "PGH", "PL", "TRY", "NPY", "RUF"]
+exclude = [
+    "tests/*",
+    ".idea/**",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ALL"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+exclude = ["tests/"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --strict-markers"

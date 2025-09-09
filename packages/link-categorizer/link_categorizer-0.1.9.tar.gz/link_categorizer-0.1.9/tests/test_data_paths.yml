@@ -1,0 +1,62 @@
+- href: "https://example.com/about"
+  expected: "about"
+
+- href: "https://example.com/signup/"
+  expected: "signup"
+
+- href: "https://example.com/signup"
+  expected: "signup"
+
+- href: "https://example.com/sign-up/"
+  expected: "signup"
+
+- href: "https://example.com/sign-up"
+  expected: "signup"
+
+- href: "https://example.com/team"
+  expected: "team"
+
+- href: "https://example.com/work"
+  expected: "work"
+
+- href: "https://example.com/en/career"
+  expected: "jobs"
+
+- href: "https://example.com/careers"
+  expected: "jobs"
+
+- href: "https://example.com/support"
+  expected: "support"
+
+- href: "https://example.com/podcasts"
+  expected: "podcast"
+
+- href: "https://example.com/privacy"
+  expected: "privacy"
+
+- href: "https://example.com/blog"
+  expected: "blog"
+
+- href: "https://example.com/cookiepolicy"
+  expected: "cookie policy"
+
+- href: "https://example.com/cookie-policy"
+  expected: "cookie policy"
+
+- href: "https://example.com/newsletter"
+  expected: "newsletter"
+
+- href: "https://example.com/login"
+  expected: "login"
+
+- href: "https://example.com/terms-and-conditions"
+  expected: "terms"
+
+- href: "https://example.com/developers"
+  expected: "developers"
+
+- href: "https://example.com/investor-relations"
+  expected: "investor relations"
+
+- href: "https://example.com/how-it-works"
+  expected: "how it works"

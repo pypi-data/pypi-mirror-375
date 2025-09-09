@@ -1,0 +1,14 @@
+- href: "mailto:info@example.com"
+  expected: "email"
+
+- href: "tel:+1234567890"
+  expected: "telephone"
+
+- href: "fax:+999999999"
+  expected: "telephone"
+
+- href: "sms:+999999999"
+  expected: "sms"
+
+- href: "data:base64+sdfkljsdf"
+  expected: "data"
