@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: mseep-amap-mcp-server
+Version: 0.1.10
+Summary: Python版本高德地图MCP Server
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/sugarforever/amap-mcp-server
+Project-URL: Bug Tracker, https://github.com/sugarforever/amap-mcp-server/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp==1.8.1
+Requires-Dist: requests>=2.32.3
+Dynamic: license-file
+
+Package managed by MseeP.ai

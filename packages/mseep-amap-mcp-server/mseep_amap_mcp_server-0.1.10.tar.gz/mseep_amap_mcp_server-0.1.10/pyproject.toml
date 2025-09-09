@@ -1,0 +1,35 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-amap-mcp-server"
+version = "0.1.10"
+description = "Python版本高德地图MCP Server"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mcp==1.8.1",
+    "requests>=2.32.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+amap-mcp-server = "amap_mcp_server:main"
+
+[project.urls]
+Homepage = "https://github.com/sugarforever/amap-mcp-server"
+"Bug Tracker" = "https://github.com/sugarforever/amap-mcp-server/issues"
