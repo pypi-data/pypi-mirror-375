@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_server_openai/__init__.py
+src/mcp_server_openai/llm.py
+src/mcp_server_openai/server.py
+src/mcp_server_openai/test_openai.py
+src/mseep_mcp_server_openai.egg-info/PKG-INFO
+src/mseep_mcp_server_openai.egg-info/SOURCES.txt
+src/mseep_mcp_server_openai.egg-info/dependency_links.txt
+src/mseep_mcp_server_openai.egg-info/entry_points.txt
+src/mseep_mcp_server_openai.egg-info/requires.txt
+src/mseep_mcp_server_openai.egg-info/top_level.txt
