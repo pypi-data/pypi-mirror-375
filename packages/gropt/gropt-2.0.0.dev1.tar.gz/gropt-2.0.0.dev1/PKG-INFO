@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: gropt
+Version: 2.0.0.dev1
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: pyqt6
+Provides-Extra: dev
+Requires-Dist: jupyterlab; extra == "dev"
+Requires-Dist: setuptools>=18.0; extra == "dev"
+Requires-Dist: cython>=0.18; extra == "dev"
+Requires-Dist: wheel; extra == "dev"
+Requires-Dist: pybind11-stubgen; extra == "dev"
+Requires-Dist: scipy; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: mkdocs; extra == "docs"
+Requires-Dist: mkdocs-material; extra == "docs"
+Requires-Dist: mkdocs-jupyter; extra == "docs"
+Requires-Dist: mkdocstrings-python; extra == "docs"
+Requires-Dist: mkdocs-awesome-nav; extra == "docs"
+Requires-Dist: pybind11-stubgen; extra == "docs"
