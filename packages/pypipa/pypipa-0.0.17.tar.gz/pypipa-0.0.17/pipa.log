@@ -1,0 +1,34 @@
+2025-09-08 20:52:08,077 - pipa.common.logger - cmd:run_command:33 - WARNING - 'invalid_command' return code = 127
+2025-09-08 20:52:08,078 - pipa.common.logger - cmd:run_command:37 - INFO - echo 'Hello, World!': Hello, World!
+2025-09-08 20:52:08,088 - pipa.common.logger - export:execute_query:23 - INFO - Query executed successfully.
+2025-09-08 20:52:08,090 - pipa.common.logger - export:execute_query:23 - INFO - Query executed successfully.
+2025-09-08 20:52:08,090 - pipa.common.logger - export:fetch_table_as_dataframe:17 - INFO - Table test_table fetched successfully.
+2025-09-08 20:52:08,090 - pipa.common.logger - export:export_table_to_csv:35 - INFO - Exporting table test_table to test_output.csv
+2025-09-08 20:52:08,093 - pipa.common.logger - export:execute_query:23 - INFO - Query executed successfully.
+2025-09-08 20:52:08,093 - pipa.common.logger - export:fetch_table_as_dataframe:17 - INFO - Table test_table fetched successfully.
+2025-09-08 20:52:08,094 - pipa.common.logger - export:wrapper:63 - INFO - Exporting DataFrame to test_output.csv
+2025-09-08 20:52:08,100 - pipa.common.logger - perf_report:parse_perf_report_file:93 - INFO - Successfully parsed data
+2025-09-08 20:52:08,100 - pipa.common.logger - perf_report:parse_perf_report_file:94 - INFO - parsed data length: 8
+2025-09-08 20:52:08,101 - pipa.common.logger - perf_report:parse_one_line:40 - WARNING - parse failed for line: incorrect format data
+ with error: too many values to unpack (expected 2)
+2025-09-08 20:52:08,148 - pipa.common.logger - perf_script:parse_one_line:175 - WARNING - parse failed for line: 
+ with error: 'NoneType' object has no attribute 'groups'
+2025-09-08 20:52:08,178 - pipa.common.logger - perf_script:parse_one_line:175 - WARNING - parse failed for line: invalid format line
+ with error: 'NoneType' object has no attribute 'groups'
+2025-09-08 21:01:35,929 - pipa.common.logger - cmd:run_command:33 - WARNING - 'invalid_command' return code = 127
+2025-09-08 21:01:35,930 - pipa.common.logger - cmd:run_command:37 - INFO - echo 'Hello, World!': Hello, World!
+2025-09-08 21:01:35,941 - pipa.common.logger - export:execute_query:23 - INFO - Query executed successfully.
+2025-09-08 21:01:35,943 - pipa.common.logger - export:execute_query:23 - INFO - Query executed successfully.
+2025-09-08 21:01:35,943 - pipa.common.logger - export:fetch_table_as_dataframe:17 - INFO - Table test_table fetched successfully.
+2025-09-08 21:01:35,943 - pipa.common.logger - export:export_table_to_csv:35 - INFO - Exporting table test_table to test_output.csv
+2025-09-08 21:01:35,947 - pipa.common.logger - export:execute_query:23 - INFO - Query executed successfully.
+2025-09-08 21:01:35,947 - pipa.common.logger - export:fetch_table_as_dataframe:17 - INFO - Table test_table fetched successfully.
+2025-09-08 21:01:35,947 - pipa.common.logger - export:wrapper:63 - INFO - Exporting DataFrame to test_output.csv
+2025-09-08 21:01:35,953 - pipa.common.logger - perf_report:parse_perf_report_file:93 - INFO - Successfully parsed data
+2025-09-08 21:01:35,953 - pipa.common.logger - perf_report:parse_perf_report_file:94 - INFO - parsed data length: 8
+2025-09-08 21:01:35,955 - pipa.common.logger - perf_report:parse_one_line:40 - WARNING - parse failed for line: incorrect format data
+ with error: too many values to unpack (expected 2)
+2025-09-08 21:01:36,004 - pipa.common.logger - perf_script:parse_one_line:175 - WARNING - parse failed for line: 
+ with error: 'NoneType' object has no attribute 'groups'
+2025-09-08 21:01:36,015 - pipa.common.logger - perf_script:parse_one_line:175 - WARNING - parse failed for line: invalid format line
+ with error: 'NoneType' object has no attribute 'groups'
