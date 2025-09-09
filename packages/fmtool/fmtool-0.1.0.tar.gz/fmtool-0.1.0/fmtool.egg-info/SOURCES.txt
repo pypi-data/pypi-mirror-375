@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+fmtool/__init__.py
+fmtool/filemanager.py
+fmtool/version.py
+fmtool.egg-info/PKG-INFO
+fmtool.egg-info/SOURCES.txt
+fmtool.egg-info/dependency_links.txt
+fmtool.egg-info/top_level.txt
+tests/test_filemanager.py
