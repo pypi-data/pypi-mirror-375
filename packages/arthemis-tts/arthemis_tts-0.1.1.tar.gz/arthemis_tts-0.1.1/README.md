@@ -1,0 +1,240 @@
+# Arthemis TTS
+
+A simple and efficient transformer-based text-to-speech library for Python.
+
+## Overview
+
+Arthemis TTS is a PyPI package that provides an easy-to-use interface for 
+interacting with arthemis-TTS model
+
+## Features
+
+- **Simple API**: Easy-to-use functions for text-to-speech conversion
+- **Pretrained Models**: Use ready-to-go pretrained models
+- **GPU Support**: Automatic GPU acceleration when available
+- **Multiple Output Formats**: Support for various audio formats (WAV, MP3, etc.)
+- **Lightweight**: Minimal dependencies and efficient implementation works on CPU
+
+## Installation
+
+### From PyPI (Recommended)
+
+```bash
+pip install arthemis-tts
+```
+
+
+## Using Pretrained Models
+
+### Basic Usage
+
+```python
+import arthemis_tts
+
+# Simple text-to-speech with pretrained model (tested example)
+model_path = "your_model.pt"
+audio = arthemis_tts.text_to_speech("Hello, world!", model_path=model_path)
+
+# Save to file
+arthemis_tts.text_to_speech("Hello, world!", 
+                           model_path=model_path,
+                           output_path="hello_world.wav")
+```
+
+### Advanced Usage
+
+```python
+from arthemis_tts import load_model
+from arthemis_tts.audio_processing import write_audio_to_file
+
+# Load a pretrained model (tested with actual model)
+model_path = r"C:\Users\haris\Downloads\train_ArthemisTTS (7).pt"
+model = load_model(model_path)
+
+# Generate speech
+audio = model.synthesize("This is a test of the synthesize function.")
+
+# Save the audio
+write_audio_to_file(audio, "synthesized_speech.wav")
+```
+
+### Step-by-Step Usage (Complete Example)
+
+```python
+import torch
+from arthemis_tts import ArthemisTTS
+from arthemis_tts.text_processing import text_to_sequence
+from arthemis_tts.audio_processing import inverse_mel_spec_to_wav, write_audio_to_file
+from arthemis_tts.utils import get_device
+
+# 1. Load your pretrained model (tested example)
+model_path = "your_model.pt"
+device = get_device()  # Automatically detects best device
+print(f"Using device: {device}")
+
+model = ArthemisTTS(device=device)
+state_dict = torch.load(model_path, map_location=device)
+
+# Handle different state dict formats
+if isinstance(state_dict, dict) and "model" in state_dict:
+    model.load_state_dict(state_dict["model"])
+else:
+    model.load_state_dict(state_dict)
+model.eval()
+
+# 2. Convert text to sequence
+text = "Hello, world!"
+text_seq = text_to_sequence(text).unsqueeze(0).to(device)
+
+# 3. Generate mel spectrogram
+with torch.no_grad():
+    mel_postnet, gate_outputs = model.inference(
+        text_seq,
+        max_length=100,  # Shorter for faster generation
+        stop_token_threshold=0.5,
+        with_tqdm=True  # Show progress bar
+    )
+
+# 4. Convert to audio
+audio = inverse_mel_spec_to_wav(mel_postnet.detach()[0].T)
+
+# 5. Save audio file
+write_audio_to_file(audio, "step_by_step_output.wav")
+print(f"Generated audio shape: {audio.shape}")
+```
+
+## API Reference
+
+### Main Functions
+
+#### `text_to_speech(text, model_path=None, output_path=None, max_length=800, gate_threshold=0.5)`
+
+Convert text to speech using a pretrained model.
+
+**Parameters:**
+- `text` (str): Input text to synthesize
+- `model_path` (str): Path to pretrained model file (required)
+- `output_path` (str, optional): Path to save audio file
+- `max_length` (int): Maximum generation length (default: 800)
+- `gate_threshold` (float): Stop token threshold (default: 0.5)
+
+**Returns:**
+- `torch.Tensor` or `None`: Audio tensor if no output_path, None if saved to file
+
+#### `load_model(model_path)`
+
+Load a pretrained model.
+
+**Parameters:**
+- `model_path` (str): Path to pretrained model file
+
+**Returns:**
+- `ArthemisTTS`: Loaded model instance
+
+### Classes
+
+#### `ArthemisTTS`
+
+Main TTS model class for using pretrained models.
+
+**Methods:**
+- `inference(text_tensor, max_length=800, stop_token_threshold=0.5, with_tqdm=True)`: Generate mel spectrogram
+- `synthesize(text, max_length=800, stop_token_threshold=0.5)`: High-level synthesis function
+
+## Supported Audio Formats
+
+- WAV (recommended)
+- MP3
+
+## Requirements
+
+- Python >= 3.7
+- PyTorch >= 1.9.0
+- torchaudio >= 0.9.0
+- NumPy >= 1.19.0
+- pandas >= 1.2.0
+- tqdm >= 4.60.0
+- pydub >= 0.25.0 (for MP3 support)
+
+## Performance Notes
+
+- **GPU Acceleration**: The model will automatically use CUDA if available
+- **Memory Usage**: Adjust `max_length` parameter based on available memory
+- **Generation Speed**: Depends on text length and hardware capabilities
+
+
+## Model Requirements
+
+- Models should be saved as PyTorch state dictionaries (.pt files)
+- Compatible with the transformer architecture used in this library
+- Models trained on the LJ Speech dataset work best for English text
+
+## Examples
+
+### Batch Processing with Pretrained Model
+
+```python
+import arthemis_tts
+
+# Path to your pretrained model (tested example)
+model_path = r"C:\Users\haris\Downloads\train_ArthemisTTS (7).pt"
+
+texts = [
+    "Hello, world!",
+    "This is Arthemis TTS.",
+    "Text-to-speech synthesis."
+]
+
+for i, text in enumerate(texts):
+    arthemis_tts.text_to_speech(
+        text, 
+        model_path=model_path,
+        output_path=f"batch_output_{i+1}.wav"
+    )
+    print(f"Generated audio {i+1}: {text}")
+```
+
+### Efficient Multiple Generation (Load Once, Use Many Times)
+
+```python
+from arthemis_tts import load_model
+from arthemis_tts.audio_processing import write_audio_to_file
+
+# Load model once (tested with actual model)
+model_path = r"C:\Users\haris\Downloads\train_ArthemisTTS (7).pt"
+model = load_model(model_path)
+
+texts = [
+    "Hello, this is the first sentence.",
+    "This is the second sentence.",
+    "And this is the third sentence."
+]
+
+# Generate multiple times without reloading model
+for i, text in enumerate(texts):
+    audio = model.synthesize(text)
+    write_audio_to_file(audio, f"efficient_output_{i+1}.wav")
+    print(f"Generated efficient audio {i+1}")
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+## Acknowledgments
+
+- Based on the [Neural Speech Synthesis with Transformer Network](https://arxiv.org/pdf/1809.08895.pdf) paper
+- Inspired by the original SimpleTransformerTTS implementation
+- Uses PyTorch and torchaudio for audio processing
+
+## Support
+
+For questions and support, please open an issue on GitHub or Huggingface.
+
+---
