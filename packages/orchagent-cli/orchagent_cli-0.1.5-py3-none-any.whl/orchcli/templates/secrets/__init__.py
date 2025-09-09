@@ -1,0 +1,2 @@
+"""Provider secrets templates."""
+
