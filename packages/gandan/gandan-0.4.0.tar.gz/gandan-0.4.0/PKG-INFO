@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: gandan
+Version: 0.4.0
+Summary: a small tcp based middlware for raw with advanced pub-sub features
+Home-page: https://github.com/willcaster0418/gandan
+Author: SANG-HUN, KIM
+Author-email: fury8208@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+a small tcp based middlware for raw with advanced pub-sub features including publisher callbacks, subscription intervals, and data optimization
+
