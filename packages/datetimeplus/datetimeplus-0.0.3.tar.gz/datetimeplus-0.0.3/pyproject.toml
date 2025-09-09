@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "datetimeplus"
+version = "0.0.3"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.isort]
+profile = "black"
+
+[tool.pydocstyle]
+ignore = ["D100", "D104", "D203", "D205", "D212", "D400", "D415"]
+addopts = "--exclude=tests"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/datetimeplus"]
+include = ["src/datetimeplus/py.typed"]
+
+[tool.ruff]
+line-length = 88
+include = ["datetimeplus/**/*.py"]
+
+[tool.ruff.lint]
+select = ["F", "E", "I", "B"]
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = true
+combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[dependency-groups]
+dev = [
+    "bandit>=1.8.6",
+    "mypy>=1.17.1",
+    "pydocstyle>=6.3.0",
+    "pytest>=8.4.1",
+    "pytest-benchmark>=5.1.0",
+    "pytest-cov>=6.2.1",
+    "ruff>=0.12.10",
+]
