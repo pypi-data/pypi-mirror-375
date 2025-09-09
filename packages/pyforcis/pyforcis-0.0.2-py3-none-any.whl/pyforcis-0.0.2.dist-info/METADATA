@@ -1,0 +1,257 @@
+Metadata-Version: 2.4
+Name: pyforcis
+Version: 0.0.2
+Summary: Lightweight FORCIS versioning/download toolkit with rich CLI (devices, parquet, integrity)
+Author: Khalil Hammami
+License: GPL-3.0-only
+License-File: LICENSE
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+Requires-Python: >=3.10
+Requires-Dist: rich>=13.7
+Provides-Extra: cli
+Requires-Dist: rich>=13.7; extra == 'cli'
+Provides-Extra: dev
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: pyarrow>=15.0; extra == 'dev'
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: pytest-cov; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Provides-Extra: parquet
+Requires-Dist: pyarrow>=15.0; extra == 'parquet'
+Description-Content-Type: text/markdown
+
+# pyforcis
+
+Lightweight Python helper for FORCIS multi-version retrieval: list versions, inspect metadata, download selected device files, convert JSONL↔Parquet, view cache + device catalog.
+
+> [!IMPORTANT]  
+> Not an official FORCIS project.  
+> Scope: Versioning • Download • JSONL↔Parquet • Device Catalog • Cache Integrity.
+> Expect a lean, stability-focused core.
+
+Release note: _Last updated: 2025-09-08 (v0.0.2)_
+
+## Contents
+
+- [pyforcis](#pyforcis)
+  - [Contents](#contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Quick Start](#quick-start)
+  - [Data \& Versioning Model](#data--versioning-model)
+  - [CLI Reference](#cli-reference)
+  - [Devices (Data Types)](#devices-data-types)
+  - [Contributing](#contributing)
+  - [License \& Data Licensing Notes](#license--data-licensing-notes)
+  - [Citation](#citation)
+  - [Disclaimer](#disclaimer)
+
+---
+
+## Features
+
+| Category | Highlights (trimmed) |
+|----------|---------------------|
+| Versioning | Multi-version Zenodo discovery (concept 7390791), suspicious-index auto refresh, forced refresh flag |
+| Download | Streaming chunked downloader (progress bars, cached detection, summary-only/JSON modes) |
+| Formats | JSONL native helpers; Parquet conversion via optional `pyarrow` |
+| Devices | Built-in catalog + substring matching to filter source downloads |
+| Integrity | Cache (index, metadata, downloads) + stale index heuristics (size, age, host) + checksum verify (if Zenodo provides) |
+| CLI | `list-versions`, `metadata`, `fetch`, `list-devices`, `jsonl2parquet`, `parquet2jsonl`, cache info/clear |
+
+---
+
+## Installation
+
+Minimal:
+
+```bash
+pip install pyforcis
+```
+
+TestPyPI (latest dev release):
+
+```bash
+pip install -i https://test.pypi.org/simple/ pyforcis
+```
+
+Optional extras:
+
+```bash
+# CLI niceties + Parquet conversion
+pip install "pyforcis[cli,parquet]"
+```
+
+Development / latest (unreleased tip of main):
+
+```bash
+# Direct from repo (includes extras)
+pip install "git+https://github.com/khammami/pyforcis.git#egg=pyforcis[cli,parquet]"
+```
+
+Editable local clone:
+
+```bash
+git clone https://github.com/your-org/pyforcis.git
+cd pyforcis
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[cli,parquet]"    # add ,dev if a dev extra is defined
+pytest -q
+```
+
+Upgrade later:
+
+```bash
+pip install -U "pyforcis[cli,parquet]"
+```
+
+---
+
+## Quick Start
+
+```bash
+pyforcis list-versions             # Show all versions (auto-refresh if stale)
+pyforcis list-devices              # Show device/data types
+pyforcis fetch --version 10 --sources net,trap --summary-only
+pyforcis fetch --version 10 --sources net --json
+pyforcis fetch --sources net,trap  # No version selector -> downloads latest (currently 10)
+```
+
+Python (minimal scope):
+
+```python
+import pyforcis as pf
+print(pf.list_versions()[:5])
+# No version specified -> downloads from latest release (currently 10)
+files = pf.download_forcis_db(sources=["net","pump"])  # dict of file_key -> Path
+# Explicit version example:
+# files_v9 = pf.download_forcis_db(version="9", sources=["net"])  # older version
+print(files)
+```
+
+---
+
+## Data & Versioning Model
+
+- Zenodo concept ID: 7390791 (all FORCIS releases).
+- Cached artifacts:
+  - `versions_index.json` (auto-refreshed if suspicious: too few entries / example.org hosts)
+  - `metadata_<recid>.json`
+  - Downloaded files: `downloads/<version>/`
+  - `download_index.json` (sha256, etag, size, timestamp)
+
+Force refresh:
+
+```bash
+pyforcis list-versions --refresh-index
+pyforcis refresh-index
+```
+
+---
+
+## CLI Reference
+
+| Command | Purpose | Selected Flags |
+|---------|---------|----------------|
+| list-versions | List all versions | `--json`, `--plain`, `--refresh-index` |
+| list-devices  | List known device/data types | `--json`, `--plain` |
+| refresh-index | Force fetch version index | (respects `--json`) |
+| fetch | Download selected files (defaults to latest if no version/recid/doi) | `--version/--recid/--doi`, `--sources`, `--summary-only`, `--force`, `--json` |
+| metadata | Show single version metadata | version selectors |
+| jsonl2parquet | JSONL → Parquet | — |
+| parquet2jsonl | Parquet → JSONL | — |
+| csv2parquet | CSV → Parquet (via JSONL temp) | `--limit` |
+| csv2jsonl | CSV → JSONL | `--limit` |
+| describe | Quick column summary | `--csv/--jsonl`, `--limit`, `--max-unique`, `--sample` |
+| device-describe | Summaries for all downloaded files for device ids | `--version`, `--sources`, `--limit` |
+| cache-info | Show download cache index | `--json` |
+| cache-clear | Remove cache files | — |
+
+Global flags: `--plain`, `--json`, `--summary-only`, `--no-progress`, `--refresh-index`.
+
+`list-versions` output now includes an Access column (open / restricted) sourced from Zenodo `access_right` so you can quickly see which releases are publicly downloadable.
+
+---
+
+## Devices (Data Types)
+
+`pyforcis list-devices` shows metadata:
+
+| id        | label                                         | typical substring | notes |
+|-----------|-----------------------------------------------|-------------------|-------|
+| net       | Plankton Nets                                 | net               | Full species blocks (_VT/_LT) |
+| pump      | Plankton Pump                                 | pump              | Similar to net |
+| trap      | Sediment Trap                                 | trap              | Flux-aware |
+| cpr_south | CPR (Southern Hemisphere)                     | cpr_south         | Species-resolved |
+| cpr_north | CPR (Northern Hemisphere)                     | cpr_north         | May lack species columns |
+
+Use these ids inside `--sources net,trap`.
+
+---
+
+## Contributing
+
+1. Fork, branch (feat/*).
+2. Implement + tests (`pytest -q`).
+3. Lint (ruff), optional mypy.
+4. Update README & CHANGELOG entries.
+5. PR with clear description.
+
+---
+
+## License & Data Licensing Notes
+
+- Code: GPL-3.0-only
+- Data: FORCIS database (CC-BY-4.0) – doi.org/10.5281/zenodo.7390791.
+- pyforcis does not redistribute raw data; facilitates retrieval.
+
+---
+
+## Citation
+
+Please cite both the FORCIS database and this tool when using pyforcis in work or publications:
+
+> Chaabane, S. et al. (2024). FORCIS database (Version 10) [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.7390791>  
+> Hammami, K. (2025). pyforcis (Version 0.0.2) [Computer software]. GitHub. <https://github.com/khammami/pyforcis>
+
+Minimal BibTeX (dataset currently Version 10):
+
+```bibtex
+@dataset{forcis_database,
+  title        = {FORCIS database},
+  author       = {Chaabane, S. and others},
+  year         = {2024},
+  version      = {0.0.2},
+  doi          = {10.5281/zenodo.7390791},
+  publisher    = {Zenodo}
+}
+
+@software{pyforcis_tool,
+  title        = {pyforcis},
+  author       = {Hammami, Khalil},
+  year         = {2025},
+  version      = {0.0.2},
+  url          = {https://github.com/khammami/pyforcis}
+}
+```
+
+---
+
+## Disclaimer
+
+Validate scientific outputs against domain standards and official FORCIS references if strict parity is required.
+
+---
