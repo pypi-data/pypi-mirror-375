@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: indicio-indy-plenum
+Version: 1.13.2.dev1757381235
+Summary: Plenum Byzantine Fault Tolerant Protocol
+Home-page: https://github.com/Indicio-tech/indy-plenum
+Download-URL: https://github.com/Indicio-tech/indy-plenum/tarball/1.13.2.dev1757381235
+Author: Hyperledger
+Author-email: hyperledger-indy@lists.hyperledger.org
+Maintainer: Indicio
+Maintainer-email: support@indicio.tech
+License: Apache 2.0
+Keywords: Byzantine Fault Tolerant Plenum
+Classifier: Programming Language :: Python :: 3
+License-File: LICENSE
+Requires-Dist: base58
+Requires-Dist: importlib-metadata==3.10.1
+Requires-Dist: ioflo
+Requires-Dist: jsonpickle
+Requires-Dist: leveldb
+Requires-Dist: libnacl==1.6.1
+Requires-Dist: msgpack==0.5.6
+Requires-Dist: orderedset
+Requires-Dist: packaging
+Requires-Dist: portalocker==2.7.0
+Requires-Dist: prompt-toolkit>=3.0.18
+Requires-Dist: psutil
+Requires-Dist: pympler==0.8
+Requires-Dist: python-dateutil
+Requires-Dist: python-rocksdb==0.7.0
+Requires-Dist: python-ursa==0.1.1
+Requires-Dist: rlp==2.0.0
+Requires-Dist: semver==2.13.0
+Requires-Dist: sha3
+Requires-Dist: six
+Requires-Dist: sortedcontainers==2.1.0
+Requires-Dist: ujson==1.33
+Provides-Extra: benchmark
+Requires-Dist: pympler==0.8; extra == "benchmark"
+Provides-Extra: stats
+Requires-Dist: python-firebase; extra == "stats"
+Provides-Extra: tests
+Requires-Dist: attrs==20.3.0; extra == "tests"
+Requires-Dist: pytest==6.2.5; extra == "tests"
+Requires-Dist: pytest-xdist==2.2.1; extra == "tests"
+Requires-Dist: pytest-forked==1.3.0; extra == "tests"
+Requires-Dist: python3-indy==1.16.0.post236; extra == "tests"
+Requires-Dist: pytest-asyncio==0.14.0; extra == "tests"
+
+Plenum Byzantine Fault Tolerant Protocol
