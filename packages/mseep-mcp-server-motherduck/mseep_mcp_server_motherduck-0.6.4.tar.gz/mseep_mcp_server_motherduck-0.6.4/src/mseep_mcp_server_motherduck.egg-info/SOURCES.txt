@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_server_motherduck/__init__.py
+src/mcp_server_motherduck/configs.py
+src/mcp_server_motherduck/database.py
+src/mcp_server_motherduck/prompt.py
+src/mcp_server_motherduck/server.py
+src/mseep_mcp_server_motherduck.egg-info/PKG-INFO
+src/mseep_mcp_server_motherduck.egg-info/SOURCES.txt
+src/mseep_mcp_server_motherduck.egg-info/dependency_links.txt
+src/mseep_mcp_server_motherduck.egg-info/entry_points.txt
+src/mseep_mcp_server_motherduck.egg-info/requires.txt
+src/mseep_mcp_server_motherduck.egg-info/top_level.txt
