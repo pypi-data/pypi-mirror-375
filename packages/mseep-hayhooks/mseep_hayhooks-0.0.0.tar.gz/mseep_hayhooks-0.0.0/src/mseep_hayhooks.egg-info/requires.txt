@@ -1,0 +1,16 @@
+haystack-ai>=2.11.0
+fastapi[standard]
+typer
+uvicorn
+rich
+requests
+python-multipart
+loguru
+pydantic-settings
+python-dotenv
+docstring-parser
+
+[mcp]
+
+[mcp:python_version >= "3.10"]
+mcp>=1.8.0
