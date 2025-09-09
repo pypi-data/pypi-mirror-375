@@ -1,0 +1,165 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [
+  "hatch-vcs",
+  "hatchling",
+]
+
+[project]
+name = "tap-checkly"
+description = "Singer tap for Checkly, built with the Meltano SDK for Singer Taps."
+readme = "README.md"
+keywords = [
+  "Checkly",
+  "ELT",
+  "singer.io",
+]
+license = "Apache-2.0"
+license-files = [ "LICENSE" ]
+maintainers = [
+  { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
+]
+authors = [
+  { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" },
+]
+requires-python = ">=3.10"
+classifiers = [
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+dynamic = [
+  "version",
+]
+dependencies = [
+  "singer-sdk~=0.47.0",
+]
+urls.Documentation = "https://github.com/reservoir-data/tap-checkly/#readme"
+urls.Homepage = "https://github.com/reservoir-data/tap-checkly"
+urls.Repository = "https://github.com/reservoir-data/tap-checkly"
+scripts."tap-checkly" = "tap_checkly.tap:TapCheckly.cli"
+
+[dependency-groups]
+dev = [
+  { include-group = "testing" },
+  { include-group = "typing" },
+]
+testing = [
+  "deptry>=0.12",
+  "pytest~=8.0",
+  "singer-sdk[testing]",
+]
+typing = [
+  "mypy",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.ruff]
+line-length = 88
+src = [
+  "tap_checkly",
+  "tests",
+]
+
+lint.select = [
+  "ALL",
+]
+lint.ignore = [
+  "COM812", # missing-trailing-comma
+  "DJ",     # flake8-django
+  "ISC001", # single-line-implicit-string-concatenation
+]
+
+lint.per-file-ignores."noxfile.py" = [
+  "ANN",
+  "INP001",
+]
+lint.per-file-ignores."tests/*" = [
+  "ANN201", # missing-return-type-public-function
+  "S101",   # assert
+  "SLF001", # private-member-access
+]
+lint.unfixable = [
+  "ERA001", # commented-out-code
+]
+lint.isort.known-first-party = [
+  "tap_checkly",
+]
+lint.isort.required-imports = [
+  "from __future__ import annotations",
+]
+lint.pydocstyle.convention = "google"
+
+[tool.deptry.package_module_name_map]
+mypy = "mypy"
+
+[tool.deptry.per_rule_ignores]
+DEP002 = [
+  "deptry",
+  "mypy",
+  "pytest",
+]
+
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
+
+[tool.pytest.ini_options]
+addopts = "-vvv"
+
+[tool.tox]
+min_version = "4.22"
+requires = [
+  # renovate: datasource=pypi depName=tox
+  "tox~=4.22",
+  # renovate: datasource=pypi depName=tox-uv
+  "tox-uv~=1.17",
+]
+env_list = [
+  "dependencies",
+  "typing",
+  "3.14",
+  "3.13",
+  "3.12",
+  "3.11",
+  "3.10",
+]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+pass_env = [ "TAP_CHECKLY_*" ]
+set_env = { "PYO3_USE_ABI3_FORWARD_COMPATIBILITY" = "1" }
+dependency_groups = [ "testing" ]
+commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
+
+[tool.tox.env.dependencies]
+dependency_groups = [ "testing" ]
+commands = [ [ "deptry", "." ] ]
+
+[tool.tox.env.sync]
+commands = [ [ "tap-checkly", { replace = "posargs", default = [ "--config=ENV" ], extend = true } ] ]
+
+[tool.tox.env.typing]
+dependency_groups = [ "testing", "typing" ]
+commands = [ [ "mypy", "--strict", { replace = "posargs", default = [ "tap_checkly", "tests" ], extend = true } ] ]
+
+[tool.mypy]
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module = [
+  "backoff.*",
+]
+
+[tool.uv]
+prerelease = "allow"
+required-version = ">=0.5.19"

@@ -1,0 +1,47 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: tap-checkly
+environments:
+- name: dev
+default_environment: dev
+plugins:
+  extractors:
+  - name: tap-checkly
+    namespace: checkly
+    label: Checkly
+    docs: https://github.com/reservoir-data/tap-checkly#readme
+    repo: https://github.com/reservoir-data/tap-checkly
+    pip_url: -e .
+    description: Delightful Active Monitoring for Developers
+    capabilities:
+    - state
+    - catalog
+    - discover
+    settings:
+    - name: account_id
+      description: Checkly Account ID
+    - name: token
+      kind: password
+      label: API Token
+      description: API Token for Checkly
+    - name: start_date
+      kind: date_iso8601
+      label: Start Date
+      description: Earliest datetime to get data from
+    - name: include_paid_streams
+      kind: boolean
+      value: false
+      label: Include Paid Streams
+      description: Include paid streams in the catalog
+    config:
+      start_date: '2022-01-01'
+  loaders:
+  - name: target-duckdb
+    variant: jwills
+    pip_url: target-duckdb~=0.4
+    config:
+      filepath: output/wh.duckdb
+      default_target_schema: ${MELTANO_ENVIRONMENT}_${MELTANO_EXTRACTOR_NAMESPACE}
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
