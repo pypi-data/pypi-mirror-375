@@ -1,0 +1,22 @@
+Metadata-Version: 2.3
+Name: cdispyutils
+Version: 2.4.1
+Summary: This package includes several utility Python tools for the Gen3 stack.
+License: Apache-2.0
+Author: CTDS UChicago
+Author-email: cdis@uchicago.edu
+Requires-Python: >=3.9,<4.0
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: profiling
+Requires-Dist: Flask
+Requires-Dist: PyJWT
+Requires-Dist: cdiserrors
+Requires-Dist: cryptography (>=43.0.1,<44.0.0)
+Requires-Dist: prometheus-client
+Requires-Dist: requests
