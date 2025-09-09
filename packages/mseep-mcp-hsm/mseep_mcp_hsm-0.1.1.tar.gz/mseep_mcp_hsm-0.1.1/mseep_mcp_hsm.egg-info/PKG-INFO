@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-hsm
+Version: 0.1.1
+Summary: A MCP server project to handle cryptographic operations with Hardware Security Module (HSM) Implementation
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.6.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
