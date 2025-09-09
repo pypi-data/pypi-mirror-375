@@ -1,0 +1,80 @@
+# seriallll
+
+A small, modest Python helper for talking to serial ports. Works elsewhere via [pyserial].
+
+* Connect with optional retries (including “retry forever”)
+* Auto-reconnect on I/O errors (e.g., cable unplug/replug)
+* Simple, thread-safe read/write helpers
+* Tiny API, single dependency
+
+## Installation
+
+```bash
+pip install seriallll
+# or
+uv add seriallll 
+```
+
+## Quick start
+
+```python
+from seriallll import SerialClient
+
+client = SerialClient(
+    port=None,           # None for auto-discover a macOS USB serial port
+    baudrate=115200,
+    max_retries=-1,      # retry forever on initial connect
+    auto_reconnect=True, # reconnect on I/O errors
+)
+
+client.connect()
+client.write_line("hello")
+print(client.readline(timeout=1.0))
+client.close()
+```
+
+### Reading lines
+
+```python
+line = client.readline(timeout=2.0)  # returns b"...\\n" or b"" on timeout
+```
+
+### Raw read / write
+
+```python
+client.write(b"\x01\x02\x03")
+chunk = client.read(64, timeout=0.2)
+```
+
+### Callbacks (optional)
+
+```python
+def on_reconnect(c):
+    print("Reconnected to", c.port)
+
+client = SerialClient(port=None, on_reconnect=on_reconnect)
+```
+
+## macOS notes
+
+* Auto-discovery looks for `/dev/tty.usb*` (and falls back to `/dev/tty.*`).
+* DTR (data terminal ready pin) is asserted on (re)connect, which some boards expect on macOS.
+
+## API surface
+
+* `SerialClient.connect() / close()`
+* `SerialClient.write(data) / write_line(line, newline=b"\n")`
+* `SerialClient.read(size=1, timeout=None)`
+* `SerialClient.read_until(terminator=b"\n", timeout=None, max_bytes=None)`
+* `SerialClient.readline(timeout=None, max_bytes=None)`
+* Properties: `port`, `is_open`
+
+## Troubleshooting
+
+* **No port found**: pass `--port` explicitly (check `ls /dev/tty.*` on macOS).
+* **Time out reading**: increase `timeout` or use `read_until/readline`.
+* **Flaky cable/adapter**: keep `auto_reconnect=True`.
+
+---
+
+[pyserial]: https://pyserial.readthedocs.io/
