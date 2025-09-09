@@ -1,0 +1,40 @@
+[project]
+name = "mseep-mcp-db-navigator"
+version = "1.0.2"
+description = "A powerful MySQL/MariaDB database navigation tool using MCP (Model Control Protocol)."
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.8"
+dependencies = [
+    "fastmcp>=0.1.0",
+    "mysql-connector-python>=8.0.26",
+    "pydantic>=2.0.0",
+    "cryptography>=3.4.7",
+    "typing-extensions>=4.0.0",
+]
+
+[project.license]
+file = "LICENSE"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/mcp-db"
+
+[project.scripts]
+mcp-db = "mcp_db.server:main_cli"
+
+[tool.setuptools.packages.find]
+where = [
+    ".",
+]
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
