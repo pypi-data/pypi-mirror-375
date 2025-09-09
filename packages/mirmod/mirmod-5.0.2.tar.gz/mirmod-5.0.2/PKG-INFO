@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: mirmod
+Version: 5.0.2
+Requires-Python: >=3.12
+Requires-Dist: asyncio
+Requires-Dist: asyncssh
+Requires-Dist: dill
+Requires-Dist: filesplit
+Requires-Dist: ipython
+Requires-Dist: lxml
+Requires-Dist: matplotlib
+Requires-Dist: mysql-connector-python==8.0.28
+Requires-Dist: nest-asyncio
+Requires-Dist: networkx
+Requires-Dist: niquests
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: pillow
+Requires-Dist: plotly
+Requires-Dist: pyyaml
+Requires-Dist: requests
+Requires-Dist: setuptools
+Requires-Dist: tabulate
+Description-Content-Type: text/markdown
+
+meowdge
