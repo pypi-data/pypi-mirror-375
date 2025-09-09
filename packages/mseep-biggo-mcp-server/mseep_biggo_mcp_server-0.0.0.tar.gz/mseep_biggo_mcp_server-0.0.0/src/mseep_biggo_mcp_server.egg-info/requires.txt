@@ -1,0 +1,6 @@
+aiohttp>=3.11.11
+async-lru>=2.0.4
+async-timeout>=5.0.1
+elasticsearch8[async]>=8.17.1
+mcp[cli]>=1.2.1
+typing-extensions>=4.12.2
