@@ -1,0 +1,110 @@
+Metadata-Version: 2.4
+Name: mtwpay
+Version: 1.0.1
+Summary: Python SDK for MyTonWallet Pay API
+Author-email: LaFTon Technology <laftonsup@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/LaFTonTechnology/mytonwallet_pay
+Project-URL: Repository, https://github.com/LaFTonTechnology/mytonwallet_pay
+Project-URL: Issues, https://github.com/LaFTonTechnology/mytonwallet_pay/issues
+Keywords: MyTonWallet,MyTonWallet Pay,MyTonWallet Pay API,MTW Pay,MTW
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pydantic>=2.0
+Requires-Dist: certifi
+Requires-Dist: aiohappyeyeballs>=2.6.1
+Requires-Dist: aiohttp>=3.12.15
+Requires-Dist: aiosignal>=1.4.0
+Requires-Dist: annotated-types>=0.7.0
+Requires-Dist: attrs>=25.3.0
+Requires-Dist: frozenlist>=1.7.0
+Requires-Dist: idna>=3.10
+Requires-Dist: multidict>=6.6.4
+Requires-Dist: propcache>=0.3.2
+Requires-Dist: typing-inspection>=0.4.1
+Requires-Dist: typing_extensions>=4.15.0
+Requires-Dist: yarl>=1.20.1
+Dynamic: license-file
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LaFTonTechnology/mytonwallet_pay/main/assets/mtwpayLogo.png" width="300"/>
+  <h1 align="center">mtwpay</h1>
+  <p align="center">Асинхронный Python клиент для <a href="https://anywaylabs.notion.site/MyTonWallet-Pay-Docs-for-partners-18aba64b301480f98053e88b5c829e4a">MyTonWallet Pay API</a></p>
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/LaFTonTechnology/mytonwallet_pay/main/assets/python-version.json" alt="Python"></a>
+  <a href="https://pydantic.dev"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/pydantic/pydantic/main/docs/badge/v2.json" alt="Pydantic v2"></a>
+  <a href="https://docs.aiohttp.org/en/stable/"><img src="https://img.shields.io/badge/aiohttp-v3-2c5bb4?logo=aiohttp" alt="Aiohttp"></a>
+</p>
+
+---
+
+## 📌 О проекте
+
+**mtwpay** — асинхронный Python клиент для работы с [MyTonWallet Pay API](https://anywaylabs.notion.site/MyTonWallet-Pay-Docs-for-partners-18aba64b301480f98053e88b5c829e4a).  
+Позволяет создавать счета, получать ссылки на оплату и обрабатывать платежи полностью асинхронно.
+
+---
+
+### 📖 Документация
+[![Docs](https://img.shields.io/badge/docs-online-brightgreen)](https://laftontechnology.github.io/mytonwallet_pay/)
+
+---
+
+## 💬 Сообщество
+
+Присоединяйтесь к нашему чату в Telegram: [@mtwpay](https://t.me/mtwpay)
+
+---
+
+## Quick start
+
+```python
+import asyncio
+from mytonwallet_pay import MTWPay
+from datetime import datetime, timedelta
+
+
+async def main():
+    mtw_pay = MTWPay(token="YOUR_TOKEN", project_id=0)
+
+    inv = await mtw_pay.create_invoice(amount=300000000, coin="TON", validUntil=datetime.now()+timedelta(minutes=5), description="My internal order info (id in your system, etc)")
+    return inv.invoiceLink  # Ссылка для оплаты счёта
+
+
+if __name__ == "__main__":
+    print(asyncio.run(main()))
+```
+
+
+## 📦 Основные возможности
+
+- ✅ Асинхронный клиент на `aiohttp`  
+- ✅ Полная поддержка [MyTonWallet Pay API](https://anywaylabs.notion.site/MyTonWallet-Pay-Docs-for-partners-18aba64b301480f98053e88b5c829e4a)
+- ✅ Быстрое создание счетов и получение ссылок для оплаты  
+- ✅ Совместимость с Python 3.10+  
+
+---
+
+## 💖 Поддержка проекта
+
+Вы можете поддержать разработчиков донатом:
+
+| Сеть     | Адрес                                                                 |
+|----------|-----------------------------------------------------------------------|
+| **TON**  | `UQCekZTSqysK4OUQFovzI31CILQj0GGjnYxBV77HlK2Zv1BM`                    |
+
+---
+
+## 📝 Лицензия
+
+Проект распространяется под лицензией MIT.
+
+---
+
+## 📌 Контакты и обратная связь
+
+- Telegram: [@mtwpay](https://t.me/mtwpay)  
+- GitHub Issues: открывайте любые баги или предложения прямо в репозитории.
