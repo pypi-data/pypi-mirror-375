@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-wcgw
+Version: 5.4.4
+Summary: Shell and coding agent for Claude and other mcp clients
+Project-URL: Homepage, https://github.com/rusiaaman/wcgw
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: anthropic>=0.39.0
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: mcp>=1.7.0
+Requires-Dist: openai>=1.46.0
+Requires-Dist: petname>=2.6
+Requires-Dist: pexpect>=4.9.0
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: pydantic>=2.9.2
+Requires-Dist: pygit2>=1.16.0
+Requires-Dist: pyte>=0.8.2
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: rich>=13.8.1
+Requires-Dist: semantic-version>=2.10.0
+Requires-Dist: syntax-checker==0.4.0
+Requires-Dist: tokenizers>=0.21.0
+Requires-Dist: toml>=0.10.2
+Requires-Dist: tree-sitter-bash>=0.23.3
+Requires-Dist: tree-sitter>=0.24.0
+Requires-Dist: typer>=0.12.5
+Requires-Dist: uvicorn>=0.31.0
+Requires-Dist: websockets>=13.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
