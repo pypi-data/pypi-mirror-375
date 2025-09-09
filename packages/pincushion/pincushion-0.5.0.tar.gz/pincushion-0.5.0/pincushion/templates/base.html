@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+    <title>Pincushion: {{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    {% endblock %}
+    <style>
+
+    a {
+      text-decoration: none;
+    }
+
+    body {
+      margin: 10px 10% 10px 10%;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+      line-height: 1.5;
+      font-size: 1.4em;
+    }
+
+    nav {
+      margin-bottom: 20px;
+      font-size: 1.5em;
+    }
+
+    .breadcrumb ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .breadcrumb li:not(:last-child)::after {
+      display: inline-block;
+      margin: 0 .25rem;
+      content: ">";
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: start;
+    }
+
+    .gallery .gallery-item {
+      border: 1px groove #ccc;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .gallery .gallery-item .name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .gallery .gallery-item .description {
+      text-align: left;
+      margin: 5px;
+    }
+
+    .gallery .gallery-item img {
+      max-width: 400px;
+      max-height: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gallery .gallery-item video {
+      max-width: 400px;
+      max-height: 400px;
+    }
+
+    .media {
+      text-align: center;
+    }
+
+    .media img, .media video {
+      max-width: 80%;
+      margin: 0 auto 0 auto;
+    }
+
+    .media p {
+      text-align: left;
+      border: thin gray groove;
+      padding: 15px;
+      font-size: larger;
+    }
+
+    dl {
+      columns: 2;
+    }
+
+    dl dt {
+      font-weight: bold;
+      font-size: larger;
+    }
+
+    dl dd {
+      margin-left: 0px;
+      margin-bottom: 20px;
+    }
+
+    .comment {
+      border: 1px groove #ddd;
+      padding: 8px;
+      max-width: 800px;
+      border-radius: 5px;
+    }
+
+    .comment .name {
+      text-decoration: underline;
+    }
+
+    .comment .created {
+      color: gray;
+    }
+
+    .tags {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      margin: 5px;
+      padding: 5px;
+      border: 1px groove #ddd;
+    }
+
+    .tag:hover {
+      background: pink;
+    }
+
+    /* Mobile Devices */
+
+    @media only screen and (max-width: 600px) {
+      body {
+        margin: 10px;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+        line-height: 1.1;
+        font-size: 1.0em;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .gallery .gallery-item img {
+        max-width: 300px;
+        max-height: 300px;
+      }
+
+      .gallery .gallery-item video {
+        max-width: 300px;
+        max-height: 300px;
+      }
+      
+      dl {
+        columns: 1;
+      }
+
+    }
+
+    </style>
+  </head>
+  <body>
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      {% block breadcrumb %}{% endblock %}
+    </nav>
+    <main>
+      {% block main %}
+      {% endblock %}
+    </main>
+  </body>
+</html>
