@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-memory-plus
+Version: 0.1.5
+Summary: A memory management server using FastMCP
+Project-URL: Homepage, https://github.com/Yuchen20/Memory-Plus
+Project-URL: Repository, https://github.com/Yuchen20/Memory-Plus.git
+Project-URL: Bug Tracker, https://github.com/Yuchen20/Memory-Plus/issues
+Project-URL: Changelog, https://github.com/Yuchen20/Memory-Plus/blob/main/CHANGELOG.md
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: Yuchen Mao <yuchenmao2024@163.com>
+License-Expression: MIT
+License-File: LICENSE
+Keywords: FastMCP,mcp,memory,server
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python
+Requires-Python: >=3.10
+Requires-Dist: fast-agent-mcp>=0.2.26
+Requires-Dist: fastmcp<2.3.4
+Requires-Dist: google-genai
+Requires-Dist: langchain
+Requires-Dist: mcp-agent<0.0.21
+Requires-Dist: mcp==1.8.0
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: plotly
+Requires-Dist: pydantic
+Requires-Dist: python-dotenv
+Requires-Dist: qdrant-client
+Requires-Dist: scikit-learn
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
