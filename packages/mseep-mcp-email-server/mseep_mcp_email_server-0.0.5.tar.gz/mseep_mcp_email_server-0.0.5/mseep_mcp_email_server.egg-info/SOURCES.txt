@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+mseep_mcp_email_server.egg-info/PKG-INFO
+mseep_mcp_email_server.egg-info/SOURCES.txt
+mseep_mcp_email_server.egg-info/dependency_links.txt
+mseep_mcp_email_server.egg-info/entry_points.txt
+mseep_mcp_email_server.egg-info/requires.txt
+mseep_mcp_email_server.egg-info/top_level.txt
+tests/test_classic_handler.py
+tests/test_config.py
+tests/test_dispatcher.py
+tests/test_email_client.py
+tests/test_env_config_coverage.py
+tests/test_mcp_tools.py
+tests/test_models.py
