@@ -1,0 +1,17 @@
+LICENSE.txt
+README.md
+setup.py
+famli/__init__.py
+famli/exec_helpers.py
+famli/famli_helpers.py
+famli/fastq_helpers.py
+famli/run_famli.py
+famli.egg-info/PKG-INFO
+famli.egg-info/SOURCES.txt
+famli.egg-info/dependency_links.txt
+famli.egg-info/entry_points.txt
+famli.egg-info/requires.txt
+famli.egg-info/top_level.txt
+tests/test_alignment_batchsize.py
+tests/test_parse_alignments.py
+tests/test_quality_trim.py
