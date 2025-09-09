@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: fastapi-oidc-simple
+Version: 0.2.0
+Summary: Simple OIDC integration for FastAPI using Authlib
+Author-email: Noidea <noidea1238@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/adityasm1238/fastapi-oidc-simple
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.116.0
+Requires-Dist: authlib>=1.6.3
+Requires-Dist: starlette>=0.47.0
+Requires-Dist: httpx>=0.28.0
+Requires-Dist: itsdangerous>=2.2.0
+
+# fastapi-oidc
+
+A lightweight **OpenID Connect (OIDC)** integration for **FastAPI**, built on top of [Authlib](https://docs.authlib.org/).  
+It provides simple routes for OIDC login, callback, and user info, along with dependency helpers to protect endpoints and enforce group-based access.
+
+---
+
+## ✨ Features
+
+- 🔑 Easy OIDC integration with FastAPI  
+- 🔗 Built-in routes for `/auth/login`, `/auth/callback`, and `/auth/userinfo`  
+- 🛡️ Dependency helpers:
+  - `require_oidc` → protect endpoints with authentication  
+  - `require_oidc_group("group")` → enforce group-based authorization  
+- 🧩 Uses Authlib’s discovery-based OIDC client  
+- ⚡ Minimal setup: just plug it into your FastAPI app  
+
+---
