@@ -1,0 +1,4 @@
+[console_scripts]
+MP4UploadDL = MP4UploadDL.__main__:main
+mp4up-dl = MP4UploadDL.__main__:main
+mp4upload-dl = MP4UploadDL.__main__:main
