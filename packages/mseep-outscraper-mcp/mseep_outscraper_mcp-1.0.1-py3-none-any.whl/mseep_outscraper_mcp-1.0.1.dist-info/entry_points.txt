@@ -1,0 +1,2 @@
+[console_scripts]
+outscraper-mcp = outscraper_mcp.__init__:main
