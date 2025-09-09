@@ -1,0 +1,23 @@
+[project]
+name = "mseep-mcp-image-placeholder"
+version = "0.1.4"
+description = "MCP Image Placeholder Server"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.2.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-mcp-image-placeholder = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
