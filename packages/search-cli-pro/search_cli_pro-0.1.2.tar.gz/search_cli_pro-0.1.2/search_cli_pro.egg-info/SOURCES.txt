@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+search_cli_pro.egg-info/PKG-INFO
+search_cli_pro.egg-info/SOURCES.txt
+search_cli_pro.egg-info/dependency_links.txt
+search_cli_pro.egg-info/entry_points.txt
+search_cli_pro.egg-info/requires.txt
+search_cli_pro.egg-info/top_level.txt
+searchcli/__init__.py
+searchcli/cli.py
+searchcli/engines.py
+searchcli/interactive.py
+searchcli/search.py
+searchcli/utils.py
