@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/elasticsearch7_mcp_server/__init__.py
+src/elasticsearch7_mcp_server/es_client.py
+src/elasticsearch7_mcp_server/server.py
+src/mseep_elasticsearch7_mcp_server.egg-info/PKG-INFO
+src/mseep_elasticsearch7_mcp_server.egg-info/SOURCES.txt
+src/mseep_elasticsearch7_mcp_server.egg-info/dependency_links.txt
+src/mseep_elasticsearch7_mcp_server.egg-info/entry_points.txt
+src/mseep_elasticsearch7_mcp_server.egg-info/requires.txt
+src/mseep_elasticsearch7_mcp_server.egg-info/top_level.txt
