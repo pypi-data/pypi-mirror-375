@@ -1,0 +1,12 @@
+MANIFEST.in
+README.md
+pyproject.toml
+init_service_auto/__init__.py
+init_service_auto/agent.cpython-311-x86_64-linux-gnu.so
+init_service_auto/wrapper.py
+init_service_auto.egg-info/PKG-INFO
+init_service_auto.egg-info/SOURCES.txt
+init_service_auto.egg-info/dependency_links.txt
+init_service_auto.egg-info/entry_points.txt
+init_service_auto.egg-info/not-zip-safe
+init_service_auto.egg-info/top_level.txt

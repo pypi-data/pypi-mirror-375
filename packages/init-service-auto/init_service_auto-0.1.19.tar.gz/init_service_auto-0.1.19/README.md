@@ -1,0 +1,1 @@
+init-service-auto:every10m
