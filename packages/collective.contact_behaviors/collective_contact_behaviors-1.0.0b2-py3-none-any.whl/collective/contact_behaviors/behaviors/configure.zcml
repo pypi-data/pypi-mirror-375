@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="collective.contact_behaviors"
+    >
+
+  <!-- Address Information Behavior -->
+  <plone:behavior
+      name="collective.contact_behaviors.address_info"
+      title="Address Information"
+      description="Fields with address information"
+      provides=".address_info.IAddressInfo"
+      />
+
+  <!-- Contact Information Behavior -->
+  <plone:behavior
+      name="collective.contact_behaviors.contact_info"
+      title="Contact Information"
+      description="Fields with contact information"
+      provides=".contact_info.IContactInfo"
+      />
+
+</configure>

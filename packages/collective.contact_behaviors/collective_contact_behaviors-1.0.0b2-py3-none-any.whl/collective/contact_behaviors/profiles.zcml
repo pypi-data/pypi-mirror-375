@@ -1,0 +1,33 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.contact_behaviors"
+    >
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Behaviors: Catalog and querystring setup"
+      description="Configure collective.contact_behaviors"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Behaviors: Uninstall"
+      description="Remove collective.contact_behaviors configuration"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <genericsetup:registerProfile
+      name="testing"
+      title="Behaviors: Testing profile"
+      description="Used in automated tests, provides a new content type"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/testing"
+      />
+
+  <include package=".upgrades" />
+
+</configure>
