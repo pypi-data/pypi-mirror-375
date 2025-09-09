@@ -1,0 +1,3 @@
+[console_scripts]
+moondream-mcp = moondream_mcp.server:main
+setup-claude-desktop = moondream_mcp.scripts.setup_claude_desktop:main
