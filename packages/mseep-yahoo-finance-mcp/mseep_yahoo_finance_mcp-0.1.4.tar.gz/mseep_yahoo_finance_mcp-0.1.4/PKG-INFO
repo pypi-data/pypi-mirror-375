@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-yahoo-finance-mcp
+Version: 0.1.4
+Summary: MCP server implementation for yahoo finance integration
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: yfinance>=0.2.62
+Provides-Extra: dev
+Requires-Dist: pre-commit>=3.6.0; extra == "dev"
+Requires-Dist: black>=24.2.0; extra == "dev"
+Requires-Dist: isort>=5.13.2; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
