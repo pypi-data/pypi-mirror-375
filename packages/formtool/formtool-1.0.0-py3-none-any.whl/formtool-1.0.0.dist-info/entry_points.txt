@@ -1,0 +1,8 @@
+[console_scripts]
+fav1 = formtool.__main__:av1
+fflac = formtool.__main__:flac
+fmp3 = formtool.__main__:mp3
+fopus = formtool.__main__:opus
+formtool = formtool.__main__:cli
+fwav = formtool.__main__:wav
+fx264 = formtool.__main__:x264
