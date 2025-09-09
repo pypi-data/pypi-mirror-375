@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-gsuite-enhanced
+Version: 2.0.1
+Summary: Enhanced MCP server for Google Workspace integration with comprehensive Gmail API coverage and advanced email management
+Project-URL: Homepage, https://github.com/ajramos/mcp-gsuite-enhanced
+Project-URL: Repository, https://github.com/ajramos/mcp-gsuite-enhanced
+Project-URL: Issues, https://github.com/ajramos/mcp-gsuite-enhanced/issues
+Project-URL: Original Project, https://github.com/MarkusPfundstein/mcp-gsuite
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Keywords: archive,calendar,email-management,gmail,google,google-meet,labels,mcp,model-context-protocol
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.10
+Requires-Dist: google-api-python-client>=2.171.0
+Requires-Dist: mcp>=1.3.0
+Requires-Dist: oauth2client>=4.1.3
+Requires-Dist: pytz>=2024.2
+Provides-Extra: dev
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: isort; extra == 'dev'
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: pytest; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
