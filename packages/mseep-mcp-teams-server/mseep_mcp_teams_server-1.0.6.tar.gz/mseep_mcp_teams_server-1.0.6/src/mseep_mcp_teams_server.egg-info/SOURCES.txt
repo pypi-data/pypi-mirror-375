@@ -1,0 +1,16 @@
+LICENSE.txt
+NOTICE
+README.md
+pyproject.toml
+src/mcp_teams_server/__init__.py
+src/mcp_teams_server/__main__.py
+src/mcp_teams_server/config.py
+src/mcp_teams_server/teams.py
+src/mseep_mcp_teams_server.egg-info/PKG-INFO
+src/mseep_mcp_teams_server.egg-info/SOURCES.txt
+src/mseep_mcp_teams_server.egg-info/dependency_links.txt
+src/mseep_mcp_teams_server.egg-info/entry_points.txt
+src/mseep_mcp_teams_server.egg-info/requires.txt
+src/mseep_mcp_teams_server.egg-info/top_level.txt
+tests/test_main.py
+tests/test_teams.py
