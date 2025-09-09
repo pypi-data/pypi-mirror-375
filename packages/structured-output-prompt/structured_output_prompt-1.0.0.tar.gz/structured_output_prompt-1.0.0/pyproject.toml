@@ -1,0 +1,42 @@
+[project]
+name = "structured-output-prompt"
+version = "1.0.0"
+description = "一个Python库，用于从Pydantic模型生成结构化输出提示，专为不支持JSON Schema的大语言模型设计。 / A Python library for generating structured output prompts from Pydantic models, designed for LLMs that do not support JSON Schema."
+authors = [{ name = "Apauto-to-all", email = "apautotoall@outlook.com" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.11.7"]
+
+# 添加项目链接
+urls = { Homepage = "https://github.com/Apauto-to-all/structured_output_prompt" }
+
+
+[dependency-groups]
+dev = ["pytest>=8.4.2"]
+
+
+# 发布testpypi
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
+
+
+# 主要使用清华源
+[[tool.uv.index]]
+name = "tuna"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+
+
+# 添加阿里云备用源
+[[tool.uv.index]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+
+
+# 最后默认源
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
