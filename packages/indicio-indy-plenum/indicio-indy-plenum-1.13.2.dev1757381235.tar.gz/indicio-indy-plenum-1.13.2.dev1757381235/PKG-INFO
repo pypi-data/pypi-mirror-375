@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: indicio-indy-plenum
+Version: 1.13.2.dev1757381235
+Summary: Plenum Byzantine Fault Tolerant Protocol
+Home-page: https://github.com/Indicio-tech/indy-plenum
+Download-URL: https://github.com/Indicio-tech/indy-plenum/tarball/1.13.2.dev1757381235
+Author: Hyperledger
+Author-email: hyperledger-indy@lists.hyperledger.org
+Maintainer: Indicio
+Maintainer-email: support@indicio.tech
+License: Apache 2.0
+Keywords: Byzantine Fault Tolerant Plenum
+Classifier: Programming Language :: Python :: 3
+Provides-Extra: tests
+Provides-Extra: stats
+Provides-Extra: benchmark
+License-File: LICENSE
+
+Plenum Byzantine Fault Tolerant Protocol
