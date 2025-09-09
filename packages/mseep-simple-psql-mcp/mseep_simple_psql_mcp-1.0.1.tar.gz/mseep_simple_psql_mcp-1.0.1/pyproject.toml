@@ -1,0 +1,31 @@
+[project]
+name = "mseep-simple-psql-mcp"
+version = "1.0.1"
+description = "A PostgreSQL MCP server project"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.11.13",
+    "mcp[cli]>=1.3.0",
+    "pyyaml>=6.0.2",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+postgres = "src.postgres:main"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src",
+]
