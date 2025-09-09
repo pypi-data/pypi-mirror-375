@@ -1,0 +1,321 @@
+Metadata-Version: 2.4
+Name: apicrusher
+Version: 2.0.0
+Summary: Cut AI API costs by 63-99% with intelligent routing
+Home-page: https://apicrusher.com
+Author: APICrusher
+Author-email: hello@apicrusher.com
+Project-URL: Website, https://apicrusher.com
+Project-URL: Documentation, https://apicrusher.com/docs
+Keywords: openai anthropic google ai api optimization cost-reduction llm gpt claude gemini
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.28.0
+Requires-Dist: redis>=4.5.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# APICrusher - Cut AI API Costs by 63-99%
+
+Stop bleeding money on AI APIs. APICrusher automatically routes requests to the cheapest capable model and caches responses, cutting costs by 63-99% with just 2 lines of code.
+
+## 🚀 Quick Start
+
+```bash
+# Python 3.8+ required
+# Use a virtual environment (recommended for all Python packages)
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+pip install apicrusher
+```
+
+## 📋 Important Installation Notes
+
+### Virtual Environment Required
+Modern Python systems require virtual environments for pip packages:
+```bash
+# If you see "externally-managed-environment" error:
+python3 -m venv venv
+source venv/bin/activate
+pip install apicrusher
+```
+
+### API Keys Required
+APICrusher optimizes your existing AI API calls. You need:
+1. **Your AI provider API key** (OpenAI, Anthropic, etc.) - Keep using your existing keys
+2. **An APICrusher optimization key** from [apicrusher.com](https://apicrusher.com) - Enables cost optimization
+
+### How It Works
+APICrusher is a smart proxy layer. You keep your existing API keys. We analyze each request and route it to the optimal model. Your API keys never leave your server.
+
+## 💻 Basic Usage
+
+```python
+# Before (expensive)
+from openai import OpenAI
+client = OpenAI(api_key="sk-...")  # Your OpenAI key
+
+# After (63-99% cheaper)
+from apicrusher import OpenAI
+client = OpenAI(
+    api_key="sk-...",              # Your existing OpenAI key
+    apicrusher_key="apc_live_..."  # Add optimization key
+)
+
+# Your code stays exactly the same
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+```
+
+## 💰 How Much Can You Save?
+
+### Single Provider vs Cross-Provider
+- **Single Provider** (e.g., just OpenAI): 70-85% savings
+- **Cross-Provider** (e.g., OpenAI + Anthropic): Up to 99% savings
+
+| Your Current Usage | Monthly Cost | With APICrusher | You Save |
+|-------------------|--------------|-----------------|----------|
+| GPT-4 for everything | $1,000 | $180 | $820 (82%) |
+| Mixed GPT-4/3.5 | $500 | $95 | $405 (81%) |
+| Heavy API usage | $5,000 | $750 | $4,250 (85%) |
+| Long conversations | $2,000 | $340 | $1,660 (83%) |
+
+## 🎯 Core Features
+
+### Cross-Provider Optimization (NEW in v1.3.0)
+
+Get 99% savings by routing between providers:
+
+```python
+from apicrusher import OpenAI
+
+client = OpenAI(
+    api_key="sk-...",                    # Your OpenAI key
+    anthropic_api_key="sk-ant-...",      # Optional: Add for 99% savings
+    google_api_key="...",                # Optional: Add Google key
+    apicrusher_key="apc_live_..."    
+)
+
+# Simple GPT-4 queries now route to Claude Haiku automatically (99% cheaper)
+# Complex queries stay on GPT-4 to preserve quality
+```
+
+### Universal Provider Support
+Works with ALL major AI providers:
+- OpenAI (GPT-5, GPT-4, GPT-4o, GPT-3.5, O1)
+- Anthropic (Claude 3.5, Claude Opus 4.1)
+- Google (Gemini 1.5, Gemini 2.0)
+- Groq, Cohere, Meta, Mistral, and more
+
+### Intelligent Model Routing
+- Simple queries → Cheap models (gpt-4o-mini)
+- Complex queries → Premium models (GPT-4)
+- Automatic quality preservation
+
+### Smart Caching
+- Deduplicates identical requests
+- Redis + in-memory fallback
+- 33% average cache hit rate
+
+### 🆕 Context Compression (NEW!)
+**Stop paying to reprocess the same conversation 50 times:**
+
+```python
+# Enable context compression for long conversations
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=conversation_history,  # 50 messages = 15,000 tokens normally
+    compress_context=True  # Reduces to ~3,000 tokens automatically
+)
+
+# Features:
+# - Summarizes older messages while preserving key decisions
+# - Removes duplicate context automatically  
+# - Compresses code blocks by 40-60%
+# - Sends only deltas for continuing conversations
+# - Preserves last 3 messages in full for accuracy
+```
+
+**Context Compression Savings Example:**
+- Normal 20-message conversation: 150,000 tokens ($2.25)
+- With compression: 35,000 tokens ($0.52)
+- **Savings: 77% on long conversations**
+
+## 🏢 Enterprise Security & Controls (v2.0)
+
+### Security Features
+- **IP Allowlisting**: Restrict API keys to specific IP ranges
+- **Audit Logging**: Complete usage trail for compliance (SOC2 Type II)
+- **API Key Rotation**: Rotate keys without service interruption
+- **Email Verification**: Secure access control for all users
+- **Role-Based Access**: Admin and user permissions for teams
+
+### Business Controls
+- **Usage Quotas**: Configurable limits per tier
+  - Trial: 1,000 calls/day
+  - Professional: 10,000 calls/day
+  - Enterprise: Unlimited with alerts
+- **80% Alerts**: Email warnings before quota exceeded
+- **Overage Protection**: Prevent unexpected bills
+- **Team Management**: Multiple users under one billing account
+- **Monthly Reports**: Automated ROI reports for finance teams
+
+### Reliability & Monitoring
+- **Webhook Retry Queue**: Never miss critical payment events
+- **Health Monitoring**: Real-time system status at `/metrics`
+- **Automatic Failover**: Cross-provider redundancy
+- **99.9% Uptime SLA**: For enterprise customers
+- **Dedicated Support**: Priority response for business accounts
+
+### Compliance
+- **SOC2 Type II**: Security audit compliant
+- **GDPR Ready**: Data processing agreements available
+- **HIPAA Compatible**: With enterprise agreement
+- **Self-Hosted Option**: Deploy in your own VPC for maximum control
+
+## 📊 Analytics & Reporting
+
+```python
+# Get detailed savings report
+client.print_savings_summary()
+
+# Output:
+# 💸 Total Saved: $127.43
+# 📞 Total Calls: 1,432
+# 💾 Cache Hit Rate: 34.2%
+# ⚡ Optimization Rate: 91.3%
+```
+
+### Executive Dashboard
+- Real-time cost savings visualization
+- Model routing analytics
+- Usage patterns and trends
+- Export to CSV/Excel for finance teams
+- Monthly ROI reports via email
+
+## 🔧 Advanced Usage
+
+### Multi-Provider Setup
+```python
+from apicrusher import OpenAI
+
+client = OpenAI(
+    openai_api_key="sk-...",
+    anthropic_api_key="sk-ant-...",
+    google_api_key="...",
+    apicrusher_key="apc_..."
+)
+
+# Automatically routes to cheapest provider
+response = client.chat.completions.create(
+    model="gpt-4",  # Will use gpt-4o-mini if appropriate
+    messages=[{"role": "user", "content": "Format this date: 2024-01-01"}]
+)
+```
+
+### Context Compression Options
+```python
+# Fine-tune compression behavior
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=long_conversation,
+    compress_context=True,
+    compression_threshold=10,  # Start compressing after 10 messages
+    preserve_recent=5  # Keep last 5 messages uncompressed
+)
+```
+
+### Manual Optimization Control
+```python
+# Force specific model
+response = client.chat.completions.create(
+    model="gpt-4o-mini",  # Use this exact model
+    messages=messages,
+    skip_optimization=True  # Bypass routing logic
+)
+```
+
+### Enterprise Configuration
+```python
+# Configure enterprise features
+client = OpenAI(
+    api_key="sk-...",
+    apicrusher_key="apc_enterprise_...",
+    config={
+        "ip_allowlist": ["192.168.1.0/24"],
+        "audit_logging": True,
+        "usage_quota": 50000,  # Daily limit
+        "alert_threshold": 0.8,  # Alert at 80% usage
+        "team_id": "eng-team-01"
+    }
+)
+```
+
+## 📊 Real-World Results
+
+Based on actual customer usage:
+
+- **E-commerce company**: Reduced costs from $8,400/mo to $1,260/mo (85% savings)
+- **SaaS startup**: Cut API bills from $3,200/mo to $480/mo (85% savings)  
+- **AI coding assistant**: Dropped from $12,000/mo to $2,400/mo (80% savings)
+- **Customer support platform**: Saved $47,000/year with context compression
+- **Data analytics firm**: 99% reduction using cross-provider routing
+
+## 🛡️ Security & Privacy
+
+- **Your API keys stay local** - Never sent to our servers
+- **No prompt logging** - Your data remains private
+- **Open source** - Audit the code yourself
+- **SOC2 compliant** - Enterprise-ready security
+- **IP allowlisting** - Restrict access to your network
+- **Audit trails** - Complete usage history for compliance
+
+## 🚀 Getting Started
+
+1. **Install**: `pip install apicrusher`
+2. **Get your key**: Sign up at [apicrusher.com](https://apicrusher.com)
+3. **Add 2 lines**: Replace your import and add your key
+4. **Save money**: Watch your costs drop by 63-99%
+
+## 💰 Pricing
+
+- **Free Trial**: 7 days, no credit card required
+- **Professional**: $99/month (pays for itself in hours)
+- **Enterprise**: Custom pricing for high-volume usage
+
+Most customers save 10-50x the subscription cost in the first month.
+
+## 🤝 Support
+
+- Email: hello@apicrusher.com
+- Documentation: [apicrusher.com/docs](https://apicrusher.com/docs)
+- GitHub: [github.com/apicrusher/apicrusher](https://github.com/apicrusher/apicrusher)
+- Enterprise Support: Priority response with SLA
+
+## License
+
+MIT License - Use it however you want.
+
+---
+
+**Stop bleeding money on AI APIs. Start saving with APICrusher today.**
+
+[Get Your Key →](https://apicrusher.com)
