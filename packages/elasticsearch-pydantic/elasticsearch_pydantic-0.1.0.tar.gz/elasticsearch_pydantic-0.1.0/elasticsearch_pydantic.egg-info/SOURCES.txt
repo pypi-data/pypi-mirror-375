@@ -1,0 +1,16 @@
+.gitignore
+LICENSE
+README.md
+pyproject.toml
+.github/dependabot.yml
+.github/release.yml
+.github/workflows/ci.yml
+elasticsearch_pydantic/__init__.py
+elasticsearch_pydantic/_compat.py
+elasticsearch_pydantic/field.py
+elasticsearch_pydantic/test_mapping.py
+elasticsearch_pydantic.egg-info/PKG-INFO
+elasticsearch_pydantic.egg-info/SOURCES.txt
+elasticsearch_pydantic.egg-info/dependency_links.txt
+elasticsearch_pydantic.egg-info/requires.txt
+elasticsearch_pydantic.egg-info/top_level.txt
