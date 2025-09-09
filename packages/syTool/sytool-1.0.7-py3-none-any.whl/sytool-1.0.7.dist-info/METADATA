@@ -1,0 +1,110 @@
+Metadata-Version: 2.4
+Name: syTool
+Version: 1.0.7
+Summary: A modular toolkit for database operations, HTTP clients, file processing, caching, and more.
+Author-email: Sawyerlsy <sawyerlsy@126.com>
+Project-URL: Homepage, https://gitee.com/sawyerlsy/syTool
+Keywords: toolkit,database,http,file,cache,utility
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: loguru>=0.7.3
+Provides-Extra: bloom
+Provides-Extra: cache-redis
+Requires-Dist: redis~=3.5.3; extra == "cache-redis"
+Requires-Dist: redis-py-cluster~=2.1.3; extra == "cache-redis"
+Provides-Extra: cache-local
+Provides-Extra: cache-all
+Requires-Dist: syTool[cache-redis]; extra == "cache-all"
+Requires-Dist: syTool[cache-local]; extra == "cache-all"
+Provides-Extra: captcha
+Provides-Extra: config
+Requires-Dist: dynaconf~=3.2.11; extra == "config"
+Provides-Extra: core
+Provides-Extra: cypto
+Provides-Extra: db-mysql
+Requires-Dist: oracledb>=3.3.0; extra == "db-mysql"
+Requires-Dist: pymysql~=1.1.2; extra == "db-mysql"
+Provides-Extra: db-oracle
+Requires-Dist: sqlalchemy~=2.0.43; extra == "db-oracle"
+Requires-Dist: oracledb>=3.3.0; extra == "db-oracle"
+Provides-Extra: db-sqlserver
+Requires-Dist: sqlalchemy~=2.0.43; extra == "db-sqlserver"
+Requires-Dist: pymssql~=2.3.7; extra == "db-sqlserver"
+Provides-Extra: db-all
+Requires-Dist: syTool[db-mysql]; extra == "db-all"
+Requires-Dist: syTool[db-oracle]; extra == "db-all"
+Requires-Dist: syTool[db-sqlserver]; extra == "db-all"
+Provides-Extra: file
+Provides-Extra: http
+Requires-Dist: requests~=2.32.3; extra == "http"
+Requires-Dist: httpx[http2]>=0.28.1; extra == "http"
+Requires-Dist: aiofiles>=24.1.0; extra == "http"
+Provides-Extra: job
+Requires-Dist: APScheduler~=3.11.0; extra == "job"
+Provides-Extra: json
+Requires-Dist: orjson>=3.10.18; extra == "json"
+Provides-Extra: jwt
+Provides-Extra: poi
+Provides-Extra: socket
+Provides-Extra: system
+Provides-Extra: thread
+Provides-Extra: time
+Provides-Extra: all
+Requires-Dist: syTool[bloom]; extra == "all"
+Requires-Dist: syTool[cache-all]; extra == "all"
+Requires-Dist: syTool[captcha]; extra == "all"
+Requires-Dist: syTool[config]; extra == "all"
+Requires-Dist: syTool[core]; extra == "all"
+Requires-Dist: syTool[cypto]; extra == "all"
+Requires-Dist: syTool[db-all]; extra == "all"
+Requires-Dist: syTool[file]; extra == "all"
+Requires-Dist: syTool[http]; extra == "all"
+Requires-Dist: syTool[job]; extra == "all"
+Requires-Dist: syTool[json]; extra == "all"
+Requires-Dist: syTool[jwt]; extra == "all"
+Requires-Dist: syTool[log]; extra == "all"
+Requires-Dist: syTool[poi]; extra == "all"
+Requires-Dist: syTool[socket]; extra == "all"
+Requires-Dist: syTool[system]; extra == "all"
+Requires-Dist: syTool[thread]; extra == "all"
+Requires-Dist: syTool[time]; extra == "all"
+
+# syTool
+
+#### 介绍
+常用工具类
+
+#### 软件架构
+软件架构说明
+
+
+#### 安装教程
+
+1.  xxxx
+2.  xxxx
+3.  xxxx
+
+#### 使用说明
+
+1.  xxxx
+2.  xxxx
+3.  xxxx
+
+#### 参与贡献
+
+1.  Fork 本仓库
+2.  新建 Feat_xxx 分支
+3.  提交代码
+4.  新建 Pull Request
