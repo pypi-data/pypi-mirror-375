@@ -1,0 +1,127 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Monday at 09:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    if: github.repository == 'basher83/Zammad-MCP'
+    permissions:
+      contents: read
+      security-events: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@557e51de59eb14aaaba2ed9621916900a91d50c6 # v6.6.1
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          uv sync --dev --frozen
+
+      - name: Run Bandit (HIGH/CRITICAL only)
+        run: |
+          # Full recursive scan of the entire codebase
+          # --severity-level high: Only fail on HIGH and CRITICAL severity issues
+          echo "Running Bandit security scan (HIGH/CRITICAL only)..."
+          uv run bandit -r mcp_zammad/ --severity-level high -f json -o bandit-report.json
+
+      - name: Generate Bandit SARIF report
+        continue-on-error: true
+        run: |
+          # Generate SARIF for GitHub Security tab (includes all severities for visibility)
+          echo "Generating Bandit SARIF report for Security tab..."
+          uv run bandit -r mcp_zammad/ -f sarif -o bandit-sarif.json
+
+      - name: Upload Bandit results to GitHub Security
+        uses: github/codeql-action/upload-sarif@f1f6e5f6af878fb37288ce1c627459e94dbf7d01 # v3
+        if: always()
+        with:
+          sarif_file: bandit-sarif.json
+          category: bandit
+
+      - name: Run safety scan
+        uses: pyupio/safety-action@2591cf2f3e67ba68b923f4c92f0d36e281c65023  # v1.0.1 tag target commit
+        continue-on-error: true
+        with:
+          api-key: ${{ github.repository == 'basher83/Zammad-MCP' && secrets.SAFETY_API_KEY || '' }}
+
+      - name: Run pip-audit
+        continue-on-error: true
+        run: |
+          echo "Running pip-audit dependency scan..."
+          # Will exit non-zero if vulnerabilities are found
+          uv run pip-audit --format json --output pip-audit-report.json || {
+            EXIT_CODE=$?
+            echo "⚠️  pip-audit found vulnerabilities (exit code: $EXIT_CODE)"
+            # Generate a summary of vulnerabilities
+            if [ -f pip-audit-report.json ]; then
+              VULN_COUNT=$(jq '.vulnerabilities | length' pip-audit-report.json)
+              echo "Found $VULN_COUNT vulnerability(ies) in dependencies"
+              echo ""
+              jq -r '.vulnerabilities[] | "Package: \(.name) \(.version)\nVulnerability: \(.id)\nDescription: \(.description)\nFix: \(if .fix_versions | length > 0 then "Upgrade to " + (.fix_versions | join(", ")) else "Check advisory" end)\n"' pip-audit-report.json
+            fi
+            exit $EXIT_CODE
+          }
+          echo "✅ No dependency vulnerabilities found"
+
+      - name: Upload security reports
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: security-reports
+          path: |
+            bandit-report.json
+            bandit-sarif.json
+            pip-audit-report.json
+
+      - name: Generate Security Summary
+        if: always()
+        run: |
+          echo "## 🔒 Security Scan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Check Bandit results
+          if [ -f bandit-report.json ]; then
+            HIGH_COUNT=$(jq '[.results[] | select(.issue_severity == "HIGH")] | length' bandit-report.json)
+            MED_COUNT=$(jq '[.results[] | select(.issue_severity == "MEDIUM")] | length' bandit-report.json)
+            LOW_COUNT=$(jq '[.results[] | select(.issue_severity == "LOW")] | length' bandit-report.json)
+            echo "### Bandit Static Analysis" >> $GITHUB_STEP_SUMMARY
+            if [ "$HIGH_COUNT" -gt 0 ]; then
+              echo "❌ **Failed**: Found $HIGH_COUNT HIGH severity issues" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "✅ **Passed**: No HIGH/CRITICAL issues (Medium: $MED_COUNT, Low: $LOW_COUNT)" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # Check safety results
+          echo "### Dependency Vulnerability Scans" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Safety**: Check performed via GitHub Action (see job output for details)" >> $GITHUB_STEP_SUMMARY
+          
+          # Check pip-audit results
+          if [ -f pip-audit-report.json ]; then
+            AUDIT_VULNS=$(jq '.vulnerabilities | length' pip-audit-report.json)
+            if [ "$AUDIT_VULNS" -gt 0 ]; then
+              echo "❌ **pip-audit**: Found $AUDIT_VULNS vulnerabilities" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "✅ **pip-audit**: No vulnerabilities" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
