@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-yugabytedb-mcp-server
+Version: 1.0.3
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.9.4
+Requires-Dist: httpx~=0.28.0
+Requires-Dist: fastapi>=0.115.12
+Requires-Dist: psycopg2-binary>=2.9.10
+Dynamic: license-file
+
+Package managed by MseeP.ai
