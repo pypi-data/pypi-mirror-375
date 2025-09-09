@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: xecta_data_api_client
+Version: 2.0.20250908.1
+Requires-Python: >=3.8
+Requires-Dist: nulltype
+Requires-Dist: python_dateutil>=2.5.3
+Requires-Dist: setuptools==65.3.0
+Requires-Dist: urllib3>=1.25.3
+Requires-Dist: pydantic>=2.5.0
+Dynamic: requires-dist
+Dynamic: requires-python
