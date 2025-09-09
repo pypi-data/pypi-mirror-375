@@ -1,0 +1,3 @@
+[console_scripts]
+tubescribe = ytx.cli:app
+ytx = ytx.cli:app
