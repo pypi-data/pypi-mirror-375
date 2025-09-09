@@ -1,0 +1,66 @@
+id;name;resource;start;end;estimate;spent;milestone;parent_id;predecessor_ids;state;iteration_path;target_date;activity;type;rank
+346672;Прототип;;;;;;False;;;New;TE_S7_SURVEY\Release 23.07.2;2023-09-25 17:00:00;;Epic;1333333332.0
+346674;Техдолг проекта;Arkady Makarov;;;;;False;346672;;New;TE_S7_SURVEY\Release 23.07.2;;;Feature;
+346675;Инфраструктура проекта;Arkady Makarov;;;;;False;346672;;New;TE_S7_SURVEY\Release 23.07.2;;;Feature;
+347335;Опросы: Настройка инфраструктуры проекта;Arkady Makarov;;;;;False;346675;;New;TE_S7_SURVEY\Release 23.07.2;;;Product Backlog Item;
+347336;Опросы: Настройка инфраструктуры проекта - декомпозиция и оценка задач;Arkady Makarov;;;;0;False;347335;;New;TE_S7_SURVEY\Release 23.07.2;;Specification;Service Task;
+346261;Подготовительные работы;Arkady Makarov;24.08.23;;;;False;346672;;In Progress;TE_S7_SURVEY;;;Feature;571428570.0
+346266;Опросы: Настроить проект TFS;Ilya Avdeev;24.08.23;;;;False;346261;;In Dev;TE_S7_SURVEY;;;Product Backlog Item;1931972789.0
+347329;Опросы: Настроить проект TFS - декомпозиция и оценка задач;Arkady Makarov;24.08.23;24.08.23;4.0;4.0;False;346266;;Done;TE_S7_SURVEY\Release 23.07.2;;Specification;Service Task;285714285.0
+347353;Опросы: TFS: Настроить pipeline для автоматического сбора заврешённых задач для release notes;Arkady Makarov;;;8.0;2.0;False;346266;;New;TE_S7_SURVEY\Release 23.08.2;;Development;Task;571428570.0
+347363;Опросы: TFS: Настроить ветку master. Определить политики, раздать доступы.;Arkady Makarov;24.08.23;24.08.23;8.0;2.0;False;346266;;Done;TE_S7_SURVEY\Release 23.08.2;;;Service Task;857142855.0
+347222;"Опросы: Подготовка: Создание страничек в вики: ""Окружение"" ""Подготовка рабочего места""";Arkady Makarov;;;3.0;0;False;346266;;New;TE_S7_SURVEY\Release 23.08.2;;Development;Task;1142857140.0
+347368;Настроить цветовые схемы как в HelpCenter;Ilya Avdeev;18.08.23;18.08.23;4.0;1.0;False;346266;;Done;TE_S7_SURVEY\Release 23.08.2;;Specification;Service Task;1428571425.0
+347369;Настроить шаблоны для PBI.;Ilya Avdeev;;;4.0;0;False;346266;;New;TE_S7_SURVEY\Release 23.08.2;;;Service Task;1714285715.0
+347375;Опросы: Настроить развертывание приложения и деплой ;Arkady Makarov;;;;;False;346261;;New;TE_S7_SURVEY;;;Product Backlog Item;
+347389;Автоматического развертывания приложения на средах dev, uat, prod ;Arkady Makarov;15.08.23;15.08.23;16.0;12.0;False;347375;;Done;TE_S7_SURVEY\Release 23.08.1;;Specification;Service Task;
+347390;"Автоматическое проставление тагов ""on dev"" ""on uat"" ""on prod""";Arkady Makarov;18.08.23;18.08.23;8.0;0;False;347375;;Done;TE_S7_SURVEY\Release 23.08.2;;Estimation;Service Task;
+347392;Автоматический прогон юнит тестов;Arkady Makarov;;;8.0;0;False;347375;;New;TE_S7_SURVEY;;Specification;Service Task;
+349461;Создать/настроить синхронизацию с gitlab С7 ;Ilya Avdeev;18.08.23;18.08.23;;0;False;347375;;Done;TE_S7_SURVEY\Release 23.08.2;;Specification;Service Task;
+347385;Опросы: Настроить развертывание приложения и деплой - декомпозиция и оченка задач;Arkady Makarov;24.08.23;24.08.23;3.0;3.0;False;347375;;Done;TE_S7_SURVEY;;;Service Task;999968378.0
+347393;Создать инструкцию по локальному развертыванию приложения;Arkady Makarov;;;6.0;0;False;347375;;New;TE_S7_SURVEY\Release 23.08.2;;Specification;Service Task;1500000000.0
+348142;Опросы: Документация: Создать документацию интеграции проекта ;Arkady Makarov;;;;;False;346261;;New;TE_S7_SURVEY;;;Product Backlog Item;
+348143;Описать интеграцию проекта Опросы (схема, описание вики).;Arkady Makarov;28.07.23;;8.0;8.0;False;348142;;In Progress;TE_S7_SURVEY;;;Service Task;
+348144;Описать микросервисную архитектуру проекта (схема, описание вики).;Arkady Makarov;;;8.0;0;False;348142;;New;TE_S7_SURVEY;;;Service Task;
+351033;Опросы: создание микросервиса Survey;Arkady Makarov;;;;;False;346261;;New;TE_S7_SURVEY\Release 23.08.2;;;Product Backlog Item;
+351104;Опросы: Создание шаблона сервиса Survey - декомпозиция и оценка задач;Arkady Makarov;18.08.23;18.08.23;2.0;0;False;351033;;Done;TE_S7_SURVEY\Release 23.08.2;;Specification;Service Task;
+351105;Опросы: Подготовка: Создать заготовку сервиса TE.S7.Survey.Survey в репозитории проекта;Arkady Makarov;;;6.0;0;False;351033;352455;New;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+346264;Опросы: Создание шаблона сервиса Frontend;Vadim Shikitov;;;;;False;346261;;New;TE_S7_SURVEY;;;Product Backlog Item;1918367347.0
+347217;Опросы: Подготовка: Создать заготовку сервиса TE.S7.Survey.FrontEnd в репозитории проекта;Arkady Makarov;09.08.23;09.08.23;;4.0;False;346264;;Done;TE_S7_SURVEY\Release 23.08.1;;Development;Task;
+348413;Настроить Alias'ы;Vadim Shikitov;;;4.0;0;False;346264;;New;TE_S7_SURVEY;;Development;Task;
+348414;Добавить роуты;Vadim Shikitov;;;6.0;0;False;346264;;New;TE_S7_SURVEY;;Development;Task;
+348415;Настройка prettier и eslint;Vadim Shikitov;;;4.0;0;False;346264;;New;TE_S7_SURVEY;;Development;Task;
+348422;Frontend архитектура;Vadim Shikitov;02.08.23;;30.0;22.5;False;346264;;In Progress;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+347328;Опросы: Создание шаблона сервиса Frontend - декомпозиция и оценка задач;Arkady Makarov;04.08.23;04.08.23;;15.0;False;346264;;Done;TE_S7_SURVEY\Release 23.07.2;;Specification;Service Task;1999955279.0
+346275;Форма для прохождения опроса;Arkady Makarov;;;;;False;346672;;New;TE_S7_SURVEY;;;Feature;785714284.0
+346267;Опросы: Настроить аутентификацию WSO2;Arkady Makarov;;;;;False;346275;;New;TE_S7_SURVEY;;;Product Backlog Item;1947278912.0
+347330;Опросы: Настроить аутентификацию WSO2 - декомпозиция и оценка задач;Arkady Makarov;15.08.23;15.08.23;3.0;3.0;False;346267;;Done;TE_S7_SURVEY\Release 23.08.1;;Specification;Service Task;
+347427;Опросы: Подключить автотризацию WSO2;Arkady Makarov;18.08.23;18.08.23;20.0;22.0;False;346267;;Done;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+347972;Создать контракт микросервиса авторизации;Arkady Makarov;;;16.0;0;False;346267;;New;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+350452;Создать сервис определения группы AD пользователя;Arkady Makarov;23.08.23;;16.0;32.0;False;346267;;Code Review;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+351023;Опросы: изучение данных тикета OAuth;Arkady Makarov;16.08.23;16.08.23;4.0;7.0;False;346267;;Done;TE_S7_SURVEY\Release 23.08.2;;Specification;Service Task;
+352455;Подключить сервис получения пользователя;Arkady Makarov;24.08.23;;16.0;0;False;346267;;In Progress;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+346273;Опросы: Создание и настройка ролевой модели пользователей;Arkady Makarov;;;;;False;346275;;New;TE_S7_SURVEY;;;Product Backlog Item;1962585034.0
+347331;Опросы: Создание и настройка ролевой модели пользователей - декомпозиция и оценка задач;Arkady Makarov;24.08.23;24.08.23;;0;False;346273;;Done;TE_S7_SURVEY\Release 23.07.2;;Specification;Service Task;
+347978;Создать роли на основе групп AD пользователя;Arkady Makarov;21.08.23;21.08.23;32.0;24.0;False;346273;;Done;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+347983;Создать политики доступа к методам API на основе ролей ;Arkady Makarov;;;32.0;0;False;346273;;New;TE_S7_SURVEY;;Development;Task;
+346271;Опросы: Создание API-заглушки;Nikita Zaikin;;;;;False;346275;;New;TE_S7_SURVEY;;;Product Backlog Item;1979591836.0
+348254;Back: Создать выгрузку в csv файл;Nikita Zaikin;24.08.23;;24.0;0;False;346271;;In Progress;TE_S7_SURVEY\Release 23.08.2;;Development;Task;
+351028;Опросы: документация по API-заглушки;Nikita Zaikin;24.08.23;;8.0;7.0;False;346271;;Code Review;TE_S7_SURVEY\Release 23.08.2;;Specification;Service Task;
+351029;Опросы: риски;Nikita Zaikin;15.08.23;;24.0;0;False;346271;;In Progress;TE_S7_SURVEY\Release 23.08.2;;Specification;Service Task;
+347332;Опросы: Создание API-заглушки - декомпозиция и оценка задач;Nikita Zaikin;14.08.23;14.08.23;5.0;5.0;False;346271;;Done;TE_S7_SURVEY\Release 23.08.1;;Estimation;Service Task;333333333.0
+348043;Опросы: Изучение бизнес-требований для создания API;Nikita Zaikin;15.08.23;15.08.23;4.0;4.0;False;346271;;Done;TE_S7_SURVEY\Release 23.08.1;;;Service Task;666666666.0
+350855;Опросы: Создать контракты опросов;Nikita Zaikin;18.08.23;;6.0;27.0;False;346271;;Code Review;TE_S7_SURVEY\Release 23.08.2;;Development;Task;999999999.0
+350838;Опросы: Написать методы для API-заглушки;Nikita Zaikin;18.08.23;;8.0;24.0;False;346271;;Code Review;TE_S7_SURVEY\Release 23.08.2;;Development;Task;1333333332.0
+350840;Опросы: Подключение и настройка FluentValidation;Nikita Zaikin;;;12.0;0;False;346271;;New;TE_S7_SURVEY\Release 23.08.2;;Development;Task;1666666667.0
+346274;Опросы: UI Создать страницу опроса;Vadim Shikitov;;;;;False;346275;;New;TE_S7_SURVEY;;;Product Backlog Item;1986394558.0
+347333;Опросы: UI Создать страницу опроса - декомпозиция и оценка задач;Vadim Shikitov;;;;0;False;346274;;New;TE_S7_SURVEY\Release 23.07.2;;Specification;Service Task;
+348689;FE: Создание страницы опроса ;Vadim Shikitov;;;12.0;0;False;346274;;New;TE_S7_SURVEY;;Development;Task;
+348690;FE: Создание компонента отображения опроса;Vadim Shikitov;;;24.0;0;False;346274;;New;TE_S7_SURVEY;;Development;Task;
+348691;FE: Компонент отображения шкалы;Vadim Shikitov;;;8.0;0;False;346274;;New;TE_S7_SURVEY;;Development;Task;
+348692;FE: Proggress bar для опроса;Vadim Shikitov;;;10.0;0;False;346274;;New;TE_S7_SURVEY;;Development;Task;
+348696;FE: Компонент оценки в смайлах;Vadim Shikitov;;;12.0;0;False;346274;;New;TE_S7_SURVEY;;Development;Task;
+346276;Экспорт результатов в CSV;Arkady Makarov;;;;;False;346672;;New;TE_S7_SURVEY;;;Feature;892857141.0
+346278;Опросы: Экспорт результатов в csv;Arkady Makarov;;;;;False;346276;;New;TE_S7_SURVEY;;;Product Backlog Item;1988095238.0
+347334;Опросы: Экспорт результатов в csv - декомпозиция и оценка задач;Arkady Makarov;24.08.23;24.08.23;1.0;0;False;346278;;Done;TE_S7_SURVEY\Release 23.07.2;;Specification;Service Task;
+348282;Front: Cкачивание csv файла ;Vadim Shikitov;;;12.0;0;False;346278;;New;TE_S7_SURVEY;;Development;Task;

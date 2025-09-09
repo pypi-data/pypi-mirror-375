@@ -1,0 +1,22 @@
+=============================
+pjplan: Python библиотека для планирования и анализа проектов
+=============================
+
+**pjplan** turns your [Jupyter Notebook](https://jupyter.org/) into project management software.
+This Python package gives you a simple API with following features:
+- Describe Work Burn-down Structure (WBS) of your project in code or load it from external source.
+- Manipulate tasks: link them as successors/predecessors, find, delete, reorder, etc. A lot of batch operations are supported via simple commands.
+- Assign resources and estimates to tasks
+- Define work calendars for each resource
+- Calculate project schedule in several ways
+- Find critical path
+- Visualize WBS as Gantt or Network diagram
+- Save/Load your WBS to/from csv files
+- Export WBS to [pandas](https://pandas.pydata.org/)
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Содержание:
+
+   getting-started/getting-started
