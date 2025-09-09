@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mbu_rpa_core"
+version = "0.1.0"
+description = "Core library for RPA processes in AAK-MBU"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "MBU RPA", email = "rpa@mbu.aarhus.dk"}
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.urls]
+Repository = "https://github.com/AAK-MBU/MBU-rpa-core.git"
+
+[tool.setuptools]
+packages = ["mbu_rpa_core"]
+
+[tool.setuptools.package-data]
+"mbu_rpa_core" = ["py.typed"]
