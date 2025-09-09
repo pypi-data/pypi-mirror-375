@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+brightspace_api.egg-info/PKG-INFO
+brightspace_api.egg-info/SOURCES.txt
+brightspace_api.egg-info/dependency_links.txt
+brightspace_api.egg-info/requires.txt
+brightspace_api.egg-info/top_level.txt
+bsapi/__init__.py
+bsapi/feedback.py
+bsapi/helper.py
+bsapi/oauth.py
+bsapi/types.py

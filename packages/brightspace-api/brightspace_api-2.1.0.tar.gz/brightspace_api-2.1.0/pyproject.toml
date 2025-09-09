@@ -1,0 +1,18 @@
+[build-system]
+requires = ['setuptools']
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brightspace-api"
+version = "2.1.0"
+authors = [
+    { name="Ciske Harsema", email="Ciske.Harsema@ru.nl" },
+    { name="Job Doesburg", email="Job.Doesburg@ru.nl" }
+]
+description = "Basic Python wrapper for the D2LValence Brightspace API using OAuth 2.0, with some added utilities and text to HTML conversion."
+dependencies = [
+    "requests"
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
