@@ -1,0 +1,29 @@
+name: xcalc-docs
+
+channels:
+    - conda-forge
+    - nodefaults
+
+dependencies:
+    - python
+    - xclim
+    - pint
+    - cf_xarray
+    - xarray
+    - docutils
+    - nbconvert
+    - numpydoc
+    - pillow
+    - pip
+    - sphinx_rtd_theme
+    - sphinx
+    - pandoc
+    - nbsphinx
+    - nbsphinx-link
+    - ipython
+    - dask
+    - cftime
+
+    - pip:
+      #      - sphinxcontrib-mockautodoc
+      - pyhomogenize

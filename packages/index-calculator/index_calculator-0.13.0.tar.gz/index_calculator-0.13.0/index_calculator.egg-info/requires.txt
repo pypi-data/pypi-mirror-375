@@ -1,0 +1,6 @@
+xarray
+dask
+xclim>=0.56.0
+pyhomogenize>=0.5.1
+pint>=0.1
+pooch
