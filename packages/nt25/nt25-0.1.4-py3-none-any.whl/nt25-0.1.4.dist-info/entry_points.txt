@@ -1,0 +1,3 @@
+[console_scripts]
+et = nt25.lib.et:main
+nt25 = nt25.main:main
