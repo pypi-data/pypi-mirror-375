@@ -1,0 +1,84 @@
+[project]
+name = "tubescribe"
+version = "0.3.5"
+description = "CLI to transcribe YouTube audio via Whisper (local) or Gemini (cloud)"
+readme = "README.md"
+authors = [
+    { name = "Prateek", email = "19404752+prateekjain24@users.noreply.github.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "faster-whisper>=1.2.0",
+    "httpx>=0.28.1",
+    "orjson>=3.11.3",
+    "pydantic>=2.10.6",
+    "pydantic-settings>=2.8.1",
+    "python-dotenv>=1.0.1",
+    "rich>=13.9.4",
+    "srt>=3.5.3",
+    "tenacity>=9.1.2",
+    "typer>=0.15.2",
+    "yt-dlp>=2025.9.5",
+    # Optional cloud engine (Gemini). Install when using --engine gemini.
+    "google-generativeai>=0.7.2",
+]
+keywords = [
+  "youtube",
+  "transcription",
+  "whisper",
+  "speech-to-text",
+  "caption",
+  "srt",
+  "cli",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Multimedia :: Sound/Audio",
+  "Topic :: Multimedia :: Video",
+  "Topic :: Utilities",
+]
+
+[project.scripts]
+ytx = "ytx.cli:app"
+tubescribe = "ytx.cli:app"
+
+[project.optional-dependencies]
+# Optional SDKs; HTTP fallbacks are used if these are absent
+openai = ["openai>=1.0.0"]
+deepgram = ["deepgram-sdk>=2.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/prateekjain24/TubeScribe"
+Repository = "https://github.com/prateekjain24/TubeScribe"
+Issues = "https://github.com/prateekjain24/TubeScribe/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = [
+  "README.md",
+  "pyproject.toml",
+  "src/ytx/**",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ytx"]
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests",
+]
+filterwarnings = [
+  "ignore::DeprecationWarning",
+]
