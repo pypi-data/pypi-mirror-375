@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-vikingdb
+Version: 0.1.6
+Summary: a mcp server for vikingdb store and search
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: aiohttp>=3.11.10
+Requires-Dist: mcp>=1.1.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: volcengine>=1.0.164
+
+Package managed by MseeP.ai
