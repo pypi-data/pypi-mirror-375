@@ -1,0 +1,188 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "gsMap"
+authors = [{ name = "liyang", email = "songliyang@westlake.edu.cn" },
+    { name = "wenhao", email = "chenwenhao@westlake.edu.cn" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: POSIX :: Linux",
+]
+dynamic = ["version", "description"]
+dependencies = [
+    "numpy < 2.0.0",
+    "pandas",
+    "scipy",
+    "scikit-learn",
+    "matplotlib",
+    "seaborn",
+    "tqdm",
+    "pyyaml",
+    "torch",
+    "torch-geometric",
+    "pyranges",
+    "pyfiglet",
+    'plotly',
+    'kaleido',
+    'jinja2',
+    'scanpy >=1.8.0',
+    'zarr>=2,<3',
+    'bitarray >=2.9.2, <3.0.0',
+    'pyarrow',
+    'scikit-misc',
+    'numba'
+]
+
+[project.optional-dependencies]
+doc = [
+    "sphinx",
+    'sphinx-argparse',
+    'sphinx-autobuild',
+    'sphinx-autodoc-typehints',
+    'sphinx-basic-ng',
+    'sphinx-charts',
+    'sphinx-copybutton',
+    'sphinx_inline_tabs',
+    'sphinx-markdown-tables',
+    'sphinx-rtd-theme',
+    'sphinxcontrib-applehelp',
+    'sphinxcontrib-devhelp',
+    'sphinxcontrib-htmlhelp',
+    'sphinxcontrib-jquery',
+    'sphinxcontrib-jsmath',
+    'sphinxcontrib-qthelp',
+    'sphinxcontrib-serializinghtml',
+    'furo',
+    'myst-parser',
+    'nbsphinx',
+]
+
+tests = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "coverage",
+]
+
+[project.urls]
+Home = "https://github.com/JianYang-Lab/gsMap"
+Documentation = "https://yanglab.westlake.edu.cn/gsmap/document/software"
+Website = "https://yanglab.westlake.edu.cn/gsmap/home"
+
+[project.scripts]
+gsmap = "gsMap.main:main"
+
+[tool.flit.module]
+name = "gsMap"
+
+[tool.flit.sdist]
+# Include the HTML template in the source distribution
+include = [
+    "src/gsMap/templates/*.html"
+]
+
+
+[tool.ruff]
+src = ["src"]
+line-length = 99
+indent-width = 4
+target-version = "py312"
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.lint]
+select = [
+    "F",  # Errors detected by Pyflakes
+    "E",  # Error detected by Pycodestyle
+    "W",  # Warning detected by Pycodestyle
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "TID",  # flake8-tidy-imports
+    "C4",  # flake8-comprehensions
+    "BLE",  # flake8-blind-except
+    "UP",  # pyupgrade
+    "RUF100",  # Report unused noqa directives
+    "PT", # pytest style
+    "NPY", # numpy formatting
+    "TCH", # flake8-type-checking
+    "FA", # flake8-future-annotations
+]
+ignore = [
+    # allow I, O, l as variable names -> I is the identity matrix
+    "E741",
+    # Errors from function calls in argument defaults. These are fine when the result is immutable.
+    "B008",
+    # Raising ValueError is sufficient in tests.
+    "PT011",
+    # We support np.random functions.
+    "NPY002",
+    # Line too long
+    "E501",
+    # Loop variable is not used
+    "B007",
+    # Allow string in percent format
+    "UP031",
+    # Allow dict call within literal
+    "C408"
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"docs/*" = ["I", "BLE001"]
+"tests/*" = ["D"]
+"*/__init__.py" = ["F401"]
+
+[tool.ruff.format]
+docstring-code-format = true
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.jupytext]
+formats = "ipynb,md"
+
+[tool.ruff.lint.flake8-type-checking]
+exempt-modules = []
+strict = true

@@ -1,0 +1,100 @@
+name: test
+
+on:
+  push:
+    branches: [main, "[0-9]+.[0-9]+.x"]
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash -e {0} # -e to fail on error
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.13"]
+
+    name: Python ${{ matrix.python }} integration
+
+    env:
+      PYTHON: ${{ matrix.python }}
+      TEST_DATA_URL: https://yanglab.westlake.edu.cn/data/gsMap/gsMap_test_data.tar.gz
+      TEST_DATA_DIR: ${{ github.workspace }}/test_data
+      WORK_DIR: ${{ github.workspace }}/gsmap_workdir
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: |
+          uv pip install --system -e ".[tests]"
+
+      - name: Create workdir
+        run: |
+          mkdir -p $WORK_DIR
+          echo "Created workdir: $WORK_DIR"
+
+      - name: Cache test data
+        uses: actions/cache@v3
+        id: cache-test-data
+        with:
+          path: ${{ env.TEST_DATA_DIR }}
+          key: test-data-v1
+
+      - name: Download and extract test data
+        if: steps.cache-test-data.outputs.cache-hit != 'true'
+        run: |
+          echo "Downloading test data from $TEST_DATA_URL"
+          curl -L $TEST_DATA_URL -o gsMap_test_data.tar.gz
+          tar -xzf gsMap_test_data.tar.gz -C ${{ github.workspace }}
+          rm gsMap_test_data.tar.gz
+          echo "Test data extracted to ${{ github.workspace }}"
+          ls -la $TEST_DATA_DIR
+
+      - name: Run pytest
+        env:
+          MPLBACKEND: agg
+          DISPLAY: :0
+          COLUMNS: 120
+        run: |
+          python -m pytest --cov=src \
+              --junitxml=junit.xml -o junit_family=legacy \
+              --cov-report=term-missing \
+              --cov-report=xml \
+              --cov-config=.coveragerc \
+              -v -s --color=yes \
+              --run-real-data \
+              --work-dir=$WORK_DIR \
+              --test-data=$TEST_DATA_DIR
+
+      - uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          fail_ci_if_error: false
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
