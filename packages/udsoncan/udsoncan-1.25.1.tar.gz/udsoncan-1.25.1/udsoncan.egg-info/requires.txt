@@ -1,0 +1,10 @@
+
+[dev]
+mypy
+ipdb
+autopep8
+coverage
+
+[test]
+mypy
+coverage
