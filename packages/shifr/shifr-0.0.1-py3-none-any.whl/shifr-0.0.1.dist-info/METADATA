@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: shifr
+Version: 0.0.1
+Home-page: https://pypi.org/manage/projects/
+Author: clown
+Author-email: maxim3hohlov@gmail.com
+Keywords: files shifr_modules
+Classifier: Programming Language :: Python :: 3.11
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.25.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: requires-dist
+Dynamic: requires-python
