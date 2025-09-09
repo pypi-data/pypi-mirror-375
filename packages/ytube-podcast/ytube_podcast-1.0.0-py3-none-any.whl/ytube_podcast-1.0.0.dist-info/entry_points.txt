@@ -1,0 +1,5 @@
+[console_scripts]
+podtube = ytube_podcast.main:run
+
+[gui_scripts]
+
