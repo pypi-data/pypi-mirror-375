@@ -1,0 +1,25 @@
+[project]
+name = "mseep-thegraph-mcp"
+version = "0.1.4"
+description = "An MCP server that powers AI agents with indexed blockchain data from The Graph."
+requires-python = ">=3.13"
+dependencies = [
+    "dotenv>=0.9.9",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.5.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-thegraph-mcp = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]

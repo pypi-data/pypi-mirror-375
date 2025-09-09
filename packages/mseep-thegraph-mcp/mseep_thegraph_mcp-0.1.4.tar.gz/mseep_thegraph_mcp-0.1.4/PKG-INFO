@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-thegraph-mcp
+Version: 0.1.4
+Summary: An MCP server that powers AI agents with indexed blockchain data from The Graph.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.5.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
