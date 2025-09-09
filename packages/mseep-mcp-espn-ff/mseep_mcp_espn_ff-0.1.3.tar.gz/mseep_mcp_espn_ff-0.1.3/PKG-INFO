@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-espn-ff
+Version: 0.1.3
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: espn-api>=0.44.1
+Requires-Dist: mcp[cli]>=1.5.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
