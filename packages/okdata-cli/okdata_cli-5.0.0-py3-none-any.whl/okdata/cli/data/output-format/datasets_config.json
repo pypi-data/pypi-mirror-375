@@ -1,0 +1,18 @@
+{
+  "ID": {
+    "name": "ID",
+    "key": "Id"
+  },
+  "Publisher": {
+    "name": "Publisher",
+    "key": "publisher"
+  },
+  "Parent ID": {
+    "name": "Parent ID",
+    "key": "parent_id"
+  },
+  "Access rights": {
+    "name": "Access rights",
+    "key": "accessRights"
+  }
+}

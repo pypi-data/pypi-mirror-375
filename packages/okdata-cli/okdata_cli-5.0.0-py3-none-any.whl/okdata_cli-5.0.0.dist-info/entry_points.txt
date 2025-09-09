@@ -1,0 +1,2 @@
+[console_scripts]
+okdata = okdata.cli.__main__:main
