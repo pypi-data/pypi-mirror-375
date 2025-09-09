@@ -1,0 +1,2 @@
+[console_scripts]
+umcp = ultimate_mcp_server.cli.typer_cli:cli

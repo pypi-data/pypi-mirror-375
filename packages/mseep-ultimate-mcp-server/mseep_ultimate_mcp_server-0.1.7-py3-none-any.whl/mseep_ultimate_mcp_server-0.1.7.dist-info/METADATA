@@ -1,0 +1,131 @@
+Metadata-Version: 2.4
+Name: mseep-ultimate_mcp_server
+Version: 0.1.7
+Summary: The Ultimate Model Context Protocol (MCP) Server, providing unified access to a wide variety of useful and powerful tools.
+Project-URL: Homepage, https://github.com/Dicklesworthstone/ultimate_mcp_server
+Project-URL: Documentation, https://github.com/Dicklesworthstone/ultimate_mcp_server/docs
+Project-URL: Repository, https://github.com/Dicklesworthstone/ultimate_mcp_server.git
+Project-URL: Bug Reports, https://github.com/Dicklesworthstone/ultimate_mcp_server/issues
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: Jeffrey Emanuel <jeffrey.emanuel@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2025 Jeffrey Emanuel
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: agent,ai,claude,deepseek,gemini,gpt,mcp,server,ultimte
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.13
+Requires-Dist: aiofiles>=0
+Requires-Dist: aiohttp>=0
+Requires-Dist: aiosqlite>=0
+Requires-Dist: anthropic>=0
+Requires-Dist: beautifulsoup4>=0
+Requires-Dist: boto3>=0
+Requires-Dist: brotli>=0
+Requires-Dist: chromadb>=0
+Requires-Dist: colorama>=0
+Requires-Dist: diskcache>=0
+Requires-Dist: docling>=0
+Requires-Dist: fastapi>=0.115.9
+Requires-Dist: faster-whisper>=0
+Requires-Dist: fastmcp>0
+Requires-Dist: fitz>=0
+Requires-Dist: google-genai>=0
+Requires-Dist: html2text>=0
+Requires-Dist: httpx>=0
+Requires-Dist: hvac>=0
+Requires-Dist: jinja2>=0
+Requires-Dist: jsonpatch>=0
+Requires-Dist: jsonpointer>=0
+Requires-Dist: jsonschema>=0
+Requires-Dist: lxml>=0
+Requires-Dist: magika>=0
+Requires-Dist: markdown>=0
+Requires-Dist: markdownify>=0
+Requires-Dist: marqo>=0
+Requires-Dist: matplotlib>=0
+Requires-Dist: mcp>=0
+Requires-Dist: msgpack>=0
+Requires-Dist: networkx>0
+Requires-Dist: numpy>=0
+Requires-Dist: openai>=0
+Requires-Dist: opencv-python>=0
+Requires-Dist: pandas>=0
+Requires-Dist: pandera>=0
+Requires-Dist: pdf2image>=0
+Requires-Dist: pdfplumber>=0
+Requires-Dist: pillow>=0
+Requires-Dist: prometheus-client>=0
+Requires-Dist: pydantic-settings>=0
+Requires-Dist: pydantic>=0
+Requires-Dist: pygments>=0
+Requires-Dist: pymupdf>=0
+Requires-Dist: pypdf2>=0
+Requires-Dist: pytesseract>=0
+Requires-Dist: pytest-playwright>=0
+Requires-Dist: python-decouple>=0
+Requires-Dist: python-docx>=0
+Requires-Dist: python-slugify>=0
+Requires-Dist: pyvis>=0
+Requires-Dist: rapidfuzz>=0
+Requires-Dist: readability-lxml>=0
+Requires-Dist: rich>=0
+Requires-Dist: scipy>0
+Requires-Dist: sentence-transformers>=0
+Requires-Dist: sqlalchemy>=0
+Requires-Dist: tabula-py>=0
+Requires-Dist: tenacity>=0
+Requires-Dist: tiktoken>=0
+Requires-Dist: tqdm>=0
+Requires-Dist: trafilatura>=0
+Requires-Dist: typer>=0
+Requires-Dist: uvicorn>=0.34.2
+Requires-Dist: xmldiff>=0
+Provides-Extra: advanced
+Requires-Dist: accelerate>=0; extra == 'advanced'
+Requires-Dist: pytorch-triton==3.3.0+git96316ce5; extra == 'advanced'
+Requires-Dist: torch==2.8.0.dev20250428+cu126; extra == 'advanced'
+Requires-Dist: torchaudio==2.6.0.dev20250428+cu126; extra == 'advanced'
+Requires-Dist: torchvision==0.22.0.dev20250428+cu126; extra == 'advanced'
+Requires-Dist: transformers>=0; extra == 'advanced'
+Provides-Extra: all
+Requires-Dist: ultimate-mcp-server[advanced,dev,docs]; extra == 'all'
+Provides-Extra: dev
+Requires-Dist: isort>=0; extra == 'dev'
+Requires-Dist: mypy>=0; extra == 'dev'
+Requires-Dist: pre-commit>=0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0; extra == 'dev'
+Requires-Dist: pytest-cov>=0; extra == 'dev'
+Requires-Dist: pytest>=0; extra == 'dev'
+Requires-Dist: ruff>=0; extra == 'dev'
+Requires-Dist: types-aiofiles>=0; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: mkdocs-material>=0; extra == 'docs'
+Requires-Dist: mkdocs>=0; extra == 'docs'
+Requires-Dist: mkdocstrings-python>=0; extra == 'docs'
+Requires-Dist: mkdocstrings>=0; extra == 'docs'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
