@@ -1,0 +1,53 @@
+ci:
+  autofix_prs: false
+
+exclude: ^src/labelle/_vendor/.*$
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+  - id: no-commit-to-branch
+    args: [--branch, master, --branch, main]
+  - id: trailing-whitespace
+  - id: check-added-large-files
+  - id: check-ast
+  - id: check-merge-conflict
+  - id: check-yaml
+  - id: debug-statements
+  - id: end-of-file-fixer
+  - id: mixed-line-ending
+    args: ['--fix=lf']
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.12.12
+  hooks:
+  - id: ruff
+    args: [--fix, --unsafe-fixes, --exit-non-zero-on-fix]
+  - id: ruff-format
+
+- repo: https://gitlab.com/bmares/check-json5
+  rev: v1.0.0
+  hooks:
+  - id: check-json5
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.17.1
+  hooks:
+  - id: mypy
+    additional_dependencies:
+    - darkdetect
+    - platformdirs
+    # This is a hack to get type checking for PyQt6 but to stay under
+    # pre-commit.ci's 250MiB limit.
+    # <https://github.com/maresb/pyqt6-without-qt>
+    - pyqt6-without-qt
+    - typer
+    - types-pillow
+    - types-cffi
+    - types-pygments
+
+- repo: https://github.com/igorshubovych/markdownlint-cli
+  rev: v0.45.0
+  hooks:
+  - id: markdownlint

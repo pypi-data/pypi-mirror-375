@@ -1,0 +1,240 @@
+[build-system]
+requires = ["hatchling >=1.11.1,<2.0.0", "hatch-vcs >=0.3.0,<0.4", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[project]
+name = "labelle"
+description = "Open-source label printing software"
+url = "https://github.com/labelle-org/labelle"
+authors = [{name = "Sebastian J. Bronner", email = "waschtl@sbronner.com"}]
+maintainers = [
+    {name = "Tomer Shalev", email = "tshalev@proofpoint.com"},
+    {name = "Ben Mares", email = "services-labelle@tensorial.com"},
+    {name = "Tomek Szczęsny", email = "mctom@tlen.pl"},
+]
+license = "Apache-2.0"
+license-file = "LICENSE"
+dependencies = [
+    "platformdirs",
+    "Pillow>=8.1.2,<11",
+    "PyQRCode>=1.2.1,<2",
+    "python-barcode>=0.13.1,<0.16",
+    "pyusb",
+    "PyQt6",
+    "darkdetect",
+    "typer>=0.16.0",
+]
+classifiers = [
+    "Operating System :: POSIX :: Linux",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Printing",
+]
+dynamic = ["version", "readme"]
+requires-python = ">=3.8,<4"
+
+[project.optional-dependencies]
+test = [
+    "pytest-cov",
+    "pytest-image-diff",
+    "pytest-qt",
+    "pytest-xvfb",
+]
+
+[project.urls]
+Homepage = "https://github.com/labelle-org/labelle"
+source = "https://github.com/labelle-org/labelle"
+tracker = "https://github.com/labelle-org/labelle/issues"
+
+[project.scripts]
+labelle = "labelle.cli.cli:main"
+labelle-gui = "labelle.gui.gui:main"
+
+[tool.hatch.version]
+source = "vcs"
+# See configuration details in https://github.com/pypa/setuptools_scm
+raw-options = { version_scheme = "no-guess-dev" }
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/labelle/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/labelle"]
+
+# <https://github.com/hynek/hatch-fancy-pypi-readme>
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+# Image links should go to the raw content on GitHub
+# <https://stackoverflow.com/a/46875147>
+pattern = '\[(.*?)\]\(((?!https?://)\S+\.(png|jpe?g|svg|gif))\)'
+replacement = '[\1](https://raw.githubusercontent.com/labelle-org/labelle/main/\g<2>)'
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+# Handle also HTML image tags
+pattern = '''(<img\b[^>]*\bsrc=)(['"])((?!https?://)[^'"]+)(['"][^>]*>)'''
+replacement = '<img src="https://raw.githubusercontent.com/labelle-org/labelle/main/\g<3>\g<4>'
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+# Remaining non-image relative links map to the normal absolute GitHub URL
+# <https://stackoverflow.com/a/46875147>
+pattern = '\[(.*?)\]\(((?!https?://)\S+)\)'
+replacement = '[\1](https://github.com/labelle-org/labelle/tree/main/\g<2>)'
+
+[tool.pytest.ini_options]
+qt_api = "pyqt6"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+  py38
+  py39
+  py310
+  py311
+  py312
+
+[gh-actions]
+python =
+    3.8: py38
+    3.9: py39
+    3.10: py310
+    3.11: py311
+    3.12: py312
+
+[testenv]
+deps =
+  .[test]
+commands =
+  pip check
+  pip freeze
+  pytest --cov=src/labelle --cov-report html:{work_dir}/{env_name}/htmlcov --cov-fail-under=45
+  labelle --version
+  labelle --help
+  python -c "import labelle.gui.gui; print('GUI import succeeded')"
+  labelle --output console "single line"
+  labelle --output console-inverted "inverted"
+  labelle --output console multiple lines
+  labelle --output console --barcode "Barcode" --barcode-type code128
+  labelle --output console --barcode-with-text "Barcode" --barcode-type code128 Caption
+  labelle --output console --qr QR
+  labelle --output console --qr QR Caption
+  labelle --output console --picture ./labelle.png
+
+[testenv:{clean,build}]
+description =
+    Build (or clean) the package in isolation according to instructions in:
+    https://setuptools.readthedocs.io/en/latest/build_meta.html#how-to-use-it
+    https://github.com/pypa/pep517/issues/91
+    https://github.com/pypa/build
+# NOTE: build is still experimental, please refer to the links for updates/issues
+skip_install = True
+changedir = {toxinidir}
+deps =
+    build: build[virtualenv]
+commands =
+    clean: python -c 'from shutil import rmtree; rmtree("build", True); rmtree("dist", True)'
+    build: python -m build .
+
+[testenv:publish]
+description =
+    Publish the package you have been developing to a package index server.
+    By default, it uses testpypi. If you really want to publish your package
+    to be publicly accessible in PyPI, use the `-- --repository pypi` option.
+skip_install = True
+changedir = {toxinidir}
+passenv =
+    TWINE_USERNAME
+    TWINE_PASSWORD
+    TWINE_REPOSITORY
+deps = twine
+commands =
+    python -m twine check dist/*
+    python -m twine upload {posargs:--repository testpypi} dist/*
+"""
+
+[tool.vendoring]
+destination = "src/labelle/_vendor"
+namespace = "labelle._vendor"
+requirements = "vendoring/vendor.txt"
+protected-files = ["vendoring/README.md", "vendoring/vendor.txt"]
+patches-dir = "vendoring/patches"
+
+[tool.vendoring.transformations]
+drop = [
+    'mpl_toolkits',
+    'pylab.py',
+    'matplotlib-3.7.4-py3.8-nspkg.pth',
+    '^matplotlib\/(?!font_manager\.py$).*$',
+    'matplotlib.pyi',
+]
+
+[tool.ruff]
+line-length = 88
+extend-exclude = ["_vendor"]
+src = ["src"]
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "D",   # pydocstyle
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "C4",  # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "RUF", # Ruff-specific rules
+    "TID", # flake8-tidy-imports
+    "BLE", # flake8-blind-except
+    "PTH", # flake8-pathlib
+    "A",   # flake8-builtins
+]
+ignore = [
+    "C408", # unnecessary-collection-call (allow dict(a=1, b=2); clarity over speed!)
+    "D203", # one-blank-line-before-class (must ignore this or D211)
+    "D213", # multi-line-summary-second-line (must ignore this or D212)
+    "D100", # Missing docstring in public module
+    "D101", # Missing docstring in public class
+    "D102", # Missing docstring in public method
+    "D103", # Missing docstring in public function
+    "D104", # Missing docstring in public package
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in __init__
+    "D415", # ends-in-punctuation (redundant with D400 ends-in-period)
+    # The following list is recommended to disable these when using ruff's formatter.
+    # (Not all of the following are actually enabled.)
+    "W191",   # tab-indentation
+    "E111",   # indentation-with-invalid-multiple
+    "E114",   # indentation-with-invalid-multiple-comment
+    "E117",   # over-indented
+    "D206",   # indent-with-spaces
+    "D300",   # triple-single-quotes
+    "Q000",   # bad-quotes-inline-string
+    "Q001",   # bad-quotes-multiline-string
+    "Q002",   # bad-quotes-docstring
+    "Q003",   # avoidable-escaped-quote
+    "COM812", # missing-trailing-comma
+    "COM819", # prohibited-trailing-comma
+    "ISC001", # single-line-implicit-string-concatenation
+    "ISC002", # multi-line-implicit-string-concatenation
+]
+
+[tool.mypy]
+check_untyped_defs = true
+install_types = true
+mypy_path = "src/"
+packages = ["labelle"]
+
+[[tool.mypy.overrides]]
+module="labelle._vendor.*"
+ignore_errors = true
