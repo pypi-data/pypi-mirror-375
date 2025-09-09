@@ -1,0 +1,23 @@
+[project]
+name = "mseep-qgis-mcp"
+version = "0.1.5"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.3.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-qgis-mcp = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
