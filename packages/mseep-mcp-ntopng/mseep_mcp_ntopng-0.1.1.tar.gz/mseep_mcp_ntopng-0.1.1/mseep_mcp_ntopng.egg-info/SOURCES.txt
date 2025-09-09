@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+mcp_ntopng/__init__.py
+mcp_ntopng/main.py
+mcp_ntopng/mcp_config.py
+mcp_ntopng/mcp_server.py
+mcp_ntopng/ntopng_schema.py
+mseep_mcp_ntopng.egg-info/PKG-INFO
+mseep_mcp_ntopng.egg-info/SOURCES.txt
+mseep_mcp_ntopng.egg-info/dependency_links.txt
+mseep_mcp_ntopng.egg-info/entry_points.txt
+mseep_mcp_ntopng.egg-info/requires.txt
+mseep_mcp_ntopng.egg-info/top_level.txt
