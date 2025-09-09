@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+src/ScratchAgent.egg-info/PKG-INFO
+src/ScratchAgent.egg-info/SOURCES.txt
+src/ScratchAgent.egg-info/dependency_links.txt
+src/ScratchAgent.egg-info/entry_points.txt
+src/ScratchAgent.egg-info/requires.txt
+src/ScratchAgent.egg-info/top_level.txt
+src/agent/__init__.py
+src/agent/main.py
+tests/test_main.py
