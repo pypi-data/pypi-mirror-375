@@ -1,0 +1,25 @@
+[project]
+name = "mseep-mcp-allthetools"
+version = "0.1.4"
+description = "Add your description here"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.13"
+dependencies = [
+    "mcp>=1.6.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-allthetools = "mcp_allthetools:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
