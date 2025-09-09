@@ -1,0 +1,3 @@
+[console_scripts]
+gradescope = gradescope_autosubmitter.cli:main
+gs-submit = gradescope_autosubmitter.cli:main
