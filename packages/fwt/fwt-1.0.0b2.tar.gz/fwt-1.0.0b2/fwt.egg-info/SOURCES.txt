@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+fwt/__init__.py
+fwt/authority.py
+fwt/serialization.py
+fwt.egg-info/PKG-INFO
+fwt.egg-info/SOURCES.txt
+fwt.egg-info/dependency_links.txt
+fwt.egg-info/requires.txt
+fwt.egg-info/top_level.txt
+tests/test_fwt.py
+tests/test_serialization.py
