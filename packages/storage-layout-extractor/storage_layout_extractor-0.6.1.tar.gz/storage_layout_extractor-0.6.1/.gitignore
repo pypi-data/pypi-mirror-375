@@ -1,0 +1,17 @@
+# These will have contain compiled files and executables
+debug/
+target/
+
+# This is a library, so we do not check in the lockfile.
+Cargo.lock
+
+# Rustfmt generates these as backup files.
+**/*.rs.bk
+
+# MSVC Windows builds of rustc generate these, which store debugging information.
+*.pdb
+
+# JetBrains IDEs store their per-project configuration in this directory. It shouldn't be checked in.
+.idea
+
+.DS_Store

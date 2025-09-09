@@ -1,0 +1,84 @@
+# The package section specifies metadata and configuration for the entire package.
+[package]
+# Basic metadata for the package.
+name = "storage_layout_extractor"
+version = "0.6.1"
+homepage = "https://github.com/smlxlio/storage-layout-extractor"
+repository = "https://github.com/smlxlio/storage-layout-extractor"
+license = "AGPL-3.0-or-later"
+
+# More detailed metadata specification.
+authors = ["smlXL"]
+description = "A library for performing bytecode-based discovery of storage layouts for contracts that run on the EVM."
+keywords = ["smlxl", "evm", "decompiler"]
+categories = ["cryptography::cryptocurrencies"]
+readme = "README.md"
+
+# Configuration for the Rust version and edition.
+#
+# The rust version specifies a concrete compiler version used to build the crate. The edition is a system used by Rust
+# to let authors opt in to backwards-incompatible changes. Crates using one edition can interoperate with crates using
+# another edition, thereby ensuring that there's no ecosystem split.
+edition = "2021"
+rust-version = "1.71.0"
+
+# Prevent publishing by accident.
+publish = false
+
+# Configure the library to build as a Python extension module
+[lib]
+name = "storage_layout_extractor"
+crate-type = ["cdylib"]
+
+# Build dependencies.
+[dependencies]
+bimap = "0.6.3"
+bitvec = "1.0.1"
+derivative = "2.2.0"
+downcast-rs = "1.2.0"
+ethnum = "1.3.2"
+hex = "0.4.3"
+itertools = "0.11.0"
+serde = { version = "1.0.180", features = ["derive"] }
+sha3 = "0.10.8"
+thiserror = "1.0.44"
+uuid = { version = "1.4.1", features = ["v4", "fast-rng", "macro-diagnostics"] }
+pyo3 = { version = "0.19", features = ["extension-module"] }
+tokio = { version = "1", features = ["full"] }
+
+# Dev dependencies.
+#
+# These are the dependencies required purely for internal development of the library such as testing or benchmarking.
+[dev-dependencies]
+anyhow = { version = "1.0.72", features = ["backtrace"] }
+rand = "0.8.5"
+serde_json = "1.0.104"
+
+# Profiles specify the build settings for different kinds of build.
+#
+# Here the defaults are specified explicitly by way of demonstration. Where a setting is the default it is annotated.
+[profile]
+
+# Configuration for developer builds
+[profile.dev]
+opt-level = 0           # Do not optimise dev builds. This is the default.
+debug = true            # Embed full debug information in the executable. This is the default.
+debug-assertions = true # Enable debug assertions in dev builds. This is the default.
+overflow-checks = true  # Keep these enabled in dev builds. This is the default.
+panic = "unwind"        # Dev builds should provide nice stack traces if they panic. This is the default.
+incremental = true      # Ensure that incremental builds are enabled for dev. This is the default.
+
+# Configuration for release builds
+[profile.release]
+opt-level = 3            # Compile with all of the optimisations in production builds. This is the default.
+debug = true             # Include full debug information in release builds.
+debug-assertions = false # Disable in release builds for speed. This is the default.
+overflow-checks = true   # Keep overflow checks in production builds.
+lto = "thin"             # Thin LTO performs cross-crate LTO while not bloating the build time too much.
+panic = "unwind"         # Production builds should provide nice stack traces if they panic. This is the default.
+
+# The test profile inherits its settings from the dev one.
+[profile.test]
+
+# The benchmarking profile inherits its settings from the release one.
+[profile.bench]
