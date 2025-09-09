@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block main %}
+
+<section class="profile">
+  <div class="media">
+    <img alt="{{ title }}" src="index.jpg">
+  </div>
+  {% if title %}
+  <h1>{{ title }}</h1>
+  <p>
+    {{ description | safe }}  
+  </p>
+</section>
+
+
+{% endif %}
+
+<section class="gallery">
+  {% for coll in collections %}
+  <a href="collections/{{ coll.slug }}/index.html">
+  <div class="gallery-item">
+    <div class="name">{{ coll.title }}</div>
+    <img src="collections/{{ coll.slug }}/image.jpg">
+  </div>
+  </a>
+  {% endfor %}
+</section>
+
+{% endblock %}
