@@ -1,0 +1,2 @@
+[console_scripts]
+dataset_build = dataset_build.main:run
