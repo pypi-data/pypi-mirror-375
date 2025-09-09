@@ -1,0 +1,23 @@
+[build-system]
+requires = ["meson-python", "numpy"]
+build-backend = "mesonpy"
+
+[project]
+name = "phs_poly"
+version = "0.2.0"
+authors = [
+	{ name="Ivan Pribec", email="ivan.pribec@gmail.com" } 
+]
+description = "PHS+poly approximation procedures"
+readme="README.md"
+requires-python = ">=3.9"
+dependencies = ["numpy"]
+classifiers = [
+	"Development Status :: 1 - Planning",
+	"Operating System :: MacOS",
+	"Topic :: Scientific/Engineering :: Mathematics",
+	"Programming Language :: Fortran",
+	"Programming Language :: Python :: 3.9",
+]
+keywords=["approximation", "RBF-FD", "meshfree"]
+license = { text = "MIT" }
