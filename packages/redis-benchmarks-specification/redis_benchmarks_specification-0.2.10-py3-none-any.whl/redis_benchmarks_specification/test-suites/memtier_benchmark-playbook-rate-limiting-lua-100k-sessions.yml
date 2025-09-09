@@ -1,0 +1,94 @@
+version: 0.4
+name: memtier_benchmark-playbook-rate-limiting-lua-100k-sessions
+description:  |
+  Runs memtier_benchmark to model API rate limiting in Redis using a strings-only Lua script that enforces a sliding window via current/previous time buckets. Each call atomically checks user, org, and global counters with GET/INCRBY/PEXPIRE/TIME, increments only on allow, and returns allow/remaining/reset.
+
+  The benchmark uses a Lua script to atomically enforce quotas:
+
+      local key = KEYS[1]
+      local limit = 100
+      local window = 60
+      local current = redis.call("INCR", key)
+      if current == 1 then
+        redis.call("EXPIRE", key, window)
+      end
+      if current > limit then
+        return 0
+      else
+        return 1
+      end
+
+  This approach ensures that **increments, expiry, and limit checks** are performed without race conditions,
+  accurately modeling production-grade API quota enforcement.
+
+  ### Workload profile
+  - **Command tested**: `EVAL` (rate-limit script)  
+  - **Keyspace size**: 100k user-level rate-limit keys  
+  - **Access pattern**: randomized keys (`--command-key-pattern=R`) to simulate distributed users  
+  - **Response shape**: single integer (1 = allowed, 0 = denied), representing pass/fail on quota checks  
+
+  This benchmark measures Redis performance in **rate limiting scenarios**, where atomic counters and TTLs
+  are critical for API protection and fairness in multi-tenant SaaS workloads.
+
+exporter:
+  redistimeseries:
+    break_by:
+    - version
+    - commit
+    timemetric: $."ALL STATS".Runtime."Start time"
+    metrics:
+    - $."BEST RUN RESULTS".Totals."Ops/sec"
+    - $."BEST RUN RESULTS".Totals."Latency"
+    - $."BEST RUN RESULTS".Totals."Misses/sec"
+    - $."BEST RUN RESULTS".Totals."Percentile Latencies"."p50.00"
+    - $."BEST RUN RESULTS".Totals."Percentile Latencies"."p99.00"
+    - $."ALL STATS".Evals."Ops/sec"
+    - $."ALL STATS".Totals."Ops/sec"
+    - $."ALL STATS".Totals."Latency"
+    - $."ALL STATS".Totals."Misses/sec"
+    - $."ALL STATS".Totals."Percentile Latencies"."p50.00"
+    - $."ALL STATS".Totals."Percentile Latencies"."p99.00"
+
+
+dbconfig:
+  configuration-parameters:
+    save: '""'
+  resources:
+    requests:
+      memory: 1g
+tested-groups:
+- hash
+- sorted-set
+- set
+- scripting
+
+tested-commands:
+- incr
+- expire
+- eval
+
+redis-topologies:
+- oss-standalone
+build-variants:
+- gcc:15.2.0-amd64-debian-bookworm-default
+- gcc:15.2.0-arm64-debian-bookworm-default
+- dockerhub
+
+clientconfig:
+  run_image: redislabs/memtier_benchmark:edge
+  tool: memtier_benchmark
+  arguments: >
+    --key-prefix ""
+    --key-minimum 1
+    --key-maximum 100000
+    --pipeline=1
+    --print-percentiles=50,90,95,99
+    --run-count=1
+    --test-time=120
+    --command='EVAL "local base=ARGV[1];local limit=tonumber(ARGV[2]);local window=tonumber(ARGV[3]);local slots=tonumber(ARGV[4]);local t=redis.call(\"TIME\");local now=t[1]*1000+math.floor(t[2]/1000);local bucket=math.floor(now/window);local key=base..\":\"..tostring(bucket);local slot=math.floor(((now%window)*slots)/window);local count=redis.call(\"BITCOUNT\",key);local allowed=0;if count<limit then redis.call(\"SETBIT\",key,slot,1);allowed=1;end;redis.call(\"PEXPIRE\",key,window*2);local reset=window-(now%window);local remaining=limit-(count+allowed);if remaining<0 then remaining=0 end;return {allowed,remaining,reset}" 0 ratelimit:{user-__key__}:/api/resource 100 60000 60000'    --hide-histogram
+  resources:
+    requests:
+      cpus: '4'
+      memory: 2g
+
+priority: 150
