@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: mseep-synalinks
+Version: 0.3.29
+Summary: Graph-Based Programmable Neuro-Symbolic LM Framework
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/SynaLinks/synalinks
+Project-URL: Issues, https://github.com/SynaLinks/synalinks/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: absl-py
+Requires-Dist: asyncio
+Requires-Dist: click
+Requires-Dist: datasets
+Requires-Dist: docstring-parser
+Requires-Dist: fastmcp
+Requires-Dist: graphviz
+Requires-Dist: greenlet
+Requires-Dist: inquirer
+Requires-Dist: jinja2
+Requires-Dist: kuzu>0.11.0
+Requires-Dist: litellm
+Requires-Dist: matplotlib
+Requires-Dist: mcp
+Requires-Dist: namex
+Requires-Dist: neo4j
+Requires-Dist: numpy
+Requires-Dist: openai<1.100.0
+Requires-Dist: optree
+Requires-Dist: pydantic
+Requires-Dist: pydotplus
+Requires-Dist: rich
+Requires-Dist: tenacity
+Dynamic: license-file
+
+Package managed by MseeP.ai
