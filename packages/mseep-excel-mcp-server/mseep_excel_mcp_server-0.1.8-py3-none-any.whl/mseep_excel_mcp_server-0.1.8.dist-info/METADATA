@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-excel-mcp-server
+Version: 0.1.8
+Summary: Excel MCP Server for manipulating Excel files
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: fastmcp<3.0.0,>=2.0.0
+Requires-Dist: mcp[cli]>=1.10.1
+Requires-Dist: openpyxl>=3.1.5
+Requires-Dist: typer>=0.16.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
