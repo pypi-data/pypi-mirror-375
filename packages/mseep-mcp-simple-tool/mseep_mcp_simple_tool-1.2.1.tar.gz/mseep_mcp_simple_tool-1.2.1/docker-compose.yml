@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: .
+    container_name: mcp-framework-server
+    ports:
+      - "${MCP_SERVER_PORT:-8000}:8000"
+    environment:
+      - MCP_SERVER_PORT=${MCP_SERVER_PORT:-8000}
+      - MCP_SERVER_HOST=${MCP_SERVER_HOST:-0.0.0.0}
+      - MCP_AUTH_URL=${MCP_AUTH_URL:-http://170.106.105.206:4000/users}
+      - DEBUG=${DEBUG:-false}
+      - MCP_USER_AGENT=${MCP_USER_AGENT:-"MCP Test Server (github.com/modelcontextprotocol/python-sdk)"}
+      # MaxKB配置
+      - MAXKB_HOST=${MAXKB_HOST:-http://host.docker.internal:8080}
+      - MAXKB_CHAT_ID=${MAXKB_CHAT_ID}
+      - MAXKB_APPLICATION_ID=${MAXKB_APPLICATION_ID}
+      - MAXKB_AUTHORIZATION=${MAXKB_AUTHORIZATION}
+      # 挂载目录配置
+      - HOST_MOUNT_SOURCE=${HOST_MOUNT_SOURCE:-/tmp}
+      - HOST_MOUNT_TARGET=${HOST_MOUNT_TARGET:-/host_files}
+    volumes:
+      # 挂载用户的本地目录到容器内的指定目录
+      - ${HOST_MOUNT_SOURCE:-/tmp}:${HOST_MOUNT_TARGET:-/host_files}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/sse"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s 
