@@ -1,0 +1,2 @@
+[console_scripts]
+app-asset-translator = app_asset_translator.translator_scripts:main

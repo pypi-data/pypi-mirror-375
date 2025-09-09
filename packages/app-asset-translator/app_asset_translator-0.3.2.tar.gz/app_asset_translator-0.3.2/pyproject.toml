@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "app_asset_translator"
+version = "0.3.2"
+description = "Small tool to generate translations files to csv and back"
+readme = "README.md"
+authors = [
+    {name = "Originally by Myler Media, Currently maintained by Stella Schalkwijk"}
+]
+license = {text = "GNU GPLv3"}
+requires-python = ">=3.6"
+dependencies = [
+    "pandas",
+    "PyYAML",
+]
+
+[project.urls]
+Homepage = "https://github.com/StellaAlexis/AppAssetTranslator"
+Download = "https://github.com/StellaAlexis/AppAssetTranslator"
+
+[project.scripts]
+app-asset-translator = "app_asset_translator.translator_scripts:main"
