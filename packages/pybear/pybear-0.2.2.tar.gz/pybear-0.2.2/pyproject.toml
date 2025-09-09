@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "pybear"
+version = "0.2.2"
+description = "Python modules for miscellaneous data analytics applications"
+license = "BSD-3-clause"
+authors = ["Bill Sousa <WKSJR99@msn.com>"]
+maintainers = ["Bill Sousa"]
+readme = "README.rst"
+# The contents of the README file(s) are used to populate the Description field
+# of your distribution’s metadata (similar to long_description in setuptools).
+# When multiple files are specified they are concatenated with newlines.
+homepage = "https://github.com/PylarBear/pybear"
+repository = "https://github.com/PylarBear/pybear"
+#documentation
+keywords = ["python data analytics scikit-API text"]
+#classifiers
+packages = [
+	{ include = "pybear", from = "src"}
+]
+include = [
+    "LICENSE",
+    "README.rst",
+    "CHANGELOG.md",
+    "tests"
+]
+#exclude
+
+
+[tool.poetry.dependencies]
+# These packages are mandatory and form the core of this package’s distribution.
+python = ">=3.10"
+joblib = ">=1.3.0"
+numpy = ">=2.1.0"
+pandas = ">=2.2.3"
+polars = ">=1.19.0"
+psutil = ">=5.7.0"
+scipy = ">=1.15.0"
+scikit-learn = ">=1.5.2"
+typing_extensions = ">=4.12.0"
+
+
+[tool.poetry.group.dev.dependencies]
+docutils = ">=0.20"
+jupyter = "*"
+notebook = "*"
+numpydoc = "*"
+pyarrow = ">=18.0.0"
+pydata-sphinx-theme = "*"
+sphinx = "*"
+sphinx-autobuild = "*"
+sphinx-sitemap = "*"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.0.0"
+pytest-cov = "*"
+pytest-html = "*"
+
+
+[tool.poetry.extras]
+# Optional dependencies. They can be opted into by apps.
+
+
+[tool.poetry.scripts]
+
+
+[tool.poetry.plugins]
+
+
+[tool.poetry.urls]
+Homepage = "https://github.com/PylarBear/pybear"
+Documentation = "https://pybear.readthedocs.io/en/stable/"
+
+
+[tool.coverage.run]
+source = ["pybear"]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
