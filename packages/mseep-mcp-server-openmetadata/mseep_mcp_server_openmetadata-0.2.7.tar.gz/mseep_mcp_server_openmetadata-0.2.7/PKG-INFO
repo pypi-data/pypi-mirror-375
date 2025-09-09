@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-openmetadata
+Version: 0.2.7
+Summary: Model Context Protocol (MCP) server for OpenMetadata
+Project-URL: Homepage, https://github.com/yangkyeongmo/mcp-server-openmetadata
+Project-URL: Repository, https://github.com/yangkyeongmo/mcp-server-openmetadata.git
+Project-URL: Bug Tracker, https://github.com/yangkyeongmo/mcp-server-openmetadata/issues
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: mcp,metadata,model-context-protocol,openmetadata
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Requires-Dist: anyio>=4.2.0
+Requires-Dist: click>=8.1.7
+Requires-Dist: httpx>=0.24.1
+Requires-Dist: mcp>=0.1.0
+Requires-Dist: starlette>=0.36.3
+Requires-Dist: uvicorn>=0.27.1
+Provides-Extra: dev
+Requires-Dist: build>=1.2.2.post1; extra == 'dev'
+Requires-Dist: ruff>=0.2.1; extra == 'dev'
+Requires-Dist: twine>=6.1.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
