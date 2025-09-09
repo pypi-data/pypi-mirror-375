@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-gitingest-mcp
+Version: 0.1.3
+Summary: Gitingest MCP server that provides Github repository info including file content, directory structure and other metadata
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.12
+Requires-Dist: gitingest>=0.1.4
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.3.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
