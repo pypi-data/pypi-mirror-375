@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+ScrapeSage.egg-info/PKG-INFO
+ScrapeSage.egg-info/SOURCES.txt
+ScrapeSage.egg-info/dependency_links.txt
+ScrapeSage.egg-info/requires.txt
+ScrapeSage.egg-info/top_level.txt
+scrapesage/__init__.py
+scrapesage/core.py
+scrapesage/scraper.py

@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ScrapeSage"
+version = "1.0.0"
+description = "A comprehensive web scraping and summarization library using multiple search engines and AI"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "ScrapeSage", email = "contact@scrapesage.com"}
+]
+keywords = ["scraping", "web scraping", "ai", "summarization", "search", "playwright", "gemini"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: General",
+]
+dependencies = [
+    "requests>=2.25.0",
+    "duckduckgo-search>=4.0.0",
+    "playwright>=1.30.0",
+    "google-generativeai>=0.3.0",
+    "beautifulsoup4>=4.9.0",
+    "tenacity>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "mypy>=0.800",
+    "build>=0.8.0",
+    "twine>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/akillabs/scrapesage"
+Documentation = "https://github.com/akillabs/scrapesage#readme"
+Repository = "https://github.com/akillabs/scrapesage.git"
+"Bug Tracker" = "https://github.com/akillabs/scrapesage/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scrapesage*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true

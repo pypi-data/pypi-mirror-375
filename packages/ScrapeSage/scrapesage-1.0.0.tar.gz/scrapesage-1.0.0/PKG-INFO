@@ -1,0 +1,241 @@
+Metadata-Version: 2.4
+Name: ScrapeSage
+Version: 1.0.0
+Summary: A comprehensive web scraping and summarization library using multiple search engines and AI
+Author-email: ScrapeSage <contact@scrapesage.com>
+License: MIT
+Project-URL: Homepage, https://github.com/akillabs/scrapesage
+Project-URL: Documentation, https://github.com/akillabs/scrapesage#readme
+Project-URL: Repository, https://github.com/akillabs/scrapesage.git
+Project-URL: Bug Tracker, https://github.com/akillabs/scrapesage/issues
+Keywords: scraping,web scraping,ai,summarization,search,playwright,gemini
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Internet :: WWW/HTTP :: Indexing/Search
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: General
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.25.0
+Requires-Dist: duckduckgo-search>=4.0.0
+Requires-Dist: playwright>=1.30.0
+Requires-Dist: google-generativeai>=0.3.0
+Requires-Dist: beautifulsoup4>=4.9.0
+Requires-Dist: tenacity>=8.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: black>=21.0; extra == "dev"
+Requires-Dist: flake8>=3.8; extra == "dev"
+Requires-Dist: mypy>=0.800; extra == "dev"
+Requires-Dist: build>=0.8.0; extra == "dev"
+Requires-Dist: twine>=4.0.0; extra == "dev"
+Dynamic: license-file
+
+# ScrapeSage
+
+[![PyPI version](https://badge.fury.io/py/ScrapeSage.svg)](https://badge.fury.io/py/ScrapeSage)
+[![Python Support](https://img.shields.io/pypi/pyversions/ScrapeSage.svg)](https://pypi.org/project/ScrapeSage/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A comprehensive Python library for web scraping and AI-powered content summarization using multiple search engines.
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+pip install ScrapeSage
+```
+
+### Basic Usage
+
+```python
+import scrapesage
+
+# Simple function call with your API keys and query
+results = scrapesage.search_and_summarize(
+    query="artificial intelligence trends 2024",
+    gemini_api_key="your_gemini_api_key",
+    serper_api_key="your_serper_api_key",
+    max_urls=10  # Control how many URLs to process (default: 5)
+)
+
+# Print results
+for summary in results["summaries"]:
+    print(f"Title: {summary['title']}")
+    print(f"URL: {summary['url']}")
+    print(f"Summary: {summary['summary']}")
+    print("-" * 80)
+```
+
+```
+
+## 📦 Features
+
+- **Multi-Engine Search**: Search using Google (via Serper API) and DuckDuckGo
+- **Intelligent Web Scraping**: Uses Playwright for robust content extraction
+- **AI-Powered Summarization**: Leverages Google Gemini AI for content summarization
+- **Parallel Processing**: Efficiently scrapes multiple URLs simultaneously
+- **Retry Mechanisms**: Built-in retry logic for reliable operation
+- **Simple Interface**: Single function call for complete pipeline
+
+## 🔧 API Reference
+
+### Main Function
+
+#### `search_and_summarize()`
+
+Complete pipeline: search, scrape, and summarize content.
+
+```python
+scrapesage.search_and_summarize(
+    query: str,
+    gemini_api_key: str,
+    serper_api_key: str,
+    max_urls: int = 5,
+    use_both_engines: bool = True
+)
+```
+
+**Parameters:**
+- `query` (str): Search query
+- `gemini_api_key` (str): Your Google Gemini AI API key
+- `serper_api_key` (str): Your Serper API key for Google search
+- `max_urls` (int): Maximum URLs to scrape (default: 5)
+- `use_both_engines` (bool): Use both Google and DuckDuckGo (default: True)
+
+**Returns:**
+```python
+{
+    "summaries": [
+        {
+            "title": "Page Title",
+            "url": "https://example.com",
+            "summary": "AI-generated summary..."
+        }
+    ],
+    "sources": ["https://example.com", ...]
+}
+```
+
+### Advanced Usage (Class-based)
+
+For more control, you can use the class interface:
+
+```python
+from scrapesage import ScrapeSageScraper
+
+scraper = ScrapeSageScraper(
+    gemini_api_key="your_key",
+    serper_api_key="your_key"
+)
+
+# Individual methods
+urls = scraper.search_only("query")
+content = scraper.scrape_urls(["url1", "url2"])
+summary = scraper.summarize_content("text content")
+results = scraper.search_and_scrape("query")
+```
+
+## 🔑 Getting API Keys
+
+### Google Gemini AI API Key
+
+1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Create a new API key
+3. Copy the key for use
+
+### Serper API Key
+
+1. Sign up at [Serper.dev](https://serper.dev/)
+2. Get your API key from the dashboard
+3. Copy the key for use
+
+## 📋 Requirements
+
+- Python 3.8+
+- Internet connection
+- Valid API keys (Gemini AI, Serper)
+- Playwright browsers (automatically installed)
+
+## 📝 Examples
+
+### Example 1: Basic Search and Summarization
+
+```python
+import scrapesage
+
+results = scrapesage.search_and_summarize(
+    query="climate change solutions 2024",
+    gemini_api_key="your_gemini_key",
+    serper_api_key="your_serper_key",
+    max_urls=3
+)
+
+print(f"Found {len(results['summaries'])} results")
+for i, summary in enumerate(results['summaries'], 1):
+    print(f"{i}. {summary['title']}")
+    print(f"   {summary['summary'][:100]}...")
+```
+
+### Example 2: Using DuckDuckGo Only
+
+```python
+import scrapesage
+
+results = scrapesage.search_and_summarize(
+    query="python machine learning",
+    gemini_api_key="your_gemini_key",
+    serper_api_key="your_serper_key",
+    use_both_engines=False  # Use only DuckDuckGo
+)
+```
+
+## 🚨 Error Handling
+
+```python
+import scrapesage
+
+try:
+    results = scrapesage.search_and_summarize(
+        query="your search query",
+        gemini_api_key="your_gemini_key",
+        serper_api_key="your_serper_key"
+    )
+except ValueError as e:
+    print(f"Invalid input: {e}")
+except Exception as e:
+    print(f"An error occurred: {e}")
+```
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+For issues and questions:
+- Create an issue on GitHub
+- Check the documentation
+- Email: contact@scrapesage.com
+
+## 🔄 Changelog
+
+### v1.0.0
+- Initial release
+- Simple function-based interface: `scrapesage.search_and_summarize()`
+- Multi-engine search support (Google + DuckDuckGo)
+- AI-powered summarization with Gemini
+- Parallel web scraping with Playwright
+- Comprehensive error handling
+- PyPI ready package structure
