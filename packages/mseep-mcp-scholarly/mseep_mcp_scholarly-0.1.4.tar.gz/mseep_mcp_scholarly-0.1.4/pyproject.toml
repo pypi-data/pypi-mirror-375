@@ -1,0 +1,28 @@
+[project]
+name = "mseep-mcp-scholarly"
+version = "0.1.4"
+description = "A MCP server to search for accurate academic articles."
+requires-python = ">=3.11"
+dependencies = [
+    "arxiv>=2.1.3",
+    "free-proxy>=1.1.3",
+    "mcp>=1.1.2",
+    "scholarly>=1.7.11",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-scholarly = "mcp_scholarly:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

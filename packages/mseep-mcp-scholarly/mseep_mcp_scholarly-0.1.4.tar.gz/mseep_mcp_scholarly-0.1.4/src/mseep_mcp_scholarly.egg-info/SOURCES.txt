@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_scholarly/__init__.py
+src/mcp_scholarly/arxiv_search.py
+src/mcp_scholarly/google_scholar.py
+src/mcp_scholarly/server.py
+src/mseep_mcp_scholarly.egg-info/PKG-INFO
+src/mseep_mcp_scholarly.egg-info/SOURCES.txt
+src/mseep_mcp_scholarly.egg-info/dependency_links.txt
+src/mseep_mcp_scholarly.egg-info/entry_points.txt
+src/mseep_mcp_scholarly.egg-info/requires.txt
+src/mseep_mcp_scholarly.egg-info/top_level.txt
