@@ -1,0 +1,170 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+    "Cython>=3.0.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-swiftlens"
+version = "0.2.17"
+description = "SwiftLens is a Model Context Protocol (MCP) server that provides deep, semantic-level analysis of Swift codebases to any AI models. By integrating directly with Apple's SourceKit-LSP, SwiftLens enables AI models to understand Swift code with compiler-grade accuracy."
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "mcp>=1.0.0",
+    "fastmcp>=0.1.0",
+    "pydantic>=2.0.0",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.24.0",
+    "websockets>=12.0",
+    "aiosqlite>=0.19.0",
+    "httpx>=0.25.0",
+    "swiftlens-core>=0.1.9",
+    "rpds-py>=0.20.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "Proprietary"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black",
+    "isort",
+    "mypy",
+    "ruff",
+]
+
+[project.urls]
+Homepage = "https://github.com/swiftlens/swiftlens"
+
+[project.scripts]
+swiftlens = "swiftlens.server:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+
+[tool.setuptools.package-data]
+dashboard = [
+    "static/*",
+]
+
+[tool.black]
+line-length = 100
+target-version = [
+    "py310",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+]
+ignore = [
+    "E501",
+    "E402",
+    "B008",
+    "C901",
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "test",
+]
+python_files = [
+    "test_*.py",
+]
+python_functions = [
+    "test_*",
+]
+markers = [
+    "lsp: marks tests that require SourceKit-LSP environment (full Xcode installation)",
+    "lsp_comprehensive: marks tests requiring built Swift environment with IndexStoreDB",
+    "malformed: marks tests that use malformed Swift code (slow, excluded by default)",
+    "slow: marks tests that are inherently slow (concurrent, performance, cross-file resolution)",
+    "asyncio: marks tests that use asyncio",
+    "integration: marks integration tests that verify real parallel execution",
+    "performance: marks tests that measure performance characteristics",
+]
+addopts = [
+    "--tb=short",
+    "--strict-markers",
+    "-v",
+]
+filterwarnings = [
+    "ignore:websockets.legacy is deprecated:DeprecationWarning",
+    "ignore:websockets.server.WebSocketServerProtocol is deprecated:DeprecationWarning",
+    "ignore:coroutine.*was never awaited:RuntimeWarning",
+    "ignore:Enable tracemalloc to get.*:RuntimeWarning",
+    "ignore:.*AsyncMockMixin._execute_mock_call.*was never awaited:RuntimeWarning",
+    "ignore:Exception in thread.*:pytest.PytestUnhandledThreadExceptionWarning",
+]
