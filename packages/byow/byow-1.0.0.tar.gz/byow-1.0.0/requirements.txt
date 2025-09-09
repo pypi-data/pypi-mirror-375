@@ -1,0 +1,7 @@
+# Core tokenizer
+tiktoken>=0.7,<0.8
+
+# PyTorch (CPU build by default, works in Codespaces)
+torch>=2.2,<2.4
+torchvision>=0.17,<0.19
+torchaudio>=2.2,<2.4
