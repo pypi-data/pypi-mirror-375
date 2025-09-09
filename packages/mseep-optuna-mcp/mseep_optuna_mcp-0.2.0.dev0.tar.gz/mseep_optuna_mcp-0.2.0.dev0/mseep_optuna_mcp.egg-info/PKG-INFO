@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: mseep-optuna-mcp
+Version: 0.2.0.dev0
+Summary: Optuna MCP Server operates, manages, and visualizes Optuna studies.
+Author-email: mseep <support@skydeck.ai>
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: kaleido==0.2.1
+Requires-Dist: mcp[cli]>=1.5.0
+Requires-Dist: optuna>=4.2.1
+Requires-Dist: optuna-dashboard>=0.18.0
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: plotly>=6.0.1
+Requires-Dist: torch>=2.7.0
+Requires-Dist: bottle>=0.13.4
+Dynamic: license-file
+
+Package managed by MseeP.ai
