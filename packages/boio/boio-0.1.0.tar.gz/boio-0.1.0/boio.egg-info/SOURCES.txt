@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+boio/__init__.py
+boio/transcribe.py
+boio.egg-info/PKG-INFO
+boio.egg-info/SOURCES.txt
+boio.egg-info/dependency_links.txt
+boio.egg-info/requires.txt
+boio.egg-info/top_level.txt
