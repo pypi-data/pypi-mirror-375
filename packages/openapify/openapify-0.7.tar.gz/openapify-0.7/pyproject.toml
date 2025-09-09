@@ -1,0 +1,24 @@
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = [
+    'openapify.core.openapi.models',
+]
+disable_error_code = 'override'
+
+[flake8]
+max-line-length = 79
+
+[tool.isort]
+profile = 'black'
+line_length = 79
+multi_line_output = 3
+include_trailing_comma = true
+ensure_newline_before_comments = true
+
+[tool.black]
+line-length = 79
+target-version = ['py39', 'py310', 'py311', 'py312']
