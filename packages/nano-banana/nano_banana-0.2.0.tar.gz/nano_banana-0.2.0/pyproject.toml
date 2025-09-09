@@ -1,0 +1,35 @@
+[project]
+name = "nano-banana"
+version = "0.2.0"
+description = "Generates images using the Google Gemini API."
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "openai>=1.106.1",
+]
+authors = [
+    { name = "Simen AI", email = "hi@simen.ai" }
+]
+keywords = ["gemini", "nano_banana", "ai", "image-generation", "image-analysis", "text-to-image"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/nano-banana"
+"Bug Tracker" = "https://github.com/yourusername/nano-banana/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nano_banana"]
