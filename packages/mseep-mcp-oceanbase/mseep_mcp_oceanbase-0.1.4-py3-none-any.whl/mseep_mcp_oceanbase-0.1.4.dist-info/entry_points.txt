@@ -1,0 +1,3 @@
+[console_scripts]
+ocp_mcp_server = ocp_mcp_server:main
+okctl_mcp_server = okctl_mcp_server:main

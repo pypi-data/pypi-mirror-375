@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-oceanbase
+Version: 0.1.4
+Summary: A Model Context Protocol (MCP) server that enables secure interaction with OceanBase databases. This server allows AI assistants to list tables, read data, and execute SQL queries through a controlled interface, making database exploration and analysis safer and more structured.
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: beautifulsoup4>=4.13.3
+Requires-Dist: certifi>=2025.4.26
+Requires-Dist: fastmcp>=2.5.1
+Requires-Dist: mcp[cli]>=1.0.0
+Requires-Dist: mysql-connector-python>=9.1.0
+Requires-Dist: python-dotenv
+Requires-Dist: requests
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
