@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+rpy2_arrow/__init__.py
+rpy2_arrow/arrow.py
+rpy2_arrow/polars.py
+rpy2_arrow/pyarrow_rarrow.py
+rpy2_arrow/r6b.py
+rpy2_arrow/tests.py
+rpy2_arrow/tests_polars.py
+rpy2_arrow/tests_r6b.py
+rpy2_arrow.egg-info/PKG-INFO
+rpy2_arrow.egg-info/SOURCES.txt
+rpy2_arrow.egg-info/dependency_links.txt
+rpy2_arrow.egg-info/requires.txt
+rpy2_arrow.egg-info/top_level.txt
