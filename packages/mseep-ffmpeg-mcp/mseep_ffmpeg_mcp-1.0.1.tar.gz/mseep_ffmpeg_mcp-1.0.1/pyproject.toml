@@ -1,0 +1,41 @@
+[project]
+name = "mseep-ffmpeg-mcp"
+version = "1.0.1"
+description = "使用ffmpeg,对视频进行裁剪，拼接，滤镜等操作"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+]
+classifiers = [
+    "Environment :: MacOS X",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/video-creator/ffmpeg-mcp"
+
+[project.scripts]
+ffmpeg-mcp = "ffmpeg_mcp.server:main"
+
+[tool.poetry]
+packages = [
+    { include = "ffmpeg_mcp", from = "src" },
+]
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
+
+[build-system]
+requires = [
+    "poetry-core>=2.0.0,<3.0.0",
+]
+build-backend = "poetry.core.masonry.api"
