@@ -1,0 +1,2 @@
+[console_scripts]
+scrapegraph-mcp = scrapegraph_mcp.server:main
