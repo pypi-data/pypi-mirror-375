@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: fastapi_build
+Version: 1.0.4
+Home-page: https://github.com/tosmart01/fastapi-build
+Classifier: Programming Language :: Python :: 3.9
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+License-File: LICENSE
+Requires-Dist: fastapi
+Requires-Dist: gunicorn
+Requires-Dist: loguru
+Requires-Dist: pydantic
+Requires-Dist: PyJWT
+Requires-Dist: python-dotenv
+Requires-Dist: pytz
+Requires-Dist: SQLAlchemy
+Requires-Dist: typing_extensions
+Requires-Dist: uvicorn
+Requires-Dist: click
+Requires-Dist: alembic
+Requires-Dist: pyjwt
+Requires-Dist: passlib[bcrypt]
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist

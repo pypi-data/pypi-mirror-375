@@ -1,0 +1,14 @@
+fastapi
+gunicorn
+loguru
+pydantic
+PyJWT
+python-dotenv
+pytz
+SQLAlchemy
+typing_extensions
+uvicorn
+click
+alembic
+pyjwt
+passlib[bcrypt]
