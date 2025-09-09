@@ -1,0 +1,51 @@
+[build-system]
+requires = ['setuptools>=42']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = "JAAT"
+version = "0.4.1"
+description = "Repository for JAAT: efficient and accurate analysis of job ads for task matching, title matching, firm name extraction, attribute classification, and wage extraction."
+readme = {file = "README.md", content-type = "text/markdown"}
+license = {file = "LICENSE"}
+authors = [
+  {name = "Stephen Meisenbacher", email = "stephen.meisenbacher@tum.de"},
+  {name = "Peter Norlander", email = "pnorlander@luc.edu"},
+]
+maintainers = [
+  {name = "Stephen Meisenbacher", email = "stephen.meisenbacher@tum.de"}
+]
+keywords = ["text analysis","text classification", "semantic matching"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+requires-python = ">= 3.6"
+dependencies = [
+    "importlib_resources",
+    "nltk",
+    "pandas",
+    "psutil",
+    "sentence_transformers",
+    "torch",
+    "tqdm",
+    "transformers",
+    "xlrd",
+    "swifter",
+    "pure-predict",
+    "compress_pickle"
+]
+
+[project.urls]
+Homepage = "https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT"
+Documentation = "https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT"
+Repository = "https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT"
+Issues = "https://github.com/Job-Ad-Research-at-QSB-LUC/JAAT/issues"
+
+[tool.setuptools]
+packages = ["JAAT"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+JAAT = ['JAAT/data/*', 'JAAT/models/*']
