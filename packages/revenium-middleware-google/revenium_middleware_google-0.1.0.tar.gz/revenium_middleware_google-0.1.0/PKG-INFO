@@ -1,0 +1,663 @@
+Metadata-Version: 2.4
+Name: revenium-middleware-google
+Version: 0.1.0
+Summary: A Python library that meters Google AI API usage to Revenium with support for both Gemini Developer API and Vertex AI.
+Author-email: Revenium <support@revenium.io>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/revenium/revenium-middleware-google-python
+Project-URL: Bug Tracker, https://github.com/revenium/revenium-middleware-google-python/issues
+Project-URL: Documentation, https://github.com/revenium/revenium-middleware-google-python/blob/main/README.md
+Keywords: google,gemini,vertex-ai,middleware,logging,token-usage,metering,revenium,ai,llm
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: wrapt
+Requires-Dist: revenium_middleware>=0.2.7
+Provides-Extra: genai
+Requires-Dist: google-genai>=0.1.0; extra == "genai"
+Provides-Extra: vertex
+Requires-Dist: vertexai>=1.0.0; extra == "vertex"
+Provides-Extra: all
+Requires-Dist: google-genai>=0.1.0; extra == "all"
+Requires-Dist: vertexai>=1.0.0; extra == "all"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: freezegun; extra == "dev"
+Dynamic: license-file
+
+# Revenium Middleware for Google AI (Python)
+
+[![PyPI version](https://img.shields.io/pypi/v/revenium-middleware-google.svg)](https://pypi.org/project/revenium-middleware-google/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/revenium-middleware-google.svg)](https://pypi.org/project/revenium-middleware-google/)
+[![Documentation Status](https://readthedocs.org/projects/revenium-middleware-google/badge/?version=latest)](https://revenium-middleware-google.readthedocs.io/en/latest/?badge=latest)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
+[//]: # ([![Build Status]&#40;https://github.com/revenium/revenium-middleware-google/actions/workflows/ci.yml/badge.svg&#41;]&#40;https://github.com/revenium/revenium-middleware-google/actions&#41;)
+
+A middleware library for metering and monitoring Google AI services usage in Python applications. Supports both Google AI SDK (Gemini Developer API) and Vertex AI SDK with flexible optional dependencies.
+
+## Features
+
+- **Precise Usage Tracking**: Monitor tokens, costs, and request counts for Google AI services
+- **Seamless Integration**: Drop-in middleware that works with minimal code changes
+- **Dual SDK Support**: Choose between Google AI SDK or Vertex AI SDK based on your needs
+- **Optional Dependencies**: Install only the SDK components you need
+- **Streaming Support**: Full support for streaming responses (both SDKs)
+- **Enhanced Token Counting**: Complete token tracking including embeddings (Vertex AI)
+- **Flexible Configuration**: Customize metering behavior to suit your application needs
+
+## What's Supported
+
+| Feature | Google AI SDK | Vertex AI SDK |
+|---------|---------------|---------------|
+| **Chat Completion** | ✅ Full support | ✅ Full support |
+| **Streaming** | ✅ Full support | ✅ Full support |
+| **Text Embeddings** | ✅ Basic support* | ✅ Full support |
+| **Token Metering** | ✅ Chat/Streaming | ✅ All operations |
+| **Metadata Tracking** | ✅ Full support | ✅ Full support |
+| **Setup Complexity** | Simple (API key) | Moderate (GCP project) |
+
+**Note**: *Google AI SDK embeddings don't return token counts due to API limitations, but requests are still tracked.
+
+## Installation
+
+Choose the SDK variant that best fits your needs:
+
+```bash
+# Google AI SDK only (Gemini Developer API)
+pip install "revenium-middleware-google[genai]"
+
+# Vertex AI SDK only (recommended for production)
+pip install "revenium-middleware-google[vertex]"
+
+# Both SDKs (maximum flexibility)
+pip install "revenium-middleware-google[all]"
+```
+
+### Which SDK Should I Choose?
+
+| Use Case | Recommended SDK | Why |
+|----------|----------------|-----|
+| **Quick prototyping** | Google AI SDK | Simple API key setup, but does NOT support token counts on embeddings |
+| **Production applications** | Vertex AI SDK | Full token counting, enterprise features |
+| **Embeddings-heavy workloads** | Vertex AI SDK | Complete token tracking for embeddings |
+| **Enterprise/GCP environments** | Vertex AI SDK | Advanced Google Cloud integration |
+| **Simple chat applications** | Either SDK | Both provide full chat support |
+
+**Recommendation**: Use Vertex AI SDK for production applications that need comprehensive token counting and advanced features.
+
+## Usage
+
+### Zero-Config Integration
+
+Simply export your REVENIUM_METERING_API_KEY and import the middleware.
+Your Google AI calls will be metered automatically:
+
+#### Google AI SDK (Gemini Developer API)
+```python
+import revenium_middleware_google
+from google import genai
+
+client = genai.Client(api_key="your-google-api-key")
+
+response = client.models.generate_content(
+    model="gemini-2.0-flash-001",
+    contents="What is the meaning of life, the universe and everything?"
+)
+print(response.text)
+```
+
+#### Vertex AI SDK
+```python
+import revenium_middleware_google
+import vertexai
+from vertexai.generative_models import GenerativeModel
+
+vertexai.init(project="your-project-id", location="us-central1")
+model = GenerativeModel("gemini-2.0-flash-001")
+
+response = model.generate_content(
+    "What is the meaning of life, the universe and everything?"
+)
+print(response.text)
+```
+
+The middleware automatically intercepts Google AI API calls and sends metering data to Revenium without requiring any
+changes to your existing code. Make sure to set the `REVENIUM_METERING_API_KEY` environment variable for authentication
+with the Revenium service.
+
+### Enhanced Tracking with Metadata
+
+For more granular usage tracking and detailed reporting, add the `usage_metadata` parameter:
+
+#### Google AI SDK with Metadata
+```python
+import revenium_middleware_google
+from google import genai
+
+client = genai.Client(api_key="your-google-api-key")
+
+response = client.models.generate_content(
+    model="gemini-2.0-flash-001",
+    contents="Analyze this quarterly report for key insights",
+    usage_metadata={
+        "trace_id": "conv-28a7e9d4",
+        "task_type": "document-analysis",
+        "subscriber_email": "user@example.com",
+        "subscriber_id": "user-12345",
+        "organization_id": "acme-corp",
+        "subscription_id": "premium-plan",
+        "product_id": "business-intelligence",
+        "agent": "report-analyzer-v2",
+    }
+)
+print(response.text)
+```
+
+#### Vertex AI SDK with Enhanced Features
+```python
+import revenium_middleware_google
+import vertexai
+from vertexai.generative_models import GenerativeModel
+
+vertexai.init(project="your-project-id", location="us-central1")
+model = GenerativeModel("gemini-2.0-flash-001")
+
+# Set metadata on the model instance for automatic tracking
+model._revenium_usage_metadata = {
+    "trace_id": "conv-28a7e9d4",
+    "task_type": "document-analysis",
+    "organization_id": "acme-corp",
+    "product_id": "business-intelligence"
+}
+
+response = model.generate_content(
+    "Analyze this quarterly report for key insights"
+)
+print(response.text)
+# Full token counting including embeddings
+```
+
+## SDK-Specific Integration
+
+### Automatic Provider Detection
+
+The middleware automatically chooses between Google AI SDK and Vertex AI SDK:
+
+| Detection Method | When Used | Example |
+|-----------------|-----------|---------|
+| **Google AI SDK** | When `google.genai` is imported and used | `from google import genai` |
+| **Vertex AI SDK** | When `vertexai` is imported and used | `import vertexai` |
+| **Dual Support** | When both SDKs are available | Automatic routing based on usage |
+
+**Key Point**: Both SDKs report as "Google" provider for unified analytics and consistent reporting.
+
+### Quick Start Examples
+
+#### Basic Usage (Google AI SDK)
+```python
+import revenium_middleware_google
+from google import genai
+
+client = genai.Client(api_key="your-google-api-key")
+response = client.models.generate_content(
+    model="gemini-2.0-flash-001",
+    contents="Hello from Google AI SDK!"
+)
+# Automatically metered with provider="Google"
+```
+
+#### Basic Usage (Vertex AI SDK)
+```python
+import revenium_middleware_google
+import vertexai
+from vertexai.generative_models import GenerativeModel
+
+vertexai.init(project="your-project-id", location="us-central1")
+model = GenerativeModel("gemini-2.0-flash-001")
+response = model.generate_content("Hello from Vertex AI SDK!")
+# Automatically metered with provider="Google" + enhanced token counting
+```
+
+## Configuration
+
+Configure the middleware using environment variables:
+
+### Required Environment Variables
+
+#### For Google AI SDK (Gemini Developer API)
+```bash
+# Required
+export REVENIUM_METERING_API_KEY=your_revenium_api_key
+export GOOGLE_API_KEY=your_google_api_key
+
+# Optional
+export REVENIUM_METERING_BASE_URL=https://api.revenium.io/meter/v2
+export REVENIUM_LOG_LEVEL=INFO
+```
+
+#### For Vertex AI SDK (Google Cloud)
+```bash
+# Required
+export REVENIUM_METERING_API_KEY=your_revenium_api_key
+export GOOGLE_CLOUD_PROJECT=your_gcp_project_id
+
+# Recommended
+export GOOGLE_CLOUD_LOCATION=us-central1
+
+# Google Cloud Authentication (choose one)
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+# OR use: gcloud auth application-default login
+
+# Optional
+export REVENIUM_METERING_BASE_URL=https://api.revenium.io/meter/v2
+export REVENIUM_LOG_LEVEL=INFO
+```
+
+### Using .env File
+
+Create a `.env` file in your project root:
+
+```bash
+# Required for all configurations
+REVENIUM_METERING_API_KEY=your_revenium_api_key
+
+# For Google AI SDK
+GOOGLE_API_KEY=your_google_api_key
+
+# For Vertex AI SDK
+GOOGLE_CLOUD_PROJECT=your_gcp_project_id
+GOOGLE_CLOUD_LOCATION=us-central1
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+
+# Optional settings
+REVENIUM_METERING_BASE_URL=https://api.revenium.io/meter/v2
+REVENIUM_LOG_LEVEL=DEBUG
+```
+
+### Google Cloud Authentication
+
+The Vertex AI SDK uses the standard Google Cloud authentication chain:
+
+1. **Service Account Key File** (recommended for production):
+   ```bash
+   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+   ```
+
+2. **Application Default Credentials** (for development):
+   ```bash
+   gcloud auth application-default login
+   ```
+
+3. **Compute Engine/GKE Service Account** (automatic in GCP environments)
+
+4. **Environment Variables**:
+   ```bash
+   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json
+   ```
+
+Ensure your credentials have the following permissions:
+- `aiplatform.endpoints.predict`
+- `ml.projects.predict` (for some models)
+
+### Configuration Variables
+
+| Variable | Required | SDK | Description |
+|----------|----------|-----|-------------|
+| `REVENIUM_METERING_API_KEY` | Yes | Both | Your Revenium API key |
+| `GOOGLE_API_KEY` | Yes | Google AI | Google AI API key (Gemini Developer API) |
+| `GOOGLE_CLOUD_PROJECT` | Yes | Vertex AI | Google Cloud project ID |
+| `GOOGLE_CLOUD_LOCATION` | No | Vertex AI | Google Cloud location (default: `us-central1`) |
+| `GOOGLE_APPLICATION_CREDENTIALS` | No | Vertex AI | Path to service account key file |
+| `REVENIUM_METERING_BASE_URL` | No | Both | Revenium API base URL |
+| `REVENIUM_LOG_LEVEL` | No | Both | Log level: `DEBUG`, `INFO`, `WARNING`, `ERROR` |
+
+## Streaming Support
+
+The middleware supports streaming responses for both SDKs with identical interfaces:
+
+### Google AI SDK Streaming
+```python
+import revenium_middleware_google
+from google import genai
+
+client = genai.Client(api_key="your-google-api-key")
+
+stream = client.models.generate_content_stream(
+    model="gemini-2.0-flash-001",
+    contents="Write a creative story about AI",
+    usage_metadata={
+        "organization_id": "creative-studio",
+        "task_type": "creative-writing"
+    }
+)
+
+for chunk in stream:
+    print(chunk.text, end="", flush=True)
+# Usage tracking happens automatically when stream completes
+```
+
+### Vertex AI SDK Streaming
+```python
+import revenium_middleware_google
+import vertexai
+from vertexai.generative_models import GenerativeModel
+
+vertexai.init(project="your-project-id", location="us-central1")
+model = GenerativeModel("gemini-2.0-flash-001")
+
+# Set metadata on model instance
+model._revenium_usage_metadata = {
+    "organization_id": "creative-studio",
+    "task_type": "creative-writing"
+}
+
+stream = model.generate_content(
+    "Write a creative story about AI",
+    stream=True
+)
+
+for chunk in stream:
+    print(chunk.text, end="", flush=True)
+# Enhanced usage tracking with full token counting
+```
+
+## Text Embeddings
+
+### Google AI SDK Embeddings (Basic Support)
+```python
+import revenium_middleware_google
+from google import genai
+
+client = genai.Client(api_key="your-google-api-key")
+
+response = client.models.embed_content(
+    model="text-embedding-004",
+    contents="Text to embed for search indexing",
+    usage_metadata={
+        "organization_id": "search-app",
+        "task_type": "document-indexing"
+    }
+)
+
+print(f"Generated {len(response.embeddings[0].values)} dimensional embedding")
+# Note: Token counts will be 0 due to Google AI SDK limitations
+```
+
+### Vertex AI SDK Embeddings (Full Support)
+```python
+import revenium_middleware_google
+import vertexai
+from vertexai.language_models import TextEmbeddingModel
+
+vertexai.init(project="your-project-id", location="us-central1")
+model = TextEmbeddingModel.from_pretrained("text-embedding-004")
+
+# Set metadata for tracking
+model._revenium_usage_metadata = {
+    "organization_id": "search-app",
+    "task_type": "document-indexing"
+}
+
+embeddings = model.get_embeddings(["Text to embed for search indexing"])
+print(f"Generated {len(embeddings[0].values)} dimensional embedding")
+# Full token counting available
+```
+
+#### Metadata Fields
+
+The `usage_metadata` parameter supports the following fields:
+
+| Field                        | Description                                               | Use Case                                                          |
+|------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------|
+| `trace_id`                   | Unique identifier for a conversation or session           | Group multi-turn conversations into single event for performance & cost tracking                           |
+| `task_type`                  | Classification of the AI operation by type of work        | Track cost & performance by purpose (e.g., classification, summarization)                                  |
+| `subscriber_email`           | The email address of the subscriber                       | Track cost & performance by individual users (if customer e-mail addresses are known)                      |
+| `subscriber_id`              | The id of the subscriber from non-Revenium systems        | Track cost & performance by individual users (if customers are anonymous or tracking by emails is not desired)   |
+| `subscriber_credential_name` | An alias for an API key used by one or more users         | Track cost & performance by individual API keys                                                            |
+| `subscriber_credential`      | The key value associated with the subscriber (i.e an API key)     | Track cost & performance by API key value (normally used when the only identifier for a user is an API key) |
+| `organization_id`            | Customer or department ID from non-Revenium systems       | Track cost & performance by customers or business units                                                    |
+| `subscription_id`            | Reference to a billing plan in non-Revenium systems       | Track cost & performance by a specific subscription                                                        |
+| `product_id`                 | Your product or feature making the AI call                | Track cost & performance across different products                                                         |
+| `agent`                      | Identifier for the specific AI agent                      | Track cost & performance performance by AI agent                                                           |
+| `response_quality_score`     | The quality of the AI response (0..1)                     | Track AI response quality                                                                                  |
+
+**All metadata fields are optional**. Adding them enables more detailed reporting and analytics in Revenium.
+
+## Testing Your Setup
+
+The middleware includes comprehensive test scripts to verify your configuration and ensure everything is working correctly. Each test script supports both Google AI SDK and Vertex AI SDK with intelligent provider selection.
+
+### Quick Test Commands
+
+```bash
+# Test Google AI SDK (default)
+python examples/simple_test.py
+
+# Test Vertex AI SDK
+python examples/simple_test.py --provider vertex-ai
+
+# Test streaming functionality
+python examples/simple_streaming_test.py --provider google-ai
+python examples/simple_streaming_test.py --provider vertex-ai
+
+# Test embeddings (Vertex AI recommended for full token counting)
+python examples/simple_embeddings_test.py --provider vertex-ai
+
+# Get help for any test script
+python examples/simple_test.py --help
+```
+
+### Environment Setup for Testing
+
+#### For Google AI SDK Testing
+```bash
+export GOOGLE_API_KEY=your_google_api_key
+export REVENIUM_METERING_API_KEY=your_revenium_key
+
+# Run the test
+python examples/simple_test.py --provider google-ai
+```
+
+#### For Vertex AI SDK Testing
+```bash
+export GOOGLE_CLOUD_PROJECT=your_project_id
+export GOOGLE_CLOUD_LOCATION=us-central1  # optional, defaults to us-central1
+export REVENIUM_METERING_API_KEY=your_revenium_key
+
+# Ensure Google Cloud authentication
+gcloud auth application-default login
+
+# Run the test
+python examples/simple_test.py --provider vertex-ai
+```
+
+### Expected Test Results
+
+**Successful Test Output:**
+```
+Revenium Google AI Middleware - Test Suite
+Testing: GOOGLE AI SDK
+======================================================================
+Google API Key: AIzaSyB8oD...
+Revenium Key: hak_6PVMBR...
+
+GOOGLE AI SDK EXAMPLES
+======================================================================
+Google AI SDK detected
+
+Google AI SDK - Basic Example
+==================================================
+Response: According to the supercomputer Deep Thought...
+Tokens: 12 input + 421 output = 433 total
+Zero-config integration successful!
+
+Google AI SDK - Enhanced Tracking Example
+==================================================
+Response: Okay, I'm ready to analyze the quarterly report...
+Enhanced metadata tracking enabled!
+
+======================================================================
+TEST RESULTS SUMMARY
+======================================================================
+PASS: google_ai_basic
+PASS: google_ai_enhanced
+
+Overall: 2/2 tests passed
+Success! Check your Revenium dashboard for usage data
+```
+
+**Failed Test Output:**
+```
+Missing required environment variable for Google AI SDK
+   GOOGLE_API_KEY not found
+
+Setup Instructions:
+   1. Get your API key from: https://aistudio.google.com/app/apikey
+   2. Set the environment variable:
+      export GOOGLE_API_KEY=your_google_api_key
+   3. Run the test again
+```
+
+### Test Script Features
+
+- **Intelligent Provider Selection**: Automatically tests only the selected provider
+- **Environment Validation**: Checks for required environment variables before testing
+- **Clear Error Messages**: Provides specific setup instructions when configuration is missing
+- **Comprehensive Coverage**: Tests basic functionality, enhanced metadata, streaming, and embeddings
+- **User-Friendly Output**: Color-coded results with clear success/failure indicators
+
+### Available Test Scripts
+
+| Script | Purpose | Key Features |
+|--------|---------|--------------|
+| `simple_test.py` | Basic functionality testing | Chat completion, metadata tracking |
+| `simple_streaming_test.py` | Streaming functionality | Real-time token counting, streaming responses |
+| `simple_embeddings_test.py` | Embeddings testing | Text embeddings, token counting (Vertex AI) |
+
+All test scripts support the `--provider` flag to specify which SDK to test.
+
+## Troubleshooting
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| **"No module named 'google.genai'"** | Install with Google AI support: `pip install "revenium-middleware-google[genai]"` |
+| **"No module named 'vertexai'"** | Install with Vertex AI support: `pip install "revenium-middleware-google[vertex]"` |
+| **Vertex AI authentication errors** | Verify Google Cloud credentials: `gcloud auth application-default login` |
+| **"Project not found" errors** | Ensure `GOOGLE_CLOUD_PROJECT` is set correctly |
+| **Embeddings showing 0 tokens** | Expected with Google AI SDK; use Vertex AI for full token counting |
+| **Requests not being tracked** | Ensure middleware is imported before Google AI/Vertex AI SDKs |
+
+### Debug Mode
+
+Enable debug logging to see provider detection and routing decisions:
+
+```bash
+export REVENIUM_LOG_LEVEL=DEBUG
+python your_script.py
+```
+
+### Force Specific SDK
+
+To ensure only one SDK is used:
+
+```bash
+# Use only Google AI SDK
+pip install "revenium-middleware-google[genai]"
+
+# Use only Vertex AI SDK
+pip install "revenium-middleware-google[vertex]"
+```
+
+### Google AI SDK Troubleshooting
+
+**Middleware not tracking requests:**
+- Ensure middleware is imported before Google AI SDK
+- Check that environment variables are loaded correctly
+- Verify your `REVENIUM_METERING_API_KEY` is correct
+
+**Embeddings showing 0 tokens:**
+- This is expected due to Google AI SDK limitations
+- Model name and metadata are still tracked correctly
+- Chat and streaming operations provide full token data
+
+### Vertex AI SDK Troubleshooting
+
+**Authentication issues:**
+- Verify Google Cloud credentials: `gcloud auth list`
+- Check project access: `gcloud projects describe YOUR_PROJECT_ID`
+- Ensure service account has required permissions
+
+**Model not available errors:**
+- Check if models are available in your region
+- Verify Vertex AI API is enabled in your project
+- Try a different model or region
+
+## Logging
+
+This module uses Python's standard logging system. You can control the log level by setting the `REVENIUM_LOG_LEVEL` environment variable:
+
+```bash
+# Enable debug logging
+export REVENIUM_LOG_LEVEL=DEBUG
+
+# Or when running your script
+REVENIUM_LOG_LEVEL=DEBUG python your_script.py
+```
+
+Available log levels:
+- `DEBUG`: Detailed debugging information
+- `INFO`: General information (default)
+- `WARNING`: Warning messages only
+- `ERROR`: Error messages only
+- `CRITICAL`: Critical error messages only
+
+## Compatibility
+
+- Python 3.8+
+- Google AI SDK (`google-genai>=0.1.0`) or Vertex AI SDK (`google-cloud-aiplatform>=1.0.0`)
+- Google Cloud Project (for Vertex AI SDK)
+
+## Supported Models
+
+The middleware works with all Google AI models available through both SDKs:
+
+### Google AI SDK Models
+- `gemini-2.0-flash-001`
+- `gemini-2.0-flash-lite-001`
+- `gemini-1.5-pro`
+- `gemini-1.5-flash`
+- `text-embedding-004`
+- All other Gemini Developer API models
+
+### Vertex AI SDK Models
+- `gemini-2.0-flash-001`
+- `gemini-2.0-flash-lite-001`
+- `gemini-1.5-pro`
+- `gemini-1.5-flash`
+- `text-embedding-004`
+- All other Vertex AI Gemini models
+
+## License
+
+This project is licensed under the Apache Software License - see the LICENSE file for details.
+
+## Acknowledgments
+
+Built by the Revenium team
