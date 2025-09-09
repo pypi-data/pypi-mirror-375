@@ -1,0 +1,42 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-code-index-mcp"
+version = "2.2.2"
+description = "Code indexing and analysis tools for LLMs using MCP"
+requires-python = ">=3.10"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp>=0.3.0",
+    "watchdog>=3.0.0",
+    "tree-sitter>=0.20.0",
+    "tree-sitter-javascript>=0.20.0",
+    "tree-sitter-typescript>=0.20.0",
+    "tree-sitter-java>=0.20.0",
+    "tree-sitter-zig>=0.20.0",
+    "pathspec>=0.12.1",
+    "msgpack>=1.0.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/johnhuang316/code-index-mcp"
+"Bug Tracker" = "https://github.com/johnhuang316/code-index-mcp/issues"
+
+[project.scripts]
+code-index-mcp = "code_index_mcp.server:main"
+
+[tool.setuptools.package-dir]
+"" = "src"
