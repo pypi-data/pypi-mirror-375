@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-shopify-py-mcp
+Version: 0.1.6
+Summary: A MCP server project
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11.6
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.3.0
+Requires-Dist: ShopifyAPI>=1.0.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
