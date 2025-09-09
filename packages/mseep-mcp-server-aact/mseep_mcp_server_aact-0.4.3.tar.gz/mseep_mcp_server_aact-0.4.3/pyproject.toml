@@ -1,0 +1,47 @@
+[project]
+name = "mseep-mcp-server-aact"
+version = "0.4.3"
+description = "MCP server for AACT clinical trials database"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "psycopg2-binary",
+    "python-dotenv",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio",
+]
+
+[project.scripts]
+mcp-server-aact = "mcp_server_aact:main"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = [
+    "tests",
+]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.uv]
+dev-dependencies = [
+    "pyright>=1.1.389",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.24.0",
+]
