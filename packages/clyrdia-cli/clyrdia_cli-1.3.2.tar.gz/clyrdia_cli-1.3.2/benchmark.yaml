@@ -1,0 +1,142 @@
+cicd:
+  enabled: true
+  fail_on_quality_gate: true
+  report_format: json
+description: AI Quality Gate Benchmark for CI/CD
+models:
+  anthropic:
+  - claude-opus-4-1-20250805
+  - claude-3-5-sonnet-20241022
+  openai:
+  - gpt-5
+  - gpt-4o-mini
+name: Industry Standard Test
+quality_gates:
+  max_cost_per_test: 0.1
+  max_latency_ms: 5000
+  min_overall_score: 0.7
+test_cases:
+- evaluation_criteria:
+  - accuracy
+  - completeness
+  - safety
+  max_tokens: 1000
+  name: code_review
+  prompt: "Review this code for bugs, security issues, and best practices:\n\n```python\n\
+    def process_user_data(data):\n    return data.upper()\n```"
+  temperature: 0.3
+- evaluation_criteria:
+  - clarity
+  - completeness
+  - examples
+  max_tokens: 800
+  name: documentation
+  prompt: "Write clear documentation for this function:\n\n```python\ndef calculate_metrics(data):\n\
+    \    return sum(data) / len(data)\n```"
+  temperature: 0.5
+- evaluation_criteria:
+  - robustness
+  - clarity
+  - edge_cases
+  max_tokens: 600
+  name: error_handling
+  prompt: "Add proper error handling to this function:\n\n```python\ndef divide(a,\
+    \ b):\n    return a / b\n```"
+  temperature: 0.2
+- evaluation_criteria:
+  - completeness
+  - security
+  - best_practices
+  max_tokens: 1200
+  name: api_design
+  prompt: Design a REST API endpoint for user authentication. Include request/response
+    schemas, error codes, and security considerations.
+  temperature: 0.4
+- evaluation_criteria:
+  - accuracy
+  - performance
+  - best_practices
+  max_tokens: 800
+  name: database_optimization
+  prompt: 'Optimize this SQL query for better performance:
+
+
+    ```sql
+
+    SELECT u.name, p.title, c.content
+
+    FROM users u
+
+    JOIN posts p ON u.id = p.user_id
+
+    JOIN comments c ON p.id = c.post_id
+
+    WHERE u.created_at > ''2023-01-01''
+
+    ORDER BY p.created_at DESC
+
+    LIMIT 100;
+
+    ```'
+  temperature: 0.3
+- evaluation_criteria:
+  - security
+  - completeness
+  - accuracy
+  max_tokens: 1000
+  name: security_analysis
+  prompt: "Analyze this code for security vulnerabilities:\n\n```python\nimport os\n\
+    import subprocess\n\ndef process_file(filename):\n    command = f'cat {filename}'\n\
+    \    result = subprocess.run(command, shell=True, capture_output=True)\n    return\
+    \ result.stdout.decode()\n```"
+  temperature: 0.2
+- evaluation_criteria:
+  - performance
+  - correctness
+  - best_practices
+  max_tokens: 900
+  name: performance_optimization
+  prompt: "Optimize this Python function for better performance:\n\n```python\ndef\
+    \ find_duplicates(items):\n    duplicates = []\n    for i in range(len(items)):\n\
+    \        for j in range(i + 1, len(items)):\n            if items[i] == items[j]:\n\
+    \                duplicates.append(items[i])\n    return duplicates\n```"
+  temperature: 0.4
+- evaluation_criteria:
+  - completeness
+  - accuracy
+  - best_practices
+  max_tokens: 1100
+  name: testing_strategy
+  prompt: "Design a comprehensive testing strategy for this e-commerce checkout function:\n\
+    \n```python\ndef process_checkout(cart, payment_info, shipping_address):\n   \
+    \ # Validate cart\n    if not cart or len(cart) == 0:\n        raise ValueError('Cart\
+    \ is empty')\n    \n    # Calculate total\n    total = sum(item['price'] * item['quantity']\
+    \ for item in cart)\n    \n    # Process payment\n    if payment_info['method']\
+    \ == 'credit_card':\n        process_credit_card(payment_info, total)\n    \n\
+    \    # Create order\n    order = create_order(cart, shipping_address, total)\n\
+    \    return order\n```"
+  temperature: 0.5
+- evaluation_criteria:
+  - completeness
+  - scalability
+  - best_practices
+  max_tokens: 1500
+  name: architecture_design
+  prompt: Design a microservices architecture for a social media platform with features
+    like posts, comments, likes, and real-time notifications. Include service boundaries,
+    data flow, and technology choices.
+  temperature: 0.6
+- evaluation_criteria:
+  - accuracy
+  - insightfulness
+  - actionability
+  max_tokens: 1000
+  name: data_analysis
+  prompt: "Analyze this dataset and provide insights:\n\n```python\nimport pandas\
+    \ as pd\n\n# Sample e-commerce data\ndata = {\n    'customer_id': [1, 2, 3, 4,\
+    \ 5],\n    'purchase_amount': [100, 150, 200, 75, 300],\n    'category': ['electronics',\
+    \ 'clothing', 'electronics', 'books', 'electronics'],\n    'age': [25, 30, 35,\
+    \ 28, 40],\n    'satisfaction_score': [4.5, 3.8, 4.2, 4.0, 4.7]\n}\ndf = pd.DataFrame(data)\n\
+    ```\n\nWhat patterns do you see? What recommendations would you make?"
+  temperature: 0.4
+version: 1.0.0
