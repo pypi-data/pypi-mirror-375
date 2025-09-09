@@ -1,0 +1,27 @@
+[project]
+name = "mseep-higress-ai-search-mcp-server"
+version = "1.0.4"
+description = "Higress ai-search MCP Server"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=0.4.1",
+    "httpx>=0.24.0",
+    "tomli>=2.2.1",
+    "tomli-w>=1.2.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.scripts]
+higress-ai-search-mcp-server = "server:main"
+
+[tool.setuptools]
+license-files = []
