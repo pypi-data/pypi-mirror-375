@@ -1,0 +1,9 @@
+pymysql
+pandas
+openmetadata-ingestion>=1.9.5.0
+pyspark>=3.5.0
+pyyaml
+
+[openmetadata]
+openmetadata-ingestion>=1.9.5.0
+pyspark>=3.5.0
