@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rolemap>
+  <permissions>
+
+    <permission acquire="False"
+                name="collective.contact_behaviors: View Basic Address Information"
+    >
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Contributor" />
+      <role name="Reader" />
+      <role name="Anonymous" />
+    </permission>
+
+    <permission acquire="False"
+                name="collective.contact_behaviors: View Detailed Address Information"
+    >
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Contributor" />
+    </permission>
+
+    <permission acquire="False"
+                name="collective.contact_behaviors: View Contact Information"
+    >
+      <role name="Manager" />
+      <role name="Site Administrator" />
+      <role name="Owner" />
+      <role name="Editor" />
+      <role name="Contributor" />
+    </permission>
+  </permissions>
+
+</rolemap>
