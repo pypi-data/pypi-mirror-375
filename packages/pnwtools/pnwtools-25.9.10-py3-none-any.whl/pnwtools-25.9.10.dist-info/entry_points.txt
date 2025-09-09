@@ -1,0 +1,6 @@
+[console_scripts]
+check_tags = pnwtools.CheckTags:main
+make_wav_review_file = pnwtools.MakeWavReviewFile:main
+recover_filenames = pnwtools.RecoverFilenames:main
+rename_files = pnwtools.RenameFiles:main
+station_info = pnwtools.GetStationInfo:main
