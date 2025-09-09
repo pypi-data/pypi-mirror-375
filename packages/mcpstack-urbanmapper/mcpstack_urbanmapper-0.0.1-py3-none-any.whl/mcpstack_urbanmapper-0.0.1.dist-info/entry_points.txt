@@ -1,0 +1,10 @@
+[console_scripts]
+
+[gui_scripts]
+
+[mcpstack.tool_clis]
+urbanmapper = mcpstack_urbanmapper.cli:UrbanMapperCLI.get_app
+
+[mcpstack.tools]
+urbanmapper = mcpstack_urbanmapper.tool:UrbanMapper
+
