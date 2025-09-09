@@ -1,0 +1,104 @@
+Metadata-Version: 2.4
+Name: pydhis2
+Version: 0.1.1
+Summary: Reproducible DHIS2 Python SDK for LMIC scenarios
+Project-URL: Homepage, https://github.com/pydhis2/pydhis2
+Project-URL: Documentation, https://pydhis2.readthedocs.io
+Project-URL: Repository, https://github.com/pydhis2/pydhis2
+Project-URL: Issues, https://github.com/pydhis2/pydhis2/issues
+Author: pydhis2 contributors
+License-Expression: Apache-2.0
+License-File: LICENSE
+Keywords: analytics,async,data,dhis2,health,pandas
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Requires-Dist: aiofiles>=23.0.0
+Requires-Dist: aiohttp>=3.8.0
+Requires-Dist: aiolimiter>=1.1.0
+Requires-Dist: jinja2>=3.0.0
+Requires-Dist: keyring>=24.0.0
+Requires-Dist: pandas>=1.5.0
+Requires-Dist: plotly>=5.0.0
+Requires-Dist: pyarrow>=10.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: tenacity>=8.0.0
+Requires-Dist: typer>=0.9.0
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == 'dev'
+Requires-Dist: cookiecutter>=2.1.0; extra == 'dev'
+Requires-Dist: hypothesis>=6.0.0; extra == 'dev'
+Requires-Dist: mypy>=1.0.0; extra == 'dev'
+Requires-Dist: pre-commit>=3.0.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: ruff>=0.1.0; extra == 'dev'
+Requires-Dist: sphinx-rtd-theme>=1.3.0; extra == 'dev'
+Requires-Dist: sphinx>=6.0.0; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: myst-parser>=2.0.0; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme>=1.3.0; extra == 'docs'
+Requires-Dist: sphinx>=6.0.0; extra == 'docs'
+Provides-Extra: otel
+Requires-Dist: opentelemetry-api>=1.20.0; extra == 'otel'
+Requires-Dist: opentelemetry-instrumentation-aiohttp-client>=0.41b0; extra == 'otel'
+Requires-Dist: opentelemetry-sdk>=1.20.0; extra == 'otel'
+Description-Content-Type: text/markdown
+
+# pydhis2
+
+A reproducible DHIS2 Python SDK designed for LMIC (Low and Middle Income Countries) scenarios.
+
+## Features
+
+- Async HTTP client with automatic retry and rate limiting
+- Data Quality Review (DQR) framework based on WHO standards
+- Pandas integration for data analysis
+- Pipeline system for automated workflows
+- Comprehensive testing and benchmarking tools
+
+## Installation
+
+```bash
+pip install pydhis2
+```
+
+## Quick Start
+
+```python
+import asyncio
+from pydhis2 import DHIS2Client
+
+async def main():
+    client = DHIS2Client(
+        base_url="https://play.dhis2.org/dev",
+        auth=("admin", "district")
+    )
+    
+    # Get user information
+    user_info = await client.get("me")
+    print(f"User: {user_info['name']}")
+
+asyncio.run(main())
+```
+
+## Documentation
+
+For detailed documentation and examples, visit our [GitHub repository](https://github.com/your-repo/pydhis2).
+
+## License
+
+Apache License 2.0

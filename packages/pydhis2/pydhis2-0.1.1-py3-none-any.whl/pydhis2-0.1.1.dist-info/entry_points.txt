@@ -1,0 +1,2 @@
+[console_scripts]
+pydhis2 = pydhis2.cli.main:app
