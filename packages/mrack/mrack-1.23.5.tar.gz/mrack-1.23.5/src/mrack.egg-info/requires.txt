@@ -1,0 +1,13 @@
+beaker-client>=29.2
+botocore>=1.14.17
+boto3>=1.11.17
+click>=7.0.0
+pyyaml>=5.0.0
+asyncopenstackclient>=0.9.0
+testcloud>=0.5.0
+aiofiles>=23.1.0
+os_client_config>=2.1.0
+async_timeout~=4.0.3
+
+[krb-owner]
+gssapi

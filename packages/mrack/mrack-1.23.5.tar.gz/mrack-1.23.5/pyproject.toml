@@ -1,0 +1,25 @@
+[tool.isort]
+atomic = true
+include_trailing_comma = true
+known_first_party = "mrack"
+line_length = 88
+multi_line_output = 3
+
+[tool.pytest.ini_options]
+markers = [
+    "etc_hosts: passes path for etc_hosts fixture",
+]
+pythonpath = [
+  "./src"
+]
+
+[tool.semantic_release]
+version_source = "commit"
+commit_message = "chore: Release version {version}\n\nReleasing new mrack version"
+version_variables = [
+    "src/mrack/version.py:VERSION",
+    "docs/conf.py:release",
+]
+branch = "main"
+commit = true
+tag = true
