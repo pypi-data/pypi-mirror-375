@@ -1,0 +1,168 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "json-logify"
+version = "0.1.2"
+description = "Universal structured logging with exact JSON schema for Python frameworks"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Bakdoolot Kulbarakov", email = "kulbarakovbh@gmail.com"}
+]
+maintainers = [
+    {name = "Bakdoolot Kulbarakov", email = "kulbarakovbh@gmail.com"}
+]
+keywords = [
+    "logging",
+    "structured",
+    "json",
+    "django",
+    "fastapi",
+    "flask",
+    "universal",
+    "schema",
+    "orjson",
+    "structlog"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Logging",
+    "Framework :: Django",
+    "Framework :: FastAPI",
+    "Framework :: Flask",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "structlog>=23.0.0",
+    "orjson>=3.8.0",
+]
+
+[project.optional-dependencies]
+django = [
+    "django>=5.2.6",
+]
+#fastapi = [
+#    "fastapi>=0.116.1",
+#    "uvicorn>=0.35.0",
+#]
+#flask = [
+#    "flask>=3.1.2",
+#]
+dev = [
+    "pytest>=8.4.2",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "bandit>=1.7.5",
+]
+all = [
+    "json-logify[django,fastapi,flask]",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/json-logify"
+Documentation = "https://json-logify.readthedocs.io/"
+Repository = "https://github.com/yourusername/json-logify"
+Issues = "https://github.com/yourusername/json-logify/issues"
+Changelog = "https://github.com/yourusername/json-logify/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["logify*"]
+
+[tool.setuptools.package-data]
+logify = ["py.typed"]
+
+# Black configuration
+[tool.black]
+line-length = 120
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+# isort configuration
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+# mypy configuration
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+
+# pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--tb=short",
+]
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow",
+    "integration: marks tests as integration tests",
+    "asyncio: marks tests as async tests",
+]
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["logify"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
+# Bandit configuration
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101", "B601"]
