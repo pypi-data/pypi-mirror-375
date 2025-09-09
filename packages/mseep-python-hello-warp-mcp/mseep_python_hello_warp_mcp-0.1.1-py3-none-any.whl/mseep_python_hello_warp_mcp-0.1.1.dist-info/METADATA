@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-python_hello_warp_mcp
+Version: 0.1.1
+Summary: A simple 'Hello World' MCP server for Warp Terminal
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
