@@ -1,0 +1,27 @@
+[project]
+name = "umleitung"
+version = "0.2.0"
+description = ""
+authors = [
+    {name = "Ilja Bauer",email = "iljabauer@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "fastmcp (>=2.10.5,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+ruff = "^0.12.3"
+pytest = "^8.4.1"
+pytest-asyncio = "^1.0.0"
+cli-mcp-server = "^0.2.5"
+lice = "^0.6"
+

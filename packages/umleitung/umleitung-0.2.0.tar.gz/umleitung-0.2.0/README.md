@@ -1,0 +1,103 @@
+# umleitung
+
+**umleitung** is a flexible proxy server for [FastMCP](https://github.com/fastmcp/fastmcp) servers. It provides a unified endpoint for any number of sub-servers, with powerful tools for whitelisting/blacklisting which tools are exposed, and flexible configuration via YAML. This enables orchestration, tooling filtering, and dynamic proxying of local or remote FastMCP servers for development, deployment, or testing scenarios.
+
+---
+
+> **✨ Why use umleitung?**
+>
+> By using **umleitung**, you can bridge MCP servers that only support traditional `stdio` or `sse` protocols and instantly make them available to any protocol supported by FastMCP, such as streamable HTTP—even if the original server doesn’t have native support for those protocols!
+>
+> MCP servers are often overlapping, providing multiple similar or identical tools. With umleitung's white/blacklist feature, you can pick and choose the best tools from each server for your workflow, creating a best-of toolbox and hiding redundant or less suitable options.
+>
+> This means you can modernize and extend your existing FastMCP ecosystem with minimal changes, providing a universal access point for tools and workflows.
+
+---
+
+## Features
+
+- Proxy any number of MCP sub-servers into a single FastMCP endpoint
+- Fine-grained control with `allowedTools` and `blockedTools` per proxied server
+- Simple YAML configuration
+- Designed for in-memory/integration testing and real deployment
+- **Protocol bridging:** Expose legacy MCP servers over HTTP, streaming, and more
+- Built-in support for [FastMCP](https://github.com/jlowin/fastmcp)
+
+## Installation
+
+```bash
+pip install umleitung
+```
+
+## Usage
+
+### Basic Proxy Configuration
+
+Create a config file (e.g., `proxy_config.yaml`):
+
+```yaml
+mcpServers:
+  dummy:
+    command: python
+    args: [tests/dummy_server.py, dummy, foo, bar, baz]
+    # allowedTools: [foo, bar]     # restrict to only these tools
+    # blockedTools: [baz]          # block certain tools (mutually exclusive with allowedTools)
+```
+
+Run the proxy server:
+
+```bash
+python -m umleitung.proxy proxy_config.yaml
+```
+
+By default, it reads `proxy_config.yaml` if no file is specified.
+
+### Example: Dynamic Proxy & Tool Filtering
+
+The proxy exposes only permitted tools on behalf of its sub-servers, controlled via `allowedTools` or `blockedTools`:
+
+```yaml
+mcpServers:
+  image_worker:
+    command: python
+    args: [run_image_worker.py]
+    allowedTools: [resize_image, convert_format]  # only expose these
+  text_worker:
+    command: python
+    args: [run_text_worker.py]
+    blockedTools: [delete_text]         # expose all except these
+```
+
+### Programmatic Usage
+
+You can use the proxy logic in your own Python code:
+
+```python
+from umleitung.proxy import load_config, build_proxy_server
+import asyncio
+
+async def main():
+    config = load_config("proxy_config.yaml")
+    proxy_server = await build_proxy_server(config)
+    await proxy_server.run_async()
+
+asyncio.run(main())
+```
+
+## Testing
+
+The repository contains [pytest](https://pytest.org/) tests with dummy server example in the `tests/` directory.
+
+```bash
+pytest
+```
+
+You can also use the dummy server directly, e.g.:
+
+```bash
+python tests/dummy_server.py dummy foo bar baz
+```
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for full text.
