@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>font character extractor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/1.3.4/opentype.min.js"></script>
+</head>
+<body class="bg-white font-mono text-black">
+    <div class="max-w-4xl mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-2">font character extractor</h1>
+        <p class="text-sm text-gray-600 mb-6">drop a .ttf file to extract all unicode characters</p>
+        
+        <div id="dropZone" class="border-2 border-dashed border-gray-400 p-8 text-center cursor-pointer hover:border-gray-600 mb-4">
+            <div class="text-4xl mb-2">📁</div>
+            <div>drop .ttf file here or click to browse</div>
+            <input type="file" id="fileInput" class="hidden" accept=".ttf,.otf,.woff">
+        </div>
+
+        <div id="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-4 hidden"></div>
+        
+        <div id="loading" class="text-center py-8 hidden">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mb-2"></div>
+            <div>processing...</div>
+        </div>
+
+        <div id="results" class="hidden">
+            <div class="bg-gray-100 p-4 mb-4">
+                <h3 class="font-bold mb-2">font info</h3>
+                <div id="fontInfo" class="text-sm"></div>
+            </div>
+
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-bold">characters (<span id="charCount">0</span>)</span>
+                    <button id="copyButton" class="bg-blue-600 text-white px-4 py-1 hover:bg-blue-700">copy all</button>
+                </div>
+                <textarea 
+                    id="charactersTextarea" 
+                    class="w-full h-64 p-2 border border-gray-400 font-mono text-sm"
+                    readonly
+                ></textarea>
+            </div>
+
+            <div class="bg-gray-100 p-4">
+                <h3 class="font-bold mb-2">preview (using uploaded font)</h3>
+                <div id="characterPreview" class="text-xl leading-relaxed break-all" style="font-family: 'uploaded-font', monospace;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+        const error = document.getElementById('error');
+        const charactersTextarea = document.getElementById('charactersTextarea');
+        const copyButton = document.getElementById('copyButton');
+        const fontInfo = document.getElementById('fontInfo');
+        const characterPreview = document.getElementById('characterPreview');
+        const charCount = document.getElementById('charCount');
+
+        let loadedFont = null;
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-gray-600');
+        });
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-gray-600');
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-gray-600');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) processFile(files[0]);
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) processFile(e.target.files[0]);
+        });
+
+        function showError(message) {
+            error.textContent = message;
+            error.classList.remove('hidden');
+            loading.classList.add('hidden');
+            results.classList.add('hidden');
+        }
+
+        function hideError() {
+            error.classList.add('hidden');
+        }
+
+        async function processFile(file) {
+            hideError();
+            loading.classList.remove('hidden');
+            results.classList.add('hidden');
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                loadedFont = opentype.parse(arrayBuffer);
+                
+                if (!loadedFont) {
+                    throw new Error('failed to parse font file');
+                }
+
+                // Create a font face and load it
+                const fontUrl = URL.createObjectURL(file);
+                const fontFace = new FontFace('uploaded-font', `url(${fontUrl})`);
+                
+                await fontFace.load();
+                document.fonts.add(fontFace);
+
+                extractCharacters(loadedFont, file.name);
+            } catch (err) {
+                console.error('Error:', err);
+                showError('error processing font: ' + err.message);
+            }
+        }
+
+        function extractCharacters(font, fileName) {
+            try {
+                const characters = new Set();
+                
+                // Get all glyphs with unicode values
+                for (let i = 0; i < font.glyphs.length; i++) {
+                    const glyph = font.glyphs.glyphs[i];
+                    
+                    if (glyph.unicode !== undefined) {
+                        characters.add(String.fromCodePoint(glyph.unicode));
+                    }
+                    
+                    if (glyph.unicodes && glyph.unicodes.length > 0) {
+                        glyph.unicodes.forEach(unicode => {
+                            characters.add(String.fromCodePoint(unicode));
+                        });
+                    }
+                }
+
+                const sortedChars = Array.from(characters).sort((a, b) => 
+                    a.codePointAt(0) - b.codePointAt(0)
+                );
+
+                displayResults(font, fileName, sortedChars);
+                
+            } catch (err) {
+                console.error('Error extracting:', err);
+                showError('error extracting characters: ' + err.message);
+            }
+        }
+
+        function displayResults(font, fileName, characters) {
+            loading.classList.add('hidden');
+            results.classList.remove('hidden');
+
+            const fontFamily = font.names.fontFamily?.en || 'unknown';
+            const fontSubfamily = font.names.fontSubfamily?.en || 'unknown';
+            
+            fontInfo.innerHTML = `
+                <strong>file:</strong> ${fileName}<br>
+                <strong>family:</strong> ${fontFamily}<br>
+                <strong>style:</strong> ${fontSubfamily}<br>
+                <strong>glyphs:</strong> ${font.glyphs.length}
+            `;
+
+            const charactersText = characters.join('');
+            charactersTextarea.value = charactersText;
+            charCount.textContent = characters.length;
+
+            // Set preview with uploaded font
+            characterPreview.textContent = charactersText;
+        }
+
+        copyButton.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(charactersTextarea.value);
+                copyButton.textContent = 'copied!';
+                copyButton.classList.add('bg-green-600');
+                copyButton.classList.remove('bg-blue-600');
+                
+                setTimeout(() => {
+                    copyButton.textContent = 'copy all';
+                    copyButton.classList.remove('bg-green-600');
+                    copyButton.classList.add('bg-blue-600');
+                }, 1500);
+            } catch (err) {
+                charactersTextarea.select();
+                document.execCommand('copy');
+                copyButton.textContent = 'copied!';
+            }
+        });
+    </script>
+</body>
+</html>
