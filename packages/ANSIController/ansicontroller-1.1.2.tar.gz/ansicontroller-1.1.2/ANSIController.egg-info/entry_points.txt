@@ -1,0 +1,5 @@
+[console_scripts]
+ANSI = ANSIController.__main__:main
+ANSIController = ANSIController.__main__:main
+ansic = ANSIController.__main__:main
+ansicontroller = ANSIController.__main__:main
