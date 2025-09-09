@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: mseep-jvm-mcp-server
+Version: 0.1.7
+Summary: A JVM monitoring and control server
+Project-URL: Homepage, https://github.com/xzq-xu/jvm-mcp-server
+Project-URL: Repository, https://github.com/xzq-xu/jvm-mcp-server.git
+Project-URL: Issues, https://github.com/xzq-xu/jvm-mcp-server/issues
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.10
+Requires-Dist: fastapi>=0.68.0
+Requires-Dist: mcp[cli]
+Requires-Dist: paramiko>=3.5.1
+Requires-Dist: pydantic>=1.8.2
+Requires-Dist: uvicorn>=0.15.0
+Provides-Extra: dev
+Requires-Dist: autopep8>=2.0.0; extra == 'dev'
+Requires-Dist: flake8>=6.0.0; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'test'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'test'
+Requires-Dist: pytest>=7.0.0; extra == 'test'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
