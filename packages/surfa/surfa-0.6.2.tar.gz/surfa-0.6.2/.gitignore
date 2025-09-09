@@ -1,0 +1,15 @@
+__pycache__
+*.pyc
+*cpython*.so
+*.c
+
+.eggs
+*setup_orig.py
+
+build
+dist
+surfa.egg-info
+
+docs/.deps
+docs/build
+docs/reference/api
