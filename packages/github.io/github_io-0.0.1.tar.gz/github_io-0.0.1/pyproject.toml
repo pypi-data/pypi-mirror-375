@@ -1,0 +1,19 @@
+[project]
+name = "github.io"
+version = "0.0.1"
+authors = [
+  { name="VarMonke", email="var.monke@gmail.com" },
+]
+description = "An asynchronous python wrapper around the GitHub API"
+readme = "README.rst"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/VarMonke/Github-API-Wrapper"
+Issues = "https://github.com/VarMonke/Github-API-Wrapper/issues"
