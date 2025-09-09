@@ -1,0 +1,82 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "dependencyDashboard": false,
+  "timezone": "Europe/Paris",
+  "baseBranchPatterns": ["main", "fix/renovate-test"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
+  "postUpdateOptions": ["lockFileMaintenance"],
+  "updateLockFiles": true,
+  "pre-commit": {
+    "enabled": true
+  },
+  "enabledManagers": [
+    "pep621",
+    "github-actions",
+    "dockerfile",
+    "pre-commit",
+    "docker-compose"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["ruff", "astral-sh/ruff-pre-commit"],
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true,
+      "groupName": "ruff"
+    },
+    {
+      "matchPackageNames": ["fastapi"],
+      "matchDatasources": ["pypi"],
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["pep621"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["pep621"],
+      "matchDatasources": ["pypi"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["docker-compose", "dockerfile"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["regex"],
+      "matchDatasources": ["github-releases", "github-tags"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "see https://regex101.com/r/Bf1hmQ/1 and https://regex101.com/r/SjTpfT/1",
+      "managerFilePatterns": ["Dockerfile", "compose.yaml", "compose.yml"],
+      "matchStrings": [
+        "#.*https:\\/\\/github\\.com/(?<depName>[^\\/]+\\/[^\\/]+)\\/(?<sourceType>(releases|tags)+).*\n(?:ENV|ARG)\\s.*_VERSION[\\s|=](?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "github-{{{sourceType}}}"
+    }
+  ]
+}
