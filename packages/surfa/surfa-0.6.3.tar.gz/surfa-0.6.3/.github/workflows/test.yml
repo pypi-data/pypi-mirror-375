@@ -1,0 +1,26 @@
+name: Package Test
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.8
+
+    - name: Install package
+      run: pip install .
+
+    - name: Run tests
+      working-directory: test
+      # simple test for now checking whether general import works
+      # we should soon get some actual pytest scripts running
+      run: python -c 'import surfa'
