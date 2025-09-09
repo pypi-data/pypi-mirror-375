@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "protclust"
+version = "0.2.0"
+description = "Python tools for protein sequence clustering and dataset splitting"
+readme = "README.md"
+requires-python = ">=3.7"
+license = { text = "MIT" }
+authors = [
+    { name = "Michael Scutari" },
+]
+keywords = ["bioinformatics", "protein", "clustering", "machine learning"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Intended Audience :: Science/Research",
+    "Development Status :: 4 - Beta",
+]
+dependencies = [
+    "numpy>=1.20.0",
+    "pandas>=1.5.0",
+    "scikit-learn>=1.0.0",
+    "pulp>=2.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/michaelscutari/protclust"
+"Bug Tracker" = "https://github.com/michaelscutari/protclust/issues"
+"Documentation" = "https://github.com/michaelscutari/protclust"
+
+[tool.setuptools]
+packages = ["protclust"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+ignore = ["E501"]
+select = ["E", "F", "W", "I"]
+per-file-ignores = { "tests/*" = ["E501"], "__init__.py" = ["F401"] }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning"
+]
