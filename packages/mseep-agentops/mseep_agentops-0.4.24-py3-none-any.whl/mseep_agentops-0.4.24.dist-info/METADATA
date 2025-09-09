@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: mseep-agentops
+Version: 0.4.24
+Summary: Observability and DevTool Platform for AI Agents
+Project-URL: Homepage, https://github.com/AgentOps-AI/agentops
+Project-URL: Issues, https://github.com/AgentOps-AI/agentops/issues
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.9
+Requires-Dist: aiohttp<4.0.0,>=3.8.0
+Requires-Dist: httpx<0.29.0,>=0.24.0
+Requires-Dist: opentelemetry-api==1.29.0; python_version < '3.10'
+Requires-Dist: opentelemetry-api>1.29.0; python_version >= '3.10'
+Requires-Dist: opentelemetry-exporter-otlp-proto-http==1.29.0; python_version < '3.10'
+Requires-Dist: opentelemetry-exporter-otlp-proto-http>1.29.0; python_version >= '3.10'
+Requires-Dist: opentelemetry-instrumentation==0.50b0; python_version < '3.10'
+Requires-Dist: opentelemetry-instrumentation>=0.50b0; python_version >= '3.10'
+Requires-Dist: opentelemetry-sdk==1.29.0; python_version < '3.10'
+Requires-Dist: opentelemetry-sdk>1.29.0; python_version >= '3.10'
+Requires-Dist: opentelemetry-semantic-conventions==0.50b0; python_version < '3.10'
+Requires-Dist: opentelemetry-semantic-conventions>=0.50b0; python_version >= '3.10'
+Requires-Dist: ordered-set<5.0.0,>=4.0.0
+Requires-Dist: packaging<25.0,>=21.0
+Requires-Dist: psutil<7.0.1,>=5.9.8
+Requires-Dist: pyyaml<7.0,>=5.3
+Requires-Dist: requests<3.0.0,>=2.0.0
+Requires-Dist: termcolor<2.5.0,>=2.3.0
+Requires-Dist: wrapt<2.0.0,>=1.0.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
