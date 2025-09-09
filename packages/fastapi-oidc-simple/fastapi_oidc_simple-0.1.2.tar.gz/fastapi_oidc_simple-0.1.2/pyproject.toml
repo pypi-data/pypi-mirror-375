@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastapi-oidc-simple"
+version = "0.1.2"
+description = "Simple OIDC integration for FastAPI using Authlib"
+authors = [{ name = "Noidea", email = "noidea1238@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+    "fastapi >= 0.116.0",
+    "authlib >= 1.6.3",
+    "starlette >= 0.47.0",
+    "httpx >= 0.28.0",
+    "itsdangerous >= 2.2.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/adityasm1238/fastapi-oidc-simple"
