@@ -1,0 +1,2 @@
+[console_scripts]
+claude-tools = claude_tools.main:main
