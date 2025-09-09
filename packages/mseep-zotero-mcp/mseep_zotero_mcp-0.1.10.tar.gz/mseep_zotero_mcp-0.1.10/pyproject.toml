@@ -1,0 +1,54 @@
+[project]
+name = "mseep-zotero-mcp"
+version = "0.1.10"
+description = "Model Context Protocol server for Zotero"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.11"
+keywords = [
+    "mcp",
+    "zotero",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mcp[cli]>=1.2.1",
+    "pydantic>=2.10.6",
+    "python-dotenv>=1.0.1",
+    "pyzotero>=1.6.8",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.scripts]
+zotero-mcp = "zotero_mcp.cli:main"
+
+[project.urls]
+Repository = "https://github.com/kujenga/zotero-mcp"
+Issues = "https://github.com/kujenga/zotero-mcp/issues"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "ruff>=0.9.4",
+]

@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_zotero_mcp.egg-info/PKG-INFO
+src/mseep_zotero_mcp.egg-info/SOURCES.txt
+src/mseep_zotero_mcp.egg-info/dependency_links.txt
+src/mseep_zotero_mcp.egg-info/entry_points.txt
+src/mseep_zotero_mcp.egg-info/requires.txt
+src/mseep_zotero_mcp.egg-info/top_level.txt
+src/zotero_mcp/__init__.py
+src/zotero_mcp/cli.py
+src/zotero_mcp/client.py
+tests/test_client.py
+tests/test_item_operations.py
+tests/test_search.py
