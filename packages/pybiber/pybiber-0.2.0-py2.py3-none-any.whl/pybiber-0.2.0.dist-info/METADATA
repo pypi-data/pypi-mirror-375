@@ -1,0 +1,397 @@
+Metadata-Version: 2.4
+Name: pybiber
+Version: 0.2.0
+Summary: Extract Biber features from a document parsed and annotated by spaCy.
+Author-email: David Brown <dwb2@andrew.cmu.edu>
+Maintainer-email: David Brown <dwb2@andrew.cmu.edu>
+License: MIT License
+        
+        Copyright (c) 2025 David Brown
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+              "Contributor" shall mean Licensor and any individual or Legal Entity
+              on behalf of whom a Contribution has been received by Licensor and
+              subsequently incorporated within the Work.
+        
+           2. Grant of Copyright License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              copyright license to reproduce, prepare Derivative Works of,
+              publicly display, publicly perform, sublicense, and distribute the
+              Work and such Derivative Works in Source or Object form.
+        
+           3. Grant of Patent License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              (except as stated in this section) patent license to make, have made,
+              use, offer to sell, sell, import, and otherwise transfer the Work,
+              where such license applies only to those patent claims licensable
+              by such Contributor that are necessarily infringed by their
+              Contribution(s) alone or by combination of their Contribution(s)
+              with the Work to which such Contribution(s) was submitted. If You
+              institute patent litigation against any entity (including a
+              cross-claim or counterclaim in a lawsuit) alleging that the Work
+              or a Contribution incorporated within the Work constitutes direct
+              or contributory patent infringement, then any patent licenses
+              granted to You under this License for that Work shall terminate
+              as of the date such litigation is filed.
+        
+           4. Redistribution. You may reproduce and distribute copies of the
+              Work or Derivative Works thereof in any medium, with or without
+              modifications, and in Source or Object form, provided that You
+              meet the following conditions:
+        
+              (a) You must give any other recipients of the Work or
+                  Derivative Works a copy of this License; and
+        
+              (b) You must cause any modified files to carry prominent notices
+                  stating that You changed the files; and
+        
+              (c) You must retain, in the Source form of any Derivative Works
+                  that You distribute, all copyright, patent, trademark, and
+                  attribution notices from the Source form of the Work,
+                  excluding those notices that do not pertain to any part of
+                  the Derivative Works; and
+        
+              (d) If the Work includes a "NOTICE" text file as part of its
+                  distribution, then any Derivative Works that You distribute must
+                  include a readable copy of the attribution notices contained
+                  within such NOTICE file, excluding those notices that do not
+                  pertain to any part of the Derivative Works, in at least one
+                  of the following places: within a NOTICE text file distributed
+                  as part of the Derivative Works; within the Source form or
+                  documentation, if provided along with the Derivative Works; or,
+                  within a display generated by the Derivative Works, if and
+                  wherever such third-party notices normally appear. The contents
+                  of the NOTICE file are for informational purposes only and
+                  do not modify the License. You may add Your own attribution
+                  notices within Derivative Works that You distribute, alongside
+                  or as an addendum to the NOTICE text from the Work, provided
+                  that such additional attribution notices cannot be construed
+                  as modifying the License.
+        
+              You may add Your own copyright statement to Your modifications and
+              may provide additional or different license terms and conditions
+              for use, reproduction, or distribution of Your modifications, or
+              for any such Derivative Works as a whole, provided Your use,
+              reproduction, and distribution of the Work otherwise complies with
+              the conditions stated in this License.
+        
+           5. Submission of Contributions. Unless You explicitly state otherwise,
+              any Contribution intentionally submitted for inclusion in the Work
+              by You to the Licensor shall be under the terms and conditions of
+              this License, without any additional terms or conditions.
+              Notwithstanding the above, nothing herein shall supersede or modify
+              the terms of any separate license agreement you may have executed
+              with Licensor regarding such Contributions.
+        
+           6. Trademarks. This License does not grant permission to use the trade
+              names, trademarks, service marks, or product names of the Licensor,
+              except as required for reasonable and customary use in describing the
+              origin of the Work and reproducing the content of the NOTICE file.
+        
+           7. Disclaimer of Warranty. Unless required by applicable law or
+              agreed to in writing, Licensor provides the Work (and each
+              Contributor provides its Contributions) on an "AS IS" BASIS,
+              WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+              implied, including, without limitation, any warranties or conditions
+              of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+              PARTICULAR PURPOSE. You are solely responsible for determining the
+              appropriateness of using or redistributing the Work and assume any
+              risks associated with Your exercise of permissions under this License.
+        
+           8. Limitation of Liability. In no event and under no legal theory,
+              whether in tort (including negligence), contract, or otherwise,
+              unless required by applicable law (such as deliberate and grossly
+              negligent acts) or agreed to in writing, shall any Contributor be
+              liable to You for damages, including any direct, indirect, special,
+              incidental, or consequential damages of any character arising as a
+              result of this License or out of the use or inability to use the
+              Work (including but not limited to damages for loss of goodwill,
+              work stoppage, computer failure or malfunction, or any and all
+              other commercial damages or losses), even if such Contributor
+              has been advised of the possibility of such damages.
+        
+           9. Accepting Warranty or Additional Liability. While redistributing
+              the Work or Derivative Works thereof, You may choose to offer,
+              and charge a fee for, acceptance of support, warranty, indemnity,
+              or other liability obligations and/or rights consistent with this
+              License. However, in accepting such obligations, You may act only
+              on Your own behalf and on Your sole responsibility, not on behalf
+              of any other Contributor, and only if You agree to indemnify,
+              defend, and hold each Contributor harmless for any liability
+              incurred by, or claims asserted against, such Contributor by reason
+              of your accepting any such warranty or additional liability.
+        
+           END OF TERMS AND CONDITIONS
+        
+           APPENDIX: How to apply the Apache License to your work.
+        
+              To apply the Apache License to your work, attach the following
+              boilerplate notice, with the fields enclosed by brackets "[]"
+              replaced with your own identifying information. (Don't include
+              the brackets!)  The text should be enclosed in the appropriate
+              comment syntax for the file format. We also recommend that a
+              file or class name and description of purpose be included on the
+              same "printed page" as the copyright notice for easier
+              identification within third-party archives.
+        
+           Copyright [yyyy] [name of copyright owner]
+        
+           Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at
+        
+               http://www.apache.org/licenses/LICENSE-2.0
+        
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.
+        
+Project-URL: Homepage, https://github.com/browndw/pybiber
+Project-URL: Documentation, https://browndw.github.io/pybiber
+Keywords: nlp,language
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.10
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: adjustText>=1.1
+Requires-Dist: factor_analyzer>=0.5
+Requires-Dist: polars>=1.17
+Requires-Dist: spacy>=3.7
+Requires-Dist: statsmodels>=0.14
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Provides-Extra: spacy-model
+Requires-Dist: en_core_web_sm>=3.7.0; extra == "spacy-model"
+Dynamic: license-file
+
+
+pybiber: A comprehensive Python package for linguistic feature extraction and Multi-Dimensional Analysis
+========================================================================================================
+|pypi| |pypi_downloads| |tests|
+
+The pybiber package provides tools for extracting 67 lexicogrammatical and functional features described by `Biber (1988) <https://books.google.com/books?id=CVTPaSSYEroC&dq=variation+across+speech+and+writing&lr=&source=gbs_navlinks_s>`_ and widely used for text-type, register, and genre classification tasks in corpus linguistics.
+
+**Key Features:**
+
+- **67 Linguistic Features**: Automated extraction of tense markers, pronouns, subordination patterns, modal verbs, and more
+- **Multi-Dimensional Analysis**: Complete implementation of Biber's MDA methodology for register analysis
+- **Principal Component Analysis**: Alternative dimensionality reduction approaches with visualization tools
+- **High Performance**: Built on `spaCy <https://spacy.io/models>`_ and `Polars <https://docs.pola.rs/>`_ for efficient text processing
+- **End-to-End Pipeline**: From raw text files to statistical analysis in just a few lines of code
+- **Comprehensive Visualization**: Built-in plotting functions for exploratory data analysis
+
+**Applications:**
+
+- Register and genre analysis in corpus linguistics
+- Text classification and machine learning preprocessing  
+- Diachronic language change studies
+- Cross-linguistic variation research
+- Academic writing analysis and pedagogical applications
+- Stylometric analysis and authorship attribution
+
+The package uses `spaCy <https://spacy.io/models>`_ part-of-speech tagging and dependency parsing with `Polars <https://docs.pola.rs/>`_ DataFrames for high-performance analytics.
+
+**Accuracy Note**: Feature extraction builds from probabilistic taggers, so accuracy depends on model quality. Texts with irregular spellings or non-standard punctuation may produce unreliable outputs unless taggers are specifically tuned for those domains.
+
+See `the documentation <https://browndw.github.io/pybiber>`_ for comprehensive guides and API reference.
+
+See `pseudobibeR <https://cran.r-project.org/web/packages/pseudobibeR/index.html>`_ for the R implementation.
+
+Quick Start
+-----------
+
+**One-line processing** from a folder of text files:
+
+.. code-block:: python
+
+    import pybiber as pb
+
+    # Process all .txt files in a directory
+    pipeline = pb.PybiberPipeline(model="en_core_web_sm")
+    features = pipeline.run_from_folder("path/to/texts")
+
+**Multi-Dimensional Analysis** with visualization:
+
+.. code-block:: python
+
+    # Create analyzer for statistical analysis
+    analyzer = pb.BiberAnalyzer(features)
+    
+    # Perform MDA and generate scree plot
+    mda_results = analyzer.mda()
+    analyzer.mdaviz_screeplot()
+    
+    # Plot group means by dimension
+    analyzer.mdaviz_groupmeans(grouping_var="register")
+
+Installation
+------------
+
+You can install the released version of pybiber from `PyPI <https://pypi.org/project/pybiber/>`_:
+
+.. code-block:: install-pybiber
+
+    pip install pybiber
+
+Install a `spaCY model <https://spacy.io/usage/models#download>`_:
+
+.. code-block:: install-model
+
+    python -m spacy download en_core_web_sm
+
+Usage
+-----
+
+**Data Requirements**
+
+The pybiber package works with corpora structured as DataFrames with:
+- ``doc_id`` column: Unique document identifiers  
+- ``text`` column: Raw text content
+
+This follows conventions from `readtext <https://readtext.quanteda.io/articles/readtext_vignette.html>`_ and `quanteda <https://quanteda.io/>`_.
+
+**Step-by-Step Workflow**
+
+1. **Import libraries and load spaCy model**:
+
+.. code-block:: python
+
+    import spacy
+    import pybiber as pb
+    from pybiber.data import micusp_mini  # Sample corpus
+    
+    nlp = spacy.load("en_core_web_sm")
+
+2. **Parse corpus with spaCy**:
+
+.. code-block:: python
+
+    # Parse texts to extract linguistic annotations (modern approach)
+    processor = pb.CorpusProcessor()
+    tokens_df = processor.process_corpus(micusp_mini, nlp)
+
+3. **Extract Biber features**:
+
+.. code-block:: python
+
+    # Aggregate 67 linguistic features per document  
+    features_df = pb.biber(tokens_df)
+
+4. **Advanced Analysis** (optional):
+
+.. code-block:: python
+
+    # Statistical analysis and visualization
+    analyzer = pb.BiberAnalyzer(features_df)
+    
+    # Multi-Dimensional Analysis
+    mda_results = analyzer.mda()
+    
+    # Principal Component Analysis
+    pca_results = analyzer.pca()
+    
+    # Visualization options
+    analyzer.mdaviz_screeplot()           # Eigenvalue plot
+    analyzer.pcaviz_contrib()             # Feature contributions
+    analyzer.mdaviz_groupmeans(group_var="genre")  # Group comparisons
+
+**Pipeline Convenience Functions**
+
+For streamlined processing, use the high-level pipeline:
+
+.. code-block:: python
+
+    from pybiber import PybiberPipeline
+    
+    pipeline = PybiberPipeline(model="en_core_web_sm", disable_ner=True)
+    
+    # From folder of .txt files
+    features_df = pipeline.run_from_folder("/path/to/texts")
+    
+    # From in-memory corpus
+    features_df, tokens_df = pipeline.run(corpus_df, return_tokens=True)
+    
+    # One-liner convenience functions
+    features_df = pb.run_biber_from_folder("/path/to/texts")
+    features_df = pb.run_biber(corpus_df)
+
+Feature Categories
+------------------
+
+The package extracts 67 linguistic features across 16 categories:
+
+- **Tense & Aspect**: Past tense, perfect aspect, present tense
+- **Adverbials**: Place and time adverbials  
+- **Pronouns**: 1st/2nd/3rd person, demonstrative, indefinite pronouns
+- **Questions**: Direct wh-questions
+- **Nominal Forms**: Nominalizations, gerunds, nouns
+- **Passives**: Agentless and by-passives
+- **Stative Forms**: *be* as main verb, existential *there*
+- **Subordination**: 18 different clause types (that-clauses, wh-clauses, infinitives, relatives, etc.)
+- **Modification**: Prepositional phrases, attributive/predicative adjectives, adverbs
+- **Lexical Specificity**: Type-token ratio, word length
+- **Lexical Classes**: Conjuncts, hedges, amplifiers, emphatics, discourse particles
+- **Modals**: Possibility, necessity, and predictive modals
+- **Specialized Verbs**: Public, private, suasive verbs
+- **Reduced Forms**: Contractions, deletions, split constructions
+- **Coordination**: Phrasal and clausal coordination
+- **Negation**: Synthetic and analytic negation
+
+See the `full feature list <https://browndw.github.io/pybiber/feature-categories.html>`_ for detailed descriptions.
+
+Performance & Requirements
+--------------------------
+
+**System Requirements:**
+- Python 3.10+
+- spaCy model with POS tagging and dependency parsing (e.g., ``en_core_web_sm``)
+
+**Performance Notes:**
+- Built on Polars for fast DataFrame operations
+- Supports multiprocessing for large corpora
+- Memory-efficient processing with configurable batch sizes
+- Processing time: ~20-30 seconds for small corpora (e.g., 500 documents)
+
+License
+-------
+
+Code licensed under the `MIT License <https://opensource.org/license/mit/>`_.
+See the `LICENSE <https://github.com/browndw/pybiber/blob/master/LICENSE>`_ file.
+
+.. |pypi| image:: https://badge.fury.io/py/pybiber.svg
+    :target: https://badge.fury.io/py/pybiber
+    :alt: PyPI Version
+
+.. |pypi_downloads| image:: https://img.shields.io/pypi/dm/pybiber
+    :target: https://pypi.org/project/pybiber/
+    :alt: Downloads from PyPI
+
+.. |tests| image:: https://github.com/browndw/pybiber/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/browndw/pybiber/actions/workflows/test.yml
+    :alt: Test Status
