@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-python-template
+Version: 0.1.4
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.4.1
+Requires-Dist: starlette>=0.46.1
+Requires-Dist: uvicorn>=0.34.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
