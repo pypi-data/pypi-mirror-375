@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: schlange-queue
+Version: 0.0.1
+Summary: Lightweight, persistent, single-node task queue with at-least-once delivery guarantee
+Home-page: https://github.com/rnovatorov/schlange
+Author: Roman Novatorov
+Author-email: roman.novatorov@gmail.com
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: summary
