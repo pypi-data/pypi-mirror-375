@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-apache-airflow
+Version: 0.2.8
+Summary: Model Context Protocol (MCP) server for Apache Airflow
+Project-URL: Homepage, https://github.com/yangkyeongmo/mcp-server-apache-airflow
+Project-URL: Repository, https://github.com/yangkyeongmo/mcp-server-apache-airflow.git
+Project-URL: Bug Tracker, https://github.com/yangkyeongmo/mcp-server-apache-airflow/issues
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: airflow,apache-airflow,mcp,model-context-protocol
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Requires-Dist: apache-airflow-client<3,>=2.7.0
+Requires-Dist: click>=8.1.7
+Requires-Dist: fastmcp>=2.11.3
+Requires-Dist: httpx>=0.24.1
+Requires-Dist: mcp>=0.1.0
+Provides-Extra: dev
+Requires-Dist: build>=1.2.2.post1; extra == 'dev'
+Requires-Dist: twine>=6.1.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
