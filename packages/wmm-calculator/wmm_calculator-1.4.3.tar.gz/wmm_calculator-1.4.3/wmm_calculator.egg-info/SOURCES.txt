@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+tests/test_vec.py
+wmm/__init__.py
+wmm/build.py
+wmm/load.py
+wmm/uncertainty.py
+wmm/utils.py
+wmm/coefs/WMM.COF
+wmm_calculator.egg-info/PKG-INFO
+wmm_calculator.egg-info/SOURCES.txt
+wmm_calculator.egg-info/dependency_links.txt
+wmm_calculator.egg-info/requires.txt
+wmm_calculator.egg-info/top_level.txt
