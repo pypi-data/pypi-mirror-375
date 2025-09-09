@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+discord_data/__init__.py
+discord_data/__main__.py
+discord_data/common.py
+discord_data/error.py
+discord_data/merge.py
+discord_data/model.py
+discord_data/parse.py
+discord_data/py.typed
+discord_data.egg-info/PKG-INFO
+discord_data.egg-info/SOURCES.txt
+discord_data.egg-info/dependency_links.txt
+discord_data.egg-info/entry_points.txt
+discord_data.egg-info/requires.txt
+discord_data.egg-info/top_level.txt
