@@ -1,0 +1,513 @@
+#! /bin/bash
+# -*- coding: utf-8 -*-
+#
+# Run test in travis environment
+# This script is default script to run syntax and regression tests
+# Should be replaced by OCA maintainer-quality-tools os something like it!
+#
+# This free software is released under GNU Affero GPL3
+# author: Antonio M. Vigliotti - antoniomaria.vigliotti@gmail.com
+# (C) 2015-2025 by SHS-AV s.r.l. - http://www.shs-av.com - info@shs-av.com
+#
+# Based on template 2.1.1
+[ $BASH_VERSINFO -lt 4 ] && echo "This script $0 requires bash 4.0+!" && exit 4
+READLINK=$(which readlink 2>/dev/null)
+export READLINK
+THIS=$(basename "$0")
+TDIR=$(readlink -f $(dirname $0))
+ME=$(readlink -e $0)
+if [[ -d $HOME/devel || -z $HOME_DEVEL || ! -d $HOME_DEVEL ]]; then
+  [[ -d $HOME/odoo/devel ]] && HOME_DEVEL="$HOME/odoo/devel" || HOME_DEVEL="$HOME/devel"
+fi
+PYPATH=""
+[[ $(basename $PWD) == "tests" && $(basename $PWD/../..) == "build" ]] && PYPATH="$(dirname $PWD)"
+[[ $(basename $PWD) == "tests" && $(basename $PWD/../..) == "build" && -d $PWD/../scripts ]] && PYPATH="$PYPATH $(readlink -f $PWD/../scripts)"
+x=$ME; while [[ $x != $HOME && $x != "/" && ! -d $x/lib && ! -d $x/bin && ! -d $x/pypi ]]; do x=$(dirname $x); done
+[[ -d $x/pypi ]] && PYPATH="$PYPATH $x/pypi"
+[[ -d $x/pypi/z0lib ]] && PYPATH="$PYPATH $x/pypi/z0lib"
+[[ -d $x/pypi/z0lib/z0lib ]] && PYPATH="$PYPATH $x/pypi/z0lib/z0lib"
+[[ -d $x/tools ]] && PYPATH="$PYPATH $x/tools"
+[[ -d $x/tools/z0lib ]] && PYPATH="$PYPATH $x/tools/z0lib"
+[[ -d $x/bin ]] && PYPATH="$PYPATH $x/bin"
+[[ -d $x/lib ]] && PYPATH="$PYPATH $x/lib"
+[[ -d $HOME_DEVEL/venv/bin ]] && PYPATH="$PYPATH $HOME_DEVEL/venv/bin"
+[[ -d $HOME_DEVEL/../tools ]] && PYPATH="$PYPATH $(readlink -f $HOME_DEVEL/../tools)"
+[[ $TRAVIS_DEBUG_MODE -ge 8 ]] && echo "PYPATH=$PYPATH"
+for d in $TDIR $PYPATH /etc; do
+  if [[ -e $d/z0librc ]]; then
+    . $d/z0librc
+    Z0LIBDIR=$(readlink -e $d)
+    break
+  fi
+done
+[[ -z "$Z0LIBDIR" ]] && echo "Library file z0librc not found in <$PYPATH>!" && exit 72
+[[ $TRAVIS_DEBUG_MODE -ge 8 ]] && echo "Z0LIBDIR=$Z0LIBDIR"
+TRAVISLIBDIR=$(findpkg travisrc "$PYPATH" "travis_emulator" "travis_emulator")
+[[ -z "$TRAVISLIBDIR" ]] && echo "Library file travisrc not found!" && exit 72
+. $TRAVISLIBDIR
+[[ $TRAVIS_DEBUG_MODE -ge 8 ]] && echo "TRAVISLIBDIR=$TRAVISLIBDIR"
+
+# DIST_CONF=$(findpkg ".z0tools.conf" "$PYPATH")
+# TCONF="$HOME/.z0tools.conf"
+CFG_init "ALL"
+link_cfg_def
+link_cfg $DIST_CONF $TCONF
+[[ $TRAVIS_DEBUG_MODE -ge 8 ]] && echo "DIST_CONF=$DIST_CONF" && echo "TCONF=$TCONF"
+get_pypi_param ALL
+RED="\e[1;31m"
+CYAN="\e[1;36m"
+GREEN="\e[1;32m"
+CLR="\e[0m"
+
+__version__=2.0.18
+
+
+travis_test_bash() {
+    echo "======== Testing test_bash   ========"
+    local s sts
+    sts=0
+    if [ ${opt_dry_run:-0} -eq 0 ]; then
+      local f p param
+      if [[ -n "$LINT_CHECK_LEVEL" && -f $TDIR/cfg/travis_run_shellcheck_$LINT_CHECK_LEVEL.cfg ]]; then
+        local shellcheck_ignore=$(grep --color=never -Eo "^ignore *= *[0-9,]+" $TDIR/cfg/travis_run_shellcheck_$LINT_CHECK_LEVEL.cfg|tr -d " "|awk -F= '{print $2}')
+      else
+        local shellcheck_ignore=$(grep --color=never -Eo "^ignore *= *[0-9,]+" $TDIR/cfg/travis_run_shellcheck.cfg|tr -d " "|awk -F= '{print $2}')
+      fi
+      local shellcheck_exclude=$(grep --color=never -Eo "^exclude *= *[^#]+" $TDIR/cfg/travis_run_shellcheck.cfg|tr -d " "|awk -F= '{print $2}')
+      shellcheck_exclude="${shellcheck_exclude//,/ } *.py"
+      shellcheck_exclude=$(echo $shellcheck_exclude)
+      param=
+      if [ -n "$shellcheck_exclude" ]; then
+        for p in $shellcheck_exclude; do
+          if [ "${p: -1}" == "/" ]; then
+            param="$param -not -path '$p'"
+          else
+            param="$param -not -name '$p'"
+          fi
+        done
+      fi
+      for f in $(find . -type f $param -executable|tr "\n" " "); do
+        local mime=$(file -b --mime-type $f)
+        if [ "$mime" == "text/x-shellscript" ]; then
+          [[ ${opt_verbose:-0} -gt 0 ]] && echo "$ shellcheck -e $shellcheck_ignore $f"
+          bash -n $f
+          s=$?; [ ${s-1} -eq 0 -o $sts -ne 0 ] || sts=$s
+          [ $s -eq 0 ] && shellcheck -e $shellcheck_ignore $f
+          s=$?; [ ${s-1} -eq 0 -o $sts -ne 0 ] || sts=$s
+          if [[ $sts -eq 0 ]]; then
+            if [[ "$(grep ^[[:space:]]*set[[:space:]]+-x $f 2>/dev/null)" ]]; then
+              echo "Invalid statement 'set -x' in $f"
+              sts=1
+            fi
+          else
+            sts=1
+          fi
+        fi
+      done
+      [[ $LINT_CHECK_LEVEL =~ (MINIMAL|REDUCED) ]] && sts=0
+    else
+      sts=0
+    fi
+    return $sts
+}
+
+please_test_flake8() {
+    echo "======== Testing test_flake8 ========"
+    local opts s sts
+    sts=0
+    run_traced "export FLAKE8_CONFIG_DIR=$(readlink -f $TDIR/../_travis/cfg)"
+    [[ -z "$FLAKE8_CONFIG_DIR" ]] && run_traced "export FLAKE8_CONFIG_DIR=$(readlink -f $TDIR/../travis/cfg)"
+    if [[ ${opt_dry_run:-0} -eq 0 ]]; then
+        if [[ -n "$LINT_CHECK_LEVEL" && -f ${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__$LINT_CHECK_LEVEL.cfg ]]; then
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__$LINT_CHECK_LEVEL.cfg
+        else
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__.cfg
+        fi
+        [[ $TRAVIS_PYTHON_VERSION =~ ^2 ]] && opts="--extend-ignore=B006,F812 --max-line-length=88" || opts="--extend-ignore=B006 --max-line-length=88"
+        run_traced "flake8 . --config=${FLAKE8_CONFIG} $opts"
+        s=$?; [ ${s-1} -eq 0 -o $sts -ne 0 ] || sts=$s
+        if [[ -n "$LINT_CHECK_LEVEL" && -f ${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__$LINT_CHECK_LEVEL.cfg ]]; then
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8_$LINT_CHECK_LEVEL.cfg
+        else
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8.cfg
+        fi
+        run_traced "flake8 . --config=${FLAKE8_CONFIG} $opts"
+        s=$?; [ ${s-1} -eq 0 -o $sts -ne 0 ] || sts=$s
+    fi
+    return $sts
+}
+
+_please_test_flake8() {
+    echo "======== Testing test_flake8 ========"
+    local opts s sts x
+    sts=0
+    run_traced "export FLAKE8_CONFIG_DIR=$(readlink -f $TDIR/../_travis/cfg)"
+    [[ -z "$FLAKE8_CONFIG_DIR" ]] && run_traced "export FLAKE8_CONFIG_DIR=$(readlink -f $TDIR/../travis/cfg)"
+    if [[ -z $FLAKE8_CONFIG_DIR && -n $HOME_DEVEL ]]; then
+        x=$(find $HOME_DEVEL/venv/lib -type d -name site-packages)
+        [[ -n $x ]] && run_traced "export FLAKE8_CONFIG_DIR=$(readlink -f $x/zerobug/_travis/cfg)"
+    fi
+    [[ -z $FLAKE8_CONFIG ]] && echo "Non flake8 configuration file found!" && return 1
+    if [[ ${opt_dry_run:-0} -eq 0 ]]; then
+        if [[ $PRJNAME == "Odoo" ]]; then
+            x=$(build_odoo_param MAJVER ./)
+            [[ $x -le 7 ]] && opts="$opts --per-file-ignores='__openerp__.py:E501,E128'"
+        fi
+        if [[ -n "$LINT_CHECK_LEVEL" && -f ${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__$LINT_CHECK_LEVEL.cfg ]]; then
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__$LINT_CHECK_LEVEL.cfg
+        else
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__.cfg
+        fi
+        [[ $TRAVIS_PYTHON_VERSION =~ ^2 ]] && opts="--extend-ignore=B006,F812 --max-line-length=88" || opts="--extend-ignore=B006 --max-line-length=88"
+        if [[ -n $VDIR ]]; then
+            x=$(vem $VDIR info flake8 2>/dev/null|grep -Eo "[0-9]+\.[0-9]+"|head -n1|tr -d ".")
+            [[ $x -lt 39 ]] && vem $VDIR exec "pip install -U \"flake8>3.9.0,<=6.0.0\""
+            run_traced "vem $VDIR exec \"flake8 --config=$FLAKE8_CONFIG $opts ${PKGPATH}\""
+            s=$?; [[ $s -ne 0 && $sts -eq 0 ]] && sts=$s
+        else
+            run_traced "flake8 --config=${FLAKE8_CONFIG} $opts ${PKGPATH}"
+            s=$?; [[ $s -ne 0 && $sts -eq 0 ]] && sts=$s
+        fi
+        if [[ -n "$LINT_CHECK_LEVEL" && -f ${FLAKE8_CONFIG_DIR}/travis_run_flake8__init__$LINT_CHECK_LEVEL.cfg ]]; then
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8_$LINT_CHECK_LEVEL.cfg
+        else
+            local FLAKE8_CONFIG=${FLAKE8_CONFIG_DIR}/travis_run_flake8.cfg
+        fi
+        if [[ -n $VDIR ]]; then
+            run_traced "vem $VDIR exec \"flake8 --config=$FLAKE8_CONFIG $opts ${PKGPATH}\""
+            s=$?; [[ $s -ne 0 && $sts -eq 0 ]] && sts=$s
+        else
+            run_traced "flake8 --config=${FLAKE8_CONFIG} $opts ${PKGPATH}"
+            s=$?; [[ $s -ne 0 && $sts -eq 0 ]] && sts=$s
+        fi
+    fi
+    return $sts
+}
+
+please_test_pylint() {
+    echo "======== Testing test_pylint ========"
+    local s sts
+    sts=0
+    run_traced "export PYLINT_CONFIG_DIR=$(readlink -f $TDIR/../_travis/cfg)"
+    if [ ${opt_dry_run:-0} -eq 0 ]; then
+      TRAVIS_BUILD_DIR=$PKGPATH
+      MODULES_TO_TEST=$TRAVIS_BUILD_DIR
+      if [[ $PRJNAME == "Odoo" ]]; then
+        pylint_rcfile=${PYLINT_CONFIG_DIR}/travis_run_pylint.cfg
+      elif [[ ${TRAVIS_PYTHON_VERSION:0:1} == "2" && -f ${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI2.cfg ]]; then
+        pylint_rcfile=${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI2.cfg
+      elif [[ ${TRAVIS_PYTHON_VERSION:0:1} == "3" && -f ${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI3.cfg ]]; then
+        pylint_rcfile=${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI3.cfg
+      else
+        pylint_rcfile=${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI.cfg
+      fi
+      IFS="/" read -a REPO <<< "${ODOO_REPO}"
+      export PATH=${PATH}:${PWD}/../${REPO[1]}-${VERSION}/openerp
+      run_traced "pylint --rcfile=$pylint_rcfile ${MODULES_TO_TEST}"
+      sts=$?
+    fi
+    return $sts
+}
+
+_please_test_pylint() {
+    echo "======== Testing test_pylint ========"
+    local s sts
+    sts=0
+    run_traced "export PYLINT_CONFIG_DIR=$(readlink -f $TDIR/../_travis/cfg)"
+    if [[ -z $PYLINT_CONFIG_DIR && -n $HOME_DEVEL ]]; then
+      x=$(find $HOME_DEVEL/venv/lib -type d -name site-packages)
+      [[ -n $x ]] && run_traced "export PYLINT_CONFIG_DIR=$(readlink -f $x/zerobug/_travis/cfg)"
+    fi
+    [[ -z $PYLINT_CONFIG_DIR ]] && echo "Non pylint configuration file found!" && return 1
+    if [[ ${opt_dry_run:-0} -eq 0 ]]; then
+      if [[ $PRJNAME == "Odoo" ]]; then
+        PYLINT_CONFIG=${PYLINT_CONFIG_DIR}/travis_run_pylint_beta.cfg
+        [[ ! -f $PYLINT_CONFIG ]] && PYLINT_CONFIG=${PYLINT_CONFIG_DIR}/travis_run_pylint.cfg
+      elif [[ ${TRAVIS_PYTHON_VERSION:0:1} == "2" && -f ${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI2.cfg ]]; then
+        PYLINT_CONFIG=${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI2.cfg
+      elif [[ ${TRAVIS_PYTHON_VERSION:0:1} == "3" && -f ${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI3.cfg ]]; then
+        PYLINT_CONFIG=${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI3.cfg
+      else
+        PYLINT_CONFIG=${PYLINT_CONFIG_DIR}/travis_run_pylint_PYPI.cfg
+      fi
+      IFS="/" read -a REPO <<< "${ODOO_REPO}"
+      export PATH=${PATH}:${PWD}/../${REPO[1]}-${VERSION}/openerp
+      if [[ -n $VDIR ]]; then
+          run_traced "vem $VDIR exec \"pylint --rcfile=$PYLINT_CONFIG ${PKGPATH}\""
+      else
+          run_traced "pylint --rcfile=$PYLINT_CONFIG  ${PKGPATH}"
+      fi
+      sts=$?
+    fi
+    return $sts
+}
+
+coverage_set() {
+    coverage_tmpl=$(readlink -f $TDIR/cfg/coveragerc)
+    [[ -z $coverage_tmpl || ! -f "$coverage_tmpl" ]] && echo "No configuration file found ($TDIR/cfg/coveragerc)!" && exit 1
+    [[ -z $LOGDIR ]] && echo "${RED}Undefined LOGDIR!" && exit 1
+    [[ ! $PRJNAME == "Odoo" && -z $GIT_ORGID ]] && GIT_ORGID="zero"
+    [[ -z $GIT_ORGID ]] && GIT_ORGID="$(build_odoo_param GIT_ORGID \"$PKGPATH\")"
+    get_uniqid "$PKGPATH" "$TRAVIS_PYTHON_VERSION" "$GIT_ORGID" "$REPOSNAME"
+    run_traced "export COVERAGE_DATA_FILE=\"$LOGDIR/.${UDI}_coverage\""
+    run_traced "export COVERAGE_PROCESS_START=\"$LOGDIR/${UDI}_coveragerc\""
+    run_traced "cp $coverage_tmpl $COVERAGE_PROCESS_START"
+    if [[ $opt_dry_run -eq 0 ]]; then
+      sed -E "/    \*\.py/a\\    $PKGPATH/*" -i $COVERAGE_PROCESS_START
+      sed -E "s/    \*\.py/#    *.py/" -i $COVERAGE_PROCESS_START
+      sed -E "/\[run\]/a\\\ndata_file=$COVERAGE_DATA_FILE\n" -i $COVERAGE_PROCESS_START
+    fi
+}
+
+coverage_erase() {
+    if [[ -n $COVERAGE_PROCESS_START ]]; then
+        [[ -f $COVERAGE_DATA_FILE ]] && rm -f $COVERAGE_DATA_FILE
+        run_traced "coverage erase --rcfile=$COVERAGE_PROCESS_START"
+    fi
+}
+
+do_test () {
+    echo "======== Running regression_test ========"
+    local x opts OPTS
+    local s sts
+    sts=0
+    if [ ${opt_dry_run:-0} -eq 0 ]; then
+        [[ $TRAVIS_PDB == "true" ]] && opts="${opts}B"
+        [[ $TRAVIS_DEBUG_MODE =~ [89] ]] && opts="${opts}n"
+        OPTS=$(inherits_travis_opts "$opts" "T")
+        [[ -n $TRAVIS_TEST_PATTERN ]] && OPTS="$OPTS -p $TRAVIS_TEST_PATTERN"
+        coverage_set
+        coverage_erase
+        run_traced "cd $PKGPATH/tests && DEV_ENVIRONMENT=$PKGNAME $(which zerobug) $OPTS"
+        sts=$?
+        [[ ! -f $COVERAGE_DATA_FILE ]] && echo "Result coverage file $COVERAGE_DATA_FILE not found!"
+    fi
+    return $sts
+}
+
+set_pythonpath() {
+# set_pythonpath(path file PIP)
+    local PYPATH="${1//,/ }"
+    PYPATH="${PYPATH//:/ }"
+    local FSITE=$2
+    local PIP=${3:-pip}
+    local pth PYLIB x
+    if [[ -n "$PYPATH" || -n "$FSITE" ]]; then
+        PYLIB=$(dirname $($PIP --version | grep --color=never -Eo "from [^ ]+" | awk '{print $2}'))
+        if [ -z "$PYLIB" ]; then
+            PYLIB=$(findpkg "" "$HOME/virtualenv $HOME/python${TRAVIS_PYTHON_VERSION}_with_system_site_packages $HOME/local  $HOME/.local $HOME/lib64 $HOME/lib" "python${TRAVIS_PYTHON_VERSION} site-packages local lib64 lib" "python${TRAVIS_PYTHON_VERSION} site-packages local lib64 lib" "python${TRAVIS_PYTHON_VERSION} site-packages" "site-packages")
+        fi
+    fi
+    if [ -n "$PYLIB" ]; then
+        if [ -f $PYLIB/sitecustomize.py ]; then
+            if grep -q "import sys" $PYLIB/sitecustomize.py; then
+                :
+            else
+                echo 'import sys' >> $PYLIB/sitecustomize.py
+            fi
+        else
+            echo 'import sys' > $PYLIB/sitecustomize.py
+        fi
+        for pth in $PYPATH; do
+            echo "if '$pth' not in sys.path:    sys.path.insert(0, '$pth')" >> $PYLIB/sitecustomize.py
+            if echo ":$PYTHONPATH": | grep -q ":$pth:"; then
+                x=${PYTHONPATH//$pth/}
+                export $PYTHONPATH = ${x//::/:}
+            fi
+        done
+        [ "${PYTHONPATH:0:1}" == ":" ] && export $PYTHONPATH = ${PYTHONPATH:1}
+        if [[ -n "$FSITE" && -f $FSITE ]]; then
+            if [ -f $PYLIB/sitecustomize.py ]; then
+                if grep -q "import sys" $PYLIB/sitecustomize.py; then
+                    run_traced "tail $FSITE -n -1 >> $PYLIB/sitecustomize.py"
+                else
+                    run_traced "cat $FSITE >> $PYLIB/sitecustomize.py"
+                fi
+            else
+                run_traced "cp $FSITE $PYLIB"
+            fi
+            export PYTHONPATH=
+        fi
+    fi
+}
+
+check_pythonpath() {
+# check_pythonpath(path python)
+    local PYPATH="${1//,/ }"
+    PYPATH="${PYPATH//:/ }"
+    local PYTHON=${2:-python}
+    local PYVER=$(python --version 2>&1|grep "Python"|grep --color=never -Eo "[0-9]+"|head -n1)
+    local pth PYLIB
+    for pth in $PYPATH; do
+      if [ "$PYVER" == "2" ]; then
+        echo -e "import sys\nfor x in sys.path:\n  print x,"|$PYTHON|grep -q " $pth "
+      else
+        echo -e "import sys\nfor x in sys.path:\n  print (x,end=' ')"|$PYTHON|grep -q " $pth "
+      fi
+      if [ $? -ne 0 ]; then
+        echo "Warning: sitecustomize.py without effect! Use PYTHONPATH method"
+        [ -n "$PYTHONPATH" ] && export PYTHONPATH=$PYTHONPATH:$pth
+        [ -z "$PYTHONPATH" ] && export PYTHONPATH=$pth
+      fi
+    done
+}
+
+
+do_summary() {
+    local des k s d
+    do_summary_header | tee -a $LOGFILE
+    while IFS="#" read -r lne r || [[ -n "$lne" ]]; do
+        k=$(echo $lne | cut -d"|" -f1)
+        s=$(echo $lne | cut -d"|" -f2)
+        d=$(echo $lne | cut -d"|" -f3)
+        do_summary_line "$k" "$PKGNAME" "$TRAVIS_PYTHON_VERSION" "$s" "$d" | tee -a $LOGFILE
+    done < "$LOGDIR/.run.log"
+    do_summary_footer | tee -a $LOGFILE
+    rm -f $LOGDIR/.run.log
+}
+
+OPTOPTS=(h        c        j        K         n            p         q           r     T        t         V           v)
+OPTDEST=(opt_help opt_conf opt_dprj opt_check opt_dry_run  opt_patrn opt_verbose opt_r opt_regr test_mode opt_version opt_verbose)
+OPTACTI=("+"      "="      1        1         1            "="       0           1     1        1         "*>"        "+")
+OPTDEFL=(0        ""       0        0         0            ""        0           0     0        0         ""          -1)
+OPTMETA=("help"   "file"   "dprj"   "check"   "do nothing" "pattern" "quiet"     "rxt" "test"   "test"    "version"   "verbose")
+OPTHELP=("this help"
+ "configuration file (def .travis.conf)"
+ "deprecated: execute tests in project dir rather in test dir"
+ "do bash, flake8 and pylint checks - BASH_CHECK='1' LINT_CHECK='1'"
+ "do nothing (dry-run) - MQT_DRY_RUN"
+ "pattern to apply for test files (comma separated) - TRAVIS_TEST_PATTERN"
+ "silent mode"
+ "DEPRECATED: run rescricted mode (w/o parsing travis.yml file)"
+ "do regression tests - TESTS='1'"
+ "test mode (implies dry-run)"
+ "show version"
+ "verbose mode - MQT_VERBOSE_MODE")
+OPTARGS=(pkg)
+
+parseoptargs "$@"
+if [[ "$opt_version" ]]; then
+    echo "$__version__"
+    exit 0
+fi
+if [[ $opt_help -gt 0 ]]; then
+    print_help "Run test in travis environment" \
+               "(C) 2015-2025 by zeroincombenze®\nhttp://wiki.zeroincombenze.org/en/Linux/dev\nAuthor: antoniomaria.vigliotti@gmail.com"
+    exit 0
+fi
+
+[[ ${MQT_DRY_RUN:-0} == "1" ]] && opt_dry_run=1
+[[ ${MQT_VERBOSE_MODE:-1} == "0" ]] && opt_verbose=0
+[[ ${TRAVIS_DEBUG_MODE:-0} -ne 0 ]] && opt_verbose=1
+[[ -n $opt_patrn ]] && TRAVIS_TEST_PATTERN="$opt_patrn"
+
+opts_travis
+conf_default
+[[ $opt_verbose -gt 2 ]] && set -x
+init_travis
+# prepare_env_travis
+prepare_env_travis
+set_log_dir
+[[ ! -f $LOGDIR/.run.log ]] && touch "$LOGDIR/.run.log"
+
+sts=0
+if [ $test_mode -gt 0 ]; then
+    do_chkconfig
+    exit 0
+fi
+check_4_travis
+if [ ${opt_regr:-0} -gt 0 ]; then
+    LINT_CHECK="0"
+    TESTS="1"
+fi
+BASH_CHECK="0"
+if [ ${opt_check:-0} -gt 0 ]; then
+    LINT_CHECK="1"
+fi
+if [ "${BASH_CHECK:-1}" == "1" ]; then
+    BASH_CHECK_ENABLED=1;
+else
+    BASH_CHECK_ENABLED=0;
+fi
+if [ "${LINT_CHECK:-0}" == "1" ]; then
+    LINT_CHECK_ENABLED=1;
+else
+    LINT_CHECK_ENABLED=0;
+fi
+if [ "${LINT_CHECK:-1}" == "0" ]; then
+    LINT_CHECK_DISABLED=1;
+else
+    LINT_CHECK_DISABLED=0;
+fi
+if [ "${TESTS:-0}" == "1" ]; then
+    TEST_CHECK_ENABLED=1;
+else
+    TEST_CHECK_ENABLED=0;
+fi
+if [ -z "${TESTS}" ]; then
+    TESTS_UNSPECIFIED=1;
+else
+    TESTS_UNSPECIFIED=0;
+fi
+[[ -z "$PYPI_RUN_PYVER" ]] && PYPI_RUN_PYVER="(2.7|3.7|3.8|3.9|3.10|3.11|3.12)"
+[[ -f ./travis.ini && $(grep -qv "^#" ./travis.ini) ]] && export $(cat ./travis.ini|grep -v "^#"|tr -d "'"|tr -d '"')
+VDIR=""
+if [[ $PRJNAME == "Odoo" ]]; then
+  VDIR=$(build_odoo_param VDIR ./)
+  if [[ $(basename $(dirname $PWD)) =~ (marketplace|uncovered) ]]; then
+    p=$(dirname $(dirname $PWD))
+    x=$(echo $p|grep -Eo "[0-9]+"|head -n1)
+    [[ -d $(dirname $p)/oca$x/venv_odoo ]] && VDIR="$(dirname $p)/oca$x/venv_odoo"
+    [[ -d $(dirname $p)/odoo$x/venv_odoo ]] && VDIR="$(dirname $p)/odoo$x/venv_odoo"
+  fi
+fi
+sts_bash=127
+sts_flake8=127
+sts_pylint=127
+test_sts=127
+if [[ $TRAVIS_PYTHON_VERSION =~ $PYPI_RUN_PYVER ]]; then
+    # [[ $(basename $PWD) == "tests" ]] && cd ..
+    [[ ! "${TRAVIS_PYTHON_VERSION:0:1}" == "3" ]] && PIP=pip || PIP=pip3
+    [[ ! "${TRAVIS_PYTHON_VERSION:0:1}" == "3" ]] && PYTHON=python || PYTHON=python3
+    if [ $BASH_CHECK_ENABLED -gt 0 ]; then
+        [[ $TRAVIS_DEBUG_MODE =~ [89] ]] || travis_test_bash
+        sts_bash=$?
+        [[ $TRAVIS_DEBUG_MODE == "8" ]] && sts_bash=1
+    fi
+    if [ $LINT_CHECK_DISABLED -eq 0 ]; then
+        [[ $TRAVIS_DEBUG_MODE =~ [89] ]] || please_test_flake8
+        sts_flake8=$?
+        echo "test_flake8|$sts_flake8|$(date '+%F %T')" >> "$LOGDIR/.run.log"
+        [[ $TRAVIS_DEBUG_MODE == "8" ]] && sts_flake8=1
+        [[ $TRAVIS_DEBUG_MODE =~ [89] ]] || please_test_pylint
+        sts_pylint=$?
+        echo "test_pylint|$sts_pylint|$(date '+%F %T')" >> "$LOGDIR/.run.log"
+        [[ $TRAVIS_DEBUG_MODE == "8" ]] && sts_pylint=1
+        if [ $sts_bash -ne 127 ]; then
+            sts=$(($sts_bash || $sts_flake8 || $sts_pylint))
+        else
+            sts=$(($sts_flake8 || $sts_pylint))
+        fi
+    else
+        sts=0
+    fi
+    # [[ -d $PWD/tests ]] && cd tests
+    if [ $sts -eq 0 ]; then
+        if [ $TESTS_UNSPECIFIED -gt 0 -a $LINT_CHECK_ENABLED -eq 0 ]; then
+            [[ $TRAVIS_DEBUG_MODE =~ [89] ]] || do_test
+            test_sts=$?
+            echo "please test|$test_sts|$(date '+%F %T')" >> "$LOGDIR/.run.log"
+        elif [ $TEST_CHECK_ENABLED -gt 0 ]; then
+            [[ $TRAVIS_DEBUG_MODE =~ [89] ]] || do_test
+            test_sts=$?
+            echo "please test|$test_sts|$(date '+%F %T')" >> "$LOGDIR/.run.log"
+        fi
+        [[ $TRAVIS_DEBUG_MODE == "8" ]] && test_sts=1
+        sts=$test_sts
+    fi
+else
+    echo "This package cannot run under python $TRAVIS_PYTHON_VERSION"
+    sts=0
+fi
+do_summary "$sts_bash" "$sts_flake8" "$sts_pylint" "$test_sts"
+exit $sts
