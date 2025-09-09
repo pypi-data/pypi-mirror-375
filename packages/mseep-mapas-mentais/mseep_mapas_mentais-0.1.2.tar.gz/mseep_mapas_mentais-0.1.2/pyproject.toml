@@ -1,0 +1,23 @@
+[project]
+name = "mseep-mapas-mentais"
+version = "0.1.2"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-mapas-mentais = "server:main"
+
+[tool.setuptools]
+py-modules = [
+    "server",
+]
