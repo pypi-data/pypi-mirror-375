@@ -1,0 +1,678 @@
+/* MCP聊天面板样式 */
+.jp-mcp-chat-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.jp-mcp-chat-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.jp-mcp-chat-header h3 {
+  margin: 0 0 12px 0;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jp-mcp-chat-header h3:before {
+  content: "🤖";
+  font-size: 24px;
+}
+
+.jp-mcp-chat-status {
+  font-size: 13px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.jp-mcp-status-connected {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.jp-mcp-status-connected:before {
+  content: "●";
+  color: #10b981;
+  margin-right: 4px;
+  animation: pulse 2s infinite;
+}
+
+.jp-mcp-status-disconnected {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.jp-mcp-status-disconnected:before {
+  content: "●";
+  color: #ef4444;
+  margin-right: 4px;
+}
+
+.jp-mcp-status-connecting {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.jp-mcp-status-connecting:before {
+  content: "●";
+  color: #3b82f6;
+  margin-right: 4px;
+  animation: blink 1s infinite;
+}
+
+.jp-mcp-chat-model {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.jp-mcp-chat-model select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jp-mcp-chat-model select:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.jp-mcp-chat-auto-execute {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+.jp-mcp-chat-auto-execute label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.jp-mcp-chat-auto-execute label:hover {
+  opacity: 0.8;
+}
+
+.jp-mcp-chat-auto-execute input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  accent-color: #10b981;
+}
+
+.jp-mcp-chat-messages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 15px 20px 5px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+  min-height: 0;
+  max-height: calc(100vh - 300px);
+  box-sizing: border-box;
+}
+
+.jp-mcp-chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.jp-mcp-chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.jp-mcp-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.jp-mcp-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.jp-mcp-chat-message {
+  padding: 16px 20px;
+  border-radius: 18px;
+  max-width: 80%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  animation: messageSlideIn 0.3s ease-out;
+  word-wrap: break-word;
+}
+
+.jp-mcp-chat-message.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom-right-radius: 6px;
+}
+
+.jp-mcp-chat-message.user:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-bottom-color: #764ba2;
+  border-right: none;
+  border-bottom-right-radius: 0;
+}
+
+.jp-mcp-chat-message.assistant {
+  align-self: flex-start;
+  background: white;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.jp-mcp-chat-message.assistant:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-bottom-color: white;
+  border-left: none;
+  border-bottom-left-radius: 0;
+}
+
+.jp-mcp-chat-message.system {
+  align-self: center;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  font-style: italic;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+.jp-mcp-chat-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.jp-mcp-chat-role {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.jp-mcp-chat-role:before {
+  content: "👤";
+  font-size: 12px;
+}
+
+.jp-mcp-chat-message.assistant .jp-mcp-chat-role:before {
+  content: "🤖";
+}
+
+.jp-mcp-chat-message.system .jp-mcp-chat-role:before {
+  content: "ℹ️";
+}
+
+.jp-mcp-chat-time {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.jp-mcp-chat-message-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.jp-mcp-chat-input-container {
+  padding: 12px 16px 16px 16px;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  min-height: 100px;
+  margin: 0;
+  width: 100%;
+}
+
+/* 输入框行布局 */
+.jp-mcp-chat-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.jp-mcp-chat-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 50px;
+  max-height: 120px;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  resize: vertical;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.jp-mcp-chat-input:focus {
+  border-color: #667eea;
+  outline: none;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.jp-mcp-chat-input::placeholder {
+  color: #9ca3af;
+}
+
+.jp-mcp-chat-send-button {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  min-height: 50px;
+  box-sizing: border-box;
+  width: auto;
+}
+
+.jp-mcp-chat-send-button:before {
+  content: "📤";
+  font-size: 16px;
+}
+
+.jp-mcp-chat-send-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.jp-mcp-chat-send-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.jp-mcp-chat-send-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.jp-mcp-chat-send-button:disabled:before {
+  content: "⏳";
+}
+
+.jp-mcp-chat-panel-widget {
+  min-width: 320px;
+  min-height: 480px;
+}
+
+/* 代码块样式 */
+.jp-mcp-code-block {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.jp-mcp-code-block:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+  border-radius: 12px 12px 0 0;
+}
+
+.jp-mcp-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.jp-mcp-code-placeholder {
+  background-color: var(--jp-layout-color2);
+  color: var(--jp-ui-font-color2);
+  padding: 4px 8px;
+  margin: 4px 0;
+  border-radius: 4px;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.jp-mcp-code-output {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: var(--jp-layout-color1);
+  border: 1px solid var(--jp-border-color1);
+  border-radius: 4px;
+}
+
+.jp-mcp-code-output.error {
+  background-color: var(--jp-error-color3);
+  border-color: var(--jp-error-color2);
+}
+
+.jp-mcp-output-header {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.jp-mcp-chat-code-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* 执行按钮样式 */
+.jp-mcp-execute-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+.jp-mcp-execute-button:before {
+  content: "▶️";
+  font-size: 10px;
+}
+
+.jp-mcp-execute-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.jp-mcp-execute-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.jp-mcp-execute-button:disabled:before {
+  content: "✅";
+}
+
+.jp-mcp-execute-all-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
+}
+
+.jp-mcp-execute-all-button:before {
+  content: "🚀";
+  font-size: 14px;
+}
+
+.jp-mcp-execute-all-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.jp-mcp-execute-all-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 动画效果 */
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 响应式设计 */
+.jp-mcp-chat-panel-widget {
+  min-width: 350px;
+  min-height: 650px;
+  max-width: 500px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* 确保输入框总是可见且不被遮挡 */
+.jp-mcp-chat-panel .jp-mcp-chat-input-container {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* 调整消息区域，为输入框留出充足空间 */
+.jp-mcp-chat-messages {
+  padding-bottom: 10px;
+  margin-bottom: 0;
+}
+
+/* 面板主体布局优化 */
+.jp-mcp-chat-panel {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* 输入框区域固定在底部 */
+.jp-mcp-chat-input-container {
+  position: sticky !important;
+  bottom: 0 !important;
+  background: white !important;
+  border-radius: 0 !important;
+}
+
+/* 代码语法高亮改进 */
+.jp-mcp-code-block pre {
+  margin: 0;
+  font-family: inherit;
+  color: #1f2937;
+  background: transparent;
+}
+
+.jp-mcp-code-block code {
+  color: #1f2937;
+  background: transparent;
+}
+
+/* 输出样式改进 */
+.jp-mcp-code-output {
+  margin-top: 12px;
+  padding: 12px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.jp-mcp-code-output.error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #fca5a5;
+}
+
+.jp-mcp-output-header {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.jp-mcp-output-header:before {
+  content: "📊";
+  font-size: 14px;
+}
+
+.jp-mcp-code-output.error .jp-mcp-output-header:before {
+  content: "❌";
+}
+
+/* 加载状态 */
+.jp-mcp-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.jp-mcp-loading:before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
