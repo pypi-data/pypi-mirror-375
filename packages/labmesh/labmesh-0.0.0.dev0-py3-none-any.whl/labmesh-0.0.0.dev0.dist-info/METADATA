@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: labmesh
+Version: 0.0.0.dev0
+Summary: Hybrid ZeroMQ networking package for connecting lab instruments.
+Author-email: You <you@example.com>
+License-Expression: BSD-2-Clause
+Project-URL: Homepage, https://github.com/Grant-Giesbrecht/labmesh
+Project-URL: Issues, https://github.com/Grant-Giesbrecht/labmesh/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Classifier: Framework :: AsyncIO
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyzmq>=25
+Dynamic: license-file
+
+# labmesh
+Mesh networking package using ZeroMQ specifically designed for constellation.
