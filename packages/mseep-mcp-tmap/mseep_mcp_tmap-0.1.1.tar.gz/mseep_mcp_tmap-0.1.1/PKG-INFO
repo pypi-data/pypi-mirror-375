@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-tmap
+Version: 0.1.1
+Summary: MCP for TMAP API
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx[http2]>=0.28.1
+Requires-Dist: mcp[cli]>=1.7.1
+Requires-Dist: python-dotenv>=1.1.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

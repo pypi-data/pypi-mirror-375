@@ -1,0 +1,27 @@
+[project]
+name = "mseep-mcp-tmap"
+version = "0.1.1"
+description = "MCP for TMAP API"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx[http2]>=0.28.1",
+    "mcp[cli]>=1.7.1",
+    "python-dotenv>=1.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp_tmap = "mcp_tmap:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
