@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: mseep-kodit
+Version: 0.4.4.dev2
+Summary: Code indexing for better AI code generation
+Project-URL: Homepage, https://docs.helixml.tech/kodit/
+Project-URL: Documentation, https://docs.helixml.tech/kodit/
+Project-URL: Repository, https://github.com/helixml/kodit.git
+Project-URL: Issues, https://github.com/helixml/kodit/issues
+Project-URL: Changelog, https://github.com/helixml/kodit/releases
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: "Helix.ML" <founders@helix.ml>
+License-Expression: Apache-2.0
+License-File: LICENSE
+Keywords: ai,indexing,mcp,rag
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Code Generators
+Requires-Python: >=3.12
+Requires-Dist: accelerate>=1.7.0
+Requires-Dist: aiofiles>=24.1.0
+Requires-Dist: aiosqlite>=0.20.0
+Requires-Dist: alembic>=1.15.2
+Requires-Dist: asgi-correlation-id>=4.3.4
+Requires-Dist: asyncpg>=0.30.0
+Requires-Dist: better-exceptions>=0.3.3
+Requires-Dist: bm25s[core]>=0.2.12
+Requires-Dist: click>=8.1.8
+Requires-Dist: colorama>=0.4.6
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: fastapi[standard]>=0.115.12
+Requires-Dist: fastmcp>=2.10.4
+Requires-Dist: gitpython>=3.1.44
+Requires-Dist: hf-xet>=1.1.2
+Requires-Dist: httpx-retries>=0.3.2
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: litellm>=1.75.8
+Requires-Dist: openai==1.99.9
+Requires-Dist: pathspec>=0.12.1
+Requires-Dist: pydantic-settings>=2.9.1
+Requires-Dist: pystemmer>=3.0.0
+Requires-Dist: pytable-formatter>=0.1.1
+Requires-Dist: rudder-sdk-python>=2.1.4
+Requires-Dist: sentence-transformers>=4.1.0
+Requires-Dist: sqlalchemy[asyncio]>=2.0.40
+Requires-Dist: structlog>=25.3.0
+Requires-Dist: tdqm>=0.0.1
+Requires-Dist: tiktoken>=0.9.0
+Requires-Dist: transformers>=4.51.3
+Requires-Dist: tree-sitter-language-pack>=0.7.3
+Requires-Dist: tree-sitter>=0.24.0
+Requires-Dist: uritools>=5.0.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
