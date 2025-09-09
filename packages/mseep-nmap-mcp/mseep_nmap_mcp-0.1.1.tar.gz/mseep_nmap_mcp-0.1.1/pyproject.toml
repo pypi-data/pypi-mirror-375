@@ -1,0 +1,38 @@
+[project]
+name = "mseep-nmap-mcp"
+version = "0.1.1"
+description = "A MCP server for nmap network scanning"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.4.1",
+    "python-libnmap>=0.7.2",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+nmap-mcp = "nmap_mcp:main"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+packages = [
+    "src",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/nmap_mcp",
+]
