@@ -1,0 +1,74 @@
+Metadata-Version: 2.4
+Name: square_authentication
+Version: 10.0.2
+Summary: authentication layer for my personal server.
+Home-page: https://github.com/thepmsquare/square_authentication
+Author: Parth Mukesh Mangtani
+Author-email: thepmsquare@gmail.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Security
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Framework :: FastAPI
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: uvicorn>=0.24.0.post1
+Requires-Dist: fastapi>=0.104.1
+Requires-Dist: python-multipart>=0.0.6
+Requires-Dist: pydantic>=2.5.3
+Requires-Dist: bcrypt>=4.1.2
+Requires-Dist: pyjwt>=2.8.0
+Requires-Dist: requests>=2.32.3
+Requires-Dist: cryptography>=42.0.7
+Requires-Dist: square_commons>=3.0.0
+Requires-Dist: square_logger>=2.0.0
+Requires-Dist: square_database_helper>=2.6.1
+Requires-Dist: square_database_structure>=2.6.0
+Requires-Dist: square_file_store_helper>=3.0.0
+Requires-Dist: pytest>=8.0.0
+Requires-Dist: httpx>=0.27.2
+Requires-Dist: google-auth>=2.40.3
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+# square_authentication
+
+> 📌 versioning: see [CHANGELOG.md](./CHANGELOG.md).
+
+## about
+
+authentication layer for my personal server.
+
+## goals
+
+- integration with square_*
+- unified authentication api across all projects
+- jwt token support
+- simple user and user profile management
+- oauth support
+- future extensibility
+
+## Installation
+
+```shell
+pip install square_authentication
+```
+
+## env
+
+- python>=3.12.0
+
+> feedback is appreciated. thank you!
