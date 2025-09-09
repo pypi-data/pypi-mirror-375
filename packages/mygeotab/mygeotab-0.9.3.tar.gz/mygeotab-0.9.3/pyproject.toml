@@ -1,0 +1,18 @@
+[tool.ruff]
+line-length = 127
+target-version = "py37"
+
+[tool.ruff.lint]
+select = ["E", "F", "B"]
+exclude = [
+    "docs"
+]
+mccabe.max-complexity = 10
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"
