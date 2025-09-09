@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.S": "riscv",
+        "*.Rmd": "r",
+        "config": "plaintext",
+        "arrayobject.h": "c",
+        "python.h": "c",
+        "pyconfig.h": "c",
+        "patchlevel.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "pymacconfig.h": "c"
+    }
+}
