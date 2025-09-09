@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-panther
+Version: 2.0.2
+Summary: Panther Labs MCP Server
+Author-email: mseep <support@skydeck.ai>
+License: Apache-2.0
+Project-URL: Homepage, https://github.com/panther-labs/mcp-panther
+Project-URL: Repository, https://github.com/panther-labs/mcp-panther.git
+Keywords: security,ai,mcp,mcp-server,panther
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Systems Administration
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: aiohttp<4.0.0,>=3.11.14
+Requires-Dist: gql<4.0.0,>=3.5.2
+Requires-Dist: click<9.0.0,>=8.1.0
+Requires-Dist: fastmcp<3.0.0,>=2.10.0
+Requires-Dist: sqlparse<1.0.0,>=0.4.4
+Dynamic: license-file
+
+Package managed by MseeP.ai
