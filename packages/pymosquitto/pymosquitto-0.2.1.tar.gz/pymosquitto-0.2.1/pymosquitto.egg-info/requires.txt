@@ -1,0 +1,12 @@
+
+[dev]
+pytest
+pytest-asyncio
+build
+twine
+matplotlib
+paho-mqtt
+aiomqtt
+amqtt
+gmqtt
+mqttools
