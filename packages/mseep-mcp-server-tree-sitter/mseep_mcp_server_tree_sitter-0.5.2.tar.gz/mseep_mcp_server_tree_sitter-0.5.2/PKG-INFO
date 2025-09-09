@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-tree-sitter
+Version: 0.5.2
+Summary: MCP Server for Tree-sitter code analysis
+Project-URL: Homepage, https://github.com/wrale/mcp-server-tree-sitter
+Project-URL: Bug Tracker, https://github.com/wrale/mcp-server-tree-sitter/issues
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+License-File: NOTICE
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Requires-Dist: mcp[cli]>=0.12.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: tree-sitter-language-pack>=0.6.1
+Requires-Dist: tree-sitter>=0.20.0
+Requires-Dist: types-pyyaml>=6.0.12.20241230
+Provides-Extra: dev
+Requires-Dist: mypy>=1.2.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: ruff>=0.0.262; extra == 'dev'
+Provides-Extra: languages
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
