@@ -1,0 +1,13 @@
+LICENSE
+README.md
+setup.py
+snallygaster
+snallygaster.egg-info/PKG-INFO
+snallygaster.egg-info/SOURCES.txt
+snallygaster.egg-info/dependency_links.txt
+snallygaster.egg-info/requires.txt
+snallygaster.egg-info/top_level.txt
+snallygaster.egg-info/zip-safe
+tests/test_codingstyle.py
+tests/test_docs.py
+tests/test_scan_testdata.py
