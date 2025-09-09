@@ -1,0 +1,13 @@
+requests
+amazon.ion
+python-dateutil
+
+[dev]
+isort
+black
+flake8
+
+[test]
+pytest
+requests_mock
+pytest-mock
