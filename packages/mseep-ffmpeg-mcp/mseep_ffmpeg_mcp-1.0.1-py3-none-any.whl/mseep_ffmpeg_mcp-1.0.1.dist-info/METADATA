@@ -1,0 +1,13 @@
+Metadata-Version: 2.3
+Name: mseep-ffmpeg-mcp
+Version: 1.0.1
+Summary: 使用ffmpeg,对视频进行裁剪，拼接，滤镜等操作
+Author: mseep
+Author-email: support@skydeck.ai
+Requires-Python: >=3.10
+Classifier: Environment :: MacOS X
+Requires-Dist: mcp[cli] (>=1.6.0)
+Project-URL: Homepage, https://github.com/video-creator/ffmpeg-mcp
+Description-Content-Type: text/plain
+
+/tmp/build-via-sdist-p1xjxhpa/mseep_ffmpeg_mcp-1.0.1/Package managed by MseeP.ai

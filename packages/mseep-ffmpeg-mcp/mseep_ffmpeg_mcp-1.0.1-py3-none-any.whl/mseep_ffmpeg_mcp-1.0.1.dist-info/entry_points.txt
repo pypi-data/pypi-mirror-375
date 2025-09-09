@@ -1,0 +1,3 @@
+[console_scripts]
+ffmpeg-mcp=ffmpeg_mcp.server:main
+
