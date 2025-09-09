@@ -1,0 +1,8 @@
+gspread
+joblib==1.2.0
+numpy
+oauth2client
+pandas
+pandas_market_calendars
+psycopg2-binary>2.8
+pytz
