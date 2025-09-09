@@ -1,0 +1,4 @@
+[console_scripts]
+dask-ms=daskms.apps.entrypoint:main
+fragments=daskms.apps.fragments:main
+
