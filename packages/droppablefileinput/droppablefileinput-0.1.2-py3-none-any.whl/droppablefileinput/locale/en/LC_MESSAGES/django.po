@@ -1,0 +1,63 @@
+# English translations for droppablefileinput.
+# Copyright (C) 2025 Krystof Beuermann
+# This file is distributed under the same license as the droppablefileinput package.
+# Krystof Beuermann <krystof@blackbox.ms>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: droppablefileinput 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-30 04:25-0500\n"
+"PO-Revision-Date: 2025-06-30 11:27+0100\n"
+"Last-Translator: Krystof Beuermann <krystof@blackbox.ms>\n"
+"Language-Team: English <en@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: droppablefileinput/templates/widgets/droppable_file_input.html:24
+msgid "Clear selected file"
+msgstr ""
+
+#: droppablefileinput/templates/widgets/droppable_file_input.html:25
+msgid "Clear"
+msgstr ""
+
+#: droppablefileinput/templates/widgets/droppable_file_input.html:29
+msgid "Uploading file..."
+msgstr ""
+
+#: droppablefileinput/templates/widgets/droppable_file_input.html:31
+msgid "Uploading..."
+msgstr ""
+
+#: droppablefileinput/templates/widgets/droppable_file_input.html:48
+msgid "Drop file here to upload"
+msgstr ""
+
+#: droppablefileinput/widgets.py:9
+msgid "Click here or drag and drop a file"
+msgstr ""
+
+#: droppablefileinput/widgets.py:10
+msgid "Drag the file here or click"
+msgstr ""
+
+#: droppablefileinput/widgets.py:11
+msgid "choose file"
+msgstr ""
+
+#: droppablefileinput/widgets.py:12
+msgid "to upload."
+msgstr ""
+
+#: droppablefileinput/widgets.py:43
+#, python-format
+msgid "The file is too large. The maximum file size is %(max_file_size)s."
+msgstr ""
+
+#: droppablefileinput/widgets.py:49
+#, python-format
+msgid "Invalid file type. Only %(allowed_types)s files are allowed."
+msgstr ""

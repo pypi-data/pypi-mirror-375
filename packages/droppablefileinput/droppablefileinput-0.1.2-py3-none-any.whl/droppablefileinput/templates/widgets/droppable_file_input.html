@@ -1,0 +1,51 @@
+{% load static i18n %}
+<div class="droppablefileinput__card">
+    <div class="droppablefileinput__card-body">
+        <div class="droppablefileinput__error" style="display: none"></div>
+        <div class="droppablefileinput__content">
+            <div class="droppablefileinput__preview"></div>
+            <div class="droppablefileinput__icon-container">
+                <img class="droppablefileinput__icon"
+                     alt="Upload file icon"
+                     src="{{ widget.icon_url }}"
+                     height="{{ widget.icon_height }}"
+                     width="{{ widget.icon_width }}" />
+            </div>
+            <div class="droppablefileinput__text-container">
+                <p class="droppablefileinput__label" data-original-text="{{ widget.drop_text }} {{ widget.link_text }} {{ widget.description_text }}">
+                    {{ widget.drop_text }} <a href="#" onclick="return false;">{{ widget.link_text }}</a> {{ widget.description_text }}
+                </p>
+                {% if widget.instructions %}
+                <p class="droppablefileinput__instructions">{{ widget.instructions }}</p>
+                {% endif %}
+                <div class="droppablefileinput__controls">
+                    <button type="button" 
+                            class="droppablefileinput__clear" 
+                            style="display: none"
+                            aria-label="{% trans 'Clear selected file' %}">
+                        {% trans "Cancel" %}
+                    </button>
+                    <div class="droppablefileinput__spinner"
+                         role="status"
+                         aria-label="{% trans 'Uploading file...' %}"
+                         style="display: none">
+                        <span class="droppablefileinput__spinner-text">{% trans "Uploading..." %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="{{ widget.type }}"
+               name="{{ widget.name }}"
+               {% if widget.value %}value="{{ widget.value }}"{% endif %}
+               {% if widget.attrs.accept %}accept="{{ widget.attrs.accept }}"{% else %}accept="*"{% endif %}
+               {% if widget.attrs.class %}class="{{ widget.attrs.class }}"{% endif %}
+               {% if widget.attrs.required %}required{% endif %}
+               data-max-file-size="{{ widget.max_file_size|default:'100M' }}"
+               data-auto-submit="{{ widget.auto_submit }}"
+               data-allowed-types="{{ widget.allowed_types|default:'' }}"
+               data-max-size-error-message="{{ widget.max_size_error_message }}"
+               data-invalid-file-type-error-message="{{ widget.invalid_file_type_error_message }}"
+               id="{{ widget.attrs.id }}" />
+    </div>
+    <span id="drop-active" class="droppablefileinput__sr-only">{% trans "Drop file here to upload" %}</span>
+</div>
