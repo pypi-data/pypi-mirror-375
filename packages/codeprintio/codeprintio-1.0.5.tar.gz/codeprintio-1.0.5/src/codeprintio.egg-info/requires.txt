@@ -1,0 +1,12 @@
+colorama>=0.4.4
+pyperclip>=1.8.2
+
+[all]
+pyperclip>=1.8.2
+
+[dev]
+pytest>=7.0.0
+pytest-cov>=3.0.0
+black>=22.0.0
+flake8>=4.0.0
+mypy>=0.950

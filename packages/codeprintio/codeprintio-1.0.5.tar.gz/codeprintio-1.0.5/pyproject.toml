@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=77.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codeprintio"
+version = "1.0.5"
+description = "A powerful cross-platform tool for creating AI-ready project snapshots"
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+authors = [
+    {name = "Tanay Kedia", email = "tkedia7@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Documentation",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "colorama>=0.4.4",
+    "pyperclip>=1.8.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950",
+]
+all = [
+    "pyperclip>=1.8.2",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Tanayk07/codeprint"
+"Bug Tracker" = "https://github.com/Tanayk07/codeprint/issues"
+"Documentation" = "https://github.com/Tanayk07/codeprint#readme"
+
+[project.scripts]
+codeprint = "codeprint.cli:main"
+codep = "codeprint.cli:main"
+codeprintio = "codeprint.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["codeprint*"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 100
+target-version = ['py37', 'py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.mypy]
+python_version = "3.7"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
