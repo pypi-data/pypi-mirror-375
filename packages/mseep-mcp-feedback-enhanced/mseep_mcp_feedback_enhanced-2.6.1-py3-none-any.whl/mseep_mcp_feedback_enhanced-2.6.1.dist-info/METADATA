@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-feedback-enhanced
+Version: 2.6.1
+Summary: Enhanced MCP server for interactive user feedback and command execution in AI-assisted development, featuring dual interface support (Web UI and Desktop Application) with intelligent environment detection and cross-platform compatibility.
+Project-URL: Homepage, https://github.com/Minidoracat/mcp-feedback-enhanced
+Project-URL: Repository, https://github.com/Minidoracat/mcp-feedback-enhanced
+Project-URL: Issues, https://github.com/Minidoracat/mcp-feedback-enhanced/issues
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Keywords: ai,cross-platform,desktop-app,development,dual-interface,feedback,interactive,mcp,tauri,web-ui
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: MacOS X
+Classifier: Environment :: Web Environment
+Classifier: Environment :: Win32 (MS Windows)
+Classifier: Environment :: X11 Applications
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Desktop Environment
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: User Interfaces
+Requires-Python: >=3.11
+Requires-Dist: aiohttp>=3.8.0
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: fastmcp>=2.0.0
+Requires-Dist: jinja2>=3.1.0
+Requires-Dist: mcp>=1.9.3
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: uvicorn>=0.30.0
+Requires-Dist: websockets>=13.0.0
+Provides-Extra: dev
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
