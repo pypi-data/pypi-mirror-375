@@ -1,0 +1,27 @@
+[project]
+name = "mseep-mcp-oi-wiki"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "fastembed>=0.6.1",
+    "mcp[cli]>=1.6.0",
+    "openai>=1.76.0",
+    "pymilvus>=2.5.7",
+    "transformers>=4.51.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-mcp-oi-wiki = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
