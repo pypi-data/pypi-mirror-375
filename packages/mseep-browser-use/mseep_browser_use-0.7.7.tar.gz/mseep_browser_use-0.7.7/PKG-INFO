@@ -1,0 +1,69 @@
+Metadata-Version: 2.4
+Name: mseep-browser-use
+Version: 0.7.7
+Summary: Make websites accessible for AI agents
+Project-URL: Repository, https://github.com/browser-use/browser-use
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: <4.0,>=3.11
+Requires-Dist: aiofiles>=24.1.0
+Requires-Dist: aiohttp==3.12.15
+Requires-Dist: anthropic<1.0.0,>=0.58.2
+Requires-Dist: anyio>=4.9.0
+Requires-Dist: authlib>=1.6.0
+Requires-Dist: bubus>=1.5.6
+Requires-Dist: cdp-use>=1.4.0
+Requires-Dist: google-api-core>=2.25.0
+Requires-Dist: google-api-python-client>=2.174.0
+Requires-Dist: google-auth-oauthlib>=1.2.2
+Requires-Dist: google-auth>=2.40.3
+Requires-Dist: google-genai<2.0.0,>=1.29.0
+Requires-Dist: groq>=0.30.0
+Requires-Dist: html2text>=2025.4.15
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.10.1
+Requires-Dist: ollama>=0.5.1
+Requires-Dist: openai<2.0.0,>=1.99.2
+Requires-Dist: pillow>=11.2.1
+Requires-Dist: portalocker<3.0.0,>=2.7.0
+Requires-Dist: posthog>=3.7.0
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: pydantic>=2.11.5
+Requires-Dist: pyobjc>=11.0; platform_system == 'darwin'
+Requires-Dist: pyotp>=2.9.0
+Requires-Dist: pypdf>=5.7.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: reportlab>=4.0.0
+Requires-Dist: requests>=2.32.3
+Requires-Dist: screeninfo>=0.8.1; platform_system != 'darwin'
+Requires-Dist: typing-extensions>=4.12.2
+Requires-Dist: uuid7>=0.1.0
+Provides-Extra: all
+Requires-Dist: browser-use[aws,cli,examples]; extra == 'all'
+Provides-Extra: aws
+Requires-Dist: boto3>=1.38.45; extra == 'aws'
+Provides-Extra: cli
+Requires-Dist: click>=8.1.8; extra == 'cli'
+Requires-Dist: rich>=14.0.0; extra == 'cli'
+Requires-Dist: textual>=3.2.0; extra == 'cli'
+Provides-Extra: eval
+Requires-Dist: anyio>=4.9.0; extra == 'eval'
+Requires-Dist: browserbase==1.4.0; extra == 'eval'
+Requires-Dist: datamodel-code-generator>=0.26.0; extra == 'eval'
+Requires-Dist: hyperbrowser==0.47.0; extra == 'eval'
+Requires-Dist: lmnr[all]==0.7.10; extra == 'eval'
+Requires-Dist: psutil>=7.0.0; extra == 'eval'
+Provides-Extra: examples
+Requires-Dist: agentmail>=0.0.53; extra == 'examples'
+Requires-Dist: botocore>=1.37.23; extra == 'examples'
+Requires-Dist: imgcat>=0.6.0; extra == 'examples'
+Requires-Dist: langchain-openai>=0.3.26; extra == 'examples'
+Provides-Extra: video
+Requires-Dist: imageio[ffmpeg]>=2.37.0; extra == 'video'
+Requires-Dist: numpy>=2.3.2; extra == 'video'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
