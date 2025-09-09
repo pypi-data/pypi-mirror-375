@@ -1,0 +1,116 @@
+Metadata-Version: 2.4
+Name: tap-pushbullet
+Version: 0.5.1
+Summary: Singer tap for Pushbullet, built with the Meltano SDK for Singer Taps.
+Project-URL: Documentation, https://github.com/reservoir-data/tap-pushbullet#readme
+Project-URL: Homepage, https://github.com/reservoir-data/tap-pushbullet
+Project-URL: Repository, https://github.com/reservoir-data/tap-pushbullet
+Author-email: Edgar Ramírez-Mondragón <edgarrm358@gmail.com>
+License-Expression: Apache-2.0
+Keywords: ELT,Pushbullet,singer.io
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Requires-Python: >=3.10
+Requires-Dist: backoff~=2.2.1
+Requires-Dist: requests-cache<2,>=1.1
+Requires-Dist: singer-sdk~=0.48.1
+Description-Content-Type: text/markdown
+
+# `tap-pushbullet`
+
+Singer tap for Pushbullet.
+
+Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+
+## Capabilities
+
+* `catalog`
+* `state`
+* `discover`
+* `about`
+* `stream-maps`
+
+## Settings
+
+- [ ] `Developer TODO:` Declare tap settings here.
+
+A full list of supported settings and capabilities is available by running: `tap-pushbullet --about`
+
+### Source Authentication and Authorization
+
+- [ ] `Developer TODO:` If your tap requires special access on the source system, or any special authentication requirements, provide those here.
+
+## Usage
+
+You can easily run `tap-pushbullet` by itself or in a pipeline using [Meltano](https://meltano.com/).
+
+### Executing the Tap Directly
+
+```bash
+tap-pushbullet --version
+tap-pushbullet --help
+tap-pushbullet --config CONFIG --discover > ./catalog.json
+```
+
+## Developer Resources
+
+- [ ] `Developer TODO:` As a first step, scan the entire project for the text "`TODO:`" and complete any recommended steps, deleting the "TODO" references once completed.
+
+### Initialize your Development Environment
+
+Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already.
+
+### Create and Run Tests
+
+Create tests within the `tests` subfolder and then run:
+
+```bash
+uv run pytest
+```
+
+You can also test the `tap-pushbullet` CLI interface directly using `uv run`:
+
+```bash
+uv run tap-pushbullet --help
+```
+
+### Testing with [Meltano](https://www.meltano.com)
+
+_**Note:** This tap will work in any Singer environment and does not require Meltano.
+Examples here are for convenience and to streamline end-to-end orchestration scenarios._
+
+Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any _"TODO"_ items listed in
+the file.
+
+Next, install Meltano (if you haven't already) and any needed plugins:
+
+```bash
+# Install meltano
+uv tool install meltano
+
+# Configure the backend to use `uv`
+meltano config meltano set venv.backend uv
+
+# Initialize meltano within this directory
+cd tap-pushbullet
+meltano install
+```
+
+Now you can test and orchestrate using Meltano:
+
+```bash
+# Test invocation:
+meltano invoke tap-pushbullet --version
+
+# OR run a test `elt` pipeline:
+meltano run tap-pushbullet target-jsonl
+```
+
+### SDK Dev Guide
+
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
+develop your own taps and targets.
