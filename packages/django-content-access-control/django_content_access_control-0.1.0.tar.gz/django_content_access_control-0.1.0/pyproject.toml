@@ -1,0 +1,7 @@
+[project]
+name = "django-content-access-control"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["django>=4.2", "pycasbin>=2.2.0"]
