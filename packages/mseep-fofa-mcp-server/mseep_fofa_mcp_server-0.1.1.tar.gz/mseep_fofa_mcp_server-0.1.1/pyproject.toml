@@ -1,0 +1,24 @@
+[project]
+name = "mseep-fofa-mcp-server"
+version = "0.1.1"
+description = "A server for querying FOFA API using MCP"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.4.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-fofa-mcp-server = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
