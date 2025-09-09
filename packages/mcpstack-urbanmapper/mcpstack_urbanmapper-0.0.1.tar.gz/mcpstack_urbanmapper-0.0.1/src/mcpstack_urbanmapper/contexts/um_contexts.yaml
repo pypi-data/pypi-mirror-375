@@ -1,0 +1,146 @@
+defaults:
+  env:
+    MCP_URBANMAPPER_ENFORCE_HF_ONLY: "1"
+    MCP_URBANMAPPER_DEFAULT_SPLIT: ""
+    MCP_URBANMAPPER_DEFAULT_CRS: "EPSG:4326"
+  pipeline:
+    include_imputer: true
+    include_filter: true
+    streaming: true
+    number_of_rows: 5000
+  visualiser:
+    type: Interactive
+    preset: dark
+
+stages:
+
+  loader:
+    primitives:
+      from_huggingface:
+        summary: >
+          Load a split or a sampled subset directly from Hugging Face Hub (HF-only).
+          Use outside the pipeline to create a CSV, because `loader.build()` supports only file sources.
+        params:
+          repo_id: "<namespace/dataset>"
+          split: "train|test|validation (optional)"
+          number_of_rows: "int (optional; sample size)"
+          streaming: "bool (optional; stream head efficiently)"
+      with_columns:
+        summary: "Declare columns for coordinates OR geometry."
+        patterns:
+          - 'with_columns(longitude_column="lon", latitude_column="lat")'
+          - 'with_columns(geometry_column="geometry")'
+      with_crs:
+        summary: "Set the CRS for loaded coordinates/geometry."
+        example: 'with_crs("EPSG:4326")'
+      from_file:
+        summary: "Use this in the pipeline loader step to read the CSV you just exported from HF."
+
+  urban_layer:
+    types:
+      streets_roads:
+        maps_to: OSMNXStreets
+        summary: "OSM street network edges (roads)."
+      streets_intersections:
+        maps_to: OSMNXIntersections
+        summary: "OSM street intersections (nodes)."
+      streets_sidewalks:
+        maps_to: Tile2NetSidewalks
+        summary: "Tile2Net sidewalks."
+      streets_crosswalks:
+        maps_to: Tile2NetCrosswalks
+        summary: "Tile2Net crosswalks."
+      streets_features:
+        maps_to: OSMFeatures
+        summary: "OSM point/area features (amenities, etc.)."
+      region_cities:
+        summary: "Administrative city boundaries."
+      region_neighborhoods:
+        summary: "Administrative neighbourhood boundaries."
+      region_states:
+        summary: "Administrative state boundaries."
+      region_countries:
+        summary: "Administrative country boundaries."
+      custom_urban_layer:
+        summary: "Wrap an existing GeoDataFrame or file."
+
+    mapping:
+      with_mapping:
+        summary: "Define input coordinate columns and name the mapping result column."
+        signatures:
+          - 'with_mapping(longitude_column="LONGITUDE", latitude_column="LATITUDE", output_column="nearest_intersection")'
+          - 'with_mapping(geometry_column="geometry", output_column="nearest_segment")'
+        gotchas:
+          - "The same output_column must be used later as enricher.with_data(group_by=...)."
+
+  imputer:
+    types:
+      SimpleGeoImputer:
+        summary: "Drop rows with missing lat/long (quick clean)."
+      AddressGeoImputer:
+        summary: "Geocode an address column to fill lat/long."
+        cautions:
+          - "Requires network; may be rate-limited."
+
+  filter:
+    types:
+      BoundingBoxFilter:
+        summary: "Clip points to an AOI (uses the layer bounds unless explicit)."
+
+  enricher:
+    types:
+      SingleAggregatorEnricher:
+        summary: "Aggregate observations per feature (count or statistic)."
+
+  visualiser:
+    aliases:
+      Interactive: interactive
+      Static: static
+      InteractiveVisualiser: interactive
+      StaticVisualiser: static
+    types:
+      Static:
+        class_name: StaticVisualiser
+        summary: "Static plot via Matplotlib (single column)."
+        allowed_style_keys: [kind, cmap, color, ax, cax, categorical, legend, scheme, k, vmin, vmax, markersize, figsize]
+      Interactive:
+        class_name: InteractiveVisualiser
+        summary: "Interactive map (folium/leaflet)."
+        allowed_style_keys: [cmap, color, m, tiles, attr, tooltip, popup, highlight, categorical, legend, scheme, k, vmin, vmax, width, height, colorbar_text_color, marker_type, marker_kwds]
+    presets:
+      static:
+        paper: { figsize: [10, 8], cmap: "viridis", legend: true }
+        poster: { figsize: [14, 10], cmap: "plasma", legend: true }
+        mono:   { figsize: [10, 8], color: "0.2", legend: false }
+      interactive:
+        light: { tiles: "CartoDB positron", legend: true }
+        dark:  { tiles: "CartoDB dark_matter", legend: true, colorbar_text_color: "white" }
+        categorical_points: { categorical: true, marker_type: "circle", marker_kwds: { radius: 5 } }
+        continuous_viridis: { cmap: "viridis", legend: true }
+        continuous_plasma:  { cmap: "plasma", legend: true }
+
+pipeline_hints:
+  order: ["urban_layer", "loader", "imputer?", "filter?", "enricher", "visualiser?"]
+
+examples:
+  collisions_downtown_bk:
+    params:
+      repo_id: "oscur/NYC_vehicle_collisions"
+      place: "Downtown Brooklyn, New York City, USA"
+      layer: "streets_intersections"
+      group_by_key: "nearest_intersection"
+      lon: "LONGITUDE"
+      lat: "LATITUDE"
+      aggregation: { method: "count", output_column: "collision_count" }
+      visualiser: { preset: "dark" }
+
+  pluto_intersections_avg_floors:
+    params:
+      repo_id: "oscur/pluto"
+      place: "Downtown Brooklyn, New York City, USA"
+      layer: "streets_intersections"
+      group_by_key: "nearest_intersection"
+      lon: "longitude"
+      lat: "latitude"
+      aggregation: { method: "mean", values_from: "numfloors", output_column: "avg_floors" }
+      visualiser: { preset: "light" }
