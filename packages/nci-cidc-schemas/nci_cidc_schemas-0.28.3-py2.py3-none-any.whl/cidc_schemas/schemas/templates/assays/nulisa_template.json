@@ -1,0 +1,88 @@
+{
+    "title": "NULISA assay template",
+    "description": "NULISA submission.",
+    "prism_template_root_object_schema": "assays/nulisa_assay.json",
+    "prism_template_root_object_pointer": "/assays/nulisa/0",
+    "properties":
+    {
+        "worksheets":
+        {
+            "NULISA":
+            {
+                "preamble_rows":
+                {
+                    "protocol identifier":
+                    {
+                        "merge_pointer": "3/protocol_identifier",
+                        "type_ref": "clinical_trial.json#properties/protocol_identifier"
+                    },
+                    "assay creator":
+                    {
+                        "merge_pointer": "0/assay_creator",
+                        "type_ref": "assays/scrnaseq_assay.json#properties/assay_creator"
+                    },
+                    "batch id": {
+                        "merge_pointer": "0/batch_id",
+                        "type_ref": "assays/scrnaseq_assay.json#properties/batch_id"
+                    },
+                    "npq file": {
+                        "merge_pointer": "0/npq_file",
+                        "gcs_uri_format": "{protocol identifier}/nulisa/{batch id}/npq_file.csv",
+                        "is_artifact": 1,
+                        "type_ref": "assays/components/local_file.json#properties/file_path"
+                    },
+                    "raw counts file": {
+                        "merge_pointer": "0/raw_counts_file",
+                        "gcs_uri_format": "{protocol identifier}/nulisa/{batch id}/raw_counts_file.csv",
+                        "is_artifact": 1,
+                        "type_ref": "assays/components/local_file.json#properties/file_path"
+                    },
+                    "metadata csv": {
+                        "merge_pointer": "0/metadata_csv",
+                        "gcs_uri_format": "{protocol identifier}/nulisa/{batch id}/metadata.csv",
+                        "is_artifact": 1,
+                        "type_ref": "assays/components/local_file.json#properties/file_path",
+                        "allow_empty": true
+                    }
+                },
+                "prism_data_object_pointer": "/records/-",
+                "data_columns":
+                {
+                    "Samples":
+                    {
+                        "Cimac ID":
+                        {
+                            "merge_pointer": "0/cimac_id",
+                            "type_ref": "sample.json#properties/cimac_id"
+                        },
+                        "IC Median": {
+                            "merge_pointer": "0/details/ic_median",
+                            "type": "number"
+                        },
+                        "Detectability": {
+                            "merge_pointer": "0/details/detectability",
+                            "type": "number",
+                            "allow_empty": true
+                        },
+                        "IC Reads": {
+                            "merge_pointer": "0/details/ic_reads",
+                            "type": "integer"
+                        },
+                        "QC Status": {
+                            "merge_pointer": "0/details/qc_status",
+                            "type": "string"
+                        },
+                        "Reads": {
+                            "merge_pointer": "0/details/reads",
+                            "type": "integer"
+                        },
+                        "AUTO_WELLPOSITION": {
+                            "merge_pointer": "0/details/auto_well_position",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
