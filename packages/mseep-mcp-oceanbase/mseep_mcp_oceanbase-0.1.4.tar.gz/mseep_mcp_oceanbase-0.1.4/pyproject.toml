@@ -1,0 +1,43 @@
+[project]
+name = "mseep-mcp-oceanbase"
+version = "0.1.4"
+description = "A Model Context Protocol (MCP) server that enables secure interaction with OceanBase databases. This server allows AI assistants to list tables, read data, and execute SQL queries through a controlled interface, making database exploration and analysis safer and more structured."
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "fastmcp>=2.5.1",
+    "mysql-connector-python>=9.1.0",
+    "python-dotenv",
+    "beautifulsoup4>=4.13.3",
+    "certifi>=2025.4.26",
+    "requests",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+ocp_mcp_server = "ocp_mcp_server:main"
+okctl_mcp_server = "okctl_mcp_server:main"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = [
+    "src/ocp_mcp_server/**/*.py",
+    "src/okctl_mcp_server/**/*.py",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/ocp_mcp_server",
+    "src/okctl_mcp_server",
+]
