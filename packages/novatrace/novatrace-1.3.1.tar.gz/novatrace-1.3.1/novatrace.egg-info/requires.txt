@@ -1,0 +1,9 @@
+sqlalchemy>=1.4
+python-decouple
+pytz
+requests
+reflex
+fastapi>=0.116.1
+bcrypt
+psutil
+pyjwt
