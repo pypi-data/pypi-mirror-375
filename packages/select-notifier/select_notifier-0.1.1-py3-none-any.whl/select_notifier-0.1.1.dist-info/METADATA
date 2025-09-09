@@ -1,0 +1,214 @@
+Metadata-Version: 2.4
+Name: select-notifier
+Version: 0.1.1
+Summary: Lightweight notification package(email & Rocket.Chat) for Select services
+Author: Select Team
+License: Proprietary
+Project-URL: Homepage, https://repo.afe.ir/afeai/select-notifier
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: httpx>=0.27.0
+Provides-Extra: email
+Provides-Extra: rocket
+Requires-Dist: httpx>=0.27.0; extra == "rocket"
+Provides-Extra: test
+Requires-Dist: pytest>=8; extra == "test"
+Requires-Dist: pytest-cov>=5; extra == "test"
+Provides-Extra: dev
+Requires-Dist: black>=24.0; extra == "dev"
+Requires-Dist: ruff>=0.6.0; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: pre-commit>=3.7; extra == "dev"
+
+## Name
+
+**Select-Notifier: Lightweight Notification Module (Email + Rocket.Chat)**
+
+---
+
+## Description
+
+**Select-Notifier** is a small, production-friendly Python package that provides a unified interface for sending notifications.  
+It currently supports:
+
+- **EmailNotifier** — SMTP with robust input validation, STARTTLS/SSL support, retries & backoff  
+- **RocketNotifier** — Rocket.Chat integration via REST API (`chat.postMessage`) with retries & backoff  
+
+The package is designed to be embedded inside Select services and pipelines where a simple, reliable notifier is needed.
+
+---
+
+## Badges
+
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project.  
+You can use [Shields.io](https://shields.io) to add badges. Many services also have instructions for adding a badge.
+
+---
+
+## Visuals
+
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos).  
+Tools like `ttygif` can help, but check out [Asciinema](https://asciinema.org) for a more sophisticated method.
+
+---
+
+## Features
+
+```text
+✅ Email (SMTP):
+    - STARTTLS (587) and SMTPS/SSL (465)
+    - Retries with exponential backoff
+    - Clear, actionable log messages
+    - Validation for sender/recipient, subject/body
+    - Password normalization:
+        • Removes whitespace
+        • Converts non-ASCII digits (e.g., Persian ۰-۹) to ASCII
+
+✅ Rocket.Chat (REST API):
+    - Auth with userId + authToken
+    - Send to channels (#channel) or direct messages (@user)
+    - Retries with exponential backoff
+    - Handles transient vs permanent errors cleanly
+
+✅ Minimal Dependencies:
+    - Email: standard library only
+    - Rocket: [`httpx`](https://www.python-httpx.org/) for HTTP
+```
+
+---
+
+## Repository Structure
+
+```text
+select-notifier/
+├── src/
+│   └── select_notifier/
+│       ├── __init__.py
+│       ├── __version__.py
+│       ├── base.py                 # Core types & protocols
+│       └── services/
+│           ├── email.py            # EmailNotifier
+│           └── rocket.py           # RocketNotifier
+├── tests/
+│   ├── test_base.py
+│   ├── test_email_notifier.py
+│   └── test_rocket_notifier.py
+├── version_and_changelog.py        # Version bump + changelog generator
+├── versioning_strategy.md          # Versioning policy
+├── pyproject.toml
+├── requirements.txt
+├── requirements-dev.txt
+└── README.md
+```
+
+---
+
+## Installation
+
+1) Clone the repository:
+```bash
+git clone http://repo.afe.ir/afeai/select-notifier.git
+cd select-notifier
+```
+
+2. Create virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate    # Linux/Mac
+.venv\Scripts\activate       # Windows
+```
+
+3) Install requirements:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Usage
+
+### EmailNotifier (STARTTLS, port 587)
+```python
+from select_notifier.services.email import EmailNotifier
+
+notifier = EmailNotifier.create(
+    sender="noreply@example.com",
+    password="your-app-password",
+    server="smtp.example.com",
+    port=587,
+    use_tls=True,
+    use_ssl=False,
+    timeout=30.0,
+)
+
+notifier.send_text(
+    subject="Hello from Select-Notifier",
+    body="This is a test message.",
+    to=["user@dest.com"],
+)
+```
+
+### EmailNotifier (SMTPS, port 465)
+```python
+from select_notifier.services.email import EmailNotifier
+
+notifier = EmailNotifier.create(
+    sender="noreply@example.com",
+    password="your-app-password",
+    server="smtp.example.com",
+    port=465,
+    use_tls=False,
+    use_ssl=True,
+)
+
+notifier.send_text(
+    subject="Secure Email",
+    body="Body here",
+    to=["user@dest.com"],
+)
+```
+
+### RocketNotifier (REST API)
+```python
+from select_notifier.services.rocket import RocketNotifier
+
+notifier = RocketNotifier.create(
+    domain="https://chat.company.com",
+    user_id="YOUR_USER_ID",
+    auth_token="YOUR_AUTH_TOKEN",
+)
+
+notifier.send_text(
+    subject="Deploy",
+    body="Production deployment finished",
+    to=["#ops"],   # or ["@username"]
+)
+```
+
+**Notes**
+- For Gmail, use an **App Password** (no spaces) and ensure “Less secure apps” is not required.
+- The module normalizes secrets by stripping whitespace and converting non-ASCII digits to ASCII digits.
+- Rocket.Chat API requires a valid userId and authToken. The user must have permission to post into the target channel/DM.
+- Retry/backoff behavior is configurable (retries, backoff).
+
+---
+
+## License
+
+**Private Repository:**  
+This codebase is private and currently not distributed under any open-source license.  
+Contact the project owner for more information or collaboration requests.
+
+---
+
+## Contact
+
+For questions, ideas, or collaboration, please reach out to the project maintainer.
+
+---
+
+## Project Status
+
+**Under Development:**  
+This project is still evolving. While core functionalities are operational, enhancements and stability improvements are ongoing.
