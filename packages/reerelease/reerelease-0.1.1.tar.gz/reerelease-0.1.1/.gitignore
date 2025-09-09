@@ -1,0 +1,22 @@
+# Coverage reports
+htmlcov/
+coverage.xml
+coverage.lcov
+junit.xml
+.coverage
+.coverage.*
+test-report.html
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Tool caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+dist/
+
+# Environment variables
+.env
