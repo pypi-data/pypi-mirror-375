@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-flights-mcp
+Version: 0.1.4
+Summary: Flight search MCP server using Duffel API
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: httpx
+Requires-Dist: mcp
+Requires-Dist: pydantic
+Requires-Dist: python-dotenv
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
