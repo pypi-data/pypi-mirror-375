@@ -1,0 +1,52 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-hass-mcp"
+version = "0.1.4"
+description = "Home Assistant Model Context Protocol (MCP) server"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.4.1",
+    "httpx>=0.27.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.24.0",
+]
+
+[project.scripts]
+hass-mcp = "app.run:main"
+test = "pytest:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "app",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+log_cli = true
+log_cli_level = "INFO"
+markers = [
+    "asyncio: Tests that use asyncio",
+]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
