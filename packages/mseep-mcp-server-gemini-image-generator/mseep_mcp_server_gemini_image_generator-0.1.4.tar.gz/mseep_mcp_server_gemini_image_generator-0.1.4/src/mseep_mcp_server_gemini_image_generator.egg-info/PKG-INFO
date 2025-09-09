@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-gemini-image-generator
+Version: 0.1.4
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Keywords: http,mcp,llm,automation
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=0.4.1
+Requires-Dist: google>=3.0.0
+Requires-Dist: google-genai>=1.7.0
+Requires-Dist: pillow>=11.1.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

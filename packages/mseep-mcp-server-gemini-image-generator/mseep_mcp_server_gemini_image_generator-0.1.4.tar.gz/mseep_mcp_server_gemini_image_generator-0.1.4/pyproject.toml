@@ -1,0 +1,43 @@
+[project]
+name = "mseep-mcp-server-gemini-image-generator"
+version = "0.1.4"
+description = ""
+requires-python = ">=3.11"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+keywords = [
+    "http",
+    "mcp",
+    "llm",
+    "automation",
+]
+dependencies = [
+    "fastmcp>=0.4.1",
+    "google>=3.0.0",
+    "google-genai>=1.7.0",
+    "pillow>=11.1.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+mcp-server-gemini-image-generator = "mcp_server_gemini_image_generator:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+dev-dependencies = [
+    "pyright>=1.1.389",
+    "ruff>=0.7.3",
+]
