@@ -1,0 +1,19 @@
+[project]
+name = "formtool"
+version = "1.0.0"
+description = "ffmpeg command shortcuts"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "hypy-utils>=1.0.29",
+    "rich>=14.1.0",
+]
+
+[project.scripts]
+formtool = "formtool.__main__:cli"
+fav1 = "formtool.__main__:av1"
+fx264 = "formtool.__main__:x264"
+fmp3 = "formtool.__main__:mp3"
+fopus = "formtool.__main__:opus"
+fflac = "formtool.__main__:flac"
+fwav = "formtool.__main__:wav"
