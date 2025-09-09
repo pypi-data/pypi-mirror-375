@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-numpy-mcp
+Version: 0.1.1
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: matplotlib>=3.10.3
+Requires-Dist: numpy>=2.2.6
+Requires-Dist: sympy>=1.14.0
+Requires-Dist: typing
+Requires-Dist: pydantic
+Requires-Dist: fastapi>=0.116.1
+Requires-Dist: mcp>=1.13.1
+Requires-Dist: typer>=0.17.3
+Dynamic: license-file
+
+Package managed by MseeP.ai

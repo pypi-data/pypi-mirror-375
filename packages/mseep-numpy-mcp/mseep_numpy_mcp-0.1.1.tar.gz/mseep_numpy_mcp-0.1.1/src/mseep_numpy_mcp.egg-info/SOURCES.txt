@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/__init__.py
+src/linear_algebra.py
+src/main.py
+src/middleware.py
+src/vector_calculus.py
+src/visualization.py
+src/mseep_numpy_mcp.egg-info/PKG-INFO
+src/mseep_numpy_mcp.egg-info/SOURCES.txt
+src/mseep_numpy_mcp.egg-info/dependency_links.txt
+src/mseep_numpy_mcp.egg-info/requires.txt
+src/mseep_numpy_mcp.egg-info/top_level.txt
