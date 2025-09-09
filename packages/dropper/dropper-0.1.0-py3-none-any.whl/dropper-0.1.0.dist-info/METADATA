@@ -1,0 +1,22 @@
+Metadata-Version: 2.3
+Name: dropper
+Version: 0.1.0
+Summary: 
+Author: Golos1
+Author-email: 68024905+Golos1@users.noreply.github.com
+Requires-Python: >=3.12
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: scikit-learn (>=1.7.1,<2.0.0)
+Requires-Dist: torch (>=2.8.0,<3.0.0)
+Requires-Dist: torchmetrics (>=1.8.1,<2.0.0)
+Requires-Dist: torchvision (>=0.23.0,<0.24.0)
+Description-Content-Type: text/markdown
+
+## Summary
+This model is an example classifier for CIFAR-10 relying on high dropout, with an ROC AUC of ~98.1 and an F1 Score of ~82.
+The load_dropper method is used to load a pretrained model; all other code should only be used when developing the model itself.
+
+## Installation
+Simply use `pip install dropper.`
