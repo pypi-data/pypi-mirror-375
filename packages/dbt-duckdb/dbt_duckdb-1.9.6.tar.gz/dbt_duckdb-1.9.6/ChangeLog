@@ -1,0 +1,7 @@
+CHANGES
+=======
+
+1.9.6
+-----
+
+* Remove extraneous log() lines for index-related operations (#630)
