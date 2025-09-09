@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-jenkins-mcp
+Version: 0.1.5
+Summary: MCP server for managing Jenkins operations
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Repository, https://github.com/kjozsa/jenkins-mcp
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp
+Requires-Dist: python-jenkins
+Requires-Dist: loguru
+Requires-Dist: requests
+Dynamic: license-file
+
+Package managed by MseeP.ai

@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+requirements.txt
+jenkins_mcp/__init__.py
+jenkins_mcp/server.py
+mseep_jenkins_mcp.egg-info/PKG-INFO
+mseep_jenkins_mcp.egg-info/SOURCES.txt
+mseep_jenkins_mcp.egg-info/dependency_links.txt
+mseep_jenkins_mcp.egg-info/entry_points.txt
+mseep_jenkins_mcp.egg-info/requires.txt
+mseep_jenkins_mcp.egg-info/top_level.txt
+tests/test_auth_password.py
+tests/test_auth_token.py
