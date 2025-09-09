@@ -1,0 +1,47 @@
+Metadata-Version: 2.4
+Name: mseep-outscraper-mcp
+Version: 1.0.1
+Summary: Streamlined MCP server for Outscraper's Google Maps data extraction services - 2 essential tools for maps search and reviews
+Project-URL: Homepage, https://github.com/jayozer/outscraper-mcp
+Project-URL: Repository, https://github.com/jayozer/outscraper-mcp.git
+Project-URL: Issues, https://github.com/jayozer/outscraper-mcp/issues
+Project-URL: Documentation, https://github.com/jayozer/outscraper-mcp#readme
+Project-URL: Bug Reports, https://github.com/jayozer/outscraper-mcp/issues
+Project-URL: Source Code, https://github.com/jayozer/outscraper-mcp
+Author-email: mseep <support@skydeck.ai>
+License: Experimental Software License
+License-File: LICENSE
+Keywords: ai,api,business-intelligence,claude,data-extraction,google-maps,mcp,outscraper,reviews,search
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Office/Business
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Requires-Dist: fastapi>=0.104.0
+Requires-Dist: fastmcp>=2.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: requests>=2.25.0
+Requires-Dist: starlette<0.30.0
+Requires-Dist: typing-extensions>=4.0.0
+Requires-Dist: urllib3>=2.4.0
+Requires-Dist: uvicorn[standard]>=0.24.0
+Provides-Extra: dev
+Requires-Dist: black>=22.0.0; extra == 'dev'
+Requires-Dist: build>=0.10.0; extra == 'dev'
+Requires-Dist: flake8>=4.0.0; extra == 'dev'
+Requires-Dist: mypy>=1.0.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: twine>=4.0.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
