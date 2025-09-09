@@ -1,0 +1,2 @@
+[console_scripts]
+kaggle-mcp = server:run_server

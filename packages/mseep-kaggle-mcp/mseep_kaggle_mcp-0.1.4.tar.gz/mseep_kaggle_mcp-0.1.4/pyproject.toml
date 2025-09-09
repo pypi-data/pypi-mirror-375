@@ -1,0 +1,34 @@
+[project]
+name = "mseep-kaggle-mcp"
+version = "0.1.4"
+description = "MCP Server for interacting with Kaggle API"
+requires-python = ">=3.10"
+dependencies = [
+    "kaggle",
+    "python-dotenv",
+    "mcp-server",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+kaggle-mcp = "server:run_server"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = [
+    "src",
+]
+exclude = [
+    "datasets*",
+]
