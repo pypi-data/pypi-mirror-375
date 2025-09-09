@@ -1,0 +1,13 @@
+fastapi[standard]>=0.115.6
+universal-pathlib>=0.2.5
+uvicorn
+llmling>=1.0.0
+mcp>=1.1.0
+pydantic
+logfire>=2.6.2
+websockets>=14.1
+upathtools[httpx]
+fastmcp>=2.3.4
+
+[gui]
+nicegui
