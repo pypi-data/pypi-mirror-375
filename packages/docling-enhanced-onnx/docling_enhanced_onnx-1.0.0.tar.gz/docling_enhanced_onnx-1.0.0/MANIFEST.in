@@ -1,0 +1,6 @@
+include README.md
+include CHANGELOG.md
+include LICENSE
+include pyproject.toml
+recursive-include src/docling_enhanced *.py
+include src/docling_enhanced/py.typed
