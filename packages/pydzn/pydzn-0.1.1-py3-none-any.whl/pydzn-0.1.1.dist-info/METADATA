@@ -1,0 +1,38 @@
+Metadata-Version: 2.4
+Name: pydzn
+Version: 0.1.1
+Summary: Tiny design-system utilities (Tailwind-like), composable HTML components, and a grid layout builder for Python/Jinja apps.
+Author-email: Ryan Kirkish <ryan@foo.com>
+License: Apache-2.0
+Project-URL: Homepage, https://github.com/anthonyrka/pydzn
+Project-URL: Repository, https://github.com/anthonyrka/pydzn
+Project-URL: Issues, https://github.com/anthonyrka/pydzn/issues
+Keywords: design-system,css,utility-classes,jinja2,components,grid,htmx
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Framework :: Flask
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Jinja2>=3.1
+Provides-Extra: flask
+Requires-Dist: Flask>=2.3; extra == "flask"
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: ruff>=0.5; extra == "dev"
+Requires-Dist: black>=24; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: build>=1.2; extra == "dev"
+Requires-Dist: twine>=5; extra == "dev"
+Dynamic: license-file
+
+# pydzn
+Python web components for server-side rendering
