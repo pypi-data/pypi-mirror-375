@@ -1,0 +1,4 @@
+[console_scripts]
+alephonenull-dashboard = alephonenull.monitoring.dashboard:run_dashboard
+alephonenull-monitor = alephonenull.monitoring.metrics:start_monitoring
+alephonenull-protect = alephonenull.cli:protect_all
