@@ -1,0 +1,17 @@
+[project]
+name = "mseep-qmt-mcp-server"
+version = "0.1.6"
+description = "MCP Server for QMT"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.6.0",
+    "pyyaml>=6.0.2",
+    "xtquant>=241014.1.2",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
