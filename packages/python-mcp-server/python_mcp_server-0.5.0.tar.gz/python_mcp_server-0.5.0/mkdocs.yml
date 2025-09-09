@@ -1,0 +1,93 @@
+site_name: Python MCP Server
+site_description: A world-class Python interpreter MCP server with session management, kernel health monitoring, and FastMCP middleware
+site_url: https://deadmeme5441.github.io/python-mcp-server/
+repo_url: https://github.com/deadmeme5441/python-mcp-server
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+    - content.action.edit
+    - navigation.sections
+    - navigation.expand
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Overview: index.md
+  - Getting Started: getting-started.md
+  - Architecture: architecture.md
+  - Tools Reference: tools.md
+  - Session Management: sessions.md
+  - Health Monitoring: health.md
+  - Development: development.md
+  - Examples: examples.md
+  - API Reference: api.md
+  - Troubleshooting: troubleshooting.md
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - llmstxt:
+      markdown_description: |
+        python-mcp-server is a world-class Python interpreter MCP (Model Context Protocol) server 
+        that provides secure, isolated Python code execution with advanced session management and health monitoring.
+        
+        Key features:
+        - Session-based kernel isolation with full state management
+        - Comprehensive health monitoring and intelligent restarts  
+        - FastMCP middleware stack with professional error handling
+        - File system operations with workspace security
+        - Package installation and dependency management
+        - Code completion and object introspection
+        - Progressive timeout handling and resilience
+        
+        Perfect for AI agents that need reliable, production-grade Python execution environments.
+      full_output: llms-full.txt
+      sections:
+        Overview & Architecture:
+        - index.md: What this MCP server provides and core value proposition
+        - architecture.md: Technical architecture, FastMCP middleware, and design decisions
+        Getting Started:
+        - getting-started.md: Installation, basic setup, and first execution
+        Core Functionality:
+        - tools.md: Complete reference of all 20 MCP tools with examples
+        - sessions.md: Session management, isolation, and multi-kernel workflows  
+        - health.md: Kernel health monitoring, diagnostics, and restart strategies
+        Development & Integration:
+        - development.md: Contributing, testing, and extending the server
+        - examples.md: Practical usage examples and common patterns
+        Reference & Support:
+        - api.md: Technical API details and integration patterns
+        - troubleshooting.md: Common issues, debugging, and performance optimization
+
+docs_dir: docs
+site_dir: site
