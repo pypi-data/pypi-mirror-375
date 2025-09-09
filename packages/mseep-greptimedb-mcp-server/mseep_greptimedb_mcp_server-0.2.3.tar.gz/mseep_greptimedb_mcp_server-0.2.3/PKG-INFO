@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-greptimedb-mcp-server
+Version: 0.2.3
+Summary: A Model Context Protocol (MCP) server that enables secure interaction with GreptimeDB databases. This server allows AI assistants to list tables, read data, and execute SQL queries through a controlled interface, making database exploration and analysis safer and more structured.
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+License-File: LICENSE.md
+Requires-Python: >=3.11
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: mysql-connector-python>=9.1.0
+Requires-Dist: pyyaml>=6.0.2
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
