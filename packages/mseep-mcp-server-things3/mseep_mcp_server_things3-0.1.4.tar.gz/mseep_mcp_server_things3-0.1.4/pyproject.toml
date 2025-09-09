@@ -1,0 +1,25 @@
+[project]
+name = "mseep-mcp-server-things3"
+version = "0.1.4"
+description = "A server implementation for interacting with Things3 app on macOS through Claude AI"
+requires-python = ">=3.8"
+dependencies = [
+    "mcp>=0.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.scripts]
+mcp-server-things3 = "mcp_server_things3.server:main"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
