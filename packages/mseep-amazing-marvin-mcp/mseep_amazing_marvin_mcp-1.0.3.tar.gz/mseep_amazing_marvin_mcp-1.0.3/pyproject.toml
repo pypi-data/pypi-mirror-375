@@ -1,0 +1,142 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-amazing-marvin-mcp"
+version = "1.0.3"
+description = "Amazing Marvin Model Context Provider"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "fastapi>=0.68.0",
+    "fastmcp>=0.1.0",
+    "requests>=2.25.1",
+    "uvicorn>=0.15.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "python-dotenv>=0.19.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0.0",
+    "ruff>=0.12.0",
+    "mypy>=0.812",
+    "pre-commit>=3.0.0",
+    "types-requests>=2.25.0",
+]
+
+[project.scripts]
+amazing-marvin-mcp = "amazing_marvin_mcp.main:start"
+
+[project.urls]
+Homepage = "https://github.com/bgheneti/Amazing-Marvin-MCP"
+"Bug Tracker" = "https://github.com/bgheneti/Amazing-Marvin-MCP/issues"
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.black]
+line-length = 88
+target-version = [
+    "py310",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "W",
+    "C90",
+    "I",
+    "N",
+    "UP",
+    "B",
+    "A",
+    "C4",
+    "DJ",
+    "EM",
+    "EXE",
+    "ISC",
+    "ICN",
+    "G",
+    "PIE",
+    "T20",
+    "PYI",
+    "PT",
+    "Q",
+    "RSE",
+    "RET",
+    "SLF",
+    "SIM",
+    "TID",
+    "TCH",
+    "ARG",
+    "PTH",
+    "ERA",
+    "PD",
+    "PGH",
+    "PL",
+    "TRY",
+    "NPY",
+    "RUF",
+]
+ignore = [
+    "E501",
+    "PLR0913",
+    "PLR0912",
+    "PLR0915",
+    "TRY003",
+    "EM101",
+    "EM102",
+    "PLR2004",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = [
+    "T201",
+    "EXE001",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[tool.smithery]
+name = "amazing-marvin-mcp"
+display_name = "Amazing Marvin MCP"
+description = "Model Context Provider for Amazing Marvin productivity app"
+entry_point = "amazing_marvin_mcp.main:start"
+environment_variables = [
+    "AMAZING_MARVIN_API_KEY",
+]
