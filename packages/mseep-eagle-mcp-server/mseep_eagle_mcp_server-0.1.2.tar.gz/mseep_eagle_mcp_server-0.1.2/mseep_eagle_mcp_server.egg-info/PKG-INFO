@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-eagle-mcp-server
+Version: 0.1.2
+Summary: An MCP server for Eagle
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastapi-mcp>=0.3.3
+Requires-Dist: httpx>=0.28.1
+Dynamic: license-file
+
+Package managed by MseeP.ai
