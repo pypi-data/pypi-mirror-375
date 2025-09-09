@@ -1,0 +1,8 @@
+{
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+    },
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": false,
+}

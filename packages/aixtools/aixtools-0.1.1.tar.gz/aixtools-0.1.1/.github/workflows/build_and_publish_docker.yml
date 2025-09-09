@@ -1,0 +1,34 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-publish-docker-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build and publish
+        uses: ${{ vars.DOCKER_WORKFLOW_REPO }}/.github/workflows/publish_docker_artifactory.yml@main
+        with:
+          REPO_NAME: ${{ vars.DOCKER_REPO_NAME }}
+          REPO_PATH: ${{ vars.DOCKER_REPO_PATH }}
+          IMAGE_NAME: mcp-base
+          DOCKER_TAG: ${{ github.sha }}
+          CONTEXT: docker/mcp-base
+        # secrets:
+          DOS_ARTIFACTORY_USERNAME: ${{ vars.DOCKER_ARTIFACTORY_USERNAME }}
+          DOS_ARTIFACTORY_API_KEY: ${{ secrets.DOCKER_ARTIFACTORY_API_KEY }}
+      - name: test docker interaction
+        run: |
+          echo "Testing Docker interaction..."
+          docker --version
+          docker images
+          docker rm ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_REPO_PATH }}/mcp-base:${{ github.sha }} || true
+          docker images
+          docker pull ${{ vars.DOCKER_REGISTRY }}/${{ vars.DOCKER_REPO_PATH }}/mcp-base:${{ github.sha }} || true
+          docker images
+          echo "Docker interaction test completed."
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_CLI_EXPERIMENTAL: enabled
