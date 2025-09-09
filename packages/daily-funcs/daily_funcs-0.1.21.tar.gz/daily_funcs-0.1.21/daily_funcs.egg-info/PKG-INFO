@@ -1,0 +1,18 @@
+Metadata-Version: 2.2
+Name: daily_funcs
+Version: 0.1.21
+Summary: daily tools for data science employee
+Home-page: https://github.com/gouqi/daily_tools
+Author: gouqi
+Author-email: 1249224822@qq.com
+License: MIT
+Keywords: daily tools for data science employee
+Requires-Dist: pandas
+Requires-Dist: tqdm
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
