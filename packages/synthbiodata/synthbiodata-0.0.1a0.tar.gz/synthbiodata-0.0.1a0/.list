@@ -1,0 +1,45 @@
+# synthbiodata
+
+Improvements to make:
+
+# 1. Type Annotation Issues:
+The return type annotation for polars.DataFrame in generate_sample_data() is using string literal "polars.DataFrame" instead of proper type hint
+Missing type annotations for some class attributes
+Should use from typing import List for Python <3.9 compatibility (if that's a requirement)
+
+# 2. Configuration Issues:
+Magic numbers are used throughout the code (e.g., 0.03, 42, etc.) without clear explanation of their significance
+No configuration file support (e.g., YAML or JSON) for loading default values
+No environment variable support for configuration overrides
+No validation for standard deviation values being positive
+
+# 3. Error Handling:
+Error messages could be more descriptive and include actual values
+No custom exception classes for configuration errors
+No logging implementation for configuration errors or warnings
+
+# 4. Code Organization:
+The file is quite long (174 lines) and could potentially be split into separate modules
+Generator imports are circular (config imports from generator, generator likely imports from config)
+Missing clear versioning for configuration schema
+
+# 5. Testing Concerns:
+The validation thresholds (e.g., 1e-6 for probability sum) should be constants
+No clear way to serialize/deserialize configurations
+No factory methods for common configuration scenarios
+
+# 6. Design Issues:
+The DataType enum is not extensible without code changes
+No clear strategy for handling backward compatibility of configurations
+No support for configuration inheritance or composition
+The generate_sample_data function might be better placed in a separate module
+
+# Best Practices Missing:
+No __all__ definition to control public API
+No type hints for the validator methods' self parameter
+No frozen configurations option (configurations can be modified after creation)
+No clear deprecation strategy for configuration parameters
+Performance Considerations:
+Validation is performed on every instance creation, which might be unnecessary in some cases
+No caching mechanism for frequently used configurations
+No lazy loading of heavy imports

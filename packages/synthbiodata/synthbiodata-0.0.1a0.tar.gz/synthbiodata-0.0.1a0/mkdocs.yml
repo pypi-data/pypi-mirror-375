@@ -1,0 +1,129 @@
+site_name: synthbiodata
+site_description: A data generator for synthetic biological data
+site_url: https://github.com/ojeda-e/synthbiodata
+repo_url: https://github.com/ojeda-e/synthbiodata
+repo_name: ojeda-e/synthbiodata
+
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    # Palette - automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/eye-outline
+        name: Switch to light mode
+    # Palette - light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: grey
+      toggle:
+        icon: material/eye-outline
+        name: Switch to dark mode
+    # Palette - dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: grey
+      toggle:
+        icon: material/eye
+        name: Switch to system preference
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: false
+            show_root_heading: true
+            show_root_toc_entry: true
+            show_object_full_path: false
+            show_category_heading: true
+            show_if_no_docstring: false
+            members_order: source
+            filters: ["!^_"]
+            show_signature: true
+            show_signature_annotations: true
+            show_docstring_description: true
+            show_docstring_examples: true
+            show_docstring_parameters: true
+            show_docstring_attributes: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Quick Start: getting-started/quickstart.md
+    - Examples: getting-started/examples.md
+  - User Guide:
+    - Architecture: user-guide/architecture.md
+    - Configuration: user-guide/configuration.md
+    - Validation Rules: user-guide/validation-rules.md
+    - Best Practices: user-guide/best-practices.md
+  - Data Types:
+    - Molecular Descriptors: data-types/molecular-descriptors.md
+    - ADME Data: data-types/adme-data.md
+  - API Reference:
+    - Data Generators: api/data-generators.md
+    - Configuration: api/configuration.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: ojeda-e
+      repo: synthbiodata
+  - pymdownx.mark
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.details
+  - pymdownx.tilde
+  - admonition
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ojeda-e/synthbiodata
+  version:
+    provider: mike
+  javascripts:
+    - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+    - javascripts/mermaid-init.js
