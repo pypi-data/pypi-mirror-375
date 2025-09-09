@@ -1,0 +1,15 @@
+[project]
+name = "mseep-mcp-uuid-gen"
+version = "0.1.1"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.9.4",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
