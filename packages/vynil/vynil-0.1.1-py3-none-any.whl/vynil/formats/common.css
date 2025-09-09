@@ -1,0 +1,56 @@
+.image {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+
+.image img {
+    max-width: 100%;
+    margin: 20px auto 0 auto;
+}
+
+.image figcaption {
+    margin: 10px 0 0 0;
+}
+
+.chapter {
+    break-before: right;
+}
+
+.page-break {
+    break-before: page;
+}
+
+.dinkus {
+    margin-top: 3em 0;
+}
+
+.admonition {
+    border: 1px solid black;
+    padding: 15px 20px;
+}
+
+.columns {
+    display: flex;
+}
+.columns .column {
+    flex: 1;
+}
+
+.table {
+    width: 100%;
+}
+
+.table th {
+    border-bottom: 1px solid black;
+    padding: 0.5em;
+    font-weight: bold;
+}
+
+.table td {
+    padding: 0.5em;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f0f0f0;
+}

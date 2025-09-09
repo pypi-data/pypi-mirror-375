@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{book.title}</title>
+        !for author in book.authors:
+            <meta name="author" content="{author}" />
+        !for url in render.styles:
+            <link rel="stylesheet" href="{url}" />
+        !for url in render.scripts:
+            <script src="{url}"></script>
+        <style>
+            %bookmark style
+        </style>
+        <script>
+            %bookmark script
+        </script>
+    </head>
+    <body>
+        <button id="open-toc"></button>
+        <nav id="toc" class="container">
+            <ul class="chapters" class="container">
+                %bookmark toc
+            </ul>
+        </nav>
+        <main id="content" class="container">
+            %!for number, chapter in sorted(book.chapters.items()):
+                %eval render.set_chapter({number})
+                <section id="{render.current_chapter.id}" class="chapter">
+                    %include: chapter.text load="chapter" continue_generation=True
+                    %append toc
+                        <li>
+                            <a href="#{render.current_chapter.id}">{render.current_chapter.title}</a>
+                            !if render.current_chapter.sections:
+                                <ul class="sections">
+                                    !for section_id, section_ in render.current_chapter.sections.items():
+                                        <li><a href="#{section_id}">{section_.title}</a></li>
+                                </ul>
+                        </li>
+                </section>
+        <main>
+    </body>
+</html>
