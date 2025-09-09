@@ -1,0 +1,2 @@
+#!/bin/sh
+exec "/Users/Martin/.local/share/mamba/envs/pymol_310/bin/python" "/Users/Martin/.local/share/mamba/envs/pymol_310/lib/python3.10/site-packages/pymol/__init__.py" "$@"
