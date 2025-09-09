@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: cti_ctf_challenges
+Version: 0.1.2
+Summary: cti_ctf_challenges
+Author: foxyjames123_ctf
+Requires-Python: >=3.6
+Requires-Dist: requests>=2.0.0
+Dynamic: author
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
