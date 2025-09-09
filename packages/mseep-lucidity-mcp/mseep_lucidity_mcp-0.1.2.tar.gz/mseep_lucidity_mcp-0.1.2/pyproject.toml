@@ -1,0 +1,327 @@
+[project]
+name = "mseep-lucidity-mcp"
+version = "0.1.2"
+description = "An AI powered code review tool for MCP"
+requires-python = ">=3.13"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+keywords = [
+    "mcp",
+    "android",
+    "ai",
+    "llm",
+    "claude",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "dotenv>=0.9.9",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.4.1",
+    "rich>=13.9.4",
+    "sse-starlette>=2.2.1",
+    "starlette>=0.36.3",
+    "uvicorn>=0.30.0",
+    "anyio>=4.8.0",
+    "types-pyyaml>=6.0.12.20241230",
+    "types-pygments>=2.19.0.20250305",
+    "types-colorama>=0.4.15.20240311",
+    "types-pexpect>=4.9.0.20241208",
+    "types-setuptools>=76.0.0.20250313",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/hyperbliss/lucidity"
+Issues = "https://github.com/hyperbliss/lucidity/issues"
+Documentation = "https://github.com/hyperbliss/lucidity#readme"
+
+[project.scripts]
+lucidity-mcp = "lucidity.server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.25.3",
+    "pytest-cov>=6.0.0",
+    "mypy>=1.15.0",
+    "pylint>=3.3.5",
+    "ruff>=0.11.0",
+]
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "lucidity",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = "test_*.py"
+addopts = [
+    "-v",
+    "--tb=short",
+]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+check_untyped_defs = true
+error_summary = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+namespace_packages = true
+explicit_package_bases = true
+show_error_context = true
+show_column_numbers = true
+pretty = true
+
+[[tool.mypy.overrides]]
+module = [
+    "mcp.*",
+    "starlette.*",
+    "uvicorn.*",
+    "sse_starlette.*",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "tests.*",
+]
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = [
+    "droidmind.core.*",
+]
+disallow_any_generics = true
+disallow_any_explicit = true
+warn_unreachable = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+src = [
+    "droidmind",
+    "tests",
+]
+extend-exclude = [
+    ".venv",
+    "docs",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "C",
+    "B",
+    "N",
+    "UP",
+    "RUF",
+    "PT",
+    "SIM",
+    "ASYNC",
+    "BLE",
+    "DTZ",
+    "G",
+    "ICN",
+    "PGH",
+    "PIE",
+    "PL",
+    "RET",
+    "RSE",
+    "S",
+    "SLF",
+    "TRY",
+    "COM",
+    "ERA",
+    "T20",
+    "ARG",
+]
+ignore = [
+    "C901",
+    "PLR0911",
+    "PLR0912",
+    "PLR0913",
+    "PLR0915",
+    "PLR2004",
+    "RUF012",
+    "PLC0414",
+    "PLR0904",
+    "PLW0603",
+    "PLW2901",
+    "PT011",
+    "SIM102",
+    "SIM108",
+    "TRY003",
+    "G004",
+    "PGH003",
+    "RET502",
+    "RET503",
+    "RET505",
+    "TRY300",
+    "TRY301",
+    "TRY401",
+    "S101",
+    "COM812",
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-sort-within-sections = true
+known-first-party = [
+    "lucidity",
+]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401",
+    "E402",
+]
+"lucidity/prompts.py" = [
+    "BLE001",
+    "ARG001",
+]
+"lucidity/resources.py" = [
+    "BLE001",
+    "ARG001",
+]
+"lucidity/tools/*.py" = [
+    "BLE001",
+    "ARG001",
+]
+"lucidity/server.py" = [
+    "BLE001",
+    "SLF001",
+]
+"lucidity/tools/code_analysis.py" = [
+    "S603",
+    "S607",
+]
+"tests/**/*.py" = [
+    "ARG001",
+    "ARG002",
+    "ARG005",
+    "E501",
+    "PIE790",
+    "PLR2004",
+    "PT018",
+    "RET504",
+    "S101",
+    "S105",
+    "S106",
+    "S108",
+    "SLF001",
+    "BLE001",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = 80
+
+[tool.pylint]
+py-version = "3.13"
+jobs = 2
+max-line-length = 120
+disable = [
+    "bad-indentation",
+    "line-too-long",
+    "missing-final-newline",
+    "trailing-whitespace",
+    "unnecessary-semicolon",
+    "missing-docstring",
+    "invalid-name",
+    "abstract-class-instantiated",
+    "abstract-method",
+    "arguments-differ",
+    "assignment-from-none",
+    "attribute-defined-outside-init",
+    "protected-access",
+    "signature-differs",
+    "too-few-public-methods",
+    "import-error",
+    "no-member",
+    "no-name-in-module",
+    "unused-import",
+    "redefined-outer-name",
+    "unused-argument",
+    "unused-variable",
+    "wrong-import-position",
+    "import-outside-toplevel",
+    "too-many-positional-arguments",
+    "fixme",
+    "broad-except",
+]
+enable = [
+    "use-symbolic-message-instead",
+    "useless-suppression",
+    "duplicate-code",
+]
+
+[tool.pylint.basic]
+good-names = [
+    "i",
+    "j",
+    "k",
+    "ex",
+    "id",
+    "fd",
+    "_",
+]
+
+[tool.pylint.design]
+max-parents = 15
+max-returns = 10
+max-branches = 20
+max-statements = 60
+max-attributes = 20
+max-locals = 25
+max-args = 10
+max-nested-blocks = 8
