@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: mseep-octagon-vc-agents
+Version: 0.1.7
+Summary: MCP server that runs AI-driven venture capitalist agents, enriched by Octagon Private Markets' real-time intelligence
+Project-URL: Homepage, https://github.com/OctagonAI/octagon-vc-agents
+Project-URL: Documentation, https://docs.octagonagents.com
+Project-URL: Repository, https://github.com/OctagonAI/octagon-vc-agents.git
+Project-URL: Issues, https://github.com/OctagonAI/octagon-vc-agents/issues
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+License-File: LICENSE
+Keywords: agents,ai,investment,startup,venture capital
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.11
+Requires-Dist: mcp
+Requires-Dist: openai
+Requires-Dist: openai-agents
+Requires-Dist: pydantic
+Requires-Dist: requests
+Requires-Dist: rich
+Requires-Dist: typer
+Requires-Dist: uvicorn
+Provides-Extra: dev
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: ipython>=9.0.2; extra == 'dev'
+Requires-Dist: isort; extra == 'dev'
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: pytest-cov; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

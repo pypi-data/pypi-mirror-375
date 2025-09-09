@@ -1,0 +1,23 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - openaiApiKey
+      - octagonApiKey
+    properties:
+      openaiApiKey:
+        type: string
+        description: Your OpenAI API key.
+      octagonApiKey:
+        type: string
+        description: Your Octagon API key (get a free one at https://app.octagonai.co/signup)
+  commandFunction: |
+    (config) => ({
+      command: 'octagon-vc-agents-mcp-server',
+      args: [],
+      env: {
+        OPENAI_API_KEY: config.openaiApiKey,
+        OCTAGON_API_KEY: config.octagonApiKey,
+      }
+    })
