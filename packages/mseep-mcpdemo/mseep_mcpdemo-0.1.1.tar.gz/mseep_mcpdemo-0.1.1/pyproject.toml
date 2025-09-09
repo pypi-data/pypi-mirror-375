@@ -1,0 +1,19 @@
+[project]
+name = "mseep-mcpdemo"
+version = "0.1.1"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.6.0",
+    "openai>=1.70.0",
+    "requests>=2.32.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
