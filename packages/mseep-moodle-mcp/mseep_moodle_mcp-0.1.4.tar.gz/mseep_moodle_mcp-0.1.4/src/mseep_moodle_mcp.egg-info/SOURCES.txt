@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/moodle_mcp/__init__.py
+src/moodle_mcp/api.py
+src/moodle_mcp/logger.py
+src/moodle_mcp/moodle.py
+src/moodle_mcp/server.py
+src/moodle_mcp/utils.py
+src/mseep_moodle_mcp.egg-info/PKG-INFO
+src/mseep_moodle_mcp.egg-info/SOURCES.txt
+src/mseep_moodle_mcp.egg-info/dependency_links.txt
+src/mseep_moodle_mcp.egg-info/entry_points.txt
+src/mseep_moodle_mcp.egg-info/requires.txt
+src/mseep_moodle_mcp.egg-info/top_level.txt
