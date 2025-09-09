@@ -1,0 +1,28 @@
+[project]
+name = "mseep-coinmarket-service"
+version = "0.1.4"
+description = "Coinmarket MCP Server"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.0.0",
+    "python-dotenv>=1.0.1",
+    "requests>=2.32.3",
+    "ruff>=0.8.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+coinmarket_service = "coinmarket_service:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
