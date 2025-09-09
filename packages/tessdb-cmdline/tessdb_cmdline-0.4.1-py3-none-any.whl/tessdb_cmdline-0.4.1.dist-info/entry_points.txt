@@ -1,0 +1,5 @@
+[console_scripts]
+tess-location = tess.location.cli:main
+tess-log = tess.logfile.cli:main
+tess-observer = tess.observer.cli:main
+tess-photometer = tess.photometer.noasync.cli:main
