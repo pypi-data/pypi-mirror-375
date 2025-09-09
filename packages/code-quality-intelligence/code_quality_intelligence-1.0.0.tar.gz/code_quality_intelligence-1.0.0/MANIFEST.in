@@ -1,0 +1,14 @@
+include README.md
+include LICENSE
+include requirements.txt
+include pyproject.toml
+recursive-include code_quality_agent *.py
+recursive-include sample_code *.py *.js
+include ship_validation.py
+include test_all_features.py
+include simple_dashboard.py
+include streamlit_app.py
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude .git*
+global-exclude .env
