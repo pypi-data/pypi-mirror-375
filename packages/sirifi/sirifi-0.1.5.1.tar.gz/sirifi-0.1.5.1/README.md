@@ -1,0 +1,204 @@
+
+
+# SIRIFI
+
+Smart Insights & Research for Investments in Financial Instruments
+
+
+<img src="images/image.png" alt="Logo" height="180" width="180">
+
+
+## 📋 Summary   
+
+Sirifi is a comprehensive Python package for quantitative analysis of cryptocurrency data. It enables users to extract, clean, and transform raw data from sources such as Yahoo Finance and Binance, followed by advanced feature engineering to generate actionable insights. The package supports data visualization, sentiment analysis, and identification of potentially valuable investment coins using benchmarked analytical tools. While Sirifi provides detailed insights, it is intended for informational purposes only and not as financial advice.
+
+A key feature of Sirifi is its backtesting and trading bot functionality, where users can evaluate strategies on value investment coins or any user-defined cryptocurrencies. Users can incorporate popular indicators such as RSI (Relative Strength Index) and MACD (Moving Average Convergence Divergence), and selectively enable or disable either or both indicators according to their strategy. Based on backtesting results, users can assess the potential of building automated trading bots for Binance or simulate trading with customizable parameters in a demo environment.
+
+Looking ahead, Sirifi will be extended to support stock market data, bringing the same quantitative analysis, backtesting, and trading bot capabilities to equities in addition to cryptocurrencies. Sirifi is a versatile tool for data-driven research, strategy evaluation, and experimental trading across multiple financial markets.
+
+## 📝 How to cite
+
+Narwade, S., Desai, R. (2025), SIRIFI: Smart Insights & Research for Investments in Financial Instruments. Journal of Open Source Software, https://joss.theoj.org/papers/b51be70e9634e45d8035ee20b6147d76.
+
+Markdown:
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.06243/status.svg)](https://doi.org/10.21105/joss.06243)
+
+HTML:
+<a style="border-width:0" href="https://doi.org/10.21105/joss.06243">
+  <img src="https://joss.theoj.org/papers/10.21105/joss.06243/status.svg" alt="DOI badge" >
+</a>
+
+
+
+
+
+## Advisory
+
+- Ensure Python version '>=3.10, <3.11'.
+- Utilize IDEs like Visual Studio or platforms like Google Colab for enhanced plot visualization.
+- Refer to the provided [sample dataset](https://github.com/CodeEagle22/SIRITVIS/tree/main/sample_dataset) for better comprehension.
+
+## 💡 Features
+
+- Data Streaming 💾
+- Data Cleaning 🧹
+- Topic Model Training and Evaluation :dart:
+- Topic Visual Insights 🔍
+- Trending Topic Geo Visualisation 🌏
+
+## 🛠 Installation
+
+Attention: SIRITVIS is specifically tailored for operation on Python 3.10, and its visualization capabilities are optimized for Python notebooks. Extensive testing has been conducted under these specifications. For the best compatibility and performance, we advise setting up a fresh (conda) environment utilizing Python 3.10.10.
+
+The package can be installed via pip:
+
+```bash
+pip install sirifi
+```
+
+## 👩‍💻 Usage ([documentation])
+
+### Import Libraries
+
+```python
+from sirifi import Sirifi_C_DataStreamer
+```
+
+### Streaming Raw Data
+
+```python
+# Run the streaming process to retrieve raw data based on the specified assets
+
+# Binance → Profile → API Management → Create API → Verify → Copy Key & Secret → Enable “Spot & Margin Trading” (Futures optional, Withdrawals ❌) → (Optional) Restrict IP → Store keys safely.
+BINANCE_API_KEY = "XXXXXXXX"
+BINANCE_API_SECRET = "XXXXXXXX"
+
+fetcher = Sirifi_C_DataStreamer(
+    binance_api_key=BINANCE_API_KEY,
+    binance_api_secret=BINANCE_API_SECRET
+)
+
+base_assets = ['BTC', 'ETH', 'ADA', 'XRP', 'DOGE']
+
+results = fetcher.fetch(
+    base_assets=base_assets,
+    currency='USD',
+    interval='1d',
+    source='yfinance', # source yfinance (default) or binance
+    start_date='2024-06-01',
+    end_date='2025-08-23'
+)
+
+results['BTC']
+```
+
+
+### Feature Engineering on Raw Data
+
+```python
+# Run the feature engineering process to retrieve more data insights from raw data
+for asset in base_assets:
+    sfe = Sirifi_C_FeatureEngineering(results[asset])
+    results[asset] = sfe.get_transformed_data()
+
+results['BTC']
+
+''' Columns: 
+'Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'pct_return', 'ma_20',
+'ma_50', 'ma_200', 'ema_12', 'ema_26', 'macd', 'macd_signal',
+'macd_histogram', 'rsi', 'bollinger_middle', 'bollinger_upper',
+'bollinger_lower', 'obv', 'roc', 'atr', 'candle_range', 'price_gap',
+'return_std', 'signal_crossover', 'rsi_signal', 'macd_cross'
+'''
+
+```
+
+### Feature Dash Board
+
+```python
+
+# Robust Plotly Dashboard
+dashboard = Sirifi_C_Dashboard(results, normalize=True)
+dashboard.show()
+
+```
+
+### Train your a topic model on corpus of short texts
+- Recommendation: Consider using a larger cleaned file with more data (at least 500 KB)
+  
+```python
+# cleaned_file variable might also be used as dataset_source attribute value
+
+model = topic_model.TopicModeling(num_topics=10, dataset_source='../csv/file/path/to/load/data.csv',
+learning_rate=0.001, batch_size=32, activation='softplus', num_layers=3, num_neurons=100,
+dropout=0.2, num_epochs=100, save_model=False, model_path=None, train_model='NeuralLDA',evaluation=['topicdiversity','invertedrbo','jaccardsimilarity'])
+
+saved_model = model.run()
+```
+
+### Topic Insights Visualisation 
+- To investigate internal structure of topics and their relations to words and indicidual documents we recommend using [pyLDAvis](https://github.com/bmabey/pyLDAvis).
+- Recommendation: Consider using a larger cleaned file with more data (at least 500 KB)
+
+```python
+# cleaned_file variable could also used as data_source attribute value
+
+vis_model = topic_visualise.PyLDAvis(data_source='../csv/file/path/to/load/data.csv',num_topics=5,text_column='text')
+vis_model.visualize()
+```
+
+A graphical display of text data in which the importance of each word reflects its frequency or significance within the text.
+- Recommendation: Consider using a larger cleaned file with more data (at least 500 KB)
+
+```python
+# The cleaned_file variable might also be used as data_source attribute value
+# please wait for a while for the word cloud to appear.
+
+vis_model = topic_visualise.Wordcloud(data_source='../csv/file/path/to/load/data.csv',text_column='text',save_image=False)
+vis_model.visualize()
+```
+
+
+### Trending Topic Geo Visualisation 
+
+Topic Mapper excels at mapping the spatial distribution of Instagram posts and other text data globally. It accomplishes this by associating each location with its top trending topics and their frequencies, all using pre-trained topic models. Furthermore, it categorizes and color-codes these locations based on sentiment, providing users with a quick overview of sentiment distribution, including counts for positive, negative, and neutral posts.
+
+Users can effortlessly explore specific keywords through a dropdown interface, allowing them to see how frequently these keywords appear on the world map. This feature simplifies the process of grasping and navigating research findings.
+
+- Notice: Reddit data cannot be visualized on the topic_mapper due to the absence of coordinate values.
+  
+```python
+# The cleaned_file variable might also be used as data_source attribute value
+# The saved_model variable might also be used as the model_source attribute value, for example, model_source = saved_model
+
+data_source = '../file/path/of/data.csv'
+model_source = '../file/path/of/model.pkl' 
+topic_mapper.TopicMapper(data_source, model_source)
+```
+
+## 📣 Community guidelines
+
+We encourage and welcome contributions to the SIRITVIS package. If you have any questions, want to report bugs, or have ideas for new features, please file an issue. 
+
+Additionally, we appreciate pull requests via GitHub. There are several areas where potential contributions can make a significant impact, such as enhancing the quality of topics in topic models when dealing with noisy data from Reddit, Instagram or any external data sources, and improving the topic_mapper function to make it more interactive and independent from the notebook.
+
+## 🖊️ Authors
+
+- Sagar Narwade
+- Gillian Kant
+- Benjamin Säfken
+- Benjamin Leiding
+
+## 🎓 References
+In our project, we utilised the "OCTIS" [^1^] tool, a fantastic library by Terragni et al., which provided essential functionalities. Additionally, we incorporated the "pyLDAvis" [^2^] by Ben Mabey Python library for interactive topic model visualisation, enriching our application with powerful data insights. The seamless integration of these resources significantly contributed to the project's success, offering an enhanced user experience and valuable research capabilities.
+
+[^1^]: [OCTIS](https://github.com/MIND-Lab/OCTIS).
+[^2^]: [pyLDAvis](https://github.com/bmabey/pyLDAvis)
+
+## 📜 License
+
+This project is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). See the [LICENSE](./LICENSE) file for details.
+
+
+
+
