@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-kaggle-mcp
+Version: 0.1.4
+Summary: MCP Server for interacting with Kaggle API
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: kaggle
+Requires-Dist: python-dotenv
+Requires-Dist: mcp-server
+Dynamic: license-file
+
+Package managed by MseeP.ai
