@@ -1,0 +1,19 @@
+[project]
+name = "mseep-choose-mcp-server"
+version = "0.1.14"
+description = "Add your description here"
+requires-python = ">=3.10.6"
+dependencies = [
+    "google-cloud-bigquery>=3.29.0",
+    "mcp[cli]>=1.3.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+choose-mcp-server = "main:run"
