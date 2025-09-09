@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/Copilot/__init__.py
+src/Copilot/agent/Copilot.py
+src/Copilot/agent/__init__.py
+src/Copilot/rag/rag_system.py
+src/Copilot/utils/extractor.py
+src/Copilot/utils/model.py
+src/mortgage_copilot.egg-info/PKG-INFO
+src/mortgage_copilot.egg-info/SOURCES.txt
+src/mortgage_copilot.egg-info/dependency_links.txt
+src/mortgage_copilot.egg-info/requires.txt
+src/mortgage_copilot.egg-info/top_level.txt

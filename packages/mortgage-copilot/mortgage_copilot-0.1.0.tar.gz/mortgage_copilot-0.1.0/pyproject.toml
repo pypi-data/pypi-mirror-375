@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mortgage-copilot"
+version = "0.1.0"
+authors = [
+  { name="54g0", email="sagar8296d@gmail.com" },
+]
+description = "Agentic Mortgage Co-Pilot: A reusable, production-ready Python package that plugs generative-AI agents into any mortgage-origination stack."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "langchain",
+    "faiss-cpu",
+    "pydantic",
+    "python-multipart",
+    "openai",
+    "transformers",
+    "sentence-transformers",
+    "accelerate",
+    "langchain_groq",
+    "langchain_openai",
+    "langchain_huggingface",
+    "huggingface_hub",
+    "langchain-google-genai",
+    "langchain-community",
+    "easyocr",
+    "camelot-py",
+    "PyPDF2",
+    "pdfplumber",
+    "pandas",
+    "numpy",
+    "tabulate",
+    "langgraph",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/54g0/Mortgage-Copilot"
+[tool.setuptools.packages.find]
+where = ["src"]
