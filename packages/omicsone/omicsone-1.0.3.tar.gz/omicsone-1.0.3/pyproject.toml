@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omicsone"                      # 若要发 PyPI，需唯一
+version = "1.0.3"
+description = "Utilities for multi-omics analysis (glyco, diff, plots, etc.)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Yingwei Hu" }]
+keywords = ["proteomics", "glycoproteomics", "omics", "bioinformatics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+# 运行时依赖（按需填）
+dependencies = [
+ "matplotlib>=3.10.1",
+  "seaborn>=0.13.2",
+  "numpy==1.26.4",
+  "pandas>=2.2.3",
+   "nbformat>=5.10"
+]
+
+[project.urls]
+Homepage = "https://example.com/omicsone"
+Repository = "https://github.com/yourname/omicsone"
+
+# 可选：命令行入口（安装后可直接运行 `omicsone`）
+[project.scripts]
+omicsone = "omicsone.omics_init:main"
+
+[tool.setuptools]
+# 允许包含包内的非 .py 资源（需要与 MANIFEST.in 配合）
+include-package-data = true
+
+# 自动发现 omicsone 及其所有子包（包括 omicsone.gpnb）
+[tool.setuptools.packages.find]
+include = ["omicsone*"]
+
+# 如果 gpnb 里有模板/笔记本/配置等资源，声明到包内
+[tool.setuptools.package-data]
+"omicsone" = [
+  "gpnb/*.ipynb",
+  "gpnb/**/*.ipynb",
+  "gpnb/*.json",
+  "gpnb/**/*.json",
+  "gpnb/*.txt",
+  "gpnb/**/*.txt"
+]
