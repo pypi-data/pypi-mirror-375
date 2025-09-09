@@ -1,0 +1,30 @@
+[project]
+name = "mseep-python-mcp"
+version = "0.1.1"
+description = "A working example to create a FastAPI server with SSE-based MCP support"
+requires-python = ">=3.12"
+dependencies = [
+    "cmake>=4.0.0",
+    "fastapi>=0.115.12",
+    "mcp[cli]>=1.6.0",
+    "uvicorn>=0.34.2",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+start = "server:run"
+
+[build-system]
+requires = [
+    "setuptools",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-dir]
+"" = "src"
