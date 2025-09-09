@@ -1,0 +1,2 @@
+[console_scripts]
+hexaboost = hexaboost.cli.main:cli
