@@ -1,0 +1,24 @@
+[project]
+name = "mseep-kanka-mcp"
+version = "0.1.1"
+description = "A MCP Server interacting with Kanka Campaigns"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+    "requests>=2.32.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-kanka-mcp = "kanka_mcp:main"
+
+[tool.setuptools]
+py-modules = [
+    "kanka_mcp",
+]
