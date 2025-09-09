@@ -1,0 +1,25 @@
+[project]
+name = "mseep-mcp-server-macos-defaults"
+version = "0.1.6"
+description = "MCP server for reading/writing macOS defaults (settings)"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp>=1.0.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-server-macos-defaults = "mcp_server_macos_defaults:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
