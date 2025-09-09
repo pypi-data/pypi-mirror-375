@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-vegalite
+Version: 0.0.5
+Summary: A simple Data Visualization MCP server using Vega-Lite
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: vl-convert-python
+
+Package managed by MseeP.ai

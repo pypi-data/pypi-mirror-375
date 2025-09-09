@@ -1,0 +1,31 @@
+[project]
+name = "mseep-mcp-server-vegalite"
+version = "0.0.5"
+description = "A simple Data Visualization MCP server using Vega-Lite"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+    "vl-convert-python",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp_server_vegalite = "mcp_server_vegalite:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+dev-dependencies = [
+    "pyright>=1.1.389",
+]
