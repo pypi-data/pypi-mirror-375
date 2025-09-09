@@ -1,0 +1,30 @@
+Metadata-Version: 2.3
+Name: pypipr
+Version: 2.0.2
+Summary: The Python Package Index Project
+Author: ufiapjj
+Author-email: ufiapjj@gmail.com
+Requires-Python: >=3,<4
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: colorama
+Requires-Dist: cssselect
+Requires-Dist: django
+Requires-Dist: getch ; platform_system == "Linux"
+Requires-Dist: lxml
+Requires-Dist: pint
+Requires-Dist: pyyaml
+Requires-Dist: requests
+Requires-Dist: tzdata
+Description-Content-Type: text/markdown
+
+
