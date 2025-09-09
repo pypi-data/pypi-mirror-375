@@ -1,0 +1,5 @@
+[console_scripts]
+mcp-windows-website-downloader = mcp_windows_website_downloader.server:main
+
+[mcp.servers]
+mcp-windows-website-downloader = mcp_windows_website_downloader.server:main
