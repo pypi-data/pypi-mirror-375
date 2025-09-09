@@ -1,0 +1,3 @@
+[console_scripts]
+npm-vuln-scanner = npm_vuln_scanner.__main__:main
+nvs = npm_vuln_scanner.__main__:main
