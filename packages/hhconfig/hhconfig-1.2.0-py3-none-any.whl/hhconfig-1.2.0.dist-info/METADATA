@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: hhconfig
+Version: 1.2.0
+Summary: Hay Hoist Serial Config Tool
+Author-email: Nathan Fraser <ndf-zz@6-v.org>
+License-Expression: MIT
+Project-URL: homepage, https://github.com/ndf-zz/remootio-adapter/util/hhconfig
+Keywords: serial,tk
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Win32 (MS Windows)
+Classifier: Environment :: X11 Applications
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyserial
+Dynamic: license-file
+
+# Hay Hoist Configuration Tool
+
+![screenshot](hhconfig.png "hhconfig screenshot")
+
+## Usage
+
+Launch hhconfig utility, enter device console pin
+if applicable, attach console cable if applicable,
+then select hoist from devices list.
+
+Current status is displayed on the top line. Use
+"Down" and "Up" buttons to trigger the hoist. "Load"
+and "Save" buttons read or write configuration
+from/to a JSON text file.
+
+
+## Batch Programming
+
+   - Open hhconfig utility, enter pin and attach a serial adapter
+   - Read desired settings from a saved configuration file
+   - For each unit to be updated:
+     - Plug serial cable onto console port
+     - Wait until status line reports "Device updated"
+     - Disconnect serial cable
+     - Wait until status line reports "Device disconnected"
+
+
+## Installation
+
+Run python script directly:
+
+	$ python hhconfig.py
+
+Install into a venv with pip:
+
+	$ python -m venv hh
+	$ ./hh/bin/pip install hhconfig
+	$ ./hh/bin/hhconfig
+
