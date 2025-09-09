@@ -1,0 +1,2 @@
+[console_scripts]
+wexpect = wexpect.__main__:main
