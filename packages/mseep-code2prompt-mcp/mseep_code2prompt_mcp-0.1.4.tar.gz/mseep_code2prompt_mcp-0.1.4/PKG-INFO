@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-code2prompt-mcp
+Version: 0.1.4
+Summary: MCP server for Code2Prompt
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.8
+Requires-Dist: code2prompt-rs>=3.2.1
+Requires-Dist: colorlog>=6.9.0
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.4.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
