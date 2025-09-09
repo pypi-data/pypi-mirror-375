@@ -1,0 +1,193 @@
+Metadata-Version: 2.4
+Name: index_calculator
+Version: 0.13.0
+Summary: Python index-calculator is an xclim wrapper
+License: MIT License
+        
+        Copyright (c) 2022, Ludwig Lierhammer
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: homepage, https://index-calculator.readthedocs.io
+Project-URL: documentation, https://index-calculator.readthedocs.io
+Project-URL: repository, https://github.com/ludwiglierhammer/index_calculator.git
+Project-URL: changelog, https://index-calculator.readthedocs.io/en/latest/history.html
+Keywords: index_calculator
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.11
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+License-File: AUTHORS.rst
+Requires-Dist: xarray
+Requires-Dist: dask
+Requires-Dist: xclim>=0.56.0
+Requires-Dist: pyhomogenize>=0.5.1
+Requires-Dist: pint>=0.1
+Requires-Dist: pooch
+Dynamic: license-file
+
+============================================================================================
+Calculate climate indicators with standardized project-specific attributes: index_calculator
+============================================================================================
+
++----------------------------+-----------------------------------------------------+
+| Versions                   | |pypi| |versions|                                   |
++----------------------------+-----------------------------------------------------+
+| Documentation and Support  | |docs|                                              |
++----------------------------+-----------------------------------------------------+
+| Open Source                | |license| |zenodo|                                  |
++----------------------------+-----------------------------------------------------+
+| Coding Standards           | |black| |ruff| |pre-commit| |security| |fossa|      |
++----------------------------+-----------------------------------------------------+
+| Development Status         | |status| |build| |coveralls|                        |
++----------------------------+-----------------------------------------------------+
+
+Python index_calculator is an xclim wrapper to calculate climate indicators from CMORized netCDF files.
+
+Documentation
+-------------
+The official documentation is at https://index-calculator.readthedocs.io/
+
+Features
+--------
+* Calculate climate indices via xclim_.
+* Write standardized netCDF attributes.
+* Write on disk with a project-specific output file name.
+
+Available projects
+------------------
+You can calculate climate indicators using index_calculator with the projects listed in the table below.
+
++--------------------+--------------+
+| CMIP               | CMIP5, CMIP6 |
++--------------------+--------------+
+| CORDEX             | CORDEX       |
++--------------------+--------------+
+| Observational data | E-OBS, HYRAS |
++--------------------+--------------+
+| Reanalysis data    | ERA5         |
++--------------------+--------------+
+
+Installation
+------------
+
+You can install the package directly with pip:
+
+.. code-block:: console
+
+     pip install index_calculator
+
+If you want to contribute, we recommend cloning the repository, setup a conda environmant and installing the package in development mode, e.g.
+
+.. code-block:: console
+
+    git clone https://github.com/climate-service-center/index_calculator
+    cd index_calculator
+    conda env create -f ci/requirements/environment.yml
+    conda activate xcalc-tests
+    pip install -e . --no-deps
+
+This will install the package but you can still edit it and you don't need the package in your :code:`PYTHONPATH`
+
+
+Requirements
+------------
+
+* python3.6 or higher
+
+* xclim
+
+* numpy
+
+* pandas
+
+* xarray
+
+* cf_xarray
+
+* cftime
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _xclim: https://xclim.readthedocs.io/en/latest/
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+.. |pypi| image:: https://img.shields.io/pypi/v/index_calculator.svg
+        :target: https://pypi.python.org/pypi/index_calculator
+        :alt: Python Package Index Build
+
+.. |docs| image:: https://readthedocs.org/projects/index_calculator/badge/?version=latest
+        :target: https://index-calculator.readthedocs.io/en/latest/?version=latest
+        :alt: Documentation Status
+
+.. |versions| image:: https://img.shields.io/pypi/pyversions/index_calculator.svg
+        :target: https://pypi.python.org/pypi/index_calculator
+        :alt: Supported Python Versions
+
+.. |license| image:: https://img.shields.io/github/license/ludwiglierhammer/index_calculator.svg
+        :target: https://github.com/ludwiglierhammer/index_calculator/blob/master/LICENSE
+        :alt: License
+
+.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+        :target: https://github.com/psf/black
+        :alt: Python Black
+
+.. |ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+        :target: https://github.com/astral-sh/ruff
+        :alt: Ruff
+
+.. |pre-commit| image:: https://results.pre-commit.ci/badge/github/climate-service-center/index_calculator/main.svg
+        :target: https://results.pre-commit.ci/latest/github/climate-service-center/index_calculator/main
+        :alt: pre-commit.ci status
+
+.. |fossa| image:: https://app.fossa.com/api/projects/git%2Bgithub.com%2Fludwiglierhammer%2Findex_calculator.svg?type=shield
+        :target: https://app.fossa.com/projects/git%2Bgithub.com%2Fludwiglierhammer%2Findex_calculator?ref=badge_shield
+        :alt: FOSSA
+
+.. |security| image:: https://www.bestpractices.dev/projects/8143/badge
+        :target: https://www.bestpractices.dev/projects/8143
+        :alt: Open Source Security Foundation
+
+.. |status| image:: https://www.repostatus.org/badges/latest/active.svg
+        :target: https://www.repostatus.org/#active
+        :alt: Project Status: Active – The project has reached a stable, usable state and is being actively developed.
+
+.. |build| image:: https://github.com/ludwiglierhammer/index_calculator/actions/workflows/ci.yml/badge.svg
+        :target: https://github.com/ludwiglierhammer/index_calculator/actions/workflows/ci.yml
+        :alt: Build Status
+
+.. |coveralls| image:: https://codecov.io/gh/ludwiglierhammer/index_calculator/branch/master/graph/badge.svg
+	      :target: https://codecov.io/gh/ludwiglierhammer/index_calculator
+	      :alt: Coveralls
+
+.. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7762679.svg
+        :target: https://doi.org/10.5281/zenodo.7762679
+        :alt:   DOI
