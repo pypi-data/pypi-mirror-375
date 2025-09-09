@@ -1,0 +1,13 @@
+Create Fibery entity with specified fields.
+Examples (note, that these databases are non-existent, use databases only from user's schema!):
+Query: Create a feature
+Tool use:
+{
+    "database": "Product Management/Feature",
+    "entity": {
+        "Product Management/Name": "New Feature",
+        "Product Management/Description": "Description of the new feature",
+        "workflow/state": "To Do" # notice how we use string literal for workflow field here
+    }
+}
+In case of successful execution, you will get a link to created entity. Make sure to give that link to the user.

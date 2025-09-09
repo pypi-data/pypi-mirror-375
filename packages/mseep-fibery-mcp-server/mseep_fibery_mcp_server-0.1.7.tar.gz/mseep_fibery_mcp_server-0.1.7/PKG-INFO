@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-fibery-mcp-server
+Version: 0.1.7
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: click>=8.1.8
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.4.1
+Requires-Dist: pydantic>=2.10.6
+Requires-Dist: python-dotenv>=1.0.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

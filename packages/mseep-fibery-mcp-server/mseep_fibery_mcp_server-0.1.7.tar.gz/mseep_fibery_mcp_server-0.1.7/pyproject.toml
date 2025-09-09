@@ -1,0 +1,81 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-fibery-mcp-server"
+version = "0.1.7"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.1.8",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.4.1",
+    "pydantic>=2.10.6",
+    "python-dotenv>=1.0.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+fibery-mcp-server = "fibery_mcp_server:main"
+
+[dependency-groups]
+dev = [
+    "build>=1.2.2.post1",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.25.3",
+    "ruff>=0.11.0",
+    "twine>=6.1.0",
+]
+
+[tool.ruff]
+line-length = 120
+exclude = [
+    "__init__.py",
+]
+
+[tool.ruff.lint]
+select = [
+    "ANN001",
+    "ANN002",
+    "ANN003",
+    "ANN201",
+    "ANN202",
+    "ANN204",
+    "ANN205",
+    "ANN206",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "ANN",
+]
+"*/__init__.py" = [
+    "ANN204",
+]
+"*_test.py" = [
+    "ANN204",
+]
+
+[tool.ruff.lint.flake8-annotations]
+mypy-init-return = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/fibery_mcp_server",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
