@@ -1,0 +1,98 @@
+[build-system]
+requires = ["flit_scm"]
+build-backend = "flit_scm:buildapi"
+
+[project]
+name = "jsonschema_to_typeddict"
+authors = [{name = "Henrique Gemignani Passos Lima", email = "henrique@gemignani.org"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: Apache Software License"]
+dynamic = ["version", "description"]
+requires-python = ">=3.10"
+
+[project.urls]
+Home = "https://github.com/henriquegemignani/jsonschema-to-typeddict"
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W", "C90", "I", "UP", "C4",
+    "RSE",
+    "TCH",
+    "PTH",
+    "COM818", "COM819",
+    "ISC",
+    "PIE",
+
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+]
+extend-ignore = [
+    "ISC001",  # conflicts with formatter
+    "PLR0913",  # Too many arguments for function
+]
+
+[tool.ruff.lint.isort]
+# This is very desirable, but causes issues with py-cord and some usages of construct_pack.encode
+# required-imports = ["from __future__ import annotations"]
+
+[tool.mypy]
+files = ["src"]
+
+[tool.setuptools_scm]
+write_to = "src/jsonschema_to_typeddict/_version.py"
+
+[tool.pytest.ini_options]
+addopts = "--cov"
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning",
+    "ignore::ResourceWarning",
+]
+
+xfail_strict = true
+
+[tool.coverage.run]
+branch = true
+source = [
+    "jsonschema_to_typeddict",
+]
+
+[tool.coverage.paths]
+source = [
+   "src/",
+   "**/site-packages/",
+]
+
+[tool.coverage.report]
+fail_under = 70
+
+# Regexes for lines to exclude from consideration
+exclude_also = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod",
+]
