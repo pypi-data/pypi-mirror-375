@@ -1,0 +1,13 @@
+.gitignore
+.gitlab-ci.yml
+LICENSE
+README.md
+pyproject.toml
+src/oasis-tui/__init__.py
+src/oasis-tui/tui.py
+src/oasis_tui.egg-info/PKG-INFO
+src/oasis_tui.egg-info/SOURCES.txt
+src/oasis_tui.egg-info/dependency_links.txt
+src/oasis_tui.egg-info/entry_points.txt
+src/oasis_tui.egg-info/requires.txt
+src/oasis_tui.egg-info/top_level.txt

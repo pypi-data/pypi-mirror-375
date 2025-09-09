@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oasis-tui"
+dynamic = ["version"]
+description = "TUI for the Open Acquisition System for IEPE Sensors (OASIS)"
+readme = "README.md"
+authors = [
+    {name = "Johannes Maierhofer", email = "j.maierhofer@tum.de"},
+    {name = "Oliver Zobel", email = "oliver.zobel@tum.de"},
+]
+dependencies = [
+    "oasis-api",
+    "pyserial",
+    "questionary",
+    "h5py",
+]
+requires-python = ">=3.11"
+
+[project.urls]
+Homepage = "https://gitlab.com/oasis-acquisition/oasis-tui"
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "node-and-date"
+fallback_version = "0.0.0"
+
+[project.scripts]
+oasis-tui = "oasis.tui:main"
