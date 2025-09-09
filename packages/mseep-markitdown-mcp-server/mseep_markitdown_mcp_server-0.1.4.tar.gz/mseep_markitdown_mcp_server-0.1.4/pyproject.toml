@@ -1,0 +1,26 @@
+[project]
+name = "mseep-markitdown-mcp-server"
+version = "0.1.4"
+description = "Add your description here"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "markitdown>=0.0.1a3",
+    "mcp>=1.2.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+markitdown = "markitdown_mcp_server:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
