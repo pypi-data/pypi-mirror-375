@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-dooray-mcp
+Version: 0.1.1
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.12
+Requires-Dist: mcp
+Requires-Dist: pydantic
+Requires-Dist: python-dotenv
+Requires-Dist: requests
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
