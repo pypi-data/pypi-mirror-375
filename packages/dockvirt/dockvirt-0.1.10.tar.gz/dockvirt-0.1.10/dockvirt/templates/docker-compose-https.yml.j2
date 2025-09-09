@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  app:
+    image: frontend:latest
+    restart: unless-stopped
+    networks:
+      - app-network
+    
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile.json:/etc/caddy/caddy.json:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - /home/ubuntu/.dockvirt/certs:/certs:ro
+    networks:
+      - app-network
+    command: ["caddy", "run", "--config", "/etc/caddy/caddy.json"]
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
