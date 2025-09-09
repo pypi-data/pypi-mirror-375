@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-spotify-mcp
+Version: 0.2.6
+Summary: MCP spotify project
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp==1.3.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: spotipy==2.24.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

@@ -1,0 +1,33 @@
+[project]
+name = "mseep-spotify-mcp"
+version = "0.2.6"
+description = "MCP spotify project"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp==1.3.0",
+    "python-dotenv>=1.0.1",
+    "spotipy==2.24.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+spotify-mcp = "spotify_mcp:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = []
+
+[tool.uv.sources.spotify-mcp]
+workspace = true
