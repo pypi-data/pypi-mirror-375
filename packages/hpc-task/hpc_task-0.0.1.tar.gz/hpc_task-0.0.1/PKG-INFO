@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: hpc_task
+Version: 0.0.1
+Summary: HPC Task python library.
+Home-page: https://gitee.com/pjren/hpc_task
+Author: Renpj
+Author-email: 0403114076@163.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: paramiko
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+# HPC Task
+ 
+Python package for easy HPC task management based on paramiko.
+
+## Installation
+
+pip install -U hpc_task
+
+**Requirements**
+* paramiko
+
+## Usage
+
+See tests
+
+## TODO
