@@ -1,0 +1,42 @@
+[project]
+name = "mseep-voice-status-report-mcp-server"
+version = "0.1.4"
+description = "An MCP server providing voice status reports using OpenAI TTS (text-to-speech) API"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.5.0",
+    "openai>=1.68.2",
+    "pydub>=0.25.1",
+    "click>=8.1.0",
+    "typing-extensions>=4.0.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+voice-status-report-mcp-server = "voice_status_report_mcp_server:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = [
+    "pydub.*",
+]
+ignore_missing_imports = true

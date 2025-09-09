@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-voice-status-report-mcp-server
+Version: 0.1.4
+Summary: An MCP server providing voice status reports using OpenAI TTS (text-to-speech) API
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.5.0
+Requires-Dist: openai>=1.68.2
+Requires-Dist: pydub>=0.25.1
+Requires-Dist: click>=8.1.0
+Requires-Dist: typing-extensions>=4.0.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
