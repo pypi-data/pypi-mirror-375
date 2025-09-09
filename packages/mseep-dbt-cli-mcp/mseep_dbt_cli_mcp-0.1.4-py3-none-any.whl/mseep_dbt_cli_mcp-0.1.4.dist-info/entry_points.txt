@@ -1,0 +1,3 @@
+[console_scripts]
+dbt-mcp = src.cli:main_entry
+dbt-mcp-server = src.server:main

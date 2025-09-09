@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-dbt-cli-mcp
+Version: 0.1.4
+Summary: A Model Context Protocol server for dbt CLI
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: mcp[cli]>=1.2.0
+Requires-Dist: python-dotenv>=1.0.0
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == 'dev'
+Requires-Dist: dbt-core; extra == 'dev'
+Requires-Dist: dbt-duckdb; extra == 'dev'
+Requires-Dist: isort>=5.12.0; extra == 'dev'
+Requires-Dist: mypy>=1.0.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
