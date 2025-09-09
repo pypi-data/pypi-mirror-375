@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-mcp_mqtt_bridge
+Version: 0.1.1
+Summary: An MCP server providing MQTT publish and subscribe tools.
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp
+Requires-Dist: paho-mqtt
+
+Package managed by MseeP.ai

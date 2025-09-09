@@ -1,0 +1,2 @@
+[console_scripts]
+mqtt-bridge = mqtt_mcp_server:main

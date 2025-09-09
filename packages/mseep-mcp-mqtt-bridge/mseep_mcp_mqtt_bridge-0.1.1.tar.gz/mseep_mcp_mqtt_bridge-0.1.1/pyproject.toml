@@ -1,0 +1,28 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-mcp_mqtt_bridge"
+version = "0.1.1"
+description = "An MCP server providing MQTT publish and subscribe tools."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "paho-mqtt",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+mqtt-bridge = "mqtt_mcp_server:main"
