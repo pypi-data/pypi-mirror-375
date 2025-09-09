@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-nonead-universal-robots-mcp
+Version: 0.1.1
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.3.0
+Requires-Dist: numpy
+Requires-Dist: paramiko
+Dynamic: license-file
+
+Package managed by MseeP.ai
