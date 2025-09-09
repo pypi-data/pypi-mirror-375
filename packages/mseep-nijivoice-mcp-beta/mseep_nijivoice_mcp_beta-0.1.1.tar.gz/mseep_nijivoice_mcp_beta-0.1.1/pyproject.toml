@@ -1,0 +1,29 @@
+[project]
+name = "mseep-nijivoice-mcp-beta"
+version = "0.1.1"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp>=2.2.8",
+    "httpx>=0.28.1",
+    "logger>=1.4",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "pytest-cov>=4.1.0",
+    "python-dotenv>=1.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-nijivoice-mcp-beta = "server:main"
+
+[tool.setuptools]
+py-modules = [
+    "server",
+]
