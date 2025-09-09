@@ -1,0 +1,13 @@
+cookiejar==0.0.2
+requests>=2.14.2
+requests-oauthlib>=0.7.0
+appdirs
+semantic_version>=2.6.0
+numpy
+pandas
+matplotlib
+prompt-toolkit
+seaborn
+wurlitzer
+tabulate
+scipy

@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: mplabml
+Version: 2025.1.2
+Summary: MPLABML Python SDK
+Author: Microchip
+Author-email: nicholas.copeland@microchip.com
+License: Proprietary
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+License-File: LICENSE
+Requires-Dist: cookiejar==0.0.2
+Requires-Dist: requests>=2.14.2
+Requires-Dist: requests-oauthlib>=0.7.0
+Requires-Dist: appdirs
+Requires-Dist: semantic_version>=2.6.0
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+Requires-Dist: prompt-toolkit
+Requires-Dist: seaborn
+Requires-Dist: wurlitzer
+Requires-Dist: tabulate
+Requires-Dist: scipy
+
+============================
+MPLABÂ® Machine Learning SDK
+============================
+
+The MPLAB ML SDK provides a programmatic interface to MPLAB ML Development Suite REST API's for building machine learning pipelines including data processing, feature generation, and classification for developing smart sensor algorithms optimized to run on Microchip Technology MCUs and MPUs.
+
+Installation/Setup Instructions
+===============================
+
+1. The MPLAB ML SDK requires **python version 3.7 or greater** to be installed on your computer.
+2. We recommend running the MPLAB ML SDK using Jupyter Notebook. Install Jupyter Notebook by opening a command prompt window on your computer and running the following command
+
+    pip install jupyter
+
+3. Next, to install the MPLAB ML SDK open a command prompt window on your computer and run the following command
+
+    pip install MPLABML
+
+This command will install the MPLAB ML SDK and all of the required dependencies on your computer.
+
+Connect to the MPLAB ML Development Suite Server
+------------------------------------------------
+
+Once you have installed the ML SDK, you can connect to the server by running the following
+
+    from mplabml import*
+
+    client = Client()
+
+You will then be prompted to input your API key, which can be obtained by logging into the MPLAB ML Model Builder and clicking from the user profile menu at the top right of the screen.
+
+Creating an Account
+-------------------
+
+Connecting to the MPLAB ML Development Suite server requires an account. You can purchase a license on Microchip Direct (https://www.microchipdirect.com/)
+
+Documentation
+-------------
+
+Documentation for the ML SDK can be found on the Microchip Online Docs (https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=MPLAB-ML-SDK-Documentation&redirect=true)
