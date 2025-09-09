@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: cartagon-monday-client
+Version: 0.1.8
+Summary: Cliente Python para integraciones con la API GraphQL de Monday.com
+Author-email: Miguel Diaz <mpsdiaz@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/MiguelDN/cartagon-monday-client/settings
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.25.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: responses>=0.18; extra == "dev"
