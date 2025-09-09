@@ -1,0 +1,16 @@
+aiohttp==3.11.0
+click>=8.1.7
+mcp>=1.0.0
+pydantic>=2.0.0
+fastmcp==2.1.2
+typing-extensions>=4.5.0
+python-dotenv>=1.0.0
+
+[dev]
+pyright>=1.1.389
+ruff>=0.7.3
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-mock>=3.12.0
+pytest-cov>=4.1.0
+black>=24.2.0
