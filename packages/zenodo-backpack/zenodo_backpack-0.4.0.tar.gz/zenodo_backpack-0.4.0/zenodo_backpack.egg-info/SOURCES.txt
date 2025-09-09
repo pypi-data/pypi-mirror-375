@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+bin/zenodo_backpack
+test/test_downloader.py
+zenodo_backpack/__init__.py
+zenodo_backpack/version.py
+zenodo_backpack.egg-info/PKG-INFO
+zenodo_backpack.egg-info/SOURCES.txt
+zenodo_backpack.egg-info/dependency_links.txt
+zenodo_backpack.egg-info/requires.txt
+zenodo_backpack.egg-info/top_level.txt
