@@ -1,0 +1,140 @@
+Metadata-Version: 2.4
+Name: visualtest-python
+Version: 1.9.6
+Summary: Python SDK for SmartBear VisualTest via Selenium WebDriver
+Home-page: https://github.com/SmartBear/visualtest-python
+Author: Luke Kende
+Author-email: luke.kende@smartbear.com
+Keywords: visual testing,UI testing,GUI testing,UX testing,screenshots,full page screenshots,image comparisons,regression testing
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: Pillow
+Requires-Dist: numpy
+Requires-Dist: python-dotenv
+Requires-Dist: packaging
+Requires-Dist: colorama
+Requires-Dist: colour
+Requires-Dist: axe-selenium-python
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+
+#  VisualTest
+
+This Python SDK extends the functionality of Selenium WebDriver enabling the script to capture screenshots of the device under test, including fullpage, viewport, and element screenshots for regression testing or manual review of the UI.
+
+```pip install visualtest-python```
+
+ ### Quick Setup
+
+```shell
+from selenium import webdriver
+from sbvt import VisualTest
+
+driver = webdriver.Safari()
+settings = {'projectToken': "INSERT_PROJECT_TOKEN"}
+visualTest = VisualTest(driver, settings)
+try:
+    driver.get("https://www.google.com/search?q=smartbear")
+    visualTest.capture("Google results")
+    visualTest.capture("Google results viewport", {'viewport': True})
+finally:
+    driver.quit()
+```
+
+***
+### Running Selenium against BitBar
+Copy the file from below
+
+Enter BitBar API_KEY and VisualTest PROJECT_TOKEN in the file
+
+```shell
+import time
+from selenium import webdriver
+from sbvt import VisualTest
+
+API_KEY = 'INSERT_BITBAR_APIKEY'
+PROJECT_TOKEN = 'INSERT_PROJECT_TOKEN'
+
+def testSmartBearHomePage():
+    import warnings
+    warnings.simplefilter("ignore")  # turn off tracemalloc socket warnings
+
+    caps = {
+        'platform': 'Linux',
+        'osVersion': '18.04',
+        'browserName': 'firefox',
+        'version': 'latest',
+        'resolution': '2560x1920',
+        'bitbar_apiKey': API_KEY,
+    }
+
+    hubUrl = 'https://us-west-desktop-hub.bitbar.com/wd/hub'
+    driver = webdriver.Remote(command_executor=hubUrl, desired_capabilities=caps)
+    print(
+        f'Launching webdriver for {caps["platform"]} {caps["osVersion"]} {caps["browserName"]} {caps["version"]} ')
+
+    # load the url
+    url = 'https://www.smartbear.com'
+    print(f'Opening URL: {url}')
+    driver.get(url)
+    time.sleep(5)
+
+
+    settings = {
+        'projectToken': PROJECT_TOKEN,
+    }
+    visualTest = VisualTest(driver, settings)
+    
+    # full page screenshot
+    fullPageScreenshot = visualTest.capture('Home Page')
+   
+    # viewport screenshot
+    viewportScreenshot = visualTest.capture('viewport', {'viewport': True})
+   
+
+if __name__ == '__main__':
+    try:
+        testSmartBearHomePage()
+    except Exception as e:
+        print(f'Error starting test {e}')
+```
+
+### Running Selenium Locally
+
+```shell
+from sbvt import VisualTest
+
+# pip install selenium==3.141
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+PROJECT_TOKEN = 'INSERT_PROJECT_TOKEN'
+
+driver = webdriver.Chrome('./chromedriver')
+driver.get("https://www.smartbear.com")
+print(driver.title)
+settings = {
+    'projectToken': PROJECT_TOKEN
+}
+visualTest = VisualTest(driver, settings)
+# full page screenshot
+fullPageScreenshot = visualTest.capture('Home Page')
+
+# viewport screenshot
+viewportScreenshot = visualTest.capture('viewport', {'viewport': True})
+
+# element screenshot
+heroEl = driver.find_element(By.CLASS_NAME, "sb-hp-hero-content")
+visualTest.capture('Hero Content', {'element': heroEl})
+print(driver.current_url)
+driver.close()
+```
