@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-bonusly
+Version: 1.1.2
+Summary: MCP server for Bonusly employee recognition platform
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/ajramos/mcp-bonusly
+Project-URL: Repository, https://github.com/ajramos/mcp-bonusly
+Keywords: mcp,bonusly,employee-recognition,api
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: httpx>=0.25.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: email-validator>=2.0.0
+Requires-Dist: python-dateutil>=2.8.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
