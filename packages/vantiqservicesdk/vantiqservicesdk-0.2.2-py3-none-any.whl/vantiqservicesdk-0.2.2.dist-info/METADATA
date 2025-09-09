@@ -1,0 +1,74 @@
+Metadata-Version: 2.4
+Name: vantiqservicesdk
+Version: 0.2.2
+Summary: SDK for building Vantiq service connectors in Python
+Author-email: Vantiq <sfitts@vantiq.com>
+License: MIT
+Project-URL: Homepage, https://github.com/Vantiq/vantiq-service-connectors
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastapi
+Requires-Dist: uvicorn[standard]
+Requires-Dist: vantiqsdk
+Requires-Dist: prometheus-client
+Dynamic: license-file
+
+## Repository Contents
+
+This repository contains an SDK for building Vantiq Service Connectors in Python. Service connectors allow some of all
+of a Vantiq service to be implemented outside the Vantiq platform.  The typical use case for this is to leverage a language other than VAIl (in this case Python).  One major use case for Python is to take advantage of its broad support for ML/Generative AI libraries.
+
+## Overview of a Service Connector
+
+TBD...   Python Service Connectors are only used internally by Vantiq at this point.
+
+## Building a Service Connector
+
+Running this code required Python 3.8 or later.
+
+To use the SDK, install it into your Python environment.  Using `pip`, 
+
+```commandline
+pip install vantiqservicesdk
+```
+
+Other Python environment tools may use different commands.
+
+Once it is installed, you can import it.
+
+```python
+
+from vantiqservicesdk import BaseVantiqServiceConnector
+```
+
+More details TBD...
+
+
+The MIT License (MIT)
+
+Copyright (c) 2023 Vantiq, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
