@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: mseep-nagios-mcp
+Version: 0.1.5
+Summary: MCP Server for Nagios Core
+Author-email: mseep <support@skydeck.ai>
+License: Apache-2.0
+Project-URL: Homepage, https://github.com/PROSPIRE-TECHNOLOGY-SERVICES/nagios-mcp
+Project-URL: Repository, https://github.com/PROSPIRE-TECHNOLOGY-SERVICES/nagios-mcp
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: flask>=3.1.1
+Requires-Dist: mcp[cli]>=1.8.0
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: requests>=2.32.3
+Dynamic: license-file
+
+Package managed by MseeP.ai

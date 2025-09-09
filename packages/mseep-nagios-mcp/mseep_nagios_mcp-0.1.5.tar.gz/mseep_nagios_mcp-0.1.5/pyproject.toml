@@ -1,0 +1,28 @@
+[project]
+name = "mseep-nagios-mcp"
+version = "0.1.5"
+description = "MCP Server for Nagios Core"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1.1",
+    "mcp[cli]>=1.8.0",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.3",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "Apache-2.0"
+
+[project.scripts]
+nagios-mcp = "nagios_mcp.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/PROSPIRE-TECHNOLOGY-SERVICES/nagios-mcp"
+Repository = "https://github.com/PROSPIRE-TECHNOLOGY-SERVICES/nagios-mcp"
