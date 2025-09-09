@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pscaffold"
+version = "0.1.6"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.32.5",
+    "typer[all]>=0.16.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipython>=9.4.0",
+    "pytest[all]>=8.4.1",
+    "twine>=6.1.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["pyscaffold*"]
+
+[tool.setuptools.package-data]
+pyscaffold = ["assets/*.json"]
+
+[project.scripts]
+scaffold = "pyscaffold.main:app"
