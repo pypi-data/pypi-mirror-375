@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_server_duckdb/__init__.py
+src/mcp_server_duckdb/config.py
+src/mcp_server_duckdb/server.py
+src/mseep_mcp_server_duckdb.egg-info/PKG-INFO
+src/mseep_mcp_server_duckdb.egg-info/SOURCES.txt
+src/mseep_mcp_server_duckdb.egg-info/dependency_links.txt
+src/mseep_mcp_server_duckdb.egg-info/entry_points.txt
+src/mseep_mcp_server_duckdb.egg-info/requires.txt
+src/mseep_mcp_server_duckdb.egg-info/top_level.txt
+tests/test_config.py
+tests/test_server.py
