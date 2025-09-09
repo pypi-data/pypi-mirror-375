@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: mseep-google-analytics-mcp
+Version: 1.2.2
+Summary: Google Analytics 4 MCP Server with Smart Optimizations - Access GA4 data in Claude, Cursor and other MCP clients. Prevents context window crashes with intelligent data volume management.
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/surendranb/google-analytics-mcp
+Project-URL: Repository, https://github.com/surendranb/google-analytics-mcp
+Project-URL: Issues, https://github.com/surendranb/google-analytics-mcp/issues
+Keywords: google-analytics,mcp,ai-assistant,analytics,ga4,claude,cursor,windsurf
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: fastmcp>=2.0.0
+Requires-Dist: google-analytics-data>=0.16.0
+
+Package managed by MseeP.ai
