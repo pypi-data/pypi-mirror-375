@@ -1,0 +1,26 @@
+# CSSCade - Development Dependencies
+# Additional packages needed for development, testing, and contributing
+
+# Include runtime dependencies
+-r requirements.txt
+
+# Code Quality & Formatting
+black==25.1.0          # Code formatter
+ruff==0.12.12          # Fast Python linter
+mypy==1.17.1           # Static type checker
+
+# Testing
+pytest==8.4.2          # Testing framework
+pytest-cov             # Coverage plugin for pytest
+
+# Documentation & Examples
+Pygments==2.19.2       # Syntax highlighting for examples
+
+# Development Utilities
+ipython                # Enhanced Python shell for development
+pre-commit             # Git hooks for code quality
+
+# Optional: Build & Distribution (uncomment if needed)
+# build                # Build package
+# twine                # Upload to PyPI
+# wheel                # Wheel package format
