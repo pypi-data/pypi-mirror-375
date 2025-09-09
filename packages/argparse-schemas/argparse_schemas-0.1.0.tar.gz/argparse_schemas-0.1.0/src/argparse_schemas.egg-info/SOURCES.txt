@@ -1,0 +1,15 @@
+.gitignore
+.pre-commit-config.yaml
+CHANGELOG.md
+LICENSE
+README.md
+pyproject.toml
+uv.lock
+.github/workflows/ci.yml
+src/argparse_schemas.egg-info/PKG-INFO
+src/argparse_schemas.egg-info/SOURCES.txt
+src/argparse_schemas.egg-info/dependency_links.txt
+src/argparse_schemas.egg-info/top_level.txt
+src/lisa/sim/interfaces/__init__.py
+src/lisa/sim/interfaces/jsonschema.py
+tests/test_jsonchema.py

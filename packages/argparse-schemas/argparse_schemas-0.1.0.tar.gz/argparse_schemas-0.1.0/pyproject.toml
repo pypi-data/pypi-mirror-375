@@ -1,0 +1,52 @@
+[project]
+name = "argparse-schemas"
+description = "Transform argparse specs to JSON schemas"
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/lisa-sgs/argparse-schemas"
+Source = "https://github.com/lisa-sgs/argparse-schemas"
+Issues = "https://github.com/lisa-sgs/argparse-schemas/issues"
+Changelog = "https://github.com/lisa-sgs/argparse-schemas/blob/develop/CHANGELOG.md"
+
+[dependency-groups]
+dev = ["pre-commit", "pytest", "pytest-cov"]
+
+
+[build-system]
+requires = ["setuptools >= 77.0.3", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+[tool.ruff]
+# Ruff supports a top-level `src` option in lieu of isort's `src_paths` setting.
+# All paths are relative to the project root, which is the directory containing the pyproject.toml.
+src = ["src"]
+
+[tool.ruff.lint]
+# See https://docs.astral.sh/ruff/rules
+select = [
+    "ASYNC",
+    "C",
+    "D2",
+    "D4",
+    "E",
+    "F",
+    "I",
+    "N",
+    "NPY",
+    "RUF",
+    "S",
+    "UP",
+    "W",
+]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/**/*.py" = [
+    "S101", # Allow asserts in tests
+]
