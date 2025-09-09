@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: llm_multiprovider
+Version: 0.1.33
+Summary: LLM API for multiple model providers
+Home-page: https://github.com/jamorell/llm_multiprovider
+Author: José Ángel Morell
+Author-email: jose@closeknit.ai
+License: AGPL-3.0
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: anyio==4.10.0
+Requires-Dist: certifi==2025.8.3
+Requires-Dist: dotenv==0.9.9
+Requires-Dist: exceptiongroup==1.3.0
+Requires-Dist: h11==0.16.0
+Requires-Dist: httpcore==1.0.9
+Requires-Dist: httpx==0.28.1
+Requires-Dist: idna==3.10
+Requires-Dist: json_repair==0.50.1
+Requires-Dist: python-dotenv==1.1.1
+Requires-Dist: sniffio==1.3.1
+Requires-Dist: typing_extensions==4.15.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# llm_multiprovider
+LLM API for multiple model providers
