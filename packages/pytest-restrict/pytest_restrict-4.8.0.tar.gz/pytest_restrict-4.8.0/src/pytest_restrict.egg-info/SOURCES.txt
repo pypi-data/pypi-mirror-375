@@ -1,0 +1,13 @@
+CHANGELOG.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+src/pytest_restrict/__init__.py
+src/pytest_restrict/py.typed
+src/pytest_restrict.egg-info/PKG-INFO
+src/pytest_restrict.egg-info/SOURCES.txt
+src/pytest_restrict.egg-info/dependency_links.txt
+src/pytest_restrict.egg-info/entry_points.txt
+src/pytest_restrict.egg-info/requires.txt
+src/pytest_restrict.egg-info/top_level.txt
