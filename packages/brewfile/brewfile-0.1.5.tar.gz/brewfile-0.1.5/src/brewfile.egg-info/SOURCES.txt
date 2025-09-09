@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/brewfile/__init__.py
+src/brewfile/brew.py
+src/brewfile/cli.py
+src/brewfile/manager.py
+src/brewfile/models.py
+src/brewfile/utils.py
+src/brewfile.egg-info/PKG-INFO
+src/brewfile.egg-info/SOURCES.txt
+src/brewfile.egg-info/dependency_links.txt
+src/brewfile.egg-info/entry_points.txt
+src/brewfile.egg-info/top_level.txt
