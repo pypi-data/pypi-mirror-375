@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "keybin-cli"
+version = "0.1"
+description = "Safe CLI password generator and manager. Encrypt your data, manage multiple profiles and more. "
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name="jotaesee", email="joseslamich.dev@gmail.com" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "cryptography>=45.0",
+    "keyring>=25.6",
+    "platformdirs>=4.4",
+    "pydantic>=2.0",
+    "pyperclip>=1.9",
+    "rich>=14.0",
+    "thefuzz>=0.22",
+    "typer[all]>=0.17",
+]
+
+[project.scripts]
+keybin = "keybin.cli:app"
+
+[project.urls]
+"Homepage" = "https://github.com/jotaesee/keybin" 
+"Bug Tracker" = "https://github.com/jotaesee/keybin/issues"
+
+[tool.setuptools.packages.find]
