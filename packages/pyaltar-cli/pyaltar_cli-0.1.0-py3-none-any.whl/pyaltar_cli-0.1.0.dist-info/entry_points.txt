@@ -1,0 +1,2 @@
+[console_scripts]
+altar = altar_cli.cli:main

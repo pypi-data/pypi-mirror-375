@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: pyaltar-cli
+Version: 0.1.0
+Summary: A CLI for managing Altar UI components to your project.
+Project-URL: homepage, https://github.com/pyaether/altar-cli
+Project-URL: repository, https://github.com/pyaether/altar-cli
+Project-URL: documentation, https://github.com/pyaether/altar-cli
+Author-email: Saurabh Ghanekar <ghanekarsaurabh8@gmail.com>
+License-Expression: BSD-2-Clause
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.10
+Requires-Dist: click>=8.1
+Requires-Dist: pydantic>=2.10
+Requires-Dist: rich>=13.9
+Requires-Dist: typing-extensions>=4
+Description-Content-Type: text/markdown
+
+# Altar CLI
+
+A CLI for managing Altar UI components to your project.
