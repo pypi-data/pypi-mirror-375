@@ -1,0 +1,35 @@
+
+[:platform_system == "Windows"]
+windows-curses
+
+[all]
+pytest
+pytest-cov
+build
+bump-my-version
+pre-commit
+ruff
+twine
+insipid-sphinx-theme
+sphinx
+
+[all:platform_system != "Windows"]
+pexpect
+
+[dev]
+build
+bump-my-version
+pre-commit
+ruff
+twine
+
+[docs]
+insipid-sphinx-theme
+sphinx
+
+[test]
+pytest
+pytest-cov
+
+[test:platform_system != "Windows"]
+pexpect

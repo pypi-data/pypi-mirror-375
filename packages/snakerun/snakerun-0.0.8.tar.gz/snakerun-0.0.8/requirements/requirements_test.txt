@@ -1,0 +1,3 @@
+pexpect; platform_system != "Windows"
+pytest
+pytest-cov
