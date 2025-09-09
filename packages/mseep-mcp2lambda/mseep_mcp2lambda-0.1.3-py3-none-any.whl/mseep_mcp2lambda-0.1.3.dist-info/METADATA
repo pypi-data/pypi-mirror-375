@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-mcp2lambda
+Version: 0.1.3
+Summary: MCP2Lambda - A bridge between MCP clients and AWS Lambda functions
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: boto3>=1.37.0
+Requires-Dist: mcp==1.3.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
