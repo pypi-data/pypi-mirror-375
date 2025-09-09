@@ -1,0 +1,162 @@
+# To install just on a per-project basis
+# 1. Activate your virtual environemnt
+# 2. uv add --dev rust-just
+# 3. Use just within the activated environment
+
+pkg := "tessdb-cmdline"
+module := "tess"
+
+drive_uuid := "77688511-78c5-4de3-9108-b631ff823ef4"
+user :=  file_stem(home_dir())
+def_drive := join("/media", user, drive_uuid, "env")
+project := file_stem(justfile_dir())
+local_env := join(justfile_dir(), ".env")
+
+# list all recipes
+default:
+    just --list
+
+# Add conveniente development dependencies
+dev:
+    uv add --dev pytest pytest-asyncio
+
+# Build the package
+build:
+    rm -fr dist/*
+    uv build
+
+# Install tools globally
+tools:
+    uv tool install twine
+    uv tool install ruff
+
+# Publish the package to PyPi
+publish: build
+    twine upload -r pypi dist/*
+    uv run --no-project --with {{pkg}} --refresh-package {{pkg}} \
+        -- python -c "from {{module}} import __version__; print(__version__)"
+
+# Publish to Test PyPi server
+test-publish: build
+    twine upload --verbose -r testpypi dist/*
+    uv run --no-project  --with {{pkg}} --refresh-package {{pkg}} \
+        --index-url https://test.pypi.org/simple/ \
+        --extra-index-url https://pypi.org/simple/ \
+        -- python -c "from {{module}} import __version__; print(__version__)"
+
+# upgrades library and uv.lock
+upgrade library:
+    uv pip install --upgrade {{library}}
+    uv lock --upgrade
+
+pull:
+    git pull --rebase --tags
+
+# ==================
+# Development
+# ==================
+
+# Restore a fresh, unmigrated ZPTESS database
+db-anew which="anew" drive=def_drive: (check_mnt drive) (db-restore which)
+
+tess-log1 logdir="log":
+    uv run tess-log --console --trace names --log-dir {{logdir}} --output-file names.csv
+
+tess-log2 name="stars1267" logdir="log" verbose="":
+    uv run tess-log --console --trace {{verbose}} readings --name {{name}} --log-dir {{logdir}} --output-file readings.txt
+
+tess-loc-c verbose="" dry-run="":
+    cp tess.medium.db tess.db
+    uv run tess-location --console --trace {{verbose}} create {{dry-run}} -pl "Melrose Place" -lo -3.6124434 -la 40.4208393 -he 900
+
+tess-loc-u verbose="" dry-run="":
+    cp tess.medium.db tess.db
+    uv run tess-location --console --trace {{verbose}} create {{dry-run}} -pl "Melrose Place" -lo -3.6124434 -la 40.4208393 -he 900
+    uv run tess-location --console --trace {{verbose}} update {{dry-run}} -pl "Melrose Place" -lo -3.6124434 -la 40.4208393 -he 880 -tz Europe/Madrid
+
+tess-obs-c verbose="" dry-run="":
+    cp tess.medium.db tess.db
+    uv run tess-observer --console --trace {{verbose}} create {{dry-run}} -ty "Organization" -na "Universidad Complutense de Madrid"
+
+tess-obs-f verbose="" dry-run="":
+    cp tess.medium.db tess.db
+    uv run tess-observer --console --trace {{verbose}} update {{dry-run}} --fix  -ty "Organization" -na "Universidad Complutense de Madrid" -em info@ucm.es -we http://www.ucm.es
+
+tess-obs-u verbose="" dry-run="":
+    cp tess.medium.db tess.db
+    uv run tess-observer --console --trace {{verbose}} update {{dry-run}} -ty "Organization" -na "Universidad Complutense de Madrid" -em support@ucm.es -we http://www.ucm.es
+
+tess-register verbose="" dry-run="":
+    cp tess.medium.db tess.db
+    uv run tess-photometer --console --trace {{verbose}} register {{dry-run}} -au -na stars8000 -ma AA:BB:CC:DD:EE:FF -mo TESS-W -fi "0.1.1" --zp1 20.44 -f1 "UV/IR-750" -o1 0
+
+
+# =============
+# PyTest driver
+# =============
+
+test pkg module:
+    uv run pytest test/{{pkg}}/test_{{module}}.py
+
+testf pkg module func:
+    uv run pytest test/{{pkg}}/test_{{module}}.py::test_{{func}}
+
+
+# =================
+# Restore databases
+# =================
+
+[private]
+db-restore which="anew":
+    #!/usr/bin/env bash
+    set -exuo pipefail
+    cp {{ def_drive }}/{{project}}/tess.{{which}}.db tess.db
+
+# ==================
+# Backup environment
+# ==================
+
+# Backup .env to storage unit
+env-bak drive=def_drive: (check_mnt drive) (env-backup join(drive, project))
+
+# Restore .env from storage unit
+env-rst drive=def_drive: (check_mnt drive) (env-restore join(drive, project))
+
+[private]
+check_mnt mnt:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [[ ! -d  {{ mnt }} ]]; then
+        echo "Drive not mounted: {{ mnt }}"
+        exit 1 
+    fi
+
+[private]
+env-backup bak_dir:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [[ ! -f  {{ local_env }} ]]; then
+        echo "Can't backup: {{ local_env }} doesn't exists"
+        exit 1 
+    fi
+    if [[ ! -d  {{ bak_dir }} ]]; then
+        mkdir {{ bak_dir }}
+    fi
+    echo "Copy {{ local_env }} => {{ bak_dir }}"
+    cp {{ local_env }} {{ bak_dir }}
+
+
+[private]
+env-restore bak_dir:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [[ ! -f  {{ bak_dir }}/.env ]]; then
+        echo "Can't restore: {{ bak_dir }}/.env doesn't exists"
+        exit 1 
+    fi
+    echo "Copy {{ bak_dir }}/.env => {{ local_env }}"
+    cp {{ bak_dir }}/.env {{ local_env }}
+    echo "Copy {{ bak_dir }}/tess.medium.db => ."
+    cp {{ bak_dir }}/tess.medium.db .
+    echo "Copy {{ bak_dir }}/tess.anew.db => ."
+    cp {{ bak_dir }}/tess.anew.db .

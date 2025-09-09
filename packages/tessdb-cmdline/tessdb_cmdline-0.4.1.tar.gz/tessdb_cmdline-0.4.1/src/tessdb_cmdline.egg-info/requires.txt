@@ -1,0 +1,9 @@
+sqlalchemy[asyncio]>=2.0
+lica[aiosqlalchemy]>=2.0
+aiosqlite
+tessdb-dao>=0.4
+tessdb-api>=0.4
+zptess-dao>=1.0
+
+[test]
+pytest>=6

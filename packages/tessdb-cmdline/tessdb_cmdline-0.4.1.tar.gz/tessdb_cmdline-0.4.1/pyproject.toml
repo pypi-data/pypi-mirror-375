@@ -1,0 +1,89 @@
+[project]
+name = "tessdb-cmdline"
+dynamic = ["version"]
+description = "TESS database command line tools"
+readme = "README.md"
+requires-python = ">=3.12"
+license-files = ["LICENSE"]
+authors = [
+    {name = "Rafael González", email = "rafael08@ucm.es"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    'Programming Language :: SQL',
+    'Development Status :: 4 - Beta',
+    "Environment :: Console",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    'Intended Audience :: Science/Research',
+    'Intended Audience :: Developers',
+    'Natural Language :: English',
+    'Natural Language :: Spanish',
+]
+dependencies = [
+   "sqlalchemy[asyncio] >= 2.0",
+   "lica[aiosqlalchemy]>=2.0", # needs lica library from 2.x on
+   "aiosqlite",
+   "tessdb-dao>=0.4",
+   "tessdb-api>=0.4",
+   "zptess-dao>=1.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=6",
+]
+
+[project.urls]
+Homepage = "https://github.com/STARS4ALL/tessdb-cmdline-ng"
+Repository = "https://github.com/STARS4ALL/tessdb-cmdline-ng.git"
+
+[project.scripts]
+tess-log = "tess.logfile.cli:main"
+tess-location = "tess.location.cli:main"
+tess-observer = "tess.observer.cli:main"
+tess-photometer = "tess.photometer.noasync.cli:main"
+
+
+[build-system]
+requires = ["setuptools >= 78.1", "wheel", "setuptools_scm[toml]>=8.2"]
+build-backend = "setuptools.build_meta"
+
+# pyproject.toml
+# Autimatically generates a _version-py file from with Git information
+# This file shold be placed in .gitignore
+[tool.setuptools_scm]
+write_to = "src/tess/_version.py"
+
+[tool.setuptools.packages.find]
+# scanning for namespace packages is true by default in pyproject.toml, so
+# you do NOT need to include the following line.
+namespaces = true
+where = ["src"]
+
+[tool.setuptools]
+script-files = [
+]
+
+#[tool.setuptools.package-data]
+#"tess.tool.recover.templates" = ["*.j2"]
+
+[tool.ruff]
+line-length = 100
+
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] [%(name)s] %(message)s"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+]
