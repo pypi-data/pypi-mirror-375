@@ -1,0 +1,106 @@
+Metadata-Version: 2.4
+Name: huscy.rooms
+Version: 0.2.0a9
+Project-URL: homepage, https://bitbucket.org/huscy/rooms
+Author-email: Stefan Bunde <stefanbunde+git@posteo.de>
+License-Expression: AGPL-3.0-or-later
+License-File: LICENSE
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 4.2
+Classifier: Framework :: Django :: 5.1
+Classifier: Framework :: Django :: 5.2
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: django>=4.2
+Requires-Dist: djangorestframework>=3.14
+Provides-Extra: development
+Requires-Dist: psycopg2-binary; extra == 'development'
+Provides-Extra: testing
+Requires-Dist: tox; extra == 'testing'
+Description-Content-Type: text/markdown
+
+huscy.rooms
+======
+
+![PyPi Version](https://img.shields.io/pypi/v/huscy-rooms.svg)
+![PyPi Status](https://img.shields.io/pypi/status/huscy-rooms)
+![PyPI Downloads](https://img.shields.io/pypi/dm/huscy-rooms)
+![PyPI License](https://img.shields.io/pypi/l/huscy-rooms?color=yellow)
+![Python Versions](https://img.shields.io/pypi/pyversions/huscy-rooms.svg)
+![Django Versions](https://img.shields.io/pypi/djversions/huscy-rooms)
+
+
+
+Requirements
+------
+
+- Python 3.8+
+- A supported version of Django
+
+Tox tests on Django versions 4.2, 5.0 and 5.1.
+
+
+
+Installation
+------
+
+To install `husy.rooms` simply run:
+```
+pip install huscy.rooms
+```
+
+
+Configuration
+------
+
+We need to hook `huscy.rooms` into our project.
+
+1. Add `huscy.rooms` into your `INSTALLED_APPS` at settings module:
+
+```python
+INSTALLED_APPS = (
+	...
+	'huscy.rooms',
+)
+```
+
+2. Create `huscy.rooms` database tables by running:
+
+```
+python manage.py migrate
+```
+
+
+Development
+------
+
+After checking out the repository you should run
+
+```
+make install
+```
+
+to install all development and test requirements and
+
+```
+make migrate
+```
+
+to create the database tables.
+We assume you have a running postgres database with a user `huscy` and a database also called `huscy`.
+You can easily create them by running
+
+```
+sudo -u postgres createuser -d huscy
+sudo -u postgres psql -c "ALTER USER huscy WITH PASSWORD '123'"
+sudo -u postgres createdb huscy
+```
