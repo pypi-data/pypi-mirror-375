@@ -1,0 +1,9 @@
+[project]
+name = "veeink-mcp-server"
+version = "0.1.1"
+description = "veeink的MCP服务"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.13.1",
+]
