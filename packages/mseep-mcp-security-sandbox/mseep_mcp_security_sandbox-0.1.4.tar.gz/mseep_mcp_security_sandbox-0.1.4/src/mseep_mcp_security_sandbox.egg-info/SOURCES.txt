@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp-security-sandbox/__init__.py
+src/mcp-security-sandbox/frontend/MCP_Chat.py
+src/mcp-security-sandbox/frontend/pages/BurpSuite_MCP_Chat.py
+src/mcp-security-sandbox/frontend/pages/Github_MCP_Server.py
+src/mcp-security-sandbox/frontend/pages/History_Aware_Chat.py
+src/mcp-security-sandbox/mcp/__init__.py
+src/mcp-security-sandbox/mcp/github/client.py
+src/mcp-security-sandbox/mcp/github/server.py
+src/mseep_mcp_security_sandbox.egg-info/PKG-INFO
+src/mseep_mcp_security_sandbox.egg-info/SOURCES.txt
+src/mseep_mcp_security_sandbox.egg-info/dependency_links.txt
+src/mseep_mcp_security_sandbox.egg-info/requires.txt
+src/mseep_mcp_security_sandbox.egg-info/top_level.txt
