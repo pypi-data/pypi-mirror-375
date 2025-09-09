@@ -1,0 +1,57 @@
+Metadata-Version: 2.1
+Name: scanpro
+Version: 0.4.0
+Summary: Single-Cell Analysis of Proportions
+Home-page: https://github.com/loosolab/scanpro
+Author: Loosolab
+Author-email: yousef.alayoubi@mpi-bn.mpg.de
+License: MIT
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Scanpro: robust proportion analysis for single cell resolution data
+Scanpro is a modular tool for proportion analysis, seamlessly integrating into widely accepted frameworks in the python environment. Scanpro is fast, accurate, support datasets without replicates, and is intended to be used by bioinformatics experts and beginners.
+
+<img src="docs/source/figures/scanpro_workflow.png" width=75% height=55%>
+
+## Install
+### PyPi
+
+`pip install scanpro`
+
+### From source: 
+- clone the repository
+```
+git clone https://gitlab.gwdg.de/loosolab/software/scanpro.git
+```
+- navigate to scanpro directory
+```
+cd scanpro
+```
+- then run 
+```
+pip install .
+```
+## Quick start
+To run the tool import and call the function `scanpro`:
+```
+from scanpro import scanpro
+
+out = scanpro(adata, clusters_col='clusters', conds_col='condition', samples_col='sample')
+
+```
+
+- If samples_col is not given or set to None, the dataset is assumed to be not replicated and scanpro will run the bootstrapping method.
+
+To show the results, run
+```out.results```. 
+
+You can plot the results by calling ```out.plot()```.
+
+## Documentation
+
+A detailed documentation can be found here: [Manual](https://scanpro.readthedocs.io/en/latest/).
+
+## Citation
+
+Alayoubi, Y., Bentsen, M. & Looso, M. Scanpro is a tool for robust proportion analysis of single-cell resolution data. *Sci Rep* **14**, 15581 (2024). [https://doi.org/10.1038/s41598-024-66381-7](https://doi.org/10.1038/s41598-024-66381-7)
