@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-aws-resources
+Version: 0.1.4
+Summary: MCP server for AWS resources using boto3
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: boto3
+Requires-Dist: mcp
+Requires-Dist: pydantic
+Requires-Dist: pytz
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
