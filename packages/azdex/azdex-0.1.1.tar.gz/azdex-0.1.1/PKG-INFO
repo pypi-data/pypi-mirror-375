@@ -1,0 +1,34 @@
+Metadata-Version: 2.3
+Name: azdex
+Version: 0.1.1
+Summary: Add your description here
+Keywords: python dex libs,dex,Python Decentralized Crypto Exchange Libs
+Author: hhglory
+Author-email: hhglory <hhglory@outlook.com>
+Requires-Dist: hyperliquid-python-sdk>=0.18.0
+Requires-Dist: loguru>=0.7.3
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
+# Dex
+
+- DEX = Cryptocurrency Decentralized Exchanges (加密货币去中心化交易所)
+
+## Installation
+
+```ruby
+
+uv add azdex
+
+```
+
+## DEX Rankings
+
+- ✅ [CoinMarketCap - DEX](https://coinmarketcap.com/rankings/exchanges/dex/)
+
+## DEX Exchanges
+
+### Hyperliquid
+
+- ✅ [Hyperliquid](https://app.hyperliquid.xyz/trade)
+- ✅ [Python SDK](https://github.com/hyperliquid-dex/hyperliquid-python-sdk)
