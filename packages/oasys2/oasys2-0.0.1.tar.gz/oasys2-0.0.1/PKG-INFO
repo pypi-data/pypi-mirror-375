@@ -1,0 +1,30 @@
+Metadata-Version: 2.1
+Name: oasys2
+Version: 0.0.1
+Summary: Core component of OASYS 2.0
+Home-page: https://www.aps.anl.gov/Science/Scientific-Software/OASYS
+Author: Manuel Sanchez del Rio & Luca Rebuffi
+Author-email: lrebuffi@aps.gov
+License: BSD3
+Project-URL: Bug Reports, https://github.com/oasys-kit/OASYS2/issues
+Project-URL: Source, https://github.com/oasys-kit/OASYS2
+Project-URL: Documentation, https://orange-canvas-core.readthedocs.io/en/latest/
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: X11 Applications :: Qt
+Classifier: Environment :: Console
+Classifier: Environment :: Plugins
+Classifier: Programming Language :: Python
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+
+# OASYS2
+New release of OASYS, fully in python
