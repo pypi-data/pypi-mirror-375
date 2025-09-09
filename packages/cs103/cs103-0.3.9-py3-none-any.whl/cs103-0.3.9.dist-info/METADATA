@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: cs103
+Version: 0.3.9
+Summary: cs103 utils package
+Author: CPSC 103
+Author-email: cs-103@students.cs.ubc.ca
+License: GPLv3
+Keywords: cs103
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Education
+Classifier: Topic :: Education
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Requires-Dist: matplotlib
+Requires-Dist: pandas
+Requires-Dist: canvasapi
+Requires-Dist: python-dotenv
+
+Utility package for CPSC 103 @ The University of British Columbia
