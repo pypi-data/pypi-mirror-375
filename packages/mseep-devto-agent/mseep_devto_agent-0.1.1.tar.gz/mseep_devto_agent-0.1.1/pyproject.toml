@@ -1,0 +1,26 @@
+[project]
+name = "mseep-devto-agent"
+version = "0.1.1"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "google-adk>=0.1.0",
+    "mcp[cli]>=1.9.1",
+    "requests>=2.32.3",
+    "termcolor>=3.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-devto-agent = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
