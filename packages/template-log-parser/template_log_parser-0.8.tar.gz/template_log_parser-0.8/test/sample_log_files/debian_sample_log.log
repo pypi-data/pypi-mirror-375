@@ -1,0 +1,9 @@
+2025-03-04T16:21:38+01:00 debian_pc sudo:     root : PWD=/ ; USER=root ; COMMAND=/bin/sh -c \\/var\\/lib\\/openmediavault\\/cron\\.d\\/userdefined-a6abba22-44bb-44f7-bd34-8408c5c23284
+2025-04-06T15:19:43+01:00 debian_pc upssched-cmd: UPS ups - Line Power Fail, system running on battery power. Shutdown imminent in 180 seconds.
+2025-04-06T23:59:08+01:00 debian_pc rsync-c9335dc7-4918-4b54-a0e8-5f The synchronisation has completed successfully.
+2025-04-08T05:10:57+01:00 debian_pc kernel: hrtimer: interrupt took 5570 ns
+2025-04-11T17:09:10+01:00 debian_pc thermald[1305]: Config file /etc/thermald/thermal-conf.xml does not exist
+2025-05-09T15:03:39+01:00 debian_pc rsyslogd: [origin software="rsyslogd" swVersion="8.2302.0" x-pid="1790675" x-info="https://www.rsyslog.com"] start
+2025-05-22T16:15:22+01:00 debian_pc mtp-probe: bus: 5, device: 3 was not an MTP device
+2025-05-23T08:49:23+01:00 debian_pc pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by test_admin(uid=1000)
+2025-07-03T04:05:11+01:00 debian_pc 05efi: debug: /dev/some_sda partition scheme is gpt

@@ -1,0 +1,22 @@
+2025-05-17T06:33:50+01:00 ubuntu_pc pycharm-community_pycharm-commun Recomputation log:
+2025-05-20T05:54:34+01:00 ubuntu_pc PackageKit: resolve transaction /10451_aaacadbb from uid 1000 finished with success after 262ms
+2025-05-23T08:48:46+01:00 ubuntu_pc com.core447.StreamController.des Created virtual joystick: streamcontroller-joystick
+2025-05-23T09:34:22+01:00 ubuntu_pc sticky-notes-simple_sticky-notes [LOG] Notes after add: ['test']
+2025-05-24T02:15:36+01:00 ubuntu_pc dbus-daemon: apparmor="DENIED" operation="dbus_signal"  bus="accessibility" path="/org/a11y/atspi/registry" interface="org.a11y.atspi.Registry" member="EventListenerDeregistered" name=":1.1" mask="receive" pid=35175 label="snap.sticky-notes-simple.sticky-notes-simple" peer_pid=2347 peer_label="unconfined"
+2025-05-24T05:40:36+01:00 ubuntu_pc snapd-desktop-integration.snapd- Sorry, home directories outside of /home needs configuration.
+2025-05-24T05:42:45+01:00 ubuntu_pc AptDaemon.Worker: INFO: Updating cache
+2025-05-24T06:49:55+01:00 ubuntu_pc gnome-keyring-secrets.desktop[29 discover_other_daemon: 1GNOME_KEYRING_CONTROL=/run/user/1000/keyring
+2025-05-25T14:54:55+01:00 ubuntu_pc ubuntu-appindicators@ubuntu.com[ Using Brute-force mode for StatusNotifierItem :1.96@/com/core447/StreamController/Menu
+2025-05-26T05:02:12+01:00 ubuntu_pc org.gnome.DejaDup.Monitor.deskto An operation is already in progress
+2025-05-26T06:45:52+01:00 ubuntu_pc gdm-password]: gkr-pam: unlocked login keyring
+2025-06-02T05:26:30+01:00 ubuntu_pc vsce-sign: Package file size:  75101
+2025-07-05T05:13:05+01:00 ubuntu_pc snap-store_ubuntu-software.deskt Warning: Schema “org.gnome.system.locale” has path “/system/locale/”.  Paths starting with “/apps/”, “/desktop/” or “/system/” are deprecated.
+2025-03-04T16:21:38+01:00 debian_pc sudo:     root : PWD=/ ; USER=root ; COMMAND=/bin/sh -c \\/var\\/lib\\/openmediavault\\/cron\\.d\\/userdefined-a6abba22-44bb-44f7-bd34-8408c5c23284
+2025-04-06T15:19:43+01:00 debian_pc upssched-cmd: UPS ups - Line Power Fail, system running on battery power. Shutdown imminent in 180 seconds.
+2025-04-06T23:59:08+01:00 debian_pc rsync-c9335dc7-4918-4b54-a0e8-5f The synchronisation has completed successfully.
+2025-04-08T05:10:57+01:00 debian_pc kernel: hrtimer: interrupt took 5570 ns
+2025-04-11T17:09:10+01:00 debian_pc thermald[1305]: Config file /etc/thermald/thermal-conf.xml does not exist
+2025-05-09T15:03:39+01:00 debian_pc rsyslogd: [origin software="rsyslogd" swVersion="8.2302.0" x-pid="1790675" x-info="https://www.rsyslog.com"] start
+2025-05-22T16:15:22+01:00 debian_pc mtp-probe: bus: 5, device: 3 was not an MTP device
+2025-05-23T08:49:23+01:00 debian_pc pkexec: pam_unix(polkit-1:session): session opened for user root(uid=0) by test_admin(uid=1000)
+2025-07-03T04:05:11+01:00 debian_pc 05efi: debug: /dev/some_sda partition scheme is gpt

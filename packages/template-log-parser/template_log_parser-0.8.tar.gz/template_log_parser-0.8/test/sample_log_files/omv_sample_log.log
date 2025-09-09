@@ -1,0 +1,6 @@
+2024-10-01T07:37:28+01:00 my_open_media_vault_server_X openmediavault-check_ssl_cert_ex Perform a check for expired SSL certificates.
+2024-10-01T08:17:01+01:00 my_open_media_vault_server_X omv-sfsnapadm: Cleaning up snapshots from shared folders has been disabled.
+2024-12-25T06:21:14+01:00 my_open_media_vault_server_X conf_7.4.17.sh: The node 'homesfollowsymlinks' already exists at XPath '/config/services/smb'.
+2025-01-02T06:38:29+01:00 my_open_media_vault_server_X omv-engined[454604]: pam_unix(openmediavault:auth): authentication failure; logname= uid=0 euid=0 tty= ruser= rhost=1.1.0.1  user=somebody
+2025-01-10T04:31:39+01:00 my_open_media_vault_server_X openmediavault-webgui[1395907]: Authorized login from 2.8.6.9 [username=somebody, user-generic_browser_info]
+2025-03-15T14:01:11+01:00 my_open_media_vault_server_X php8.2-common: php_invoke ftp: already enabled for PHP 8.2 fpm sapi

@@ -1,0 +1,31 @@
+Jun 12 00:00:12 dnsmasq[50]: reply something.com is 0.0.0.0
+Jun 12 16:12:27 dnsmasq[169]: exiting on receipt of SIGTERM
+Jun 12 16:13:28 dnsmasq[50]: cached 1.0.10.10.in-addr.arpa is NXDOMAIN
+Jun 12 16:13:28 dnsmasq[50]: Pi-hole hostname pi.hole is 127.0.0.1
+Jun 12 16:13:28 dnsmasq[421]: query[A] queried_website.com from 10.86.32.102
+Jun 12 16:13:29 dnsmasq[422]: compile time options: misc_fake_info other_fake_info ipv6
+Jun 12 16:13:43 dnsmasq[50]: forwarded hello-world.com to 8.8.8.8
+Jun 12 16:13:43 dnsmasq[50]: cached-stale duckduckgo.com is 52.250.42.157
+2025-06-12 16:14:07.109 EST [50/T54] INFO: Terminating database thread
+Jun 12 16:15:06 dnsmasq[51]: /etc/hosts 127.0.0.1 is localhost.lan
+Jun 12 16:15:27 dnsmasq[50]: gravity blocked fake.org is 0.0.0.0
+Jun 12 16:16:03 dnsmasq[50]: exactly denied bs.com is NODATA
+Jun 12 16:16:27 dnsmasq[50]: config 0.0.0.0 is NXDOMAIN
+Jun 12 16:16:43 dnsmasq[50]: special domain fake.com is NXDOMAIN
+Jun 12 17:03:22 dnsmasq[421]: exactly blacklisted dumbwebsite.com is NODATA
+Jun 12 17:13:26 dnsmasq[50]: using only locally-known addresses for bind
+Jun 12 17:31:34 dnsmasq[420]: Rate-limiting support.mozilla.org is REFUSED (EDE: blocked)
+Jun 12 17:33:26 dnsmasq[50]: read /etc/hosts - 2 names
+Jun 12 18:44:32 dnsmasq[421]: reply is truncated
+Jun 12 19:13:26 dnsmasq[50]: started, version pi-hole-v2 cachesize 10000
+[2025-06-20 04:16:38.501 EST 49] Authentication required, redirecting to /admin/login
+Jun 20 04:52:51 dnsmasq[50]: inotify: /etc/pihole/hosts/custom.list new or modified
+Jun 21 06:36:25 dnsmasq[49]: using nameserver 1.1.1.1#53 for domain 1.1.1.in-addr.arpa
+Jun 21 06:39:19 dnsmasq[49]: using nameserver 8.8.8.8#53
+2025-06-21 06:39:19.789 EST [49M] WARNING: Insufficient permissions to set system time (CAP_SYS_TIME required), NTP client not available
+Jun 22 00:00:00 dnsmasq[50]: /etc/pihole/hosts/custom.list 10.0.0.199 is somehost.lan
+[2025-06-22 06:39:19.789 EST 49] Initializing HTTP server on ports "443s,8089"
+  [i] Cleaning up stray matter...#015#033[K  [✓] Cleaning up stray matter
+#015#033[K  [✓] Pulling blocklist source list into range
+2025-06-28 22:38:00.864 EST [49/T66743] ERROR: Cannot receive UDP DNS reply: Timeout - no response from upstream DNS server
+Jul 11 00:11:52 dnsmasq[235561]: TCP connection failed: Resource temporarily unavailable

@@ -1,0 +1,48 @@
+                                                   <advancedsettings>
+                                                     <videodatabase>
+                                                       <type>mysql</type>
+                                                       <host>1.1.1.1</host>
+                                                       <port>3307</port>
+                                                       <user>kodi</user>
+                                                       <pass>*****</pass>
+                                                     </videodatabase>
+                                                     <musicdatabase>
+                                                       <type>mysql</type>
+                                                       <host>1.1.1.1</host>
+                                                       <port>3307</port>
+                                                       <user>kodi</user>
+                                                       <pass>*****</pass>
+                                                     </musicdatabase>
+                                                     <videolibrary>
+                                                       <importwatchedstate>true</importwatchedstate>
+                                                       <importresumepoint>true</importresumepoint>
+                                                     </videolibrary>
+                                                   </advancedsettings>
+2025-04-12 06:27:11.088 T:17       info <general>:     Device 7
+2025-04-12 06:27:11.088 T:17       info <general>:         m_deviceName      : hdmi:CARD=HDMI,DEV=1
+2025-04-12 06:27:11.088 T:17       info <general>:         m_displayName     : HDA Intel
+2025-04-12 06:27:11.088 T:17       info <general>:         m_displayNameExtra: HDMI #1
+2025-04-12 06:27:11.088 T:17       info <general>:         m_deviceType      : AE_DEVTYPE_HDMI
+2025-04-12 06:27:11.088 T:17       info <general>:         m_channels        : FL, FR
+2025-04-12 06:27:11.088 T:17       info <general>:         m_sampleRates     : 32000,44100,48000,88200,96000,176400,192000
+2025-04-12 06:27:11.088 T:17       info <general>:         m_dataFormats     : AE_FMT_S32NE,AE_FMT_S16NE,AE_FMT_S16LE,AE_FMT_RAW
+2025-04-12 06:27:11.088 T:17       info <general>:         m_streamTypes     : STREAM_TYPE_AC3,STREAM_TYPE_DTSHD,STREAM_TYPE_DTSHD_MA,STREAM_TYPE_DTSHD_CORE,STREAM_TYPE_DTS_1024,STREAM_TYPE_DTS_2048,STREAM_TYPE_DTS_512,STREAM_TYPE_EAC3,STREAM_TYPE_TRUEHD
+2025-04-12 06:30:56.902 T:270     debug <general>: [metadata.tvshows.themoviedb.org.python (1.7.3)]: returning ratings of
+                                                   {'tmdb': {'rating': 8.0, 'votes': 2}}
+2025-05-17 06:14:15.348 T:98448   error <general>: SMBFile->Open: Unable to open file : 'smb://1.1.1.1/Movies/some_movie.mkv'
+                                                   unix_err:'2' error : 'No such file or directory'
+2025-05-17 06:14:35.535 T:98465   error <general>: SMBDirectory->GetDirectory: Unable to open directory : 'smb://1.1.1.1/Movies/some_folder'
+                                                   unix_err:'d' error : 'Permission denied'
+Line that does not require linking
+2025-04-12 06:27:11.088 T:17       info <general>:     Device 7 This line meets start text criteria, but end line criteria does not exist and will exceed the limit of ten lines
+2025-04-12 06:27:11.088 T:17       info <general>:         m_channels        : FL, FR
+line three
+line four
+line five
+line six
+line seven
+line eight
+line nine
+line ten
+line eleven
+2025-04-12 06:27:11.088 T:17       info <general>:     Device 7 This line meets start text criteria but file ends before end text criteria is found

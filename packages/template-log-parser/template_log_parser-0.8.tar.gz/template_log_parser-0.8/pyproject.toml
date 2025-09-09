@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools >= 80.9.0", "setuptools_scm>=9.2.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ['template_log_parser', 'template_log_parser.templates']
+
+[tool.setuptools.package-data]
+mypkg = ["*.log"]
+
+[project]
+name = "template-log-parser"
+version = "0.8"
+dependencies = [
+  "pandas>=2.0.0",
+  "parse==1.20.2",
+]
+requires-python = ">=3.9"
+authors = [
+  {name = "Caleb Yourison", email = "caleb.yourison@gmail.com"},
+]
+description = "Parsing Log Files With User Defined Templates"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ['log', 'parse', 'template']
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3"
+]
+
+[project.urls]
+homepage = "https://github.com/calebyourison/simple_template_log_parser"

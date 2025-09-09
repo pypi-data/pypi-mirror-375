@@ -1,0 +1,38 @@
+2024-12-29T08:20:39.570483+01:00 generic_firewall filterlog[61076] 57,,,11001,igc0,match,block,in,4,0x0,,1,26466,0,none,2,igmp,36,0.0.0.0,224.0.0.1,datalength=12
+2024-12-29T08:22:58.036185+01:00 generic_firewall filterlog[61076] 6,,,1000000105,igc0,match,block,in,6,0x20,0x4c4b0,1,ICMPv6,58,64,2321:5e8:6134:c:ede0:df3:5972:e285,aa02::2,
+2024-12-29T08:23:57.867604+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,41,51085,0,none,17,udp,420,122.156.1.3,74.252.13.17,11520,8442,400
+2024-12-29T10:40:41.839934+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc1,match,block,in,4,0x0,,63,44276,0,DF,6,tcp,1239,10.123.25.2,132.82.169.130,33722,443,1187,PA,196384251:196385438,6903405,1595,,nop;nop;TS
+2024-12-29T11:14:56.503841+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,48,32515,0,none,1,icmp,34,114.32.68.247,83.54.13.48,request,32515,014
+2024-12-29T13:22:10.000000+01:00 generic_firewall nginx 10.1.32.154 - sample_user [29/Dec/2024:13:22:10 +0100] "POST /ifstats.php HTTP/2.0" 200 236 "https://10.1.32.154/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+2024-12-30T06:29:58.677830+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,55,0,0,DF,1,icmp,41,23.4.32.32,74.252.13.17,type-??20
+2024-12-30T18:21:35.031883+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,52,38570,0,none,1,icmp,81,16.13.9.26,87.76.32.89,unreachport,16.13.9.26,UDP,844761
+2024-12-30T20:08:27.260264+01:00 generic_firewall kernel arpresolve: can't allocate llinfo for 17.34.54.1 on igc0
+2024-12-31T00:10:01.413620+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,48,62510,0,none,1,icmp,153,43.19.122.1,22.199.41.98,reply,10613,15648133
+2024-12-31T16:19:15.492770+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,47,19129,0,DF,47,gre,564,1.4.8.7,91.4.31.83,datalength=544
+2024-12-31T20:49:00.025248+01:00 generic_firewall syslogd restart
+2024-12-31T22:00:56.734025+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,50,8620,0,none,1,icmp,91,86.11.7.34,90.4.43.62,unreachproto,18.3.76.124,4758
+2025-01-02T06:35:11.000000+01:00 generic_firewall nginx 2025/01/02 06:35:11 [error] 52489#100258: send() failed (54: Connection reset by peer) while logging to syslog, server: unix:/var/run/log
+2025-01-04T08:35:42.436521+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,110,10308,0,DF,6,tcp,40,90.98.32.29,12.46.3.99,22,43932,-12,R,errormsg='[bad hdr length 32 - too long, > 20]',
+2025-01-05T14:09:05.491269+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,243,54321,0,none,41,ipv6,84,52.12.5.75,91.42.34.85,IPV6-IN-IPV4,
+2025-01-07T14:31:01.182189+01:00 generic_firewall filterlog[61076] 2,,,1000000101,igc1,match,block,in,4,0xc0,,63,64308,0,none,1,icmp,68,19.4.1.2,7.2.3.2,unreach,host 1.8.0.3 unreachable48
+2025-01-08T13:12:11.809847+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,53,0,0,DF,1,icmp,40,2.2.0.7,9.4.1.8,tstampreply, 17664,83,00:00:00.000,372:53:59.424,1045:02:39.61620
+2025-01-13T07:27:33.986226+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,244,54321,0,none,4,ipencap,68,6.2.7.3,9.4.1.8,IPV4-IN-IPV4,
+2025-01-14T23:42:06.244222+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,56,35722,0,DF,6,tcp,64,6.1.2.8,4.3.2.8,3389,1367,0,SA,588570493,277071317,28340,,wscale;mss;nop;nop;nop;nop;mss;wscale;[bad opt],>,
+2025-01-31T16:09:05.131161+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,52,4408,0,none,1,icmp,87,1.2.1.9,8.4.3.8,redirect,redirect 1.4.0.1 to host 1.4.0.7
+2025-02-05T06:42:50.910020+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x2,0,51,17468,0,none,50,esp,96,1.2.3.4,9.8.7.6,datalength=76
+2025-02-09T14:38:32.089124+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,44,6307,0,none,132,sctp,52,2.7.3.6,9.4.3.8,39900,14001,20
+2025-02-14T15:53:18.854175+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,244,6969,0,none,1,icmp,40,1.2.3.4,5.6.7.8,tstamp,13528,234620
+2025-02-14T15:53:31.058325+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,244,6969,0,none,1,icmp,32,5.4.3.2,6.7.8.9,address mask request12
+2025-02-14T15:53:35.100000+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,118,13528,0,DF,252,unknown,21,1.2.3.4,5.6.7.8,datalength=1
+2025-02-14T16:32:05.997016+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,242,30162,0,DF,45,idrp,24,6.7.8.9,1.1.1.1,datalength=4
+2025-02-14T16:32:07.061960+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,242,34514,0,DF,53,swipe,24,1.2.3.4,5.5.5.5,datalength=4
+2025-02-14T16:32:08.121348+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,244,38866,0,DF,55,mobile,24,1.2.3.4,1.2.3.4,datalength=4
+2025-02-14T16:32:09.135096+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,242,43218,0,DF,66,rvd,24,5.5.5.5,1.1.1.1,datalength=4
+2025-02-14T16:32:10.153068+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,242,47570,0,DF,77,sun-nd,24,9.9.9.9,3.3.3.3,datalength=4
+2025-02-14T16:32:12.192632+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,244,51922,0,DF,125,fire,25,2.2.2.2,1.1.1.1,datalength=5
+2025-02-15T03:46:06.117638+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,56,0,0,DF,1,icmp,40,1.2.3.4,2.2.2.2,maskreply, address mask is 0x0000000020
+2025-03-09T13:33:52.353574+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,54,0,0,DF,1,icmp,40,2.2.2.2,4.4.4.4,information request20
+2025-03-14T14:47:55.927361+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,243,61801,0,none,1,icmp,168,1.1.1.1,3.3.3.3,timexceed,time exceeded in-transit148
+2025-03-14T19:15:39.970271+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,54,0,0,DF,1,icmp,40,1.1.1.1,5.5.5.5,router solicitation20
+2025-03-21T20:08:28.123718+01:00 generic_firewall filterlog[61076] 4,,,1000000103,igc0,match,block,in,4,0x0,,54,0,0,DF,1,icmp,40,23.206.229.113,69.254.193.148,source quench20
+2025-06-01T05:29:12.584289+01:00 generic_firewall reboot[66096] rebooted by root

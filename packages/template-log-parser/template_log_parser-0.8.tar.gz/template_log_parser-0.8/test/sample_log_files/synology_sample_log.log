@@ -1,0 +1,55 @@
+2024-09-15T11:36:32+01:00 server_x Connection: User [Admin_User] from [20.13.0.99] signed in to [DSM] successfully via [password].
+2024-09-16T04:00:16+01:00 server_x System: System successfully stopped [MariaDB 10].
+2024-09-18T13:59:10+01:00 server_x System SYSTEM:#011System successfully finished data scrubbing on [my_storage_pool_13].
+2024-09-19T04:28:23+01:00 server_x Connection: User [Admin_User] from [11.12.0.99] failed to log in via [FTP] due to authorization failure.
+2024-09-19T04:28:34+01:00 server_x Connection: User [Admin_User] from [11.12.50.99] logged in successfully via [FTP].
+2024-09-19T05:45:27+01:00 server_x Connection: User [Admin_User] from [12.11.99.54] failed to sign in to [DSM] via [password] due to authorization failure.
+2024-09-19T11:15:44+01:00 server_x Connection: User [guest] from [(10.63.10.65)] via [CIFS(SMB3)] accessed shared folder [my_shared_folder].
+2024-09-21T19:11:29+01:00 server_x Connection: User [Admin_User] from [11.12.50.99] logged out the server via [FTP] with totally [    37363.39 MB] uploaded and [      261.97 MB] downloaded.
+2024-09-24T04:41:57+01:00 server_x System Admin_User:#011Cleared [Admin_User] all notifications successfully.
+2024-10-02T05:44:07+01:00 server_x System Admin_user:#011Package [Log Center] has been successfully updated.
+2024-10-03T05:38:56+01:00 server_x Backup Admin_user:#011[Network to share] Credentials changed on the destination.
+2024-10-16T04:52:14+01:00 server_x System Admin_User:#011System successfully restarted SFTP service.
+2024-10-18T06:36:07+01:00 server_x System Admin_User:#011User [user_19] was created.
+2024-10-18T06:36:08+01:00 server_x System Admin_User:#011The app privilege on app [DSM] for user [user_19] was set to [allow] from [all IPs].
+2024-10-18T06:36:09+01:00 server_x System Admin_User:#011User [user_19] was added to the group [general].
+2024-10-19T07:27:02+01:00 server_x WinFileService Event: delete, Path: /fake_path/fake_backups/test.zip, File/Folder: File, Size: 722 Bytes, User: user_19, IP: 30.22.0.80
+2024-10-25T09:04:56+01:00 server_x System SYSTEM:#011Server is on battery.
+2024-10-25T09:05:02+01:00 server_x System SYSTEM:#011Server back online.
+2024-10-28T05:51:01+01:00 server_x System Admin_User:#011Download task for [software 5.34] finished.
+2024-10-28T05:54:39+01:00 server_x System Admin_User:#011Update was complete.
+2024-10-28T05:54:42+01:00 server_x System Admin_User:#011System started counting down to reboot.
+2024-10-28T06:04:15+01:00 server_x System SYSTEM:#011[some_fake_service] service was started.
+2024-11-12T04:00:45+01:00 server_x Hyper_Backup: SYSTEM:#011[Local to share][task_alpha] Backup task finished successfully.
+2024-11-13T01:09:52+01:00 server_x Hyper_Backup: SYSTEM:#011[task_omega] Trigger version rotation.
+2024-11-13T20:14:13+01:00 server_x Hyper_Backup: some_user:#011Backup task [broken_task] was removed.
+2024-11-13T20:26:23+01:00 server_x System some_user:#011Scheduled Task [new_task] was created.
+2024-11-13T20:27:14+01:00 server_x Hyper_Backup: some_user:#011Setting of backup task [tasK_omega] was created to backup to [some_user@169.254.1.1::Folder/database_temp.hbk]
+2024-11-21T08:34:09+01:00 server_x System some_user:#011Normal shared folder [new_folder] was created.
+2024-11-21T11:19:23+01:00 server_x System some_user:#011[SMB2,SMB2 & Large MTU,SMB3] was enabled.
+2024-11-21T11:37:02+01:00 server_x System some_user:#011Host [10.76.1.82] was blocked via [FTP].
+2024-11-21T11:42:36+01:00 server_x System some_user:#011Delete host IP [17.1.1.81] from Block List.
+2024-11-22T07:37:29+01:00 server_x System SYSTEM:#011[LAN 1] link up.
+2024-11-27T21:41:40+01:00 server_x Connection: Host [10.115.0.20] failed to connect via [SMB] due to [SMB1 not permitted].
+2024-11-28T01:38:40+01:00 server_x System admin:#011Start install [DSM version x.x.x.x] automatically.
+2024-12-25T18:24:22+01:00 server_x System admin:#011System successfully exported configurations.
+2025-01-07T16:44:38+01:00 server_x System admin:#011System successfully deleted User [some_user].
+2025-01-10T04:41:14+01:00 server_x System admin:#011User [user_1] was renamed to [user_2].
+2025-03-09T14:23:39+01:00 server_x System SYSTEM:#011System failed to convert video [/volume1/photo/PhotoLibrary/IMG_1734 (1).mov] to mpeg4.
+2025-03-11T14:40:05+01:00 server_x System admin:#011Create a report profile named [duplicates]
+2025-03-17T19:12:33+01:00 server_x System admin:#011Shared folder [music] was created when enabling [AudioStation].
+2025-04-13T07:06:50+01:00 server_x System SYSTEM:#011An unknown error occurred, so disk 3 was restarted. If you often see this message, please disable disk write cache.
+2025-06-08T16:06:53+01:00 server_x Hyper_Backup: SYSTEM:#011[task_beta] Version rotation started from ID [task_beta_folder.hbk].
+2025-06-08T16:08:20+01:00 server_x Hyper_Backup: SYSTEM:#011[task_beta] Rotate version [2024-11-21 13:39:22] from ID [task_beta_folder.hbk].
+2025-06-10T18:41:22+01:00 server_x System admin:#011DNS server setting was changed.
+2025-06-10T18:42:14+01:00 server_x System admin:#011[LAN 1] was set to [Manual IP].
+2025-06-10T18:42:21+01:00 server_x System admin:#011Subnet mask of [LAN 1] was changed from [255.255.255.0] to [ ].
+2025-07-13T05:48:04+01:00 server_x System SYSTEM:#011Storage Pool [1] degraded [3/4 of drives remaining]. Please repair it.
+2025-07-13T05:52:18+01:00 server_x System admin:#011System started to perform Fast Repair on [Storage Pool 1] with [Drive 1].
+2025-07-13T16:30:51+01:00 server_x System admin:#011System successfully repaired [Storage Pool 1] with drive [Drive 1].
+2025-07-20T07:48:41+01:00 server_x System admin:#011External disk [USB Disk 1 Partition 1] is ejected.
+2025-07-20T08:04:04+01:00 server_x System SYSTEM:#011The share name [usbshare1] was found as [/volumeUSB1/usbshare] and [/volumeUSB2/usbshare], and the latter was renamed to [usbshare1_1].
+2025-07-20T08:07:15+01:00 server_x System admin:#011The external device [USB Disk 2] was not ejected properly. You should eject the device before unplugging it or turning it off.
+2025-07-20T08:07:16+01:00 server_x System SYSTEM:#011The system failed to eject external disk [USB Disk 2 Partition 1].
+2025-07-22T15:13:19+01:00 server_x System admin:#011The system successfully initialized the external disk [sdq] to [EXT4] format.
+2025-08-24T04:23:21+01:00 server_x System admin:#011Fan speed was set to [full].
