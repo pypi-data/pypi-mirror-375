@@ -1,0 +1,14 @@
+humanfriendly==10.0.0
+requests
+pandas<3.0,>=2.0
+numpy
+
+[dev]
+bumpver==2024.1130
+devtools==0.12.2
+pytest<9.0.0,>=8.3.0
+coverage<7.7.0,>=7.6.0
+types-humanfriendly
+types-requests
+pandas-stubs
+mypy

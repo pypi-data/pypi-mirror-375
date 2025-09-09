@@ -1,0 +1,4 @@
+[console_scripts]
+fractal-aggregate-users-stats = fractal_slurm_tools.cli_aggregate:main
+fractal-slurm-tools = fractal_slurm_tools.cli:main
+fractal-slurm-tools-user-interval = fractal_slurm_tools.cli_2:main

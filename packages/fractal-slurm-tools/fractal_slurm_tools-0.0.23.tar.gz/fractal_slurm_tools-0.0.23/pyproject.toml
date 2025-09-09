@@ -1,0 +1,66 @@
+[project]
+name = "fractal-slurm-tools"
+version = "0.0.23"
+description = "Shared tools for parsing&processing SLURM data"
+authors = [
+    {name="Tommaso Comparin", email="tommaso.comparin@exact-lab.it"},
+]
+readme = "README.md"
+license = {text ="BSD-3-Clause"}
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "humanfriendly ==10.0.0",
+    "requests",
+    "pandas >=2.0,<3.0",
+    "numpy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "bumpver ==2024.1130",
+    "devtools ==0.12.2",
+    "pytest >=8.3.0, <9.0.0",
+    "coverage >=7.6.0,<7.7.0",
+    "types-humanfriendly",
+    "types-requests",
+    "pandas-stubs",
+    "mypy",
+]
+
+[project.urls]
+homepage = "https://github.com/fractal-analytics-platform/fractal-slurm-tools"
+repository = "https://github.com/fractal-analytics-platform/fractal-slurm-tools"
+changelog = "https://github.com/fractal-analytics-platform/fractal-slurm-tools/blob/main/CHANGELOG.md"
+
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+fractal-slurm-tools = "fractal_slurm_tools.cli:main"
+fractal-slurm-tools-user-interval = "fractal_slurm_tools.cli_2:main"
+fractal-aggregate-users-stats = "fractal_slurm_tools.cli_aggregate:main"
+
+[tool.bumpver]
+current_version = "0.0.23"
+version_pattern = "MAJOR.MINOR.PATCH[PYTAGNUM]"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = ['version = "{version}"$']
+"src/fractal_slurm_tools/__init__.py" = ['__VERSION__ = "{version}"$']
+
+
+[tool.coverage.run]
+branch = true
+parallel = true
+relative_files = true
+source = ["src"]
+omit = ["tests/*", "*/.venv/*"]
+
+[tool.coverage.report]
+omit = ["tests/*", "*/.venv/*"]
