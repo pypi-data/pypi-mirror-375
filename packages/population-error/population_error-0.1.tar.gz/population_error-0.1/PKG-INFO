@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: population-error
+Version: 0.1
+Summary: JAX-based package for estimating the information lost due to Monte Carlo approximations in GW population inference.
+Home-page: https://github.com/jack-heinzel/population-error
+Author: Jack Heinzel
+Author-email: heinzelj@mit.edu
+Project-URL: Source, https://github.com/jack-heinzel/population-error
+Project-URL: Documentation, https://population-error.readthedocs.io/
+License-File: LICENSE
+Requires-Dist: jax
+Requires-Dist: jax_tqdm
+Requires-Dist: gwpopulation
+Requires-Dist: bilby
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: summary
