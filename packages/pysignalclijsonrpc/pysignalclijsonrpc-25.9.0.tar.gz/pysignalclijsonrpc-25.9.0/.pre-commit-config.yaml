@@ -1,0 +1,46 @@
+---
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.12
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  - repo: https://github.com/pycqa/isort
+    rev: '6.0.1'
+    hooks:
+      - id: isort
+  - repo: https://github.com/pycqa/bandit
+    rev: '1.8.6'
+    hooks:
+      - id: bandit
+        args:
+          - "-c"
+          - "pyproject.toml"
+        additional_dependencies:
+          - "bandit[toml,yaml]"
+  - repo: https://github.com/pycqa/flake8
+    rev: '7.3.0'
+    hooks:
+      - id: flake8
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        stages:
+          - pre-commit
+        types:
+          - python
+        entry: mise x -- pylint
+        language: system
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        stages:
+          - pre-commit
+        types:
+          - python
+        entry: mise test
+        language: system
+        pass_filenames: false

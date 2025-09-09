@@ -1,0 +1,59 @@
+[project]
+name = "pysignalclijsonrpc"
+version = "25.9.0"
+description = "Python API client for signal-cli JSON-RPC"
+authors = [
+    { name = "Stefan Heitmüller", email = "stefan.heitmueller@gmx.com" },
+]
+requires-python = ">=3.9"
+readme = "README.md"
+repository = "https://gitlab.com/morph027/pysignalclijsonrpc"
+documentation = "https://pysignalclijsonrpc.readthedocs.io/"
+dependencies = [
+  "requests~=2.32",
+  "python-magic~=0.4",
+  "jmespath~=1.0",
+  "packaging>=24",
+]
+
+[dependency-groups]
+dev = [
+  "pytest==8.4.2",
+  "pook==2.1.4",
+  "pytest-cov==6.3.0",
+  "pylint>=3.3.8",
+]
+docs = [
+  "furo==2024.4.27",
+  "sphinx-autobuild==2024.10.3",
+  "sphinx-copybutton==0.5.2",
+  "sphinx-inline-tabs==2023.4.21",
+  "sphinx-pyproject==0.3.0",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pysignalclijsonrpc"]
+
+[tool.isort]
+profile = "black"
+src_paths = ["pysignalclijsonrpc"]
+
+[tool.pytest.ini_options]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::PendingDeprecationWarning"]
+addopts = "--maxfail=1 --junitxml=pytest.xml --cov=pysignalclijsonrpc --cov-report=term-missing --cov-report=xml -v"
+testpaths = [
+  "tests",
+]
+pythonpath = [
+  ".",
+]
+
+[tool.bandit.assert_used]
+skips = ["tests/test_*.py"]
