@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-dbutils
+Version: 1.0.8
+Summary: MCP Database Utilities Service
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.7.1
+Requires-Dist: typer>=0.9.0
+Requires-Dist: psycopg2-binary>=2.9.10
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: mysql-connector-python>=8.2.0
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == "test"
+Requires-Dist: pytest-asyncio>=0.23.0; extra == "test"
+Requires-Dist: pytest-docker>=2.0.0; extra == "test"
+Requires-Dist: docker>=7.0.0; extra == "test"
+Requires-Dist: aiosqlite>=0.19.0; extra == "test"
+Requires-Dist: testcontainers>=3.7.0; extra == "test"
+Requires-Dist: pytest-cov>=4.1.0; extra == "test"
+Requires-Dist: ruff>=0.3.0; extra == "test"
+Requires-Dist: pre-commit>=3.6.0; extra == "test"
+Dynamic: license-file
+
+Package managed by MseeP.ai

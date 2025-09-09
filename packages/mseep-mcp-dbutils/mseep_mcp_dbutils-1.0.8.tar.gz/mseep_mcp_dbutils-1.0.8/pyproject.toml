@@ -1,0 +1,119 @@
+[project]
+name = "mseep-mcp-dbutils"
+version = "1.0.8"
+description = "MCP Database Utilities Service"
+license = "MIT"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp>=1.7.1",
+    "typer>=0.9.0",
+    "psycopg2-binary>=2.9.10",
+    "python-dotenv>=1.0.1",
+    "pyyaml>=6.0.2",
+    "mysql-connector-python>=8.2.0",
+]
+requires-python = ">=3.10"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-dbutils = "mcp_dbutils:main"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-docker>=2.0.0",
+    "docker>=7.0.0",
+    "aiosqlite>=0.19.0",
+    "testcontainers>=3.7.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.3.0",
+    "pre-commit>=3.6.0",
+]
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.semantic_release]
+version_variables = [
+    "pyproject.toml:project.version",
+]
+version_toml = [
+    "pyproject.toml:project.version",
+]
+commit_parser = "conventional"
+major_on_zero = false
+branch = "main"
+changelog_components = "semantic_release.changelog.changelog"
+build_command = "uv build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "no_collect: marks test classes that should not be collected as test cases",
+]
+filterwarnings = [
+    "ignore::pytest.PytestCollectionWarning",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "N",
+    "UP",
+    "B",
+    "C4",
+    "SIM",
+    "T20",
+]
+ignore = [
+    "E501",
+    "B904",
+    "UP035",
+    "UP006",
+    "UP007",
+    "F401",
+    "F541",
+    "UP015",
+    "UP032",
+    "B905",
+    "SIM105",
+    "UP038",
+    "F821",
+    "F841",
+    "E402",
+    "T201",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "mcp_dbutils",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
