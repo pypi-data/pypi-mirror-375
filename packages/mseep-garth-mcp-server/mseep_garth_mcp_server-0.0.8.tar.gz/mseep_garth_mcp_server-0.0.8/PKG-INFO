@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: mseep-garth-mcp-server
+Version: 0.0.8
+Summary: Garmin Connect MCP server
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: garmin,garmin connect,mcp
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.13
+Requires-Dist: garth<0.6.0,>=0.5.14
+Requires-Dist: mcp<2.0.0,>=1.9.0
+Provides-Extra: dev
+Requires-Dist: ipdb; extra == 'dev'
+Requires-Dist: ipykernel; extra == 'dev'
+Requires-Dist: ipython; extra == 'dev'
+Requires-Dist: mcp[cli]; extra == 'dev'
+Provides-Extra: linting
+Requires-Dist: mypy; extra == 'linting'
+Requires-Dist: ruff; extra == 'linting'
+Requires-Dist: types-requests; extra == 'linting'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
