@@ -1,0 +1,24 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-xctools-mcp-server"
+version = "0.1.2"
+description = "A Model Context Protocol server for different Xcode related tools"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.2.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+xctools-mcp-server = "xctools_mcp_server:cli"
