@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-docy
+Version: 0.5.1
+Summary: A Model Context Protocol (MCP) server for accessing documentation
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Keywords: documentation,mcp,llm,automation,scraper
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=2.2.2
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pydantic-settings>=2.0.0
+Requires-Dist: diskcache>=5.6.1
+Requires-Dist: loguru>=0.7.3
+Requires-Dist: crawl4ai>=0.6.0rc1
+Dynamic: license-file
+
+Package managed by MseeP.ai

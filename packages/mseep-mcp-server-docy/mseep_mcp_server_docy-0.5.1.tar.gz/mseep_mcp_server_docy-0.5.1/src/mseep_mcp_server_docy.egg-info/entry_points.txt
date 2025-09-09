@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-server-docy = mcp_server_docy.__main__:main
