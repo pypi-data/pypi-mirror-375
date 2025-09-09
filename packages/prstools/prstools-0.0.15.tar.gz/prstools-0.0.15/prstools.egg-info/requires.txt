@@ -1,0 +1,15 @@
+pandas
+scipy
+tqdm
+h5py
+ipython
+matplotlib
+bed-reader
+
+[dev]
+nbdev
+
+[full]
+mjwt
+pysnptools
+seaborn
