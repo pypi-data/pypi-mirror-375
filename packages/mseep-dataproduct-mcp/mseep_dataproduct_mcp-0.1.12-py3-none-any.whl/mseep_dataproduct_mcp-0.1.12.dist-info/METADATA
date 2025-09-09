@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: mseep-dataproduct_mcp
+Version: 0.1.12
+Summary: A Model Context Protocol (MCP) server for discovering data products, requesting access, and executing queries on the data platform to access business data.
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.13
+Requires-Dist: databricks-sdk>=0.59.0
+Requires-Dist: databricks-sql-connector>=3.0.0
+Requires-Dist: google-cloud-bigquery>=3.36.0
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.13.0
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: python-dotenv>=1.1.1
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: snowflake-connector-python>=3.0.0
+Provides-Extra: dev
+Requires-Dist: pytest-asyncio>=1.1.0; extra == 'dev'
+Requires-Dist: pytest>=8.4.1; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

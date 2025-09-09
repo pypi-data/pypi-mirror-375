@@ -1,0 +1,15 @@
+dataproduct_mcp/server.py,sha256=TWxG8FTVkghAEkynOPoVnmKDt4UvrdW1F3mh2rHqhyA,23037
+dataproduct_mcp/connections/__init__.py,sha256=me4Zq9lPS8XjXDUC2JSG1IEo2ESsoU6Ww6-mnDBCwDU,30
+dataproduct_mcp/connections/bigquery_client.py,sha256=f5PvrU7yfMtNGBZ0OEr2CI15yD9jvTHcYEur5qr2c0Y,2671
+dataproduct_mcp/connections/databricks_client.py,sha256=i60_SoEEqUYFzj4upQakKnFv371EwQWTWahSJQCjGo8,8709
+dataproduct_mcp/connections/snowflake_client.py,sha256=TAmojBLjdvKqriJNtbR5vsoTn951JrT2umAweyXEZ-w,7870
+dataproduct_mcp/datameshmanager/datamesh_manager_client.py,sha256=Me2THAM7mvzkxiUiFKGA5fjVeoTbuw_jrmrwOdbeZ64,17365
+dataproduct_mcp/datameshmanager/models.py,sha256=iPZ8dF-8_vSyygWECt9SEhFxztSD465LpHhafNykRAo,2860
+dataproduct_mcp/guardrails/__init__.py,sha256=iCToL39TKu_b2FUeGNlLcy6AqqLigWsGyUWzrv34e5k,264
+dataproduct_mcp/guardrails/prompt_injection.py,sha256=ZjeD-z8msHzm9ISkrTsHP0KrUyH8V0c-DlY3B8FZCJ0,10739
+dataproduct_mcp/guardrails/readonly.py,sha256=lJR979gvZZAXd5DY4PR32uF0BQsQssNckv-fvvIik48,1464
+mseep_dataproduct_mcp-0.1.12.dist-info/METADATA,sha256=fh9jAQmcUcK9Fj--0NHFO-4OsxEhff2CVdaU5GHPeLU,838
+mseep_dataproduct_mcp-0.1.12.dist-info/WHEEL,sha256=qtCwoSJWgHk21S1Kb4ihdzI2rlJ1ZKaIurTj_ngOhyQ,87
+mseep_dataproduct_mcp-0.1.12.dist-info/entry_points.txt,sha256=3kQqmAUAfFf4mRhjuaaXhRhOQBvcvDdHuR2S7KgwndU,64
+mseep_dataproduct_mcp-0.1.12.dist-info/licenses/LICENSE,sha256=JimVHZF5GPecQLo0EzpZpQ9h1okLxIZ3FsB6nvbmGmI,1069
+mseep_dataproduct_mcp-0.1.12.dist-info/RECORD,,
