@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: NCaptcha-python
+Version: 0.0.1
+Summary: Simple Captcha
+Author-email: namo <kdevnamo@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/dev-namo/NCaptcha-python
+Project-URL: Issues, https://github.com/dev-namo/NCaptcha-python/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+## NCaptcha-python
+파이썬용 **NCaptcha** 입니다.  
+
+NCaptcha는 간단한 캡챠를 구현한 라이브러리 입니다.
+몇줄 안되는 코드로 간단하게 구현할 수 있습니다.  
+**간단한 라이브러리이기 때문에 보안이 중요한 곳에서는 사용하지 마세요.**
+
+---
+
+사용할 수 있는 캡챠는
+
+- 영어(소)
+- 영어(대)
+- 영어(소, 대)
+- 
+- 숫자
+- 숫자+영어(소)
+- 숫자+영어(대)
+- 숫자+영어(소, 대)
+- 
+- 특수문자
+- 특수문자+영어(소)
+- 특수문자+영어(대)
+- 특수문자+영어(소, 대)
+- 특수문자+숫자
+- 특수문자+영어(소)+숫자
+- 특수문자+영어(대)+숫자
+- 특수문자+영어(소, 대)+숫자
