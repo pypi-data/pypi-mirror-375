@@ -1,0 +1,7 @@
+huggingface-hub>=0.34.4
+together>=1.5.25
+
+[dev]
+ruff
+pre-commit
+mypy
