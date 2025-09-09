@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+# Software metadata
+title: pyforcis
+version: 0.0.1
+authors:
+  - family-names: Hammami
+    given-names: Khalil
+license: GPL-3.0-only
+repository-code: https://github.com/khammami/pyforcis
+url: https://github.com/khammami/pyforcis
+abstract: >
+  pyforcis is a lightweight Python helper for FORCIS multi-version retrieval: list versions,
+  inspect metadata, download selected device files, convert between JSONL and Parquet,
+  and inspect a local cache + device catalog. Minimal, stability-focused scope.
+keywords:
+  - FORCIS
+  - plankton
+  - oceanography
+  - zenodo
+  - versioning
+  - parquet
+# (Update this date on tagged releases.)
+date-released: 2025-09-08
+preferred-citation:
+  type: software
+  title: pyforcis
+  authors:
+    - family-names: Hammami
+      given-names: Khalil
+  year: 2025
+  version: 0.0.1
+  url: https://github.com/khammami/pyforcis
+references:
+  - type: dataset
+    title: FORCIS database (Version 10)
+    authors:
+      - family-names: Chaabane
+        given-names: S.
+      - name: et al.
+    year: 2024
+    doi: 10.5281/zenodo.7390791
+    repository: Zenodo
