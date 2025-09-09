@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: NetBridge
+Version: 0.0.2
+Summary: Uma biblioteca simples para Comunicação interProgramas Locais ou Remotos.
+Author: Leonardo Nery
+Author-email: leonardonery616@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: License.md
+
+# NetBridge
+
+Biblioteca Python para iniciantes que permite a Comunicação interProgramas Locais ou Remotos.
+
+## Instalação
+
+```bash
+pip install NetBridge
