@@ -1,0 +1,5 @@
+[console_scripts]
+freecad-mcp = freecad_mcp.server:main
+
+[gui_scripts]
+

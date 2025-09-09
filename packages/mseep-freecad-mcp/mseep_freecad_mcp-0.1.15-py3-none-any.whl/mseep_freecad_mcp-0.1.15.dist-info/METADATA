@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: mseep-freecad-mcp
+Version: 0.1.15
+Summary: FreeCAD integration through the Model Context Protocol
+Author-Email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/bonninr/freecad_mcp
+Project-URL: Bug Tracker, https://github.com/bonninr/freecad_mcp/issues
+Requires-Python: >=3.10
+Requires-Dist: mcp-server>=1.2.0
+Requires-Dist: httpx>=0.24.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
