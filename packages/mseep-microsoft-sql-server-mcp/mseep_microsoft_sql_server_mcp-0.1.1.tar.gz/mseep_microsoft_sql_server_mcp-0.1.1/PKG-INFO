@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: mseep-microsoft_sql_server_mcp
+Version: 0.1.1
+Summary: A Model Context Protocol (MCP) server that enables secure interaction with Microsoft SQL Server databases.
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: ai,database,mcp,mssql,sql-server
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.11
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: pymssql>=2.2.8
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
