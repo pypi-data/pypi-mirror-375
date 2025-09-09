@@ -1,0 +1,45 @@
+Metadata-Version: 2.3
+Name: active-boxes
+Version: 0.0.1.dev2
+Summary: Tiny ActivityPub framework written in Python, both database and server agnostic.
+License: MIT
+Author: Chaiwat Suttipongsakul
+Author-email: cwt@bashell.com
+Requires-Python: >=3.6.0
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Provides-Extra: dev
+Requires-Dist: black ; extra == "dev"
+Requires-Dist: codecov ; extra == "dev"
+Requires-Dist: flake8 ; extra == "dev"
+Requires-Dist: httpretty ; extra == "dev"
+Requires-Dist: mypy ; extra == "dev"
+Requires-Dist: pytest ; extra == "dev"
+Requires-Dist: pytest-cov ; extra == "dev"
+Project-URL: Homepage, https://github.com/cwt/active-boxes
+Description-Content-Type: text/markdown
+
+# Active Boxes (Modernized Little Boxes)
+
+This project is a fork of [Little Boxes](https://github.com/tsileo/little-boxes) that is currently being modernized and relicensed from ISC to MIT.
+
+⚠️ **Work in Progress** ⚠️
+
+This project is in the process of being modernized and updated to current Python packaging standards. 
+The original README can be found in [ORIGINAL-README.md](ORIGINAL-README.md).
+
+## Modernization Progress
+
+- [x] Migrated from `setup.py` to `pyproject.toml`
+- [x] Moved development dependencies to `pyproject.toml`
+- [x] Switched to Poetry for dependency management and building
+- [ ] More modernization steps to come...
+
+## Original Project
+
+For information about the original project, please refer to [ORIGINAL-README.md](ORIGINAL-README.md).
