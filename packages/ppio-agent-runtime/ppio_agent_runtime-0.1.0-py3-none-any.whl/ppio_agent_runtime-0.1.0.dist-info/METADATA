@@ -1,0 +1,131 @@
+Metadata-Version: 2.4
+Name: ppio-agent-runtime
+Version: 0.1.0
+Summary: PPIO Agent Runtime SDK - 轻量级 AI 智能体运行时框架
+Project-URL: Homepage, https://github.com/ppio/ppio-agent-runtime-sdk
+Project-URL: Documentation, https://github.com/ppio/ppio-agent-runtime-sdk#readme
+Project-URL: Repository, https://github.com/ppio/ppio-agent-runtime-sdk.git
+Project-URL: Issues, https://github.com/ppio/ppio-agent-runtime-sdk/issues
+Author-email: PPIO Team <team@ppio.cn>
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.12
+Requires-Dist: pydantic<3.0.0,>=2.0.0
+Requires-Dist: starlette>=0.46.2
+Requires-Dist: typing-extensions<5.0.0,>=4.13.2
+Requires-Dist: uvicorn>=0.34.2
+Provides-Extra: dev
+Requires-Dist: httpx>=0.28.1; extra == 'dev'
+Requires-Dist: mypy>=1.16.1; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.24.0; extra == 'dev'
+Requires-Dist: pytest>=8.4.1; extra == 'dev'
+Requires-Dist: ruff>=0.12.0; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# PPIO Agent Runtime SDK
+
+PPIO Agent Runtime SDK 是一个轻量级的 AI 智能体运行时框架，旨在为开发者提供简单易用的智能体部署解决方案。
+
+## 核心特性
+
+- **极简改造**：最小化代码修改，只需添加装饰器即可
+- **零配置启动**：默认配置即可运行，无需复杂配置
+- **容器化就绪**：专为 Docker 容器化部署设计
+- **流式响应**：支持同步和异步流式输出
+- **健康监控**：内置健康检查机制
+
+## 快速开始
+
+### 安装
+
+```bash
+pip install ppio-agent-runtime
+```
+
+### 基础使用
+
+```python
+from ppio_agent_runtime import PPIOAgentRuntimeApp
+
+app = PPIOAgentRuntimeApp()
+
+@app.entrypoint
+def my_agent(request: dict) -> str:
+    """简单的智能体函数"""
+    query = request.get("query", "")
+    return f"处理查询: {query}"
+
+if __name__ == "__main__":
+    app.run()
+```
+
+### 流式响应
+
+```python
+from ppio_agent_runtime import PPIOAgentRuntimeApp
+
+app = PPIOAgentRuntimeApp()
+
+@app.entrypoint
+def streaming_agent(request: dict):
+    """流式响应智能体"""
+    query = request.get("query", "")
+    
+    for i in range(5):
+        yield f"步骤 {i+1}: 处理 {query}"
+
+if __name__ == "__main__":
+    app.run()
+```
+
+### 异步智能体
+
+```python
+import asyncio
+from ppio_agent_runtime import PPIOAgentRuntimeApp
+
+app = PPIOAgentRuntimeApp()
+
+@app.entrypoint
+async def async_agent(request: dict) -> str:
+    """异步智能体函数"""
+    query = request.get("query", "")
+    
+    # 模拟异步处理
+    await asyncio.sleep(1)
+    return f"异步处理完成: {query}"
+
+if __name__ == "__main__":
+    app.run()
+```
+
+## 部署
+
+使用 PPIO CLI 工具部署你的智能体：
+
+```bash
+# 配置项目
+ppio-agent configure
+
+# 部署智能体
+ppio-agent deploy
+```
+
+## 文档
+
+- [API 参考](docs/api_reference.md)
+- [部署指南](docs/deployment_guide.md)
+
+## 许可证
+
+MIT License
