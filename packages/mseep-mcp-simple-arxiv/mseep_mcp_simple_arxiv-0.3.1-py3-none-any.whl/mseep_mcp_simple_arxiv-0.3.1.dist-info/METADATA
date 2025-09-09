@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-simple-arxiv
+Version: 0.3.1
+Summary: An MCP server that provides access to arXiv papers through their API.
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/andybrandt/mcp-simple-arxiv
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp
+Requires-Dist: feedparser
+Requires-Dist: httpx
+Requires-Dist: beautifulsoup4
+Dynamic: license-file
+
+Package managed by MseeP.ai
