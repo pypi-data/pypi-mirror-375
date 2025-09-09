@@ -1,0 +1,182 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#, python-format
+msgid "%s translation"
+msgstr ""
+
+# schema pot file, generated on 2011-09-19 10:17:10
+#
+# singular and plural forms for each entity type
+msgid "I18nField"
+msgstr ""
+
+msgid "I18nField_plural"
+msgstr ""
+
+msgid "I18nLang"
+msgstr ""
+
+msgid "I18nLang_plural"
+msgstr ""
+
+msgid "ISO 639.2 Code"
+msgstr ""
+
+msgid "ISO description"
+msgstr ""
+
+msgid "New I18nField"
+msgstr ""
+
+msgid "New I18nLang"
+msgstr ""
+
+msgid "New Translation"
+msgstr ""
+
+msgid "Original version"
+msgstr ""
+
+msgid ""
+"Partly taken from i18ncontent ; note this makes current cube and i18ncontent "
+"incompatible. registered language for an application. See http://www.loc.gov/"
+"standards/iso639-2 for available codes."
+msgstr ""
+
+msgid "This I18nField"
+msgstr ""
+
+msgid "This I18nLang"
+msgstr ""
+
+msgid "This Translation"
+msgstr ""
+
+msgid "Translation"
+msgstr ""
+
+msgctxt "inlined:I18nField.of_field.object"
+msgid "Translation"
+msgstr ""
+
+msgid "Translation_plural"
+msgstr ""
+
+msgid "add Translation of_field I18nField object"
+msgstr ""
+
+msgctxt "inlined:I18nField.of_field.object"
+msgid "add a Translation"
+msgstr ""
+
+# subject and object forms for each relation type
+# (no object form for final or symmetric relation types)
+msgid "code"
+msgstr ""
+
+msgctxt "I18nLang"
+msgid "code"
+msgstr ""
+
+msgid "creating Translation (Translation of_field I18nField %(linkto)s)"
+msgstr ""
+
+msgid "creation"
+msgstr ""
+
+msgid "edit"
+msgstr ""
+
+msgid "edition"
+msgstr ""
+
+msgid "field_name"
+msgstr ""
+
+msgctxt "I18nField"
+msgid "field_name"
+msgstr ""
+
+msgid "i18nfield_of"
+msgstr ""
+
+msgid "i18nfield_of_object"
+msgstr ""
+
+msgid "incomplete"
+msgstr ""
+
+msgid "lang"
+msgstr ""
+
+msgctxt "Translation"
+msgid "lang"
+msgstr ""
+
+msgid "lang_object"
+msgstr ""
+
+msgctxt "I18nLang"
+msgid "lang_object"
+msgstr ""
+
+#, python-format
+msgid "language \"%s\" not found"
+msgstr ""
+
+msgid "last_edited"
+msgstr ""
+
+msgctxt "I18nField"
+msgid "last_edited"
+msgstr ""
+
+msgid "manage translations"
+msgstr ""
+
+msgctxt "I18nLang"
+msgid "name"
+msgstr ""
+
+msgid "of_field"
+msgstr ""
+
+msgctxt "Translation"
+msgid "of_field"
+msgstr ""
+
+msgid "of_field_object"
+msgstr ""
+
+msgctxt "I18nField"
+msgid "of_field_object"
+msgstr ""
+
+msgid "outdated"
+msgstr ""
+
+msgid "ref_lang"
+msgstr ""
+
+msgid "ref_lang_object"
+msgstr ""
+
+msgid "translation"
+msgstr ""
+
+msgid "translations"
+msgstr ""
+
+#, python-format
+msgid "unknown language code \"%s\""
+msgstr ""
+
+msgctxt "Translation"
+msgid "value"
+msgstr ""
