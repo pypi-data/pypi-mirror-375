@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/__init__.py
+src/redemais/__init__.py
+src/redemais/whitelabel/__init__.py
+src/redemais/whitelabel/api.py
+src/redemais/whitelabel/apis/__init__.py
+src/redemais/whitelabel/apis/beneficiarios.py
+src/redemais/whitelabel/dtos/__init__.py
+src/redemais/whitelabel/dtos/beneficiario.py
+src/redemais_python_sdk.egg-info/PKG-INFO
+src/redemais_python_sdk.egg-info/SOURCES.txt
+src/redemais_python_sdk.egg-info/dependency_links.txt
+src/redemais_python_sdk.egg-info/top_level.txt
