@@ -1,0 +1,39 @@
+[project]
+name = "datadec"
+version = "0.1.0"
+description = "A library to download and process DataDecide datasets from Hugging Face."
+readme = "README.md"
+authors = [
+    { name = "Danielle Rothermel", email = "danielle.rothermel@gmail.com" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "datasets>=4.0.0",
+    "pandas>=2.3.1",
+    "numpy>=2.0.2",
+    "pyarrow>=21.0.0",
+    "huggingface_hub",
+    "ipykernel>=6.30.1",
+    "orjson>=3.11.2",
+    "matplotlib>=3.9.4",
+    "dr-plotter>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.ruff]
+include = ["src/**/*.py", "scripts/**/*.py", "tests/**/*.py"]
+line-length = 88
+cache-dir = ".ruff_cache"
+exclude = ["outputs/*", "notebooks/*"]
+
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+]

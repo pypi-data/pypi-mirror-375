@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv:*)",
+      "WebSearch",
+      "Bash(python:*)",
+      "Read(//Users/daniellerothermel/drotherm/repos/dr_plotter/**)",
+      "Read(//Users/daniellerothermel/drotherm/repos/dr_plotter/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/scripts/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/src/ddpred/features/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/src/ddpred/features/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/scripts/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/**)",
+      "Read(/Users/daniellerothermel/drotherm/repos/ddpred/**)"
+    ],
+    "defaultMode": "acceptEdits"
+  }
+}
