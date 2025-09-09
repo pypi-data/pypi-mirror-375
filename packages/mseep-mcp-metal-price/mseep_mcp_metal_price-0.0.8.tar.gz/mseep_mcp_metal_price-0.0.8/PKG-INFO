@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-mcp_metal_price
+Version: 0.0.8
+Summary: An MCP server for metal price information
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Source, https://github.com/isdaniel/mcp-metal-price
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: requests>=2.31.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
