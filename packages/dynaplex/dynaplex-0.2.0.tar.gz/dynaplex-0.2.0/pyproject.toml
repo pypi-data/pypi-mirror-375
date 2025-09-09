@@ -1,0 +1,33 @@
+[build-system]
+requires = [
+"scikit-build-core>=0.10",
+"pybind11>=2.11",
+"setuptools_scm>=8",
+]
+build-backend = "scikit_build_core.build"
+
+
+[project]
+name = "dynaplex"
+version = "0.2.0"
+description = "DynaPlex toolbox"
+readme = "README.md"
+authors = [{ name = "Willem van Jaarsveld" }]
+requires-python = ">=3.10"
+classifiers = [
+"Programming Language :: Python",
+"Programming Language :: Python :: 3",
+"Programming Language :: C++",
+"Operating System :: OS Independent",
+]
+
+
+[tool.setuptools_scm]
+version_scheme = "no-guess-dev"
+local_scheme = "no-local-version"
+
+#note: .github/workflows/wheels.yaml drives the matrix, below is ignored when publishing:
+[tool.cibuildwheel]
+skip = "pp* cp37* cp38* cp39*"
+build = "cp313-*"
+test-command = "pytest -q {project}/tests"

@@ -1,0 +1,43 @@
+__pycache__/
+*.pyc
+build/
+cmake-build*/
+CMakeCache.txt
+CMakeFiles/
+*.egg-info/
+install/
+.dist/
+dist/
+wheelhouse/
+out/
+
+
+# Visual Studio user-specific files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio database/cache
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+*.VC.db
+*.VC.opendb
+
+# Visual Studio project/solution if auto-generated
+*.vcxproj*
+*.vcproj*
+*.vcxproj.filters
+
+# Other IDE clutter
+*.log
+*.tmp
+.idea
+CMakeUserPresets.json
+
+#virtual environments:
+.venv/
+venv/

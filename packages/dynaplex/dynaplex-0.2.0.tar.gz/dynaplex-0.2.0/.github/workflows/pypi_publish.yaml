@@ -1,0 +1,93 @@
+name: Publish (PyPI – reuse artifacts)
+
+on:
+  push:
+    tags: [ "v*" ]          # e.g. v0.1.0
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fetch-and-publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      # Wheels from wheels workflow (download all OS-specific artifacts)
+      - name: Download wheel artifacts
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: wheels.yaml
+          commit: ${{ github.sha }}
+          name: wheels-.*
+          name_is_regexp: true          # match wheels-ubuntu, wheels-macos, wheels-windows
+          path: dist
+          workflow_conclusion: success
+
+      # sdist from sdist workflow
+      - name: Download sdist artifact
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: sdist.yaml
+          commit: ${{ github.sha }}
+          name: sdist
+          path: dist
+          workflow_conclusion: success
+
+      # Flatten nested artifact dirs into a single folder for upload
+      - name: Collect distributions
+        run: |
+          mkdir -p dist_flat
+          find dist -type f \( -name "*.whl" -o -name "*.tar.gz" \) -exec cp {} dist_flat/ \;
+          echo "Contents to publish:"
+          ls -l dist_flat
+
+      # Optional: verify tag matches project version
+      - name: Check tag matches pyproject version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          python - <<'PY'
+          import os, sys
+          try:
+              import tomllib
+          except Exception:
+              import tomli as tomllib
+          with open("pyproject.toml","rb") as f:
+              data = tomllib.load(f)
+          version = data["project"]["version"]
+          tag = os.environ["GITHUB_REF_NAME"].lstrip("v")
+          if version != tag:
+              print(f"ERROR: tag v{tag} != pyproject version {version}")
+              sys.exit(1)
+          print(f"OK: tag v{tag} matches pyproject version {version}")
+          PY
+
+      # Fail early if nothing was collected
+      - name: Ensure distributions exist
+        run: |
+          shopt -s nullglob
+          files=(dist_flat/*.whl dist_flat/*.tar.gz)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No distributions found in dist_flat/"
+            exit 1
+          fi
+
+      - name: Publish to PyPI (OIDC)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+            packages-dir: dist_flat
+            skip-existing: true
