@@ -1,0 +1,9 @@
+pdfium2img
+Copyright (c) 2025 Abhishake
+
+This product is licensed under the Apache License, Version 2.0.
+This product depends on third-party packages that are permissively licensed:
+- pypdfium2 (Apache-2.0 OR BSD-3-Clause). PDFium itself is under Apache-2.0; see their license files.
+- Pillow (MIT-CMU).
+
+No third-party code is bundled in this package; dependencies are resolved at install time via PyPI.

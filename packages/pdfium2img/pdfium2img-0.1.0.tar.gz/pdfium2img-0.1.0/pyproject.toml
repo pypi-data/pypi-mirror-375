@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pdfium2img"
+version = "0.1.0"
+description = "Convert PDF pages to images using PDFium (pypdfium2) — no GPL/AGPL deps."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [{ name = "Abhishake", email = "admin@gyaan.gg" }]
+keywords = ["pdf", "image", "renderer", "pdfium", "pypdfium2", "conversion"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: Apache Software License",
+  "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+  "Environment :: Console",
+  "Operating System :: OS Independent",
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Libraries :: Python Modules"
+]
+dependencies = [
+  "pypdfium2>=4.30.0",
+  "Pillow>=9.5.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/abhishake/pdfium2img"
+"Bug Tracker" = "https://github.com/abhishake/pdfium2img/issues"
+Repository = "https://github.com/abhishake/pdfium2img"
+
+[project.scripts]
+pdfium2img = "pdfium2img.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pdfium2img"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/README.md",
+  "/LICENSE",
+  "/NOTICE",
+  "/MANIFEST.in"
+]
