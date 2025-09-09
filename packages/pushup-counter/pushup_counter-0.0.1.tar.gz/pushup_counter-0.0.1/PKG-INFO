@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: pushup-counter
+Version: 0.0.1
+Summary: A pushup counter using Mediapipe.
+Author-email: Razzaq Inspires <vr.zaq1@gmail.com>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: opencv-python
+Requires-Dist: mediapipe
+Requires-Dist: gTTS
+Requires-Dist: pydub
