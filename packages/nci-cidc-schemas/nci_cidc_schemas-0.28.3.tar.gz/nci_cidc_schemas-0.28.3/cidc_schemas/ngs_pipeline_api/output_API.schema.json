@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "output_API.schema",
+  "title": "Pipeline output_API.JSON schema",
+  "type": "object",
+  "description": "Schema for pipeline's output_API.JSONs",
+  "properties": {
+    "id": {"type":"null"}
+  },
+  "additionalProperties": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "filter_group": {
+          "description": "Filter under which the file would appear during faceted search. It is the GCS-URI top-level hierarchy.",
+          "type": "string"
+        },
+        "file_path_template": {
+          "description": "Local file path template string, describes where the CLI expects a file to be located during upload.",
+          "type": "string"
+        },
+        "short_description": {
+          "description": "Short description, to appear on hover, not more than a sentence long.",
+          "type": "string"
+        },
+        "long_description": {
+          "description": "Long description, to appear in file documentation page, 3-5 sentences long.",
+          "type": "string"
+        },
+        "file_purpose": {
+          "description": "Assigns a tag to for the file to show up in a particular file-browser view configuration.",
+          "type": "string",
+          "enum": [
+            "Source view",
+            "Analysis view",
+            "Clinical view",
+            "Miscellaneous"
+          ]
+        }
+      }
+    }
+  }
+}
+

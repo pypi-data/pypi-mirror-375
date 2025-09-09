@@ -1,0 +1,63 @@
+{
+    "$schema": "metaschema/strict_meta_schema.json#",
+    "$id": "nulisa_assay",
+    "title": "NULISA Assay",
+    "type": "object",
+    "$comment": "description used in docs/index.html and docs/assays.nulisa.html",
+    "description": "Nucleic acid Linked Immuno-Sandwich Assay (NULISA) assay",
+    "additionalProperties": false,
+    "definitions": {
+        "record": {
+            "type": "object",
+            "mergeStrategy": "objectMerge",
+            "description": "A single data record from a NULISA assay.",
+            "additionalProperties": false,
+            "required": [
+                "cimac_id",
+                "details"
+            ],
+            "properties": {
+                "cimac_id": {
+                    "description": "Id of an sample within this clinical trial, that this assay record is based upon.",
+                    "$ref": "sample.json#properties/cimac_id"
+                },
+                "details": {
+                    "$ref": "assays/components/nulisa_input.json"
+                }
+            }
+        }
+    },
+    "properties": {
+        "assay_creator": {
+            "$ref": "assays/components/assay_core.json#properties/assay_creator"
+        },
+        "batch_id": {
+            "description": "Batch identification number. Unique to every upload.",
+            "type": "string"
+        },
+        "npq_file": {
+            "$ref": "artifacts/artifact_csv.json"
+        },
+        "raw_counts_file": {
+            "$ref": "artifacts/artifact_csv.json"
+        },
+        "metadata_csv": {"$ref": "artifacts/artifact_csv.json"},
+
+
+        "records": {
+            "type": "array",
+            "description": "A single data record from a NULISA assay.",
+            "items": {
+                "$ref": "assays/nulisa_assay.json#definitions/record"
+            },
+            "mergeStrategy": "append"
+        }
+    },
+    "required": [
+        "assay_creator",
+        "batch_id",
+        "npq_file",
+        "raw_counts_file",
+        "records"
+    ]
+}

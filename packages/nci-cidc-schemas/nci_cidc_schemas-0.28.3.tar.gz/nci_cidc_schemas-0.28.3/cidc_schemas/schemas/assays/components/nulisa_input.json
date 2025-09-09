@@ -1,0 +1,46 @@
+{
+  "$schema": "metaschema/strict_meta_schema.json#",
+  "$id": "nulisa_input",
+  "title": "NULISA Input Files and Data",
+  "type": "object",
+  "description": "NULISA assay input files and data",
+  "inheritableBase": true,
+  "properties": {
+    "ic_median": {
+      "description": "Percentage sample IC reads relative to the median (within +/- 40% of the plate median)",
+      "type": "number"
+    },
+    "detectability": {
+      "description": "Percentage of targets with reads above the Limit of Detection (LOD) (Minimum threshold = plasma-90%, serum-90%, csf-70%, other-0%)",
+      "type": "number"
+    },
+    "ic_reads": {
+      "description": "Number of Internal Control (IC) reads within a sample (Minimum threshold = 1,000)",
+      "type": "integer"
+    },
+    "qc_status": {
+      "description": "Status",
+      "type": "string",
+      "enum": [
+        "warning",
+        "passed",
+        "NA"
+      ]
+    },
+    "reads": {
+      "description": "Number of reads within a sample (Minimum threshold = 500,000)",
+      "type": "integer"
+    },
+    "auto_well_position": {
+      "description": "Auto well position label",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ic_median",
+    "ic_reads",
+    "qc_status",
+    "reads",
+    "auto_well_position"
+  ]
+}
