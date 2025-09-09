@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="collective.contact_behaviors"
+    >
+
+  <configure zcml:condition="installed AccessControl.security">
+
+    <permission
+        id="collective.contact_behaviors.address_info.view"
+        title="collective.contact_behaviors: View Basic Address Information"
+        />
+
+    <permission
+        id="collective.contact_behaviors.address_info_details.view"
+        title="collective.contact_behaviors: View Detailed Address Information"
+        />
+
+    <permission
+        id="collective.contact_behaviors.contact_info.view"
+        title="collective.contact_behaviors: View Contact Information"
+        />
+
+  </configure>
+
+</configure>
