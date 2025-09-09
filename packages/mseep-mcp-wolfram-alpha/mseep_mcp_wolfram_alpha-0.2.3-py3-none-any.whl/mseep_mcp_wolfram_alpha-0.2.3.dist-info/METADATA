@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-wolfram-alpha
+Version: 0.2.3
+Summary: A MCP server to connect to wolfram alpha API.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.2.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
