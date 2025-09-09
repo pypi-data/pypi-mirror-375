@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-singlestore_mcp_server
+Version: 0.4.12
+Summary: SingleStore MCP server
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: jsonschema>=4.0.0
+Requires-Dist: mcp>=1.10.1
+Requires-Dist: nbformat>=5.10.4
+Requires-Dist: pre-commit>=4.2.0
+Requires-Dist: pydantic-settings>=2.9.1
+Requires-Dist: pytest-asyncio>=1.1.0
+Requires-Dist: segment-analytics-python>=2.3.4
+Requires-Dist: singlestoredb>=1.15.1
+Requires-Dist: starlette>=0.46.2
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
