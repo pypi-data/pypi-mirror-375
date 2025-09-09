@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+datacleanx/__init__.py
+datacleanx/ai_suggestions.py
+datacleanx/cleaning.py
+datacleanx/utils.py
+datacleanx/validation.py
+datacleanx/visualization.py
+datascour.egg-info/PKG-INFO
+datascour.egg-info/SOURCES.txt
+datascour.egg-info/dependency_links.txt
+datascour.egg-info/requires.txt
+datascour.egg-info/top_level.txt
+tests/test_cleaning.py
+tests/test_validation.py

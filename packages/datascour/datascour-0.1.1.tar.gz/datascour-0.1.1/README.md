@@ -1,0 +1,138 @@
+<div align="center">
+<h1>✨ Welcome to DataCleanX ✨</h1>
+<p>
+An intuitive, high-level toolkit for cleaning and validating pandas DataFrames that accelerates data science and machine learning workflows.
+</p>
+</div>
+
+<p align="center">
+<img src="https://img.shields.io/pypi/v/datacleanx?color=blue&label=pypi%20package" alt="PyPI version">
+<img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+<img src="https://img.shields.io/pypi/pyversions/datacleanx" alt="Python versions">
+<img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status">
+</p>
+
+## 🤔 Why DataCleanX?
+
+Data scientists spend approximately **80% of their time** on data cleaning and preprocessing tasks. This is time that could be better spent on analysis, modeling, and generating insights. DataCleanX solves this problem by automating the most common data cleaning workflows with simple, intuitive functions.
+
+**Key Benefits:**
+- **⏰ Save Time:** Transform hours of repetitive cleaning code into a single function call
+- **🎯 Enforce Best Practices:** Built-in validation and robust statistical methods
+- **📖 Improve Readability:** Replace complex pandas chains with clear, expressive functions  
+- **🔧 Stay Flexible:** Use the all-in-one `clean()` function or individual modules as needed
+
+## 🚀 Example in Action
+
+See the power of DataCleanX in transforming messy, real-world data into analysis-ready datasets.
+
+### Before DataCleanX:
+```python
+import pandas as pd
+import numpy as np
+
+# A sample of messy, real-world data
+data = {
+    'age': [25, 34, 999, np.nan, 28],
+    'salary': [50000, 80000, 5000000, 75000, np.nan],
+    'department': ['  Engineering!!  ', 'Sales', 'MARKETING', 'sales', 'Engineering'],
+    'review': ['Excellent work!', 'N/A', 'Great performance.', '', 'Outstanding!!!']
+}
+df_messy = pd.DataFrame(data)
+print(df_messy)
+```
+
+```
+   age     salary      department           review
+0 25.0    50000.0   Engineering!!    Excellent work!
+1 34.0    80000.0           Sales                N/A
+2 999.0  5000000.0       MARKETING  Great performance.
+3  NaN    75000.0           sales                  
+4 28.0        NaN    Engineering    Outstanding!!!
+```
+
+### After DataCleanX:
+```python
+import datacleanx as dcx
+
+# Clean the entire DataFrame with one powerful function
+df_clean = dcx.clean(df_messy)
+print(df_clean)
+```
+
+```
+   age   salary   department         review
+0 25.0  50000.0  Engineering  excellent work
+1 34.0  80000.0        Sales  great performance
+3 29.0  75000.0        Sales               
+4 28.0  68333.3  Engineering    outstanding
+```
+
+*Notice how DataCleanX automatically handled the outliers, missing values, text inconsistencies, and rare categories - all in one line of code!*
+
+## 💡 The Philosophy: Engine vs. Dashboard
+
+Think of **pandas** as a powerful car engine - it gives you incredible control and performance, but requires mechanical expertise to operate effectively. **DataCleanX** is like having a smart car dashboard - it uses that same powerful engine under the hood, but provides an intuitive, user-friendly interface that lets you focus on where you're going rather than how the engine works.
+
+DataCleanX doesn't replace pandas; it makes pandas more accessible and efficient for everyday data cleaning tasks.
+
+## 🎯 Key Features
+
+- **🧹 Comprehensive Cleaning:** Powerful one-liner `clean()` function for complete data preprocessing workflows
+- **📊 Missing Value Imputation:** Handle missing data with strategies including mean, median, mode, and advanced KNN imputation
+- **🎯 Robust Outlier Detection:** Detect and remove outliers using statistical methods (IQR, MAD) and isolation techniques
+- **📝 Advanced Text Cleaning:** Automatically lowercase, remove punctuation, digits, whitespace, and common stopwords
+- **🏷️ Smart Categorical Handling:** Group rare categories and encode features for machine learning (one-hot, label encoding)
+- **✅ Schema Validation:** Enforce data types and automatically detect schemas to prevent downstream errors
+- **📈 Data Quality Visualizations:** Generate comprehensive reports with heatmaps, distribution plots, and correlation matrices
+- **🔧 Duplicate Detection:** Intelligent identification and removal of duplicate records
+- **🎨 Flexible API:** Use individual functions for granular control or the all-in-one solution for speed
+
+## 🚀 Getting Started
+
+### Installation
+Install DataCleanX directly from PyPI:
+
+```bash
+pip install datacleanx
+```
+
+### Quick Usage
+```python
+import datacleanx as dcx
+import pandas as pd
+
+# Load your messy data
+df = pd.read_csv('your_messy_data.csv')
+
+# Option 1: Clean everything at once
+df_clean = dcx.clean(df)
+
+# Option 2: Use individual functions for more control
+df_filled = dcx.handle_missing(df, strategy='median')
+df_no_outliers = dcx.remove_outliers(df_filled, method='iqr')
+df_final = dcx.clean_text(df_no_outliers, column='text_column')
+
+# Generate a data quality report
+report = dcx.generate_report(df)
+print(report)
+```
+
+## 📚 Documentation
+
+For comprehensive guides, tutorials, and detailed API documentation, explore our documentation:
+
+- 📦 [Installation Guide](docs/installation.md) - Detailed setup instructions and requirements
+- 📖 [User Guide](docs/user_guide.md) - Step-by-step tutorials and best practices  
+- 🔍 [API Reference](docs/api_reference.md) - Complete function documentation with examples
+- 🤝 [Contributing Guide](docs/contributing.md) - How to contribute to DataCleanX development
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Whether you're fixing bugs, adding new features, improving documentation, or sharing feedback, your involvement helps make DataCleanX better for everyone.
+
+Ready to contribute? Check out our [Contributing Guide](CONTRIBUTING.md) to get started. We've made the process as smooth as possible and provide guidance for contributors of all experience levels.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
