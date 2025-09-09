@@ -1,0 +1,49 @@
+[project]
+name = "mseep-dappier-mcp"
+version = "0.3.6"
+description = "An MCP server for interacting with Dappier's RAG models"
+requires-python = ">=3.10"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+maintainers = [
+    { name = "Amaan Mohammed", email = "amaan@ai20labs.com" },
+]
+keywords = [
+    "http",
+    "mcp",
+    "llm",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "dappier>=0.3.3",
+    "mcp[cli]>=1.2.1",
+    "pydantic>=2.10.2",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+homepage = "https://github.com/DappierAI/dappier-mcp"
+repository = "https://github.com/DappierAI/dappier-mcp"
+issues = "https://github.com/DappierAI/dappier-mcp/issues"
+
+[project.scripts]
+dappier-mcp = "dappier_mcp:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+package = true

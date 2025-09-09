@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: mseep-dappier-mcp
+Version: 0.3.6
+Summary: An MCP server for interacting with Dappier's RAG models
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: Amaan Mohammed <amaan@ai20labs.com>
+Project-URL: homepage, https://github.com/DappierAI/dappier-mcp
+Project-URL: repository, https://github.com/DappierAI/dappier-mcp
+Project-URL: issues, https://github.com/DappierAI/dappier-mcp/issues
+Keywords: http,mcp,llm
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: dappier>=0.3.3
+Requires-Dist: mcp[cli]>=1.2.1
+Requires-Dist: pydantic>=2.10.2
+Dynamic: license-file
+
+Package managed by MseeP.ai
