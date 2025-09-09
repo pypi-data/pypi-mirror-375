@@ -1,0 +1,5 @@
+[console_scripts]
+langconnect-client = app:main
+langconnect-server = langconnect.server:main
+mcp-langconnect = mcpserver.mcp_server:main
+mcp-langconnect-sse = mcpserver.mcp_langconnect_sse_server:main
