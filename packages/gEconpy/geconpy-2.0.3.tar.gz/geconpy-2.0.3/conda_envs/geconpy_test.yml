@@ -1,0 +1,37 @@
+name: geconpy-test
+channels:
+- conda-forge
+- nodefaults
+dependencies:
+  # Base dependencies
+  - numpy
+  - numba
+  - scipy
+  - sympy>=1.14.0
+  - sympytensor
+  - pyparsing
+  - pandas
+  - xarray
+  - matplotlib
+  - joblib
+  - arviz
+  - statsmodels
+  - pymc>=5.25.0
+  - pytensor
+  - preliz>=0.2.0
+  - ipython
+  - sympytensor
+  - pymc-extras>=0.4.0
+  - better-optimize
+  - nutpie
+
+  # Testing dependencies
+  - pre-commit
+  - pytest-cov>=2.5
+  - pytest>=3.0
+  - pytest-env
+
+  - pip
+  - pip:
+      - numdifftools
+      - jax
