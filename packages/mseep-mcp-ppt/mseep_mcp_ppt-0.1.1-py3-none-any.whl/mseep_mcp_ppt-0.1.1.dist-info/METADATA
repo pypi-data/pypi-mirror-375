@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-ppt
+Version: 0.1.1
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.4.1
+Requires-Dist: pillow>=11.1.0
+Requires-Dist: python-pptx>=1.0.2
+Requires-Dist: pywin32>=310
+Requires-Dist: requests>=2.32.3
+Dynamic: license-file
+
+Package managed by MseeP.ai
