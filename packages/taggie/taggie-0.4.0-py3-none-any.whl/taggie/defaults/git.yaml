@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: UL Research Institutes
+# SPDX-License-Identifier: Apache-2.0
+
+- type: file.name
+  tags:
+    - git
+  groups:
+    - tool
+  names:
+    - .gitattributes
+    - .gitignore
+    - .gitmodules

@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: UL Research Institutes
+# SPDX-License-Identifier: Apache-2.0
+
+- type: file.extension
+  tags:
+    - shell
+  groups:
+    - language
+  extensions:
+    - sh
+    - bash
+    - bats
+    - csh
+    - zsh
+    - fish
+
+- type: file.extension
+  tags:
+    - bats
+  extensions:
+    - bats
+
+- type: file.extension
+  tags:
+    - bash
+  extensions:
+    - bash

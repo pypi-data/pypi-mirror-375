@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: UL Research Institutes
+# SPDX-License-Identifier: Apache-2.0
+
+- type: file.extension
+  tags:
+    - opentofu
+  groups:
+    - language
+  extensions:
+    - tf
+
+- type: file.name
+  tags:
+    - opentofu
+  groups:
+    - language
+  names:
+    - .terraform.lock.hcl

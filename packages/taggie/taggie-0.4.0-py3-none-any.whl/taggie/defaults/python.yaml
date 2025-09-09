@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: UL Research Institutes
+# SPDX-License-Identifier: Apache-2.0
+
+- type: file.extension
+  tags:
+    - python
+  groups:
+    - language
+  extensions:
+    - py
+
+- type: file.name
+  tags:
+    - python
+  groups:
+    - language
+  names:
+    - MANIFEST.in
+    - pyproject.toml
+    - setup.cfg
+    - requirements.in
+    - requirements.txt
+
+- type: file.name
+  tags:
+    - python.manifest_in
+  names:
+    - MANIFEST.in
+
+- type: file.name
+  tags:
+    - python.pyproject_toml
+  names:
+    - pyproject.toml
+
+- type: file.name
+  tags:
+    - python.setup_cfg
+  names:
+    - setup.cfg
+
+- type: file.name
+  tags:
+    - python.requirements_txt
+  names:
+    - requirements.in
+    - requirements.txt
