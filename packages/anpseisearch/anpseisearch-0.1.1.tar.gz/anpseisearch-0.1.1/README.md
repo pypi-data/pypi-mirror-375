@@ -1,0 +1,207 @@
+# 📚 Biblioteca `anpseisearch`
+
+A biblioteca **`anpseisearch`** foi desenvolvida para permitir consultas automatizadas de processos e documentos no **SEI da ANP** (Agência Nacional do Petróleo, Gás Natural e Biocombustíveis). Ela permite que você busque protocolos, documentos e processos usando **filtros detalhados**, retornando os resultados de forma organizada em listas de registros com informações como protocolo, descrição, unidade, data e link direto para o processo/documento.
+
+Esta biblioteca é especialmente útil para profissionais ou pesquisadores que precisam monitorar processos ou extrair dados do SEI de maneira rápida e automatizada, sem precisar acessar manualmente o sistema.
+
+## 1️⃣ Pré-requisitos
+
+Antes de começar a usar a biblioteca, é necessário **instalar o Python**, que é a linguagem de programação em que a biblioteca foi desenvolvida. Também precisaremos do **pip**, que é a ferramenta que permite instalar bibliotecas no Python.
+
+### a) Instalar Python
+
+1. Acesse o site oficial do Python: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+2. Baixe a versão mais recente recomendada para o seu sistema operacional (Windows, macOS ou Linux).
+3. Durante a instalação, **certifique-se de marcar a opção "Add Python to PATH"**, pois isso permitirá que você execute comandos do Python a partir do terminal ou prompt de comando.
+4. Conclua a instalação seguindo as instruções da tela.
+
+Para confirmar se o Python foi instalado corretamente, abra o terminal (no Windows, digite `cmd`; no macOS ou Linux, abra o Terminal) e execute:
+
+```bash
+python --version
+```
+
+Você deverá ver uma resposta semelhante a:
+
+```
+Python 3.11.6
+```
+
+Se você receber uma mensagem de erro, o Python não está corretamente instalado ou o PATH não foi configurado. Nesse caso, revise o passo 3 da instalação.
+
+
+### b) Instalar pip
+
+O **pip** normalmente é instalado junto com o Python. Para verificar se ele está disponível, execute no terminal:
+
+```bash
+pip --version
+```
+
+Você deverá ver algo semelhante a:
+
+```
+pip 23.2.1 from ...
+```
+
+Caso o pip não esteja instalado, siga as instruções oficiais para instalá-lo: [https://pip.pypa.io/en/stable/installation/](https://pip.pypa.io/en/stable/installation/)
+
+O pip é necessário porque ele permite instalar a biblioteca `anpseisearch` e suas dependências automaticamente.
+
+---
+
+## 2️⃣ Instalar a biblioteca `anpseisearch`
+
+A biblioteca pode ser instalada via PyPI
+
+Se a biblioteca estiver disponível no repositório oficial do Python, você pode instalar com um único comando:
+
+```bash
+pip install anpseisearch
+```
+
+Esse comando fará o download da biblioteca e de todas as dependências necessárias.
+
+## 3️⃣ Como usar a biblioteca
+
+A biblioteca funciona em três etapas principais: **criar o pesquisador**, **definir filtros de pesquisa** e **executar a pesquisa**.
+A seguir, apresentamos um exemplo **completo** que utiliza múltiplos filtros.
+
+```python
+from anpseisearch import SeiRegisterSearcher, SeiProcessSearchError
+
+# Criar a instância do pesquisador
+searcher = SeiRegisterSearcher()
+
+# Definir os filtros da pesquisa
+filters = {
+    "numero_protocolo_sei": "5288361",
+    "texto_pesquisa": "Fiscalização de contratos",
+    "incluir_processos": True,
+    "incluir_documentos_gerados": True,
+    "incluir_documentos_recebidos": False,
+    "tipo_processo": "Aquisição de Bens e Serviços: Licitação",
+    "tipo_documento": "Acordo de Cooperação Técnica",
+    "data_inicio": "2025-09-05",
+    "data_fim": "2025-09-07",
+}
+
+# Aplicar os filtros
+searcher.set_filters(filters)
+
+# Executar a pesquisa e capturar resultados
+try:
+    resultados = searcher.execute_search(page=0, rows_per_page=50)
+    for r in resultados:
+        print(f"Protocolo: {r['protocolo']}")
+        print(f"Descrição: {r['descricao']}")
+        print(f"Unidade: {r['unidade']}")
+        print(f"Data: {r['data']}")
+        print(f"Link: {r['link']}")
+        print("-" * 40)
+except SeiProcessSearchError as e:
+    print("Erro na consulta ao SEI:", e)
+```
+
+### 🔹 Explicação detalhada de cada parte do código
+
+#### Importar e criar a instância do pesquisador
+
+```python
+from anpseisearch import SeiRegisterSearcher, SeiProcessSearchError
+searcher = SeiRegisterSearcher()
+```
+
+* `SeiRegisterSearcher` → é a classe principal da biblioteca. Ela encapsula toda a lógica de busca, montagem de filtros e parsing dos resultados.
+* `SeiProcessSearchError` → exceção personalizada que será lançada caso a requisição ao SEI falhe.
+* `searcher = SeiRegisterSearcher()` → cria uma instância do pesquisador com os parâmetros padrão, pronta para receber filtros e executar a pesquisa.
+
+#### Definir filtros
+
+```python
+filters = {
+    "numero_protocolo_sei": "5288361",
+    "texto_pesquisa": "Fiscalização de contratos",
+    "incluir_processos": True,
+    "incluir_documentos_gerados": True,
+    "incluir_documentos_recebidos": False,
+    "tipo_processo": "Aquisição de Bens e Serviços: Licitação",
+    "tipo_documento": "Acordo de Cooperação Técnica",
+    "data_inicio": "2025-09-05",
+    "data_fim": "2025-09-07",
+}
+```
+
+* **`numero_protocolo_sei`** → filtra pelo número do protocolo exato.
+* **`texto_pesquisa`** → pesquisa por palavras-chave no conteúdo do processo/documento.
+* **Filtros booleanos (`incluir_processos`, etc.)** → definem se você quer incluir processos, documentos gerados ou recebidos. O `True` indica que deseja incluir, `False` que não deseja incluir.
+* **`tipo_processo` e `tipo_documento`** → filtram apenas os registros daquele tipo específico. Os valores devem existir nos arquivos `process_ids.json` e `document_ids.json`.
+* **`data_inicio` e `data_fim`** → definem o intervalo de datas da pesquisa. Devem estar no formato `YYYY-MM-DD` e são obrigatórios para pesquisas temporais.
+
+```python
+searcher.set_filters(filters)
+```
+
+* Aplica os filtros definidos ao objeto pesquisador.
+* Constrói automaticamente o campo `partialfields` que será usado para filtrar apenas os registros relevantes no SEI.
+* Converte filtros booleanos nos códigos esperados pelo SEI (`P`, `G`, `R`).
+* Substitui os nomes dos tipos de processo e documento pelos IDs correspondentes.
+
+#### Executar a pesquisa e processar resultados
+
+```python
+resultados = searcher.execute_search(page=0, rows_per_page=50)
+```
+
+* `page` → número da página da pesquisa. Começa em `0` para a primeira página.
+* `rows_per_page` → número de resultados que deseja retornar por página.
+
+O método retorna uma **lista de dicionários**, onde cada dicionário representa um registro encontrado:
+
+```python
+{
+    "protocolo": "1234567",
+    "descricao": "Aquisição de equipamentos - Fiscalização",
+    "unidade": "GAB/ANP",
+    "data": "05/09/2025",
+    "link": "https://sei.anp.gov.br/sei/controlador.php?...",
+}
+```
+
+#### Exibir os resultados
+
+```python
+for r in resultados:
+    print(f"Protocolo: {r['protocolo']}")
+    print(f"Descrição: {r['descricao']}")
+    print(f"Unidade: {r['unidade']}")
+    print(f"Data: {r['data']}")
+    print(f"Link: {r['link']}")
+    print("-" * 40)
+```
+
+* Percorre cada registro retornado e exibe as informações de forma organizada.
+* Facilita a leitura dos resultados e permite identificar rapidamente protocolos, datas e links para acesso direto.
+
+#### Tratamento de erros
+
+```python
+except SeiProcessSearchError as e:
+    print("Erro na consulta ao SEI:", e)
+```
+
+* Captura falhas na requisição HTTP ou erros do SEI.
+* Evita que o programa quebre e permite exibir uma mensagem clara sobre o problema.
+
+## Observações importantes
+
+1. As datas (`data_inicio` e `data_fim`) são obrigatórias e devem estar no formato `YYYY-MM-DD`.
+2. O campo `partialfields` é gerado automaticamente com base nos filtros preenchidos, e somente os filtros preenchidos são incluídos na query.
+3. Se não houver resultados para a pesquisa, a biblioteca retorna uma lista vazia `[]`.
+4. Valores incorretos para `tipo_processo` ou `tipo_documento` serão ignorados, portanto verifique os arquivos `process_ids.json` e `document_ids.json` antes de definir os filtros.
+
+### 🔗 Links úteis
+
+* [SEI ANP](https://sei.anp.gov.br)
+* [Documentação oficial do Python](https://docs.python.org/3/)
+* [Instalação do pip](https://pip.pypa.io/en/stable/installation/)
