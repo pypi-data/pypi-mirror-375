@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-simple-tool = mcp_tool.server:main
