@@ -1,0 +1,31 @@
+Metadata-Version: 2.3
+Name: django-whatsapp-api-wrapper
+Version: 0.1.0
+Summary: 
+License: MIT
+Author: Your Name
+Author-email: you@example.com
+Requires-Python: >=3.11,<4.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: dev
+Requires-Dist: build (==1.2.1) ; extra == "dev"
+Requires-Dist: django (>=4.2)
+Requires-Dist: dotenv (>=0.9.9,<0.10.0)
+Requires-Dist: nox (==2024.4.15) ; extra == "dev"
+Requires-Dist: python-dotenv (>=1.0,<2.0)
+Requires-Dist: twine (==5.1.1) ; extra == "dev"
+Description-Content-Type: text/markdown
+
+# django-whatsapp-api-wrapper
