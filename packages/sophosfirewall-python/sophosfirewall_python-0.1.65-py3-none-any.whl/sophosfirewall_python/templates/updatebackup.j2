@@ -1,0 +1,37 @@
+<Request>
+   <Login>
+        <Username>{{username}}</Username>
+        <Password >{{password}}</Password>
+    </Login>
+    <Set operation="update"> 
+    <BackupRestore>
+		<ScheduleBackup>
+			<BackupMode>{{ BackupMode | default("") }}</BackupMode>
+			<BackupPrefix>{{ BackupPrefix | default("") }}</BackupPrefix>
+			<FTPServer>{{ FTPServer | default("") }}</FTPServer><!-- For FTP -->
+			<Username>{{ Username | default("") }}</Username><!-- For FTP -->
+			{% if Password %}
+			{% if "@hashform" in Password %}
+			<Password hashform="mode1">{{ Password['#text'] }}</Password>
+			{% else %}
+			<Password>{{ Password | default("") }}</Password><!-- For FTP -->
+			{% endif %}
+			{% endif %}
+			<FtpPath>{{ FtpPath | default("") }}</FtpPath><!-- For FTP -->
+			<EmailAddress>{{ EmailAddress | default("") }}</EmailAddress><!--For Mail -->
+			<BackupFrequency>{{ BackupFrequency | default("") }}</BackupFrequency>
+			<Day>{{ Day | default("") }}</Day>
+			<Hour>{{ Hour | default("") }}</Hour>
+			<Minute>{{ Minute | default("") }}</Minute>
+			<Date>{{ Date | default("") }}</Date>
+			{% if EncryptionPassword %}
+			{% if "@hashform" in EncryptionPassword %}
+			<EncryptionPassword hashform="mode1">{{ EncryptionPassword['#text'] }}</EncryptionPassword>
+			{% else %}
+			<EncryptionPassword>{{ EncryptionPassword | default("") }}</EncryptionPassword>
+			{% endif%}
+			{% endif %}
+		</ScheduleBackup>
+	</BackupRestore>
+   </Set>
+</Request>
