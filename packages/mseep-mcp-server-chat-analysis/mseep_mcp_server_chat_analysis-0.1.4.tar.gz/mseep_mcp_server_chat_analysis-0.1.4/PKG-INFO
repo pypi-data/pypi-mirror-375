@@ -1,0 +1,57 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-chat-analysis
+Version: 0.1.4
+Summary: MCP server for chat analysis using vector embeddings and knowledge graphs
+Project-URL: Homepage, https://github.com/yourusername/mcp-server-chat-analysis
+Project-URL: Documentation, https://github.com/yourusername/mcp-server-chat-analysis#readme
+Project-URL: Repository, https://github.com/yourusername/mcp-server-chat-analysis.git
+Project-URL: Issues, https://github.com/yourusername/mcp-server-chat-analysis/issues
+Author-email: mseep <support@skydeck.ai>
+License: MIT License
+        
+        Copyright (c) 2024 Robin L. M. Cheung
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: analysis,chat,knowledge-graph,mcp,vector
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Text Processing :: General
+Requires-Python: >=3.8
+Requires-Dist: modelcontextprotocol>=0.1.0
+Requires-Dist: neo4j>=5.15.0
+Requires-Dist: pydantic>=2.5.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: qdrant-client>=1.7.0
+Requires-Dist: sentence-transformers>=2.2.2
+Provides-Extra: dev
+Requires-Dist: black>=23.0; extra == 'dev'
+Requires-Dist: flake8>=6.0; extra == 'dev'
+Requires-Dist: mypy>=1.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest>=7.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
