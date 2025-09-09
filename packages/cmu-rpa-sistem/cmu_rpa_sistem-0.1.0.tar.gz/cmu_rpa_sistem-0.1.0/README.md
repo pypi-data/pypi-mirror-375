@@ -1,0 +1,1 @@
+Módulo de arquivos úteis para auxiliar as automações da CMU.

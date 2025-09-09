@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cmu-rpa-sistem"                      # troque pelo nome no PyPI
+# versão dinâmica lida do __init__.py
+dynamic = ["version"]
+description = "Uma biblioteca de exemplo com layout src, tipos e CLI."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "Sanzio Dinelli", email = "sanzio.magalhae@gmail.com" }]
+keywords = ["exemplo", "pypi", "packaging"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Typing :: Typed",
+]
+
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/sanziolopes-cmu/RPA-MODEL"
+Documentation = "https://github.com/sanziolopes-cmu/RPA-MODEL/README.md"
+
+[tool.hatch.version]
+path = "src/cmu-rpa-sistem/__init__.py"
+
+# (Opcional) inclusão/ exclusão fina de arquivos no sdist/wheel:
+[tool.hatch.build]
+include = ["src/cmu-rpa-sistem", "README.md", "LICENSE", "CHANGELOG.md"]
