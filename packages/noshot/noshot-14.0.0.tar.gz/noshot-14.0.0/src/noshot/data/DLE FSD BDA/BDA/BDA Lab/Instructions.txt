@@ -1,0 +1,56 @@
+Go to cloudera's Home
+Create a folder named Lab
+Copy the mapper.py & reducer.py into the folder
+==========================================================
+Run The Commands In The Folder Containing Mapper & Reducer
+==========================================================
+
+=====================
+To Create & Edit File
+=====================
+gedit input.txt
+gedit mapper.py
+gedit reducer.py
+
+==========================
+To View Contents Of A File
+==========================
+cat input.txt
+
+======================
+To Demonstarte Locally
+======================
+cat input.txt | python3 mapper.py | sort | python3 reducer.py
+
+=============================================================
+Add Files To Hadoop FS (use different name if already exists)
+=============================================================
+hdfs fs -put input.txt
+
+=================
+To List The Files
+=================
+hdfs fs -ls
+
+
+(Note: Change the paths for mapper, reducer, input, output as in your system)
+(output path should be unique)
+================
+To Execute A Job
+================
+hadoop jar /usr/lib/hadoop-0.20-mapreduce/contrib/streaming/hadoop-streaming-2.6.0-mr1-cdh5.4.2.jar \
+  -file /home/cloudera/Lab/mapper.py \
+  -file /home/cloudera/Lab/reducer.py \
+  -mapper "python mapper.py" \
+  -reducer "python reducer.py" \
+  -input /user/cloudera/input.txt \
+  -output /user/cloudera/laboutput
+
+hadoop fs -ls /user/cloudera/laboutput
+
+hadoop fs -cat /user/cloudera/laboutput/part-00000
+
+
+
+
+
