@@ -1,0 +1,32 @@
+{
+  "$schema": "https://gofastmcp.com/public/schemas/fastmcp.json/v1.json",
+  "source": {
+    "type": "filesystem",
+    "path": "src/python_mcp_server/server.py",
+    "entrypoint": "mcp"
+  },
+  "environment": {
+    "type": "uv",
+    "python": ">=3.10",
+    "dependencies": [
+      "fastmcp>=1.0.0",
+      "uvicorn>=0.30.0",
+      "jupyter_client>=8.0.0",
+      "matplotlib>=3.7.0",
+      "pandas>=2.0.0",
+      "ipykernel>=6.25.0",
+      "psutil>=5.9.0",
+      "pathlib>=1.0.1"
+    ],
+    "editable": ["."]
+  },
+  "deployment": {
+    "transport": "stdio",
+    "log_level": "INFO",
+    "env": {
+      "MCP_WORKSPACE_DIR": "workspace",
+      "MPLBACKEND": "Agg",
+      "PYTHONUNBUFFERED": "1"
+    }
+  }
+}
