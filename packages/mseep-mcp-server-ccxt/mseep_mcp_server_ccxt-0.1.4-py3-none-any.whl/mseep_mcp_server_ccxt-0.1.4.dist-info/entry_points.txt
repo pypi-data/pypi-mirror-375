@@ -1,0 +1,2 @@
+[console_scripts]
+ccxt-server = src.server:run_server
