@@ -1,0 +1,111 @@
+# -*- coding: utf-8 -*-
+
+# enpt_enmapboxapp, A QGIS EnMAPBox plugin providing a GUI for the EnMAP processing tools (EnPT)
+#
+# Copyright (C) 2018–2025 Daniel Scheffler (GFZ Potsdam, daniel.scheffler@gfz.de)
+#
+# This software was developed within the context of the EnMAP project supported
+# by the DLR Space Administration with funds of the German Federal Ministry of
+# Economic Affairs and Energy (on the basis of a decision by the German Bundestag:
+# 50 EE 1529) and contributions from DLR, GFZ and OHB System AG.
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU Lesser General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option) any
+# later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+# You should have received a copy of the GNU Lesser General Public License along
+# with this program. If not, see <https://www.gnu.org/licenses/>.
+
+[build-system]
+requires = [
+    "setuptools>=61.2",
+    "setuptools-git",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enpt_enmapboxapp"
+description = "A QGIS EnMAPBox plugin providing a GUI for the EnMAP processing tools (EnPT)"
+authors = [{name = "Daniel Scheffler", email = "daniel.scheffler@gfz.de"}]
+license = "GPL-3.0-or-later"
+license-files = ["LICEN[CS]E*", "AUTHORS.rst"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = [
+    "enpt_enmapboxapp",
+    "EnMAP",
+    "EnMAP-Box",
+    "hyperspectral",
+    "remote sensing",
+    "satellite",
+    "processing chain"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "packaging",
+    "psutil",
+]
+dynamic = ["version"]
+
+[project.readme]
+file = "README.rst"
+content-type = "text/x-rst"
+
+[project.urls]
+"Source code" = "https://git.gfz-potsdam.de/EnMAP/GFZ_Tools_EnMAP_BOX/enpt_enmapboxapp"
+"Issue Tracker" = "https://git.gfz-potsdam.de/EnMAP/GFZ_Tools_EnMAP_BOX/enpt_enmapboxapp/-/issues"
+"Documentation" = "https://enmap.git-pages.gfz-potsdam.de/GFZ_Tools_EnMAP_BOX/enpt_enmapboxapp/doc/"
+"Change log" = "https://enmap.git-pages.gfz-potsdam.de/GFZ_Tools_EnMAP_BOX/enpt_enmapboxapp/doc/history.html"
+
+[project.optional-dependencies]
+doc = [
+    "sphinx-argparse",
+    "sphinx_rtd_theme",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-reporter-html1",
+    "urlchecker",
+]
+lint = [
+    "flake8",
+    "pycodestyle",
+    "pydocstyle",
+]
+deploy = [
+    "build",
+    "twine",
+]
+dev = [
+    "enpt_enmapboxapp[test]",
+    "enpt_enmapboxapp[doc]",
+    "enpt_enmapboxapp[lint]",
+    "enpt_enmapboxapp[deploy]",
+]
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.setuptools.packages.find]
+namespaces = false
+
+[tool.setuptools.dynamic]
+version = {attr = "enpt_enmapboxapp.version.__version__"}
+
+[tool.distutils.bdist_wheel]
+universal = 1
