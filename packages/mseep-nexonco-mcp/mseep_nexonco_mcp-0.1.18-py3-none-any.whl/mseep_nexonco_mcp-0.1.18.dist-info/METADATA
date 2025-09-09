@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-nexonco-mcp
+Version: 0.1.18
+Summary: An advanced MCP Server for accessing and analyzing clinical evidence data, with flexible search options to support precision medicine and oncology research.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]==1.6.0
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: requests>=2.32.3
+Requires-Dist: starlette>=0.46.1
+Requires-Dist: uvicorn>=0.34.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
