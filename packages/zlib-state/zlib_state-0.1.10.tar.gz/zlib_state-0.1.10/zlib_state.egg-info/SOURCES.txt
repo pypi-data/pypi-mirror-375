@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/zlib_state.c
+test/test.py
+zlib_state/__init__.py
+zlib_state.egg-info/PKG-INFO
+zlib_state.egg-info/SOURCES.txt
+zlib_state.egg-info/dependency_links.txt
+zlib_state.egg-info/top_level.txt
