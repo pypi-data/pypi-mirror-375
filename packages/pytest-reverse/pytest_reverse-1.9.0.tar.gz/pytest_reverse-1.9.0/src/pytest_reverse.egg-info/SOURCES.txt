@@ -1,0 +1,13 @@
+CHANGELOG.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+src/pytest_reverse/__init__.py
+src/pytest_reverse/py.typed
+src/pytest_reverse.egg-info/PKG-INFO
+src/pytest_reverse.egg-info/SOURCES.txt
+src/pytest_reverse.egg-info/dependency_links.txt
+src/pytest_reverse.egg-info/entry_points.txt
+src/pytest_reverse.egg-info/requires.txt
+src/pytest_reverse.egg-info/top_level.txt
