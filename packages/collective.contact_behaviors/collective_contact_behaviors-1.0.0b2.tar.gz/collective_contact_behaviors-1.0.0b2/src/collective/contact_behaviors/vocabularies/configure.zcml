@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <utility
+      name="collective.contact_behaviors.available_countries"
+      component=".countries.available_countries_vocabulary"
+      />
+
+  <utility
+      name="collective.contact_behaviors.countries"
+      component=".countries.countries_vocabulary"
+      />
+
+</configure>

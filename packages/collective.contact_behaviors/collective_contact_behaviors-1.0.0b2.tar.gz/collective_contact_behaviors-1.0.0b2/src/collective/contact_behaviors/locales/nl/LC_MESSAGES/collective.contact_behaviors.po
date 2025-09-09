@@ -1,0 +1,154 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-06-21 17:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: collective/contact_behaviors/behaviors/configure.zcml:15
+msgid "Address Information"
+msgstr ""
+
+#: collective/contact_behaviors/profiles.zcml:13
+msgid "Behaviors: Catalog and querystring setup"
+msgstr ""
+
+#: collective/contact_behaviors/profiles.zcml:29
+msgid "Behaviors: Testing profile"
+msgstr ""
+
+#: collective/contact_behaviors/profiles.zcml:21
+msgid "Behaviors: Uninstall"
+msgstr ""
+
+#: collective/contact_behaviors/profiles.zcml:13
+msgid "Configure collective.contact_behaviors"
+msgstr ""
+
+#: collective/contact_behaviors/behaviors/configure.zcml:23
+msgid "Contact Information"
+msgstr ""
+
+#: collective/contact_behaviors/behaviors/configure.zcml:15
+msgid "Fields with address information"
+msgstr ""
+
+#: collective/contact_behaviors/behaviors/configure.zcml:23
+msgid "Fields with contact information"
+msgstr ""
+
+#: collective/contact_behaviors/profiles/default/registry/plone.app.querystring.interfaces.IQueryField.xml
+msgid "Geography"
+msgstr ""
+
+#: collective/contact_behaviors/profiles.zcml:21
+msgid "Remove collective.contact_behaviors configuration"
+msgstr ""
+
+#: collective/contact_behaviors/profiles.zcml:29
+msgid "Used in automated tests, provides a new content type"
+msgstr ""
+
+#. Default: "Example: Room 2"
+#: collective/contact_behaviors/behaviors/address_info.py:44
+msgid "description_address_2"
+msgstr ""
+
+#. Default: "Example: Brasília"
+#: collective/contact_behaviors/behaviors/address_info.py:50
+msgid "description_address_city"
+msgstr ""
+
+#. Default: "Please select a country"
+#: collective/contact_behaviors/behaviors/address_info.py:68
+msgid "description_address_country"
+msgstr ""
+
+#. Default: "70123"
+#: collective/contact_behaviors/behaviors/address_info.py:62
+msgid "description_address_postal_code"
+msgstr ""
+
+#. Default: "DF"
+#: collective/contact_behaviors/behaviors/address_info.py:56
+msgid "description_address_state"
+msgstr ""
+
+#. Default: "Internationalized phone number with country code and area code"
+#: collective/contact_behaviors/behaviors/contact_info.py:36
+msgid "description_contact_phone"
+msgstr ""
+
+#. Default: "Filter by Country."
+#: collective/contact_behaviors/profiles/default/registry/plone.app.querystring.interfaces.IQueryField.xml
+msgid "description_qs_country"
+msgstr ""
+
+#. Default: "Address"
+#: collective/contact_behaviors/behaviors/address_info.py:39
+msgid "label_address"
+msgstr ""
+
+#. Default: "Additional Info"
+#: collective/contact_behaviors/behaviors/address_info.py:43
+msgid "label_address_2"
+msgstr ""
+
+#. Default: "City"
+#: collective/contact_behaviors/behaviors/address_info.py:49
+msgid "label_address_city"
+msgstr ""
+
+#. Default: "Country"
+#: collective/contact_behaviors/behaviors/address_info.py:67
+msgid "label_address_country"
+msgstr ""
+
+#. Default: "Address Information"
+#: collective/contact_behaviors/behaviors/address_info.py:18
+msgid "label_address_info"
+msgstr ""
+
+#. Default: "Postal Code"
+#: collective/contact_behaviors/behaviors/address_info.py:61
+msgid "label_address_postal_code"
+msgstr ""
+
+#. Default: "State / Province"
+#: collective/contact_behaviors/behaviors/address_info.py:55
+msgid "label_address_state"
+msgstr ""
+
+#. Default: "Email"
+#: collective/contact_behaviors/behaviors/contact_info.py:27
+msgid "label_contact_email"
+msgstr ""
+
+#. Default: "Contact Information"
+#: collective/contact_behaviors/behaviors/contact_info.py:18
+msgid "label_contact_info"
+msgstr ""
+
+#. Default: "Phone Number"
+#: collective/contact_behaviors/behaviors/contact_info.py:35
+msgid "label_contact_phone"
+msgstr ""
+
+#. Default: "Website"
+#: collective/contact_behaviors/behaviors/contact_info.py:31
+msgid "label_contact_website"
+msgstr ""
+
+#. Default: "Country"
+#: collective/contact_behaviors/profiles/default/registry/plone.app.querystring.interfaces.IQueryField.xml
+msgid "label_country"
+msgstr ""
