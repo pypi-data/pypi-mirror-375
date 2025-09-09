@@ -1,0 +1,2 @@
+[console_scripts]
+lark-webhook-notify = lark_webhook_notify.cli:main
