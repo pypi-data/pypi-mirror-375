@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Textmode Client</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @font-face {
+        font-family: "Dungeon Mode";
+        src: url("./font/dungeon-mode.ttf") format("truetype");
+        font-display: swap;
+      }
+      @keyframes blink {
+        0% { }
+        50% { color: #4C4C4C4C; }
+        100% { }
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        background: #000;
+        color: #d0d0d0;
+        display: grid;
+        place-items: center;
+      }
+      .cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex flex-col items-center gap-3">
+      <div id="term" class="grid gap-0 bg-black p-2 border-2 border-neutral-700 rounded-md text-[#d0d0d0]" style="font-family: 'Dungeon Mode', monospace; font-size: 24px; line-height: 1;"></div>
+      <div class="text-neutral-400 text-sm">use arrow keys and enter to control</div>
+    </div>
+
+    <script>
+      const API = 'http://localhost:8500';
+      const term = document.getElementById('term');
+      let COLS = 0, ROWS = 0, cells = [];
+
+      function buildGrid(cols, rows) {
+        COLS = cols; ROWS = rows;
+        term.style.gridTemplateColumns = `repeat(${cols}, .95ch)`;
+        term.style.gridTemplateRows = `repeat(${rows}, .99ch)`;
+        term.innerHTML = '';
+        cells = [];
+        for (let i = 0; i < cols * rows; i++) {
+          const span = document.createElement('span');
+          span.className = 'cell';
+          span.textContent = ' ';
+          term.appendChild(span);
+          cells.push(span);
+        }
+      }
+
+      function render(payload) {
+        const { cols, rows, chars, fgs, bgs, styles } = payload;
+        if (cols !== COLS || rows !== ROWS || cells.length === 0) {
+          buildGrid(cols, rows);
+        }
+        const total = Math.min(chars.length, cells.length);
+        for (let i = 0; i < total; i++) {
+          const el = cells[i];
+          el.textContent = chars[i] || ' ';
+          const fg = (fgs && fgs[i]) || '#d0d0d0';
+          const bg = (bgs && bgs[i]) || '#000000';
+          const st = (styles && styles[i]) || 'normal';
+          el.style.color = fg;
+          el.style.backgroundColor = bg;
+          el.style.fontStyle = (st === 'italic' ? 'italic' : 'normal');
+          // Blink handling via CSS animation
+          if (st === 'blink') {
+            el.style.animation = 'blink 1s step-start infinite';
+          } else {
+            el.style.animation = 'none';
+          }
+        }
+      }
+
+      async function callStart() {
+        const res = await fetch(`${API}/start`, { method: 'POST' });
+        if (!res.ok) {
+          console.error('start failed');
+          return;
+        }
+        const payload = await res.json();
+        render(payload);
+      }
+
+      async function callStep(key) {
+        try {
+          const res = await fetch(`${API}/step`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key })
+          });
+          if (!res.ok) return;
+          const payload = await res.json();
+          render(payload);
+        } catch (e) {
+          // server might be down
+        }
+      }
+
+      function mapKey(ev) {
+        // Normalize
+        const k = (ev.key || '').toLowerCase();
+        // Arrow keys
+        if (k === 'arrowup') return 'up';
+        if (k === 'arrowdown') return 'down';
+        if (k === 'arrowleft') return 'left';
+        if (k === 'arrowright') return 'right';
+        if (k === 'enter') return 'enter';
+        // WASD and Q as aliases
+        if (k === 'w') return 'up';
+        if (k === 'a') return 'left';
+        if (k === 's') return 'down';
+        if (k === 'd') return 'right';
+        if (k === 'q') return 'enter';
+        return null;
+      }
+
+      window.addEventListener('keydown', (ev) => {
+        const k = mapKey(ev);
+        if (!k) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        callStep(k);
+      });
+
+      // boot
+      callStart();
+    </script>
+  </body>
+</html>
