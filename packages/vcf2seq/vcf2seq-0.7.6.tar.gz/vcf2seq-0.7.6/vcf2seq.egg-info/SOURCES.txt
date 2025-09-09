@@ -1,0 +1,14 @@
+LICENCE.md
+MANIFEST.in
+README.md
+setup.py
+vcf2seq/__init__.py
+vcf2seq/ascii.py
+vcf2seq/info.py
+vcf2seq/vcf2seq.py
+vcf2seq.egg-info/PKG-INFO
+vcf2seq.egg-info/SOURCES.txt
+vcf2seq.egg-info/dependency_links.txt
+vcf2seq.egg-info/entry_points.txt
+vcf2seq.egg-info/requires.txt
+vcf2seq.egg-info/top_level.txt
