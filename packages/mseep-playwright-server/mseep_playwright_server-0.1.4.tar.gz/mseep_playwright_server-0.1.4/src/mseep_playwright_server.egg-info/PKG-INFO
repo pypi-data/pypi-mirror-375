@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-playwright-server
+Version: 0.1.4
+Summary: \A MCP server with playwright tools\
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.1.2
+Requires-Dist: playwright
+Dynamic: license-file
+
+Package managed by MseeP.ai
