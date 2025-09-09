@@ -1,0 +1,27 @@
+Metadata-Version: 2.3
+Name: pyeasyphd
+Version: 0.0.3
+Summary: pyeasyphd
+License: GPL-3.0-or-later
+Keywords: Python,Markdown,LaTex
+Author: NextAI
+Author-email: nextartifintell@gmail.com
+Maintainer: NextAI
+Maintainer-email: nextartifintell@gmail.com
+Requires-Python: >=3.8.1
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: pyadvtools (>=0.0.5,<0.0.6)
+Project-URL: Documentation, https://github.com/NextArtifIntell/pyeasyphd
+Project-URL: Homepage, https://github.com/NextArtifIntell/pyeasyphd
+Project-URL: Repository, https://github.com/NextArtifIntell/pyeasyphd
+Description-Content-Type: text/markdown
+
+# pyeasyphd
+
