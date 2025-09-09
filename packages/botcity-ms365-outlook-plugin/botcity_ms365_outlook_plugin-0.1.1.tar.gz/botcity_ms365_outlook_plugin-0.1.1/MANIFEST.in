@@ -1,0 +1,4 @@
+include LICENSE
+include versioneer.py
+include botcity/plugins/ms365/outlook/_version.py
+include requirements.txt

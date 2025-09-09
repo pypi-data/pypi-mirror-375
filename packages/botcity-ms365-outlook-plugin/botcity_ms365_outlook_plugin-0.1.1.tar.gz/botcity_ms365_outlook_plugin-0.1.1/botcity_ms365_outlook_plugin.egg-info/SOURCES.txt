@@ -1,0 +1,16 @@
+MANIFEST.in
+README.md
+requirements.txt
+setup.cfg
+setup.py
+versioneer.py
+botcity/plugins/ms365/outlook/__init__.py
+botcity/plugins/ms365/outlook/_version.py
+botcity/plugins/ms365/outlook/plugin.py
+botcity_ms365_outlook_plugin.egg-info/PKG-INFO
+botcity_ms365_outlook_plugin.egg-info/SOURCES.txt
+botcity_ms365_outlook_plugin.egg-info/dependency_links.txt
+botcity_ms365_outlook_plugin.egg-info/requires.txt
+botcity_ms365_outlook_plugin.egg-info/top_level.txt
+tests/test_import.py
+tests/test_plugin.py
