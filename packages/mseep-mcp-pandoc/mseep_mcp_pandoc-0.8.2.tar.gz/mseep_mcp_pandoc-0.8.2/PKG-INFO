@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-pandoc
+Version: 0.8.2
+Summary: MCP to interface with pandoc to convert files to different formats with enhanced features like Mermaid diagram conversion and defaults file support.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.2.1
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: pandoc>=2.4
+Requires-Dist: pypandoc>=1.14
+Requires-Dist: pandocfilters>=1.5.0
+Requires-Dist: panflute>=2.3.1
+Dynamic: license-file
+
+Package managed by MseeP.ai
