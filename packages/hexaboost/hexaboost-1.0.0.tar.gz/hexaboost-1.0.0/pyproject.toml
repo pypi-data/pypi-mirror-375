@@ -1,0 +1,33 @@
+[project]
+name = "hexaboost"
+version = "1.0.0"
+description = "Hexaboost - CLI para generar proyectos en Python con plantillas listas"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["cli", "scaffolding", "python", "boost", "templates"]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "click>=8.0",
+]
+
+[project.scripts]
+hexaboost = "hexaboost.cli.main:cli"
+
+[project.urls]
+Homepage = "https://github.com/tu-usuario/hexaboost"
+Repository = "https://github.com/tu-usuario/hexaboost"
+Issues = "https://github.com/tu-usuario/hexaboost/issues"
+

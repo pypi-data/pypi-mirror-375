@@ -1,0 +1,90 @@
+🌐 [Español](./README.md) | [English](./README.en.md) | [Português](./README.pt.md)
+
+# ⚡ Hexaboost  
+# Hexaboost 🚀
+
+[![PyPI version](https://badge.fury.io/py/hexaboost.svg)](https://pypi.org/project/hexaboost/)
+[![CI](https://github.com/hexaboost/hexaboost/actions/workflows/ci.yml/badge.svg)](https://github.com/hexaboost/hexaboost/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
+[![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)  
+[![FastAPI](https://img.shields.io/badge/FastAPI-Ready-green.svg)](https://fastapi.tiangolo.com/)  
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
+
+Generador de proyectos **escalables** con arquitectura **Hexagonal**, pensado para acelerar el desarrollo de aplicaciones modernas en Python.  
+
+## 🚀 Características  
+
+- 🏗️ **CLI intuitiva** para crear y gestionar proyectos.  
+- 📦 **Plantillas listas** (ejemplo: FastAPI) para arrancar rápido.  
+- 🌐 Documentación **multi-idioma** incluida.  
+- ✅ Tests preconfigurados con **pytest**.  
+- 🔧 Preparado para integrarse con **CI/CD**.  
+
+---
+
+## 📦 Instalación  
+
+1. Clonar el repositorio:  
+   ```bash
+   git clone https://github.com/hexaboost/hexaboost.git
+   cd hexaboost
+Crear entorno virtual e instalar dependencias:
+
+bash
+Copiar código
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+⚡ Uso
+Comandos disponibles:
+
+bash
+Copiar código
+hexaboost --help
+Crear un proyecto vacío:
+bash
+Copiar código
+hexaboost init myproject
+Crear un proyecto desde plantilla (ejemplo con FastAPI):
+bash
+Copiar código
+hexaboost new python-fastapi myproject
+Sincronizar la documentación (multi-idioma):
+bash
+Copiar código
+hexaboost sync-readme
+🧪 Tests
+Ejecutar los tests de un proyecto generado:
+
+bash
+Copiar código
+pytest -v myproject/tests
+📂 Estructura del proyecto
+bash
+Copiar código
+hexaboost/
+├── cli/               # CLI (init, new, sync-readme)
+├── scripts/           # utilidades como sincronización README
+├── templates/         # plantillas (ej. python-fastapi)
+├── pyproject.toml     # configuración del paquete
+└── README.md          # documentación multi-idioma
+🤝 Contribuciones
+¡Las contribuciones son bienvenidas!
+Si quieres colaborar:
+
+Haz un fork del repositorio.
+
+Crea una rama con tu feature: git checkout -b feature/nueva-feature.
+
+Haz commit de tus cambios: git commit -m "Añadida nueva feature".
+
+Sube tu rama: git push origin feature/nueva-feature.
+
+Crea un Pull Request.
+
+📜 Licencia
+Este proyecto está bajo la licencia MIT.
+
