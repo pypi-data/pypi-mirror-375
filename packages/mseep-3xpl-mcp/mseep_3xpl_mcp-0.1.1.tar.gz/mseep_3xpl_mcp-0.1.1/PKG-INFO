@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-3xpl-mcp
+Version: 0.1.1
+Summary: MCP server for interacting with 48 blockchains via 3xpl JSON API
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.6.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

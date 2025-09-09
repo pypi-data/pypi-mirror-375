@@ -1,0 +1,23 @@
+[project]
+name = "mseep-3xpl-mcp"
+version = "0.1.1"
+description = "MCP server for interacting with 48 blockchains via 3xpl JSON API"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-3xpl-mcp = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
