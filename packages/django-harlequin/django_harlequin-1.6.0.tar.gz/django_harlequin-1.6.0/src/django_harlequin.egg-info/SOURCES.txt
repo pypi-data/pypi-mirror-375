@@ -1,0 +1,15 @@
+CHANGELOG.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+src/django_harlequin/__init__.py
+src/django_harlequin/py.typed
+src/django_harlequin.egg-info/PKG-INFO
+src/django_harlequin.egg-info/SOURCES.txt
+src/django_harlequin.egg-info/dependency_links.txt
+src/django_harlequin.egg-info/requires.txt
+src/django_harlequin.egg-info/top_level.txt
+src/django_harlequin/management/__init__.py
+src/django_harlequin/management/commands/__init__.py
+src/django_harlequin/management/commands/harlequin.py
