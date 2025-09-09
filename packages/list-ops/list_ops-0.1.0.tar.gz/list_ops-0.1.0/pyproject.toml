@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "list-ops"  # Replace with your actual library name
+version = "0.1.0"
+authors = [
+    {name = "Muhammad Asif Ali", email = "creativedeveloper151214@gmail.com"}
+]
+description = "To be available soon"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["utility", "library",'functions','lists']  # Add relevant keywords
+dependencies = [
+    # Add your dependencies here, e.g.:
+    # "requests>=2.28.0",
+    # "numpy>=1.20.0",
+]
+
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
