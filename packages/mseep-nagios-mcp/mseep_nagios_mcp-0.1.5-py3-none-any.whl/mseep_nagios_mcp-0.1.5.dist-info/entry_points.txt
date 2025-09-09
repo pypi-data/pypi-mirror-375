@@ -1,0 +1,2 @@
+[console_scripts]
+nagios-mcp = nagios_mcp.__main__:main
