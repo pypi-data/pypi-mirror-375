@@ -1,0 +1,17 @@
+[project]
+name = "mseep-google-flights-mcp-server"
+version = "0.1.1"
+description = "Google Flights MCP Server !!"
+requires-python = ">=3.12"
+dependencies = [
+    "fast-flights>=2.2",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.3.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
