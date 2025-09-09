@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+fewlab/fewlab.egg-info/PKG-INFO
+fewlab/fewlab.egg-info/SOURCES.txt
+fewlab/fewlab.egg-info/dependency_links.txt
+fewlab/fewlab.egg-info/requires.txt
+fewlab/fewlab.egg-info/top_level.txt
+tests/test_api.py
+tests/test_quality.py
