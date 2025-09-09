@@ -1,0 +1,162 @@
+Metadata-Version: 2.4
+Name: rootf
+Version: 0.1.6
+Summary: A system information tool similar to neofetch
+Keywords: system-information,neofetch,cli
+Author-email: nloveuser <nloveuser@nloveuser.ru>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+License-File: LICENSE
+Requires-Dist: psutil>=5.9.0
+Requires-Dist: platformdirs>=2.5.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: requests>=2.28.0
+
+# 🌱 root
+
+**root** — это лёгкий и кроссплатформенный инструмент на Python, вдохновлённый [neofetch](https://github.com/dylanaraps/neofetch).  
+Он показывает системную информацию в терминале с поддержкой **настраиваемого ASCII-арта** для Linux, macOS, Windows и Termux.
+
+---
+
+## ✨ Возможности
+
+- 🚀 Работает на **Linux / macOS / Windows / Termux**
+- 🎨 Поддержка **ASCII-логотипов дистрибутивов** (полные и мини-версии)
+- ⚙️ Гибкая настройка отображаемых полей
+- 📦 Установка одной командой через `pip`
+
+---
+
+## 📥 Установка
+
+```bash
+pip install root
+
+
+---
+
+⚡ Использование
+
+Запустить:
+
+root
+
+Пример вывода на Arch Linux:
+
+-`                 
+                  .o+`                
+                 `ooo/                
+                `+oooo:               
+               `+oooooo:              
+               -+oooooo+:             
+             `/:-:++oooo+:            
+            `/++++/+++++++:           
+           `/++++++++++++++:          
+          `/+++ooooooooooooo/`        
+         ./ooosssso++osssssso+`       
+        .oossssso-````/ossssss+`      
+       -osssssso.      :ssssssso.     
+      :osssssss/        osssso+++.    
+     /ossssssss/        +ssssooo/-    
+   `/ossssso+/:-        -:/+osssso+-  
+  `+sso+:-`                 `.-/+oso: 
+ `++:.                           `-/+/
+ .`                                 `/
+               Arch Linux
+
+ OS: Arch Linux
+ Host: ThinkPad X1
+ Kernel: 6.10.5-arch1
+ Uptime: 2h 14m
+ Packages: 1452 (pacman)
+ Shell: zsh 5.9
+ Resolution: 1920x1080
+ Terminal: kitty
+ CPU: Intel i7-1165G7
+ GPU: Intel Iris Xe
+ Memory: 3.21GiB / 15.4GiB
+
+
+---
+
+🔧 Настройка
+
+Файл конфигурации: ~/.config/root/config.py
+
+Можно выбрать:
+
+🎨 логотип (arch, ubuntu, debian, windows, macos, termux, и т.д.)
+
+📋 поля, которые будут отображаться (OS, Kernel, Memory и т.д.)
+
+🔠 Мини- или полноразмерные ASCII
+
+
+
+---
+
+🖼 Поддерживаемые ASCII
+
+Arch Linux (arch, arch_mini)
+
+Ubuntu (ubuntu, ubuntu_mini)
+
+Debian (debian, debian_mini)
+
+Fedora (fedora, fedora_mini)
+
+CentOS (centos, centos_mini)
+
+Manjaro (manjaro, manjaro_mini)
+
+Kali (kali, kali_mini)
+
+Gentoo (gentoo, gentoo_mini)
+
+Alpine (alpine, alpine_mini)
+
+Void (void, void_mini)
+
+Linux Mint (linuxmint, linuxmint_mini)
+
+openSUSE (opensuse, opensuse_mini)
+
+NixOS (nixos, nixos_mini)
+
+Slackware (slackware, slackware_mini)
+
+macOS (macos, macos_mini)
+
+Windows (windows, windows_mini)
+
+Termux / Android (termux, termux_mini)
+
+Generic Linux (Tux) (linux, linux_mini)
+
+
+
+---
+
+💡 Планы
+
+[ ] Цветные ASCII (ANSI-цвета)
+
+[ ] Поддержка кастомных шаблонов ASCII
+
+[ ] Интеграция с Python API
+
+
+
+---
+
+📜 Лицензия
+
+MIT © 2025
+Made with ❤️ in Python
+
+---
+
