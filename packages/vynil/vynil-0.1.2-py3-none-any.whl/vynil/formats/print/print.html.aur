@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{book.title}</title>
+        !for author in book.authors:
+            <meta name="author" content="{author}" />
+        !for url in render.styles:
+            <link rel="stylesheet" href="{url}" />
+        !for url in render.scripts:
+            <script src="{url}"></script>
+        <style>
+            %bookmark style
+        </style>
+        <script>
+            %bookmark script
+            %raw
+                document.addEventListener("DOMContentLoaded", () => {
+                    window.PagedPolyfill.on("rendered", () => {
+                        window.status = "pagedone";
+                    });
+                });
+        </script>
+    </head>
+    <body>
+        <img id="cover" src="{book.cover}" />
+        <section class="chapter">
+            <h1>Table of Contents</h1>
+            <table id="toc">
+                <tbody>
+                    %bookmark toc
+                </tbody>
+            </table>
+        </section>
+        %!for number, chapter in book.chapters.items():
+            %eval render.set_chapter({number})
+            <section id="{render.current_chapter.id}" class="chapter">
+                %include: chapter.text load="chapter" continue_generation=True
+                %append toc
+                    <tr class="toc-chapter">
+                        <td>
+                            {render.current_chapter.title}
+                        </td>
+                        <td>
+                            {toc.get(render.current_chapter.id, 0)}
+                        </td>
+                    </tr>
+                    !for toc_section in render.current_chapter.sections.values():
+                        <tr class="toc-section">
+                            <td>
+                                {toc_section.title}
+                            </td>
+                            <td>
+                                {toc.get(toc_section.id, 0)}
+                            </td>
+                        </tr>
+            </section>
+    </body>
+</html>
