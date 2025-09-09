@@ -1,0 +1,53 @@
+# Copyright © 2025 Frederik “Freso” S. Olesen <https://freso.dk/>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+---
+on:
+  push:
+    tags: ["v*.*.*"]
+
+jobs:
+  build:
+    runs-on: codeberg-tiny-lazy
+    outputs:
+      tag_name: ${{ steps.metadata.outputs.tag_name }}
+      name: ${{ steps.metadata.outputs.name }}
+      body: ${{ steps.metadata.outputs.body }}
+    steps:
+      - name: Checkout source
+        run: git clone --depth 1 --revision=${{ forge.ref_name }} ${{ forge.server_url }}/${{ forge.repository }} .
+      - name: Get metadata
+        id: metadata
+        run: |
+          echo "tag_name=${{ forge.ref_name }}" >> $FORGEJO_OUTPUT
+          echo "name=$(git tag -l --format='%(contents:subject)')" >> $FORGEJO_OUTPUT
+          echo "body=$(git tag -l --format='%(contents:body)')" >> $FORGEJO_OUTPUT
+      - name: Build project
+        run: python3 -m build
+      - name: Upload build artifacts
+        uses: https://code.forgejo.org/forgejo/upload-artifact@v4
+        with:
+          path: dist/
+          retention: 1 # We only need this for the duration of this workflow
+  release:
+    needs: [build]
+    runs-on: codeberg-tiny-lazy
+    steps:
+      - name: Get build artifacts
+        uses: https://code.forgejo.org/forgejo/download-artifact@v4
+      - name: Create release
+        run: |
+          curl -X 'POST' \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'Authorization: token ${{ secrets.RELEASE_TOKEN }}' \
+          --data '{"tag_name": "${{ needs.build.outputs.tag_name }}", "name": "${{ needs.build.outputs.name }}", "body": "${{ needs.build.outputs.body }}"}' \
+          ${{ forge.server_url }}/api/v1/repos/${{ forge.repository }}/releases
+      - name: Upload release assets
+        run: |
+          curl -… ${{ forge.server_url }}/repos/${{ forge.repository }}/releases/{id}/assets
+
+
+  publish:
+    needs: [build]
+    runs-on: codeberg-tiny-lazy
+...

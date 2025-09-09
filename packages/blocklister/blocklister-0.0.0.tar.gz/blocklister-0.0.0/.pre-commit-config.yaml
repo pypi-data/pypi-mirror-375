@@ -1,0 +1,94 @@
+# Copyright © 2025 Frederik “Freso” S. Olesen <https://freso.dk/>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+%YAML 1.2
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-illegal-windows-names
+      - id: check-merge-conflict
+        args:
+          - "--assume-in-merge"
+      - id: check-shebang-scripts-are-executable
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: forbid-submodules
+      - id: mixed-line-ending
+        args:
+          - "--fix=lf"
+      - id: name-tests-test
+      - id: trailing-whitespace
+        args:
+          - "--markdown-linebreak-ext=md"
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.11
+    hooks:
+      # Linter
+      - id: ruff-check
+        # Use non-zero exit on fix in order to inspect
+        # changes before going ahead with the commit.
+        args:
+          - "--exit-non-zero-on-fix"
+      # Formatter
+      - id: ruff-format
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-check-blanket-type-ignore
+      - id: python-check-mock-methods
+      - id: python-no-eval
+      - id: python-no-log-warn
+      - id: python-use-type-annotations
+      - id: rst-backticks
+      - id: rst-directive-colons
+      - id: rst-inline-touching-normal
+      - id: text-unicode-replacement-char
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker
+    rev: v3.4.0
+    hooks:
+      - id: editorconfig-checker
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.17.1
+    hooks:
+      - id: mypy
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.28.0
+    hooks:
+      - id: gitleaks
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.37.1
+    hooks:
+      - id: yamllint
+        args:
+          - "--strict"
+  - repo: https://git.fsfe.org/reuse/tool
+    rev: v5.0.2
+    hooks:
+      - id: reuse
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+  - repo: https://github.com/amperser/proselint
+    rev: 0.14.0
+    hooks:
+      - id: proselint
+        types: []
+        types_or: [rst, markdown, plain-text]
+        exclude: ^LICENSES/.*$
+...

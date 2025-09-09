@@ -1,0 +1,144 @@
+# Copyright © 2025 Frederik “Freso” S. Olesen <https://freso.dk/>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+[build-system]
+requires = ["hatchling >= 1.27", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "blocklister"
+dynamic = ["version"]  # dynamic version assignment via hatch-vcs
+description = "Parse and output blocklists in various formats"
+readme = "README.rst"
+license = "AGPL-3.0-or-later"
+license-files = { globs = ["LICENSES/*"] }
+authors = [
+  { name = "Frederik “Freso” S. Olesen" },
+]
+requires-python = ">= 3.10"
+dependencies = [
+]
+keywords = ["DNS", "blocklists", "hosts"]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
+  "Topic :: File Formats",
+  "Topic :: Internet",
+  "Topic :: Internet :: Name Service (DNS)",
+  "Topic :: Security",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: System :: Networking",
+  "Topic :: System :: Networking :: Firewalls",
+  "Topic :: System :: Systems Administration",
+  "Topic :: Utilities",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://codeberg.org/Freso/python-blocklister"
+Issues = "https://codeberg.org/Freso/python-blocklister/issues"
+Repository = "https://codeberg.org/Freso/python-blocklister.git"
+
+[project.scripts]
+blocklister = "blocklister.cli:main"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.codespell]
+builtin = "clear,rare,informal,usage,code,names,en-GB_to_en-US"
+check-hidden = true
+check-filenames = true
+skip = "./LICENSES,./LICENSE.*"
+ignore-words = "./.ignore-words"
+summary = true
+count = true
+
+[tool.ruff]
+preview = true
+fix = true
+unsafe-fixes = true
+line-length = 90
+
+[tool.ruff.lint]
+select = [
+  "ERA", # eradicate
+  "YTT", # flake8-2020
+  "ANN", # flake8-annotations
+  "ASYNC", # flake8-async
+  "S", # flake8-bandit
+  "BLE", # flake8-blind-except
+  "FBT", # flake8-boolean-trap
+  "B", # flake8-bugbear
+  "A", # flake8-builtins
+  "COM", # flake8-commas
+  "C4", # flake8-comprehensions
+  "CPY", # flake8-copyright
+  "DTZ", # flake8-datetimez
+  "T10", # flake8-debugger
+  "EM", # flake8-errmsg
+  "EXE", # flake8-executable
+  "FA", # flake8-future-annotations
+  "ISC", # flake8-implicit-str-concat
+  "ICN", # flake8-import-conventions
+  "LOG", # flake8-logging
+  "G", # flake8-logging-format
+  "INP", # flake8-no-pep420
+  "PIE", # flake8-pie
+  "T20", # flake8-print
+  "PYI", # flake8-pyi
+  "PT", # flake8-pytest-style
+  "Q", # flake8-quotes
+  "RSE", # flake8-raise
+  "RET", # flake8-return
+  "SLF", # flake8-self
+  "SIM", # flake8-simplify
+  "SLOT", # flake8-slots
+  "TID", # flake8-tidy-imports
+  "TD", # flake8-todos
+  "TC", # flake8-type-checking
+  "ARG", # flake8-unused-arguments
+  "PTH", # flake8-use-pathlib
+  "FLY", # flynt
+  "I", # isort
+  "C90", # mccabe
+  "N", # pep8-naming
+  "PERF", # Perflint
+  "E", "W", # pycodestyle
+  "DOC", # pydoclint
+  "D", # pydocstyle
+  "F", # Pyflakes
+  "PGH", # pygrep-hooks
+  "PL", # Pylint
+  "UP", # pyupgrade
+  "FURB", # refurb
+  "RUF", # Ruff-specific rules
+  "TRY", # tryceratops
+]
+ignore = [
+  # Potential conflicts with `ruff format`
+  "COM812",
+  # No need to make TODO statements too verbose
+  "TD002", "TD003",
+]
+allowed-confusables = ["’"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+# Disallow all relative imports.
+ban-relative-imports = "all"
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"

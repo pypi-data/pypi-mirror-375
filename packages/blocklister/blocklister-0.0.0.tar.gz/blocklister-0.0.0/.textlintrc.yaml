@@ -1,0 +1,19 @@
+# Copyright © 2025 Frederik “Freso” S. Olesen <https://freso.dk/>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+---
+plugins:
+  - rst
+rules:
+  alex:
+    allow: []
+  apostrophe: true
+  date-weekday-mismatch: true
+  doubled-spaces: true
+  editorconfig: true
+  en-capitalization: true
+  ja-no-mixed-period: true
+  no-mixed-punctuations:
+    language: english
+  "@textlint-rule/no-unmatched-pair": true
+  no-zero-width-spaces: true
+...

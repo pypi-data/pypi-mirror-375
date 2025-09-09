@@ -1,0 +1,11 @@
+# Copyright © 2025 Frederik “Freso” S. Olesen <https://freso.dk/>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+[general]
+contrib = contrib-title-conventional-commits,contrib-disallow-cleanup-commits
+# This will be the default in the future, so make the future now!
+regex-style-search=true
+
+[contrib-title-conventional-commits]
+# Don’t use “chore”, we use “task” instead
+types = fix,feat,task,docs,style,refactor,perf,test,revert,ci,build
