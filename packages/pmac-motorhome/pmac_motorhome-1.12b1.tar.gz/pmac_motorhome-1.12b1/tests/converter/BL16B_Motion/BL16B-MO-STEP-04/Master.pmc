@@ -1,0 +1,47 @@
+; Setup the current offsets
+#include "Variables/00-50-C2-CB-A2-FD.pmc"
+
+; Add the axes and control I Variables
+#include "Variables/Axis.pmc"
+#include "Variables/Control.pmc"
+
+; I variable overrides
+#include "Variables/BL16B-MO-STEP-04_Ivariables.pmc"
+
+; And the m-variable definitions
+#include "../../../Common/BRICK_M_variables.pmc"
+
+; a PLC to setup the internal amps
+#include "PLCs/PLC6_Initialise_and_Reset.pmc"
+
+;#############################################################################
+; Controls section
+; Uncomment this when brick is handed over
+;#############################################################################
+
+; First we want to clear all the PLCs and CSs
+;#include "../../../Common/clear_PLC_CS.pmc"
+
+; a PLC to initialise the brick
+#include "PLCs/PLC1_BRICK_initialise.pmc"
+
+; a PLC to do motion stop
+;#include "PLCs/PLC2_motion_stop.pmc"
+
+; a PLC to do encoder loss and amp status protection
+;#include "PLCs/PLC4_encoder_loss.pmc"
+
+; a PLC to do cpu load
+;#include "PLCs/PLC5_cpu_load.pmc"
+
+; a PLC to kill axes after a move
+#include "PLCs/PLC7_kill_when_idle.pmc"
+
+; Homing PLC for Geobrick 4 (KB Mirrors)
+#include "PLCs/PLC11_GEO4_HM.pmc"
+
+; Custom PLC 20 to phase axis 8 (Aerotech tilt stage)
+#include "PLCs/PhaseANT_Mtr8.pmc"
+
+; a motion program for the CS moves
+;#include "PROGs/PROG10_CS_motion.pmc"

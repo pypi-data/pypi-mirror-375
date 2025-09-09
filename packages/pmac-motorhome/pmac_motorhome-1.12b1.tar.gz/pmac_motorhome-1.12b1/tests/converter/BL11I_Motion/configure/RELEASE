@@ -1,0 +1,7 @@
+
+# PMACUTIL must be specified
+PMAC = /dls_sw/prod/R3.14.12.7/support/pmac/2-5-16
+PMACUTIL = /dls_sw/prod/R3.14.12.7/support/pmacUtil/5-12
+PMACCOORD = /dls_sw/prod/R3.14.12.7/support/pmacCoord/1-72
+TRANSFOCATOR = /dls_sw/prod/R3.14.12.7/support/transfocator/4-5
+# Other modules can also be specified here

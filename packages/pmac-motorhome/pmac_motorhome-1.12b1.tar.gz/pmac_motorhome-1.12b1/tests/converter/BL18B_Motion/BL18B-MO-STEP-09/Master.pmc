@@ -1,0 +1,70 @@
+;NOTE: See the README.txt for more instructions.
+
+;NOTE: There is no position compare PLC on this
+;brick, even though we are using position compare
+;on axis 5. We use Lee's position compare board,
+;which only requires the gate start/end to work.
+;We can do this without a PLC, just setting
+;m-variables. So we do that via the Epics database.
+
+M33=0
+
+; First we want to clear all the PLCs and CSs
+#include "../../../Common/clear_PLC_CS.pmc"
+
+; Setup the current offsets
+#include "Variables/00-50-C2-7A-A9-17.pmc"
+
+; Add the axes and control I Variables
+;#include "Variables/BL18B-MO-STEP-09-ivariables-retune.pmc"
+;#include "Variables/BL18B-MO-STEP-09.pmc"
+#include "Variables/Axis.pmc"
+#include "Variables/Control.pmc"
+#include "Variables/ECT.pmc"
+;#include "Variables/energy.pmc"
+
+; And the m-variable definitions
+#include "../../../Common/BRICK_M_variables.pmc"
+
+; a PLC (from Lee) to do commutation
+;#include "PLCs/PLC15-COMMUTATION.pmc
+;NOTE: not sure we need this anymore)
+
+; a PLC to setup the internal amps
+#include "PLCs/PLC6_Initialise_and_Reset.pmc"
+
+#include "PLCs/PLC3_Y_AMP_ENABLE.pmc"
+
+M33=0
+
+;#############################################################################
+; Controls section
+; Uncomment this when brick is handed over
+;#############################################################################
+
+; a PLC to initialise the brick
+;#include "PLCs/PLC1_INITIALISE_IDT_PLCS.pmc"
+#include "PLCs/PLC1_BRICK_initialise.pmc"
+
+; a PLC to do encoder loss and amp status protection
+;#include "PLCs/PLC4_encoder_loss.pmc"
+;NOTE: this needs a custom ELOSS program for 
+;the 4 encoders on the Bragg axis. Not written yet.
+
+; a PLC to do cpu load
+#include "PLCs/PLC4_encoder_loss.pmc"
+#include "PLCs/PLC5_cpu_load.pmc"
+#include "PLCs/PLC9_BRAGG_COMMUTATION.pmc"
+#include "PLCs/PLC10_CONFIGURE_DCM.pmc"
+#include "PLCs/PLC11_ENERGY_ON_OFF_SWITCH.pmc"
+#include "PLCs/PLC12_YAXIS_SPEED_LIMIT.pmc"
+#include "PLCs/PLC13_ENERGY_READBACK.pmc"
+#include "PLCs/PLC14_ANTI_CLASH.pmc"
+#include "PLCs/PLC15_CURRENT_AVERAGE.pmc"
+#include "PLCs/PLC16_DCM2_HM.pmc"
+#include "PLCs/PLC20_I2T_RESET.pmc"
+#include "PLCs/PLC28_HOMING_PLC.pmc"
+#include "PLCs/PLC29_CURRENT_REDUCER_PITCH_ROLL.pmc"
+#include "PLCs/PLC30_KILL_Y.pmc"
+
+#include "PROGs/PROG5_ENERGY_CS.pmc"

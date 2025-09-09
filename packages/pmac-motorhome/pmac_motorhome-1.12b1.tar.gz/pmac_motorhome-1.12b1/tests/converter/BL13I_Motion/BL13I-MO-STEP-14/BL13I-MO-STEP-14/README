@@ -1,0 +1,18 @@
+Change notes
+===
+
+2017-04-04:
+    Axis 5, DCM Z, is now open loop for the time being because of a mechanical problems
+    Encoder is read out on #13. Add a #13hmz command at the end of homing for #5 to ensure this is zeroed
+    Generate new unfix file
+
+2016-12-21:
+    Increase in-position band for #5 as the controller
+    keeps making small corrective moves for a long time
+    after the move has finished.
+
+2016-10-31:
+    Mismatch in i677. Hardware 750, reference 500.
+    Reference updated. The current for axis 6 was increased in September 2016 on account of stalling motor
+    Mismatch in motion program 10: Hardware RAPID, reference LINEAR.
+    Unfix file generated - BL13I-MO-STEP-14_unfix.pmc

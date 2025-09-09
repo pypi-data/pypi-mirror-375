@@ -1,0 +1,48 @@
+; Configuration file for i13-geobrick14.
+;
+; Jonathan Thompson  February 2012.
+
+; First we want to clear all the PLCs and CSs
+#include "../../../Common/clear_PLC_CS.pmc"
+
+; Setup the current offsets
+#include "Variables/00-50-C2-CB-AD-43.pmc"
+
+; Add the axes and control I variable
+#include "Variables/Axis.pmc"
+#include "Variables/Control.pmc"
+#include "Variables/Ect.pmc"
+
+; And the m-variable definitions
+#include "../../../Common/BRICK_M_variables.pmc"
+
+; a PLC to initialise the brick
+#include "PLCs/PLC1_initialise.pmc"
+
+; a PLC to do motion stop
+#include "PLCs/PLC2_motion_stop.pmc"
+
+; a PLC to do encoder loss and amp status protection
+#include "PLCs/PLC4_encoder_loss.pmc"
+
+; a PLC to setup the internal amps
+#include "PLCs/PLC6_Initialise_and_Reset.pmc"
+
+; a PLC to kill axes after a move
+#include "PLCs/PLC7_kill_when_idle.pmc"
+
+; a PLC that cures the corruption problem
+#include "PLCs/PLC9_auto_cure.pmc"
+
+; Homing PLCs
+#include "PLCs/PLC11_DCM01_HM.pmc"
+
+; Coordinate systems
+#include "PLCs/PLC17_DCMJACKS_CS.pmc"
+#include "PLCs/PLC18_DCMENERGY_CS.pmc"
+
+; a motion program for the CS moves
+#include "PROGs/PROG10_CS_motion.pmc"
+
+; Unfix file generated 2016-04-04
+#include "BL13I-MO-STEP-14_unfix_2017-04-04.pmc"

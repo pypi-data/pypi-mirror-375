@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier
+_commit: 4.2.0
+_src_path: git@github.com:diamondlightsource/python-copier-template
+author_email: urszula.neuman@diamond.ac.uk
+author_name: Urszula Neuman
+component_lifecycle: production
+component_owner: group:default/controls
+component_type: library
+description: pmac_motorhome is a python3 tool to generator homing PLCs from a python
+    script
+distribution_name: pmac-motorhome
+docker: false
+docs_type: sphinx
+git_platform: github.com
+github_org: DiamondLightSource
+package_name: pmac_motorhome
+pypi: true
+repo_name: pmac_motorhome
+type_checker: mypy

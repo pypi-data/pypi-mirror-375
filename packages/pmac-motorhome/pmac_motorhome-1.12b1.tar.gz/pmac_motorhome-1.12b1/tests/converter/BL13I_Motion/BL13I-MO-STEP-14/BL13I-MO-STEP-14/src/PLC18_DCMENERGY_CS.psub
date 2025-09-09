@@ -1,0 +1,5 @@
+substitute "COORD=3,PLC=18,BRAGG=7,ZPAR=5,PGM=11,YPERP=6"
+include "BL13I-CS-dcm-energy-yandz-switch.pmc"
+
+;substitute "COORD=3,PLC=18,BRAGG=7,T2=5"
+;include "CS_accel_dcm.pmc"

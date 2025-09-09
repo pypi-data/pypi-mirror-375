@@ -1,0 +1,12 @@
+# pmac for those that do exist there (latest prog 10)
+PMAC = /dls_sw/prod/R3.14.12.7/support/pmac/2-4-10
+
+# pmacUtil for the rest (CS templates etc)
+
+# PMACUTIL must be specified
+PMACUTIL = /dls_sw/prod/R3.14.12.7/support/pmacUtil/5-9-2
+
+# PMACCORD contains co-ordinate system pmc files
+PMACCOORD = /dls_sw/prod/R3.14.12.7/support/pmacCoord/1-60
+
+# Other modules can also be specified here

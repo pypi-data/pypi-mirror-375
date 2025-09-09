@@ -1,0 +1,2 @@
+substitute "COORD=2,PLC=17,J1=2,J1X=650,J1Z=0,J2=1,J2X=650,J2Z=700,J3=3,J3X=0,J3Z=350,MD=0,MCX=0,MCZ=0"
+include "CS_3jack.pmc"
