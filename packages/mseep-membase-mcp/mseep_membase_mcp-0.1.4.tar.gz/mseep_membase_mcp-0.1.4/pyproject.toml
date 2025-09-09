@@ -1,0 +1,19 @@
+[project]
+name = "mseep-membase-mcp"
+version = "0.1.4"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.6.0",
+    "membase>=0.1.8",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[tool.uv.sources.membase]
+git = "https://github.com/unibaseio/membase.git"
