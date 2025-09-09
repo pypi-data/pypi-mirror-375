@@ -1,0 +1,88 @@
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[project]
+name = "mcpstack-urbanmapper"
+dynamic = []
+description = "MCPStack tool for UrbanMapper that emits HF-only pipeline code strings (no execution)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Provost Simon", email = "s.g.provost@kent.ac.uk" },
+]
+keywords = [
+    "mcp",
+    "mcpstack",
+    "mcpPipeline",
+    "tool",
+    "urbanmapper",
+    "huggingface",
+    "geospatial",
+    "OSCUR",
+    "NYU",
+]
+dependencies = [
+    "typer>=0.9.0",
+    "beartype>=0.21.0",
+    "rich>=13.0.0",
+    "rich-argparse>=1.4.0",
+    "rich-pyfiglet>=1.0.0",
+    "click>=8.1.8",
+    "mcpstack>=0.0.2",
+    "datasets>=2.20.0",
+    "urban-mapper",
+    "pydantic>=2.6.0",
+    "jsonschema>=4.22.0",
+    "seaborn>=0.13.2",
+    "folium>=0.20.0",
+    "plotly>=6.3.0",
+    "pandas>=2.3.2",
+]
+version = "0.0.0"
+
+[project.entry-points."mcpstack.tools"]
+urbanmapper = "mcpstack_urbanmapper.tool:UrbanMapper"
+
+[project.entry-points."mcpstack.tool_clis"]
+urbanmapper = "mcpstack_urbanmapper.cli:UrbanMapperCLI.get_app"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.4.0",
+    "pre-commit>=3.0.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+src = [
+    "src",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "UP",
+    "RUF",
+    "B",
+    "C4",
+]
+ignore = [
+    "E501",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+]
