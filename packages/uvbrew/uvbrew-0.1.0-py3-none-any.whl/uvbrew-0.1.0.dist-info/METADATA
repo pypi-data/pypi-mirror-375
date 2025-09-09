@@ -1,0 +1,17 @@
+Metadata-Version: 2.3
+Name: uvbrew
+Version: 0.1.0
+Summary: Add your description here
+Author: thewisenerd
+Author-email: thewisenerd <thewisenerd@protonmail.com>
+Requires-Dist: click>=8.2.1
+Requires-Dist: structlog>=25.4.0
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+uvbrew
+======
+
+create homebrew formulae from a uv package.
+
+uses ``
