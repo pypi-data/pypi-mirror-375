@@ -1,0 +1,2 @@
+[mkdocs.plugins]
+izsam-search = mkdocs_izsam_search.plugin:SearchPlugin
