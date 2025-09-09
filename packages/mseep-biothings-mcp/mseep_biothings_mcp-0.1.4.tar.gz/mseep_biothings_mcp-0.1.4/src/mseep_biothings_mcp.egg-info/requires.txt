@@ -1,0 +1,9 @@
+biopython>=1.85
+biothings-typed-client>=0.0.7
+eliot>=1.17.5
+pycomfort>=0.0.18
+fastmcp>=2.10.2
+aiosqlite>=0.21.0
+sqlite-utils>=3.38
+huggingface-hub>=0.33.2
+typer>=0.16.0
