@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/orchagent_cli.egg-info/PKG-INFO
+src/orchagent_cli.egg-info/SOURCES.txt
+src/orchagent_cli.egg-info/dependency_links.txt
+src/orchagent_cli.egg-info/entry_points.txt
+src/orchagent_cli.egg-info/requires.txt
+src/orchagent_cli.egg-info/top_level.txt
+src/orchcli/__init__.py
+src/orchcli/main.py
+tests/test_cli_help.py
+tests/test_templates_secrets_out.py
