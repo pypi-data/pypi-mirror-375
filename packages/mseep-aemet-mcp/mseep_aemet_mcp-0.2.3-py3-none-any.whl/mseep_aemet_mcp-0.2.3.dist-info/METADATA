@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-aemet_mcp
+Version: 0.2.3
+Summary: AEMET API integration with MCP (Model Context Protocol)
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.6.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
