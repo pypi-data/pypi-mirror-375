@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: nornir_arista
+Version: 0.0.8
+Summary: Python library to interact with Arista devices. Based on Arista EAPI
+Home-page: https://github.com/Vicnz03/nornir_arista
+Author: Vic Chen
+Author-email: vicnz03@hotmail.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyeapi>=1.0.2
+
+# nornir_arista
+Arista EAPI Plugins for Nornir
