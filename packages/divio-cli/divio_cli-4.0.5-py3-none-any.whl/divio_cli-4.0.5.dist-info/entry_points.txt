@@ -1,0 +1,2 @@
+[console_scripts]
+divio = divio_cli.cli:cli
