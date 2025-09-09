@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+mseep_paddleocr_mcp.egg-info/PKG-INFO
+mseep_paddleocr_mcp.egg-info/SOURCES.txt
+mseep_paddleocr_mcp.egg-info/dependency_links.txt
+mseep_paddleocr_mcp.egg-info/entry_points.txt
+mseep_paddleocr_mcp.egg-info/requires.txt
+mseep_paddleocr_mcp.egg-info/top_level.txt
+paddleocr_mcp/__init__.py
+paddleocr_mcp/__main__.py
+paddleocr_mcp/pipelines.py
+paddleocr_mcp/py.typed
