@@ -1,0 +1,37 @@
+[project]
+name = "mseep-excel-mcp-server"
+version = "0.1.8"
+description = "Excel MCP Server for manipulating Excel files"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.10.1",
+    "fastmcp>=2.0.0,<3.0.0",
+    "openpyxl>=3.1.5",
+    "typer>=0.16.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+excel-mcp-server = "excel_mcp.__main__:app"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+packages = [
+    "src/excel_mcp",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/excel_mcp",
+]
