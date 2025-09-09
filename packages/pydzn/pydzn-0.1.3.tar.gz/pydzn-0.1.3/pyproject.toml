@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydzn"
+version = "0.1.3"
+description = "Tiny design-system utilities (Tailwind-like), composable HTML components, and a grid layout builder for Python/Jinja apps."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+  { name = "Ryan Kirkish", email = "ryan@foo.com" }
+]
+keywords = ["design-system", "css", "utility-classes", "jinja2", "components", "grid", "htmx"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Framework :: Flask",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+dependencies = [
+  "Jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+flask = ["Flask>=2.3"]
+dev = [
+  "pytest>=8",
+  "ruff>=0.5",
+  "black>=24",
+  "mypy>=1.10",
+  "build>=1.2",
+  "twine>=5"
+]
+
+[project.urls]
+Homepage = "https://github.com/anthonyrka/pydzn"
+Repository = "https://github.com/anthonyrka/pydzn"
+Issues = "https://github.com/anthonyrka/pydzn/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pydzn = [
+  "**/*.html",
+  "**/*.css",
+  "**/*.js",
+  "py.typed"
+]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E","F","I","W"]
+exclude = ["build/", "dist/", ".venv/"]
+
+[tool.mypy]
+python_version = "3.10"
+pretty = true
+show_error_codes = true
+strict = false
+ignore_missing_imports = true
