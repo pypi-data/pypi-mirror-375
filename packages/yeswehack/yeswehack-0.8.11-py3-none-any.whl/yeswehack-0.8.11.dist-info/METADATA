@@ -1,0 +1,61 @@
+Metadata-Version: 2.3
+Name: yeswehack
+Version: 0.8.11
+Summary: yeswehack - YesWeHack API Wrapper
+Author: Jean Lou Hau
+Author-email: jl.hau@yeswehack.com
+Maintainer: YesWeHack
+Maintainer-email: project@yeswehack.com
+Requires-Python: >=3.7.0,<3.13
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: requests (>=2.24.0,<3.0.0)
+Requires-Dist: setuptools (>=69.0.2,<70.0.0) ; python_version >= "3.12"
+Requires-Dist: tomlkit (>=0.7.0,<0.8.0)
+Project-URL: Repository, https://yeswehack.com
+Description-Content-Type: text/markdown
+
+SDK for yeswehack
+
+
+# Build from source
+
+`make build` (or `poetry build`)
+
+# Installation
+
+## Developer
+
+### Requirements
+
+- [`poetry`](https://python-poetry.org/) (`pip install poetry`)
+
+### Installation
+
+`make install` (or `poetry install`): creates a virtualenv and install dependencies
+
+## From pip
+
+```
+pip install yeswehack
+```
+
+## From wheel
+
+```
+pip install path/to/yeswehack-wheel.whl
+```
+
+# Getting starting with YesWeHack Python SDK
+
+## API Module
+
+In this python module, we define object mapping to YesWeHack API Object.
+
