@@ -1,0 +1,36 @@
+<header class="header">
+  <div class="top-bar">
+    <div class="platform-heading">
+      <div class="platform-logo">
+        <a href="{{ base_url }}">
+          <img src="{{ base_url }}/img/piattaforma-genpat-logo.svg" alt="Logo">
+        </a>
+      </div>
+      <div class="platform-title">
+        {% if config.extra.platform_title %}
+          <h1>{{ config.extra.platform_title }}</h1>
+        {% endif %}
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="tool tool-docs-navigation">
+        <div class="tool-label" data-i18n-key="topics">Topics</div>
+        <div class="tool-trigger" onclick="wiki.theme.toggleDocsNav()">
+          <i class="iconic iconic-menu"></i>
+        </div>
+      </div>
+      <div class="tool tool-search">
+        <div class="tool-label" data-i18n-key="search">Search</div>
+        <div class="tool-trigger" onclick="wiki.search.buildModalSearch()">
+          <i class="iconic iconic-search"></i>
+        </div>
+      </div>
+      <div class="tool tool-lang hidden">
+        <div class="tool-label"></div>
+        <div class="tool-trigger">
+          <i class="iconic iconic-globe"></i>
+        </div>
+      </div><!-- language trigger -->
+    </div>
+  </div>
+</header>

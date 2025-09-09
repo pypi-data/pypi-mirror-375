@@ -1,0 +1,54 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="six columns">
+        <div class="logo genpat-logo">
+          <img src="{{ base_url }}/img/genpat-logo.png" data-i18n-key="organisation_logo" alt="Organisation logo">
+        </div>
+      </div>
+      <div class="six columns">
+        {% if config.extra.useful_links %}
+          <div class="useful useful-links">
+            <h6 data-i18n-key="useful_links">Useful links</h6>
+            <ul>
+              {% for link in config.extra.useful_links.values() %}
+                <li><a href="{{ link.url }}" target="_blank">{{ link.label }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        {% if config.extra.support %}
+          <div class="useful useful-help">
+            <h6 data-i18n-key="support">Support</h6>
+            <ul>
+              {% for link in config.extra.support.values() %}
+                <li><a href="{{ link.url }}" target="_blank">{{ link.label }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        {% if config.extra.tools %}
+          <div class="useful useful-tools">
+            <ul>
+              {% for link in config.extra.tools.values() %}
+                <li>
+                  {% if link.icon %}
+                    <i class="iconic {{ link.icon }}"></i>
+                  {% endif %}
+                  <a href="{{ link.url }}" target="{{ link.target }}">{{ link.label }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <div class="info">
+          <p data-i18n-key="cookies_message">This wiki is not using cookies.</p>
+          <p><span data-i18n-key="last_update">Last update</span> <span id="last-update-date">{{ build_date_utc }}</span>.</p>
+          {% if config.extra.copyright %}
+            <p class="copyright">&copy;<span id="copyright-date"></span> {{ config.extra.copyright }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
