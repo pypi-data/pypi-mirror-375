@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: mseep-unreal-blender-mcp
+Version: 0.1.1
+Summary: Unified MCP server for controlling Blender and Unreal Engine via AI agents
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.10
+Requires-Dist: aiohttp>=3.8.5
+Requires-Dist: fastapi>=0.103.1
+Requires-Dist: langchain-community>=0.0.1
+Requires-Dist: langchain>=0.0.292
+Requires-Dist: mcp[cli]>=1.3.0
+Requires-Dist: sse-starlette>=1.6.5
+Requires-Dist: uvicorn>=0.23.2
+Provides-Extra: dev
+Requires-Dist: black>=23.7.0; extra == 'dev'
+Requires-Dist: mypy>=1.5.1; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.1; extra == 'dev'
+Requires-Dist: pytest>=7.3.1; extra == 'dev'
+Requires-Dist: ruff>=0.0.286; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
