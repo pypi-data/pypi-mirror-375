@@ -1,0 +1,3 @@
+[console_scripts]
+cinema4d-mcp = cinema4d_mcp:main
+cinema4d-mcp-wrapper = cinema4d_mcp:main_wrapper
