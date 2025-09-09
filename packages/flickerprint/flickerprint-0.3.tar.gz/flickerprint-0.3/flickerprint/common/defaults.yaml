@@ -1,0 +1,102 @@
+## Configuration file for the experiment file
+
+## The default values are designed to give to reasonable behaviour
+
+## Note that any lines starting with a '#' character are ignored.
+## By convention any lines starting with '##' are for comments and a single '#'
+## is used to disable the option (and falling back to default behaviour),
+## but may be re-enabled by removing this the '#' character.
+
+## Parameters used in automating the workflow, particularly in snakemake.
+## These are not required if the scripts are being run manually, but this is
+## not recommended.
+workflow:
+  ## Location of the microscopy files
+  image_dir: "default_images"
+
+  ## Glob pattern for the microscopy files inside the image directory,
+  ## if this not provided then fall back to a set of sensible default values.
+  image_regex: "*.ims"
+
+  ## User name
+  ##   Human readable name for the experiment
+  ##   This is used in organisation and plotting
+  ##   Experiments with the same name will be combined by the plotting routines.
+  experiment_name: "experiment_name"
+
+image_processing:
+  ## The width of one pixel in microns
+  ##    IMPORTANT: The program will try to extract this value from
+  ##    the microscope file's metadata. The value here is only used
+  ##    if the metadata is missing or incomplete. This is especially
+  ##    important for bare image files (ie. .tiff). You will recieve
+  ##    a warning if this value is used.
+  pixel_size: 0.1408
+
+  ## Method for drawing the boundary, these are:
+  ##   gradient: Find the maximum of the directional gradient
+  ##   intensity: Find the point at which the intensity crosses a given threshold
+  method: gradient
+
+  ## Smoothing
+  ##   Noise in the image will often will disrupt the boundary detection
+  ##   we can therefore apply a smoothing to the image to reduce this effect.
+  ##   This is given as an float of the Gaussian sigma width.
+  smoothing: 1.5
+
+  ## Minimum granule radius
+  ##  Reject granules with a radius smaller than this value.
+  ##  Given in micrometers
+  granule_minimum_radius: 0.3
+
+  ## Maximum granule radius
+  ##  Reject granules with a radius larger than this value.
+  ##  Given in micrometers
+  granule_maximum_radius: 3.0
+
+  ## Minimum intensity of a granule relative to the maximum intensity, 
+  ##   used in the detection algorithm.
+  ##   This is particularly important in transfected cells, where the 
+  ##   intensity may vary greatly between cells.
+  granule_minimum_intensity: 0.1
+
+  ## Intensity threshold for the flood fill
+  ## not used with method:intensity
+  fill_threshold: 0.6
+
+  ## Condensate Tracking Threshold
+  ##  The value is given in pixels, and is used to link granules between frames.
+  ##  The closest granule in the previous frame must be within this distance
+  ##  to be considered the same granule.
+  ##  Do not change this value unless you are having issues with condensate tracking.
+  tracking_threshold: 15
+
+  ## Produce images of the granules, showing their position in the frame and their boundaries.
+  ##  True: Save an image of the granules for every 100 frames, with their center and boundary
+  ##  marked (results in lots of files which require significant additional processing)
+  ##  False: Do not save images of the granules
+  granule_images: False
+
+spectrum_fitting:
+  ## Experimental spectrum used to fit the theoretical model
+  ##   direct: Use the magnitude squared directly
+  ##   corrected: Use the standard deviation of the magnitudes
+  ## These terms are identical for a spherical granules
+  experimental_spectrum: corrected
+
+  ## Fitting orders
+  ##   Number of orders to use in the spectrum fitting
+  fitting_orders: 15
+
+  ## Temperature
+  ##  The temperature which the experiments were conducted at (Degrees Celcius)
+  temperature: 37
+
+  ## Plot Spectra and Heatmaps
+  ##  True: Save a plot of the fluctuation spectra and heatmaps for each granule (large files which require significant additional processing)
+  ##  False: Do not plot the spectra and heatmaps for each granule (results are stored in aggregate_fittings.h5 only)
+  plot_spectra_and_heatmaps: False
+
+## Parameters used in automated plotting
+plotting:
+  latex: True
