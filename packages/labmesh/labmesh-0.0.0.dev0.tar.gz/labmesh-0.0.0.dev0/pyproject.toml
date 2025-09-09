@@ -1,0 +1,27 @@
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "labmesh"
+version = "0.0.0.dev0"
+description = "Hybrid ZeroMQ networking package for connecting lab instruments."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name="You", email="you@example.com"}]
+dependencies = ["pyzmq>=25"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+    "Framework :: AsyncIO"
+]
+license = "BSD-2-Clause"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/Grant-Giesbrecht/labmesh"
+Issues = "https://github.com/Grant-Giesbrecht/labmesh/issues"
+
+[project.scripts]
+lm-keygen = "labmesh.security:main"
