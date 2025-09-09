@@ -1,0 +1,8 @@
+statement,application,local modules,odoo/addons,addons + dependencies
+ALL,|check|,|check|,|check|,|check|
+APPLICATIONS,|check|,|no_check|,|no_check|,Only if application
+LOCALIZATION,|no_check|,|check|,|no_check|,Only local modules
+CORE,|no_check|,|no_check|,|check|,|no_check|
+NO-APPLICATION,|no_check|,|check|,|check|,No if application
+NO-LOCALIZATION,|check|,|no_check|,|check|,No local modules
+NO-CORE,|check|,|check|,|no_check|,|check|
