@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-video-converter = mcp_video_converter.server:main_cli
