@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-video-converter
+Version: 0.1.1
+Summary: An MCP server with video conversion tools using FFmpeg.
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Repository, https://github.com/adamanz/mcp-video-converter
+Project-URL: Issues, https://github.com/adamanz/mcp-video-converter/issues
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=2.0.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

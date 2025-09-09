@@ -1,0 +1,35 @@
+[project]
+name = "mseep-mcp-video-converter"
+version = "0.1.1"
+description = "An MCP server with video conversion tools using FFmpeg."
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=2.0.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Repository = "https://github.com/adamanz/mcp-video-converter"
+Issues = "https://github.com/adamanz/mcp-video-converter/issues"
+
+[project.scripts]
+mcp-video-converter = "mcp_video_converter.server:main_cli"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
