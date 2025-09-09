@@ -1,0 +1,16 @@
+sqlalchemy>=2.0.37
+splurge-dsv>=2025.1.5
+splurge-typer>=2025.0.1
+splurge-tabular>=2025.0.0
+
+[dev]
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-xdist>=3.8.0
+ruff>=0.12.12
+mypy>=1.0.0
+
+[test]
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-xdist>=3.8.0
