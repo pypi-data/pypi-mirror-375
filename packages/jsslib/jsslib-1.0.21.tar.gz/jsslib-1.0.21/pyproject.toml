@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jsslib"
+version = "1.0.21"
+description = "JSON Structure Search library"
+readme = { file = "README.md", content-type = "text/markdown" }
+authors = [
+  { name = "liutingchao", email = "liutingchao@hotmail.com" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.6"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11"
+]
+dependencies = [
+  "pywin32; sys_platform == 'win32'"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+# 自动发现包（包含子包）
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["jsslib", "jsslib.*"]
+
+# 打包时附带的资源文件
+[tool.setuptools.package-data]
+jsslib = [
+  "libjsslib.dylib",
+  "libjsslib.so",
+  "jsslib_x64.dll",
+  "jsslib_arm64.dll",
+  "jsslib.py",
+  "base.lex"
+]
