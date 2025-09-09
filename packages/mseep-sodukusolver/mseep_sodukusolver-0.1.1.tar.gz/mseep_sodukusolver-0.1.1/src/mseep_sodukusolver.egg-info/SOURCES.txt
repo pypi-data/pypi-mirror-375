@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/mseep_sodukusolver.egg-info/PKG-INFO
+src/mseep_sodukusolver.egg-info/SOURCES.txt
+src/mseep_sodukusolver.egg-info/dependency_links.txt
+src/mseep_sodukusolver.egg-info/entry_points.txt
+src/mseep_sodukusolver.egg-info/requires.txt
+src/mseep_sodukusolver.egg-info/top_level.txt
+src/sodukusolver/__init__.py
+src/sodukusolver/server.py
+src/sodukusolver/solver.py
