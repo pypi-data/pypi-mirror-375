@@ -1,0 +1,2 @@
+[flake8.extension]
+L = flake8_logging:Plugin
