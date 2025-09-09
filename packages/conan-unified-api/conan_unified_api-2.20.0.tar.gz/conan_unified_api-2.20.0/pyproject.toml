@@ -1,0 +1,116 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "conan-unified-api"
+authors = [{name = "Péter Gosztolya and Contributors"}]
+version = "2.20.0" # version corresponds to the last supported conan version
+requires-python = ">=3.8"
+description = "Compatibility layer for Conan 1 and 2 for Python 3.8+"
+readme = "README.md"
+keywords = ["conan", "api"]
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: Implementation :: CPython"]
+dependencies = [
+    "conan>=1.48, <2.21",
+    # compatibility
+    'contextlib-chdir==1.0.2; python_version<"3.11"',  # BSD License (BSD-3-Clause)
+    'typing-extensions>=3.10.0.2, <5',  # Python Software Foundation License(PSF)
+    "packaging",  # use the built-in, or get latest if there is some issue with pip
+]
+
+[tool.setuptools.packages.find]
+include = ["conan_unified_api*"]  # package names should match these glob patterns (["*"] by default)
+namespaces = false  # to disable scanning PEP 420 namespaces (true by default)
+
+[project.urls]
+repository = "https://github.com/goszpeti/conan_unified_api.git"
+issues = "https://github.com/goszpeti/conan_unified_api/issues"
+
+[project.optional-dependencies]
+dev = [
+    "rope", # refactoring
+]
+
+test = [
+    "legacy-cgi; python_version>='3.13'", # for conan 1 compatibility
+    "psutil==7.0.0",
+    "pytest==8.3.5", # newer versions uncompatible to U22, upgrade later
+    "pytest-cov==5.0.0", # newer versions uncompatible to U22, upgrade later
+    "pytest-mock==3.14.1",
+    "pytest-check==2.4.2", # newer versions uncompatible to U22, upgrade later
+]
+
+[tool.ruff]
+line-length=96
+
+[tool.ruff.lint]
+pyupgrade.keep-runtime-typing=true
+select = [
+  "ALL",
+]
+ignore = ["ANN401", "ANN204",
+"FA100",
+"FBT001",
+"FBT002",
+"COM812", # trailing commas
+"C90", # complexity
+"EXE", # flake8-executable 
+"BLE", # flake8-blind-except
+"D", # pydocstyle
+"C90", # complexity
+"I", # Isort
+"ASYNC", # flake8-async.
+"PLR0912", # too many branches
+"PLR0913",
+"TRY003",
+"S112", # logging on try-continue
+# pydoclint (DOC)?
+"PLC0415", # import not at top
+"SLF001" # access to private members
+]
+
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "test",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = [
+    "conan_unified_api",
+]
+
+[tool.coverage.report]
+precision = 2
+# Regexes for lines to exclude from consideration
+exclude_also = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod",
+    "...",
+    ]
+
+ignore_errors = true
