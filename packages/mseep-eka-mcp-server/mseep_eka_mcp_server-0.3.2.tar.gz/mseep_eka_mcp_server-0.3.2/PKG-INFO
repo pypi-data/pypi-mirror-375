@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-eka_mcp_server
+Version: 0.3.2
+Summary: The official Eka MCP Server for medical science tools curated by eka.care
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Repository, https://github.com/eka-care/eka_mcp_server
+Project-URL: Documentation, https://developer.eka.care/api-reference/eka_mcp/overview
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[all]>=1.3.0
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: logging>=0.4.9.6
+Requires-Dist: pillow>=11.0.0
+Requires-Dist: pytest>=8.3.5
+Requires-Dist: pyjwt>=2.10.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
