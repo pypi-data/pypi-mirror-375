@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_voice_status_report_mcp_server.egg-info/PKG-INFO
+src/mseep_voice_status_report_mcp_server.egg-info/SOURCES.txt
+src/mseep_voice_status_report_mcp_server.egg-info/dependency_links.txt
+src/mseep_voice_status_report_mcp_server.egg-info/entry_points.txt
+src/mseep_voice_status_report_mcp_server.egg-info/requires.txt
+src/mseep_voice_status_report_mcp_server.egg-info/top_level.txt
+src/voice_status_report_mcp_server/__init__.py
+src/voice_status_report_mcp_server/py.typed
+src/voice_status_report_mcp_server/server.py
