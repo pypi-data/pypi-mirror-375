@@ -1,0 +1,89 @@
+Metadata-Version: 2.4
+Name: mseep-toolfront
+Version: 0.2.16
+Summary: ToolFront helps you retrieve information from large databases, APIs, and documents with AI.
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: click>=8.1.8
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.9.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: pydantic>=2.11.4
+Requires-Dist: pytest>=8.3.5
+Requires-Dist: python-decouple>=3.8
+Requires-Dist: openapi-spec-validator>=0.7.2
+Requires-Dist: jsonref>=1.1.0
+Requires-Dist: pydantic-ai>=0.4.2
+Requires-Dist: yarl>=1.20.1
+Requires-Dist: rich>=14.0.0
+Requires-Dist: sqlparse>=0.5.3
+Requires-Dist: tabulate>=0.9.0
+Requires-Dist: ibis-framework>=10.6.0
+Requires-Dist: pyarrow<19.0.0
+Requires-Dist: executing>=2.2.0
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == "test"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "test"
+Provides-Extra: dev
+Requires-Dist: pre-commit>=3.0.0; extra == "dev"
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+Requires-Dist: mkdocs-material[imaging]>=9.6.16; extra == "dev"
+Requires-Dist: mkdocstrings[python]>=0.30.0; extra == "dev"
+Requires-Dist: markitdown[docx,pdf,pptx,xls,xlsx]>=0.1.2; extra == "dev"
+Provides-Extra: bigquery
+Requires-Dist: ibis-framework[bigquery]>=10.6.0; extra == "bigquery"
+Provides-Extra: clickhouse
+Requires-Dist: ibis-framework[clickhouse]>=10.6.0; extra == "clickhouse"
+Provides-Extra: databricks
+Requires-Dist: ibis-framework[databricks]>=10.6.0; extra == "databricks"
+Provides-Extra: druid
+Requires-Dist: ibis-framework[druid]>=10.6.0; extra == "druid"
+Provides-Extra: duckdb
+Requires-Dist: ibis-framework[duckdb]>=10.6.0; extra == "duckdb"
+Provides-Extra: flink
+Requires-Dist: ibis-framework[flink]>=10.6.0; extra == "flink"
+Provides-Extra: mssql
+Requires-Dist: ibis-framework[mssql]>=10.6.0; extra == "mssql"
+Provides-Extra: mysql
+Requires-Dist: ibis-framework[mysql]>=10.6.0; extra == "mysql"
+Provides-Extra: oracle
+Requires-Dist: ibis-framework[oracle]>=10.6.0; extra == "oracle"
+Provides-Extra: postgres
+Requires-Dist: ibis-framework[postgres]>=10.6.0; extra == "postgres"
+Provides-Extra: risingwave
+Requires-Dist: ibis-framework[risingwave]>=10.6.0; extra == "risingwave"
+Provides-Extra: snowflake
+Requires-Dist: ibis-framework[snowflake]>=10.6.0; extra == "snowflake"
+Provides-Extra: sqlite
+Requires-Dist: ibis-framework[sqlite]>=10.6.0; extra == "sqlite"
+Provides-Extra: trino
+Requires-Dist: ibis-framework[trino]>=10.6.0; extra == "trino"
+Provides-Extra: pyspark
+Requires-Dist: ibis-framework[pyspark]>=10.6.0; extra == "pyspark"
+Provides-Extra: all
+Requires-Dist: toolfront[bigquery]; extra == "all"
+Requires-Dist: toolfront[clickhouse]; extra == "all"
+Requires-Dist: toolfront[databricks]; extra == "all"
+Requires-Dist: toolfront[druid]; extra == "all"
+Requires-Dist: toolfront[duckdb]; extra == "all"
+Requires-Dist: toolfront[mssql]; extra == "all"
+Requires-Dist: toolfront[mysql]; extra == "all"
+Requires-Dist: toolfront[oracle]; extra == "all"
+Requires-Dist: toolfront[postgres]; extra == "all"
+Requires-Dist: toolfront[pyspark]; extra == "all"
+Requires-Dist: toolfront[risingwave]; extra == "all"
+Requires-Dist: toolfront[snowflake]; extra == "all"
+Requires-Dist: toolfront[sqlite]; extra == "all"
+Requires-Dist: toolfront[trino]; extra == "all"
+Dynamic: license-file
+
+Package managed by MseeP.ai
