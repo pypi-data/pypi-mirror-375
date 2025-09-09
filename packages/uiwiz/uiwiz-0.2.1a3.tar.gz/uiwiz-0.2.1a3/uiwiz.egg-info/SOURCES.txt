@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+tests/test_dict_element.py
+tests/test_element.py
+tests/test_extract_text.py
+tests/test_frame.py
+tests/test_html_element.py
+tests/test_page_router.py
+tests/test_svg.py
+tests/test_tree.py
+uiwiz.egg-info/PKG-INFO
+uiwiz.egg-info/SOURCES.txt
+uiwiz.egg-info/dependency_links.txt
+uiwiz.egg-info/requires.txt
+uiwiz.egg-info/top_level.txt
