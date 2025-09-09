@@ -1,0 +1,3 @@
+[pylsp]
+bec_completion_pylsp_plugin = pylsp_bec.completions
+bec_signature_help_pylsp_plugin = pylsp_bec.signatures
