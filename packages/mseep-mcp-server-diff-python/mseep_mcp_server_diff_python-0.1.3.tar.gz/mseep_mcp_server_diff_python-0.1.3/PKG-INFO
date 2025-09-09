@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-diff-python
+Version: 0.1.3
+Summary: This is an MCP server that gets the difference between two texts.
+Project-URL: Homepage, https://github.com/tatn/mcp-server-diff-python
+Project-URL: Repository, https://github.com/tatn/mcp-server-diff-python
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+License-File: LICENSE
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.11
+Requires-Dist: mcp>=1.2.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
