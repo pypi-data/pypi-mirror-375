@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: mseep-skydeckai-code
+Version: 0.1.42
+Summary: This MCP server provides a comprehensive set of tools for AI-driven Development workflows including file operations, code analysis, multi-language execution, web content fetching with HTML-to-markdown conversion, multi-engine web search, code content searching, persistent task management, and system information retrieval.
+Project-URL: Homepage, https://github.com/skydeckai/skydeckai-code
+Project-URL: Repository, https://github.com/skydeckai/skydeckai-code
+Project-URL: Documentation, https://github.com/skydeckai/skydeckai-code/blob/main/README.md
+Author-email: mseep <support@skydeck.ai>
+License: Apache 2.0
+License-File: LICENSE
+Keywords: ai,aidd,code,code-analysis,development,mcp
+Requires-Python: >=3.11
+Requires-Dist: beautifulsoup4>=4.13.3
+Requires-Dist: html2text>=2025.4.15
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: mss>=10.0.0
+Requires-Dist: pillow>=11.1.0
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: pygetwindow>=0.0.9; sys_platform == 'win32'
+Requires-Dist: pyobjc-framework-quartz>=11.0; sys_platform == 'darwin'
+Requires-Dist: requests>=2.32.3
+Requires-Dist: tree-sitter-c-sharp>=0.23.1
+Requires-Dist: tree-sitter-cpp>=0.23.4
+Requires-Dist: tree-sitter-go>=0.23.4
+Requires-Dist: tree-sitter-java>=0.23.5
+Requires-Dist: tree-sitter-javascript>=0.23.1
+Requires-Dist: tree-sitter-kotlin>=1.1.0
+Requires-Dist: tree-sitter-php>=0.23.11
+Requires-Dist: tree-sitter-python>=0.23.6
+Requires-Dist: tree-sitter-ruby>=0.23.1
+Requires-Dist: tree-sitter-rust==0.23.2
+Requires-Dist: tree-sitter-typescript>=0.23.2
+Requires-Dist: tree-sitter>=0.24.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
