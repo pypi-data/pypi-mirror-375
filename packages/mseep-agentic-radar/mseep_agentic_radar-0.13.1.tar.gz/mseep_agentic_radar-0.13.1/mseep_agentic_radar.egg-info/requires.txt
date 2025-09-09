@@ -1,0 +1,16 @@
+pydantic>=2.10.6
+typer-slim>=0.15.1
+jinja2<4.0.0,>=3.1.5
+importlib-resources<7.0.0,>=6.5.2
+openai<2.0.0,>=1.73.0
+dotenv<0.10.0,>=0.9.9
+rich<14.0.0,>=13.7.0
+pyyaml<7.0.0,>=6.0.2
+
+[crewai]
+
+[crewai:python_version >= "3.10" and python_version < "3.13"]
+crewai-tools>=0.38.1
+
+[openai-agents]
+openai-agents<0.0.14,>=0.0.13
