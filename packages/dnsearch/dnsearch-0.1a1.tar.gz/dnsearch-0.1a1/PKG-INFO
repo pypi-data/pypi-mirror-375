@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: dnsearch
+Version: 0.1a1
+Summary: Automatically created by xkits-command.
+Home-page: https://github.com/bondbox/xcommand/
+Author: Mingzhe Zou
+Author-email: zoumingzhe@outlook.com
+License: GPLv3
+Project-URL: Source Code, https://github.com/bondbox/xcommand/
+Project-URL: Bug Tracker, https://github.com/bondbox/xcommand/issues
+Project-URL: Documentation, https://github.com/bondbox/xcommand/
+Keywords: command-line,argparse,argcomplete
+Platform: any
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: xkits-command>=0.4.4
+
+# DNSearch
+
+> Domain Name Search
