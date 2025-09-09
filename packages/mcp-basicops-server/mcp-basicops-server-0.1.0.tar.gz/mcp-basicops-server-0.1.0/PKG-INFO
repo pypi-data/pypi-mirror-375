@@ -1,0 +1,255 @@
+Metadata-Version: 2.1
+Name: mcp-basicops-server
+Version: 0.1.0
+Summary: MCP server for BasicOps project management platform integration
+Home-page: https://github.com/yourusername/mcp-basicops-server
+Author: MCP BasicOps Server
+Author-email: MCP BasicOps Server <support@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/yourusername/mcp-basicops-server
+Project-URL: Repository, https://github.com/yourusername/mcp-basicops-server.git
+Project-URL: Issues, https://github.com/yourusername/mcp-basicops-server/issues
+Project-URL: Documentation, https://github.com/yourusername/mcp-basicops-server#readme
+Project-URL: Changelog, https://github.com/yourusername/mcp-basicops-server/releases
+Keywords: mcp,basicops,project-management,llm,ai
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Office/Business :: Groupware
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+License-File: LICENSE
+
+# MCP BasicOps Server
+
+A Model Context Protocol (MCP) server that provides integration with the BasicOps project management platform. This server enables LLMs to interact with BasicOps projects, tasks, sections, notes, users, and webhooks through a standardized interface.
+
+[![PyPI version](https://badge.fury.io/py/mcp-basicops-server.svg)](https://badge.fury.io/py/mcp-basicops-server)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## 🚀 Quick Start
+
+### Installation
+
+The easiest way to install and run the server is using `uvx` (or `pipx`):
+
+```bash
+# Install and run with uvx (recommended)
+uvx mcp-basicops-server
+
+# Or install with pipx
+pipx install mcp-basicops-server
+mcp-basicops-server
+
+# Or install globally with pip
+pip install mcp-basicops-server
+mcp-basicops-server
+```
+
+### Configuration
+
+Set your BasicOps API token as an environment variable:
+
+```bash
+export BASICOPS_API_TOKEN="your_basicops_api_token_here"
+mcp-basicops-server
+```
+
+Or create a `.env` file:
+
+```bash
+BASICOPS_API_TOKEN=your_basicops_api_token_here
+BASICOPS_API_URL=https://api.basicops.com/v1
+LOG_LEVEL=INFO
+```
+
+### Getting Your BasicOps API Token
+
+1. Log in to your BasicOps account
+2. Go to Settings > API Keys
+3. Generate a new API key with appropriate permissions
+4. Copy the Bearer token to your environment
+
+## 🔧 Integration with MCP Clients
+
+### Claude Desktop
+
+Add to your Claude Desktop configuration file:
+
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "basicops": {
+      "command": "uvx",
+      "args": ["mcp-basicops-server"],
+      "env": {
+        "BASICOPS_API_TOKEN": "your_token_here"
+      }
+    }
+  }
+}
+```
+
+Alternative if installed globally:
+
+```json
+{
+  "mcpServers": {
+    "basicops": {
+      "command": "mcp-basicops-server",
+      "env": {
+        "BASICOPS_API_TOKEN": "your_token_here"
+      }
+    }
+  }
+}
+```
+
+### Other MCP Clients
+
+The server follows the standard MCP protocol and communicates via stdin/stdout using JSON-RPC. It should work with any MCP-compliant client.
+
+## 🛠️ Available Tools
+
+### Project Management
+
+- **`create_project`** - Create a new project
+- **`get_project`** - Retrieve project details by ID
+- **`list_projects`** - List projects with filtering options
+- **`update_project`** - Update an existing project
+- **`delete_project`** - Delete a project
+
+### Example Usage
+
+```bash
+# Once connected through an MCP client, you can use natural language:
+"Create a new project called 'Website Redesign' with a due date of June 30th"
+"Show me all projects with 'At Risk' status"
+"Update project 123 to mark it as Complete"
+```
+
+## 📋 Features
+
+- ✅ **Complete BasicOps API Integration**: Full CRUD operations for projects
+- ✅ **Advanced Filtering**: Filter projects by status, owner, dates, etc.
+- ✅ **Robust Error Handling**: Detailed error messages with context
+- ✅ **Structured Logging**: JSON and text logging formats
+- ✅ **Type Safety**: Full type hints with Pydantic models
+- ✅ **Async Performance**: Built with async/await for optimal performance
+- ✅ **Easy Deployment**: Simple installation with uvx/pipx
+- ✅ **Extensible Architecture**: Ready for additional BasicOps resources
+
+## ⚙️ Configuration Options
+
+| Environment Variable | Default | Description |
+|---------------------|---------|-------------|
+| `BASICOPS_API_TOKEN` | *required* | Your BasicOps API token |
+| `BASICOPS_API_URL` | `https://api.basicops.com/v1` | BasicOps API base URL |
+| `LOG_LEVEL` | `INFO` | Logging level (DEBUG, INFO, WARNING, ERROR) |
+| `LOG_FORMAT` | `text` | Log format (`text` or `json`) |
+| `BASICOPS_TIMEOUT` | `30` | Request timeout in seconds |
+| `BASICOPS_MAX_RETRIES` | `3` | Maximum retry attempts |
+| `ENVIRONMENT` | `development` | Environment (development, staging, production) |
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+**"Authentication failed"**
+- Verify your `BASICOPS_API_TOKEN` is correct
+- Check that the token has proper permissions in BasicOps
+
+**"Command not found"**
+- Make sure you've installed the package: `pip install mcp-basicops-server`
+- If using uvx, ensure it's installed: `pip install uvx`
+
+**"Connection errors"**
+- Verify internet connectivity to `api.basicops.com`
+- Check if your firewall allows outbound HTTPS connections
+
+### Debug Mode
+
+Enable debug logging to see detailed request/response information:
+
+```bash
+BASICOPS_API_TOKEN=your_token LOG_LEVEL=DEBUG mcp-basicops-server
+```
+
+## 🚀 Development
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/mcp-basicops-server.git
+cd mcp-basicops-server
+
+# Install in development mode
+pip install -e .[dev]
+
+# Run tests
+pytest
+
+# Run with hot reload for development
+python -m mcp_basicops.server
+```
+
+### Building and Publishing
+
+```bash
+# Build for PyPI
+./scripts/build.sh
+
+# Publish to PyPI (requires PyPI token)
+./scripts/publish.sh
+```
+
+### Extending the Server
+
+The architecture supports easy extension for additional BasicOps resources:
+
+1. **Add Models**: Define Pydantic models in `src/mcp_basicops/models/`
+2. **Create Services**: Add service classes in `src/mcp_basicops/services/`
+3. **Add Tools**: Register new tools in `src/mcp_basicops/server.py`
+4. **Write Tests**: Add tests in `tests/`
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🆘 Support
+
+- 📖 [Documentation](https://github.com/yourusername/mcp-basicops-server#readme)
+- 🐛 [Issue Tracker](https://github.com/yourusername/mcp-basicops-server/issues)
+- 💬 [Discussions](https://github.com/yourusername/mcp-basicops-server/discussions)
+- 📧 Email: support@example.com
+
+## 🙏 Acknowledgments
+
+- [Model Context Protocol](https://modelcontextprotocol.io/) for the MCP specification
+- [BasicOps](https://basicops.com/) for the project management platform
+- The Python async/await ecosystem for excellent tools
