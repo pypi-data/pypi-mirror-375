@@ -1,0 +1,4 @@
+[console_scripts]
+sbcli-rdma = simplyblock_cli.cli:main
+sbctl = simplyblock_cli.cli:main
+
