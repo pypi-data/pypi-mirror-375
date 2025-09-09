@@ -1,0 +1,15 @@
+educelab-cmdparse>=0.2
+numpy
+scipy
+scikit-image
+scikit-learn
+
+[docs]
+sphinx
+sphinx_rtd_theme
+
+[gui]
+PySide6
+PySide6-QtAds
+imageio
+imagecodecs

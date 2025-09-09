@@ -1,0 +1,71 @@
+Metadata-Version: 2.4
+Name: educelab-imgproc
+Version: 0.7.0a0
+Summary: EduceLab image processing module
+Home-page: https://educelab.gitlab.io/educelab-imgproc/
+Download-URL: https://gitlab.com/educelab/educelab-imgproc
+Author: Seth Parker
+Author-email: c.seth.parker@uky.edu
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+License-File: NOTICE
+Requires-Dist: educelab-cmdparse>=0.2
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: scikit-image
+Requires-Dist: scikit-learn
+Provides-Extra: docs
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx_rtd_theme; extra == "docs"
+Provides-Extra: gui
+Requires-Dist: PySide6; extra == "gui"
+Requires-Dist: PySide6-QtAds; extra == "gui"
+Requires-Dist: imageio; extra == "gui"
+Requires-Dist: imagecodecs; extra == "gui"
+Dynamic: download-url
+Dynamic: license-file
+
+# EduceLab Image Processing
+
+`educelab-imgproc` is a Python module for performing common image
+processing tasks. This module is largely a collection of wrapper functions
+around functionality provided by other toolkits (numpy, scikit-image, etc.) and
+is meant to encourage consistent, predictable use across EduceLab projects.
+It should not be considered a total replacement for those other, wonderful
+toolkits.
+
+## Requirements
+- Python 3.9+
+
+## Installation
+
+This project is available on PyPI:
+
+```shell
+python3 -m pip install educelab-imgproc
+```
+
+### GUI (Work in progress)
+
+This package comes with a basic image editor for testing the various processing 
+functions. To run:
+
+```shell
+# Install this module with GUI dependencies
+python -m pip install educelab-imgproc[gui]
+
+# Run the GUI
+el_imgproc
+```
+
+## API Documentation
+
+Visit our API documentation [here](https://educelab.gitlab.io/educelab-imgproc/).
