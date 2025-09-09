@@ -1,0 +1,197 @@
+:root {
+  --pdf-viewer-full-screen-margin: 25px;
+}
+
+
+.pdf-viewer {
+  background-color: $grey-100;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  overflow: hidden;
+
+  .btn:disabled {
+    border: 0;
+  }
+
+  .btn {
+    color: $grey-900;
+  }
+
+  .btn-group {
+    border-radius: 0;
+    padding: 0 0.5em;
+  }
+
+  .border-end {
+    border-color: $grey-300;
+  }
+
+  &.pdf-viewer-full-screen {
+    height: calc(100vh - var(--pdf-viewer-full-screen-margin) * 2 - 0px);
+    width: calc(100vw - var(--pdf-viewer-full-screen-margin) * 2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    margin: var(--pdf-viewer-full-screen-margin);
+
+    .pdf-viewer-page-viewport {
+      height: calc(100% - var(--pdf-viewer-full-screen-margin) * 2);
+      overflow-y: scroll;
+      z-index: 10000;
+    }
+
+    .pdf-viewer-page-container {
+      z-index: 50000;
+    }
+  }
+
+
+  .pdf-viewer-page-count {
+    user-select: none;
+  }
+
+
+  .pdf-viewer-toolbar {
+    background-color: $grey-200;
+    border-bottom: 1px solid $grey-400;
+    display: flex;
+    justify-content: space-between;
+    border-radius: $border-radius $border-radius 0 0;
+    overflow: hidden;
+    width: 100%;
+    padding: 0.5em 0;
+    transition: all 0.20s ease-in-out;
+
+    &.fixed-toolbar {
+      position: fixed;
+      top: 16px; //TODO Handle plone toolbar
+      left: 0;
+      box-shadow: $shadow-md;
+    }
+  }
+
+
+  .pdf-viewer-toolbar-left {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .pdf-viewer-toolbar-center {
+    display: flex;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pdf-viewer-toolbar-right {
+    display: flex;
+    justify-content: right;
+    z-index: 1;
+  }
+
+  .pdf-viewer-page-viewport {
+    overflow-x: scroll;
+    text-align: center;
+  }
+
+  .pdf-viewer-page-container {
+    display: inline-block;
+    padding: 0.5em;
+  }
+
+  canvas {
+    box-shadow: $shadow-md;
+    border-radius: $border-radius;
+    border: 1px solid $grey-300;
+  }
+
+  canvas.pdf-full-width {
+    width: 100%;
+  }
+}
+
+.pdf-viewer-full-screen-overlay {
+  background-color: transparentize($grey-900, 0.2);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  border: 0;
+  backdrop-filter: blur(5px);
+}
+
+
+.plone-toolbar-top {
+  .pdf-viewer-toolbar.fixed-toolbar {
+    top: 56px;
+  }
+
+  .pdf-viewer-full-screen {
+    top: 50px !important;
+    height: calc(100vh - var(--pdf-viewer-full-screen-margin) * 2 - 50px);
+  }
+}
+
+@include media-breakpoint-down(md) {
+
+
+  .pdf-viewer-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+
+    .pdf-viewer-toolbar-left {
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      width: 50%;
+      z-index: 1;
+      order: 1;
+    }
+
+    .pdf-viewer-toolbar-center {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      order: 3;
+      border-top: 1px solid $grey-300;
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+    }
+
+    .pdf-viewer-toolbar-right {
+      display: flex;
+      justify-content: right;
+      z-index: 1;
+      width: 50%;
+      order: 2;
+    }
+  }
+}
+
+.dark {
+  .pdf-viewer {
+    background-color: $grey-800;
+    border: 1px solid $gray-700;
+  }
+
+  .pdf-viewer-toolbar {
+    background-color: $grey-900;
+    border-bottom: 1px solid $grey-700;
+  }
+
+  .border-end {
+    border-color: $grey-800;
+  }
+
+  .btn {
+    color: $white;
+  }
+}

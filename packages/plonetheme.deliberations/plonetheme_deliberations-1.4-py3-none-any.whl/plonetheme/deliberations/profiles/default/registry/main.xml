@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<registry
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plonetheme.deliberations">
+
+  <record name="plone.toolbar_position" interface="Products.CMFPlone.interfaces.controlpanel.ISiteSchema">
+      <value purge="true">top</value>
+  </record>
+
+  <records prefix="plone.bundles/plonetheme.deliberations-devserver"
+           interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="enabled">False</value>
+    <value key="compile">False</value>
+    <value key="last_compilation">2020-09-04 12:30:00</value>
+    <value key="jscompilation">http://localhost:3000/dist/js/theme.js</value>
+  </records>
+
+</registry>

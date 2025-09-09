@@ -1,0 +1,218 @@
+#nextprev-navigation {
+  position: relative;
+  margin-top: 0.1rem;
+  margin-bottom: 1rem;
+
+  background-color: $gray-200;
+  border: 1px solid $grey-400;
+  border-radius: $rounded;
+  box-shadow: $shadow-md;
+  padding: 0;
+
+
+  .flex-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .center-container {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+
+  .nav-col {
+    border-left: 1px solid $grey-400;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5em 0;
+  }
+
+  .nav-col:first-child {
+    border-right: 1px solid $grey-400;
+    border-left: 0;
+  }
+
+  .action-col {
+    //width: 170px;
+    text-align: center;
+    display: flex;
+    padding: 0 0.5rem;
+  }
+
+  #number-col {
+    text-align: center;
+  }
+
+  #query-nextprev-prev, #query-nextprev-next, button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-decoration: none;
+    color: $grey-900;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.20s ease-in-out;
+    border-radius: $rounded;
+    text-transform: uppercase;
+    font-size: 0.80rem;
+
+    &:hover, &.active, &:focus {
+      color: $grey-900;
+      background-color: $grey-50;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .navbar.navbar-expand-lg {
+    position: absolute;
+    right: 1rem;
+  }
+}
+
+
+.navbar-deliberation {
+
+  @extend .container-fluid;
+  background-color: $white;
+  font-size: 1.2em;
+
+  #portal-globalnav:has(li) {
+    border-bottom: 0;
+    width: 100%;
+    border-top: 1px solid $gray-400;
+  }
+
+
+  .nav-item {
+    margin: 0 0.0em;
+    font-weight: 600;
+    background-color: $white !important;
+
+    a {
+      border-bottom: 5px solid transparent;
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
+      color: $grey-800;
+
+      &:focus {
+        background-color: transparent;
+        text-decoration: none;
+        border-bottom: 5px solid color-mix(in srgb, var(--nav-color), transparent 50%);
+        transition: background-color 0.20s ease-in-out;
+        box-shadow: none;
+      }
+
+      &:hover {
+        background-color: $grey-50;
+        border-radius: 0 0 $rounded $rounded;
+        box-shadow: $shadow-inner;
+        border-top: 1px solid $grey-200;
+        border-left: 1px solid $grey-200;
+        border-right: 1px solid $grey-200;
+      }
+
+      padding: 0.6em 0.75em 0.5em 0.75em;
+    }
+
+    &.current, &.inPath {
+      color: $grey-800;
+
+      a {
+        background-color: transparent;
+        padding: 0.6em 0.75em 0.5em 0.75em;
+        border-bottom: 5px solid var(--nav-color);
+      }
+    }
+  }
+}
+
+.nav-pills {
+  background-color: $grey-200;
+  border-radius: $rounded-md;
+  padding: 0.25em 0.25em;
+  color: $grey-900;
+
+  margin: 0rem 0rem 1.5rem 0rem;
+
+  .nav-link.active {
+    background-color: $grey-50 !important;
+    color: $grey-900;
+    border: 1px solid $grey-200;
+    box-shadow: $shadow;
+    font-weight: $font-weight-bold;
+  }
+
+  .nav-link {
+    color: $grey-700;
+  }
+}
+
+.dark {
+  .navbar-deliberation {
+    background-color: $grey-900;
+
+    .nav-item {
+      background-color: $grey-900 !important;
+      color: $white;
+
+      a {
+        border-bottom: 5px solid transparent;
+        color: $white;
+
+        &:hover {
+          background-color: $grey-700;
+        }
+      }
+
+      &.current {
+        color: $grey-900;
+
+        a {
+          border-bottom: 5px solid var(--nav-color);
+        }
+      }
+    }
+  }
+
+
+  #nextprev-navigation {
+    background-color: $gray-900;
+    border: 1px solid $grey-700;
+
+    .nav-col {
+      border-left: 1px solid $grey-700;
+    }
+
+    .nav-col:first-child {
+      border-right: 1px solid $grey-700;
+    }
+
+    #query-nextprev-prev, #query-nextprev-next, button {
+      color: $grey-100;
+
+      &:hover, &.active, &:focus {
+        color: $grey-100;
+        background-color: $grey-800;
+      }
+    }
+  }
+
+}
+
+.state-private.nav-link {
+  color: $red-500;
+}

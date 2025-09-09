@@ -1,0 +1,115 @@
+.annexes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-gap: 1rem;
+
+  .annex {
+    @extend .card;
+    background-color: $white;
+    min-height: 100%;
+    display: flex;
+    flex-direction: row;
+    box-shadow: $shadow;
+    overflow: hidden;
+
+    .title {
+      padding: 0.25em 0.5em;
+      flex: 1;
+      border-left: 1px solid $grey-500;
+      border-right: 1px solid $grey-500;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    h3 {
+      font-size: .9em !important;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+      overflow: hidden;
+      //text-align: justify;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* number of lines to show */
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .bg-file-color {
+      margin: 10px;
+      border-radius: $rounded;
+      width: 50px;
+      box-shadow: $shadow-inner;
+
+      background: linear-gradient(to right top, rgb(107, 114, 128), rgb(209, 213, 219));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bolder;
+      color: white;
+
+      i {
+        font-size: 35px;
+      }
+    }
+
+
+    #annex-file-size {
+      font-size: 0.8em;
+      font-family: monospace;
+      margin-top: 0.5em;
+      color: $grey-700;
+      text-align: right;
+      margin-bottom: 0;
+    }
+
+    .annex-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: $grey-200;
+      border-top: 1px solid $grey-300;
+
+      a {
+        text-decoration: none;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover, &.active, &:focus {
+          color: $grey-900;
+          background-color: $grey-400;
+        }
+      }
+
+      i {
+        text-decoration: none;
+        color: $grey-900;
+        transition: background-color 0.20s ease-in-out;
+        border-bottom: 1px solid $grey-500;
+        padding: 0.5em 1em;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      i:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+
+.card-link {
+  .filled-link {
+    z-index: 1;
+  }
+
+  a {
+    z-index: 2;
+  }
+}

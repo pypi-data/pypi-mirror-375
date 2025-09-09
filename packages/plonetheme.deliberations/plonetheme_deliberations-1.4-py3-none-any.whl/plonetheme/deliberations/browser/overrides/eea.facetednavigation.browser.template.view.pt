@@ -1,0 +1,48 @@
+<tal:left define="hidden python:request.set('disable_plone.leftcolumn', view.hide_left_portlets)"/>
+<tal:right define="hidden python:request.set('disable_plone.rightcolumn', view.hide_right_portlets)"/>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+   metal:use-macro="here/main_template/macros/master"
+   i18n:domain="eea">
+
+<body>
+
+<div metal:fill-slot="content-core">
+
+  <!-- Folder contents -->
+  <div class="faceted-form" metal:define-macro="widgets" id="faceted-form"
+     tal:define="mode view/mode | string:view" tal:attributes="
+    data-mode mode;
+    data-baseurl string:${context/absolute_url}/">
+    <div class="faceted-buttons-outer-wrapper">
+      <div class="container">
+        <!-- Basic/Extended search -->
+        <div class="faceted-sections-buttons">
+          <a href="#" class="faceted-sections-buttons-more" i18n:translate="">
+            <div class="faceted-filter-button">
+              <i class="bi bi-filter-circle"></i>
+              <span class="label">Voir tous les filtres</span>
+            </div>
+          </a>
+          <a href="#" class="faceted-sections-buttons-less" i18n:translate="">
+            <div class="faceted-filter-button">
+              <i class="bi bi-filter-circle-fill"></i>
+              <span class="label">Masquer tous les filtres</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <metal:widgets use-macro="here/@@faceted_widgets_macros/macros/widgets"/>
+
+    <!-- Faceted version -->
+    <div style="display: none" id="faceted-version"
+       tal:content="here/@@faceted_version|string:" />
+  </div>
+
+</div>
+</body>
+</html>

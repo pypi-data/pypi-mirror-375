@@ -1,0 +1,140 @@
+.form-select:focus {
+  border-color: #80bdd8;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--nav-color), transparent 50%);
+}
+
+.form-control:focus {
+  background-color: var(--bs-body-bg);
+  border-color: #80bdd8;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--nav-color), transparent 50%) !important;
+}
+
+#content-header {
+  display: flex;
+  justify-content: center;
+
+  #portal-logo {
+    max-width: 250px;
+  }
+}
+
+
+#center-area {
+  #center-content-area {
+    @extend .container;
+  }
+}
+
+.faceted-results {
+  padding-top: 2.5em;
+}
+
+
+.pagination {
+  box-shadow: $shadow;
+}
+
+
+.page-item {
+  overflow: hidden;
+  border-left: 1px solid $grey-300;
+  border-right: 1px solid $grey-300;
+  margin: 0 0 0 -1px;
+  padding: 0;
+  height: 35px;
+  background-color: $white;
+
+  &.disabled {
+    width: 36px;
+    text-align: center;
+    background-color: $grey-100;
+  }
+
+  &.active {
+    .page-link {
+      border-bottom: 4px solid var(--nav-color);
+    }
+  }
+
+  .page-link:focus {
+    box-shadow: none;
+    border-bottom: 4px solid color-mix(in srgb, var(--nav-color), transparent 50%)
+  }
+
+  &:last-child {
+    border-radius: 0 5px 5px 0;
+    border-right: 0;
+  }
+
+  &:first-child {
+    border-left: 0;
+    border-radius: 5px 0 0 5px;
+  }
+
+  .page-link {
+    border-radius: 0 !important;
+    background-color: transparent;
+    color: $grey-900;
+    border: 0;
+    padding: 7px 0 0 0;
+    width: 35px;
+    margin: 0;
+    text-align: center;
+    transition: none;
+    height: 100%;
+  }
+
+  .label {
+    display: none;
+  }
+}
+
+
+.meeting-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: $grey-900;
+  }
+
+  h2 {
+    margin-left: 2px;
+    font-size: 1.6em;
+    color: $grey-900;
+    font-weight: 700;
+  }
+}
+
+.meeting-custom-info {
+  @extend .card;
+  padding: 1.5rem;
+  box-shadow: $shadow-md;
+  margin-bottom: 2.5em;
+  position: relative;
+  z-index: 5;
+}
+
+
+.meeting-state {
+  display: flex;
+  justify-content: end;
+}
+
+.dark {
+  .faceted-buttons-outer-wrapper {
+    @extend .full-width;
+    background-color: $grey-900;
+  }
+
+  .faceted-area.top-area:before {
+    background-color: $grey-900;
+  }
+}

@@ -1,0 +1,111 @@
+.badge {
+  border-radius: $rounded;
+  padding: 4px 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+
+  &.state-badge {
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+
+  &.success,
+  &.state-decision,
+  &.state-published,
+  &.added {
+    background-color: $green-500;
+  }
+
+  &.danger,
+  &.state-private,
+  &.removed {
+    background-color: $red-500;
+  }
+
+  &.warning,
+  &.state-proposed,
+  &.state-in_project,
+  &.modified {
+    background-color: $orange-400;
+  }
+
+  &.info {
+    background-color: $blue-500;
+  }
+
+
+  &.state-planned {
+    background-color: $grey-500;
+  }
+
+  &.state-unpublished {
+    background-color: $grey-800;
+  }
+
+  &.timestamp-badge {
+
+    &.animated {
+      width: 36px;
+      transition: all 0.25s ease-in-out;
+
+      span {
+        width: 0;
+        transition: all 0.25s ease-in-out;
+        display: inline-block;
+        margin: 0;
+        padding: 0 0 0 0px;
+        border: 0;
+        opacity: 0;
+      }
+
+      i {
+        padding-right: 0;
+      }
+    }
+
+    z-index: 1;
+    overflow: hidden;
+    text-transform: uppercase;
+
+    i {
+      padding-right: 12px;
+    }
+  }
+}
+
+.item-card:hover {
+  .timestamp-badge.animated {
+    width: 200px;
+
+    span {
+      width: 100%;
+      opacity: 100%;
+    }
+  }
+}
+
+#section-byline {
+  .badge {
+    border: 0;
+    padding: 0;
+    font-size: 1rem;
+    text-decoration: 0;
+    box-shadow: none;
+  }
+
+  .state-expired {
+    @extend .badge;
+    background-color: $red-500;
+    color: $white;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    font-style: normal;
+    padding: 4px 12px;
+  }
+
+}
