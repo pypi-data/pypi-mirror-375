@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-hh-jira-mcp-server
+Version: 0.1.4
+Summary: A MCP server project
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+Requires-Dist: fastmcp>=0.3.3
+Requires-Dist: jira>=3.8.0
+Requires-Dist: keyring>=25.5.0
+Requires-Dist: mcp>=1.0.0
+
+Package managed by MseeP.ai
