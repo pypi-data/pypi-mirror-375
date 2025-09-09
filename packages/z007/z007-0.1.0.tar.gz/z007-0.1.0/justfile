@@ -1,0 +1,54 @@
+# Show available commands
+default:
+    @just --list
+
+# Install dependencies
+install:
+    uv sync
+
+# Install in development mode
+dev:
+    uv pip install -e .
+
+# Run the CLI tool
+run *args:
+    uv run z007 {{args}}
+
+# Run tests
+test:
+    uv run python test.py
+    uv run python examples.py
+
+# Build the package
+build:
+    uv build
+
+# Run type checking
+typecheck:
+    uv run mypy z007/
+
+# Run linting
+lint:
+    uv run ruff check z007/
+
+# Format code
+format:
+    uv run ruff format z007/
+
+# Clean build artifacts
+clean:
+    rm -rf dist/ build/ *.egg-info/
+    find . -type d -name __pycache__ -exec rm -rf {} +
+    find . -type f -name "*.pyc" -delete
+
+# Publish to Test PyPI
+publish-test:
+    uv publish --repository testpypi
+
+# Publish to PyPI
+publish:
+    uv publish
+
+# Full development cycle: format, lint, test, build
+ci: format lint test build
+    @echo "All checks passed!"
