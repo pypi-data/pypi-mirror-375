@@ -1,0 +1,30 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-mcp-server-peakmojo"
+version = "0.1.4"
+description = "MCP server for PeakMojo resources"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "pydantic",
+    "requests",
+    "pytz",
+    "pyyaml",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mcp_server_peakmojo",
+]

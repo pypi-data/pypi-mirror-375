@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-peakmojo
+Version: 0.1.4
+Summary: MCP server for PeakMojo resources
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: mcp
+Requires-Dist: pydantic
+Requires-Dist: pytz
+Requires-Dist: pyyaml
+Requires-Dist: requests
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
