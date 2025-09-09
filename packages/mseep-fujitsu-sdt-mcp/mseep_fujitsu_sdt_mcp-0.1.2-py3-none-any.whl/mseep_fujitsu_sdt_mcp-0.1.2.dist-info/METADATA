@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: mseep-fujitsu-sdt-mcp
+Version: 0.1.2
+Summary: MCP Server for Fujitsu Social Digital Twin and Digital Rehearsal API
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: fastapi>=0.115.12
+Requires-Dist: uvicorn>=0.34.1
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: typing-extensions>=4.13.2
+Requires-Dist: pytz>=2025.2
+Requires-Dist: rich>=14.0.0
+Requires-Dist: anyio>=4.9.0
+Requires-Dist: orjson>=3.10.16
+Requires-Dist: idna>=3.10
+Requires-Dist: certifi>=2025.1.31
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3.5; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.26.0; extra == "dev"
+Requires-Dist: black>=25.1.0; extra == "dev"
+Requires-Dist: isort>=6.0.1; extra == "dev"
+Requires-Dist: mypy>=1.15.0; extra == "dev"
+Requires-Dist: ruff>=0.11.5; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
