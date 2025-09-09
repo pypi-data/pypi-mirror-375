@@ -1,0 +1,20 @@
+# OS files
+*.DS_Store
+thumbs.db
+
+# Python cache
+**/__pycache__/*
+
+# Build files
+dist/
+build/
+*.egg-info
+
+# Measurement files
+*.h5
+
+# Sphinx temp
+**/_build/*
+**/_static/*
+**/_templates/*
+docs/generated/*
