@@ -1,0 +1,51 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-mcp-openapi-proxy"
+requires-python = ">=3.10"
+version = "0.1.1"
+description = "MCP server for exposing OpenAPI specifications as MCP tools."
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp[cli]>=1.2.0",
+    "python-dotenv>=1.0.1",
+    "requests>=2.25.0",
+    "fastapi>=0.100.0",
+    "pydantic>=2.0",
+    "prance>=23.6.21.0",
+    "openapi-spec-validator>=0.7.1",
+    "jmespath>=1.0.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-openapi-proxy = "mcp_openapi_proxy:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: mark a test as an integration test",
+]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.setuptools.packages.find]
+include = [
+    "mcp_openapi_proxy",
+    "mcp_openapi_proxy.*",
+]
