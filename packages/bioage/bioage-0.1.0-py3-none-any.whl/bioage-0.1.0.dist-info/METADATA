@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: bioage
+Version: 0.1.0
+Summary: 
+Author: YAJIE
+Author-email: yajiez.me@gmail.com
+Requires-Python: >=3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: ipykernel (>=6.30.1,<7.0.0)
+Requires-Dist: loguru (>=0.7.3,<0.8.0)
+Requires-Dist: numpy (>=2.3.2,<3.0.0)
+Requires-Dist: pandas (>=2.3.2,<3.0.0)
+Requires-Dist: pyarrow (>=21.0.0,<22.0.0)
+Requires-Dist: scikit-learn (>=1.7.1,<2.0.0)
+Requires-Dist: seaborn (>=0.13.2,<0.14.0)
+Requires-Dist: statsmodels (>=0.14.5,<0.15.0)
+Description-Content-Type: text/markdown
+
+
