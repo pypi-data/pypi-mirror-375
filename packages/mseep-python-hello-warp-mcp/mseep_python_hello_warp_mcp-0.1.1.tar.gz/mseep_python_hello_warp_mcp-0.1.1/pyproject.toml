@@ -1,0 +1,40 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-python_hello_warp_mcp"
+version = "0.1.1"
+description = "A simple 'Hello World' MCP server for Warp Terminal"
+requires-python = ">=3.8"
+dependencies = [
+    "mcp",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "pytest",
+]
+
+[project.scripts]
+mseep-python_hello_warp_mcp = "python_hello_warp_mcp.server:main"
+
+[tool.setuptools]
+packages = [
+    "python_hello_warp_mcp",
+]
