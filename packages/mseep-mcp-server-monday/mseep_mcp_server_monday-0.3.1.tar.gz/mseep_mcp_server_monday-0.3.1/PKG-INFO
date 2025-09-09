@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-monday
+Version: 0.3.1
+Summary: MCP Server for monday.com
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/sakce/mcp-server-monday/
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=2.11.3
+Requires-Dist: mcp[cli]>=1.2.1
+Requires-Dist: monday>=2.0.1
+Requires-Dist: requests>=2.32.3
+Dynamic: license-file
+
+Package managed by MseeP.ai
