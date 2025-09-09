@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server
+Version: 0.4.1
+Summary: Graphiti MCP Server
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: <4,>=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp>=1.5.0
+Requires-Dist: openai>=1.68.2
+Requires-Dist: graphiti-core>=0.14.0
+Requires-Dist: azure-identity>=1.21.0
+Requires-Dist: graphiti-core
+
+Package managed by MseeP.ai

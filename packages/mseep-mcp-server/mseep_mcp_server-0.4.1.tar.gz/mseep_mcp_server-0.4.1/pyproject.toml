@@ -1,0 +1,19 @@
+[project]
+name = "mseep-mcp-server"
+version = "0.4.1"
+description = "Graphiti MCP Server"
+requires-python = ">=3.10,<4"
+dependencies = [
+    "mcp>=1.5.0",
+    "openai>=1.68.2",
+    "graphiti-core>=0.14.0",
+    "azure-identity>=1.21.0",
+    "graphiti-core",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
