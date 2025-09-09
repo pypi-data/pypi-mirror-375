@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-sentry-custom
+Version: 0.6.3
+Summary: MCP server for retrieving issues from sentry.io
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/javaDer/mcp-sentry-custom
+Project-URL: Bug Tracker, https://github.com/javaDer/mcp-sentry-custom/issues
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp>=1.0.0
+
+Package managed by MseeP.ai

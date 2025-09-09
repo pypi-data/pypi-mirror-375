@@ -1,0 +1,36 @@
+[project]
+name = "mseep-mcp-sentry-custom"
+version = "0.6.3"
+description = "MCP server for retrieving issues from sentry.io"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-sentry-custom = "mcp_sentry_custom:main"
+
+[project.urls]
+Homepage = "https://github.com/javaDer/mcp-sentry-custom"
+"Bug Tracker" = "https://github.com/javaDer/mcp-sentry-custom/issues"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+dev-dependencies = [
+    "pyright>=1.1.389",
+    "pytest>=8.3.3",
+    "ruff>=0.8.0",
+]
