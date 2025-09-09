@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-pymcp
+Version: 0.1.1
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+Requires-Dist: fastmcp>=2.2.5
+Requires-Dist: mysql-connector-python>=9.3.0
+Requires-Dist: requests>=2.32.3
+
+Package managed by MseeP.ai
