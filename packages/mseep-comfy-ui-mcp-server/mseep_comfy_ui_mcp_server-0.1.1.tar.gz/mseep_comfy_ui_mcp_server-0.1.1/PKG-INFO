@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-comfy-ui-mcp-server
+Version: 0.1.1
+Summary: MCP server for ComfyUI integration
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: aiohttp>=3.9.1
+Requires-Dist: mcp>=0.1.0
+Requires-Dist: pydantic>=2.5.2
+Requires-Dist: websocket-client>=1.8.0
+Requires-Dist: websockets>=12.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
