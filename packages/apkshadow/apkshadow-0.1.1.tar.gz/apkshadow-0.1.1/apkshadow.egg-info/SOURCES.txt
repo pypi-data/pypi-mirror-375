@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+apkshadow/cli.py
+apkshadow/cmdrunner.py
+apkshadow/filters.py
+apkshadow/utils.py
+apkshadow.egg-info/PKG-INFO
+apkshadow.egg-info/SOURCES.txt
+apkshadow.egg-info/dependency_links.txt
+apkshadow.egg-info/entry_points.txt
+apkshadow.egg-info/requires.txt
+apkshadow.egg-info/top_level.txt
+apkshadow/actions/decompile.py
+apkshadow/actions/list.py
+apkshadow/actions/pull.py
