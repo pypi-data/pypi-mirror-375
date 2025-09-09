@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: mseep-kaltura-mcp
+Version: 0.2.1
+Summary: Model Context Protocol server for secure Kaltura API operations with comprehensive analytics
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/zoharbabin/kaltura-mcp
+Project-URL: Repository, https://github.com/zoharbabin/kaltura-mcp
+Project-URL: Issues, https://github.com/zoharbabin/kaltura-mcp/issues
+Project-URL: Documentation, https://github.com/zoharbabin/kaltura-mcp#readme
+Keywords: kaltura,mcp,model-context-protocol,video,api,analytics,media,streaming
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Multimedia :: Video
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp<2.0.0,>=1.0.0
+Requires-Dist: KalturaApiClient<20.0.0,>=19.0.0
+Requires-Dist: requests<3.0.0,>=2.31.0
+Requires-Dist: lxml<5.0.0,>=4.9.0
+Requires-Dist: python-dotenv<2.0.0,>=1.0.0
+Requires-Dist: fastapi<1.0.0,>=0.104.0
+Requires-Dist: uvicorn[standard]<1.0.0,>=0.24.0
+Requires-Dist: authlib<2.0.0,>=1.2.0
+Requires-Dist: cryptography<42.0.0,>=41.0.0
+Requires-Dist: pyjwt<3.0.0,>=2.8.0
+Requires-Dist: httpx<1.0.0,>=0.25.0
+Provides-Extra: dev
+Requires-Dist: pytest<8.0.0,>=7.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio<1.0.0,>=0.21.0; extra == "dev"
+Requires-Dist: black<24.0.0,>=23.0.0; extra == "dev"
+Requires-Dist: ruff<1.0.0,>=0.1.0; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai

@@ -1,0 +1,4 @@
+[console_scripts]
+kaltura-mcp = kaltura_mcp.server:main
+kaltura-mcp-proxy = kaltura_mcp.proxy_client:main
+kaltura-mcp-remote = kaltura_mcp.remote_server:main
