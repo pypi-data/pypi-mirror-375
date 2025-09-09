@@ -1,0 +1,58 @@
+Metadata-Version: 2.4
+Name: feets
+Version: 1.0.0
+Summary: feets: feATURE eXTRACTOR FOR tIME sERIES.
+Author-email: Felipe Clariá Dambolena <felipe.claria@unc.edu.ar>, Juan B Cabral <jbcabral@unc.edu.ar>
+License: The MIT License (MIT)
+        
+        Copyright (c) 2017-2024, Cabral, Juan
+        Copyright (c) 2025, QuatroPe; Clariá, Felipe
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+        
+Project-URL: Homepage, https://feets.readthedocs.io/
+Project-URL: Repository, https://github.com/quatrope/feets
+Keywords: machine-learning,feature-extraction,timeseries,astronomy
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Scientific/Engineering
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: numpy>=2.2.6
+Requires-Dist: scipy>=1.15.3
+Requires-Dist: statsmodels>=0.14.5
+Requires-Dist: astropy>=6.1.7
+Requires-Dist: pandas>=2.3.2
+Requires-Dist: requests>=2.32.5
+Requires-Dist: joblib>=1.5.2
+Requires-Dist: custom_inherit>=2.4.1
+Requires-Dist: dask>=2025.7.0
+Requires-Dist: light-curve>=0.10.4
+Requires-Dist: attrs>=25.3.0
+Dynamic: license-file
