@@ -1,0 +1,66 @@
+Metadata-Version: 2.4
+Name: edasuite
+Version: 0.0.2
+Summary: A Python library for exploratory data analysis
+Author-email: LattIQ Development Team <dev@lattiq.com>
+License: MIT
+Project-URL: Homepage, https://github.com/lattiq/edasuite
+Project-URL: Repository, https://github.com/lattiq/edasuite
+Keywords: data analysis,exploratory data analysis,eda
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# EDASuite
+
+A Python library for exploratory data analysis.
+
+## Status
+
+**This is a placeholder package for name reservation on PyPI.**
+
+EDASuite is currently under development. This minimal package is published to reserve the name on PyPI while we work on the full implementation.
+
+## Installation
+
+```bash
+pip install edasuite
+```
+
+## Usage
+
+```python
+import edasuite
+print(edasuite.hello())
+```
+
+## Coming Soon
+
+EDASuite will provide comprehensive tools for exploratory data analysis including:
+
+- Data profiling and summarization
+- Automated visualization generation
+- Statistical analysis utilities
+- Data quality assessment
+- And much more!
+
+## License
+
+MIT License
+
+## Contact
+
+For questions or suggestions, please contact us at dev@lattiq.com
