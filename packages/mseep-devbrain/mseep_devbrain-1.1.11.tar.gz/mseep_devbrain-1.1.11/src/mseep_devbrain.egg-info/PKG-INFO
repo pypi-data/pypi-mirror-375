@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-devbrain
+Version: 1.1.11
+Summary: A FastMCP server for DevBrain stdio communication.
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/mimeCam/mcp-devbrain-stdio
+Project-URL: Bug Tracker, https://github.com/mimeCam/mcp-devbrain-stdio/discussions
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp
+Requires-Dist: requests
+Dynamic: license-file
+
+Package managed by MseeP.ai
