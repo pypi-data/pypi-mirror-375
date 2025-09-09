@@ -1,0 +1,35 @@
+[project]
+name = "mseep-reaper-mcp-server"
+version = "0.1.4"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+description = "Your project description"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.2.0",
+    "asyncio>=3.4.3",
+    "pytest>=8.3.4",
+]
+
+[project.scripts]
+reaper-mcp-server = "reaper_mcp_server.server:main"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    ".",
+]
+
+[tool.uv.sources.reaper-mcp-server]
+workspace = true
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
