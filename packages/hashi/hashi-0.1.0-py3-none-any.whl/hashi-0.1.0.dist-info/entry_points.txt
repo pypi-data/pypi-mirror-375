@@ -1,0 +1,2 @@
+[console_scripts]
+hashi = hashi.__main__:main
