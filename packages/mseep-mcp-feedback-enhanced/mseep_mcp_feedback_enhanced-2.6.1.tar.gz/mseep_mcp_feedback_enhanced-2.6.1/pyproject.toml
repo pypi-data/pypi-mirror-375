@@ -1,0 +1,281 @@
+[project]
+name = "mseep-mcp-feedback-enhanced"
+version = "2.6.1"
+description = "Enhanced MCP server for interactive user feedback and command execution in AI-assisted development, featuring dual interface support (Web UI and Desktop Application) with intelligent environment detection and cross-platform compatibility."
+requires-python = ">=3.11"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+keywords = [
+    "mcp",
+    "ai",
+    "feedback",
+    "web-ui",
+    "desktop-app",
+    "interactive",
+    "development",
+    "cross-platform",
+    "tauri",
+    "dual-interface",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: User Interfaces",
+    "Topic :: Desktop Environment",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Operating System :: OS Independent",
+    "Environment :: Web Environment",
+    "Environment :: X11 Applications",
+    "Environment :: Win32 (MS Windows)",
+    "Environment :: MacOS X",
+]
+dependencies = [
+    "fastmcp>=2.0.0",
+    "psutil>=7.0.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "jinja2>=3.1.0",
+    "websockets>=13.0.0",
+    "aiohttp>=3.8.0",
+    "mcp>=1.9.3",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Minidoracat/mcp-feedback-enhanced"
+Repository = "https://github.com/Minidoracat/mcp-feedback-enhanced"
+Issues = "https://github.com/Minidoracat/mcp-feedback-enhanced/issues"
+
+[project.scripts]
+mcp-feedback-enhanced = "mcp_feedback_enhanced.__main__:main"
+interactive-feedback-mcp = "mcp_feedback_enhanced.__main__:main"
+
+[build-system]
+requires = [
+    "hatchling",
+    "maturin>=1.8.7",
+    "setuptools-rust>=1.11.1",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mcp_feedback_enhanced",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "bump2version>=1.0.1",
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-timeout>=2.1.0",
+    "twine>=6.1.0",
+    "ruff>=0.11.0",
+    "mypy>=1.16.0",
+    "pre-commit>=4.0.0",
+    "maturin>=1.8.7",
+    "setuptools-rust>=1.11.1",
+    "pillow>=11.2.1",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+include = [
+    "*.py",
+    "*.pyi",
+    "**/pyproject.toml",
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "venv",
+    "*.egg-info",
+    ".trunk",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+    "ARG",
+    "C90",
+    "T20",
+    "TID",
+    "ICN",
+    "RET",
+    "SIM",
+    "S",
+    "A",
+    "COM",
+    "PL",
+    "RUF",
+]
+ignore = [
+    "E501",
+    "COM812",
+    "COM819",
+    "S101",
+    "T201",
+    "S603",
+    "S607",
+    "S108",
+    "RUF001",
+    "RUF002",
+    "RUF003",
+    "PLR0913",
+    "PLR0912",
+    "PLR0911",
+    "PLR0915",
+    "PLR2004",
+    "C901",
+    "E402",
+    "E722",
+    "ARG001",
+    "ARG002",
+    "SIM105",
+    "RUF006",
+    "TID252",
+    "B007",
+    "SIM102",
+    "SIM103",
+    "SIM108",
+    "SIM110",
+    "SIM117",
+    "RET504",
+    "RUF005",
+    "RUF012",
+    "RUF013",
+    "S110",
+    "E712",
+    "PLW0603",
+    "A002",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "S101",
+    "ARG",
+    "FBT",
+    "PLR2004",
+    "S311",
+]
+"__init__.py" = [
+    "F401",
+]
+"scripts/**/*.py" = [
+    "T201",
+    "S602",
+    "S603",
+    "S607",
+]
+"src/mcp_feedback_enhanced/web/**/*.py" = [
+    "S104",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "mcp_feedback_enhanced",
+]
+force-single-line = false
+lines-after-imports = 2
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+disallow_untyped_decorators = false
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+show_error_codes = true
+show_column_numbers = true
+pretty = true
+files = [
+    "src",
+    "tests",
+]
+exclude = [
+    "build/",
+    "dist/",
+    ".venv/",
+    "venv/",
+    ".trunk/",
+    ".mypy_cache/",
+]
+explicit_package_bases = true
+mypy_path = [
+    "src",
+]
+no_site_packages = true
+
+[[tool.mypy.overrides]]
+module = [
+    "fastmcp.*",
+    "mcp.*",
+    "psutil.*",
+    "uvicorn.*",
+    "websockets.*",
+    "aiohttp.*",
+    "fastapi.*",
+    "pydantic.*",
+    "pytest.*",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+disallow_untyped_decorators = false
