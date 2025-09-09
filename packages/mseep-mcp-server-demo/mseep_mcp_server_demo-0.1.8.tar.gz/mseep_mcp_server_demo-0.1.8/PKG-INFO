@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-demo
+Version: 0.1.8
+Summary:  Showcasing a demo about MCP server creation with mcp-python-sdk
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]>=1.7.1
+
+Package managed by MseeP.ai

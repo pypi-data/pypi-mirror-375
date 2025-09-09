@@ -1,0 +1,15 @@
+[project]
+name = "mseep-mcp-server-demo"
+version = "0.1.8"
+description = " Showcasing a demo about MCP server creation with mcp-python-sdk"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.7.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
