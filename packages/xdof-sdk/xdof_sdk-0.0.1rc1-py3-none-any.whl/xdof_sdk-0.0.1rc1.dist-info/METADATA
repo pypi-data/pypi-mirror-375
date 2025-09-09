@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: xdof-sdk
+Version: 0.0.1rc1
+Summary: Useful libraries for interacting with xdof data and services.
+Author-email: Michael Luo <mluogh@xdof.ai>
+Requires-Python: >=3.9
+Requires-Dist: mink<1.0.0,>=0.0.11
+Requires-Dist: mujoco<4.0.0,>=3.0.0
+Requires-Dist: numpy-quaternion>=2023.0.4
+Requires-Dist: numpy>=1.0.0
+Requires-Dist: opencv-python>=4.0.0
+Requires-Dist: pydantic<3.0.0,>=2.0.0
+Requires-Dist: pytest>=8.0.0
+Requires-Dist: rerun-sdk>=0.24.0
+Requires-Dist: tyro>=0.9.26
+Description-Content-Type: text/markdown
+
+# Getting Started
+
+## Data
+
+## Visualization
+
+## Sim
