@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: serptool
+Version: 0.1.1
+Summary: Add your description here
+Author-email: wangxiaokangty <1002075358@qq.com>
+Requires-Python: >=3.12
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: google-search-results>=2.4.2
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: serpapi>=0.1.5
