@@ -1,0 +1,31 @@
+[project]
+name = "mseep-mcp-netsuite"
+version = "0.1.5"
+description = "NetSuite MCP Server"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]",
+    "fastapi",
+    "uvicorn",
+    "requests",
+    "python-dotenv",
+    "pydantic",
+    "httpx",
+    "sqlparse>=0.5.3",
+    "timeout-decorator>=0.5.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-mcp-netsuite = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]

@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-netsuite
+Version: 0.1.5
+Summary: NetSuite MCP Server
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: requests
+Requires-Dist: python-dotenv
+Requires-Dist: pydantic
+Requires-Dist: httpx
+Requires-Dist: sqlparse>=0.5.3
+Requires-Dist: timeout-decorator>=0.5.0
+
+Package managed by MseeP.ai

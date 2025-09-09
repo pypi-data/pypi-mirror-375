@@ -1,0 +1,9 @@
+mcp[cli]
+fastapi
+uvicorn
+requests
+python-dotenv
+pydantic
+httpx
+sqlparse>=0.5.3
+timeout-decorator>=0.5.0
