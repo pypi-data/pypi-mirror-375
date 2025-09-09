@@ -1,0 +1,17 @@
+[project]
+name = "mseep-mcp-server-redis"
+version = "0.1.4"
+description = "MCP server to interact with redis server, aws memory DB, etc for caching or other use-cases where in-memory and key-value based storage is appropriate"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.2.1",
+    "python-dotenv>=1.0.1",
+    "redis>=5.2.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
