@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: okdata-cli
+Version: 5.0.0
+Summary: CLI for services provided by Oslo Origo
+Home-page: https://github.com/oslokommune/okdata-cli/
+Author: Oslo Origo
+Author-email: dataspeilet@oslo.kommune.no
+License: MIT
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: docopt
+Requires-Dist: okdata-sdk<4,>=3.4
+Requires-Dist: PrettyTable
+Requires-Dist: questionary<2.0.0,>=1.10.0
+Requires-Dist: requests
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# `okdata-cli`: Oslo Origo data services CLI
+
+Okdata CLI provides a unified interface to data services for Oslo Origo teams.
+
+* [Install](doc/install.md)
+* [Configuration](doc/configuration.md)
+* [Public services](doc/pubs.md)
+* [Teams](doc/teams.md)
+* [Datasets](doc/datasets.md)
+* [Permissions](doc/permissions.md)

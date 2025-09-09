@@ -1,0 +1,5 @@
+docopt
+okdata-sdk<4,>=3.4
+PrettyTable
+questionary<2.0.0,>=1.10.0
+requests

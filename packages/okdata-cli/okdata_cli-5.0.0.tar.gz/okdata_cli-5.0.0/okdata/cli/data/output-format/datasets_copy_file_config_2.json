@@ -1,0 +1,14 @@
+{
+  "Source": {
+    "name": "File source",
+    "key": "source"
+  },
+  "Target": {
+    "name": "File destination",
+    "key": "target"
+  },
+  "TraceID": {
+    "name": "Trace ID",
+    "key": "trace_id"
+  }
+}
