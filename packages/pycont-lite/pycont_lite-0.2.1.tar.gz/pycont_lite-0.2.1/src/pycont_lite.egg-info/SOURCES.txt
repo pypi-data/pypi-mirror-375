@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/pycont/BranchSwitching.py
+src/pycont/PseudoArclengthContinuation.py
+src/pycont/Stability.py
+src/pycont/TestFunctions.py
+src/pycont/Types.py
+src/pycont/__init__.py
+src/pycont/continuation.py
+src/pycont/plotting.py
+src/pycont_lite.egg-info/PKG-INFO
+src/pycont_lite.egg-info/SOURCES.txt
+src/pycont_lite.egg-info/dependency_links.txt
+src/pycont_lite.egg-info/requires.txt
+src/pycont_lite.egg-info/top_level.txt
