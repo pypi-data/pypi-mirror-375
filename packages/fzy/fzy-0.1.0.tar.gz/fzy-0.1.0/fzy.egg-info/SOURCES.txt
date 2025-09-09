@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+fzy/__init__.py
+fzy/filtering.py
+fzy/py.typed
+fzy/tui.py
+fzy/util.py
+fzy.egg-info/PKG-INFO
+fzy.egg-info/SOURCES.txt
+fzy.egg-info/dependency_links.txt
+fzy.egg-info/entry_points.txt
+fzy.egg-info/requires.txt
+fzy.egg-info/top_level.txt
+tests/test_filtering.py
+tests/test_with_mypy.py

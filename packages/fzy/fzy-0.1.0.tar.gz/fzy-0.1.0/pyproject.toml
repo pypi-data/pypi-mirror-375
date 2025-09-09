@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fzy"
+description = "A tool which interactively displays YAML files and provides fuzzy interactive searching and filtering."
+readme = "README.md"
+license-files = ["LICENSE"]
+dependencies = [
+    "urwid>=2.5.0",
+    "pygments",
+    "pyyaml",
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {attr = "fzy.__version__"}
+
+[project.scripts]
+fzy = "fzy:main"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    # Filter out spurious urwid deprecation warnings
+    'ignore:urwid\..*is moved to urwid\.',
+]
