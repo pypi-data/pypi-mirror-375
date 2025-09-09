@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wcosmo"
+authors = [
+    {name = "Colm Talbot", email = "talbotcolm@gmail.com"},
+    {name = "Amanda Farah"},
+]
+description = "A package for cosmology calculations with arbitrary numpy-like APIs"
+readme = "README.rst"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+classifiers = [
+    "Framework :: Django",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "astropy>=6.1",
+    "plum-dispatch",
+    "array-api-compat",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+    "pytest-cov",
+    'jax>=0.4.34,<0.7; python_version>="3.11"',  # quax is not currently compatible with jax 0.7 (https://github.com/patrick-kidger/quax/issues/71)
+    'jax>=0.4.34,<0.6; python_version<"3.11"',  # quaxed has dropped 3.10
+    "unxt",
+]
+jax = [
+    'jax>=0.4.34; python_version>="3.11"',
+    'jax>=0.4.34,<0.6; python_version<"3.11"',  # quaxed has dropped 3.10
+    "unxt",
+]
+
+[tool.setuptools]
+packages = ["wcosmo"]
+
+[tool.setuptools_scm]
+write_to = "wcosmo/_version.py"

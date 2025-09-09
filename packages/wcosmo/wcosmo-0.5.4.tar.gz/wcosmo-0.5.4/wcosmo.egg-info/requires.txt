@@ -1,0 +1,24 @@
+numpy
+scipy
+astropy>=6.1
+plum-dispatch
+array-api-compat
+
+[jax]
+unxt
+
+[jax:python_version < "3.11"]
+jax<0.6,>=0.4.34
+
+[jax:python_version >= "3.11"]
+jax>=0.4.34
+
+[test]
+pytest-cov
+unxt
+
+[test:python_version < "3.11"]
+jax<0.6,>=0.4.34
+
+[test:python_version >= "3.11"]
+jax<0.7,>=0.4.34
