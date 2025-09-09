@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+treerequests/__init__.py
+treerequests/args.py
+treerequests/logger.py
+treerequests/session.py
+treerequests/tree.py
+treerequests/useragents.py
+treerequests.egg-info/PKG-INFO
+treerequests.egg-info/SOURCES.txt
+treerequests.egg-info/dependency_links.txt
+treerequests.egg-info/requires.txt
+treerequests.egg-info/top_level.txt

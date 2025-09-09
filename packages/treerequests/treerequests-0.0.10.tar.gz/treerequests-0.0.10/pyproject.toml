@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "treerequests"
+version = "0.0.10"
+description = "A wrapper for requests for integration with html tree parsers"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "GPLv3"}
+keywords = ["requests", "reliq", "wrapper"]
+authors = [
+  {name = "Dominik Stanisław Suchora", email = "hexderm@gmail.com" }
+]
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+
+  "Operating System :: OS Independent",
+
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3 :: Only",
+]
+
+[project.optional-dependencies]
+cookies = ['browser_cookie3']
+bs4 = ['bs4']
+lxml = ['lxml']
+html5-parser = ['html5_parser']
+selectolax = ['selectolax']
+reliq = ['reliq']
+
+[project.urls]
+"Homepage" = "https://github.com/TUVIMEN/treerequests"
+
+[tool.setuptools]
+packages = ["treerequests"]
