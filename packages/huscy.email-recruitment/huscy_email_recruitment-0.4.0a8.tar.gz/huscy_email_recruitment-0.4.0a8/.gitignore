@@ -1,0 +1,10 @@
+build/
+dist/
+docs/
+htmlcov/
+huscy.email_recruitment.egg-info/
+migrations/
+
+*.pyc
+
+.coverage
