@@ -1,0 +1,736 @@
+"""`pnwtools` package for working with bioacoustics data
+
+The functions defined herein are not really intended as a complete 
+functional API; rather, they form the bones of a number of utility 
+scripts which are the main point of the package. However, the 
+functions themselves may also be useful, so they are collected here 
+for ease of discovery.
+
+:copyright: (c) 2025 by Zachary J. Ruff
+:license: GNU General Public License v3; see LICENSE for details.
+"""
+
+import os
+import re
+import struct
+import wave
+from datetime import datetime, timedelta
+from guano import GuanoFile, tzoffset
+from math import log10
+from pathlib import Path
+
+
+################################################################################
+########### Miscellaneous functions for dealing with .wav files ################
+
+def findWavs(top_dir):
+    """Get a sorted list of .wav files within a directory tree."""
+
+    wav_patt = "*.[wW][aA][vV]"
+
+    wav_paths = [str(path) for path in Path(top_dir).rglob(wav_patt)]
+
+    return sorted(wav_paths)
+
+
+def makeWavDict(top_dir):
+    """Create a dictionary of .wav file paths indexed by filename."""
+    wav_paths = findWavs(top_dir)
+
+    wav_dict = dict(zip([Path(x).name for x in wav_paths], wav_paths))
+
+    return wav_dict
+
+
+def getStamp(file_path, offset=0):
+    """Get the timestamp of a file.
+
+    If the filename contains a readable timestamp in YYYYMMDD_HHMMSS 
+    format, that timestamp will be preserved. Otherwise, the timestamp
+    will be the file's last modification time.
+
+    Args:
+
+        file_path (str): Path to the file.
+
+        offset (numeric): Hours by which the timestamp will be adjusted
+            for time zone differences or clock errors. This value will
+            be added to the timestamp; use a negative value to subtract
+            time.
+
+    Returns:
+
+        datetime.datetime: Timestamp of the file, either constructed 
+        from the filename or based on the file's modification time,
+        plus any offset.
+
+    """
+    str_stamp = '_'.join(file_path.split('_')[-2:])
+    try:
+        stamp = datetime.strptime(str_stamp, "%Y%m%d_%H%M%S.wav")
+    except:
+        file_mtime = os.path.getmtime(file_path)
+        stamp = datetime.fromtimestamp(file_mtime)
+
+    if offset != 0:
+        stamp = stamp + timedelta(hours=offset)
+
+    return stamp
+
+
+def getStn(wav_path):
+    """Construct an area_hex-stn identifier from the directory path."""
+    wav_dir = os.path.dirname(wav_path)
+    hex_dir, stn_dir = wav_dir.split(os.sep)[-2:]
+    stn_id = stn_dir.split('_')[-1]
+    stn = "{0}-{1}".format(hex_dir, stn_id)
+    return stn
+
+
+def getWavLength(wav_path):
+    """Calculate the duration of a .wav file.
+
+    Args:
+
+        wav_path: Path to the .wav file.
+
+    Returns:
+
+        float: Duration of the .wav file in seconds.
+
+    """
+
+    try:
+        w = wave.open(wav_path)
+        n_samples, sample_rate = w.getnframes(), w.getframerate()
+        w.close()
+        wav_length = float(n_samples) / sample_rate
+    except:
+        wav_length = 0
+    return wav_length
+
+
+def checkWav(wav_path):
+    """Check to make sure wav_path is a valid wav file.
+
+    Args:
+
+        wav_path: Path to the .wav file.
+
+    Returns:
+
+        bool: True if the file appears to be a valid .wav file or
+        False if not.
+    
+    """
+
+    try:
+        f = wave.open(wav_path)
+        params = f.getparams()
+        f.close()
+        valid = True
+    except:
+        valid = False
+    
+    return valid
+
+
+def checkWavFilename(filename, folder):
+    """Check that a .wav filename matches preferred formatting.
+
+    Preferred format is [Area]_[Hex ID]-[Stn ID]_YYYYMMDD_HHMMSS.wav.
+
+    Args:
+
+        filename (str): Name of the file.
+
+        folder (str): Path to the file's parent folder.
+
+    Returns:
+    
+        bool: True if the filename conforms to naming conventions or
+        False if it does not.
+
+    """
+    filename_patt = re.compile("[A-Z]{3,5}_[0-9]{5}-[A-Z0-9]+?_[0-9]{8}_[0-9]{6}.wav")
+    if filename_patt.match(filename):
+        hex_dir, stn_dir = folder.split('/')[-2:]
+        stn_id = stn_dir.split('_')[-1]
+        prefix = "{0}-{1}".format(hex_dir, stn_id)
+        if filename[:len(prefix)] == prefix:
+            return True
+    else:
+        return False
+
+
+def makeWavLines(wav_path, target_dir, clip_length, interval):
+    """Create a table listing short segments of a wav file for review.
+
+    Setting `interval` to less than `clip_length` allows segments to
+    overlap, which can be useful.
+
+    Args:
+
+        wav_path (str): Path to the .wav file to be examined.
+
+        target_dir (str): Path to the root of the directory tree 
+            containing the .wav file. Values in the FOLDER field will
+            be relative to this path.
+
+        clip_length (int): Desired length of audio segments in seconds.
+
+        interval (int): Time in seconds from the start of one clip to
+            the start of the next clip.
+
+    Returns:
+
+        list: A list of lines to be written to a CSV file which can
+        then be browsed in Kaleidoscope.
+
+    """
+
+    fdir, fname = os.path.split(wav_path)
+    folder = fdir.replace(target_dir + os.sep, "")
+    wav_length = getWavLength(wav_path)
+    
+    if wav_length == 0:
+        output_lines = []
+    else:
+        n_part_digits = max(int(log10(wav_length / interval)) + 1, 3)
+        n_pos_digits = int(log10(wav_length)) + 1
+        output_lines = []
+        i = 1
+        while True:
+            offs = (i - 1) * interval
+            if clip_length == interval:
+                str_part = "part_%s" % str(i).zfill(n_part_digits)
+            else:
+                str_part = "pos_%s" % str(int(offs)).zfill(n_pos_digits)
+            
+            if offs + clip_length < wav_length:
+                dur = clip_length
+            else:
+                dur = wav_length - offs
+                if dur < clip_length:
+                    break
+            
+            new_line = "{0},{1},0,{2},{3},{4},1,".format(folder, fname, offs, dur, str_part)
+            output_lines.append(new_line)
+            i = i + 1
+
+    return output_lines
+
+
+def extractWavSegment(src_path, dst_path, sample_start, sample_dur):
+    """Write audio from an existing .wav file to a new .wav file.
+
+    Args:
+
+        src_path (str): Path to the source .wav file.
+
+        dst_path (str): Path to the new .wav file that will be created
+            (or overwritten if it already exists).
+
+        sample_start (numeric): Offset in seconds of the clip from the
+            source .wav file that will be copied.
+
+        sample_dur (numeric): Duration of the portion of the source 
+            .wav file to copy.
+
+    Returns:
+
+        Nothing.
+    """
+
+    src_wav = wave.open(src_path, mode='rb')
+    src_params = src_wav.getparams()
+
+    sample_rate = src_params.framerate
+    start_frame = sample_rate * sample_start
+    read_frames = sample_rate * sample_dur 
+
+    dst_wav = wave.open(dst_path, mode='wb')
+    dst_wav.setparams(src_params)
+    dst_wav.setnframes(read_frames)
+    src_wav.setpos(start_frame)
+    dst_wav.writeframes(src_wav.readframes(read_frames))
+
+    src_wav.close()
+    dst_wav.close()
+
+    return
+
+
+################################################################################
+############## Functions for renaming a set of .wav files ######################
+
+def buildFilePrefix(fpath, depth=2, sep='-', ignore=''):
+    """Construct a prefix using path components.
+    
+    Args:
+    
+        fpath (str): Path to the file for which a prefix should be
+            constructed.
+        
+        depth (int): Number of levels of enclosing directories to 
+            include in the prefix; 1=parent, 2=grandparent and parent,
+            etc.
+        
+        sep (str): Character(s) to use to divide path components in the
+            new file prefix.
+        
+        ignore (str): String that should be omitted from the prefix if
+            it occurs in the path.
+            
+    Returns:
+    
+        str: New prefix for the filename.
+    
+    """
+
+    p = Path(fpath)
+    dirs = p.parent.parts
+
+    if ignore != '':
+        dirs = [x.replace(ignore, '') for x in dirs]    
+
+    prefix = sep.join(dirs[-depth:])
+
+    return prefix
+
+
+def renameWav(old_path):
+    """Intelligently rename a .wav file.
+    
+    Infers the hex ID and station from the two lowest level directories
+    in the file's path, e.g. if the file is in 
+    F:\\Data\\OLY_30020\\Stn_1 
+    the original prefix will be replaced with "OLY_30020-1."
+    Only retains timestamp information from original filename, i.e. the
+    last two components when the name is split by '_'.
+    Replaces $ with _ to deal with weird filenames that ARUs sometimes 
+    spit out when the recording quality is wonky.
+    """
+    
+    wav_dir, old_name = os.path.split(old_path)
+    old_name = old_name.replace('$', '_')
+    
+    hex_id, stn_dir = wav_dir.split(os.sep)[-2:]
+    stn_id = stn_dir.split('_')[-1]
+    
+    str_stamp = '_'.join(old_name.split('_')[-2:])
+    
+    new_name = "{0}-{1}_{2}".format(hex_id, stn_id, str_stamp)
+    new_path = os.path.join(wav_dir, new_name)
+
+    if new_path != old_path:
+        os.rename(old_path, new_path)
+    else:
+        pass
+
+    return "{0},{1},{2}".format(wav_dir, old_name, new_name)
+
+
+def undoRename(log_path):
+    """Undo a renaming operation based on an existing log file."""
+    
+    with open(log_path) as log_file:
+        log_lines = log_file.readlines()[1:]
+        print("Reverting {0} filenames... ".format(len(log_lines))),
+    
+    for line in log_lines:
+        wav_dir, old_name, new_name = line.rstrip().split(',')
+        old_path, new_path = os.path.join(wav_dir, old_name), os.path.join(wav_dir, new_name)
+
+        if old_path == new_path:
+            continue
+        else:
+            os.rename(new_path, old_path)
+    
+    print("done.")
+
+
+################################################################################
+############# Functions for summarizing a set of .wav files ####################
+
+def buildStationDict(top_dir):
+    """Build a dictionary of info about .wav files in a directory."""
+
+    wavs = findWavs(top_dir)
+    good_wavs = list(filter(checkWav, wavs))
+    stns = sorted(list(set([getStn(w) for w in good_wavs])))
+
+    stn_dict = dict(zip(stns, [{'dates':[], 'serials':[], 'n_wavs':0} for i in stns]))
+
+    for wav in good_wavs:
+        stn, stamp = getStn(wav), getStamp(wav)
+        stn_dict[stn]['dates'].append(stamp)
+        stn_dict[stn]['n_wavs'] += 1
+        try:
+            serial = getSerial(wav)
+            stn_dict[stn]['serials'].append(serial)
+        except:
+            pass
+
+    return stn_dict
+
+
+def buildStationTable(stn_dict):
+    """Summarize info on .wavs in a directory tree in table form."""
+
+    stn_info_lines = ["Station ID,Valid wavs,Earliest,Latest,Serial number"]
+    
+    stns = sorted(stn_dict.keys())
+
+    for stn in stns:
+        stn_dates = stn_dict[stn]['dates']
+        good_dates = list(filter(lambda d: d.year >= 2017, stn_dates))
+        first_date, last_date = min(good_dates), max(good_dates)
+        str_first = first_date.strftime("%m/%d/%y")
+        str_last = last_date.strftime("%m/%d/%y")
+        serials = '+'.join(list(set(stn_dict[stn]['serials'])))
+        n_wavs = stn_dict[stn]['n_wavs']
+        stn_info_lines.append("{0},{1},{2},{3},{4}".format(stn, n_wavs, str_first, str_last, serials))
+
+    return stn_info_lines
+
+
+################################################################################
+############# Functions for dealing with tagged review files ####################
+
+def countTags(tagged_file_path):
+    """Tally user-applied ID tags in a tagged review file.
+
+    Args:
+
+        tagged_file_path (str): Path to a review file containing user-
+            applied ID tags.
+
+    Returns:
+
+        dict: Dictionary containing two dictionaries: file_info, which
+        lists the path, filename, modification time, total lines, 
+        number of tagged lines, and the number of unique tags used; and
+        tag_counts, indexed by tag and by folder (from the FOLDER field
+        of the review file), listing the number of instances of each 
+        unique tag.
+    """
+
+    with open(tagged_file_path) as tagged_file:
+        lines = [line.replace('"', '').rstrip() for line in tagged_file.readlines()]
+
+    headers = [x.replace(' ', '_').replace('*', '').upper() for x in lines[0].split(',')]
+    n_fields = len(headers)
+    n_lines = len(lines) - 1
+    n_tagged_lines = 0
+    tag_counts = {}
+
+    try:
+        manid_field = headers.index("MANUAL_ID")
+        infile_field = headers.index("IN_FILE")
+        folder_field = headers.index("FOLDER")
+    except:
+        print("Required fields were not found in the file specified.")
+        return
+
+    folders = list(set([line.split(',')[folder_field] for line in lines[1:]]))
+
+    for line in lines[1:]:
+        vals = line.split(',')
+        n_vals = len(vals)
+
+        filename, folder = vals[infile_field], vals[folder_field]
+        if folder == '':
+            folder = "NA"
+
+        n_comma_tags = n_vals - n_fields
+        labels = '+'.join(vals[manid_field : manid_field + n_comma_tags + 1])
+
+        if labels != '':
+            n_tagged_lines += 1
+            tags = labels.split('+')
+            for tag in tags:
+                if not tag in tag_counts:
+                    tag_counts[tag] = dict(zip(folders, [0 for i in folders]))
+                tag_counts[tag][folder] += 1
+
+    file_info = {
+        "file_path": tagged_file_path,
+        "file_name": os.path.basename(tagged_file_path),
+        "file_mtime": os.path.getmtime(tagged_file_path), 
+        "total_lines": n_lines,
+        "tagged_lines": n_tagged_lines,
+        "unique_folders": sorted(folders),
+        "unique_tags": len(tag_counts)
+        }
+
+    results = {"file_info": file_info, "tag_counts": tag_counts}
+
+    return results
+
+
+def summarizeTags(tag_count_dict):
+    """Print a summary of user-applied ID tags in a review file.
+
+    Args:
+
+        count_dict (dict): Dictionary produced by countTags function.
+
+    Returns:
+
+        Nothing.
+    """
+    finfo = tag_count_dict["file_info"]
+    tag_counts = tag_count_dict["tag_counts"]
+    folders = finfo["unique_folders"]
+
+    str_mtime = datetime.fromtimestamp(finfo["file_mtime"]).strftime("%b %d at %H:%M")
+
+    print("\nFile {0} was last saved {1}.".format(finfo["file_name"], str_mtime))
+    print("{0:,} of {1:,} lines are tagged.\n".format(finfo["tagged_lines"], finfo["total_lines"]))
+    
+    if finfo["tagged_lines"] > 0:
+        print("{0} unique tags were used:\n".format(finfo["unique_tags"]))
+        print("Tag\t\t{0}".format('\t\t'.join(folders)))
+        for label in sorted(tag_counts, key = lambda x: ("?" in x, x)):
+            counts = '\t\t'.join([str(tag_counts[label][f]) for f in folders])
+            print("{0}\t\t{1}".format(label, counts))
+        print("")
+
+    return
+
+
+################################################################################
+################## Functions for dealing with .wav metadata ####################
+
+# Most of this is lifted from the `wamd2guano` script that is included in the 
+# `guano` package.
+
+
+# binary WAMD field identifiers
+WAMD_IDS = {
+    0x00: 'version',
+    0x01: 'model',
+    0x02: 'serial',
+    0x05: 'timestamp',
+}
+
+# fields that we exclude from our in-memory representation
+WAMD_DROP_IDS = (
+    0x0D,    # voice note embedded .WAV
+    0x10,    # program binary
+    0x11,    # runstate giant binary blob
+    0xFFFF  # used for 16-bit alignment 
+)
+
+# rules to coerce values from binary string to native types (default is `str`)
+WAMD_COERCE = {
+    'version': lambda x: struct.unpack('<H', x)[0],
+    'gpsfirst': lambda x: _parse_wamd_gps(x),
+    'time_expansion': lambda x: struct.unpack('<H', x)[0] 
+}
+
+
+def _parse_text(value):
+    """Coerce text to UTF-8 encoding."""
+    return value.decode('utf-8')
+
+
+def _parse_wamd_timestamp(timestamp):
+    """WAMD timestamps are one of these known formats:
+    2014-04-02 22:59:14-05:00
+    2014-04-02 22:59:14.000
+    2014-04-02 22:59:14
+    Produces a `datetime.datetime`.
+    """
+    if isinstance(timestamp, bytes):
+        timestamp = timestamp.decode('utf-8')
+    if len(timestamp) == 25:
+        dt, offset = timestamp[:-6], timestamp[19:]
+        tz = tzoffset(offset)
+        return datetime.strptime(dt, '%Y-%m-%d %H:%M:%S').replace(tzinfo=tz)
+    elif len(timestamp) == 23:
+        return datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S.%f')
+    elif len(timestamp) == 19:
+        return datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
+    else:
+        return None
+
+
+# This class definition is copied directly from the wamd2guano.py 
+# utility script in the guano package.
+class RiffChunk:
+    """A replacement for chunk.Chunk to handle RIFF chunks."""
+
+    def __init__(self, file_or_chunk, bigendian=False):
+        self.bigendian = bigendian
+        self.format = '>I' if bigendian else '<I'
+
+        # Determine if we're reading from a file or another chunk
+        if isinstance(file_or_chunk, RiffChunk):  # It's a parent chunk
+            self.parent = file_or_chunk
+            self.file = self.parent.file
+        else:  # It's a file
+            self.file = file_or_chunk
+            self.parent = None
+
+        # Read chunk header
+        if self.parent:
+            self.name = self.parent.read(4)
+        else:
+            self.name = self.file.read(4)
+
+        if len(self.name) < 4:
+            raise EOFError
+
+        # Read chunk size
+        if self.parent:
+            size_bytes = self.parent.read(4)
+        else:
+            size_bytes = self.file.read(4)
+
+        if len(size_bytes) < 4:
+            raise EOFError
+
+        self.size = struct.unpack(self.format, size_bytes)[0]
+        self.bytes_read = 0
+
+    def getname(self):
+        """Return the name (ID) of this chunk."""
+        return self.name
+
+    def getsize(self):
+        """Return the size of this chunk's data."""
+        return self.size
+
+    def read(self, size=None):
+        """Read at most size bytes from this chunk."""
+        if size is None:
+            size = self.size - self.bytes_read
+        else:
+            size = min(size, self.size - self.bytes_read)
+
+        if size <= 0:
+            return b''
+
+        data = self.file.read(size)
+        self.bytes_read += len(data)
+
+        # If we have a parent, update its bytes_read too
+        if self.parent:
+            self.parent.bytes_read += len(data)
+
+        return data
+
+    def skip(self):
+        """Skip to the end of this chunk."""
+        if self.bytes_read < self.size:
+            remaining = self.size - self.bytes_read
+
+            if self.parent:
+                # For nested chunks, we need to read (and discard) the data
+                # instead of seeking, so parent's position is updated correctly
+                self.read(remaining)
+            else:
+                # Direct file access can use seek
+                self.file.seek(remaining, 1)
+                self.bytes_read = self.size
+
+        # Handle alignment - chunks are word-aligned
+        if self.size % 2:
+            if self.parent:
+                self.parent.read(1)  # Read and discard padding byte
+            else:
+                self.file.seek(1, 1)
+                # No need to update bytes_read for padding
+
+
+# This function definition is copied more or less directly from the 
+# wamd2guano.py utility script in the guano package.
+def wamd(fname):
+    """Extract WAMD metadata from a .WAV file as a dict."""
+    with open(fname, 'rb') as f:
+        # Just checking the first chunk to make sure this is a wave file
+        # ch = chunk.Chunk(f, bigendian=False)
+        ch = RiffChunk(f)
+        if ch.getname() != b'RIFF':
+            raise Exception('%s is not a RIFF file!' % fname)
+        if ch.read(4) != b'WAVE':
+            raise Exception('%s is not a WAVE file!' % fname)
+
+        # Look for a chunk called 'wamd' which contains the WAMD metadata
+        wamd_chunk = None
+        while True:
+            try:
+                # subch = chunk.Chunk(ch, bigendian=False)
+                subch = RiffChunk(ch)
+            except EOFError:
+                break
+            if subch.getname() == b'wamd':
+                wamd_chunk = subch
+                break
+            else:
+                subch.skip()
+        if not wamd_chunk:
+            raise Exception('"wamd" WAV chunk not found in file %s' % fname)
+
+        metadata = {}
+        offset = 0
+        size = wamd_chunk.getsize()
+        buf = wamd_chunk.read(size)
+        while offset < size:
+            id = struct.unpack_from('< H', buf, offset)[0]
+            len = struct.unpack_from('< I', buf, offset+2)[0]
+            val = struct.unpack_from('< %ds' % len, buf, offset+6)[0]
+            if id not in WAMD_DROP_IDS:
+                name = WAMD_IDS.get(id, id) # Return id if it isn't a valid key
+                val = WAMD_COERCE.get(name, _parse_text)(val)
+                metadata[name] = val
+            offset += 6 + len
+        return metadata
+
+
+def getSerial(fpath):
+    """Get the ARU serial number from .wav metadata, if available.
+
+    Look for WAMD metadata first, then try GUANO. If neither option 
+    produces a usable value, the serial number is returned as "NA".
+
+    Returns:
+
+        str
+    """
+
+    try:
+        serial = wamd(fpath)["serial"]
+    except:
+        try:
+            gf = GuanoFile(fpath)
+            serial = gf["Serial"]
+        except:
+            serial = "NA"
+    return serial
+
+
+def getTimestampFromMetadata(fpath):
+    """Get the timestamp for a file from .wav metadata, if available.
+
+    Look for WAMD metadata first, then try GUANO. If neither option 
+    produces a usable value, the timestamp is returned as "NA".
+
+    Returns:
+
+        datetime.datetime
+    """
+
+    try:
+        stamp_string = wamd(fpath)["timestamp"]
+        timestamp = _parse_wamd_timestamp(stamp_string)
+    except:
+        try:
+            gf = GuanoFile(fpath)
+            timestamp = gf["Timestamp"]
+        except:
+            timestamp = None
+    return timestamp
+
