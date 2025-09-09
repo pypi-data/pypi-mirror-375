@@ -1,0 +1,102 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+DJANGO_SETTINGS_MODULE = "example.settings"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+fix = true
+select = [
+  # flake8-2020
+  "YTT",
+  # flake8-bandit
+  "S",
+  # flake8-bugbear
+  "B",
+  # flake8-builtins
+  "A",
+  # flake8-comprehensions
+  "C4",
+  # flake8-debugger
+  "T10",
+  # flake8-simplify
+  "SIM",
+  # isort
+  "I",
+  # mccabe
+  "C90",
+  # pycodestyle
+  "E",
+  "W",
+  # pyflakes
+  "F",
+  # pygrep-hooks
+  "PGH",
+  # pyupgrade
+  "UP",
+  # ruff
+  "RUF",
+  # tryceratops
+  "TRY",
+]
+ignore = [
+  # LineTooLong
+  "E501",
+  # DoNotAssignLambda
+  "E731",
+]
+
+[tool.ruff.format]
+preview = true
+
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["S101"]
+
+[project]
+name = "droppablefileinput"
+version = "0.1.2"
+description = "DroppableFileInput is a custom Django widget that enhances the usability of file input forms by allowing users to drag and drop files. This widget utilizes JavaScript to provide interactive feedback, such as highlighting the drop area when a file is dragged over and displaying file details on the page."
+authors = [{ name = "Krystof Beuermann", email = "krystof@blackbox.ms" }]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Django",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["django", "widget", "file", "upload", "drag-and-drop"]
+requires-python = ">=3.11,<4.0"
+dependencies = ["django>=4.0"]
+
+[project.urls]
+Homepage = "https://github.com/krystofbe/droppablefileinput"
+Repository = "https://github.com/krystofbe/droppablefileinput"
+Issues = "https://github.com/krystofbe/droppablefileinput/issues"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.2.0,<8.0.0",
+  "deptry>=0.12.0,<0.13.0",
+  "pre-commit>=3.4.0,<4.0.0",
+  "tox>=4.11.1,<5.0.0",
+  "ruff>=0.4.4,<0.5.0",
+  "pytest-cov>=5.0.0,<6.0.0",
+  "coverage>=7.5.3,<8.0.0",
+  "pytest-django>=4.8.0,<5.0.0",
+  "pytest-playwright>=0.5.0,<0.6.0",
+]

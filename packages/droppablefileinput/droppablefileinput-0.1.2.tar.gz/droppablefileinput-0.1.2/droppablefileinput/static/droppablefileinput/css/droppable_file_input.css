@@ -1,0 +1,227 @@
+:root {
+    --droppablefileinput-bg-gray-100: rgb(244, 244, 246);
+    --droppablefileinput-bg-gray-200: rgb(242, 242, 238);
+    --droppablefileinput-text-gray-500: rgb(132, 134, 148);
+    --droppablefileinput-text-gray-600: rgb(114, 116, 132);
+    --droppablefileinput-text-gray-700: rgb(93, 96, 115);
+    --droppablefileinput-bg-blue-100: rgb(218, 239, 245);
+    --droppablefileinput-border-blue-400: rgb(59, 130, 246);
+    --droppablefileinput-border-radius: 1rem;
+    --droppablefileinput-error-bg: rgb(254, 226, 226);
+    --droppablefileinput-error-text: rgb(185, 28, 28);
+    --droppablefileinput-error-border: rgb(239, 68, 68);
+    --droppablefileinput-focus-outline: 3px solid rgb(59, 130, 246);
+    --droppablefileinput-focus-outline-offset: 2px;
+}
+
+.droppablefileinput__card {
+    background-color: var(--droppablefileinput-bg-gray-100);
+    border: 2px solid transparent;
+    box-shadow: none;
+    border-radius: var(--droppablefileinput-border-radius);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.droppablefileinput__card:hover {
+    background-color: var(--droppablefileinput-bg-gray-200);
+}
+
+.droppablefileinput__card:focus {
+    outline: var(--droppablefileinput-focus-outline);
+    outline-offset: var(--droppablefileinput-focus-outline-offset);
+}
+
+.droppablefileinput__card-body {
+    padding: 3.5rem 1.5rem;
+}
+
+.droppablefileinput__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--droppablefileinput-text-gray-600);
+}
+
+.droppablefileinput__error {
+    background-color: var(--droppablefileinput-error-bg);
+    color: var(--droppablefileinput-error-text);
+    border: 1px solid var(--droppablefileinput-error-border);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.droppablefileinput__preview {
+    margin-bottom: 1rem;
+}
+
+.droppablefileinput__preview-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.droppablefileinput__icon-container {
+    margin-bottom: 1rem;
+}
+
+.droppablefileinput__text-container {
+    max-width: 400px;
+}
+
+.droppablefileinput__icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.droppablefileinput__label {
+    margin-bottom: 0.25rem;
+}
+
+.droppablefileinput__label a {
+    color: var(--droppablefileinput-border-blue-400);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.droppablefileinput__label a:hover {
+    text-decoration: underline;
+}
+
+.droppablefileinput__instructions {
+    color: var(--droppablefileinput-text-gray-500);
+    margin-bottom: 0;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.droppablefileinput__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.droppablefileinput__clear {
+    background-color: var(--droppablefileinput-bg-gray-200);
+    color: var(--droppablefileinput-text-gray-700);
+    border: 1px solid var(--droppablefileinput-text-gray-500);
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.droppablefileinput__clear:hover {
+    background-color: var(--droppablefileinput-text-gray-700);
+    color: white;
+}
+
+.droppablefileinput__clear:focus {
+    outline: var(--droppablefileinput-focus-outline);
+    outline-offset: 1px;
+}
+
+.droppablefileinput__spinner {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    display: inline-block;
+    animation: droppablefileinput__rotation 1s infinite linear;
+    border: 4px solid #e2e8f0;
+    border-radius: 100%;
+}
+
+.droppablefileinput__spinner:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -4px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-top: 4px solid #2d3748;
+    border-left: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-radius: 100%;
+    box-sizing: border-box;
+}
+
+.droppablefileinput__spinner-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Keyframes for rotation animation */
+@keyframes droppablefileinput__rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Vendor prefixes for animation */
+@-webkit-keyframes droppablefileinput__rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.droppablefileinput__highlight {
+    border-color: var(--droppablefileinput-border-blue-400);
+    background-color: var(--droppablefileinput-bg-blue-100);
+}
+
+/* Screen reader only text */
+.droppablefileinput__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+    .droppablefileinput__card-body {
+        padding: 2rem 1rem;
+    }
+    
+    .droppablefileinput__preview-image {
+        max-width: 150px;
+        max-height: 150px;
+    }
+}
