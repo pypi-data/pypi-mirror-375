@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: mseep-seo-mcp
+Version: 0.2.5
+Summary: A free SEO tool MCP (Model Control Protocol) service based on Ahrefs data. Includes features such as backlinks, keyword ideas, and more.
+Author-Email: mseep <support@skydeck.ai>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Project-URL: Homepage, https://github.com/cnych/seo-mcp
+Project-URL: Bug Tracker, https://github.com/cnych/seo-mcp/issues
+Requires-Python: >=3.10
+Requires-Dist: fastmcp>=2.0.0
+Requires-Dist: requests>=2.32.3
+Requires-Dist: pydantic>=2.5.0
+Requires-Dist: pydantic-core>=2.14.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
