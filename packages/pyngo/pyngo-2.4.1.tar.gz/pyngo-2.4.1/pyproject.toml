@@ -1,0 +1,145 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyngo"
+description = "Pydantic Package for Adding Models into a Django or Django Rest Framework Project ✨"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Yasser Tahiri", email = "hello@yezz.me" },
+]
+keywords = [
+    "django",
+    "django-rest-framework",
+    "pydantic",
+    "pydantic-models",
+    "pydantic-django",
+]
+
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Natural Language :: English",
+    "Framework :: Django",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Internet :: WWW/HTTP :: Session",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "typing-extensions >=3.7.4,<4.16.0",
+    "pydantic>=2.8.2,<2.13.0",
+    "Django >=3.2.0,<6.0.0",
+]
+
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/yezz123/pyngo"
+Funding = 'https://github.com/sponsors/yezz123'
+
+[dependency-groups]
+lint = [
+    "pre-commit==4.3.0",
+    "mypy==1.17.1",
+    "ruff==0.12.12",
+]
+test = [
+    "pytest==8.4.2",
+    "pytest-cov==6.3.0",
+    "pytest-asyncio == 1.1.0",
+    "pytest-pretty",
+    "django-stubs",
+]
+
+[tool.hatch.version]
+path = "pyngo/__init__.py"
+
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+mccabe = { max-complexity = 14 }
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["pydantic", "typing_extensions"]
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
+[tool.coverage.run]
+source = ["pyngo", "tests"]
+branch = true
+context = '${CONTEXT}'
+
+[tool.coverage.paths]
+source = [
+    "pyngo",
+    "tests",
+]
+
+[tool.mypy]
+plugins = "pydantic.mypy"
+follow_imports = "silent"
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+ignore_missing_imports = true
+disallow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = "pyngo.tests.*"
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "raise NotImplemented",
+    "@overload",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+]
+
+[tool.pytest.ini_options]
+testpaths = "tests/"
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format= "%Y-%m-%d %H:%M:%S"
+asyncio_mode= "auto"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+    "ignore:The default value of USE_TZ",
+]

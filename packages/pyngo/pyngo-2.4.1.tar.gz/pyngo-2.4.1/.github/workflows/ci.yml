@@ -1,0 +1,84 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Install Dependencies
+        run: uv sync --group lint
+      - name: Install Just
+        run: sudo apt-get install just
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files --verbose
+      - name: check Static Analysis
+        run: just lint
+
+  tests:
+
+    name: test py${{ matrix.python-version }} on ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}-latest
+
+
+    strategy:
+
+      matrix:
+
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+        os: [ubuntu, macos, windows]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install Dependencies
+        run: uv sync --group test
+
+      - name: Install Just
+        uses: taiki-e/install-action@just
+
+      - name: Test with pytest
+        run: uv run pytest --cov --cov-branch --cov-report=xml
+
+      - name: Upload coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v5
+
+  # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
+  check:
+    if: always()
+    needs: [lint, tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
