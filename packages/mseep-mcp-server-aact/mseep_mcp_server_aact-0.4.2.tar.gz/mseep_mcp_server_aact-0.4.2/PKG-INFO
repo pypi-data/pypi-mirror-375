@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-aact
+Version: 0.4.2
+Summary: MCP server for AACT clinical trials database
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: mcp>=1.12.4
+Requires-Dist: psycopg2-binary
+Requires-Dist: python-dotenv
+Provides-Extra: test
+Requires-Dist: pytest; extra == 'test'
+Requires-Dist: pytest-asyncio; extra == 'test'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
