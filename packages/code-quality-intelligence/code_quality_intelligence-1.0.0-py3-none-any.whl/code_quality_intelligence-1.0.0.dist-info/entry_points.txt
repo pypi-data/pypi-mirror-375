@@ -1,0 +1,4 @@
+[console_scripts]
+code-quality = code_quality_agent.cli:cli
+code-quality-agent = code_quality_agent.cli:cli
+cqi = code_quality_agent.cli:cli
