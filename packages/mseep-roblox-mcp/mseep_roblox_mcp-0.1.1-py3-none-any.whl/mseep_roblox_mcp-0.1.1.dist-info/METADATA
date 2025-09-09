@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: mseep-roblox-mcp
+Version: 0.1.1
+Summary: Roblox Studio integration through the Model Context Protocol
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.3.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: requests>=2.30.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
