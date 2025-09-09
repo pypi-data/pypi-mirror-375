@@ -1,0 +1,6 @@
+packaging
+platformdirs
+
+[test]
+numpy
+pytest>=6
