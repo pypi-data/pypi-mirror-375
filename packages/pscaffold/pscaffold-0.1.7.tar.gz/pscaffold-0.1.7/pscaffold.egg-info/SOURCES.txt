@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+pscaffold.egg-info/PKG-INFO
+pscaffold.egg-info/SOURCES.txt
+pscaffold.egg-info/dependency_links.txt
+pscaffold.egg-info/entry_points.txt
+pscaffold.egg-info/requires.txt
+pscaffold.egg-info/top_level.txt
+pyscaffold/__init__.py
+pyscaffold/config.py
+pyscaffold/constants.py
+pyscaffold/main.py
+pyscaffold/project_structure.py
+pyscaffold/assets/default.json
+pyscaffold/services/__init__.py
+pyscaffold/services/generate_structure.py
+tests/test_generate_folder_structure.py
