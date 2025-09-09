@@ -1,0 +1,26 @@
+[project]
+name = "mseep-mcp-overkiz"
+version = "0.1.3"
+description = "MCP server for controlling lights using overkiz"
+requires-python = ">=3.13.3"
+dependencies = [
+    "mcp>=1.7.1",
+    "pyoverkiz>=1.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-overkiz = "mcp_overkiz:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
