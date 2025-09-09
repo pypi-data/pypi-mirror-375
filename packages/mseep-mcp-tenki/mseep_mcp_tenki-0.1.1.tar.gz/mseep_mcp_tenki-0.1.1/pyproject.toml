@@ -1,0 +1,26 @@
+[project]
+name = "mseep-mcp-tenki"
+version = "0.1.1"
+description = "Get weather of Japan"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.2.0",
+    "pydantic>=2.10.5",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-tenki = "mcp_tenki.main:main"
+
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.3.4",
+    "ruff>=0.9.1",
+]
