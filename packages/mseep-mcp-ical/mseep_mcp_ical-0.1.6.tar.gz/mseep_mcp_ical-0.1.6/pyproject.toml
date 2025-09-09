@@ -1,0 +1,46 @@
+[project]
+name = "mseep-mcp-ical"
+version = "0.1.6"
+description = "A Model Context Protocol server providing tools for CRUD operations for the mac-os calendar"
+requires-python = ">=3.12"
+dependencies = [
+    "loguru>=0.7.3",
+    "mcp[cli]>=1.2.1",
+    "pyobjc>=11.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-ical = "mcp_ical.server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-mock>=3.14.0",
+    "pytest-random-order>=1.1.1",
+]
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest]
+pythonpath = [
+    "src",
+]
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
