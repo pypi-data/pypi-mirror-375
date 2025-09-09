@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: mseep-screenenv
+Version: 0.1.4
+Summary: A powerful Python library for creating and managing isolated desktop environments using Docker containers
+Project-URL: Homepage, https://github.com/huggingface/screenenv
+Project-URL: Repository, https://github.com/huggingface/screenenv
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: automation,desktop,docker,gui,playwright,sandbox
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Desktop Environment
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: System :: Emulators
+Requires-Python: >=3.10
+Requires-Dist: docker>=7.1.0
+Requires-Dist: fastapi>=0.115.13
+Requires-Dist: filelock>=3.18.0
+Requires-Dist: huggingface-hub==0.33.1
+Requires-Dist: mcp>=1.9.4
+Requires-Dist: openai==1.91.0
+Requires-Dist: playwright>=1.52.0
+Requires-Dist: prompt-toolkit==3.0.51
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: requests>=2.32.4
+Requires-Dist: smolagents[openai]==1.15.0
+Requires-Dist: uvicorn>=0.15.0
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == 'dev'
+Requires-Dist: flake8>=6.0.0; extra == 'dev'
+Requires-Dist: isort>=5.12.0; extra == 'dev'
+Requires-Dist: mypy>=1.0.0; extra == 'dev'
+Requires-Dist: pre-commit>=3.0.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Provides-Extra: test
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'test'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'test'
+Requires-Dist: pytest>=7.0.0; extra == 'test'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
