@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+requirements-dev.txt
+requirements.txt
+setup.py
+jaas_ai/__init__.py
+jaas_ai/main.py
+jaas_ai/version.py
+jaas_ai.egg-info/PKG-INFO
+jaas_ai.egg-info/SOURCES.txt
+jaas_ai.egg-info/dependency_links.txt
+jaas_ai.egg-info/requires.txt
+jaas_ai.egg-info/top_level.txt
