@@ -1,0 +1,27 @@
+[project]
+name = "mseep-waldur-mcp-server"
+version = "0.1.4"
+description = "Waldur MCP server project"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=1.6.0",
+    "waldur-api-client==0.2.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+waldur-mcp-server = "waldur_mcp_server:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-waldur-mcp-server
+Version: 0.1.4
+Summary: Waldur MCP server project
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE.md
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: waldur-api-client==0.2.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
