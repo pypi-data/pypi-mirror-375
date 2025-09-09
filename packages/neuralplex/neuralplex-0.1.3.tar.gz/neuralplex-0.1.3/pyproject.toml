@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "neuralplex"
+dynamic = ["version"]
+authors = [
+  { name="FAR Analytics & Research", email="adam@farar.net" },
+]
+description = "An object oriented neural network implementation."
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+"scikit-learn",
+"scipy"
+]
+
+[tool.hatch.version]
+path = "src/neuralplex/__about__.py"
+
+[project.urls]
+Homepage = "https://github.com/faranalytics/neuralplex"
+Issues = "https://github.com/faranalytics/neuralplex/issues"
