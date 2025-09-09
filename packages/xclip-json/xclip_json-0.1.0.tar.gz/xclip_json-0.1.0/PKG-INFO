@@ -1,0 +1,71 @@
+Metadata-Version: 2.4
+Name: xclip-json
+Version: 0.1.0
+Summary: A command-line tool to dump X clipboard targets as JSON.
+Author-email: "@readwithai" <talwrii@gmail.com>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
+# xclip-json
+**@readwithai** - [X](https://x.com/readwithai) - [blog](https://readwithai.substack.com/) - [machine-aided reading](https://www.reddit.com/r/machineAidedReading/) - [📖](https://readwithai.substack.com/p/what-is-reading-broadly-defined
+)[⚡️](https://readwithai.substack.com/s/technical-miscellany)[🖋️](https://readwithai.substack.com/p/note-taking-with-obsidian-much-of)
+
+`xclip-json` is a command-line utility for Linux that dumps all the different targets on the X clipboard into a machine-readable JSON format. This is a wrapper around xclip. It is useful for saving and restoring the entire clipboard for debugging purposes.
+
+This tool requires xclip command-line utility, which is a required package.
+
+You can install xclip on most Debian/Ubuntu-based systems with:
+
+```
+sudo apt-get install xclip
+```
+
+# Installlation
+
+You can install `xclip-json` using [pipx](https://github.com/pypa/pipx):
+
+```
+pipx install xclip-json
+```
+
+# Usage
+You can run the command like so:
+
+```
+xclip-json
+```
+
+This outputs the contents of all targets and selection to the clipboards.
+
+Here is some example output:
+
+```
+{
+  "CLIPBOARD": {
+    "STRING": "This is some plain text from the clipboard.",
+    "UTF8_STRING": "This is some plain text from the clipboard.",
+    "text/plain;charset=UTF-8": "This is some plain text from the clipboard.",
+    "image/png": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+  }
+}
+```
+
+You can then use tools such as [jq](jqlang.org) to query the data. The following command is particularly useful for this:
+
+```
+xclip-json | jq .CLIPBOARD | jq 'keys'
+```
+
+# Alternatives and prior work
+While I could find no tool like `xclip-json` you can use `xclip` to manually list all targets on the clipboard like so: `xclip -o -t TARGETS`. You can then fetch a specific target with `xclip -o -t $TARGET`.
+
+## About me
+I am **@readwithai**. I create tools for reading, research and agency sometimes using the markdown editor [Obsidian](https://readwithai.substack.com/p/what-exactly-is-obsidian).
+
+I also create a [stream of tools](https://readwithai.substack.com/p/my-productivity-tools) that are related to carrying out my work.
+
+I write about lots of things - including tools like this - on [X](https://x.com/readwithai).
+My [blog](https://readwithai.substack.com/) is more about reading and research and agency.
