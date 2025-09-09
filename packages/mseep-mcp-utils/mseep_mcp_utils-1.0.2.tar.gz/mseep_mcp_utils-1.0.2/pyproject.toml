@@ -1,0 +1,104 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-mcp-utils"
+version = "1.0.2"
+description = "Synchronous utilities for Model Context Protocol (MCP) integration"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "llm",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/fulfilio/mcp-utils"
+Repository = "https://github.com/fulfilio/mcp-utils.git"
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=3.6.0",
+    "ruff>=0.3.0",
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "bump-my-version>=0.15.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mcp_utils",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+extend-include = [
+    "*.ipynb",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "mcp_utils",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+addopts = "--cov=mcp_utils --cov-report=term-missing"
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+]
+
+[tool.bumpversion]
+current_version = "1.0.0"
+commit = true
+tag = true
+allow_dirty = false
+
+[tool.bumpversion.file_patterns]
+pyproject = [
+    "version = \"{current_version}\"",
+]
