@@ -1,0 +1,12 @@
+LICENCE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+tests/test_txtanim.py
+txtanim/__init__.py
+txtanim/txtanim.py
+txtanim.egg-info/PKG-INFO
+txtanim.egg-info/SOURCES.txt
+txtanim.egg-info/dependency_links.txt
+txtanim.egg-info/top_level.txt
