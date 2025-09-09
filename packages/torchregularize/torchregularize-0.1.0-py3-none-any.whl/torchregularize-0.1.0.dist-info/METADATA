@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: torchregularize
+Version: 0.1.0
+Summary: Advanced regularization layers for PyTorch (DropBlock, Stochastic Depth, ShakeDrop).
+Home-page: https://github.com/yourusername/torchregularize
+Author: Adie Kaushik
+Author-email: your_email@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Requires-Dist: torch>=1.10
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
