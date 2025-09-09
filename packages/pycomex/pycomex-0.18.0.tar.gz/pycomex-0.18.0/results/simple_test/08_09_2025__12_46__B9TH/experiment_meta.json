@@ -1,0 +1,61 @@
+{
+    "__track__": [],
+    "__wandb__": false,
+    "base_path": "/media/ssd/Programming/pycomex/pycomex/examples",
+    "description": "\nThis experiment will repeatedly create a text made of randomly sampled words.\n\nThe words are assembled into a text file, which is supposed to be saved as an\nartifact of the computational experiment. Additionally, information such as the\ntotal text length / run time of the calculations are to be saved as experiment\nmetadata.\n\nThis module-level doc string will automatically be saved as the description\nfor this experiment\n",
+    "duration": 0,
+    "end_time": null,
+    "has_error": false,
+    "hooks": {},
+    "name": "simple_test",
+    "namespace": "results/02_basic",
+    "parameters": {
+        "NUM_WORDS": {
+            "description": "The number of words to be generated each time ",
+            "name": "NUM_WORDS",
+            "type": "int",
+            "usable": true,
+            "value": 100
+        },
+        "REPETITIONS": {
+            "description": "The number of times to repeat the generation process ",
+            "name": "REPETITIONS",
+            "type": "int",
+            "usable": true,
+            "value": 2
+        },
+        "__DEBUG__": {
+            "description": "Flag to enable debug mode. In debug mode the experiment archive folder will be called \"debug\" and will be overwritten when another experiment is started with the same name.",
+            "type": "bool",
+            "usable": true,
+            "value": false
+        },
+        "__NOTIFY__": {
+            "description": "Determines whether a desktop notification should be sent when the experiment is done. This may or may not work depending on the operating system.",
+            "type": "bool",
+            "usable": true,
+            "value": true
+        },
+        "__PREFIX__": {
+            "description": "A string that will be prefixed to the experiment name. This can be used to differentiate between different runs of the same experiment. This will only be used as the prefix for the experiment name and not for the actual folder name.",
+            "type": "str",
+            "usable": true,
+            "value": ""
+        },
+        "__REPRODUCIBLE__": {
+            "description": "Flag to enable reproducible mode. In reproducible mode, additional information will be stored in the experiment archive at the end of the experiment execution. This information will include a snapshot of the dependencies and the source code.",
+            "type": "bool",
+            "usable": true,
+            "value": true
+        },
+        "__TESTING__": {
+            "description": "Flag to enable testing mode. In testing mode the experiment will be executed with minimal runtime and minimal resources simply to test if all the components work. Implementing testing mode is optional and will have to be done by each experiment individually.",
+            "type": "bool",
+            "usable": true,
+            "value": false
+        }
+    },
+    "short_description": "This experiment will repeatedly create a text made of randomly sampled words.",
+    "start_time": 1757328407.015549,
+    "status": "running"
+}
