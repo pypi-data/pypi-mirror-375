@@ -1,0 +1,9 @@
+websockets>=11.0
+cryptography>=35.0
+bson>=0.5.10
+ujson>=4.0.0
+packaging>=20.0
+
+[dev]
+pytest
+pytest-asyncio
