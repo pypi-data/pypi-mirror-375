@@ -1,0 +1,151 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-zulipchat-mcp"
+version = "2.3.1"
+description = "MCP server for Zulip Chat integration"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+license = "MIT"
+requires-python = ">=3.10"
+keywords = [
+    "mcp",
+    "zulip",
+    "chat",
+    "ai",
+    "assistant",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Communications :: Chat",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "fastmcp>=0.1.0",
+    "httpx>=0.24.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "zulip>=0.9.0",
+    "structlog>=24.1.0",
+    "prometheus-client>=0.19.0",
+    "duckdb>=0.9.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/akougkas/zulipchat-mcp"
+Documentation = "https://github.com/akougkas/zulipchat-mcp#readme"
+Repository = "https://github.com/akougkas/zulipchat-mcp.git"
+Issues = "https://github.com/akougkas/zulipchat-mcp/issues"
+Changelog = "https://github.com/akougkas/zulipchat-mcp/releases"
+
+[project.scripts]
+zulipchat-mcp = "zulipchat_mcp.server:main"
+zulipchat-mcp-integrate = "zulipchat_mcp.integrations.registry:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=5.0",
+    "black>=24.0",
+    "ruff>=0.8.0",
+    "mypy>=1.13",
+    "bandit>=1.8",
+    "safety>=3.0",
+]
+
+[tool.uv]
+package = true
+managed = true
+dev-dependencies = []
+
+[tool.uv.sources]
+
+[tool.black]
+line-length = 88
+target-version = [
+    "py310",
+]
+include = "\\.pyi?$"
+extend-exclude = "/(\n  # directories\n  \\.eggs\n  | \\.git\n  | \\.hg\n  | \\.mypy_cache\n  | \\.tox\n  | \\.venv\n  | build\n  | dist\n)/\n"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+]
+ignore = [
+    "E501",
+    "B008",
+    "C901",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401",
+]
+
+[tool.mypy]
+python_version = "3.10"
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = [
+    "zulip.*",
+    "mcp.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+]
+python_classes = [
+    "Test*",
+]
+python_functions = [
+    "test_*",
+]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--disable-warnings",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
