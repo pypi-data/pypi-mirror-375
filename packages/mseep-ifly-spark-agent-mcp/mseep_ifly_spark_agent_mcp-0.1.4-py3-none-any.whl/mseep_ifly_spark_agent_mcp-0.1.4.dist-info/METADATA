@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: mseep-ifly-spark-agent-mcp
+Version: 0.1.4
+Summary: This is a simple example of using MCP Server to invoke the task chain of the iFlytek SparkAgent Platform.
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Keywords: automation,llm,mcp,sparkagent,web
+Requires-Python: >=3.12.5
+Requires-Dist: anyio>=4.5
+Requires-Dist: click>=8.1.0
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: python-dotenv==1.0.1
+Requires-Dist: requests>=2.32.3
+Requires-Dist: websocket-client==1.8.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
