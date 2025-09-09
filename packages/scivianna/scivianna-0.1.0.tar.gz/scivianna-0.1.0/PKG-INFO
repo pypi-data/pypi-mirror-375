@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: scivianna
+Version: 0.1.0
+Summary: Visualize Tripoli 4/5 and Apollo3 geometries.
+Author: CEA
+Author-email: Thibault.Moulignier@cea.fr
+Maintainer: Thibault Moulignier
+Keywords: visualization
+Requires-Python: >=3.8, <4
+Requires-Dist: panel
+Requires-Dist: rasterio
+Requires-Dist: matplotlib
+Requires-Dist: numpy<2
+Requires-Dist: shapely
+Requires-Dist: jupyter_bokeh
+Requires-Dist: holoviews
+Requires-Dist: icoco~=2.0.0
+Requires-Dist: panel_material_ui
+Requires-Dist: geopandas
+Dynamic: author
+Dynamic: author-email
+Dynamic: keywords
+Dynamic: maintainer
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
