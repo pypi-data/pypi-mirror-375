@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-bitable-mcp
+Version: 0.2.5
+Summary: This MCP server provides access to Lark bitable through the Model Context Protocol.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: pybitable
+Requires-Dist: mcp==1.3.0
+Requires-Dist: typer
+
+Package managed by MseeP.ai
