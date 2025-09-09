@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcpcrashcourse
+Version: 0.1.5
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: asyncio>=3.4.3
+Requires-Dist: langchain-groq>=0.3.2
+Requires-Dist: mcp-use>=1.2.7
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: nest-asyncio>=1.6.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
