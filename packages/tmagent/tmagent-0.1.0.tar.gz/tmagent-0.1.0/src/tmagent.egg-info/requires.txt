@@ -1,0 +1,15 @@
+rich
+questionary
+qrcode
+pyperclip
+requests
+
+[dev]
+wily
+bandit
+ruff
+pytest
+pytest-cov
+mypy
+build
+twine

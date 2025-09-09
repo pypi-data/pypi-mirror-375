@@ -1,0 +1,49 @@
+[project]
+name = "tmagent"
+version = "0.1.0"
+description = "An interactive CLI tool for managing tmate sessions with Telegram notifications"
+authors = [{ name = "Aleksei Svetlov", email = "svetlovtech@aabee.tech" }]
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "rich",
+    "questionary",
+    "qrcode",
+    "pyperclip",
+    "requests"
+]
+
+[project.urls]
+Homepage = "https://github.com/aabee-tech/tmagent"
+Repository = "https://github.com/aabee-tech/tmagent"
+
+[project.scripts]
+tmagent = "tmagent.main:main"
+
+[project.optional-dependencies]
+dev = [
+    "wily",
+    "bandit",
+    "ruff",
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    "build",
+    "twine"
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts = "-ra -q --cov-report term-missing --cov=src/tmate_cli"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
