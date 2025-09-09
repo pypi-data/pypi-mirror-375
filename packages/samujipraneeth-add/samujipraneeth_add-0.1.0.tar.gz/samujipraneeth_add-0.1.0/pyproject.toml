@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "samujipraneeth-add"
+version = "0.1.0"
+description = "which does addtion"
+readme = "README.md"
+requires-python = ">=3.7"
