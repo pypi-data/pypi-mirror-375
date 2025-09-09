@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "article-mcp": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "D:\\C\\Documents\\Program\\Python_file\\mcp_serve\\mcp1",
+        "main.py",
+        "server",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1",
+        "UV_LINK_MODE": "copy",
+        "PATH": "%PATH%"
+      }
+    }
+  }
+} 
