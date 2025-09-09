@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: datalibro_utils
+Version: 2.3.9
+Summary: For Datalibro.
+Home-page: https://github.com/DesignLibro/datalibro_utils
+Author: DesignLibro
+Author-email: livid.su@gmail.com
+Requires-Dist: tablemaster
+Requires-Dist: pandas
+Requires-Dist: streamlit
+Requires-Dist: plotly
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: summary
