@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-server-chat-analysis = mcp_chat_analysis.server:main
