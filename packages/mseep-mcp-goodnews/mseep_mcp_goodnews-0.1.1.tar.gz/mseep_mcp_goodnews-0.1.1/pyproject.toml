@@ -1,0 +1,42 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "black>=24.10.0",
+    "codespell>=2.3.0",
+    "fire>=0.7.0",
+    "ipykernel>=6.29.5",
+    "isort>=5.13.2",
+    "mypy>=1.14.1",
+    "pre-commit>=4.1.0",
+    "pylint>=3.3.3",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.2",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.14.0",
+    "ruff>=0.9.2",
+]
+
+[project]
+name = "mseep-mcp-goodnews"
+version = "0.1.1"
+description = "An MCP application that delivers curated positive and uplifting news stories."
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.11"
+dependencies = [
+    "asyncio>=3.4.3",
+    "cohere>=5.14.0",
+    "mcp[cli]>=1.4.1",
+    "pydantic>=2.10.6",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
