@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: mseep-pyserini
+Version: 1.2.4
+Summary: A Python toolkit for reproducible information retrieval research with sparse and dense representations
+Author-email: mseep <support@skydeck.ai>
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/castorini/pyserini
+Project-URL: Issues, https://github.com/castorini/pyserini/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE.txt
+Requires-Dist: tqdm
+Requires-Dist: pyyaml
+Requires-Dist: requests
+Requires-Dist: Cython>=0.29.21
+Requires-Dist: numpy>=1.18.1
+Requires-Dist: pandas>=1.4.0
+Requires-Dist: pyjnius>=1.6.0
+Requires-Dist: scikit-learn>=0.22.1
+Requires-Dist: scipy>=1.4.1
+Requires-Dist: transformers>=4.6.0
+Requires-Dist: torch>=2.4.0
+Requires-Dist: onnxruntime>=1.8.1
+Requires-Dist: openai>=1.0.0
+Requires-Dist: sentencepiece>=0.2
+Requires-Dist: tiktoken>=0.4.0
+Requires-Dist: flask>3.0
+Requires-Dist: pillow>=10.2.0
+Requires-Dist: fastapi>=0.70.0
+Requires-Dist: uvicorn>=0.13.0
+Requires-Dist: fastmcp>=2.10.4
+Provides-Extra: optional
+Requires-Dist: faiss>1.7.0; extra == "optional"
+Requires-Dist: spacy>=3.2.1; extra == "optional"
+Requires-Dist: pyarrow>=15.0.0; extra == "optional"
+Requires-Dist: pybind11>=2.11.0; extra == "optional"
+Dynamic: license-file
+
+Package managed by MseeP.ai
