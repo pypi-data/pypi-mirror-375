@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mseep-lodestar-mcp
+Version: 0.1.4
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]>=1.2.1
+Requires-Dist: pydantic>=2.10.6
+
+Package managed by MseeP.ai
