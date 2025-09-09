@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: torchtimers
+Version: 0.1.0
+Summary: Lightweight timing utilities for PyTorch training and inference (CPU & GPU).
+Home-page: https://huggingface.co/GenAIDevTOProd
+Author: Naga Adithya Kaushik (GenAIDevTOProd)
+Author-email: adithyakaushikch@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Requires-Dist: torch>=1.10
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
