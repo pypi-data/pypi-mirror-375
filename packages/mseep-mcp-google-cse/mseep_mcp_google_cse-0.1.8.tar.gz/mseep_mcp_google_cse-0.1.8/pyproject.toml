@@ -1,0 +1,45 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-mcp-google-cse"
+version = "0.1.8"
+description = "An MCP server for searching a custom Google search engine."
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.2.0",
+    "google-api-python-client>=2.159.0",
+]
+license = "Unlicense"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Development Status :: 3 - Alpha",
+    "Operating System :: OS Independent",
+]
+keywords = [
+    "MCP",
+    "Model Context Protocol",
+    "Google Custom Search Engine",
+    "Google CSE",
+    "Web Browsing",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/Richard-Weiss/mcp-google-cse"
+Issues = "https://github.com/Richard-Weiss/mcp-google-cse/issues"
+
+[project.scripts]
+mcp-google-cse = "mcp_google_cse:main"

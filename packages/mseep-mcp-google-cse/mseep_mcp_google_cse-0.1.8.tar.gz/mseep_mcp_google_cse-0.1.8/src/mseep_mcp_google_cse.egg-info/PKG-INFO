@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-google-cse
+Version: 0.1.8
+Summary: An MCP server for searching a custom Google search engine.
+Author-email: mseep <support@skydeck.ai>
+License-Expression: Unlicense
+Project-URL: Homepage, https://github.com/Richard-Weiss/mcp-google-cse
+Project-URL: Issues, https://github.com/Richard-Weiss/mcp-google-cse/issues
+Keywords: MCP,Model Context Protocol,Google Custom Search Engine,Google CSE,Web Browsing
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Development Status :: 3 - Alpha
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.2.0
+Requires-Dist: google-api-python-client>=2.159.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
