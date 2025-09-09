@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mimitfuelpy"
+version = "0.2.0"
+description = "Python library for accessing Mimit Fuel Prices API"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Francesco Petranzan", email = "contact-me@fpetranzan.me"}
+]
+maintainers = [
+    {name = "Francesco Petranzan", email = "contact-me@fpetranzan.me"}
+]
+keywords = ["fuel", "prices", "api", "mimit", "italy"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "requests>=2.25.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/fpetranzan/mimitFuelPy"
+"Bug Tracker" = "https://github.com/fpetranzan/mimitFuelPy/issues"
+Documentation = "https://fpetranzan.github.io/mimitFuelPy/"
+Repository = "https://github.com/fpetranzan/mimitFuelPy.git"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "flake8",
+    "mypy",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 88
+target-version = ['py37']
+
+[tool.isort]
+profile = "black"
+src_paths = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--cov=src/mimitfuelpy",
+    "--cov-report=html",
+    "--cov-report=term-missing",
+    "--cov-fail-under=80"
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]

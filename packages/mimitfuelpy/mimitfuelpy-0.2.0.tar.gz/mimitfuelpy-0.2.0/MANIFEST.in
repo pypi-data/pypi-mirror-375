@@ -1,0 +1,27 @@
+# Include the README
+include README.md
+
+# Include the license file
+include LICENSE
+
+# Include the changelog
+include CHANGELOG.md
+
+# Include the Claude.md documentation
+include CLAUDE.md
+
+# Include example files
+recursive-include examples *.py
+
+# Include tests
+recursive-include tests *.py
+
+# Include all Python files in src
+recursive-include src *.py
+
+# Exclude compiled Python files
+global-exclude *.pyc
+global-exclude __pycache__/
+global-exclude .git/
+global-exclude .pytest_cache/
+global-exclude *.egg-info/
