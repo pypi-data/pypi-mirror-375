@@ -1,0 +1,3 @@
+[console_scripts]
+b10-transfer=b10_transfer.cache_cli:main
+
