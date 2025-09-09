@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: g1asm
+Version: 0.1.0
+Summary: Assembler implementation for the g1 ISA
+Home-page: https://github.com/7Limes/g1asm
+License: MIT
+Keywords: assembler,cli
+Author: 7Limes
+Requires-Python: >=3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Project-URL: Repository, https://github.com/7Limes/g1asm
+Description-Content-Type: text/markdown
+
+# g1asm
+
+Assembler implementation for the g1 ISA.
+
