@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: izihawa-textparser
+Version: 0.2.48
+Summary: Add your description here
+Requires-Python: >=3.12
+Requires-Dist: aiokit
+Requires-Dist: beautifulsoup4>=4.13.3
+Requires-Dist: ebooklib>=0.18
+Requires-Dist: fire>=0.6.0
+Requires-Dist: izihawa-textutils
+Requires-Dist: markdownify==1.2.0
+Requires-Dist: pypdf>=5.5.0
+Requires-Dist: python-iso639
+Requires-Dist: xmltodict>=0.14.2
+Description-Content-Type: text/markdown
+
+# izihawa_textparser
