@@ -1,0 +1,79 @@
+Metadata-Version: 2.4
+Name: mseep-voice-mode
+Version: 4.3.2
+Summary: VoiceMode - Voice interaction capabilities for AI assistants (formerly voice-mcp)
+Project-URL: Homepage, https://github.com/mbailey/voicemode
+Project-URL: Repository, https://github.com/mbailey/voicemode
+Project-URL: Issues, https://github.com/mbailey/voicemode/issues
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Keywords: ai,livekit,llm,mcp,speech,stt,tts,voice
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Multimedia :: Sound/Audio :: Speech
+Classifier: Topic :: Software Development :: Libraries
+Requires-Python: >=3.10
+Requires-Dist: audioop-lts; python_version >= '3.13'
+Requires-Dist: click>=8.0.0
+Requires-Dist: fastmcp>=2.0.0
+Requires-Dist: httpx
+Requires-Dist: livekit-agents>=0.10.2
+Requires-Dist: livekit-plugins-openai>=0.10.1
+Requires-Dist: livekit-plugins-silero>=0.6.5
+Requires-Dist: livekit>=0.13.1
+Requires-Dist: numpy
+Requires-Dist: openai>=1.0.0
+Requires-Dist: psutil>=5.9.0
+Requires-Dist: pydub
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: scipy
+Requires-Dist: setuptools
+Requires-Dist: simpleaudio
+Requires-Dist: sounddevice
+Requires-Dist: uv>=0.4.0
+Requires-Dist: webrtcvad>=2.0.10
+Provides-Extra: coreml
+Requires-Dist: ane-transformers; extra == 'coreml'
+Requires-Dist: coremltools>=7.0; extra == 'coreml'
+Requires-Dist: torch>=2.0.0; extra == 'coreml'
+Requires-Dist: transformers; extra == 'coreml'
+Provides-Extra: dev
+Requires-Dist: build>=1.0.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest-mock>=3.10.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: twine>=4.0.0; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: mkdocs-gen-files>=0.5.0; extra == 'docs'
+Requires-Dist: mkdocs-git-revision-date-localized-plugin>=1.2.0; extra == 'docs'
+Requires-Dist: mkdocs-material[imaging]>=9.0.0; extra == 'docs'
+Requires-Dist: mkdocs-minify-plugin>=0.7.0; extra == 'docs'
+Requires-Dist: mkdocs>=1.5.0; extra == 'docs'
+Requires-Dist: pymdown-extensions>=10.0; extra == 'docs'
+Provides-Extra: notebooks
+Requires-Dist: gradio>=4.0.0; extra == 'notebooks'
+Requires-Dist: jupyter>=1.0.0; extra == 'notebooks'
+Requires-Dist: notebook>=7.0.0; extra == 'notebooks'
+Requires-Dist: pandas>=2.0.0; extra == 'notebooks'
+Provides-Extra: scripts
+Requires-Dist: flask>=3.0.0; extra == 'scripts'
+Provides-Extra: test
+Requires-Dist: coverage[toml]>=7.4.0; extra == 'test'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'test'
+Requires-Dist: pytest-cov>=4.1.0; extra == 'test'
+Requires-Dist: pytest-mock>=3.10.0; extra == 'test'
+Requires-Dist: pytest-timeout>=2.2.0; extra == 'test'
+Requires-Dist: pytest-xdist>=3.5.0; extra == 'test'
+Requires-Dist: pytest>=7.0.0; extra == 'test'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
