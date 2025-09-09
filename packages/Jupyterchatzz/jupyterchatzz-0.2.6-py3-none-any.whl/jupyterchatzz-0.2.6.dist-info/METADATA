@@ -1,0 +1,186 @@
+Metadata-Version: 2.4
+Name: Jupyterchatzz
+Version: 0.2.6
+Dynamic: Keywords
+Summary: A JupyterLab extension.
+Project-URL: Homepage, https://github.com/Zhoums/Jupyterchatzz
+Project-URL: Bug Tracker, https://github.com/Zhoums/Jupyterchatzz/issues
+Project-URL: Repository, https://github.com/Zhoums/Jupyterchatzz.git
+Author-email: Zhoums <18652950852@163.com>
+License: BSD 3-Clause License
+        
+        Copyright (c) 2025, Zhoums
+        All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice, this
+           list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice,
+           this list of conditions and the following disclaimer in the documentation
+           and/or other materials provided with the distribution.
+        
+        3. Neither the name of the copyright holder nor the names of its
+           contributors may be used to endorse or promote products derived from
+           this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+        AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+        DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+        OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+License-File: LICENSE
+Classifier: Framework :: Jupyter
+Classifier: Framework :: Jupyter :: JupyterLab
+Classifier: Framework :: Jupyter :: JupyterLab :: 4
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.8
+Requires-Dist: ipython>=8.0.0
+Requires-Dist: jupyter-mcp-server>=0.1.0
+Requires-Dist: jupyter>=1.0.0
+Requires-Dist: jupyterlab<5,>=4.0.0
+Description-Content-Type: text/markdown
+
+# Jupyterchatzz - Jupyter MCP AI助手扩展
+
+这个JupyterLab扩展允许您连接到Jupyter MCP服务器，在Jupyter笔记本中使用AI助手功能，自动编写和执行代码。
+
+## 功能
+
+- 连接到Jupyter MCP服务器
+- 在JupyterLab界面中配置MCP连接参数
+- 侧边栏AI聊天助手面板
+- 自动识别和执行代码
+- 默认使用gpt-4o-mini模型，通过aihubmix推理时代API进行调用
+- 支持多种AI模型，包括GPT-4o、Claude-3等
+- 通过顶部菜单或命令面板快速访问MCP功能
+
+## 安装
+
+```bash
+# 安装扩展
+pip install -e .
+
+# 或者从PyPI安装（未发布）
+# pip install jupyterchatzz
+```
+
+## 使用方法
+
+### 1. 启动JupyterLab
+
+```bash
+python -m jupyter lab
+```
+
+或使用我们的便捷脚本：
+
+```bash
+python start_jupyterlab.py
+```
+
+### 2. 启动MCP服务器
+
+在另一个终端中：
+
+```bash
+python -m jupyter_mcp_server.server --port 8080
+```
+
+或使用我们的便捷脚本：
+
+```bash
+python ../start_mcp_server.py
+```
+
+### 3. 配置并连接MCP服务器
+
+1. 在JupyterLab中，点击顶部菜单中的"MCP"（如果可见）
+2. 或者使用命令面板（Ctrl+Shift+C）搜索"MCP"
+3. 选择"MCP服务器配置"选项
+4. 在配置面板中：
+   - 设置MCP服务器URL（例如：http://localhost:8080）
+   - 设置笔记本ID（当前打开的笔记本路径）
+   - 配置AihubMix推理时代API：
+     - 选择AI模型（默认：GPT-4o-mini）
+     - 填写AihubMix API URL
+     - 填写AihubMix API密钥
+   - 点击"连接"按钮
+
+### 4. 使用AI助手
+
+连接成功后：
+
+1. 打开AI助手面板：
+   - 点击MCP菜单中的"打开AI助手"
+   - 或使用命令面板搜索"打开AI助手"
+
+2. 在AI助手面板中：
+   - 选择要使用的模型（默认：aihubmix）
+   - 在输入框中输入您的问题或需求
+   - 按Enter发送消息
+
+3. AI助手将回复您的消息，并可能生成代码
+   - 代码块会自动识别并显示在消息下方
+   - 点击"执行代码"按钮可以将代码写入笔记本并执行
+   - 或点击"执行所有代码"一次执行所有代码块
+
+## 示例用法
+
+1. **编写代码**：
+   - 用户：`请编写一个函数计算斐波那契数列的第n项`
+   - AI助手将生成代码并提供执行按钮
+
+2. **数据分析**：
+   - 用户：`帮我分析这个数据集并绘制图表`
+   - AI助手将生成分析代码并提供可视化
+
+3. **代码解释**：
+   - 用户：`解释这段代码是做什么的：[粘贴代码]`
+   - AI助手将解释代码功能并可能提供改进建议
+
+## 故障排除
+
+如果您没有看到MCP菜单：
+- 检查浏览器控制台是否有错误信息
+- 确认扩展已正确安装：`python -m jupyter labextension list`
+- 尝试清除浏览器缓存并重新加载页面
+- 重启JupyterLab
+
+如果连接到MCP服务器失败：
+- 确认MCP服务器正在运行
+- 检查服务器URL是否正确
+- 确认没有防火墙阻止连接
+
+如果代码执行失败：
+- 检查笔记本是否处于活动状态
+- 确认您有足够的权限执行代码
+- 查看浏览器控制台是否有错误信息
+
+## 开发
+
+```bash
+# 安装开发依赖
+jlpm
+
+# 构建扩展
+jlpm run build
+
+# 安装扩展
+pip install -e .
+```
