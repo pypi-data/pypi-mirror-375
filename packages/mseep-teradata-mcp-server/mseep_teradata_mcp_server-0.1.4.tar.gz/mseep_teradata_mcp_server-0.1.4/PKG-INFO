@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: mseep-teradata-mcp-server
+Version: 0.1.4
+Summary: Model Context Protocol (MCP) server for Teradata, Community edition
+Project-URL: Homepage, https://github.com/Teradata/teradata-mcp-server
+Project-URL: Documentation, https://github.com/Teradata/teradata-mcp-server#readme
+Project-URL: Repository, https://github.com/Teradata/teradata-mcp-server.git
+Project-URL: Bug Tracker, https://github.com/Teradata/teradata-mcp-server/issues
+Project-URL: Source, https://github.com/Teradata/teradata-mcp-server
+Project-URL: Discussions, https://github.com/Teradata/teradata-mcp-server/discussions
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: database,mcp,model-context-protocol,sql,teradata
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Database
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.11
+Requires-Dist: mcp[cli]<2.0.0,>=1.0.0
+Requires-Dist: pydantic<3.0.0,>=2.8.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: sqlalchemy<3.0.0,>=2.0.0
+Requires-Dist: teradatasqlalchemy>=20.0.0.0
+Provides-Extra: dev
+Requires-Dist: mypy>=1.5.0; extra == 'dev'
+Requires-Dist: ruff>=0.1.0; extra == 'dev'
+Requires-Dist: types-pyyaml; extra == 'dev'
+Provides-Extra: evs
+Requires-Dist: teradatagenai>=20.0.0.0; extra == 'evs'
+Provides-Extra: fs
+Requires-Dist: tdfs4ds>=0.2.4.0; extra == 'fs'
+Requires-Dist: teradataml>=20.0.0.5; extra == 'fs'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
