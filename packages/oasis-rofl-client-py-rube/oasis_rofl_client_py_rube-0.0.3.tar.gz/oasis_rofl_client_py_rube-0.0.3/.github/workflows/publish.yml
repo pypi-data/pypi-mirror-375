@@ -1,0 +1,130 @@
+name: Publish to PyPI
+
+on:
+  release:
+    types: [published]  # PyPI: Only on GitHub releases (manual action)
+  push:
+    tags:
+      - 'v*'  # TestPyPI: All version tags for testing
+
+permissions:
+  contents: read
+  id-token: write  # Required for trusted publishing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is_release: ${{ steps.check.outputs.is_release }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history and tags for versioning
+    
+    - name: Get version info
+      id: version
+      run: |
+        echo "version=$(git describe --tags --always)" >> $GITHUB_OUTPUT
+    
+    - name: Check if this is a release
+      id: check
+      run: |
+        if [[ "${{ github.event_name }}" == "release" ]]; then
+          echo "is_release=true" >> $GITHUB_OUTPUT
+          echo "📦 This is a PRODUCTION release"
+        else
+          echo "is_release=false" >> $GITHUB_OUTPUT
+          echo "🧪 This is a TEST release"
+        fi
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+      with:
+        enable-cache: true
+    
+    - name: Set up Python
+      run: uv python install 3.12
+    
+    - name: Build package
+      run: uv build
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+
+  publish-to-testpypi:
+    needs: build
+    runs-on: ubuntu-latest
+    # Always publish tags to TestPyPI for testing
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/oasis-rofl-client-py-rube
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+    
+    - name: Publish to TestPyPI
+      env:
+        UV_PUBLISH_URL: https://test.pypi.org/legacy/
+      run: |
+        echo "🧪 Publishing version ${{ needs.build.outputs.version }} to TestPyPI"
+        echo "📍 This is for testing only"
+        uv publish dist/*
+    
+    - name: Report TestPyPI URL
+      run: |
+        echo "✅ Published to TestPyPI!"
+        echo "🔗 View at: https://test.pypi.org/project/oasis-rofl-client-py-rube/"
+        echo ""
+        echo "To test installation:"
+        echo "  uv pip install --index-url https://test.pypi.org/simple/ oasis-rofl-client-py-rube"
+
+  publish-to-pypi:
+    needs: build
+    runs-on: ubuntu-latest
+    # ONLY publish to PyPI on GitHub releases (never on plain tags)
+    if: github.event_name == 'release'
+    environment:
+      name: pypi
+      url: https://pypi.org/p/oasis-rofl-client-py-rube
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+    
+    - name: ⚠️  Production Publishing Warning
+      run: |
+        echo "================================================"
+        echo "⚠️  PRODUCTION RELEASE TO PYPI"
+        echo "================================================"
+        echo "Version: ${{ needs.build.outputs.version }}"
+        echo "This will be PERMANENTLY published to PyPI"
+        echo "Releases cannot be deleted, only yanked"
+        echo "================================================"
+    
+    - name: Publish to PyPI
+      run: |
+        uv publish dist/*
+    
+    - name: Report PyPI URL
+      run: |
+        echo "✅ Published to PyPI!"
+        echo "🔗 View at: https://pypi.org/project/oasis-rofl-client-py-rube/"
+        echo ""
+        echo "To install:"
+        echo "  uv pip install oasis-rofl-client-py-rube"
