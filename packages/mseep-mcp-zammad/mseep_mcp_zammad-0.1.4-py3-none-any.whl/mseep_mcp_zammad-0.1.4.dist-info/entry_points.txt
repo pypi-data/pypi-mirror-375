@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-zammad = mcp_zammad.__main__:main
