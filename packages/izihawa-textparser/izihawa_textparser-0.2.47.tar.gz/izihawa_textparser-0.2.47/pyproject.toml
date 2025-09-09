@@ -1,0 +1,21 @@
+[project]
+name = "izihawa-textparser"
+version = "0.2.47"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiokit",
+    "beautifulsoup4>=4.13.3",
+    "ebooklib>=0.18",
+    "fire>=0.6.0",
+    "izihawa-textutils",
+    "markdownify==1.2.0",
+    "pypdf>=5.5.0",
+    "python-iso639",
+    "xmltodict>=0.14.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
