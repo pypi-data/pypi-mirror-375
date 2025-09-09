@@ -1,0 +1,43 @@
+[project]
+name = "mseep-bluesky-social-mcp"
+version = "0.1.1"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "atproto>=0.0.61",
+    "mcp[cli]>=1.9.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "requests>=2.32.3",
+    "trio>=0.30.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+bluesky-social-mcp = "server:main"
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.10",
+]
+
+[build-system]
+requires = [
+    "setuptools>=45",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = [
+    "server",
+]
