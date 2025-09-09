@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-signal-mcp
+Version: 0.1.4
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Requires-Dist: mcp>=1.6.0
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == 'test'
+Requires-Dist: python-dotenv>=1.0.0; extra == 'test'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
