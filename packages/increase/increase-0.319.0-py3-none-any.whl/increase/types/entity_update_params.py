@@ -1,0 +1,218 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from typing import Union
+from datetime import datetime
+from typing_extensions import Literal, Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
+
+__all__ = [
+    "EntityUpdateParams",
+    "Corporation",
+    "CorporationAddress",
+    "GovernmentAuthority",
+    "GovernmentAuthorityAddress",
+    "NaturalPerson",
+    "NaturalPersonAddress",
+    "RiskRating",
+    "ThirdPartyVerification",
+    "Trust",
+    "TrustAddress",
+]
+
+
+class EntityUpdateParams(TypedDict, total=False):
+    corporation: Corporation
+    """Details of the corporation entity to update.
+
+    If you specify this parameter and the entity is not a corporation, the request
+    will fail.
+    """
+
+    government_authority: GovernmentAuthority
+    """Details of the government authority entity to update.
+
+    If you specify this parameter and the entity is not a government authority, the
+    request will fail.
+    """
+
+    natural_person: NaturalPerson
+    """Details of the natural person entity to update.
+
+    If you specify this parameter and the entity is not a natural person, the
+    request will fail.
+    """
+
+    risk_rating: RiskRating
+    """
+    An assessment of the entity’s potential risk of involvement in financial crimes,
+    such as money laundering.
+    """
+
+    third_party_verification: ThirdPartyVerification
+    """A reference to data stored in a third-party verification service.
+
+    Your integration may or may not use this field.
+    """
+
+    trust: Trust
+    """Details of the trust entity to update.
+
+    If you specify this parameter and the entity is not a trust, the request will
+    fail.
+    """
+
+
+class CorporationAddress(TypedDict, total=False):
+    city: Required[str]
+    """The city of the address."""
+
+    line1: Required[str]
+    """The first line of the address. This is usually the street number and street."""
+
+    state: Required[str]
+    """
+    The two-letter United States Postal Service (USPS) abbreviation for the state of
+    the address.
+    """
+
+    zip: Required[str]
+    """The ZIP code of the address."""
+
+    line2: str
+    """The second line of the address. This might be the floor or room number."""
+
+
+class Corporation(TypedDict, total=False):
+    address: CorporationAddress
+    """The entity's physical address.
+
+    Mail receiving locations like PO Boxes and PMB's are disallowed.
+    """
+
+    name: str
+    """The legal name of the corporation."""
+
+
+class GovernmentAuthorityAddress(TypedDict, total=False):
+    city: Required[str]
+    """The city of the address."""
+
+    line1: Required[str]
+    """The first line of the address. This is usually the street number and street."""
+
+    state: Required[str]
+    """
+    The two-letter United States Postal Service (USPS) abbreviation for the state of
+    the address.
+    """
+
+    zip: Required[str]
+    """The ZIP code of the address."""
+
+    line2: str
+    """The second line of the address. This might be the floor or room number."""
+
+
+class GovernmentAuthority(TypedDict, total=False):
+    address: GovernmentAuthorityAddress
+    """The entity's physical address.
+
+    Mail receiving locations like PO Boxes and PMB's are disallowed.
+    """
+
+    name: str
+    """The legal name of the government authority."""
+
+
+class NaturalPersonAddress(TypedDict, total=False):
+    city: Required[str]
+    """The city of the address."""
+
+    line1: Required[str]
+    """The first line of the address. This is usually the street number and street."""
+
+    state: Required[str]
+    """
+    The two-letter United States Postal Service (USPS) abbreviation for the state of
+    the address.
+    """
+
+    zip: Required[str]
+    """The ZIP code of the address."""
+
+    line2: str
+    """The second line of the address. This might be the floor or room number."""
+
+
+class NaturalPerson(TypedDict, total=False):
+    address: NaturalPersonAddress
+    """The entity's physical address.
+
+    Mail receiving locations like PO Boxes and PMB's are disallowed.
+    """
+
+    name: str
+    """The legal name of the natural person."""
+
+
+class RiskRating(TypedDict, total=False):
+    rated_at: Required[Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]]
+    """
+    The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the risk
+    rating was performed.
+    """
+
+    rating: Required[Literal["low", "medium", "high"]]
+    """The rating given to this entity.
+
+    - `low` - Low
+    - `medium` - Medium
+    - `high` - High
+    """
+
+
+class ThirdPartyVerification(TypedDict, total=False):
+    reference: Required[str]
+    """The reference identifier for the third party verification."""
+
+    vendor: Required[Literal["alloy", "middesk", "oscilar"]]
+    """The vendor that was used to perform the verification.
+
+    - `alloy` - Alloy. See https://alloy.com for more information.
+    - `middesk` - Middesk. See https://middesk.com for more information.
+    - `oscilar` - Oscilar. See https://oscilar.com for more information.
+    """
+
+
+class TrustAddress(TypedDict, total=False):
+    city: Required[str]
+    """The city of the address."""
+
+    line1: Required[str]
+    """The first line of the address. This is usually the street number and street."""
+
+    state: Required[str]
+    """
+    The two-letter United States Postal Service (USPS) abbreviation for the state of
+    the address.
+    """
+
+    zip: Required[str]
+    """The ZIP code of the address."""
+
+    line2: str
+    """The second line of the address. This might be the floor or room number."""
+
+
+class Trust(TypedDict, total=False):
+    address: TrustAddress
+    """The entity's physical address.
+
+    Mail receiving locations like PO Boxes and PMB's are disallowed.
+    """
+
+    name: str
+    """The legal name of the trust."""
