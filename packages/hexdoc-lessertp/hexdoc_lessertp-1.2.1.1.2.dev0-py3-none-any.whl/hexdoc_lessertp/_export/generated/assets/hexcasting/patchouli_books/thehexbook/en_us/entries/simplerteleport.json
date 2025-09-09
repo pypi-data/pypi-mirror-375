@@ -1,0 +1,21 @@
+{
+    "name": "lessertp.page.simplertp.title",
+    "category": "hexcasting:patterns/spells",
+    "advancement": "hexcasting:enlightenment",
+    "icon": "minecraft:ender_eye",
+    "read_by_default": true,
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "lessertp.page.simplertp.introduction"
+        },
+        {
+            "type": "hexcasting:pattern",
+            "op_id": "lessertp:simpler_tp",
+            "anchor": "lessertp:simpler_tp",
+            "input": "entity, vec",
+            "output": "",
+            "text": "lessertp.page.simplertp.summary"
+        }
+    ]
+}
