@@ -1,0 +1,4 @@
+[console_scripts]
+gel-annotate = annotation.gui.gel_gui_wrapper:main
+gel-annotate-cli = annotation.cli_main:main
+gel-annotate-shortcut = annotation.scripts.shortcuts:main
