@@ -1,0 +1,27 @@
+version: "0.2"
+ignorePaths:
+  - .gitignore
+dictionaryDefinitions: []
+dictionaries: []
+words:
+  - aiohttp
+  - currentpage
+  - ddragon
+  - endpoit
+  - Hamburgão
+  - iebrlh
+  - itemset
+  - itemsets
+  - lcumadesimple
+  - mobalytics
+  - mypy
+  - pipx
+  - PROCESSENTRY
+  - selectolax
+  - simplerunes
+  - leaguewizard
+  - SNAPPROCESS
+  - Toolhelp
+  - venv
+ignoreWords: []
+import: []
