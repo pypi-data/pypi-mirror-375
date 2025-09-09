@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qa-util"
+version = "0.0.0"
+description = "will be replaced soon."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Wooyoung", email = "andy241822@gmail.com" }]
+requires-python = ">=3.9"
+
+# 기본 의존성 있으면 여기에 추가
+dependencies = [
+    "pytest>=8.4.2",
+    "pytest-playwright>=0.7.0",
+    "exceptiongroup>=1.3.0",
+    "rich>=13.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["qau*"]
