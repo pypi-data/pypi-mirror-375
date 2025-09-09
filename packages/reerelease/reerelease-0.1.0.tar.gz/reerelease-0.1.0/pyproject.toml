@@ -1,0 +1,184 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "reerelease"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Laurence DV", email = "laurencedv@realee.tech" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "typer>=0.16.1",
+  "rich>=14.1.0",
+  "jinja2>=3.1.6",
+]
+
+[project.urls]
+Documentation = "https://gitlab.com/real-ee/tool/reerelease#readme"
+Issues = "https://gitlab.com/real-ee/tool/reerelease/-/issues"
+Source = "https://gitlab.com/real-ee/tool/reerelease#"
+
+[project.scripts]
+reerelease = "reerelease.reerelease:cli"
+
+[tool.hatch.version]
+path = "src/reerelease/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest>=7.0.0",
+  "pytest-cov>=4.0.0",
+  "pytest-html>=3.0.0",  # Add this back for HTML reports
+  "genbadge[coverage,tests]>=1.1.0",
+  "ruff>=0.5.0",         # Modern linting and formatting
+  "mypy>=1.0.0",         # Type checking
+  "build>=1.0.0",        # Building packages
+  "twine>=5.0.0",        # Uploading to PyPI
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "pytest --cov --cov-report=xml --cov-report=lcov {args:tests}"
+test-report = "pytest --html=docs/test-report.html --self-contained-html {args:tests}"
+test-full = "pytest --cov --cov-report=xml --cov-report=lcov --cov-report=html:docs/coverage-report --html=docs/test-report.html --self-contained-html --junitxml=junit.xml {args:tests}"
+reports = "test-full"  # New convenient alias
+cov = "test-cov"
+coverage = "cov"
+badge = "python tools/update_badge.py"
+setup-hooks = "python tools/setup_hooks.py"
+setup = ["setup-hooks"]
+lint = "ruff check {args:.}"
+format = "ruff format {args:.}"
+typecheck = "mypy {args:src}"
+quality = ["format", "lint", "typecheck", "test"]
+build = "python -m build"
+check-dist = "twine check dist/*"
+publish-test = "twine upload --repository testpypi dist/*"
+publish = "twine upload dist/*"
+release = ["quality", "build", "check-dist"]
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/reerelease tests}"
+
+[tool.coverage.run]
+source_pkgs = ["reerelease"]
+branch = true
+parallel = true
+omit = [
+  "src/reerelease/__about__.py",
+  "tests/*",
+]
+
+[tool.pytest.ini_options]
+addopts = "--color=yes"
+
+[tool.coverage.paths]
+reerelease = ["src/reerelease", "*/reerelease/src/reerelease"]
+tests = ["tests", "*/reerelease/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+# Ruff configuration
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.9"
+strict = true  # Enable all strict checks
+
+# Focus only on source code, exclude everything else
+files = ["src/"]
+exclude = [
+    "tests/.*",      # Tests can be less strict
+    "tools/.*",      # Tools/scripts can be dynamic
+    "setup.py",
+    "conftest.py",
+    "build/.*",
+    "dist/.*"
+]
+
+# Essential settings for clean code
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_unreachable = true
+ignore_missing_imports = true  # Still ignore 3rd party imports
+
+# Additional strict checks
+disallow_any_unimported = false  # Can be too strict for practical use
+disallow_any_expr = false       # Can be too strict for practical use
+
+[tool.coverage.html]
+directory = "docs/coverage-report"
+title = "Reerelease Test Coverage Report"
+
+[tool.coverage.lcov]
+output = "coverage.lcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/reerelease"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/reerelease" = "reerelease"
+
+[tool.hatch.build]
+include = [
+  "src/reerelease/**/*.py",
+  "src/reerelease/templates/**/*.j2",
+]
