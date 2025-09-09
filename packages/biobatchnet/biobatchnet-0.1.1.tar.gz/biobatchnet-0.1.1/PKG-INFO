@@ -1,0 +1,154 @@
+Metadata-Version: 2.4
+Name: biobatchnet
+Version: 0.1.1
+Summary: A deep learning framework for batch effect correction in biological data
+Author: Haochen Liu
+Author-email: Haochen Liu <haiping.liu.uom@gmail.com>
+Maintainer-email: Haochen Liu <haiping.liu.uom@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/Manchester-HealthAI/BioBatchNet
+Project-URL: Documentation, https://github.com/Manchester-HealthAI/BioBatchNet/blob/main/USAGE.md
+Project-URL: Repository, https://github.com/Manchester-HealthAI/BioBatchNet
+Project-URL: Bug Tracker, https://github.com/Manchester-HealthAI/BioBatchNet/issues
+Keywords: batch-effect,deep-learning,single-cell,IMC,scRNA-seq,bioinformatics
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=1.10.0
+Requires-Dist: numpy>=1.19.0
+Requires-Dist: pandas>=1.2.0
+Requires-Dist: scikit-learn>=0.24.0
+Requires-Dist: scipy>=1.6.0
+Requires-Dist: tqdm>=4.60.0
+Requires-Dist: pyyaml>=5.4.0
+Requires-Dist: anndata>=0.8.0
+Requires-Dist: scanpy>=1.8.0
+Requires-Dist: matplotlib>=3.3.0
+Requires-Dist: seaborn>=0.11.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: black>=21.0; extra == "dev"
+Requires-Dist: flake8>=3.9; extra == "dev"
+Requires-Dist: mypy>=0.900; extra == "dev"
+Requires-Dist: pre-commit>=2.15.0; extra == "dev"
+Provides-Extra: full
+Requires-Dist: scib>=1.0.0; extra == "full"
+Requires-Dist: wandb>=0.12.0; extra == "full"
+Provides-Extra: docs
+Requires-Dist: sphinx>=4.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0; extra == "docs"
+Requires-Dist: nbsphinx>=0.8; extra == "docs"
+Dynamic: author
+Dynamic: license-file
+Dynamic: requires-python
+
+# BioBatchNet
+
+## Installation
+### Clone the Repository
+
+Clone the repository to your local machine:
+
+```bash
+git clone https://github.com/Manchester-HealthAI/BioBatchNet](https://github.com/Manchester-HealthAI/BioBatchNet
+```
+
+### Set Up the Environment
+
+Create a virtual environment and install dependencies using `environment.yml`:
+
+#### Using Conda:
+
+```bash
+conda env create -f environment.yml
+conda activate bbn
+```
+
+## BioBatchNet Usage
+
+### Enter BioBatchNet
+```bash
+cd BioBatchNet
+```
+
+### Construct dataset
+For the IMC dataset, place the dataset inside:
+
+```bash
+mv <your-imc-dataset> Data/IMC/
+```
+
+For scRNA-seq data, create a folder named `gene_data` inside the `Data` directory and place the dataset inside:
+
+```bash
+mkdir -p Data/gene_data/
+mv <your-scrna-dataset> Data/scRNA-seq/
+```
+
+### Batch effect correction
+
+**For IMC Data**
+To process **IMC** data, run the following command to train BioBatchNet:
+```bash
+python imc.py -c config/IMC/IMMUcan.yaml
+```
+
+**For scRNA-seq Data**
+To process **scRNA-seq** data, modify the dataset, run the following command to train BioBatchNet:
+```bash
+python scrna.py -c config/IMC/macaque.yaml
+```
+
+## CPC Usage
+
+CPC utilizes the **embedding output from BioBatchNet** as input. The provided sample data consists of the **batch effect corrected embedding of IMMUcan IMC data**.
+
+To use CPC, ensure you are running in the **same environment** as BioBatchNet.  
+All experiment results can be found in the following directory:
+
+```bash
+cd CPC/IMC_experiment
+```
+
+✅ **Key Notes**:  
+- CPC requires embeddings from BioBatchNet as input.  
+- Sample data includes batch-corrected IMMUcan IMC embeddings.  
+- Ensure the **same computational environment** as BioBatchNet before running CPC.  
+
+## 📂 Data Download Link
+
+To use BioBatchNet for **batch effect correction**, you need to download the corresponding dataset and place it in the appropriate directory.
+
+### **🔹 Download scRNA-seq Data**
+The **scRNA-seq dataset** is available on OneDrive. Click the link below to download:
+
+🔗 [Download scRNA-seq Data](https://drive.google.com/drive/folders/1m4AkNc_KMadp7J_lL4jOQj9DdyKutEZ5?usp=sharing)
+
+### **🔹 Download IMC Data**
+The **IMC dataset** can be accessed from the **Bodenmiller Group IMC datasets repository**. Visit the link below to explore and download the datasets:
+
+🔗 [IMC Datasets - Bodenmiller Group](https://github.com/BodenmillerGroup/imcdatasets)
+
+
+## To Do List
+
+- [x] Data download link
+- [ ] Checkpoint
+- [ ] Benchmark method results
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
