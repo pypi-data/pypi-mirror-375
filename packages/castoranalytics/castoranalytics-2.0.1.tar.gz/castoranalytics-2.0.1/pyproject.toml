@@ -1,0 +1,29 @@
+[project]
+name = "castoranalytics"
+version = "2.0.1"
+description = ""
+authors = [
+    {name = "Ralph Brecheisen", email = "r.brecheisen@maastrichtuniversity.nl"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "pyside6-essentials>=6.9",
+    "oauthlib>=3.2",
+    "requests-oauthlib>=2.0",
+    "pandas>=2.3.2",
+    "openpyxl>=3.1.5",
+]
+
+[tool.poetry]
+packages = [{include = "castoranalytics", from = "src"}]
+
+[tool.poetry.scripts]
+castoranalytics = "castoranalytics.app:main"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
