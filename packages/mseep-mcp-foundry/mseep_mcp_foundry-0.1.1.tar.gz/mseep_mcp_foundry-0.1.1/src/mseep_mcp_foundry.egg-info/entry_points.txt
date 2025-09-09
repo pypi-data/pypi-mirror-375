@@ -1,0 +1,2 @@
+[console_scripts]
+run-azure-ai-foundry-mcp = mcp_foundry.__main__:main
