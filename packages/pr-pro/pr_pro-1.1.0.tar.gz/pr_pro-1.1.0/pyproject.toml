@@ -1,0 +1,54 @@
+[project]
+name = "pr-pro"
+version = "1.1.0"
+description = "PRogramming PROgrams is a Python library for defining training programs."
+readme = "README.md"
+authors = [
+    { name = "Roland Stolz", email = "roland.stolz9@gmail.com" }
+]
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pandas>=2.3.0",
+    "pydantic>=2.11.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/rolandstolz/pr_pro"
+
+
+[project.optional-dependencies]
+vis = [
+    "fpdf2>=2.8.4",
+    "matplotlib>=3.10.3",
+    "streamlit>=1.45.1",
+    "watchdog>=6.0.0",
+]
+dev = [
+    "pytest>=8.4.0",
+    "pytest-cov>=6.1.1",
+]
+
+[project.scripts]
+pr-pro = "pr_pro:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+indent-width = 4
+format.quote-style = "single"
+target-version = "py313"
+
+[tool.coverage.run]
+omit = [
+    "tests/*",
+    "examples/*",
+    "src/pr_pro/streamlit_vis/*"
+]
