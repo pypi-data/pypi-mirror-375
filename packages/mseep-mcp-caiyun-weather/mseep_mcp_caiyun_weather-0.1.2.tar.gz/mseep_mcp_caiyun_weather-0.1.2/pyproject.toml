@@ -1,0 +1,43 @@
+[project]
+name = "mseep-mcp-caiyun-weather"
+version = "0.1.2"
+description = "Caiyun Weather MCP Server"
+maintainers = [
+    { name = "adamwen", email = "adamwen829@gmail.com" },
+    { name = "tssujt", email = "xujiawei@caiyunapp.com" },
+    { name = "caiyunapp", email = "oss@caiyunapp.com" },
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.5.0",
+    "pydantic>=2.10.6",
+]
+keywords = [
+    "MCP",
+    "Weather",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/caiyunapp/mcp-caiyun-weather"
+Issues = "https://github.com/caiyunapp/mcp-caiyun-weather/issues"
+
+[project.scripts]
+mcp-caiyun-weather = "mcp_caiyun_weather:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
