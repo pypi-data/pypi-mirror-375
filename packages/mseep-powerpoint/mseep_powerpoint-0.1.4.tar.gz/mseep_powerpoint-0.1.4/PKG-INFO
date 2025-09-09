@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-powerpoint
+Version: 0.1.4
+Summary: A MCP server project that creates powerpoint presentations
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.3.0
+Requires-Dist: pillow>=11.1.0
+Requires-Dist: python-pptx>=1.0.2
+Requires-Dist: requests>=2.32.3
+Requires-Dist: together>=1.4.1
+Dynamic: license-file
+
+Package managed by MseeP.ai

@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_powerpoint.egg-info/PKG-INFO
+src/mseep_powerpoint.egg-info/SOURCES.txt
+src/mseep_powerpoint.egg-info/dependency_links.txt
+src/mseep_powerpoint.egg-info/entry_points.txt
+src/mseep_powerpoint.egg-info/requires.txt
+src/mseep_powerpoint.egg-info/top_level.txt
+src/powerpoint/__init__.py
+src/powerpoint/chart_manager.py
+src/powerpoint/presentation_manager.py
+src/powerpoint/server.py
+src/powerpoint/vision_manager.py
