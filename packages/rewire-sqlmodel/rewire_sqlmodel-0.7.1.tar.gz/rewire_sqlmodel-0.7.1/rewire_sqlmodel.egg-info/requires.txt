@@ -1,0 +1,15 @@
+sqlmodel>=0.0.14
+rewire
+sqlalchemy_utils
+
+[dev]
+aiosqlite
+alembic
+fastapi
+sqlalchemy_utils
+
+[fastapi]
+fastapi
+
+[migrations]
+alembic
