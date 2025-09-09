@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-ragflow-mcp
+Version: 0.1.5
+Summary: Simple MCP server for RAGFlow
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp
+Requires-Dist: uvicorn
+Requires-Dist: starlette
+Requires-Dist: ragflow-sdk
+Requires-Dist: dotenv
+Dynamic: license-file
+
+Package managed by MseeP.ai
