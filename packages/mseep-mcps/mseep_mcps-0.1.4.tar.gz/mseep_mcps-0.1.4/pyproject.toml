@@ -1,0 +1,47 @@
+[project]
+name = "mseep-mcps"
+version = "0.1.4"
+description = "Model Context Protocol server for continue.dev"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp>=0.4.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcps = "mcps:main"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mcps",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "test",
+]
+pythonpath = [
+    "src/mcps",
+    "test",
+]
+asyncio_mode = "auto"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
