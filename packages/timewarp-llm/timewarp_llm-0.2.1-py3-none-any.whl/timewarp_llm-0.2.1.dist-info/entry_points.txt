@@ -1,0 +1,3 @@
+[console_scripts]
+timewarp = timewarp.cli:main
+timewarp-repl = timewarp.interactive_debug:main
