@@ -1,0 +1,278 @@
+html {
+  min-height: 100vh;
+  overflow-x: hidden; // Prevent horizontal scrollbars when using full-width containers
+}
+
+:root {
+  --nav-color: #{$delib-primary};
+  --links-color: #{$delib-primary};
+}
+
+body { // Pull the footer to the bottom of the page
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .outer-wrapper {
+    flex: 1;
+  }
+
+  background-color: $grey-100;
+}
+
+.outer-wrapper:before {
+  content: " ";
+  display: block;
+  width: 100%;
+  z-index: 1040; // Same as plone edit bar
+  border-top: 16px solid var(--nav-color);
+  position: fixed;
+}
+
+#mainnavigation {
+  background-color: $white;
+  box-shadow: $shadow-md;
+  margin-bottom: 1em;
+}
+
+#content > header {
+  margin-bottom: 0;
+}
+
+#section-byline {
+  margin-bottom: 1em;
+  color: $grey-600;
+  font-style: italic;
+}
+
+#content-header {
+  margin-top: 16px;
+  box-shadow: $shadow-md;
+  background: $white;
+}
+
+#content {
+  h1 {
+    @extend .container;
+    @include font-size(2.0rem);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid $grey-300;
+    font-weight: 500;
+  }
+
+  h2 {
+    @include font-size(1.5rem);
+    font-weight: 500;
+  }
+
+  h3 {
+    @include font-size(1.17rem);
+    font-weight: 500;
+  }
+
+  h4 {
+    @include font-size(0.9rem);
+    font-weight: 500;
+  }
+
+  h5 {
+    @include font-size(0.75rem);
+    font-weight: 500;
+  }
+}
+
+.documentDescription, .documentByline, #content header .lead {
+  margin-bottom: 0.75rem;
+  font-style: italic;
+  color: $grey-700;
+  font-size: 1.1em;
+}
+
+#main-container {
+  margin-bottom: 0;
+}
+
+#content-core {
+  margin-bottom: 0;
+}
+
+//.portaltype-publication.template-view #content-core,
+.template-document_view #content-core,
+.template-contact-info #content-core,
+.template-contact-info #content-core,
+.template-sitemap #content-core {
+  @extend .card;
+  padding: 1.5em 2.5em;
+}
+
+
+.placeholder {
+  border-radius: $rounded-sm;
+  opacity: 0.1;
+}
+
+.formControls {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+
+  > * {
+    margin-left: 0.25em;
+  }
+}
+
+.filled-link {
+  text-decoration: none !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%
+}
+
+
+.dark {
+  background-color: $grey-800;
+
+  #mainnavigation {
+    background-color: $grey-800;
+  }
+
+  #content-header {
+    background-color: $grey-900;
+  }
+
+  #section-byline {
+    color: $grey-200 !important;
+  }
+
+  .documentDescription, .documentByline, #content header .lead {
+    color: $grey-200;
+  }
+}
+
+textarea.form-control {
+  min-height: 300px;
+}
+
+#viewlet-below-content-title > a[title="Horodaté"] {
+  display: none;
+}
+
+// TODO: Remove this when we have a better solution
+
+.help-link {
+  font-style: italic;
+  text-decoration: none;
+  color: $grey-600;
+  font-size: 0.8rem;
+}
+
+.help-link:hover {
+  font-style: italic;
+  color: $grey-900;
+}
+
+
+.form-check-input:checked {
+  background-color: var(--links-color);
+  border-color: var(--links-color);
+}
+
+.form-check-input:focus {
+  border-color: #80bdd8;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 177, 0.25);
+}
+
+.datagridwidget-hidden-data {
+  display: none;
+  border-right: 1px solid;
+}
+
+.template-manage-settings, .template-manage-users-listing, .portaltype-institution.template-edit {
+  --grid-line-color: #eeeeef;
+  background-color: #ffffff;
+  background-image: linear-gradient(var(--grid-line-color) 2px, transparent 2px),
+  linear-gradient(90deg, var(--grid-line-color) 2px, transparent 2px),
+  linear-gradient(var(--grid-line-color) 1px, transparent 1px),
+  linear-gradient(90deg, var(--grid-line-color) 1px, #f8f9fa 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  /* Add these so the pseudo-element can sit atop your pattern */
+  position: relative;
+  z-index: 0;
+
+  &::before {
+    content: "";
+    /* Fill the entire area */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* Let clicks pass through */
+    pointer-events: none;
+    z-index: -1;
+    /* A gradient that’s fully opaque in the horizontal center,
+       then fades out to transparent at both edges */
+    background: linear-gradient(
+                    to right,
+                    rgba(248, 249, 250, 0) 0%,
+                    rgba(248, 249, 250, 1) 25%,
+                    rgba(248, 249, 250, 1) 75%,
+                    rgba(248, 249, 250, 0) 100%
+    );
+  }
+}
+
+// Document generator viewlet
+#action-bar {
+  margin: 1rem auto;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  text-align: left !important;
+  background: #e9ecef;
+  //display: flex;
+  position: relative;
+  box-shadow: $shadow-inner;
+
+  .action-section {
+    flex: 1;
+    padding: 0.5rem !important;
+  }
+
+  .action-section:not(:last-child) {
+    border-right: 1px solid #d9d9d9;
+  }
+
+  h2 {
+    font-size: 0.9rem;
+    color: #1c1c1c;
+    padding-bottom: 0.25rem !important;
+    padding-top: 0.5rem !important;
+    padding-left: 0.5rem !important;
+    border-bottom: 1px dashed #afafaf;
+  }
+
+  ul.action-bar-actions {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    li {
+      list-style: none;
+      margin-right: 0.5rem;
+      .btn {
+          font-size: 0.85rem !important;
+      }
+      .dropdown-item {
+        font-size: 0.85rem !important;
+      }
+    }
+    .dropdown-menu {
+      li {
+        margin-right: 0;
+      }
+    }
+  }
+}

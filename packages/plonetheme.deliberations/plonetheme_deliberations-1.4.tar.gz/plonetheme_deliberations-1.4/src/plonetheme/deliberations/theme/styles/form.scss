@@ -1,0 +1,271 @@
+#form:not(#login-form) {
+  .autotoc-nav {
+    position: sticky;
+    top: 4em;
+    padding: 0.2em;
+    background-color: $gray-200;
+    border: 1px solid $grey-400;
+    z-index: 1000;
+    border-radius: $rounded-md;
+    box-shadow: $shadow;
+
+    a {
+      color: $gray-700;
+      text-decoration: none;
+      border-radius: $rounded-md;
+      margin: 0;
+    }
+
+    a.active {
+      background-color: $grey-50;
+      color: $grey-900;
+      border: 1px solid $grey-200;
+      box-shadow: $shadow;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .formControls {
+    position: sticky;
+    bottom: 0.5em;
+    padding: 0.5em 0.5em;
+    background-color: $gray-200;
+    border: 1px solid $grey-400;
+    z-index: 1000;
+    border-radius: $rounded-md;
+    box-shadow: $shadow;
+  }
+}
+
+.modal-content {
+  .formControls {
+    display: none; // Weidly enough, the formControls is duplicated and empty insidethe modal
+  }
+}
+
+.actions-bar {
+  position: sticky;
+  bottom: 0.5em;
+  padding: 0.5em 0.5em;
+  background-color: $gray-200;
+  border: 1px solid $grey-400;
+  z-index: 1000;
+  border-radius: $rounded-md;
+  box-shadow: $shadow;
+}
+
+
+.form-label {
+  font-weight: $font-weight-bold;
+}
+
+.datagridwidget-block-edit-cell {
+  label > span:nth-child(1) {
+    font-weight: bold !important;
+  }
+
+  label > span.formHelp {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: var(--bs-secondary-color);
+  }
+
+  .datagridwidget-cell {
+    margin-bottom: 0em;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0.7em 1em 0.7em 1em;
+  }
+
+  .datagridwidget-cell:not(:last-child) {
+    border-bottom: 1px solid $grey-400;
+
+  }
+
+  .datagridwidget-cell input, select {
+    margin-top: 0.5em;
+  }
+
+}
+
+#formfield-form-widgets-template_settings {
+  thead {
+    display: none;
+  }
+}
+
+.pat-datagridfield {
+  border-radius: $rounded-md;
+  border: 1px solid $grey-400;
+  overflow: hidden;
+  background-color: $white;
+
+  thead tr th {
+    background-color: $gray-100;
+  }
+}
+
+
+.pm-named-image-widget {
+
+  background-color: $grey-100;
+
+  .card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-meta {
+    background-color: $grey-300;
+    border-radius: 0 0 $rounded $rounded;
+    display: flex;
+    justify-content: center;
+    color: $grey-900;
+
+    > * {
+      margin: 0.1em 0.5em;
+    }
+  }
+}
+#form:not(#login-form) {
+  .autotoc-nav {
+    position: sticky;
+    top: 4em;
+    padding: 0.2em;
+    background-color: $gray-200;
+    border: 1px solid $grey-400;
+    z-index: 1000;
+    border-radius: $rounded-md;
+    box-shadow: $shadow;
+
+    a {
+      color: $gray-700;
+      text-decoration: none;
+      border-radius: $rounded-md;
+      margin: 0;
+    }
+
+    a.active {
+      background-color: $grey-50;
+      color: $grey-900;
+      border: 1px solid $grey-200;
+      box-shadow: $shadow;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  .formControls {
+    position: sticky;
+    bottom: 0.5em;
+    padding: 0.5em 0.5em;
+    background-color: $gray-200;
+    border: 1px solid $grey-400;
+    z-index: 1000;
+    border-radius: $rounded-md;
+    box-shadow: $shadow;
+  }
+}
+
+.modal-content {
+  .formControls {
+    display: none; // Weidly enough, the formControls is duplicated and empty insidethe modal
+  }
+}
+
+.actions-bar {
+  position: sticky;
+  bottom: 0.5em;
+  padding: 0.5em 0.5em;
+  background-color: $gray-200;
+  border: 1px solid $grey-400;
+  z-index: 1000;
+  border-radius: $rounded-md;
+  box-shadow: $shadow;
+}
+
+
+.form-label {
+  font-weight: $font-weight-bold;
+}
+
+.datagridwidget-block-edit-cell {
+  label > span:nth-child(1) {
+    font-weight: bold !important;
+  }
+
+  label > span.formHelp {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: var(--bs-secondary-color);
+  }
+
+  .datagridwidget-cell {
+    margin-bottom: 0em;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0.7em 1em 0.7em 1em;
+  }
+
+  .datagridwidget-cell:not(:last-child) {
+    border-bottom: 1px solid $grey-400;
+
+  }
+
+  .datagridwidget-cell input, select {
+    margin-top: 0.5em;
+  }
+
+}
+
+#formfield-form-widgets-template_settings {
+  thead {
+    display: none;
+  }
+}
+
+.pat-datagridfield {
+  border-radius: $rounded-md;
+  border: 1px solid $grey-400;
+  overflow: hidden;
+  background-color: $white;
+
+  thead tr th {
+    background-color: $gray-100;
+  }
+}
+
+
+.pm-named-image-widget {
+
+  background-color: $grey-100;
+  box-shadow: $shadow-inner;
+
+  .card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-meta {
+    background-color: $grey-300;
+    border-radius: 0 0 $rounded $rounded;
+    display: flex;
+    justify-content: center;
+    color: $grey-900;
+
+    > * {
+      margin: 0.1em 0.5em;
+    }
+  }
+
+  .no-image {
+    padding: 1em;
+    color: $grey-600;
+    font-weight: bold;
+  }
+}

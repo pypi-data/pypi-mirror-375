@@ -1,0 +1,35 @@
+.card {
+  @extend .card;
+  border: 1px solid $gray-200;
+  border-radius: $rounded-md;
+  box-shadow: $shadow-md;
+  background-color: $white;
+}
+
+.dark {
+  .card {
+    background-color: $gray-900;
+    color: $white;
+    border: 1px solid $gray-700;
+  }
+}
+
+.card-link {
+  overflow: visible !important;
+  .filled-link {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    outline-style: solid;
+    outline-offset: 2px !important;
+    outline-color: transparent;
+    border-radius: $rounded-md;
+  }
+
+  .filled-link:hover, .filled-link:focus {
+    box-shadow: $shadow-sm;
+    //transform: translateY(2px);
+    outline-offset: 2px !important;
+    cursor: pointer;
+    outline-color: color-mix(in srgb, var(--nav-color), transparent 50%);
+  }
+}

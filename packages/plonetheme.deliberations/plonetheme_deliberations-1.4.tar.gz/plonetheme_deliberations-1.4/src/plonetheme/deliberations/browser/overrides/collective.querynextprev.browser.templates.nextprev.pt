@@ -1,0 +1,17 @@
+<div xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="collective.querynextprev"
+     id="querynextprev-navigation"
+   tal:condition="view/is_navigable">
+
+  <a tal:condition="view/previous_uids" tal:attributes="href string:${context/absolute_url}/@@go_to_previous_item"
+    id="query-nextprev-prev">
+    <i class="bi bi-chevron-left"></i> Précédent
+  </a>
+
+  <a tal:condition="view/next_uids" tal:attributes="href string:${context/absolute_url}/@@go_to_next_item" i18n:translate=""
+    id="query-nextprev-next">
+    Suivant
+    <i class="bi bi-chevron-right"></i>
+  </a>
+</div>
