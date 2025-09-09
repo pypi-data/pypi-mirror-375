@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: morethon
+Version: 0.0.0
+Summary: Interpreter for morethon language.
+Project-URL: Documentation, https://github.com/Chitaoji/morethon/blob/main/README.md
+Project-URL: Repository, https://github.com/Chitaoji/morethon/
+Author-email: Chitaoji <2360742040@qq.com>
+Maintainer-email: Chitaoji <2360742040@qq.com>
+License-Expression: BSD-3-Clause
+License-File: LICENSE
+Keywords: config
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
+# morethon
+Interpreter for morethon language.
+
+## Installation
+```sh
+$ pip install morethon
+```
+
+## Requirements
+```txt
+
+```
+
+## See Also
+### Github repository
+* https://github.com/Chitaoji/morethon/
+
+### PyPI project
+* https://pypi.org/project/morethon/
+
+## License
+This project falls under the BSD 3-Clause License.
+
+## History
+### v0.0.0
+* Initial release.

@@ -1,0 +1,7 @@
+close := (field a) => a
+open := (field a) => a
+
+ap := (field a) => [a]
+av := (field a) => [a]
+bp := (field a) => [a]
+bv := (field a) => [a]

@@ -1,0 +1,7 @@
+__add__ x y := (field a, b) => a -> b -> a $ b
+__min__ x y := (field a, b) => a -> b -> a $ b
+__mul__ x y := (field a, b) => a -> b -> a $ b
+__div__ x y := (field a, b) => a -> b -> a $ b
+__pow__ x y := (field a, b) => a -> b -> a $ b 
+
+abs x := (field a) => a -> a 
