@@ -1,0 +1,24 @@
+[project]
+name = "mseep-academic-search"
+version = "0.1.4"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.2.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-academic-search = "server:main"
+
+[tool.setuptools]
+py-modules = [
+    "server",
+]
