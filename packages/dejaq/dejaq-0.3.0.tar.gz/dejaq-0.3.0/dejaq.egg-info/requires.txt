@@ -1,0 +1,8 @@
+numpy
+tqdm
+
+[:platform_system != "Windows"]
+posix_ipc
+
+[:platform_system == "Windows"]
+pywin32
