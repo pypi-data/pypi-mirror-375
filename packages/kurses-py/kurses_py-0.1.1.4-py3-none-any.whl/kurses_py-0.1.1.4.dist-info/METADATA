@@ -1,0 +1,357 @@
+Metadata-Version: 2.1
+Name: kurses-py
+Version: 0.1.1.4
+Summary: This module simulates the ‘conio’ and ‘curses’ libraries to create text interfaces with color and cursor.
+Home-page: https://github.com/SealtielFreak/kurses.py
+Author: SealtielFreak
+Author-email: sealtielfreak@yandex.com
+License: LGPL 2.1
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# kurses.py
+![Python - Version](https://img.shields.io/badge/python-%3E%3D3.8-brightgreen)
+![PyPI - Version](https://img.shields.io/pypi/v/kurses-py?color=green&label=pip%20install%20kurses)
+![Python - Implementation](https://img.shields.io/pypi/implementation/kurses-py)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/kurses-py)
+
+This module uses SDL2 (or Pygame) to emulate the functions of the [conio](https://en.wikipedia.org/wiki/Conio.h) and [curses](https://en.wikipedia.org/wiki/Curses_(programming_library)) libraries, which are used to create text-based user interfaces. You can control the color and cursor of the text, as well as the position and size of the window, the bit depth, typography and text styles (underline, bold, italic and strikethrough).
+
+It is designed to offer a cross-platform solution for creating text-based applications, independent of the system where they run.
+
+## How to install it?
+You can install from pip:
+
+```
+pip install kurses-py
+```
+
+Or from GitHub repository:
+
+```
+pip install git+https://github.com/SealtielFreak/kurses.py.git
+```
+
+### Dependencies
+At the moment it is only implemented to work with SDL2 (PySDL2).
+
+```
+pip install pysdl2 pysdl2-dll
+```
+
+## Examples
+### [hello_world.py](examples/hello_world.py)
+
+```python
+# load module
+from kurses import VirtualTerminal
+
+# instance Virtual console
+term = VirtualTerminal(font_filename="ModernDOS8x16.ttf")  # load font resources
+stream = term.stream  # get main buffer console
+
+
+# define loop function
+def loop():
+    stream.resetall()  # restore default attributes in the buffer console
+
+    # set attributes of first string
+    stream.gotoxy(0, 0)  # go to position x: 0, y: 0
+    stream.set_background_color((255, 255, 255))  # set background color characters
+    stream.set_foreign_color((0, 0, 0))  # set foreign color
+    stream.print("Hello\n")  # print into buffer console
+
+    # set attributes of second string
+    stream.gotoxy(5, 1)  # go to position x: 5, y: 1
+    stream.italic(True)  # set true italic
+    stream.print("world!")  # print into buffer console, again
+
+
+# set loop function
+term.set_target(loop)
+
+# run all program
+term.main_loop()
+```
+### [keypressed.py](examples/keypressed.py)
+
+```python
+# load modules
+import random
+
+from kurses import VirtualTerminal
+
+# instance Virtual console
+console = VirtualTerminal("ModernDOS8x16.ttf")
+buffer = console.stream  # get buffer console
+
+# define global variables
+x, y = 0, 0
+
+
+# define loop function
+def loop():
+    global x, y
+
+    buffer.clrscr()
+    buffer.resetall()  # restore default attributes in the buffer console
+
+    # check key pressed
+    if "w" in console.keyspressed():
+        y -= 1
+    elif "s" in console.keyspressed():
+        y += 1
+    if "a" in console.keyspressed():
+        x -= 1
+    elif "d" in console.keyspressed():
+        x += 1
+
+    # all draw events of string with random colors
+    _x = x
+
+    for _c in "Random color":
+        buffer.set_foreign_color(tuple(random.randint(0, 255) for _ in range(3)))
+        buffer.set_background_color(tuple(random.randint(0, 255) for _ in range(3)))
+        buffer.gotoxy(_x, y)  # set position
+        buffer.cputs(_c)  # print character into buffer console
+        _x += 1
+
+
+# set loop function
+console.set_target(loop)
+
+# run all program
+console.main_loop()
+```
+## More examples
+
+### [asteroids.py](examples/asteroids.py)
+```python
+import random
+import time
+
+import kurses.stream
+from kurses import VirtualTerminal, StreamBuffer
+from kurses.font_resources import QualityFont
+
+SHIP = """\
+ |
+/0\\
+"""
+
+
+def draw_ship(x, y, buffer):
+    buffer.gotoxy(x, y)
+    buffer.set_foreign_color((255, 0, 255))
+    buffer.print(SHIP)
+    buffer.resetall()
+
+
+def random_asteroid(_x=(0, 80), _y=(0, 30)):
+    return (
+        random.randint(*_x),
+        random.randint(*_y),
+        random.randint(1, 2),
+        random.sample([(255, 255, 255), (255, 255, 0), (0, 0, 255), (0, 255, 255), (255, 0, 0), (0, 255, 0)], 1)[0],
+        random.sample("*", 1)[0],
+    )
+
+
+console = VirtualTerminal(font_filename="ModernDOS8x16.ttf", quality=QualityFont.LCD)
+
+main_buffer = console.stream
+
+score_buffer = StreamBuffer(40, 15, sx=2, sy=2, type_cursor=kurses.stream.TypeCursor.RECT)
+score_buffer.x = 0
+score_buffer.y = 0
+score_buffer.type_cursor = kurses.stream.TypeCursor.EMPTY
+
+asteroids = [random_asteroid() for _ in range(5)]
+
+x_ship, y_ship = random.randint(0, 70), random.randint(0, 30)
+
+life, score = 100, 0
+shoots = []
+
+
+def loop():
+    global x_ship, y_ship, life, score
+    rows, columns = main_buffer.buffersize
+
+    time.sleep(0.025)
+
+    for stream in console.streams:
+        stream.clrscr()
+
+    if life > 0:
+        if score >= 10:
+            _msg = "You win!"
+            main_buffer.bold(True)
+            main_buffer.cputsxy(40 - (len(_msg) // 2), 15, _msg)
+
+            main_buffer.resetall()
+
+            _msg = "Press SPACE for play again"
+            main_buffer.set_foreign_color((255, 255, 0))
+            main_buffer.cputsxy(40 - (len(_msg) // 2), 16, _msg)
+
+            main_buffer.resetall()
+
+            if "space" in console.keyspressed():
+                life = 100
+
+        else:
+            if "w" in console.keyspressed() and y_ship >= 0:
+                y_ship -= 1
+            elif "s" in console.keyspressed() and y_ship <= rows - 3:
+                y_ship += 1
+
+            if "a" in console.keyspressed() and x_ship >= 0:
+                x_ship -= 1
+            elif "d" in console.keyspressed() and x_ship <= columns - 3:
+                x_ship += 1
+
+            if "space" in console.keyspressed():
+                if len(shoots) == 0:
+                    shoots.append((x_ship, y_ship))
+
+            draw_ship(x_ship, y_ship, main_buffer)
+
+            for i, (_x, _y, speed, color, c) in enumerate(asteroids):
+                main_buffer.set_foreign_color(color)
+                main_buffer.putchxy(_x, _y, c)
+                main_buffer.resetall()
+
+                _y += speed
+
+                if _y > rows:
+                    _x = random.randint(0, columns)
+                    _y = 0
+
+                if _x in range(x_ship, x_ship + 3) and _y in range(y_ship, y_ship + 3):
+                    if c == '.':
+                        score += 1
+                    else:
+                        life -= 5
+
+                    asteroids.remove(asteroids[i])
+                    asteroids.append(random_asteroid(_y=(0, 0)))
+                else:
+                    asteroids[i] = _x, _y, speed, color, c
+
+            for i, (_x, _y) in enumerate(shoots):
+                _y -= 1
+                main_buffer.set_foreign_color((0, 255, 0))
+                main_buffer.putchxy(_x, _y, '0')
+                main_buffer.resetall()
+
+                if _y < 0:
+                    shoots.remove(shoots[i])
+                else:
+                    shoots[i] = _x, _y
+
+            for i, (_x, _y) in enumerate(shoots):
+                for j, (_xx, _yy, speed, color, c) in enumerate(asteroids):
+                    if _x == _xx and _y == _yy:
+                        asteroids.remove(asteroids[j])
+                        score += 1
+
+            _msg = f"life: {life}"
+            score_buffer.gotoxy(0, 0)
+            score_buffer.bold(True)
+            score_buffer.set_background_color((255, 0, 0))
+            score_buffer.set_foreign_color((255, 255, 0))
+            score_buffer.print(_msg)
+            score_buffer.resetall()
+
+            _msg = f"score: {score}"
+            score_buffer.gotoxy(40 - len(_msg), 0)
+            score_buffer.bold(True)
+            score_buffer.set_background_color((0, 0, 255))
+            score_buffer.set_foreign_color((255, 255, 255))
+            score_buffer.print(_msg)
+            score_buffer.resetall()
+
+    else:
+        _msg = "You lost!"
+        main_buffer.bold(True)
+        main_buffer.cputsxy(40 - (len(_msg) // 2), 15, _msg)
+
+        main_buffer.resetall()
+
+        _msg = "Press SPACE for play again"
+        main_buffer.set_foreign_color((255, 0, 0))
+        main_buffer.cputsxy(40 - (len(_msg) // 2), 16, _msg)
+
+        main_buffer.resetall()
+
+        if "space" in console.keyspressed():
+            life = 100
+
+
+if __name__ == '__main__':
+    console.streams.append(score_buffer)
+
+    console.title = "Asteroids"
+    console.set_target(loop)
+    console.main_loop()
+
+```
+
+### [runtime_target_example.py](examples/asteroids.py)
+```python
+import random
+import typing
+
+from kurses import VirtualTerminal
+from kurses.events import EventTargetRuntime
+
+term = VirtualTerminal(font_filename="ModernDOS8x16.ttf")
+stream = term.stream
+
+
+class MyTarget(EventTargetRuntime):
+    def __init__(self):
+        self.position = 0, 0
+
+    def load(self):
+        term.resizable = True
+        stream.resetall()
+
+    def update(self, dt):
+        x, y = self.position
+
+        stream.clrscr()
+
+        stream.gotoxy(x, y)
+        stream.set_foreign_color(tuple(random.randint(0, 255) for _ in range(3)))
+        stream.set_background_color(tuple(random.randint(0, 255) for _ in range(3)))
+        stream.print("Hello\n")
+
+        stream.gotoxy(x + 5, y + 1)
+        stream.italic(True)
+        stream.print("world!")
+
+    def key_down(self, key: chr):
+        print(f"Key down: {key}")
+
+    def key_up(self, key: chr):
+        print(f"Key up: {key}")
+
+    def mouse(self, position: typing.Tuple[int, int], click: int):
+        self.position = position
+
+    def exit(self):
+        stream.resetall()
+        stream.gotoxy(0, 0)
+        stream.set_foreign_color((255, 255, 255))
+        stream.print("Goodbye")
+
+
+if __name__ == "__main__":
+    term.set_runtime(MyTarget)
+
+    term.main_loop()
+
+```
