@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+src/TCviewer.egg-info/PKG-INFO
+src/TCviewer.egg-info/SOURCES.txt
+src/TCviewer.egg-info/dependency_links.txt
+src/TCviewer.egg-info/requires.txt
+src/TCviewer.egg-info/top_level.txt
+src/tcviewer/__init__.py
+src/tcviewer/materials.py
+src/tcviewer/mol_widget.py
+src/tcviewer/screen.py
+src/tcviewer/settings.py
