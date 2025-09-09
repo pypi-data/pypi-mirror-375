@@ -1,0 +1,17 @@
+tyro
+torch
+tqdm
+opencv-python
+trimesh
+transforms3d
+matplotlib
+urchin
+ninja>=1.11
+
+[dev]
+black
+isort
+pre-commit
+
+[sim-maniskill]
+mani_skill-nightly
