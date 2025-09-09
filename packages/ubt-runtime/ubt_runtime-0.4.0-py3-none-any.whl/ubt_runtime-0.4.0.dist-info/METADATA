@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: ubt_runtime
+Version: 0.4.0
+Summary: Shared pyarmor runtime for ubTrace python packages
+Author-email: team useblocks <info@useblocks.com>
+Maintainer-email: Marco Heinemann <marco.heinemann@useblocks.com>
+Requires-Python: ~=3.12
+Description-Content-Type: text/markdown
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Documentation
+License-File: LICENSE
+
+# Shared ubCode pyarmor runtime
+
+Shared pyarmor runtime as per
+https://pyarmor.readthedocs.io/en/latest/reference/man.html#pyarmor-gen-runtime
+
+# Build shared runtime
+
+Call
+
+	rye run runtime:generate
+
+# Register pyarmor license
+
+Pyarmor needs a license to run. It must be registered on the individual machines and in the CI.
+Call
+
+	rye run license:register
+
+to register the license on the current machine. It will check if the license is already registered and
+register it if not.
+
+# codesign for macOS
+
+When building the package on Linux, the codesign command is not available:
+
+	WARNING  codesign command failed with:
+	[Errno 2] No such file or directory: 'codesign'
+
+Check how to fix this issue, either by postponing the codesign command to a MacOS user or by generating
+the whole runtime package on MacOS.
+
