@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+reorder_editable/__init__.py
+reorder_editable/__main__.py
+reorder_editable/core.py
+reorder_editable/py.typed
+reorder_editable.egg-info/PKG-INFO
+reorder_editable.egg-info/SOURCES.txt
+reorder_editable.egg-info/dependency_links.txt
+reorder_editable.egg-info/entry_points.txt
+reorder_editable.egg-info/requires.txt
+reorder_editable.egg-info/top_level.txt
+tests/test_reorder_editable.py

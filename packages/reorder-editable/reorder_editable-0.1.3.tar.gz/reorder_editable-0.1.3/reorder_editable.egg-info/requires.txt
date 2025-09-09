@@ -1,0 +1,6 @@
+click>=8.0
+
+[testing]
+flake8
+mypy
+pytest
