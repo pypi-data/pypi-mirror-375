@@ -1,0 +1,1627 @@
+{
+    "search_metadata": {
+        "id": "68be72714a0898d6b6c0d014",
+        "status": "Success",
+        "json_endpoint": "https://serpapi.com/searches/58d7628b7e67e8d4/68be72714a0898d6b6c0d014.json",
+        "pixel_position_endpoint": "https://serpapi.com/searches/58d7628b7e67e8d4/68be72714a0898d6b6c0d014.json_with_pixel_position",
+        "created_at": "2025-09-08 06:06:41 UTC",
+        "processed_at": "2025-09-08 06:06:41 UTC",
+        "google_url": "https://www.google.com/search?q=Coffee&oq=Coffee&uule=w+CAIQICIaQXVzdGluLFRleGFzLFVuaXRlZCBTdGF0ZXM&hl=en&gl=us&sourceid=chrome&ie=UTF-8",
+        "raw_html_file": "https://serpapi.com/searches/58d7628b7e67e8d4/68be72714a0898d6b6c0d014.html",
+        "total_time_taken": 2.29
+    },
+    "search_parameters": {
+        "engine": "google",
+        "q": "Coffee",
+        "location_requested": "Austin, Texas, United States",
+        "location_used": "Austin,Texas,United States",
+        "google_domain": "google.com",
+        "hl": "en",
+        "gl": "us",
+        "device": "desktop"
+    },
+    "search_information": {
+        "query_displayed": "Coffee",
+        "total_results": 3380000000,
+        "time_taken_displayed": 0.35,
+        "organic_results_state": "Results for exact spelling",
+        "results_for": "Austin, TX"
+    },
+    "local_map": {
+        "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&tbm=lcl&q=Coffee&rflfq=1&num=10&uule=w+CAIQICIaQXVzdGluLFRleGFzLFVuaXRlZCBTdGF0ZXM&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QtgN6BAgyEAM",
+        "image": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/1440a5ac62d0aa27110540efeda04a8a.png",
+        "gps_coordinates": {
+            "latitude": 30.31954415,
+            "longitude": -97.73574829
+        }
+    },
+    "local_results": {
+        "places": [
+            {
+                "position": 1,
+                "rating": 4.5,
+                "reviews": 1500,
+                "reviews_original": "(1.5K)",
+                "price": "$1–10",
+                "description": "\"Great coffee, friendly staff, calm oasis from the heat!\"",
+                "lsig": "AB86z5ULyBs2TVBuZLquC243_dvm",
+                "thumbnail": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/0c1dab4492ca88e0b93e21b07d1c397c4287bdba9ac20f9d56d98ac9d3bfe384ca82a62cb13867cd.jpeg",
+                "place_id": "16212840284195723418",
+                "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&ludocid=16212840284195723418&q=Coffee",
+                "gps_coordinates": {
+                    "latitude": 30.256083,
+                    "longitude": -97.74623
+                },
+                "title": "Bennu Coffee on Congress",
+                "type": "Cafe",
+                "address": "515 S Congress Ave"
+            },
+            {
+                "position": 2,
+                "rating": 4.5,
+                "reviews": 2400,
+                "reviews_original": "(2.4K)",
+                "price": "$1–10",
+                "description": "\"The atmosphere is nice, the people cool, and the coffee was delicious.\"",
+                "lsig": "AB86z5WCLZhGamycyguuCv2gmldr",
+                "thumbnail": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/0c1dab4492ca88e0b93e21b07d1c397c174a36f444daecdb18519f5c238feb0532e6e979790d9913.jpeg",
+                "place_id": "140078896924485689",
+                "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&ludocid=140078896924485689&q=Coffee",
+                "gps_coordinates": {
+                    "latitude": 30.318579,
+                    "longitude": -97.72449
+                },
+                "title": "Epoch Coffee",
+                "type": "Coffee shop",
+                "address": "221 W N Loop Blvd"
+            },
+            {
+                "position": 3,
+                "rating": 4.6,
+                "reviews": 2400,
+                "reviews_original": "(2.4K)",
+                "price": "$1–10",
+                "description": "\"Amazing place - coffee is great- food is delicious & the patio is wonderful.\"",
+                "lsig": "AB86z5WoV54MYHFVQZJdyMkvbFu3",
+                "thumbnail": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/0c1dab4492ca88e0b93e21b07d1c397c1afc8128cbb789a7d9752577da8677634e7794b542c25f0c.jpeg",
+                "place_id": "15035462485940050278",
+                "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&ludocid=15035462485940050278&q=Coffee",
+                "gps_coordinates": {
+                    "latitude": 30.241714,
+                    "longitude": -97.72694
+                },
+                "title": "The Buzz Mill",
+                "type": "Bar",
+                "address": "1505 Town Creek Dr"
+            }
+        ],
+        "more_locations_link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&tbm=lcl&q=Coffee&rflfq=1&num=10&uule=w+CAIQICIaQXVzdGluLFRleGFzLFVuaXRlZCBTdGF0ZXM&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QjGp6BAg0EAE"
+    },
+    "knowledge_graph": {
+        "title": "Coffee",
+        "type": "Beverages",
+        "kgmid": "/m/02vqfm",
+        "knowledge_graph_search_link": "https://www.google.com/search?kgmid=/m/02vqfm&hl=en-US&q=Coffee",
+        "serpapi_knowledge_graph_search_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en-US&kgmid=%2Fm%2F02vqfm&location=Austin%2C+Texas%2C+United+States&q=Coffee",
+        "header_images": [
+            {
+                "image": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/8b6bd113c1e2f4ea1d2e041169cc9db0452a609d740c9d71eaca6a7df59f3db2ca125aeb5f462e36.webp",
+                "source": "https://en.wikipedia.org/wiki/Coffee"
+            },
+            {
+                "image": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/8b6bd113c1e2f4ea1d2e041169cc9db0452a609d740c9d71d456b581cf50a1c205643ec42f236a56.webp",
+                "source": "https://www.bbcgoodfood.com/recipes/collection/coffee-recipes"
+            },
+            {
+                "image": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/8b6bd113c1e2f4ea1d2e041169cc9db0452a609d740c9d71e8871eeb83db7298fef76017a85750e0.webp",
+                "source": "https://www.americanolounge.com/what-is-american-style-coffee/"
+            },
+            {
+                "image": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/8b6bd113c1e2f4ea1d2e041169cc9db0452a609d740c9d7188e79b0824d9081cd8778c4619369183.webp",
+                "source": "https://en.wikipedia.org/wiki/Coffee_bean"
+            }
+        ],
+        "description": "Coffee is a beverage brewed from roasted, ground coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content, but decaffeinated coffee is also commercially available. There are also various coffee substitutes.",
+        "source": {
+            "name": " Wikipedia",
+            "link": "https://en.wikipedia.org/wiki/Coffee"
+        },
+        "acidity_level": "between 4.85-5.10 stonestreetcoffee.com",
+        "acidity_level_links": [
+            {
+                "text": "stonestreetcoffee.com",
+                "link": "https://stonestreetcoffee.com/blogs/brooklyn-coffee-academy/is-your-coffee-too-acidic"
+            }
+        ],
+        "sources_include": "USDAUSDAUSDAUSDAUSDAUSDAUSDACoffee1 Calories - 1 cup (8 fl oz) (237 g)",
+        "sources_include_links": [
+            {
+                "text": "USDA",
+                "link": "https://fdc.nal.usda.gov/food-details/171890/nutrients"
+            },
+            {
+                "text": "USDA",
+                "link": "https://fdc.nal.usda.gov/food-details/171889/nutrients"
+            },
+            {
+                "text": "USDA",
+                "link": "https://fdc.nal.usda.gov/food-details/171891/nutrients"
+            },
+            {
+                "text": "USDA",
+                "link": "https://fdc.nal.usda.gov/food-details/171893/nutrients"
+            },
+            {
+                "text": "USDA",
+                "link": "https://fdc.nal.usda.gov/food-details/174134/nutrients"
+            },
+            {
+                "text": "USDA",
+                "link": "https://fdc.nal.usda.gov/"
+            },
+            {
+                "text": "USDA",
+                "link": "https://fdc.nal.usda.gov/food-details/174135/nutrients"
+            }
+        ],
+        "list": {
+            "total_fat": [
+                "0 g",
+                "0%"
+            ],
+            "cholesterol": [
+                "0 mg",
+                "0%"
+            ],
+            "sodium": [
+                "5 mg",
+                "0%"
+            ],
+            "potassium": [
+                "116 mg",
+                "3%"
+            ],
+            "total_carbohydrate": [
+                "0 g",
+                "0%"
+            ],
+            "protein": [
+                "0.3 g",
+                "0%"
+            ],
+            "caffeine": [
+                "95 mg"
+            ]
+        }
+    },
+    "immersive_products": [
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTGvK-Xn1eRFNzafl1rcySej8rtPQUguq6tY_ImgvxTAwjKK-0T6ouDim-ipNUPQJsS3Nr39oPb9Q98d79VFOcx5hqH4wRQQ-EZC7aVA99zBUsrdNj6pgfP",
+            "source_logo": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn%3AANd9GcRNCLCmT5112kcRABKhpJ_JT187W-vdYD1VXhY2uYDAIDL3LzSg1F8aQPuP1Fmtttkoek4kVpoCYicX8bo-UvlltFxTdx0k3dg",
+            "source": "Spec's",
+            "title": "Community Coffee Breakfast Blend Medium Roast Ground Coffee 32 oz",
+            "rating": 4.7,
+            "reviews": 714,
+            "price": "$8.94",
+            "extracted_price": 8.94,
+            "location": "Also nearby",
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiIiwiY2F0YWxvZ2lkIjoiMjk3ODY5MzY5NjgxNjAxNTA3OSIsImhlYWRsaW5lT2ZmZXJEb2NpZCI6IjEwMTkxOTQyNjIzMDQ0NzE0NjI2IiwiaW1hZ2VEb2NpZCI6IjE3MjIwMDk3NTYyOTI5NDY1MjMiLCJyZHMiOiJQQ18xODM1Mjg0NDIxMjU1NjY3MDQ1MnxQUk9EX1BDXzE4MzUyODQ0MjEyNTU2NjcwNDUyIiwicXVlcnkiOiJDb2ZmZWUiLCJncGNpZCI6IjE4MzUyODQ0MjEyNTU2NjcwNDUyIiwibWlkIjoiNTc2NDYyODEwNTI3ODk1ODQyIiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiIiwiY2F0YWxvZ2lkIjoiMjk3ODY5MzY5NjgxNjAxNTA3OSIsImhlYWRsaW5lT2ZmZXJEb2NpZCI6IjEwMTkxOTQyNjIzMDQ0NzE0NjI2IiwiaW1hZ2VEb2NpZCI6IjE3MjIwMDk3NTYyOTI5NDY1MjMiLCJyZHMiOiJQQ18xODM1Mjg0NDIxMjU1NjY3MDQ1MnxQUk9EX1BDXzE4MzUyODQ0MjEyNTU2NjcwNDUyIiwicXVlcnkiOiJDb2ZmZWUiLCJncGNpZCI6IjE4MzUyODQ0MjEyNTU2NjcwNDUyIiwibWlkIjoiNTc2NDYyODEwNTI3ODk1ODQyIiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ%3D%3D",
+            "product_id": "2978693696816015079",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=2978693696816015079"
+        },
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSfs6yCF4fBqWpVHuyFQtWmxnnXT6x9RAL5cgpsn0sHUAVbv77-0xuIEC5su93dn0CbVWoaUvupDaMldxWUrZ8GUs6cF5_AuGGniGaQqPWgvA9DfVmTU-5tYA",
+            "source_logo": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn%3AANd9GcRaqsjJtYKYP2lcSoGXI5JGP13bdVffXAMsldX4CGgzW2fO2A0DvOYbUpAw0qr7bfRH8aqxZl3HGPSyRP9ai3sZ9Gdo7wsLl7fvxJM",
+            "source": "Trade",
+            "title": "Heirloom Common Voice Trade Coffee",
+            "price": "$16.99",
+            "extracted_price": 16.99,
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiNTkxMTgyNjU4MTg5Mzg1NjE4IiwiY2F0YWxvZ2lkIjoiIiwiaGVhZGxpbmVPZmZlckRvY2lkIjoiNTkxMTgyNjU4MTg5Mzg1NjE4IiwiaW1hZ2VEb2NpZCI6Ijc4MDYwNDk3NDMyMjEyMzcxODAiLCJyZHMiOiIiLCJxdWVyeSI6IkNvZmZlZSIsImdwY2lkIjoiIiwibWlkIjoiIiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiNTkxMTgyNjU4MTg5Mzg1NjE4IiwiY2F0YWxvZ2lkIjoiIiwiaGVhZGxpbmVPZmZlckRvY2lkIjoiNTkxMTgyNjU4MTg5Mzg1NjE4IiwiaW1hZ2VEb2NpZCI6Ijc4MDYwNDk3NDMyMjEyMzcxODAiLCJyZHMiOiIiLCJxdWVyeSI6IkNvZmZlZSIsImdwY2lkIjoiIiwibWlkIjoiIiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ%3D%3D",
+            "product_id": "591182658189385618",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=591182658189385618"
+        },
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSk5NtlKaLIdWsr49uLQGDblvvL81TPXCYD3HLbDExlfErdGEUU9gs7-eR4v9E5P0ApWT5u-j4j8Ngh2sWi8AATEiufojEL4ZwR8sTB8y0R",
+            "source_logo": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn%3AANd9GcStVGlIUYSI15QjOz0b2vqlBQnkmRQ2T7G4d0jE_9CzvqcrYiudJXkUZ3m8MTSXIlYTnd6lqYII5IfGfREAYc2YDlTM3A",
+            "source": "Bean Box",
+            "title": "Huckleberry Roasters Phantom Limb Whole Bean Coffee",
+            "rating": 4.3,
+            "reviews": 21,
+            "price": "$22.65",
+            "extracted_price": 22.65,
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiIiwiY2F0YWxvZ2lkIjoiMTc3NDM2NDgxNzk0ODY3NzM1NTQiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiI1MTQ5Nzg1MjY1OTIwNDg1ODA2IiwiaW1hZ2VEb2NpZCI6IjE1OTM5ODc0ODAyNTcxMjQxODg2IiwicmRzIjoiUENfMTY0MTE4ODY1ODkxNzYwOTkzMzN8UFJPRF9QQ18xNjQxMTg4NjU4OTE3NjA5OTMzMyIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIxNjQxMTg4NjU4OTE3NjA5OTMzMyIsIm1pZCI6IjU3NjQ2MjUxNjk3OTQyMjY2MiIsInB2dCI6ImhnIiwidXVsZSI6IncrQ0FJUUlDSWFRWFZ6ZEdsdUxGUmxlR0Z6TEZWdWFYUmxaQ0JUZEdGMFpYTSIsImdsIjoidXMiLCJobCI6ImVuIiwiZW5naW5lIjoiZ29vZ2xlIn0=",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiIiwiY2F0YWxvZ2lkIjoiMTc3NDM2NDgxNzk0ODY3NzM1NTQiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiI1MTQ5Nzg1MjY1OTIwNDg1ODA2IiwiaW1hZ2VEb2NpZCI6IjE1OTM5ODc0ODAyNTcxMjQxODg2IiwicmRzIjoiUENfMTY0MTE4ODY1ODkxNzYwOTkzMzN8UFJPRF9QQ18xNjQxMTg4NjU4OTE3NjA5OTMzMyIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIxNjQxMTg4NjU4OTE3NjA5OTMzMyIsIm1pZCI6IjU3NjQ2MjUxNjk3OTQyMjY2MiIsInB2dCI6ImhnIiwidXVsZSI6IncrQ0FJUUlDSWFRWFZ6ZEdsdUxGUmxlR0Z6TEZWdWFYUmxaQ0JUZEdGMFpYTSIsImdsIjoidXMiLCJobCI6ImVuIiwiZW5naW5lIjoiZ29vZ2xlIn0%3D",
+            "product_id": "17743648179486773554",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=17743648179486773554"
+        },
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT3pu808Tp-3aDWARaw19brAmjSJaIGNnUc0mzQNqDgjXAVhFZ4khsK5dYjgLszw__m8Xm77eYqWB0_E8ANrSQyokRACQT5nnU3Y6prKiyYfbnUBzMj0DFP8A",
+            "source_logo": "https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn%3AANd9GcSN1XmQeJU_yT0zcxhHYWuffZKmEBeCLcmLdkaZM422mZbdDohDeZ1F0htTlz68NMC5ys71nX8kDNtoHo_3z5uYipJX7A",
+            "source": "eBay",
+            "title": "Community Coffee Pecan Praline Medium Roast Ground",
+            "rating": 4.7,
+            "reviews": 444,
+            "price": "$6.49",
+            "extracted_price": 6.49,
+            "location": "Also nearby",
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiIiwiY2F0YWxvZ2lkIjoiODM0Njk0NzE5NzkzODM4MjI4MiIsImhlYWRsaW5lT2ZmZXJEb2NpZCI6IjExNTQyMzc4MjUyMjQwNDY3MDciLCJpbWFnZURvY2lkIjoiMTYxMjE5NTg0OTgxOTAyMTczOTUiLCJyZHMiOiJQQ18xMDA4Nzg5MjE2NzQ3MjU1NzkzfFBST0RfUENfMTAwODc4OTIxNjc0NzI1NTc5MyIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIxMDA4Nzg5MjE2NzQ3MjU1NzkzIiwibWlkIjoiNTc2NDYyODM0MTg5Njc1NDU3IiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiIiwiY2F0YWxvZ2lkIjoiODM0Njk0NzE5NzkzODM4MjI4MiIsImhlYWRsaW5lT2ZmZXJEb2NpZCI6IjExNTQyMzc4MjUyMjQwNDY3MDciLCJpbWFnZURvY2lkIjoiMTYxMjE5NTg0OTgxOTAyMTczOTUiLCJyZHMiOiJQQ18xMDA4Nzg5MjE2NzQ3MjU1NzkzfFBST0RfUENfMTAwODc4OTIxNjc0NzI1NTc5MyIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIxMDA4Nzg5MjE2NzQ3MjU1NzkzIiwibWlkIjoiNTc2NDYyODM0MTg5Njc1NDU3IiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ%3D%3D",
+            "product_id": "8346947197938382282",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=8346947197938382282"
+        },
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT86eFJ2yAWIBAraOqC-XTXTK7wrOdEUBxtS10_HP9d4g8Hl7p-NUK_E3bIBclRP2ngOwJKO3QnbZYUb9PnI9ueJxB6ZStG7wa884C6IjQPibKqQlN-bDMrCA",
+            "source_logo": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn%3AANd9GcTSHRSWLtNOT_evJG0XwJXUUqKqQSqsAwtObYz59YS1csBF79X7MFw4kzl4Vh7rT4riGTFK3ieqjE5zAf8aSnr5VL6FrUAYQw",
+            "source": "Keurig.com",
+            "title": "Community Coffee Iced Vanilla Sweet Cream Coffee K-Cup Pods Box",
+            "rating": 4.8,
+            "reviews": 50,
+            "price": "$53.97",
+            "extracted_price": 53.97,
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiMTU2MzI3ODY0NTE2NTgxODI0OTciLCJjYXRhbG9naWQiOiIiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiIxNTYzMjc4NjQ1MTY1ODE4MjQ5NyIsImltYWdlRG9jaWQiOiIxNjk1MDUwMzczNTA2ODQ2OTExMSIsInJkcyI6IlBDXzE2NDAwMzIzNjQ3MTcyMDQ1Njk5fFBST0RfUENfMTY0MDAzMjM2NDcxNzIwNDU2OTkiLCJxdWVyeSI6IkNvZmZlZSIsImdwY2lkIjoiIiwibWlkIjoiIiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiMTU2MzI3ODY0NTE2NTgxODI0OTciLCJjYXRhbG9naWQiOiIiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiIxNTYzMjc4NjQ1MTY1ODE4MjQ5NyIsImltYWdlRG9jaWQiOiIxNjk1MDUwMzczNTA2ODQ2OTExMSIsInJkcyI6IlBDXzE2NDAwMzIzNjQ3MTcyMDQ1Njk5fFBST0RfUENfMTY0MDAzMjM2NDcxNzIwNDU2OTkiLCJxdWVyeSI6IkNvZmZlZSIsImdwY2lkIjoiIiwibWlkIjoiIiwicHZ0IjoiaGciLCJ1dWxlIjoidytDQUlRSUNJYVFYVnpkR2x1TEZSbGVHRnpMRlZ1YVhSbFpDQlRkR0YwWlhNIiwiZ2wiOiJ1cyIsImhsIjoiZW4iLCJlbmdpbmUiOiJnb29nbGUifQ%3D%3D",
+            "product_id": "15632786451658182497",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=15632786451658182497"
+        },
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRnYNbMzGqZ1d8NqJ30Itxt2zc_OaEd2RltxlVXYCETFZIggIpN6p4m1428wk9d_J1FGzRL46t0x8AtW3B1u0w_AT1BArPvXzFa9djJuTrm4asbv_dnhjDw",
+            "source_logo": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn%3AANd9GcRR0_zHnaJ3qErUF0QmVnyDMkZsagL2saaoEuixfD9kcC3BfifYr-i6Mb1745RdfmGPuusArl4AC2obvdP1BwJRoInAlVM",
+            "source": "eBay - jrkmiami",
+            "title": "Community Coffee Keurig K-cups Iced Vanilla Sweet Cream",
+            "rating": 4.8,
+            "reviews": 50,
+            "price": "$168.99",
+            "extracted_price": 168.99,
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiNTgyOTYwMjM1NzI5OTAwOTExNyIsImNhdGFsb2dpZCI6IiIsImhlYWRsaW5lT2ZmZXJEb2NpZCI6IjU4Mjk2MDIzNTcyOTkwMDkxMTciLCJpbWFnZURvY2lkIjoiMTQ5NDQ2MTc5MzA1NTIzNDgzMjciLCJyZHMiOiJQQ18xNjQwMDMyMzY0NzE3MjA0NTY5OXxQUk9EX1BDXzE2NDAwMzIzNjQ3MTcyMDQ1Njk5IiwicXVlcnkiOiJDb2ZmZWUiLCJncGNpZCI6IiIsIm1pZCI6IiIsInB2dCI6ImhnIiwidXVsZSI6IncrQ0FJUUlDSWFRWFZ6ZEdsdUxGUmxlR0Z6TEZWdWFYUmxaQ0JUZEdGMFpYTSIsImdsIjoidXMiLCJobCI6ImVuIiwiZW5naW5lIjoiZ29vZ2xlIn0=",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiNTgyOTYwMjM1NzI5OTAwOTExNyIsImNhdGFsb2dpZCI6IiIsImhlYWRsaW5lT2ZmZXJEb2NpZCI6IjU4Mjk2MDIzNTcyOTkwMDkxMTciLCJpbWFnZURvY2lkIjoiMTQ5NDQ2MTc5MzA1NTIzNDgzMjciLCJyZHMiOiJQQ18xNjQwMDMyMzY0NzE3MjA0NTY5OXxQUk9EX1BDXzE2NDAwMzIzNjQ3MTcyMDQ1Njk5IiwicXVlcnkiOiJDb2ZmZWUiLCJncGNpZCI6IiIsIm1pZCI6IiIsInB2dCI6ImhnIiwidXVsZSI6IncrQ0FJUUlDSWFRWFZ6ZEdsdUxGUmxlR0Z6TEZWdWFYUmxaQ0JUZEdGMFpYTSIsImdsIjoidXMiLCJobCI6ImVuIiwiZW5naW5lIjoiZ29vZ2xlIn0%3D",
+            "product_id": "5829602357299009117",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=5829602357299009117"
+        },
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSszHx415R85H3MENCOs1UwBGBybwhxSLYYDvEaoTTpCO9myha_vTe-yb-_AQ65HzD-PfEm71W82_2tomQhlszd4gP6IWrMunvSSuhtfLk8W-V3qVcX0-ZwDg",
+            "source_logo": "https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn%3AANd9GcRR0_zHnaJ3qErUF0QmVnyDMkZsagL2saaoEuixfD9kcC3BfifYr-i6Mb1745RdfmGPuusArl4AC2obvdP1BwJRoInAlVM",
+            "source": "eBay - jrkmiami",
+            "title": "Community Coffee Keurig K-cups",
+            "rating": 4.6,
+            "reviews": 106,
+            "price": "$30.99",
+            "extracted_price": 30.99,
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiMTU3OTIyMjAyMDIyNTU4OTE1NTAiLCJjYXRhbG9naWQiOiIiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiIxNTc5MjIyMDIwMjI1NTg5MTU1MCIsImltYWdlRG9jaWQiOiIxMTIwNzEzMjg2MTc1Mjg2MTYwMCIsInJkcyI6IlBDXzk5MjE1NTE1Njc1OTMxOTA0NXxQUk9EX1BDXzk5MjE1NTE1Njc1OTMxOTA0NSIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIiLCJtaWQiOiIiLCJwdnQiOiJoZyIsInV1bGUiOiJ3K0NBSVFJQ0lhUVhWemRHbHVMRlJsZUdGekxGVnVhWFJsWkNCVGRHRjBaWE0iLCJnbCI6InVzIiwiaGwiOiJlbiIsImVuZ2luZSI6Imdvb2dsZSJ9",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiMTU3OTIyMjAyMDIyNTU4OTE1NTAiLCJjYXRhbG9naWQiOiIiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiIxNTc5MjIyMDIwMjI1NTg5MTU1MCIsImltYWdlRG9jaWQiOiIxMTIwNzEzMjg2MTc1Mjg2MTYwMCIsInJkcyI6IlBDXzk5MjE1NTE1Njc1OTMxOTA0NXxQUk9EX1BDXzk5MjE1NTE1Njc1OTMxOTA0NSIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIiLCJtaWQiOiIiLCJwdnQiOiJoZyIsInV1bGUiOiJ3K0NBSVFJQ0lhUVhWemRHbHVMRlJsZUdGekxGVnVhWFJsWkNCVGRHRjBaWE0iLCJnbCI6InVzIiwiaGwiOiJlbiIsImVuZ2luZSI6Imdvb2dsZSJ9",
+            "product_id": "15792220202255891550",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=15792220202255891550"
+        },
+        {
+            "category": "Popular products",
+            "thumbnail": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQIFroWHcZAyE8v6iJOMlbYhLDRF1qzBco02ngq0RF5FI_g0eQj4z_OpHd2JiH8EhjVjzH92N04-gpY5Gf7rxpXcOzd70LhsyCnE0ujIDDsRvwcTJyih0U5",
+            "source_logo": "https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn%3AANd9GcTSHRSWLtNOT_evJG0XwJXUUqKqQSqsAwtObYz59YS1csBF79X7MFw4kzl4Vh7rT4riGTFK3ieqjE5zAf8aSnr5VL6FrUAYQw",
+            "source": "Keurig.com",
+            "title": "Community Coffee Iced Classic Black Coffee K-Cup Pods Box",
+            "rating": 4.6,
+            "reviews": 106,
+            "price": "$71.96",
+            "extracted_price": 71.96,
+            "immersive_product_page_token": "eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiMTIyMDY5MDg0NTU2MzEyNjE5NzkiLCJjYXRhbG9naWQiOiIiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiIxMjIwNjkwODQ1NTYzMTI2MTk3OSIsImltYWdlRG9jaWQiOiIxMTkzOTM1MjYyNjI0OTU0Mjc0MiIsInJkcyI6IlBDXzk5MjE1NTE1Njc1OTMxOTA0NXxQUk9EX1BDXzk5MjE1NTE1Njc1OTMxOTA0NSIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIiLCJtaWQiOiIiLCJwdnQiOiJoZyIsInV1bGUiOiJ3K0NBSVFJQ0lhUVhWemRHbHVMRlJsZUdGekxGVnVhWFJsWkNCVGRHRjBaWE0iLCJnbCI6InVzIiwiaGwiOiJlbiIsImVuZ2luZSI6Imdvb2dsZSJ9",
+            "serpapi_link": "https://serpapi.com/search.json?engine=google_immersive_product&page_token=eyJlaSI6ImNuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnIiwicHJvZHVjdGlkIjoiMTIyMDY5MDg0NTU2MzEyNjE5NzkiLCJjYXRhbG9naWQiOiIiLCJoZWFkbGluZU9mZmVyRG9jaWQiOiIxMjIwNjkwODQ1NTYzMTI2MTk3OSIsImltYWdlRG9jaWQiOiIxMTkzOTM1MjYyNjI0OTU0Mjc0MiIsInJkcyI6IlBDXzk5MjE1NTE1Njc1OTMxOTA0NXxQUk9EX1BDXzk5MjE1NTE1Njc1OTMxOTA0NSIsInF1ZXJ5IjoiQ29mZmVlIiwiZ3BjaWQiOiIiLCJtaWQiOiIiLCJwdnQiOiJoZyIsInV1bGUiOiJ3K0NBSVFJQ0lhUVhWemRHbHVMRlJsZUdGekxGVnVhWFJsWkNCVGRHRjBaWE0iLCJnbCI6InVzIiwiaGwiOiJlbiIsImVuZ2luZSI6Imdvb2dsZSJ9",
+            "product_id": "12206908455631261979",
+            "serpapi_product_api": "https://serpapi.com/search.json?engine=google_product&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&product_id=12206908455631261979"
+        }
+    ],
+    "related_questions": [
+        {
+            "question": "Is coffee actually healthy for you?",
+            "type": "ai_overview",
+            "text_blocks": [
+                {
+                    "type": "paragraph",
+                    "snippet": "Yes, for many people, moderate coffee consumption is good for you, associated with numerous health benefits like a lower risk of early death, type 2 diabetes, Parkinson's, and certain cancers. However, the benefits depend on individual caffeine sensitivity, and excessive intake can cause issues such as anxiety, sleep problems, and heart palpitations. To maximize benefits, it's best to limit sugar and cream, and consider the timing of your coffee consumption.",
+                    "snippet_highlighted_words": [
+                        "Yes, for many people, moderate coffee consumption is good for you, associated with numerous health benefits like a lower risk of early death, type 2 diabetes, Parkinson's, and certain cancers"
+                    ],
+                    "reference_indexes": [
+                        1,
+                        3,
+                        5,
+                        6,
+                        7,
+                        9,
+                        11
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Potential Benefits of Coffee"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "title": "Reduced Risk of Chronic Diseases:",
+                            "snippet": "Coffee consumption has been linked to a lower risk of type 2 diabetes, heart failure, and certain cancers.",
+                            "reference_indexes": [
+                                0,
+                                4,
+                                7,
+                                11
+                            ]
+                        },
+                        {
+                            "title": "Brain Health:",
+                            "snippet": "Coffee may protect against neurodegenerative diseases like Parkinson's and Alzheimer's.",
+                            "reference_indexes": [
+                                7,
+                                10,
+                                12
+                            ]
+                        },
+                        {
+                            "title": "Improved Mood and Performance:",
+                            "snippet": "Coffee can improve mood, increase alertness, and enhance athletic performance and reaction speed.",
+                            "reference_indexes": [
+                                7,
+                                11,
+                                12
+                            ]
+                        },
+                        {
+                            "title": "Antioxidant Properties:",
+                            "snippet": "Coffee is rich in antioxidants, which protect against cell damage and inflammation.",
+                            "reference_indexes": [
+                                7,
+                                10,
+                                13
+                            ]
+                        },
+                        {
+                            "title": "Liver Protection:",
+                            "snippet": "Both caffeinated and decaffeinated coffee may offer a protective effect on the liver.",
+                            "reference_indexes": [
+                                0,
+                                10
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Potential Risks and Considerations"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "snippet": "Caffeine Sensitivity: Some individuals are more sensitive to caffeine and may experience anxiety, jitters, or heart palpitations with moderate intake.",
+                            "reference_indexes": [
+                                9,
+                                11
+                            ]
+                        },
+                        {
+                            "snippet": "Sleep Disturbances: Consuming coffee, especially later in the day, can disrupt sleep.",
+                            "reference_indexes": [
+                                5,
+                                9
+                            ]
+                        },
+                        {
+                            "snippet": "Digestive Issues: Coffee can increase heartburn and may increase the frequency of urination.",
+                            "reference_indexes": [
+                                2,
+                                11
+                            ]
+                        },
+                        {
+                            "snippet": "Preparation Matters: The benefits of coffee are more likely when consumed black or with minimal healthy add-ins like sugar and cream.",
+                            "reference_indexes": [
+                                8,
+                                9,
+                                14,
+                                15,
+                                16
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Recommendations"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "snippet": "Moderation is Key: For most healthy adults, up to 400 mg of caffeine, or about three to four cups of coffee daily, is considered moderate and may provide benefits.",
+                            "reference_indexes": [
+                                9
+                            ]
+                        },
+                        {
+                            "snippet": "Be Mindful of Timing: Consuming coffee before noon may provide the greatest health benefits.",
+                            "reference_indexes": [
+                                5
+                            ]
+                        },
+                        {
+                            "snippet": "Consult a Physician: Discuss your coffee consumption with your doctor, especially if you are pregnant, have heart issues, or are sensitive to caffeine.",
+                            "reference_indexes": [
+                                2,
+                                11
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "title": "9 Reasons Why (the Right Amount of) Coffee Is Good for You | Johns Hopkins Medicine",
+                    "link": "https://www.hopkinsmedicine.org/health/wellness-and-prevention/9-reasons-why-the-right-amount-of-coffee-is-good-for-you",
+                    "source": "Johns Hopkins Medicine",
+                    "index": 0
+                },
+                {
+                    "title": "Is Coffee Good for You?",
+                    "link": "https://www.youtube.com/watch?v=rABfboy0h6o&t=771",
+                    "snippet": "Jun 21, 2023 — and yes the cold brew coffee was less acidic in testing than the hot brew coffee uh was pretty clear difference there.",
+                    "source": "YouTube · James Hoffmann",
+                    "index": 1
+                },
+                {
+                    "title": "Coffee and health: What does the research say? - Mayo Clinic",
+                    "link": "https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/expert-answers/coffee-and-health/faq-20058339#:~:text=Drinking%20coffee%20with%20caffeine%20has,and%20it%20may%20have%20benefits.",
+                    "snippet": "Drinking coffee with caffeine has been linked with improved mood and a lower risk of depression in some groups. Drinking 3 to 4 cu...",
+                    "source": "Mayo Clinic",
+                    "index": 2
+                },
+                {
+                    "title": "Is coffee good or bad for your health?",
+                    "link": "https://hsph.harvard.edu/news/is-coffee-good-or-bad-for-your-health/#:~:text=Hu%20said%20that%20moderate%20coffee%20intake%E2%80%94about%202%E2%80%935,can%20reduce%20their%20risk%20of%20early%20death.",
+                    "snippet": "Apr 9, 2021 — Hu said that moderate coffee intake—about 2–5 cups a day—is linked to a lower likelihood of type 2 diabetes, heart dise...",
+                    "source": "Harvard T.H. Chan School of Public Health",
+                    "index": 3
+                },
+                {
+                    "title": "Is Coffee Good for You? - The New York Times",
+                    "link": "https://www.nytimes.com/2020/02/13/style/self-care/coffee-benefits.html#:~:text=In%20addition%2C%20experts%20say%20some,behaviors%20present%20in%20coffee%20drinkers.%E2%80%9D",
+                    "snippet": "Nov 12, 2021 — In addition, experts say some of the strongest protective effects may be with Type 2 diabetes, Parkinson's disease, an...",
+                    "source": "The New York Times",
+                    "index": 4
+                },
+                {
+                    "title": "When it comes to the health benefits of coffee, timing may count - NHLBI",
+                    "link": "https://www.nhlbi.nih.gov/news/2025/when-it-comes-health-benefits-coffee-timing-may-count#:~:text=Moderate%20coffee%20drinking%20%E2%80%94%20about%20three,to%20die%20from%20cardiovascular%20disease.",
+                    "snippet": "Feb 12, 2025 — Moderate coffee drinking — about three to five cups a day — has been previously linked to reduced risks for dying earl...",
+                    "source": "NHLBI",
+                    "index": 5
+                },
+                {
+                    "title": "Is coffee good for you or not? - American Heart Association",
+                    "link": "https://www.heart.org/en/news/2018/09/28/is-coffee-good-for-you-or-not#:~:text=Higher%20consumption%20of%20coffee%20%E2%80%93%20caffeinated,nervous%20system%20diseases%20and%20suicide.",
+                    "snippet": "Sep 28, 2018 — Higher consumption of coffee – caffeinated and decaf alike – was associated with a lower risk of total mortality, incl...",
+                    "source": "www.heart.org",
+                    "index": 6
+                },
+                {
+                    "title": "Is coffee good for you? | Diet and Nutrition | UT Southwestern Medical Center",
+                    "link": "https://utswmed.org/medblog/is-coffee-good-for-you/",
+                    "source": "UT Southwestern Medical Center",
+                    "index": 7
+                },
+                {
+                    "title": "Coffee health benefits: Diabetes, heart health, liver cancer, and more",
+                    "link": "https://www.medicalnewstoday.com/articles/270202#:~:text=The%20meta%2Danalysis%20from%202017%20concluded%20that%20it%20is%20%E2%80%9Cgenerally,may%20wish%20to%20avoid%20coffee.",
+                    "snippet": "The meta-analysis from 2017 concluded that it is “generally safe” for most people to consume three to four cups of coffee per day ...",
+                    "source": "MedicalNewsToday",
+                    "index": 8
+                },
+                {
+                    "title": "What Happens to Your Body When You Drink Coffee Every Day",
+                    "link": "https://www.verywellhealth.com/is-coffee-good-for-you-11738884#:~:text=Key%20Takeaways%20*%20Moderate%20coffee%20consumption%20(up,a%20difference%20in%20how%20healthful%20it%20is.",
+                    "snippet": "May 28, 2025 — Key Takeaways * Moderate coffee consumption (up to 400 mg of caffeine for healthy adults, or about 3 to 4 cups daily)",
+                    "source": "Verywell Health",
+                    "index": 9
+                },
+                {
+                    "title": "That Cup of Coffee May Have a Longer-Term Perk",
+                    "link": "https://www.nytimes.com/2025/06/02/well/eat/health-longevity-aging-benefits-of-coffee.html#:~:text=How%20might%20coffee%20protect%20your,health%20and%20a%20longer%20life.",
+                    "snippet": "Jun 10, 2025 — How might coffee protect your health? Researchers aren't entirely sure why coffee may be beneficial. “It's a bit of a ...",
+                    "source": "The New York Times",
+                    "index": 10
+                },
+                {
+                    "title": "Five Ways Coffee May Be Good For Your Health | Piedmont Healthcare",
+                    "link": "https://www.piedmont.org/living-real-change/is-coffee-good-for-your-health",
+                    "source": "Piedmont Healthcare",
+                    "index": 11
+                },
+                {
+                    "title": "The REAL Reason You Should Drink Coffee",
+                    "link": "https://www.youtube.com/watch?v=XoxwcE6g7Qw",
+                    "snippet": "Apr 4, 2024 — so today I'm going to talk about some of the other benefits of coffee that go beyond just waking up in the morning in o...",
+                    "source": "YouTube · Dr. Eric Berg DC",
+                    "index": 12
+                },
+                {
+                    "title": "13 Health Benefits of Coffee: From Diabetes to Dementia - GoodRx",
+                    "link": "https://www.goodrx.com/well-being/diet-nutrition/health-benefits-of-coffee",
+                    "snippet": "Dec 4, 2024 — Key takeaways: * Coffee has numerous health benefits. It's a good source of antioxidants that can help protect you fro...",
+                    "source": "GoodRx",
+                    "index": 13
+                },
+                {
+                    "title": "9 Ways To Make Your Morning Coffee Healthier",
+                    "link": "https://www.health.com/how-to-make-your-coffee-healthier-11689286#:~:text=Coffee%20may%20offer%20health%20benefits%20when%20consumed,avoiding%20artificial%20creamers%2C%20can%20support%20coffee's%20benefits.",
+                    "snippet": "Mar 12, 2025 — Coffee may offer health benefits when consumed in moderation. Making healthy choices with coffee, like avoiding artifi...",
+                    "source": "health.com",
+                    "index": 14
+                },
+                {
+                    "title": "New research says drinking coffee can lower your risk of several diseases",
+                    "link": "https://www.wxyz.com/news/health/ask-dr-nandi/new-research-says-drinking-coffee-can-lower-your-risk-of-several-diseases#:~:text=Another%20important%20factor%20is%20how%20you%20take,best%20health%20benefits%20from%20drinking%20it%20black.",
+                    "snippet": "Jul 10, 2024 — Another important factor is how you take your coffee. Experts say you get the best health benefits from drinking it bl...",
+                    "source": "WXYZ Channel 7",
+                    "index": 15
+                },
+                {
+                    "title": "Type 2 diabetes: Drinking coffee may lower disease risk, prolong life",
+                    "link": "https://www.medicalnewstoday.com/articles/3-5-cups-coffee-day-linked-longer-life-lower-diabetes-risk-review#:~:text=%E2%80%9CFor%20clinicians%2C%20the%20message%20is%20clear:%20for,or%20lightly%20sweetened%20versions%20may%20be%20best.",
+                    "snippet": "Aug 26, 2025 — “For clinicians, the message is clear: for most adults, moderate coffee drinking can be safely encouraged as part of a...",
+                    "source": "MedicalNewsToday",
+                    "index": 16
+                }
+            ],
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJJcyBjb2ZmZWUgYWN0dWFsbHkgaGVhbHRoeSBmb3IgeW91PyIsImxrIjoiR2lKcGN5QmpiMlptWldVZ1lXTjBkV0ZzYkhrZ2FHVmhiSFJvZVNCbWIzSWdlVzkxIiwiYnMiOiJjLVB5NDFMMkxGWkl6azlMUzAxVlNFd3VLVTNNeWFsVXlFaE56Q25KcUZSSXl5OVNxTXd2dFpkNEtHR2tJcVdVU1ZBbGx3LVhVbmhHWW9rQ1VHbEpScXFDaFlHLWtZRkNVV2xPS2xnRlJMZTl4S0pxSTJVcHhYSVVoUXFZQ3JtOHVCU1JUVE0wMVFVam1DdEF5dTBsSHVnYUtVa3BsS09vZ3lJa2RWd0pYRHBnczVLS0V2TlNGUExUWUpKZ1QtVVZaNmFrRnFXbWdMVW5wUmFYMkV2Y3RESFNsZEl1SjE2TEFDTUEiLCJpZCI6ImZjX2NuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnXzIifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJJcyBjb2ZmZWUgYWN0dWFsbHkgaGVhbHRoeSBmb3IgeW91PyIsImxrIjoiR2lKcGN5QmpiMlptWldVZ1lXTjBkV0ZzYkhrZ2FHVmhiSFJvZVNCbWIzSWdlVzkxIiwiYnMiOiJjLVB5NDFMMkxGWkl6azlMUzAxVlNFd3VLVTNNeWFsVXlFaE56Q25KcUZSSXl5OVNxTXd2dFpkNEtHR2tJcVdVU1ZBbGx3LVhVbmhHWW9rQ1VHbEpScXFDaFlHLWtZRkNVV2xPS2xnRlJMZTl4S0pxSTJVcHhYSVVoUXFZQ3JtOHVCU1JUVE0wMVFVam1DdEF5dTBsSHVnYUtVa3BsS09vZ3lJa2RWd0pYRHBnczVLS0V2TlNGUExUWUpKZ1QtVVZaNmFrRnFXbWdMVW5wUmFYMkV2Y3RESFNsZEl1SjE2TEFDTUEiLCJpZCI6ImZjX2NuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnXzIifQ%3D%3D"
+        },
+        {
+            "question": "What is the 80/20 rule for coffee?",
+            "type": "featured_snippet",
+            "snippet": "Quick answer: The 80/20 rule for coffee, often mentioned in the context of a coffee guide, suggests that 80% of coffee's flavor comes from the bean and its origin, while 20% depends on the brewing process. This principle emphasizes the importance of high-quality beans for achieving superior coffee flavors.",
+            "title": "What is the 80/20 rule for coffee?",
+            "date": "Aug 19, 2025",
+            "link": "https://scandalouscoffee.com/blogs/articles/what-is-the-80-20-rule-for-coffee#:~:text=Quick%20answer%3A%20The%2080%2F20,for%20achieving%20superior%20coffee%20flavors.",
+            "displayed_link": "https://scandalouscoffee.com › blogs › articles › what-is-t...",
+            "source_logo": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/32afc7a061d53d558ebcdc7a8c576143e56e70e940ec05c945114a3134f48d0f.png",
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJXaGF0IGlzIHRoZSA4MC8yMCBydWxlIGZvciBjb2ZmZWU/IiwibGsiOiJHaUYzYUdGMElHbHpJSFJvWlNBNE1DQXlNQ0J5ZFd4bElHWnZjaUJqYjJabVpXVSIsImJzIjoiYy1QeTQxTDJMRlpJems5TFMwMVZTRXd1S1UzTXlhbFV5RWhOekNuSnFGUkl5eTlTcU13dnRaZDRLR0drSXFXVVNWQWxsdy1YVW5oR1lva0NVR2xKUnFxQ2hZRy1rWUZDVVdsT0tsZ0ZSTGU5eEtKcUkyVXB4WElVaFFxWUNybTh1QlNSVFRNMDFRVWptQ3RBeXUwbEh1Z2FLVWtwbEtPb2d5SWtkVndKWERwZ3M1S0tFdk5TRlBMVFlKSmdULVVWWjZha0ZxV21nTFVucFJhWDJFdmN0REhTbGRJdUoxNkxBQ01BIiwiaWQiOiJmY19jbkstYUszbENxSDl3UEFQN2RQTzZBZ18yIn0=",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJXaGF0IGlzIHRoZSA4MC8yMCBydWxlIGZvciBjb2ZmZWU%2FIiwibGsiOiJHaUYzYUdGMElHbHpJSFJvWlNBNE1DQXlNQ0J5ZFd4bElHWnZjaUJqYjJabVpXVSIsImJzIjoiYy1QeTQxTDJMRlpJems5TFMwMVZTRXd1S1UzTXlhbFV5RWhOekNuSnFGUkl5eTlTcU13dnRaZDRLR0drSXFXVVNWQWxsdy1YVW5oR1lva0NVR2xKUnFxQ2hZRy1rWUZDVVdsT0tsZ0ZSTGU5eEtKcUkyVXB4WElVaFFxWUNybTh1QlNSVFRNMDFRVWptQ3RBeXUwbEh1Z2FLVWtwbEtPb2d5SWtkVndKWERwZ3M1S0tFdk5TRlBMVFlKSmdULVVWWjZha0ZxV21nTFVucFJhWDJFdmN0REhTbGRJdUoxNkxBQ01BIiwiaWQiOiJmY19jbkstYUszbENxSDl3UEFQN2RQTzZBZ18yIn0%3D"
+        },
+        {
+            "question": "What is the 15-15-15 coffee rule?",
+            "type": "ai_overview",
+            "text_blocks": [
+                {
+                    "type": "paragraph",
+                    "snippet": "The \"15 15 15 coffee rule,\" also known as Babbie's Rule of Fifteens, is a guideline for coffee freshness, stating that green, unroasted coffee should be used within 15 months of harvest, roasted coffee beans within 15 days of roasting, and ground coffee within 15 minutes of grinding to ensure peak flavor. This rule emphasizes consuming coffee at its freshest stage, from the initial harvest to the final brew, by limiting exposure to air and reducing the rate of oxidation.",
+                    "snippet_highlighted_words": [
+                        "a guideline for coffee freshness, stating that green, unroasted coffee should be used within 15 months of harvest, roasted coffee beans within 15 days of roasting, and ground coffee within 15 minutes of grinding to ensure peak flavor"
+                    ],
+                    "reference_indexes": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        5
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "The 15 15 15 Rule Explained"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "title": "15 Months (Green Beans):",
+                            "snippet": "Green, unroasted coffee beans have a longer shelf life and can remain fresh for up to 15 months from their harvest date before they start to stale.",
+                            "reference_indexes": [
+                                0,
+                                4
+                            ]
+                        },
+                        {
+                            "title": "15 Days (Roasted Beans):",
+                            "snippet": "Once beans are roasted, their freshness rapidly declines due to oxidation. They should be used within 15 days of their roast date to enjoy the best flavor.",
+                            "reference_indexes": [
+                                0,
+                                1,
+                                4
+                            ]
+                        },
+                        {
+                            "title": "15 Minutes (Ground Coffee):",
+                            "snippet": "Grinding significantly increases the surface area of the coffee, accelerating the staling process. For the most aromatic and flavorful cup, it's best to grind your beans just 15 minutes before brewing.",
+                            "reference_indexes": [
+                                1,
+                                2
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Why It Matters"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "title": "Flavor and Aroma:",
+                            "snippet": "Oxidation dramatically changes the flavor of coffee. Following this rule helps maintain the coffee's nuanced flavors and rich aromas.",
+                            "reference_indexes": [
+                                1,
+                                2
+                            ]
+                        },
+                        {
+                            "title": "Bean Freshness:",
+                            "snippet": "The guidelines are a simple way to ensure you're using the freshest coffee possible, from the raw bean to the final brew.",
+                            "reference_indexes": [
+                                2
+                            ]
+                        },
+                        {
+                            "title": "Grind-to-Brew Time:",
+                            "snippet": "This rule encourages you to control the grind and brew process yourself, grinding only what you need for the freshest results.",
+                            "reference_indexes": [
+                                5
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "title": "On Bean Freshness and Storage - Blackout Coffee Co",
+                    "link": "https://www.blackoutcoffee.com/blogs/the-reading-room/on-bean-freshness-and-storage#:~:text=The%20Rule%20goes%20like%20this,minutes%20before%20it%20goes%20stale.",
+                    "snippet": "The Rule goes like this: Green coffee lasts about 15 months before it goes stale. Roasted coffee lasts about 15 days before it goe...",
+                    "source": "Blackout Coffee Co",
+                    "index": 0
+                },
+                {
+                    "title": "Making the Perfect Cup of Coffee at Home: Tips from the Experts",
+                    "link": "https://www.rossstreetroasting.com/blogs/blog/making-the-perfect-cup-of-coffee-at-home-tips-from-the-experts#:~:text=The%20reason%20why%20we%20tell,following%20to%20the%20coffee%20newbies:",
+                    "snippet": "Sep 14, 2021 — The reason why we tell you that is because the oxidation process will dramatically change the flavor. From the moment ...",
+                    "source": "Ross Street Roasting",
+                    "index": 1
+                },
+                {
+                    "title": "The Rule Of Fifteens Will Make Sure You're Drinking The Freshest ...",
+                    "link": "https://www.tastingtable.com/1936515/fifteen-rule-coffee-freshness/#:~:text=While%20the%20origins%20of%20Babbie's,fifteen%20is%20the%20lucky%20number.",
+                    "snippet": "Aug 17, 2025 — While the origins of Babbie's Rule of Fifteens are uncertain, it's believed \"Babbie\" is a barista named Chris Babbie (",
+                    "source": "Tasting Table",
+                    "index": 2
+                },
+                {
+                    "title": "The Bottom Line Bakeshop & Cafe - Facebook",
+                    "link": "https://m.facebook.com/61576799765375/posts/the-coffee-rule-known-as-the-15-15-15-coffee-rulenon-roasted-beans-stale-in-15-m/122109732746893325/#:~:text=%E2%80%9CThe%E2%80%9D%20coffee%20rule%20(known,Jun%2011%F3%B0%9E%8B%F3%B1%9F%A0",
+                    "snippet": "Jun 11, 2025 — “The” coffee rule (known as the 15-15-15 coffee rule)… Non-roasted beans stale in 15 months, roasted beans stale in 15...",
+                    "source": "Facebook · The Bottom Line Bakeshop & Cafe",
+                    "index": 3
+                },
+                {
+                    "title": "Learning from Others and the Rule of 15 - Potomac Roasting",
+                    "link": "https://www.potomacroasting.com/post/learning-from-others-and-the-rule-of-15#:~:text=Green%20beans%20remain%20fresh%20for,minutes%20before%20they%20are%20brewed",
+                    "snippet": "Apr 18, 2024 — Green beans remain fresh for 15 months after they are dried. Roasted beans are at their peak freshness for 15 days aft...",
+                    "source": "Potomac Roasting",
+                    "index": 4
+                },
+                {
+                    "title": "The Rule Of Fifteens Will Make Sure You're Drinking The Freshest ...",
+                    "link": "https://www.aol.com/rule-fifteens-sure-youre-drinking-193000377.html#:~:text=That%20first%20morning%20sip%2C%20with,ensure%20freshness%2C%22%20she%20explains.",
+                    "snippet": "Aug 17, 2025 — That first morning sip, with its rich aroma and comforting warmth, can feel downright heavenly. According to Jee Choe,",
+                    "source": "AOL.com",
+                    "index": 5
+                }
+            ],
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJXaGF0IGlzIHRoZSAxNS0xNS0xNSBjb2ZmZWUgcnVsZT8iLCJsayI6ImM1TlNLTTlJTEZISUxGWW95VWhWTURTRm91VDh0TFRVVklXaTBweFVBQSIsImJzIjoiYy1QeTQxTDJMRlpJems5TFMwMVZTRXd1S1UzTXlhbFV5RWhOekNuSnFGUkl5eTlTcU13dnRaZDRLR0drSXFXVVNWQWxsdy1YVW5oR1lva0NVR2xKUnFxQ2hZRy1rWUZDVVdsT0tsZ0ZSTGU5eEtKcUkyVXB4WElVaFFxWUNybTh1QlNSVFRNMDFRVWptQ3RBeXUwbEh1Z2FLVWtwbEtPb2d5SWtkVndKWERwZ3M1S0tFdk5TRlBMVFlKSmdULVVWWjZha0ZxV21nTFVucFJhWDJFdmN0REhTbGRJdUoxNkxBQ01BIiwiaWQiOiJmY19jbkstYUszbENxSDl3UEFQN2RQTzZBZ18yIn0=",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJXaGF0IGlzIHRoZSAxNS0xNS0xNSBjb2ZmZWUgcnVsZT8iLCJsayI6ImM1TlNLTTlJTEZISUxGWW95VWhWTURTRm91VDh0TFRVVklXaTBweFVBQSIsImJzIjoiYy1QeTQxTDJMRlpJems5TFMwMVZTRXd1S1UzTXlhbFV5RWhOekNuSnFGUkl5eTlTcU13dnRaZDRLR0drSXFXVVNWQWxsdy1YVW5oR1lva0NVR2xKUnFxQ2hZRy1rWUZDVVdsT0tsZ0ZSTGU5eEtKcUkyVXB4WElVaFFxWUNybTh1QlNSVFRNMDFRVWptQ3RBeXUwbEh1Z2FLVWtwbEtPb2d5SWtkVndKWERwZ3M1S0tFdk5TRlBMVFlKSmdULVVWWjZha0ZxV21nTFVucFJhWDJFdmN0REhTbGRJdUoxNkxBQ01BIiwiaWQiOiJmY19jbkstYUszbENxSDl3UEFQN2RQTzZBZ18yIn0%3D"
+        },
+        {
+            "question": "What brand of coffee is considered the best?",
+            "type": "featured_snippet",
+            "title": "Our favorite coffee roasters and brands",
+            "link": "https://coffeebros.com/blogs/coffee/the-51-best-specialty-coffee-roasters-and-brand-in-the-united-states-of-america",
+            "list": [
+                "Little Wolf.",
+                "Tandem.",
+                "Bonlife Coffee.",
+                "Klatch Coffee.",
+                "Intelligentsia.",
+                "PTs Coffee.",
+                "Sweet Bloom.",
+                "Verve Coffee."
+            ],
+            "displayed_link": "https://coffeebros.com › blogs › coffee › the-51-best-spe...",
+            "source_logo": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/32afc7a061d53d558ebcdc7a8c57614399ea6a6d78724775e5c9f74c7f88ebce.png",
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJXaGF0IGJyYW5kIG9mIGNvZmZlZSBpcyBjb25zaWRlcmVkIHRoZSBiZXN0PyIsImxrIjoiR2l0M2FHRjBJR0p5WVc1a0lHOW1JR052Wm1abFpTQnBjeUJqYjI1emFXUmxjbVZrSUhSb1pTQmlaWE4wIiwiYnMiOiJjLVB5NDFMMkxGWkl6azlMUzAxVlNFd3VLVTNNeWFsVXlFaE56Q25KcUZSSXl5OVNxTXd2dFpkNEtHR2tJcVdVU1ZBbGx3LVhVbmhHWW9rQ1VHbEpScXFDaFlHLWtZRkNVV2xPS2xnRlJMZTl4S0pxSTJVcHhYSVVoUXFZQ3JtOHVCU1JUVE0wMVFVam1DdEF5dTBsSHVnYUtVa3BsS09vZ3lJa2RWd0pYRHBnczVLS0V2TlNGUExUWUpKZ1QtVVZaNmFrRnFXbWdMVW5wUmFYMkV2Y3RESFNsZEl1SjE2TEFDTUEiLCJpZCI6ImZjX2NuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnXzIifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUR3QwWDNaRldtVTVNMWRMT1hrMlVIWmFXbWRNTTJkS1oxOVpWVEZUUm1aVlJXdG1kRlF5WmpWb1NFMUJOSGxOTm01bWJtdHlWVVZyWTBFM0xVaERXRzVKYm5sNGJteFdWbGRGYTNGeGIxaFlTVW80VTNaa0xXSTVTVGQwWmxsdVVSSVhZMjVMTFdGTE0yeERjVWc1ZDFCQlVEZGtVRTgyUVdjYUlrRkdUVUZIUjNGd01HWllNekpETFZaUUxXWjFlbXhtV1dKR1lVRnNUME13U0VFIiwiZmN2IjoiMyIsImVpIjoiY25LLWFLM2xDcUg5d1BBUDdkUE82QWciLCJxYyI6IkNnWmpiMlptWldVUUFIM3dZUzBfIiwicXVlc3Rpb24iOiJXaGF0IGJyYW5kIG9mIGNvZmZlZSBpcyBjb25zaWRlcmVkIHRoZSBiZXN0PyIsImxrIjoiR2l0M2FHRjBJR0p5WVc1a0lHOW1JR052Wm1abFpTQnBjeUJqYjI1emFXUmxjbVZrSUhSb1pTQmlaWE4wIiwiYnMiOiJjLVB5NDFMMkxGWkl6azlMUzAxVlNFd3VLVTNNeWFsVXlFaE56Q25KcUZSSXl5OVNxTXd2dFpkNEtHR2tJcVdVU1ZBbGx3LVhVbmhHWW9rQ1VHbEpScXFDaFlHLWtZRkNVV2xPS2xnRlJMZTl4S0pxSTJVcHhYSVVoUXFZQ3JtOHVCU1JUVE0wMVFVam1DdEF5dTBsSHVnYUtVa3BsS09vZ3lJa2RWd0pYRHBnczVLS0V2TlNGUExUWUpKZ1QtVVZaNmFrRnFXbWdMVW5wUmFYMkV2Y3RESFNsZEl1SjE2TEFDTUEiLCJpZCI6ImZjX2NuSy1hSzNsQ3FIOXdQQVA3ZFBPNkFnXzIifQ%3D%3D"
+        }
+    ],
+    "organic_results": [
+        {
+            "position": 1,
+            "title": "Coffee",
+            "link": "https://en.wikipedia.org/wiki/Coffee",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://en.wikipedia.org/wiki/Coffee&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECGYQAQ",
+            "displayed_link": "https://en.wikipedia.org › wiki › Coffee",
+            "thumbnail": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb88a98ec4c675f61ce03c54738029e1ddf1.jpeg",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb8823e8aa311d084504da1d564ee496ea28.png",
+            "snippet": "Coffee is a beverage brewed from roasted, ground coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans",
+            "snippet_highlighted_words": [
+                "a beverage brewed from roasted, ground coffee beans"
+            ],
+            "sitelinks": {
+                "inline": [
+                    {
+                        "title": "History",
+                        "link": "https://en.wikipedia.org/wiki/History_of_coffee"
+                    },
+                    {
+                        "title": "Coffee bean",
+                        "link": "https://en.wikipedia.org/wiki/Coffee_bean"
+                    },
+                    {
+                        "title": "Coffee preparation",
+                        "link": "https://en.wikipedia.org/wiki/Coffee_preparation"
+                    },
+                    {
+                        "title": "Coffee production",
+                        "link": "https://en.wikipedia.org/wiki/Coffee_production"
+                    }
+                ]
+            },
+            "source": "Wikipedia"
+        },
+        {
+            "position": 2,
+            "title": "Starbucks Coffee Company",
+            "link": "https://www.starbucks.com/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.starbucks.com/&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECDwQAQ",
+            "displayed_link": "https://www.starbucks.com",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7cvKhnkAO-Q42M7Lq1BBbCFe0Q-MZfyZx0MX623h26B8oU9dM6Me8&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb889ed5a47648013ec7823e5ec6b5305c6c.png",
+            "snippet": "More than just great coffee. Explore the menu, sign up for Starbucks® Rewards, manage your gift card and more.",
+            "snippet_highlighted_words": [
+                "coffee"
+            ],
+            "source": "Starbucks"
+        },
+        {
+            "position": 3,
+            "title": "Jo's Coffee - Austin",
+            "link": "https://www.joscoffee.com/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.joscoffee.com/&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECDkQAQ",
+            "displayed_link": "https://www.joscoffee.com",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThtpw68uh70fbqGC3t5xIlb-9r_6lJOmBLouIZ8o3WZqEEj1RWvDdw&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb885e78ccd85bd0f277eb6e62667ba9c873.png",
+            "snippet": "Jo's Coffee is an iconic Austin coffee shop known for its coffee, pastries, sandwiches, and breakfast tacos with multiple locations throughout Texas.",
+            "snippet_highlighted_words": [
+                "an iconic Austin coffee shop"
+            ],
+            "source": "Jo's Coffee"
+        },
+        {
+            "position": 4,
+            "title": "r/Coffee",
+            "link": "https://www.reddit.com/r/Coffee/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.reddit.com/r/Coffee/&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECGMQAQ",
+            "displayed_link": "2.4M+ followers",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb88f3f9dbf0efd0cda5b61651281a3f348d.png",
+            "snippet": "thread where you can share what you are brewing or ask for bean recommendations. This is a place to share and talk about your favorite coffee roasters or beans.",
+            "snippet_highlighted_words": [
+                "thread where you can share what you are brewing"
+            ],
+            "sitelinks": {
+                "list": [
+                    {
+                        "title": "American coffee isn't proper coffee : r/iamveryculinary",
+                        "link": "https://www.reddit.com/r/iamveryculinary/comments/1n9yd4o/american_coffee_isnt_proper_coffee/",
+                        "answer_count": 148,
+                        "date": "Sep 6, 2025"
+                    },
+                    {
+                        "title": "I'm so confused lol : r/Coffee",
+                        "link": "https://www.reddit.com/r/Coffee/comments/1naedie/im_so_confused_lol/",
+                        "answer_count": 56,
+                        "date": "Sep 6, 2025"
+                    }
+                ]
+            },
+            "source": "Reddit · r/Coffee"
+        },
+        {
+            "position": 5,
+            "title": "Coffee - The Nutrition Source",
+            "link": "https://nutritionsource.hsph.harvard.edu/food-features/coffee/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://nutritionsource.hsph.harvard.edu/food-features/coffee/&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECGEQAQ",
+            "displayed_link": "https://nutritionsource.hsph.harvard.edu › food-features",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNO-0LapqM3JQdt21pzBBppzh1IpFsCPOrwNimVez_h8bwNRpsD0rA&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb884e14e8be51b2b0a650ed0084d45824d3.png",
+            "snippet": "A plain “black” cup of coffee is a very low calorie drink—8 ounces only contains 2 calories! However, adding sugar, cream, and milk can quickly bump up the ...",
+            "snippet_highlighted_words": [
+                "is a very low calorie drink"
+            ],
+            "source": "The Nutrition Source"
+        },
+        {
+            "position": 6,
+            "title": "Austin Coffee Shops, Cafes, Tea Houses & Local Roasters",
+            "link": "https://www.austintexas.org/things-to-do/food-and-drink/coffee-and-tea/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.austintexas.org/things-to-do/food-and-drink/coffee-and-tea/&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECDoQAQ",
+            "displayed_link": "https://www.austintexas.org › food-and-drink › coffee-...",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe7Bj11nX8ERWKYik3aWo7PTFxL0f1vppM99bL_TW6Ai5DeGEv3psK&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb88cc0af4c0a718396428fbc34ea8f229b9.png",
+            "snippet": "Austin's coffee shops feature gourmet coffee and rotating selections of roasters in unique settings. Shops like Sa-Ten Coffee and Eats and Wright Bros. Brew & ...",
+            "snippet_highlighted_words": [
+                "Austin's coffee shops feature gourmet coffee"
+            ],
+            "source": "Visit Austin"
+        },
+        {
+            "position": 7,
+            "title": "Cuvée Coffee: Always Something Brewing. Austin, TX",
+            "link": "https://cuveecoffee.com/?srsltid=AfmBOopW2XQU4wP57TY73qE7mRAKYtHwu2lEQ9gkXL1F16I5kq3YXQpd",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://cuveecoffee.com/%3Fsrsltid%3DAfmBOopW2XQU4wP57TY73qE7mRAKYtHwu2lEQ9gkXL1F16I5kq3YXQpd&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECEQQAQ",
+            "displayed_link": "https://cuveecoffee.com",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTewE4JAG6WguP5UA0DZUsOv4qpwAwTDCFd39-UZ05HZLwUHLrYni-G&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb88c377527c679c401562d39bd0af94599f.png",
+            "snippet": "Roasting the worlds' best coffees since 1998. We push boundaries, stay up late, work hard and never stop experimenting to bring you the best coffee possible.",
+            "snippet_highlighted_words": [
+                "Roasting the worlds' best coffees since 1998"
+            ],
+            "sitelinks": {
+                "inline": [
+                    {
+                        "title": "All Coffee",
+                        "link": "https://cuveecoffee.com/collections/all-coffee"
+                    },
+                    {
+                        "title": "Coffee Bar",
+                        "link": "https://cuveecoffee.com/pages/about-coffee-bar"
+                    },
+                    {
+                        "title": "About",
+                        "link": "https://cuveecoffee.com/pages/about-us"
+                    },
+                    {
+                        "title": "Roastery",
+                        "link": "https://cuveecoffee.com/pages/about-roastery"
+                    }
+                ]
+            },
+            "source": "Cuvée Coffee"
+        },
+        {
+            "position": 8,
+            "title": "Catalina Coffee: Order Online - Houston",
+            "link": "https://www.catalinacoffeeshop.com/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.catalinacoffeeshop.com/&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECDsQAQ",
+            "displayed_link": "https://www.catalinacoffeeshop.com",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgTf7ShU980GmHFCh9MY-STRKHW8d-nCahm-7lntKKhStB3Gg7rebL&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb88e6c21911d8af9d1e7060e7bdacb3cd1f.png",
+            "snippet": "Catalina Coffee 2201 Washington Ave Houston, Texas 77007 (713) 861-8448 info@catalinacoffeeshop.com Get directions",
+            "snippet_highlighted_words": [
+                "2201 Washington Ave Houston, Texas 77007"
+            ],
+            "rich_snippet": {
+                "bottom": {
+                    "detected_extensions": {
+                        "price_from": 18,
+                        "price_to": 25,
+                        "currency": "$"
+                    },
+                    "extensions": [
+                        "$18 to $25"
+                    ]
+                }
+            },
+            "source": "Catalina Coffee"
+        },
+        {
+            "position": 9,
+            "title": "Blue Bottle Coffee | Fresh Roasted Specialty Coffee",
+            "link": "https://bluebottlecoffee.com/?srsltid=AfmBOorg6VxJcv3X5vI0Sh26O1XcpbNzZdhABUvOPRe1HyIBw17O7umh",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://bluebottlecoffee.com/%3Fsrsltid%3DAfmBOorg6VxJcv3X5vI0Sh26O1XcpbNzZdhABUvOPRe1HyIBw17O7umh&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECHEQAQ",
+            "displayed_link": "https://bluebottlecoffee.com",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYOEEPaBo-5-WdbDIXGw8EUGVd1ohYKAV9FAx1gd3C_NMmcRmydkCg&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb88c32324af2b5f2c2fec6e979afc78954a.png",
+            "snippet": "Years in the making but ready in seconds, our Craft Instant Coffees are perfect for a busy new season — conveniently portioned for on-the-go enjoyment.",
+            "snippet_highlighted_words": [
+                "Coffees"
+            ],
+            "sitelinks": {
+                "inline": [
+                    {
+                        "title": "Specialty Coffee Beans",
+                        "link": "https://bluebottlecoffee.com/us/eng/shop/coffee"
+                    },
+                    {
+                        "title": "Browse Our Cafes",
+                        "link": "https://bluebottlecoffee.com/cafes"
+                    },
+                    {
+                        "title": "Specialty Coffee Subscription",
+                        "link": "https://bluebottlecoffee.com/us/eng/subscriptions"
+                    },
+                    {
+                        "title": "Matcha",
+                        "link": "https://bluebottlecoffee.com/us/eng/shop/matcha"
+                    }
+                ]
+            },
+            "rich_snippet": {
+                "bottom": {
+                    "extensions": [
+                        "Free delivery over $40",
+                        "30-day returns"
+                    ]
+                }
+            },
+            "source": "Blue Bottle Coffee"
+        },
+        {
+            "position": 10,
+            "title": "Hear Me Out: Instant Coffee Is, in Fact, Good",
+            "link": "https://www.nytimes.com/wirecutter/reviews/instant-coffee-is-good/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.nytimes.com/wirecutter/reviews/instant-coffee-is-good/&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QFnoECDgQAQ",
+            "displayed_link": "https://www.nytimes.com › Kitchen › Coffee",
+            "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/7f2b8526c2e58d1269c65867e14ccb880451748b5f0d44d8a3e445e09d184eaf.png",
+            "date": "6 days ago",
+            "snippet": "Not all instant coffee tastes gross. The newest options are pretty delicious — and can save the day on chaotic mornings.",
+            "snippet_highlighted_words": [
+                "instant coffee tastes gross"
+            ],
+            "source": "The New York Times"
+        }
+    ],
+    "nutrition_information": {
+        "description": "Coffee",
+        "calories": "1",
+        "amount_per": "1 cup (8 fl oz) (237 g)",
+        "source": "USDA",
+        "source_link": "https://fdc.nal.usda.gov/food-details/171890/nutrients",
+        "total_fat": [
+            "0 g",
+            "0%"
+        ],
+        "cholesterol": [
+            "0 mg",
+            "0%"
+        ],
+        "sodium": [
+            "5 mg",
+            "0%"
+        ],
+        "potassium": [
+            "116 mg",
+            "3%"
+        ],
+        "total_carbohydrate": [
+            "0 g",
+            "0%"
+        ],
+        "protein": [
+            "0.3 g",
+            "0%"
+        ],
+        "caffeine": "95 mg",
+        "disclaimer": "Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs."
+    },
+    "related_searches": [
+        {
+            "block_position": 1,
+            "query": "Coffee near me",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+near+me&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAhdEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+near+me"
+        },
+        {
+            "block_position": 1,
+            "query": "Coffee menu",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+menu&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAh0EAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+menu"
+        },
+        {
+            "block_position": 1,
+            "query": "Coffee types",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+types&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAhyEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+types"
+        },
+        {
+            "block_position": 1,
+            "query": "Coffee brands",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+brands&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAhuEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+brands"
+        },
+        {
+            "block_position": 1,
+            "query": "Coffee beans",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+beans&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAhrEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+beans"
+        },
+        {
+            "block_position": 1,
+            "query": "Coffee benefits",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+benefits&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAhnEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+benefits"
+        },
+        {
+            "block_position": 1,
+            "query": "Coffee shop",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+shop&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAhkEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+shop"
+        },
+        {
+            "block_position": 1,
+            "query": "Coffee recipe",
+            "link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=Coffee+recipe&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q1QJ6BAhgEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+recipe"
+        }
+    ],
+    "refine_this_search": [
+        {
+            "query": "Nearby",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+nearby&shoprs=GAMqBmNvZmZlZTIMCAMSBk5lYXJieRgCWLfLH2AB&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAF6BAgtEHE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+nearby"
+        },
+        {
+            "query": "On sale",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+sale&shoprs=EgRKAhgBGAYqBmNvZmZlZTITCAYSB09uIHNhbGUYAiIESgIYAVi3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAJ6BAgtEHI",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+sale"
+        },
+        {
+            "query": "Whole Bean",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=whole+bean+coffee&shoprs=GAEqBmNvZmZlZTIaCAESCldob2xlIEJlYW46Cgju_jgQ8f44MAJYt8sfYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAN6BAgtEHM",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=whole+bean+coffee"
+        },
+        {
+            "query": "Brand",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=brand+coffee&shoprs=GBIqBmNvZmZlZTIJCBISBUJyYW5kYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAR6BAgtEHQ",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=brand+coffee"
+        },
+        {
+            "query": "Ground",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=ground+coffee&shoprs=GAEqBmNvZmZlZTIWCAESBkdyb3VuZDoKCO7-OBDv_jgwAli3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAV6BAgtEHU",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=ground+coffee"
+        },
+        {
+            "query": "Pod",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=pod+coffee&shoprs=GAEqBmNvZmZlZTITCAESA1BvZDoKCPucZRD8nGUwA1i3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAZ6BAgtEHY",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=pod+coffee"
+        },
+        {
+            "query": "Get it today",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=coffee&shoprs=Eg2aAQoKCBAAOAFAAUgBGBQqBmNvZmZlZTIlCBQSDEdldCBpdCB0b2RheSINmgEKCggQADgBQAFIASoEEAEYAWAB&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAd6BAgtEHc",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=coffee"
+        },
+        {
+            "query": "Bag",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=bag+coffee&shoprs=GAEqBmNvZmZlZTITCAESA0JhZzoKCIGdZRCEnWUwAFi3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAh6BAgtEHg",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=bag+coffee"
+        },
+        {
+            "query": "Black",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=black+coffee&shoprs=GAEqBmNvZmZlZTIXCAESBUJsYWNrOgwI2Iz1ARDlivUBMAtYt8sfYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAl6BAgtEHk",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=black+coffee"
+        },
+        {
+            "query": "Buy",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=buy+coffee&shoprs=GBIqBmNvZmZlZTIHCBISA0J1eWAB&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAp6BAgtEHo",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=buy+coffee"
+        },
+        {
+            "query": "12 oz – 2.25 lb",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=12+oz+to+2.25+lb+coffee&shoprs=EhoqGAj-nGUSEgkAAABgvsXVPxEAAACgTlTwPxgBKgZjb2ZmZWUyUQgBEhExMiBveiDigJMgMi4yNSBsYiIaKhgI_pxlEhIJAAAAYL7F1T8RAAAAoE5U8D8qFAoQMTIgb3ogdG8gMi4yNSBsYhgBOggI_pxlEAAwBli3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAt6BAgtEHs",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=12+oz+to+2.25+lb+coffee"
+        },
+        {
+            "query": "Brown",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=brown+coffee&shoprs=GAEqBmNvZmZlZTIXCAESBUJyb3duOgwI2Iz1ARDrivUBMAtYt8sfYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKAx6BAgtEHw",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=brown+coffee"
+        },
+        {
+            "query": "Under $15",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+under+$15&shoprs=Eg0SCxEAAAAAOJxsQRgBGAUqBmNvZmZlZTIiCAUSCVVuZGVyICQxNRgCIg0SCxEAAAAAOJxsQRgBKgIYAVi3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKA16BAgtEH0",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+under+%2415"
+        },
+        {
+            "query": "Online",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=online+coffee&shoprs=GBIqBmNvZmZlZTIKCBISBk9ubGluZWAB&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKA56BAgtEH4",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=online+coffee"
+        },
+        {
+            "query": "Store",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=store+coffee&shoprs=GBIqBmNvZmZlZTIJCBISBVN0b3JlYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKA96BAgtEH8",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=store+coffee"
+        },
+        {
+            "query": "Medium Roast",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=medium+roast+coffee&shoprs=GAEqBmNvZmZlZTIcCAESDE1lZGl1bSBSb2FzdDoKCJm4OxCbuDswAFi3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBB6BQgtEIAB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=medium+roast+coffee"
+        },
+        {
+            "query": "Instant",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=instant+coffee&shoprs=GAEqBmNvZmZlZTIXCAESB0luc3RhbnQ6Cgju_jgQ8P44MAJYt8sfYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBF6BQgtEIEB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=instant+coffee"
+        },
+        {
+            "query": "White",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=white+coffee&shoprs=GAEqBmNvZmZlZTIXCAESBVdoaXRlOgwI2Iz1ARChi_UBMAtYt8sfYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBJ6BQgtEIIB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=white+coffee"
+        },
+        {
+            "query": "Price",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=price+coffee&shoprs=GBIqBmNvZmZlZTIJCBISBVByaWNlYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBN6BQgtEIMB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=price+coffee"
+        },
+        {
+            "query": "Box",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=box+coffee&shoprs=GAEqBmNvZmZlZTITCAESA0JveDoKCIGdZRCPnWUwAFi3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBR6BQgtEIQB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=box+coffee"
+        },
+        {
+            "query": "2.25 – 5 lb",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=2.25+lb+to+5+lb+coffee&shoprs=EhoqGAj-nGUSEgkAAACgTlTwPxEAAABAySQCQBgBKgZjb2ZmZWUyTAgBEg0yLjI1IOKAkyA1IGxiIhoqGAj-nGUSEgkAAACgTlTwPxEAAABAySQCQCoTCg8yLjI1IGxiIHRvIDUgbGIYAToICP6cZRAAMAZYt8sfYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBV6BQgtEIUB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=2.25+lb+to+5+lb+coffee"
+        },
+        {
+            "query": "Recipe",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=recipe+coffee&shoprs=GBIqBmNvZmZlZTIKCBISBlJlY2lwZWAB&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBZ6BQgtEIYB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=recipe+coffee"
+        },
+        {
+            "query": "Caffeine-free",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=caffeine-free+coffee&shoprs=GAEqBmNvZmZlZTIfCAESDUNhZmZlaW5lLWZyZWU6DAig8YoBEKHxigEwA1i3yx9gAQ&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBd6BQgtEIcB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=caffeine-free+coffee"
+        },
+        {
+            "query": "For Sale",
+            "link": "https://www.google.com/search?hl=en&gl=us&q=coffee+for+sale&shoprs=GBIqBmNvZmZlZTIMCBISCEZvciBTYWxlYAE&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Qip4GKBh6BQgtEIgB",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=coffee+for+sale"
+        }
+    ],
+    "refine_search_filters": [
+        {
+            "type": "Product Rating",
+            "options": [
+                {
+                    "title": "",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee&shoprs=EgViAwiQAxgeKgZjb2ZmZWUyFQgeEgg0IGFuZCB1cCIFYgMIkANABGAC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEAc",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee"
+                }
+            ]
+        },
+        {
+            "type": "Type",
+            "options": [
+                {
+                    "title": "Whole Bean",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=whole+bean+coffee&shoprs=GAEqBmNvZmZlZTIaCAESCldob2xlIEJlYW46Cgju_jgQ8f44MAJYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEAw",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=whole+bean+coffee"
+                },
+                {
+                    "title": "Ground",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=ground+coffee&shoprs=GAEqBmNvZmZlZTIWCAESBkdyb3VuZDoKCO7-OBDv_jgwAli3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEA0",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=ground+coffee"
+                },
+                {
+                    "title": "Instant",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=instant+coffee&shoprs=GAEqBmNvZmZlZTIXCAESB0luc3RhbnQ6Cgju_jgQ8P44MAJYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEA4",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=instant+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Features",
+            "options": [
+                {
+                    "title": "Pod",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=pod+coffee&shoprs=GAEqBmNvZmZlZTITCAESA1BvZDoKCPucZRD8nGUwA1i3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEBI",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=pod+coffee"
+                },
+                {
+                    "title": "Caffeine-free",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=caffeine-free+coffee&shoprs=GAEqBmNvZmZlZTIfCAESDUNhZmZlaW5lLWZyZWU6DAig8YoBEKHxigEwA1i3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEBM",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=caffeine-free+coffee"
+                },
+                {
+                    "title": "Organic",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=organic+coffee&shoprs=GAEqBmNvZmZlZTIZCAESB09yZ2FuaWM6DAi--YcBEL_5hwEwA1i3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEBQ",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=organic+coffee"
+                },
+                {
+                    "title": "Fair Trade",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=fair+trade+coffee&shoprs=GAEqBmNvZmZlZTIcCAESCkZhaXIgVHJhZGU6DAie7ooBEJ_uigEwA1i3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtEBU",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=fair+trade+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Container Type",
+            "options": [
+                {
+                    "title": "Bag",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=bag+coffee&shoprs=GAEqBmNvZmZlZTITCAESA0JhZzoKCIGdZRCEnWUwAFi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEBs",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=bag+coffee"
+                },
+                {
+                    "title": "Box",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=box+coffee&shoprs=GAEqBmNvZmZlZTITCAESA0JveDoKCIGdZRCPnWUwAFi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEBw",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=box+coffee"
+                },
+                {
+                    "title": "Canister",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=canister+coffee&shoprs=GAEqBmNvZmZlZTIYCAESCENhbmlzdGVyOgoIgZ1lEIKdZTAAWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEB0",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=canister+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Color",
+            "options": [
+                {
+                    "title": "Black",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=black+coffee&shoprs=GAEqBmNvZmZlZTIXCAESBUJsYWNrOgwI2Iz1ARDlivUBMAtYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtECE",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=black+coffee"
+                },
+                {
+                    "title": "Brown",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=brown+coffee&shoprs=GAEqBmNvZmZlZTIXCAESBUJyb3duOgwI2Iz1ARDrivUBMAtYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtECI",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=brown+coffee"
+                },
+                {
+                    "title": "White",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=white+coffee&shoprs=GAEqBmNvZmZlZTIXCAESBVdoaXRlOgwI2Iz1ARChi_UBMAtYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtECM",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=white+coffee"
+                },
+                {
+                    "title": "Yellow",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=yellow+coffee&shoprs=GAEqBmNvZmZlZTIYCAESBlllbGxvdzoMCNiM9QEQ7Yr1ATALWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtECQ",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=yellow+coffee"
+                },
+                {
+                    "title": "Tan",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=tan+coffee&shoprs=GAEqBmNvZmZlZTIVCAESA1RhbjoMCNiM9QEQnYz1ATALWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAR6BAgtECU",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=tan+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Size",
+            "options": [
+                {
+                    "title": "Under 12 oz",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=under+12+oz+coffee&shoprs=EhEqDwj-nGUSCREAAABgvsXVPxgBKgZjb2ZmZWUyMAgBEgtVbmRlciAxMiBveiIRKg8I_pxlEgkRAAAAYL7F1T8qAhgBOggI_pxlEAAwBli3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtECk",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=under+12+oz+coffee"
+                },
+                {
+                    "title": "12 oz – 2.25 lb",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=12+oz+to+2.25+lb+coffee&shoprs=EhoqGAj-nGUSEgkAAABgvsXVPxEAAACgTlTwPxgBKgZjb2ZmZWUyUQgBEhExMiBveiDigJMgMi4yNSBsYiIaKhgI_pxlEhIJAAAAYL7F1T8RAAAAoE5U8D8qFAoQMTIgb3ogdG8gMi4yNSBsYhgBOggI_pxlEAAwBli3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtECo",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=12+oz+to+2.25+lb+coffee"
+                },
+                {
+                    "title": "2.25 – 5 lb",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=2.25+lb+to+5+lb+coffee&shoprs=EhoqGAj-nGUSEgkAAACgTlTwPxEAAABAySQCQBgBKgZjb2ZmZWUyTAgBEg0yLjI1IOKAkyA1IGxiIhoqGAj-nGUSEgkAAACgTlTwPxEAAABAySQCQCoTCg8yLjI1IGxiIHRvIDUgbGIYAToICP6cZRAAMAZYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtECs",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=2.25+lb+to+5+lb+coffee"
+                },
+                {
+                    "title": "Over 5 lb",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=over+5+lb+coffee&shoprs=EhEqDwj-nGUSCQkAAABAySQCQBgBKgZjb2ZmZWUyLggBEglPdmVyIDUgbGIiESoPCP6cZRIJCQAAAEDJJAJAKgIYAToICP6cZRAAMAZYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtECw",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=over+5+lb+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Stores",
+            "options": [
+                {
+                    "title": "Walmart",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=walmart+coffee&shoprs=GAIqBmNvZmZlZTILCAISB1dhbG1hcnRYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEDA",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=walmart+coffee"
+                },
+                {
+                    "title": "Target",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=target+coffee&shoprs=GAIqBmNvZmZlZTIKCAISBlRhcmdldFi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEDE",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=target+coffee"
+                },
+                {
+                    "title": "Home Depot",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=home+depot+coffee&shoprs=GAIqBmNvZmZlZTIOCAISCkhvbWUgRGVwb3RYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEDI",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=home+depot+coffee"
+                },
+                {
+                    "title": "Bass Pro Shops",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=bass+pro+shops+coffee&shoprs=GAIqBmNvZmZlZTISCAISDkJhc3MgUHJvIFNob3BzWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtEDM",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=bass+pro+shops+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Price",
+            "options": [
+                {
+                    "title": "Under $15",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+under+$15&shoprs=Eg0SCxEAAAAAOJxsQRgBGAUqBmNvZmZlZTIiCAUSCVVuZGVyICQxNRgCIg0SCxEAAAAAOJxsQRgBKgIYAVi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEDk",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+under+%2415"
+                },
+                {
+                    "title": "$15 - $30",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+between+$15+and+$30&shoprs=EhYSFAkAAAAAOJxsQREAAAAAOJx8QRgBGAUqBmNvZmZlZTIrCAUSCSQxNSAtICQzMBgCIhYSFAkAAAAAOJxsQREAAAAAOJx8QRgBKgIYAVi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEDo",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+between+%2415+and+%2430"
+                },
+                {
+                    "title": "$30 - $60",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+between+$30+and+$60&shoprs=EhYSFAkAAAAAOJx8QREAAAAAOJyMQRgBGAUqBmNvZmZlZTIrCAUSCSQzMCAtICQ2MBgCIhYSFAkAAAAAOJx8QREAAAAAOJyMQRgBKgIYAVi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEDs",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+between+%2430+and+%2460"
+                },
+                {
+                    "title": "Over $60",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+over+$60&shoprs=Eg0SCwkAAAAAOJyMQRgBGAUqBmNvZmZlZTIhCAUSCE92ZXIgJDYwGAIiDRILCQAAAAA4nIxBGAEqAhgBWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtEDw",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+over+%2460"
+                }
+            ]
+        },
+        {
+            "type": "Sort by",
+            "options": [
+                {
+                    "title": "Price: low to high",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=coffee&shoprs=GBcqBmNvZmZlZTIcCBcSElByaWNlOiBsb3cgdG8gaGlnaCoEEAEYAWACiAEB&udm=3&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEEM",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=coffee"
+                },
+                {
+                    "title": "Price: high to low",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=coffee&shoprs=GBcqBmNvZmZlZTIcCBcSElByaWNlOiBoaWdoIHRvIGxvdyoEEAEYAWACiAEC&udm=3&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEEQ",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=coffee"
+                }
+            ]
+        },
+        {
+            "type": "Roast",
+            "options": [
+                {
+                    "title": "Medium Roast",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=medium+roast+coffee&shoprs=GAEqBmNvZmZlZTIcCAESDE1lZGl1bSBSb2FzdDoKCJm4OxCbuDswAFi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEEg",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=medium+roast+coffee"
+                },
+                {
+                    "title": "Dark Roast",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=dark+roast+coffee&shoprs=GAEqBmNvZmZlZTIaCAESCkRhcmsgUm9hc3Q6CgiZuDsQnbg7MABYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEEk",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=dark+roast+coffee"
+                },
+                {
+                    "title": "Light Roast",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=light+roast+coffee&shoprs=GAEqBmNvZmZlZTIbCAESC0xpZ2h0IFJvYXN0OgoImbg7EJq4OzAAWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEEo",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=light+roast+coffee"
+                },
+                {
+                    "title": "Medium-Dark Roast",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=medium-dark+roast+coffee&shoprs=GAEqBmNvZmZlZTIhCAESEU1lZGl1bS1EYXJrIFJvYXN0OgoImbg7EJy4OzAAWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtEEs",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=medium-dark+roast+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Flavor",
+            "options": [
+                {
+                    "title": "Chocolate",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=chocolate+coffee&shoprs=GAEqBmNvZmZlZTIZCAESCUNob2NvbGF0ZToKCIidZRCMnWUwAFi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEE8",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=chocolate+coffee"
+                },
+                {
+                    "title": "Vanilla",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=vanilla+coffee&shoprs=GAEqBmNvZmZlZTIXCAESB1ZhbmlsbGE6CgiInWUQi51lMABYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEFA",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=vanilla+coffee"
+                },
+                {
+                    "title": "Caramel",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=caramel+coffee&shoprs=GAEqBmNvZmZlZTIXCAESB0NhcmFtZWw6CgiInWUQjZ1lMABYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEFE",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=caramel+coffee"
+                },
+                {
+                    "title": "Hazelnut",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=hazelnut+coffee&shoprs=GAEqBmNvZmZlZTIYCAESCEhhemVsbnV0OgoIiJ1lEImdZTAAWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtEFI",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=hazelnut+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Sugar Content",
+            "options": [
+                {
+                    "title": "No Sugar Added",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=no+sugar+added+coffee&shoprs=GAEqBmNvZmZlZTIgCAESDk5vIFN1Z2FyIEFkZGVkOgwI99-HARCLiIwBMABYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEFY",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=no+sugar+added+coffee"
+                },
+                {
+                    "title": "Sugar Free",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=sugar+free+coffee&shoprs=GAEqBmNvZmZlZTIcCAESClN1Z2FyIEZyZWU6DAj334cBEPnfhwEwAFi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEFc",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=sugar+free+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Count",
+            "options": [
+                {
+                    "title": "12 – 22 count",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=12+count+to+22+count+coffee&shoprs=EhoqGAiAnWUSEgkAAAAAAAAoQBEAAAAAAAA2QBgBKgZjb2ZmZWUyUwgBEg8xMiDigJMgMjIgY291bnQiGioYCICdZRISCQAAAAAAAChAEQAAAAAAADZAKhgKFDEyIGNvdW50IHRvIDIyIGNvdW50GAE6CAiAnWUQADAGWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEFs",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=12+count+to+22+count+coffee"
+                },
+                {
+                    "title": "22 – 40 count",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=22+count+to+40+count+coffee&shoprs=EhoqGAiAnWUSEgkAAAAAAAA2QBEAAAAAAABEQBgBKgZjb2ZmZWUyUwgBEg8yMiDigJMgNDAgY291bnQiGioYCICdZRISCQAAAAAAADZAEQAAAAAAAERAKhgKFDIyIGNvdW50IHRvIDQwIGNvdW50GAE6CAiAnWUQADAGWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEFw",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=22+count+to+40+count+coffee"
+                },
+                {
+                    "title": "40 – 96 count",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=40+count+to+96+count+coffee&shoprs=EhoqGAiAnWUSEgkAAAAAAABEQBEAAAAAAABYQBgBKgZjb2ZmZWUyUwgBEg80MCDigJMgOTYgY291bnQiGioYCICdZRISCQAAAAAAAERAEQAAAAAAAFhAKhgKFDQwIGNvdW50IHRvIDk2IGNvdW50GAE6CAiAnWUQADAGWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEF0",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=40+count+to+96+count+coffee"
+                },
+                {
+                    "title": "Over 96 count",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=over+96+count+coffee&shoprs=EhEqDwiAnWUSCQkAAAAAAABYQBgBKgZjb2ZmZWUyMggBEg1PdmVyIDk2IGNvdW50IhEqDwiAnWUSCQkAAAAAAABYQCoCGAE6CAiAnWUQADAGWLfLH2AC&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtEF4",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=over+96+count+coffee"
+                }
+            ]
+        },
+        {
+            "type": "Free shipping",
+            "options": [
+                {
+                    "title": "Free shipping",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=Coffee+free+shipping&shoprs=EgRSAhABGBkqBmNvZmZlZTIXCBkSDUZyZWUgc2hpcHBpbmciBFICEAFgAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEGI",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee+free+shipping"
+                }
+            ]
+        },
+        {
+            "type": "Brand",
+            "options": [
+                {
+                    "title": "Folgers",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=folgers+coffee&shoprs=GAEqBmNvZmZlZTIXCAESB0ZvbGdlcnM6CgiD8zwQ5IlAMAFYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAB6BAgtEGY",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=folgers+coffee"
+                },
+                {
+                    "title": "Community Coffee",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=community+coffee+&shoprs=GAEqBmNvZmZlZTIgCAESEENvbW11bml0eSBDb2ZmZWU6CgiD8zwQ1PNPMAFYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAF6BAgtEGc",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=community+coffee+"
+                },
+                {
+                    "title": "Black Rifle Coffee Company",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=black+rifle+coffee+company+&shoprs=GAEqBmNvZmZlZTIrCAESGkJsYWNrIFJpZmxlIENvZmZlZSBDb21wYW55OgsIg_M8EOa7qQIwAVi3yx9gAg&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAJ6BAgtEGg",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=black+rifle+coffee+company+"
+                },
+                {
+                    "title": "doTERRA",
+                    "link": "https://www.google.com/search?hl=en&gl=us&q=doterra+coffee&shoprs=GAEqBmNvZmZlZTIXCAESB2RvVEVSUkE6CgiD8zwQheY-MAFYt8sfYAI&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q268JKAN6BAgtEGk",
+                    "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=doterra+coffee"
+                }
+            ]
+        }
+    ],
+    "things_to_know": {
+        "buttons": [
+            {
+                "text": "Types",
+                "title": "Types of Coffee Drinks",
+                "link": "https://www.folgerscoffee.com/coffee/articles/types-of-coffee",
+                "displayed_link": "https://www.folgerscoffee.com › coffee › articles › types...",
+                "snippet": "Types of Coffee Drinks",
+                "snippet_highlighted_words": [
+                    "Types of Coffee Drinks"
+                ],
+                "list": [
+                    "Espresso.",
+                    "Espresso & Coffee.",
+                    "Cold Brew.",
+                    "Cappuccino.",
+                    "Mocha.",
+                    "Iced Coffees.",
+                    "Lattes.",
+                    "Breve."
+                ],
+                "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/081d9dfb5451b237930429934a03cda3a2e2b8482110cd02b1793f27a88eca983b5891ecd39c3edd.png",
+                "source": "folgerscoffee.com",
+                "search_link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=types+of+coffee&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QrooIegQIDRAP",
+                "serpapi_search_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=types+of+coffee"
+            },
+            {
+                "text": "Caffeine Content",
+                "title": "How Much Caffeine in a Cup of Coffee? A Detailed Guide - Healthline",
+                "link": "https://www.healthline.com/nutrition/how-much-caffeine-in-coffee#:~:text=A%2012%2Dounce%20(oz),amount%20was%20around%20150.5%20mg.",
+                "displayed_link": "https://www.healthline.com › nutrition › how-much-caff...",
+                "date": "Oct 14, 2024",
+                "snippet": "A 12-ounce (oz) cup of brewed coffee may contain 113 to 247 milligrams (mg) of caffeine, whereas a smaller 8-ounce cup can contain about 95 to 200 mg. The exact amount can also depend on the variety of coffee you use. In a 2020 study, researchers found that the average amount was around 150.5 mg.",
+                "snippet_highlighted_words": [
+                    "113 to 247 milligrams (mg)"
+                ],
+                "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/081d9dfb5451b237930429934a03cda317cf903c929a3243895feec741393aff1a1a267df002a11f.png",
+                "source": "healthline.com",
+                "search_link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=how+much+caffeine+in+coffee&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QrooIegQIDRAe",
+                "serpapi_search_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=how+much+caffeine+in+coffee"
+            },
+            {
+                "text": "Health Benefits",
+                "title": "Coffee and health: What does the research say? - Mayo Clinic",
+                "link": "https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/expert-answers/coffee-and-health/faq-20058339#:~:text=Drinking%20coffee%20with%20caffeine%20has,mouth%2C%20throat%20and%20digestive%20system.",
+                "displayed_link": "https://www.mayoclinic.org › faq-20058339",
+                "snippet": "Drinking coffee with caffeine has been linked with improved mood and a lower risk of depression in some groups. Drinking 3 to 4 cups of coffee a day is linked to a lower risk of stroke in some studies. And coffee may help protect against cancers of the mouth, throat and digestive system.",
+                "snippet_highlighted_words": [
+                    "improved mood and a lower risk of depression"
+                ],
+                "favicon": "https://serpapi.com/searches/68be72714a0898d6b6c0d014/images/081d9dfb5451b237930429934a03cda31f14f8fa175f143677f054e7f224236d42d8b99064572a22.png",
+                "source": "mayoclinic.org",
+                "search_link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=health+benefits+of+coffee&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QrooIegQIDRAt",
+                "serpapi_search_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=health+benefits+of+coffee"
+            },
+            {
+                "text": "Calories",
+                "table": [
+                    [
+                        "Amount Per 1 fl oz (29.6 g)100 grams6 fl oz (178 g)1 cup (8 fl oz) (237 g)1 cup (8 fl oz) (237 g)"
+                    ],
+                    [
+                        "Calories 1"
+                    ]
+                ],
+                "search_link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=coffee+calories&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QrooIegQIDRA8",
+                "serpapi_search_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=coffee+calories"
+            },
+            {
+                "text": "Flavor Profiles",
+                "title": "Introduction to Flavor Profiles in Coffee Blends",
+                "link": "https://rockcreekcoffee.com/blogs/blog/introduction-to-flavor-profiles-in-coffee-blends#:~:text=A%3A%20Common%20tastes%20and%20flavors,aftertaste%2C%20aroma%2C%20and%20sweetness.",
+                "displayed_link": "https://rockcreekcoffee.com › blogs › blog › introductio...",
+                "date": "Feb 16, 2024",
+                "snippet": "A: Common tastes and flavors associated with coffee includes notes of fruity, floral, chocolately, nutty, smoky, charred, woody, and peppery. Some professionals also describe taste components like acidity, bitterness, finish, body, aftertaste, aroma, and sweetness.",
+                "snippet_highlighted_words": [
+                    "fruity, floral, chocolately, nutty, smoky, charred, woody, and peppery"
+                ],
+                "source": "rockcreekcoffee.com",
+                "search_link": "https://www.google.com/search?sca_esv=4a92dd1190abdc4f&hl=en&gl=us&q=what+are+the+different+flavor+profiles+of+coffee&sa=X&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40QrooIegQIDRBL",
+                "serpapi_search_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=what+are+the+different+flavor+profiles+of+coffee"
+            }
+        ]
+    },
+    "pagination": {
+        "current": 1,
+        "next": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=10&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8NMDegQIChAW",
+        "other_pages": {
+            "2": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=10&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAE",
+            "3": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=20&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAG",
+            "4": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=30&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAI",
+            "5": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=40&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAK",
+            "6": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=50&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAM",
+            "7": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=60&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAO",
+            "8": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=70&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAQ",
+            "9": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=80&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAS",
+            "10": "https://www.google.com/search?q=Coffee&sca_esv=4a92dd1190abdc4f&hl=en&gl=us&ei=cnK-aK3lCqH9wPAP7dPO6Ag&start=90&sa=N&sstk=Ac65TH4zVXrw0OzcIdaxaQUbEeJk7XQC8uli7blirOqZe11wSf-6HCW0FE1Z6l9LItvPu8H4nFiFwctHgmI8ycrZQlUoz_PXYNLnCw&ved=2ahUKEwit5rruv8iPAxWhPhAIHe2pE40Q8tMDegQIChAU"
+        }
+    },
+    "serpapi_pagination": {
+        "current": 1,
+        "next_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=10",
+        "next": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=10",
+        "other_pages": {
+            "2": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=10",
+            "3": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=20",
+            "4": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=30",
+            "5": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=40",
+            "6": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=50",
+            "7": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=60",
+            "8": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=70",
+            "9": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=80",
+            "10": "https://serpapi.com/search.json?device=desktop&engine=google&gl=us&google_domain=google.com&hl=en&location=Austin%2C+Texas%2C+United+States&q=Coffee&start=90"
+        }
+    }
+}
