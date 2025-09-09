@@ -1,0 +1,2 @@
+[console_scripts]
+discord_data = discord_data.__main__:main
