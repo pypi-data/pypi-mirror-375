@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: mseep-metatrader-mcp-server
+Version: 0.2.9
+Summary: Model Context Protocol (MCP) server built with Python to enable AI LLMs to trade using MetaTrader platform.
+Author-email: mseep <support@skydeck.ai>
+License: MIT License
+        
+        Copyright (c) 2025 Aria Dhanang
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+Project-URL: Homepage, https://github.com/ariadng/metatrader-mcp-server
+Project-URL: Bug Tracker, https://github.com/ariadng/metatrader-mcp-server/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: MetaTrader5>=5.0.45
+Requires-Dist: numpy>=2.2.4
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: tabulate>=0.9.0
+Requires-Dist: pytest>=8.3.5
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: build>=1.2.2.post1
+Requires-Dist: fastapi>=0.115.12
+Requires-Dist: uvicorn[standard]>=0.34.1
+Requires-Dist: pydantic>=2.11.3
+Requires-Dist: pydantic-settings>=2.8.1
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: click>=8.0.0
+Provides-Extra: client
+Dynamic: license-file
+
+Package managed by MseeP.ai
