@@ -1,0 +1,2 @@
+[console_scripts]
+mcp_server_my_mac = mcp_server_my_mac.__main__:main

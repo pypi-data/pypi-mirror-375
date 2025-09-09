@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-my-mac
+Version: 0.1.4
+Summary: A MCP Server for managing Mac configuration and information
+Project-URL: Homepage, https://mingyuanzhong.github.io/mcp-my-mac
+Project-URL: Repository, https://github.com/mingyuanzhong/mcp-my-mac.git
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.10
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.4.1
+Provides-Extra: dev
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: build; extra == 'dev'
+Requires-Dist: isort; extra == 'dev'
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: pytest-cov; extra == 'dev'
+Requires-Dist: pytest>=7.0; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
