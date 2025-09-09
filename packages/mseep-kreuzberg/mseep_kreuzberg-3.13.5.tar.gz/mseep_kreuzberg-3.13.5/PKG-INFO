@@ -1,0 +1,78 @@
+Metadata-Version: 2.4
+Name: mseep-kreuzberg
+Version: 3.13.5
+Summary: Document intelligence framework for Python - Extract text, metadata, and structured data from diverse file formats
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: documentation, https://kreuzberg.dev
+Project-URL: homepage, https://github.com/Goldziher/kreuzberg
+Keywords: async,document-analysis,document-classification,document-intelligence,document-processing,extensible,information-extraction,mcp,metadata-extraction,model-context-protocol,ocr,pandoc,pdf-extraction,pdfium,plugin-architecture,rag,retrieval-augmented-generation,structured-data,table-extraction,tesseract,text-extraction
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Database
+Classifier: Topic :: Multimedia :: Graphics :: Capture :: Scanners
+Classifier: Topic :: Office/Business :: Office Suites
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: General
+Classifier: Typing :: Typed
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: anyio>=4.10.0
+Requires-Dist: chardetng-py>=0.3.5
+Requires-Dist: exceptiongroup>=1.2.2; python_version < "3.11"
+Requires-Dist: html-to-markdown[lxml]>=1.9.1
+Requires-Dist: mcp>=1.13.0
+Requires-Dist: msgspec>=0.18.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: playa-pdf>=0.7.0
+Requires-Dist: polars>=1.33.0
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: pypdfium2==4.30.0
+Requires-Dist: python-calamine>=0.5.2
+Requires-Dist: python-pptx>=1.0.2
+Requires-Dist: typing-extensions>=4.15.0; python_version < "3.12"
+Provides-Extra: additional-extensions
+Requires-Dist: mailparse>=1.0.15; extra == "additional-extensions"
+Requires-Dist: tomli>=2.0.0; python_version < "3.11" and extra == "additional-extensions"
+Provides-Extra: all
+Requires-Dist: kreuzberg[additional-extensions,api,chunking,cli,crypto,document-classification,easyocr,entity-extraction,gmft,langdetect,paddleocr]; extra == "all"
+Provides-Extra: api
+Requires-Dist: litestar[opentelemetry,standard,structlog]>=2.17.0; extra == "api"
+Provides-Extra: chunking
+Requires-Dist: semantic-text-splitter>=0.27.0; extra == "chunking"
+Provides-Extra: cli
+Requires-Dist: click>=8.2.1; extra == "cli"
+Requires-Dist: rich>=14.1.0; extra == "cli"
+Requires-Dist: tomli>=2.0.0; python_version < "3.11" and extra == "cli"
+Provides-Extra: crypto
+Requires-Dist: playa-pdf[crypto]>=0.7.0; extra == "crypto"
+Provides-Extra: document-classification
+Requires-Dist: deep-translator>=1.11.4; extra == "document-classification"
+Provides-Extra: easyocr
+Requires-Dist: easyocr>=1.7.2; extra == "easyocr"
+Provides-Extra: entity-extraction
+Requires-Dist: keybert>=0.9.0; extra == "entity-extraction"
+Requires-Dist: spacy>=3.8.7; extra == "entity-extraction"
+Provides-Extra: gmft
+Requires-Dist: gmft>=0.4.2; extra == "gmft"
+Provides-Extra: langdetect
+Requires-Dist: fast-langdetect>=0.3.2; extra == "langdetect"
+Provides-Extra: paddleocr
+Requires-Dist: paddleocr>=3.2.0; extra == "paddleocr"
+Requires-Dist: paddlepaddle>=3.1.1; extra == "paddleocr"
+Requires-Dist: setuptools>=80.9.0; extra == "paddleocr"
+Dynamic: license-file
+
+Package managed by MseeP.ai
