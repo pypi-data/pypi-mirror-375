@@ -1,0 +1,2 @@
+[console_scripts]
+monarch-mcp-server = monarch_mcp_server.server:main
