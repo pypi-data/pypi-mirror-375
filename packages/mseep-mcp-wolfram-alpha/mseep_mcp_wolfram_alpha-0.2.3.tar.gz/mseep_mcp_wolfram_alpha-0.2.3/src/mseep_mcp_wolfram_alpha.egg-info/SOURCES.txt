@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_wolfram_alpha/__init__.py
+src/mcp_wolfram_alpha/server.py
+src/mcp_wolfram_alpha/wolfram_client.py
+src/mseep_mcp_wolfram_alpha.egg-info/PKG-INFO
+src/mseep_mcp_wolfram_alpha.egg-info/SOURCES.txt
+src/mseep_mcp_wolfram_alpha.egg-info/dependency_links.txt
+src/mseep_mcp_wolfram_alpha.egg-info/entry_points.txt
+src/mseep_mcp_wolfram_alpha.egg-info/requires.txt
+src/mseep_mcp_wolfram_alpha.egg-info/top_level.txt

@@ -1,0 +1,26 @@
+[project]
+name = "mseep-mcp-wolfram-alpha"
+version = "0.2.3"
+description = "A MCP server to connect to wolfram alpha API."
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=1.2.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-wolfram-alpha = "mcp_wolfram_alpha:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
