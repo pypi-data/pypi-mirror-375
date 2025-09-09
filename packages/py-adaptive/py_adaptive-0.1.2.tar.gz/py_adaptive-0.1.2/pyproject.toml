@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py-adaptive"
+version = "0.1.2"
+description = "Python library used for simplifying data interaction with Adaptive API."
+authors = [
+    { name="Mikal Røli", email="mikal.roli@avinet.no" },
+    { name="Jørgen Reimer Nystad", email="jorgen.nystad@avinet.no" }
+]
+readme = "PUBLIC_README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "python-dotenv>=0.21.0",
+    "requests>=2.31.0",
+    "python-keycloak>=3.1.0",
+]
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
