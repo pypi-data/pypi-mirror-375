@@ -1,0 +1,2 @@
+[console_scripts]
+things3-enhanced-mcp = src.things_mcp.fast_server:run_things_mcp_server

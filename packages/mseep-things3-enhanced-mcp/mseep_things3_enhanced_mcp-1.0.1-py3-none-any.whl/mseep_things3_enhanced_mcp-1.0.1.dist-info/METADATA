@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-things3-enhanced-mcp
+Version: 1.0.1
+Summary: Enhanced FastMCP server for Things 3 app integration with Claude Desktop and Windsurf - featuring reliability improvements, caching, and AppleScript bridge
+Project-URL: Homepage, https://github.com/excelsier/things-fastmcp
+Project-URL: Bug Tracker, https://github.com/excelsier/things-fastmcp/issues
+Project-URL: Documentation, https://github.com/excelsier/things-fastmcp#readme
+Author-email: mseep <support@skydeck.ai>
+License: MIT License
+License-File: LICENSE
+Keywords: anthropic,apple,claude,fastmcp,macos,mcp,productivity,task-management,things,things3
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Office/Business :: Scheduling
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+Requires-Python: >=3.12
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.2.0
+Requires-Dist: things-py>=0.0.15
+Provides-Extra: dev
+Requires-Dist: build>=0.10.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: ruff>=0.1.0; extra == 'dev'
+Requires-Dist: twine>=4.0.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
