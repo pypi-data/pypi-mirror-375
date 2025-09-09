@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+setup.py
+azure_carbon_tracker/__init__.py
+azure_carbon_tracker/azure_cost_management.py
+azure_carbon_tracker/azure_retail_prices.py
+azure_carbon_tracker.egg-info/PKG-INFO
+azure_carbon_tracker.egg-info/SOURCES.txt
+azure_carbon_tracker.egg-info/dependency_links.txt
+azure_carbon_tracker.egg-info/requires.txt
+azure_carbon_tracker.egg-info/top_level.txt
+azure_carbon_tracker/data/carbon_models.csv
+azure_carbon_tracker/data/emission_factors.csv
+azure_carbon_tracker/data/model_mapping.csv
+azure_carbon_tracker/data/pricing.csv
