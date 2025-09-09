@@ -1,0 +1,30 @@
+[project]
+name = "mseep-elastic-semantic-search-mcp-server"
+version = "0.1.4"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "elasticsearch>=8.17.2",
+    "mcp>=1.3.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-elastic-semantic-search-mcp-server = "server:main"
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "mcp[cli]>=1.3.0",
+]
+
+[tool.setuptools]
+py-modules = [
+    "server",
+]
