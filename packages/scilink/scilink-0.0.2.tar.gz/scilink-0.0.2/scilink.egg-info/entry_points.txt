@@ -1,0 +1,3 @@
+[console_scripts]
+scilink = scilink.cli.workflows:main
+scilink-agent = scilink.cli.run_agent:main
