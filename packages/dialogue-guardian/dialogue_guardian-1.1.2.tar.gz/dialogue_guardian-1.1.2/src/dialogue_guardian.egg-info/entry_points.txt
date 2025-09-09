@@ -1,0 +1,3 @@
+[console_scripts]
+dialogue-guardian = guardian.cli:main
+guardian = guardian.cli:main
