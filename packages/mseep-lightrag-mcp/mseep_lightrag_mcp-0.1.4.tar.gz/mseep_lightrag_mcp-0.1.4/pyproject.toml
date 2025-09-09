@@ -1,0 +1,39 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-lightrag_mcp"
+version = "0.1.4"
+description = "MCP Server for LightRAG"
+requires-python = ">=3.11"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp>=1.2.0",
+    "httpx>=0.28.1",
+    "pydantic>=2.11",
+    "python-dotenv>=1.0.1",
+    "attrs>=25.3.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.5.0",
+    "ruff>=0.11.4",
+]
+
+[project.scripts]
+lightrag-mcp = "lightrag_mcp.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/lightrag_mcp",
+]
