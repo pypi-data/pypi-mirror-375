@@ -1,0 +1,27 @@
+[project]
+name = "mseep-mcp-pyodbc-server"
+version = "0.5.1"
+description = "A simple MCP ODBC server using FastAPI and PyODBC"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.4.1",
+    "pyodbc>=5.2.0",
+    "python-dotenv>=1.0.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-pyodbc-server = "mcp_pyodbc_server:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
