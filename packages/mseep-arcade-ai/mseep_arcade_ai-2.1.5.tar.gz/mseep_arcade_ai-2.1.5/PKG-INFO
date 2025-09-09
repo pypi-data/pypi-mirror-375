@@ -1,0 +1,61 @@
+Metadata-Version: 2.4
+Name: mseep-arcade-ai
+Version: 2.1.5
+Summary: Arcade.dev - Tool Calling platform for Agents
+Author-email: mseep <support@skydeck.ai>
+License: MIT License
+        
+        Copyright (c) 2025, Arcade AI
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.10
+Requires-Dist: arcade-core<3.0.0,>=2.2.2
+Requires-Dist: arcadepy==1.5.0
+Requires-Dist: click==8.1.8
+Requires-Dist: jinja2==3.1.6
+Requires-Dist: openai==1.82.1
+Requires-Dist: rich==13.9.4
+Requires-Dist: tqdm==4.67.1
+Requires-Dist: typer==0.10.0
+Provides-Extra: all
+Requires-Dist: arcade-serve<3.0.0,>=2.0.0; extra == 'all'
+Requires-Dist: arcade-tdk<3.0.0,>=2.0.0; extra == 'all'
+Requires-Dist: numpy>=2.0.0; extra == 'all'
+Requires-Dist: python-dateutil>=2.8.2; extra == 'all'
+Requires-Dist: pytz>=2024.1; extra == 'all'
+Requires-Dist: scikit-learn>=1.5.0; extra == 'all'
+Requires-Dist: scipy>=1.14.0; extra == 'all'
+Provides-Extra: evals
+Requires-Dist: numpy>=2.0.0; extra == 'evals'
+Requires-Dist: python-dateutil>=2.8.2; extra == 'evals'
+Requires-Dist: pytz>=2024.1; extra == 'evals'
+Requires-Dist: scikit-learn>=1.5.0; extra == 'evals'
+Requires-Dist: scipy>=1.14.0; extra == 'evals'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
