@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: battmo
+Version: 0.1.2
+Summary: Battery simulation with BattMo in Python.
+Author-email: Olav Møyner <olav.moyner@sintef.no>, Lorena Hendrix <lorena.hendrix@sintef.no>
+Maintainer-email: Olav Møyner <olav.moyner@sintef.no>, Lorena Hendrix <lorena.hendrix@sintef.no>
+License-Expression: MIT
+Project-URL: Repository, https://github.com/BattMoTeam/PyBattMo
+Project-URL: Julia repository, https://github.com/BattMoTeam/BattMo.jl
+Project-URL: Documentation, https://battmoteam.github.io/BattMo.jl/dev/
+Keywords: battery simulation,battmo
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3 :: Only
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: juliacall==0.9.27
+Requires-Dist: numpy<3.0.0,>=1.13.0
+Requires-Dist: juliapkg>=0.1
+Dynamic: license-file
+
+# PyBattMo
+A Python wrapper around BattMo.jl
