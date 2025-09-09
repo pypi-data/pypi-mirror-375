@@ -1,0 +1,3 @@
+[console_scripts]
+sse_run = email_Server.client:sse_run
+stdio_run = email_Server.client:stdio_run
