@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-aider-mcp-server
+Version: 0.1.4
+Summary: Model context protocol server for offloading ai coding work to Aider
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+Requires-Dist: aider-chat>=0.81.0
+Requires-Dist: boto3>=1.37.27
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: pydantic>=2.11.2
+Requires-Dist: pytest>=8.3.5
+Requires-Dist: rich>=14.0.0
+
+Package managed by MseeP.ai
