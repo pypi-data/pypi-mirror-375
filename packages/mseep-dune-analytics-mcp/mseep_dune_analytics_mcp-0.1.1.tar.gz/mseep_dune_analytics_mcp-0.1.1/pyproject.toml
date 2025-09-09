@@ -1,0 +1,24 @@
+[project]
+name = "mseep-dune-analytics-mcp"
+version = "0.1.1"
+description = "A mcp server that bridges Dune Analytics data to AI agents."
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.4.1",
+    "pandas>=2.2.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-dune-analytics-mcp = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
