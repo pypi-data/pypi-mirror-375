@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-human-use
+Version: 0.1.1
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+Requires-Dist: anthropic>=0.51.0
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.8.0
+Requires-Dist: openai>=1.78.0
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: rapidata>=2.23.0
+Requires-Dist: streamlit>=1.45.0
+
+Package managed by MseeP.ai
