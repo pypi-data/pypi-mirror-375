@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-jira-python
+Version: 0.1.1
+Summary: MCP server for JIRA in Python
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.13
+Requires-Dist: jira
+Requires-Dist: mcp>=1.2.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
