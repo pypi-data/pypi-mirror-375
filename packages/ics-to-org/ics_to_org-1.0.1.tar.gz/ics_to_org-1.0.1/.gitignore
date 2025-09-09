@@ -1,0 +1,13 @@
+.venv/
+__pycache__
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Generated files (kept in repo for PyPI description)
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+src/*.egg-info/
