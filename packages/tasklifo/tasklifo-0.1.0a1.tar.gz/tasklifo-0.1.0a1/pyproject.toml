@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tasklifo"
+version = "0.1.0a1"
+description = "Last-in-first-out (LIFO), Git-inspired, LLM-assisted, Shell-friendly task manager for the busy and frequently interrupted."
+readme = "README.md"
+requires-python = ">=2"
+license = "AGPL-3.0"
+authors = [
+  { name="Jifeng Wu", email="jifengwu2k@gmail.com" }
+]
+classifiers = [
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "chat-completions-conversation",
+    "get-multiline-input-with-editor",
+    "pytz",
+    "textcompat",
+    "typing; python_version < '3.5'"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/jifengwu2k/tasklifo"
+"Bug Tracker" = "https://github.com/jifengwu2k/tasklifo/issues"

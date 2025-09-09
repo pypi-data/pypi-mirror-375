@@ -1,0 +1,7 @@
+chat-completions-conversation
+get-multiline-input-with-editor
+pytz
+textcompat
+
+[:python_version < "3.5"]
+typing
