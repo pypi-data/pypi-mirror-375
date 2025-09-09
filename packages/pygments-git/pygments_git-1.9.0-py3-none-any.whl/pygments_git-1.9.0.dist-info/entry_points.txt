@@ -1,0 +1,8 @@
+[pygments.lexers]
+git-attributes = pygments_git:GitAttributesLexer
+git-blame-ignore-revs = pygments_git:GitBlameIgnoreRevsLexer
+git-commit-edit-msg = pygments_git:GitCommitEditMsgLexer
+git-conflict-markers = pygments_git:GitConflictMarkersLexer
+git-console = pygments_git:GitBashSessionLexer
+git-ignore = pygments_git:GitIgnoreLexer
+git-rebase-todo = pygments_git:GitRebaseTodoLexer
