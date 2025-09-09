@@ -1,0 +1,3 @@
+[console_scripts]
+bitable-mcp = bitable_mcp:main
+bitable-mcp-install = bitable_mcp.cli:install
