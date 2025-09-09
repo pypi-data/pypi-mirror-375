@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: singbox2proxy
+Version: 0.1.1
+Summary: 🐳 Use sing-box proxies (VLESS, VMess, Trojan, Shadowsocks, Hysteria, Hysteria2, TUIC, WireGuard, SSH) with chaining support in python web clients.
+Author-email: nichind <nichind@proton.me>
+License: MIT
+Project-URL: Homepage, https://github.com/nichind/sing-box2proxy
+Project-URL: Issues, https://github.com/nichind/sing-box2proxy/issues
+Keywords: sing-box,hysteria2,v2ray,v2core,v2ray-core,proxy,vless,vmess,shadowsocks,trojan,python,cli
+Classifier: Programming Language :: Python :: 3.9
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: psutil
