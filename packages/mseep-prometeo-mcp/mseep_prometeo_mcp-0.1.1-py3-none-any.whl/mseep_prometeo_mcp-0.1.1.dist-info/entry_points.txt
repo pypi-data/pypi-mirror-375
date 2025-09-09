@@ -1,0 +1,2 @@
+[console_scripts]
+mseep-prometeo-mcp = prometeo_mcp.server:main
