@@ -1,0 +1,13 @@
+LICENSE
+NOTICE
+README.md
+pyproject.toml
+src/mseep_pylib2mcp.egg-info/PKG-INFO
+src/mseep_pylib2mcp.egg-info/SOURCES.txt
+src/mseep_pylib2mcp.egg-info/dependency_links.txt
+src/mseep_pylib2mcp.egg-info/entry_points.txt
+src/mseep_pylib2mcp.egg-info/requires.txt
+src/mseep_pylib2mcp.egg-info/top_level.txt
+src/pylib2mcp/__init__.py
+src/pylib2mcp/cli.py
+src/pylib2mcp/core.py

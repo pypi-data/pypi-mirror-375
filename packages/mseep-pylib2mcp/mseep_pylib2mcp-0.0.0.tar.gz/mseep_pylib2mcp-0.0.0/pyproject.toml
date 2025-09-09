@@ -1,0 +1,61 @@
+[project]
+name = "mseep-pylib2mcp"
+dynamic = [
+    "version",
+]
+description = "Expose Python library functions as MCP server tools"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: Apache Software License",
+]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "fastmcp==2.8.1",
+    "pydantic>=2.11.7",
+    "typer>=0.16.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.license]
+file = "LICENSE"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+pylib2mcp = "pylib2mcp.cli:app"
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.0.0",
+    "tox>=4.27.0",
+    "tox-uv>=1.26.1",
+]
+
+[tool.black]
+line-length = 500
+
+[tool.hatch.version]
+path = "src/pylib2mcp/__init__.py"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
