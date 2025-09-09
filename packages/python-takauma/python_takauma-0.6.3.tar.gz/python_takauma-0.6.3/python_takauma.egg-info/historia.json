@@ -1,0 +1,102 @@
+[
+  {
+    "revisio": "09eebe52e9d5e30e8c7f8dd86842a6a7e53329f5",
+    "versio": "0.6.3",
+    "kuvaus": "Lis\u00e4tty `Lataaja.__getattribute__`-toteutus (pycountry-yhteensopivuus)"
+  },
+  {
+    "revisio": "d75868f549f348e0b49fd3fd8fe040d501530068",
+    "versio": "0.6.2",
+    "kuvaus": "P\u00e4ivitetty projektim\u00e4\u00e4ritys pyproject.toml-muotoon"
+  },
+  {
+    "revisio": "600868a1827f9588619946bdbf2eed968da9e1b7",
+    "versio": "0.6.1",
+    "kuvaus": "Python 3.12 -yhteensopivuus"
+  },
+  {
+    "revisio": "226c6e99df8f434b710b39e8116a8bad9fdd7347",
+    "versio": "0.6",
+    "kuvaus": "Korvattu `pkg_resources`-riippuvuus `importlib.metadatalla`"
+  },
+  {
+    "revisio": "1ee94f2d9b90b23427bfba7d68795dac5e0e1836",
+    "versio": "0.5.4",
+    "kuvaus": "P\u00e4ivitetty asennusm\u00e4\u00e4ritys"
+  },
+  {
+    "revisio": "ce71cdde08740e31e1c96b1f8be50b4023da17fb",
+    "versio": "0.5.3",
+    "kuvaus": "Lis\u00e4tty PEP-paketointim\u00e4\u00e4ritys"
+  },
+  {
+    "revisio": "cb2947be6586a85bbbe7a6a1b3205095e4cdcd35",
+    "versio": "0.5.2",
+    "kuvaus": "Vaiennetaan varoitukset `__getattr__`-ylikuormitukseen liittyen"
+  },
+  {
+    "revisio": "cfdf145302879731121bb42371066b87ce61fb79",
+    "versio": "0.5.1",
+    "kuvaus": "P\u00e4ivitetty k\u00e4ytt\u00f6oikeusasiakirja"
+  },
+  {
+    "revisio": "ac6533b981495a93e22aacde36669ece9af4101f",
+    "versio": "0.5",
+    "kuvaus": "Git-versiointi 1.4.9+ -yhteensopiva kehitysversioiden haku"
+  },
+  {
+    "revisio": "3b9eef190387cdc56eb25902f204123bf9d3b5ce",
+    "versio": "0.4.5",
+    "kuvaus": "Asetettu nykyinen moduuliversio saataville avaimella \"__max__\""
+  },
+  {
+    "revisio": "af610535ea8895845c6d455d2ff7d52c6b7d3930",
+    "versio": "0.4.4",
+    "kuvaus": "Hae mahdolliset asennetut versiot my\u00f6s kehitystilassa olevista moduuleista"
+  },
+  {
+    "revisio": "c6b120f691256c5aeec0c2a5034d247709457114",
+    "versio": "0.4.3",
+    "kuvaus": "Lis\u00e4tty `__min__`- ja `__max__`-versioiden poiminta"
+  },
+  {
+    "revisio": "bb524f03c9924eb16a0d78d1a8b26adcbd420efb",
+    "versio": "0.4.2",
+    "kuvaus": "Tutkitaan jakeluiden sis\u00e4lt\u00f6 (my\u00f6s) top_level.txt-tiedoston mukaan"
+  },
+  {
+    "revisio": "5158fa6c99bf082c6ba4f93cddfb796a7caadb9f",
+    "versio": "0.4.1",
+    "kuvaus": "Ei etsit\u00e4 versiota, mik\u00e4li moduulin jakelua ei l\u00f6ydy"
+  },
+  {
+    "revisio": "1d4827605725fb4feffa9c92cf7b6135c40729b1",
+    "versio": "0.4",
+    "kuvaus": "Lis\u00e4tty ajossa olevan, kehitystilassa olevan paketin moduuliversioiden haku\n* edellytt\u00e4\u00e4 git-versioinnin asentamista kehitysymp\u00e4rist\u00f6\u00f6n"
+  },
+  {
+    "revisio": "6040bd5a40b51364666c75d218b365623b423a61",
+    "versio": "0.3",
+    "kuvaus": "Moduulitasoinen, automaattinen versiointi\n* toteutettu luokkakohtainen versiointi uudelleen\n* otettu k\u00e4ytt\u00f6\u00f6n `python-mmaare`-paketti"
+  },
+  {
+    "revisio": "10abb42f0dd4a6937444931c2bab7965c4be8193",
+    "versio": "0.2",
+    "kuvaus": "Normalisoidaan asennettujen moduulien tiedostopolut `os.path.realpath`-funktion avulla"
+  },
+  {
+    "revisio": "d27193ccfa9a9ddaf1af6cb1c98a66c555529d5f",
+    "versio": "0.1.2",
+    "kuvaus": "Vaihdettu `Distribution._get_version()`-kutsut `.version`-m\u00e4\u00e4reen hakuun"
+  },
+  {
+    "revisio": "fe246819f2854944ffa3ccd93bb1cb53589c0054",
+    "versio": "0.1.1",
+    "kuvaus": "Parannettu virheensietoa"
+  },
+  {
+    "revisio": "106329711fc460fc4eec7c9cbf40d92ca54eb173",
+    "versio": "0.1",
+    "kuvaus": "Alustava toteutus"
+  }
+]

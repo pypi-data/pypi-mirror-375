@@ -1,0 +1,18 @@
+[build-system]
+requires = ["git-versiointi>=1.7rc4", "setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-takauma"
+dynamic = ["version"]
+requires-python = ">= 3.8"
+description = "Python-moduulien tiedostoversiointi"
+readme = "README.md"
+authors = [
+  {name = "Antti Hautaniemi", email = "antti.hautaniemi@me.com"},
+]
+dependencies = ["python-mmaare"]
+urls = {Repository = "https://github.com/an7oine/python-takauma.git"}
+
+[project.optional-dependencies]
+kehitys = ["git-versiointi>=1.4.4"]
