@@ -1,0 +1,68 @@
+name: Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        # Fetch full history for setuptools-scm to work properly
+        fetch-depth: 0
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[test]
+        
+    - name: Check version detection
+      run: |
+        python -c "import mcpacket; print('Version:', mcpacket.__version__)"
+        
+    - name: Run linting (if available)
+      run: |
+        # Add linting commands here when you have them configured
+        # pip install ruff
+        # ruff check .
+        echo "Linting step - configure as needed"
+        
+    - name: Run tests (if available)
+      run: |
+        # Add test commands here when you have tests
+        # python -m pytest
+        echo "Test step - configure when tests are added"
+
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+        
+    - name: Install setuptools-scm
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools-scm[toml]
+        
+    - name: Verify version can be determined
+      run: |
+        python -c "from setuptools_scm import get_version; print('Detected version:', get_version())"
