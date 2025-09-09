@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-prometheus-mcp-server
+Version: 1.2.8
+Summary: Prometheus Model Context Protocol Server
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/plain
+Requires-Dist: requests
+Requires-Dist: fastmcp>=0.1.0
+
+Package managed by MseeP.ai

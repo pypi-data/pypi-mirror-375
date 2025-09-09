@@ -1,0 +1,29 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-prometheus-mcp-server"
+version = "1.2.8"
+description = "Prometheus Model Context Protocol Server"
+requires-python = ">=3.8"
+dependencies = [
+    "requests",
+    "fastmcp>=0.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+prometheus-mcp = "prometheus_mcp.cli:main"
