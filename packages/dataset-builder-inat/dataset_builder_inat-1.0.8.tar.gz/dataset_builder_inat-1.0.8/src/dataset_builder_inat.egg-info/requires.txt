@@ -1,0 +1,11 @@
+bs4>=0.0.2
+pandas>=1.1.5
+pyarrow>=6.0.1
+matplotlib>=3.3.4
+matplotlib-venn>=1.1.2
+numpy>=1.19.5
+pandas>=1.1.5
+pyyaml>=6.0.1
+requests>=2.27.1
+scikit-learn>=0.24.2
+tqdm
