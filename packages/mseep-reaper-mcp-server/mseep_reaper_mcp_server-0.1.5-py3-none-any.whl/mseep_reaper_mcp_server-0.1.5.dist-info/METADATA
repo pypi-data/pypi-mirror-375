@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: mseep-reaper-mcp-server
+Version: 0.1.5
+Summary: MCP Server for interacting with Reaper projects
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]>=1.2.0
+
+Package managed by MseeP.ai
