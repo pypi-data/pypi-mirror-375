@@ -1,0 +1,12 @@
+synonym_dict>=0.2.4
+antelope_interface>=0.3.3
+xlstools>=0.1.6
+python-magic>=0.4.18
+requests>=2.25
+pydantic>=2.5.0
+
+[XML]
+lxml>=1.2.0
+
+[write_to_excel]
+xlsxwriter>=1.3.7
