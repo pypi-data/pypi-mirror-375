@@ -1,0 +1,3 @@
+[console_scripts]
+confluence-sync = confluence_sync.cli:cli
+
