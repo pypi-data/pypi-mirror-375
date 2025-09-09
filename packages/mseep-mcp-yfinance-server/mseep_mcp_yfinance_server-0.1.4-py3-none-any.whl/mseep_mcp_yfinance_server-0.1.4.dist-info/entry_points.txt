@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-yfinance-server = yfinance_mcp.server:main
