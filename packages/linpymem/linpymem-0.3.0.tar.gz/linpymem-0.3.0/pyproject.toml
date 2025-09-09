@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools<69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "linpymem"
+version = "0.3.0"
+description = "Low-level physical memory access via Linpmem kernel driver"
+authors = [
+    { name="gionetti", email="its.only.a.matter.of.time.000@gmail.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+dependencies = ["psutil"]
+requires-python = ">=3.7"
+
+[project.urls]
+Homepage = "https://github.com/gionetti/linpymem"
+
+[tool.setuptools.packages.find]
+where = ["."]
