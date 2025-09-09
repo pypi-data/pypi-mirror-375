@@ -1,0 +1,12 @@
+Metadata-Version: 2.3
+Name: golem-faucet
+Version: 0.1.1
+Summary: Shared PoW faucet client for Golem environments
+Author: VM on Golem Team
+Author-email: dev@golem.network
+Requires-Python: >=3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: httpx (>=0.23,<1)
