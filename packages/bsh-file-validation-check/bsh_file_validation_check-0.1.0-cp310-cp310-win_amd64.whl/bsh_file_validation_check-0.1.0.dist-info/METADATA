@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: bsh-file-validation-check
+Version: 0.1.0
+Requires-Dist: cryptography
+Requires-Dist: cython
+Dynamic: requires-dist
