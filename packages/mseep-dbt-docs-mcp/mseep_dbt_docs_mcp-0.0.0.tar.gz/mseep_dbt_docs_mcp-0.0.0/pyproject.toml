@@ -1,0 +1,71 @@
+[project]
+name = "mseep-dbt-docs-mcp"
+dynamic = [
+    "version",
+]
+description = "Model Context Protocol (MCP) server for dbt docs"
+requires-python = ">=3.10"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "dbt-core>=1.8",
+    "mcp[cli]>=1.2.0",
+    "networkx",
+    "python-decouple",
+    "rapidfuzz",
+    "snowplow-tracker<1.1.0",
+    "sqlglot>=26.12.0",
+    "tqdm",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Code = "https://github.com/mattijsdp/dbt-docs-mcp"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "PL",
+    "C90",
+]
+fixable = [
+    "ALL",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+docstring-code-format = false
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.4",
+]

@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: mseep-dbt-docs-mcp
+Version: 0.0.0
+Summary: Model Context Protocol (MCP) server for dbt docs
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Project-URL: Code, https://github.com/mattijsdp/dbt-docs-mcp
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: dbt-core>=1.8
+Requires-Dist: mcp[cli]>=1.2.0
+Requires-Dist: networkx
+Requires-Dist: python-decouple
+Requires-Dist: rapidfuzz
+Requires-Dist: snowplow-tracker<1.1.0
+Requires-Dist: sqlglot>=26.12.0
+Requires-Dist: tqdm
+Dynamic: license-file
+
+Package managed by MseeP.ai
