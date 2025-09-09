@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-ebaymcpserver
+Version: 0.1.3
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.3.0
+Requires-Dist: pydantic
+Dynamic: license-file
+
+Package managed by MseeP.ai
