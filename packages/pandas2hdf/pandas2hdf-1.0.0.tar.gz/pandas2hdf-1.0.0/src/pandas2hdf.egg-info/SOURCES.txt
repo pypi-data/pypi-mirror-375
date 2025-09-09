@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/pandas2hdf/__init__.py
+src/pandas2hdf/core.py
+src/pandas2hdf.egg-info/PKG-INFO
+src/pandas2hdf.egg-info/SOURCES.txt
+src/pandas2hdf.egg-info/dependency_links.txt
+src/pandas2hdf.egg-info/requires.txt
+src/pandas2hdf.egg-info/top_level.txt
+tests/test_dataframe.py
+tests/test_pandas2hdf.py
+tests/test_swmr_workflows.py
+tests/test_write_modes.py
