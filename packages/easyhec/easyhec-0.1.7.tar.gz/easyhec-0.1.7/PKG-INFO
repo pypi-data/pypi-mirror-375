@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: easyhec
+Version: 0.1.7
+Summary: EasyHec is a library for fast and automatic camera extrinsic calibration
+Home-page: https://github.com/stonet2000/easyhec
+Author: Stone Tao
+License: BSD-3-Clause
+Requires-Python: >=3.9
+License-File: LICENSE
+License-File: LICENSE-3RD-PARTY
+Requires-Dist: tyro
+Requires-Dist: torch
+Requires-Dist: tqdm
+Requires-Dist: opencv-python
+Requires-Dist: trimesh
+Requires-Dist: transforms3d
+Requires-Dist: matplotlib
+Requires-Dist: urchin
+Requires-Dist: ninja>=1.11
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Provides-Extra: sim-maniskill
+Requires-Dist: mani_skill-nightly; extra == "sim-maniskill"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
