@@ -1,0 +1,27 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-cinema4d-mcp"
+version = "0.1.6"
+description = "Cinema 4D MCP Server for Claude Desktop with MoGraph support"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.9"
+dependencies = [
+    "mcp>=1.2.0",
+    "starlette",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+cinema4d-mcp-wrapper = "cinema4d_mcp:main_wrapper"
+cinema4d-mcp = "cinema4d_mcp:main"
