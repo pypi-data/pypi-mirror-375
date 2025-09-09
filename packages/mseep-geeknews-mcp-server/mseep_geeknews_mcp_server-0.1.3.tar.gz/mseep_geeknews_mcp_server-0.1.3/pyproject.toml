@@ -1,0 +1,25 @@
+[project]
+name = "mseep-geeknews-mcp-server"
+version = "0.1.3"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "mcp[cli]>=1.6.0",
+    "requests>=2.32.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-geeknews-mcp-server = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
