@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-google-sheets
+Version: 0.5.1
+Summary: This MCP server integrates with your Google Drive and Google Sheets, to enable creating and modifying spreadsheets.
+Project-URL: Homepage, https://github.com/xing5/mcp-google-sheets
+Project-URL: Bug Tracker, https://github.com/xing5/mcp-google-sheets/issues
+Project-URL: Repository, https://github.com/xing5/mcp-google-sheets.git
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: google-api-python-client>=2.117.0
+Requires-Dist: google-auth-oauthlib>=1.2.0
+Requires-Dist: google-auth>=2.28.1
+Requires-Dist: mcp>=1.5.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
