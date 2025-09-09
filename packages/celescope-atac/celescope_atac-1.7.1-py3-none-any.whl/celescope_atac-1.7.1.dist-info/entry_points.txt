@@ -1,0 +1,3 @@
+[console_scripts]
+celescope = celescope.celescope:main
+multi_atac = celescope.atac.multi_atac:main
