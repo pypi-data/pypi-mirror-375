@@ -1,0 +1,33 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Project data and artifacts (not tracked)
+data/
+artifacts/
+
+# Local environment
+.env
+
+# Generated media and caption artifacts in project dir
+/*.wav
+/*.mp3
+/*.m4a
+/*.webm
+/*.mkv
+/*.flac
+/*.srt
+/*.vtt
+# Common transcript/export artifacts created during local runs
+/*.json
+
+# Temporary output folders
+/out/
+/tmpout/
