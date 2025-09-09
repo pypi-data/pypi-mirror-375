@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-zammad
+Version: 0.1.6
+Summary: Model Context Protocol server for Zammad ticket system integration (unofficial)
+Author-email: mseep <support@skydeck.ai>
+License: AGPL-3.0-or-later
+License-File: LICENSE
+Keywords: api,mcp,support,tickets,zammad
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Requires-Dist: httpx>=0.25.0
+Requires-Dist: mcp>=1.12.2
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: zammad-py>=3.2.0
+Provides-Extra: dev
+Requires-Dist: bandit[sarif]>=1.8.6; extra == 'dev'
+Requires-Dist: defusedxml>=0.7.1; extra == 'dev'
+Requires-Dist: mypy>=1.0.0; extra == 'dev'
+Requires-Dist: pip-audit>=2.6.0; extra == 'dev'
+Requires-Dist: pre-commit>=3.0.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: ruff>=0.1.0; extra == 'dev'
+Requires-Dist: safety>=2.3.1; extra == 'dev'
+Requires-Dist: semgrep>=1.35.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
