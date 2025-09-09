@@ -1,0 +1,80 @@
+# ⚡ Hexaboost
+
+[![PyPI version](https://badge.fury.io/py/hexaboost.svg)](https://pypi.org/project/hexaboost/)
+[![CI](https://github.com/hexaboost/hexaboost/actions/workflows/ci.yml/badge.svg)](https://github.com/hexaboost/hexaboost/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Generador de proyectos escalables con arquitectura Hexagonal, pensado para acelerar el desarrollo de aplicaciones modernas en **Python**.
+
+---
+
+## 🚀 Características
+- 🏗️ CLI intuitiva para crear y gestionar proyectos.
+- 📦 Plantillas listas (ejemplo: FastAPI) para arrancar rápido.
+- 🌐 Documentación multi-idioma incluida.
+- ✅ Tests preconfigurados con `pytest`.
+- 🔧 Preparado para integrarse con CI/CD.
+
+---
+
+## 📦 Instalación
+
+Desde PyPI:
+
+```bash
+pip install hexaboost
+Verifica la instalación:
+
+bash
+Copiar código
+hexaboost --help
+⚡ Uso básico
+Inicializar un proyecto vacío:
+
+bash
+Copiar código
+hexaboost init myproject
+Crear un proyecto desde plantilla (ejemplo FastAPI):
+
+bash
+Copiar código
+hexaboost new python-fastapi myproject
+Sincronizar la documentación (multi-idioma):
+
+bash
+Copiar código
+hexaboost sync-readme
+🧪 Tests
+Ejecutar los tests de un proyecto generado:
+
+bash
+Copiar código
+pytest -v myproject/tests
+📂 Estructura del proyecto generado
+arduino
+Copiar código
+myproject/
+├── app/              # código principal
+├── tests/            # pruebas con pytest
+├── requirements.txt
+├── pyproject.toml
+└── README.md
+🤝 Contribuciones
+¡Las contribuciones son bienvenidas! 🎉
+
+Haz un fork del repositorio.
+
+Crea una rama:
+
+bash
+Copiar código
+git checkout -b feature/nueva-feature
+Haz commit de tus cambios:
+
+bash
+Copiar código
+git commit -m "Añadida nueva feature"
+Sube tu rama y abre un PR.
+
+📜 Licencia
+Este proyecto está bajo la licencia MIT.
