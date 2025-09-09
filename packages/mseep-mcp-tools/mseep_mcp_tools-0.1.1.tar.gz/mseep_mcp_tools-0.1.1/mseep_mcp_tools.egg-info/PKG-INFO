@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-tools
+Version: 0.1.1
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.9.1
+Requires-Dist: openai>=1.86.0
+Requires-Dist: pyyaml>=6.0.2
+
+Package managed by MseeP.ai
