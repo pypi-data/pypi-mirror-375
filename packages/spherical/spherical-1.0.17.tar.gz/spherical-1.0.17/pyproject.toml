@@ -1,0 +1,80 @@
+[project]
+name = "spherical"
+dynamic = ["version"]
+description = "Evaluate and transform D matrices, 3-j symbols, and (scalar or spin-weighted) spherical harmonics"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [
+  { name = "Michael Boyle", email = "michael.oliver.boyle@gmail.com" }
+]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Physics",
+  "Topic :: Scientific/Engineering :: Astronomy"
+]
+dependencies = [
+  "numpy >=1.20",
+  "scipy >=1.5",
+  "numba >=0.55; implementation_name == 'cpython'",
+  "quaternionic >= 1.0",
+  "spinsfast >=104.2020.8; sys_platform != 'win32'"
+]
+
+[project.optional-dependencies]
+docs = [
+  "mkdocs",
+  "mktheapidocs",
+  "pymdown-extensions"
+]
+
+[project.urls]
+Homepage = "https://github.com/moble/spherical"
+Documentation = "https://spherical.readthedocs.io/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.hatch.version]
+path = "spherical/__version__.py"
+
+[tool.hatch.envs.default]
+installer = "uv"
+dependencies = [
+  "pytest",
+  "pytest-cov",
+  "black",
+  "sympy"
+]
+[tool.hatch.envs.default.scripts]
+# Run these as `hatch run test`
+test = "pytest {args:tests}"
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs",
+  "mktheapidocs",
+  "pymdown-extensions"
+]
+[tool.hatch.envs.docs.scripts]
+# Run these as `hatch run docs:build` or `hatch run docs:serve`
+build = "mkdocs build --clean"
+serve = "mkdocs serve --dev-addr localhost:8000"
+
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+norecursedirs = ".* build dist *.egg-info install ENV"
+junit_family="xunit2"
+addopts = "-s -v --tb=short --doctest-glob='' --cov=spherical --cov-branch --cov-report xml"
