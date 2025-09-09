@@ -1,0 +1,64 @@
+include:
+  - project: divio/infra/gitlab-pipelines
+    file: python-package/.gitlab-ci.yml
+
+variables:
+  LINT_FOLDER_PYTHON: divio_cli
+  CRYPTOGRAPHY_DONT_BUILD_RUST: 1
+
+check-newsfragment:
+  rules: [when: never]
+
+check-changelog:
+  rules: [when: never]
+
+unit-tests:
+  # Do not run integration tests (done in another job)
+  script: tox -x tox.skip_missing_interpreters=false -- -m "not integration"
+
+integration-tests:
+  stage: qa
+  image: docker:latest
+  before_script:
+    - apk --update add openssh-client git python3 python3-dev py-pip build-base libffi-dev openssl-dev
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - eval $(ssh-agent -s)
+    ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    ## We're using tr to fix line endings which makes ed25519 keys work
+    ## without extra base64 encoding.
+    ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+    - echo "$SSH_CI_TEST_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    ## Create the SSH directory and give it the right permissions
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    ## Allow host keys
+    - ssh-keyscan git.divio.com >> ~/.ssh/known_hosts
+    - ssh-keyscan git.dev.aldryn.net >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+    # prepare netrc as login
+    - echo "$CI_TEST_NETRC" > ~/.netrc
+  script: 
+      - pip install -e .[test]
+      - divio doctor
+      - mkdir -p ${CI_PROJECT_DIR}/test_data
+      - export COVERAGE_FILE=.coverage # do not override existing files in .artifacts
+      - pytest -v -s -m integration --cov=divio_cli --cov-report= --cov-branch --junitxml=.artifacts/junit-testreport-integration.xml
+  after_script:
+      - mkdir -p ${CI_PROJECT_DIR}/.artifacts
+      - cp ${CI_PROJECT_DIR}/.coverage ${CI_PROJECT_DIR}/.artifacts/.coverage.integrationtest
+  artifacts:
+    paths:
+      - .artifacts/.coverage.integrationtest
+    reports:
+      junit: .artifacts/junit-testreport-integration.xml
+
+
+release:
+  stage: release
+  extends: .prepare-release
+  script:
+    - !reference [.prepare-release, script]
+    - !reference [.release, pypi] # requires PYPI_USERNAME and PYPI_PASSWORD
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^(\d+\.)?(\d+\.)?(\d+)$/

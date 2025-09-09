@@ -1,0 +1,168 @@
+import errno
+import json
+import os
+import time
+from netrc import netrc
+
+from packaging import version
+
+from divio_cli.exceptions import DivioException
+
+from . import __version__, settings, utils
+
+
+def get_global_config_path():
+    old_path = os.path.join(os.path.expanduser("~"), settings.ALDRYN_DOT_FILE)
+    if os.path.exists(old_path):
+        return old_path
+    else:
+        return settings.DIVIO_GLOBAL_CONFIG_FILE
+
+
+class Config:
+    config = {}
+
+    def __init__(self):
+        super().__init__()
+        self.config_path = get_global_config_path()
+        self.read()
+
+    def read(self):
+        try:
+            with open(self.config_path) as fh:
+                config = json.load(fh)
+        except OSError:
+            # file doesn't exist
+            config = {}
+        except ValueError:
+            # invalid config
+            config = {}
+        self.config = config
+
+    def save(self):
+        # Create folders if they don't exist yet.
+        if not os.path.exists(os.path.dirname(self.config_path)):
+            try:
+                os.makedirs(os.path.dirname(self.config_path))
+            except OSError as exc:  # Guard against race condition
+                if exc.errno != errno.EEXIST:
+                    raise
+
+        with open(self.config_path, "w+") as fh:
+            json.dump(self.config, fh)
+
+    def check_for_updates(self, force=False):
+        """check for updates daily"""
+        if self.config.get("disable_update_check", False) and not force:
+            return None
+
+        timestamp_key = "update_check_timestamp"
+        version_key = "update_check_version"
+
+        last_checked = self.config.get(timestamp_key, None)
+        now = int(time.time())
+        installed_version = version.parse(__version__)
+        pypi_error = None
+
+        if force or not last_checked or last_checked < now - (60 * 60 * 24):
+            # try to access PyPI to get the latest available version
+            remote_version, pypi_error = utils.get_latest_version_from_pypi()
+
+            if remote_version:
+                if remote_version > installed_version:
+                    self.config[version_key] = str(remote_version)
+                self.config[timestamp_key] = now
+                self.save()
+            elif remote_version is False:
+                # fail silently, nothing the user can do about this
+                self.config.pop(version_key, None)
+
+        newest_version_s = self.config.get(version_key, None)
+        newest_version = None
+        if newest_version_s:
+            newest_version = version.parse(newest_version_s)
+            if newest_version <= installed_version:
+                self.config.pop(version_key)
+                self.save()
+        return {
+            "current": __version__,
+            "remote": str(newest_version),
+            "update_available": (
+                newest_version > installed_version if newest_version else False
+            ),
+            "pypi_error": pypi_error,
+        }
+
+    def skip_doctor(self):
+        return self.config.get("skip_doctor")
+
+    def get_skip_doctor_checks(self):
+        checks = self.config.get("skip_doctor_checks")
+        if not checks or not isinstance(checks, list):
+            return []
+        return checks
+
+    def get_docker_compose_cmd(self):
+        return self.config.get(
+            "docker-compose", settings.DEFAULT_DOCKER_COMPOSE_CMD
+        )
+
+    def get_sentry_dsn(self):
+        return self.config.get("sentry-dsn", settings.DEFAULT_SENTRY_DSN)
+
+
+class WritableNetRC(netrc):
+    def __init__(self, *args, **kwargs):
+        netrc_path = self.get_netrc_path()
+        if not os.path.exists(netrc_path):
+            open(netrc_path, "a").close()
+            os.chmod(netrc_path, 0o600)
+        kwargs["file"] = netrc_path
+        try:
+            netrc.__init__(self, *args, **kwargs)
+        except OSError:
+            raise DivioException(
+                f"Please make sure your netrc config file ('{netrc_path}') "
+                "can be read and written by the current user."
+            )
+
+    @classmethod
+    def get_netrc_path(self):
+        """
+        netrc uses os.environ['HOME'] for path detection which is
+        not defined on Windows. Detecting the correct path ourselves.
+
+        This method also checks if the environment variable "NETRC_PATH" is set
+        and returns it if so.
+        """
+
+        if "NETRC_PATH" in os.environ:
+            return os.environ["NETRC_PATH"]
+
+        home = os.path.expanduser("~")
+        return os.path.join(home, ".netrc")
+
+    def add(self, host, login, account, password):
+        self.hosts[host] = (login, account, password)
+
+    def remove(self, host):
+        if host in self.hosts:
+            del self.hosts[host]
+
+    def write(self, path=None):
+        if path is None:
+            path = self.get_netrc_path()
+
+        out = []
+        for machine, data in self.hosts.items():
+            login, account, password = data
+            out.append(f"machine {machine}")
+            if login:
+                out.append(f"\tlogin {login}")
+            if account:
+                out.append(f"\taccount {account}")
+            if password:
+                out.append(f"\tpassword {password}")
+
+        with open(path, "w") as f:
+            f.write(os.linesep.join(out))
