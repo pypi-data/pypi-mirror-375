@@ -1,0 +1,16 @@
+LICENSE
+README.md
+setup.py
+django_jaeger_middleware_plus.egg-info/PKG-INFO
+django_jaeger_middleware_plus.egg-info/SOURCES.txt
+django_jaeger_middleware_plus.egg-info/dependency_links.txt
+django_jaeger_middleware_plus.egg-info/requires.txt
+django_jaeger_middleware_plus.egg-info/top_level.txt
+jaegertrace/__init__.py
+jaegertrace/conf.py
+jaegertrace/exceptions.py
+jaegertrace/httpclient.py
+jaegertrace/initial_tracer.py
+jaegertrace/middleware.py
+jaegertrace/request_context.py
+jaegertrace/patches/__init__.py

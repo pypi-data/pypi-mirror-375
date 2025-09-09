@@ -1,0 +1,11 @@
+Django>=2.2
+jaeger-client>=4.6.1
+opentracing>=2.4.0
+requests>=2.25.1
+
+[dev]
+pytest>=6.0
+pytest-django>=2.2
+black>=21.0
+flake8>=3.8
+mypy>=0.812
