@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-ledger
+Version: 0.1.2
+Summary: A Model Context Protocol server providing tools to execute Ledger, a powerful command-line accounting system, commands.
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Keywords: mcp,ledger
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: click>=8.1.8
+Requires-Dist: mcp>=1.4.1
+
+Package managed by MseeP.ai
