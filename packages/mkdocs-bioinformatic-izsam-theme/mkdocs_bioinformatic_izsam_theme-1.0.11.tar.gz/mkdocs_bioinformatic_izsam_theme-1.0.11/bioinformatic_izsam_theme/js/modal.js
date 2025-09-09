@@ -1,0 +1,295 @@
+wiki.modal = {};
+
+wiki.modal.body = document.querySelector('body');
+wiki.modal.close_modal_trigger = document.querySelector('.modal-close');
+
+wiki.modal.css_vars = wiki.utils.getAllCssVariables();
+wiki.modal.scrolly_options = {
+  position: 'absolute',
+  opacity: 0.8,
+  containerColor: wiki.modal.css_vars['--secondary-light'],
+  barColor: wiki.modal.css_vars['--secondary-dark'],
+  radius: 1,
+  scaleY : 0.8,
+  side : 'left',
+  offset : -1,
+  width : 0.3,
+  unit : 'rem',
+};
+wiki.modal.scrolly = new Scrolly(wiki.modal.scrolly_options);
+
+/**
+ * Close all notifiers and clean contents
+ * 
+ */
+wiki.modal.closeAllComponentsNotifiers = function() {
+  let notifiers = document.querySelectorAll('.component-notifier');
+  notifiers.forEach(notifier => {
+    notifier.remove();
+  });
+  let components = document.querySelectorAll('.show-component-notifier');
+  components.forEach(component => {
+    component.classList.remove('show-component-notifier');
+  });
+}
+
+/**
+ * Close notifier and clean contents
+ * 
+ * @param {DOM node} component `.tree-container`, `map-container` ... (tested only for tree)
+ * @param {DOM node} notifier
+ * @param {DOM node} contents
+ * 
+ */
+wiki.modal.closeComponentNotifier = function(component, notifier, contents) {
+  if (contents) {
+    contents.remove();
+  }
+  let n_contents = component.querySelectorAll('.notifier-contents');
+  if (!n_contents || n_contents.length == 0) {
+    if (!notifier) {
+      notifier = component.querySelector('.component-notifier');
+    }
+    notifier.remove();
+    component.classList.remove('show-component-notifier');
+  }
+}
+
+/**
+ * Close notifier and clean contents
+ * 
+ * @param {DOM node} notifier
+ * 
+ */
+wiki.modal.closeNotifier = function(notifier, contents) {
+  contents.remove();
+  let n_contents = document.querySelectorAll('.notifier-contents');
+  if (!n_contents || n_contents.length == 0) {
+    notifier.remove();
+    wiki.modal.body.classList.remove("show-notifier");
+  }
+}
+
+/**
+ * Build notifier
+ * 
+ * @param {String} component `tree`, `map` ... (tested only for tree)
+ * @param {String} id Notifier contents id
+ * @param {String} title Notifier title
+ * @param {Array} contents Array of html contents
+ * @param {Array} actions Array of html contents like button or toggles
+ * @param {DOM Node} feedback System feedback for users
+ * @param {String} fType Feedback type to assign as class `info` | to be defined
+ */
+wiki.modal.buildComponentNotifier = function(component, id, title, contents, actions, feedback, fType) {
+  let selector ='.' + component + '-container';
+  let context = document.querySelector(selector);
+  let notifier = document.querySelector('.notifier');
+  if (!notifier) {
+    notifier = document.createElement('div');
+    notifier.setAttribute('class', 'notifier component-notifier');
+    context.append(notifier);
+  }
+  let n_contents = document.createElement('div');
+  n_contents.setAttribute('class', 'notifier-contents');
+  if (id) {
+    n_contents.setAttribute('id', id);
+  }
+  let close = document.createElement('div');
+  close.setAttribute('class', 'notifier-close');
+  close.innerHTML = '<i class="iconic iconic-close-circle"></i>';
+  close.addEventListener('click', () => {
+    wiki.modal.closeComponentNotifier(context, notifier, n_contents);
+  });
+  n_contents.append(close);
+  if (title) {
+    let n_header = document.createElement('div');
+    n_header.setAttribute('class', 'notifier-header');
+    n_header.innerHTML = '<h3>' + title + '</h3>';
+    n_contents.append(n_header);
+  }
+  if (contents && contents.length > 0) {
+    let n_body = document.createElement('div');
+    n_body.setAttribute('class', 'notifier-body');
+    contents.forEach(content => {
+      n_body.append(content);
+    });
+    n_contents.append(n_body);
+  }
+  if (actions && actions.length > 0) {
+    let n_actions = document.createElement('div');
+    n_actions.setAttribute('class', 'notifier-actions');
+    actions.forEach(action => {
+      n_actions.append(action);
+    });
+    n_contents.append(n_actions);
+  }
+  if (feedback) {
+    let n_feedback = document.createElement('div');
+    n_feedback.setAttribute('class', 'notifier-feedback');
+    n_feedback.innerHTML = feedback;
+    if (fType) {
+      n_feedback.classList.add(fType); 
+    }
+    n_contents.append(n_feedback);
+  }
+  notifier.append(n_contents);
+  context.classList.add('show-component-notifier');
+};
+
+/**
+ * Build notifier
+ * 
+ * @param {String} title Modal title
+ * @param {Array} contents Array of html modal contents
+ * @param {DOM Node} feedback System feedback for users
+ * @param {String} fType Feedback type to assign as class `info` || `warning` || to be defined
+ */
+wiki.modal.buildNotifier = function(title, contents, feedback, fType) {
+  let notifier = document.querySelector('.notifier');
+  if (!notifier) {
+    notifier = document.createElement('div');
+    notifier.setAttribute('class', 'notifier');
+    wiki.modal.body.append(notifier);
+  }
+  let n_contents = document.createElement('div');
+  n_contents.setAttribute('class', 'notifier-contents');
+  let close = document.createElement('div');
+  close.setAttribute('class', 'notifier-close');
+  close.innerHTML = '<i class="iconic iconic-close-circle"></i>';
+  close.addEventListener('click', () => {
+    wiki.modal.closeNotifier(notifier, n_contents);
+  });
+  n_contents.append(close);
+  if (title) {
+    let n_header = document.createElement('div');
+    n_header.setAttribute('class', 'notifier-header');
+    n_header.innerHTML = '<h3>' + title + '</h3>';
+    n_contents.append(n_header);
+  }
+  if (contents && contents.length > 0) {
+    let n_body = document.createElement('div');
+    n_body.setAttribute('class', 'notifier-body');
+    contents.forEach(content => {
+      n_body.append(content);
+    });
+    n_contents.append(n_body);
+  }
+  if (feedback) {
+    let n_feedback = document.createElement('div');
+    n_feedback.setAttribute('class', 'notifier-feedback');
+    n_feedback.innerHTML = feedback;
+    if (fType) {
+      n_feedback.classList.add(fType); 
+    }
+    n_contents.append(n_feedback);
+  }
+  notifier.append(n_contents);
+  wiki.modal.body.classList.add('show-notifier');
+};
+
+/**
+ * Build modal
+ * 
+ * @param {String} title Modal title
+ * @param {Array} contents Array of html modal contents
+ * @param {DOM Node} feedback System feedback for users
+ * @param {String} fType Feedback type to assign as class `info` | `warning`
+ * @param {String} additionalCls additional class to add to body, should start with 'show-modal' in order to be removed with closeModal function
+ */
+wiki.modal.buildModal = function(cfg) {
+  let modal = document.querySelector('.modal');
+  if (cfg.title) {
+    let m_header = modal.querySelector('.modal-header');
+    m_header.innerHTML = '<h3>' + cfg.title + '</h3>';
+  }
+  if (cfg.contents.length > 0) {
+    let m_body = modal.querySelector('.modal-body');
+    let m_contents = document.createElement('div');
+    m_contents.setAttribute('class', 'modal-body-contents');
+    cfg.contents.forEach(content => {
+      m_contents.append(content);
+    });
+    m_body.append(m_contents);
+    wiki.modal.scrolly.initNode(m_contents);
+  }
+  if (cfg.feedback) {
+    let m_feedback = modal.querySelector('.modal-feedback');
+    m_feedback.innerHTML = cfg.feedback;
+    if (cfg.fType) {
+      m_feedback.classList.add(cfg.fType); 
+    }
+    m_feedback.classList.add('show');
+  }
+  wiki.modal.body.classList.add('show-modal');
+  if (cfg.additionalCls) {
+    wiki.modal.body.classList.add(cfg.additionalCls);
+  }
+};
+
+/**
+ * 
+ * Colse modal and clean contents
+ * 
+ */
+wiki.modal.closeModal = function () {
+  // i need to remove all classes starting with show-modal from body
+  let classes = wiki.modal.body.classList;
+  let classesToRemove = [];
+  classes.forEach(cls => {
+    if (cls.startsWith('show-modal')) {
+      classesToRemove.push(cls);
+    }
+  });
+  classesToRemove.forEach(cls => {  
+    wiki.modal.body.classList.remove(cls);
+  });
+  
+  let modal = document.querySelector('.modal');
+  modal.setAttribute('class', 'modal');
+  let m_header = document.querySelector('.modal-header');
+  let m_body = document.querySelector('.modal-body');
+  let m_feedback = document.querySelector('.modal-feedback');
+  m_feedback.setAttribute('class', 'modal-feedback');
+  m_header.innerHTML = "";
+  m_body.innerHTML = "";
+  m_feedback.innerHTML = "";
+}
+
+wiki.modal.close_modal_trigger.addEventListener('click', function(e) {
+  wiki.modal.closeModal();
+});
+
+window.addEventListener("resize", function() {
+  setTimeout(() => {
+    let node = document.querySelector('.modal-body-contents');
+    if (node) {
+      wiki.modal.scrolly.updateNode(node);
+    }
+  }, 300);
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (wiki.modal.body.classList.contains('show-modal')) {
+      wiki.modal.closeModal();
+    } else {
+      let notifier = document.querySelector('.notifier');
+      if (notifier) {
+        wiki.modal.closeNotifier(notifier, notifier.querySelector('.notifier-contents'));
+      }
+    }
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.querySelector('.modal');
+  const modalContents = document.querySelector('.modal-contents');
+
+  modal.addEventListener('click', function(event) {
+    // Check if the click is outside the modal contents
+    if (event.target === modal) {
+      wiki.modal.closeModal(); // Close the modal
+    }
+  });
+});

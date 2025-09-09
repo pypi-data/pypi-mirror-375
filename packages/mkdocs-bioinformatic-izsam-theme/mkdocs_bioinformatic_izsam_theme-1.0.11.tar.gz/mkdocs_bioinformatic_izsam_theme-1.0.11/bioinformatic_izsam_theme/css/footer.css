@@ -1,0 +1,106 @@
+/* FOOTER */
+
+footer {
+  padding-top: 8vh;
+  padding-bottom: 8vh;
+  background-color: var(--darker);
+}
+
+@media (min-width: 750px) {
+  footer .columns {
+    margin-left: 2%;
+  }
+  footer .column:first-child,
+  footer .columns:first-child {
+    margin-left: 0;
+  }
+
+  footer .two.columns {
+    width: 16%;
+  }
+
+  footer .eight.columns {
+    width: 64%;
+  }
+}
+
+footer .logo img {
+  opacity: 0.9;
+  max-width: 14.4rem;
+}
+
+footer .useful {
+  margin-top: 5vh;
+  margin-left: 0.5rem;
+}
+
+@media (min-width: 750px) {
+  footer .useful {
+    margin-left: 0;
+  }
+  footer .useful:first-child {
+    margin-top: 0;
+  }
+}
+
+footer .useful:last-child {
+  margin-bottom: 0;
+}
+
+footer .useful h6 {
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-weight: 700;
+  margin-bottom: 1.3rem;
+  font-size: 1.3rem;
+}
+
+footer .useful ul {
+  list-style: none;
+  font-size: 1.6rem;
+}
+
+footer .useful ul li {
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  margin-right: 0.8rem;
+}
+
+footer .useful-tools ul li {
+  display: block;
+  color: var(--white);
+}
+
+footer .useful-tools ul li i {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+footer .useful ul li a {
+  color: var(--white);
+  opacity: 0.9;
+}
+
+footer .info {
+  margin-top: 5vh;
+  margin-left: 0.5rem;
+}
+
+@media (min-width: 750px) {
+  footer .info {
+    margin-left: 0;
+  }
+}
+
+footer .info p {
+  color: var(--white);
+  opacity: 0.9;
+  margin-bottom: 0;
+  font-size: 1.3rem;
+}
+
+footer .info p.copyright {
+  opacity: 0.6;
+  margin-top: 0.5rem;
+}

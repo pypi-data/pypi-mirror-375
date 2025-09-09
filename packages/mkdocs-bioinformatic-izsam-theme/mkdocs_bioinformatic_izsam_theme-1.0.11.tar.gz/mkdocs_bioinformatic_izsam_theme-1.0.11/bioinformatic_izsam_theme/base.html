@@ -1,0 +1,286 @@
+<!--
+  This Basic theme serves as an example for how to create other
+  themes by demonstrating the features with minimal HTML and CSS.
+  Comments like this will be through the code to explain briefly
+  what each feature is and point you to the MkDocs documentation
+  to find out more.
+-->
+<!DOCTYPE html>
+<html lang="{{ config.extra.language|default('en') }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--
+    The page.title contains the title for a page as shown in the navigation.
+    Site name contains the name as defined in the mkdocs.yml
+  -->
+  <title>
+    {% if page %}
+      {% if page.meta and page.meta.title %}
+        {{ page.meta.title }} - {{ config.site_name }}
+      {% elif page.title %}
+        {{ page.title }} - {{ config.site_name }}
+      {% else %}
+        {{ config.site_name }}
+      {% endif %}
+    {% else %}
+      {{ config.site_name }}
+    {% endif %}
+  </title>
+  
+  {% if page %}
+    {% if page.meta and page.meta.description %}
+      <meta name="description" content="{{ page.meta.description }}">
+    {% else %}
+      <meta name="description" content="{{ config['site_description'] }}">
+    {% endif %}
+  {% else %}
+    <meta name="description" content="{{ config['site_description'] }}">
+  {% endif %}
+  {% if config.site_author %}<meta name="author" content="{{ config.site_author }}">{% endif %}
+  {% if page and page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}">{% endif %}
+  <!--
+    Just add a favicon.ico image to the docs.
+  -->
+  <link rel="shortcut icon" href="{{ 'img/favicon.ico'|url }}">
+  <!--
+    You can include external assets of course, but be aware that it means the
+    documentation may not work well offline.
+  -->
+  <link rel="stylesheet" href="{{ 'css/normalize.css'|url }}">
+  <link rel="stylesheet" href="{{ 'css/skeleton.css'|url }}">
+  <link rel="stylesheet" href="{{ 'css/iconic.css'|url }}" />
+  <link rel="stylesheet" href="{{ 'css/pygments-rainbow-dash.css'|url }}">
+  <link rel="stylesheet" href="{{ 'css/vars.css'|url }}" />
+  <link rel="stylesheet" href="{{ 'css/base.css'|url }}">
+  <link rel="stylesheet" href="{{ 'css/wiki.css'|url }}">
+  <link rel="stylesheet" href="{{ 'css/header.css'|url }}">
+  <link rel="stylesheet" href="{{ 'css/footer.css'|url }}">
+  <!-- scrolly -->
+  <link rel="stylesheet" href="{{ 'js/scrolly/scrolly.css'|url }}" type="text/css" />
+
+  <!--
+    extra_ess contains paths to CSS files in the users
+    documentation directory or a list of CSS files defined in
+    their mkdocs.yml.
+
+    http://www.mkdocs.org/user-guide/configuration/#extra_css
+  -->
+  {% for path in config.extra_css %}
+    <link href="{{ path|url }}" rel="stylesheet">
+  {% endfor %}
+
+  {% block extrahead %}{% endblock %}
+
+  <!--
+    extra_javascript contains paths to JavaScript files in the
+    users documentation directory or a list of JavaScript files
+    defined in their mkdocs.yml.
+
+    http://www.mkdocs.org/user-guide/configuration/#extra_javascript
+  -->
+  {% for path in config.extra_javascript %}
+    <script src="{{ path|url }}"></script>
+  {% endfor %}
+
+</head>
+
+<body class="wiki">
+  
+  {% include "header.html" %}
+
+  <section class="main">
+    <div class="container">
+      <div class="row">
+        <div class="two columns columns-docs-navigation">
+          <div class="docs-navigation">
+            <div class="close" onclick="wiki.theme.toggleDocsNav()">
+              <i class="iconic iconic-close-circle"></i>
+            </div>
+            <!--
+              Create the navigation for the documentation.
+
+              Because we don't know how many levels deep the navigation is, it needs to
+              be included in it's own file so it can be recursive. Otherwise the theme
+              can also only support a specific number of levels.
+
+              See the nav.html file for more details about how this works.
+            -->
+            <h6 id="docs-topics-title" data-i18n-key="topics">Topics</h6>
+            <ul>
+            {% for nav_item in nav %}
+              {% include "nav.html" %}
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="eight columns columns-contents">
+          <div class="contents">
+            {% block content %}
+              {{ page.content }}
+            {% endblock %}
+          </div>
+        </div>
+        <div class="two columns columns-table-of-contents sticky">
+          <div class="table-of-contents">
+            {% if page.toc %}
+            <h6 data-i18n-key="on_this_page" id="page-contents-title">On this page</h6>
+            <ul>
+              {% for toc_item in page.toc %}
+                {% if toc_item.children %}
+                  <li class="has-children">
+                    <a href="{{ toc_item.url }}" onclick="wiki.theme.toggleTocNavChild()">{{ toc_item.title }}</a>
+                    <ul class="nav-child">
+                      {% for child in toc_item.children %}
+                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  {% else %}
+                  <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Create a search form that sends the user to the search.html file - this is
+    the other file in the template which adds search to the theme. The only
+    requirement here is that there is a text input with the name 'q' and the
+    action and methods match below.
+  -->
+  {% if 'izsam-search' in config['plugins'] %}
+  <section class="modal">
+    <div class="modal-contents">
+      <div class="modal-close"><i class="iconic iconic-close-circle"></i></div>
+      <div class="modal-header"></div>
+      <div class="modal-body"></div>
+      <div class="modal-feedback"></div>
+    </div>
+  </section>
+
+  {% endif %}
+
+  <!--
+    Implement the previous and next links to cycle through the pages.
+  -->
+  {% if page.next_page or page.previous_page %}
+  <section class="internal-nav">
+    <div class="container">
+      <div class="internal-nav-links">
+        <div class="internal-nav-link internal-nav-link-previous">
+          {% if page.previous_page %}
+          <a href="{{ page.previous_page.url|url }}" title="{{ page.previous_page.title }}">
+            <div class="internal-nav-previous">
+              <div class="arrow arrow-left">
+                <i class="iconic iconic-arrow-left"></i>
+              </div>
+              <div class="internal-nav-link-previous-label">
+                <h6 data-i18n-key="previous">Previous</h6>
+                {% if page.previous_page.parent %}
+                <h5>{{ page.previous_page.parent.title }}, {{ page.previous_page.title }}</h5>
+                {% else %}
+                <h5>{{ page.previous_page.title }}</h5>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+          {% else %}
+            &nbsp;
+          {% endif %}
+        </div>
+        <div class="internal-nav-link internal-nav-link-next">
+          {% if page.next_page %}
+          <a href="{{ page.next_page.url|url }}" title="{{ page.next_page.title }}">
+            <div class="internal-nav-next">
+              <div class="internal-nav-link-next-label">
+                <h6 data-i18n-key="next">Next</h6>
+                {% if page.next_page.parent %}
+                <h5>{{ page.next_page.parent.title }}, {{ page.next_page.title }}</h5>
+                {% else %}
+                <h5>{{ page.next_page.title }}</h5>
+                {% endif %}
+              </div>
+              <div class="arrow arrow-right">
+                <i class="iconic iconic-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+          {% else %}
+            &nbsp;
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+  <div class="overlay-utility" onclick="wiki.theme.toggleDocsNav()"></div>
+
+  {% include "footer.html" %}
+
+  <!--
+  MkDocs version      : {{ mkdocs_version }}
+  Docs Build Date UTC : {{ build_date_utc }}
+  -->
+
+  <!--
+
+    Support extra data from configuration
+
+    {% if config.extra.pippo %}
+    <ul>
+    {% for link in config.extra.pippo %}
+        <li>{{ link }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  -->
+
+  <!--
+    Support repo URL
+
+    {% if page and page.edit_url %}
+    <h2>Link to the source</h2>
+      <a href="{{ page.edit_url }}">Edit on {{ config.repo_name }}</a>
+    {% elif config.repo_url %}
+      <a href="{{ config.repo_url }}">{{ config.repo_name }}</a>
+    {% endif %}
+  -->
+
+  <script>
+    const base_url = '{{ base_url }}';
+    const site_url = '{{ config.site_url }}';
+    const config_lang = "{{ config.extra.language|default('en') }}";
+    const wiki = {};
+  </script>
+
+  <script src="{{ 'js/scrolly/scrolly.js'|url }}"></script>
+  <script src="{{ 'js/utils.js'|url }}"></script>
+  <!--
+    To include static assets from our theme, just add
+    {{ base_url }} beforehand which will be the relative path to
+    the root of the documentation.
+  -->
+  <script src="{{ 'js/languages.js'|url }}"></script>
+  <script src="{{ 'js/locales.js'|url }}"></script>
+  <script src="{{ 'search/search_config.js'|url }}"></script>
+  <script src="{{ 'search/search_docs.js'|url }}"></script>
+  <script src="{{ 'js/lunr.js'|url }}"></script>
+  {% if config.extra.language and not 'en' in config.extra.language %}
+    <script src="{{ 'js/lunr-languages/lunr.stemmer.support.js'|url }}"></script>
+    <script src="{{ 'js/lunr-languages/lunr.multi.js'|url }}"></script>
+    {% set js_path = 'js/lunr-languages/lunr.' ~ config.extra.language ~ '.js' %}
+    <script src="{{ js_path|url }}"></script>
+  {% endif %}
+  <script src="{{ 'js/modal.js'|url }}"></script>
+  <script src="{{ 'js/search.js'|url }}"></script>
+  <script src="{{ 'js/theme.js'|url }}"></script>
+  <script src="{{ 'js/footer.js'|url }}"></script>
+</body>
+</html>

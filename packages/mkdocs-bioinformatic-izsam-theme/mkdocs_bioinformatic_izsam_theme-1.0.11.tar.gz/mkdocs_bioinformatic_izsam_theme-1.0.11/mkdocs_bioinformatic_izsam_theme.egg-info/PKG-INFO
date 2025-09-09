@@ -1,0 +1,359 @@
+Metadata-Version: 2.1
+Name: mkdocs-bioinformatic-izsam-theme
+Version: 1.0.11
+Summary: MkDocs theme designed for Bioinformatic Unit of the Istituto Zooprofilattico dell' Abruzzo e del Molise G. Caporale
+Home-page: 
+Author: Alessandro De Luca
+Author-email: al.deluca@izs.it
+License: MIT
+Keywords: MkDocs,Theme,Software documentation
+Description-Content-Type: text/markdown
+License-File: LICENCE.txt
+Requires-Dist: mkdocs>=1.0.4
+
+# mkdocs-bioinformatic-izsam-theme
+
+This is an MkDocs theme designed to layout the documentation provided by Bioinformatic Unit of the Istituto Zooprofilattico Sperimentale dell'Abruzzo e del Molise "G. Caporale".
+
+#### Important!
+
+The theme is intended to work with the plugin **mkdocs-izsam-search** [https://pypi.org/project/mkdocs-izsam-search/](https://pypi.org/project/mkdocs-izsam-search/)
+
+```bash
+pip install mkdocs-izsam-search
+```
+
+## Theme customization
+
+The theme allows you to customize platform title and footer contents by using your mdkdocs configuration file `mkdocs.yml`.
+
+```yaml
+extra:
+  platform_title: Piattaforma GenPat, Wiki
+  language: it
+  useful_links:
+    link_1:
+      label: CRN Sequenze Genomiche
+      url: https://www.izs.it/IZS/Eccellenza/Centri_nazionali/CRN_-_Sequenze_Genomiche
+    link_2:
+      label: IZSAM "G. Caporale"
+      url: https://www.izs.it
+  support:
+    support_1:
+      label: bioinformatica@izs.it
+      url: mailto:bioinformatica@izs.it
+    support_2:
+      label: +39 0861 3321
+      url: tel:+3908613321
+  tools:
+    tool_1:
+      icon: iconic-print
+      label: Versione PDF
+      target: _blank
+      url: https://genpat.izs.it/genpat_wiki/en/pdf/genpat_platform_wiki.pdf
+  copyright: IZSAM "G. Caporale"
+```
+
+## Multi language support
+
+The theme supports a localization system written in javascript. At the moment it supports Italian and English but it is possible to add new languages.
+
+### Add a language
+
+1. Create a new language file in `js/i18n` folder by using `en.js` or `it.js` as template and translate values.
+2. List it in `js/languages-builder.js`
+3. Pack language files in `languages.js` 
+
+#### Pack language files
+
+To pack files we use [**packjs**](https://www.npmjs.com/package/packjs) npm library:
+
+```bash
+npm install --save-dev packjs
+```
+
+Then from `js` folder:
+
+```bash
+  packjs i18n/languages-builder.js languages.js
+```
+
+The code will loop through the `wiki.languages` object keys and for each key, it will add an option to the language switcher. By selecting an available language, the code will redirect to the language subfolder.
+
+The theme is designed to handle different builds for each language. Specifically, we will have the documentation in Italian hosted under `https://mywiki.eu/it`, the documentation in English under `https://mywiki.eu/en`, and so on.
+
+> **Please note:** If you have a single language site, just remove the languages you don't need from `js/languages.js`. If you want to modify the behavior of the language switcher, you can override the `js/locales.js` file.
+
+### Language definition
+
+Each build relies on `config.extra.language` parameter to define the wiki language (the default is `en`), on `base.html` we set the html `lang` attribute and a global javascript constant `config_lang` with that value:
+
+```html
+<html lang="{{ config.extra.language|default('en') }}">
+```
+
+```javascript
+const config_lang = "{{ config.extra.language|default('en') }}";
+```
+
+The `config.extra.language` variable is used also to set **search functionalities**. There are some limitations on the values it can assume. Allowed languages are: `ar`, `da`, `de`, `du`, `es`, `fi`, `fr`, `hi`, `hu`, `it`, `ja`, `jp`, `nl`, `no`, `pt`, `ro`, `ru`, `sv`, `ta`, `th`, `tr`, `vi`, `zh`. If you want to use a different language, you should not to use **mkdocs-izsam-search** plugin and customize the `base.html` file removing all the code related to it.
+
+```html
+{% if config.extra.language and not 'en' in config.extra.language %}
+  <script src="{{ 'js/lunr-languages/lunr.stemmer.support.js'|url }}"></script>
+  <script src="{{ 'js/lunr-languages/lunr.multi.js'|url }}"></script>
+  {% set js_path = 'js/lunr-languages/lunr.' ~ config.extra.language ~ '.js' %}
+  <script src="{{ js_path|url }}"></script>
+{% endif %}
+```
+
+## Theme features
+
+#### Use image caption
+
+If you need to use a caption for images, you can use the markdown image title sintax.
+
+`![](image.png "image title")`
+
+> A function in `theme.js` loops all images and if a title exists will append a `figcaption` tag after the image.
+
+#### Use icons inline
+
+To use icons inline inside the contents, please add the alt attribute `inline-icon`:
+
+```
+![inline-icon](icon.png)
+```
+
+> Images will have inherent size and displayed inline.
+
+#### Use diagram as images (no plantuml)
+
+To use diagram inside the contents as images, please add the alt attribute `diagram` to avoid box shadow.
+
+```
+![diagram](file.png)
+```
+
+## Credits
+
+For the icons, we are using the free [Iconic](https://iconic.app/) package, converted to a font with the [IcoMoon app](https://icomoon.io/app/#/select).
+
+# Change log
+
+## [1.0.11] - 2025-09-08
+
+### search.js
+- Added support for the new `meta_text` field introduced by `mkdocs-izsam-search==0.1.9`.
+- Implemented a check to display the searched text highlighted with the `<mark>` tag in the summary.
+
+### setup.py
+- Fixed a typo in the package name: changed `name='mkdocs-bionformatic-izsam-theme'` to `name='mkdocs-bioinformatic-izsam-theme'`.
+
+## [1.0.10] - 2025-05-28
+
+### 404 page
+- Fixed HTML, changed contents and messages, new css rules.
+
+## [1.0.9] - 2025-05-22
+
+### Hyphenation
+- Added hyphenation and break-word rules for navigation, toc, contents and titles.
+
+## [1.0.8] - 2025-05-20
+
+### Bug fixes for navigation menu
+- Fixed JavaScript DOM selector error.
+- Minor changes to submenu icon positions.
+
+## [1.0.7] - 2025-05-20
+
+### Bug fixes and accessibility improvements
+- Updated UX/UI for navigation and TOC menu.
+- Minor fixes for mobile display.
+
+## [1.0.6] - 2025-03-7
+
+### Bug fixes and improvements 
+- Improved handling of `title` and `meta description`, now they take values from the metadata inserted in the markdown of the `docs`.
+- Fixed behavior that did not allow independent clicking on the `plus` and `minus` icons in the context menu.
+- Added language code to the options of the language switch select box.
+
+## [1.0.5] - 2025-02-25
+
+### Added rules for drawio diagrams
+Added css rules to manage images with `class="drawio"`.
+
+## [1.0.4] - 2025-02-04
+
+### Fix for TOC navigation
+Fix for TOC navigation expandable functionalities if they contain children.
+
+## [1.0.3] - 2025-01-31
+
+### UX changes and a fix for English UI translation
+TOC navigation now has expandable items if they contain children. Scrolling the page will highlight the corresponding TOC item in the context menu. Fixed an incorrect translation for the `search` key in the i18n English object.
+
+## [1.0.2] - 2025-01-31
+
+### Bug fixes
+Fix for onload events being called twice for the same element. Fix for TOC navigation theme where the for loop was generating a `ul` tag for each element.
+
+## [1.0.1] - 2025-01-30
+
+### Bug fix and cleaning
+Fixed formatting problem with last update date on footer, reoved unused code
+
+## [1.0.0] - 2025-01-28
+
+### Refactoring
+Theme code refactoring in order to have greater modularity for overrides, better localization management, and improved flexibility with the use of extra mkdocs configuration variables.
+
+## [0.2.8] - 2024-09-17
+
+### Added css style in order to manage Mermaid diagrams
+Added support in general theme css rules for Mermaid diagrams generated by mkdocs-izsam-mermaid-to-images plugin
+
+## [0.2.7] - 2024-09-16
+
+### Added home link for header logo
+
+## [0.2.6] - 2024-09-10
+
+### Fixed style for indented list
+
+## [0.2.5] - 2024-06-17
+
+### Fixed package problem related to build process
+
+## [0.2.4] - 2024-06-17
+
+### New style for table
+
+## [0.2.3] - 2023-12-1
+
+### Added new logo and canged accent color
+
+## [0.2.1] - 2023-08-29
+
+### Small fix related to 0.2 release
+- Edited base.html
+
+## [0.2] - 2023-08-29
+
+### Refactoring and bug fix for search
+Change in multilingual handling for search in order to resolve issues related to searching for words containing the underscore character (`_`).
+- Edited base.html
+- Edited js/search.js
+
+## [0.1.9.3] - 2023-05-15
+
+### Ux improvement for main menu in mobile view
+- Edited theme.css
+- Edited base.html
+
+## [0.1.9.2] - 2023-03-28
+
+### Bug fix for ordered list
+- Edited theme.css
+
+## [0.1.9.1] - 2022-12-09
+
+### Ux improvement for main menu in mobile view
+- Edited theme.css
+
+## [0.1.9] - 2022-10-24
+
+### Small fix on Ux improvement for main menu in mobile view
+- Edited theme.css and base.html
+
+## [0.1.8] - 2022-10-24
+
+### Ux improvement for main menu in mobile view
+- Edited theme.css and base.html
+
+## [0.1.7] - 2022-05-12
+
+### Debug and refactoring for theme.js
+- Edited theme.js
+
+## [0.1.6] - 2022-05-12
+
+### Fix for image caption function
+- Edited theme.css and theme.js
+
+## [0.1.5] - 2022-05-12
+
+### Added support for image caption
+- Edited theme.css and theme.js
+
+### Readme improvements
+- Edited README.md
+
+## [0.1.4] - 2022-05-2
+
+### CSS: added rule for html video tag
+- Edited theme.css
+
+## [0.1.3] - 2022-04-27
+
+### Html base template: changed next and previous buttons in order to integrate parent title
+- Edited base.html
+
+## [0.1.2] - 2022-03-18
+
+### Layout improvement.
+- Edited theme.css
+
+## [0.1.1] - 2022-01-25
+
+### Layout improvement.
+- Edited theme.css
+
+## [0.1.0] - 2022-01-25
+
+### Layout improvement.
+- Edited theme.css
+
+## [0.0.9] - 2022-01-25
+
+### Layout changes: form fields and buttons aspect.
+- Edited theme.css
+
+## [0.0.8] - 2021-11-24
+
+### Layout improvement.
+- Edited theme.css
+
+## [0.0.7] - 2021-11-15
+
+### Project description.
+- Edited README.md
+
+## [0.0.6] - 2021-11-15
+
+### Theme localization, integration of a footer.css, ui emprovement.
+- Added theme localization for search.html file.
+- Added theme localization for 404.html file.
+- Added a footer.css file.
+- Small changes in the main theme.css style for left menu.
+
+## [0.0.5] - 2021-11-12
+
+### Theme localization
+- The theme now support it and en localization and it can be extended with other langauges.
+
+## [0.0.4] - 2021-11-12
+
+### Added support for other languages besides `en` to make theme working with mkdocs-izsam-search plugin
+- The theme now support languages present in `js/lunr-languages` and can be defined in `theme.locale` of the `.yml` configuration file. Multilanguage is not supported yet.
+
+## [0.0.2] and [0.0.3] - 2021-11-11
+
+### Debug on setup
+- Fixed bugs for the mkdocs entry point in `setup.py` 
+
+## [0.0.1] - 2021-11-11
+
+### First release
+- Made stuff necessary to package a theme
