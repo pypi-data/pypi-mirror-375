@@ -1,0 +1,17 @@
+automcp/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+automcp/cli.py,sha256=0FbJhRfmVojQLYq6IzWm5fqF-ISpEtHicivNHHCDF3g,6933
+automcp/adapters/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+automcp/adapters/crewai.py,sha256=D4nSvFP2If1doNX1coVCMM2xCjj3h94xRmFTTi7n2vs,2080
+automcp/adapters/langgraph.py,sha256=MEsc2Q0TvgmKu-LPz1FSW7ibG0EMHZSAs30rxINadTA,1988
+automcp/adapters/llamaindex.py,sha256=0jCEGgSpNmHGoojP4haZb2Fyr_NRbQKnRkfWGLjCoPw,1733
+automcp/adapters/mcp_agent.py,sha256=mRZW5uh6yieyRz7IJsByVUSAwbYTDL_6-j1WcEfdxjg,2632
+automcp/adapters/openai.py,sha256=e5CGESkfB1yCDLLc9OZyl16je1rmHS_E2om2jpgheeQ,1649
+automcp/adapters/pydantic.py,sha256=ttkiwIhw3xkf1Iskbc_izPFW31ThIXNo1cfhVFbfWAE,2145
+automcp/adapters/utils.py,sha256=D9oIbl5B3fDsBVLq2ftmetY-pZrOe_00FW6L8fZWO4k,2038
+automcp/cli_templates/framework_config.yaml,sha256=EhSM7r9VkZgu_kOyaRo9OLufONSbizRCvXuVA50cthI,2796
+automcp/cli_templates/run_mcp.py.template,sha256=3GBmZV_SewqIO7mLBJJ_VH_7pYuFYYi2ieVY8UiCjtk,1849
+mseep_naptha_automcp-0.1.2.dist-info/METADATA,sha256=rzuj_2vYYzfOVpum82v0YPFMLlgmA9hvkT6NMDaUkys,13457
+mseep_naptha_automcp-0.1.2.dist-info/WHEEL,sha256=qtCwoSJWgHk21S1Kb4ihdzI2rlJ1ZKaIurTj_ngOhyQ,87
+mseep_naptha_automcp-0.1.2.dist-info/entry_points.txt,sha256=4IXwFDu_6eclqXja5YnFBjVJOQK5GF2eUMou0XE-Zcw,45
+mseep_naptha_automcp-0.1.2.dist-info/licenses/LICENSE,sha256=xx0jnfkXJvxRnG63LTGOxlggYnIysveWIZ6H3PNdCrQ,11357
+mseep_naptha_automcp-0.1.2.dist-info/RECORD,,
