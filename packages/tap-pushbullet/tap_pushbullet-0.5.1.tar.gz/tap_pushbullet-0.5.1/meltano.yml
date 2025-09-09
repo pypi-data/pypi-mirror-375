@@ -1,0 +1,31 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: tap-pushbullet
+plugins:
+  extractors:
+  - name: tap-pushbullet
+    label: Pushbullet
+    namespace: pushbullet
+    description: Your devices working better together
+    repo: https://github.com/reservoir-data/tap-pushbullet
+    docs: https://github.com/reservoir-data/tap-pushbullet#readme
+    pip_url: -e .
+    capabilities:
+    - state
+    - catalog
+    - discover
+    settings:
+    - name: api_key
+      kind: password
+      label: API Key
+      description: API Key for Pushbullet
+    - name: start_date
+      kind: integer
+      label: Start Date
+      description: Earliest datetime to get data from
+    config:
+      start_date: 1451628000
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl

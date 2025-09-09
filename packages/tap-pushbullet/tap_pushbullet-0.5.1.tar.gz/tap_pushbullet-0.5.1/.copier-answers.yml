@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier
+_commit: 0.0.4
+_src_path: gh:reservoir-data/singer-tap-copier-template
+author_email: edgarrm358@gmail.com
+author_fullname: Edgar Ramírez-Mondragón
+author_username: edgarrmondragon
+python_main_version: '3.10'
+repository_name: tap-pushbullet
+repository_namespace: edgarrmondragon
+repository_provider: github.com
+tap_auth_method: API Key
+tap_id: tap-pushbullet
+tap_package_command_line_name: tap-pushbullet
+tap_package_distribution_name: tap-pushbullet
+tap_package_import_name: tap_pushbullet
+tap_source_description: Your devices working better together
+tap_source_id: Pushbullet
+tap_source_name: Pushbullet
+tap_stream_type: REST
