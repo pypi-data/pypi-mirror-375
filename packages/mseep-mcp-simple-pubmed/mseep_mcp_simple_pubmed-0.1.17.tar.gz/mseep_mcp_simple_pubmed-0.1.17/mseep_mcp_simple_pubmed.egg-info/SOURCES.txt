@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+mcp_simple_pubmed/__init__.py
+mcp_simple_pubmed/__main__.py
+mcp_simple_pubmed/fulltext_client.py
+mcp_simple_pubmed/pubmed_client.py
+mcp_simple_pubmed/pubmed_fetch.py
+mcp_simple_pubmed/pubmed_search.py
+mcp_simple_pubmed/server.py
+mseep_mcp_simple_pubmed.egg-info/PKG-INFO
+mseep_mcp_simple_pubmed.egg-info/SOURCES.txt
+mseep_mcp_simple_pubmed.egg-info/dependency_links.txt
+mseep_mcp_simple_pubmed.egg-info/entry_points.txt
+mseep_mcp_simple_pubmed.egg-info/requires.txt
+mseep_mcp_simple_pubmed.egg-info/top_level.txt

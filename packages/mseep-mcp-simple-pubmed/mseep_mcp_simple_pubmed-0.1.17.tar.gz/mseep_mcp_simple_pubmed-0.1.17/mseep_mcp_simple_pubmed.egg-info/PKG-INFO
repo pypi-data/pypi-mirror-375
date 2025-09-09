@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-simple-pubmed
+Version: 0.1.17
+Summary: An MCP server that provides access to PubMed articles through Entrez API.
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/andybrandt/mcp-simple-pubmed
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=2.10.0
+Requires-Dist: biopython
+Requires-Dist: metapub
+Requires-Dist: httpx
+Dynamic: license-file
+
+Package managed by MseeP.ai
