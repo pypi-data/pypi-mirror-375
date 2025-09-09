@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-naver
+Version: 0.1.9
+Summary: MCP server providing Naver Open APIs
+Project-URL: Repository, https://github.com/pfldy2850/py-mcp-naver.git
+Project-URL: Issues, https://github.com/pfldy2850/py-mcp-naver/issues
+Project-URL: Github, https://github.com/pfldy2850/py-mcp-naver
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: fastmcp>=0.4.1
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: pydantic>=2.10.6
+Requires-Dist: xmltodict>=0.14.2
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
