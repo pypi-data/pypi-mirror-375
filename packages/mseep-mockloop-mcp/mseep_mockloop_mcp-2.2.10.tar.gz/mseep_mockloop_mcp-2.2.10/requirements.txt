@@ -1,0 +1,22 @@
+# Core dependencies for mockloop-mcp server
+fastapi
+uvicorn[standard]
+Jinja2
+PyYAML
+requests
+
+# Enhanced functionality dependencies
+aiohttp
+pyyaml
+
+# MCP SDK
+mcp[cli]
+
+# SchemaPin integration
+schemapin
+
+# For development (optional, can be in requirements-dev.txt)
+# pytest
+# black
+# flake8
+# mypy

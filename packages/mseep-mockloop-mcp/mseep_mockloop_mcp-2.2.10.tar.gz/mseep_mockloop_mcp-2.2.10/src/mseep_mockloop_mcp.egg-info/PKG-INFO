@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: mseep-mockloop-mcp
+Version: 2.2.10
+Summary: MCP server to generate and run mock APIs from specifications.
+Author-email: mseep <support@skydeck.ai>
+License: MIT License
+Project-URL: Homepage, https://github.com/mockloop/mockloop-mcp
+Project-URL: Repository, https://github.com/mockloop/mockloop-mcp
+Keywords: mcp,api,mock,fastapi,openapi,swagger,generator
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Framework :: FastAPI
+Classifier: Environment :: Console
+Classifier: Topic :: Software Development :: Testing :: Mocking
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastapi>=0.104.0
+Requires-Dist: uvicorn[standard]>=0.24.0
+Requires-Dist: Jinja2>=3.1.0
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: aiohttp>=3.9.0
+Requires-Dist: mcp[cli]>=1.0.0
+Requires-Dist: schemapin>=1.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: bandit[toml]>=1.7.0; extra == "dev"
+Requires-Dist: safety>=2.3.0; extra == "dev"
+Requires-Dist: pre-commit>=3.0.0; extra == "dev"
+Requires-Dist: pip-audit>=2.6.0; extra == "dev"
+Requires-Dist: semgrep>=1.45.0; extra == "dev"
+Requires-Dist: types-PyYAML>=6.0.0; extra == "dev"
+Requires-Dist: types-requests>=2.31.0; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
