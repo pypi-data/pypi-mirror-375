@@ -1,0 +1,10 @@
+Metadata-Version: 2.3
+Name: veeink-mcp-server
+Version: 0.1.4
+Summary: veeink的MCP服务
+Author: wlf
+Author-email: wlf <fwl7747@126.com>
+Requires-Dist: mcp[cli]>=1.13.1
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
