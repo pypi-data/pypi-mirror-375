@@ -1,0 +1,9 @@
+optuna
+pydantic
+python-dotenv
+langchain
+langchain[openai]
+langchain[community]
+
+[torch]
+torch
