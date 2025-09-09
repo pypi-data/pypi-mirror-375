@@ -1,0 +1,29 @@
+[project]
+name = "mseep-vibetest"
+version = "0.1.1"
+description = "Browser-agent QA swarm with MCP interface for testing AI-generated websites"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "browser-use",
+    "playwright",
+    "langchain_google_genai",
+    "langchain_core",
+    "pydantic",
+    "screeninfo",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.scripts]
+vibetest-mcp = "vibetest.mcp_server:run"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[tool.setuptools.packages.find]
+include = [
+    "vibetest*",
+]

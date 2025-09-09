@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-vibetest
+Version: 0.1.1
+Summary: Browser-agent QA swarm with MCP interface for testing AI-generated websites
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]>=1.0.0
+Requires-Dist: browser-use
+Requires-Dist: playwright
+Requires-Dist: langchain_google_genai
+Requires-Dist: langchain_core
+Requires-Dist: pydantic
+Requires-Dist: screeninfo
+
+Package managed by MseeP.ai
