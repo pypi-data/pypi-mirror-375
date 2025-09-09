@@ -1,0 +1,212 @@
+Metadata-Version: 2.4
+Name: reerelease
+Version: 0.1.1
+Project-URL: Documentation, https://gitlab.com/real-ee/tool/reerelease#readme
+Project-URL: Issues, https://gitlab.com/real-ee/tool/reerelease/-/issues
+Project-URL: Source, https://gitlab.com/real-ee/tool/reerelease#
+Author-email: Laurence DV <laurencedv@realee.tech>
+License-Expression: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Topic :: Software Development :: Documentation
+Classifier: Topic :: Text Processing :: Markup :: Markdown
+Classifier: Topic :: Utilities
+Requires-Python: >=3.8
+Requires-Dist: jinja2>=3.1.6
+Requires-Dist: rich>=14.1.0
+Requires-Dist: typer>=0.16.1
+Description-Content-Type: text/markdown
+
+# REErelease
+
+[![Coverage](docs/coverage.svg)](/docs/coverage-report/index.html)
+[![Tests](docs/tests.svg)](/docs/test-report.html)
+
+A modern Python tool for managing release contexts and templates with automated quality assurance.
+
+## Quick Start
+
+### Installation
+
+```sh
+pip install reerelease
+```
+> NOTE: Not yet published on [pypi][pypi_reerelease_link]
+
+### Basic Usage
+
+```sh
+# Display available contexts
+reerelease contexts
+
+# Generate new release files from templates
+reerelease new
+```
+
+## Development
+
+### Setup
+
+1. Install [hatch](https://hatch.pypa.io/1.12/install/)
+2. Clone and setup:
+   ```sh
+   git clone git@gitlab.com:real-ee/tool/reerelease.git
+   cd reerelease
+   hatch run setup
+   ```
+
+### Git Hooks Setup
+
+**Automated quality assurance** is enforced through Git hooks:
+
+```sh
+python tools/setup_hooks.py
+```
+
+> NOTE: this is automatically run during [setup](#setup)
+
+This configures:
+- 🎨 **Code formatting** (ruff format)
+- 🔍 **Linting** (ruff check) 
+- 🏷️ **Type checking** (mypy)
+- 🧪 **Testing** (pytest)
+- 📊 **Badge generation** (coverage + test badges)
+- 🔒 **Push validation** (ensures quality gates passed)
+
+### Development Workflow
+
+#### Normal Development
+```sh
+git add .
+git commit -m "Your changes"  # Runs full validation pipeline
+git push                      # Validates commit has passed checks
+```
+
+The pre-commit hook automatically:
+1. Formats code with ruff
+2. Runs linting checks
+3. Validates type annotations
+4. Executes test suite
+5. Updates coverage/test badges
+6. Adds validation marker to commit
+
+#### Emergency Bypass
+```sh
+git commit --no-verify -m "Emergency fix [skip-hooks]"
+git push --no-verify
+```
+
+### Testing
+
+```sh
+# Run tests
+hatch run test
+
+# Run tests with detailed output
+hatch run pytest -- --show-fail-details tests
+
+# Generate coverage report
+hatch run cov
+
+# Generate all reports
+hatch run reports
+```
+
+### VS Code Integration
+
+The project includes [VS Code][vscode_install_link] settings for:
+- **Ruff** integration with auto-fix on save
+- **MyPy** type checking in Problems Panel
+- **Pytest** test discovery and execution
+- **Task runners** for common operations
+
+> **Setup**: After opening the project, VS Code should automatically detect the hatch environment. If not, use `Ctrl+Shift+P` → "Python: Select Interpreter" and choose the hatch virtual environment (usually shows as `reerelease` with the hatch path).
+
+#### Available Tasks
+Open the project in [VS Code][vscode_install_link] and use `Ctrl+Shift+P` → "Tasks: Run Task":
+- **pytest** - Run test suite
+- **pytest (show CLI output on fail)** - Run tests with detailed failure output
+- **Fix All Ruff Issues** - Auto-fix linting issues
+- **Format Code** - Format code with ruff
+- **Quality Check (All)** - Run complete quality pipeline
+
+#### Debug/Launch Configurations
+Use `F5` or "Run and Debug" panel:
+- **Hatch: Show Help** - Display reerelease CLI help
+- **Hatch: New Context (demo)** - Create demo context in /tmp
+- **Hatch: List Contexts** - List contexts in demo directory
+- **Hatch: Emit Test Logs** - Generate test log output
+
+#### Quick Commands
+- `Ctrl+Shift+P` → "Python: Configure Tests" (pytest)
+- `Ctrl+Shift+P` → "Python: Run All Tests"
+- `Ctrl+Shift+P` → "Tasks: Run Task" → Choose from available tasks
+
+## Project Structure
+
+<details>
+<summary>📁 View complete project structure</summary>
+
+```
+reerelease/
+├── src/reerelease/          # Main package
+│   ├── __about__.py         # Package version and metadata
+│   ├── __init__.py          # Package initialization
+│   ├── reerelease.py        # CLI and core logic
+│   └── templates/           # Jinja2 templates
+│       ├── readme.md.j2     # README template
+│       ├── release.md.j2    # Release notes template
+│       └── roadmap.md.j2    # Roadmap template
+├── tests/                   # Test suite
+│   ├── __init__.py          # Test package init
+│   ├── conftest.py          # Pytest configuration
+│   ├── test_contexts.py     # Context discovery tests
+│   ├── test_logging.py      # Logging functionality tests
+│   ├── test_reerelease.py   # Main CLI tests
+│   ├── test_templates.py    # Template processing tests
+│   └── utils.py             # Test utilities
+├── tools/                   # Development tools
+│   ├── setup_hooks.py       # Git hooks installer
+│   └── update_badge.py      # Badge generation script
+├── .vscode/                 # VS Code configuration
+│   ├── settings.json        # Editor settings
+│   ├── tasks.json           # Task definitions
+│   └── launch.json          # Debug configurations
+├── docs/                    # Generated badges and reports
+│   ├── coverage.svg         # Coverage badge
+│   └── tests.svg            # Tests badge
+├── pyproject.toml           # Project configuration
+├── README.md                # This file
+└── license.txt              # MIT license
+```
+
+</details>
+
+## Quality Assurance
+
+This project maintains **100% test coverage** and strict code quality through:
+
+- **Modern Python tooling**: Ruff (linting/formatting), MyPy (type checking)
+- **Comprehensive testing**: pytest with full coverage reporting
+- **Automated validation**: Git hooks ensure all changes pass quality gates
+- **VS Code integration**: Real-time feedback and auto-fixing
+- **Badge tracking**: Visual indicators of test and coverage status
+
+## License
+
+Released under [MIT](/license.txt) open-source license
+
+<!-- links -->
+
+[vscode_install_link]: https://code.visualstudio.com/download
+[repo_link]: https://gitlab.com/real-ee/tool/reerelease
+[hatch_install_link]: https://hatch.pypa.io/1.12/install/
+[pypi_reerelease_link]: FIXME
