@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-snowflake
+Version: 0.1.4
+Summary: MCP server for interacting with Snowflake databases / 用于与 Snowflake 数据库交互的 MCP 服务器
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: python-dotenv
+Requires-Dist: snowflake-connector-python
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
