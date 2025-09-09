@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/agent/__init__.py
+src/agent/main.py
+src/scrathagent.egg-info/PKG-INFO
+src/scrathagent.egg-info/SOURCES.txt
+src/scrathagent.egg-info/dependency_links.txt
+src/scrathagent.egg-info/requires.txt
+src/scrathagent.egg-info/top_level.txt
+tests/test_main.py
