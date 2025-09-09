@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "nectarpy-publisher"
+version = "0.3.0"
+description = "nectarpy-publisher"
+authors = ["Tamarin Health <phil@tamarin.health>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4"
+setuptools = ">=65.5.0"
+wheel = "*"
+twine = "*"
+packaging = ">=23.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
