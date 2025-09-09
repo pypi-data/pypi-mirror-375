@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% if page.article_listing is not defined %}
+    {% set ARTICLE_LISTING = False %}
+{% else %}
+    {% set ARTICLE_LISTING = page.article_listing %}
+{% endif -%}
+
+{% block title -%}
+    {{ page.title|striptags|breaking_spaces }} &mdash; {{ super() }}
+{%- endblock %}
+
+{% block breadcrumbs %}
+    {% if DISPLAY_BREADCRUMBS %}
+    <ol class="breadcrumb">
+        <li><a href="{{ SITE_ROOT_URL | default('/') }}" title="{{ SITENAME }}"><span class="fa fa-home fa-lg"></span></a></li>
+        {% if MENUITEMS_2_AT %}
+            <li><a href="{{ SITEURL -}} / {{- MENUITEMS_2_AT_LINK }}" title="{{ MENUITEMS_2_AT }}">{{ MENUITEMS_2_AT }}</a></li>
+        {% endif %}
+        {% if page.at %}
+            <li><a href="{{ SITEURL -}} / {{- page.at_link }}" title="{{ page.at }}">{{ page.at }}</a></li>
+        {% endif %}
+        {% if not page.url == '' %}
+            <li class="active"><a href="{{ SITEURL -}} / {{- page.url }}" title="{{ page.title | trim }}">{{ page.title | trim }}</a></li>
+        {% endif %}
+    </ol> <!-- /.breadcrumbs -->
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <section id="content" class="body">
+        {% if page.image %}
+            <img class="featured-image image-process-article-feature" src="{{ SITEURL -}} / {{- page.image|urlencode }}" alt="{{ page.title|striptags }}"/>
+        {% endif %}
+        <header class="entry-header">
+            <h1 class="entry-title">{{ page.title }}</h1>
+        </header>
+        {% import 'includes/translations.html' as translations with context %}
+        {{ translations.translations_for(page) }}
+        {% if PDF_PROCESSOR %}
+            <a href="{{ SITEURL -}} /pdf/ {{- page.slug }}.pdf">
+                get the pdf
+            </a>
+        {% endif %}
+        <div class="entry-content">
+            {{ page.content }}
+            {% if articles and ARTICLE_LISTING %}
+                {% for article in articles %}
+                    {% with HEADING_LEVEL=3 %}
+                        {% include 'includes/article_listing.html' %}
+                    {% endwith %}
+                {% endfor %}
+                <p><a href="{{ SITEURL -}} / {{- ARCHIVES_URL }}">Click to see every post in a big list</a></p>
+            {% endif %}
+            {% if ADAM_FOOTER %}
+                {{ ADAM_FOOTER }}
+            {% endif %}
+            {{ page.footer }}
+        </div>
+    </section>
+{% endblock %}
