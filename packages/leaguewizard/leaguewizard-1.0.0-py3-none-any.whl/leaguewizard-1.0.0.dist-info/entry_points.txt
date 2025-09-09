@@ -1,0 +1,2 @@
+[console_scripts]
+leaguewizard = leaguewizard.__init__:main

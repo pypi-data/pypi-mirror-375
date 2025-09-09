@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: leaguewizard
+Version: 1.0.0
+Summary: Auto sync your itemsets, perks and spells with mobalytics.gg ones on champion selection.
+Project-URL: Repository, https://github.com/amburgao/leaguewizard.git
+Project-URL: Issues, https://github.com/me/amburgao/leaguewizard
+Project-URL: Changelog, https://github.com/amburgao/leaguewizard/blob/master/CHANGELOG.md
+Author-email: Hamburgão <amburgao@users.noreply.github.com>
+Maintainer-email: Hamburgão <amburgao@users.noreply.github.com>
+License-File: LICENSE
+Keywords: automation,builds,lcu,league,league of legends,leaguewizard,lol,runes,simplerunes
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Games/Entertainment
+Requires-Python: >=3.13
+Requires-Dist: aiohttp>=3.12.15
+Requires-Dist: pillow>=11.3.0
+Requires-Dist: pystray>=0.19.5
+Requires-Dist: selectolax>=0.3.34
+Requires-Dist: websockets>=15.0.1
+Description-Content-Type: text/markdown
+
+# README.md
+
+Auto sync your itemsets, perks and spells with mobalytics.gg ones on champion selection.
