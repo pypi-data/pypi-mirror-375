@@ -1,0 +1,474 @@
+App ID: serpapi (Connected by user) 
+ - search: Performs a search using the SerpApi service and returns formatted search results. Note: The underlying SerpApiSearch().get_dict() call is synchronous.
+ - google_maps_search: Performs a Google Maps search using the SerpApi service and returns formatted search results.
+ - get_google_maps_reviews: Retrieves Google Maps reviews for a specific place using the SerpApi service.
+
+App ID: google_drive (Connected by user) 
+ - get_drive_info: Retrieves detailed information about the user's Google Drive storage and account.
+ - list_files: Lists and retrieves files from Google Drive with optional filtering, pagination, and sorting.
+ - create_file_from_text: Creates a new file in Google Drive with specified text content and returns the file's metadata.
+ - upload_a_file: Uploads a file to Google Drive by creating a file metadata entry and uploading the binary content.
+ - create_folder: Creates a new folder in Google Drive with optional parent folder specification
+ - get_file: Retrieves detailed metadata for a specific file using its ID.
+ - delete_file: Deletes a specified file from Google Drive and returns a status message.
+ - move_files: Moves a file from one folder to another by adding a new parent and removing the old parent.
+
+App ID: hubspot (Connected by user) 
+ - add_a_note: Create a note in HubSpot with the given properties and associations.
+
+App ID: google_mail (Connected by user) 
+ - send_email: Sends an email using the Gmail API and returns a confirmation or error message.
+ - create_draft: Creates a draft email message in Gmail using the Gmail API and returns a confirmation status.
+ - send_draft: Sends an existing draft email using the Gmail API and returns a confirmation message.
+ - get_draft: Retrieves and formats a specific draft email from Gmail by its ID
+ - list_drafts: Retrieves and formats a list of email drafts from the user's Gmail mailbox with optional filtering and pagination.
+ - get_message: Retrieves and formats a specific email message from Gmail API by its ID, including sender, recipient, date, subject, and full message body content.
+ - list_messages: Retrieves and formats a list of messages from the user's Gmail mailbox with optional filtering and pagination support.
+ - list_labels: Retrieves and formats a list of all labels (both system and user-created) from the user's Gmail account, organizing them by type and sorting them alphabetically.
+ - create_label: Creates a new Gmail label with specified visibility settings and returns creation status details.
+ - get_profile: Retrieves and formats the user's Gmail profile information including email address, message count, thread count, and history ID.
+ - trash_messsages: Moves a message to the trash folder (acts like delete functionality).
+
+App ID: google_calendar (Connected by user) 
+ - get_event: Retrieves detailed information about a specific Google Calendar event by its ID
+ - get_today_events: Retrieves events from Google Calendar for today or a specified number of future days.
+ - list_events: Retrieves a list of events from Google Calendar with customizable filtering, sorting, and pagination options
+ - quick_add_event: Creates a calendar event. Use it only when user specfies that they want to add a quick event
+ - add_an_event: Creates a new calendar event with details like start time, end time, summary, description, location, attendees, and recurrence rules. Always check the timezone using get_user_timezone before creating an event.
+ - update_event: Updates an existing calendar event. This method updates the entire event resource. To do a partial update, first get the event, then update it using etags to ensure atomicity.
+ - get_event_instances: Retrieves all instances of a recurring calendar event within a specified time range.
+ - get_user_timezone: Gets the user's calendar timezone setting to help with timezone-aware event creation.
+
+App ID: reddit (Connected by user) 
+ - get_subreddit_posts: Retrieves and formats top posts from a specified subreddit within a given timeframe using the Reddit API
+ - search_subreddits: Searches Reddit for subreddits matching a given query string and returns a formatted list of results including subreddit names, subscriber counts, and descriptions.
+ - create_post: Creates a new Reddit post in a specified subreddit with support for text posts, link posts, and image posts
+ - get_comment_by_id: Retrieves a specific Reddit comment using its unique identifier.
+ - post_comment: Posts a comment to a Reddit post or comment using the Reddit API
+ - edit_content: Edits the text content of an existing Reddit post or comment using the Reddit API
+ - delete_content: Deletes a specified Reddit post or comment using the Reddit API.
+
+App ID: google_sheet (Connected by user) 
+ - create_spreadsheet: Creates a new blank Google Spreadsheet with the specified title and returns the API response.
+ - get_spreadsheet: Retrieves detailed information about a specific Google Spreadsheet using its ID  excluding cell data.
+ - insert_dimensions: Inserts new rows or columns into a Google Sheet at a specific position within the sheet.
+ - append_dimensions: Appends empty rows or columns to the end of a Google Sheet.
+ - delete_dimensions: Tool to delete specified rows or columns from a sheet in a google spreadsheet. use when you need to remove a range of rows or columns. or Use this when you need to remove unwanted rows or columns from your data.
+ - clear_values: Clears all values from a specified range in a Google Spreadsheet while preserving cell formatting and other properties
+ - update_values: Updates cell values in a specified range of a Google Spreadsheet using the Sheets API
+ - batch_update: Updates a specified range in a google sheet with given values, or appends them as new rows if `first cell location` is omitted; ensure the target sheet exists and the spreadsheet contains at least one worksheet. Use this tool for basic updates/append. Overwrites existing data when appending.
+ - list_tables: This action is used to list all tables in a google spreadsheet, call this action to get the list of tables in a spreadsheet. discover all tables in a google spreadsheet by analyzing sheet structure and detecting data patterns. uses heuristic analysis to find header rows, data boundaries, and table structures.
+ - get_values: Retrieves values from a specific range in a Google Spreadsheet.
+ - set_basic_filter: Tool to set a basic filter on a sheet in a google spreadsheet. use when you need to filter or sort data within a specific range on a sheet.
+ - append_values: Tool to append values to a spreadsheet. use when you need to add new data to the end of an existing table in a google sheet. Use it for Insert new rows (INSERT_ROWS), specific range append, advanced options
+
+App ID: clickup (Connected by user) 
+ - task_checklists_create_new_checklist: Creates a new checklist for a given task and returns the created checklist details as a dictionary.
+ - task_checklists_update_checklist: Updates a checklist's name and/or position by sending a PUT request to the checklist API endpoint.
+ - task_checklists_remove_checklist: Removes a checklist by its ID using a DELETE request to the API.
+ - lists_get_folder_lists: Retrieves all lists contained within a specified folder, with optional filtering for archived lists.
+ - lists_get_folderless: Retrieves all lists within the specified space that are not associated with a folder.
+ - tasks_get_list_tasks: Retrieves a list of tasks from a specified list with optional filters such as archived status, pagination, sorting, subtask inclusion, status, assignees, tags, date ranges, and custom fields.
+ - tasks_create_new_task: Creates a new task in the specified list with optional attributes including tags, assignees, status, priority, dates, and custom fields.
+
+App ID: github (Connected by user) 
+ - star_repository: Stars a GitHub repository using the GitHub API and returns a status message.
+ - list_commits: Retrieves and formats a list of recent commits from a GitHub repository
+ - list_branches: Lists all branches for a specified GitHub repository and returns them in a formatted string representation.
+ - list_pull_requests: Retrieves and formats a list of pull requests for a specified GitHub repository.
+ - list_issues: Retrieves a list of issues from a specified GitHub repository with optional filtering parameters.
+ - get_pull_request: Retrieves and formats detailed information about a specific GitHub pull request from a repository
+ - create_pull_request: Creates a new pull request in a GitHub repository, optionally converting an existing issue into a pull request.
+ - create_issue: Creates a new issue in a specified GitHub repository with a title, body content, and optional labels.
+ - update_issue: Updates an existing GitHub issue with specified parameters including title, body, assignee, state, and state reason.
+
+App ID: google_docs (Connected by user) 
+ - create_document: Creates a new blank Google Document with the specified title and returns the API response.
+ - get_document: Retrieves the latest version of a specified document from the Google Docs API.
+ - add_content: Adds text content at a specified position in an existing Google Document via the Google Docs API.
+ - delete_content: Deletes content from a specified range in a Google Document.
+ - create_header: Creates a Header in a Google Document.
+
+App ID: perplexity (NOT connected by user) 
+ - chat: Initiates a chat completion request to generate AI responses using various models with customizable parameters.
+
+App ID: youtube (NOT connected by user) 
+ - get_channels: Retrieves YouTube channels based on specified parameters.
+ - get_search: Submits a search query to the YouTube Data API with optional filters.
+
+App ID: outlook (NOT connected by user) 
+ - users_message_reply: Replies to a specific message for a user using the POST method, accepting JSON content in the request body and returning status codes indicating success or error.
+ - user_send_mail: Sends an email on behalf of the specified user, accepting the email details as JSON in the request body and returning a 204 No Content response on success.
+ - user_get_mail_folder: Retrieves a specific mail folder for a specified user using optional query parameters to include hidden folders or select/expand properties.
+ - user_list_message: Retrieves a list of messages for a user, allowing optional filtering and sorting of results based on parameters such as includeHiddenMessages, search, filter, top, skip, orderby, select, and expand.
+ - user_get_message: Retrieves a specific message for a user, optionally including hidden messages, selecting specific fields, or expanding related data.
+ - user_delete_message: Deletes a specific message for a given user using the DELETE method and optional If-Match header for conditional requests.
+ - user_message_list_attachment: Retrieves attachments associated with a specified user’s message, supporting filtering, pagination, and field selection via query parameters.
+ - get_user_id: Retrieves the current user.
+
+App ID: airtable (NOT connected by user) 
+ - list_tables: Lists all tables within a specified base.
+ - list_bases: Lists all bases accessible with the current API key.
+ - get_record: Retrieves a single record by its ID from a specified table within a base.
+ - list_records: Lists records from a specified table within a base.
+ - create_record: Creates a new record in a specified table within a base.
+
+App ID: calendly (NOT connected by user) 
+ - list_event_invitees: Retrieves a paginated list of invitees for a specific scheduled event with optional filtering by status, email, and sorting parameters.
+ - get_event: Retrieves details about a scheduled event identified by the provided UUID using the GET method.
+ - list_events: Retrieves a list of scheduled events filtered by user, organization, invitee, status, time range, and other parameters, supporting pagination and sorting.
+ - get_current_user: Retrieves information about the current user using the API.
+
+App ID: sharepoint (NOT connected by user) 
+ - list_folders: Lists folders in the specified directory or root if not specified.
+ - create_folder: Creates a folder in the specified directory or root if not specified.
+ - list_documents: Lists all documents in a specified folder.
+ - create_document: Creates a document in the specified folder.
+ - get_document_content: Gets the content of a specified document.
+ - delete_file: Deletes a file from OneDrive.
+
+App ID: notion (NOT connected by user) 
+ - retrieve_a_user: Retrieves a user's details from the server using their unique identifier.
+ - retrieve_a_database: Retrieves detailed information about a specific database using its unique identifier.
+ - retrieve_a_page_property_item: Retrieves a specific property item from a Notion page using the page ID and property ID.
+ - search: Executes a search operation by sending a POST request to the search endpoint and returns the results
+
+App ID: exa (NOT connected by user) 
+ - search: Searches for data using the specified criteria and returns a list of results.
+ - get_contents: Creates new content entries via a POST request to the "/contents" endpoint.
+ - answer: Provides an answer to a query using the API endpoint at "/answer" via the POST method.
+ - find_similar: Finds and returns similar items using the API at "/findSimilar" via the POST method.
+
+App ID: falai (NOT connected by user) 
+ - run: Run a Fal AI application directly and wait for the result. Suitable for short-running applications with synchronous execution from the caller's perspective.
+ - upload_file: Uploads a local file to the Fal CDN and returns its public URL
+ - generate_image: Asynchronously generates images using the 'fal-ai/flux/dev' application with customizable parameters and default settings
+
+App ID: firecrawl (NOT connected by user) 
+ - scrape_url: Scrapes a single URL using Firecrawl and returns the extracted data.
+ - search: Performs a web search using Firecrawl's search capability.
+ - quick_web_extract: Performs a quick, synchronous extraction of data from one or more URLs using Firecrawl and returns the results directly.
+
+App ID: tavily (NOT connected by user) 
+ - search: Performs a web search using Tavily's search API and returns either a direct answer or a summary of top results.
+
+App ID: apollo (NOT connected by user) 
+ - people_enrichment: Matches a person based on provided identifying information such as name, email, organization, or LinkedIn URL, with options to reveal personal emails and phone numbers.
+ - create_a_contact: Creates a new contact with specified details such as name, organization, contact information, and labels.
+ - search_for_contacts: Searches contacts based on keywords, contact stage IDs, sorting, and pagination parameters, returning a filtered and sorted list of contacts.
+ - list_all_deals: Searches and retrieves a paginated list of opportunities with optional sorting by a specified field.
+
+App ID: asana (NOT connected by user) 
+ - get_an_allocation: Retrieves details about an allocation by its GUID using the API endpoint "/allocations/{allocation_gid}" with optional fields and formatting controlled by query parameters "opt_fields" and "opt_pretty".
+ - update_an_allocation: Updates or creates a resource identified by the allocation GID at the "/allocations/{allocation_gid}" path using the PUT method.
+ - delete_an_allocation: Deletes the specified allocation by its global identifier and returns a status code indicating success or failure.
+
+App ID: box (NOT connected by user) 
+ - get_authorize: Authorize user
+
+App ID: braze (NOT connected by user) 
+ - list_catalogs: List Catalogs
+ - create_catalog: Create Catalog
+ - delete_catalog_item: Delete Multiple Catalog Items
+ - edit_catalog_item: Edit Multiple Catalog Items
+ - list_events: Export Custom Events List
+ - list_users: Search Existing Dashboard User by Email
+ - create_user: Create New Dashboard User Account
+ - create_content_block: Create Content Block
+
+App ID: coda (NOT connected by user) 
+ - list_categories: Retrieves a dictionary of available categories from the API endpoint.
+ - list_docs: Retrieves a list of documents based on specified filtering and pagination criteria.
+ - create_doc: Creates a new document with the specified properties and returns its metadata as a dictionary.
+ - get_doc: Retrieves a document by its unique identifier from the remote service.
+ - delete_doc: Deletes a document by its ID from the remote service.
+
+App ID: confluence (NOT connected by user) 
+ - get_attachments: Retrieves a list of attachments based on specified filters like sort order, cursor position, status, media type, filename, and limit, using the GET method.
+ - delete_attachment: Deletes the specified attachment using its unique identifier and optionally purges it permanently.
+ - get_attachment_operations: Retrieves operations associated with a specific attachment using its unique identifier.
+ - get_attachment_content_properties: Retrieves properties of a specific attachment identified by `attachment-id`, with optional filtering, sorting, and pagination via query parameters.
+ - get_pages: Retrieves a list of pages based on specified parameters such as ID, space ID, sort order, status, title, body format, cursor, and limit using the GET method at the "/pages" endpoint.
+
+App ID: dialpad (NOT connected by user) 
+ - callcenters_operators_delete: Deletes an operator associated with a specific call center identified by the provided ID.
+ - custom_ivrs_get: Retrieves custom IVR data based on the specified target type and ID, with optional pagination using a cursor.
+
+App ID: digitalocean (NOT connected by user) 
+ - apps_list: List All Apps
+ - databases_list_options: List Database Options
+ - databases_list: List All Databases
+
+App ID: figma (NOT connected by user) 
+ - get_file: Retrieves a specified file's data (including versions, geometry, and plugin information) from the API using a unique file identifier.
+ - get_file_nodes: Retrieves nodes related to a file identified by the "file_key" using the specified query parameters for filtering by "ids", "version", "depth", "geometry", and "plugin_data".
+ - get_images: Retrieves an image specified by the `file_key` using the GET method, allowing optional query parameters for customization such as formatting, scaling, and SVG options.
+ - get_me: Retrieves the authenticated user's profile data.
+
+App ID: fireflies (NOT connected by user) 
+ - get_user_details: Fetches details for a specific user.
+ - get_transcript_details: Fetches details for a specific transcript.
+ - add_to_live_meeting: Adds Fireflies.ai to a live meeting.
+
+App ID: gong (NOT connected by user) 
+ - list_calls: Retrieves a list of call records within the specified date range, with optional pagination and workspace filtering.
+ - add_call: Creates and submits a new call record with detailed metadata to the remote service.
+ - get_call: Retrieves details for a specific call by its identifier.
+ - get_user: Retrieves user information by user ID from the API.
+
+App ID: hashnode (NOT connected by user) 
+ - publish_post: Publishes a post to Hashnode using the GraphQL API.
+ - get_me: Fetches details about the authenticated user.
+ - get_publication: Fetches details about a publication by host or ID. Only one of host or publication_id should be provided.
+ - get_post: Fetches details of a single post by slug and hostname.
+ - add_comment: Adds a comment to a post using the GraphQL API.
+
+App ID: mailchimp (NOT connected by user) 
+ - campaigns_get_all: Retrieves all campaigns from the API with optional filtering and pagination.
+ - campaigns_create_new_mailchimp_campaign: Creates a new Mailchimp campaign with the specified type and optional configuration settings.
+ - campaigns_get_info: Retrieves detailed information about a specific campaign, supporting optional field filtering and resend shortcut eligibility inclusion.
+
+App ID: canva (NOT connected by user) 
+ - v1_brand_templates: Retrieves a list of brand templates based on query parameters such as ownership and sorting options using the "GET" method at the "/v1/brand-templates" path.
+ - v1_designs: Retrieves a list of designs based on query parameters, including query, continuation, ownership, and sort order, using the GET method at the "/v1/designs" endpoint.
+ - v1_users_me: Retrieves information about the currently authenticated user using the GET method at the "/v1/users/me" endpoint.
+
+App ID: crustdata (NOT connected by user) 
+ - get_job_listings: Retrieves job listings data based on specified parameters.
+ - search_persons: Submits a search request for persons associated with a given asynchronous job and returns the search results as a dictionary.
+
+App ID: jira (NOT connected by user) 
+ - get_banner: Retrieves the configuration of the announcement banner using the Jira Cloud API.
+ - set_banner: Updates the announcement banner configuration in Jira Cloud, including message, visibility, and dismissal settings.
+
+App ID: klaviyo (NOT connected by user) 
+ - get_accounts: Retrieves account information using the GET method, allowing optional filtering by specific account fields and requiring a revision header, returning a successful response with the requested data if available.
+ - get_campaigns: Retrieve a list of campaigns using optional filtering, sorting, and inclusion parameters, with the option to specify fields for campaign messages, campaigns, and tags.
+ - create_campaign: Creates a new campaign using specified parameters, returning appropriate status codes for success (201), client errors (400), or server issues (500).
+ - get_campaign: Retrieves detailed information about a campaign by its ID, allowing for selective field inclusion and revision specification through query parameters and headers.
+
+App ID: heygen (NOT connected by user) 
+ - get_v1_avatar_list: Retrieves a list of available avatars from the v1 API endpoint.
+ - get_v2_voices: Retrieves the list of available v2 voices from the API endpoint.
+
+App ID: aws_s3 (NOT connected by user) 
+ - create_bucket: Creates a new S3 bucket.
+ - delete_bucket: Deletes an S3 bucket (must be empty).
+ - get_bucket_policy: Gets the bucket policy for the specified bucket.
+ - put_bucket_policy: Sets the bucket policy for the specified bucket.
+ - list_prefixes: Lists common prefixes ("folders") in the specified S3 bucket and prefix.
+ - put_prefix: Creates a prefix ("folder") in the specified S3 bucket.
+ - list_objects: Lists all objects in a specified S3 prefix.
+ - put_object: Uploads an object to the specified S3 prefix.
+ - put_object_from_base64: Uploads a binary object from base64 content to the specified S3 prefix.
+ - get_object_content: Gets the content of a specified object.
+ - get_object_metadata: Gets metadata for a specified object without downloading the content.
+ - copy_object: Copies an object from one location to another.
+ - move_object: Moves an object from one location to another (copy then delete).
+ - delete_object: Deletes an object from S3.
+ - delete_objects: Deletes multiple objects from S3.
+ - generate_presigned_url: Generates a presigned URL for accessing an S3 object.
+ - search_objects: Searches for objects in S3 based on various criteria.
+ - get_bucket_size: Calculates the total size and object count for a bucket or prefix.
+
+App ID: miro (NOT connected by user) 
+
+App ID: openai (NOT connected by user) 
+ - create_chat_completion: Creates a model response for the given chat conversation.
+ - generate_image: Creates an image given a prompt.
+ - create_transcription: Transcribes audio into the input language.
+ - create_speech: Generates audio from the input text.
+
+App ID: pipedrive (NOT connected by user) 
+
+App ID: posthog (NOT connected by user) 
+ - subscriptions_list: Retrieves a list of subscriptions for a specified project by project ID, allowing pagination through query parameters for limit and offset.
+ - surveys_list: Retrieves a paginated list of surveys for a specific project with optional search and pagination parameters.
+ - surveys_create: Creates a new survey under the specified project and returns a status message upon successful creation.
+
+App ID: replicate (NOT connected by user) 
+ - run: Run a Replicate model and wait for its output. This is a blocking call from the user's perspective. If the model output is an iterator, this tool will collect all items into a list.
+ - upload_file: Uploads a local file to Replicate and returns its public URL. Replicate uses these URLs for file inputs in models.
+ - generate_image: Generates images using a specified Replicate model (defaults to SDXL). This is a convenience wrapper around the `run` tool.
+
+App ID: resend (NOT connected by user) 
+ - send_email: Sends an email to specified recipients using the Resend API.
+ - create_domain: Creates a new domain with the specified name.
+ - list_domains: Retrieves a list of all domains for the authenticated user.
+ - list_api_keys: Retrieves a list of all API keys available through the resend service.
+ - create_broadcast: Creates a new broadcast to send to a specified audience.
+ - list_broadcasts: Retrieves a list of all available broadcasts using the configured API key.
+ - create_audience: Creates a new audience (a list of contacts) with the specified name.
+ - list_audiences: Retrieves a list of all audiences.
+ - create_contact: Creates a contact within a specific audience.
+ - list_contacts: Lists all contacts from a specified audience.
+
+App ID: retell (NOT connected by user) 
+ - get_v2_get_call_by_call_id: Retrieve detailed information about a specific call using its call ID.
+ - post_v2_create_phone_call: Initiates a phone call using a JSON payload with specified parameters.
+ - post_v2_list_calls: Sends a POST request to list call records with optional filtering, sorting, pagination, and limits.
+
+App ID: sendgrid (NOT connected by user) 
+ - list_access_activity: Retrieves activity settings using the specified limit, allowing for the optional specification of the user on whose behalf the request is made.
+ - list_alert: Retrieves a list of alerts using the GitHub API, returning a successful response with a status code of 200.
+ - list_campaign: Retrieves a list of campaigns with optional pagination and filtering by limit and offset, allowing operations on behalf of another entity.
+ - list_segment: Retrieves a list of all segments defined in the contact database using the SendGrid API.
+
+App ID: shortcut (NOT connected by user) 
+ - list_categories: Retrieves a list of categories from the API.
+ - list_epics: Fetches a list of epics from the API.
+
+App ID: spotify (NOT connected by user) 
+ - get_playlist: Retrieves a playlist from the API using the specified playlist ID.
+ - search: Performs a search query against the API and returns the matching results as a JSON object.
+ - get_playlists_tracks: Retrieves the tracks of a specified playlist from the API, applying optional filters and pagination parameters.
+ - add_tracks_to_playlist: Adds one or more tracks to a specified playlist at an optional position.
+ - create_playlist: Creates a new playlist for a specified user with optional visibility, collaboration, and description settings.
+
+App ID: trello (NOT connected by user) 
+ - get_actions_id: Get an Action
+ - check_card_item: Get checkItem on a Card
+
+App ID: unipile (NOT connected by user) 
+ - list_all_accounts: Lists all linked accounts.
+ - retrieve_account: Retrieves a specific linked account by its ID.
+ - list_user_posts: Lists all posts for a given user or company identifier.
+ - retrieve_profile: Retrieves a specific user profile by its identifier.
+ - retrieve_post: Retrieves a specific post by its ID.
+ - list_post_comments: Lists all comments from a specific post. Can also list replies to a specific comment.
+ - create_post: Creates a new post on LinkedIn.
+ - create_post_comment: Adds a comment to a specific post.
+ - add_reaction_to_post: Adds a reaction to a post or comment. The OpenAPI spec does not detail the request body. This method assumes 'post_social_id' (as 'post_id') and 'reaction_type' (as 'value') are in the JSON body. 'account_id' is an optional query parameter. Verify request/response structure with official Unipile LinkedIn API documentation.
+ - search: Performs a comprehensive search on LinkedIn for people, companies, posts, or jobs.
+
+App ID: wrike (NOT connected by user) 
+ - get_contacts: Retrieves contacts from the server with optional deleted status filtering, field selection, and metadata inclusion.
+ - get_groups: Retrieves a list of groups from the API, applying optional filtering and pagination parameters.
+ - get_workflows: Retrieves all workflows from the server using a GET request.
+
+App ID: fpl (NOT connected by user) 
+ - get_player_information: Get detailed information and statistics for a specific player
+ - search_fpl_players: Search for FPL players by name with optional filtering
+ - get_gameweek_status: Get precise information about current, previous, and next gameweeks.
+ - analyze_players: Filter and analyze FPL players based on multiple criteria
+ - compare_players: Compare multiple players across various metrics
+ - analyze_player_fixtures: Analyze upcoming fixtures for a player and provide a difficulty rating
+ - analyze_fixtures: Analyze upcoming fixtures for players, teams, or positions
+ - get_blank_gameweeks: Get information about upcoming blank gameweeks where teams don't have fixtures
+ - get_double_gameweeks: Get information about upcoming double gameweeks where teams have multiple fixtures
+ - get_league_standings: Get standings for a specified FPL league
+ - get_league_analytics: Get rich analytics for a Fantasy Premier League mini-league
+ - team_info: Get information about a team
+
+App ID: linkedin (NOT connected by user) 
+ - create_post: Create a post on LinkedIn.
+ - delete_post: Delete a post on LinkedIn.
+ - update_post: Update a post on LinkedIn.
+
+App ID: neon (NOT connected by user) 
+ - list_projects: Retrieves a list of projects with optional pagination, filtering, and organizational scoping.
+ - list_shared_projects: Retrieves a list of shared projects with optional pagination and search filtering.
+ - get_project: Retrieves detailed information for a specific project by its project ID.
+ - list_project_operations: Retrieves a paginated list of operations for a specified project.
+
+App ID: rocketlane (NOT connected by user) 
+ - get_project: Get project by Id
+ - update_project: Update project by Id
+ - delete_project: Delete project by Id
+ - add_members: Add members to a project
+ - create_field: Create a Field
+ - get_user: Get user by Id
+
+App ID: sentry (NOT connected by user) 
+ - list_your_organizations: Retrieves a list of organizations using the "GET" method, allowing filtering by owner, query, and sorting, and requires authentication with admin, read, or write permissions.
+ - retrieve_an_organization: Retrieves detailed information about a specified organization by its ID or slug, optionally including extended details, requiring appropriate organizational permissions.
+
+App ID: supabase (NOT connected by user) 
+ - v1_list_all_organizations: Retrieves a list of all organizations from the API endpoint.
+ - v1_create_an_organization: Creates a new organization using the provided name and returns the organization details.
+ - v1_list_all_snippets: Retrieves all code snippets for the specified project, or for all projects if no project reference is provided.
+ - v1_list_all_branches: Retrieves a list of all branches for the specified project reference using the v1 API.
+ - v1_create_a_branch: Creates a new branch for a specified project, configuring options such as instance size, release channel, and region.
+
+App ID: shopify (NOT connected by user) 
+ - creates_anew_report: Submits a report generation request and returns a success status upon creation.
+ - get_application_charges: Retrieves a list of application charges in JSON format, allowing filtering by specific fields and starting from a given ID.
+ - get_application_credit_by_id: Retrieves a specific application credit from Shopify's admin API, including optional field filtering parameters.
+ - retrieves_asingle_charge: Retrieves details for a specific recurring application charge by ID using the "GET" method, optionally including additional fields specified in the query parameters.
+
+App ID: semanticscholar (NOT connected by user) 
+ - get_graph_paper_title_search: Searches for matching papers based on specified query parameters, such as query string, fields, publication types, open access status, citation count, publication date, year, venue, and fields of study, using the "GET" method.
+
+App ID: whatsapp_business (NOT connected by user) 
+ - get_business_account: Retrieves information about a business account using the specified API version and business account ID, optionally filtering the response fields via a query parameter.
+ - get_commerce_settings: Retrieves the commerce settings configured for a specific WhatsApp Business phone number.
+ - get_business_phone_number: Retrieves details for a specific business phone number ID using query parameters to specify returned fields.
+ - get_all_business_phone_numbers: Retrieves a list of phone numbers associated with a specific WhatsApp Business Account (WABA), allowing for filtering and customization of the response fields.
+ - create_message_template: Creates a new WhatsApp message template for a business account, allowing businesses to send standardized messages to customers.
+
+App ID: ahrefs (NOT connected by user) 
+ - crawler_ip_ranges: Fetches the current public crawler IP ranges from the API, optionally specifying output format.
+ - serp_overview: Retrieves a SERP (Search Engine Results Page) overview report based on specified selection, country, and keyword criteria.
+ - backlinks_stats: Retrieves backlink statistics for a specified target and date, with optional filters for protocol, mode, and output format.
+ - all_backlinks: Retrieves all backlinks information for a specified target using various query parameters.
+ - organic_competitors: Retrieves organic competitors data for a specified target using the Site Explorer API.
+
+App ID: e2b (NOT connected by user) 
+ - execute_python_code: Executes Python code in a sandbox environment and returns the formatted output.
+
+App ID: elevenlabs (NOT connected by user) 
+ - get_generated_items: Retrieves historical data based on specified parameters, including page size and voice ID, using the "GET" method at the "/v1/history" endpoint.
+ - get_history_item_by_id: Retrieves a specific history item by its identifier using the API defined at "/v1/history/{history_item_id}" with the GET method.
+ - delete_history_item: Deletes a specific history item identified by its ID using the DELETE method.
+ - edit_voice: Updates the specified voice by ID using a POST request and returns a success status upon completion.
+ - get_projects: Retrieves a list of projects using the API defined at the "/v1/projects" endpoint via the GET method.
+ - add_project: Creates a new project and returns a status message.
+ - delete_project: Deletes the specified project and returns a success status upon completion.
+
+App ID: twitter (NOT connected by user) 
+ - find_tweets_by_id: Retrieves one or more Tweets by their IDs and returns associated details, supporting optional parameters for specifying additional fields and expansions.
+ - find_users_by_username: Retrieves information about one or more users specified by their usernames using the Twitter API, allowing optional specification of additional user fields and expansions.
+ - list_user_follow: Adds a Twitter user to a list of followed lists using the Twitter API and returns a status message.
+ - users_id_tweets: Retrieves a list of tweets for a user with the specified ID, allowing optional filtering by tweet ID range, result count, pagination token, excluded fields, and time range, using the "GET" method.
+
+App ID: ms_teams (NOT connected by user) 
+ - list_chats: List chats
+ - get_joined_teams: Fetches a list of the Microsoft Teams the user has joined.
+ - list_channels_for_team: List channels
+ - send_chat_message: Sends a message to a specific chat.
+ - send_channel_message: Sends a message to a specific channel in a Microsoft Teams team.
+ - reply_to_channel_message: Sends a reply to a specific message in a channel.
+
+App ID: cal_com_v2 (NOT connected by user) 
+
+App ID: ghost_content (NOT connected by user) 
+ - browse_posts: Retrieves and browses posts from a data source based on provided parameters.
+ - browse_authors: Browse authors using various filtering and pagination options.
+ - browse_tags: Browse and retrieve tags based on specified parameters.
+ - browse_pages: Retrieves a list of pages using optional filtering, pagination, and formatting parameters.
+ - browse_tiers: Browse tiers based on optional filters and pagination.
+ - browse_settings: Fetches site settings by making a GET request to the settings endpoint.
+
+App ID: google_gemini (NOT connected by user) 
+ - generate_text: Generates text using the Google Gemini model.
+ - generate_image: Generates an image using the Google Gemini model and returns a list of results. Each result is a dict with either 'text' or 'image_bytes' (raw image data).
+ - generate_audio: Generates audio using the Google Gemini model and returns the uploaded audio URL.
+
+App ID: google_searchconsole (NOT connected by user) 
+ - list_sitemaps: Lists the sitemaps-entries submitted for this site, or included in the sitemap index file (if sitemapIndex is specified in the request).
+ - add_site: Adds a site to the set of the user's sites in Search Console. This will require verification of the site ownership. If successful, this method returns a site resource in the response body.
+
+App ID: domain_checker (NOT connected by user) 
+ - check_domain_tool: Checks if a domain is available for registration by querying DNS records and RDAP data.
+ - check_tlds_tool: Checks a keyword across multiple top-level domains (TLDs) to find available domain names.
+
+App ID: http_tools (NOT connected by user) 
+ - http_get: Perform a GET request to the specified URL with optional parameters.
+ - http_post: Perform a POST request to the specified URL with optional parameters.
+ - http_put: Perform a PUT request to the specified URL with optional parameters.
+ - http_delete: Perform a DELETE request to the specified URL with optional parameters.
+ - http_patch: Perform a PATCH request to the specified URL with optional parameters.
+
+App ID: zenquotes (NOT connected by user) 
+ - get_quote: Fetches a random inspirational quote from the Zen Quotes API.
+
