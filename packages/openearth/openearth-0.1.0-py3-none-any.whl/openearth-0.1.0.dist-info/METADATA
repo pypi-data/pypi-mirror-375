@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: openearth
+Version: 0.1.0
+Summary: Python client for the OpenEarth API
+Author: Sanjana Y
+License: Proprietary
+Project-URL: Docs, https://example.com/docs
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: httpx>=0.27.0
+
+# openearth
+
+Python client for the OpenEarth API
+
+## Install (local)
+```bash
+pip install -e .
+```
+
+## Usage
+```python
+from openearth import OpenEarth
+
+oe = OpenEarth(base_url="http://localhost:8000")
+print(oe.health())
+print(oe.rain("Did it rain in rural Iowa yesterday?"))
+print(oe.wildfire("Wildfire near Santa Rosa today?"))
+oe.close()
+```
