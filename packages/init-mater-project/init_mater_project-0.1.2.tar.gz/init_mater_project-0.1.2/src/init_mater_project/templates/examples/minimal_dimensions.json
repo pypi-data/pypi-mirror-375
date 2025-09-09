@@ -1,0 +1,44 @@
+[
+  {
+    "name": "location",
+    "value": "world",
+    "equivalence": {},
+    "parents_values": { "default": "top-level" }
+  },
+  {
+    "name": "location",
+    "value": "europe",
+    "equivalence": {},
+    "parents_values": { "default": "world" }
+  },
+  {
+    "name": "location",
+    "value": "spain",
+    "equivalence": { "iso_alpha2": "ES", "iso_alpha3": "ESP" },
+    "parents_values": { "default": "europe" }
+  },
+    {
+    "name": "object",
+    "value": "vehicule",
+    "equivalence": {},
+    "parents_values": { "default": "top-level" }
+  },
+    {
+    "name": "object",
+    "value": "light-duty vehicule",
+    "equivalence": { "default": "LDV" },
+    "parents_values": { "default": "vehicule" }
+  },
+  {
+    "name": "object",
+    "value": "medium-duty vehicule",
+    "equivalence": {},
+    "parents_values": { "default": "vehicule" }
+  },
+  {
+    "name": "object",
+    "value": "heavy-duty vehicule",
+    "equivalence": {},
+    "parents_values": { "default": "vehicule" }
+  }
+]
