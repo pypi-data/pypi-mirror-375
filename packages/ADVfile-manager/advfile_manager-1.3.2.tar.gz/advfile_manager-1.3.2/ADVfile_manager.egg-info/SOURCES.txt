@@ -1,0 +1,13 @@
+LICENSE
+README.md
+USAGE.md
+pyproject.toml
+ADVfile_manager/__init__.py
+ADVfile_manager/core.py
+ADVfile_manager.egg-info/PKG-INFO
+ADVfile_manager.egg-info/SOURCES.txt
+ADVfile_manager.egg-info/dependency_links.txt
+ADVfile_manager.egg-info/requires.txt
+ADVfile_manager.egg-info/top_level.txt
+tests/test_advfile_manager.py
+tests/test_advfile_manager_extra.py
