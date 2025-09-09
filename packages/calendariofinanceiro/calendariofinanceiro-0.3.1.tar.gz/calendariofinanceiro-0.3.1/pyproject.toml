@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "calendariofinanceiro"
+version = "0.3.1"
+description = "O pacote CalendarioFinanceiro é uma ferramenta Python projetada para facilitar a manipulação de datas financeiras em diferentes calendários, como 'onshore' (Brasil) e 'offshore'. Com este pacote, você pode realizar operações como adicionar dias úteis a uma data, criar listas de dias úteis entre intervalos de datas e muito mais. Ele é uma solução eficiente para lidar com cálculos de datas em cenários financeiros, onde a consideração de dias úteis e feriados é essencial."
+authors = ["eduardo.barreto <edugobarreto@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+workdays = "^1.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
