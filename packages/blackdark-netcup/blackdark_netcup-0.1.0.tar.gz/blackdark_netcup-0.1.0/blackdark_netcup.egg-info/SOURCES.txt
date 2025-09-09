@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+blackdark_netcup/__init__.py
+blackdark_netcup/_utilities.py
+blackdark_netcup/dns_record.py
+blackdark_netcup/provider.py
+blackdark_netcup/pulumi-plugin.json
+blackdark_netcup/py.typed
+blackdark_netcup.egg-info/PKG-INFO
+blackdark_netcup.egg-info/SOURCES.txt
+blackdark_netcup.egg-info/dependency_links.txt
+blackdark_netcup.egg-info/requires.txt
+blackdark_netcup.egg-info/top_level.txt
+blackdark_netcup/config/__init__.py
+blackdark_netcup/config/__init__.pyi
+blackdark_netcup/config/vars.py
