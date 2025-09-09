@@ -1,0 +1,10 @@
+
+[clang]
+clang
+
+[cuda]
+pycuda
+
+[dev]
+pytest
+mypy

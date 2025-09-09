@@ -1,0 +1,19 @@
+[project]
+name = "pytornis"
+version = "0.0.1"
+description = "Industrial Deep Learning framework with CPU/GPU support, tensors, autograd, and CUDA kernels"
+authors = [{ name="Luis Fernando Montaño Hernández", email="tu_email@example.com" }]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["deep-learning", "tensor", "cuda", "cpu", "autograd", "AI", "industrial"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "mypy"]
+cuda = ["pycuda"]  # Esto se instalará solo si el usuario elige extras
+clang = ["clang"]  # Solo si el usuario lo instala desde PyPI, depende del paquete Python
