@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mseep-food-delivery-mcp
+Version: 0.1.3
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: <4.0,>=3.10
+Description-Content-Type: text/plain
+Requires-Dist: firebase-admin>=6.9.0
+Requires-Dist: google-cloud-firestore>=2.21.0
+Requires-Dist: mcp[cli]>=1.11.0
+
+Package managed by MseeP.ai
