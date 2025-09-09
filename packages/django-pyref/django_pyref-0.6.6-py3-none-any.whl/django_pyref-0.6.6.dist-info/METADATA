@@ -1,0 +1,58 @@
+Metadata-Version: 2.4
+Name: django-pyref
+Version: 0.6.6
+Summary: A Django app defining data models for managing bibliographic references for scientific databases.
+Home-page: https://github.com/xnx/django-pyref
+Author: Christian Hill, Frances Skinner, Iouli Gordon, Robert Hargreaves, Kelly Lockhart, Dipti
+Author-email: ch.hill@iaea.org
+Project-URL: Bug Reports, https://github.com/xnx/django-pyref/issues
+Keywords: django,database,references,citation
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Framework :: Django
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: Django>=3.2
+Requires-Dist: requests>=2.28.1
+Requires-Dist: djangorestframework>=3.13.1
+Requires-Dist: django-filter>=22.1
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: coverage; extra == "dev"
+Requires-Dist: ipython; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+============
+django-pyref
+============
+
+The project, django-pyref, defines a Django app, refs, to create references for
+scientific databases.  The goal of the app is to create a referencing system
+where an administrator can obtain the full citation of an article from its
+Digital Object Identifier (DOI). The stored references can be output in HTML,
+BibTeX and JSON format.
