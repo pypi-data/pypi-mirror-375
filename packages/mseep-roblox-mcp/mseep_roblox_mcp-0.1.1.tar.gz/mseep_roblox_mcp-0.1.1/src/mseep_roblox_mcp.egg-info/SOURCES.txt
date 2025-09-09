@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_roblox_mcp.egg-info/PKG-INFO
+src/mseep_roblox_mcp.egg-info/SOURCES.txt
+src/mseep_roblox_mcp.egg-info/dependency_links.txt
+src/mseep_roblox_mcp.egg-info/entry_points.txt
+src/mseep_roblox_mcp.egg-info/requires.txt
+src/mseep_roblox_mcp.egg-info/top_level.txt
+src/roblox_mcp/__init__.py
+src/roblox_mcp/config.py
+src/roblox_mcp/roblox_client.py
+src/roblox_mcp/server.py
+src/roblox_mcp/sse.py
