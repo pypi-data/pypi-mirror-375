@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: ad_low_noise_float_2023_decoder
+Version: 0.1.6
+Summary: ad_low_noise_float_2023_decoder for ad_low_noise_float_2023_git
+Home-page: https://github.com/petermaerki/ad_low_noise_float_2023_git/
+Author: Hans Maerki
+Author-email: buhtig.hans.maerki@ergoinfo.ch
+Requires-Python: >=3.7.9
+Requires-Dist: numpy>=1.21.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: requires-python
