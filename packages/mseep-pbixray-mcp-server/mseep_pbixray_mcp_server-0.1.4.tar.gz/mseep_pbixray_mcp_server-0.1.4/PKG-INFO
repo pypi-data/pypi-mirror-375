@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: mseep-pbixray-mcp-server
+Version: 0.1.4
+Summary: An MCP server for analyzing Power BI files using PBIXRay
+Project-URL: Homepage, https://github.com/username/pbixray-mcp
+Project-URL: Bug Tracker, https://github.com/username/pbixray-mcp/issues
+Project-URL: Documentation, https://github.com/username/pbixray-mcp/docs
+Project-URL: Source, https://github.com/username/pbixray-mcp
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: PBIXRay Contributors <your.email@example.com>
+License: MIT
+License-File: LICENSE
+Keywords: analysis,mcp,pbix,powerbi
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Office/Business :: Office Suites
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires-Python: >=3.9
+Requires-Dist: mcp>=1.2.0
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: pandas<2.0.0,>=1.0.0; python_version < '3.10'
+Requires-Dist: pandas>=1.0.0; python_version >= '3.10'
+Requires-Dist: pbixray>=0.1.0
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
