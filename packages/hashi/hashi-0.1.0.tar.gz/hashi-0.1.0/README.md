@@ -1,0 +1,41 @@
+# Hashi
+
+Hashiwokakero ("Bridges") puzzle generator, solver, printer, and player for the terminal.
+
+## Features
+- Generate random Hashiwokakero puzzles of customizable size and difficulty
+- Play interactively in the terminal
+- Print puzzles and solutions in ASCII
+
+## Installation
+
+Clone this repository and install with pip (optional):
+
+```bash
+pip install .
+```
+
+## Usage
+
+You can run the game from the command line:
+
+```bash
+python -m hashi --width 5 --height 5 --difficulty 40
+```
+
+All arguments are optional. Defaults are:
+- width: 5
+- height: 5
+- difficulty: 40
+
+## How to Play
+- Connect islands with bridges so that all islands are connected and the number on each island matches the number of bridges connected to it.
+- Enter moves in the format:
+  - `- a4 c4` : Add a single bridge between a4 and c4
+  - `= e7 e3` : Add a double bridge between e7 and e3
+  - `. a4 c4` : Remove any bridge between a4 and c4
+  - `q` : Quit
+
+## Author
+
+Al Sweigart

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hashi"
+version = "0.1.0"
+description = "Hashiwokakero puzzle engine for generating, solving, and playing."
+authors = [
+    { name = "Al Sweigart", email = "al@inventwithpython.com" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+hashi = "hashi.__main__:main"
