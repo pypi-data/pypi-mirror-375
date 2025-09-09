@@ -1,0 +1,40 @@
+[project]
+name = "mseep-blender-mcp"
+version = "1.2.2"
+description = "Blender integration through the Model Context Protocol"
+requires-python = ">=3.10"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mcp[cli]>=1.3.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+blender-mcp = "blender_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/blender-mcp"
+"Bug Tracker" = "https://github.com/yourusername/blender-mcp/issues"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-dir]
+"" = "src"
