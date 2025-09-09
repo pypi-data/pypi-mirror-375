@@ -1,0 +1,48 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-office-word-mcp-server"
+version = "1.1.13"
+description = "MCP server for manipulating Microsoft Word documents"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "python-docx>=1.1.2",
+    "fastmcp>=2.8.1",
+    "msoffcrypto-tool>=5.4.2",
+    "docx2pdf>=0.1.8",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/GongRzhe/Office-Word-MCP-Server.git"
+"Bug Tracker" = "https://github.com/GongRzhe/Office-Word-MCP-Server.git/issues"
+
+[project.scripts]
+word_mcp_server = "word_document_server.main:run_server"
+
+[tool.hatch.build.targets.wheel]
+only-include = [
+    "word_document_server",
+    "office_word_mcp_server",
+]
+sources = [
+    ".",
+]
