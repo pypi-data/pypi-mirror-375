@@ -1,0 +1,54 @@
+[project]
+name = "audio-toolset"
+version = "0.2.2"
+description = "Tools for processing audio signals"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "moshe-stanylov", email = "maxoshe@gmail.com" }]
+requires-python = ">=3.10, <3.13"
+dependencies = [
+    "click>=8.2.1",
+    "numpy==2.0.1",
+    "plotly==5.23.0",
+    "pydantic>=2.11.7",
+    "scipy==1.13.1",
+    "soundfile==0.12.1",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Multimedia :: Sound/Audio"
+]
+
+[project.urls]
+Repository = "https://github.com/maxoshe/audio-toolset.git"
+
+[project.scripts]
+audio-toolset = "audio_toolset.cli.main:audio_toolset_cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[dependency-groups]
+dev = ["pytest>=8.4.1", "ruff>=0.12.9"]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "UP",
+    "B",
+    "SIM",
+    "I",
+]
