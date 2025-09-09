@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/jewish_library/__init__.py
+src/jewish_library/demo.py
+src/jewish_library/server.py
+src/jewish_library/tantivy_search_agent.py
+src/mseep_jewish_library.egg-info/PKG-INFO
+src/mseep_jewish_library.egg-info/SOURCES.txt
+src/mseep_jewish_library.egg-info/dependency_links.txt
+src/mseep_jewish_library.egg-info/entry_points.txt
+src/mseep_jewish_library.egg-info/requires.txt
+src/mseep_jewish_library.egg-info/top_level.txt
