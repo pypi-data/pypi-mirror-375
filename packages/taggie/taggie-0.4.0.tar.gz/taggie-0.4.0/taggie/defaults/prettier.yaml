@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: UL Research Institutes
+# SPDX-License-Identifier: Apache-2.0
+
+- type: file.name
+  tags:
+    - prettier
+  groups:
+    - tool
+  names:
+    - .prettierignore
+    - .prettierrc
+    - .prettierrc.cjs
+    - .prettierrc.cts
+    - .prettierrc.js
+    - .prettierrc.json
+    - .prettierrc.json5
+    - .prettierrc.mjs
+    - .prettierrc.mts
+    - .prettierrc.toml
+    - .prettierrc.ts
+    - .prettierrc.yml
+    - .prettierrc.yaml
+    - prettier.config.cjs
+    - prettier.config.cts
+    - prettier.config.js
+    - prettier.config.mjs
+    - prettier.config.mts
+    - prettier.config.ts
