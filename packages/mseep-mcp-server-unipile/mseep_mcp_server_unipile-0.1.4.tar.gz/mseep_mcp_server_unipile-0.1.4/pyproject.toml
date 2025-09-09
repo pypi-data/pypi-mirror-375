@@ -1,0 +1,33 @@
+[project]
+name = "mseep-mcp-server-unipile"
+version = "0.1.4"
+description = "A simple unipile MCP server"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "markdownify>=0.13.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-server-unipile = "mcp_server_unipile:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+dev-dependencies = [
+    "pyright>=1.1.389",
+]
