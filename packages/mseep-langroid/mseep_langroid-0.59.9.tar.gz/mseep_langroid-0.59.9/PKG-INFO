@@ -1,0 +1,205 @@
+Metadata-Version: 2.4
+Name: mseep-langroid
+Version: 0.59.9
+Summary: Harness LLMs with Multi-Agent Programming
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Requires-Python: <3.13,>=3.10
+Requires-Dist: adb-cloud-connector<2.0.0,>=1.0.2
+Requires-Dist: aiohttp<4.0.0,>=3.9.1
+Requires-Dist: async-generator<2.0,>=1.10
+Requires-Dist: bs4<1.0.0,>=0.0.1
+Requires-Dist: cerebras-cloud-sdk<2.0.0,>=1.1.0
+Requires-Dist: colorlog<7.0.0,>=6.7.0
+Requires-Dist: docstring-parser<1.0,>=0.16
+Requires-Dist: duckduckgo-search<7.0.0,>=6.0.0
+Requires-Dist: exa-py>=1.8.7
+Requires-Dist: faker<19.0.0,>=18.9.0
+Requires-Dist: fakeredis<3.0.0,>=2.12.1
+Requires-Dist: fastmcp>=2.2.5
+Requires-Dist: fire<1.0.0,>=0.5.0
+Requires-Dist: gitpython<4.0.0,>=3.1.43
+Requires-Dist: google-api-python-client<3.0.0,>=2.95.0
+Requires-Dist: google-genai>=1.0.0
+Requires-Dist: groq<1.0.0,>=0.13.0
+Requires-Dist: grpcio<2.0.0,>=1.62.1
+Requires-Dist: halo<1.0.0,>=0.0.31
+Requires-Dist: jinja2<4.0.0,>=3.1.2
+Requires-Dist: json-repair<1.0.0,>=0.29.9
+Requires-Dist: lxml<6.0.0,>=5.4.0
+Requires-Dist: markdownify>=0.13.1
+Requires-Dist: nest-asyncio<2.0.0,>=1.6.0
+Requires-Dist: nltk<4.0.0,>=3.8.2
+Requires-Dist: onnxruntime<2.0.0,>=1.16.1
+Requires-Dist: openai<2.0.0,>=1.61.1
+Requires-Dist: pandas<3.0.0,>=2.0.3
+Requires-Dist: prettytable<4.0.0,>=3.8.0
+Requires-Dist: pydantic-settings<3.0.0,>=2.0.0
+Requires-Dist: pydantic<3.0.0,>=2.0.0
+Requires-Dist: pygithub<2.0.0,>=1.58.1
+Requires-Dist: pygments<3.0.0,>=2.15.1
+Requires-Dist: pymupdf4llm<0.1.0,>=0.0.17
+Requires-Dist: pyparsing<4.0.0,>=3.0.9
+Requires-Dist: pytest-rerunfailures<16.0,>=15.0
+Requires-Dist: python-dotenv<2.0.0,>=1.0.0
+Requires-Dist: python-magic<1.0.0,>=0.4.27
+Requires-Dist: pyyaml<7.0.0,>=6.0.1
+Requires-Dist: qdrant-client<2.0.0,>=1.8.0
+Requires-Dist: rank-bm25<1.0.0,>=0.2.2
+Requires-Dist: redis<6.0.0,>=5.0.1
+Requires-Dist: requests-oauthlib<2.0.0,>=1.3.1
+Requires-Dist: requests<3.0.0,>=2.31.0
+Requires-Dist: rich<14.0.0,>=13.3.4
+Requires-Dist: thefuzz<1.0.0,>=0.20.0
+Requires-Dist: tiktoken<1.0.0,>=0.7.0
+Requires-Dist: trafilatura<3.0.0,>=2.0.0
+Requires-Dist: typer<1.0.0,>=0.9.0
+Requires-Dist: wget<4.0,>=3.2
+Provides-Extra: all
+Requires-Dist: arango-datasets<2.0.0,>=1.2.2; extra == 'all'
+Requires-Dist: chainlit<3.0.0,>=2.0.1; extra == 'all'
+Requires-Dist: chromadb<=0.4.23,>=0.4.21; extra == 'all'
+Requires-Dist: docling<3.0.0,>=2.16.0; extra == 'all'
+Requires-Dist: fastembed<0.4.0,>=0.3.1; extra == 'all'
+Requires-Dist: huggingface-hub<1.0.0,>=0.21.2; extra == 'all'
+Requires-Dist: litellm<2.0.0,>=1.30.1; extra == 'all'
+Requires-Dist: marker-pdf; extra == 'all'
+Requires-Dist: metaphor-python<0.2.0,>=0.1.23; extra == 'all'
+Requires-Dist: neo4j<6.0.0,>=5.14.1; extra == 'all'
+Requires-Dist: pdf2image<2.0.0,>=1.17.0; extra == 'all'
+Requires-Dist: pgvector>=0.3.6; extra == 'all'
+Requires-Dist: psycopg2-binary>=2.9.10; extra == 'all'
+Requires-Dist: psycopg2<3.0.0,>=2.9.7; extra == 'all'
+Requires-Dist: pymupdf4llm<0.1.0,>=0.0.17; extra == 'all'
+Requires-Dist: pymupdf<2.0.0,>=1.23.3; extra == 'all'
+Requires-Dist: pymysql<2.0.0,>=1.1.0; extra == 'all'
+Requires-Dist: pypdf>=5.1.0; extra == 'all'
+Requires-Dist: pytesseract<0.4.0,>=0.3.10; extra == 'all'
+Requires-Dist: python-arango<9.0.0,>=8.1.2; extra == 'all'
+Requires-Dist: python-docx<2.0.0,>=1.1.0; extra == 'all'
+Requires-Dist: python-socketio<6.0.0,>=5.11.0; extra == 'all'
+Requires-Dist: sentence-transformers<3.0.0,>=2.2.2; extra == 'all'
+Requires-Dist: sqlalchemy<3.0.0,>=2.0.19; extra == 'all'
+Requires-Dist: torch<3.0.0,>=2.0.0; extra == 'all'
+Requires-Dist: transformers<5.0.0,>=4.40.1; extra == 'all'
+Requires-Dist: unstructured[docx,pdf,pptx]<1.0.0,>=0.16.15; extra == 'all'
+Requires-Dist: weaviate-client>=4.9.6; extra == 'all'
+Provides-Extra: arango
+Requires-Dist: arango-datasets<2.0.0,>=1.2.2; extra == 'arango'
+Requires-Dist: python-arango<9.0.0,>=8.1.2; extra == 'arango'
+Provides-Extra: asyncio
+Requires-Dist: asyncio>=3.4.3; extra == 'asyncio'
+Provides-Extra: chainlit
+Requires-Dist: chainlit<3.0.0,>=2.0.1; extra == 'chainlit'
+Requires-Dist: python-socketio<6.0.0,>=5.11.0; extra == 'chainlit'
+Provides-Extra: chromadb
+Requires-Dist: chromadb<=0.4.23,>=0.4.21; extra == 'chromadb'
+Provides-Extra: crawl4ai
+Requires-Dist: crawl4ai>=0.6.3; extra == 'crawl4ai'
+Provides-Extra: db
+Requires-Dist: psycopg2-binary>=2.9.10; extra == 'db'
+Requires-Dist: psycopg2<3.0.0,>=2.9.7; extra == 'db'
+Requires-Dist: pymysql<2.0.0,>=1.1.0; extra == 'db'
+Requires-Dist: sqlalchemy<3.0.0,>=2.0.19; extra == 'db'
+Provides-Extra: doc-chat
+Requires-Dist: docling<3.0.0,>=2.20.0; extra == 'doc-chat'
+Requires-Dist: marker-pdf; extra == 'doc-chat'
+Requires-Dist: pdf2image<2.0.0,>=1.17.0; extra == 'doc-chat'
+Requires-Dist: pymupdf4llm<0.1.0,>=0.0.17; extra == 'doc-chat'
+Requires-Dist: pymupdf<2.0.0,>=1.23.3; extra == 'doc-chat'
+Requires-Dist: pypdf>=5.1.0; extra == 'doc-chat'
+Requires-Dist: pytesseract<0.4.0,>=0.3.10; extra == 'doc-chat'
+Requires-Dist: python-docx<2.0.0,>=1.1.0; extra == 'doc-chat'
+Requires-Dist: unstructured[docx,pdf,pptx]<1.0.0,>=0.16.15; extra == 'doc-chat'
+Provides-Extra: doc-parsers
+Requires-Dist: markitdown[docx,pptx,xlsx]>=0.0.1a3; extra == 'doc-parsers'
+Requires-Dist: openpyxl>=3.1.5; extra == 'doc-parsers'
+Requires-Dist: python-docx>=1.1.2; extra == 'doc-parsers'
+Requires-Dist: python-pptx>=1.0.2; extra == 'doc-parsers'
+Requires-Dist: xlrd>=2.0.1; extra == 'doc-parsers'
+Provides-Extra: docling
+Requires-Dist: docling<3.0.0,>=2.16.0; extra == 'docling'
+Provides-Extra: docx
+Requires-Dist: python-docx<2.0.0,>=1.1.0; extra == 'docx'
+Provides-Extra: exa
+Requires-Dist: exa-py>=1.8.7; extra == 'exa'
+Provides-Extra: fastembed
+Requires-Dist: fastembed<0.4.0,>=0.3.1; extra == 'fastembed'
+Provides-Extra: firecrawl
+Requires-Dist: firecrawl-py>=1.13.5; extra == 'firecrawl'
+Provides-Extra: google-genai
+Requires-Dist: google-genai>=1.0.0; extra == 'google-genai'
+Provides-Extra: google-generativeai
+Requires-Dist: google-genai>=1.0.0; extra == 'google-generativeai'
+Provides-Extra: hf-embeddings
+Requires-Dist: sentence-transformers<3.0.0,>=2.2.2; extra == 'hf-embeddings'
+Requires-Dist: torch<3.0.0,>=2.0.0; extra == 'hf-embeddings'
+Provides-Extra: hf-transformers
+Requires-Dist: huggingface-hub<1.0.0,>=0.21.2; extra == 'hf-transformers'
+Requires-Dist: sentence-transformers<3.0.0,>=2.2.2; extra == 'hf-transformers'
+Requires-Dist: torch<3.0.0,>=2.0.0; extra == 'hf-transformers'
+Requires-Dist: transformers<5.0.0,>=4.40.1; extra == 'hf-transformers'
+Provides-Extra: lancedb
+Requires-Dist: lancedb<0.9.0,>=0.8.2; extra == 'lancedb'
+Requires-Dist: pyarrow<16.0.0,>=15.0.0; extra == 'lancedb'
+Requires-Dist: tantivy<0.22.0,>=0.21.0; extra == 'lancedb'
+Provides-Extra: litellm
+Requires-Dist: litellm<2.0.0,>=1.30.1; extra == 'litellm'
+Provides-Extra: marker-pdf
+Requires-Dist: marker-pdf[full]>=1.6.0; (sys_platform != 'darwin' or platform_machine != 'x86_64') and extra == 'marker-pdf'
+Requires-Dist: opencv-python>=4.11.0.86; extra == 'marker-pdf'
+Provides-Extra: markitdown
+Requires-Dist: markitdown[docx,pptx,xlsx]>=0.0.1a3; extra == 'markitdown'
+Provides-Extra: meilisearch
+Requires-Dist: meilisearch-python-sdk<3.0.0,>=2.2.3; extra == 'meilisearch'
+Provides-Extra: metaphor
+Requires-Dist: metaphor-python<0.2.0,>=0.1.23; extra == 'metaphor'
+Provides-Extra: mysql
+Requires-Dist: pymysql<2.0.0,>=1.1.0; extra == 'mysql'
+Provides-Extra: neo4j
+Requires-Dist: neo4j<6.0.0,>=5.14.1; extra == 'neo4j'
+Provides-Extra: pdf-parsers
+Requires-Dist: docling<3.0.0,>=2.16.0; extra == 'pdf-parsers'
+Requires-Dist: marker-pdf; extra == 'pdf-parsers'
+Requires-Dist: markitdown[docx,pptx,xlsx]>=0.0.1a3; extra == 'pdf-parsers'
+Requires-Dist: pdf2image<2.0.0,>=1.17.0; extra == 'pdf-parsers'
+Requires-Dist: pymupdf4llm<0.1.0,>=0.0.17; extra == 'pdf-parsers'
+Requires-Dist: pymupdf<2.0.0,>=1.23.3; extra == 'pdf-parsers'
+Requires-Dist: pypdf>=5.1.0; extra == 'pdf-parsers'
+Requires-Dist: pytesseract<0.4.0,>=0.3.10; extra == 'pdf-parsers'
+Provides-Extra: pinecone
+Requires-Dist: pinecone-client>=5.0.1; extra == 'pinecone'
+Provides-Extra: postgres
+Requires-Dist: pgvector>=0.3.6; extra == 'postgres'
+Requires-Dist: psycopg2-binary>=2.9.10; extra == 'postgres'
+Requires-Dist: psycopg2<3.0.0,>=2.9.7; extra == 'postgres'
+Requires-Dist: sqlalchemy<3.0.0,>=2.0.19; extra == 'postgres'
+Provides-Extra: pymupdf4llm
+Requires-Dist: pymupdf4llm<0.1.0,>=0.0.17; extra == 'pymupdf4llm'
+Provides-Extra: scrapy
+Requires-Dist: scrapy<3.0.0,>=2.11.0; extra == 'scrapy'
+Provides-Extra: sql
+Requires-Dist: psycopg2<3.0.0,>=2.9.7; extra == 'sql'
+Requires-Dist: pymysql<2.0.0,>=1.1.0; extra == 'sql'
+Requires-Dist: sqlalchemy<3.0.0,>=2.0.19; extra == 'sql'
+Provides-Extra: tavily
+Requires-Dist: tavily-python>=0.5.0; extra == 'tavily'
+Provides-Extra: transformers
+Requires-Dist: huggingface-hub<1.0.0,>=0.21.2; extra == 'transformers'
+Requires-Dist: torch<3.0.0,>=2.0.0; extra == 'transformers'
+Requires-Dist: transformers<5.0.0,>=4.40.1; extra == 'transformers'
+Provides-Extra: unstructured
+Requires-Dist: unstructured[docx,pdf,pptx]<1.0.0,>=0.16.15; extra == 'unstructured'
+Provides-Extra: vecdbs
+Requires-Dist: chromadb<=0.4.23,>=0.4.21; extra == 'vecdbs'
+Requires-Dist: lancedb<0.9.0,>=0.8.2; extra == 'vecdbs'
+Requires-Dist: pinecone-client>=5.0.1; extra == 'vecdbs'
+Requires-Dist: pyarrow<16.0.0,>=15.0.0; extra == 'vecdbs'
+Requires-Dist: tantivy<0.22.0,>=0.21.0; extra == 'vecdbs'
+Requires-Dist: weaviate-client>=4.9.6; extra == 'vecdbs'
+Provides-Extra: weaviate
+Requires-Dist: weaviate-client>=4.9.6; extra == 'weaviate'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
