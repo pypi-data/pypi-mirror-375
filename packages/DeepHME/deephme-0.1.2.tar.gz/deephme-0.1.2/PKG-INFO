@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: DeepHME
+Version: 0.1.2
+Summary: Heavy Mass Estimator based on deep neural network
+Project-URL: Homepage, https://github.com/cms-flaf/DeepHME
+Author-email: abolshov <artem.e.bolshov@gmail.com>
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: awkward>=2.8.5
+Requires-Dist: numpy>=1.26.4
+Requires-Dist: onnxruntime>=1.22.0
+Requires-Dist: pandas>=2.3.1
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: vector>=1.6.3
+Description-Content-Type: text/markdown
+
+# DeepHME
+Heavy Mass Estimator (HME) [hme_paper](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.96.035007), but based on deep neural network. Install via
+```
+pip install DeepHME
+```
