@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-mysql-mcp-server
+Version: 1.0.1
+Summary: MCP标准项目
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Requires-Dist: mcp>=1.8.0
+Requires-Dist: mysql-connector-python>=9.2.0
+Requires-Dist: pypinyin>=0.54.0
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: starlette>=0.46.1
+Requires-Dist: uvicorn>=0.34.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
