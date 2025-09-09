@@ -1,0 +1,2913 @@
+import os, sys, shutil, warnings
+import geopandas as gpd
+import pprint
+from collections import OrderedDict
+import numpy as np
+import json
+import warnings
+import csv
+
+import hazelbean as hb
+
+import math
+from osgeo import gdal
+import contextlib
+import logging
+from google.cloud import storage
+import hashlib
+import inspect
+import subprocess
+from tqdm import tqdm
+
+import pandas as pd
+from hazelbean import config as hb_config
+
+L = hb_config.get_logger('hazelbean utils')
+
+def get_all_frames_locations_as_list():
+    locations = []
+    # Start with the current frame, then follow the chain of calling frames
+    frame = inspect.currentframe()
+
+    while frame:
+        # Extract the file name and line number from the current frame
+        file_name = frame.f_code.co_filename
+        line_number = frame.f_lineno
+        locations.append(f"{file_name}:{line_number}")
+        frame = frame.f_back  # Move to the next outer frame
+
+    # Remove the call to this function itself from the list
+    return locations[1:]  # Skip the first entry (this function call)
+
+def get_current_script_location(exclude_frame_string_filter=None, separator=', '):
+    if exclude_frame_string_filter is None:
+        exclude_frame_string_filter = ['ProjectFlow', 'project_flow', '.vscode', 'runpy', 'hazelbean\\utils', 'hazelbean/utils']
+
+    # Get the current frame object, then go back one step to get the frame of the caller
+    caller_frame = inspect.currentframe().f_back
+    # Extract the file name and line number from the caller's frame
+    file_name = caller_frame.f_code.co_filename
+    line_number = caller_frame.f_lineno
+    locations = get_all_frames_locations_as_list()
+    return separator.join([i for i in locations if not any([j in i for j in exclude_frame_string_filter])])
+
+def print_with_location(*args, **kwargs):
+    # Get the current frame object, then go back one step to get the frame of the caller
+    caller_frame = inspect.currentframe().f_back
+    # Extract the file name and line number from the caller's frame
+    file_name = caller_frame.f_code.co_filename
+    line_number = caller_frame.f_lineno
+    # Print the file name, line number, and the original message
+    print(f"[{file_name}:{line_number}]", *args, **kwargs)
+    
+def debug(msg, *args, level=100, same_line_as_previous=False, **kwargs):
+    # LEARNING POINT, when using the * operator in a function with other named args, it had to come before the named args, e.g. level=10 in the above.
+        
+    if level <= 50:
+        to_print = str(msg) + ' ' + ' '.join([str(i) for i in args]) + ' ' + ' '.join([str(k) + ': ' + str(v) + '\n' for k, v in kwargs.items() if k != 'logger_level'])
+        
+        if same_line_as_previous:
+            print("\r" + to_print, end="")    
+        else:
+            print(to_print)
+
+def log(msg, *args, level=10, same_line_as_previous=False, include_script_location=False, **kwargs):
+    # LEARNING POINT, when using the * operator in a function with other named args, it had to come before the named args, e.g. level=10 in the above.
+        
+    if level <= 50:
+        to_print = str(msg) + ' ' + ' '.join([str(i) for i in args]) + ' ' + ' '.join([str(k) + ': ' + str(v) + '\n' for k, v in kwargs.items() if k != 'logger_level'])
+        
+        if include_script_location:
+            to_print += ' ' + get_current_script_location()
+        
+        if same_line_as_previous:
+            print("\r" + to_print, end="")    
+        else:
+            print(to_print)
+    
+def hprint(*args, **kwargs):
+    return hb_pprint(*args, **kwargs)
+
+def pp(*args, **kwargs):
+    return hb_pprint(*args, **kwargs)
+
+def hb_pprint(*args, **kwargs):
+
+    num_values = len(args)
+
+    print_level = kwargs.get('print_level', 2) # NO LONGER IMPLEMENTED
+    return_as_string = kwargs.get('return_as_string', False)
+    include_type = kwargs.get('include_type', False)
+
+    indent = kwargs.get('indent', 2)
+    width = kwargs.get('width', 120)
+    depth = kwargs.get('depth', None)
+
+    printable = ''
+
+    for i in range(num_values):
+        if type(args[i]) == hb.ArrayFrame:
+            # handles its own pretty printing via __str__
+            line = str(args[i])
+        elif type(args[i]) is OrderedDict:
+            line = 'OrderedDict\n'
+            for k, v in args[i].items():
+                if type(v) is str:
+                    item = '\'' + v + '\''
+                else:
+                    item = str(v)
+                line += '    ' + str(k) + ': ' + item + ',\n'
+                # PREVIOS ATTEMPT Not sure why was designed this way.
+                # line += '    \'' + str(k) + '\': ' + item + ',\n'
+        elif type(args[i]) is dict:
+            line = 'dict\n'
+            line += pprint.pformat(args[i], indent=indent, width=width, depth=depth)
+            # for k, v in args[i].items():
+            #     if type(v) is str:
+            #         item = '\'' + v + '\''
+            #     else:
+            #         item = str(v)
+            #     line += '    ' + str(k) + ': ' + item + ',\n'
+        elif type(args[i]) is list:
+            line = 'list\n'
+            line += pprint.pformat(args[i], indent=indent, width=width, depth=depth)
+            # for j in args[i]:
+            #     line += '  ' + str(j) + '\n'
+        elif type(args[i]) is np.ndarray:
+
+            try:
+                line = hb.describe_array(args[i])
+            except:
+                line = '\nUnable to describe array.'
+
+        else:
+            line = pprint.pformat(args[i], indent=indent, width=width, depth=depth)
+
+        if include_type:
+            line = type(args[i]).__name__ + ': ' + line
+        if i < num_values - 1:
+            line += '\n'
+        printable += line
+
+    if return_as_string:
+        return printable
+    else:
+        print (printable)
+        return printable
+
+def concat(*to_concat):
+    to_return = ''
+    for v in to_concat:
+        to_return += str(v)
+
+    return to_return
+
+@contextlib.contextmanager
+def capture_gdal_logging():
+    """Context manager for logging GDAL errors with python logging.
+
+    GDAL error messages are logged via python's logging system, at a severity
+    that corresponds to a log level in ``logging``.  Error messages are logged
+    with the ``osgeo.gdal`` logger.
+
+    Parameters:
+        ``None``
+
+    Returns:
+        ``None``"""
+    osgeo_logger = logging.getLogger('osgeo')
+
+    def _log_gdal_errors(err_level, err_no, err_msg):
+        """Log error messages to osgeo.
+
+        All error messages are logged with reasonable ``logging`` levels based
+        on the GDAL error level.
+
+        Parameters:
+            err_level (int): The GDAL error level (e.g. ``gdal.CE_Failure``)
+            err_no (int): The GDAL error number.  For a full listing of error
+                codes, see: http://www.gdal.org/cpl__error_8h.html
+            err_msg (string): The error string.
+
+        Returns:
+            ``None``"""
+        osgeo_logger.log(
+            level=GDAL_ERROR_LEVELS[err_level],
+            msg='[errno {err}] {msg}'.format(
+                err=err_no, msg=err_msg.replace('\n', ' ')))
+
+    gdal.PushErrorHandler(_log_gdal_errors)
+    try:
+        yield
+    finally:
+        gdal.PopErrorHandler()
+
+def describe(input_object, file_extensions_in_folder_to_describe=None, surpress_print=False, surpress_logger=False):
+    # Generalization of describe_array for many types of things.
+
+    description = ''
+
+    input_object_type = type(input_object).__name__
+    if type(input_object) is hb.ArrayFrame:
+        description = hb.describe_af(input_object.path)
+
+    if type(input_object) is np.ndarray:
+        description = hb.describe_array(input_object)
+    elif type(input_object) is str:
+        try:
+            folder, filename = os.path.split(input_object)
+        except:
+            folder, filename = None, None
+        try:
+            file_label, file_ext = os.path.splitext(filename)
+        except:
+            file_label, file_ext = None, None
+        if file_ext in hb.common_gdal_readable_file_extensions or file_ext in ['.npy']:
+            description = hb.describe_path(input_object)
+        elif not file_ext:
+            description = 'type: folder, contents: '
+            description += ' '.join(os.listdir(input_object))
+            if file_extensions_in_folder_to_describe == '.tif':
+                description += '\n\nAlso describing all files of type ' + file_extensions_in_folder_to_describe
+                for filename in os.listdir(input_object):
+                    if os.path.splitext(filename)[1] == '.tif':
+                        description += '\n' + describe_path(input_object)
+        else:
+            description = 'Description of this is not yet implemented: ' + input_object
+
+    ds = None
+    array = None
+    if not surpress_print:
+        pp_output = hb.hb_pprint(description)
+    else:
+        pp_output = hb.hb_pprint(description, return_as_string=True)
+
+    if not surpress_logger:
+        hb.log(pp_output)
+    return description
+
+def safe_string(string_possibly_unicode_or_number):
+    """Useful for reading Shapefile DBFs with funnycountries"""
+    return str(string_possibly_unicode_or_number).encode("utf-8", "backslashreplace").decode()
+
+def describe_af(input_af):
+    if not input_af.path and not input_af.shape:
+        return '''Hazelbean ArrayFrame (empty). The usual next steps are to set the shape (af.shape = (30, 50),
+                    then set the path (af.path = \'C:\\example_raster_folder\\example_raster.tif\') and finally set the raster
+                    with one of the set raster functions (e.g. af = af.set_raster_with_zeros() )'''
+    elif input_af.shape and not input_af.path:
+        return 'Hazelbean ArrayFrame with shape set (but no path set). Shape: ' + str(input_af.shape)
+    elif input_af.shape and input_af.path and not input_af.data_type:
+        return 'Hazelbean ArrayFrame with path set. ' + input_af.path + ' Shape: ' + str(input_af.shape)
+    elif input_af.shape and input_af.path and input_af.data_type and not input_af.geotransform:
+        return 'Hazelbean ArrayFrame with array set. ' + input_af.path + ' Shape: ' + str(input_af.shape) + ' Datatype: ' + str(input_af.data_type)
+
+    elif not os.path.exists(input_af.path):
+        raise NameError('AF pointing to ' + str(input_af.path) + ' used as if the raster existed, but it does not. This often happens if tried to load an AF from a path that does not exist.')
+
+    else:
+        if input_af.data_loaded:
+            return '\nHazelbean ArrayFrame (data loaded) at ' + input_af.path + \
+                   '\n      Shape: ' + str(input_af.shape) + \
+                   '\n      Datatype: ' + str(input_af.data_type) + \
+                   '\n      No-Data Value: ' + str(input_af.ndv) + \
+                   '\n      Geotransform: ' + str(input_af.geotransform) + \
+                   '\n      Bounding Box: ' + str(input_af.bounding_box) + \
+                   '\n      Projection: ' + str(input_af.projection)+ \
+                   '\n      Num with data: ' + str(input_af.num_valid) + \
+                   '\n      Num no-data: ' + str(input_af.num_ndv) + \
+                   '\n      ' + str(hb.pp(input_af.data, return_as_string=True)) + \
+                   '\n      Histogram ' + hb.pp(hb.enumerate_array_as_histogram(input_af.data), return_as_string=True) + '\n\n'
+        else:
+            return '\nHazelbean ArrayFrame (data not loaded) at ' + input_af.path + \
+                   '\n      Shape: ' + str(input_af.shape) + \
+                   '\n      Datatype: ' + str(input_af.data_type) + \
+                   '\n      No-Data Value: ' + str(input_af.ndv) + \
+                   '\n      Geotransform: ' + str(input_af.geotransform) + \
+                   '\n      Bounding Box: ' + str(input_af.bounding_box) + \
+                   '\n      Projection: ' + str(input_af.projection)
+
+                    # '\nValue counts (up to 30) ' + str(hb.pp(hb.enumerate_array_as_odict(input_af.data), return_as_string=True)) + \
+
+def describe_dataframe(df):
+    p = 'Dataframe of length ' + str(len(df.index)) + ' with ' + str(len(df.columns)) + ' columns. Index first 10: ' + str(list(df.index.values)[0:10])
+    for column in df.columns:
+        col = df[column]
+        p += '\n    ' + str(column) + ': min ' + str(np.min(col)) + ', max ' + str(np.max(col)) + ', mean ' + str(np.mean(col)) + ', median ' + str(np.median(col)) + ', sum ' + str(np.sum(col)) + ', num_nonzero ' + str(np.count_nonzero(col)) + ', nanmin ' + str(np.nanmin(col)) + ', nanmax ' + str(np.nanmax(col)) + ', nanmean ' + str(np.nanmean(col)) + ', nanmedian ' + str(np.nanmedian(col)) + ', nansum ' + str(np.nansum(col))
+    return(p)
+
+def describe_path(path):
+    ext = os.path.splitext(path)[1]
+    # TODOO combine the disparate describe_* functionality
+    # hb.pp(hb.common_gdal_readable_file_extensions)
+    if ext in hb.common_gdal_readable_file_extensions:
+        ds = gdal.Open(path)
+        if ds.RasterXSize * ds.RasterYSize > 10000000000:
+            return 'too big to describe'  # 'type: LARGE gdal_uri, dtype: ' + str(ds.GetRasterBand(1).DataType) + 'no_data_value: ' + str(ds.GetRasterBand(1).GetNoDataValue()) + ' sum: ' + str(sum_geotiff(input_object)) +  ', shape: ' + str((ds.RasterYSize, ds.RasterXSize)) + ', size: ' + str(ds.RasterXSize * ds.RasterYSize) + ', object: ' + input_object
+        else:
+            try:
+                array = ds.GetRasterBand(1).ReadAsArray()
+                return hb.describe_array(array)
+            except:
+                return 'Too big to open.'
+    elif ext in ['.npy', '.npz']:
+        try:
+            array = hb.load_npy_as_array(path)
+            return hb.describe_array(array)
+        except:
+            return 'Unable to describe NPY file because it couldnt be opened as an array'
+
+    # try:
+    #     af = hb.ArrayFrame(input_path)
+    #     s = describe_af(af)
+    #     hb.log(str(s))
+    # except:
+    #     pass
+
+def describe_array(input_array):
+    description = 'Array of shape '  + str(np.shape(input_array))+ ' with dtype ' + str(input_array.dtype) + '. sum: ' + str(np.sum(input_array)) + ', min: ' + str(
+        np.min(input_array)) + ', max: ' + str(np.max(input_array)) + ', range: ' + str(
+        np.max(input_array) - np.min(input_array)) + ', median: ' + str(np.median(input_array)) + ', mean: ' + str(
+        np.mean(input_array)) + ', num_nonzero: ' + str(np.count_nonzero(input_array)) + ', size: ' + str(np.size(input_array)) + ' nansum: ' + str(
+        np.nansum(input_array)) + ', nanmin: ' + str(
+        np.nanmin(input_array)) + ', nanmax: ' + str(np.nanmax(input_array)) + ', nanrange: ' + str(
+        np.nanmax(input_array) - np.nanmin(input_array)) + ', nanmedian: ' + str(np.nanmedian(input_array)) + ', nanmean: ' + str(
+        np.nanmean(input_array))
+    return description
+
+def round_to_nearest_base(x, base):
+    return base * round(x/base)
+
+def round_up_to_nearest_base(x, base):
+    return base * math.ceil(x/base)
+
+def round_down_to_nearest_base(x, base):
+    return base * math.floor(x/base)
+
+def round_significant_n(input, n):
+    # round_significant_n(3.4445678, 1)
+    x = input
+    try:
+        int(x)
+        absable = True
+    except:
+        absable = False
+    if x != 0 and absable:
+        out = round(x, -int(math.floor(math.log10(abs(x)))) + (n - 1))
+    else:
+        out = 0.0
+    return out
+
+def round_to_nearest_containing_increment(input, increment, direction):
+    if direction == 'down':
+        return int(increment * math.floor(float(input) / increment))
+    elif direction == 'up':
+        return int(increment * math.ceil(float(input) / increment))
+    else:
+        raise NameError('round_to_nearest_containing_increment failed.')
+
+# TODOO Rename to_bool and maybe have a separate section of casting functions?
+def str_to_bool(input):
+    """Convert alternate versions of the word true (e.g. from excel) to actual python bool object."""
+    return str(input).lower() in ("yes", "true", "t", "1", "y")
+
+def normalize_array_memsafe(input_path, output_path, low=0, high=1, min_override=None, max_override=None, ndv=None, log_transform=True):
+
+    raster_statistics =  hb.read_raster_stats(input_path)
+    if min_override is None:
+        min_override = raster_statistics['min']
+    if max_override is None:
+        max_override = raster_statistics['max']
+
+    input_list = [input_path, low, high, min_override, max_override, ndv, log_transform]
+    hb.log('normalize_array_memsafe on ', input_path, output_path, low, high, min_override, max_override, ndv, log_transform)
+    hb.raster_calculator_flex(input_list, normalize_array, output_path=output_path)
+
+def normalize_array(array, low=0, high=1, min_override=None, max_override=None, ndv=None, log_transform=True):
+    """Returns array with range (0, 1]
+    Log is only defined for x > 0, thus we subtract the minimum value and then add 1 to ensure 1 is the lowest value present. """
+    array = array.astype(np.float64)
+    if ndv is not None: # Slightly slower computation if has ndv. optimization here to only consider ndvs if given.
+        if log_transform:
+            if min_override is None:
+                L.debug('Starting to log array for normalize with ndv.')
+                min = np.min(array[array != ndv])
+                L.debug('  Min was ' + str(min))
+            else:
+                min = min_override
+            to_add = np.float64(min * -1.0 + 1.0) # This is just to subtract out the min and then add 1 because can't log zero
+            array = np.where(array != ndv, np.log(array + to_add), ndv)
+            L.debug('  Finished logging array')
+
+        # Have to do again to get new min after logging.
+        if min_override is None:
+            L.debug('Getting min from array', array, array[array != ndv], array.shape)
+
+            min = np.min(array[array != ndv])
+        else:
+            min = min_override
+
+        if max_override is None:
+            hb.log('Getting max from array', array, array[array != ndv], array.shape)
+            max = np.max(array[array != ndv])
+        else:
+            max = max_override
+
+        normalizer = np.float64((high - low) / (max - min))
+
+        output_array = np.where(array != ndv, (array - min) * normalizer, ndv)
+    else:
+        if log_transform:
+            hb.log('Starting to log array for normalize with no ndv.')
+            min = np.min(array)
+            to_add = np.float64(min * -1.0 + 1.0)
+            array = array + to_add
+
+            array = np.log(array)
+
+        # Have to do again to get new min after logging.
+        if min_override is None:
+            min = np.min(array[array != ndv])
+        else:
+            min = min_override
+
+        if max_override is None:
+            max = np.max(array[array != ndv])
+        else:
+            max = max_override
+        normalizer = np.float64((high - low) / (max - min))
+
+        output_array = (array - min) *  normalizer
+
+    return output_array
+
+def get_ndv_from_path(intput_path):
+    """Return nodata value from first band in gdal dataset cast as numpy datatype.
+
+    Args:
+        dataset_uri (string): a uri to a gdal dataset
+
+    Returns:
+        nodata: nodata value for dataset band 1
+    """
+    dataset = gdal.Open(intput_path)
+    band = dataset.GetRasterBand(1)
+    nodata = band.GetNoDataValue()
+    if nodata is not None:
+        nodata_out = nodata
+    else:
+        # warnings.warn(
+        #     "Warning the nodata value in %s is not set", dataset_uri)
+        nodata_out = None
+
+    band = None
+    gdal.Dataset.__swig_destroy__(dataset)
+    dataset = None
+    return nodata_out
+
+def get_nodata_from_uri(dataset_uri):
+    """Return nodata value from first band in gdal dataset cast as numpy datatype.
+
+    Args:
+        dataset_uri (string): a uri to a gdal dataset
+
+    Returns:
+        nodata: nodata value for dataset band 1
+    """
+
+    warnings.warn('get_nodata_from_uri deprecated for get_ndv_from_path ')
+    dataset = gdal.Open(dataset_uri)
+    band = dataset.GetRasterBand(1)
+    nodata = band.GetNoDataValue()
+    if nodata is not None:
+        nodata_out = nodata
+    else:
+        # warnings.warn(
+        #     "Warning the nodata value in %s is not set", dataset_uri)
+        nodata_out = None
+
+    band = None
+    gdal.Dataset.__swig_destroy__(dataset)
+    dataset = None
+    return nodata_out
+
+# Make a non line breaking printer for updates.
+def print_in_place(to_print, pre=None, post=None):
+    to_print = str(to_print)
+    if pre:
+        to_print = str(pre) + to_print
+    if post:
+        to_print = to_print + str(post)
+
+    # print("\r", end="")
+    print(to_print, end="\r")
+    # print('\r' + to_print, end="\r")
+
+    # LEARNING POINT, print with end='\r' didn't work because it was cleared before it was visible, possibly by pycharm
+    # print(to_print,  end='\r')
+
+# Make a non line breaking printer for updates.
+def pdot(pre=None, post=None):
+    to_dot = '.'
+    if pre:
+        to_dot = str(pre) + to_dot
+    if post:
+        to_dot = to_dot + str(post)
+    sys.stdout.write(to_dot)
+
+def parse_input_flex(input_flex):
+    if isinstance(input_flex, str):
+        output = hb.ArrayFrame(input_flex)
+    elif isinstance(input_flex, np.ndarray):
+        print('parse_input_flex is NYI for arrays because i first need to figure out how to have an af without georeferencing.')
+        # output = hb.create_af_from_array(input_flex)
+    else:
+        output = input_flex
+    return output
+
+def get_unique_keys_from_vertical_dataframe(df, columns_to_check=None):
+    if columns_to_check is None:
+        columns_to_check = list(df.columns)
+
+    keys_dict = {}
+    lengths_dict = {}
+
+    for column in columns_to_check:
+        uniques = df[column].unique()
+        keys_dict[column] = uniques
+        lengths_dict[column] = len(uniques)
+
+    return lengths_dict, keys_dict
+
+def calculate_on_vertical_df(df, level, op_type, focal_cell, suffix):
+    original_indices = df.index.copy()
+    original_columns = df.columns.copy()
+    if len(original_columns) > 1:
+        raise NameError('Are you sure this is vertical data?')
+    original_label = original_columns.values[0]
+
+    dfp = df.unstack(level=level)
+    r = dfp.columns.get_level_values(level=1)
+
+    dfp.columns = r
+
+    output_labels = []
+    for i in dfp.columns:
+        if op_type == 'difference_from_row' and i != focal_cell:
+            dfp[i + suffix] = dfp[i] - dfp[focal_cell]
+            output_labels.append(suffix)
+        if op_type == 'percentage_change_from_row' and i != focal_cell:
+            dfp[i + suffix] = ((dfp[i] - dfp[focal_cell]) / dfp[i]) * 100.0
+            output_labels.append(suffix)
+
+    dfo = pd.DataFrame(dfp.stack())
+
+    dfo = dfo.rename(columns={0: original_label})
+
+    dfor = dfo.reset_index()
+    dforr = dfor.set_index(original_indices.names)
+
+    # Reorder indices so it matches the input (restacking puts the targetted level outermost)
+
+    return dforr
+
+def df_plot(input_df, output_png_path, type='bar', legend_labels=None):
+
+    # Create the bar plot
+    input_df
+    import matplotlib.pyplot as plt
+    ax = input_df.plot(kind=type, rot=0, colormap='viridis', figsize=(10, 6))
+    # Set labels and title
+    plt.xlabel('Regions')
+    var = hb.file_root(output_png_path)
+    plt.ylabel('Percent change in ' + var)
+    plt.title('Change in ' + var + ' by region under three ag productivity shocks')
+    if legend_labels is not None:
+        plt.legend(title='Shock', loc='upper left', labels=legend_labels)
+
+    plt.axhline(y=0, color='gray', linestyle='dotted', linewidth=1, label='100%')
+
+    # Save the png to output_png_path
+    plt.savefig(output_png_path, dpi=300, bbox_inches='tight')
+
+def df_merge_list_of_csv_paths(csv_path_list, output_csv_path=None, on='index', left_on=None, right_on=None, column_suffix='fileroot',verbose=False):
+    print('CAVEAT NYI, only use on otherwise left and right_on get overwrit')
+    merged_df = None
+
+    if on == 'index':
+        left_index = True
+        right_index = True
+        left_on = None
+        right_on = None
+        new_on = None
+    else:
+        new_on = on
+        left_index = False
+        right_index = False
+        left_on = on
+        right_on = on
+
+    for c, csv_path in enumerate(csv_path_list):
+        current_df = pd.read_csv(csv_path)  
+
+        if column_suffix == 'fileroot':
+            columns = {k: v for k, v in zip(current_df.columns, [str(i) + '_' + hb.file_root(csv_path) for i in current_df.columns])}
+            current_df.rename(columns=columns, inplace=True)
+           
+        elif column_suffix == 'ignore':
+            pass # This means we're assuming each csv has some unique col.
+        elif type(column_suffix) is str:
+            columns = {k: v for k, v in zip(current_df.columns, [str(i) + '_' + column_suffix for i in current_df.columns])}
+            columns = {k: v for k, v in columns.items() if v != on and v != left_on and v != right_on}
+            current_df.rename(columns=columns, inplace=True)
+            
+        
+        elif type(column_suffix) is list:
+            if len(column_suffix) == len(csv_path_list):
+                columns = {k: v for k, v in zip(current_df.columns, [str(i) + '_' + column_suffix[c] for i in current_df.columns if 'Unnamed' not in i])}
+                columns = {k: v for k, v in columns.items() if v != on + '_' + column_suffix[c] and v != left_on + '_' + column_suffix[c] and v != right_on + '_' + column_suffix[c]}
+
+                current_df.rename(columns=columns, inplace=True)
+               
+            else:
+                raise NameError('column_suffix list must be same length as csv_path_list')
+
+        else:
+            raise NameError('column_suffix must be fileroot or a string or a list of strings.')
+
+
+        if c == 0:
+            merged_df = current_df
+        else:  
+
+            cols = [i for i in current_df.columns if i not in merged_df.columns]
+            if right_on:
+                cols += [right_on]
+            # new_df = current_df[cols]
+            
+            new_df = current_df
+            
+            # merged_df = pd.merge(merged_df, new_df, how='outer', left_on=left_on, right_on=right_on, left_index=left_index, right_index=right_index)
+            merged_df = df_merge(merged_df, new_df, how='outer', left_on=left_on, right_on=right_on, supress_warnings=True, verbose=False)
+    if output_csv_path:
+        merged_df.to_csv(output_csv_path, index=False)  
+        
+    return merged_df
+
+def df_pivot_vertical_up(df, row_indices, column_indices, values, aggregation_dict=None, filter_dict=None, non_summarized_vars_to_keep='all', require_single_values=True, aggregation_functions=None, flatten_column_multiindex=True):
+    """This is turning out to be a very good funciton and i almost renamed it just pivot_vertical but I still need
+    to test if it works for non vertical data.
+    
+    TODO Clarify the difference between row_indices and non_summarized_vars_to_keep
+    """
+    
+    
+    ### One tricky thing in gtap_invest is that if you filter to just the terminal year, you don't have the baseline in the filtered data to comapre to
+    
+    # column_indices specifies which columns should be the column-indices. If there's more than 1, it will make it a multiindex, ready for reshaping.
+    if column_indices is None:
+        column_indices = []
+    
+    # Specify which indices should be eliminated via aggregation. If it's aggregated, it drops out of what can be in the rows or columns
+    if aggregation_dict is None:
+        aggregation_dict = {}   
+
+    # Specify which index values should just be eliminate. For example, if you have multiple years, you might want to just plot the last year
+    if filter_dict is None: 
+        filter_dict = {} 
+
+    # Determine which index values should be eliminated, based all the above. 
+    fullydrop_filter_dict = {k: v for k, v in filter_dict.items() if type(v) != list} 
+    if row_indices == 'all':
+        row_indices = [i for i in df.columns if i not in column_indices and i != values and i not in aggregation_dict and i not in fullydrop_filter_dict]
+        
+    # Read the raw input
+    if isinstance(df, str):
+        df = pd.read_csv(df)
+            
+    # Apply filter by creating a condition 
+    if filter_dict:
+        condition = True 
+        for key, value in filter_dict.items():
+            if str(value).startswith('int('):
+                value = int(value.split('int(')[1].split(')')[0])
+            if key in df.columns:
+                if isinstance(value, list):
+                    condition &= (df[key].isin(value))
+                else:
+                    condition &= (df[key] == value)
+            else:
+                # condition &= (df[key] == value)
+                raise NameError(f'Filter key {key} not in dataframe columns {df.columns}')
+        df = df.loc[condition]    
+
+    # Check if filter eliminated everything.
+    if df.size == 0:
+        raise NameError(f'No data after filtering. Filter dict: {filter_dict}, original columns {df.columns}')
+    
+    # Determine if there are duplicates. This controls whether or not you need to keep the count columns (which implies maybe an error)
+    has_duplicates = False
+    correct_vals = 1
+    if aggregation_dict:
+        # Count the unique values in each aggregated col
+        for agg_label, operation in aggregation_dict.items():
+            n_properly_aggregated = len(df[agg_label].unique())
+            correct_vals *= n_properly_aggregated
+    
+    # Determine which columns should be kept (even if they're neither summarized values nor indices. For example, you might have an index region_label but also just want to keep region_longname
+    if non_summarized_vars_to_keep == 'all':
+        non_summarized_vars_to_keep = [i for i in df.columns if i not in column_indices and i not in aggregation_dict and i not in fullydrop_filter_dict and i != values]
+    elif isinstance(non_summarized_vars_to_keep, list):
+        pass
+    else:
+        raise NameError('non_summarized_vars_to_keep must be all or a list of strings.')
+    non_summarized_df = df[non_summarized_vars_to_keep]
+    non_summarized_df = non_summarized_df.set_index(row_indices)
+    
+    # Current logic means we'll incluse sum and count, check if count=1 for all, then drop count if so. 
+    # I might want to generalize this, but perhaps that goes in a new func.
+    all_aggregations = ['sum', 'mean', 'median', 'min', 'max', 'std', 'var', 'count', 'size', 'nunique', 'first', 'last']
+    if aggregation_functions is None:
+        if require_single_values:
+            aggregation_functions = ['sum', 'count']
+        else:
+            aggregation_functions = all_aggregations
+    elif aggregation_functions == 'all':
+        aggregation_functions = all_aggregations
+    elif isinstance(aggregation_functions, str):
+        aggregation_functions = [aggregation_functions] 
+        for func in aggregation_functions:
+            if func not in all_aggregations:
+                raise NameError('aggregation_functions must be all or one of the following: ' + str(all_aggregations))
+    else:
+        raise NameError('Shouldnt get here')
+        
+    ### DO THE PIVOT       
+    df_p = df.pivot_table(index=row_indices, columns=column_indices, values=values, aggfunc=aggregation_functions)
+    
+    # Check if any of the column_indices are empty
+    for col in df_p.columns:
+        if df_p[col].isnull().any():
+            raise NameError('Column ' + str(col) + ' has nan values in the pivoted dataframe. This function is supposed to not have that. Heres the dataframe head:\n' + str(df_p.head()))
+            
+    
+    ### After we pivot, we currently flatten the multiindex. not sure if this is beset.
+    # Define an op to flatten the multiindex.
+    def op(x):
+        if isinstance(x, float):
+            return str(int(x))
+        else:
+            return str(x)
+    
+    # Flatten multiindex columns to a single string. This is a weakness and perhasps i should figure out how to use hyphens or something so i can recover the multiindex.
+    if flatten_column_multiindex:
+        df_p.columns = ['-'.join(map(op, col[::-1])).strip() for col in df_p.columns.values]
+    
+    # Merge back in the non_summarized vars
+    if non_summarized_df.size > 0:
+        df_p = pd.merge(non_summarized_df, df_p, on=row_indices, how="inner")
+
+    # Check if any count cols have more than the number of entries the agg_label suggests it should have
+    for col in df_p.columns:
+        if col.endswith(('-count')):
+            if df_p[col].max() > correct_vals:
+                has_duplicates = True
+               
+    if not has_duplicates:
+        if require_single_values:
+            # If there aren't duplicates and we require a single value, the only thing should be the sums that come out of the pivot cause count should be 1, mean should be the same, etc. WAIT THATS NOT TRUE
+            if len(aggregation_dict) == 0:
+                # Then just take the sum
+                to_drop = [i for i in aggregation_functions if i != 'sum']
+                
+            elif len(aggregation_dict) <= 1:
+                to_drop = [i for i in aggregation_functions if i not in aggregation_dict.values()]
+            else:
+                to_drop = []
+                
+            # Drop anything not in the dict
+            for i in to_drop:
+                df_p = df_p[[j for j in df_p.columns if not j.endswith(i)]]
+            
+            if len(aggregation_dict) == 0:
+                # Then just take the sum
+                df_p = df_p.rename(columns={j: j.replace('-sum', '') for j in df_p.columns}) 
+            else:
+                to_keep = [i for i in aggregation_functions if i in aggregation_dict.values()]
+                for i in to_keep:
+                    df_p = df_p.rename(columns={j: j.replace('-' + i, '') for j in df_p.columns})
+        else:
+            raise NotImplementedError('Not sure what to do here.')
+    else:
+        raise NotImplementedError('Not sure what to do here.')
+
+    # Keep only named indices
+    if df_p.index.name or isinstance(df_p.index, pd.MultiIndex):
+        df_p = df_p.reset_index()
+        df_p = df_p.loc[:, df_p.columns[df_p.columns != 'index']]
+    else:
+        df_p = df_p.reset_index(drop=True)    
+        
+    return df_p
+                
+def df_merge_quick(
+    left_df, 
+    right_df, 
+    left_on=False,
+    right_on=False,
+    how=None,
+    check_identicality=True,
+    raise_error_if_not_identical=False, 
+    verbose=False,
+    ):
+    
+    """ Quick merge of two dataframe where it will drop the right columns that are identical to the left columns. This
+    Prevents the annoying proliferation of _x and _y columns when they're the same."""
+    
+    comparison = hb.df_compare_column_labels_as_dict(left_df, right_df)
+    right_df = right_df.rename(columns={i: i + '_right' for i in comparison['intersection'] if i != left_on and i != right_on})
+
+    # Merge
+    merged_df = pd.merge(left_df, right_df, how=how, left_on=left_on, right_on=right_on)
+    
+    if check_identicality:
+        keep_right = []
+        for col in comparison['intersection']:
+            right_col = col + '_right'
+            if col in merged_df.columns and right_col in merged_df.columns:
+                if not hb.arrays_equal_ignoring_order(merged_df[col].values, merged_df[right_col].values): # , ignore_values=[-9999]        
+                    if raise_error_if_not_identical:
+                        raise NameError('Column ' + col + ' is not identical between left and right dataframes. Contents: ' + str(left_df[col].values) + ' ' + str(right_df[col].values))
+                    else:
+                        if verbose:
+                            print('Column ' + col + ' is not identical between left and right dataframes. Contents: ' + str(left_df[col].values) + ' ' + str(right_df[right_col].values))
+            keep_right.append(right_col)
+        merged_df = merged_df[[i for i in merged_df.columns if i[-7:-1] != '_right' or i in keep_right]]
+        
+    return merged_df
+
+def df_read(input_path, delimiter=','):
+    """Read an input path to a Pandas DataFram
+    
+    Args:
+        input_path (str): Path string to the file. Currently only implements CSV.
+    
+    Returns:
+        The Pandas DataFrame read from the CSV file.
+
+    Raises:
+        NameError: If anything fails.
+    
+    Examples:
+        Basic usage:
+        ```python
+        df = df_read('path/to/your/file.csv')
+        ```
+    """
+    
+    # If the input is already a df, just return it
+    # Thhis allows optimization by just initializing it as a string and only loading it when needed, and not reloading it subsequent times.
+    if isinstance(input_path, pd.DataFrame):
+        return input_path
+        
+    if not type(input_path) is str:
+        raise NameError(f'df_read only accepts a string path. You passed in {str(input_path)} of type {str(type(input_path))} which is not a string.')
+    if not os.path.exists(input_path):
+        raise NameError(f'Path does not exist, so df_read cannot read it\n    Inputted: {input_path}\n    Abspath:  {os.path.abspath(input_path)} \n    Normpath: {os.path.normpath(input_path)}')
+    
+    try:
+        df = pd.read_csv(input_path, delimiter=delimiter)
+    except:
+        encoding = 'utf-8'
+        try:
+            df = pd.read_csv(input_path, delimiter=delimiter, encoding=encoding)
+        except:
+            encoding = 'ISO-8859-1'
+            try:
+                df = pd.read_csv(input_path, delimiter=delimiter, encoding=encoding)
+            except:
+                encoding = 'latin1'
+                try:
+                    df = pd.read_csv(input_path, delimiter=delimiter, encoding=encoding)
+                except:
+                    raise NameError(f'Unable to read {input_path} as a csv. It may not be a csv or it may be malformed.\n    Abspath: {os.path.abspath(input_path)}. \n    Normpath: {os.path.normpath(input_path)}')
+                raise NameError(f'Unable to read {input_path} as a csv. It may not be a csv or it may be malformed. \n     Abspath: {os.path.abspath(input_path)}. \n     Normpath: {os.path.normpath(input_path)}')
+            raise NameError(f'Unable to read {input_path} as a csv. It may not be a csv or it may be malformed.  \n    Abspath: {os.path.abspath(input_path)}. \n     Normpath: {os.path.normpath(input_path)}')
+        raise NameError(f'Unable to read {input_path} as a csv. It may not be a csv or it may be malformed.  \n    Abspath: {os.path.abspath(input_path)}.  \n    Normpath: {os.path.normpath(input_path)}')
+    return df
+
+def df_write(df, output_path, index=False, handle_quotes='auto'):
+    """Write a Pandas DataFrame to a CSV or XLSX file.
+    
+    The file format is determined by the extension of `output_path`.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to write.
+        output_path (str): The path where the file will be saved. Must end in .csv or .xlsx.
+        index (bool): Whether to write row indices. Default is False.
+        handle_quotes (str or int): CSV-specific option for quoting.
+            'auto': QUOTE_MINIMAL, 'default': pandas default, 'all': QUOTE_ALL,
+            or a csv.QUOTE_* constant. Ignored for XLSX files.
+    
+    Raises:
+        NameError: If the output path is not a string, the DataFrame is empty, or the
+                   file extension is unsupported.
+    
+    Examples:
+        Basic usage:
+        ```python
+        df_write(my_dataframe, 'path/to/output.csv')
+        df_write(my_dataframe, 'path/to/output.xlsx')
+        ```
+    """
+    if not isinstance(output_path, str):
+        raise NameError(f'Output path must be a string. You passed in {output_path} of type {type(output_path)}.')
+    
+    if df.empty:
+        raise NameError('DataFrame is empty. Cannot write an empty DataFrame to a file.')
+
+    # Create parent directories if they don't exist
+    output_dir = os.path.dirname(output_path)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+
+    file_ext = os.path.splitext(output_path)[1].lower()
+
+    if file_ext == '.csv':
+        if handle_quotes == 'auto':
+            df.to_csv(output_path, index=index, quoting=csv.QUOTE_MINIMAL)
+        elif handle_quotes == 'default':            
+            df.to_csv(output_path, index=index)
+        elif handle_quotes == 'all':            
+            df.to_csv(output_path, index=index, quoting=csv.QUOTE_ALL)
+        elif isinstance(handle_quotes, int):
+            df.to_csv(output_path, index=index, quoting=handle_quotes)
+        else:
+            raise NameError(f'handle_quotes must be auto, default, all, or a quoting constant from the csv module. You passed in {handle_quotes} of type {type(handle_quotes)}.')
+    elif file_ext == '.xlsx':
+        df.to_excel(output_path, index=index)
+    else:
+        raise NameError(f"Unsupported file extension: '{file_ext}'. Please use '.csv' or '.xlsx'.")
+
+# TODOOO Reorg hazelbean dfs to be in df.py so you would call hb.df.smartcast(df) instead of hb.df_smartcast(df)
+def df_smartcast(df):
+    """
+    Automatically infer and convert DataFrame columns to appropriate types.
+    
+    Args:
+        df: pandas DataFrame
+        
+    Returns:
+        pandas DataFrame with optimized column types
+    """
+    df_copy = df.copy()
+    
+    for col in df_copy.columns:
+        # Skip if already numeric
+        if pd.api.types.is_numeric_dtype(df_copy[col]):
+            continue
+            
+        # Convert to string first to handle mixed types
+        series = df_copy[col].astype(str)
+        
+        # Remove NaN/null representations
+        non_null_series = series[~series.isin(['nan', 'None', 'NaN', '<NA>'])]
+        
+        if len(non_null_series) == 0:
+            continue
+            
+        # Try integer conversion
+        try:
+            # Check if all values can be converted to int
+            converted = pd.to_numeric(non_null_series, errors='coerce')
+            if converted.notna().all():
+                # Check if they're actually integers (no decimal parts)
+                if (converted == converted.astype(int)).all():
+                    df_copy[col] = pd.to_numeric(df_copy[col], errors='coerce').astype('Int64')
+                    continue
+        except:
+            pass
+            
+        # Try float conversion
+        try:
+            converted = pd.to_numeric(non_null_series, errors='coerce')
+            if converted.notna().all():
+                df_copy[col] = pd.to_numeric(df_copy[col], errors='coerce')
+                continue
+        except:
+            pass
+            
+        # Default to string
+        df_copy[col] = df_copy[col].astype(str)
+    
+    return df_copy
+
+def df_merge(left_input, 
+             right_input, 
+             how=None, 
+             on=None, 
+             left_on=False,
+             right_on=False,
+             fill_left_col_nan_with_right_value=False,
+             compare_inner_outer=False, 
+             full_check_for_identicallity=False,
+             cols_to_ignore_for_analysis=['geometry'],
+             check_identicality=True,
+             same_name_nonidentical_column_behavior='keep_both', # One of 'keep_both', 'keep_left', 'keep_right', 'raise_error'
+             raise_error_if_not_identical=False,
+             verbose=False,
+             supress_warnings=False,
+             ):
+    
+    """
+    Convenience wrapper for pd.merge. Differences:
+    
+    - Works with Geopandas too while minimizing slowness from printing geometry
+    - Simplified to taking left_on and right_on as primary 
+        - The only way to set left_index = True is via left_on = 'index'
+    - Removes duplicate columns before merge
+    - Readds _on column so it doesn't go away
+    - Better logging
+    - Checks for cases where left or right merge cols have unique columns (which could lead to nans getting filled in.
+    - Lets you merge right values into left ndv
+    
+    All this assumes that left is primary and we will ignore geometry from right.
+    
+    """
+    
+    # Check if is string. If its not a string, we will strongly assume
+    # it is a GDF or a DF.
+    if type(left_input) is str:
+        if os.path.splitext(left_input)[1] == '.shp' or os.path.splitext(left_input)[1] == '.gpkg':
+            left_df = gpd.read_file(left_input)
+        else:
+            left_df = pd.read_csv(left_input)
+    else:
+        left_df = left_input
+        
+    if type(right_input) is str:
+        if os.path.splitext(right_input)[1] == '.shp' or os.path.splitext(right_input)[1] == '.gpkg':
+            left_df = gpd.read_file(right_input)
+        else:
+            left_df = pd.read_csv(right_input)
+    else:
+        right_df = right_input
+
+    # Always specify left_on and right_on as the merge names
+    if on and not left_on:
+        left_on = on
+    if on and not right_on:
+        right_on = on
+        
+    # If left_on is 'index' we'll use that
+
+    # Check if either df is a GeoDataFrame
+    if type(right_df) is gpd.GeoDataFrame and not type(left_df) is gpd.GeoDataFrame:
+        raise NameError('Right df is a GeoDataFrame but left is not. This is not supported. Because it will drop the geometry column and fail on .to_file()')
+
+    left_geometry = None
+    right_geometry = None
+    # Drop geometry cols for now for faster processing
+    if type(left_df) is gpd.GeoDataFrame:
+        left_geometry = left_df[[left_on, 'geometry']]
+        left_df = left_df[[i for i in left_df.columns if i != 'geometry']]
+    if type(right_df) is gpd.GeoDataFrame:
+        # right_geometry = right_df['geometry']
+        right_df = right_df[[i for i in right_df.columns if i != 'geometry']]
+
+
+    if verbose:
+        hb.log(
+"""Merging: 
+    
+    left_df:
+""" + str(left_df[[i for i in left_df.columns if i != 'geometry']]) + """
+    right_df: 
+""" + str(right_df[[i for i in right_df.columns if i != 'geometry']]) + """    
+"""
+)
+
+    if how is None:
+        how = 'outer'
+
+    # If no on, left_on, or right_on is set, try to infer it from identical columns
+
+    shared_column_labels = set(left_df.columns).intersection(set(right_df.columns))
+    
+    # Ignore columns that need ignoring
+    shared_column_labels = [i for i in shared_column_labels if i not in cols_to_ignore_for_analysis and i not in left_on and i != left_on and i not in right_on and i != right_on]
+    
+    identical_columns = []
+    identical_column_labels = []
+    for col in shared_column_labels:
+        # LEARNING POINT, using df == df failed unintuitively because np.nan != np.nan. Any one instance of a nan cannot EQUAL another instance of a nan even though they seem identical. Perhaps this is because equals is implied to be a function of numbers?
+        # LEARNING POINT: left_df[col].equals(right_df[col]) solved the np.nan != np.nan problem that arose with left_df[col] == (right_df[col])
+        # LEARNING Point, however the above didn't address the fact that the column values being identical fails equals if the indices associated are not the same.
+        
+        # LEARNING POINT: in gtapv7_s65_a24_correspondence I had the case where the ids were identical but in different order.
+        # This is exactly what the merge function deals with, but it makes for a non-trivial identify-identical case
+        # I chose to have this be considered non-identical and let the user deal with it pre function.
+        if full_check_for_identicallity:
+            if 'int' in str(left_df[col].dtype) or 'float' in str(left_df[col].dtype):
+                # temporarily replace np.nan with -9999 so that it can test equality between nans
+                left_df[col + '_temp'] = left_df[col].fillna(-9999)
+                right_df[col + '_temp'] = right_df[col].fillna(-9999)
+
+                if hb.arrays_equal_ignoring_order(left_df[col + '_temp'].values, right_df[col + '_temp'].values, ignore_values=[-9999]):
+                    identical_columns.append(left_df[col])
+                    identical_column_labels.append(col)
+                    
+                # Now drop the temp columns
+                left_df = left_df.drop(col + '_temp', axis=1)
+                right_df = right_df.drop(col + '_temp', axis=1)
+                
+            else:
+                if left_df[col].sort_values().reset_index(drop=True).equals(right_df[col].sort_values().reset_index(drop=True)):
+                    identical_columns.append(left_df[col])
+                    identical_column_labels.append(col)
+        else:
+            if left_df[col].equals(right_df[col]):
+                identical_columns.append(left_df[col])
+                identical_column_labels.append(col)            
+            
+    if not any([left_on, right_on]):
+        # If found, assign the first int column as the col to merge on
+        for c, col in enumerate(identical_columns):
+            if 'int' in str(col.dtype):
+                left_on = identical_column_labels[c]
+                right_on = identical_column_labels[c]
+            break
+
+        # If still not found, try to find a suitable string-based merge column, but fail if
+        if not any([left_on, right_on]):
+            remove_unnamed = [i for i in identical_column_labels if 'Unnamed:' not in i]
+            if len(remove_unnamed) < 0:
+                raise NameError('BORK!')
+                # raise NameError('Too many identical column headers to infer which to merge on.')
+            elif len(remove_unnamed) == 0:
+                print('No identical column headers to infer which to merge on.')
+            else:
+                left_on = remove_unnamed[0]
+                right_on = remove_unnamed[0]
+
+    # Drop one of the identical columns so we don't get tons of redundant columns.
+    for col in identical_column_labels:
+        if col != left_on and col != right_on:
+            if verbose:
+                hb.log('Identical cols i that are not index or listed as merging on, so dropping right.')
+            right_df = right_df.drop(col, axis=1)
+    if not supress_warnings:
+        if len(identical_column_labels) > 0:
+            hb.log('Identical columns found: ' + str(identical_column_labels) + ' which might cause troubles if youre doing something like math that is supposed to have a zero (rather than dropping)')
+    
+    # Check types of merge columns
+    if verbose:
+        pass
+        # hb.log('Left merge column type: ' + str(left_df[left_on].dtype) + ' Right merge column type: ' + str(right_df[right_on].dtype))
+        
+        # Also print all the columns dtypes
+        # hb.log('Left columns: ' + ['    ' + k +': ' + v + '\n' for k, v in zip(str(left_df.columns), str(left_df.dtypes))] + ' Right columns: ' + ['    ' + k +': ' + v + '\n' for k, v in zip(right_df.columns, right_df.dtypes)])
+    
+    comparison = hb.df_compare_column_labels_as_dict(left_df, right_df)
+
+
+    # Merge
+    right_df = right_df.rename(columns={i: i + '_right' for i in comparison['intersection'] if i != left_on and i != right_on and i not in left_on and i not in right_on})
+    
+    # Make all DF objects have the right types, as implied by analysis of their content.
+    right_df = df_smartcast(right_df)
+    left_df = df_smartcast(left_df)
+    
+    merged_df = pd.merge(left_df, right_df, how=how, left_on=left_on, right_on=right_on)
+
+    if check_identicality:
+        keep_right = []
+        for col in comparison['intersection']:
+            right_col = col + '_right'
+            if col in merged_df.columns and right_col in merged_df.columns:
+                if not hb.arrays_equal_ignoring_order(merged_df[col].values, merged_df[right_col].values): # , ignore_values=[-9999]        
+                    if raise_error_if_not_identical:
+                        raise NameError('Column ' + col + ' is not identical between left and right dataframes. Contents: ' + str(left_df[col].values) + ' ' + str(right_df[col].values))
+                    else:
+                        if verbose:
+                            # caluculate what was in left but not in right
+                            df_left_only = left_df[col][~left_df[col].isin(right_df[right_col])]
+                            df_right_only = right_df[right_col][~right_df[right_col].isin(left_df[col])]
+                            hb.log('Column ' + col + ' is not identical between left and right dataframes. Contents: ' + str(left_df[col].values) + ' ' + str(right_df[right_col].values))
+                            hb.log('Left only values: ' + str(df_left_only.values) + '\nRight only values: ' + str(df_right_only.values))
+                            pass
+                        
+                    if same_name_nonidentical_column_behavior == 'keep_both':
+                        keep_right.append(right_col)
+                    elif same_name_nonidentical_column_behavior == 'keep_left':
+                        hb.log('Keeping left column ' + col + ' and dropping right column ' + right_col)
+                        if right_col in merged_df.columns:
+                            merged_df = merged_df.drop(right_col, axis=1)
+                    elif same_name_nonidentical_column_behavior == 'keep_right':
+                        hb.log('Keeping right column ' + right_col + ' and dropping left column ' + col)
+                        merged_df = merged_df.drop(col, axis=1)
+                        keep_right.append(right_col)
+                    elif same_name_nonidentical_column_behavior == 'raise_error':
+                        raise NameError('Column ' + col + ' is not identical between left and right dataframes. Contents: ' + str(left_df[col].values) + ' ' + str(right_df[right_col].values))
+                        
+                        
+        # for col in merged_df.columns:
+        merged_df = merged_df[[i for i in merged_df.columns if not str(i).endswith('_right') or i in keep_right]]
+        
+
+    if compare_inner_outer:
+        if left_on == 'index' and right_on == 'index':
+            df_inner = pd.merge(left_df, right_df, how='inner', left_index=True, right_index=True)
+            df_outer = pd.merge(left_df, right_df, how='outer', left_index=True, right_index=True)
+        elif left_on == 'index':
+            df_inner = pd.merge(left_df, right_df, how='inner', left_index=True, right_on=right_on)
+            df_outer = pd.merge(left_df, right_df, how='outer', left_index=True, right_on=right_on)      
+        elif right_on == 'index':
+            df_inner = pd.merge(left_df, right_df, how='inner', left_on=left_on, right_index=True)
+            df_outer = pd.merge(left_df, right_df, how='outer', left_on=left_on, right_index=True)
+        else:
+            if type(left_on) is list:
+                # check if list contents are same
+                if set(left_on) & set(left_df.columns) != set(left_on):
+                    raise NameError('Left_on not in left_df columns: ' + str(left_on) + ' not in ' + str(left_df.columns))
+                if set(right_on) & set(right_df.columns) != set(right_on):
+                    raise NameError('Right_on not in right_df columns: ' + str(right_on) + ' not in ' + str(right_df.columns))
+            else:
+                if not left_on in left_df.columns:
+                    raise NameError('Left merge column not in left df columns: ' + left_on + ' not in ' + str(left_df.columns))
+                if not left_on in left_df.columns:
+                    raise NameError('Right merge column not in right df columns: ' + right_on + ' not in ' + str(right_df.columns))            
+            df_inner = pd.merge(left_df, right_df, how='inner', left_on=left_on, right_on=right_on)    
+            df_outer = pd.merge(left_df, right_df, how='outer', left_on=left_on, right_on=right_on)    
+         
+        if how == 'inner':
+            df = df_inner
+        elif how == 'outer':
+            df = df_outer
+        else:
+            if left_on == 'index' and right_on == 'index':
+                df = pd.merge(left_df, right_df, how=how, left_index=True, right_index=True)
+            elif left_on == 'index':
+                df = pd.merge(left_df, right_df, how=how, left_index=True, right_on=right_on)     
+            elif right_on == 'index':
+                df = pd.merge(left_df, right_df, how=how, left_on=left_on, right_index=True)          
+            else:
+                df = pd.merge(left_df, right_df, how=how, left_on=left_on, right_on=right_on)     
+        
+        # TODOO AWKWARD but i messed up the logic here and have to do this again here. simplify.
+        df = df[[i for i in merged_df.columns if not str(i).endswith('_right') or i in keep_right]]         
+        comparison_dict = hb.df_compare_column_contents_as_dict(df_outer[left_on], df_outer[right_on])
+        
+        if verbose:
+            hb.log('Comparison of entries in left and right after merge: ' + hb.print_iterable(comparison_dict, return_as_string=True))
+        
+        if not supress_warnings:
+            if len(comparison_dict['left_only']) > 0:
+                hb.log(f'\nWARNING!\nIn hb.df_merge, left had non-shared values in merge-col. N=: {str(len(comparison_dict['left_only']))}. First few values:' + str(comparison_dict['left_only'])[:100] + '...')
+            if len(comparison_dict['right_only']) > 0:
+                hb.log(f'\nWARNING!\nIn hb.df_merge, left had non-shared values in merge-col. N=: {str(len(comparison_dict['right_only']))}. First few values:' + str(comparison_dict['right_only'])[:100] + '...')
+            
+    else:
+        if left_on == 'index' and right_on == 'index':
+            df = pd.merge(left_df, right_df, how=how, left_index=True, right_index=True)
+        elif left_on == 'index':
+            df = pd.merge(left_df, right_df, how=how, left_index=True, right_on=right_on)     
+        elif right_on == 'index':
+            df = pd.merge(left_df, right_df, how=how, left_on=left_on, right_index=True)          
+        else:
+            df = pd.merge(left_df, right_df, how=how, left_on=left_on, right_on=right_on)    
+
+    if verbose:
+        hb.log('Finished merge. Found the following DF:\n' + str(df) +'\n which has columns ' + str(list(df.columns.values)))
+        
+    if left_geometry is not None:
+        df = pd.merge(df, left_geometry, how='outer', on=left_on)
+        
+        # print('df', df)
+        
+        # Convert the df to a geodataframe
+        df = gpd.GeoDataFrame(df, geometry='geometry')
+        
+    # NYI fill_left_col_nan_with_right_value
+    ## Have to think this through. Would those inherit the geometry of right then?]
+    return df
+
+def df_fill_left_col_nan_with_right_value(df, left_col, right_col, output_col_name=None):
+    
+    # Combines two columns, filling missing values of left with the value of right
+    # while also checking that no value in left does not equal the value in right
+    # good for validating merge.
+    
+    if output_col_name is None:
+        output_col_name = left_col
+    
+    left_series = df[left_col]
+    right_series = df[right_col]
+    
+    mismatch = df[left_col] != df[right_col]
+    mismatch_df = df[df[left_col] != df[right_col]][[left_col, right_col]]
+    
+    # Drop where at least one column has a nan
+    mismatch_df = mismatch_df.dropna()
+    
+    # if len(mismatch_df) > 0:
+    #     raise NameError('Mismatched values in columns ' + left_col + ' and ' + right_col + ' in dataframe ' + str(df) + ' at indices ' + str(mismatch_df.index.values))
+    
+    output_col_name_temp = output_col_name + '_' + hb.random_alphanumeric_string()
+    df[output_col_name_temp] = np.where(left_series.isnull(), right_series, left_series)
+
+    # Drop the two columns that were merged
+    df = df.drop([left_col, right_col], axis=1)
+    
+    columns = {output_col_name_temp: output_col_name}
+    df.rename(columns=columns, inplace=True)
+
+    return df
+
+# TODOO Move this to a new dataframe_utils file.
+def df_reorder_columns(input_df, initial_columns=None, prespecified_order=None, remove_columns=None, sort_method=None):
+    """If both initial_columns and prespecified_order are given, initial columns will override. Initial columns will also
+    override remove columns. sort_method can be alphabetic or reverse_alphabetic."""
+    if initial_columns is None:
+        initial_columns = []
+    if prespecified_order is None:
+        prespecified_order = []
+    if initial_columns is None:
+        initial_columns = []
+    if remove_columns is None:
+        remove_columns = []
+
+    if len(prespecified_order) <= 0:
+
+        if sort_method == 'alphabetic':
+            sorted_columns = sorted(list(input_df.columns))
+        elif sort_method == 'reverse_alphabetic':
+            sorted_columns = sorted(list(input_df.columns), reverse=True)
+        else:
+            sorted_columns = list(input_df.columns)
+    else:
+        sorted_columns = prespecified_order
+
+    final_columns = initial_columns + [i for i in sorted_columns if i not in initial_columns and i not in remove_columns]
+
+    return input_df[final_columns]
+
+def df_groupby_old(df, groupby_cols, agg_dict=None, preserve='keep_all', preserve_cols=None, on_conflict='concat_unique', conflict_reporting='warn', concat_separator='^'):
+    """
+    Constrains a pandas groupby operation to check for several key pitfalls and enable within-cell concatentation of values.
+    Processes valid non-grouped, non-aggregated columns based. A valid such group is one with all unique values. This
+    means we are just preserving the column for later use and is not affected by the grouping in any way. If a perserved
+    col does have more than 1 unique value, it will be kept based on the `on_conflict` parameter, which makes
+    a default ^ delimited list stored as a string in the target cell. Thie effectively is an alternate, space efficient and 
+    flexible way to raise the dimensionality of the data without adding tons of indices.
+        
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The DataFrame to group
+    groupby_cols : str or list
+        Column(s) to group by. Can be one or many columns, but the more you have, the less aggregation happens.
+    agg_dict : dict, optional
+        Dictionary mapping column names to aggregation functions.
+        If None and preserve='keep_all_valid', will only preserve valid (nunique=1) columns without aggregating.
+        Special aggregation functions:
+        - 'concat': Concatenate all values as strings delimited with default '^'
+        - 'concat_unique': Concatenate unique values as strings delimited with default'^'
+    preserve : {'keep_all', 'keep_all_valid'}
+        Strategy for preserving columns:
+        - 'keep_all': Keep all non-grouped, non-aggregated columns using on_conflict grouping for non-unique cols.
+        - 'keep_all_valid': Keep only columns that have unique values within groups
+    preserve_cols : list, optional
+        If preserve is 'keep_all' it will lose any non unique cols. Use preserve cols to still add them back in, using the on_conflict strategy.
+        If preserve is 'keep_all_valid', this parameter is ignored.
+    on_conflict : {'concat', 'concat_unique'}
+        What to do when preserved columns have multiple values within a group:
+        - 'concat': Concatenate all values as strings
+        - 'concat_unique': Concatenate unique values as strings
+        - 'raise': Raise an exception
+    concat_separator : str, default ', '
+        Separator to use when concatenating strings
+    
+    Returns:
+    --------
+    pandas.DataFrame
+        Grouped DataFrame with preserved columns
+    """
+    
+    # Ensure 'groupby_cols' is a list
+    groupby_cols = [groupby_cols] if isinstance(groupby_cols, str) else list(groupby_cols)
+    
+    # Handle case where agg_dict is None
+    if agg_dict is None:
+        agg_dict = {}
+    
+    # Process agg_dict to handle special string aggregations
+    processed_agg_dict = {}
+    for col, func in agg_dict.items():
+        if func == 'concat':
+            processed_agg_dict[col] = lambda x, sep=concat_separator: sep.join(x.astype(str))
+        elif func == 'concat_unique':
+            processed_agg_dict[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).unique())
+        else:
+            processed_agg_dict[col] = func
+    
+    # Determine columns to preserve based on preserve strategy
+    if preserve == 'keep_all':
+        # Keep all columns except groupby and aggregation columns
+        preserve_cols = [col for col in df.columns 
+                        if col not in groupby_cols and col not in processed_agg_dict]
+    
+    elif preserve == 'keep_all_valid':
+        # Find columns that have unique values within each group
+        grouped = df.groupby(groupby_cols)
+        valid_cols = []
+        
+        # First, let's examine the problematic groups more thoroughly
+        print(f"Total groups: {grouped.ngroups}")
+        print(f"Group sizes: {grouped.size().describe()}")
+        
+        for col in df.columns:
+            if col not in groupby_cols and col not in processed_agg_dict:
+                unique_counts = grouped[col].nunique()
+                
+                # print(f"\nColumn '{col}' unique counts per group: {unique_counts.to_dict()}")
+                
+                # For area_code specifically, let's dig deeper
+                if col == 'area_code':
+                    problematic_groups = unique_counts[unique_counts > 1]
+                    print(f"Found {len(problematic_groups)} groups with multiple area_codes, specifically: " )
+                    # print('problematic_groups:', problematic_groups )
+                    # print the first row of this
+                    # print(grouped[grouped[col].nunique() > 1])
+                    
+                    # for group_key, unique_count in problematic_groups.items():
+                    #     group_data = grouped.get_group(group_key)
+                    #     # print(f"\nGroup {group_key}:")
+                    #     print(f"  - {unique_count} unique area_codes: {group_data[col].unique()}")
+                    #     # print(f"  - Group size: {len(group_data)}")
+                    #     # print(f"  - Sample rows:")
+                    #     print(group_data[[*groupby_cols, col]].head().to_string())
+                        
+                        # # Check for data quality issues
+                        # print(f"  - Any NaN values: {group_data[col].isna().any()}")
+                        # print(f"  - Data types: {group_data[col].apply(type).unique()}")
+            
+                if (unique_counts == 1).all():
+                    valid_cols.append(col)
+        
+        preserve_cols = valid_cols
+        
+        # Report which columns were excluded
+        excluded_cols = [col for col in df.columns 
+                        if col not in groupby_cols and col not in processed_agg_dict and col not in valid_cols]
+        
+        if excluded_cols and len(processed_agg_dict) == 0:
+            print(f"Excluded columns with multiple values per group: {excluded_cols}")
+    
+    elif preserve == 'specified':
+        if preserve_cols is None:
+            raise ValueError("preserve_cols must be specified when preserve='specified'")
+        # Filter out groupby and aggregation columns
+        preserve_cols = [col for col in preserve_cols 
+                        if col not in groupby_cols and col not in processed_agg_dict]
+    
+    else:
+        raise ValueError(f"Invalid preserve value: {preserve}")
+    
+    # If no aggregation and no columns to preserve, just return groupby columns
+    if len(processed_agg_dict) == 0 and len(preserve_cols) == 0:
+        return df[groupby_cols].drop_duplicates().reset_index(drop=True)
+    
+    # Check for conflicts in preserved columns
+    conflicts = {}
+    grouped = df.groupby(groupby_cols)
+    
+    for col in preserve_cols:
+        # Check if each group has unique values
+        unique_counts = grouped[col].nunique()
+        conflict_groups = unique_counts[unique_counts > 1]
+        
+        if len(conflict_groups) > 0:
+            conflicts[col] = conflict_groups
+    
+    # Handle conflicts based on on_conflict parameter
+    preserve_agg = {}
+    
+    for col in preserve_cols:
+        if col in conflicts:
+            if on_conflict == 'raise':
+                conflict_info = []
+                for group_key, count in conflicts[col].items():
+                    group_data = grouped.get_group(group_key)[col].unique()
+                    conflict_info.append(f"  Group {group_key}: {count} unique values: {group_data}")
+                
+                raise ValueError(
+                    f"Column '{col}' has multiple values within groups:\n" + 
+                    "\n".join(conflict_info[:5]) +  # Show first 5 conflicts
+                    ("\n  ..." if len(conflict_info) > 5 else "")
+                )
+            
+            elif on_conflict == 'warn':
+                warnings.warn(
+                    f"Column '{col}' has multiple values in {len(conflicts[col])} groups. "
+                    f"Using first value."
+                )
+                preserve_agg[col] = 'first'
+            
+            elif on_conflict == 'first':
+                preserve_agg[col] = 'first'
+            
+            elif on_conflict == 'last':
+                preserve_agg[col] = 'last'
+            
+            elif on_conflict == 'concat':
+                preserve_agg[col] = lambda x, sep=concat_separator: sep.join(x.astype(str))
+            
+            elif on_conflict == 'concat_unique':
+                preserve_agg[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).unique())
+            
+            else:
+                raise ValueError(f"Invalid on_conflict value: {on_conflict}")
+        else:
+            # No conflict, just take the first (only) value
+            preserve_agg[col] = 'first'
+    
+    # Combine aggregation dictionaries
+    full_agg_dict = {**processed_agg_dict, **preserve_agg}
+    
+    # Perform aggregation
+    if full_agg_dict:
+        result = df.groupby(groupby_cols).agg(full_agg_dict).reset_index()
+    else:
+        # No aggregation needed, just get unique group keys
+        result = df[groupby_cols].drop_duplicates().reset_index(drop=True)
+    
+    # Reorder columns to match original order where possible
+    original_order = list(df.columns)
+    new_order = []
+    
+    for col in original_order:
+        if col in result.columns:
+            new_order.append(col)
+    
+    # Add any new columns created by aggregation
+    for col in result.columns:
+        if col not in new_order:
+            new_order.append(col)
+    
+    return result[new_order]
+
+def df_groupby_opus(df, groupby_cols, agg_dict=None, preserve='keep_all', preserve_cols=None, on_conflict='concat_unique', conflict_reporting='warn', concat_separator='^'):
+    """
+    Constrains a pandas groupby operation to check for several key pitfalls and enable within-cell concatenation of values.
+    Processes valid non-grouped, non-aggregated columns based. A valid such group is one with all unique values. This
+    means we are just preserving the column for later use and is not affected by the grouping in any way. If a preserved
+    col does have more than 1 unique value, it will be kept based on the `on_conflict` parameter, which makes
+    a default ^ delimited list stored as a string in the target cell. This effectively is an alternate, space efficient and 
+    flexible way to raise the dimensionality of the data without adding tons of indices.
+        
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The DataFrame to group
+    groupby_cols : str or list
+        Column(s) to group by. Can be one or many columns, but the more you have, the less aggregation happens.
+    agg_dict : dict, optional
+        Dictionary mapping column names to aggregation functions.
+        If None and preserve='keep_all_valid', will only preserve valid (nunique=1) columns without aggregating.
+        Special aggregation functions:
+        - 'concat': Concatenate all values as strings delimited with default '^'
+        - 'concat_unique': Concatenate unique values as strings delimited with default'^'
+    preserve : {'keep_all', 'keep_all_valid'}
+        Strategy for preserving columns:
+        - 'keep_all': Keep all non-grouped, non-aggregated columns using on_conflict grouping for non-unique cols.
+        - 'keep_all_valid': Keep only columns that have unique values within groups
+    preserve_cols : list, optional
+        If preserve is 'keep_all' it will lose any non unique cols. Use preserve cols to still add them back in, using the on_conflict strategy.
+        If preserve is 'keep_all_valid', this parameter is ignored.
+    on_conflict : {'concat', 'concat_unique'}
+        What to do when preserved columns have multiple values within a group:
+        - 'concat': Concatenate all values as strings
+        - 'concat_unique': Concatenate unique values as strings
+        - 'raise': Raise an exception
+    conflict_reporting : {'warn', 'silent', 'raise'}
+        How to report conflicts when they occur:
+        - 'warn': Issue a warning for conflicts
+        - 'silent': Don't report conflicts
+        - 'raise': Raise an exception on any conflict
+    concat_separator : str, default '^'
+        Separator to use when concatenating strings
+    
+    Returns:
+    --------
+    pandas.DataFrame
+        Grouped DataFrame with preserved columns
+    """
+    
+    # Ensure 'groupby_cols' is a list
+    groupby_cols = [groupby_cols] if isinstance(groupby_cols, str) else list(groupby_cols)
+    
+    # Validate parameters
+    if preserve not in ['keep_all', 'keep_all_valid']:
+        raise ValueError(f"Invalid preserve value: {preserve}. Must be 'keep_all' or 'keep_all_valid'")
+    
+    if on_conflict not in ['concat', 'concat_unique', 'raise']:
+        raise ValueError(f"Invalid on_conflict value: {on_conflict}. Must be 'concat', 'concat_unique', or 'raise'")
+    
+    if conflict_reporting not in ['warn', 'silent', 'raise']:
+        raise ValueError(f"Invalid conflict_reporting value: {conflict_reporting}. Must be 'warn', 'silent', or 'raise'")
+    
+    # Handle case where agg_dict is None
+    if agg_dict is None:
+        agg_dict = {}
+    
+    # Process agg_dict to handle special string aggregations
+    processed_agg_dict = {}
+    for col, func in agg_dict.items():
+        if func == 'concat':
+            processed_agg_dict[col] = lambda x, sep=concat_separator: sep.join(x.astype(str))
+        elif func == 'concat_unique':
+            processed_agg_dict[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).unique())
+        else:
+            processed_agg_dict[col] = func
+    
+    # Determine columns to preserve based on preserve strategy
+    if preserve == 'keep_all':
+        # Keep all columns except groupby and aggregation columns
+        cols_to_preserve = [col for col in df.columns 
+                           if col not in groupby_cols and col not in processed_agg_dict]
+        
+        # If preserve_cols is specified, ensure these are included
+        if preserve_cols is not None:
+            # Add any preserve_cols that aren't already in the list
+            for col in preserve_cols:
+                if col in df.columns and col not in groupby_cols and col not in processed_agg_dict:
+                    if col not in cols_to_preserve:
+                        cols_to_preserve.append(col)
+    
+    elif preserve == 'keep_all_valid':
+        # Find columns that have unique values within each group
+        grouped = df.groupby(groupby_cols)
+        valid_cols = []
+        
+        # Debug information (can be commented out in production)
+        if conflict_reporting == 'warn':
+            print(f"Total groups: {grouped.ngroups}")
+            print(f"Group sizes: {grouped.size().describe()}")
+        
+        for col in df.columns:
+            if col not in groupby_cols and col not in processed_agg_dict:
+                unique_counts = grouped[col].nunique()
+                
+                if (unique_counts == 1).all():
+                    valid_cols.append(col)
+                elif conflict_reporting == 'warn' and col == 'area_code':
+                    # Special debugging for area_code column (can be removed or generalized)
+                    problematic_groups = unique_counts[unique_counts > 1]
+                    print(f"Found {len(problematic_groups)} groups with multiple area_codes")
+        
+        cols_to_preserve = valid_cols
+        
+        # Report which columns were excluded
+        excluded_cols = [col for col in df.columns 
+                        if col not in groupby_cols and col not in processed_agg_dict and col not in valid_cols]
+        
+        if excluded_cols and len(processed_agg_dict) == 0 and conflict_reporting == 'warn':
+            print(f"Excluded columns with multiple values per group: {excluded_cols}")
+        
+        # Note: preserve_cols is ignored when preserve='keep_all_valid' as documented
+    
+    # If no aggregation and no columns to preserve, just return groupby columns
+    if len(processed_agg_dict) == 0 and len(cols_to_preserve) == 0:
+        return df[groupby_cols].drop_duplicates().reset_index(drop=True)
+    
+    # Check for conflicts in preserved columns
+    conflicts = {}
+    grouped = df.groupby(groupby_cols)
+    
+    for col in cols_to_preserve:
+        # Check if each group has unique values
+        unique_counts = grouped[col].nunique()
+        conflict_groups = unique_counts[unique_counts > 1]
+        
+        if len(conflict_groups) > 0:
+            conflicts[col] = conflict_groups
+    
+    # Handle conflict reporting
+    if conflicts and conflict_reporting == 'raise':
+        conflict_info = []
+        for col, conflict_groups in conflicts.items():
+            for group_key, count in list(conflict_groups.items())[:5]:  # Show first 5 conflicts
+                group_data = grouped.get_group(group_key)[col].unique()
+                conflict_info.append(f"  Column '{col}', Group {group_key}: {count} unique values: {group_data}")
+        
+        raise ValueError(
+            f"Found conflicts in preserved columns:\n" + 
+            "\n".join(conflict_info) +
+            ("\n  ..." if sum(len(cg) for cg in conflicts.values()) > 5 else "")
+        )
+    
+    # Handle conflicts based on on_conflict parameter
+    preserve_agg = {}
+    
+    for col in cols_to_preserve:
+        if col in conflicts:
+            if on_conflict == 'raise':
+                conflict_info = []
+                for group_key, count in conflicts[col].items():
+                    group_data = grouped.get_group(group_key)[col].unique()
+                    conflict_info.append(f"  Group {group_key}: {count} unique values: {group_data}")
+                
+                raise ValueError(
+                    f"Column '{col}' has multiple values within groups:\n" + 
+                    "\n".join(conflict_info[:5]) +  # Show first 5 conflicts
+                    ("\n  ..." if len(conflict_info) > 5 else "")
+                )
+            
+            elif conflict_reporting == 'warn':
+                warnings.warn(
+                    f"Column '{col}' has multiple values in {len(conflicts[col])} groups. "
+                    f"Using {on_conflict} strategy."
+                )
+            
+            if on_conflict == 'concat':
+                preserve_agg[col] = lambda x, sep=concat_separator: sep.join(x.astype(str))
+            elif on_conflict == 'concat_unique':
+                preserve_agg[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).unique())
+        else:
+            # No conflict, just take the first (only) value
+            preserve_agg[col] = 'first'
+    
+    # Combine aggregation dictionaries
+    full_agg_dict = {**processed_agg_dict, **preserve_agg}
+    
+    # Perform aggregation
+    if full_agg_dict:
+        result = df.groupby(groupby_cols).agg(full_agg_dict).reset_index()
+    else:
+        # No aggregation needed, just get unique group keys
+        result = df[groupby_cols].drop_duplicates().reset_index(drop=True)
+    
+    # Reorder columns to match original order where possible
+    original_order = list(df.columns)
+    new_order = []
+    
+    for col in original_order:
+        if col in result.columns:
+            new_order.append(col)
+    
+    # Add any new columns created by aggregation
+    for col in result.columns:
+        if col not in new_order:
+            new_order.append(col)
+    
+    return result[new_order]
+
+def df_groupby_gemini(df, groupby_cols, agg_dict=None, preserve='keep_all', preserve_cols=None, on_conflict='concat_unique', conflict_reporting='warn', concat_separator='^'):
+    """
+    Constrains a pandas groupby operation to check for several key pitfalls and enable within-cell concatentation of values.
+    Processes valid non-grouped, non-aggregated columns based. A valid such group is one with all unique values. This
+    means we are just preserving the column for later use and is not affected by the grouping in any way. If a perserved
+    col does have more than 1 unique value, it will be kept based on the `on_conflict` parameter, which makes
+    a default ^ delimited list stored as a string in the target cell. Thie effectively is an alternate, space efficient and
+    flexible way to raise the dimensionality of the data without adding tons of indices.
+
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The DataFrame to group
+    groupby_cols : str or list
+        Column(s) to group by. Can be one or many columns, but the more you have, the less aggregation happens.
+    agg_dict : dict, optional
+        Dictionary mapping column names to aggregation functions.
+        If None and preserve='keep_all_valid', will only preserve valid (nunique=1) columns without aggregating.
+        Special aggregation functions:
+        - 'concat': Concatenate all values as strings delimited with default '^'
+        - 'concat_unique': Concatenate unique values as strings delimited with default'^'
+    preserve : {'keep_all', 'keep_all_valid'}
+        Strategy for preserving columns:
+        - 'keep_all': Keep all non-grouped, non-aggregated columns using on_conflict grouping for non-unique cols.
+        - 'keep_all_valid': Keep only columns that have unique values within groups
+    preserve_cols : list, optional
+        If provided, this list explicitly defines which columns to preserve, overriding the automatic selection
+        in 'keep_all'. The `on_conflict` strategy will be applied to these columns if they are not unique within groups.
+        This parameter is ignored if preserve is 'keep_all_valid'.
+    on_conflict : {'concat', 'concat_unique', 'raise'}
+        What to do when preserved columns have multiple values within a group:
+        - 'concat': Concatenate all values as strings
+        - 'concat_unique': Concatenate unique values as strings
+        - 'raise': Raise an exception
+    conflict_reporting : {'warn', 'ignore'}
+        How to report conflicts found in preserved columns:
+        - 'warn': Issue a warning detailing which columns have conflicts.
+        - 'ignore': Do not report conflicts.
+    concat_separator : str, default '^'
+        Separator to use when concatenating strings
+
+    Returns:
+    --------
+    pandas.DataFrame
+        Grouped DataFrame with preserved columns
+    """
+    # Ensure 'groupby_cols' is a list
+    groupby_cols = [groupby_cols] if isinstance(groupby_cols, str) else list(groupby_cols)
+
+    # Handle case where agg_dict is None
+    if agg_dict is None:
+        agg_dict = {}
+
+    # Process agg_dict to handle special string aggregations
+    processed_agg_dict = {}
+    for col, func in agg_dict.items():
+        if func == 'concat':
+            processed_agg_dict[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).dropna())
+        elif func == 'concat_unique':
+            processed_agg_dict[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).dropna().unique())
+        else:
+            processed_agg_dict[col] = func
+
+    # Identify potential columns to preserve
+    all_potential_preserve_cols = [col for col in df.columns if col not in groupby_cols and col not in processed_agg_dict]
+    
+    final_preserve_cols = []
+    
+    # Determine columns to preserve based on preserve strategy
+    if preserve == 'keep_all':
+        if preserve_cols:
+            # User has provided an explicit list of columns to preserve
+            final_preserve_cols = [col for col in preserve_cols if col in all_potential_preserve_cols]
+        else:
+            # Default to keeping all non-grouped, non-aggregated columns
+            final_preserve_cols = all_potential_preserve_cols
+
+    elif preserve == 'keep_all_valid':
+        grouped = df.groupby(groupby_cols)
+        for col in all_potential_preserve_cols:
+            if grouped[col].nunique().max() <= 1:
+                final_preserve_cols.append(col)
+    else:
+        raise ValueError(f"Invalid preserve value: '{preserve}'. Must be 'keep_all' or 'keep_all_valid'.")
+
+    # If nothing to do, return unique group keys
+    if not processed_agg_dict and not final_preserve_cols:
+        return df[groupby_cols].drop_duplicates().reset_index(drop=True)
+
+    # Check for conflicts in the final list of preserved columns
+    conflicts = {}
+    grouped = df.groupby(groupby_cols)
+    for col in final_preserve_cols:
+        if grouped[col].nunique().max() > 1:
+            conflicts[col] = grouped[col].nunique()[grouped[col].nunique() > 1]
+
+    # Report and handle conflicts
+    preserve_agg = {}
+    if conflicts:
+        if conflict_reporting == 'warn':
+            warnings.warn(f"Columns {list(conflicts.keys())} have multiple values in some groups. Applying '{on_conflict}' strategy.")
+
+        if on_conflict == 'raise':
+            conflict_info = []
+            for col, series in conflicts.items():
+                group_examples = series.head(3).index.tolist()
+                conflict_info.append(f"  - Column '{col}' in groups like {group_examples}")
+            raise ValueError("Conflicts found in preserved columns:\n" + "\n".join(conflict_info))
+
+    # Define aggregation logic for preserved columns
+    for col in final_preserve_cols:
+        if col in conflicts:
+            # Apply conflict resolution strategy
+            if on_conflict == 'concat':
+                preserve_agg[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).dropna())
+            elif on_conflict == 'concat_unique':
+                preserve_agg[col] = lambda x, sep=concat_separator: sep.join(x.astype(str).dropna().unique())
+            else: # This case should ideally not be hit if 'raise' is handled above, but as a fallback.
+                 raise ValueError(f"Invalid on_conflict value: {on_conflict}")
+        else:
+            # No conflict, just take the first value
+            preserve_agg[col] = 'first'
+            
+    # Combine aggregation dictionaries
+    full_agg_dict = {**processed_agg_dict, **preserve_agg}
+
+    # Perform aggregation
+    if full_agg_dict:
+        result = df.groupby(groupby_cols).agg(full_agg_dict)
+    else:
+        result = df[groupby_cols].drop_duplicates()
+
+    result = result.reset_index()
+
+    # Reorder columns to match original order as much as possible
+    original_order = [col for col in df.columns if col in result.columns]
+    new_cols = [col for col in result.columns if col not in original_order]
+    
+    return result[original_order + new_cols]
+
+def df_groupby(df, groupby_cols, agg_cols=None, agg_dict=None, preserve='keep_all', preserve_cols=None, 
+               on_conflict='concat_unique', conflict_reporting='warn', concat_separator='^',
+               debug=False):
+    """
+    Constrains a pandas groupby operation to check for several key pitfalls and enable within-cell concatenation of values.
+    Processes valid non-grouped, non-aggregated columns based. A valid such group is one with all unique values. This
+    means we are just preserving the column for later use and is not affected by the grouping in any way. If a preserved
+    col does have more than 1 unique value, it will be kept based on the `on_conflict` parameter, which makes
+    a default ^ delimited list stored as a string in the target cell. This effectively is an alternate, space efficient and 
+    flexible way to raise the dimensionality of the data without adding tons of indices.
+        
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The DataFrame to group
+    groupby_cols : str or list
+        Column(s) to group by. Can be one or many columns, but the more you have, the less aggregation happens.
+    agg_cols : str or list, optional
+        A shorthand for specifying columns to be summed. For each column in this list, a 'sum' aggregation is
+        performed. This is overridden by any specific aggregation for the same column in `agg_dict`.
+    agg_dict : dict, optional
+        Dictionary mapping column names to aggregation functions.
+        If None and preserve='keep_all_valid', will only preserve valid (nunique=1) columns without aggregating.
+        Special aggregation functions:
+        - 'concat': Concatenate all values as strings delimited with separator (excludes NaN)
+        - 'concat_unique': Concatenate unique values as strings delimited with separator (excludes NaN)
+    preserve : {'keep_all', 'keep_all_valid'}
+        Strategy for preserving columns:
+        - 'keep_all': Keep non-grouped, non-aggregated columns. If preserve_cols is provided, only those columns
+          are preserved (not additive). Uses on_conflict strategy for non-unique cols.
+        - 'keep_all_valid': Keep only columns that have unique values within groups (ignores preserve_cols)
+    preserve_cols : list, optional
+        If provided with preserve='keep_all', explicitly defines which columns to preserve, replacing automatic selection.
+        The on_conflict strategy will be applied to these columns if they are not unique within groups.
+        This parameter is ignored if preserve='keep_all_valid'.
+    on_conflict : {'concat', 'concat_unique', 'raise'}
+        What to do when preserved columns have multiple values within a group:
+        - 'concat': Concatenate all values as strings (excluding NaN)
+        - 'concat_unique': Concatenate unique values as strings (excluding NaN)
+        - 'raise': Raise an exception
+    conflict_reporting : {'warn', 'ignore', 'raise'}
+        How to report conflicts found in preserved columns:
+        - 'warn': Issue a warning detailing which columns have conflicts
+        - 'ignore': Do not report conflicts
+        - 'raise': Raise an exception when any conflict is found (separate from on_conflict='raise')
+    concat_separator : str, default '^'
+        Separator to use when concatenating strings
+    debug : bool, default False
+        If True, print additional debugging information about groups and conflicts
+    
+    Returns:
+    --------
+    pandas.DataFrame
+        Grouped DataFrame with preserved columns
+    """
+    
+    # Parameter validation
+    if preserve not in ['keep_all', 'keep_all_valid']:
+        raise ValueError(f"Invalid preserve value: '{preserve}'. Must be 'keep_all' or 'keep_all_valid'.")
+    
+    if on_conflict not in ['concat', 'concat_unique', 'raise']:
+        raise ValueError(f"Invalid on_conflict value: '{on_conflict}'. Must be 'concat', 'concat_unique', or 'raise'.")
+    
+    if conflict_reporting not in ['warn', 'ignore', 'raise']:
+        raise ValueError(f"Invalid conflict_reporting value: '{conflict_reporting}'. Must be 'warn', 'ignore', or 'raise'.")
+    
+    # Ensure 'groupby_cols' is a list
+    groupby_cols = [groupby_cols] if isinstance(groupby_cols, str) else list(groupby_cols)
+    
+    # Handle case where agg_dict is None
+    if agg_dict is None:
+        agg_dict = {}
+
+    # Process agg_cols to populate agg_dict with sum, but don't override existing entries
+    if agg_cols:
+        if isinstance(agg_cols, str):
+            agg_cols = [agg_cols]
+        for col in agg_cols:
+            if col not in agg_dict:
+                agg_dict[col] = 'sum'
+    
+    # Create proper lambda functions that capture the separator
+    def make_concat_func(separator):
+        return lambda x: separator.join(x.astype(str).dropna())
+    
+    def make_concat_unique_func(separator):
+        return lambda x: separator.join(x.astype(str).dropna().unique())
+    
+    # Process agg_dict to handle special string aggregations
+    processed_agg_dict = {}
+    for col, func in agg_dict.items():
+        if func == 'concat':
+            processed_agg_dict[col] = make_concat_func(concat_separator)
+        elif func == 'concat_unique':
+            processed_agg_dict[col] = make_concat_unique_func(concat_separator)
+        else:
+            processed_agg_dict[col] = func
+    
+    # Identify potential columns to preserve
+    all_potential_preserve_cols = [col for col in df.columns 
+                                  if col not in groupby_cols and col not in processed_agg_dict]
+    
+    final_preserve_cols = []
+    
+    # Determine columns to preserve based on preserve strategy
+    if preserve == 'keep_all':
+        if preserve_cols:
+            # User has provided an explicit list of columns to preserve (replaces automatic selection)
+            final_preserve_cols = [col for col in preserve_cols if col in all_potential_preserve_cols]
+            
+            # Warn about invalid columns in preserve_cols
+            invalid_cols = [col for col in preserve_cols if col not in all_potential_preserve_cols]
+            if invalid_cols:
+                warnings.warn(f"Columns {invalid_cols} in preserve_cols are either groupby columns, "
+                            f"aggregation columns, or don't exist in the DataFrame.")
+        else:
+            # Default to keeping all non-grouped, non-aggregated columns
+            final_preserve_cols = all_potential_preserve_cols
+    
+    elif preserve == 'keep_all_valid':
+        # Find columns that have unique values within each group
+        grouped = df.groupby(groupby_cols)
+        
+        # Debug information
+        if debug:
+            print(f"Total groups: {grouped.ngroups}")
+            print(f"Group sizes: {grouped.size().describe()}")
+        
+        for col in all_potential_preserve_cols:
+            if grouped[col].nunique().max() <= 1:
+                final_preserve_cols.append(col)
+        
+        # Report which columns were excluded
+        excluded_cols = [col for col in all_potential_preserve_cols if col not in final_preserve_cols]
+        
+        if excluded_cols and len(processed_agg_dict) == 0 and (conflict_reporting == 'warn' or debug):
+            print(f"Excluded columns with multiple values per group: {excluded_cols}")
+    
+    # If nothing to do, return unique group keys
+    if not processed_agg_dict and not final_preserve_cols:
+        return df[groupby_cols].drop_duplicates().reset_index(drop=True)
+    
+    # Check for conflicts in the final list of preserved columns
+    conflicts = {}
+    grouped = df.groupby(groupby_cols)
+    
+    for col in final_preserve_cols:
+        unique_counts = grouped[col].nunique()
+        if unique_counts.max() > 1:
+            conflict_groups = unique_counts[unique_counts > 1]
+            conflicts[col] = conflict_groups
+            
+            # Debug information for specific columns
+            if debug and col == 'area_code':
+                print(f"\nColumn 'area_code' has {len(conflict_groups)} groups with multiple values")
+                for group_key, unique_count in list(conflict_groups.items())[:5]:
+                    group_data = grouped.get_group(group_key)
+                    print(f"  Group {group_key}: {unique_count} unique values: {group_data[col].unique()}")
+    
+    # Handle conflict reporting
+    if conflicts:
+        conflict_summary = {col: len(groups) for col, groups in conflicts.items()}
+        
+        if conflict_reporting == 'raise':
+            conflict_info = []
+            for col, groups in conflicts.items():
+                group_examples = list(groups.index)[:3]
+                conflict_info.append(f"  - Column '{col}' has conflicts in {len(groups)} groups, "
+                                   f"e.g., groups {group_examples}")
+            raise ValueError("Conflicts found in preserved columns:\n" + "\n".join(conflict_info))
+        
+        elif conflict_reporting == 'warn':
+            warnings.warn(f"Columns {list(conflicts.keys())} have multiple values in some groups. "
+                         f"Applying '{on_conflict}' strategy.")
+    
+    # Define aggregation logic for preserved columns
+    preserve_agg = {}
+    
+    for col in final_preserve_cols:
+        if col in conflicts:
+            if on_conflict == 'raise':
+                conflict_info = []
+                for group_key, count in list(conflicts[col].items())[:5]:
+                    group_data = grouped.get_group(group_key)[col].unique()
+                    conflict_info.append(f"  Group {group_key}: {count} unique values: {group_data}")
+                
+                raise ValueError(
+                    f"Column '{col}' has multiple values within groups:\n" + 
+                    "\n".join(conflict_info) +
+                    ("\n  ..." if len(conflicts[col]) > 5 else "")
+                )
+            
+            elif on_conflict == 'concat':
+                preserve_agg[col] = make_concat_func(concat_separator)
+            
+            elif on_conflict == 'concat_unique':
+                preserve_agg[col] = make_concat_unique_func(concat_separator)
+        else:
+            # No conflict, just take the first value
+            preserve_agg[col] = 'first'
+    
+    # Combine aggregation dictionaries
+    full_agg_dict = {**processed_agg_dict, **preserve_agg}
+    
+    # Perform aggregation
+    if full_agg_dict:
+        result = df.groupby(groupby_cols).agg(full_agg_dict).reset_index()
+        # Warn and show sample output if using concat or concat_unique
+        if on_conflict in ['concat', 'concat_unique'] and conflicts:
+            sample_outputs = []
+            for col in conflicts:
+            # Try to find a group where the concatenation separator will actually appear (i.e., more than one unique value)
+                found = False
+                for group_key in conflicts[col].index:
+                    group_data = grouped.get_group(group_key)[col]
+                    if on_conflict == 'concat':
+                        sample = concat_separator.join(group_data.astype(str).dropna())
+                    else:
+                        sample = concat_separator.join(group_data.astype(str).dropna().unique())
+                    if concat_separator in sample:
+                        sample_outputs.append(f"Column '{col}', group {group_key}: {sample[:200]}")
+                        found = True
+                        break
+                if not found:
+                    # Fallback: just show the first group
+                    group_key = conflicts[col].index[0]
+                    group_data = grouped.get_group(group_key)[col]
+                    if on_conflict == 'concat':
+                        sample = concat_separator.join(group_data.astype(str).dropna())
+                    else:
+                        sample = concat_separator.join(group_data.astype(str).dropna().unique())
+                        sample_outputs.append(f"Column '{col}', group {group_key}: {sample[:200]}")
+            if sample_outputs:
+                warnings.warn("Sample output of concatenated cells (first 200 chars):\n" + "\n".join(sample_outputs))
+    else:
+        # No aggregation needed, just get unique group keys
+        result = df[groupby_cols].drop_duplicates().reset_index(drop=True)
+    
+    # Reorder columns to match original order where possible
+    original_order = [col for col in df.columns if col in result.columns]
+    new_cols = [col for col in result.columns if col not in original_order]
+    
+    return result[original_order + new_cols]
+
+def convert_py_script_to_jupyter(input_path):
+    output_lines = []
+
+    output_lines.append('#%% md')
+    output_lines.append('')
+    output_lines.append('# ' + hb.file_root(input_path))
+    output_lines.append('')
+
+    current_state = 'md'
+    previous_state = 'md'
+
+    with open(input_path) as fp:
+        for line in fp:
+            line = line.replace('\n', '')
+            if line != '':
+
+                if line.replace(' ', '')[0] == '#':
+                    current_state = 'md'
+                else:
+                    current_state = 'py'
+                # print(current_state + ': ', line, line)
+
+                if current_state != previous_state:
+                    if current_state == 'md':
+                        output_lines.append('#%% md')
+                    elif current_state == 'py':
+                        output_lines.append('#%%')
+                    else:
+                        raise NameError('wtf')
+                    previous_state = current_state
+
+                if current_state == 'md':
+                    to_append = line.split('#', 1)[1].lstrip()
+                    output_lines.append(to_append)
+                elif current_state == 'py':
+                    output_lines.append(line)
+                else:
+                    raise NameError('wtf')
+
+                # output_lines.append(line + '\n')
+            else:
+                # print(current_state + ': ', 'BLANK LINE', line)
+                output_lines.append('')
+
+    for line in output_lines:
+        print(line)
+
+    # ## DOESNT WORK BECAUSE NEED TO STRUCTURE JSON AS WELL, better is just to copy paste into pycharm lol
+    # with open(output_path, 'w') as fp:
+    #     for line in output_lines:
+    #         print(line)
+    #         fp.write(line)
+
+def flatten_nested_dictionary(input_dict, return_type='values'):
+    def walk_dictionary(d, return_type):
+        for key, value in d.items():
+
+            if isinstance(value, dict):
+                yield from walk_dictionary(value, return_type)
+            else:
+                if return_type == 'both':
+                    yield (key, value)
+                elif return_type == 'keys':
+                    yield key
+                elif return_type == 'values':
+                    yield value
+
+    if return_type == 'both':
+        to_return = {}
+        returned_list = list(walk_dictionary(input_dict, return_type=return_type))
+        for i in returned_list:
+            to_return[i[0]] = i[1]
+        return to_return
+    elif return_type == 'keys':
+        return list((walk_dictionary(input_dict, return_type=return_type)))
+    elif return_type == 'values':
+        return list((walk_dictionary(input_dict, return_type=return_type)))
+
+def flatten_list(input_list):
+    stack = input_list[::-1]
+    flat_list = []
+    while stack:
+        element = stack.pop()
+        if isinstance(element, list):
+            stack.extend(element[::-1])
+        else:
+            flat_list.append(element)
+    return flat_list
+
+def get_attributes_of_object_as_list_of_strings(input_object):
+    return [a for a in dir(input_object) if not a.startswith('__') and not callable(getattr(input_object, a))]
+
+def get_reclassification_dict_from_df(input_df_or_path, src_id_col='src_id', dst_id_col='dst_id', src_label_col='src_label', dst_label_col='dst_label'):
+    if isinstance(input_df_or_path, str):
+        df = pd.read_csv(input_df_or_path)
+    else:
+        df = input_df_or_path
+    src_ids = []
+    src_labels = []
+    dst_ids = []
+    dst_labels = []
+
+    dst_to_src_reclassification_dict = {}
+    src_to_dst_reclassification_dict = {}
+    dst_to_src_labels_dict = {}
+    src_to_dst_labels_dict = {}
+    for index, row in df.iterrows():
+        dst_id = row[dst_id_col]
+        dst_label = row[dst_label_col]
+        src_id = row[src_id_col]
+        src_label = row[src_label_col]
+        if not pd.isna(dst_id):
+            dst_ids.append(dst_id)
+        if not pd.isna(dst_label):
+            dst_labels.append(dst_label)
+
+        if not pd.isna(dst_id):
+            if dst_id not in dst_to_src_reclassification_dict:
+                dst_to_src_reclassification_dict[int(dst_id)] = []
+
+            if src_id not in src_to_dst_reclassification_dict:
+                src_to_dst_reclassification_dict[int(src_id)] = int(dst_id)
+
+            if src_label not in src_to_dst_labels_dict:
+                src_to_dst_labels_dict[src_label] = dst_label
+
+            if dst_label not in dst_to_src_labels_dict:
+                dst_to_src_labels_dict[str(dst_label)] = []
+
+            try:
+                if not pd.isna(row[src_id_col]):
+                    dst_to_src_reclassification_dict[dst_id].append(int(row[src_id_col]))
+                    src_ids.append(int(row[src_id_col]))
+
+            except:
+                L.debug('Failed to read ' + str(dst_id) + ' as int from ' + str(input_df_or_path) + ' so skipping.')
+
+            try:
+                if not pd.isna(row[src_label_col]):
+                    dst_to_src_labels_dict[dst_label].append(row[src_label_col])
+                    src_labels.append(row[src_label_col])
+            except:
+                L.debug('Failed to read ' + str(dst_label) + ' as int from ' + str(input_df_or_path) + ' so skipping.')
+    return_dict = {}
+    return_dict['dst_to_src_reclassification_dict'] = dst_to_src_reclassification_dict  # Dict of one-to-many keys to lists of what each dst_key should be mapped to from each src_key. Useful when aggrigating multiple layers to a aggregated dest type
+    return_dict['src_to_dst_reclassification_dict'] = src_to_dst_reclassification_dict # Dict of one to one src to dst mapping. Useful when going to a specific value.
+    return_dict['dst_to_src_labels_dict'] = dst_to_src_labels_dict # Dictionary of lists of labels that map to each dst label
+    return_dict['src_ids'] = remove_duplicates_in_order(src_ids) # Unique list of src_ids
+    return_dict['dst_ids'] = remove_duplicates_in_order(dst_ids) # Unique list of dst_ids
+    return_dict['src_labels'] = remove_duplicates_in_order(src_labels) # Unique list of src_labels
+    return_dict['dst_labels'] = remove_duplicates_in_order(dst_labels) # Unique list of dst_labels
+    return_dict['src_ids_to_labels'] = {k: v for k, v in zip(return_dict['src_ids'], return_dict['src_labels'])} # one-to-one dictionary of src ids to labels
+    return_dict['dst_ids_to_labels'] = {k: v for k, v in zip(return_dict['dst_ids'], return_dict['dst_labels'])} # one-to-one dictionary of dst ids to labels
+    return_dict['src_labels_to_ids'] = {k: v for k, v in zip(return_dict['src_labels'], return_dict['src_ids'])} # one-to-one dictionary of src labels to ids
+    return_dict['dst_labels_to_ids'] = {k: v for k, v in zip(return_dict['dst_labels'], return_dict['dst_ids'])} # one-to-one dictionary of dst labels to ids
+
+    return return_dict
+
+def assign_df_row_to_object_attributes(input_object, input_row):
+    for attribute_name, attribute_value in list(zip(input_row.index, input_row.values)):
+        setattr(input_object, attribute_name, attribute_value)
+
+def call_conda_info():
+    command = 'conda info'
+    output = subprocess.check_output(command)
+    print('output', output)
+    return output
+
+def get_list_of_conda_envs_installed(include_dirs=True):
+   
+    command = 'conda info --envs'
+    output = subprocess.check_output(command)
+
+    output_as_list = str(output).split('\\r\\n')
+    output_replaced = str(output).replace('\\r\\n', '\\\\')
+    output_split = output_replaced.split(' ')
+    if include_dirs:
+        pared_list = []
+        
+        for c, i in enumerate(output_as_list[3:]):
+            j = i.split(' ')[-1]
+            k = j.replace('\\\\', '/')
+
+            # Check if j is a directory
+            if os.path.isdir(k):
+                pared_list.append(k)
+
+    else:
+        pared_list = [i.split(' ')[0] for i in output_as_list[2:]]
+    return pared_list
+
+def check_if_library_in_conda_env(library_name, conda_env_name):
+
+    """Check if a package is installed in a specific Conda environment."""
+    try:
+        call_conda_info()
+        # Run 'conda list' in the specified environment
+        result = subprocess.run(['conda', 'list', '-p', conda_env_name, library_name], stdout=subprocess.PIPE, text=True)
+        if library_name in result.stdout:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f"Error checking package {library_name} in environment at {conda_env_name}: {e}")
+        return False
+
+def check_which_conda_envs_have_library_installed(library_name):
+    envs_list = get_list_of_conda_envs_installed(include_dirs=True)
+    
+    envs_with_library = []
+    for env_name in envs_list:
+        if check_if_library_in_conda_env(library_name, env_name):
+            envs_with_library.append(env_name)
+    return envs_with_library
+
+def check_conda_env_exists(env_name):
+    envs_installed = get_list_of_conda_envs_installed()
+    hb.log('envs_installed', envs_installed)
+    if any([env_name in i for i  in envs_installed]):
+        return True
+    else:
+        return False
+
+def get_first_extant_path(relative_path, possible_dirs, verbose=False):
+    do_deprecation_statement = 1
+    if do_deprecation_statement:
+        hb.log('hb.get_first_extant_path is deprecated. Use p.get_path() instead. This fucntion was called via ', relative_path, possible_dirs)
+    # Searches for a file in a list of possible directories and returns the first one it finds.
+    # If it doesn't find any, it returns the first one it tried.
+    # If it was given None, just return None
+
+    if hb.path_exists(relative_path):
+        return relative_path
+
+    # Check if it's relative
+    if relative_path is not None:
+        if relative_path[1] == ':':
+            hb.log('The path given to hb.get_first_extant_path() does not appear to be relative (nor does it exist at the unmodified path): ' + str(relative_path) + ', ' + str(possible_dirs))
+
+    for possible_dir in possible_dirs:
+        if relative_path is not None:
+            path = os.path.join(possible_dir, relative_path)
+            if verbose:
+                hb.log('Checking for path: ' + str(path))
+            if hb.path_exists(path, verbose=verbose):
+                return path
+        else:
+            return None
+    
+    # If it was neither found nor None, THEN return the path constructed from the first element in possible_dirs
+    path = os.path.join(possible_dirs[0], relative_path)
+    return path
+
+def path_to_url(input_path, local_path_to_strip, url_start=''):
+    splitted_path = hb.split_assume_two(input_path.replace('\\', '/'), local_path_to_strip.replace('\\', '/')) 
+    right_path = splitted_path[1]
+    if right_path.startswith('/'):
+        right_path = right_path[1:]
+    url = os.path.join(url_start, right_path)
+    url = url.replace('\\', '/')
+
+    return url
+
+def url_to_path(input_url, left_path, path_start):
+    splitted_path = hb.split_assume_two(input_url, left_path) 
+
+    path = os.path.join(path_start, left_path, splitted_path[1])
+    path = path.replace('/', '\\')
+
+    return path
+
+def remove_duplicates_in_order(lst):
+  """
+  Removes duplicates from a list while preserving the order of the remaining elements.
+
+  Args:
+    lst: The list to remove duplicates from.
+
+  Returns:
+    A new list without duplicates.
+  """
+
+  seen = set()
+  new_lst = []
+  for item in lst:
+    if item not in seen:
+      seen.add(item)
+      new_lst.append(item)
+
+  return new_lst
+
+def df_convert_column_type(input_df, type_to_replace, new_type, columns='all', ignore_nan=False, verbose=False):
+    # Refer to types as numpy types    
+    
+    hb.log('WARNING!  this failed when there were nans in the field being inted.', level=200)
+    ### One possiblie solution is to replace with intable and nanable types as below
+    # # Manually set dtype for two remaining cols. This was not possible to fix via the function
+    # # df_convert_column_type for unknown reasons, but probably because the nan-value in gadm
+    # # combined with Operation on a Copy Warning.
+    # df['gadm_r263_id'] = df['gadm_r263_id'].astype('Int64')
+    # df['gtapv7_r251_id'] = df['gtapv7_r251_id'].astype('Int64')
+
+    if columns == 'all':
+        columns = input_df.columns
+        
+    for col in columns:
+        hb.log('Converting column ' + str(col) + ' from ' + str(type_to_replace) + ' to ' + str(new_type), level=100)
+        
+        # check if it has the dtype attribute
+        if hasattr(input_df[col], 'dtype'):
+        
+            if input_df[col].dtype == type_to_replace:
+                if ignore_nan:
+                    to_fill = -999999991
+                    its_in_it = to_fill in input_df[col].values
+                    if its_in_it:
+                        raise NameError('Really wtf... what are the odds of that. please submit a pull request to fix this improbable case.')
+                    else:
+                        # Test if there are ONLY nans
+                        if input_df[col].isnull().values.all():
+                            if verbose:
+                                hb.log('All values in column ' + str(col) + ' are nan, so skipping.', level=10)
+                        else:
+                            pd.set_option('mode.chained_assignment', None)
+                            input_df[col] = input_df[col].replace(np.nan, to_fill)
+                            input_df[col] = input_df[col].astype(new_type) 
+                            input_df[col] = input_df[col].replace(to_fill, np.nan)
+                            pd.set_option('mode.chained_assignment', 'warn')
+                            
+                else:
+                    input_df.loc[:, col] = input_df[col].astype(new_type)
+    return input_df
+
+def list_find_duplicates(lst):
+    seen = set()
+    duplicates = set()
+    for x in lst:
+        if x in seen:
+            duplicates.add(x)
+        else:
+            seen.add(x)
+    return duplicates
+
+def arrays_equal_ignoring_order(array1, array2, ignore_values=None):
+    unique1, counts1 = np.unique(array1.astype(str), return_counts=True)
+    unique2, counts2 = np.unique(array2.astype(str), return_counts=True)
+    
+    if ignore_values is not None:
+        for ignore_value in ignore_values:
+            # Take that O(n) = 1!
+            if unique1[0] == ignore_value:
+                unique1 = unique1[1:]
+                counts1 = counts1[1:]
+            if unique2[0] == ignore_value:
+                unique2 = unique2[1:]
+                counts2 = counts2[1:]
+            if unique1[-1] == ignore_value:
+                unique1 = unique1[:-1]
+                counts1 = counts1[:-1]
+            if unique2[-1] == ignore_value:
+                unique2 = unique2[:-1]
+                counts2 = counts2[:-1]
+                
+    identical = np.array_equal(np.asarray((unique1, counts1)).T, np.asarray((unique2, counts2)).T)
+    if not identical:
+        hb.log('Compared arrays and found different unique, count sets: ', unique1, counts1, unique2, counts2, level=100)
+    return identical
+
+def hash_file_path(file_path):
+    """Compute and return the SHA-256 hash of a binary-redable file (like a png) specified by its file path.
+    And return a string of the hash."""
+    sha256 = hashlib.sha256()
+    try:
+        with open(file_path, 'rb') as f:
+            while chunk := f.read(8192):
+                sha256.update(chunk)
+        return sha256.hexdigest()
+    except FileNotFoundError:
+        return "File not found."
+    except Exception as e:
+        return f"An error occurred: {e}"
+    
+def concatenate_list_of_df_paths(input_df_paths, output_path=None, verbose=False):
+    """Concatenate a list of dataframes into a single dataframe. Return DF. Also write to output_path if given"""
+    dfs = []
+    shapes = []
+    for df_path in input_df_paths:
+        if verbose:
+            hb.log('Reading ' + str(df_path))
+        if not hb.path_exists(df_path):
+            raise NameError('Path not found: ' + str(df_path))
+        
+        df = pd.read_csv(df_path)
+        
+        # Get only the number of cols, cause we're concatentating vertically
+        shapes.append(df.shape[1])
+        
+        dfs.append(df)
+    
+    # Check if all same shape
+    if len(set(shapes)) > 1:
+        raise NameError('Dataframes are not all the same shape: ' + str(shapes))
+    
+    concatenated_df = pd.concat(dfs)
+    
+    if output_path:
+        hb.create_directories(output_path)
+        concatenated_df.to_csv(output_path, index=False)
+    return concatenated_df
+
+def is_nan(input_):
+    return isnan(input_)
+
+def isnan(input_):
+    if isinstance(input_, str):
+        if input_.lower() == 'nan':
+            return True
+        else:
+            return False
+    elif not input_:
+        return False
+    else:
+        try:
+            return np.isnan(input_)
+        except:
+            False
+
+def df_move_col_before_col(df, col_to_move, col_to_put_it_before):
+    cols = df.columns.tolist()
+    cols.remove(col_to_move)
+    idx = cols.index(col_to_put_it_before)
+    cols.insert(idx, col_to_move)
+    return df[cols]
+
+def df_move_col_after_col(df, col_to_move, col_to_put_it_after):
+    cols = df.columns.tolist()
+    cols.remove(col_to_move)
+    idx = cols.index(col_to_put_it_after)
+    cols.insert(idx + 1, col_to_move)
+    return df[cols]
+
+def parse_flex_to_python_object(input_df_element, verbose=False):
+    
+    if input_df_element == 'year, counterfactual':
+        pass
+    if input_df_element == 'aggregation:v11_s26_r50, year:2050':
+        pass
+    # Check if it evaluates to none
+    if hb.isnan(input_df_element):
+        return None
+    elif input_df_element is None:
+        return None
+    elif input_df_element == 'None':
+        return None
+    elif input_df_element == '':
+        return None
+    
+
+    
+    if 'int' in str(type(input_df_element)):
+        return input_df_element
+    
+    if 'float' in str(type(input_df_element)):
+        return input_df_element
+    
+    if 'str' in str(type(input_df_element)) or 'object' in str(type(input_df_element)):
+        
+        # Strip leading and trailing spaces
+        input_df_element = input_df_element.strip()    
+    
+        # Check if it's verbatim json
+        is_json = False
+        if (input_df_element.startswith('{') and input_df_element.endswith('}')) or (input_df_element.startswith('[') and input_df_element.endswith(']')):
+            
+        #     if input_df_element.startswith('{'):
+        #         split_element = input_df_element[1:-1].split(',')
+        #         for i in split_element:
+        #             j = i.split(':')  
+        #             if len(j) > 1:                   
+        #                 for c, k in enumerate(j): # Strip leading and trailing spaces from each element
+        #                     j[c] = j[c].strip()                    
+        #                 # add quotation marks if needed
+        #                 if not j[0].startswith('"') and not j[0].startswith("'"):
+        #                     # no .isdigit() check because json spec says it has to be a string in the keys
+        #                     input_df_element = input_df_element.replace(j[0], '"' + j[0] + '"')
+        #                 if not j[1].startswith('"') and not j[1].startswith("'"):
+        #                     # Check if the first element is numeric
+        #                     if not j[1][0].isdigit():
+        #                         input_df_element = input_df_element.replace(j[1], '"' + j[1] + '"')
+                                
+                        
+            
+            try:            
+                s = hb.json_helper.parse_json_with_detailed_error(input_df_element)
+                is_json = True
+                return s
+            except:
+                is_json = False
+                raise NameError('Failed to parse json: ' + str(input_df_element) + ' as json. If something starts with a { or [ and ends with a } or ] it should be json, but if you have syntax error, like a missing comma or qutation mark, it will fail.')  
+            
+            
+        could_be_json = False
+        if not is_json and ',' in input_df_element and ':' not in input_df_element:
+            input_df_element = '[' + input_df_element + ']'
+            split_element = split_respecting_nesting(input_df_element[1:-1], ',')
+            for c, i in enumerate(split_element):
+                split_element[c] = i.strip()
+                if split_element[c].startswith('[') or split_element[c].startswith('{'):
+                    split_element[c] = parse_flex_to_python_object(split_element[c])
+            input_df_element = split_element    
+            
+        if not is_json and ':' in input_df_element:
+            input_df_element = '{' + input_df_element + '}'
+
+            if input_df_element.startswith('{'):
+                split_element = split_respecting_nesting(input_df_element[1:-1], ',')
+                # split_element = input_df_element[1:-1].split(',')
+                for i in split_element:
+                    j = i.split(':')  
+
+                    if len(j) > 1:                  
+                        for c, k in enumerate(j): # Strip leading and trailing spaces from each element
+                            j[c] = j[c].strip()                    
+                        # add quotation marks if needed
+                        if not j[0].startswith('"') and not j[0].startswith("'") and not j[0].startswith('[') and not j[0].startswith('{'):
+                            input_df_element = input_df_element.replace(j[0], '"' + j[0] + '"')
+                        if not j[1].startswith('"') and not j[1].startswith("'") and not j[1].startswith('[') and not j[1].startswith('{'):
+                            # Check if the first element is numeric
+                            if not j[1][0].isdigit():
+                                input_df_element = input_df_element.replace(j[1], '"' + j[1] + '"')
+                        if j[1].startswith('[') or j[1].startswith('{'):
+                            j[1] = parse_flex_to_python_object(j[1])
+                        
+        try:            
+            s = hb.json_helper.parse_json_with_detailed_error(input_df_element)
+            could_be_json = True
+            return s
+        except:
+            could_be_json = False                
+            
+
+        # Then it's not jsonable
+        return input_df_element
+                
+        
+                
+                
+
+    
+    
+    
+    # print('input_df_string', input_df_string)
+    
+    # terminal_types = ['int(', 'float(', 'str(', 'bool(', '"', "'", '{', '[']
+    
+    # # Cast to string becasue pandas will interpret ints as ints lol!
+    # input_df_string = str(input_df_string)
+    
+    # # Check if input_df_string starts with a terminal type
+    # for terminal_type in terminal_types:
+    #     if input_df_string.startswith(terminal_type):
+    #         if terminal_type == 'int(':
+    #             return int(json.loads(input_df_string[4:-2]))
+    #         elif terminal_type == 'float(':
+    #             return float(json.loads(input_df_string[6:-2]))
+    #         elif terminal_type == 'str(':
+    #             return str(json.loads(input_df_string[4:-2]))
+    #         elif terminal_type == 'bool(':
+    #             return bool(json.loads(input_df_string[5:-2]))
+    #         elif terminal_type == '"':
+    #             return str(json.loads(input_df_string[1:-1]))
+    #         elif terminal_type == "'":
+    #             return str(json.loads(input_df_string[1:-1]))
+    #         elif terminal_type == "{":
+    #             return json.loads(input_df_string)
+    #         elif terminal_type == "[":
+    #             return json.loads(input_df_string)
+    #         else:
+    #             'not a terminal type'
+    # # Then it's a basic type
+    # try:
+    #     float(input_df_string)
+    #     floatable = True
+    # except:
+    #     floatable = False
+    
+    # try:
+    #     int(input_df_string)
+    #     intable = True  
+    # except:
+    #     intable = False
+        
+    # if '.' in input_df_string and floatable:
+    #     return float(input_df_string)
+    # elif intable:
+    #     return int(input_df_string)
+    # else:
+    #     return str(input_df_string)    
+
+    # # Check if it's an iterator
+    # explicit_iterator_types = ['[', '{']    
+    # for explicit_iterator_type in explicit_iterator_types:
+    #     if input_df_string.startswith(explicit_iterator_type):
+    #         if explicit_iterator_type == '[':
+    #             input_df_string = input_df_string.replace(', ', ',').replace(' ', ',')
+    #             return [parse_flex_to_python_object(i) for i in input_df_string[1:-2].split(',')]
+    #         elif explicit_iterator_type == '{':
+    #             input_df_string = input_df_string.replace(', ', ',').replace(' ', ',')
+    #             return {i.split(':')[0]: parse_flex_to_python_object(i.split(':')[1]) for i in input_df_string[1:-2].split(',')}
+            
+            
+    # # Check if it's an implied iterator
+    # has_implicit_iterator = False
+    # implicit_iterator_types = [', ', ' ', ',']
+    # for implicit_iterator_type in implicit_iterator_types:
+    #     if implicit_iterator_type in input_df_string:
+    #         has_implicit_iterator = True
+            
+    # if has_implicit_iterator:
+    #     # Replace all of them with a uniform one
+    #     input_df_string = input_df_string.replace(implicit_iterator_types[0], ',').replace(implicit_iterator_types[1], ',')
+    #     split_input = input_df_string.split(implicit_iterator_types[-1])
+    #     for item in split_input:
+    #         if ':' in item:
+    #             return {item.split(':')[0]: parse_flex_to_python_object(item.split(':')[1]) }
+    #         else:
+    #             return [parse_flex_to_python_object(i) for i in item]
+            
+    # # Then it's a basic type
+    # try:
+    #     float(input_df_string)
+    #     floatable = True
+    # except:
+    #     floatable = False
+    
+    # try:
+    #     int(input_df_string)
+    #     intable = True  
+    # except:
+    #     intable = False
+        
+    # if '.' in input_df_string and floatable:
+    #     return float(input_df_string)
+    # elif intable:
+    #     return int(input_df_string)
+    # else:
+    #     return str(input_df_string)
+    
+    
+    
+    
+    
+    # Check if it's json
+    
+    # # Check if it is an iterable
+    # if ' ' in input_df_string or ',' in input_df_string:
+    #     split = input_df_string.split(' ').split(', ').split(',')
+    #     for i in split:
+    #         if ':' in i:
+    #             output_type = 'dict'
+    #             to_return = {}
+    #         elif i.startswith('{'):
+    #             output_type = 'dict'
+    #             to_return = {}
+    #         elif i.startswith('['):
+    #             output_type = 'list'
+    #             to_return = []
+    #         elif i.startswith('int('):
+    #             output_type = 'int'
+    #         elif i.startswith('float('):
+    #             output_type = 'float'
+    #         elif i.startswith('str('):
+    #             output_type = 'str'
+    #         else:
+    #             output_type = 'list'
+    #             to_return = []
+        
+    #     for i in split:
+    #         if output_type == 'dict':
+    #             if ':' in i:
+    #                 split2 = i.split(':')
+    #                 key = split2[0]
+    #                 value = split2[1]
+    #                 value = parse_flex_to_python_object(value)
+    #                 to_return[key] = value
+    #         elif output_type == 'int':
+    #             to_return = int(i[4:-1])
+    #         elif output_type == 'float':
+    #             to_return = float(i[6:-1])
+    #         elif output_type == 'str':
+    #             to_return = str(i[4:-1])
+    #         else:
+    #             to_return.append(parse_flex_to_python_object(i))
+    # else:
+        
+    #     if ':' in input_df_string:
+    #         output_type = 'dict'
+    #         to_return = {}
+    #         split = input_df_string.split(':')
+    #         to_return[split[0]] = split[1]
+    #     elif input_df_string.startswith('{'):
+    #         output_type = 'dict'
+    #         to_return = {}
+    #         removed_brackets = input_df_string[1:-1]
+    #         split = input_df_string.split(':')
+    #         to_return[split[0]] = split[1]            
+            
+    #     elif input_df_string.startswith('['):
+    #         output_type = 'list'
+    #         to_return = []
+    #         to_return.append(input_df_string(i))
+    #     elif i.startswith('int('):
+    #         output_type = 'int'
+    #     elif i.startswith('float('):
+    #         output_type = 'float'
+    #     elif i.startswith('str('):
+    #         output_type = 'str'
+    #     else:
+    #         output_type = 'list'
+    #         to_return = []        
+    
+        
+
+    #     if input_df_string.startswith('int('):
+    #         to_return = int(input_df_string[4:-1])
+    #     elif input_df_string.startswith('float('):
+    #         to_return = float(input_df_string[6:-1])
+    #     elif input_df_string.startswith('str('):
+    #         to_return = str(input_df_string[4:-1])
+    #     else:
+    #         to_return = input_df_string
+
+    # if verbose:
+    #     hb.log('parse_flex_to_python_object:\n' + input_df_string + '\nparsed to\n' + str(to_return))
+    # return to_return
+    
+def split_respecting_nesting(s, delimiter):
+    parts = []
+    bracket_level = 0
+    brace_level = 0
+    start_index = 0
+    
+    for i, char in enumerate(s):
+        if char == '[':
+            bracket_level += 1
+        elif char == ']':
+            bracket_level -= 1 # Consider error check: level shouldn't go below 0
+        elif char == '{':
+            brace_level += 1
+        elif char == '}':
+            brace_level -= 1 # Consider error check: level shouldn't go below 0
+        elif char == delimiter and bracket_level == 0 and brace_level == 0:
+            # Found a top-level comma
+            parts.append(s[start_index:i].strip()) # Add the segment, stripping whitespace
+            start_index = i + 1 # Start the next segment after the comma
+    
+    # Add the last part (from the last comma to the end)
+    parts.append(s[start_index:].strip()) 
+    
+    # Filter out potentially empty strings if the input starts/ends with commas
+    # or has consecutive top-level commas (though not in the example)
+    # parts = [p for p in parts if p] # Optional: remove empty strings if needed
+
+    return parts
