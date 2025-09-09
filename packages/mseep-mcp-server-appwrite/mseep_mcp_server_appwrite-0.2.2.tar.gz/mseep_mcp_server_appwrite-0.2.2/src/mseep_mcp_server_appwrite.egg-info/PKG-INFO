@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-appwrite
+Version: 0.2.2
+Summary: MCP (Model Context Protocol) server for Appwrite
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: appwrite>=11.1.0
+Requires-Dist: docstring-parser>=0.16
+Requires-Dist: mcp[cli]>=1.3.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
