@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-arxiv-latex-mcp
+Version: 0.1.6
+Summary: An MCP server that fetches and processes arXiv papers using LaTeX source for accurate equation handling
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: arxiv-to-prompt>=0.1.1
+Dynamic: license-file
+
+Package managed by MseeP.ai
