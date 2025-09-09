@@ -1,0 +1,179 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-fiber"
+dynamic = ["version"]
+description = "A thin, fast, observable Python client for LLMs"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Aimless"}
+]
+maintainers = [
+    {name = "Aimless"}
+]
+keywords = ["llm", "ai", "openai", "anthropic", "gemini", "chat", "completion", "streaming", "async"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "httpx>=0.24.0",
+    "typing-extensions>=4.0.0; python_version<'3.10'",
+]
+
+[project.optional-dependencies]
+otel = [
+    "opentelemetry-api>=1.15.0",
+    "opentelemetry-sdk>=1.15.0",
+    "opentelemetry-exporter-otlp>=1.15.0",
+]
+statsd = [
+    "statsd>=3.3.0",
+]
+structlog = [
+    "structlog>=22.1.0",
+]
+tokens = [
+    "tiktoken>=0.4.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "psutil>=5.0.0",
+    "hatch>=1.9.0",
+    "ruff>=0.12.12",
+]
+all = [
+    "opentelemetry-api>=1.15.0",
+    "opentelemetry-sdk>=1.15.0",
+    "opentelemetry-exporter-otlp>=1.15.0",
+    "statsd>=3.3.0",
+    "structlog>=22.1.0",
+    "tiktoken>=0.4.0",
+]
+docs = [
+    "sphinx>=7.0.0",
+    "furo>=2024.0.0",
+    "myst-parser>=2.0.0",
+    "sphinx-autobuild>=2021.3.14",
+]
+
+[project.urls]
+Homepage = "https://github.com/aimlesx/llm-fiber"
+Documentation = "https://github.com/aimlesx/llm-fiber/blob/main/docs/index.md"
+Repository = "https://github.com/aimlesx/llm-fiber"
+"Bug Tracker" = "https://github.com/aimlesx/llm-fiber/issues"
+
+[tool.hatch.version]
+path = "src/llm_fiber/__init__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest>=7.0.0",
+  "pytest-asyncio>=0.21.0",
+  "pytest-cov>=4.0.0",
+  "mypy>=1.0.0",
+  "pre-commit>=3.0.0",
+  "psutil>=5.0.0",
+  "ruff>=0.12.12",
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args}"
+lint = "ruff check . --diff"
+"lint:fix" = "ruff check . --fix"
+fmt = "ruff format ."
+
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+# E = pycodestyle errors, W = pycodestyle warnings, F = pyflakes, I = isort
+select = ["E", "W", "F", "I"]
+
+[tool.ruff.format]
+
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "structlog.*",
+    "tiktoken.*",
+    "statsd.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--cov=src/llm_fiber",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.coverage.run]
+source = ["src/llm_fiber"]
+branch = true
+
+[tool.coverage.paths]
+source = [
+    "src/",
+    "*/site-packages/",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 74
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
