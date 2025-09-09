@@ -1,0 +1,12 @@
+Metadata-Version: 2.3
+Name: golem-streaming-abi
+Version: 0.1.1
+Summary: Shared StreamPayment and ERC20 ABI definitions for VM on Golem
+Author: VM on Golem Contributors
+Requires-Python: >=3.9,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
