@@ -1,0 +1,98 @@
+[project]
+name = "mseep-mcp-llm-bridge"
+version = "0.1.4"
+description = "Bridge between MCP protocol and LLM clients"
+requires-python = ">=3.12"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp>=1.0.0",
+    "openai>=1.0.0",
+    "python-dotenv>=0.19.0",
+    "pydantic>=2.0.0",
+    "asyncio>=3.4.3",
+    "aiohttp>=3.8.0",
+    "typing-extensions>=4.0.0",
+    "colorlog>=6.9.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-mock>=3.10.0",
+    "pytest-aiohttp>=1.0.4",
+]
+
+[tool.poetry]
+name = "mseep-mcp-llm-bridge"
+version = "0.1.4"
+description = "Bridge between MCP protocol and LLM clients"
+authors = [
+    "mseep <support@skydeck.ai>",
+]
+packages = [
+    { include = "mcp_llm_bridge", from = "src" },
+]
+
+[tool.poetry.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+mcp = ">=1.0.0"
+openai = ">=1.0.0"
+python-dotenv = ">=0.19.0"
+pydantic = ">=2.0.0"
+asyncio = ">=3.4.3"
+aiohttp = ">=3.8.0"
+typing-extensions = ">=4.0.0"
+colorlog = ">=6.9.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.0.0"
+pytest-asyncio = ">=0.21.0"
+pytest-mock = ">=3.10.0"
+pytest-aiohttp = ">=1.0.4"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = [
+    "src",
+]
+include = [
+    "mcp_llm_bridge*",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+]
+
+[build-system]
+requires = [
+    "setuptools>=45",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

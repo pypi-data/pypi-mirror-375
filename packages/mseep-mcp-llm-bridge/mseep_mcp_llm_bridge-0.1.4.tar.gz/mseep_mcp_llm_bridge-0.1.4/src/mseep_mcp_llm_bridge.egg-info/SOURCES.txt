@@ -1,0 +1,17 @@
+LICENSE.md
+README.md
+pyproject.toml
+src/mcp_llm_bridge/__init__.py
+src/mcp_llm_bridge/bridge.py
+src/mcp_llm_bridge/config.py
+src/mcp_llm_bridge/create_test_db.py
+src/mcp_llm_bridge/llm_client.py
+src/mcp_llm_bridge/main.py
+src/mcp_llm_bridge/mcp_client.py
+src/mcp_llm_bridge/tools.py
+src/mseep_mcp_llm_bridge.egg-info/PKG-INFO
+src/mseep_mcp_llm_bridge.egg-info/SOURCES.txt
+src/mseep_mcp_llm_bridge.egg-info/dependency_links.txt
+src/mseep_mcp_llm_bridge.egg-info/requires.txt
+src/mseep_mcp_llm_bridge.egg-info/top_level.txt
+tests/test_bridge.py
