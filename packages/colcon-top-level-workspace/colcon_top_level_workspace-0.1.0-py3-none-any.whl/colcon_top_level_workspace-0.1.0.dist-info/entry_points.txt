@@ -1,0 +1,2 @@
+[colcon_core.argument_parser]
+top_level_workspace = colcon_top_level_workspace:TopLevelWorkspaceArgumentParserDecorator
