@@ -1,0 +1,79 @@
+Metadata-Version: 2.4
+Name: fmtool
+Version: 1.0.0
+Summary: Cross-platform Python file manager
+Author: Abbas Bachari
+Author-email: Abbas Bachari <abbas-bachari@hotmail.com>
+License-Expression: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: license-file
+Dynamic: requires-python
+
+
+<h1 align="center">🚀 FmTool: Manage Files Easily Across Any OS</h1>
+<p align="center">
+    <a href="https://pypi.org/project/fmtool/"><img src="https://img.shields.io/pypi/v/fmtool?style=plastic" alt="PyPI - Version"></a>
+    <a href="https://github.com/abbas-bachari/fmtool"><img src="https://img.shields.io/badge/Python%20-3.8+-green?style=plastic&logo=Python" alt="Python"></a>
+    <a href="https://pypi.org/project/fmtool/"><img src="https://img.shields.io/pypi/l/fmtool?style=plastic" alt="License"></a>
+    <a href="https://pepy.tech/project/fmtool"><img src="https://pepy.tech/badge/fmtool?style=flat-plastic" alt="Downloads"></a>
+</p>
+
+## 🛠️ Version: 1.0.1
+
+**FmTool** is a modern Python package for managing files and directories, designed to work consistently across all operating systems (Windows, Linux, macOS).
+
+## Features
+
+- List files and directories with filters and search
+- Read and write text and bytes
+- Create, delete, and rename files and directories
+- Zip and unzip directories
+- Inspect file status (size, modification time, permissions)
+- Compute file hashes (SHA256 and other algorithms)
+- Cross-platform and easy to use in scripts and projects
+
+## Installation
+
+```bash
+pip install fmtool
+```
+
+## Quick Start
+
+```python
+from fmtool import FileManager,Path
+
+fm = FileManager('.')
+fm.touch('example.txt')
+fm.write_text('example.txt', 'Hello World!')
+content = fm.read_text('example.txt')
+print(content)
+
+
+fm=FileManager(base = Path(__file__).parent)
+
+print(fm.resolve('data'))
+
+
+```
+
+## Links
+
+- [PyPI](https://pypi.org/project/fmtool/)
+- [GitHub](https://github.com/yourusername/fmtool)
+
+## License
+
+FmTool is released under the MIT License.
+
+## 👤 About the Author
+
+**Abbas Bachari / عباس بچاری** – Developer & Maintainer of **FmTool**
+
+- 📧 Telegram: [@abbas_bachari](https://t.me/abbas_bachari)  
+- 🌐 GitHub: [github.com/abbas-bachari](https://github.com/abbas-bachari)
