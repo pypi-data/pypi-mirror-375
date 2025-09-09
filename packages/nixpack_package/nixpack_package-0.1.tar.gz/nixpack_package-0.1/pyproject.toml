@@ -1,0 +1,60 @@
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[project]
+name = "nixpack_package"
+dynamic = []
+requires-python = ">=3.11"
+readme = "README.md"
+description = ""
+dependencies = [
+    "fastapi[standard]>=0.116.1",
+    "gunicorn>=23.0.0",
+]
+version = "0.1"
+
+[project.urls]
+"Bug Tracker" = "https://github.com/johncloud-paas/stacks/nixpack_package/-/issues"
+Homepage = "https://github.com/johncloud-paas/stacks/nixpack_package"
+Source = "https://github.com/johncloud-paas/stacks/nixpack_package"
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pdm.version]
+source = "scm"
+
+[tool.black]
+line-length = 100
+target-version = [
+    "py310",
+]
+
+[tool.uv]
+resolution = "highest"
+
+[dependency-groups]
+dev = [
+    "black==22.3.0",
+    "ipython>=8.30.0",
+    "pre-commit>=4.0.1",
+]
+doc = [
+    "pdoc3>=0.11.3",
+    "pylint>=3.3.2",
+]
+test = [
+    "pyyaml>=6.0.2",
+    "pytest-asyncio>=0.25.0",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "pytest-html>=4.1.1",
+    "pytest-instafail>=0.5.0",
+    "pytest-mock>=3.14.0",
+    "pytest-picked>=0.5.1",
+    "pytest-sugar>=1.0.0",
+    "pytest-xdist>=3.6.1",
+]

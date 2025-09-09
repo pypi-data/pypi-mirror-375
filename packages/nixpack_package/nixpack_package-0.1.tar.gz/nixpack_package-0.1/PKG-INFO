@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: nixpack_package
+Version: 0.1
+Project-URL: Bug Tracker, https://github.com/johncloud-paas/stacks/nixpack_package/-/issues
+Project-URL: Homepage, https://github.com/johncloud-paas/stacks/nixpack_package
+Project-URL: Source, https://github.com/johncloud-paas/stacks/nixpack_package
+Requires-Python: >=3.11
+Requires-Dist: fastapi[standard]>=0.116.1
+Requires-Dist: gunicorn>=23.0.0
+Description-Content-Type: text/markdown
+
