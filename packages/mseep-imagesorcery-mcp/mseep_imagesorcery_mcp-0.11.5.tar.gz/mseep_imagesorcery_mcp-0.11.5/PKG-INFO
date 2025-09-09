@@ -1,0 +1,40 @@
+Metadata-Version: 2.4
+Name: mseep-imagesorcery-mcp
+Version: 0.11.5
+Summary: A Model Context Protocol server providing image manipulation tools for LLMs
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/sunriseapps/imagesorcery-mcp
+Project-URL: Repository, https://github.com/sunriseapps/imagesorcery-mcp
+Keywords: mcp,llm
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=2.10.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: opencv-python>=4.5.0
+Requires-Dist: imutils>=0.5.4
+Requires-Dist: Pillow
+Requires-Dist: ultralytics
+Requires-Dist: requests
+Requires-Dist: tqdm
+Requires-Dist: huggingface_hub
+Requires-Dist: easyocr
+Requires-Dist: toml
+Requires-Dist: amplitude-analytics
+Requires-Dist: posthog
+Requires-Dist: python-dotenv
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: pytest-asyncio; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Provides-Extra: clip
+Dynamic: license-file
+
+Package managed by MseeP.ai

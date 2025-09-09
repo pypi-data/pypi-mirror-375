@@ -1,0 +1,115 @@
+[project]
+name = "mseep-imagesorcery-mcp"
+version = "0.11.5"
+description = "A Model Context Protocol server providing image manipulation tools for LLMs"
+requires-python = ">=3.10"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+keywords = [
+    "mcp",
+    "llm",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "fastmcp>=2.10.0",
+    "pydantic>=2.0.0",
+    "opencv-python>=4.5.0",
+    "imutils>=0.5.4",
+    "Pillow",
+    "ultralytics",
+    "requests",
+    "tqdm",
+    "huggingface_hub",
+    "easyocr",
+    "toml",
+    "amplitude-analytics",
+    "posthog",
+    "python-dotenv",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/sunriseapps/imagesorcery-mcp"
+Repository = "https://github.com/sunriseapps/imagesorcery-mcp"
+
+[project.scripts]
+imagesorcery-mcp = "imagesorcery_mcp:main"
+download-yolo-models = "imagesorcery_mcp.scripts.download_models:main"
+create-model-descriptions = "imagesorcery_mcp.scripts.create_model_descriptions:main"
+download-clip-models = "imagesorcery_mcp.scripts.download_clip:main"
+post-install-imagesorcery = "imagesorcery_mcp.scripts.post_install:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "pytest-asyncio",
+    "build",
+    "twine",
+]
+clip = []
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+target-version = "py310"
+src = [
+    "src",
+    "tests",
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "B",
+    "I",
+]
+ignore = [
+    "E501",
+]
