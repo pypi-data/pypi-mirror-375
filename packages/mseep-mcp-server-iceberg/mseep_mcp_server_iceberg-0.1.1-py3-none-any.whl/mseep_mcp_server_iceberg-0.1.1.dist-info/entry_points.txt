@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-server-iceberg = mcp_server_iceberg.server:run_server
