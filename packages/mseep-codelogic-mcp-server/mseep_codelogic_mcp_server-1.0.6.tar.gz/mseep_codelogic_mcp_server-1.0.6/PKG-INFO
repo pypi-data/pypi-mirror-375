@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-codelogic-mcp-server
+Version: 1.0.6
+Summary: Integrates CodeLogic's powerful codebase knowledge graphs with a Model Context Protocol (MCP) server
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MPL-2.0
+Project-URL: Homepage, https://github.com/CodeLogicIncEngineering/codelogic-mcp-server
+Project-URL: Bug Tracker, https://github.com/CodeLogicIncEngineering/codelogic-mcp-server/issues
+Project-URL: Documentation, https://github.com/CodeLogicIncEngineering/codelogic-mcp-server#readme
+Keywords: codelogic,mcp,code-analysis,knowledge-graph,static-analysis
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Environment :: Console
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: debugpy>=1.8.12
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.3.0
+Requires-Dist: pip-licenses>=5.0.0
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: tenacity>=9.0.0
+Requires-Dist: toml>=0.10.2
+Dynamic: license-file
+
+Package managed by MseeP.ai

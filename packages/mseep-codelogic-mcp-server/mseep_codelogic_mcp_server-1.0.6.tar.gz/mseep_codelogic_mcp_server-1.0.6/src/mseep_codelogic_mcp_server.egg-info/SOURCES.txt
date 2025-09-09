@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/start_server.py
+src/codelogic_mcp_server/__init__.py
+src/codelogic_mcp_server/handlers.py
+src/codelogic_mcp_server/server.py
+src/codelogic_mcp_server/utils.py
+src/mseep_codelogic_mcp_server.egg-info/PKG-INFO
+src/mseep_codelogic_mcp_server.egg-info/SOURCES.txt
+src/mseep_codelogic_mcp_server.egg-info/dependency_links.txt
+src/mseep_codelogic_mcp_server.egg-info/entry_points.txt
+src/mseep_codelogic_mcp_server.egg-info/requires.txt
+src/mseep_codelogic_mcp_server.egg-info/top_level.txt
+test/test_env.py
+test/test_fixtures.py
