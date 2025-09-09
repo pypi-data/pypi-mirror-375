@@ -1,0 +1,163 @@
+[activation.env]
+PYTHONIOENCODING = "utf-8"
+# The following is needed to resolve issues installing easydiffraction
+# from a local path in editable mode in the default environment. With src/
+# included in PYTHONPATH, we use the source code directly in the first place,
+# instead of the installed package.
+PYTHONPATH = "$(pwd)/src${PYTHONPATH:+:$PYTHONPATH}"
+
+[workspace]
+# Platforms supported for the lock file (pixi.lock)
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+# Channels used to fetch packages
+channels = ["conda-forge"]
+
+##########
+# FEATURES
+##########
+
+# Default feature configuration
+
+[dependencies] # == [feature.default.dependencies]
+pip = ">=25.2,<26"        # Required to install from PyPI
+jupyterlab = ">=4.4.7,<5" # JupyterLab for notebooks
+
+[target.win-64.dependencies]
+libcblas = "*" # CBLAS library for linear algebra. Required for pdffit2.
+
+[pypi-dependencies] # == [feature.default.pypi-dependencies]
+pixi-kernel = ">=0.6.6, <0.7" # Pixi Jupyter kernel integration
+
+# Extra features for different Python versions
+
+# These features specify the Python version for the environment.
+# Each feature corresponds to a specific Python version.
+
+[feature.py311.dependencies]
+python = "3.11.*"
+
+[feature.py312.dependencies]
+python = "3.12.*"
+
+[feature.py313.dependencies]
+python = "3.13.*"
+
+# This feature is for development in CI, where easydiffraction
+# is installed from the local source code defined in pyproject.toml.
+# This ensures that local lock file updates work in CI.
+
+[feature.ed-local.pypi-dependencies]
+easydiffraction = { path = ".", extras = ["dev", "visualization"] }
+
+# This feature is used to build documentation, where the package is
+# installed from PyPI with additional dependencies needed for building
+# the docs.
+
+[feature.ed-local-with-docs.pypi-dependencies]
+easydiffraction = { path = ".", extras = ["dev", "visualization", "docs"] }
+
+# This feature is used when the easydiffraction package is installed from PyPI.
+
+[feature.ed-pypi.pypi-dependencies]
+easydiffraction = { version = "*", extras = ["dev", "visualization"] }
+
+# This feature installs Node.js and Prettier for formatting
+# non-Python files.
+
+[feature.nodejs.dependencies]
+nodejs = ">=20,<21" # Required for prettier; pinned to a stable LTS
+
+##############
+# ENVIRONMENTS
+##############
+
+[environments]
+
+# The `default` environment is always included in the lock file, so it does not
+# need to be specified explicitly in the environments section.
+
+default = { features = ["py313", "ed-local", "nodejs"] }
+
+py311-dev = { features = ["py311", "ed-local", "nodejs"] }
+py312-dev = { features = ["py312", "ed-local", "nodejs"] }
+py313-dev = { features = ["py313", "ed-local", "nodejs"] }
+
+py313-docs = { features = ["py313", "ed-local-with-docs"] }
+
+py313-prod = { features = ["py313", "ed-pypi"] }
+
+#######
+# TASKS
+#######
+
+[tasks]
+
+# 🧪 Testing Tasks
+unit-tests = "python -m pytest tests/unit/ --color=yes -v"
+func-tests = "python -m pytest tests/functional/ --color=yes -n auto -v"
+notebook-tests = 'python -m pytest --nbmake tutorials/ --nbmake-timeout=600 --color=yes -n auto -v'
+script-tests = 'python -m pytest tools/test_scripts.py --color=yes -n auto -v'
+
+tests = { depends-on = ["unit-tests", "func-tests"] }
+
+# 🧹 Code Quality
+
+## ✔️ Checks
+pyproject-check = "python -m validate_pyproject pyproject.toml"
+py-lint-check = "python -m ruff check ."
+py-format-check = "python -m ruff format . --check"
+nonpy-format-check = "npx prettier . --list-different --config=prettierrc.toml"
+notebook-format-check = 'nbqa ruff tutorials/'
+
+## 🛠️ Fixes
+py-lint-fix = "python -m ruff check . --fix"
+py-format-fix = "python -m ruff format ."
+nonpy-format-fix = "npx prettier . --list-different --write --config=prettierrc.toml"
+nonpy-format-fix-modified = "npx prettier $(git diff --name-only HEAD | grep -E '\\.(json|ya?ml|toml|md|css|html)$' || echo .) --list-different --write --config=prettierrc.toml"
+notebook-format-fix = 'nbqa ruff tutorials/ --fix'
+
+code-quality = { depends-on = [
+  "pyproject-check",
+  "py-lint-fix",
+  "py-format-fix",
+  "nonpy-format-fix-modified",
+] }
+
+# 📓 Notebook Management
+notebook-convert = 'jupytext tutorials/*.py --from py:percent --to ipynb'
+notebook-strip = 'nbstripout tutorials/*.ipynb'
+notebook-tweak = 'python tools/tweak_notebooks.py tutorials/'
+notebook-clean = 'rm -f tutorials/*.ipynb'
+notebook-exec = 'python -m pytest --nbmake tutorials/ --nbmake-timeout=600 --overwrite --color=yes -n auto -v'
+
+notebook-prepare = { depends-on = [
+  "notebook-convert",
+  "notebook-strip",
+  "notebook-tweak",
+] }
+
+# 📚 Documentation Tasks
+docs-assets = "tools/add_assets_to_docs.sh"
+docs-notebooks = "mv tutorials/*.ipynb docs/tutorials/"
+docs-config = "python tools/create_mkdocs_yml.py"
+docs-serve = 'JUPYTER_PLATFORM_DIRS=1 PYTHONWARNINGS="ignore::RuntimeWarning" python -m mkdocs serve --dirty'
+docs-build = 'JUPYTER_PLATFORM_DIRS=1 PYTHONWARNINGS="ignore::RuntimeWarning" python -m mkdocs build'
+docs-clean = "tools/cleanup_docs.sh"
+docs-setup = { depends-on = [
+  "docs-config",
+  "docs-assets",
+  "notebook-prepare",
+  "docs-notebooks",
+] }
+
+# 🚀 Development & Build Tasks
+pre-commit = { depends-on = ["code-quality", "tests"] }
+dist-build = "python -m build --wheel --outdir dist"
+spdx-update = "python tools/update_spdx.py"
+prettier-install = "npm install --no-save --no-audit --no-fund prettier prettier-plugin-toml"
+
+# 🔗 Shortcuts
+easydiffraction = "python -m easydiffraction"
+tutorials-list = "python -m easydiffraction list-tutorials"
+tutorials-fetch = "python -m easydiffraction fetch-tutorials"
