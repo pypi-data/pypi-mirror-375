@@ -1,0 +1,16 @@
+[project]
+name = "mseep-hunter-mcp"
+version = "0.1.2"
+description = "An MCP interface for the Hunter API"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.8.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
