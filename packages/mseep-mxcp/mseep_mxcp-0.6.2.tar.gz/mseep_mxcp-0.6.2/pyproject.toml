@@ -1,0 +1,232 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-mxcp"
+version = "0.6.2"
+description = "Enterprise MCP framework for building production AI tools with SQL/Python, featuring security, audit trails, and policy enforcement"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+license = "BUSL-1.1"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.12,<1.14",
+    "aiohttp>=3.8.0",
+    "starlette>=0.27.0",
+    "duckdb>=0.9.2",
+    "pandas>=2.0.0",
+    "jsonschema>=4.0.0",
+    "pyyaml>=6.0.1",
+    "jinja2>=3.1.3",
+    "makefun",
+    "cel-python>=0.2.0",
+    "httpx>=0.25.0",
+    "click>=8.1.7",
+    "posthog>=3.0.0",
+    "dbt-core>=1.6.0",
+    "dbt-duckdb>=1.6.0",
+    "opentelemetry-api>=1.24.0",
+    "opentelemetry-sdk>=1.24.0",
+    "opentelemetry-exporter-otlp-proto-http>=1.24.0",
+    "opentelemetry-exporter-prometheus>=0.48b0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mxcp = "mxcp.__main__:cli"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-timeout",
+    "aioresponses",
+    "black",
+    "ruff",
+    "mypy",
+    "types-jsonschema",
+    "pandas-stubs",
+    "build",
+    "twine",
+]
+vault = [
+    "hvac>=2.0.0",
+]
+onepassword = [
+    "onepassword-sdk>=0.3.0",
+]
+all = [
+    "hvac>=2.0.0",
+    "onepassword-sdk>=0.3.0",
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-timeout",
+    "aioresponses",
+    "black",
+    "ruff",
+    "mypy",
+    "types-jsonschema",
+    "pandas-stubs",
+    "build",
+    "twine",
+]
+
+[tool.setuptools]
+packages = [
+    "mxcp",
+    "mxcp.runtime",
+    "mxcp.plugins",
+    "mxcp.server",
+    "mxcp.server.core",
+    "mxcp.server.core.auth",
+    "mxcp.server.core.config",
+    "mxcp.server.core.refs",
+    "mxcp.server.definitions",
+    "mxcp.server.definitions.endpoints",
+    "mxcp.server.definitions.evals",
+    "mxcp.server.executor",
+    "mxcp.server.executor.runners",
+    "mxcp.server.executor.session",
+    "mxcp.server.interfaces",
+    "mxcp.server.interfaces.cli",
+    "mxcp.server.interfaces.server",
+    "mxcp.server.schemas",
+    "mxcp.server.services",
+    "mxcp.server.services.audit",
+    "mxcp.server.services.dbt",
+    "mxcp.server.services.drift",
+    "mxcp.server.services.endpoints",
+    "mxcp.server.services.evals",
+    "mxcp.server.services.tests",
+    "mxcp.sdk",
+    "mxcp.sdk.audit",
+    "mxcp.sdk.audit.backends",
+    "mxcp.sdk.auth",
+    "mxcp.sdk.auth.providers",
+    "mxcp.sdk.core",
+    "mxcp.sdk.core.analytics",
+    "mxcp.sdk.core.config",
+    "mxcp.sdk.core.config.resolvers",
+    "mxcp.sdk.core.config.schemas",
+    "mxcp.sdk.evals",
+    "mxcp.sdk.executor",
+    "mxcp.sdk.executor.plugins",
+    "mxcp.sdk.executor.plugins.duckdb_plugin",
+    "mxcp.sdk.executor.plugins.python_plugin",
+    "mxcp.sdk.policy",
+    "mxcp.sdk.telemetry",
+    "mxcp.sdk.validator",
+    "mxcp.sdk.validator.decorators",
+    "mxcp.sdk.validator.decorators.schemas",
+]
+include-package-data = true
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.package-data]
+mxcp = [
+    "py.typed",
+]
+"mxcp.server.schemas" = [
+    "*.json",
+]
+"mxcp.sdk.core.config.schemas" = [
+    "*.json",
+]
+"mxcp.sdk.validator.decorators.schemas" = [
+    "*.json",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+]
+addopts = "-v"
+asyncio_mode = "auto"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
+
+[tool.black]
+line-length = 100
+target-version = [
+    "py310",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = [
+    "tests/",
+    "examples/",
+    "scripts/",
+]
+
+[tool.ruff.lint]
+select = [
+    "F",
+    "E",
+    "W",
+    "I",
+    "UP",
+    "B",
+    "SIM",
+    "C4",
+]
+ignore = [
+    "E501",
+    "B008",
+    "SIM108",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "mxcp",
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+strict_optional = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+strict = true
+explicit_package_bases = true
+packages = [
+    "mxcp",
+]
+mypy_path = "src"
+exclude = [
+    "tests/",
+    "examples/",
+    "scripts/",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.16.1",
+    "pytest>=8.4.1",
+    "ruff>=0.12.8",
+]
