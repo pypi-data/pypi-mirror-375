@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sheller-ai"
+version = "1.0.0"
+description = "AI-Powered Terminal Command Assistant - Natural Language to Commands"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Sheller Team", email = "team@sheller.com"}
+]
+keywords = ["terminal", "cli", "ai", "commands", "shell", "productivity"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Shells",
+    "Topic :: System :: System Shells",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "google-generativeai>=0.3.0",
+]
+
+[project.scripts]
+sheller-ai = "sheller.main:main_sync"
+
+[project.urls]
+Homepage = "https://sheller.com"
+Documentation = "https://docs.sheller.com"
+Repository = "https://github.com/sheller/sheller"
+Issues = "https://github.com/sheller/sheller/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
