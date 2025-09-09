@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/bicscan_mcp/__init__.py
+src/bicscan_mcp/server.py
+src/mseep_bicscan_mcp.egg-info/PKG-INFO
+src/mseep_bicscan_mcp.egg-info/SOURCES.txt
+src/mseep_bicscan_mcp.egg-info/dependency_links.txt
+src/mseep_bicscan_mcp.egg-info/entry_points.txt
+src/mseep_bicscan_mcp.egg-info/requires.txt
+src/mseep_bicscan_mcp.egg-info/top_level.txt
