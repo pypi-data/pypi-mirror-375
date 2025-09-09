@@ -1,0 +1,21 @@
+[project]
+name = "mseep-overseerr-mcp"
+version = "0.1.5"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.6.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.32.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+overseerr-mcp = "overseerr_mcp:main"

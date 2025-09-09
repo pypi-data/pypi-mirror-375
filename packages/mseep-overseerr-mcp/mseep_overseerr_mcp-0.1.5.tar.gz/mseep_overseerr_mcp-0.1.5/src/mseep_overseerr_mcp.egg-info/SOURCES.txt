@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/__init__.py
+src/mseep_overseerr_mcp.egg-info/PKG-INFO
+src/mseep_overseerr_mcp.egg-info/SOURCES.txt
+src/mseep_overseerr_mcp.egg-info/dependency_links.txt
+src/mseep_overseerr_mcp.egg-info/entry_points.txt
+src/mseep_overseerr_mcp.egg-info/requires.txt
+src/mseep_overseerr_mcp.egg-info/top_level.txt
+src/overseerr_mcp/__init__.py
+src/overseerr_mcp/overseerr.py
+src/overseerr_mcp/server.py
+src/overseerr_mcp/tools.py
