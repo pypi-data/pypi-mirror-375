@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bili-dl2"
+version = "1.0.1"
+description = "一个功能强大的B站视频下载工具，支持最高清晰度下载和自动合并"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT License"}
+authors = [
+    {name = "B站视频下载器"}
+]
+keywords = ["bilibili", "video", "download", "b站", "视频下载"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "requests>=2.28.0",
+    "qrcode>=7.3.1",
+    "Pillow>=9.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=22.10.0",
+    "flake8>=5.0.0",
+    "mypy>=0.991",
+    "pytest>=7.2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/WavesMan/bili-dl2loader"
+BugTracker = "https://github.com/WavesMan/bili-dl2loader/issues"
+Source = "https://github.com/WavesMan/bili-dl2loader"
+
+[project.scripts]
+bili-dl = "main:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+packages = ["config", "modules", "utils", "commands"]
+
+[tool.setuptools.package-data]
+"config" = ["*.json.template"]
