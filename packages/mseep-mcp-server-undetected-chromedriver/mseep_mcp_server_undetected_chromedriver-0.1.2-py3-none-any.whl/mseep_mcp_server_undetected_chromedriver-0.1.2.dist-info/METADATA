@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-undetected-chromedriver
+Version: 0.1.2
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: undetected-chromedriver>=3.5.5
+Requires-Dist: webdriver-manager>=4.0.2
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
