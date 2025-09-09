@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-simple-openai-assistant
+Version: 0.4.2
+Summary: A simple MCP server for interacting with OpenAI assistants
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=2.10.0
+Requires-Dist: openai>=1.0.0
+Provides-Extra: dev
+Requires-Dist: python-dotenv; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-asyncio; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
