@@ -1,0 +1,78 @@
+Metadata-Version: 2.4
+Name: mseep-mcp_neocoder
+Version: 0.1.1
+Summary: Neo4j-guided AI coding workflow for MCP
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: aiofiles>=23.0.0
+Requires-Dist: async-contextlib>=0.1.0
+Requires-Dist: fastmcp
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: jsonschema>=4.17.0
+Requires-Dist: loguru>=0.7.0
+Requires-Dist: matplotlib>=3.10.3
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: memory-profiler>=0.60.0
+Requires-Dist: neo4j>=5.22.0
+Requires-Dist: neo4j-rust-ext
+Requires-Dist: nltk>=3.8.0
+Requires-Dist: numba>=0.57.0
+Requires-Dist: numpy>=2.2.6
+Requires-Dist: openpyxl>=3.1.0
+Requires-Dist: pandas>=2.3.0
+Requires-Dist: plotly>=6.1.2
+Requires-Dist: psutil>=7.0.0
+Requires-Dist: pydantic>=2.11.3
+Requires-Dist: python-dateutil>=2.8.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: pytz>=2023.3
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: qdrant-client>=1.14.3
+Requires-Dist: requests>=2.28.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: scikit-learn>=1.7.0
+Requires-Dist: scipy>=1.15.3
+Requires-Dist: seaborn>=0.13.2
+Requires-Dist: sentence-transformers>=4.1.0
+Requires-Dist: spacy>=3.4.0
+Requires-Dist: statsmodels>=0.14.0
+Requires-Dist: tabulate>=0.9.0
+Requires-Dist: torch>=2.0.0; sys_platform != "darwin" or platform_machine != "arm64"
+Requires-Dist: torch<2.1.0,>=2.0.0; sys_platform == "darwin" and platform_machine == "arm64"
+Requires-Dist: torchvision>=0.15.0; sys_platform != "darwin" or platform_machine != "arm64"
+Requires-Dist: torchvision<0.16.0,>=0.15.0; sys_platform == "darwin" and platform_machine == "arm64"
+Requires-Dist: transformers>=4.20.0
+Requires-Dist: types-tabulate
+Requires-Dist: xlsxwriter>=3.1.0
+Requires-Dist: faiss-cpu>=1.7.0; sys_platform != "linux"
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: ipywidgets>=8.0.0; extra == "dev"
+Requires-Dist: jupyter>=1.0.0; extra == "dev"
+Requires-Dist: line-profiler>=4.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: notebook>=6.5.0; extra == "dev"
+Requires-Dist: pre-commit>=3.0.0; extra == "dev"
+Requires-Dist: py-spy>=0.3.14; extra == "dev"
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: myst-parser>=0.18.0; extra == "docs"
+Requires-Dist: sphinx>=5.0.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.2.0; extra == "docs"
+Provides-Extra: gpu
+Requires-Dist: cupy-cuda11x>=11.0.0; extra == "gpu"
+Requires-Dist: nvidia-ml-py>=11.0.0; extra == "gpu"
+Dynamic: license-file
+
+Package managed by MseeP.ai
