@@ -1,0 +1,37 @@
+## Here's my code: 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "iflow-mcp_mcp-server-baidu-digitalhuman"
+version = "0.1.3"
+dependencies = [
+    "mcp>=1.8.0"
+]
+requires-python = ">=3.12"
+authors = [{ name = "baidu-xiling" }]
+description = "MCP Server Baidu Digital Human"
+maintainers = [{ name = "xiling", email = "xiling_baidu@126.com" }]
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+keywords = ["http", "mcp", "digitalhuman", "baidu"]
+classifiers = [
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Homepage = "https://xiling.cloud.baidu.com"
+Documentation = "https://cloud.baidu.com/doc/AI_DH/index.html"
+Issues = "https://console.bce.baidu.com/support/#/ticket/#/ticket/create"
+
+[project.scripts]
+mcp-server-baidu-digitalhuman = "mcp_server_baidu_digitalhuman:main"
+
+[dependency-groups]
+dev = [
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_server_baidu_digitalhuman"]
