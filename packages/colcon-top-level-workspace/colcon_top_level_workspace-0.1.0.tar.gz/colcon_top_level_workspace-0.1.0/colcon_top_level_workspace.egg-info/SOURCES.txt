@@ -1,0 +1,16 @@
+LICENSE
+README.md
+setup.cfg
+setup.py
+colcon_top_level_workspace/__init__.py
+colcon_top_level_workspace/argument_parser.py
+colcon_top_level_workspace.egg-info/PKG-INFO
+colcon_top_level_workspace.egg-info/SOURCES.txt
+colcon_top_level_workspace.egg-info/dependency_links.txt
+colcon_top_level_workspace.egg-info/entry_points.txt
+colcon_top_level_workspace.egg-info/requires.txt
+colcon_top_level_workspace.egg-info/top_level.txt
+colcon_top_level_workspace.egg-info/zip-safe
+test/test_copyright_license.py
+test/test_flake8.py
+test/test_spell_check.py

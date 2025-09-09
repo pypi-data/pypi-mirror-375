@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: colcon-top-level-workspace
+Version: 0.1.0
+Summary: Extension for colcon to locate and use a top-level workspace
+Home-page: https://colcon.readthedocs.io
+Author: Robert Haschke
+Author-email: rhaschke@techfak.uni-bielefeld.de
+License: Apache License, Version 2.0
+Project-URL: GitHub, https://github.com/rhaschke/colcon-top-level-workspace
+Keywords: colcon
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Plugins
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Build Tools
+Requires-Python: >=3.6
+License-File: LICENSE
+Requires-Dist: colcon-core>=0.13.0
+Provides-Extra: test
+Requires-Dist: flake8<6,>=3.6.0; extra == "test"
+Requires-Dist: flake8-blind-except; extra == "test"
+Requires-Dist: flake8-builtins; extra == "test"
+Requires-Dist: flake8-class-newline; extra == "test"
+Requires-Dist: flake8-comprehensions; extra == "test"
+Requires-Dist: flake8-deprecated; extra == "test"
+Requires-Dist: flake8-docstrings; extra == "test"
+Requires-Dist: flake8-import-order; extra == "test"
+Requires-Dist: flake8-quotes; extra == "test"
+Requires-Dist: pep8-naming; extra == "test"
+Requires-Dist: pylint; extra == "test"
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: scspell3k>=2.2; extra == "test"
+Dynamic: license-file
+
+colcon-top-level-workspace
+==========================
+
+An extension for [`colcon-core`](https://github.com/colcon/colcon-core) to allow running from any subfolder of a workspace.
+
+This package allows running `colcon` from any subfolder of a colcon workspace, but reusing
+existing `build`, `install`, and `log` folders from the root folder of the workspace.
+
+The root of the workspace is determined by looking for the `.colcon_root` marker file, which is created on first invocation.
+Alternatively, the existence of `build`, `install`, and `log` folders indicates the root folder.
+
+Package discovery is done relative to the current working directory. Thus, to build all packages in the current folder, just run `colcon build`.
+To build all packages in the workspace, specify the special token `ROOT` for the `--base-paths` argument: `colcon build --base-paths ROOT`.
