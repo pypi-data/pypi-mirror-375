@@ -1,0 +1,7 @@
+mcp[cli]>=0.1.0
+matlabengine
+pydantic>=2.0.0
+pillow
+
+[dev]
+uv>=0.1.0

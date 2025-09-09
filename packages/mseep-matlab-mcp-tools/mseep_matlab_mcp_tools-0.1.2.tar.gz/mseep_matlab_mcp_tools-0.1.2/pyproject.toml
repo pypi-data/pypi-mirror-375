@@ -1,0 +1,64 @@
+[project]
+name = "mseep-matlab-mcp-tools"
+version = "0.1.2"
+description = "MCP server for MATLAB integration with Cline"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp[cli]>=0.1.0",
+    "matlabengine",
+    "pydantic>=2.0.0",
+    "pillow",
+]
+requires-python = ">=3.10"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+file = "LICENSE"
+
+[project.optional-dependencies]
+dev = [
+    "uv>=0.1.0",
+]
+
+[project.scripts]
+matlab-mcp-server = "matlab_mcp.server:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+    "matlab_mcp",
+]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+]
+ignore = [
+    "E501",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+    "matlab_mcp",
+]
