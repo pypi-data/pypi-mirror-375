@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-imf-data-mcp
+Version: 0.1.4
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.9.1
+Requires-Dist: requests>=2.32.3
+Dynamic: license-file
+
+Package managed by MseeP.ai
