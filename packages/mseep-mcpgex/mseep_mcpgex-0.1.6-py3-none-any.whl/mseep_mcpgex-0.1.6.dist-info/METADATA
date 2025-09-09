@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: mseep-mcpgex
+Version: 0.1.6
+Summary: MCP server for testing and validating regex patterns against test cases
+Project-URL: Homepage, https://github.com/PatzEdi
+Project-URL: Repository, https://github.com/PatzEdi/MCPGex
+Project-URL: Bug Tracker, https://github.com/PatzEdi/MCPGex/issues
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Keywords: mcp,regex finder,regex llm,regex mcp
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Requires-Dist: mcp>=0.1.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
