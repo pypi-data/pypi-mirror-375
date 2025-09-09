@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: kcntools
+Version: 1.0.2
+Summary: kc ai nlp tools
+Home-page: https://ezone.ksyun.com/code/ai-app/kcntools/-/tree
+Author: xuen
+Author-email: xuen@kingsoft.com
+Project-URL: Bug Reports, https://ezone.ksyun.com/code/ai-app/kcntools/-/tree
+Keywords: machine-learning,deep-learning,ml,pytorch,YOLO,object-detection,YOLOv3,YOLOv4,YOLOv5
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Education
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Image Recognition
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.7, <4
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == "dev"
+Provides-Extra: test
+Requires-Dist: coverage; extra == "test"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-python
+Dynamic: summary
+
+## KCNtools Pip Project
+
+![Python Logo](https://www.python.org/static/community_logos/python-logo.png "Sample inline image")
+
+这是一个NLP的python项目，目的是解决ai项目组中常用到的NLP工具集合，该工具提供基本的字符串搜索，nromaize等工具
+
+## Requirements
+
+Python 3.8 or later with all requirements.txt
+dependencies installed, including `build` and `twine`. To install run:
+
+```bash
+python -m pip install -U pip
+pip install -r requirements.txt
+```
+
+## Pip Package Steps
+
+### https://pypi.org/
+
+```bash
+# Build and upload https://pypi.org/
+rm -rf build dist && python3 -m build && python3 -m twine upload -r ezone_snapshot_pypi_ai-repo dist/*
+# username: __token__
+# password: pypi-AgENdGVzdC5weXBpLm9yZ...
+
+# Download and install
+pip install -U kcntools
+```
+
+some sample python code
+
+```python
+
+from kcntools.strutils import normalize
+from kcntools.chutils import wordLen,charSplit,charType
+from kcntools.darray import Compile 
+# 规范化同形异码字
+print(normalize('test code ！这是一个测试，看看?'))
+print(wordLen('test code ！这是一个测试，看看?'))
+```
