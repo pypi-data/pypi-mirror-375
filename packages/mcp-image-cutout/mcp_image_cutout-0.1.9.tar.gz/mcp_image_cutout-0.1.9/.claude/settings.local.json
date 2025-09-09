@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/fengjinchao/**)",
+      "Bash(pkill:*)",
+      "Bash(uvx:*)",
+      "Bash(uv cache:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
