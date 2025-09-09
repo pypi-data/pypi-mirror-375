@@ -1,0 +1,3 @@
+[console_scripts]
+enhanced-git = gitai.cli:app
+git-ai = gitai.cli:app
