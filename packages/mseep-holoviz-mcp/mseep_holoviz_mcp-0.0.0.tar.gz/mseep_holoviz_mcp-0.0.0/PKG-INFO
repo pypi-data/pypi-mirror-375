@@ -1,0 +1,59 @@
+Metadata-Version: 2.4
+Name: mseep-holoviz-mcp
+Version: 0.0.0
+Summary: A Model Context Protocol (MCP) server for the HoloViz ecosystem
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: MarcSkovMadsen <marc.skov.madsen@gmail.com>
+License: BSD
+Project-URL: Homepage, https://github.com/MarcSkovMadsen/holoviz-mcp
+Project-URL: Source, https://github.com/MarcSkovMadsen/holoviz-mcp
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Natural Language :: English
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE.txt
+Requires-Dist: certifi
+Requires-Dist: chromadb
+Requires-Dist: fastmcp
+Requires-Dist: GitPython
+Requires-Dist: packaging
+Requires-Dist: nbconvert
+Requires-Dist: panel
+Requires-Dist: pydantic>=2.0
+Requires-Dist: PyYAML
+Provides-Extra: dev
+Requires-Dist: mkdocs-material; extra == "dev"
+Requires-Dist: mkdocs; extra == "dev"
+Requires-Dist: mkdocstrings[python]; extra == "dev"
+Requires-Dist: mkdocs_pycafe; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: pytest-asyncio; extra == "dev"
+Requires-Dist: pytest-rerunfailures; extra == "dev"
+Requires-Dist: pytest-xdist; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: types-PyYAML; extra == "dev"
+Requires-Dist: watchfiles; extra == "dev"
+Provides-Extra: mypy
+Requires-Dist: mypy; extra == "mypy"
+Requires-Dist: types-requests; extra == "mypy"
+Requires-Dist: typing-extensions; extra == "mypy"
+Provides-Extra: panel-extensions
+Requires-Dist: panel-full-calendar; extra == "panel-extensions"
+Requires-Dist: panel-graphic-walker; extra == "panel-extensions"
+Requires-Dist: panel-material-ui; extra == "panel-extensions"
+Requires-Dist: panel-neuroglancer; extra == "panel-extensions"
+Requires-Dist: panel-precision-slider; extra == "panel-extensions"
+Requires-Dist: panel-web-llm; extra == "panel-extensions"
+Dynamic: license-file
+
+Package managed by MseeP.ai
