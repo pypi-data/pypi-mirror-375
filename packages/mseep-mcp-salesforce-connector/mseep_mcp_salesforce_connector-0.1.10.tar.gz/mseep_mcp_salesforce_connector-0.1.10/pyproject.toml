@@ -1,0 +1,42 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-mcp-salesforce-connector"
+version = "0.1.10"
+description = "A Model Context Protocol (MCP) server implementation for Salesforce integration"
+requires-python = ">=3.11"
+keywords = [
+    "mcp",
+    "llm",
+    "salesforce",
+]
+dependencies = [
+    "mcp",
+    "simple-salesforce",
+    "python-dotenv",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/smn2gnt/MCP-Salesforce"
+
+[project.scripts]
+salesforce = "src.salesforce:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src",
+]
