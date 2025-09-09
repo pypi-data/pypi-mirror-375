@@ -1,0 +1,11 @@
+CHANGELOG.rst
+LICENSE
+MANIFEST.in
+README.rst
+pyproject.toml
+src/pip_lock/__init__.py
+src/pip_lock/py.typed
+src/pip_lock.egg-info/PKG-INFO
+src/pip_lock.egg-info/SOURCES.txt
+src/pip_lock.egg-info/dependency_links.txt
+src/pip_lock.egg-info/top_level.txt
