@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: mseep-fastmcp-threatintel
+Version: 0.2.9
+Summary: 🛡️ MCP AI Powered Threat Intelligence - Revolutionizing Cybersecurity | Built by Arjun Trivedi (4R9UN)
+Project-URL: Homepage, https://github.com/4R9UN/fastmcp-threatintel
+Project-URL: Repository, https://github.com/4R9UN/fastmcp-threatintel
+Project-URL: Documentation, https://4r9un.github.io/fastmcp-threatintel/
+Project-URL: Changelog, https://github.com/4R9UN/fastmcp-threatintel/blob/main/CHANGELOG.md
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: "Arjun Trivedi (4R9UN)" <arjuntrivedi42@yahoo.com>, Roo Engineering <arjuntrivedi42@yahoo.com>
+License: Apache-2.0
+Keywords: 4r9un,abuseipdb,ai-security,apt-attribution,claude-desktop,cybersecurity,ioc-analysis,malware-analysis,mcp-server,model-context-protocol,otx,roo,security-automation,stix,threat-hunting,threat-intelligence,virustotal
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Framework :: AsyncIO
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Internet
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Monitoring
+Classifier: Topic :: System :: Networking :: Monitoring
+Classifier: Typing :: Typed
+Requires-Python: <4.0,>=3.10
+Requires-Dist: anyio>=4.6.0
+Requires-Dist: fastmcp>=0.1.0
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: kaleido>=0.2.1
+Requires-Dist: networkx>=3.0
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: plotly>=5.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: tabulate>=0.9.0
+Requires-Dist: tqdm>=4.66.1
+Requires-Dist: typer>=0.12.5
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == 'dev'
+Requires-Dist: commitizen>=3.2.2; extra == 'dev'
+Requires-Dist: coverage>=7.0.0; extra == 'dev'
+Requires-Dist: isort>=5.12.0; extra == 'dev'
+Requires-Dist: mkdocs-material>=9.0.0; extra == 'dev'
+Requires-Dist: mkdocs>=1.5.0; extra == 'dev'
+Requires-Dist: mkdocstrings[python]>=0.24.0; extra == 'dev'
+Requires-Dist: mypy>=1.5.1; extra == 'dev'
+Requires-Dist: pre-commit>=3.0.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.23.5; extra == 'dev'
+Requires-Dist: pytest-cov>=4.1.0; extra == 'dev'
+Requires-Dist: pytest>=8.3.3; extra == 'dev'
+Requires-Dist: ruff>=0.1.0; extra == 'dev'
+Provides-Extra: lint
+Requires-Dist: black; extra == 'lint'
+Requires-Dist: isort; extra == 'lint'
+Requires-Dist: mypy; extra == 'lint'
+Requires-Dist: ruff; extra == 'lint'
+Provides-Extra: test
+Requires-Dist: faker>=20.0.0; extra == 'test'
+Requires-Dist: pytest-mock>=3.12.0; extra == 'test'
+Requires-Dist: pytest-xdist>=3.0.0; extra == 'test'
+Requires-Dist: trio>=0.22.0; extra == 'test'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
