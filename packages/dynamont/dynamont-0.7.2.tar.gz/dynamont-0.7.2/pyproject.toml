@@ -1,0 +1,125 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling", "hatch-vcs>=0.3", "setuptools-scm>=7.1"]
+
+[project]
+authors = [
+  {name = "Jannes Spangenberg", email = "jannes.spangenberg@uni-jena.de"}
+]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Intended Audience :: Science/Research"
+]
+dependencies = [
+  "numpy >=1.26.0",
+  "pandas >=2.2.0",
+  "seaborn >=0.13.0",
+  "matplotlib >=3.2.0",
+  "read5_ont >=1.2.8",
+  "pysam >=0.22.0",
+  "psutil >=6.0.0",
+]
+description = "Segmentation/resquiggling tool for ONT signals."
+dynamic = ["version"]
+license = {text = "GNUv3"}
+name = "dynamont"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+  "pytest-cov",
+  "pytest-mock",
+  "mypy"
+]
+
+[project.scripts]
+dynamont-resquiggle = "python.segmentation.segment:main"
+dynamont-train = "python.segmentation.train:main"
+dynamont-NTC = "python.ntc_entry:main"
+dynamont-NT-banded = "python.nt_entry_banded:main"
+dynamont-NT = "python.nt_entry:main"
+
+[project.urls]
+repository = "https://github.com/rnajena/dynamont"
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  # This covers both typing.TYPE_CHECKING and plain TYPE_CHECKING, with any amount of whitespace
+  "if\\s+(typing\\.)?TYPE_CHECKING:",
+  'if __name__ == "__main__":'
+]
+omit = [
+  "src/python/_version.py",
+  "test/*"
+]
+
+[tool.distutils.bdist_wheel]
+universal = true
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/python/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/python"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"models/dna/r10.4.1/dna_r10.4.1_e8.2_260bps.model" = "models/dna/r10.4.1/dna_r10.4.1_e8.2_260bps.model"
+"models/dna/r10.4.1/dna_r10.4.1_e8.2_400bps.model" = "models/dna/r10.4.1/dna_r10.4.1_e8.2_400bps.model"
+"models/rna/r9.4.1/rna002_5mer.model" = "models/rna/r9.4.1/rna002_5mer.model"
+"models/rna/rp4/rna004_9mer.model" = "models/rna/rp4/rna004_9mer.model"
+"src/bin/dynamont-NTC" = "src/bin/dynamont-NTC"
+"src/bin/dynamont-NT-banded" = "src/bin/dynamont-NT-banded"
+"src/bin/dynamont-NT" = "src/bin/dynamont-NT"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/python",
+  "pyproject.toml",
+  "README.md",
+  "LICENSE"
+]
+
+[tool.hatch.build.targets.sdist.force-include]
+"models/dna/r10.4.1/dna_r10.4.1_e8.2_260bps.model" = "models/dna/r10.4.1/dna_r10.4.1_e8.2_260bps.model"
+"models/dna/r10.4.1/dna_r10.4.1_e8.2_400bps.model" = "models/dna/r10.4.1/dna_r10.4.1_e8.2_400bps.model"
+"models/rna/r9.4.1/rna002_5mer.model" = "models/rna/r9.4.1/rna002_5mer.model"
+"models/rna/rp4/rna004_9mer.model" = "models/rna/rp4/rna004_9mer.model"
+"src/bin/dynamont-NTC" = "src/bin/dynamont-NTC"
+"src/bin/dynamont-NT-banded" = "src/bin/dynamont-NT-banded"
+"src/bin/dynamont-NT" = "src/bin/dynamont-NT"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.mypy]
+disallow_untyped_defs = true
+files = ["src/python/**/*.py"]
+python_version = "3.10"
+warn_no_return = true
+
+[tool.pytest.ini_options]
+addopts = [
+  "-vv",
+  "--color=yes",
+  "--cov-append",
+  "--cov-branch",
+  "--cov-report=term-missing",
+  "--cov=src/python",
+  "--tb=native",
+  "--strict-markers",
+  "--durations=20"
+]
+markers = [
+  "serial: execute test serially (to avoid race conditions)",
+  "slow: tests can take a long time (deselect with '-m \"not slow\"')"
+]
+norecursedirs = [".*", "*.egg*", "build", "dist", "conda.recipe", "examples", "env", "envs", "scripts"]
