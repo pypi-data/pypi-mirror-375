@@ -1,0 +1,40 @@
+[project]
+name = "mseep-mcp-analyst"
+version = "0.3.4"
+description = "MCP Analyst is an MCP server that empowers claude to analyze local CSV or Parquet files."
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+    "polars>=1.26.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-analyst = "mcp_analyst.analyst:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = [
+    "mcp_analyst*",
+]
+exclude = [
+    "data*",
+    "stock_data*",
+    "tests*",
+]
+
+[dependency-groups]
+dev = [
+    "twine>=6.1.0",
+]
