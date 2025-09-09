@@ -1,0 +1,3 @@
+[console_scripts]
+rplayground-mcp = rplayground_mcp.mcp_cli:main
+rplayground-test-basic = rplayground_mcp.cli_basic:run
