@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-wikidata
+Version: 0.1.4
+Summary: MCP Wikidata Server
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.4.1
+Requires-Dist: httpx>=0.28.1
+Provides-Extra: example
+Requires-Dist: black>=25.1.0; extra == "example"
+Requires-Dist: langchain-openai>=0.3.11; extra == "example"
+Requires-Dist: langgraph>=0.3.21; extra == "example"
+Requires-Dist: langchain-core>=0.3.49; extra == "example"
+Requires-Dist: langchain-mcp-adapters>=0.0.6; extra == "example"
+Dynamic: license-file
+
+Package managed by MseeP.ai
