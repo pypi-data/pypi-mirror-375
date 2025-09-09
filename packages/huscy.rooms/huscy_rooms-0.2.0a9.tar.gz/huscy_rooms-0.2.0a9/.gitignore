@@ -1,0 +1,14 @@
+.tox/
+
+build/
+dist/
+htmlcov/
+huscy.rooms.egg-info/
+
+*.pyc
+*.swp
+
+.coverage
+
+db.sqlite3
+docs/class_diagram.png
