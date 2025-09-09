@@ -1,0 +1,6 @@
+numpy<2.0,>=1.23
+numba
+scipy
+scikit-learn>=1.4
+torch>=2.0
+joblib==1.2.0

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=57.4.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt"]
+
+[tool.black]
+line-length = 100
+target-version = ['py37']
+
+[tool.flake8]
+exclude = ['.git','__pycache__','env']
+max-line-length = 100
+max-complexity = 12
+ignore = ['N803','N806','N802','N801','E203','E231','E712','C417','W503','C408', 'E501']
+
+[tool.mypy]
+python_version = "3.7"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+ignore_missing_imports_per_module = true
+disable_error_code = 'annotation-unchecked'
+exclude = ['(?x)(^env|^src/thefittest/tests)']
+
+
+[project]
+name = "thefittest"
+version = "0.2.7"
+dependencies = ["numpy>=1.23,<2.0", "numba", "scipy", "scikit-learn>=1.4", "torch>=2.0", "joblib==1.2.0"]
+requires-python = ">=3.7,<=3.13"
+authors = [
+  { name="Pavel Sherstnev", email="sherstpasha99@gmail.com"},
+]
+description = "Implementation of data mining methods that use evolutionary algorithms"
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/sherstpasha/thefittest"
