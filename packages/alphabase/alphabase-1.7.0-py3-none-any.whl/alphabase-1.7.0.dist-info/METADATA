@@ -1,0 +1,549 @@
+Metadata-Version: 2.4
+Name: alphabase
+Version: 1.7.0
+Summary: An infrastructure Python package of the AlphaX ecosystem
+Author-email: Mann Labs <jalew188@gmail.com>
+License:                                  Apache License
+                                   Version 2.0, January 2004
+                                http://www.apache.org/licenses/
+        
+           TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+        
+           1. Definitions.
+        
+              "License" shall mean the terms and conditions for use, reproduction,
+              and distribution as defined by Sections 1 through 9 of this document.
+        
+              "Licensor" shall mean the copyright owner or entity authorized by
+              the copyright owner that is granting the License.
+        
+              "Legal Entity" shall mean the union of the acting entity and all
+              other entities that control, are controlled by, or are under common
+              control with that entity. For the purposes of this definition,
+              "control" means (i) the power, direct or indirect, to cause the
+              direction or management of such entity, whether by contract or
+              otherwise, or (ii) ownership of fifty percent (50%) or more of the
+              outstanding shares, or (iii) beneficial ownership of such entity.
+        
+              "You" (or "Your") shall mean an individual or Legal Entity
+              exercising permissions granted by this License.
+        
+              "Source" form shall mean the preferred form for making modifications,
+              including but not limited to software source code, documentation
+              source, and configuration files.
+        
+              "Object" form shall mean any form resulting from mechanical
+              transformation or translation of a Source form, including but
+              not limited to compiled object code, generated documentation,
+              and conversions to other media types.
+        
+              "Work" shall mean the work of authorship, whether in Source or
+              Object form, made available under the License, as indicated by a
+              copyright notice that is included in or attached to the work
+              (an example is provided in the Appendix below).
+        
+              "Derivative Works" shall mean any work, whether in Source or Object
+              form, that is based on (or derived from) the Work and for which the
+              editorial revisions, annotations, elaborations, or other modifications
+              represent, as a whole, an original work of authorship. For the purposes
+              of this License, Derivative Works shall not include works that remain
+              separable from, or merely link (or bind by name) to the interfaces of,
+              the Work and Derivative Works thereof.
+        
+              "Contribution" shall mean any work of authorship, including
+              the original version of the Work and any modifications or additions
+              to that Work or Derivative Works thereof, that is intentionally
+              submitted to Licensor for inclusion in the Work by the copyright owner
+              or by an individual or Legal Entity authorized to submit on behalf of
+              the copyright owner. For the purposes of this definition, "submitted"
+              means any form of electronic, verbal, or written communication sent
+              to the Licensor or its representatives, including but not limited to
+              communication on electronic mailing lists, source code control systems,
+              and issue tracking systems that are managed by, or on behalf of, the
+              Licensor for the purpose of discussing and improving the Work, but
+              excluding communication that is conspicuously marked or otherwise
+              designated in writing by the copyright owner as "Not a Contribution."
+        
+              "Contributor" shall mean Licensor and any individual or Legal Entity
+              on behalf of whom a Contribution has been received by Licensor and
+              subsequently incorporated within the Work.
+        
+           2. Grant of Copyright License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              copyright license to reproduce, prepare Derivative Works of,
+              publicly display, publicly perform, sublicense, and distribute the
+              Work and such Derivative Works in Source or Object form.
+        
+           3. Grant of Patent License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              (except as stated in this section) patent license to make, have made,
+              use, offer to sell, sell, import, and otherwise transfer the Work,
+              where such license applies only to those patent claims licensable
+              by such Contributor that are necessarily infringed by their
+              Contribution(s) alone or by combination of their Contribution(s)
+              with the Work to which such Contribution(s) was submitted. If You
+              institute patent litigation against any entity (including a
+              cross-claim or counterclaim in a lawsuit) alleging that the Work
+              or a Contribution incorporated within the Work constitutes direct
+              or contributory patent infringement, then any patent licenses
+              granted to You under this License for that Work shall terminate
+              as of the date such litigation is filed.
+        
+           4. Redistribution. You may reproduce and distribute copies of the
+              Work or Derivative Works thereof in any medium, with or without
+              modifications, and in Source or Object form, provided that You
+              meet the following conditions:
+        
+              (a) You must give any other recipients of the Work or
+                  Derivative Works a copy of this License; and
+        
+              (b) You must cause any modified files to carry prominent notices
+                  stating that You changed the files; and
+        
+              (c) You must retain, in the Source form of any Derivative Works
+                  that You distribute, all copyright, patent, trademark, and
+                  attribution notices from the Source form of the Work,
+                  excluding those notices that do not pertain to any part of
+                  the Derivative Works; and
+        
+              (d) If the Work includes a "NOTICE" text file as part of its
+                  distribution, then any Derivative Works that You distribute must
+                  include a readable copy of the attribution notices contained
+                  within such NOTICE file, excluding those notices that do not
+                  pertain to any part of the Derivative Works, in at least one
+                  of the following places: within a NOTICE text file distributed
+                  as part of the Derivative Works; within the Source form or
+                  documentation, if provided along with the Derivative Works; or,
+                  within a display generated by the Derivative Works, if and
+                  wherever such third-party notices normally appear. The contents
+                  of the NOTICE file are for informational purposes only and
+                  do not modify the License. You may add Your own attribution
+                  notices within Derivative Works that You distribute, alongside
+                  or as an addendum to the NOTICE text from the Work, provided
+                  that such additional attribution notices cannot be construed
+                  as modifying the License.
+        
+              You may add Your own copyright statement to Your modifications and
+              may provide additional or different license terms and conditions
+              for use, reproduction, or distribution of Your modifications, or
+              for any such Derivative Works as a whole, provided Your use,
+              reproduction, and distribution of the Work otherwise complies with
+              the conditions stated in this License.
+        
+           5. Submission of Contributions. Unless You explicitly state otherwise,
+              any Contribution intentionally submitted for inclusion in the Work
+              by You to the Licensor shall be under the terms and conditions of
+              this License, without any additional terms or conditions.
+              Notwithstanding the above, nothing herein shall supersede or modify
+              the terms of any separate license agreement you may have executed
+              with Licensor regarding such Contributions.
+        
+           6. Trademarks. This License does not grant permission to use the trade
+              names, trademarks, service marks, or product names of the Licensor,
+              except as required for reasonable and customary use in describing the
+              origin of the Work and reproducing the content of the NOTICE file.
+        
+           7. Disclaimer of Warranty. Unless required by applicable law or
+              agreed to in writing, Licensor provides the Work (and each
+              Contributor provides its Contributions) on an "AS IS" BASIS,
+              WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+              implied, including, without limitation, any warranties or conditions
+              of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+              PARTICULAR PURPOSE. You are solely responsible for determining the
+              appropriateness of using or redistributing the Work and assume any
+              risks associated with Your exercise of permissions under this License.
+        
+           8. Limitation of Liability. In no event and under no legal theory,
+              whether in tort (including negligence), contract, or otherwise,
+              unless required by applicable law (such as deliberate and grossly
+              negligent acts) or agreed to in writing, shall any Contributor be
+              liable to You for damages, including any direct, indirect, special,
+              incidental, or consequential damages of any character arising as a
+              result of this License or out of the use or inability to use the
+              Work (including but not limited to damages for loss of goodwill,
+              work stoppage, computer failure or malfunction, or any and all
+              other commercial damages or losses), even if such Contributor
+              has been advised of the possibility of such damages.
+        
+           9. Accepting Warranty or Additional Liability. While redistributing
+              the Work or Derivative Works thereof, You may choose to offer,
+              and charge a fee for, acceptance of support, warranty, indemnity,
+              or other liability obligations and/or rights consistent with this
+              License. However, in accepting such obligations, You may act only
+              on Your own behalf and on Your sole responsibility, not on behalf
+              of any other Contributor, and only if You agree to indemnify,
+              defend, and hold each Contributor harmless for any liability
+              incurred by, or claims asserted against, such Contributor by reason
+              of your accepting any such warranty or additional liability.
+        
+           END OF TERMS AND CONDITIONS
+        
+           APPENDIX: How to apply the Apache License to your work.
+        
+              To apply the Apache License to your work, attach the following
+              boilerplate notice, with the fields enclosed by brackets "[]"
+              replaced with your own identifying information. (Don't include
+              the brackets!)  The text should be enclosed in the appropriate
+              comment syntax for the file format. We also recommend that a
+              file or class name and description of purpose be included on the
+              same "printed page" as the copyright notice for easier
+              identification within third-party archives.
+        
+           Copyright 2020 MannLabs
+        
+           Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at
+        
+               http://www.apache.org/licenses/LICENSE-2.0
+        
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.
+        
+Project-URL: Paper preprint, https://www.biochem.mpg.de/mann
+Project-URL: Repository, https://github.com/MannLabs/alphabase
+Project-URL: Documentation, https://alphabase.readthedocs.io/en/latest/
+Project-URL: Issues, https://github.com/MannLabs/alphabase/issues
+Project-URL: Mann Labs Homepage, https://www.biochem.mpg.de/mann
+Keywords: mass spectrometry,proteomics,bioinformatics,AlphaPept,AlphaPept ecosystem,AlphaX ecosystem
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: numba
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: h5py
+Requires-Dist: contextlib2
+Requires-Dist: xxhash
+Requires-Dist: biopython
+Requires-Dist: tqdm
+Requires-Dist: regex
+Requires-Dist: pyarrow
+Requires-Dist: pyahocorasick
+Requires-Dist: pyteomics
+Requires-Dist: pyyaml
+Requires-Dist: lxml
+Requires-Dist: rdkit
+Provides-Extra: stable
+Requires-Dist: numba==0.60.0; extra == "stable"
+Requires-Dist: numpy<2.0; extra == "stable"
+Requires-Dist: pandas==2.2.3; extra == "stable"
+Requires-Dist: h5py==3.12.1; extra == "stable"
+Requires-Dist: contextlib2==21.6.0; extra == "stable"
+Requires-Dist: xxhash==3.5.0; extra == "stable"
+Requires-Dist: biopython==1.84; extra == "stable"
+Requires-Dist: tqdm==4.67.0; extra == "stable"
+Requires-Dist: regex==2024.11.6; extra == "stable"
+Requires-Dist: pyarrow==19.0.1; extra == "stable"
+Requires-Dist: pyahocorasick==2.1.0; extra == "stable"
+Requires-Dist: pyteomics==4.7.5; extra == "stable"
+Requires-Dist: pyyaml==6.0.2; extra == "stable"
+Requires-Dist: lxml==5.3.0; extra == "stable"
+Requires-Dist: rdkit==2024.3.3; extra == "stable"
+Provides-Extra: dask
+Requires-Dist: dask; extra == "dask"
+Requires-Dist: dask_expr; extra == "dask"
+Provides-Extra: dask-stable
+Requires-Dist: dask==2024.8.0; extra == "dask-stable"
+Requires-Dist: dask_expr==1.1.10; extra == "dask-stable"
+Provides-Extra: hdf
+Requires-Dist: tables; extra == "hdf"
+Provides-Extra: tests
+Requires-Dist: pre-commit==3.7.0; extra == "tests"
+Requires-Dist: nbmake==1.5.3; extra == "tests"
+Requires-Dist: matplotlib; extra == "tests"
+Requires-Dist: pytest; extra == "tests"
+Requires-Dist: anndata==0.10.8; extra == "tests"
+Requires-Dist: mudata==0.2.4; extra == "tests"
+Provides-Extra: development
+Requires-Dist: jupyter; extra == "development"
+Requires-Dist: bump-my-version; extra == "development"
+Requires-Dist: ipykernel; extra == "development"
+Requires-Dist: pre-commit==3.7.0; extra == "development"
+Requires-Dist: nbmake==1.5.3; extra == "development"
+Requires-Dist: matplotlib; extra == "development"
+Requires-Dist: pytest; extra == "development"
+Requires-Dist: anndata==0.10.8; extra == "development"
+Requires-Dist: mudata==0.2.4; extra == "development"
+Requires-Dist: autodocsumm; extra == "development"
+Requires-Dist: myst_parser; extra == "development"
+Requires-Dist: sphinx; extra == "development"
+Requires-Dist: nbsphinx; extra == "development"
+Requires-Dist: jinja2; extra == "development"
+Requires-Dist: contextfilter; extra == "development"
+Requires-Dist: furo; extra == "development"
+Requires-Dist: anndata==0.10.8; extra == "development"
+Requires-Dist: mudata==0.2.4; extra == "development"
+Dynamic: license-file
+
+# AlphaBase
+
+![Pip installation](https://github.com/MannLabs/alphabase/workflows/Default%20installation%20and%20tests/badge.svg)
+![PyPi releases](https://github.com/MannLabs/alphabase/workflows/Publish%20on%20PyPi%20and%20release%20on%20GitHub/badge.svg)
+[![Documentation Status](https://readthedocs.org/projects/alphabase/badge/?version=latest)](https://alphabase.readthedocs.io/en/latest/?badge=latest)
+[![PyPI](https://img.shields.io/pypi/v/alphabase)](https://pypi.org/project/alphabase)
+[![pip downloads](https://img.shields.io/pypi/dm/alphabase?color=blue&label=pip%20downloads)](https://pypi.org/project/alphabase)
+![Python](https://img.shields.io/pypi/pyversions/alphabase)
+
+AlphaBase provides all basic python functionalities for AlphaPept
+ecosystem from the [Mann Labs at the Max Planck Institute of
+Biochemistry](https://www.biochem.mpg.de/mann) and the [University of
+Copenhagen](https://www.cpr.ku.dk/research/proteomics/mann/). To enable
+all hyperlinks in this document, please view it at
+[GitHub](https://github.com/MannLabs/alphabase). For documentation,
+please see [readthedocs](https://alphabase.readthedocs.io/en/latest).
+
+- [**About**](#about)
+- [**License**](#license)
+- [**Installation**](#installation)
+  - [**Pip installer**](#pip)
+  - [**Developer installer**](#developer)
+- [**Usage**](#usage)
+- [**Troubleshooting**](#troubleshooting)
+- [**Citations**](#citations)
+- [**How to contribute**](#how-to-contribute)
+- [**Changelog**](#changelog)
+
+------------------------------------------------------------------------
+
+## About
+
+The infrastructure package of AlphaX ecosystem for MS proteomics. It was first published with AlphaPeptDeep, see [Citations](#citations).
+
+### Packages built upon AlphaBase
+
+- [AlphaPeptDeep](https://github.com/MannLabs/alphapeptdeep): deep learning framework for proteomics.
+- [AlphaRaw](https://github.com/MannLabs/alpharaw): raw data reader for different vendors.
+- [AlphaDIA](https://github.com/MannLabs/alphadia): DIA search engine.
+- [PeptDeep-HLA](https://github.com/MannLabs/peptdeep-hla): personalized HLA-binding peptide prediction.
+- [AlphaViz](https://github.com/MannLabs/alphaviz): visualization for MS-based proteomics.
+- [AlphaQuant](https://github.com/MannLabs/alphaquant): quantification for MS-based proteomics.
+
+------------------------------------------------------------------------
+
+## Citations
+
+Wen-Feng Zeng, Xie-Xuan Zhou, Sander Willems, Constantin Ammar, Maria Wahle, Isabell Bludau, Eugenia Voytik, Maximillian T. Strauss & Matthias Mann. AlphaPeptDeep: a modular deep learning framework to predict peptide properties for proteomics. Nat Commun 13, 7238 (2022). https://doi.org/10.1038/s41467-022-34904-3
+
+------------------------------------------------------------------------
+
+## License
+
+AlphaBase was developed by the [Mann Labs at the Max Planck Institute of Biochemistry](https://www.biochem.mpg.de/mann) and the [University of Copenhagen](https://www.cpr.ku.dk/research/proteomics/mann/) and is
+freely available with an [Apache License](LICENSE.txt). External Python
+packages (available in the [requirements](requirements) folder) have
+their own licenses, which can be consulted on their respective websites.
+
+------------------------------------------------------------------------
+
+## Installation
+
+AlphaBase can be installed and used on all major operating systems
+(Windows, macOS and Linux). There are two different types of
+installation possible:
+
+- [**Pip installer:**](#pip) Choose this installation if you want to use
+  AlphaBase as a Python package in an existing Python 3.8 environment
+  (e.g. a Jupyter notebook).
+- [**Developer installer:**](#developer) Choose this installation if you
+  are familiar with [conda](https://docs.conda.io/en/latest/) and
+  Python. This installation allows access to all available features of
+  AlphaBase and even allows to modify its source code directly.
+  Generally, the developer version of AlphaBase outperforms the
+  precompiled versions which makes this the installation of choice for
+  high-throughput experiments.
+
+### Pip
+
+AlphaBase can be installed in an existing Python 3.8 environment with a
+single `bash` command. *This `bash` command can also be run directly
+from within a Jupyter notebook by prepending it with a `!`*:
+
+``` bash
+pip install alphabase
+```
+
+Installing AlphaBase like this avoids conflicts when integrating it in
+other tools, as this does not enforce strict versioning of dependencies.
+However, if new versions of dependencies are released, they are not
+guaranteed to be fully compatible with AlphaBase. While this should only
+occur in rare cases where dependencies are not backwards compatible, you
+can always force AlphaBase to use dependency versions which are known to
+be compatible with:
+
+``` bash
+pip install "alphabase[stable]"
+```
+
+NOTE: You might need to run `pip install -U pip` before installing
+AlphaBase like this. Also note the double quotes `"`.
+If you are using the `quant_reader` module, it is advisable to add the
+`dask-stable` or `dask` extras to speed up processing large files.
+You need to install the `hdf` extra option of the package to be able to read alphapept protein group matrices in hdf format.
+
+For those who are really adventurous, it is also possible to directly
+install any branch (e.g. `@main`) with any extras
+(e.g. `#egg=alphabase[stable,development]`) from GitHub with e.g.
+
+``` bash
+pip install "git+https://github.com/MannLabs/alphabase.git@main#egg=alphabase[stable,development]"
+```
+
+### Developer
+
+AlphaBase can also be installed in editable (i.e. developer) mode with a
+few `bash` commands. This allows to fully customize the software and
+even modify the source code to your specific needs. When an editable
+Python package is installed, its source code is stored in a transparent
+location of your choice. While optional, it is advised to first (create
+and) navigate to e.g. a general software folder:
+
+``` bash
+mkdir ~/folder/where/to/install/software
+cd ~/folder/where/to/install/software
+```
+
+***The following commands assume you do not perform any additional `cd`
+commands anymore***.
+
+Next, download the AlphaBase repository from GitHub either directly or
+with a `git` command. This creates a new AlphaBase subfolder in your
+current directory.
+
+``` bash
+git clone https://github.com/MannLabs/alphabase.git
+```
+
+For any Python package, it is highly recommended to use a separate
+[conda virtual environment](https://docs.conda.io/en/latest/), as
+otherwise *dependency conflicts can occur with already existing
+packages*.
+
+``` bash
+conda create --name alphabase python=3.9 -y
+conda activate alphabase
+```
+
+Finally, AlphaBase and all its [dependencies](requirements) need to be
+installed. To take advantage of all features and allow development (with
+the `-e` flag), this is best done by also installing the [development
+dependencies](requirements/requirements_development.txt) instead of only
+the [core dependencies](requirements/requirements.txt):
+
+``` bash
+pip install -e "./alphabase[development]"
+```
+
+By default this installs loose dependencies (no explicit versioning),
+although it is also possible to use stable dependencies
+(e.g. `pip install -e "./alphabase[stable,development]"`).
+
+***By using the editable flag `-e`, all modifications to the [AlphaBase
+source code folder](alphabase) are directly reflected when running
+AlphaBase. Note that the AlphaBase folder cannot be moved and/or renamed
+if an editable version is installed. In case of confusion, you can
+always retrieve the location of any Python module with e.g. the command
+`import module` followed by `module.__file__`.***
+
+------------------------------------------------------------------------
+
+## Usage
+
+TODO
+
+------------------------------------------------------------------------
+
+## Troubleshooting
+
+In case of issues, check out the following:
+
+- [Issues](https://github.com/MannLabs/alphabase/issues): Try a few
+  different search terms to find out if a similar problem has been
+  encountered before
+- [Discussions](https://github.com/MannLabs/alphabase/discussions):
+  Check if your problem or feature requests has been discussed before.
+
+------------------------------------------------------------------------
+
+## How to contribute
+
+If you like this software, you can give us a
+[star](https://github.com/MannLabs/alphabase/stargazers) to boost our
+visibility! All direct contributions are also welcome. Feel free to post
+a new [issue](https://github.com/MannLabs/alphabase/issues) or clone the
+repository and create a [pull
+request](https://github.com/MannLabs/alphabase/pulls) with a new branch.
+For an even more interactive participation, check out the
+[discussions](https://github.com/MannLabs/alphabase/discussions) and the
+[the Contributors License Agreement](misc/CLA.md).
+
+### Notes for developers
+
+#### 1. Code Structure
+While AlphaBase offers an object-oriented interface, algorithms for manipulating data should be implemented in a functional way and called from class methods. This allows the functions to be reused without instatiating a class.
+
+#### 2. DataFrame Handling
+- Return DataFrames in the same order as they were passed
+- Minimize in-place modifications of DataFrames. Mention them explicitly in the docstring
+- Implement low-level functions that operate on numpy arrays and return arrays. Use higher-level functions to assign array results to DataFrames
+
+#### 3. Data Assumptions
+Avoid making assumptions about:
+- Precursor ordering by `nAA`
+- Fragment indices ordering (e.g., `frag_start_idx`)
+- Continuity of `frag_start_idx` where `frag_start_idx[i+1] == frag_stop_idx[i]`
+- All fragments being assigned to a precursor
+
+Assumptions are only permitted for low-level or optimized functions and should be documented in the docstring.
+
+#### 3. Optimization Strategy
+When performance optimization is needed:
+1. Implement the general solution first
+2. Add optimized versions for special cases for refined precursor df or order `nAA`
+3. Check conditions at runtime to use optimized versions when applicable
+
+#### 4. Code Quality
+- Include python type hints
+- Include docstrings in numpy style (see [numpy docstring example](https://www.sphinx-doc.org/en/master/usage/extensions/example_numpy.html#example-numpy))
+
+
+#### 5. pre-commit hooks
+It is highly recommended to use the provided pre-commit hooks, as the CI pipeline enforces all checks therein to
+pass in order to merge a branch.
+
+The hooks need to be installed once by
+```bash
+pre-commit install
+```
+You can run the checks yourself using:
+```bash
+pre-commit run --all-files
+```
+
+#### 6. Tagging of Pull Requests
+In order to have release notes automatically generated, pull requests need to be tagged with labels.
+The following labels are used (should be safe-explanatory):
+`breaking-change`, `bug`, `enhancement`.
+
+#### 7. Release a new version
+This package uses a shared release process defined in the
+[alphashared](https://github.com/MannLabs/alphashared) repository. Please see the instructions
+[there](https://github.com/MannLabs/alphashared/blob/reusable-release-workflow/.github/workflows/README.md#release-a-new-version).
+
+
+------------------------------------------------------------------------
+
+## Changelog
+
+For a full overview of the changes made in each version see [CHANGELOG.md](CHANGELOG.md) (until version 1.1.0) and the github release notes (from >1.1.0).
