@@ -1,0 +1,7 @@
+# Defaults used by the CLI prompts / outputs
+output_filename: "jupyter_config.json"
+
+prompts:
+  document_url: "Document URL"
+  document_id: "Notebook path"
+  runtime_url: "Runtime URL (Enter to reuse Document URL)"

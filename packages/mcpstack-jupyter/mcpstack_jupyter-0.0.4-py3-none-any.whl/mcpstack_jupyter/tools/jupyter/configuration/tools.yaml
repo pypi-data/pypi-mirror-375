@@ -1,0 +1,21 @@
+# Tools exposed by jupyter_mcp_server.server that we want to surface by default.
+# To Update Regularly if the official original MCP evolves.
+known_tools:
+  - append_markdown_cell
+  - insert_markdown_cell
+  - overwrite_cell_source
+  - delete_cell
+  - append_execute_code_cell
+  - insert_execute_code_cell
+  - execute_cell_with_progress
+  - execute_cell_simple_timeout
+  - execute_cell_streaming
+  - read_cell
+  - read_all_cells
+  - get_notebook_info
+
+# Subset considered read-only.
+read_only:
+  - read_cell
+  - read_all_cells
+  - get_notebook_info

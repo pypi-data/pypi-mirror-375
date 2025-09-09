@@ -1,0 +1,6 @@
+# Default environment values for the Jupyter tool
+provider: "jupyter"
+document_url: "http://127.0.0.1:8888"
+document_id: "notebook.ipynb"
+runtime_url: null
+require_tokens: true
