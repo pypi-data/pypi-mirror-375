@@ -1,0 +1,145 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maykin-django-prosemirror"
+version = "0.1.0-rc1"
+description = "Rich-text fields for Django using Prosemirror - a powerful, schema-driven rich text editor."
+authors = [
+    {name = "Maykin Media", email = "support@maykinmedia.nl"}
+]
+readme = "README.rst"
+license = {file = "LICENSE"}
+keywords = [
+    "Django",
+    "Prosemirror",
+    "rich-text",
+    "editor",
+    "document",
+    "JSON",
+    "WYSIWYG",
+    "content editor",
+    "text editor",
+    "markdown",
+    "html",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "django>=4.2",
+    "prosemirror>=0.5.2"
+]
+
+[project.urls]
+Homepage = "https://github.com/maykinmedia/django-prosemirror"
+Documentation = "http://django-prosemirror.readthedocs.io/en/latest/"
+"Bug Tracker" = "https://github.com/maykinmedia/django-prosemirror/issues"
+"Source Code" = "https://github.com/maykinmedia/django-prosemirror"
+
+[project.optional-dependencies]
+tests = [
+    "pytest-playwright",
+    "pytest-django",
+    "pytest-cov",
+    "tox",
+    "ruff",
+    # "pyright",
+    # "django-stubs",
+]
+images = [
+    "django-filer",
+]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+release = [
+    "bump-my-version",
+]
+
+[tool.setuptools.packages.find]
+include = ["django_prosemirror*"]
+exclude = ["tests*", "testapp*", "build*", "docs*"]
+namespaces = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+DJANGO_SETTINGS_MODULE = "testapp.settings"
+
+[tool.bumpversion]
+current_version = "0.1.0-rc1"
+files = [
+    {filename = "pyproject.toml"},
+    {filename = "README.rst"},
+    {filename = "docs/conf.py"},
+]
+
+[tool.coverage.run]
+branch = true
+source = ["django_prosemirror"]
+omit = [
+    # migrations run while django initializes the test db
+    "*/migrations/*",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "if (typing\\.)?TYPE_CHECKING:",
+    "@(typing\\.)?overload",
+    "class .*\\(.*Protocol.*\\):",
+    "@(abc\\.)?abstractmethod",
+    "raise NotImplementedError",
+    "\\.\\.\\.",
+    "\\bpass$",
+]
+
+[tool.pyright]
+include = [
+    "django_prosemirror",
+    "testapp",
+    "tests",
+]
+ignore = []
+pythonVersion = "3.12"
+pythonPlatform = "Linux"
+
+[tool.ruff.lint]
+extend-select = [
+    "UP",  # pyupgrade
+    "DJ",  # django
+    "LOG", # logging
+    "G",
+    "I",   # isort
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "PERF",# perflint
+    "B",   # flake8-bugbear
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+section-order = [
+    "future",
+    "standard-library",
+    "django",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.isort.sections]
+"django" = ["django"]

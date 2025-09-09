@@ -1,0 +1,19 @@
+<div
+    id="{{ widget.attrs.id }}-editor"
+    class="editor"
+    data-prosemirror-id="{{ widget.attrs.id }}"
+    data-prosemirror-input-id="{{ widget.attrs.id }}"
+    data-prosemirror-schema="{{ schema }}"
+    data-prosemirror-classes="{{ classes }}"
+    data-prosemirror-history="{{ history }}"
+    data-prosemirror-allowed-node-types="{{ allowed_node_types }}"
+    data-prosemirror-allowed-mark-types="{{ allowed_mark_types }}"
+    data-prosemirror-upload-endpoint="{{ filer_upload_url }}"
+></div>
+
+<input
+    id="{{ widget.attrs.id }}"
+    type="hidden"
+    name="{{ widget.name }}"
+    value="{{ widget.value }}"
+/>
