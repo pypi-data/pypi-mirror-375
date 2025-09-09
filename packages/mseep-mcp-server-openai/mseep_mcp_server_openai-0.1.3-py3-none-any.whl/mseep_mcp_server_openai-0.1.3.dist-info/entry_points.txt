@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-server-openai = mcp_server_openai.server:main

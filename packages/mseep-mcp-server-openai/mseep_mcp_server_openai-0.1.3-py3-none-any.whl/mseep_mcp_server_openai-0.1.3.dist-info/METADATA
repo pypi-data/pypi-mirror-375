@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-openai
+Version: 0.1.3
+Summary: MCP server for OpenAI API integration
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=0.9.1
+Requires-Dist: openai>=1.0.0
+Requires-Dist: click>=8.0.0
+Requires-Dist: pytest-asyncio
+Dynamic: license-file
+
+Package managed by MseeP.ai
