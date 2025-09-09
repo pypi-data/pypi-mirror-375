@@ -1,0 +1,26 @@
+[project]
+name = "mseep-itmcp"
+version = "0.1.4"
+description = "MCP server enabling AI assistants to execute terminal commands through a secure shell interface"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+license = "MIT"
+dependencies = [
+    "mcp>=1.0.0",
+]
+requires-python = ">=3.10"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.hatch.metadata]
+allow-direct-references = true

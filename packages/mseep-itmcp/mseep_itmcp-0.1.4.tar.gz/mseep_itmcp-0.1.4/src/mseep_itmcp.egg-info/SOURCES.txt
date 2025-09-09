@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/itmcp/__init__.py
+src/itmcp/executor.py
+src/mseep_itmcp.egg-info/PKG-INFO
+src/mseep_itmcp.egg-info/SOURCES.txt
+src/mseep_itmcp.egg-info/dependency_links.txt
+src/mseep_itmcp.egg-info/requires.txt
+src/mseep_itmcp.egg-info/top_level.txt
+src/pandoras_shell/executor.py
