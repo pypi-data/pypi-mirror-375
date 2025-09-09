@@ -1,0 +1,7 @@
+[console_scripts]
+create-mail = TempMail_Generator.__main__:main
+generate-mail = TempMail_Generator.__main__:main
+gt-mail = TempMail_Generator.__main__:main
+gtmail = TempMail_Generator.__main__:main
+temp-mail = TempMail_Generator.__main__:main
+tmail = TempMail_Generator.__main__:main
