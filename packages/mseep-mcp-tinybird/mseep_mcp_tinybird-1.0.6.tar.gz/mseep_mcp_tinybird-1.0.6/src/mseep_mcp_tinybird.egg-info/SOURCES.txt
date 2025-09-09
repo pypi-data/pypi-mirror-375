@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_tinybird/__init__.py
+src/mcp_tinybird/__main__.py
+src/mcp_tinybird/run_sse.py
+src/mcp_tinybird/run_stdio.py
+src/mcp_tinybird/server.py
+src/mcp_tinybird/sse.py
+src/mcp_tinybird/stdio.py
+src/mcp_tinybird/tb.py
+src/mseep_mcp_tinybird.egg-info/PKG-INFO
+src/mseep_mcp_tinybird.egg-info/SOURCES.txt
+src/mseep_mcp_tinybird.egg-info/dependency_links.txt
+src/mseep_mcp_tinybird.egg-info/entry_points.txt
+src/mseep_mcp_tinybird.egg-info/requires.txt
+src/mseep_mcp_tinybird.egg-info/top_level.txt
