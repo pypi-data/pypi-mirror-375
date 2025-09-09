@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+src/admin_wizard/__init__.py
+src/admin_wizard/admin.py
+src/admin_wizard/forms.py
+src/admin_wizard/models.py
+src/admin_wizard/tests.py
+src/admin_wizard/templates/admin/admin_action_wizard.html
+src/admin_wizard/templates/admin/admin_update_wizard.html
+src/django_admin_wizard.egg-info/PKG-INFO
+src/django_admin_wizard.egg-info/SOURCES.txt
+src/django_admin_wizard.egg-info/dependency_links.txt
+src/django_admin_wizard.egg-info/requires.txt
+src/django_admin_wizard.egg-info/top_level.txt
