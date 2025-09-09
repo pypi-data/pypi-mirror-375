@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: mseep-solscan-mcp-server
+Version: 0.2.1
+Summary: A Model Context Protocol server providing tools to interact with the Solscan Pro API via LLMs
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Keywords: solana,solscan,blockchain,mcp,llm,automation,defi
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: aiohttp==3.11.0
+Requires-Dist: click>=8.1.7
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: fastmcp==2.1.2
+Requires-Dist: typing-extensions>=4.5.0
+Requires-Dist: python-dotenv>=1.0.0
+Provides-Extra: dev
+Requires-Dist: pyright>=1.1.389; extra == "dev"
+Requires-Dist: ruff>=0.7.3; extra == "dev"
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23.0; extra == "dev"
+Requires-Dist: pytest-mock>=3.12.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: black>=24.2.0; extra == "dev"
+
+Package managed by MseeP.ai
