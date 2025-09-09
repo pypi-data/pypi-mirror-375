@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-cointelegraph-mcp
+Version: 0.1.1
+Summary: An MCP server that provides real-time access to the latest news from Cointelegraph.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: feedparser>=6.0.11
+Requires-Dist: markdownify>=1.1.0
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: requests>=2.32.3
+Dynamic: license-file
+
+Package managed by MseeP.ai
