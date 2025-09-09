@@ -1,0 +1,55 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install linters
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff==0.4.* docformatter==1.7.*
+
+      - name: Run ruff
+        run: |
+          ruff --version
+          ruff check .
+
+      - name: Run docformatter (check mode)
+        run: |
+          docformatter --version
+          # Limit scope to project files to avoid scanning virtualenvs
+          docformatter --check --recursive arched_emailer tests scripts || (echo "Run docformatter to fix docstrings" && exit 1)
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install flask requests appdirs
+
+      - name: Run unit tests
+        run: |
+          python -m unittest -q

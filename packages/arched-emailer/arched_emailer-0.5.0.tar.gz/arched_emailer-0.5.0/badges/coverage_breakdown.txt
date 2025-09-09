@@ -1,0 +1,8 @@
+Name                                                                                Stmts   Miss  Cover   Missing
+-----------------------------------------------------------------------------------------------------------------
+/mnt/storage_drive/PycharmProjects/ArchedEmailer/arched_emailer/__init__.py             1      0   100%
+/mnt/storage_drive/PycharmProjects/ArchedEmailer/arched_emailer/arched_emailer.py     572     53    91%   132, 299, 330, 351-354, 412-417, 475-476, 516-518, 543-544, 560-561, 643-644, 650-651, 761-762, 790-791, 824-825, 900-912, 976, 1039-1040, 1069-1077, 1140, 1168-1169, 1222-1225, 1257-1259, 1314
+/mnt/storage_drive/PycharmProjects/ArchedEmailer/arched_emailer/encryption.py          45      1    98%   85
+/mnt/storage_drive/PycharmProjects/ArchedEmailer/arched_emailer/utils.py               25      0   100%
+-----------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                 643     54    92%

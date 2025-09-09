@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling>=1.11.1"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arched_emailer"
+dynamic = ["version"]
+description = "A emailing python library"
+readme = "README.md"
+readme-content-type = "text/markdown"
+requires-python = ">=3.10"
+dependencies = [
+  "concurrent-log-handler>=0.9.27",
+  "flask>=3.1.1",
+  "requests>=2.32.3",
+  "smtpymailer>=0.1.10",
+  "flask-login==0.6.3",
+  "appdirs==1.4.4",
+  "pytest>=8.4.1",
+  "pytest-cov==6.2.1",
+]
+license = { text = "MIT" }
+authors = [
+  { name = "lewis", email = "lewis@arched.dev" },
+]
+urls = { Home = "https://github.com/lewis-morris/arched_emailer" }
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[tool.hatch.version]
+path = "arched_emailer/arched_emailer.py"
+attr = "__version__"
+
+[dependency-groups]
+dev = [
+    "hatch>=1.14.1",
+    "twine>=6.1.0",
+    "pre-commit>=3.8.0",
+    "black>=24.8.0",
+    "ruff>=0.6.9",
+    "docformatter>=1.7.5",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+fixable = ["I"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["arched_emailer"]
+combine-as-imports = true
+force-sort-within-sections = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+ignore-decorators = ["overload"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+"zz_import_check_test.py" = ["D"]
+
+[tool.docformatter]
+wrap-summaries = 100
+wrap-descriptions = 100
+pre-summary-newline = true
+make-summary-multi-line = true
+close-quotes-on-newline = true
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+exclude = '''
+/(\.venv|build|dist|\.git)/
+'''
