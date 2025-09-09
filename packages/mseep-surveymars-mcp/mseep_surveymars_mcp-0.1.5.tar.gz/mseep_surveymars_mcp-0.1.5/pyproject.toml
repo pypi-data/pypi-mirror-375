@@ -1,0 +1,30 @@
+[project]
+name = "mseep-surveymars-mcp"
+version = "0.1.5"
+description = "SurveyMars MCP server"
+keywords = [
+    "SurveyMars",
+    "mcp",
+    "Survey",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.6.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+surveymars-mcp = "surveymars_mcp:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
