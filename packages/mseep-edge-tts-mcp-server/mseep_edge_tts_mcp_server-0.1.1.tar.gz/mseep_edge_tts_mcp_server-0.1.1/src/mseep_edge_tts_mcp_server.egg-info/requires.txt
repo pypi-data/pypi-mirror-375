@@ -1,0 +1,9 @@
+mcp
+edge-tts
+uvicorn
+fastapi
+
+[dev]
+black
+isort
+pytest

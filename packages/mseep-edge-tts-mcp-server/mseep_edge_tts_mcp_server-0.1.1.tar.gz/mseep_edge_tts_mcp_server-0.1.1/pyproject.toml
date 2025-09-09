@@ -1,0 +1,57 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-edge_tts_mcp_server"
+version = "0.1.1"
+description = "MCPサーバーでedge-ttsを提供するサービス"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "edge-tts",
+    "uvicorn",
+    "fastapi",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "pytest",
+]
+
+[project.scripts]
+edge-tts-mcp = "edge_tts_mcp_server.cli:main"
+
+[tool.setuptools]
+packages = [
+    "edge_tts_mcp_server",
+]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
