@@ -1,0 +1,4 @@
+[console_scripts]
+alwaysgreen = nova.cli:app
+nova = nova.cli:app
+nova-doctor = nova.tools.doctor_cli:main

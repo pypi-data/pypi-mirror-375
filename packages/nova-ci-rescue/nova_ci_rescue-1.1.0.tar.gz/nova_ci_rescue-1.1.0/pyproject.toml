@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nova-ci-rescue"
+version = "1.1.0"
+description = "AlwaysGreen: Self-healing CI/CD autopatcher"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    {name = "AlwaysGreen Contributors", email = "support@alwaysgreen.ai"}
+]
+keywords = ["ci", "cd", "testing", "automation", "ai", "llm", "pytest", "github-actions"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "httpx>=0.25.0",
+    "typer[all]>=0.9.0",
+    "rich>=13.0.0",
+    "GitPython>=3.1.0",
+    "PyYAML>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/novasolve/nova-ci-rescue"
+Repository = "https://github.com/novasolve/nova-ci-rescue"
+Issues = "https://github.com/novasolve/nova-ci-rescue/issues"
+Documentation = "https://github.com/novasolve/nova-ci-rescue/tree/main/docs"
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio",
+    "pytest-json-report",
+    "black",
+    "ruff",
+]
+
+[project.scripts]
+nova = "nova.cli:app"
+alwaysgreen = "nova.cli:app"
+nova-doctor = "nova.tools.doctor_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nova = ["py.typed"]
