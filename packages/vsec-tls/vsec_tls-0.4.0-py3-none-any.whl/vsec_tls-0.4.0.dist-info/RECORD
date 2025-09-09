@@ -1,0 +1,17 @@
+vsec_tls/__init__.py,sha256=ase01qjIjnOqHjEaF77q7nOZmqolZ_gfs-U3n37Tmi0,1350
+vsec_tls/__version__.py,sha256=WvgAwVC4QYjbS1mxsNuCZHz1K2o2IGiMPZKV7SuTNR4,556
+vsec_tls/c_interface_wrapper.py,sha256=EgPfUBsnGb5T1DZhKyJgj4fqIcyFpZ9y4id4KpjeROc,9893
+vsec_tls/exceptions.py,sha256=tCg6lij7sSIaOQLQYfftvBgd98cL06VU5ealXLdOMeU,383
+vsec_tls/profiles.py,sha256=VU9H8oo-ksukdnsjtCybhovT-XpLNoaYrKe7Zc2gfSQ,10297
+vsec_tls/response.py,sha256=0AXrgi439JyH9TFUjYeDGnXodOD1sVKD7jdXdVGgkE8,3608
+vsec_tls/session.py,sha256=9yUjeRJAYif7AfwnBtDkHfNnL-6nO6XtHnVC6OdIB8s,15951
+vsec_tls/utils.py,sha256=ymZQpgf7_IjKTCTdJgMApfOspYaYxoZQ7SdMqngz6hU,1761
+vsec_tls/dependencies/libvelum_secure.so,sha256=vZFLs9FXVS339IZVrGw09mesJVavz_hJx4a46h8aKaY,5683416
+vsec_tls/dependencies/libvelum_secure_arm64.dylib,sha256=aj0-rfNYBEQ7WDkDeP5iQxlknCBmoXUMNLwA60-59I8,4772992
+vsec_tls/dependencies/libvelum_secure_x86_64.dylib,sha256=JiZmqKTXOo0TILaYdbJxrA8Yw17ez4kY8-mVd8Gv0Ao,5268292
+vsec_tls/dependencies/velum_secure.dll,sha256=t7UWMEm7Eis_5trG3rbV3WfjF_VQTG6zFEXzIzGVOnk,6415872
+vsec_tls-0.4.0.dist-info/licenses/LICENSE,sha256=aQbHvHu36EhivaO1V-mJ_ZJTfint1aIyL46A2-J6p-U,1129
+vsec_tls-0.4.0.dist-info/METADATA,sha256=ren0eO8tHl_nYWaYpvI4amC2uJnOunLMGjljtn0XtMc,15193
+vsec_tls-0.4.0.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+vsec_tls-0.4.0.dist-info/top_level.txt,sha256=nXMYhE3wd7kpxRagtGtTAt4pVInq5IybJ0fnh56eAA4,9
+vsec_tls-0.4.0.dist-info/RECORD,,
