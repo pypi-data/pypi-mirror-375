@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-linkedin
+Version: 0.1.5
+Summary: MCP server to interact with LinkedIn
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/adhikasp/mcp-linkedin
+Requires-Python: >=3.7
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: linkedin-api
+Requires-Dist: fastmcp
+Requires-Dist: requests
+Requires-Dist: uvicorn
+Dynamic: license-file
+
+Package managed by MseeP.ai
