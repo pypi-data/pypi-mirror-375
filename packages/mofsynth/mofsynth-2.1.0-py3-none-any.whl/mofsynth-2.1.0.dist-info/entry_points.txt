@@ -1,0 +1,2 @@
+[console_scripts]
+mofsynth = mofsynth.__main__:main
