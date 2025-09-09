@@ -1,0 +1,292 @@
+Metadata-Version: 2.4
+Name: nano-banana
+Version: 0.3.0
+Summary: Generates images using the Google Gemini API.
+Project-URL: Homepage, https://github.com/yourusername/nano-banana
+Project-URL: Bug Tracker, https://github.com/yourusername/nano-banana/issues
+Author-email: Simen AI <hi@simen.ai>
+Keywords: ai,gemini,image-analysis,image-generation,nano_banana,text-to-image
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Requires-Dist: openai>=1.106.1
+Description-Content-Type: text/markdown
+
+# nano-banana 🍌
+
+基于 Google Gemini 2.5 Flash Image 的 Python 包装器，通过 OpenAI 兼容接口调用图像生成和分析功能。
+
+## 功能特性
+
+- 🎨 **文本生成图片**: 使用 `gemini-2.5-flash-image` 模型从文本生成图片
+- 🔄 **图片到图片**: 基于参考图片进行编辑和创作
+- 🔍 **图片分析**: 使用 `gemini-2.5-flash` 模型分析图片内容
+- 🖼️ **多种输入格式**: 支持URL、本地文件、多张图片输入
+- 🚀 **简单接口**: 提供类和函数两种调用方式
+
+## 安装
+
+```bash
+# 推荐使用 uv
+uv add nano-banana
+
+# 或使用 pip
+pip install nano-banana
+```
+
+## 快速开始
+
+### 设置 API 密钥
+
+```bash
+export SIMEN_AI_API_KEY="your-simen-ai-api-key"
+export SIMEN_BASEURL="https://api.simen.ai/v1"
+```
+
+### 基本用法
+
+```python
+import nano_banana as nb
+
+# 1. 文本生成图片
+result = nb.text_to_image("一只可爱的橙色小猫坐在花园里")
+print(f"成功: {result['success']}")
+print(f"图片URL: {result['urls']}")
+
+# 2. 图片分析
+analysis = nb.analyze(
+    "https://example.com/image.jpg", 
+    "这张图片里有什么物体？"
+)
+print(analysis)
+
+# 3. 图片到图片转换
+result = nb.image_to_image(
+    "把这张图片转换成卡通风格", 
+    "path/to/your/image.jpg"
+)
+print(f"生成的图片: {result['urls']}")
+```
+
+## API 参考
+
+### 返回值格式详解
+
+#### text_to_image() 和 image_to_image() 返回值
+
+这两个函数返回一个字典，包含以下字段：
+
+```python
+{
+    "success": bool,           # 是否成功提取到图片URL
+    "urls": List[str],         # 提取到的图片URL列表（可能为空）
+    "raw_response": str,       # AI模型的原始文本响应
+    "message": str            # 状态信息
+}
+```
+
+**实际示例：**
+```python
+# 成功情况
+{
+    "success": True,
+    "urls": ["https://storage.googleapis.com/generated-image.png"],
+    "raw_response": "我已经为您生成了一张图片...\n![图片](https://storage.googleapis.com/generated-image.png)",
+    "message": "成功生成图片"
+}
+
+# 失败情况（未提取到URL）
+{
+    "success": False,
+    "urls": [],
+    "raw_response": "抱歉，我无法生成这类图片...",
+    "message": "未找到图片URL，请检查响应内容"
+}
+```
+
+#### analyze() 返回值
+
+返回纯文本字符串，是AI对图片的分析结果：
+
+```python
+"这张图片显示了一只橙色的小猫坐在花园里，周围有绿色的植物和鲜花。猫咪看起来很可爱，眼神专注地看向镜头。"
+```
+
+### NanoBanana 类
+
+```python
+from nano_banana import NanoBanana
+
+# 初始化（参数可选，优先读取环境变量）
+client = NanoBanana(api_key="your-api-key", base_url="your-base-url")
+```
+
+#### text_to_image(prompt: str) -> Dict[str, Any]
+
+从文本描述生成图片。
+
+**参数：**
+- `prompt`: 图片生成指令（中文或英文）
+
+#### image_to_image(prompt: str, reference_images: Union[str, Path, List]) -> Dict[str, Any]
+
+基于参考图片生成新图片。
+
+**参数：**
+- `prompt`: 图片编辑/生成指令
+- `reference_images`: 参考图片，支持：
+  - 单张图片：`"image.jpg"` 或 `"https://example.com/image.jpg"`
+  - 多张图片：`["img1.jpg", "img2.png"]`
+  - 混合格式：`["local.jpg", "https://url.com/remote.png"]`
+
+#### analyze(image: Union[str, Path, List], question: str = "描述图片") -> str
+
+分析图片内容。
+
+**参数：**
+- `image`: 图片输入（格式同 `reference_images`）
+- `question`: 分析问题（默认为"描述图片"）
+
+### 便捷函数
+
+无需创建类实例，直接调用：
+
+```python
+import nano_banana as nb
+
+result = nb.text_to_image("一只猫")
+result = nb.image_to_image("转成卡通风格", "photo.jpg")
+analysis = nb.analyze("photo.jpg", "这是什么动物？")
+```
+
+## 实际使用示例
+
+### 处理返回结果的正确方式
+
+```python
+import nano_banana as nb
+
+# 文本生成图片
+result = nb.text_to_image("一只可爱的橙色小猫")
+
+# 检查是否成功
+if result['success']:
+    print(f"✅ 成功生成 {len(result['urls'])} 张图片:")
+    for i, url in enumerate(result['urls']):
+        print(f"  图片 {i+1}: {url}")
+else:
+    print(f"❌ 生成失败: {result['message']}")
+    print(f"原始响应: {result['raw_response']}")
+```
+
+### 图片编辑和风格转换
+
+```python
+# 单张参考图
+result = nb.image_to_image(
+    "转换成卡通动漫风格", 
+    "selfie.jpg"
+)
+
+# 多张参考图
+result = nb.image_to_image(
+    "结合这些图片的元素创作新图片",
+    ["style_reference.jpg", "content_image.png", "https://example.com/inspiration.jpg"]
+)
+
+# 处理结果
+if result['success'] and result['urls']:
+    print(f"生成的图片URL: {result['urls'][0]}")
+else:
+    print("可能需要检查AI响应格式:")
+    print(result['raw_response'])
+```
+
+### 图片分析
+
+```python
+# 简单分析
+description = nb.analyze("photo.jpg")
+print(f"图片描述: {description}")
+
+# 特定问题分析
+answer = nb.analyze(
+    "product_image.jpg", 
+    "这个产品的主要特点是什么？适合什么人群使用？"
+)
+print(f"产品分析: {answer}")
+
+# 多图对比
+comparison = nb.analyze(
+    ["before.jpg", "after.jpg"],
+    "对比这两张图片，说明有什么变化"
+)
+print(f"对比结果: {comparison}")
+```
+
+### 错误处理和调试
+
+```python
+import nano_banana as nb
+
+try:
+    result = nb.text_to_image("生成一张风景图")
+    
+    if not result['success']:
+        # URL提取失败，但API调用成功
+        print("⚠️  API调用成功，但未找到图片URL")
+        print("原始响应内容:")
+        print(result['raw_response'])
+        print("\n💡 可能需要手动从响应中提取URL")
+    else:
+        print(f"✅ 成功: {result['urls']}")
+        
+except FileNotFoundError as e:
+    print(f"❌ 文件未找到: {e}")
+except Exception as e:
+    print(f"❌ API调用失败: {e}")
+```
+
+## 重要说明
+
+### URL提取机制
+
+本包会自动从AI响应中提取图片URL，支持：
+- Markdown格式：`![描述](https://url.com/image.png)`
+- 直接URL：`https://url.com/image.jpg`
+
+如果 `success` 为 `False`，说明没有从响应中提取到URL，但不代表API调用失败。你可以查看 `raw_response` 字段获取完整的AI响应内容。
+
+### 环境变量配置
+
+```bash
+# SIMEN AI (推荐)
+export SIMEN_AI_API_KEY="your-simen-ai-key"
+export SIMEN_BASEURL="https://api.simen.ai/v1"
+
+# 或者使用 OpenAI 
+export OPENAI_API_KEY="your-openai-key"
+# OPENAI_API_KEY 时不需要设置 base_url
+```
+
+### 支持的图片格式
+
+- **输入**：JPG, PNG, GIF, WebP (本地文件或URL)
+- **输出**：取决于AI模型返回的URL格式
+
+## 系统要求
+
+- Python 3.8+
+- 依赖：`openai>=1.106.1`
+- API密钥：SIMEN AI 或 OpenAI
+
+## License
+
+MIT License
