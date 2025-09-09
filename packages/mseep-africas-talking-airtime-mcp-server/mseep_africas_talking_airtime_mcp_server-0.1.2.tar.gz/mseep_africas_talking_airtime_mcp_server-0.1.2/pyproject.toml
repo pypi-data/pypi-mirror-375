@@ -1,0 +1,24 @@
+[project]
+name = "mseep-africas-talking-airtime-mcp-server"
+version = "0.1.2"
+description = "An MCP server that provides tools for interacting with Africa's Talking airtime service."
+requires-python = ">=3.12"
+dependencies = [
+    "africastalking>=1.2.9",
+    "mcp[cli]>=1.6.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-africas-talking-airtime-mcp-server = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
