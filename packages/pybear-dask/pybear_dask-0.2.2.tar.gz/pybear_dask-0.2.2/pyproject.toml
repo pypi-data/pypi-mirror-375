@@ -1,0 +1,82 @@
+[tool.poetry]
+name = "pybear-dask"
+version = "0.2.2"
+description = "Python modules for data analytics applications with dask"
+license = "BSD-3-clause"
+authors = ["Bill Sousa <WKSJR99@msn.com>"]
+maintainers = ["Bill Sousa"]
+readme = "README.rst"
+# The contents of the README file(s) are used to populate the Description field
+# of your distribution’s metadata (similar to long_description in setuptools).
+# When multiple files are specified they are concatenated with newlines.
+homepage = "https://github.com/PylarBear/pybear-dask"
+repository = "https://github.com/PylarBear/pybear-dask"
+#documentation
+keywords = ["python data analytics pybear dask"]
+#classifiers
+packages = [
+	{ include = "pybear_dask", from = "src"}
+]
+include = [
+    "LICENSE",
+    "README.rst",
+    "CHANGELOG.md",
+    "tests"
+]
+#exclude
+
+
+[tool.poetry.dependencies]
+# These packages are mandatory and form the core of this package’s distribution.
+python = "^3.10, <3.13"
+dask = "<2025.1"
+dask-ml = "<2025.1"
+distributed = "<2025.1"
+pybear = ">=0.2.0"    #{ version = ">=0.1.22", source = "testpypi" }
+scikit-learn = "<1.7"
+
+
+[tool.poetry.group.dev.dependencies]
+bokeh = "*"
+docutils = ">=0.20"
+graphviz = "*"
+jupyter = "*"
+notebook = "*"
+pyarrow = ">=18.0.0"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.0.0"
+pytest-cov = "*"
+pytest-html = "*"
+
+
+[tool.poetry.extras]
+# Optional dependencies. They can be opted into by apps.
+
+
+[tool.poetry.scripts]
+
+
+[tool.poetry.plugins]
+
+
+[tool.poetry.urls]
+# If you publish your package on PyPI, they will appear in the Project Links section.
+
+
+#[[tool.poetry.source]]
+#name = "testpypi"
+#url = "https://test.pypi.org/simple/"
+#priority = "explicit"
+
+
+[tool.coverage.run]
+source = ["pybear_dask"]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
