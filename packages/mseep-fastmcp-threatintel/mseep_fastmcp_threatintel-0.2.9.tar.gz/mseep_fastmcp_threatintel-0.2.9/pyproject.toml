@@ -1,0 +1,266 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-fastmcp-threatintel"
+version = "0.2.9"
+description = "🛡️ MCP AI Powered Threat Intelligence - Revolutionizing Cybersecurity | Built by Arjun Trivedi (4R9UN)"
+requires-python = ">=3.10,<4.0"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+maintainers = [
+    { name = "Arjun Trivedi (4R9UN)", email = "arjuntrivedi42@yahoo.com" },
+    { name = "Roo Engineering", email = "arjuntrivedi42@yahoo.com" },
+]
+keywords = [
+    "threat-intelligence",
+    "cybersecurity",
+    "ioc-analysis",
+    "mcp-server",
+    "ai-security",
+    "apt-attribution",
+    "malware-analysis",
+    "virustotal",
+    "otx",
+    "abuseipdb",
+    "stix",
+    "threat-hunting",
+    "security-automation",
+    "roo",
+    "4r9un",
+    "claude-desktop",
+    "model-context-protocol",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Security",
+    "Topic :: Internet",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Networking :: Monitoring",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Framework :: AsyncIO",
+    "Natural Language :: English",
+    "Typing :: Typed",
+]
+dependencies = [
+    "fastmcp>=0.1.0",
+    "httpx>=0.28.1",
+    "pydantic>=2.0.0",
+    "pandas>=2.0.0",
+    "networkx>=3.0",
+    "python-dotenv>=1.1.0",
+    "anyio>=4.6.0",
+    "typer>=0.12.5",
+    "tabulate>=0.9.0",
+    "tqdm>=4.66.1",
+    "rich>=13.0.0",
+    "plotly>=5.0.0",
+    "kaleido>=0.2.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "Apache-2.0"
+
+[project.scripts]
+threatintel = "threatintel.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/4R9UN/fastmcp-threatintel"
+Repository = "https://github.com/4R9UN/fastmcp-threatintel"
+Documentation = "https://4r9un.github.io/fastmcp-threatintel/"
+Changelog = "https://github.com/4R9UN/fastmcp-threatintel/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.3",
+    "pytest-asyncio>=0.23.5",
+    "pytest-cov>=4.1.0",
+    "pre-commit>=3.0.0",
+    "mypy>=1.5.1",
+    "commitizen>=3.2.2",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "ruff>=0.1.0",
+    "coverage>=7.0.0",
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocstrings[python]>=0.24.0",
+]
+test = [
+    "pytest-mock>=3.12.0",
+    "pytest-xdist>=3.0.0",
+    "faker>=20.0.0",
+    "trio>=0.22.0",
+]
+lint = [
+    "ruff",
+    "black",
+    "isort",
+    "mypy",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/threatintel",
+]
+include = [
+    "src/threatintel",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "src/Demo.gif",
+]
+exclude = [
+    "tests/",
+    "docs/",
+    "scripts/",
+    ".github/",
+    "*.log",
+    "*.tmp",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version_provider = "pep621"
+tag_format = "v$version"
+update_changelog_on_bump = true
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+python_classes = [
+    "Test*",
+]
+python_functions = [
+    "test_*",
+]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "anyio: marks tests as anyio",
+]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+strict = false
+warn_return_any = false
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = false
+disallow_untyped_decorators = false
+no_implicit_optional = false
+warn_redundant_casts = false
+warn_unused_ignores = false
+warn_no_return = false
+warn_unreachable = false
+show_error_codes = true
+pretty = true
+
+[tool.black]
+line-length = 100
+target-version = [
+    "py310",
+]
+include = "\\.pyi?$"
+extend-exclude = "/(\n  # directories\n  \\.eggs\n  | \\.git\n  | \\.hg\n  | \\.mypy_cache\n  | \\.tox\n  | \\.venv\n  | build\n  | dist\n)/\n"
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = [
+    "src",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+]
+ignore = [
+    "E501",
+    "B008",
+    "C901",
+]
+fixable = [
+    "ALL",
+]
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = [
+    "B011",
+]
+
+[tool.coverage.run]
+source = [
+    "src",
+]
+omit = [
+    "tests/*",
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
