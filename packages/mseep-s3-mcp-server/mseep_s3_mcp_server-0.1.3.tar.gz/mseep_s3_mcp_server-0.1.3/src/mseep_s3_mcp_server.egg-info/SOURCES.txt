@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/client.py
+src/mseep_s3_mcp_server.egg-info/PKG-INFO
+src/mseep_s3_mcp_server.egg-info/SOURCES.txt
+src/mseep_s3_mcp_server.egg-info/dependency_links.txt
+src/mseep_s3_mcp_server.egg-info/entry_points.txt
+src/mseep_s3_mcp_server.egg-info/requires.txt
+src/mseep_s3_mcp_server.egg-info/top_level.txt
+src/s3_mcp_server/__init__.py
+src/s3_mcp_server/server.py
+src/s3_mcp_server/resources/__init__.py
+src/s3_mcp_server/resources/s3_resource.py
