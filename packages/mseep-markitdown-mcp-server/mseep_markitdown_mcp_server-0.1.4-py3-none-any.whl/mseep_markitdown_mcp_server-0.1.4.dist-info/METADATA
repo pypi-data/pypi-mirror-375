@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-markitdown-mcp-server
+Version: 0.1.4
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: markitdown>=0.0.1a3
+Requires-Dist: mcp>=1.2.1
+Dynamic: license-file
+
+Package managed by MseeP.ai
