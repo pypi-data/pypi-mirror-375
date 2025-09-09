@@ -1,0 +1,2 @@
+[console_scripts]
+synapse-mcp = synapse_mcp.__main__:main
