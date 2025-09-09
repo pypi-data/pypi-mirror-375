@@ -1,0 +1,43 @@
+2fc2208 fix: temporary patch to convert the metadata dict into a JobMetaData client model
+1032fb9 feat: update clients
+3ca8a3c feat: add a logic test to make sure attributes and params are going to the right backends
+8491ffe fix: jobparameters and jobattributes pydantic models
+a4f5441 feat: add pre-commit check for lollygag
+57eae01 feat(utils): Add secured write in write_credential()
+62601f8 build(deps): bump the actions group across 1 directory with 3 updates
+34ba630 ci: Set image tag to 'dev' in gubbins_values.yaml
+a5adb7b ci: update deployment to use DIRACCommon package
+addd9c0 test: Add missing test dependency on pyjwt
+59f71e0 refactor: simplify legacy integration test configuration
+fb8adcd test: update tests for new config dependencies and API changes
+a7fd49a feat: add config parameter to job submission router
+a3b2260 feat: extend config schema with structured job and resource configs
+275bc4f feat: add resources module with platform compatibility
+3647cd2 feat: add DIRACCommon dependency and update imports
+cfd9c40 docs: Guide users on updating the expected output of test_cssync when necessary
+059799a feat: add supports_extending decorator
+b181f2e fix: Running test_insert_malformed_jdl on machines with a non-UTC timezone
+271a9d0 fix: improve error logging for JDL syntax issues during job submission
+bd18098 refactor: Make Operations configuration VO-specific
+9f33dea feat(ci): add automatic chart version bumping on DiracX releases
+f979528 [pre-commit.ci] pre-commit autoupdate
+e6f96c4 [pre-commit.ci] pre-commit autoupdate
+fbf8b1d fix: remove preferred username from the search body of the summary if admin
+a0f23c1 build(deps): bump codecov/codecov-action in the actions group
+f35dcab ci: remove RUST_BACKTRACE=full from workflow
+c236fd6 chore(ci): pixi --no-install does not work anymore in the CI
+f481730 docs: Fix broken navigation
+e157bb8 [pre-commit.ci] pre-commit autoupdate
+d364557 build(deps): bump the actions group with 2 updates
+fae41e5 docs: continue installation doc
+4a22c26 docs: Enable strict mode for ReadTheDocs builds
+c79582a add RUST_BACKEND=full
+c1a4259 Add RUST_BACKTRACE=1 for debuging purposes
+edee32a docs: Remove pages which no longer fit into the structure
+f594f6e docs: fix remaining broken links in documentation
+dde3a76 docs: organize navigation to include all missing pages
+b448d4f docs: fix roadmap link path in register-a-vo.md
+6dbf985 docs: fix mkdocs navigation warnings
+44ceb48 feat(mkdocs): add mkdocs dependencies and update mkdocs feature configuration
+656f837 [pre-commit.ci] pre-commit autoupdate
+a25985f build(deps): bump the actions group with 2 updates
