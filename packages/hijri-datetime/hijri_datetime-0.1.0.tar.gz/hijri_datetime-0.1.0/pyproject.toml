@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools<77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hijri-datetime"
+version = "0.1.0"
+license = { text = "MIT" }  # old-style, accepted
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+authors = [
+    { name = "m.lotfi", email = "m.lotfi@email.com" },
+]
+maintainers = [
+    { name = "m.lotfi", email = "m.lotfi@email.com" },
+]
+
+keywords = [
+    "python", "package", "modules", "portable",
+    "hijri", "islamic", "calendar", "datetime"
+]
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.8"
+
+
+    
+
+[tool.setuptools.packages.find]
+where = ["src"]
