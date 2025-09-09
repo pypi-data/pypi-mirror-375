@@ -1,0 +1,15 @@
+pandas<=2.2.3,>=0.25.0
+numpy<=2.2.0,>=1.22.0
+
+[lint]
+black==25.1.0
+ruff==0.12.12
+
+[performance]
+cupy-cuda12x
+numba
+
+[test]
+pytest
+pytest-cov
+pytest-mock
