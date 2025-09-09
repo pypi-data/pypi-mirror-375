@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-datahub
+Version: 0.3.10.dev6
+Summary: A Model Context Protocol (MCP) server for DataHub
+Author-email: mseep <support@skydeck.ai>
+License-Expression: Apache-2.0
+Project-URL: Source, https://github.com/acryldata/mcp-server-datahub
+Project-URL: Documentation, https://docs.datahub.com/docs/features/feature-guides/mcp
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: acryl-datahub==1.2.0.2
+Requires-Dist: asyncer>=0.0.8
+Requires-Dist: fastmcp==2.10.5
+Requires-Dist: jmespath~=1.0.1
+Requires-Dist: loguru
+Dynamic: license-file
+
+Package managed by MseeP.ai
