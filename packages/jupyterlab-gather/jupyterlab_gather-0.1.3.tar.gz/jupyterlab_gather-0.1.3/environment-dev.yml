@@ -1,0 +1,7 @@
+name: jupyterlab-gather
+channels:
+  - conda-forge
+dependencies:
+  - jupyterlab
+  - nodejs
+  - pyjwt
