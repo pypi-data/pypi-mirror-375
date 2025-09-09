@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+recipescraper/__init__.py
+recipescraper/main.py
+recipescraper/utils/__init__.py
+recipescraper/utils/get_data.py
+recipescraper/utils/write_data.py
+recipescraper_cli_tool_er.egg-info/PKG-INFO
+recipescraper_cli_tool_er.egg-info/SOURCES.txt
+recipescraper_cli_tool_er.egg-info/dependency_links.txt
+recipescraper_cli_tool_er.egg-info/entry_points.txt
+recipescraper_cli_tool_er.egg-info/requires.txt
+recipescraper_cli_tool_er.egg-info/top_level.txt

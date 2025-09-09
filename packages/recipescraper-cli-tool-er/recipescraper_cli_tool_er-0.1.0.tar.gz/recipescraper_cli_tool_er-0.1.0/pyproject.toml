@@ -1,0 +1,16 @@
+[project]
+name = "recipescraper-cli-tool-er"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "argparse>=1.4.0",
+    "bs4>=0.0.2",
+    "requests>=2.32.5",
+    "validators>=0.35.0",
+]
+
+
+[project.scripts]
+recipescraper = "recipescraper.main:main"
