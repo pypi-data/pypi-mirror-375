@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/select_notifier/__init__.py
+src/select_notifier/__version__.py
+src/select_notifier/base.py
+src/select_notifier.egg-info/PKG-INFO
+src/select_notifier.egg-info/SOURCES.txt
+src/select_notifier.egg-info/dependency_links.txt
+src/select_notifier.egg-info/requires.txt
+src/select_notifier.egg-info/top_level.txt
+src/select_notifier/services/__init__.py
+src/select_notifier/services/email.py
+src/select_notifier/services/rocket.py
+tests/test_base.py
+tests/test_email_notifier.py
+tests/test_rocket_notifier.py
