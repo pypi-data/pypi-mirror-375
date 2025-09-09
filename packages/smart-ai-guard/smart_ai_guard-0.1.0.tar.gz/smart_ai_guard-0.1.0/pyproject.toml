@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "smart-ai-guard"
+version = "0.1.0"
+description = "Smart Code Quality Gatekeeper for AI-generated code"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    {name = "AI-Guard Contributors"}
+]
+keywords = ["code-quality", "ci-cd", "testing", "security", "ai"]
+dependencies = [
+    "typer==0.9.0",
+    "rich==13.3.5",
+    "tomli>=2.0.1",
+    "defusedxml>=0.7.1",
+    "click==8.1.7",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+
+[project.scripts]
+ai-guard = "ai_guard.analyzer:main"
+
+[project.optional-dependencies]
+dev = [
+    "flake8>=7.1.1",
+    "mypy>=1.11.1",
+    "pytest>=8.3.2",
+    "pytest-cov>=5.0.0",
+    "bandit>=1.7.9",
+    "hypothesis>=6.112.0",
+    "pre-commit>=3.0.0",
+    "pygithub>=2.4.0",
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+ignore_missing_imports = true
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --cov=src --cov-report=xml --cov-fail-under=0"
+filterwarnings = [
+    "ignore::pytest.PytestCollectionWarning"
+]
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["tests/*", "**/__main__.py", "**/contrib/**"]
+
+[tool.coverage.report]
+fail_under = 5
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
