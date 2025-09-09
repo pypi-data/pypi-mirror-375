@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: aek-auto-mlbuilder
+Version: 0.1.0
+Summary: Automatic ML model builder in Python
+Home-page: https://github.com/alpemre8/aek-auto-mlbuilder
+Author: Alp Emre Karaahmet
+Author-email: alpemrekaraahmet@gmail.com
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
