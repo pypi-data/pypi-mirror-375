@@ -1,0 +1,101 @@
+﻿meter_name;location;unitPrice;currencyCode
+Free Text Records;CH North;0.0;USD
+Image-Dall-E-3 Std LowRes-regnl EP Images;SE Central;4.0;USD
+embedding-ada-regional Tokens;FR Central;0.0001;USD
+embedding-ada-regional Tokens;US East;0.0001;USD
+gpt 4o 0513 Input global Tokens;FR Central;0.005;USD
+gpt 4o 0513 Input global Tokens;US East;0.005;USD
+gpt 4o 0513 Input regional Tokens;SE Central;0.005;USD
+gpt 4o 0513 Output global Tokens;FR Central;0.015;USD
+gpt 4o 0513 Output global Tokens;US East;0.015;USD
+gpt 4o 0513 Output regional Tokens;SE Central;0.015;USD
+gpt-35-turbo-16k-Input-regional Tokens;FR Central;0.003;USD
+gpt-35-turbo-16k-Output-regional Tokens;FR Central;0.004;USD
+gpt-35-turbo-4k-Input-regional Tokens;SE Central;0.0015;USD
+gpt-35-turbo-4k-Output-regional Tokens;SE Central;0.002;USD
+gpt-4-32K-Input-regional Tokens;US East;0.06;USD
+gpt-4-32K-Output-regional Tokens;US East;0.12;USD
+gpt-4-8K-Input-regional Tokens;CH North;0.03;USD
+gpt-4-8K-Input-regional Tokens;SE Central;0.03;USD
+gpt-4-8K-Input-regional Tokens;US East;0.03;USD
+gpt-4-8K-Output-regional Tokens;CH North;0.06;USD
+gpt-4-8K-Output-regional Tokens;SE Central;0.06;USD
+gpt-4-8K-Output-regional Tokens;US East;0.06;USD
+gpt-4-turbo128K Inp-glbl Tokens;US East;0.01;USD
+gpt-4-turbo128K Outp-glbl Tokens;US East;0.03;USD
+gpt-4o-0806-Inp-glbl Tokens;US East;0.0025;USD
+gpt-4o-0806-Outp-glbl Tokens;US East;0.01;USD
+gpt-4o-mini-0718-Inp-glbl Tokens;US East;0.00015;USD
+gpt-4o-mini-0718-Inp-regnl Tokens;SE Central;0.000165;USD
+gpt-4o-mini-0718-Outp-glbl Tokens;US East;0.0006;USD
+gpt-4o-mini-0718-Outp-regnl Tokens;SE Central;0.00066;USD
+text-embedding-3-large-regional Tokens;US East;0.00013;USD
+text-embedding-3-small-regional Tokens;US East;2e-05;USD
+gpt-4o-0806-Inp-glbl Tokens;SE Central;0.0025;USD
+gpt-4o-0806-Outp-glbl Tokens;SE Central;0.01;USD
+gpt 4o 0806 cached Inp glbl Tokens;US East;0.00125;USD
+gpt 4o mini 0718 cached Inp glbl Tokens;FR Central;7.5e-05;USD
+gpt-4o-mini-0718-Inp-glbl Tokens;FR Central;0.00015;USD
+gpt-4o-mini-0718-Outp-glbl Tokens;FR Central;0.0006;USD
+gpt 4o 0513 Input global Tokens;CH North;0.005;USD
+gpt 4o 0513 Output global Tokens;CH North;0.015;USD
+text-embedding-3-small-regional Tokens;CH North;2e-05;USD
+gpt 4o 1120 Inp glbl Tokens;SE Central;0.0025;USD
+gpt 4o 1120 Inp glbl Tokens;US East;0.0025;USD
+gpt 4o 1120 Outp glbl Tokens;SE Central;0.01;USD
+gpt 4o 1120 Outp glbl Tokens;US East;0.01;USD
+gpt 4o 1120 cached Inp glbl Tokens;SE Central;0.00125;USD
+gpt 4o 1120 cached Inp glbl Tokens;US East;0.00125;USD
+gpt 4o mini 0718 cached Inp glbl Tokens;US West;7.5e-05;USD
+gpt 4o mini 0718 cached Inp regnl Tokens;SE Central;9.1e-05;USD
+gpt-35-turbo-4k-Input-regional Tokens;CH North;0.0015;USD
+gpt-35-turbo-4k-Output-regional Tokens;CH North;0.002;USD
+gpt-4o-0806-Inp-regnl Tokens;US East;0.00275;USD
+gpt-4o-0806-Outp-regnl Tokens;US East;0.011;USD
+gpt-4o-mini-0718-Inp-glbl Tokens;CH North;0.00015;USD
+gpt-4o-mini-0718-Inp-glbl Tokens;US West;0.00015;USD
+gpt-4o-mini-0718-Inp-regnl Tokens;US East;0.000165;USD
+gpt-4o-mini-0718-Outp-glbl Tokens;CH North;0.0006;USD
+gpt-4o-mini-0718-Outp-glbl Tokens;US West;0.0006;USD
+gpt-4o-mini-0718-Outp-regnl Tokens;US East;0.00066;USD
+o1 mini cached input glbl Tokens;SE Central;0.00055;USD
+o1 mini input glbl Tokens;SE Central;0.0011;USD
+o1 mini output glbl Tokens;SE Central;0.0044;USD
+Standard Text Records;CH North;0.375;USD
+gpt 4o 0806 cached Inp glbl Tokens;SE Central;0.00125;USD
+gpt-35-turbo-16K-0125 Input-regional Tokens;FR Central;0.0005;USD
+gpt-35-turbo-16K-0125 Output-regional Tokens;FR Central;0.0015;USD
+o3 mini 0131 input glbl Tokens;SE Central;0.0011;USD
+o3 mini 0131 output glbl Tokens;SE Central;0.0044;USD
+gpt-4o-mini-0718-Inp-glbl Tokens;EU West;0.00015;USD
+gpt-4o-mini-0718-Inp-glbl Tokens;SE Central;0.00015;USD
+gpt-4o-mini-0718-Outp-glbl Tokens;EU West;0.0006;USD
+gpt-4o-mini-0718-Outp-glbl Tokens;SE Central;0.0006;USD
+gpt 4o 1120 Inp glbl Tokens;US East 2;0.0025;USD
+gpt 4o 1120 Outp glbl Tokens;US East 2;0.01;USD
+gpt 4o 1120 cached Inp glbl Tokens;US East 2;0.00125;USD
+gpt 4o mini 0718 cached Inp glbl Tokens;SE Central;7.5e-05;USD
+gpt 4o mini 0718 cached Inp glbl Tokens;US East 2;7.5e-05;USD
+gpt-4o-mini-0718-Inp-glbl Tokens;US East 2;0.00015;USD
+gpt-4o-mini-0718-Outp-glbl Tokens;US East 2;0.0006;USD
+o3 mini 0131 cached input glbl Tokens;US East 2;0.00055;USD
+o3 mini 0131 input glbl Tokens;US East 2;0.0011;USD
+o3 mini 0131 output glbl Tokens;US East 2;0.0044;USD
+Standard Text Records;FR Central;0.375;USD
+gpt 4.1 Inp glbl Tokens;US East 2;0.002;USD
+gpt 4.1 Outp glbl Tokens;US East 2;0.008;USD
+gpt 4.1 cached Inp glbl Tokens;US East 2;0.0005;USD
+gpt 4.1 nano Inp glbl Tokens;US East 2;0.0001;USD
+gpt 4.1 nano Outp glbl Tokens;US East 2;0.0004;USD
+gpt 4o 0806 cached Inp regnl Tokens;US East;0.001375;USD
+Standard Text Records;US East 2;1.0;USD
+gpt 4.1 Inp glbl Tokens;US East;0.002;USD
+gpt 4.1 Outp glbl Tokens;US East;0.008;USD
+gpt 4.1 mini Inp glbl Tokens;US East;0.0004;USD
+gpt 4.1 mini Inp glbl Tokens;US East 2;0.0004;USD
+gpt 4.1 mini Outp glbl Tokens;US East;0.0016;USD
+gpt 4.1 mini Outp glbl Tokens;US East 2;0.0016;USD
+o4-mini 0416 Inp glbl Tokens;US East;0.0011;USD
+o4-mini 0416 Inp glbl Tokens;US East 2;0.0011;USD
+o4-mini 0416 Outp glbl Tokens;US East;0.0044;USD
+o4-mini 0416 Outp glbl Tokens;US East 2;0.0044;USD
