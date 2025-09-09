@@ -1,0 +1,400 @@
+# Python Database Utilities
+
+[![PyPI version](https://badge.fury.io/py/pyspdbutils.svg)](https://badge.fury.io/py/pyspdbutils)
+[![Python versions](https://img.shields.io/pypi/pyversions/pyspdbutils.svg)](https://pypi.org/project/pyspdbutils/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A production-grade database utilities package that provides a unified interface for working with multiple database types. Built with enterprise requirements in mind, it includes hash collision detection, automatic schema validation, and robust error handling.
+
+## 📖 Documentation Guide
+
+**👋 New to db_utils? Start here:**
+1. **README.md** (this file) - Overview, features, and quick start
+2. **[INSTALL.md](INSTALL.md)** - Detailed installation guide for all databases
+3. **[check_imports.py](check_imports.py)** - Test interface import examples
+3. **[examples.py](examples.py)** - Basic db utils usage examples
+4. **[data_approaches_demo.py](data_approaches_demo.py)** - End to end db utils Data handling patterns
+
+**🔧 For developers:**
+- **[SETUP.md](SETUP.md)** - Development environment setup and contribution guide
+
+## Features
+
+- **Universal Database Interface**: Work with 12+ database types using a single API
+- **Hash Collision Detection**: Automatic duplicate prevention using configurable hash columns
+- **Schema Validation**: Built-in validation for table schemas and data integrity
+- **Query Builder**: Type-safe query building with parameter binding
+- **Production Ready**: Comprehensive error handling and logging
+- **Type Hints**: Full type annotation support for better IDE integration
+- **Transaction Management**: Built-in transaction handling with rollback support
+
+## Supported Databases
+
+- SQLite
+- PostgreSQL
+- MySQL/MariaDB
+- Microsoft SQL Server
+- Azure SQL Database
+- Oracle
+- Snowflake
+- Databricks
+- Amazon Redshift
+- IBM DB2
+- Teradata
+
+## Installation
+
+### Basic Installation
+
+```bash
+pip install pyspdbutils
+```
+
+### Database-Specific Dependencies
+
+Install with specific database support:
+
+```bash
+# PostgreSQL
+pip install pyspdbutils[postgresql]
+
+# MySQL
+pip install pyspdbutils[mysql]
+
+# SQL Server
+pip install pyspdbutils[sqlserver]
+
+# Oracle
+pip install pyspdbutils[oracle]
+
+# Snowflake
+pip install pyspdbutils[snowflake]
+
+# Teradata
+pip install pyspdbutils[teradata]
+
+# Databricks
+pip install pyspdbutils[databricks]
+
+# MariaDB
+pip install pyspdbutils[mariadb]
+
+# Azure SQL
+pip install pyspdbutils[azuresql]
+
+# All databases
+pip install pyspdbutils[all]
+```
+
+## Quick Start
+
+### SQLite Example
+
+```python
+from db_utils import DBManager, DBConfig
+from db_utils.interfaces import SQLiteInterface
+
+# Initialize database interface
+interface = SQLiteInterface("example.db")
+
+# Create manager with hash collision detection
+manager = DBManager(interface, hash_columns=["id", "email"])
+
+# Create table
+schema = {
+    "id": "INTEGER PRIMARY KEY",
+    "name": "VARCHAR(100)",
+    "email": "VARCHAR(255) UNIQUE",
+    "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+}
+manager.create_table("users", schema)
+
+# Insert data with automatic duplicate detection
+user_data = {"id": 1, "name": "John Doe", "email": "john@example.com"}
+result = manager.insert("users", user_data)
+
+if result == "duplicate":
+    print("User already exists!")
+else:
+    print("User created successfully!")
+
+# Query data
+users = manager.select("users", conditions={"name": "John Doe"})
+print(f"Found {len(users)} users")
+```
+
+### PostgreSQL Example
+
+```python
+from db_utils import DBManager, DBConfig
+from db_utils.interfaces import PostgreSQLInterface
+
+# Initialize PostgreSQL interface
+interface = PostgreSQLInterface(
+    host="localhost",
+    port=5432,
+    user="username", 
+    password="password",
+    database="mydb"
+)
+
+# Or use environment variables with DBConfig
+config = DBConfig.from_env("postgresql")
+from db_utils.interfaces import SQLAlchemyInterface
+interface = SQLAlchemyInterface(config.conn_str)
+
+manager = DBManager(interface)
+
+# Rest of the code is the same...
+```
+
+### Using Environment Variables
+
+Create a `.env` file:
+
+```env
+POSTGRESQL_HOST=localhost
+POSTGRESQL_PORT=5432
+POSTGRESQL_USER=myuser
+POSTGRESQL_PASSWORD=mypassword
+POSTGRESQL_DATABASE=mydatabase
+
+MYSQL_HOST=localhost
+MYSQL_USER=root
+MYSQL_PASSWORD=password
+MYSQL_DATABASE=testdb
+
+SNOWFLAKE_ACCOUNT=your-account
+SNOWFLAKE_USER=your-user
+SNOWFLAKE_PASSWORD=your-password
+SNOWFLAKE_WAREHOUSE=your-warehouse
+SNOWFLAKE_DATABASE=your-database
+SNOWFLAKE_SCHEMA=your-schema
+```
+
+Then use `DBConfig`:
+
+```python
+from db_utils import DBConfig
+from db_utils.interfaces import SQLAlchemyInterface
+
+# Load configuration from environment
+config = DBConfig.from_env("postgresql")
+interface = SQLAlchemyInterface(config.connection_string)
+```
+
+## Advanced Usage
+
+### Hash Collision Detection
+
+```python
+# Configure hash columns for duplicate detection
+manager = DBManager(interface, hash_columns=["email", "phone"])
+
+# Insert will automatically check for duplicates
+data = {"name": "Jane Doe", "email": "jane@example.com", "phone": "+1234567890"}
+result = manager.insert("users", data, skip_duplicates=True)
+
+if result == "duplicate":
+    print("Record with same email/phone already exists")
+```
+
+### Transaction Management
+
+```python
+# Using context manager for automatic transaction handling
+with interface:
+    manager.insert("users", user1_data)
+    manager.insert("users", user2_data)
+    # Automatically commits on success, rolls back on error
+```
+
+### Custom Schema Creation
+
+```python
+# Create complex table with constraints
+schema = {
+    "id": "SERIAL PRIMARY KEY",
+    "username": "VARCHAR(50) UNIQUE NOT NULL",
+    "email": "VARCHAR(100) UNIQUE NOT NULL", 
+    "password_hash": "VARCHAR(255) NOT NULL",
+    "is_active": "BOOLEAN DEFAULT TRUE",
+    "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+    "updated_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+}
+
+manager.create_table("users", schema)
+
+# Add indexes (database-specific)
+if hasattr(interface, 'execute_query'):
+    interface.execute_query("CREATE INDEX idx_users_email ON users(email)")
+```
+
+### Batch Operations
+
+```python
+# Bulk insert with duplicate checking
+users_data = [
+    {"name": "User 1", "email": "user1@example.com"},
+    {"name": "User 2", "email": "user2@example.com"},
+    {"name": "User 3", "email": "user3@example.com"},
+]
+
+inserted_count = 0
+duplicate_count = 0
+
+for user_data in users_data:
+    result = manager.insert("users", user_data)
+    if result == "duplicate":
+        duplicate_count += 1
+    else:
+        inserted_count += 1
+
+print(f"Inserted: {inserted_count}, Duplicates: {duplicate_count}")
+```
+
+### Query Building
+
+```python
+from db_utils import QueryBuilder
+
+# Custom query building
+builder = QueryBuilder("postgresql")
+
+# Build complex SELECT query
+query, params = builder.build_query_params(
+    "SELECT",
+    "users",
+    columns=["id", "name", "email"],
+    conditions={"is_active": True, "created_at": "2024-01-01"},
+    limit=10,
+    offset=20
+)
+
+results = interface.execute_query(str(query), params, fetch="all")
+```
+
+## Error Handling
+
+The package includes comprehensive error handling:
+
+```python
+from db_utils.exception import (
+    DBOperationError,
+    ValidationError,
+    ConnectionError,
+    ConfigurationError
+)
+
+try:
+    manager.insert("users", invalid_data)
+except ValidationError as e:
+    print(f"Data validation failed: {e}")
+except DBOperationError as e:
+    print(f"Database operation failed: {e}")
+except ConnectionError as e:
+    print(f"Database connection failed: {e}")
+```
+
+## Configuration
+
+### Supported Configuration Methods
+
+1. **Direct instantiation**:
+   ```python
+   config = DBConfig("postgresql", host="localhost", user="user", password="pass")
+   ```
+
+2. **Environment variables**:
+   ```python
+   config = DBConfig.from_env("postgresql")
+   ```
+
+3. **Mixed approach**:
+   ```python
+   config = DBConfig("postgresql", host="custom-host")  # Other params from env
+   ```
+
+### Database-Specific Configuration
+
+#### Snowflake
+```python
+config = DBConfig("snowflake",
+    account="your-account",
+    user="username",
+    password="password",
+    warehouse="compute_wh",
+    database="analytics",
+    schema="public",
+    role="analyst"
+)
+```
+
+#### Databricks
+```python
+config = DBConfig("databricks",
+    host="your-workspace.cloud.databricks.com",
+    password="your-token",  # Personal access token
+    database="/your/database/path"
+)
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+# Install development dependencies
+pip install production-db-utils[dev]
+
+# Run tests
+pytest
+
+# Run with coverage
+pytest --cov=db_utils --cov-report=html
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Add tests for your changes
+5. Run the test suite (`pytest`)
+6. Commit your changes (`git commit -m 'Add amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
+
+## 📚 Additional Documentation
+
+- **[📦 INSTALL.md](INSTALL.md)** - Complete installation guide for all database types
+- **[🔧 SETUP.md](SETUP.md)** - Development setup and contribution guidelines  
+- **[📝 examples.py](examples.py)** - Basic usage examples and patterns
+- **[🚀 advanced_examples_copy.py](advanced_examples_copy.py)** - Advanced features and enterprise usage
+- **[📊 data_approaches_demo.py](data_approaches_demo.py)** - Data handling best practices
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- Support for 12+ database types
+- Hash collision detection
+- Schema validation
+- Production-grade error handling
+- Comprehensive test suite
+
+## Support
+
+- 📧 Email: your.email@example.com
+- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/production-db-utils/issues)
+- 📖 Documentation: [GitHub Wiki](https://github.com/yourusername/production-db-utils/wiki)
+
+## Related Projects
+
+- [SQLAlchemy](https://sqlalchemy.org/) - The Python SQL toolkit
+- [Pandas](https://pandas.pydata.org/) - Data analysis and manipulation tool
+- [Alembic](https://alembic.sqlalchemy.org/) - Database migration tool
