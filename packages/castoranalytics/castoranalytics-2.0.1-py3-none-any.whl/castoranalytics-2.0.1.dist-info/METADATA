@@ -1,0 +1,19 @@
+Metadata-Version: 2.3
+Name: castoranalytics
+Version: 2.0.1
+Summary: 
+Author: Ralph Brecheisen
+Author-email: r.brecheisen@maastrichtuniversity.nl
+Requires-Python: >=3.11,<3.14
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: oauthlib (>=3.2)
+Requires-Dist: openpyxl (>=3.1.5)
+Requires-Dist: pandas (>=2.3.2)
+Requires-Dist: pyside6-essentials (>=6.9)
+Requires-Dist: requests-oauthlib (>=2.0)
+Description-Content-Type: text/markdown
+
+
