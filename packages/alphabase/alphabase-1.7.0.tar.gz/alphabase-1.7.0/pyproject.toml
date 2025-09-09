@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alphabase"
+requires-python = ">=3.8"
+dynamic = ["version", "dependencies", "optional-dependencies"]
+
+authors = [
+    {name = "Mann Labs", email = "jalew188@gmail.com"}
+]
+description = "An infrastructure Python package of the AlphaX ecosystem"
+readme = "README.md"
+keywords = [
+    "mass spectrometry",
+    "proteomics",
+    "bioinformatics",
+    "AlphaPept",
+    "AlphaPept ecosystem",
+    "AlphaX ecosystem",
+]
+license = {file = "LICENSE.txt"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    # "Development Status :: 5 - Production/Stable",
+    # "Development Status :: 6 - Mature",
+    # "Development Status :: 7 - Inactive"
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.urls]
+
+"Paper preprint" = "https://www.biochem.mpg.de/mann"
+Repository = "https://github.com/MannLabs/alphabase"
+Documentation = "https://alphabase.readthedocs.io/en/latest/"
+#Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+Issues = "https://github.com/MannLabs/alphabase/issues"
+"Mann Labs Homepage" = "https://www.biochem.mpg.de/mann"
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.setuptools.dynamic]
+# https://stackoverflow.com/a/73600610
+dependencies = {file = ["requirements/requirements_loose.txt"]}
+optional-dependencies.stable = { file = ["requirements/requirements.txt" ] }
+optional-dependencies.dask = { file = ["requirements/requirements_dask_loose.txt" ] }
+optional-dependencies.dask-stable = { file = ["requirements/requirements_dask.txt" ] }
+optional-dependencies.hdf = { file = ["requirements/requirements_hdf_loose.txt" ] }
+optional-dependencies.tests = { file = ["requirements/requirements_tests.txt" ] }
+optional-dependencies.development = { file = [
+    "requirements/requirements_development.txt",
+    "requirements/requirements_tests.txt",
+    "requirements/requirements_docs.txt"
+] }
+
+version = {attr = "alphabase.__version__"}
+
+
+[tool.ruff.lint]
+select =  [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+ignore = [
+    "E501",  # Line too long  (ruff wraps code, but not docstrings)
+    "B028",  #  No explicit `stacklevel` keyword argument found (for warnings)
+    "B006", # Do not use mutable data structures for argument defaults # TODO: fix this!
+]
