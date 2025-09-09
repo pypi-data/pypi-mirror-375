@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling>=1.22"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyforcis"
+version = "0.0.2"
+description = "Lightweight FORCIS versioning/download toolkit with rich CLI (devices, parquet, integrity)"
+readme = "README.md"
+license = {text = "GPL-3.0-only"}
+authors = [{name = "Khalil Hammami", email = ""}]
+requires-python = ">=3.10"
+dependencies = [
+  "rich>=13.7"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+  "Environment :: Console",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Topic :: Utilities",
+  "Typing :: Typed"
+]
+
+[project.optional-dependencies]
+parquet = ["pyarrow>=15.0"]
+cli = ["rich>=13.7"]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "ruff",
+  "mypy",
+  "pyarrow>=15.0"
+]
+
+[project.scripts]
+pyforcis = "pyforcis.cli:main"
+
+# plugins feature removed in minimal build
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pyforcis"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+addopts = "-q"
