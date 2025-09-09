@@ -1,0 +1,2 @@
+[console_scripts]
+yaraflux-mcp-server = yaraflux_mcp_server.__main__:cli
