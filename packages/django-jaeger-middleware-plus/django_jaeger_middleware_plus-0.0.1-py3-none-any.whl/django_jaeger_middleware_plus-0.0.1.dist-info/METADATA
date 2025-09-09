@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: django-jaeger-middleware-plus
+Version: 0.0.1
+Summary: A Django middleware for distributed tracing with Jaeger
+Home-page: https://github.com/lcoolcool/django-jaeger-middleware-plus
+Author: zhaishuaishuai
+Author-email: zhaishuaishuai001@gmail.com
+Project-URL: Bug Reports, https://github.com/lcoolcool/django-jaeger-middleware-plus/issues
+Project-URL: Source, https://github.com/lcoolcool/django-jaeger-middleware-plus
+Project-URL: Documentation, https://github.com/lcoolcool/django-jaeger-middleware-plus
+Keywords: django,jaegeropentracingmicroservice
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 2.2
+Classifier: Framework :: Django :: 3.2
+Classifier: Framework :: Django :: 4.0
+Classifier: Framework :: Django :: 4.1
+Classifier: Framework :: Django :: 4.2
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Django >=2.2
+Requires-Dist: jaeger-client >=4.6.1
+Requires-Dist: opentracing >=2.4.0
+Requires-Dist: requests >=2.25.1
+Provides-Extra: dev
+Requires-Dist: pytest >=6.0 ; extra == 'dev'
+Requires-Dist: pytest-django >=2.2 ; extra == 'dev'
+Requires-Dist: black >=21.0 ; extra == 'dev'
+Requires-Dist: flake8 >=3.8 ; extra == 'dev'
+Requires-Dist: mypy >=0.812 ; extra == 'dev'
+
+# django-jaeger-middleware-plus
+适用于django及基于django框架的项目中添加jaeger(遵循opentracing API)实现的middleware. 自动采集HTTP请求、数据库查询、缓存操作等链路数据.
