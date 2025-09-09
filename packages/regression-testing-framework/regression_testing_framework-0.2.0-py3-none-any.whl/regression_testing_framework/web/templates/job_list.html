@@ -1,0 +1,55 @@
+<!-- Job List Template -->
+{% if jobs %}
+<div class="job-list">
+    {% for job in jobs %}
+    <div class="job-item">
+        <div class="job-header">
+            <span class="job-id">{{ job.job_id[:8] }}</span>
+            <span class="status {{ job.status.lower() }}">{{ job.status }}</span>
+        </div>
+        
+        {% if job.description %}
+        <div class="job-description">
+            <strong>{{ job.description }}</strong>
+        </div>
+        {% endif %}
+        
+        <div class="job-meta">
+            <div class="job-meta-item">
+                <strong>Config:</strong> {{ job.config_path | basename }}
+            </div>
+            <div class="job-meta-item">
+                <strong>Created:</strong> {{ job.created_at | timeago }}
+            </div>
+            {% if job.max_workers %}
+            <div class="job-meta-item">
+                <strong>Workers:</strong> {{ job.max_workers }}
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if job.result %}
+        <div class="job-result">
+            <strong>Result:</strong> 
+            {% if job.result.tests_passed %}
+            <span class="status success">{{ job.result.tests_passed }} passed</span>
+            {% endif %}
+            {% if job.result.tests_failed %}
+            <span class="status error">{{ job.result.tests_failed }} failed</span>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        {% if job.error %}
+        <div class="error-message">
+            <strong>Error:</strong> {{ job.error }}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="job-list">
+    <p class="loading">No jobs found. Start a new job above to see it here.</p>
+</div>
+{% endif %}

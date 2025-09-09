@@ -1,0 +1,2 @@
+[console_scripts]
+reggie = regression_testing_framework.cli:cli

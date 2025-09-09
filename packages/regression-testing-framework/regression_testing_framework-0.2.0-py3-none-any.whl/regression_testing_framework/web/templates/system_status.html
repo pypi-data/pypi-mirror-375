@@ -1,0 +1,21 @@
+<!-- System Status Template -->
+<div class="system-stats">
+    <div class="stat-item">
+        <span class="stat-value">{{ celery.workers }}</span>
+        <span class="stat-label">Workers</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-value">{{ celery.active_jobs }}</span>
+        <span class="stat-label">Active Jobs</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-value">{{ celery.scheduled_jobs }}</span>
+        <span class="stat-label">Queued</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-value status {{ 'success' if celery.broker_connected else 'error' }}">
+            {{ 'Connected' if celery.broker_connected else 'Disconnected' }}
+        </span>
+        <span class="stat-label">Broker</span>
+    </div>
+</div>
