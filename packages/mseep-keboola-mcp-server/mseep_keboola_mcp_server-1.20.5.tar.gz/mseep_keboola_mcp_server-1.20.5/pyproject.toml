@@ -1,0 +1,236 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-keboola-mcp-server"
+version = "1.20.5"
+description = "MCP server for interacting with Keboola Connection"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "fastmcp == 2.10.6",
+    "mcp == 1.12.3",
+    "httpx ~= 0.28",
+    "jsonschema ~= 4.23",
+    "pyjwt ~= 2.10",
+    "json-log-formatter ~= 1.0",
+    "cryptography ~= 45.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+codestyle = [
+    "black ~= 25.1",
+    "isort ~= 6.0",
+    "flake8 ~= 7.2",
+    "Flake8-pyproject ~= 1.2",
+    "flake8-bugbear ~= 24.12",
+    "flake8-colors ~= 0.1",
+    "flake8-isort ~= 6.1",
+    "flake8-pytest-style ~= 2.1",
+    "flake8-quotes ~= 3.4",
+    "flake8-typing-imports ~= 1.16",
+    "pep8-naming ~= 0.14",
+]
+tests = [
+    "python-dateutil ~= 2.9",
+    "pytest ~= 8.3",
+    "pytest-asyncio ~= 0.25",
+    "pytest-cov ~= 6.0",
+    "pytest-datadir ~= 1.6.1",
+    "python-dotenv ~= 1.1",
+    "pytest-mock ~= 3.14",
+]
+integtests = [
+    "kbcstorage ~= 0.9",
+]
+dev = [
+    "tox ~= 4.23",
+]
+
+[project.scripts]
+keboola_mcp_server = "keboola_mcp_server.cli:main"
+keboola-mcp-server = "keboola_mcp_server.cli:main"
+
+[tool.setuptools.package-data]
+"keboola_mcp_server.resources" = [
+    "storage-schema.json",
+]
+
+[tool.black]
+target-version = [
+    "py310",
+]
+skip-string-normalization = true
+line-length = 120
+extend-exclude = "/(\n  # directories\n  \\.eggs\n  | \\.git\n  | \\.hg\n  | \\.mypy_cache\n  | \\.tox\n  | \\.venv\n  | _build\n  | buck-out\n  | build\n  | dist\n)/\n"
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+use_parentheses = true
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/keboola_mcp_server",
+]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+asyncio_default_fixture_loop_scope = "function"
+asyncio_mode = "strict"
+log_cli = false
+log_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(name)s: %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+
+[tool.flake8]
+max-line-length = 120
+import-order-style = "edited"
+application-package-names = [
+    "keboola_mcp_server",
+]
+min-python-version = "3.10.0"
+pytest-fixture-no-parentheses = true
+per-file-ignores = [
+    "__init__.py: F401",
+]
+extend-ignore = [
+    "E203",
+    "W503",
+    "I101",
+]
+
+[tool.tox]
+requires = [
+    "tox>=4.23",
+]
+env_list = [
+    "python",
+    "black",
+    "flake8",
+    "check-tools-docs",
+]
+
+[tool.tox.labels]
+cs-fix = [
+    "black",
+]
+cs = [
+    "flake8",
+]
+
+[tool.tox.env_run_base]
+description = "Run tests"
+extras = [
+    "tests",
+]
+package = "wheel"
+wheel_build_env = ".pkg"
+commands = [
+    [
+        "pytest",
+        { replace = "posargs", default = [
+    "tests",
+    "--cov=keboola_mcp_server",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--junitxml",
+    "./test-results.xml",
+], extend = true },
+    ],
+]
+
+[tool.tox.env.integtests]
+description = "Run integration tests"
+extras = [
+    "tests",
+    "integtests",
+]
+pass_env = [
+    "INTEGTEST_STORAGE_API_URL",
+    "INTEGTEST_STORAGE_TOKEN",
+    "INTEGTEST_WORKSPACE_SCHEMA",
+]
+commands = [
+    [
+        "pytest",
+        { replace = "posargs", default = [
+    "integtests",
+    "--junitxml",
+    "./integtest-results.xml",
+], extend = true },
+    ],
+]
+
+[tool.tox.env.black]
+description = "Fix code formatting using black"
+package = "skip"
+deps = [
+    "black ~= 25.1",
+]
+commands = [
+    [
+        "black",
+        "src/",
+        "tests/",
+        "integtests/",
+    ],
+]
+
+[tool.tox.env.flake8]
+description = "Run code style check using flake8"
+package = "skip"
+deps = [
+    "flake8 ~= 7.2",
+    "Flake8-pyproject ~= 1.2",
+    "flake8-bugbear ~= 24.12",
+    "flake8-colors ~= 0.1",
+    "flake8-isort ~= 6.1",
+    "flake8-pytest-style ~= 2.1",
+    "flake8-quotes ~= 3.4",
+    "flake8-typing-imports ~= 1.16",
+    "pep8-naming ~= 0.14",
+]
+commands = [
+    [
+        "flake8",
+        "src/",
+        "tests/",
+        "integtests/",
+    ],
+]
+
+[tool.tox.env.check-tools-docs]
+description = "Check if TOOLS.md is up-to-date with tool definitions"
+extras = []
+package = "wheel"
+wheel_build_env = ".pkg"
+allowlist_externals = [
+    "git",
+]
+commands = [
+    [
+        "python",
+        "-m",
+        "keboola_mcp_server.generate_tool_docs",
+    ],
+    [
+        "git",
+        "diff",
+        "--exit-code",
+        "TOOLS.md",
+    ],
+]

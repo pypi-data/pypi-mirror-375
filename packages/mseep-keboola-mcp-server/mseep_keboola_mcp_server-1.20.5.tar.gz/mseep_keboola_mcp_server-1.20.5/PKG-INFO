@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: mseep-keboola-mcp-server
+Version: 1.20.5
+Summary: MCP server for interacting with Keboola Connection
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: cryptography~=45.0
+Requires-Dist: fastmcp==2.10.6
+Requires-Dist: httpx~=0.28
+Requires-Dist: json-log-formatter~=1.0
+Requires-Dist: jsonschema~=4.23
+Requires-Dist: mcp==1.12.3
+Requires-Dist: pyjwt~=2.10
+Provides-Extra: codestyle
+Requires-Dist: black~=25.1; extra == 'codestyle'
+Requires-Dist: flake8-bugbear~=24.12; extra == 'codestyle'
+Requires-Dist: flake8-colors~=0.1; extra == 'codestyle'
+Requires-Dist: flake8-isort~=6.1; extra == 'codestyle'
+Requires-Dist: flake8-pyproject~=1.2; extra == 'codestyle'
+Requires-Dist: flake8-pytest-style~=2.1; extra == 'codestyle'
+Requires-Dist: flake8-quotes~=3.4; extra == 'codestyle'
+Requires-Dist: flake8-typing-imports~=1.16; extra == 'codestyle'
+Requires-Dist: flake8~=7.2; extra == 'codestyle'
+Requires-Dist: isort~=6.0; extra == 'codestyle'
+Requires-Dist: pep8-naming~=0.14; extra == 'codestyle'
+Provides-Extra: dev
+Requires-Dist: tox~=4.23; extra == 'dev'
+Provides-Extra: integtests
+Requires-Dist: kbcstorage~=0.9; extra == 'integtests'
+Provides-Extra: tests
+Requires-Dist: pytest-asyncio~=0.25; extra == 'tests'
+Requires-Dist: pytest-cov~=6.0; extra == 'tests'
+Requires-Dist: pytest-datadir~=1.6.1; extra == 'tests'
+Requires-Dist: pytest-mock~=3.14; extra == 'tests'
+Requires-Dist: pytest~=8.3; extra == 'tests'
+Requires-Dist: python-dateutil~=2.9; extra == 'tests'
+Requires-Dist: python-dotenv~=1.1; extra == 'tests'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
