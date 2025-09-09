@@ -1,0 +1,7 @@
+name: chained_command_test
+description: Test running a command in different venv with params and env vars
+commands:
+  - name: run_in_custom_venv
+    command: source /path/to/custom/.venv/bin/activate && TEST_ENV_VAR='test_value' python script.py --param value
+    working_dir: "${WORKSPACE_DIR}/scripts"
+    timeout: 60

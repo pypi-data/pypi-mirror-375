@@ -1,0 +1,16 @@
+Test: python_test
+Status: FAILURE
+Command: python -c import os; print(f'Environment variable: {os.environ.get("ABC", "not set")}')
+Environment:
+  ABC=cats
+  DEBUG=true
+Return code: 2
+Start time: 2025-08-31 16:36:11.290873
+End time: 2025-08-31 16:36:11.297391
+
+--- STDOUT ---
+
+
+--- STDERR ---
+/bin/sh: -c: line 0: syntax error near unexpected token `f'Environment variable: {os.environ.get("ABC", "not set")}''
+/bin/sh: -c: line 0: `python -c import os; print(f'Environment variable: {os.environ.get("ABC", "not set")}')'

@@ -1,0 +1,13 @@
+Test Summary
+============
+Tests passed: 3/3 (100.0%)
+
+Test Results:
+multiple_stderr_warnings_test: PASS
+multiple_stderr_warnings_with_python_interpreter: PASS
+stderr_warnings_with_extra_params: PASS
+
+Log Files:
+multiple_stderr_warnings_test: 20250403_195435_multiple_stderr_warnings_test_PASS.log
+multiple_stderr_warnings_with_python_interpreter: 20250403_195435_multiple_stderr_warnings_with_python_interpreter_PASS.log
+stderr_warnings_with_extra_params: 20250403_195435_stderr_warnings_with_extra_params_PASS.log

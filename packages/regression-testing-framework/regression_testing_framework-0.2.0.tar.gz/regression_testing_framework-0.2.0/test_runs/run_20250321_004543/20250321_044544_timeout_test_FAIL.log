@@ -1,0 +1,13 @@
+Test: timeout_test
+Status: FAILURE
+Command: python3 -c import time; print('Starting infinite task...'); time.sleep(600)
+Return code: 2
+Start time: 2025-03-21 04:45:44.185160
+End time: 2025-03-21 04:45:44.191468
+
+--- STDOUT ---
+
+
+--- STDERR ---
+/bin/sh: -c: line 0: syntax error near unexpected token `'Starting infinite task...''
+/bin/sh: -c: line 0: `python3 -c import time; print('Starting infinite task...'); time.sleep(600)'

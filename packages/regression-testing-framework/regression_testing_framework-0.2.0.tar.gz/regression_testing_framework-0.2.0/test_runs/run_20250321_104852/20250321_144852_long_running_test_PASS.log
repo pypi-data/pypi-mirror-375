@@ -1,0 +1,10 @@
+Test: long_running_test
+Status: SUCCESS
+Command: python3 -c import time; print('Starting long task...'); time.sleep(10); print('Task completed')
+Return code: 0
+Start time: 2025-03-21 14:48:52.269694
+End time: 2025-03-21 14:49:02.314340
+
+--- STDOUT ---
+Starting long task...
+Task completed

@@ -1,0 +1,14 @@
+Test: cowsay
+Status: FAILURE
+Command: '/bin/bash -c ".venv_test/bin/python say.py"' Say
+Environment:
+  OTHERTHING=again
+Return code: 127
+Start time: 2025-03-19 17:14:13.727730
+End time: 2025-03-19 17:14:13.731887
+
+--- STDOUT ---
+
+
+--- STDERR ---
+/bin/sh: /bin/bash -c ".venv_test/bin/python say.py": No such file or directory

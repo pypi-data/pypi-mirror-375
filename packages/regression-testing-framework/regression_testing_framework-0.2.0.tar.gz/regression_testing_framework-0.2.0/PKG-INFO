@@ -1,0 +1,335 @@
+Metadata-Version: 2.4
+Name: regression-testing-framework
+Version: 0.2.0
+Summary: Run parallel test configurations with log discovery and summary.
+Author-email: Nicholas Ballard <nicholaesricballard@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2024 Nicholas Ballard
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Requires-Python: >=3.9
+Requires-Dist: celery[redis]>=5.3.0
+Requires-Dist: click>=8.1.0
+Requires-Dist: flask>=3.1.0
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: sqlite-utils>=3.38
+Provides-Extra: dev
+Requires-Dist: httpx>=0.24.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Provides-Extra: monitoring
+Requires-Dist: flower>=2.0.0; extra == 'monitoring'
+Provides-Extra: web
+Requires-Dist: fastapi>=0.104.0; extra == 'web'
+Requires-Dist: jinja2>=3.1.0; extra == 'web'
+Requires-Dist: psutil>=5.9.0; extra == 'web'
+Requires-Dist: python-multipart>=0.0.6; extra == 'web'
+Requires-Dist: uvicorn[standard]>=0.24.0; extra == 'web'
+Description-Content-Type: text/markdown
+
+# 🧪 Reggie - Regression Testing Framework
+
+A comprehensive, scalable regression testing framework with CLI and web interfaces, powered by Celery for distributed execution.
+
+## ✨ Features
+
+- **🖥️ CLI Interface**: Easy command-line testing with `reggie` command
+- **🌐 Web Dashboard**: Real-time monitoring with FastAPI + HTMX
+- **⚡ Distributed Execution**: Scalable testing with Celery workers
+- **🐳 Docker Ready**: Complete containerization with Docker Compose
+- **📊 Monitoring**: Built-in status monitoring and job tracking
+- **🔧 Flexible**: Supports both local and distributed execution modes
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+# Basic installation
+pip install -e .
+
+# With web interface
+pip install -e .[web]
+
+# Complete setup
+pip install -e .[web,monitoring,dev]
+```
+
+### Usage
+
+```bash
+# Start Redis (for Celery mode)
+docker run -d -p 6379:6379 redis
+
+# Run tests (multiprocessing mode)
+reggie run config.yaml
+
+# Run tests (Celery distributed mode)
+reggie run config.yaml --celery
+
+# Start workers (separate terminal)
+reggie worker
+
+# Start web interface (optional)
+reggie web
+
+# Monitor status
+reggie status
+```
+
+### Docker Deployment
+
+```bash
+# CLI-only deployment
+docker-compose up -d
+
+# Full web interface deployment
+docker-compose -f docker-compose.web.yml up -d
+```
+
+## 🏗️ Architecture
+
+### Execution Modes
+
+1. **Multiprocessing Mode** (Default)
+   - Direct process execution
+   - No external dependencies
+   - Good for single-machine setups
+
+2. **Celery Mode** (Scalable)
+   - Distributed task execution
+   - Redis message broker
+   - Multiple worker support
+   - Web interface integration
+
+### Components
+
+- **CLI Interface**: `reggie` command for all operations
+- **Celery Workers**: Distributed test execution
+- **Web Dashboard**: Real-time monitoring and control
+- **SQLite Database**: Test metadata and history
+- **Redis Broker**: Message queue for Celery
+
+## 🔧 Configuration
+
+Create a YAML configuration file:
+
+```yaml
+name: "My Test Suite"
+description: "Example regression tests"
+output_dir: "./test_runs"
+max_workers: 4
+timeout: 300
+
+tests:
+  - name: "example_test"
+    command: "echo 'Hello, World!'"
+    expected_exit_code: 0
+    timeout: 30
+    description: "Simple example test"
+  
+  - name: "python_test"
+    command: "python -c 'print(\"Success\")'"
+    expected_exit_code: 0
+    timeout: 60
+```
+
+## 📊 Web Interface
+
+Access the web dashboard at `http://localhost:8000`:
+
+- **Dashboard**: Overview of system status and recent jobs
+- **Job Management**: Start new test runs, monitor progress
+- **Worker Status**: View active Celery workers and their health
+- **Configuration**: Manage and validate config files
+
+## 🐳 Docker
+
+### Services
+
+- **reggie-app**: Main application container
+- **reggie-worker**: Celery worker containers (scalable)
+- **redis**: Message broker
+- **flower**: Celery monitoring (web mode only)
+
+### Scaling
+
+```bash
+# Scale workers
+docker-compose up -d --scale reggie-worker=3
+
+# Monitor with Flower
+open http://localhost:5555
+```
+
+## 📁 Project Structure
+
+```
+src/regression_testing_framework/
+├── cli.py                 # Main CLI interface
+├── celery_app.py         # Celery application setup
+├── test_runner.py        # Core test execution logic
+├── config_parser.py      # YAML configuration parsing
+├── database.py           # SQLite database operations
+├── tasks/
+│   ├── test_execution.py # Individual test Celery tasks
+│   └── orchestration.py  # Test suite orchestration
+└── web/
+    ├── main.py           # FastAPI web application
+    ├── api/              # REST API endpoints
+    ├── templates/        # HTML templates (HTMX)
+    └── static/           # CSS stylesheets
+```
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+1. **Dependencies**: Run `pip install -e .[web]` for full functionality
+2. **Redis**: Ensure Redis is running on port 6379
+3. **Workers**: Start workers with `reggie worker` before using Celery mode
+4. **Validation**: Run `python3 validate.py` to check setup
+
+### Monitoring
+
+- **CLI**: `reggie status` for worker and job information
+- **Web**: Dashboard at `http://localhost:8000`
+- **Flower**: Celery monitoring at `http://localhost:5555` (web mode)
+
+## 📝 Development
+
+### Setup
+
+```bash
+# Clone and install
+git clone <repository>
+cd regression_testing_framework
+pip install -e .[dev]
+
+# Run tests
+pytest
+
+# Format code
+black .
+ruff check .
+```
+
+### Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Ensure all tests pass
+5. Submit a pull request
+
+## 📖 Documentation
+
+- **[Deployment Guide](DEPLOYMENT.md)**: Comprehensive deployment instructions
+- **[Configuration Reference](docs/configuration.md)**: Detailed config options
+- **[API Documentation](http://localhost:8000/docs)**: FastAPI interactive docs
+
+## 🎯 Use Cases
+
+- **CI/CD Integration**: Automated testing in pipelines
+- **Performance Regression**: Track performance over time
+- **Cross-platform Testing**: Distributed testing across environments
+- **Load Testing**: Scalable test execution with multiple workers
+- **Compliance Testing**: Automated regulatory compliance checks
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+**Reggie** - Making regression testing simple, scalable, and reliable! 🚀
+     params:
+       - "-c"
+       - "import os; print('Hello from Python')"
+     environment:
+       - DEBUG=true
+
+   # Test with timeout for long-running processes
+   long_running_test:
+     base_command: python3
+     params:
+       - "-c"
+       - "import time; print('Starting long task...'); time.sleep(10); print('Task completed')"
+     timeout: 15  # Timeout in seconds
+   ```
+
+2. **Run Tests**
+
+   Execute your tests:
+
+   ```bash
+   reggie run -i config.yaml -o test_report.txt
+   ```
+
+   For a dry run (to see what commands will be executed without running them):
+
+   ```bash
+   reggie run -i config.yaml --dry-run
+   ```
+
+   Control the number of parallel test executions:
+
+   ```bash
+   reggie run -i config.yaml -p 8  # Run 8 tests in parallel
+   ```
+
+## How It Works
+
+1. The framework parses your YAML configuration file
+2. Each test is executed in parallel using Python's ThreadPoolExecutor
+3. Commands are executed directly without shell wrapping for improved reliability
+4. Long-running tests can be configured with timeouts to prevent hanging
+5. Results are collected and a summary report is generated
+
+## Configuration Options
+
+### Test Configuration
+
+Each test in your YAML file can have the following properties:
+
+- `base_command`: The executable to run (e.g., `python3`, `/bin/bash`)
+- `params`: List of parameters to pass to the command
+- `environment`: List of environment variables to set for the test
+- `timeout`: Maximum time in seconds before the test is terminated (optional)
+
+### Example Configuration
+
+```yaml
+my_test:
+  base_command: python3
+  params:
+    - script.py
+    - --arg1=value1
+    - --arg2=value2
+  environment:
+    - ENV_VAR1=value1
+    - ENV_VAR2=value2
+  timeout: 300  # 5 minutes timeout
+```
+
+## License
+
+This project is licensed under the terms of the LICENSE file included in the repository.

@@ -1,0 +1,14 @@
+Test: python_warning_success
+Status: SUCCESS
+Command: python3 -c import warnings; warnings.warn('This is a test warning', UserWarning); print('Command completed successfully')
+Return code: 0
+Start time: 2025-03-20 19:40:23.521347
+End time: 2025-03-20 19:40:23.555302
+
+--- STDOUT ---
+Command completed successfully
+
+
+--- STDERR ---
+<string>:1: UserWarning: This is a test warning
+  import warnings; warnings.warn('This is a test warning', UserWarning); print('Command completed successfully')

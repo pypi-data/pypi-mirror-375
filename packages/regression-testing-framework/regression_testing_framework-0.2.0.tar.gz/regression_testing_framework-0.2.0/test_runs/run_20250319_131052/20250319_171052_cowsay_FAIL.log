@@ -1,0 +1,14 @@
+Test: cowsay
+Status: FAILURE
+Command: 'python say.py' Say
+Environment:
+  OTHERTHING=again
+Return code: 127
+Start time: 2025-03-19 17:10:52.890082
+End time: 2025-03-19 17:10:52.897545
+
+--- STDOUT ---
+
+
+--- STDERR ---
+/bin/sh: python say.py: command not found

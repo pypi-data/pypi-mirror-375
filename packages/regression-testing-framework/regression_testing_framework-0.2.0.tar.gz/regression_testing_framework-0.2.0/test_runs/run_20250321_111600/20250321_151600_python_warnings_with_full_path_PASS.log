@@ -1,0 +1,23 @@
+Test: python_warnings_with_full_path
+Status: SUCCESS
+Command: python python_warnings_test.py
+Return code: 0
+Start time: 2025-03-21 15:16:00.537237
+End time: 2025-03-21 15:16:02.083406
+
+--- STDOUT ---
+Starting test with Python warning module...
+Function executed despite deprecation warning
+Function executed despite user warning
+Function executed despite runtime warning
+All Python warnings test completed successfully!
+
+
+--- STDERR ---
+/Users/n/projects/boa/regression_testing_framework/python_warnings_test.py:26: DeprecationWarning: This function is deprecated and will be removed in a future version
+  function_with_deprecation_warning()
+Direct stderr message between warnings
+/Users/n/projects/boa/regression_testing_framework/python_warnings_test.py:12: UserWarning: This is a custom user warning
+  warnings.warn("This is a custom user warning", UserWarning)
+/Users/n/projects/boa/regression_testing_framework/python_warnings_test.py:16: RuntimeWarning: This is a runtime warning
+  warnings.warn("This is a runtime warning", RuntimeWarning)

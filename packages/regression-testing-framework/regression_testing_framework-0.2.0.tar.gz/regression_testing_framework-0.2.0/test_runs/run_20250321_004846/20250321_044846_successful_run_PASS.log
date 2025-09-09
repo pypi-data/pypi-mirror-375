@@ -1,0 +1,9 @@
+Test: successful_run
+Status: SUCCESS
+Command: /bin/bash -c echo 'This command will succeed'
+Return code: 0
+Start time: 2025-03-21 04:48:46.948372
+End time: 2025-03-21 04:48:46.959698
+
+--- STDOUT ---
+

@@ -1,0 +1,20 @@
+Test: cowsay
+Status: SUCCESS
+Command: python3 say.py Hello from the testing framework!
+Environment:
+  OTHERTHING=again
+Return code: 0
+Start time: 2025-03-19 17:37:08.316709
+End time: 2025-03-19 17:37:08.343536
+
+--- STDOUT ---
+  _________________________________
+| Hello from the testing framework! |
+  =================================
+                                 \
+                                  \
+                                    ^__^
+                                    (oo)\_______
+                                    (__)\       )\/\
+                                        ||----w |
+                                        ||     ||

@@ -1,0 +1,7 @@
+Test: cowsay
+Status: EXCEPTION
+Start time: 2025-03-19 17:38:06.742987
+End time: 2025-03-19 17:38:06.744572
+
+--- ERROR ---
+[Errno 13] Permission denied: './.venv_test/bin/activate'

@@ -1,0 +1,24 @@
+Test Summary
+============
+Tests passed: 5/8 (62.5%)
+
+Test Results:
+name: FAIL
+  Error: Test configuration not found or invalid
+description: FAIL
+  Error: Test configuration not found or invalid
+simple_success: PASS
+python_warning_success: PASS
+python_deprecation_warning: PASS
+multiple_warnings: PASS
+stderr_warning: PASS
+expected_failure: FAIL
+  Error: Command failed with return code 1
+
+Log Files:
+simple_success: 20250320_193935_simple_success_PASS.log
+python_warning_success: 20250320_193935_python_warning_success_PASS.log
+python_deprecation_warning: 20250320_193935_python_deprecation_warning_PASS.log
+multiple_warnings: 20250320_193935_multiple_warnings_PASS.log
+stderr_warning: 20250320_193935_stderr_warning_PASS.log
+expected_failure: 20250320_193935_expected_failure_FAIL.log

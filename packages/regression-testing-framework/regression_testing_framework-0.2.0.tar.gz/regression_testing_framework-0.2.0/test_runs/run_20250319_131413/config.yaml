@@ -1,0 +1,50 @@
+# Global base command (optional, can be overridden by individual tests)
+base_command: /bin/bash
+
+# Test with default base_command
+successful_run:
+  params:
+    - -c
+    - "echo 'This command will succeed'"
+
+# Test with custom base_command and environment variables
+python_test:
+  base_command: python
+  params:
+    - "-c"
+    - "import os; print(f'Environment variable: {os.environ.get(\"ABC\", \"not set\")}')"
+  environment:
+    - ABC=cats
+    - DEBUG=true
+
+# Test that will fail
+failing_run:
+  params:
+    - -c
+    - "exit 1"
+
+# Test with multiple parameters
+another_successful_run:
+  base_command: /bin/bash
+  params:
+    - -c
+    - "echo 'Another successful command with ENV=' && echo $XYZ"
+  environment:
+    - XYZ=testvalue
+
+# Test with new parameter format
+new_parameter_test:
+  base_command: /bin/bash
+  params:
+    - -c
+    - "echo 'Testing with new parameter format' && echo '--item1=cat -c dog'"
+  environment:
+    - ABC=cat
+
+# Test a chained command
+cowsay:
+  base_command: /bin/bash -c ".venv_test/bin/python say.py"
+  params:
+    - Say
+  environment:
+    - OTHERTHING=again

@@ -1,0 +1,20 @@
+Test: stderr_warnings_with_extra_params
+Status: SUCCESS
+Command: ./stderr_warnings_test.py --verbose --extra-param=value
+Return code: 0
+Start time: 2025-04-03 19:54:35.382677
+End time: 2025-04-03 19:54:36.421002
+
+--- STDOUT ---
+Starting test with multiple stderr warnings...
+Continuing normal execution...
+More normal output...
+Test completed successfully!
+
+
+--- STDERR ---
+First warning message to stderr
+Second warning message to stderr
+Third warning message to stderr
+Fourth warning message to stderr
+Fifth warning message to stderr

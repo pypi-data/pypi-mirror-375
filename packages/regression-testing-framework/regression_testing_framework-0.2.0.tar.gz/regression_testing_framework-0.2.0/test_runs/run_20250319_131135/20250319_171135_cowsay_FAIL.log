@@ -1,0 +1,14 @@
+Test: cowsay
+Status: FAILURE
+Command: '/bin/bash -c python3 say.py' Say
+Environment:
+  OTHERTHING=again
+Return code: 127
+Start time: 2025-03-19 17:11:35.806433
+End time: 2025-03-19 17:11:35.810445
+
+--- STDOUT ---
+
+
+--- STDERR ---
+/bin/sh: /bin/bash -c python3 say.py: No such file or directory

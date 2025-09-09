@@ -1,0 +1,16 @@
+# Configuration for Python warnings module test
+base_command: python
+
+tests:
+  python_warnings_module_test:
+    command: ./python_warnings_test.py
+    description: "Test that uses Python's warnings module to generate stderr messages"
+    
+  python_warnings_with_full_path:
+    command: python python_warnings_test.py
+    description: "Python warnings test with explicit interpreter"
+    
+  # This test combines both scripts to generate even more stderr output
+  combined_warnings_test:
+    command: bash -c "./stderr_warnings_test.py && ./python_warnings_test.py"
+    description: "Run both warning tests in sequence to generate many stderr messages"

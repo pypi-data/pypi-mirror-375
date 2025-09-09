@@ -1,0 +1,40 @@
+# Test configuration to verify warning handling behavior
+name: warning_tests
+description: Tests that generate warnings but should still pass
+
+commands:
+  # This will run a simple successful command for comparison
+  - name: simple_success
+    command: "echo 'This command will succeed'"
+    working_dir: "${WORKSPACE_DIR}"
+    timeout: 10
+
+  # Test with a Python command that generates a UserWarning but exits with code 0
+  - name: python_warning_success
+    command: "python3 -c \"import warnings; warnings.warn('This is a test warning', UserWarning); print('Command completed successfully')\""
+    working_dir: "${WORKSPACE_DIR}"
+    timeout: 10
+    
+  # Test with a Python command that generates a DeprecationWarning
+  - name: python_deprecation_warning
+    command: "python3 -c \"import warnings; warnings.warn('This feature is deprecated', DeprecationWarning); print('Command still completed successfully')\""
+    working_dir: "${WORKSPACE_DIR}"
+    timeout: 10
+    
+  # Test with a command that generates multiple warnings
+  - name: multiple_warnings
+    command: "python3 -c \"import warnings; warnings.warn('Warning 1', UserWarning); warnings.warn('Warning 2', RuntimeWarning); print('Multiple warnings but still success')\""
+    working_dir: "${WORKSPACE_DIR}"
+    timeout: 10
+    
+  # Test that writes warning to stderr directly
+  - name: stderr_warning
+    command: "python3 -c \"import sys; sys.stderr.write('Warning: something might be wrong\\n'); print('Written directly to stderr but not an error')\""
+    working_dir: "${WORKSPACE_DIR}"
+    timeout: 10
+    
+  # This should fail for comparison (non-zero exit code)
+  - name: expected_failure
+    command: "python3 -c \"import sys; print('This will exit with failure'); sys.exit(1)\""
+    working_dir: "${WORKSPACE_DIR}"
+    timeout: 10

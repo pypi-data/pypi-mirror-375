@@ -1,0 +1,13 @@
+Test: long_running_test
+Status: FAILURE
+Command: python3 -c import time; print('Starting long task...'); time.sleep(10); print('Task completed')
+Return code: 2
+Start time: 2025-03-21 04:48:46.964842
+End time: 2025-03-21 04:48:46.972923
+
+--- STDOUT ---
+
+
+--- STDERR ---
+/bin/sh: -c: line 0: syntax error near unexpected token `'Starting long task...''
+/bin/sh: -c: line 0: `python3 -c import time; print('Starting long task...'); time.sleep(10); print('Task completed')'

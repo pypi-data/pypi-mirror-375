@@ -1,0 +1,20 @@
+Test Summary
+============
+Tests passed: 5/6 (83.3%)
+
+Test Results:
+simple_success: PASS
+multiple_warnings: PASS
+python_deprecation_warning: PASS
+stderr_warning: PASS
+python_warning_success: PASS
+expected_failure: FAIL
+  Error: Command failed with return code 1
+
+Log Files:
+simple_success: 20250320_200723_simple_success_PASS.log
+multiple_warnings: 20250320_200723_multiple_warnings_PASS.log
+python_deprecation_warning: 20250320_200723_python_deprecation_warning_PASS.log
+stderr_warning: 20250320_200723_stderr_warning_PASS.log
+python_warning_success: 20250320_200723_python_warning_success_PASS.log
+expected_failure: 20250320_200723_expected_failure_FAIL.log

@@ -1,0 +1,27 @@
+Test Summary
+============
+Tests passed: 4/8 (50.0%)
+
+Test Results:
+python_test: FAIL
+  Error: Command failed with return code 2
+successful_run: PASS
+failing_run: PASS
+another_successful_run: PASS
+new_parameter_test: PASS
+long_running_test: FAIL
+  Error: Command failed with return code 2
+timeout_test: FAIL
+  Error: Command failed with return code 2
+cowsay: FAIL
+  Error: Command failed with return code 1
+
+Log Files:
+python_test: 20250831_163611_python_test_FAIL.log
+successful_run: 20250831_163611_successful_run_PASS.log
+failing_run: 20250831_163611_failing_run_PASS.log
+another_successful_run: 20250831_163611_another_successful_run_PASS.log
+new_parameter_test: 20250831_163611_new_parameter_test_PASS.log
+long_running_test: 20250831_163611_long_running_test_FAIL.log
+timeout_test: 20250831_163611_timeout_test_FAIL.log
+cowsay: 20250831_163611_cowsay_FAIL.log

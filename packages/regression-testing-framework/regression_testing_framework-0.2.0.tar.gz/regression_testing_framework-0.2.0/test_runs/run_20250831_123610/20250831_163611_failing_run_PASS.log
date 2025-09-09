@@ -1,0 +1,8 @@
+Test: failing_run
+Status: SUCCESS
+Command: /bin/bash -c exit 1
+Return code: 0
+Start time: 2025-08-31 16:36:11.302065
+End time: 2025-08-31 16:36:11.311475
+
+--- STDOUT ---

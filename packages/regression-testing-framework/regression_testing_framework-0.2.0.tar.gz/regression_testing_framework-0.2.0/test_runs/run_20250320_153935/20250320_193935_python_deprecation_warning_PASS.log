@@ -1,0 +1,14 @@
+Test: python_deprecation_warning
+Status: SUCCESS
+Command: python3 -c import warnings; warnings.warn('This feature is deprecated', DeprecationWarning); print('Command still completed successfully')
+Return code: 0
+Start time: 2025-03-20 19:39:35.801337
+End time: 2025-03-20 19:39:35.839397
+
+--- STDOUT ---
+Command still completed successfully
+
+
+--- STDERR ---
+<string>:1: DeprecationWarning: This feature is deprecated
+  import warnings; warnings.warn('This feature is deprecated', DeprecationWarning); print('Command still completed successfully')

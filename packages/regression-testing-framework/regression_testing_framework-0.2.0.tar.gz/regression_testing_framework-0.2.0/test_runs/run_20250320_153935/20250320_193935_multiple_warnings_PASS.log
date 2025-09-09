@@ -1,0 +1,16 @@
+Test: multiple_warnings
+Status: SUCCESS
+Command: python3 -c import warnings; warnings.warn('Warning 1', UserWarning); warnings.warn('Warning 2', RuntimeWarning); print('Multiple warnings but still success')
+Return code: 0
+Start time: 2025-03-20 19:39:35.806526
+End time: 2025-03-20 19:39:35.839573
+
+--- STDOUT ---
+Multiple warnings but still success
+
+
+--- STDERR ---
+<string>:1: UserWarning: Warning 1
+  import warnings; warnings.warn('Warning 1', UserWarning); warnings.warn('Warning 2', RuntimeWarning); print('Multiple warnings but still success')
+<string>:1: RuntimeWarning: Warning 2
+  import warnings; warnings.warn('Warning 1', UserWarning); warnings.warn('Warning 2', RuntimeWarning); print('Multiple warnings but still success')

@@ -1,0 +1,12 @@
+Test: another_successful_run
+Status: SUCCESS
+Command: /bin/bash -c 'echo '\''Another successful command with ENV='\'' && echo $XYZ'
+Environment:
+  XYZ=testvalue
+Return code: 0
+Start time: 2025-03-19 17:13:19.077355
+End time: 2025-03-19 17:13:19.086654
+
+--- STDOUT ---
+Another successful command with ENV=
+testvalue

@@ -1,0 +1,13 @@
+Test: stderr_warning
+Status: SUCCESS
+Command: python3 -c import sys; sys.stderr.write('Warning: something might be wrong\n'); print('Written directly to stderr but not an error')
+Return code: 0
+Start time: 2025-03-20 19:39:35.812706
+End time: 2025-03-20 19:39:35.843307
+
+--- STDOUT ---
+Written directly to stderr but not an error
+
+
+--- STDERR ---
+Warning: something might be wrong

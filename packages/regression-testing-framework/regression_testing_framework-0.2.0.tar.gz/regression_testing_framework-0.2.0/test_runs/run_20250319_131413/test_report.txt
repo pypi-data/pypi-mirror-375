@@ -1,0 +1,21 @@
+Test Summary
+============
+Tests passed: 4/6 (66.7%)
+
+Test Results:
+another_successful_run: PASS
+failing_run: FAIL
+  Error: Command failed with return code 1
+successful_run: PASS
+new_parameter_test: PASS
+cowsay: FAIL
+  Error: /bin/sh: /bin/bash -c ".venv_test/bin/python say.py": No such file or directory
+python_test: PASS
+
+Log Files:
+another_successful_run: 20250319_171413_another_successful_run_PASS.log
+failing_run: 20250319_171413_failing_run_FAIL.log
+successful_run: 20250319_171413_successful_run_PASS.log
+new_parameter_test: 20250319_171413_new_parameter_test_PASS.log
+cowsay: 20250319_171413_cowsay_FAIL.log
+python_test: 20250319_171413_python_test_PASS.log

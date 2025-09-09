@@ -1,0 +1,18 @@
+# Configuration for testing multiple stderr warnings
+base_command: python
+
+tests:
+  multiple_stderr_warnings_test:
+    command: ./stderr_warnings_test.py
+    description: "Test that generates multiple stderr warnings but exits with code 0"
+    
+  multiple_stderr_warnings_with_python_interpreter:
+    command: python stderr_warnings_test.py
+    description: "Same test using explicit python interpreter"
+    
+  stderr_warnings_with_extra_params:
+    command: ./stderr_warnings_test.py
+    description: "Test with stderr warnings and command line parameters"
+    params:
+      - "--verbose"
+      - "--extra-param=value"

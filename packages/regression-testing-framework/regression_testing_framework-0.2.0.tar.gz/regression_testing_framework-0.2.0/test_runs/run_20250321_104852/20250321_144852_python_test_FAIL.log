@@ -1,0 +1,18 @@
+Test: python_test
+Status: FAILURE
+Command: python -c import os; print(f'Environment variable: {os.environ.get("ABC", "not set")}')
+Environment:
+  ABC=cats
+  DEBUG=true
+Return code: 1
+Start time: 2025-03-21 14:48:52.246866
+End time: 2025-03-21 14:48:52.285775
+
+--- STDOUT ---
+
+
+--- STDERR ---
+  File "<string>", line 1
+    import os; print(f'Environment variable: {os.environ.get(ABC, not
+                                                            ^
+SyntaxError: '(' was never closed

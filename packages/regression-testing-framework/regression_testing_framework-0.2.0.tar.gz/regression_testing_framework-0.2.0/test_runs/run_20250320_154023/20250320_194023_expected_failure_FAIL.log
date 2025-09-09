@@ -1,0 +1,9 @@
+Test: expected_failure
+Status: FAILURE
+Command: python3 -c import sys; print('This will exit with failure'); sys.exit(1)
+Return code: 1
+Start time: 2025-03-20 19:40:23.558165
+End time: 2025-03-20 19:40:23.584555
+
+--- STDOUT ---
+This will exit with failure

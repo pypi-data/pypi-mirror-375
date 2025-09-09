@@ -1,0 +1,20 @@
+Test Summary
+============
+Tests passed: 5/6 (83.3%)
+
+Test Results:
+successful_run: PASS
+another_successful_run: PASS
+failing_run: FAIL
+  Error: Command failed with return code 1
+new_parameter_test: PASS
+python_test: PASS
+cowsay: PASS
+
+Log Files:
+successful_run: 20250319_173817_successful_run_PASS.log
+another_successful_run: 20250319_173817_another_successful_run_PASS.log
+failing_run: 20250319_173817_failing_run_FAIL.log
+new_parameter_test: 20250319_173817_new_parameter_test_PASS.log
+python_test: 20250319_173817_python_test_PASS.log
+cowsay: 20250319_173817_cowsay_PASS.log

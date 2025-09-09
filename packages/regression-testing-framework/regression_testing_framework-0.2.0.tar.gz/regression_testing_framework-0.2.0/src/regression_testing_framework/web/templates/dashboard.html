@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reggie Dashboard</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f5f5f5; 
+        }
+        .header { 
+            background: #2563eb; 
+            color: white; 
+            padding: 20px; 
+            margin: -20px -20px 20px -20px;
+            border-radius: 0 0 8px 8px;
+        }
+        .header h1 { margin: 0 0 10px 0; }
+        .header nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .header nav a:hover { background-color: rgba(255,255,255,0.1); }
+        .header nav a.active { background-color: rgba(255,255,255,0.2); }
+        .card { 
+            background: white; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+        .job-list { 
+            display: grid; 
+            gap: 16px; 
+        }
+        .job-item { 
+            padding: 16px; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 6px; 
+            background: #f9fafb; 
+        }
+        .status { 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 12px; 
+            font-weight: bold; 
+        }
+        .status.running { background: #dbeafe; color: #1e40af; }
+        .status.success { background: #dcfce7; color: #166534; }
+        .status.failed { background: #fee2e2; color: #dc2626; }
+        .status.queued { background: #fef3c7; color: #92400e; }
+        .form-group { margin: 16px 0; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: 500; }
+        .form-group input, .form-group select { 
+            width: 100%; 
+            padding: 8px; 
+            border: 1px solid #d1d5db; 
+            border-radius: 4px; 
+        }
+        .btn { 
+            background: #2563eb; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
+        .btn:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 Reggie Dashboard</h1>
+        <p>Regression Testing Framework</p>
+        <nav>
+            <a href="/" class="active">Dashboard</a>
+            <a href="/files">📁 File Browser</a>
+        </nav>
+    </div>
+
+    <!-- System Status -->
+    <div class="card">
+        <h2>System Status</h2>
+        <div id="system-status" hx-get="/api/status/system" hx-trigger="load, every 30s">
+            Loading system status...
+        </div>
+    </div>
+
+    <!-- New Job Form -->
+    <div class="card">
+        <h2>🚀 Start New Job</h2>
+        <form hx-post="/api/jobs/" hx-target="#job-result">
+            <div class="form-group">
+                <label for="config_path">Configuration File:</label>
+                <select name="config_path" id="config_path" required>
+                    <option value="">Select a configuration...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="max_workers">Max Workers (optional):</label>
+                <input type="number" name="max_workers" id="max_workers" min="1" max="16">
+            </div>
+            <div class="form-group">
+                <label for="description">Description (optional):</label>
+                <input type="text" name="description" id="description" placeholder="Brief description of this test run">
+            </div>
+            <button type="submit" class="btn">Start Job</button>
+        </form>
+        <div id="job-result"></div>
+    </div>
+
+    <!-- Active Jobs -->
+    <div class="card">
+        <h2>📋 Recent Jobs</h2>
+        <div id="job-list" hx-get="/api/jobs/" hx-trigger="load, every 10s">
+            Loading jobs...
+        </div>
+    </div>
+
+    <!-- Workers Status -->
+    <div class="card">
+        <h2>⚙️ Workers</h2>
+        <div id="workers-status" hx-get="/api/status/workers" hx-trigger="load, every 15s">
+            Loading worker status...
+        </div>
+    </div>
+
+    <script>
+        // Load configuration options on page load
+        fetch('/api/config/')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('config_path');
+                data.configs.forEach(config => {
+                    const option = document.createElement('option');
+                    option.value = config.path;
+                    option.textContent = config.name;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error loading configs:', error));
+
+        // Handle job form submission response
+        document.body.addEventListener('htmx:afterSwap', function(event) {
+            if (event.target.id === 'job-result') {
+                // Refresh job list after new job is created
+                htmx.trigger('#job-list', 'htmx:trigger');
+            }
+        });
+    </script>
+</body>
+</html>

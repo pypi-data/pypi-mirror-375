@@ -1,0 +1,12 @@
+Test: new_parameter_test
+Status: SUCCESS
+Command: /bin/bash -c echo 'Testing with new parameter format' && echo '--item1=cat -c dog'
+Environment:
+  ABC=cat
+Return code: 0
+Start time: 2025-08-31 16:37:32.866272
+End time: 2025-08-31 16:37:32.882051
+
+--- STDOUT ---
+
+--item1=cat -c dog

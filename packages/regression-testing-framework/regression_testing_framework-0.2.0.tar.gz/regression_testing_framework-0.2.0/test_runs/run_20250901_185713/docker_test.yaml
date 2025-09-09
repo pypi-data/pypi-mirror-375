@@ -1,0 +1,18 @@
+name: "Docker Test Suite"
+description: "Test configuration for validating Docker deployment"
+output_dir: "./test_runs"
+max_workers: 2
+timeout: 60
+
+tests:
+  - name: "simple_success"
+    command: "echo 'Docker test successful!'"
+    expected_exit_code: 0
+    timeout: 10
+    description: "Simple test that should succeed"
+  
+  - name: "python_test"
+    command: "python3 -c 'import sys; print(f\"Python {sys.version_info.major}.{sys.version_info.minor} is working!\")'"
+    expected_exit_code: 0
+    timeout: 15
+    description: "Test Python execution"

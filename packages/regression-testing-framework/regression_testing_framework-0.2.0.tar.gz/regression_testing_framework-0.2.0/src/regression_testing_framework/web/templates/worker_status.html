@@ -1,0 +1,19 @@
+<!-- Worker Status Template -->
+{% if workers %}
+<div class="worker-list">
+    {% for worker in workers %}
+    <div class="worker-item">
+        <div class="worker-name">{{ worker.name }}</div>
+        <div class="worker-stats">
+            <span>{{ worker.status }}</span>
+            <span>{{ worker.tasks.active }} active</span>
+            <span>{{ worker.processes }} processes</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="worker-list">
+    <p class="loading">No workers currently available. Make sure Celery workers are running.</p>
+</div>
+{% endif %}
