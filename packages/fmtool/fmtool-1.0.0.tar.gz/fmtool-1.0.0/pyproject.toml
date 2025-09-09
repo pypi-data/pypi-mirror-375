@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "fmtool"
+dynamic = ["version"]
+authors = [{name = "Abbas Bachari", email = "abbas-bachari@hotmail.com"}]
+description = "Cross-platform Python file manager"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+classifiers = [
+"Programming Language :: Python :: 3",
+"Operating System :: OS Independent",
+]
+dependencies = []
