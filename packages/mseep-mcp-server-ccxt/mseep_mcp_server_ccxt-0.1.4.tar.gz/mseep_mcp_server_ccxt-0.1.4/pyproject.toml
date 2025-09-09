@@ -1,0 +1,33 @@
+[project]
+name = "mseep-mcp-server-ccxt"
+version = "0.1.4"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "ccxt",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+ccxt-server = "src.server:run_server"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src",
+]
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
