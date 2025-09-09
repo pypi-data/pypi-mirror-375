@@ -1,0 +1,30 @@
+[project]
+name = "sshi"
+version = "0.1.1"
+description = "Tiny SSH instance manager with JSON inventory and completions"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [{ name = "Jacob Sun", email = "jacobsun000@gmail.com" }]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Environment :: Console",
+  "Topic :: System :: Systems Administration",
+]
+dependencies = []
+
+[project.scripts]
+sshi = "sshi.cli:main"
+
+[build-system]
+# uv build backend
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+# Optional: tell uv about TestPyPI for dry runs
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
