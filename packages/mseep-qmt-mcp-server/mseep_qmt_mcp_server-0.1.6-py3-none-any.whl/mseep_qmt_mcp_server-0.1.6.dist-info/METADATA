@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-qmt-mcp-server
+Version: 0.1.6
+Summary: MCP Server for QMT
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: xtquant>=241014.1.2
+
+Package managed by MseeP.ai
