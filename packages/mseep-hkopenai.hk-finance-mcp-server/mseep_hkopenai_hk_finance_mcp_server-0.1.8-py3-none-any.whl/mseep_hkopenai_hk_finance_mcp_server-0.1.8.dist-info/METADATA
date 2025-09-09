@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: mseep-hkopenai.hk_finance_mcp_server
+Version: 0.1.8
+Summary: Hong Kong Finance MCP Server providing financial data tools
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Project-URL: repository, https://github.com/hkopenai/hk-finance-mcp-server.git
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastmcp>=2.10.2
+Requires-Dist: requests>=2.31.0
+Requires-Dist: pytest>=8.2.0
+Requires-Dist: pytest-cov>=6.1.1
+Requires-Dist: modelcontextprotocol
+Requires-Dist: hkopenai_common>=0.4.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

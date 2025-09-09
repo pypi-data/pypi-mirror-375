@@ -1,0 +1,2 @@
+[console_scripts]
+hk_finance_mcp_server = hkopenai.hk_finance_mcp_server.__main__:cli_main
