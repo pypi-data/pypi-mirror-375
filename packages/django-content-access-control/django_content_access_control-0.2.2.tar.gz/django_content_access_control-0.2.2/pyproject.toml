@@ -1,0 +1,14 @@
+[project]
+name = "django-content-access-control"
+version = "0.2.2"
+description = ""
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "casbin>=1.43.0",
+    "django>=4.2",
+ "pycasbin>=2.2.0",
+]
+
+[tool.setuptools.packages.find]
+exclude = ["model_examples*"]
