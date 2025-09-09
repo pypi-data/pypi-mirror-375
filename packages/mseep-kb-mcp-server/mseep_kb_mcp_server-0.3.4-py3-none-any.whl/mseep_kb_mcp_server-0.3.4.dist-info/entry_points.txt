@@ -1,0 +1,4 @@
+[console_scripts]
+kb-build = kb_builder.bin.kb_build:main
+kb-mcp-server = txtai_mcp_server:main
+kb-search = kb_builder.bin.kb_search:main
