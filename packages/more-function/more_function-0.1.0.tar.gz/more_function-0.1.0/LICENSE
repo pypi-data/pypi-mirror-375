@@ -1,0 +1,10 @@
+
+**`LICENSE`**  
+
+---
+
+## Build package
+Trong terminal:
+```bash
+pip install build twine
+python -m build

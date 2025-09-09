@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "more_function"
+version = "0.1.0"
+description = "A small Python library with quadratic solver and sorting functions"
+authors = [
+  { name="Dang Minh Tai", email="dmt826321@gmail.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.7"
+keywords = ["math", "sorting", "quadratic"]
