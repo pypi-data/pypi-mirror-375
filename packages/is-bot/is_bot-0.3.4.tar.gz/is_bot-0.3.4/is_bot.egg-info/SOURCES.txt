@@ -1,0 +1,13 @@
+LICENSE.txt
+MANIFEST.in
+README.md
+pyproject.toml
+is_bot/__init__.py
+is_bot/_is_bot.py
+is_bot/_patterns.py
+is_bot.egg-info/PKG-INFO
+is_bot.egg-info/SOURCES.txt
+is_bot.egg-info/dependency_links.txt
+is_bot.egg-info/requires.txt
+is_bot.egg-info/top_level.txt
+tests/test_is_bot.py
