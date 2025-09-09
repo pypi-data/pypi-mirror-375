@@ -1,0 +1,15 @@
+Metadata-Version: 2.3
+Name: gnewcash
+Version: 1.4.0
+Summary: Python Library for reading, interacting with, and writing GnuCash files
+License: MIT
+Author: Paul Bromwell Jr.
+Author-email: pbromwelljr@gmail.com
+Requires-Python: >=3.9,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
