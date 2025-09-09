@@ -1,0 +1,237 @@
+/******************************************************************************
+  Basic Styling Overrides
+******************************************************************************/
+html {
+    font-family: 'Lato', helvetica, sans-serif;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    min-width: 1125px;
+    background: url("../imgs/background.jpg") no-repeat center center fixed;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Lato', helvetica, sans-serif;
+}
+
+hr {
+    color: #222222;
+}
+
+a {
+    text-decoration: none;
+    color: #007acc;
+}
+
+.section h2 {
+    background-color: #66c2ff;
+    color: white;
+    margin-top: 0;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.section {
+    padding-top: 0;
+    border-left: 2px solid #66c2ff;
+    border-right: 2px solid #66c2ff;
+    margin-top: .5em;
+}
+
+/******************************************************************************
+  Header/Footer Styling
+******************************************************************************/
+#header {
+    min-width: 800px;
+    background-color: #222222;
+    border-bottom: 1px solid #222222;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#header-spacer {}
+
+#header a {
+    text-decoration: none;
+}
+
+#header-icon {
+    float: left;
+    padding: 10px 10px 10px 15px;
+    width: 40px;
+}
+
+#header-home {
+    float: left;
+    color: #66c2ff;
+    height: 1.25em;
+    line-height: 1.25em;
+    margin-top: 15px;
+    text-align: left;
+    padding-right: 1em;
+}
+
+#header-group {
+    float: left;
+    color: #66c2ff;
+    height: 1.25em;
+    line-height: 1.25em;
+    margin-top: 15px;
+    text-align: center;
+}
+
+#header-title {
+    float: left;
+    color: #66c2ff;
+    height: 1.25em;
+    line-height: 1.25em;
+    margin-top: 15px;
+    text-align: center;
+    width: 50%;
+}
+
+#header-docs {
+    float: right;
+    color: #66c2ff;
+    height: 1.25em;
+    line-height: 1.25em;
+    margin-top: 15px;
+    padding-right: 15px;
+    text-align: right;
+}
+
+#wrapper {
+    margin: auto;
+    width: 80%;
+    background-color: #ffffff;
+    overflow: auto;
+}
+
+#nav {
+    width: 19%;
+    float: left;
+    padding: 20px;
+}
+
+#content {
+    padding: 10px;
+    width: 71%;
+    float: left;
+}
+
+#content div {
+    background-color: #ffffff;
+}
+
+/******************************************************************************
+  TableStyling
+******************************************************************************/
+table {
+    width: 100%;
+    border: 2px solid #66c2ff;
+    border-spacing: 0;
+}
+
+th {
+    background-color: #66c2ff;
+    color: #ffffff;
+    padding: 10px;
+}
+
+td {
+    padding: 2px;
+    text-align: center;
+}
+
+.testName td {
+    font-weight: 600;
+    text-align: left;
+}
+
+.testCase {
+    text-align: right;
+}
+
+/******************************************************************************
+  Element Styling
+******************************************************************************/
+.error {}
+
+.error p {
+    color: #ff0000;
+}
+
+.tabs {
+    background: transparent;
+}
+
+.diff {
+    border: 2px solid #66c2ff;
+    padding: 4px;
+}
+
+.diff p {
+    line-height: 1.05em;
+    margin: 0;
+    padding-left: 10%;
+    font-family: monospace;
+}
+
+.diff p.old {
+    background-color: #ffeef0;
+    color: #b31d28;
+}
+
+.diff p.new {
+    background-color: #f0fff4;
+    color: #22863a;
+}
+
+.diff p.range {
+    color: #6f42c1;
+}
+
+.bitForBit {}
+
+.table {}
+
+.gallery {}
+
+.gallery p {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.gallery div {
+    float: left;
+    margin: 10px;
+    display: inline;
+}
+
+.gallery img {
+    border: 1px solid #66c2ff;
+}
+
+.summary {}
+
+.bitForBit figure {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
