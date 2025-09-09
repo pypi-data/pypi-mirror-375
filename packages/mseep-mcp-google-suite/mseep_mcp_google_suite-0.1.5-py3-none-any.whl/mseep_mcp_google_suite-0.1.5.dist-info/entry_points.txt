@@ -1,0 +1,5 @@
+[console_scripts]
+mcp-google-suite = mcp_google_suite.launcher:main
+
+[mcp_server]
+mcp-google-suite = mcp_google_suite:main
