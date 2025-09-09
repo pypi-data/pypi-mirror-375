@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-rquest
+Version: 0.1.17
+Summary: A Model Context Protocol (MCP) server providing advanced HTTP request capabilities with realistic browser emulation for Claude and other LLMs
+Project-URL: Homepage, https://github.com/xxxbrian/mcp-rquest
+Project-URL: Bug Tracker, https://github.com/xxxbrian/mcp-rquest/issues
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE.txt
+Keywords: anti-bot,api,browser-emulation,claude,http,ja3,ja4,llm,mcp,request,tls-fingerprint
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Requires-Dist: markdownify<0.14.0,>=0.13.1
+Requires-Dist: marker-pdf>=1.6.1
+Requires-Dist: mcp[cli]>=1.4.1
+Requires-Dist: rnet>=2.0.0
+Requires-Dist: tiktoken>=0.5.0
+Provides-Extra: dev
+Requires-Dist: black>=23.9.1; extra == 'dev'
+Requires-Dist: build>=1.0.3; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.21.1; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: ruff>=0.0.292; extra == 'dev'
+Requires-Dist: twine>=6.1.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

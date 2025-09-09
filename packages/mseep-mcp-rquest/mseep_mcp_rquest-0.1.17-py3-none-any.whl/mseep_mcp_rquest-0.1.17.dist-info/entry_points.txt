@@ -1,0 +1,3 @@
+[console_scripts]
+mcp-rquest = mcp_rquest.server:main
+mcp-simple-tool = mcp_simple_tool.server:main
