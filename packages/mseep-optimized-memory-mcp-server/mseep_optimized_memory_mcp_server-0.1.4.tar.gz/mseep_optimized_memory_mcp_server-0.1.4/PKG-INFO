@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-optimized-memory-mcp-server
+Version: 0.1.4
+Summary: Optimized Memory MCP Server
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.12
+Requires-Dist: aiofiles>=23.2.1
+Requires-Dist: aiosqlite>=0.20.0
+Requires-Dist: mcp>=1.1.2
+Provides-Extra: dev
+Requires-Dist: mcp>=1.1.2; extra == 'dev'
+Requires-Dist: pytest-cov>=4.1.0; extra == 'dev'
+Requires-Dist: pytest>=7.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
