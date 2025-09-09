@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/eseg/__init__.py
+src/eseg/config.py
+src/eseg/stream.py
+src/eseg.egg-info/PKG-INFO
+src/eseg.egg-info/SOURCES.txt
+src/eseg.egg-info/dependency_links.txt
+src/eseg.egg-info/requires.txt
+src/eseg.egg-info/top_level.txt
+src/eseg/models/ConvLSTM.py
+src/eseg/models/EventSurrealLayers.py
+src/eseg/utils/dataviewers.py
+src/eseg/utils/functions.py
+src/eseg/utils/loaders.py
