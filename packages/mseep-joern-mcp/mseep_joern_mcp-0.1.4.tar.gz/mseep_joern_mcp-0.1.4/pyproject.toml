@@ -1,0 +1,25 @@
+[project]
+name = "mseep-joern-mcp"
+version = "0.1.4"
+description = "A simple Joern MCP Server."
+requires-python = ">=3.10"
+dependencies = [
+    "python-dotenv>=1.0.1",
+    "fastmcp>=2.1.0",
+    "requests>=2.32.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-joern-mcp = "server:main"
+
+[tool.setuptools]
+py-modules = [
+    "server",
+]
