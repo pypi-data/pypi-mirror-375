@@ -1,0 +1,3 @@
+[console_scripts]
+nibe-cli = nibe.console_scripts.cli:main [cli]
+nibe-convert-csv = nibe.console_scripts.convert_csv:main [convert]
