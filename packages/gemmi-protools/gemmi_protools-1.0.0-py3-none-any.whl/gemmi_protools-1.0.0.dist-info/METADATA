@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: gemmi_protools
+Version: 1.0.0
+Summary: An Enhanced tool to process PDB structures based on Gemmi
+Author: Luo Jiejian
+Author-email: Luo Jiejian <luojiejian12@mails.ucas.ac.cn>
+License-Expression: MIT
+Requires-Python: <3.13,>=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: gemmi==0.7.3
+Requires-Dist: biopython==1.85
+Requires-Dist: dockq==2.1.3
+Requires-Dist: pandas
+Requires-Dist: typeguard
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: trimesh
+Requires-Dist: freesasa==2.2.1
+Dynamic: author
+Dynamic: license-file
+
+# An Enhanced tool to process PDB structures based on Gemmi
+
+# Install
+```commandline
+conda create -n gemmi_protools python=3.12
+conda install -n gemmi_protools anarci hmmer -c bioconda
+conda install -n gemmi_protools dockq trimesh -c conda-forge
+conda activate gemmi_protools
+pip install gemmi_protools
+```
+
+# Usage
+
+## read structures
+```commandline
+from gemmi_protools import StructureParser
+st=StructureParser()
+st.load_from_file("your.pdb")
+```
