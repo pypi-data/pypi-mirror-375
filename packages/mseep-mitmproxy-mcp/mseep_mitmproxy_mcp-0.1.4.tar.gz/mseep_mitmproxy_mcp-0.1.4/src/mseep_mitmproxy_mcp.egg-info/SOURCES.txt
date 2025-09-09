@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/mitmproxy_mcp/__init__.py
+src/mitmproxy_mcp/flow_utils.py
+src/mitmproxy_mcp/json_utils.py
+src/mitmproxy_mcp/protection_analysis.py
+src/mitmproxy_mcp/server.py
+src/mseep_mitmproxy_mcp.egg-info/PKG-INFO
+src/mseep_mitmproxy_mcp.egg-info/SOURCES.txt
+src/mseep_mitmproxy_mcp.egg-info/dependency_links.txt
+src/mseep_mitmproxy_mcp.egg-info/entry_points.txt
+src/mseep_mitmproxy_mcp.egg-info/requires.txt
+src/mseep_mitmproxy_mcp.egg-info/top_level.txt
