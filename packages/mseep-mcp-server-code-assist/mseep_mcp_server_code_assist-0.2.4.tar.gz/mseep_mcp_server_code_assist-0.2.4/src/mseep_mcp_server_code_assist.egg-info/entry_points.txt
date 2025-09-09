@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-server-code-assist = mcp_server_code_assist.__main__:main

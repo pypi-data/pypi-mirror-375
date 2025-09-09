@@ -1,0 +1,83 @@
+[project]
+name = "mseep-mcp-server-code-assist"
+version = "0.2.4"
+description = "MCP Code Assist Server"
+requires-python = ">=3.11"
+dependencies = [
+    "aiofiles>=24.0.0",
+    "gitpython>=3.1.40",
+    "pydantic>=2.0.0",
+    "click>=8.1.7",
+    "mcp>=1.2.0",
+    "xmlschema>=3.4.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.scripts]
+mcp-server-code-assist = "mcp_server_code_assist.__main__:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.25.0",
+    "ruff>=0.9.2",
+    "pre-commit>=4.0.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "src",
+]
+asyncio_mode = "strict"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 200
+indent-width = 4
+fix = true
+preview = true
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "W",
+    "C90",
+    "C",
+    "ISC",
+    "T10",
+    "A",
+    "UP",
+]
+ignore = [
+    "C416",
+    "C408",
+]
+fixable = [
+    "ALL",
+]
+unfixable = []
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
