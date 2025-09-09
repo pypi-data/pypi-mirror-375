@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: almasru
+Version: 3.0.3
+Summary: This python module is a tool to use Alma SRU. it manages the logs and the backup of the records.
+Author-email: Raphaël Rey <raphael.rey@slsp.ch>
+Project-URL: Homepage, https://github.com/Swiss-Library-Service-Platform/almasru
+Project-URL: Bug Tracker, https://github.com/Swiss-Library-Service-Platform/almasru/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3
+Description-Content-Type: text/x-rst
+License-File: licence.txt
+Requires-Dist: requests
+Requires-Dist: lxml
+Requires-Dist: openpyxl
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: Levenshtein
+Dynamic: license-file
+
+*********************
+Alma SRU helper |doc|
+*********************
+
+This python module is a tool to use Alma SRU. It manages the logs and the
+backup of the records.
+
+* Author: Raphaël Rey (raphael.rey@slsp.ch)
+* Year: 2025
+* Version: 3.0.3
+* License: GNU General Public License v3.0
+* `Documentation <https://almasru.readthedocs.io/en/latest/>`_
+
+.. |doc| image:: https://readthedocs.org/projects/almapi-wrapper/badge/?version=latest
+    :target: https://almasru.readthedocs.io/en/latest/
+    :alt: Documentation Status
