@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/aemet_mcp/__init__.py
+src/aemet_mcp/server.py
+src/aemet_mcp/res/Beaches_code.json
+src/aemet_mcp/res/Municipallity_code.json
+src/aemet_mcp/res/Provinces_code.json
+src/aemet_mcp/res/Stations_code.json
+src/mseep_aemet_mcp.egg-info/PKG-INFO
+src/mseep_aemet_mcp.egg-info/SOURCES.txt
+src/mseep_aemet_mcp.egg-info/dependency_links.txt
+src/mseep_aemet_mcp.egg-info/entry_points.txt
+src/mseep_aemet_mcp.egg-info/requires.txt
+src/mseep_aemet_mcp.egg-info/top_level.txt

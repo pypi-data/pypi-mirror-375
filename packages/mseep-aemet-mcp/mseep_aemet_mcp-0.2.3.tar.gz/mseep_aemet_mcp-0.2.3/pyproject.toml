@@ -1,0 +1,43 @@
+[build-system]
+requires = [
+    "setuptools>=61",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-aemet_mcp"
+version = "0.2.3"
+description = "AEMET API integration with MCP (Model Context Protocol)"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.6.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+aemet_mcp = "aemet_mcp.server:main"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = [
+    "src",
+]
+
+[tool.setuptools.package-data]
+"aemet_mcp.res" = [
+    "Beaches_code.json",
+    "Municipallity_code.json",
+    "Provinces_code.json",
+    "Stations_code.json",
+]
