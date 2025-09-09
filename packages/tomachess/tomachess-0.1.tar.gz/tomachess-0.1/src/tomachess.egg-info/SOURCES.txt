@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/tomachess/__init__.py
+src/tomachess/__main__.py
+src/tomachess/exceptions.py
+src/tomachess/type.py
+src/tomachess/union_type.py
+src/tomachess.egg-info/PKG-INFO
+src/tomachess.egg-info/SOURCES.txt
+src/tomachess.egg-info/dependency_links.txt
+src/tomachess.egg-info/requires.txt
+src/tomachess.egg-info/top_level.txt
