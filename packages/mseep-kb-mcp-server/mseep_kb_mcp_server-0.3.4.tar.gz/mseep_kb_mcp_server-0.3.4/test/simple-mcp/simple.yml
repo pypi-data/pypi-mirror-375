@@ -1,0 +1,11 @@
+path: .txtai/indexes/simple  # Where to save the index
+content: true
+writable: true  # Enable index writing at the root level
+embeddings:
+  path: sentence-transformers/nli-mpnet-base-v2  # Model path with prefix
+  normalize: true
+  hybrid: true
+  gpu: true
+  storagetype: memory
+  writable: true
+  content: true

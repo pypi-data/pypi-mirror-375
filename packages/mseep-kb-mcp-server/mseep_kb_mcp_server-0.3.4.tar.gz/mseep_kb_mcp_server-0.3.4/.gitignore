@@ -1,0 +1,18 @@
+.env
+.pytest_cache
+__pycache__/
+test/cache/
+
+# txtai database files
+.txtai/
+*.db
+*.sqlite
+*.faiss
+*.pkl
+*.tar.gz
+
+.DS_Store
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+dist
