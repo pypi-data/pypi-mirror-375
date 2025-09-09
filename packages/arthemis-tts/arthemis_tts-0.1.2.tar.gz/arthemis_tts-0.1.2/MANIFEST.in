@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include arthemis_tts *.py
+recursive-include arthemis_tts/models *.pt
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude .DS_Store 
