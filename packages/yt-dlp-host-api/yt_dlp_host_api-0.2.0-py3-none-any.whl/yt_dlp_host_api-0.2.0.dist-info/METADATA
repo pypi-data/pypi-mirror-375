@@ -1,0 +1,187 @@
+Metadata-Version: 2.4
+Name: yt_dlp_host_api
+Version: 0.2.0
+Summary: A Python library for interacting with the yt-dlp-host API
+Author-email: "Amadeus (Wasys)" <tubik.corp@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/Vasysik/yt-dlp-host-api
+Project-URL: Issues, https://github.com/Vasysik/yt-dlp-host-api/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.25.1
+Dynamic: license-file
+
+# [yt-dlp-host](https://github.com/Vasysik/yt-dlp-host) API Client
+
+This is a Python library for interacting with the [yt-dlp-host](https://github.com/Vasysik/yt-dlp-host) API.
+
+## Installation
+
+You can install the library using pip:
+
+```
+pip install yt-dlp-host-api
+```
+
+## Usage
+
+Here's a basic example of how to use the library:
+
+```python
+import yt_dlp_host_api
+
+# Initialize the API client
+api = yt_dlp_host_api.api('http://your-api-url.com')
+client = api.get_client('YOUR_API_KEY')
+
+# Download a complete video in MP4 format
+client.get_video(url='https://youtu.be/1FPdtR_5KFo', output_format='mp4').save_file("test_video.mp4")
+print("Video saved to test_video.mp4")
+
+# Download a video in WebM format
+client.get_video(url='https://youtu.be/1FPdtR_5KFo', output_format='webm').save_file("test_video.webm")
+print("Video saved to test_video.webm")
+
+# Download a video segment with precise cutting
+client.get_video(
+    url='https://youtu.be/1FPdtR_5KFo',
+    output_format='mkv',
+    start_time="00:05:00",
+    end_time="00:10:00",
+    force_keyframes=True
+).save_file("precise_cut.mkv")
+print("Precisely cut segment saved to precise_cut.mkv")
+
+# Download a video segment with faster cutting at keyframes
+client.get_video(
+    url='https://youtu.be/1FPdtR_5KFo',
+    output_format='mp4',
+    start_time="00:05:00",
+    end_time="00:10:00",
+    force_keyframes=False
+).save_file("keyframe_cut.mp4")
+print("Keyframe-cut segment saved to keyframe_cut.mp4")
+
+# Download a complete audio in MP3 format
+client.get_audio(url='https://youtu.be/1FPdtR_5KFo', output_format='mp3').save_file("test_audio.mp3")
+print("Audio saved to test_audio.mp3")
+
+# Download audio in FLAC format (lossless)
+client.get_audio(url='https://youtu.be/1FPdtR_5KFo', output_format='flac').save_file("test_audio.flac")
+print("Audio saved to test_audio.flac")
+
+# Get info
+info_json = client.get_info(url='https://youtu.be/1FPdtR_5KFo').get_json(['qualities', 'title'])
+print("Video info:", info_json)
+
+# Admin operations (requires admin API key)
+new_key = client.create_key("user_key", ["get_video", "get_audio", "get_info"])
+keys = client.get_keys()
+key = client.get_key("user_key")
+client.delete_key("user_key")
+```
+
+## Features
+
+- Download YouTube videos
+  - Download complete videos
+  - Download specific time segments
+    - Precise cutting with frame re-encoding
+    - Fast cutting at keyframes
+  - Choose video and audio quality
+  - Choose output format (MP4, MKV, WebM, AVI, MOV, FLV, 3GP)
+- Download YouTube audio
+  - Download complete audio
+  - Download specific time segments
+  - Choose audio quality
+  - Choose output format (MP3, M4A, Opus, FLAC, WAV, AAC, OGG)
+- Extract live stream segments
+- Retrieve video information
+- Checking client permissions
+- Admin operations:
+  - Create new API keys
+  - List existing API keys
+  - Get API key by key name
+  - Delete API keys
+
+## API Reference
+
+### Client
+
+- `client.get_video(url, video_format="bestvideo", audio_format="bestaudio", output_format="mp4", start_time=None, end_time=None, force_keyframes=False)`: Get video with optional time segment selection
+- `client.get_audio(url, audio_format="bestaudio", output_format=None, start_time=None, end_time=None, force_keyframes=False)`: Get audio with optional time segment selection
+- `client.get_live_video(url, duration, start=0, video_format="bestvideo", audio_format="bestaudio", output_format="mp4")`: Get live video segment
+- `client.get_live_audio(url, duration, start=0, audio_format="bestaudio", output_format=None)`: Get live audio segment
+- `client.get_info(url)`: Get video information
+- `client.send_task.get_video(url, video_format="bestvideo", audio_format="bestaudio", output_format="mp4", start_time=None, end_time=None, force_keyframes=False)`: Initiate a video download task
+- `client.send_task.get_audio(url, audio_format="bestaudio", output_format=None, start_time=None, end_time=None, force_keyframes=False)`: Initiate an audio download task
+- `client.send_task.get_live_video(url, duration, start=0, video_format="bestvideo", audio_format="bestaudio", output_format="mp4")`: Initiate a live video download task
+- `client.send_task.get_live_audio(url, duration, start=0, audio_format="bestaudio", output_format=None)`: Initiate a live audio download task
+- `client.send_task.get_info(url)`: Initiate an info retrieval task
+- `client.check_permissions(permissions)`: Check for all permissions in the list
+
+### Supported Output Formats
+
+#### Video Formats
+- **mp4** - MPEG-4 Part 14 (recommended)
+- **mkv** - Matroska
+- **webm** - WebM
+- **avi** - Audio Video Interleave
+- **mov** - QuickTime File Format
+- **flv** - Flash Video
+- **3gp** - 3GPP multimedia
+
+#### Audio Formats
+- **mp3** - MPEG Audio Layer III
+- **m4a** - MPEG-4 Audio
+- **opus** - Opus Audio
+- **flac** - Free Lossless Audio Codec
+- **wav** - Waveform Audio File Format
+- **aac** - Advanced Audio Coding
+- **ogg** - Ogg Vorbis
+
+Note: If `output_format` is not specified for audio, the original format will be used.
+
+### Time Format
+
+Time parameters (`start_time` and `end_time`) should be provided in the following format:
+- "HH:MM:SS" (hours:minutes:seconds)
+Examples:
+- "00:05:00" - 5 minutes
+- "01:30:45" - 1 hour, 30 minutes, and 45 seconds
+
+### Cutting Modes
+
+The `force_keyframes` parameter determines how video/audio segments are cut:
+- `force_keyframes=False` (default): Faster cutting that aligns to nearest keyframes. May not be exactly at specified timestamps but is much faster as it avoids re-encoding.
+- `force_keyframes=True`: Precise cutting at exact timestamps. This requires re-encoding which takes longer but provides exact cuts.
+
+### Task
+
+- `task.get_status()`: Get the current status of a task
+- `task.get_result()`: Wait for and return the result of a task
+
+### TaskResult
+
+- `result.get_file()`: Get the file
+- `result.get_file_url()`: Get the URL of the downloaded file
+- `result.save_file(path)`: Save the downloaded file to the specified path
+- `result.get_json(fields=None)`: Get the JSON data for info tasks (optionally filtered by fields)
+
+### Admin
+
+- `client.create_key(name, permissions)`: Create a new API key
+- `client.get_keys()`: List all existing API keys
+- `client.get_key(name)`: Get API key by key name
+- `client.delete_key(name)`: Delete an API key
+
+## Error Handling
+
+The library uses exceptions to handle errors. Catch `yt_dlp_host_api.exceptions.APIError` to handle API-related errors.
+
+## Contributing
+
+Contributions to yt-dlp-host-api are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue on the GitHub repository. Pull requests are also encouraged.
