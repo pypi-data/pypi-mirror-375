@@ -1,0 +1,108 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-jvm-mcp-server"
+version = "0.1.7"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+description = "A JVM monitoring and control server"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "fastapi>=0.68.0",
+    "uvicorn>=0.15.0",
+    "pydantic>=1.8.2",
+    "mcp[cli]",
+    "paramiko>=3.5.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+dev = [
+    "autopep8>=2.0.0",
+    "flake8>=6.0.0",
+]
+
+[project.scripts]
+jvm-mcp-server = "jvm_mcp_server.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/xzq-xu/jvm-mcp-server"
+Repository = "https://github.com/xzq-xu/jvm-mcp-server.git"
+Issues = "https://github.com/xzq-xu/jvm-mcp-server/issues"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "src/jvm_mcp_server/tests",
+]
+python_files = [
+    "test_*.py",
+]
+addopts = "-v --cov=jvm_mcp_server --cov-report=term-missing"
+
+[tool.coverage.run]
+source = [
+    "src/jvm_mcp_server",
+]
+omit = [
+    "src/jvm_mcp_server/tests/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/jvm_mcp_server",
+]
+
+[tool.hatch.version]
+path = "src/jvm_mcp_server/__init__.py"
+
+[tool.autopep8]
+max_line_length = 120
+indent_size = 4
+ignore = [
+    "E226",
+    "E302",
+    "E41",
+]
+in-place = true
+recursive = true
+aggressive = 3
+verbose = 2
+jobs = 0
+exclude = ".git,.hg,.svn,CVS,.tox,.venv,venv,__pycache__,*.pyc,*.egg-info,*.egg,build,dist"
+hang_closing = true
+experimental = true
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.0",
+    "pytest-cov>=6.2.1",
+]
