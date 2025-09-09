@@ -1,0 +1,9 @@
+services:
+  web1:
+    image: nginx:alpine
+    ports:
+      - "8082:80"
+  web2:
+    image: nginxdemos/hello
+    ports:
+      - "8083:80"
