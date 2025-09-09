@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-needle-mcp
+Version: 1.0.1
+Summary: Needle MCP integration
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: needle-python>=0.6.0
+Requires-Dist: mcp>=1.1.0
+Requires-Dist: python-dotenv>=1.0.1
+Dynamic: license-file
+
+Package managed by MseeP.ai

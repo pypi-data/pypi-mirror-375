@@ -1,0 +1,27 @@
+[project]
+name = "mseep-needle-mcp"
+version = "1.0.1"
+description = "Needle MCP integration"
+license = "MIT"
+dependencies = [
+    "needle-python>=0.6.0",
+    "mcp>=1.1.0",
+    "python-dotenv>=1.0.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.scripts]
+needle-mcp = "needle_mcp:main"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
