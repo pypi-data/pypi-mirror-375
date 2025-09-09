@@ -1,0 +1,11 @@
+numpy>=2.2.6
+scipy>=1.15.3
+statsmodels>=0.14.5
+astropy>=6.1.7
+pandas>=2.3.2
+requests>=2.32.5
+joblib>=1.5.2
+custom_inherit>=2.4.1
+dask>=2025.7.0
+light-curve>=0.10.4
+attrs>=25.3.0
