@@ -1,0 +1,26 @@
+[project]
+name = "physioprep"
+version = "0.0.1b"
+description = "Utilities for preprocessing and working with physiological data"
+authors = [
+    {name = "Milad Saadat"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "wfdb",
+    "pandas",
+    "numpy",
+    "pooch",
+    "requests"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.2"
+pytest-cov = "^6.2.1"
+
