@@ -1,0 +1,2 @@
+[console_scripts]
+redshift-mcp-server = redshift_mcp_server.server:main

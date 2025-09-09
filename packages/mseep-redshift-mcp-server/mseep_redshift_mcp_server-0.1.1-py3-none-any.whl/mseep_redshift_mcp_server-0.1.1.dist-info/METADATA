@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-redshift-mcp-server
+Version: 0.1.1
+Summary: Model Context Protocol (MCP) server for Amazon Redshift
+Project-URL: Source, https://github.com/tuanknguyen/redshift-mcp-server
+Project-URL: Bug Tracker, https://github.com/tuanknguyen/redshift-mcp-server/issues
+Author-email: mseep <support@skydeck.ai>
+Maintainer: Tuan Nguyen
+License: MIT
+Keywords: database,llm,mcp,redshift
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.10
+Requires-Dist: loguru>=0.7.0
+Requires-Dist: mcp[cli]>=1.9.1
+Requires-Dist: psycopg2-binary>=2.9.10
+Requires-Dist: pydantic>=2.0.0
+Provides-Extra: dev
+Requires-Dist: pytest-asyncio>=0.23.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.1.0; extra == 'dev'
+Requires-Dist: pytest-mock>=3.11.1; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: ruff>=0.9.7; extra == 'dev'
+Requires-Dist: uvicorn>=0.23.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
