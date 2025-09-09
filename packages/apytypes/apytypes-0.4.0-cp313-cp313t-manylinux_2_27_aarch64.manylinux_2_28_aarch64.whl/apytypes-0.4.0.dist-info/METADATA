@@ -1,0 +1,111 @@
+Metadata-Version: 2.1
+Name: apytypes
+Version: 0.4.0
+Summary: Python package for custom fixed-point and floating-point formats
+Keywords: fixed-point,floating-point,finite word length
+Author-Email: Oscar Gustafsson <oscar.gustafsson@gmail.com>, Mikael Henriksson <mikael.henriksson@liu.se>, Theodor Lindberg <theodor.lindberg@liu.se>
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)
+Project-URL: Repository, https://github.com/apytypes/apytypes/
+Project-URL: Issues, https://github.com/apytypes/apytypes/issues
+Project-URL: Homepage, https://apytypes.github.io/
+Project-URL: Documentation, https://apytypes.github.io/apytypes/
+Project-URL: Changelog, https://github.com/apytypes/apytypes/blob/main/CHANGELOG.md
+Requires-Python: >=3.10
+Provides-Extra: docs
+Requires-Dist: breathe>=4.35; extra == "docs"
+Requires-Dist: furo>=2024; extra == "docs"
+Requires-Dist: matplotlib>=3.7; extra == "docs"
+Requires-Dist: numpydoc>=1.7; extra == "docs"
+Requires-Dist: setuptools>=70; extra == "docs"
+Requires-Dist: sphinx>=7; extra == "docs"
+Requires-Dist: sphinx_copybutton>=0.5; extra == "docs"
+Requires-Dist: sphinx_gallery>=0.16; extra == "docs"
+Requires-Dist: m2r2; extra == "docs"
+Requires-Dist: docutils; extra == "docs"
+Requires-Dist: numpy>=1.25; extra == "docs"
+Requires-Dist: scipy; extra == "docs"
+Requires-Dist: cocotb>=1.9.1; extra == "docs"
+Provides-Extra: test
+Requires-Dist: numpy>=1.25; extra == "test"
+Requires-Dist: pytest>=8.2; extra == "test"
+Provides-Extra: test-hdl
+Requires-Dist: numpy>=1.25; extra == "test-hdl"
+Requires-Dist: pytest>=8.2; extra == "test-hdl"
+Requires-Dist: cocotb>=1.9.1; extra == "test-hdl"
+Requires-Dist: vunit-hdl; extra == "test-hdl"
+Provides-Extra: dev
+Requires-Dist: nanobind>=2.8.0; extra == "dev"
+Provides-Extra: benchmark
+Requires-Dist: numpy>=1.25; extra == "benchmark"
+Requires-Dist: pytest>=8.2; extra == "benchmark"
+Requires-Dist: pytest-benchmark; extra == "benchmark"
+Provides-Extra: comparison
+Requires-Dist: fpbinary; extra == "comparison"
+Requires-Dist: fixedpoint; extra == "comparison"
+Requires-Dist: fxpmath>=0.4.9; extra == "comparison"
+Requires-Dist: spfpm; extra == "comparison"
+Requires-Dist: numfi>=0.5; extra == "comparison"
+Requires-Dist: numpy>=1.25; extra == "comparison"
+Requires-Dist: matplotlib>=3.7; extra == "comparison"
+Description-Content-Type: text/markdown
+
+# APyTypes
+
+[![PyPI](https://img.shields.io/pypi/v/apytypes)](https://pypi.org/project/apytypes/)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/apytypes/apytypes/main.svg)](https://results.pre-commit.ci/latest/github/apytypes/apytypes/main)
+[![License](https://img.shields.io/github/license/apytypes/apytypes)](https://github.com/apytypes/apytypes/blob/main/LICENSE.txt)
+![Workflow Status](https://img.shields.io/github/actions/workflow/status/apytypes/apytypes/tests.yml)
+[![codecov](https://codecov.io/gh/apytypes/apytypes/graph/badge.svg?token=734MDWN7SU)](https://codecov.io/gh/apytypes/apytypes)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11197885.svg)](https://doi.org/10.5281/zenodo.11197885)
+
+APyTypes is a Python library providing algorithmic scalar and array data types,
+both fixed- and floating-point in Python. The main purpose is to simplify finite
+word length design and simulation. Written in C++, the focus is on performance and
+flexibility.
+
+## Documentation
+
+<https://apytypes.github.io/apytypes/>
+
+## Installation
+
+APyTypes is available in the
+[Python Package Index](https://pypi.org/p/apytypes/) and can be installed with
+the [pip](https://pypi.org/p/pip/) package installer:
+
+```bash
+pip install apytypes
+```
+
+### Running
+
+The package can now be used as:
+
+```python
+$ python
+>>> import apytypes as apy
+>>> fx_a = apy.fx(3.5, int_bits=4, frac_bits=4)
+>>> print(fx_a)
+3.5
+>>> fx_a
+APyFixed(56, bits=8, int_bits=4)
+>>> fx_b = apy.fx(1.25, int_bits=3, frac_bits=6)
+>>> fx_a + fx_b
+APyFixed(304, bits=11, int_bits=5)
+>>> print(fx_a + fx_b)
+4.75
+```
+
+### Tests
+
+Test dependencies can be installed by running `pip install [.test]` and then
+executed by `pytest`.
