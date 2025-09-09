@@ -1,0 +1,10 @@
+[build-system]
+requires = ["meson-python", "numpy"]
+build-backend = "mesonpy"
+
+[project]
+name = "phs_poly"
+version = "0.1.0"
+description = "Python bindings for Fortran phs3_poly2"
+requires-python = ">=3.8"
+dependencies = ["numpy"]
