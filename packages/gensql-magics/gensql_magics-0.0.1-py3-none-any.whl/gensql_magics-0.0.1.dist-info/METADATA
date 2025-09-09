@@ -1,0 +1,11 @@
+Metadata-Version: 2.3
+Name: gensql-magics
+Version: 0.0.1
+Summary: Add your description here
+Author: Leif Andersen
+Author-email: Leif Andersen <leif@leifandersen.pl>
+Requires-Dist: ipykernel>=6.30.1
+Requires-Dist: pandas>=2.3.2
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
