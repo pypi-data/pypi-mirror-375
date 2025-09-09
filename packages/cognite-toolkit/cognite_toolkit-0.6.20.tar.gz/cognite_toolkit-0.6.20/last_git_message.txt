@@ -1,0 +1,24 @@
+[CDF-25685] 🤗 Streamlit app entrypoint no longer required in metadata (#1918)
+
+# Description
+
+For streamlit apps the entrypoint is no longer required in the metadata
+(the information is stored in the file content json). In addition, if
+the hash of the code is not set, we now skip it instead of setting it to
+missing.
+
+## Changelog
+
+- [x] Patch
+- [ ] Skip
+
+## cdf
+
+### Fixed
+
+- When deploying streamlit apps that has been dumped with Toolkit, then
+entrypoint for the app is now correctly set.
+
+## templates
+
+No changes.
