@@ -1,0 +1,14 @@
+sklearn_freezer/__init__.py,sha256=tDDZHK3UBfl84QIzkokVBbobSqD3smRZhp4xEo_GPrQ,1410
+sklearn_freezer/backend/__init__.py,sha256=vi_gBdXiB0z_hr_Xzk6yW8VUVBl1yk3qp5U3mHx1rpE,3538
+sklearn_freezer/backend/c_compiler.py,sha256=zDKgteNkO_U7Qn32gVzcKlWY-JicnuvCFWwtVY5JJXs,3785
+sklearn_freezer/backend/core.py,sha256=EQ_rBxjohEFxYXSoLtrCBmHf3MxqiXlyEF5YWFW-qi4,4281
+sklearn_freezer/backend/cython_compiler.py,sha256=4r405Pv-RXkfbKHevgzN81xpgOFR9ncgHxpxiIls0ug,1402
+sklearn_freezer/backend/python_compiler.py,sha256=OJ0ISLNDckHM1jx-SKX1fuaW_GBRRzhs9Q5sw5ADbLw,692
+sklearn_freezer/backend/utils.py,sha256=TvF-INhfcz7CEDvdHAz8aPZSF6jsVGMSZXfEkYFbbwc,1544
+sklearn_freezer/codegen/__init__.py,sha256=PZTfOEHoF7sVPTmnkh7HlbWtqbzX1tDG1JNDNwTHqKI,2126
+sklearn_freezer/codegen/decision_tree_classifier.py,sha256=mwTIMxBNA0FdxkQQOenzw_ZJajSbjjk4NYLO51cbjD8,3340
+sklearn_freezer/codegen/forest_classifier.py,sha256=sFCmQFfI1JZmu3pANlTl5do4_KyASQu_4-BeY8CRzf8,1895
+sklearn_freezer-0.2.0.dist-info/METADATA,sha256=7QjKwgtrISw5lzRUU0VLzbSTZtPEqbnwEDvPIkAdnIc,3296
+sklearn_freezer-0.2.0.dist-info/WHEEL,sha256=qtCwoSJWgHk21S1Kb4ihdzI2rlJ1ZKaIurTj_ngOhyQ,87
+sklearn_freezer-0.2.0.dist-info/licenses/LICENSE,sha256=XswcCbBi5wBU5Y5IbIRb-t6qbls9Ld-7lh4cbJQ-rfM,1061
+sklearn_freezer-0.2.0.dist-info/RECORD,,
