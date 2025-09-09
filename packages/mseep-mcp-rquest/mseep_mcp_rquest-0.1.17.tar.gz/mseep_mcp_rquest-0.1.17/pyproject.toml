@@ -1,0 +1,92 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-mcp-rquest"
+version = "0.1.17"
+description = "A Model Context Protocol (MCP) server providing advanced HTTP request capabilities with realistic browser emulation for Claude and other LLMs"
+requires-python = ">=3.10"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+keywords = [
+    "mcp",
+    "http",
+    "request",
+    "api",
+    "claude",
+    "llm",
+    "browser-emulation",
+    "tls-fingerprint",
+    "ja3",
+    "ja4",
+    "anti-bot",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "markdownify>=0.13.1,<0.14.0",
+    "mcp[cli]>=1.4.1",
+    "rnet>=2.0.0",
+    "tiktoken>=0.5.0",
+    "marker-pdf>=1.6.1",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.0.292",
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.1",
+    "black>=23.9.1",
+    "build>=1.0.3",
+    "twine>=6.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/xxxbrian/mcp-rquest"
+"Bug Tracker" = "https://github.com/xxxbrian/mcp-rquest/issues"
+
+[project.scripts]
+mcp-rquest = "mcp_rquest.server:main"
+mcp-simple-tool = "mcp_simple_tool.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "mcp_rquest",
+]
+
+[tool.ruff]
+line-length = 130
+target-version = "py310"
+select = [
+    "E",
+    "F",
+    "I",
+    "N",
+    "W",
+]
+
+[tool.black]
+line-length = 130
+target-version = [
+    "py310",
+]
