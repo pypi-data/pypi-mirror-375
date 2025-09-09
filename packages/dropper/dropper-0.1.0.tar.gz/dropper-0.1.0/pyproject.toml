@@ -1,0 +1,24 @@
+[project]
+name = "dropper"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Golos1",email = "68024905+Golos1@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "torch (>=2.8.0,<3.0.0)",
+    "torchmetrics (>=1.8.1,<2.0.0)",
+    "scikit-learn (>=1.7.1,<2.0.0)",
+    "torchvision (>=0.23.0,<0.24.0)"
+]
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+exclude = ["dropper/data/"]
