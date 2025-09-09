@@ -1,0 +1,55 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-yfinance-trader"
+version = "0.1.1"
+description = "YFinance Trader MCP Tool for Claude Desktop"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+requires-python = ">=3.10"
+dependencies = [
+    "yfinance>=0.2.36",
+    "fastapi>=0.103.1",
+    "uvicorn>=0.23.2",
+    "pydantic>=2.4.2",
+    "requests>=2.31.0",
+    "pandas>=2.1.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.1.0",
+    "isort>=5.12.0",
+]
+
+[project.scripts]
+mseep-yfinance-trader = "main:main"
+
+[tool.black]
+line-length = 100
+target-version = [
+    "py310",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
