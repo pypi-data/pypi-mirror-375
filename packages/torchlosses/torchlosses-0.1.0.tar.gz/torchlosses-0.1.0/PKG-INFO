@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: torchlosses
+Version: 0.1.0
+Summary: A collection of advanced PyTorch loss functions (Focal, Dice, Contrastive, Triplet, Cosine, Huber, KLDiv).
+Home-page: https://github.com/yourusername/torchlosses
+Author: Adie Kaushik
+Author-email: your_email@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Requires-Dist: torch>=1.10
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

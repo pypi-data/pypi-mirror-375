@@ -1,0 +1,15 @@
+README.md
+setup.py
+torchlosses/__init__.py
+torchlosses/contrastive.py
+torchlosses/cosine.py
+torchlosses/dice.py
+torchlosses/focal.py
+torchlosses/huber.py
+torchlosses/kldiv.py
+torchlosses/triplet.py
+torchlosses.egg-info/PKG-INFO
+torchlosses.egg-info/SOURCES.txt
+torchlosses.egg-info/dependency_links.txt
+torchlosses.egg-info/requires.txt
+torchlosses.egg-info/top_level.txt
