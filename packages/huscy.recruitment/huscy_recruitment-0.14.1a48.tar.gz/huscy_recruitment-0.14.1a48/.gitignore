@@ -1,0 +1,10 @@
+build/
+dist/
+htmlcov/
+huscy.recruitment.egg-info/
+
+*.pyc
+
+.coverage
+
+docs/class_diagram.png
