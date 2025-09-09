@@ -1,0 +1,17 @@
+include README.md
+include README_PYPI.md
+include LICENSE
+include requirements.txt
+include CHANGELOG.md
+recursive-include device_fingerprinting *.py
+recursive-include tests *.py
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.orig
+recursive-exclude * *.rej
+recursive-exclude * .DS_Store
+exclude .gitignore
+exclude .git
+exclude build
+exclude dist
+exclude *.egg-info

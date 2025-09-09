@@ -1,0 +1,106 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "device-fingerprinting-pro"
+version = "1.1.2"
+description = "Hardware-based device fingerprinting library with comprehensive security features and cross-platform support"
+readme = "README_PYPI.md"
+license = "MIT"
+authors = [
+    {name = "DeviceFingerprinting Team", email = "support@devicefingerprinting.dev"}
+]
+keywords = ["device", "fingerprinting", "hardware", "identification", "security", "cross-platform", "privacy"]
+maintainers = [
+    {name = "DeviceFingerprinting Team", email = "support@devicefingerprinting.dev"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Hardware",
+    "Topic :: System :: Systems Administration",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "psutil>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "mypy>=1.0.0",
+]
+testing = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Johnsonajibi/DeviceFingerprinting"
+Repository = "https://github.com/Johnsonajibi/DeviceFingerprinting"
+Issues = "https://github.com/Johnsonajibi/DeviceFingerprinting/issues"
+Documentation = "https://github.com/Johnsonajibi/DeviceFingerprinting#readme"
+Changelog = "https://github.com/Johnsonajibi/DeviceFingerprinting/releases"
+Source = "https://github.com/Johnsonajibi/DeviceFingerprinting"
+Tracker = "https://github.com/Johnsonajibi/DeviceFingerprinting/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["device_fingerprinting*"]
+
+[tool.setuptools.package-data]
+device_fingerprinting = ["*.md", "*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--cov=device_fingerprinting",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--strict-markers",
+]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
