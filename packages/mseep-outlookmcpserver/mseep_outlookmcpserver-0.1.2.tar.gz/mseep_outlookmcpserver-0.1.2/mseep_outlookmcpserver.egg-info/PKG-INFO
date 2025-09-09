@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-outlookmcpserver
+Version: 0.1.2
+Summary: An MCP Server for giving Claude control over Outlook on Mac
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: azure-identity
+Requires-Dist: msgraph-core
+Requires-Dist: msgraph-sdk
+Requires-Dist: pytest
+Dynamic: license-file
+
+Package managed by MseeP.ai
