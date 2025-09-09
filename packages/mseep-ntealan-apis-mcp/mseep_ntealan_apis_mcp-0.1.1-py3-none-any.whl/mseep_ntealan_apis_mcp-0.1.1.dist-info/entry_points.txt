@@ -1,0 +1,2 @@
+[console_scripts]
+ntealanmcp = ntealan_apis_mcp.main:run_mcp_server

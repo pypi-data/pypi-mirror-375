@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: mseep-ntealan-apis-mcp
+Version: 0.1.1
+Summary: A modular, extensible MCP server for NTeALan REST API dictionaries and contributions. Provides a unified async interface for managing dictionary data, articles, and user contributions.
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: Mboning Elvis <levismboning@ntealan.org>
+License: MIT
+Project-URL: homepage, https://apis.ntealan.net/ntealan/mcpserver
+Project-URL: repository, https://github.com/Levis0045/ntealan-apis-mcp-server
+Keywords: fastmpc,ntealan,mcp,server,python,dictionary,lexicography,sse
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: pydantic>=1.10.0
+Requires-Dist: fastapi>=0.110.0
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: aiofiles>=23.2.1
+Requires-Dist: beautifulsoup4>=4.12.3
+Requires-Dist: lxml>=5.4.0
+Requires-Dist: fastmcp>=2.2.5
+Requires-Dist: setuptools>=79.0.1
+Requires-Dist: aiohttp>=3.11.18
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: aiodns>=3.2.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23.6; extra == "dev"
+Requires-Dist: black>=24.4.2; extra == "dev"
+Requires-Dist: isort>=5.13.2; extra == "dev"
+Requires-Dist: mypy>=1.10.0; extra == "dev"
+Requires-Dist: flake8>=7.0.0; extra == "dev"
+Requires-Dist: pydocstyle>=6.3.0; extra == "dev"
+Requires-Dist: bandit>=1.7.8; extra == "dev"
+Requires-Dist: safety>=3.4.0; extra == "dev"
+Requires-Dist: pre-commit>=3.7.1; extra == "dev"
+Requires-Dist: ruff>=0.4.4; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
