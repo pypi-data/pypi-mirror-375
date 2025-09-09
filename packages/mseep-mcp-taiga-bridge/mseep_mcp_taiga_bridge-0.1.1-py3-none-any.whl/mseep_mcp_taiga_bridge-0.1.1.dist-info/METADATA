@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-taiga-bridge
+Version: 0.1.1
+Summary: Taiga integration bridge for MCP
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=0.1.0
+Requires-Dist: fastapi>=0.104.0
+Requires-Dist: uvicorn[standard]>=0.23.0
+Requires-Dist: python-dotenv>=0.15.0
+Requires-Dist: httpx>=0.25.0
+Requires-Dist: pydantic>=2.4.0
+Requires-Dist: pydantic-settings>=2.0.0
+Requires-Dist: tenacity>=8.2.0
+Requires-Dist: pytest>=8.3.5
+Requires-Dist: pytaigaclient
+Provides-Extra: dev
+Requires-Dist: pytest>=7.3.1; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: responses>=0.23.1; extra == "dev"
+Requires-Dist: black>=23.3.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: mypy>=1.3.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai
