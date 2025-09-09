@@ -1,0 +1,3 @@
+[console_scripts]
+postman-collection-generator-mcp=mcp_server.main:run
+
