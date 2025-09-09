@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omicsone"                      # 若要发 PyPI，需唯一
+version = "1.0.2"
+description = "Utilities for multi-omics analysis (glyco, diff, plots, etc.)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Yingwei Hu" }]
+keywords = ["proteomics", "glycoproteomics", "omics", "bioinformatics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+# 运行时依赖（按需填）
+dependencies = [
+ "matplotlib>=3.10.1",
+  "seaborn>=0.13.2",
+  "numpy==1.26.4",
+  "pandas>=2.2.3",
+   "nbformat>=5.10"
+]
+
+[project.urls]
+Homepage = "https://example.com/omicsone"
+Repository = "https://github.com/yourname/omicsone"
+
+# 可选：命令行入口（安装后可直接运行 `omicsone`）
+[project.scripts]
+omicsone = "omicsone.omics_init:main"
+
+[tool.setuptools]
+# 仅包含 omicsone 包；notebooks 会被排除
+packages = ["omicsone"]
+
+[tool.setuptools.package-data]
+# 如果要打包模板/配置等非 .py 文件，在此声明，如：
+# "omicsone" = ["data/*.csv", "templates/*.html"]
