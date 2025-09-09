@@ -1,0 +1,2 @@
+[console_scripts]
+resumeio-dl = resumeio_dl.cli:main

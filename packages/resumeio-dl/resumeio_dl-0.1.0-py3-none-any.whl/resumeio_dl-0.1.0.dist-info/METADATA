@@ -1,0 +1,106 @@
+Metadata-Version: 2.4
+Name: resumeio-dl
+Version: 0.1.0
+Summary: Download resumes from resume.io as PDF files
+Home-page: https://github.com/yourusername/resumeio-dl
+Author: Noreddine
+Author-email: your.email@example.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Utilities
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Pillow>=9.0.0
+Requires-Dist: pytesseract>=0.3.9
+Requires-Dist: pypdf>=3.0.0
+Requires-Dist: requests>=2.25.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# resumeio-dl
+
+Download resumes from resume.io as PDF files without using the web UI.
+
+## Installation
+
+```bash
+pip install resumeio-dl
+```
+
+### Requirements
+
+- Python 3.8 or higher
+- Tesseract OCR must be installed on your system
+
+## Usage
+
+### Command Line Interface
+
+```bash
+# Basic usage with just the token
+resumeio-dl YOUR_RENDERING_TOKEN
+
+# Specify an output filename
+resumeio-dl YOUR_RENDERING_TOKEN -o my_resume.pdf
+
+# Change the image size for higher/lower quality
+resumeio-dl YOUR_RENDERING_TOKEN -s 4000
+
+# Change the image extension
+resumeio-dl YOUR_RENDERING_TOKEN -e png
+```
+
+### Python API
+
+```python
+from resumeio_dl import download_resume, Extension
+
+# Basic usage
+download_resume("YOUR_RENDERING_TOKEN")
+
+# Advanced usage
+download_resume(
+    rendering_token="YOUR_RENDERING_TOKEN",
+    output_filename="my_resume.pdf",
+    image_size=4000,
+    extension=Extension.png
+)
+```
+
+## How to find your renderingToken
+
+1. Go to your resume on resume.io
+2. Check the API response:
+   - For resumes: https://resume.io/api/app/resumes
+   - For cover letters: https://resume.io/api/app/cover-letters/
+3. Find the `renderingToken` in the response
+
+## Features
+
+- Download resume images from resume.io
+- Convert images to a searchable PDF with OCR
+- Preserve hyperlinks from the original resume
+- Support for different image formats and resolutions
+
+## Disclaimer
+
+This tool is for educational purposes only. Please respect resume.io's terms of service and consider purchasing their premium services to support their platform.
+
+## License
+
+MIT
