@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-kimcp
+Version: 1.0.1
+Summary: Korea-integrated Model Context Protocol server implementation for seamless integration of Korean APIs into LLM applications
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/zeikar/kimcp
+Project-URL: Repository, https://github.com/zeikar/kimcp
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: beautifulsoup4>=4.13.3
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.6.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

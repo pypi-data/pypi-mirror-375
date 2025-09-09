@@ -1,0 +1,24 @@
+[project]
+name = "mseep-kimcp"
+version = "1.0.1"
+description = "Korea-integrated Model Context Protocol server implementation for seamless integration of Korean APIs into LLM applications"
+requires-python = ">=3.10"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.6.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/zeikar/kimcp"
+Repository = "https://github.com/zeikar/kimcp"
+
+[project.license]
+text = "MIT"
