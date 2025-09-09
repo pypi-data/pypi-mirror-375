@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: more_function
+Version: 0.1.0
+Summary: A small Python library with quadratic solver and sorting functions
+Author-email: Dang Minh Tai <dmt826321@gmail.com>
+License: MIT
+Keywords: math,sorting,quadratic
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Thư viện: more_function
+
+1 thư viện nhỏ python có các hàm:
+
+- `slove_quadratic(a, b, c)` : giải phương trình bậc 2 với các tham số a,b,c
+- `sort_asc(arr)` : sắp xếp mảng theo chiều tăng dần
+- `sort_desc(arr)` : sắp xếp mảng theo chiều giảm dần
+
+## Tải và cài đặt
+```bash
+pip install more_function
