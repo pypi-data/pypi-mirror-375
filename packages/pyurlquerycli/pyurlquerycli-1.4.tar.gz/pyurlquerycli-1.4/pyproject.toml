@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyurlquerycli"
+authors = [{ email = "tdebize@mail.com" }]
+description = "A simple Python script to interact with urlquery.net APIs from CLI"
+readme = "README.md"
+requires-python = ">=3"
+keywords = ["urlquery", "url", "malware", "phishing", "analyze", "sandbox", "api", "cli"]
+license = "LGPL-3.0-or-later"
+classifiers = [
+    'Topic :: Security',
+    'Programming Language :: Python :: 3'
+]
+dynamic = ["version", "dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["pyurlquerycli/requirements.txt"]}
+version = {attr = "pyurlquerycli.pyurlquerycli.VERSION"}
+
+[project.urls]
+Homepage = "https://github.com/maaaaz/pyurlquerycli/"
+
+[project.scripts]
+pyurlquerycli = "pyurlquerycli.pyurlquerycli:main"
