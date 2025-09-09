@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-mysqldb-mcp-server
+Version: 0.1.6
+Summary: An MCP server implementation for MySQL database integration
+Project-URL: Homepage, https://github.com/burakdirin/mysqldb-mcp-server
+Project-URL: Repository, https://github.com/burakdirin/mysqldb-mcp-server
+Project-URL: Bug Tracker, https://github.com/burakdirin/mysqldb-mcp-server/issues
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: mcp>=1.4.1
+Requires-Dist: mysql-connector-python>=9.2.0
+Requires-Dist: python-dotenv>=1.0.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

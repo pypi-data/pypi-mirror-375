@@ -1,0 +1,37 @@
+[project]
+name = "mseep-mysqldb-mcp-server"
+version = "0.1.6"
+description = "An MCP server implementation for MySQL database integration"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "mcp>=1.4.1",
+    "mysql-connector-python>=9.2.0",
+    "python-dotenv>=1.0.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/burakdirin/mysqldb-mcp-server"
+Repository = "https://github.com/burakdirin/mysqldb-mcp-server"
+"Bug Tracker" = "https://github.com/burakdirin/mysqldb-mcp-server/issues"
+
+[project.scripts]
+mysqldb-mcp-server = "mysqldb_mcp_server:main"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mysqldb_mcp_server",
+]
