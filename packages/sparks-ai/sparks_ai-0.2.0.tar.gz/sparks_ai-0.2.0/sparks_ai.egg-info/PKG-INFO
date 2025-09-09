@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: sparks-ai
+Version: 0.2.0
+Summary: Sequential Predictive Attention for the Representation of SpiKing Signals
+Author-email: Nicolas Skatchkovsky <nicolas.skatchkovsky@crick.ac.uk>
+Project-URL: Homepage, https://github.com/FrancisCrickInstitute/SPARKS
+Project-URL: Issues, https://github.com/FrancisCrickInstitute/SPARKS/issues
+Keywords: Computational neuroscience,Artificial Intelligence,GenAI
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: GPU :: NVIDIA CUDA
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE.MD
+Requires-Dist: scikit-learn
+Requires-Dist: scipy
+Requires-Dist: torch
+Requires-Dist: tqdm
+Requires-Dist: numpy
+Requires-Dist: pynwb
+Requires-Dist: pandas
+Provides-Extra: demos
+Requires-Dist: jupyter; extra == "demos"
+Requires-Dist: matplotlib; extra == "demos"
+Dynamic: license-file
