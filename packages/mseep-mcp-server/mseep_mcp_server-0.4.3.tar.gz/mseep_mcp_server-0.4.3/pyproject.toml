@@ -1,0 +1,21 @@
+[project]
+name = "mseep-mcp-server"
+version = "0.4.3"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = []
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-mcp-server = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
