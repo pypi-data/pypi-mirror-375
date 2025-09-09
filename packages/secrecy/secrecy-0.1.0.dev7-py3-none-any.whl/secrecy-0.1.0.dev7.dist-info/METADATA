@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: secrecy
+Version: 0.1.0.dev7
+Summary: A symmetric encryption utility.
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: click>=8.2.0
+Requires-Dist: cryptography>=44.0.3
+Requires-Dist: platformdirs>=4.4.0
+Requires-Dist: python-dotenv>=1.1.0
+Description-Content-Type: text/markdown
+
+# `secrecy`
+
+A symmetric encryption utility.
+
+## Overview
+
+Installing the `secrecy` package from PyPI (or building
+it from source, if you insist) gives you command-line access
+to the `secrecy` shell command. To install the package,
+you can run the following commands:
+
+```bash
+python -m venv venv       # Create a virtual environment.
+source venv/bin/activate  # Activate the virtual environment.
+pip install --upgrade pip # Make sure you have the latest version of `pip`.
+pip install secrecy       # Download and install the `secrecy` package.
+```
+
+After installation, type `secrecy` in your terminal, and press enter.
+If the installation was successful, you will see the CLI's "help" text.
