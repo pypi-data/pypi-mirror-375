@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygenieacs"
+version = "0.1.2"
+description = "Python API client for GenieACS REST API"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name = "Uberkie", email = "uberkie85@gmail.com" }
+]
+keywords = ["genieacs", "acs", "tr069", "cwmp", "networking"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "httpx",
+]
+
+[project.urls]
+Homepage = "https://github.com/uberkie/pygenieacs"
+Repository = "https://github.com/uberkie/pygenieacs"
+Issues = "https://github.com/uberkie/pygenieacs/issues"
+
+[tool.setuptools.packages.find]
+exclude = ["tests*", "examples*"]

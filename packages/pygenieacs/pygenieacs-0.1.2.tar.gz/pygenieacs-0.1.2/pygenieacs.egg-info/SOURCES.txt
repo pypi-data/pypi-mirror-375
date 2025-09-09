@@ -1,0 +1,15 @@
+LICENSE.txt
+README.md
+pyproject.toml
+setup.cfg
+pygenieacs/__init__.py
+pygenieacs/clients.py
+pygenieacs/devices.py
+pygenieacs/presets.py
+pygenieacs/provisions.py
+pygenieacs/tasks.py
+pygenieacs.egg-info/PKG-INFO
+pygenieacs.egg-info/SOURCES.txt
+pygenieacs.egg-info/dependency_links.txt
+pygenieacs.egg-info/requires.txt
+pygenieacs.egg-info/top_level.txt
