@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-code-extractor
+Version: 0.4.5
+Summary: A Model Context Protocol (MCP) server that provides precise code extraction tools using tree-sitter parsing
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: Christopher Toth <q.alpha@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/ctoth/mcp_server_code_extractor
+Project-URL: Repository, https://github.com/ctoth/mcp_server_code_extractor
+Project-URL: Issues, https://github.com/ctoth/mcp_server_code_extractor/issues
+Project-URL: Documentation, https://github.com/ctoth/mcp-code-extractor#readme
+Keywords: mcp,model-context-protocol,code-extraction,tree-sitter,ai-tools
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Topic :: Software Development :: Code Generators
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+Requires-Dist: mcp>=1.11.0
+Requires-Dist: tree-sitter-languages>=1.10.2
+Requires-Dist: tree-sitter==0.21.3
+Requires-Dist: requests>=2.31.0
+Requires-Dist: cachetools>=5.3.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: responses>=0.23.0; extra == "dev"
+
+Package managed by MseeP.ai
