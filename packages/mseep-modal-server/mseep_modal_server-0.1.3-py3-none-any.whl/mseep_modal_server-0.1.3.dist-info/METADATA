@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-modal-server
+Version: 0.1.3
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: <3.13,>=3.12
+Description-Content-Type: text/plain
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.1.1
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: modal>=0.67
+
+Package managed by MseeP.ai
