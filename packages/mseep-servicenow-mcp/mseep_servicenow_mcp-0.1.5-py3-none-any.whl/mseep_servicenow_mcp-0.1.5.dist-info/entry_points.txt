@@ -1,0 +1,3 @@
+[console_scripts]
+servicenow-mcp = servicenow_mcp.cli:main
+servicenow-mcp-sse = servicenow_mcp.server_sse:main
