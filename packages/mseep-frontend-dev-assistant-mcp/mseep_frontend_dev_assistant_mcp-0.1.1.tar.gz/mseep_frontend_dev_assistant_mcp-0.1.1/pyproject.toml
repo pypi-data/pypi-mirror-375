@@ -1,0 +1,68 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-frontend-dev-assistant-mcp"
+version = "0.1.1"
+description = "前端开发提示词智能助手 MCP服务器 - 专为前端团队设计的AI开发助手"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Code Generators",
+]
+dependencies = [
+    "mcp>=0.3.0",
+    "pydantic>=2.0.0",
+    "typing-extensions>=4.0.0",
+    "aiofiles>=23.0.0",
+    "pathlib2>=2.3.0",
+]
+requires-python = ">=3.8"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/your-username/frontend-dev-assistant-mcp"
+Repository = "https://github.com/your-username/frontend-dev-assistant-mcp"
+Documentation = "https://github.com/your-username/frontend-dev-assistant-mcp#readme"
+"Bug Reports" = "https://github.com/your-username/frontend-dev-assistant-mcp/issues"
+
+[project.scripts]
+frontend-dev-assistant = "frontend_dev_assistant.main:main"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = [
+    "src",
+]
+
+[tool.setuptools.package-data]
+frontend_dev_assistant = [
+    "templates/*.json",
+    "templates/*.md",
+    "data/*.json",
+    "data/*.yaml",
+]

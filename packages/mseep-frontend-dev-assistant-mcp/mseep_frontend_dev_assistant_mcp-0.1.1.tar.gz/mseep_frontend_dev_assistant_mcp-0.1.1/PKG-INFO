@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: mseep-frontend-dev-assistant-mcp
+Version: 0.1.1
+Summary: 前端开发提示词智能助手 MCP服务器 - 专为前端团队设计的AI开发助手
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/your-username/frontend-dev-assistant-mcp
+Project-URL: Repository, https://github.com/your-username/frontend-dev-assistant-mcp
+Project-URL: Documentation, https://github.com/your-username/frontend-dev-assistant-mcp#readme
+Project-URL: Bug Reports, https://github.com/your-username/frontend-dev-assistant-mcp/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Code Generators
+Requires-Python: >=3.8
+Description-Content-Type: text/plain
+Requires-Dist: mcp>=0.3.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: typing-extensions>=4.0.0
+Requires-Dist: aiofiles>=23.0.0
+Requires-Dist: pathlib2>=2.3.0
+
+Package managed by MseeP.ai

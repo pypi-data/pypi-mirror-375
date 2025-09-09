@@ -1,0 +1,53 @@
+{
+  "git_commit": {
+    "name": "Git 代码提交助手",
+    "description": "帮助开发者分批次、规范化提交代码",
+    "template": "帮我分批次提交代码。请先检查 git status，然后分析所有未暂存的修改，并一次性提供一个完整的、按模块或功能分组的提交计划。\n\n计划应包含：\n1. 每个批次要提交的文件列表\n2. 为每个批次建议的 commit message (格式为 feat/fix: 中文描述)\n\n请等待我确认或修改计划后再执行任何 git 命令。\n\n注意事项：\n- 遵循 Conventional Commits 规范\n- commit message 使用中文描述\n- 按功能模块合理分组\n- 避免混合不相关的改动\n\n{context}",
+    "tags": [
+      "git",
+      "提交",
+      "代码管理"
+    ]
+  },
+  "code_review": {
+    "name": "代码审查助手",
+    "description": "基于团队规范进行代码质量审查",
+    "template": "根据前端代码规范对以下代码进行 code review，主要关注：\n\n规范检查：\n1. **魔法值处理**：是否存在硬编码的数字、字符串等魔法值\n2. **常量定义**：常量是否正确定义和使用\n3. **方法注释**：方法是否有完整的JSDoc注释\n4. **命名规范**：变量、方法、组件命名是否符合规范\n5. **代码结构**：是否遵循团队约定的代码组织结构\n\n业务逻辑检查：\n1. **错误处理**：是否有适当的错误边界和异常处理\n2. **性能优化**：是否存在明显的性能问题\n3. **可维护性**：代码是否易于理解和维护\n4. **测试覆盖**：是否遗漏重要的测试场景\n\n请提供具体的改进建议和示例代码。\n\n参考编码规范：\n- 使用 PascalCase 命名组件\n- 使用 camelCase 命名变量和方法\n- 常量使用 UPPER_SNAKE_CASE\n- 方法必须有 JSDoc 注释\n- 避免使用魔法值，定义为常量\n\n{context}",
+    "tags": [
+      "代码审查",
+      "质量检查",
+      "规范"
+    ]
+  },
+  "component_reuse": {
+    "name": "组件复用助手",
+    "description": "帮助快速定位和复用项目中的现有组件",
+    "template": "帮我复用项目中的{component_type}组件。\n\n请执行以下步骤：\n\n1. **查找现有组件**：\n   - 在项目的 components 目录下查找相关组件\n   - 分析组件的 props 接口和使用方式\n   - 确定组件的适用场景\n\n2. **生成使用代码**：\n   - 提供完整的引入语句\n   - 展示基本使用示例\n   - 说明主要 props 的作用和类型\n\n3. **定制建议**：\n   - 如果现有组件不完全匹配需求，提供修改建议\n   - 建议如何扩展组件功能\n   - 提醒注意事项和最佳实践\n\n搜索关键词：{keywords}\n\n期望功能：{expected_features}\n\n请在指定位置生成对应的代码，并确保：\n- 正确引入组件依赖\n- 使用符合团队规范的代码风格\n- 添加必要的注释说明\n\n{context}",
+    "tags": [
+      "组件复用",
+      "代码生成",
+      "效率工具"
+    ]
+  },
+  "vue_component_spec": {
+    "name": "Vue组件规范生成",
+    "description": "基于团队编码规范生成标准Vue组件",
+    "template": "请基于团队编码规范生成一个{vue_version} {component_type}组件。\n\n组件要求：\n- 组件名称：{component_name}\n- Vue版本：{vue_version}\n- 组件类型：{component_type}\n\n编码规范要求：\n1. **命名规范**：\n   - 组件使用 PascalCase\n   - props 使用 camelCase\n   - 事件使用 kebab-case\n   - 插槽使用 kebab-case\n\n2. **结构规范**：\n   - 使用 <script setup> 语法（Vue3）\n   - props 必须定义类型和默认值\n   - 导出的方法需要 JSDoc 注释\n   - 样式使用 scoped\n\n3. **代码质量**：\n   - 添加适当的类型检查\n   - 包含错误边界处理\n   - 支持响应式设计\n   - 遵循无障碍规范\n\n4. **注释要求**：\n   - 组件顶部添加功能说明\n   - 复杂逻辑添加行内注释\n   - props 添加描述注释\n\n组件功能特性：{features}\n\n请生成完整的组件代码，包括：\n- 完整的 Vue 单文件组件\n- TypeScript 类型定义（如适用）\n- 使用示例和文档\n\n{context}",
+    "tags": [
+      "Vue组件",
+      "代码生成",
+      "编码规范"
+    ]
+  },
+  "project_environment_troubleshooting": {
+    "name": "项目环境排查助手",
+    "description": "系统性排查和解决老项目环境配置问题",
+    "template": "帮我排查这个项目的环境配置问题。请按以下步骤进行系统性分析：\n\n## 📋 第一步：收集基础信息\n\n请提供以下信息（我将逐步分析）：\n\n1. **项目信息**：\n   - 项目根目录的 package.json 文件内容\n   - 是否存在 package-lock.json 或 yarn.lock 文件\n   - 项目技术栈（Vue2/Vue3/Taro/小程序等）\n\n2. **环境信息**：\n   - 当前 Node.js 版本 (`node -v`)\n   - 当前 npm/yarn 版本 (`npm -v` 或 `yarn -v`)\n   - 操作系统（Windows/macOS/Linux）\n\n3. **问题描述**：\n   - 具体的报错信息（完整错误日志）\n   - 执行的命令（npm install, npm run dev 等）\n   - 问题出现的环节（安装依赖、启动项目、打包构建）\n\n## 🔍 第二步：问题诊断分析\n\n我将基于你们团队的技术栈重点检查：\n\n**Vue2项目常见问题：**\n- node-sass 版本与 Node 版本兼容性\n- webpack 4.x 配置问题\n- Element UI 等依赖版本冲突\n\n**Vue3项目常见问题：**\n- Vite 版本要求\n- TypeScript 配置兼容性\n- 组合式API相关包版本\n\n**Taro项目特殊检查：**\n- Taro CLI 版本与 Node 版本匹配\n- 多端构建配置问题\n- 原生模块编译问题\n\n**小程序项目分析：**\n- 开发者工具版本要求\n- npm 构建配置检查\n- 平台差异处理\n\n## 🛠️ 第三步：提供解决方案\n\n基于诊断结果，我将提供：\n\n1. **推荐的 Node 版本**（基于项目依赖分析）\n2. **详细的修复步骤**（针对具体问题）\n3. **环境配置文档**（供团队成员参考）\n4. **预防措施**（避免类似问题）\n\n## 📝 第四步：生成项目环境说明\n\n最终输出标准化的环境配置文档，包含：\n- 环境要求说明\n- 快速启动步骤\n- 常见问题解决方案\n- 团队开发环境统一建议\n\n---\n\n请先提供第一步要求的基础信息，我将开始分析。\n\n{context}",
+    "tags": [
+      "环境配置",
+      "问题排查",
+      "团队协作",
+      "老项目维护"
+    ]
+  }
+}
