@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-headless-ida-mcp-server
+Version: 0.1.4
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: fastmcp>=0.4.1
+Requires-Dist: headless-ida>=0.6.1
+Requires-Dist: mcp>=1.6.0
+Requires-Dist: pytest>=8.3.5
+Requires-Dist: pytest-asyncio>=0.26.0
+
+Package managed by MseeP.ai

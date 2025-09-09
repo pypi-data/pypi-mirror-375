@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/headless_ida_mcp_server/__init__.py
+src/headless_ida_mcp_server/__main__.py
+src/headless_ida_mcp_server/helper.py
+src/headless_ida_mcp_server/logger.py
+src/headless_ida_mcp_server/server.py
+src/mseep_headless_ida_mcp_server.egg-info/PKG-INFO
+src/mseep_headless_ida_mcp_server.egg-info/SOURCES.txt
+src/mseep_headless_ida_mcp_server.egg-info/dependency_links.txt
+src/mseep_headless_ida_mcp_server.egg-info/entry_points.txt
+src/mseep_headless_ida_mcp_server.egg-info/requires.txt
+src/mseep_headless_ida_mcp_server.egg-info/top_level.txt
+test/test_ida_agent.py

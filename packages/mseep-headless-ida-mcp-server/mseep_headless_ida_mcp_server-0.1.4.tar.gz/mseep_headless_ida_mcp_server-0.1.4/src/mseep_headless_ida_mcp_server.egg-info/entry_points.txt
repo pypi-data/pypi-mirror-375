@@ -1,0 +1,2 @@
+[console_scripts]
+headless_ida_mcp_server = headless_ida_mcp_server.server:main
