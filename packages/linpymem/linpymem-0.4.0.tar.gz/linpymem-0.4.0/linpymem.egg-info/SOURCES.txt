@@ -1,0 +1,12 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+linpymem/__init__.py
+linpymem/core.py
+linpymem.egg-info/PKG-INFO
+linpymem.egg-info/SOURCES.txt
+linpymem.egg-info/dependency_links.txt
+linpymem.egg-info/requires.txt
+linpymem.egg-info/top_level.txt
+tests/integration_test.py
