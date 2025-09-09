@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: indicio-indy-node
+Version: 1.13.2.dev1757371019
+Summary: Indy node
+Home-page: https://github.com/Indicio-tech/indy-node
+Author: Hyperledger
+Author-email: hyperledger-indy@lists.hyperledger.org
+Maintainer: Indicio
+License: Apache 2.0
+Keywords: Indy Node
+Classifier: Programming Language :: Python :: 3
+Provides-Extra: tests
+License-File: LICENSE
+
+Indy node
