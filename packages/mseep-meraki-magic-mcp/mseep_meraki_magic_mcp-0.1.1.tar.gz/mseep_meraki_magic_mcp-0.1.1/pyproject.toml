@@ -1,0 +1,16 @@
+[project]
+name = "mseep-meraki-magic-mcp"
+version = "0.1.1"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.8.0",
+    "meraki>=2.0.2",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
