@@ -1,0 +1,223 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-mcp-google-suite"
+version = "0.1.5"
+description = "MCP server for Google Workspace operations (Drive, Docs, and Sheets)"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+keywords = [
+    "mcp",
+    "google-workspace",
+    "google-drive",
+    "google-docs",
+    "google-sheets",
+    "ai",
+    "cursor",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Office/Business :: Office Suites",
+    "Operating System :: OS Independent",
+    "Framework :: AsyncIO",
+]
+dependencies = [
+    "google-auth-oauthlib>=1.0.0",
+    "google-auth>=2.22.0",
+    "google-api-python-client>=2.95.0",
+    "mcp>=0.1.0",
+    "pydantic>=2.0.0",
+    "uvicorn>=0.23.0",
+    "starlette>=0.31.0",
+    "tabulate>=0.9.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/adexltd/mcp-google-suite"
+Documentation = "https://github.com/adexltd/mcp-google-suite/wiki"
+Repository = "https://github.com/adexltd/mcp-google-suite.git"
+Issues = "https://github.com/adexltd/mcp-google-suite/issues"
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "pre-commit>=3.5.0",
+    "mypy>=1.8.0",
+    "isort>=5.13.0",
+]
+
+[project.scripts]
+mcp-google-suite = "mcp_google_suite.launcher:main"
+
+[project.entry-points.mcp_server]
+mcp-google-suite = "mcp_google_suite:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mcp_google_suite",
+]
+
+[tool.black]
+line-length = 100
+target-version = [
+    "py311",
+]
+include = "\\.pyi?$"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = [
+    "src",
+    "tests",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "N",
+    "SIM",
+    "RUF",
+    "ERA",
+    "PD",
+    "PGH",
+    "PL",
+]
+ignore = [
+    "UP",
+    "TCH",
+    "RUF013",
+    "UP006",
+    "UP007",
+    "UP015",
+    "UP035",
+    "TRY",
+    "TRY300",
+    "TRY301",
+    "TRY400",
+    "RUF010",
+    "PLR0402",
+    "SIM117",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401",
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+lines-after-imports = 2
+extra-standard-library = []
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+known-first-party = [
+    "mcp_google_suite",
+]
+known-third-party = [
+    "pytest",
+    "mcp",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_optional = true
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 100
+sections = [
+    "FUTURE",
+    "STDLIB",
+    "THIRDPARTY",
+    "FIRSTPARTY",
+    "LOCALFOLDER",
+]
+known_first_party = [
+    "mcp_google_suite",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = [
+    "tests",
+]
+python_files = [
+    "test_*.py",
+]
+addopts = "-v --cov=mcp_google_suite --cov-report=term-missing"
+
+[tool.coverage.run]
+source = [
+    "src/mcp_google_suite",
+]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError",
+]
+ignore_errors = true
+omit = [
+    "tests/*",
+    "setup.py",
+    "*/__init__.py",
+]
