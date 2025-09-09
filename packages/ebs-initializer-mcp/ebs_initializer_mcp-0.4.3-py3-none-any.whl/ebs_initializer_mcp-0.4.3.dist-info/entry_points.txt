@@ -1,0 +1,2 @@
+[console_scripts]
+ebs-mcp-server = ebs_init_mcp.server:mcp.run
