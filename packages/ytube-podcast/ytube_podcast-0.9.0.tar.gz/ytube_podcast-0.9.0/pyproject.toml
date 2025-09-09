@@ -1,0 +1,42 @@
+[project]
+name = "ytube-podcast"
+version = "0.9.0"
+description = "Youtube to Podcast Generator"
+authors = [
+    { name = "Paul Bailey", email = "paul@neutron.studio" },
+]
+dependencies = [
+    "piou>=0.20.0",
+    "feedparser>=6.0.11",
+    "yt-dlp>=2025.6.30",
+    "ffmpeg-python>=0.2.0",
+    "python-slugify>=8.0.4",
+    "python-liquid>=2.0.2",
+    "httpx>=0.28.1",
+    "pendulum>=3.1.0",
+    "beautifulsoup4>=4.13.4",
+    "python-dateutil>=2.9.0.post0",
+]
+requires-python = ">=3.13"
+readme = "README.md"
+
+[project.license]
+text = "BSD-3-Clause"
+
+[project.scripts]
+podtube = "ytube_podcast.main:run"
+
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.scripts]
+podtube = "python src/ytube_podcast/main.py"
+
+[tool.pdm.scripts._]
+env_file = ".env"
