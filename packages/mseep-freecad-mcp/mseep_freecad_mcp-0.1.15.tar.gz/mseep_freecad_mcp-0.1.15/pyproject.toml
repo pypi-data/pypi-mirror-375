@@ -1,0 +1,40 @@
+[project]
+name = "mseep-freecad-mcp"
+version = "0.1.15"
+description = "FreeCAD integration through the Model Context Protocol"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp-server>=1.2.0",
+    "httpx>=0.24.1",
+]
+requires-python = ">=3.10"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+freecad-mcp = "freecad_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/bonninr/freecad_mcp"
+"Bug Tracker" = "https://github.com/bonninr/freecad_mcp/issues"
+
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.7.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.1",
+]
