@@ -1,0 +1,51 @@
+tcp:
+  # TCP服务器配置
+  remote_ip: "127.0.0.1"  # 远端IP地址
+  port: 9999  # 端口号
+  connect_timeout: 3.0  # 连接超时时间，单位为秒
+  receive_timeout: 2.0  # 接收超时时间，单位为秒
+  communication_type: "client"  # 通信类型，client或server
+  response_start_string: "CMD"  # 可选，TCP应答的开始字符串，默认为OK
+
+commands:
+  # PWM控制命令
+  set_pwm:
+    command: "CMD_PWM {frequency}"  # frequency为0-100的整数，表示PWM占空比
+    need_parse: false  # 不需要解析响应内容
+    data_type: "ascii"  # 数据类型，ascii或hex
+    parameters:
+      - name: "frequency"
+        type: "integer"
+        description: "PWM frequency value (0-100)"
+        required: true
+    prompts:
+      - "把PWM调到最大 (frequency=100)"
+      - "把PWM调到最小 (frequency=0)"
+      - "请将PWM设置为{frequency} (0-100的整数)"
+      - "关闭PWM (frequency=0)"
+      - "把PWM调到一半 (frequency=50)"
+
+  # PICO信息查询命令
+  get_pico_info:
+    command: "CMD_PICO_INFO"  # 实际发送的命令格式，server会自动添加\r\n
+    need_parse: true  # 需要解析响应内容
+    data_type: "ascii"  # 数据类型，ascii或hex
+    prompts:
+      - "查询Pico板信息"
+      - "显示开发板状态"
+
+  # LED控制命令示例
+  led_control:
+    command: "CMD_LED {state}"  # state必须是on或off
+    need_parse: false
+    data_type: "ascii"  # 数据类型，ascii或hex
+    parameters:
+      - name: "state"
+        type: "string"
+        description: "LED state ('on' or 'off')"
+        required: true
+        enum: ["on", "off"]
+    prompts:
+      - "打开LED (state=on)"
+      - "关闭LED (state=off)"
+      - "设置LED状态为{state} (on或off)"

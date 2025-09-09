@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: mseep-mcp2tcp
+Version: 0.1.4
+Summary: MCP TCP Service for PWM Control
+Project-URL: Homepage, https://github.com/mcp2everything/mcp2tcp
+Project-URL: Documentation, https://github.com/mcp2everything/mcp2tcp/tree/main/docs
+Project-URL: Repository, https://github.com/mcp2everything/mcp2tcp.git
+Project-URL: Issues, https://github.com/mcp2everything/mcp2tcp/issues
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+License-File: LICENSE
+Keywords: ai,llm,mcp,pwm,tcp
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Hardware
+Requires-Python: >=3.11
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.1.2
+Requires-Dist: pyyaml>=6.0.1
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
