@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grpc-contracts"
+version = "0.1.0"
+description = "Shared gRPC contracts for my microservices"
+authors = [
+  {name="Grimjow"}
+]
+license = {text = "MIT"}
+dependencies = ["grpcio", "grpcio-tools"]

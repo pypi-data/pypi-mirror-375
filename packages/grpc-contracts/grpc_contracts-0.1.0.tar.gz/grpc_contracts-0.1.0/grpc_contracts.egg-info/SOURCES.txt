@@ -1,0 +1,11 @@
+LICENSE.txt
+README.md
+pyproject.toml
+grpc_contracts/__init__.py
+grpc_contracts/training_pb2.py
+grpc_contracts/training_pb2_grpc.py
+grpc_contracts.egg-info/PKG-INFO
+grpc_contracts.egg-info/SOURCES.txt
+grpc_contracts.egg-info/dependency_links.txt
+grpc_contracts.egg-info/requires.txt
+grpc_contracts.egg-info/top_level.txt

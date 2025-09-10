@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: grpc-contracts
+Version: 0.1.0
+Summary: Shared gRPC contracts for my microservices
+Author: Grimjow
+License: MIT
+License-File: LICENSE.txt
+Requires-Dist: grpcio
+Requires-Dist: grpcio-tools
+Dynamic: license-file
