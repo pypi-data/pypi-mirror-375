@@ -1,0 +1,12 @@
+sympy>=1.10
+
+[docs]
+sphinx
+sphinx-autoapi
+
+[style]
+ruff
+mypy
+
+[test]
+pytest
