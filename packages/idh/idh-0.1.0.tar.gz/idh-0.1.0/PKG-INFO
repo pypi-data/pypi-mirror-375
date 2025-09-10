@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: idh
+Version: 0.1.0
+Summary: API client for IDH
+Home-page: https://t.me/FacelessDeveloper
+Author: Faceless Developer & BPCommunity
+Author-email: faceless@dev.null
+Project-URL: Telegram, https://t.me/FacelessDeveloper
+Project-URL: Support, https://t.me/FacelessWorker
+Project-URL: Channel, https://t.me/BotProgrammerCommunity
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Dist: requests
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: summary
