@@ -1,0 +1,6 @@
+[console_scripts]
+patche = Patche.__init__:app
+patche-mcp = Patche.mcp.__init__:app
+
+[gui_scripts]
+
