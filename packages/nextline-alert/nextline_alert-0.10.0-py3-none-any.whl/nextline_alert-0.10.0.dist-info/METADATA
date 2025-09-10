@@ -1,0 +1,64 @@
+Metadata-Version: 2.4
+Name: nextline-alert
+Version: 0.10.0
+Summary: A plugin of nextline-graphql. Emit alerts to Campana
+Project-URL: Documentation, https://github.com/simonsobs/nextline-alert#readme
+Project-URL: Issues, https://github.com/simonsobs/nextline-alert/issues
+Project-URL: Source, https://github.com/simonsobs/nextline-alert
+Author-email: Simons Observatory <so_software@simonsobservatory.org>
+License-Expression: MIT
+License-File: LICENSE.txt
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.10
+Requires-Dist: httpx>=0.26
+Requires-Dist: nextline-graphql>=0.7.8
+Provides-Extra: tests
+Requires-Dist: deepdiff>=7.0; extra == 'tests'
+Requires-Dist: hypothesis>=6.130; extra == 'tests'
+Requires-Dist: pytest-asyncio>=0.23; extra == 'tests'
+Requires-Dist: pytest-cov>=4.1; extra == 'tests'
+Requires-Dist: pytest-timeout>=2.2; extra == 'tests'
+Requires-Dist: pytest>=7.4; extra == 'tests'
+Requires-Dist: respx>=0.20.1; extra == 'tests'
+Description-Content-Type: text/markdown
+
+# nextline-alert
+
+[![PyPI - Version](https://img.shields.io/pypi/v/nextline-alert.svg)](https://pypi.org/project/nextline-alert)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/nextline-alert.svg)](https://pypi.org/project/nextline-alert)
+
+[![Test Status](https://github.com/simonsobs/nextline-alert/actions/workflows/unit-test.yml/badge.svg)](https://github.com/simonsobs/nextline-alert/actions/workflows/unit-test.yml)
+[![Test Status](https://github.com/simonsobs/nextline-alert/actions/workflows/type-check.yml/badge.svg)](https://github.com/simonsobs/nextline-alert/actions/workflows/type-check.yml)
+[![codecov](https://codecov.io/gh/simonsobs/nextline-alert/branch/main/graph/badge.svg)](https://codecov.io/gh/simonsobs/nextline-alert)
+
+A plugin for [nextline-graphql](https://github.com/simonsobs/nextline-graphql).
+Emit alerts to [Campana](https://github.com/simonsobs/campana)
+
+## Installation
+
+```console
+pip install nextline-alert
+```
+
+## Alert types
+
+- **Run failed:** The script execution by `nextline` ended with an uncaught
+  exception except for `KeyboardInterrupt`.
+- **Idle:** The time specified by `NEXTLINE_ALERT__IDLE_TIMEOUT_MINUTES`
+  minutes has passed without the script execution since the last run ended or
+  the backend started.
+
+## Configuration
+
+| Environment variable                   | Default value             | Description                 |
+| -------------------------------------- | ------------------------- | --------------------------- |
+| `NEXTLINE_ALERT__CAMPANA_URL`          | `http://httpbin.org/post` | The CAMPANA endpoint        |
+| `NEXTLINE_ALERT__PLATFORM`             | `localhost`               | The platform name           |
+| `NEXTLINE_ALERT__IDLE_TIMEOUT_MINUTES` | 20.0                      | The idle timeout in minutes |

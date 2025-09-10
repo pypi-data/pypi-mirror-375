@@ -1,0 +1,13 @@
+# Default settings
+#
+# Syntax can be learned from Dynaconf examples 
+# https://github.com/rochacbruno/learndynaconf/tree/main/configs
+
+[alert]
+campana_url = "http://httpbin.org/post"
+platform = 'localhost'
+idle_timeout_minutes = 20.0
+
+[logging.loggers.nextline_alert]
+handlers = ["default"]
+level = "DEBUG"
