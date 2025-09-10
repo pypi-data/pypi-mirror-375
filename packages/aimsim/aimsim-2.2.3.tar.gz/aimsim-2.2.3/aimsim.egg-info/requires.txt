@@ -1,0 +1,17 @@
+scipy
+matplotlib
+seaborn
+tabulate
+numpy
+multiprocess>=0.70
+pandas
+pyyaml!=5.4.0,!=5.4.1,!=6.0.0,<7
+scikit_learn
+rdkit
+psutil
+padelpy
+plotly
+mhfp
+darkdetect
+mordredcommunity
+openpyxl
