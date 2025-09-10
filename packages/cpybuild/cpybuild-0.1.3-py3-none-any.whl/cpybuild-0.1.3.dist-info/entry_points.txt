@@ -1,0 +1,2 @@
+[console_scripts]
+cpybuild = cpybuild.cli:main
