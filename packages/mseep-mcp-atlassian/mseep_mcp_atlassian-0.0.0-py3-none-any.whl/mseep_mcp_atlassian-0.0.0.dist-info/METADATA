@@ -1,0 +1,32 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-atlassian
+Version: 0.0.0
+Summary: The Model Context Protocol (MCP) Atlassian integration is an open-source implementation that bridges Atlassian products (Jira and Confluence) with AI language models following Anthropic's MCP specification. This project enables secure, contextual AI interactions with Atlassian tools while maintaining data privacy and security. Key features include:
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: atlassian-python-api>=4.0.0
+Requires-Dist: requests[socks]>=2.31.0
+Requires-Dist: beautifulsoup4>=4.12.3
+Requires-Dist: httpx>=0.28.0
+Requires-Dist: mcp<2.0.0,>=1.8.0
+Requires-Dist: fastmcp<2.4.0,>=2.3.4
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: markdownify>=0.11.6
+Requires-Dist: markdown>=3.7.0
+Requires-Dist: markdown-to-confluence<0.4.0,>=0.3.0
+Requires-Dist: pydantic>=2.10.6
+Requires-Dist: trio>=0.29.0
+Requires-Dist: click>=8.1.7
+Requires-Dist: uvicorn>=0.27.1
+Requires-Dist: starlette>=0.37.1
+Requires-Dist: thefuzz>=0.22.1
+Requires-Dist: python-dateutil>=2.9.0.post0
+Requires-Dist: types-python-dateutil>=2.9.0.20241206
+Requires-Dist: keyring>=25.6.0
+Requires-Dist: cachetools>=5.0.0
+Requires-Dist: types-cachetools>=5.5.0.20240820
+Dynamic: license-file
+
+Package managed by MseeP.ai
