@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=80.9.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "container-manager-mcp"
+version = "0.0.2"
+description = "Container Manager manage Docker, Docker Swarm, and Podman containers as an MCP Server"
+readme = "README.md"
+authors = [{ name = "Audel Rouhi", email = "knucklessg1@gmail.com" }]
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: Public Domain",
+    "Environment :: Console",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.28.1",
+    "fastmcp>=2.11.3",
+    "podman>=5.6.0",
+]
+
+[project.optional-dependencies]
+podman = [
+    "podman>=5.6.0",
+]
+docker = [
+    "docker>=7.1.0",
+]
+all = [
+    "requests>=2.28.1",
+    "fastmcp>=2.11.3",
+    "docker>=7.1.0",
+    "podman>=5.6.0",
+]
+
+[project.scripts]
+container-manager = "container_manager_mcp.container_manager:main"
+container-manager-mcp = "container_manager_mcp.container_manager_mcp:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools]
+include-package-data = true
+package-data = { "container_manager_mcp" = ["container_manager_mcp"] }
