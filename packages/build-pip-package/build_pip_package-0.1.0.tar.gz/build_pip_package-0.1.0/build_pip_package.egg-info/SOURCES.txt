@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+build_pip_package/__init__.py
+build_pip_package/main.py
+build_pip_package.egg-info/PKG-INFO
+build_pip_package.egg-info/SOURCES.txt
+build_pip_package.egg-info/dependency_links.txt
+build_pip_package.egg-info/requires.txt
+build_pip_package.egg-info/top_level.txt

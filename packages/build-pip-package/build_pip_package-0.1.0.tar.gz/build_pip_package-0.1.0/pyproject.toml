@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "build_pip_package"
+version = "0.1.0"
+description = "A package for building pip packages using LLM7 and related tools"
+readme = "README.md"
+authors = [
+    {name = "Package Author", email = "author@example.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License", 
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "py_llm7_code",
+    "setup_py_gen", 
+    "readme_llm7_gen",
+    "langchain_llm7",
+    "langchain_core",
+]
+keywords = ["pip", "package", "build", "llm7", "langchain"]
+
+[project.urls]
+Homepage = "https://github.com/chigwell/build_pip_package"
+Repository = "https://github.com/chigwell/build_pip_package.git"
+Issues = "https://github.com/chigwell/build_pip_package/issues"
