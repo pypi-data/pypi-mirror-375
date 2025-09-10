@@ -1,0 +1,30 @@
+[project]
+name = "azure-finops-mcp-server"
+version = "2.0.0"
+description = "An MCP server for Azure FinOps to analyze costs and audit for savings."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Ravi Kiran Vallamkonda"}]
+
+dependencies = [
+    "azure-identity",
+    "azure-mgmt-costmanagement",
+    "azure-mgmt-compute",
+    "azure-mgmt-network",
+    "azure-mgmt-consumption",
+    "azure-mgmt-resource",
+    "mcp[cli]",
+]
+
+keywords = ["azure", "cost", "finops", "cloud"]
+
+[project.urls]
+"Homepage" = "https://github.com/julianobarbosa/azure-finops-mcp-server"
+"Source" = "https://github.com/julianobarbosa/azure-finops-mcp-server"
+
+[project.scripts]
+azure-finops-mcp-server = "azure_finops_mcp_server.main:run_server"
+
+[tool.setuptools]
+packages = ["azure_finops_mcp_server", "azure_finops_mcp_server.helpers"]
