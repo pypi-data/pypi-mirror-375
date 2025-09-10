@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ subject }}</title>
+    <!--[if mso]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    <style type="text/css">
+        /* Base Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f5f5f5;
+            -webkit-font-smoothing: antialiased;
+            -ms-text-size-adjust: 100%;
+        }
+
+        /* Outlook specific styles - mso-line-height-rule is required for Outlook */
+        /* stylelint-disable-next-line declaration-property-no-unknown */
+        .outlook-text { mso-line-height-rule: exactly; }
+
+        /* Card styles */
+        .card {
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: #1976d2;
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid #1565c0;
+        }
+
+        /* Content */
+        .content {
+            padding: 0 20px 20px;
+            background-color: #f5f5f5;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #616161;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Collapsible section styles */
+        details {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            background-color: #ffffff;
+        }
+
+        summary {
+            padding: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8fafc;
+        }
+
+        summary::-webkit-details-marker {
+            display: none; /* Hide default arrow in Chrome/Safari */
+        }
+
+        summary::after {
+            content: '►'; /* Collapsed state arrow */
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        details[open] > summary::after {
+            content: '▼'; /* Expanded state arrow */
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 600px) {
+            .container {
+                border-radius: 0;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<!--[if mso]>
+<body class="outlook-text" style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #2d3748; background-color: #f5f5f5;">
+<![endif]-->
+<!--[if !mso]><!-->
+<body class="outlook-text" style="margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #2d3748; background-color: #f5f5f5; -webkit-font-smoothing: antialiased; -ms-text-size-adjust: 100%;">
+<!--<![endif]-->
+    <div class="container">
+        <div class="header">
+            <h1 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: 0.5px;">{{ subject }}</h1>
+        </div>
+
+        <div class="content">
+            {% if stock_results %}
+            <div class="card" style="margin-bottom: 30px;">
+                <div class="card-header" style="padding: 16px 20px; font-weight: 600; font-size: 18px; color: white; background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);">
+                    Stock Analysis Report
+                </div>
+                <div style="padding: 20px; background: #ffffff; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 10px;">
+                        <thead>
+                            <tr style="background-color: #e3f2fd;">
+                                <th style="padding: 10px; text-align: left; border: 1px solid #bbdefb;">Metric</th>
+                                {% for stock in stock_results %}
+                                <th style="padding: 10px; text-align: right; border: 1px solid #bbdefb;">{{ stock.symbol }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px 10px; border: 1px solid #e3f2fd; font-weight: 500;">Current Price</td>
+                                {% for stock in stock_results %}
+                                <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd;">
+                                    {% if stock.technical_indicators and stock.technical_indicators.get('close') is not none %}
+                                        ₹{{ '%.2f'|format(stock.technical_indicators.close|float) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 10px; border: 1px solid #e3f2fd; font-weight: 500;">1D Change</td>
+                                {% for stock in stock_results %}
+                                {% if stock.technical_indicators and stock.technical_indicators.get('daily_return') is not none %}
+                                    {% set daily_return = stock.technical_indicators.daily_return %}
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd; {% if daily_return > 0 %}color: #1b5e20;{% elif daily_return < 0 %}color: #c62828;{% endif %}">
+                                        {{ '%.2f'|format(daily_return) }}%
+                                    </td>
+                                {% else %}
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd;">N/A</td>
+                                {% endif %}
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 10px; border: 1px solid #e3f2fd; font-weight: 500;">RSI (14)</td>
+                                {% for stock in stock_results %}
+                                <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd;">
+                                    {% if stock.technical_indicators.get('rsi') is not none %}
+                                        {{ '%.2f'|format(stock.technical_indicators.rsi|float) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 10px; border: 1px solid #e3f2fd; font-weight: 500;">50D MA</td>
+                                {% for stock in stock_results %}
+                                <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd;">
+                                    {% if stock.technical_indicators and stock.technical_indicators.get('sma_50') is not none %}
+                                        ₹{{ '%.2f'|format(stock.technical_indicators.sma_50|float) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 10px; border: 1px solid #e3f2fd; font-weight: 500;">200D MA</td>
+                                {% for stock in stock_results %}
+                                <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd;">
+                                    {% if stock.technical_indicators and stock.technical_indicators.get('sma_200') is not none %}
+                                        ₹{{ '%.2f'|format(stock.technical_indicators.sma_200|float) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 10px; border: 1px solid #e3f2fd; font-weight: 500;">P/E Ratio</td>
+                                {% for stock in stock_results %}
+                                <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd;">
+                                    {% if stock.fundamental_metrics.get('pe_ratio') is not none %}
+                                        {{ '%.2f'|format(stock.fundamental_metrics.pe_ratio|float) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 10px; border: 1px solid #e3f2fd; font-weight: 500;">P/B Ratio</td>
+                                {% for stock in stock_results %}
+                                <td style="padding: 8px 10px; text-align: right; border: 1px solid #e3f2fd;">
+                                    {% if stock.fundamental_metrics.get('pb_ratio') is not none %}
+                                        {{ '%.2f'|format(stock.fundamental_metrics.pb_ratio|float) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <details>
+                <summary>Detailed Stock Analysis</summary>
+                <div style="padding: 15px 20px;">
+                    {% for stock in stock_results %}
+                    <div class="card" style="margin-top: 15px;">
+                        <div class="card-header" style="padding: 16px 20px; font-weight: 600; font-size: 18px; color: white; background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);">
+                            <div style="display: flex; align-items: center;">
+                                <span class="symbol" style="font-weight: 700; margin-right: 10px;">{{ stock.symbol }}</span>
+                                <span class="company-name">{{ stock.metadata.info.longName or stock.symbol }}</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px 20px; background: #ffffff;">
+                            <h4 style="margin: 0 0 15px 0; color: #0d47a1; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e3f2fd; padding-bottom: 8px;">Key Metrics</h4>
+                            <div style="overflow-x: auto;">
+                                <table class="metrics-table" style="width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; font-weight: 600;">Metric</th>
+                                            <th style="padding: 12px; text-align: right; border-bottom: 1px solid #e2e8f0; font-weight: 600;">Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for name, value in stock.all_metrics.items() %}
+                                        {% if value is not none %}
+                                        <tr>
+                                            <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0;">{{ name }}</td>
+                                            <td style="padding: 10px 12px; text-align: right; border-bottom: 1px solid #e2e8f0;">
+                                                {% if value is number %}{{ value|round(2) }}{% else %}{{ value }}{% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {% if stock.analysis %}
+                            <div style="padding: 15px 0; border-top: 1px solid #e2e8f0;">
+                                <h4 style="margin: 0 0 10px 0; color: #0d47a1; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Analysis</h4>
+                                <div style="color: #4a5568; line-height: 1.6; font-size: 14px;">
+                                    {{ stock.analysis|safe }}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </details>
+            {% endif %}
+
+            {% if report_summary %}
+            <div class="card">
+                <div class="card-header" style="padding: 16px 20px; font-weight: 600; font-size: 18px; color: white; background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);">
+                    Report Summary
+                </div>
+                <div class="card-body" style="padding: 20px;">
+                    <div style="color: #4a5568; line-height: 1.6;">{{ report_summary|safe }}</div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if mutual_fund_summaries %}
+            <h2 style="color: #1976d2; font-size: 20px; margin: 30px 0 15px 0; font-weight: 600; padding-top: 20px; border-bottom: 2px solid #e3f2fd; padding-bottom: 8px;">
+                Mutual Fund Analysis
+            </h2>
+            <details>
+                <summary>Detailed Mutual Fund Analysis</summary>
+                <div style="padding: 15px 20px;">
+                    {% for fund in mutual_fund_summaries %}
+                    <div class="card" style="margin-top: 15px;">
+                        <div class="card-header" style="padding: 16px 20px; font-weight: 600; font-size: 18px; color: white; background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span>{{ fund.name }}</span>
+                                <span style="font-size: 14px; opacity: 0.9;">NAV: ₹{{ fund.current_nav|default('N/A') }}</span>
+                            </div>
+                        </div>
+
+                        <div style="padding: 20px; background: #ffffff;">
+                            <!-- Performance Metrics -->
+                            <h3 style="margin: 0 0 15px 0; color: #2e7d32; font-size: 16px; font-weight: 600;">Performance Metrics</h3>
+                            <div style="overflow-x: auto; margin-bottom: 20px;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px;">
+                                    <thead>
+                                        <tr style="background-color: #f1f8e9;">
+                                            <th style="padding: 10px; text-align: left; border: 1px solid #c8e6c9;">Period</th>
+                                            <th style="padding: 10px; text-align: right; border: 1px solid #c8e6c9;">CAGR</th>
+                                            <th style="padding: 10px; text-align: right; border: 1px solid #c8e6c9;">Volatility</th>
+                                            <th style="padding: 10px; text-align: right; border: 1px solid #c8e6c9;">Sharpe Ratio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">1 Year</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">{{ fund.cagr_1y }}%</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">{{ fund.annual_volatility }}%</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">{{ fund.sharpe_ratio }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">3 Years</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">{{ fund.cagr_3y }}%</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">-</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">{{ fund.sortino_ratio }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">5 Years</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">{{ fund.cagr_5y }}%</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">-</td>
+                                            <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            
+                            <!-- Technical Indicators Table -->
+                        <h4 style="margin: 20px 0 10px 0; color: #2e7d32; font-size: 14px; font-weight: 600;">Technical Indicators</h4>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px;">
+                            <thead>
+                                <tr style="background-color: #e8f5e9;">
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #c8e6c9;">Indicator</th>
+                                    <th style="padding: 10px; text-align: right; border: 1px solid #c8e6c9;">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if fund.rsi is defined %}
+                                <tr>
+                                    <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">RSI (14)</td>
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">
+                                        {{ '%.2f'|format(fund.rsi) }}
+                                        {% if fund.rsi > 70 %}<span style="color: #c62828;"> (Overbought)</span>
+                                        {% elif fund.rsi < 30 %}<span style="color: #1b5e20;"> (Oversold)</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                
+                                {% if fund['20d_ma'] is defined %}
+                                <tr>
+                                    <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">20-Day MA</td>
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">
+                                        ₹{{ '%.2f'|format(fund['20d_ma']) }}
+                                        {% if fund.latest_nav %}
+                                            {% set price_diff = (fund.latest_nav - fund['20d_ma']) / fund['20d_ma'] * 100 %}
+                                            {% if price_diff > 0 %}
+                                                <span style="color: #1b5e20;"> ({{ '%.2f'|format(price_diff) }}% above)</span>
+                                            {% else %}
+                                                <span style="color: #c62828;"> ({{ '%.2f'|format(price_diff|abs) }}% below)</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                
+                                {% if fund['20d_std'] is defined %}
+                                <tr>
+                                    <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">20-Day Std Dev</td>
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">
+                                        {{ '%.2f'|format(fund['20d_std']) }}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                
+                                {% if fund.support is defined and fund.resistance is defined %}
+                                <tr>
+                                    <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">Support Level</td>
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">
+                                        ₹{{ '%.2f'|format(fund.support) }}
+                                        {% if fund.distance_to_support_pct is defined %}
+                                            <span> ({{ '%.2f'|format(fund.distance_to_support_pct) }}% below current)</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">Resistance Level</td>
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">
+                                        ₹{{ '%.2f'|format(fund.resistance) }}
+                                        {% if fund.distance_to_resistance_pct is defined %}
+                                            <span> ({{ '%.2f'|format(fund.distance_to_resistance_pct) }}% above current)</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                
+                                {% if fund.upper_band is defined and fund.lower_band is defined and fund.latest_nav is defined %}
+                                <tr>
+                                    <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">Bollinger Bands</td>
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">
+                                        <div>Upper: ₹{{ '%.2f'|format(fund.upper_band) }}</div>
+                                        <div>Middle: ₹{{ '%.2f'|format(fund.upper_band - fund.lower_band) }}</div>
+                                        <div>Lower: ₹{{ '%.2f'|format(fund.lower_band) }}</div>
+                                        {% if fund.latest_nav > fund.upper_band %}
+                                            <div style="color: #c62828;">(Trading above upper band - Overbought)</div>
+                                        {% elif fund.latest_nav < fund.lower_band %}
+                                            <div style="color: #1b5e20;">(Trading below lower band - Oversold)</div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                
+                                {% if fund.golden_cross or fund.death_cross %}
+                                <tr>
+                                    <td style="padding: 8px 10px; border: 1px solid #c8e6c9;">Moving Average Cross</td>
+                                    <td style="padding: 8px 10px; text-align: right; border: 1px solid #c8e6c9;">
+                                        {% if fund.golden_cross %}
+                                            <span style="color: #1b5e20; font-weight: 500;"> Golden Cross (Bullish)</span>
+                                        {% elif fund.death_cross %}
+                                            <span style="color: #c62828; font-weight: 500;"> Death Cross (Bearish)</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        </div>
+
+                        <!-- Risk Metrics -->
+                        <h3 style="margin: 20px 0 15px 0; color: #2e7d32; font-size: 16px; font-weight: 600;">Risk Analysis</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #ff9800;">
+                                <div style="font-weight: 600; color: #e65100;">Max Drawdown</div>
+                                <div style="font-size: 18px; color: #d84315;">{{ fund.max_drawdown }}%</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #2196f3;">
+                                <div style="font-weight: 600; color: #1565c0;">Standard Deviation</div>
+                                <div style="font-size: 18px; color: #1976d2;">{{ fund.standard_deviation }}%</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #4caf50;">
+                                <div style="font-weight: 600; color: #2e7d32;">RSI</div>
+                                <div style="font-size: 18px; color: #388e3c;">{{ fund.rsi }}</div>
+                            </div>
+                        </div>
+
+
+                        <!-- Chart -->
+                        {% if fund.chart_paths and fund.chart_paths.analysis_chart_png %}
+                        <h3 style="margin: 20px 0 15px 0; color: #2e7d32; font-size: 16px; font-weight: 600;">Performance Chart</h3>
+                        <div style="text-align: center; margin: 15px 0;">
+                            <img src="cid:{{ fund.scheme_code }}_analysis" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" alt="Mutual Fund Analysis Chart">
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </details>
+            {% endif %}
+
+            {% if report_url %}
+            <div style="text-align: center; margin: 30px 0 20px;">
+                <a href="{{ report_url }}" class="btn" style="background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%); color: white; text-decoration: none; padding: 12px 24px; border-radius: 4px; font-weight: 500; display: inline-block;">View Full Report</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Removed JavaScript as it's not supported in most email clients -->
+
+        <div class="footer" style="background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #616161; border-top: 1px solid #e0e0e0;">
+            <p style="margin: 0 0 10px 0;">This email was sent from Stock Analysis Tool on {{ date }}.</p>
+            <p style="margin: 0 0 10px 0;">Please do not reply to this email. For support, please contact <a href="mailto:support@stockanalysis.com" style="color: #1976d2; text-decoration: none; font-weight: 500;">support@stockanalysis.com</a></p>
+            <p style="margin: 0; color: #9e9e9e; font-size: 11px;">&copy; {{ current_year }} Stock Analysis Tool. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
