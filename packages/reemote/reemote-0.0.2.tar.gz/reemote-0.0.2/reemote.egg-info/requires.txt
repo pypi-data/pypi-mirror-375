@@ -1,0 +1,14 @@
+cryptography
+bcrypt
+asyncssh
+tabulate
+nicegui
+
+[dev]
+setuptools
+
+[doc]
+sphinx
+
+[test]
+pytest
