@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "gemmit"
+version = "0.0.1"
+description = "AI-powered Conventional Commit generator using Gemini"
+authors = ["Md Romjan Ali <romjanvr5@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "gemmit", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+
+[tool.poetry.scripts]
+gemmit = "gemmit.cli:run"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
