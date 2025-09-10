@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "insillyclo"
+authors = [
+  { name="Gregory Batt"},
+  { name="Bryan Brancotte"},
+  { name="Juliette Bonche"},
+  { name="Julien Fumey"},
+  { name="Henri Galez"},
+]
+description = "A toolkit to support Golden Gate assembly, along with digestion, gel simulation, and more"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dynamic = ["version", "dependencies", "optional-dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
+version = {attr = "insillyclo.__version__"}
+
+[project.scripts]
+insillyclo = "insillyclo.main:cli"
+
+[project.urls]
+Homepage = "https://gitlab.pasteur.fr/hub/insillyclo-cli"
+Issues = "https://gitlab.pasteur.fr/hub/insillyclo-cli/issues"
+
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+
+[tool.setuptools.packages.find]
+where = ["src", "tests"]
+
+[tool.setuptools.package-data]
+"*" = ["*.pdf", "*.csv", "*.json"]
+
+[tool.coverage.report]
+exclude_also = [
+    '@(abc\.)?abstractmethod',
+]
+[tool.coverage.run]
+omit = [
+    "tests/test_add_used_gb.py"
+]

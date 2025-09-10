@@ -1,0 +1,15 @@
+click
+pandas
+xlsxwriter
+openpyxl
+pandas
+Bio
+pycairo
+sbol2
+
+[dev]
+build
+twine
+coverage
+black~=24.10.0
+setuptools>=62.6

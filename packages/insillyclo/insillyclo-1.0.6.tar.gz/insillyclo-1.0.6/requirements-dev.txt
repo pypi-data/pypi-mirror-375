@@ -1,0 +1,5 @@
+build
+twine
+coverage
+black~=24.10.0
+setuptools>=62.6
