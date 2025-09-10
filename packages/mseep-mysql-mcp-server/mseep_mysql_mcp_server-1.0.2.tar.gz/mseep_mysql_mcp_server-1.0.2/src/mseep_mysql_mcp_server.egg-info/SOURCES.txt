@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_mysql_mcp_server.egg-info/PKG-INFO
+src/mseep_mysql_mcp_server.egg-info/SOURCES.txt
+src/mseep_mysql_mcp_server.egg-info/dependency_links.txt
+src/mseep_mysql_mcp_server.egg-info/entry_points.txt
+src/mseep_mysql_mcp_server.egg-info/requires.txt
+src/mseep_mysql_mcp_server.egg-info/top_level.txt
+src/mysql_mcp_server/__init__.py
+src/mysql_mcp_server/server.py
+tests/test_server.py

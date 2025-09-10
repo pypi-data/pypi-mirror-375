@@ -1,0 +1,26 @@
+[project]
+name = "mseep-mysql_mcp_server"
+version = "1.0.2"
+description = "A Model Context Protocol (MCP) server that enables secure interaction with MySQL databases. This server allows AI assistants to list tables, read data, and execute SQL queries through a controlled interface, making database exploration and analysis safer and more structured."
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "mysql-connector-python>=9.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mysql_mcp_server = "mysql_mcp_server:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
