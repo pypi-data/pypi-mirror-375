@@ -1,0 +1,21 @@
+[project]
+name = "schedule-mcp-server"
+version = "0.1.2"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "PieLee", email = "15155600+pielee@user.noreply.gitee.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.13.1",
+    "pandas>=2.3.2",
+    "tabulate>=0.9.0",
+]
+
+[project.scripts]
+schedule-mcp-server = "schedule_mcp_server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

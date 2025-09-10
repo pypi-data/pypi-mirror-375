@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: schedule-mcp-server
+Version: 0.1.2
+Summary: Add your description here
+Author-email: PieLee <15155600+pielee@user.noreply.gitee.com>
+Requires-Python: >=3.10
+Requires-Dist: mcp[cli]>=1.13.1
+Requires-Dist: pandas>=2.3.2
+Requires-Dist: tabulate>=0.9.0
