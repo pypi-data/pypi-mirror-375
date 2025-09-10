@@ -1,0 +1,11 @@
+beautifulsoup4>=4.12.2
+PyYAML>=6.0
+soupsieve>=2.4
+typing_extensions>=4.5.0
+Markdown>=3.4.3
+Pygments>=2.15.1
+
+[dev]
+watchdog>=3.0.0
+websockets>=11.0.1
+pre-commit>=3.2.2
