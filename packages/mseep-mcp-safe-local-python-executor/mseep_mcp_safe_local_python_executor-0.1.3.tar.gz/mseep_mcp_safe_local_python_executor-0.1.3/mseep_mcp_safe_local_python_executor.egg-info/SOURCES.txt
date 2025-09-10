@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+mseep_mcp_safe_local_python_executor.egg-info/PKG-INFO
+mseep_mcp_safe_local_python_executor.egg-info/SOURCES.txt
+mseep_mcp_safe_local_python_executor.egg-info/dependency_links.txt
+mseep_mcp_safe_local_python_executor.egg-info/requires.txt
+mseep_mcp_safe_local_python_executor.egg-info/top_level.txt
+tests/test_local_python_executor.py
+tests/test_mcp_server.py
