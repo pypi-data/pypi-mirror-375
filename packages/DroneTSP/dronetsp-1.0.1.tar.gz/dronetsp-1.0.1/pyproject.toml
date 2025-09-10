@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.18.0"]
+build-backend = "hatchling.build"
+
+[project]
+authors = [{ name = "Trương Hải Đăng", email = "haidanghth910@gmail.com" }]
+name = "DroneTSP"
+version = "1.0.1"
+description = "Drone TSP Gymnasium environment and wrappers"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+keywords = ["gymnasium", "reinforcement-learning", "environment", "tsp", "drone"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "gymnasium",
+  "numpy",
+  "geopy",
+  "folium",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pre-commit",
+  "build",
+  "twine",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["gymnasium_env"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "gymnasium_env",
+  "README.md",
+  "LICENSE",
+]
