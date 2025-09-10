@@ -1,0 +1,51 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.person"
+    >
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Person: Install Person content type"
+      description="Configure collective.person package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Person: Uninstall collective.person"
+      description="Remove collective.person configuration"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <genericsetup:registerProfile
+      name="demo"
+      title="Person: Demo content"
+      description="Example content for collective.person"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/demo"
+      post_handler=".setuphandlers.demo.create_example_content"
+      />
+
+  <genericsetup:registerProfile
+      name="catalog"
+      title="Person: Catalog contact metadata"
+      description="Implement catalog metadata columns for collective.person"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/catalog"
+      post_handler=".setuphandlers.catalog.reindex_persons"
+      />
+
+  <genericsetup:registerProfile
+      name="testing"
+      title="Person: Testing profile"
+      description="Used in automated tests"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/testing"
+      />
+
+  <include package=".upgrades" />
+
+</configure>
