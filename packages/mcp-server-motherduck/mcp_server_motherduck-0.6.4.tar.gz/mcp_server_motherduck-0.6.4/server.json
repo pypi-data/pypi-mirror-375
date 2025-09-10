@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.motherduckdb/mcp-server-motherduck",
+  "description": "Fast analytics and data processing with DuckDB and MotherDuck",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/motherduckdb/mcp-server-motherduck",
+    "source": "github"
+  },
+  "version": "0.6.4",
+  "packages": [
+    {
+      "registry_type": "pypi",
+      "registry_base_url": "https://pypi.org",
+      "identifier": "mcp-server-motherduck",
+      "version": "0.6.4",
+      "transport": {
+        "type": "stdio"
+      },
+      "environment_variables": [
+        {
+          "description": "Access token to use for MotherDuck database connections",
+          "is_required": false,
+          "format": "string",
+          "is_secret": true,
+          "name": "motherduck_token"
+        }
+      ]
+    }
+  ]
+}
