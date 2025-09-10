@@ -1,0 +1,672 @@
+Metadata-Version: 2.4
+Name: semware
+Version: 0.1.0
+Summary: Semantic search API server using vector databases and ML embeddings
+Author: SemWare Team
+License: MIT
+Keywords: api,embeddings,machine-learning,semantic-search,vector-database
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.11
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: lancedb>=0.14.0
+Requires-Dist: loguru>=0.7.2
+Requires-Dist: numpy>=2.1.0
+Requires-Dist: pandas>=2.2.0
+Requires-Dist: pyarrow>=17.0.0
+Requires-Dist: pydantic-settings>=2.10.1
+Requires-Dist: pydantic>=2.9.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: python-multipart>=0.0.12
+Requires-Dist: sentence-transformers>=3.1.0
+Requires-Dist: tiktoken>=0.8.0
+Requires-Dist: torch>=2.5.0
+Requires-Dist: transformers>=4.45.0
+Requires-Dist: uvicorn[standard]>=0.32.0
+Provides-Extra: dev
+Requires-Dist: black>=24.8.0; extra == 'dev'
+Requires-Dist: httpx>=0.27.0; extra == 'dev'
+Requires-Dist: mypy>=1.11.0; extra == 'dev'
+Requires-Dist: pre-commit>=3.8.0; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.24.0; extra == 'dev'
+Requires-Dist: pytest-cov>=5.0.0; extra == 'dev'
+Requires-Dist: pytest>=8.3.0; extra == 'dev'
+Requires-Dist: ruff>=0.6.0; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# SemWare 🚀
+
+[![Tests](https://img.shields.io/badge/tests-46%20passed-brightgreen)](https://github.com/semware/semware)
+[![Coverage](https://img.shields.io/badge/coverage-79%25-yellow)](https://github.com/semware/semware)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://python.org)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+A high-performance semantic search API server built with modern Python technologies. SemWare provides REST APIs for vector-based document storage, embedding generation, and similarity search using state-of-the-art machine learning models.
+
+## ✨ Features
+
+- **🚄 High Performance**: Built on FastAPI with automatic async/await support
+- **🧠 Smart Embeddings**: Supports multiple embedding models (all-MiniLM-L6-v2, EmbeddingGemma-300M)
+- **🔍 Advanced Search**: Similarity threshold and top-k search with sub-second response times
+- **🛡️ Secure**: API key authentication with Bearer token support
+- **📊 Vector Storage**: Powered by LanceDB for efficient vector operations
+- **🔧 Developer Friendly**: Comprehensive OpenAPI docs, type hints, and test coverage
+- **📈 Scalable**: Handles documents of any length with intelligent text batching
+- **🏗️ Production Ready**: Comprehensive logging, error handling, and monitoring
+
+## 🏛️ Architecture
+
+SemWare follows a clean architecture pattern with separate layers:
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   FastAPI       │    │   Services      │    │   Storage       │
+│   REST APIs     │───▶│   Business      │───▶│   LanceDB       │
+│   (Routes)      │    │   Logic         │    │   Vector DB     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                │
+                       ┌─────────────────┐
+                       │   ML Models     │
+                       │   Embeddings    │
+                       │   (HuggingFace) │
+                       └─────────────────┘
+```
+
+**Core Components:**
+- **Table Management**: Create custom schemas for different document types
+- **Data Operations**: CRUD operations with automatic embedding generation  
+- **Semantic Search**: Vector similarity search with configurable parameters
+- **Text Processing**: Smart tokenization and batching for long documents
+
+## 🚀 Quick Start
+
+### Installation
+
+**Using uv (Recommended):**
+```bash
+git clone https://github.com/your-org/semware.git
+cd SemWare
+uv sync --native-tls
+```
+
+**Using pip:**
+```bash
+git clone https://github.com/your-org/semware.git
+cd SemWare
+pip install -e .
+```
+
+### Configuration
+
+Create a `.env` file:
+```bash
+# Required
+API_KEY=your-super-secret-api-key-here
+
+# Optional (with defaults)
+DEBUG=false
+DB_PATH=./data
+HOST=0.0.0.0
+PORT=8000
+LOG_LEVEL=INFO
+EMBEDDING_MODEL_NAME=all-MiniLM-L6-v2
+EMBEDDING_DIMENSION=384
+MAX_TOKENS_PER_BATCH=2000
+```
+
+### Start the Server
+
+**Simple Command (Recommended):**
+```bash
+# Start with default settings from .env
+semware
+
+# Start with custom options
+semware --debug --port 8080
+semware --workers 4 --host 127.0.0.1
+semware --reload  # Development mode with auto-reload
+```
+
+**Alternative Methods:**
+```bash
+# Using uv directly
+uv run --native-tls semware
+
+# Using Python module
+uv run --native-tls python -m semware.main
+
+# Using uvicorn directly
+uv run --native-tls uvicorn semware.main:app --host 0.0.0.0 --port 8000 --workers 4
+```
+
+The server will be available at `http://localhost:8000` with automatic API documentation at `/docs`.
+
+### CLI Options
+
+The `semware` command supports these options:
+
+```bash
+semware --help                   Show help message
+semware --version               Show version
+semware --debug                 Enable debug mode & API docs
+semware --reload                Development mode with auto-reload
+semware --host 127.0.0.1       Bind to specific host
+semware --port 8080             Use custom port
+semware --workers 4             Number of worker processes
+semware --log-level DEBUG       Set logging level
+```
+
+## 📚 API Reference
+
+### Authentication
+
+All endpoints require authentication using one of:
+- **Header**: `X-API-Key: your-api-key`
+- **Bearer Token**: `Authorization: Bearer your-api-key`
+
+### 🗂️ Table Management
+
+#### Create Table
+Create a new table with custom schema.
+
+```http
+POST /tables
+Content-Type: application/json
+X-API-Key: your-api-key
+
+{
+  "schema": {
+    "name": "research_papers",
+    "columns": {
+      "id": "string",
+      "title": "string", 
+      "abstract": "string",
+      "authors": "string",
+      "year": "int",
+      "doi": "string"
+    },
+    "id_column": "id",
+    "embedding_column": "abstract"
+  }
+}
+```
+
+**Response (201):**
+```json
+{
+  "message": "Table 'research_papers' created successfully",
+  "table_name": "research_papers"
+}
+```
+
+#### List Tables
+Get all available tables.
+
+```http
+GET /tables
+X-API-Key: your-api-key
+```
+
+**Response (200):**
+```json
+{
+  "tables": ["research_papers", "product_docs", "customer_support"],
+  "count": 3
+}
+```
+
+#### Get Table Info
+Get detailed information about a specific table.
+
+```http
+GET /tables/research_papers
+X-API-Key: your-api-key
+```
+
+**Response (200):**
+```json
+{
+  "table_name": "research_papers",
+  "schema": {
+    "name": "research_papers",
+    "columns": {
+      "id": "string",
+      "title": "string",
+      "abstract": "string",
+      "authors": "string", 
+      "year": "int",
+      "doi": "string"
+    },
+    "id_column": "id",
+    "embedding_column": "abstract"
+  },
+  "record_count": 1547,
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+#### Delete Table
+Delete a table and all its data.
+
+```http
+DELETE /tables/research_papers
+X-API-Key: your-api-key
+```
+
+**Response (200):**
+```json
+{
+  "message": "Table 'research_papers' deleted successfully",
+  "table_name": "research_papers"
+}
+```
+
+### 📄 Data Operations
+
+#### Insert/Update Documents
+Insert new documents or update existing ones. Embeddings are generated automatically.
+
+```http
+POST /tables/research_papers/data
+Content-Type: application/json
+X-API-Key: your-api-key
+
+{
+  "records": [
+    {
+      "data": {
+        "id": "paper_001",
+        "title": "Attention Is All You Need",
+        "abstract": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks...",
+        "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar",
+        "year": 2017,
+        "doi": "10.48550/arXiv.1706.03762"
+      }
+    },
+    {
+      "data": {
+        "id": "paper_002", 
+        "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+        "abstract": "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations...",
+        "authors": "Jacob Devlin, Ming-Wei Chang, Kenton Lee",
+        "year": 2018,
+        "doi": "10.48550/arXiv.1810.04805"
+      }
+    }
+  ]
+}
+```
+
+**Response (201):**
+```json
+{
+  "message": "Successfully processed 2 records",
+  "inserted_count": 2,
+  "updated_count": 0,
+  "processing_time_ms": 1247.3
+}
+```
+
+#### Get Document
+Retrieve a specific document by ID.
+
+```http
+GET /tables/research_papers/data/paper_001
+X-API-Key: your-api-key
+```
+
+**Response (200):**
+```json
+{
+  "table_name": "research_papers",
+  "record_id": "paper_001",
+  "data": {
+    "id": "paper_001",
+    "title": "Attention Is All You Need",
+    "abstract": "The dominant sequence transduction models are based on complex recurrent...",
+    "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar",
+    "year": 2017,
+    "doi": "10.48550/arXiv.1706.03762"
+  }
+}
+```
+
+#### Delete Document
+Remove a document from the table.
+
+```http
+DELETE /tables/research_papers/data/paper_001
+X-API-Key: your-api-key
+```
+
+**Response (200):**
+```json
+{
+  "message": "Record 'paper_001' deleted successfully",
+  "table_name": "research_papers",
+  "deleted_id": "paper_001"
+}
+```
+
+### 🔍 Search Operations
+
+#### Similarity Search
+Find all documents with similarity above a threshold.
+
+```http
+POST /tables/research_papers/search/similarity
+Content-Type: application/json
+X-API-Key: your-api-key
+
+{
+  "query": "transformer neural network attention mechanism",
+  "threshold": 0.7,
+  "limit": 10
+}
+```
+
+**Response (200):**
+```json
+{
+  "query": "transformer neural network attention mechanism",
+  "results": [
+    {
+      "id": "paper_001",
+      "data": {
+        "id": "paper_001",
+        "title": "Attention Is All You Need",
+        "abstract": "The dominant sequence transduction models...",
+        "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar",
+        "year": 2017,
+        "doi": "10.48550/arXiv.1706.03762"
+      },
+      "similarity_score": 0.89
+    },
+    {
+      "id": "paper_002",
+      "data": {
+        "id": "paper_002",
+        "title": "BERT: Pre-training of Deep Bidirectional Transformers", 
+        "abstract": "We introduce a new language representation model...",
+        "authors": "Jacob Devlin, Ming-Wei Chang, Kenton Lee",
+        "year": 2018,
+        "doi": "10.48550/arXiv.1810.04805"
+      },
+      "similarity_score": 0.76
+    }
+  ],
+  "total_results": 2,
+  "search_time_ms": 23.4,
+  "threshold": 0.7
+}
+```
+
+#### Top-K Search  
+Find the K most similar documents.
+
+```http
+POST /tables/research_papers/search/top-k
+Content-Type: application/json
+X-API-Key: your-api-key
+
+{
+  "query": "natural language processing BERT",
+  "k": 5
+}
+```
+
+**Response (200):**
+```json
+{
+  "query": "natural language processing BERT",
+  "results": [
+    {
+      "id": "paper_002",
+      "data": {
+        "id": "paper_002",
+        "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+        "abstract": "We introduce a new language representation model...",
+        "authors": "Jacob Devlin, Ming-Wei Chang, Kenton Lee", 
+        "year": 2018,
+        "doi": "10.48550/arXiv.1810.04805"
+      },
+      "similarity_score": 0.94
+    },
+    {
+      "id": "paper_001", 
+      "data": {
+        "id": "paper_001",
+        "title": "Attention Is All You Need",
+        "abstract": "The dominant sequence transduction models...",
+        "authors": "Ashish Vaswani, Noam Shazeer, Niki Parmar",
+        "year": 2017,
+        "doi": "10.48550/arXiv.1706.03762"
+      },
+      "similarity_score": 0.81
+    }
+  ],
+  "total_results": 5,
+  "search_time_ms": 31.7,
+  "k": 5
+}
+```
+
+### ❤️ Health Check
+
+```http
+GET /health
+```
+
+**Response (200):**
+```json
+{
+  "status": "healthy",
+  "app_name": "SemWare",
+  "version": "0.1.0", 
+  "timestamp": "2024-01-15T14:30:25.123456"
+}
+```
+
+## 🧠 Embedding Process
+
+SemWare uses advanced text processing for optimal semantic understanding:
+
+### 1. **Text Tokenization**
+- Long texts are intelligently split into manageable chunks
+- Uses `tiktoken` with `cl100k_base` encoding for precise token counting
+- Default batch size: 2000 tokens with configurable limits
+
+### 2. **Batch Processing**
+- Each text chunk is processed through the embedding model
+- Supports multiple embedding models via Hugging Face transformers
+- Automatic GPU acceleration when available
+
+### 3. **Embedding Aggregation**
+- Multiple batch embeddings are combined using average pooling
+- Preserves semantic meaning across the entire document
+- Results in high-quality 384-dimensional vectors (MiniLM)
+
+### 4. **Normalization & Storage**
+- Final embeddings are L2 normalized for consistent similarity scoring
+- Stored efficiently in LanceDB with optimized vector indexing
+- Enables sub-second search across millions of documents
+
+## 🛠️ Development
+
+### Running Tests
+```bash
+# Run all tests with coverage
+uv run --native-tls pytest --cov=src --cov-report=html
+
+# Run specific test file
+uv run --native-tls pytest tests/test_api/test_search.py -v
+
+# Run with debug output
+uv run --native-tls pytest -s --log-cli-level=DEBUG
+```
+
+### Code Quality
+```bash
+# Format code
+uv run --native-tls ruff format src/ tests/
+
+# Lint and fix issues
+uv run --native-tls ruff check src/ tests/ --fix
+
+# Type checking
+uv run --native-tls mypy src/
+```
+
+### API Documentation
+Start the server with `DEBUG=true` in your `.env` and visit:
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+- **OpenAPI JSON**: http://localhost:8000/openapi.json
+
+## 📁 Project Structure
+
+```
+SemWare/
+├── src/semware/
+│   ├── api/                    # FastAPI route handlers
+│   │   ├── __init__.py
+│   │   ├── auth.py            # Authentication middleware
+│   │   ├── data.py            # Data CRUD operations
+│   │   ├── search.py          # Search endpoints  
+│   │   └── tables.py          # Table management
+│   ├── models/                 # Pydantic data models
+│   │   ├── __init__.py
+│   │   ├── requests.py        # Request/response models
+│   │   └── schemas.py         # Core data schemas
+│   ├── services/              # Business logic services
+│   │   ├── __init__.py
+│   │   ├── embedding.py       # ML embedding generation
+│   │   ├── search.py          # Search orchestration
+│   │   └── vectordb.py        # Vector database operations
+│   ├── utils/                 # Utility functions
+│   │   ├── __init__.py
+│   │   ├── logging.py         # Logging configuration
+│   │   └── tokenizer.py       # Text tokenization
+│   ├── config.py              # Configuration management
+│   └── main.py                # FastAPI application factory
+├── tests/                     # Comprehensive test suite
+│   ├── conftest.py           # Test configuration & fixtures
+│   ├── test_api/             # API endpoint tests
+│   ├── test_services/        # Service layer tests
+│   └── test_utils/           # Utility function tests
+├── pyproject.toml            # Project configuration
+├── .env.example             # Environment template
+└── README.md               # This file
+```
+
+## ⚙️ Configuration Reference
+
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| `API_KEY` | Authentication key for all endpoints | - | ✅ |
+| `DEBUG` | Enable debug mode and API docs | `false` | ❌ |
+| `DB_PATH` | Database storage directory | `./data` | ❌ |
+| `HOST` | Server bind address | `0.0.0.0` | ❌ |
+| `PORT` | Server port | `8000` | ❌ |
+| `LOG_LEVEL` | Logging level (DEBUG/INFO/WARNING/ERROR) | `INFO` | ❌ |
+| `LOG_FILE` | Log file path (optional) | - | ❌ |
+| `EMBEDDING_MODEL_NAME` | Hugging Face model name | `all-MiniLM-L6-v2` | ❌ |
+| `EMBEDDING_DIMENSION` | Embedding vector dimensions | `384` | ❌ |
+| `MAX_TOKENS_PER_BATCH` | Max tokens per embedding batch | `2000` | ❌ |
+| `WORKERS` | Number of server workers | `1` | ❌ |
+
+## 🚢 Deployment
+
+### Docker
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY . .
+
+RUN pip install uv
+RUN uv sync --native-tls
+
+EXPOSE 8000
+CMD ["uv", "run", "--native-tls", "uvicorn", "semware.main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+### Production Considerations
+- Use multiple workers: `--workers 4`
+- Enable access logs: `--access-log`
+- Set up reverse proxy (nginx) for HTTPS termination
+- Configure log rotation and monitoring
+- Use a dedicated vector storage solution for large scale
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes and add tests
+4. Run the test suite: `uv run --native-tls pytest`
+5. Submit a pull request
+
+## 📊 Performance
+
+**Benchmarks** (on Apple M2 Pro, 16GB RAM):
+- **Embedding Generation**: ~200ms per batch (2000 tokens)
+- **Document Insertion**: ~500ms per document (including embedding)
+- **Vector Search**: <50ms for similarity search across 10K documents
+- **Throughput**: ~100 requests/second with 4 workers
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Authentication Errors**
+```bash
+# Ensure API key is set correctly
+export API_KEY=your-secret-key
+# Or check your .env file
+```
+
+**Model Download Issues**
+```bash
+# Clear Hugging Face cache
+rm -rf ~/.cache/huggingface/
+# Restart with debug logging
+DEBUG=true uv run --native-tls python -m semware.main
+```
+
+**Database Permissions**
+```bash
+# Ensure write permissions to data directory
+chmod 755 ./data
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **FastAPI** for the excellent async web framework
+- **LanceDB** for high-performance vector storage
+- **Hugging Face** for the transformer models and ecosystem
+- **Pydantic** for robust data validation
+- **The Python Community** for the amazing open-source ecosystem
+
+---
+
+<p align="center">
+  <strong>Built with ❤️ by the SemWare team</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/semware/semware/issues">Report Bug</a> •
+  <a href="https://github.com/semware/semware/discussions">Discussions</a> •
+  <a href="https://github.com/semware/semware/wiki">Wiki</a>
+</p>
