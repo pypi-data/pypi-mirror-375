@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: setup-assistant
+Version: 0.1.1
+Summary: A CLI Setup Assistant powered by AI
+Author: Varshik Chebrolu
+Requires-Dist: typer
+Requires-Dist: google-generativeai
+Requires-Dist: google-genai
+Requires-Dist: httpx
+Requires-Dist: python-docx
+Requires-Dist: pandas
+Requires-Dist: google-api-python-client
+Requires-Dist: google-auth-httplib2
+Requires-Dist: google-auth-oauthlib
+Requires-Dist: markdown
