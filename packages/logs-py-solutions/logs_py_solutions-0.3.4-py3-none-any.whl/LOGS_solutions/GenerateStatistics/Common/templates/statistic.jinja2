@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    :root {
+      /*main*/
+      --sunburst: #f2911c;
+      --magenta-mystique: #a71e69;
+      --obsidian: #323332;
+      --obsidian-light: #eaeaea;
+      --watergrey: #83929c;
+
+      /*accent*/
+      --mulberry: #3f1031;
+      --petrol-blue: #2b4865;
+      --jungle: #36b397;
+      --sunflower: #f2cd5b;
+
+      /*status*/
+      --green: #49ae47;
+      --red: #af1d23;
+    }
+
+    /* scrollbar Webkit-Browser */
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--gray-400);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      font-family: 'Nunito', sans-serif;
+      scrollbar-color: var(--gray-400) #f1f1f1;
+    }
+
+    .logo {
+      width: 120px;
+      margin: 5px;
+    }
+
+    header {
+      top: 0;
+      background-color: var(--magenta-mystique);
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 13px;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      padding-top: 10px;
+      padding-bottom: 5px;
+      padding-left: 40px;
+    }
+
+    .dataset-information {
+      align-items: center;
+      max-height: 450px;
+      width: 100%;
+    }
+
+    .title-heading {
+      color: var(--magenta-mystique);
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .data-info {
+      color: var(--obsidian);
+      text-align: left;
+    }
+
+    .qr-and-link-container {
+      align-items: center !important;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0px;
+      margin-left: 50px;
+    }
+
+    .qr-code-image {
+      max-width: 85px !important;
+      max-height: 85px !important;
+      margin-top: -10px;
+      margin-bottom: -6px;
+    }
+
+    .logs-url {
+      color: var(--magenta-mystique);
+      font-size: small;
+      margin-bottom: -10px;
+    }
+
+    button {
+      font-family: 'Nunito', sans-serif;
+      font-size: small;
+      background-color: var(--magenta-mystique);
+      color: white;
+      padding: 3px 8px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      white-space: nowrap;
+      margin-top: 11px;
+    }
+
+    .print-warning {
+      display: none;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+      margin-left: 20px !important;
+      margin-right: 40px !important;
+      padding: 10px;
+    }
+
+    .plot-content {
+      width: 100%;
+      text-align: left;
+      padding: 10px;
+      overflow: auto;
+      scrollbar-color: var(--magenta-mystique) #f1f1f1;
+      color: var(--obsidian);
+    }
+
+    .plot-image {
+      max-height: 100%;
+      width: auto;
+      display: block;
+      break-inside: avoid !important;
+    }
+
+    .plot-table {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+
+    }
+
+    .plot-tr {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+
+    .plot-td {
+      width: auto;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    .plot-td.break {
+      display: block; /* Forces a line break */
+    }
+
+    .divider {
+      width: 100%;
+      height: 2px;
+      background-color: var(--magenta-mystique) !important;
+      border: none;
+      margin-left: 25px;
+      margin-right: 25px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .parameter-table {
+      margin-top: 15px;
+    }
+
+    .parameter-content {
+      width: 100%;
+      text-align: left;
+      padding: 10px;
+      max-height: 400px;
+      overflow: auto;
+      scrollbar-color: var(--magenta-mystique) #f1f1f1;
+      color: var(--obsidian);
+    }
+    {# .parameter-key, .parameter-value {
+      vertical-align: bottom;
+      padding: 5px;    .title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 13px;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+      padding-top: 10px;
+      padding-bottom: 5px;
+      padding-left: 40px;
+    }
+    } #}
+
+    .parameter-key {
+      vertical-align: top;
+      padding: 3px;
+
+    }
+    .parameter-value{
+      vertical-align: bottom;
+      padding: 3px;
+    }
+    table {
+        border-collapse: collapse;
+    }
+
+    b {
+      color: var(--obsidian);
+      background-color: var(--obsidian-light);
+      border-radius: 5px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-right: 10px;
+    }
+
+    .key {
+      color: var(--magenta-mystique);
+    }
+
+    .value {
+      color: var(--obsidian);
+    }
+
+    
+
+    /* scrollbar Webkit-Browser */
+    .plot-content::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .plot-content::-webkit-scrollbar-thumb {
+      background: var(--magenta-mystique);
+    }
+
+    .plot-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .parameter-content::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .parameter-content::-webkit-scrollbar-thumb {
+      background: var(--magenta-mystique);
+    }
+
+    .parameter-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    @media print {
+      @page {
+        margin: 0;
+      }
+
+      header {
+        top: 0;
+        transform: translateX(2%);
+        background-color: var(--magenta-mystique);
+        padding: 10px;
+        width: 96%;
+      }
+
+      .plot-td {
+        width: 47%;
+        padding: 5px;
+        page-break-inside: avoid !important;
+        page-break-after: auto !important;
+        page-break-before: auto !important;
+      }
+
+      .plot-content {
+        max-height: none;
+        overflow: visible;
+      }
+
+      .plot-image {
+        max-height: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+        page-break-inside: avoid !important;
+      }
+
+      table.plot-table {
+        width: auto !important;
+        page-break-inside: auto !important;
+        page-break-after: auto !important;
+        page-break-before: auto !important;
+
+      }
+
+      .parameter-content {
+        max-height: none;
+        overflow: visible;
+      }
+
+      table.parameter-table {
+        width: auto !important;
+        page-break-inside: auto !important;
+        overflow: visible !important;
+      }
+
+      table,
+      tr {
+        width: 100%;
+        page-break-inside: auto;
+      }
+
+      tbody {
+        page-break-inside: avoid !important;
+        page-break-after: auto !important;
+        page-break-before: auto !important;
+      }
+    }
+  </style>
+  <script>
+        function printPage() {
+            window.print();
+        }
+    </script>
+</head>
+
+<body>
+  <header>
+    <img class="logo" alt="LOGS" src="{{ logo }}">
+    <div>Created at {{ date }}</div>
+  </header>
+
+  <div class="title">
+    <div class="dataset-information">
+      <h2 class="title-heading">{{ pdf_title }}</h2>
+    </div>
+    <div class="qr-and-link-container">
+      <button onclick="printPage()">print page</button>
+    </div>
+  </div>
+
+  <div class="content">
+      <div class="plot-content">
+        <table class="plot-table">
+          <tr class="plot-tr">
+              <tbody>
+              <td class="plot-td">
+                  <img alt="Image currently not printable" src="{{ pdf_plot }}" class="plot-image">
+              </td>
+              </tbody>
+          </tr>
+        </table>
+      </div>
+  </div>
+</body>
+</html>
