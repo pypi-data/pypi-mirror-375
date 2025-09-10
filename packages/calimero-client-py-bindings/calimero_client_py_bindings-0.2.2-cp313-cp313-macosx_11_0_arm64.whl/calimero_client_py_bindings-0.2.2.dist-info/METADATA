@@ -1,0 +1,76 @@
+Metadata-Version: 2.4
+Name: calimero-client-py-bindings
+Version: 0.2.2
+Summary: Python bindings for Calimero client library
+Author-email: Calimero Network <support@calimero.network>
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+
+# Calimero Client Python Bindings
+
+This directory contains the Rust-based Python bindings for the Calimero client library.
+
+## 🏗️ Structure
+
+```
+bindings/
+├── Cargo.toml              # Rust package configuration
+├── src/
+│   ├── lib.rs             # Entry point
+│   ├── python.rs          # Python bindings implementation
+│   ├── mod.rs             # Module definitions
+│   └── README.md          # This file
+├── calimero_client_py_bindings/
+│   └── __init__.py        # Python package initialization
+├── build.sh                # Build script for bindings only
+└── tests/                  # Rust tests
+```
+
+## 🔧 Building
+
+### From the Repository Root (Recommended)
+
+```bash
+# From calimero-client-py root directory
+./build.sh
+
+# Or with options
+./build.sh --install  # Build and install in development mode
+./build.sh --test     # Build and run tests
+```
+
+### From the Bindings Directory Only
+
+```bash
+cd bindings
+./build.sh
+```
+
+## 📦 Dependencies
+
+The bindings depend on these crates (to be published to crates.io):
+- `calimero-client` - Core client functionality
+- `calimero-primitives` - Core data types
+
+## 🚀 Integration
+
+These bindings are automatically built and integrated with the main Python client when you run the root build script. The `pyproject.toml` in the repository root is configured to use maturin to build these bindings.
+
+## 🧪 Testing
+
+```bash
+# Test Rust code
+cd bindings
+cargo test
+
+# Test Python integration
+cd ..
+./build.sh --test
+```
+
+## 📚 Documentation
+
+- [Main README](../README.md) - Overall project documentation
+- [PUBLISHING.md](PUBLISHING.md) - How to publish the bindings
+- [STANDALONE_BUILD.md](STANDALONE_BUILD.md) - Standalone build instructions
+
