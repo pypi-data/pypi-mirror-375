@@ -1,0 +1,4 @@
+cloudevents[pydantic]
+hive-common>=0.2.0
+hive-messaging>=0.12.5
+python-json-logger

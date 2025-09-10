@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+hive/service/__init__.py
+hive/service/__version__.py
+hive/service/logging.py
+hive/service/service.py
+hive_service.egg-info/PKG-INFO
+hive_service.egg-info/SOURCES.txt
+hive_service.egg-info/dependency_links.txt
+hive_service.egg-info/requires.txt
+hive_service.egg-info/top_level.txt
+tests/test_version.py
