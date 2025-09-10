@@ -1,0 +1,3 @@
+[console_scripts]
+leggen = leggen.main:cli
+leggend = leggend.main:main
