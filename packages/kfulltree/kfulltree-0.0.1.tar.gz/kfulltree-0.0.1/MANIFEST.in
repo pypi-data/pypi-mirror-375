@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include CLAUDE.md
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+exclude oliver2012.pdf
+exclude .python-version
+exclude uv.lock
