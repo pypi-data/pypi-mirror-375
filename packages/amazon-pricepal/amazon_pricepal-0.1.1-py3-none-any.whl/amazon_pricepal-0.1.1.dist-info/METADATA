@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: amazon_pricepal
+Version: 0.1.1
+Summary: A package to fetch Amazon product prices.
+Author-email: David <daviddum345@gmail.com>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: beautifulsoup4
