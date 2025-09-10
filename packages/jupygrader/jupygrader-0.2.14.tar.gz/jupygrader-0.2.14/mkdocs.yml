@@ -1,0 +1,44 @@
+site_name: Jupygrader Documentation
+
+theme:
+  name: material
+  logo: images/logo_small_icon.png
+  favicon: images/favicon.png
+  palette:
+    primary: blue grey
+  features:
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Using as a Python Library: usage-library.md
+  - Using as a CLI Tool: usage-cli.md
+  - API Reference: api.md
+  - Development: development.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            heading_level: -1
+
+markdown_extensions:
+  - admonition
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+
+# Repository
+repo_name: subwaymatch/jupygrader
+repo_url: https://github.com/subwaymatch/jupygrader
