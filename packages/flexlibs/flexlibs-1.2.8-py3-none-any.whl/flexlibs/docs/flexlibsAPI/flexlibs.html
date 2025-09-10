@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>flexlibs library &#8212; FLExTools  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pyramid.css?v=28ece156" />
+    <script src="_static/documentation_options.js?v=7f41d439"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="search" title="Search" href="search.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="nav-item nav-item-0"><a href="#">FLExTools  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">flexlibs library</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="flexlibs-library">
+<h1>flexlibs library<a class="headerlink" href="#flexlibs-library" title="Link to this heading">¶</a></h1>
+<section id="flexproject-class">
+<h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">FLExProject</span></code> class<a class="headerlink" href="#flexproject-class" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="flexlibs.FLExProject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">flexlibs.</span></span><span class="sig-name descname"><span class="pre">FLExProject</span></span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject" title="Link to this definition">¶</a></dt>
+<dd><p>This class provides convenience methods for accessing a FieldWorks 
+project by hiding some of the complexity of LCM.
+For functionality that isn’t provided here, LCM data and methods
+can be used directly via <cite>FLExProject.project</cite>, <cite>FLExProject.lp</cite> and
+<cite>FLExProject.lexDB</cite>.
+However, for long term use, new methods should be added to this class.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">SIL.LCModel.Core.KernelInterfaces</span> <span class="kn">import</span> <span class="n">ITsString</span><span class="p">,</span> <span class="n">ITsStrBldr</span>
+<span class="kn">from</span> <span class="nn">SIL.LCModel.Core.Text</span> <span class="kn">import</span> <span class="n">TsStringUtils</span> 
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">FLExProject</span><span class="p">()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">OpenProject</span><span class="p">(</span><span class="s2">&quot;my project&quot;</span><span class="p">,</span>
+                        <span class="n">writeEnabled</span> <span class="o">=</span> <span class="kc">True</span><span class="o">/</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1">#&quot;Failed to open project&quot;</span>
+    <span class="k">del</span> <span class="n">project</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">WSHandle</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">WSHandle</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+
+<span class="c1"># Traverse the whole lexicon</span>
+<span class="k">for</span> <span class="n">lexEntry</span> <span class="ow">in</span> <span class="n">project</span><span class="o">.</span><span class="n">LexiconAllEntries</span><span class="p">():</span>
+    <span class="n">headword</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">LexiconGetHeadword</span><span class="p">(</span><span class="n">lexEntry</span><span class="p">)</span>
+
+    <span class="c1"># Use get_String() and set_String() with text fields:</span>
+    <span class="n">lexForm</span> <span class="o">=</span> <span class="n">lexEntry</span><span class="o">.</span><span class="n">LexemeFormOA</span>                              
+    <span class="n">lexEntryValue</span> <span class="o">=</span> <span class="n">ITsString</span><span class="p">(</span><span class="n">lexForm</span><span class="o">.</span><span class="n">Form</span><span class="o">.</span><span class="n">get_String</span><span class="p">(</span><span class="n">WSHandle</span><span class="p">))</span><span class="o">.</span><span class="n">Text</span>
+    <span class="n">newValue</span> <span class="o">=</span> <span class="n">convert_headword</span><span class="p">(</span><span class="n">lexEntryValue</span><span class="p">)</span>
+    <span class="n">mkstr</span> <span class="o">=</span> <span class="n">TsStringUtils</span><span class="o">.</span><span class="n">MakeString</span><span class="p">(</span><span class="n">newValue</span><span class="p">,</span> <span class="n">WSHandle</span><span class="p">)</span> 
+    <span class="n">lexForm</span><span class="o">.</span><span class="n">Form</span><span class="o">.</span><span class="n">set_String</span><span class="p">(</span><span class="n">WSHandle</span><span class="p">,</span> <span class="n">mkstr</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.BestStr">
+<span class="sig-name descname"><span class="pre">BestStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stringObj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.BestStr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.BestStr" title="Link to this definition">¶</a></dt>
+<dd><p>Generic string function for <cite>MultiUnicode</cite> and <cite>MultiString</cite> 
+objects, returning the best analysis or vernacular string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.BuildGotoURL">
+<span class="sig-name descname"><span class="pre">BuildGotoURL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objectOrGuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.BuildGotoURL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.BuildGotoURL" title="Link to this definition">¶</a></dt>
+<dd><p>Builds a URL that can be used with <cite>os.startfile()</cite> to jump to the
+object in Fieldworks. This method currently supports:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Lexical Entries, Senses and any object within the lexicon</p></li>
+<li><p>Wordforms, Analyses and Wordform Glosses</p></li>
+<li><p>Reversal Entries</p></li>
+<li><p>Texts</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.CloseProject">
+<span class="sig-name descname"><span class="pre">CloseProject</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.CloseProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.CloseProject" title="Link to this definition">¶</a></dt>
+<dd><p>Save any pending changes and dispose of the LCM object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetAllAnalysisWSs">
+<span class="sig-name descname"><span class="pre">GetAllAnalysisWSs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetAllAnalysisWSs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetAllAnalysisWSs" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a set of language tags for all analysis writing systems used
+in this project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetAllSemanticDomains">
+<span class="sig-name descname"><span class="pre">GetAllSemanticDomains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetAllSemanticDomains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetAllSemanticDomains" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a nested or flat list of all semantic domains defined
+in this project. The list is ordered.</p>
+<p>Return items are <cite>ICmSemanticDomain</cite> objects.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetAllVernacularWSs">
+<span class="sig-name descname"><span class="pre">GetAllVernacularWSs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetAllVernacularWSs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetAllVernacularWSs" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a set of language tags for all vernacular writing systems used
+in this project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetCustomFieldValue">
+<span class="sig-name descname"><span class="pre">GetCustomFieldValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntryOrHvo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetCustomFieldValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetCustomFieldValue" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the field value for String, MultiString, Integer 
+and List (both single and multiple) fields.
+Raises <cite>FP_ParameterError</cite> for other field types.</p>
+<p><cite>languageTagOrHandle</cite> only applies to MultiStrings; if <cite>None</cite> the
+best analysis or venacular string is returned.</p>
+<p>Note: if the field is a vernacular WS field, then the 
+<cite>languageTagOrHandle</cite> must be specified.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetDateLastModified">
+<span class="sig-name descname"><span class="pre">GetDateLastModified</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetDateLastModified"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetDateLastModified" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetDefaultAnalysisWS">
+<span class="sig-name descname"><span class="pre">GetDefaultAnalysisWS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetDefaultAnalysisWS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetDefaultAnalysisWS" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the default analysis writing system: (Language-tag, Name)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetDefaultVernacularWS">
+<span class="sig-name descname"><span class="pre">GetDefaultVernacularWS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetDefaultVernacularWS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetDefaultVernacularWS" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the default vernacular writing system: (Language-tag, Name)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetFieldID">
+<span class="sig-name descname"><span class="pre">GetFieldID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">className</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetFieldID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetFieldID" title="Link to this definition">¶</a></dt>
+<dd><p>Return the <cite>FieldID</cite> (‘flid’) for the given field of an LCM class.
+<cite>className</cite> and <cite>fieldName</cite> are strings, where <cite>fieldName</cite> may omit 
+the type suffix (e.g. ‘OS’). Both are case-sensitive.
+For example, find the <cite>FieldID</cite> for academic domains with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GetFieldID</span><span class="p">(</span><span class="s2">&quot;LexSense&quot;</span><span class="p">,</span> <span class="s2">&quot;DomainTypes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetLexicalRelationTypes">
+<span class="sig-name descname"><span class="pre">GetLexicalRelationTypes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetLexicalRelationTypes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetLexicalRelationTypes" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an iterator over <cite>LexRefType</cite> objects, which define a 
+type of lexical relation, such as Part-Whole.</p>
+<dl class="simple">
+<dt>Each <cite>LexRefType</cite> has:</dt><dd><ul class="simple">
+<li><p><cite>MembersOC</cite>: containing zero or more <cite>LexReference</cite> objects.</p></li>
+<li><p><cite>MappingType</cite>: an enumeration defining the type of lexical relation.</p></li>
+</ul>
+</dd>
+<dt><cite>LexReference</cite> objects have:</dt><dd><ul class="simple">
+<li><p><cite>TargetsRS</cite>: the <cite>LexSense</cite> or <cite>LexEntry</cite> objects in the relation.</p></li>
+</ul>
+</dd>
+</dl>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">lrt</span> <span class="ow">in</span> <span class="n">project</span><span class="o">.</span><span class="n">GetLexicalRelationTypes</span><span class="p">():</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">lrt</span><span class="o">.</span><span class="n">MembersOC</span><span class="o">.</span><span class="n">Count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">lr</span> <span class="ow">in</span> <span class="n">lrt</span><span class="o">.</span><span class="n">MembersOC</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">lr</span><span class="o">.</span><span class="n">TargetsRS</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="n">ClassName</span> <span class="o">==</span> <span class="s2">&quot;LexEntry&quot;</span><span class="p">:</span>
+                    <span class="c1"># LexEntry</span>
+                <span class="k">else</span><span class="p">:</span> 
+                    <span class="c1"># LexSense</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetPartsOfSpeech">
+<span class="sig-name descname"><span class="pre">GetPartsOfSpeech</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetPartsOfSpeech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetPartsOfSpeech" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of the parts of speech defined in this project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetPublications">
+<span class="sig-name descname"><span class="pre">GetPublications</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetPublications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetPublications" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of the names of the publications defined in the
+project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.GetWritingSystems">
+<span class="sig-name descname"><span class="pre">GetWritingSystems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.GetWritingSystems"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.GetWritingSystems" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the writing systems that are active in this project as a
+list of tuples: (Name, Language-tag, Handle, IsVernacular).
+Use the Language-tag when specifying writing system to other
+functions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconAddTagToField">
+<span class="sig-name descname"><span class="pre">LexiconAddTagToField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntryOrHvo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconAddTagToField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconAddTagToField" title="Link to this definition">¶</a></dt>
+<dd><p>Appends the tag string to the end of the given field in the
+sense or entry inserting a semicolon between tags.
+If the tag is already in the field then it isn’t added.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconAllEntries">
+<span class="sig-name descname"><span class="pre">LexiconAllEntries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconAllEntries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconAllEntries" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an iterator over all entries in the lexicon.</p>
+<p>Each entry is of type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SIL</span><span class="o">.</span><span class="n">LCModel</span><span class="o">.</span><span class="n">ILexEntry</span><span class="p">,</span> <span class="n">which</span> <span class="n">contains</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">HomographNumber</span> <span class="p">::</span> <span class="n">integer</span>
+    <span class="o">-</span> <span class="n">HomographForm</span> <span class="p">::</span> <span class="n">string</span>
+    <span class="o">-</span> <span class="n">LexemeFormOA</span> <span class="p">::</span>  <span class="n">SIL</span><span class="o">.</span><span class="n">LCModel</span><span class="o">.</span><span class="n">IMoForm</span>
+         <span class="o">-</span> <span class="n">Form</span> <span class="p">::</span> <span class="n">SIL</span><span class="o">.</span><span class="n">LCModel</span><span class="o">.</span><span class="n">MultiUnicodeAccessor</span>
+            <span class="o">-</span> <span class="n">GetAlternative</span> <span class="p">:</span> <span class="n">Get</span> <span class="n">String</span> <span class="k">for</span> <span class="n">given</span> <span class="n">WS</span> <span class="nb">type</span>
+            <span class="o">-</span> <span class="n">SetAlternative</span> <span class="p">:</span> <span class="n">Set</span> <span class="n">string</span> <span class="k">for</span> <span class="n">given</span> <span class="n">WS</span> <span class="nb">type</span>
+    <span class="o">-</span> <span class="n">SensesOS</span> <span class="p">::</span> <span class="n">Ordered</span> <span class="n">collection</span> <span class="n">of</span> <span class="n">SIL</span><span class="o">.</span><span class="n">LCModel</span><span class="o">.</span><span class="n">ILexSense</span> 
+        <span class="o">-</span> <span class="n">Gloss</span> <span class="p">::</span> <span class="n">SIL</span><span class="o">.</span><span class="n">LCModel</span><span class="o">.</span><span class="n">MultiUnicodeAccessor</span>
+        <span class="o">-</span> <span class="n">Definition</span> <span class="p">::</span> <span class="n">SIL</span><span class="o">.</span><span class="n">LCModel</span><span class="o">.</span><span class="n">MultiStringAccessor</span>
+        <span class="o">-</span> <span class="n">SenseNumber</span> <span class="p">::</span> <span class="n">string</span>
+        <span class="o">-</span> <span class="n">ExamplesOS</span> <span class="p">::</span> <span class="n">Ordered</span> <span class="n">collection</span> <span class="n">of</span> <span class="n">ILexExampleSentence</span>
+            <span class="o">-</span> <span class="n">Example</span> <span class="p">::</span> <span class="n">MultiStringAccessor</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconAllEntriesSorted">
+<span class="sig-name descname"><span class="pre">LexiconAllEntriesSorted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconAllEntriesSorted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconAllEntriesSorted" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an iterator over all entries in the lexicon sorted by
+the (lower-case) headword.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconClearField">
+<span class="sig-name descname"><span class="pre">LexiconClearField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntryOrHvo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconClearField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconClearField" title="Link to this definition">¶</a></dt>
+<dd><p>Clears the string field or all of the strings (writing systems)
+in a multi-string field.
+Can be used to clear out a custom field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconClearListFieldSingle">
+<span class="sig-name descname"><span class="pre">LexiconClearListFieldSingle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconClearListFieldSingle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconClearListFieldSingle" title="Link to this definition">¶</a></dt>
+<dd><p>Clears the value for a ‘single’ (Atomic) list field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconEntryAnalysesCount">
+<span class="sig-name descname"><span class="pre">LexiconEntryAnalysesCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconEntryAnalysesCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconEntryAnalysesCount" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a count of the occurrences of the entry in the text corpus.</p>
+<p>NOTE: This calculation can produce slightly different results to 
+that shown in FieldWorks (where the same analysis in the same text 
+segment is only counted once in some displays). See LT-13997 for 
+more details.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconFieldIsAnyStringType">
+<span class="sig-name descname"><span class="pre">LexiconFieldIsAnyStringType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconFieldIsAnyStringType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconFieldIsAnyStringType" title="Link to this definition">¶</a></dt>
+<dd><p>Returns <cite>True</cite> if the given field is any of the string types.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconFieldIsMultiType">
+<span class="sig-name descname"><span class="pre">LexiconFieldIsMultiType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconFieldIsMultiType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconFieldIsMultiType" title="Link to this definition">¶</a></dt>
+<dd><p>Returns <cite>True</cite> if the given field is a multi string type
+(MultiUnicode or MultiString)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconFieldIsStringType">
+<span class="sig-name descname"><span class="pre">LexiconFieldIsStringType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconFieldIsStringType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconFieldIsStringType" title="Link to this definition">¶</a></dt>
+<dd><p>Returns <cite>True</cite> if the given field is a simple string type suitable 
+for use with <cite>LexiconAddTagToField()</cite>, otherwise returns <cite>False</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetAllomorphCustomFields">
+<span class="sig-name descname"><span class="pre">LexiconGetAllomorphCustomFields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetAllomorphCustomFields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetAllomorphCustomFields" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of the custom fields defined at allomorph level.
+Each item in the list is a tuple of (flid, label)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetCitationForm">
+<span class="sig-name descname"><span class="pre">LexiconGetCitationForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetCitationForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetCitationForm" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the citation form for <cite>entry</cite> in the default vernacular WS
+or other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetEntryCustomFieldNamed">
+<span class="sig-name descname"><span class="pre">LexiconGetEntryCustomFieldNamed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetEntryCustomFieldNamed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetEntryCustomFieldNamed" title="Link to this definition">¶</a></dt>
+<dd><p>Return the entry-level field ID given its name.</p>
+<p>NOTE: <cite>fieldName</cite> is case-sensitive.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetEntryCustomFields">
+<span class="sig-name descname"><span class="pre">LexiconGetEntryCustomFields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetEntryCustomFields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetEntryCustomFields" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of the custom fields defined at entry level.
+Each item in the list is a tuple of (flid, label)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetExample">
+<span class="sig-name descname"><span class="pre">LexiconGetExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">example</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetExample" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the example text in the default vernacular WS or
+other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetExampleCustomFields">
+<span class="sig-name descname"><span class="pre">LexiconGetExampleCustomFields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetExampleCustomFields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetExampleCustomFields" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of the custom fields defined at example level.
+Each item in the list is a tuple of (flid, label)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetExampleTranslation">
+<span class="sig-name descname"><span class="pre">LexiconGetExampleTranslation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetExampleTranslation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetExampleTranslation" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the translation of an example in the default analysis WS or
+other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+<p>NOTE: Analysis language translations of example sentences are
+stored as a collection (list). E.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">translation</span> <span class="ow">in</span> <span class="n">example</span><span class="o">.</span><span class="n">TranslationsOC</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">project</span><span class="o">.</span><span class="n">LexiconGetExampleTranslation</span><span class="p">(</span><span class="n">translation</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetFieldText">
+<span class="sig-name descname"><span class="pre">LexiconGetFieldText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntryOrHvo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetFieldText"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetFieldText" title="Link to this definition">¶</a></dt>
+<dd><p>Return the text value for the given entry/sense and field ID.
+Provided for use with custom fields.
+Returns the empty string if the value is null.
+<cite>languageTagOrHandle</cite> only applies to MultiStrings; if <cite>None</cite> the
+default analysis writing system is returned.</p>
+<p>Note: if the field is a vernacular WS field, then 
+<cite>languageTagOrHandle</cite> must be specified.</p>
+<p>For normal fields, the object can be used directly with 
+<cite>get_String()</cite>. E.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lexForm</span> <span class="o">=</span> <span class="n">lexEntry</span><span class="o">.</span><span class="n">LexemeFormOA</span>
+<span class="n">lexEntryValue</span> <span class="o">=</span> <span class="n">ITsString</span><span class="p">(</span><span class="n">lexForm</span><span class="o">.</span><span class="n">Form</span><span class="o">.</span><span class="n">get_String</span><span class="p">(</span><span class="n">WSHandle</span><span class="p">))</span><span class="o">.</span><span class="n">Text</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetHeadword">
+<span class="sig-name descname"><span class="pre">LexiconGetHeadword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetHeadword"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetHeadword" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the headword for <cite>entry</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetLexemeForm">
+<span class="sig-name descname"><span class="pre">LexiconGetLexemeForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetLexemeForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetLexemeForm" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the lexeme form for <cite>entry</cite> in the default vernacular WS
+or other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetPronunciation">
+<span class="sig-name descname"><span class="pre">LexiconGetPronunciation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pronunciation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetPronunciation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetPronunciation" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the form for <cite>pronunciation</cite> in the default vernacular WS
+or other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetPublishInCount">
+<span class="sig-name descname"><span class="pre">LexiconGetPublishInCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetPublishInCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetPublishInCount" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the number of dictionaries that <cite>entry</cite> is configured 
+to be published in.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetSenseCustomFieldNamed">
+<span class="sig-name descname"><span class="pre">LexiconGetSenseCustomFieldNamed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetSenseCustomFieldNamed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetSenseCustomFieldNamed" title="Link to this definition">¶</a></dt>
+<dd><p>Return the sense-level field ID given its name.</p>
+<p>NOTE: <cite>fieldName</cite> is case-sensitive.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetSenseCustomFields">
+<span class="sig-name descname"><span class="pre">LexiconGetSenseCustomFields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetSenseCustomFields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetSenseCustomFields" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of the custom fields defined at sense level.
+Each item in the list is a tuple of (flid, label)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetSenseDefinition">
+<span class="sig-name descname"><span class="pre">LexiconGetSenseDefinition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sense</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetSenseDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetSenseDefinition" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the definition for the sense in the default analysis WS or
+other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetSenseGloss">
+<span class="sig-name descname"><span class="pre">LexiconGetSenseGloss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sense</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetSenseGloss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetSenseGloss" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the gloss for the sense in the default analysis WS or
+other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetSenseNumber">
+<span class="sig-name descname"><span class="pre">LexiconGetSenseNumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sense</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetSenseNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetSenseNumber" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the sense number for the sense. (This is not available 
+directly from <cite>ILexSense</cite>.)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetSensePOS">
+<span class="sig-name descname"><span class="pre">LexiconGetSensePOS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sense</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetSensePOS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetSensePOS" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the part of speech abbreviation for the sense.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconGetSenseSemanticDomains">
+<span class="sig-name descname"><span class="pre">LexiconGetSenseSemanticDomains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sense</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconGetSenseSemanticDomains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconGetSenseSemanticDomains" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of semantic omain objects belonging to the sense.
+<cite>ToString()</cite> and <cite>Hvo</cite> are available.</p>
+<p>Methods available for SemanticDomainsRC:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Count</span>
+<span class="n">Add</span><span class="p">(</span><span class="n">Hvo</span><span class="p">)</span>
+<span class="n">Contains</span><span class="p">(</span><span class="n">Hvo</span><span class="p">)</span>
+<span class="n">Remove</span><span class="p">(</span><span class="n">Hvo</span><span class="p">)</span>
+<span class="n">RemoveAll</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconNumberOfEntries">
+<span class="sig-name descname"><span class="pre">LexiconNumberOfEntries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconNumberOfEntries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconNumberOfEntries" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSenseAnalysesCount">
+<span class="sig-name descname"><span class="pre">LexiconSenseAnalysesCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sense</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSenseAnalysesCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSenseAnalysesCount" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a count of the occurrences of the sense in the text corpus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSetExample">
+<span class="sig-name descname"><span class="pre">LexiconSetExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">example</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSetExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSetExample" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Set the default vernacular string for <cite>example</cite>:</dt><dd><ul class="simple">
+<li><p><cite>newString</cite> is the new string value.</p></li>
+<li><p><cite>languageTagOrHandle</cite> specifies a non-default writing system.</p></li>
+</ul>
+</dd>
+</dl>
+<p>NOTE: using this function will lose any formatting that might
+have been present in the example string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSetFieldInteger">
+<span class="sig-name descname"><span class="pre">LexiconSetFieldInteger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntryOrHvo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSetFieldInteger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSetFieldInteger" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the integer value for the given entry/sense and field ID.
+Provided for use with custom fields.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSetFieldText">
+<span class="sig-name descname"><span class="pre">LexiconSetFieldText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntryOrHvo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSetFieldText"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSetFieldText" title="Link to this definition">¶</a></dt>
+<dd><p>Set the text value for the given entry/sense and field ID.
+Provided for use with custom fields.</p>
+<p>NOTE: writes the string in one writing system only (defaults
+to the default analysis WS).</p>
+<p>For normal fields the object can be used directly with
+<cite>set_String()</cite>. E.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lexForm</span> <span class="o">=</span> <span class="n">lexEntry</span><span class="o">.</span><span class="n">LexemeFormOA</span>
+<span class="n">mkstr</span> <span class="o">=</span> <span class="n">TsStringUtils</span><span class="o">.</span><span class="n">MakeString</span><span class="p">(</span><span class="s2">&quot;text to write&quot;</span><span class="p">,</span> <span class="n">WSHandle</span><span class="p">)</span> 
+<span class="n">lexForm</span><span class="o">.</span><span class="n">Form</span><span class="o">.</span><span class="n">set_String</span><span class="p">(</span><span class="n">WSHandle</span><span class="p">,</span> <span class="n">mkstr</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSetLexemeForm">
+<span class="sig-name descname"><span class="pre">LexiconSetLexemeForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSetLexemeForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSetLexemeForm" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Set the lexeme form for <cite>entry</cite>:</dt><dd><ul class="simple">
+<li><p><cite>form</cite> is the new lexeme form string.</p></li>
+<li><p><cite>languageTagOrHandle</cite> specifies a non-default writing system.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSetListFieldMultiple">
+<span class="sig-name descname"><span class="pre">LexiconSetListFieldMultiple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">listOfValues</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSetListFieldMultiple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSetListFieldMultiple" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the value(s) for a ‘multiple’ (Collection) list field.
+<cite>listOfValues</cite> can be a list of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>CmPossibility</cite> objects; or</p></li>
+<li><p><cite>CmPossibility</cite> hvos; or</p></li>
+<li><p><cite>str</cite> (either the full name or the abbreviation; case-sensitive).</p></li>
+</ul>
+</div></blockquote>
+<p>Use <cite>ListFieldPossibilities()</cite> to find the valid values for the list.</p>
+<p>Note: this function is primarily for use with custom fields, 
+since regular fields can use the <cite>Add()</cite>, <cite>Remove()</cite> and <cite>Clear()</cite> 
+methods of the field itself (see LcmReferenceCollection).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSetListFieldSingle">
+<span class="sig-name descname"><span class="pre">LexiconSetListFieldSingle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possibilityOrString</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSetListFieldSingle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSetListFieldSingle" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the value for a ‘single’ (Atomic) list field.
+<cite>possibilityOrString</cite> can be a <cite>CmPossibility</cite> object, or a string.
+A string value can be the full name or the abbreviation (case-sensitive).</p>
+<p>Use <cite>ListFieldPossibilities()</cite> to find the valid values for the list.</p>
+<p>Note: this function is primarily for use with custom fields, 
+since regular list field values can be assigned directly. E.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">status_poss</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">ListFieldPossibilities</span><span class="p">(</span>
+                  <span class="n">sense</span><span class="p">,</span> 
+                  <span class="n">project</span><span class="o">.</span><span class="n">GetFieldID</span><span class="p">(</span><span class="s2">&quot;LexSense&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">))</span>
+<span class="n">sense</span><span class="o">.</span><span class="n">StatusRA</span> <span class="o">=</span> <span class="n">status_poss</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>    <span class="c1"># Tentative</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.LexiconSetSenseGloss">
+<span class="sig-name descname"><span class="pre">LexiconSetSenseGloss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sense</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gloss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.LexiconSetSenseGloss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.LexiconSetSenseGloss" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Set the default analysis gloss for <cite>sense</cite>:</dt><dd><ul class="simple">
+<li><p><cite>gloss</cite> is the new gloss string.</p></li>
+<li><p><cite>languageTagOrHandle</cite> specifies a non-default writing system.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ListFieldLookup">
+<span class="sig-name descname"><span class="pre">ListFieldLookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ListFieldLookup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ListFieldLookup" title="Link to this definition">¶</a></dt>
+<dd><p>Looks up the value (a string) in the <cite>CmPossibilityList</cite> for the
+given field.
+Returns the <cite>CmPossibility</cite> object, or <cite>None</cite> if it can’t be found.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ListFieldPossibilities">
+<span class="sig-name descname"><span class="pre">ListFieldPossibilities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ListFieldPossibilities"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ListFieldPossibilities" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the <cite>PossibilitiesOS</cite> for the given list field. This
+is a list of <cite>CmPossibility</cite> objects.
+Raises an exception if the field is not a list (single/Atomic
+or multiple/Collection)</p>
+<p>Note: this returns the top-level <cite>CmPossibility</cite> objects. Subitems 
+can be found via the <cite>SubPossibilitiesOS</cite> attribute. Alternatively, 
+a flat list of all possible options can be obtained with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">UnpackNestedPossibilityList</span><span class="p">(</span><span class="n">possibilities</span><span class="p">,</span>
+                                              <span class="nb">str</span><span class="p">,</span> 
+                                              <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ListFieldPossibilityList">
+<span class="sig-name descname"><span class="pre">ListFieldPossibilityList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">senseOrEntry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ListFieldPossibilityList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ListFieldPossibilityList" title="Link to this definition">¶</a></dt>
+<dd><p>Return the <cite>CmPossibilityList</cite> object for the given list field.
+Raises an exception if the field is not a list (single/Atomic
+or multiple/Collection)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.Object">
+<span class="sig-name descname"><span class="pre">Object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hvoOrGuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.Object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.Object" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the <cite>CmObject</cite> for the given Hvo or guid (<cite>str</cite> or <cite>System.Guid</cite>).
+Refer to <cite>.ClassName</cite> to determine the LCM class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ObjectCountFor">
+<span class="sig-name descname"><span class="pre">ObjectCountFor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ObjectCountFor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ObjectCountFor" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the number of objects in <cite>repository</cite>.
+<cite>repository</cite> is specified by the interface class, such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>ITextRepository</cite></p></li>
+<li><p><cite>ILexEntryRepository</cite></p></li>
+</ul>
+</div></blockquote>
+<p>All repository names can be viewed by opening a project in
+LCMBrowser, which can be launched via the Help menu. Add “I” 
+to the front and import from <cite>SIL.LCModel</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ObjectRepository">
+<span class="sig-name descname"><span class="pre">ObjectRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ObjectRepository"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ObjectRepository" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an object repository.
+<cite>repository</cite> is specified by the interface class, such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>ITextRepository</cite></p></li>
+<li><p><cite>ILexEntryRepository</cite></p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ObjectsIn">
+<span class="sig-name descname"><span class="pre">ObjectsIn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ObjectsIn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ObjectsIn" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an iterator over all the objects in <cite>repository</cite>.
+<cite>repository</cite> is specified by the interface class, such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>ITextRepository</cite></p></li>
+<li><p><cite>ILexEntryRepository</cite></p></li>
+</ul>
+</div></blockquote>
+<p>All repository names can be viewed by opening a project in
+LCMBrowser, which can be launched via the Help menu. Add “I” 
+to the front and import from <cite>SIL.LCModel</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.OpenProject">
+<span class="sig-name descname"><span class="pre">OpenProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projectName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writeEnabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.OpenProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.OpenProject" title="Link to this definition">¶</a></dt>
+<dd><p>Open a project. The project must be closed with <cite>CloseProject()</cite> to 
+save any changes, and release the lock.</p>
+<dl class="simple">
+<dt>projectName:</dt><dd><ul class="simple">
+<li><p>Either the full path including “.fwdata” suffix, or</p></li>
+<li><p>The name only, to open from the default project location.</p></li>
+</ul>
+</dd>
+<dt>writeEnabled: </dt><dd><p>Enables changes to be written to the project, which will be
+saved on a call to <cite>CloseProject()</cite>. 
+LCM will raise an exception if changes are attempted without 
+opening the project in this mode.</p>
+</dd>
+<dt>Note: </dt><dd><p>A call to <cite>OpenProject()</cite> may fail with a <cite>FP_FileLockedError</cite>
+exception if the project is open in Fieldworks (or another 
+application).
+To avoid this, project sharing can be enabled within the 
+Fieldworks Project Properties dialog. In the Sharing tab,
+turn on the option “Share project contents with programs 
+on this computer”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ProjectName">
+<span class="sig-name descname"><span class="pre">ProjectName</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ProjectName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ProjectName" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the display name of the current project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.PublicationType">
+<span class="sig-name descname"><span class="pre">PublicationType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">publicationName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.PublicationType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.PublicationType" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the <cite>PublicationType</cite> object (a <cite>CmPossibility</cite>) for the
+given publication name. (A list of publication names can be 
+found using <cite>GetPublications()</cite>.)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ReversalEntries">
+<span class="sig-name descname"><span class="pre">ReversalEntries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languageTag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ReversalEntries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ReversalEntries" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an iterator for the reversal entries for <cite>languageTag</cite> (eg ‘en’). Returns <cite>None</cite> if there is no reversal index for
+that writing system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ReversalGetForm">
+<span class="sig-name descname"><span class="pre">ReversalGetForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ReversalGetForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ReversalGetForm" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the citation form for the reversal entry in the default
+vernacular WS or other WS as specified by <cite>languageTagOrHandle</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ReversalIndex">
+<span class="sig-name descname"><span class="pre">ReversalIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languageTag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ReversalIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ReversalIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the reversal index for <cite>languageTag</cite> (eg ‘en’). 
+Returns <cite>None</cite> if there is no reversal index for
+that writing system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.ReversalSetForm">
+<span class="sig-name descname"><span class="pre">ReversalSetForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.ReversalSetForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.ReversalSetForm" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Sets the default analysis reversal form for the given reversal entry:</dt><dd><ul class="simple">
+<li><p><cite>form</cite> is the new reversal form string.</p></li>
+<li><p><cite>languageTagOrHandle</cite> specifies a non-default writing system.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.TextsGetAll">
+<span class="sig-name descname"><span class="pre">TextsGetAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">supplyName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supplyText</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.TextsGetAll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.TextsGetAll" title="Link to this definition">¶</a></dt>
+<dd><p>A generator that returns all the texts in the project as
+tuples of (<cite>name</cite>, <cite>text</cite>) where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>name</cite> is the best vernacular or analysis name.</p></li>
+<li><p><cite>text</cite> is a string with newlines separating paragraphs.</p></li>
+</ul>
+</div></blockquote>
+<p>Passing <cite>supplyName</cite>/<cite>Text</cite> = <cite>False</cite> returns only the texts or names.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.TextsNumberOfTexts">
+<span class="sig-name descname"><span class="pre">TextsNumberOfTexts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.TextsNumberOfTexts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.TextsNumberOfTexts" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the total number of texts in the project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.UnpackNestedPossibilityList">
+<span class="sig-name descname"><span class="pre">UnpackNestedPossibilityList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">possibilityList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objClass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.UnpackNestedPossibilityList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.UnpackNestedPossibilityList" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a nested or flat list of a Fieldworks possibility list.
+<cite>objClass</cite> is the class of object to cast the <cite>CmPossibility</cite> elements into.</p>
+<dl class="simple">
+<dt>Return items are objects with properties/methods:</dt><dd><ul class="simple">
+<li><p><cite>Hvo</cite>         - ID (value not the same across projects)</p></li>
+<li><p><cite>Guid</cite>        - Global Unique ID (same across all projects)</p></li>
+<li><p><cite>ToString()</cite>  - String representation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.WSHandle">
+<span class="sig-name descname"><span class="pre">WSHandle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languageTag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.WSHandle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.WSHandle" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the handle of the writing system for <cite>languageTag</cite>.
+Ignores case and ‘-‘/’_’ differences.
+Returns <cite>None</cite> if the language tag is not found.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flexlibs.FLExProject.WSUIName">
+<span class="sig-name descname"><span class="pre">WSUIName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">languageTagOrHandle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flexlibs/code/FLExProject.html#FLExProject.WSUIName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#flexlibs.FLExProject.WSUIName" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the UI name of the writing system for the given language tag
+or handle.
+Ignores case and ‘-‘/’_’ differences.
+Returns <cite>None</cite> if the language tag is not found.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">flexlibs library</a><ul>
+<li><a class="reference internal" href="#flexproject-class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">FLExProject</span></code> class</a><ul>
+<li><a class="reference internal" href="#flexlibs.FLExProject"><code class="docutils literal notranslate"><span class="pre">FLExProject</span></code></a><ul>
+<li><a class="reference internal" href="#flexlibs.FLExProject.BestStr"><code class="docutils literal notranslate"><span class="pre">BestStr()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.BuildGotoURL"><code class="docutils literal notranslate"><span class="pre">BuildGotoURL()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.CloseProject"><code class="docutils literal notranslate"><span class="pre">CloseProject()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetAllAnalysisWSs"><code class="docutils literal notranslate"><span class="pre">GetAllAnalysisWSs()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetAllSemanticDomains"><code class="docutils literal notranslate"><span class="pre">GetAllSemanticDomains()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetAllVernacularWSs"><code class="docutils literal notranslate"><span class="pre">GetAllVernacularWSs()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetCustomFieldValue"><code class="docutils literal notranslate"><span class="pre">GetCustomFieldValue()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetDateLastModified"><code class="docutils literal notranslate"><span class="pre">GetDateLastModified()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetDefaultAnalysisWS"><code class="docutils literal notranslate"><span class="pre">GetDefaultAnalysisWS()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetDefaultVernacularWS"><code class="docutils literal notranslate"><span class="pre">GetDefaultVernacularWS()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetFieldID"><code class="docutils literal notranslate"><span class="pre">GetFieldID()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetLexicalRelationTypes"><code class="docutils literal notranslate"><span class="pre">GetLexicalRelationTypes()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetPartsOfSpeech"><code class="docutils literal notranslate"><span class="pre">GetPartsOfSpeech()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetPublications"><code class="docutils literal notranslate"><span class="pre">GetPublications()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.GetWritingSystems"><code class="docutils literal notranslate"><span class="pre">GetWritingSystems()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconAddTagToField"><code class="docutils literal notranslate"><span class="pre">LexiconAddTagToField()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconAllEntries"><code class="docutils literal notranslate"><span class="pre">LexiconAllEntries()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconAllEntriesSorted"><code class="docutils literal notranslate"><span class="pre">LexiconAllEntriesSorted()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconClearField"><code class="docutils literal notranslate"><span class="pre">LexiconClearField()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconClearListFieldSingle"><code class="docutils literal notranslate"><span class="pre">LexiconClearListFieldSingle()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconEntryAnalysesCount"><code class="docutils literal notranslate"><span class="pre">LexiconEntryAnalysesCount()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconFieldIsAnyStringType"><code class="docutils literal notranslate"><span class="pre">LexiconFieldIsAnyStringType()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconFieldIsMultiType"><code class="docutils literal notranslate"><span class="pre">LexiconFieldIsMultiType()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconFieldIsStringType"><code class="docutils literal notranslate"><span class="pre">LexiconFieldIsStringType()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetAllomorphCustomFields"><code class="docutils literal notranslate"><span class="pre">LexiconGetAllomorphCustomFields()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetCitationForm"><code class="docutils literal notranslate"><span class="pre">LexiconGetCitationForm()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetEntryCustomFieldNamed"><code class="docutils literal notranslate"><span class="pre">LexiconGetEntryCustomFieldNamed()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetEntryCustomFields"><code class="docutils literal notranslate"><span class="pre">LexiconGetEntryCustomFields()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetExample"><code class="docutils literal notranslate"><span class="pre">LexiconGetExample()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetExampleCustomFields"><code class="docutils literal notranslate"><span class="pre">LexiconGetExampleCustomFields()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetExampleTranslation"><code class="docutils literal notranslate"><span class="pre">LexiconGetExampleTranslation()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetFieldText"><code class="docutils literal notranslate"><span class="pre">LexiconGetFieldText()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetHeadword"><code class="docutils literal notranslate"><span class="pre">LexiconGetHeadword()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetLexemeForm"><code class="docutils literal notranslate"><span class="pre">LexiconGetLexemeForm()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetPronunciation"><code class="docutils literal notranslate"><span class="pre">LexiconGetPronunciation()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetPublishInCount"><code class="docutils literal notranslate"><span class="pre">LexiconGetPublishInCount()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetSenseCustomFieldNamed"><code class="docutils literal notranslate"><span class="pre">LexiconGetSenseCustomFieldNamed()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetSenseCustomFields"><code class="docutils literal notranslate"><span class="pre">LexiconGetSenseCustomFields()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetSenseDefinition"><code class="docutils literal notranslate"><span class="pre">LexiconGetSenseDefinition()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetSenseGloss"><code class="docutils literal notranslate"><span class="pre">LexiconGetSenseGloss()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetSenseNumber"><code class="docutils literal notranslate"><span class="pre">LexiconGetSenseNumber()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetSensePOS"><code class="docutils literal notranslate"><span class="pre">LexiconGetSensePOS()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconGetSenseSemanticDomains"><code class="docutils literal notranslate"><span class="pre">LexiconGetSenseSemanticDomains()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconNumberOfEntries"><code class="docutils literal notranslate"><span class="pre">LexiconNumberOfEntries()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSenseAnalysesCount"><code class="docutils literal notranslate"><span class="pre">LexiconSenseAnalysesCount()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSetExample"><code class="docutils literal notranslate"><span class="pre">LexiconSetExample()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSetFieldInteger"><code class="docutils literal notranslate"><span class="pre">LexiconSetFieldInteger()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSetFieldText"><code class="docutils literal notranslate"><span class="pre">LexiconSetFieldText()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSetLexemeForm"><code class="docutils literal notranslate"><span class="pre">LexiconSetLexemeForm()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSetListFieldMultiple"><code class="docutils literal notranslate"><span class="pre">LexiconSetListFieldMultiple()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSetListFieldSingle"><code class="docutils literal notranslate"><span class="pre">LexiconSetListFieldSingle()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.LexiconSetSenseGloss"><code class="docutils literal notranslate"><span class="pre">LexiconSetSenseGloss()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ListFieldLookup"><code class="docutils literal notranslate"><span class="pre">ListFieldLookup()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ListFieldPossibilities"><code class="docutils literal notranslate"><span class="pre">ListFieldPossibilities()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ListFieldPossibilityList"><code class="docutils literal notranslate"><span class="pre">ListFieldPossibilityList()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.Object"><code class="docutils literal notranslate"><span class="pre">Object()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ObjectCountFor"><code class="docutils literal notranslate"><span class="pre">ObjectCountFor()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ObjectRepository"><code class="docutils literal notranslate"><span class="pre">ObjectRepository()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ObjectsIn"><code class="docutils literal notranslate"><span class="pre">ObjectsIn()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.OpenProject"><code class="docutils literal notranslate"><span class="pre">OpenProject()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ProjectName"><code class="docutils literal notranslate"><span class="pre">ProjectName()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.PublicationType"><code class="docutils literal notranslate"><span class="pre">PublicationType()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ReversalEntries"><code class="docutils literal notranslate"><span class="pre">ReversalEntries()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ReversalGetForm"><code class="docutils literal notranslate"><span class="pre">ReversalGetForm()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ReversalIndex"><code class="docutils literal notranslate"><span class="pre">ReversalIndex()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.ReversalSetForm"><code class="docutils literal notranslate"><span class="pre">ReversalSetForm()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.TextsGetAll"><code class="docutils literal notranslate"><span class="pre">TextsGetAll()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.TextsNumberOfTexts"><code class="docutils literal notranslate"><span class="pre">TextsNumberOfTexts()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.UnpackNestedPossibilityList"><code class="docutils literal notranslate"><span class="pre">UnpackNestedPossibilityList()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.WSHandle"><code class="docutils literal notranslate"><span class="pre">WSHandle()</span></code></a></li>
+<li><a class="reference internal" href="#flexlibs.FLExProject.WSUIName"><code class="docutils literal notranslate"><span class="pre">WSUIName()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="nav-item nav-item-0"><a href="#">FLExTools  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">flexlibs library</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright %Y, Craig Farrow.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.4.
+    </div>
+  </body>
+</html>
