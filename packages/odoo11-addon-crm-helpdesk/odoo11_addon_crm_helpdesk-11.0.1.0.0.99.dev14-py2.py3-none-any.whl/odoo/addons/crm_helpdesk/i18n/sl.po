@@ -1,0 +1,685 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * crm_helpdesk
+#
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2014-2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-21 14:07+0000\n"
+"PO-Revision-Date: 2015-11-13 14:04+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/odoo/odoo-8/language/"
+"sl/)\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_email
+msgid "# Emails"
+msgstr "# E-sporočil"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_nbr_requests
+msgid "# of Requests"
+msgstr "# Zahtevkov"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_active
+msgid "Active"
+msgstr "Aktivno"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "All pending Helpdesk Request"
+msgstr "Vsi čakajoči zahtevki službe za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Assigned to Me or My Sales Team(s)"
+msgstr "Dodeljeno meni ali moji prodajni ekipi."
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+msgid "Cancelled"
+msgstr "Preklicano"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Categorization"
+msgstr "Kategorizacija"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_channel_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_channel_id
+msgid "Channel"
+msgstr "Kanal"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Click to create a new request."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date_closed
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Close Date"
+msgstr "Datum zaključka"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_closed
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Closed"
+msgstr "Zaključeno"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Communication"
+msgstr "Komunikacija"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_channel_id
+msgid "Communication channel."
+msgstr "Komunikacijski kanal"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_company_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_company_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Company"
+msgstr "Družba"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_contact_name
+msgid "Contact Name"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_create_uid
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_create_date
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_create_date
+msgid "Creation Date"
+msgstr "Datum nastanka"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+msgid "Date"
+msgstr "Datum"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Dates"
+msgstr "Datumi"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_deadline
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date_deadline
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Deadline"
+msgstr "Rok"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_delay_close
+msgid "Delay to Close"
+msgstr "Zakasnitev do zaključka"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_description
+msgid "Description"
+msgstr "Opis"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_email_from
+msgid "Destination email for email gateway"
+msgstr "Ciljna e-pošta za email vozlišče (gateway)"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_display_name
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,state:0
+msgid "Draft"
+msgstr "Osnutek"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_duration
+msgid "Duration"
+msgstr "Trajanje"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_email_from
+msgid "Email"
+msgstr "E-pošta"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Extended Filters..."
+msgstr "Razširjeni filtri..."
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Extra Info"
+msgstr "Dodatne informacije"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "General"
+msgstr "Splošno"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Group By"
+msgstr "Združi po"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.action_report_crm_helpdesk
+msgid ""
+"Have a general overview of all support requests by sorting them with "
+"specific criteria such as the processing time, number of requests answered, "
+"emails sent and costs."
+msgstr ""
+"Skupen pregled vseh zahtevkov po podpori sortiranih po izbranem kriteriju, "
+"kot so: čas obravnave, število odgovorjenih zahtevkov, poslana e-pošta in "
+"stroški."
+
+#. module: crm_helpdesk
+#: model:ir.model,name:crm_helpdesk.model_crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_graph
+msgid "Helpdesk"
+msgstr "Služba za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,name:crm_helpdesk.action_report_crm_helpdesk
+#: model:ir.ui.menu,name:crm_helpdesk.menu_report_crm_helpdesks_tree
+msgid "Helpdesk Analysis"
+msgstr "Analiza službe za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,name:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Helpdesk Requests"
+msgstr "Zahtevek službi za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Helpdesk Support"
+msgstr "Podpora službe za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+msgid "Helpdesk Support Tree"
+msgstr "Seznam podpore službe za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_helpdesk_calendar_view
+msgid "Helpdesk Supports"
+msgstr "Podpore službe za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.ui.menu,name:crm_helpdesk.menu_help_support_main
+msgid "Helpdesk and Support"
+msgstr "Služba za pomoč in podporo"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Helpdesk and Support allow you to track your interventions."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model,name:crm_helpdesk.model_crm_helpdesk_report
+msgid "Helpdesk report after Sales Services"
+msgstr "Poročilo službe za pomoč po prodajnih storitvah"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid ""
+"Helpdesk requests that are assigned to me or to one of the sale teams I "
+"manage"
+msgstr ""
+"Zahtevki službi za pomoč dodeljeni meni ali eni od prodajnih ekip, ki jih "
+"vodim"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "High"
+msgstr "Visoka"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,priority:0
+msgid "Highest"
+msgstr "Najvišja"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_id
+msgid "ID"
+msgstr "ID"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0
+msgid "In Progress"
+msgstr "V obdelavi"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_action_last
+msgid "Last Action"
+msgstr "Zadnji ukrep"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk___last_update
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_write_uid
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_lost_reason
+msgid "Lost Reason"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "Low"
+msgstr "Nizka"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,priority:0
+msgid "Lowest"
+msgstr "Najnižja"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Misc"
+msgstr "Razno"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Month"
+msgstr "Mesec"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Month of helpdesk requests"
+msgstr "Mesec zahtevka službi za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Case(s)"
+msgstr "Moji primeri"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Company"
+msgstr "Moja družba"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Sales Team(s)"
+msgstr "Moje prodajne ekipe"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_name
+msgid "Name"
+msgstr "Naziv"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "New"
+msgstr "Novo"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "New Helpdesk Request"
+msgstr "Nov zahtevek službi za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_action_next
+msgid "Next Action"
+msgstr "Naslednji ukrep"
+
+#. module: crm_helpdesk
+#: code:addons/crm_helpdesk/models/crm_helpdesk.py:98
+#, python-format
+msgid "No Subject"
+msgstr "Ni zadeve"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "Normal"
+msgstr "Običajna"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Notes"
+msgstr "Opombe"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,state:0
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_open
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Open"
+msgstr "Odprto"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Open Helpdesk Request"
+msgstr "Odprti zahtevki službi za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_delay_expected
+msgid "Overpassed Deadline"
+msgstr "Presežen končni rok"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_partner_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_partner_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Partner"
+msgstr "Partner"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Pending"
+msgstr "Na čakanju"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_planned_revenue
+msgid "Planned Revenue"
+msgstr "Načrtovani prihodki"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_priority
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_priority
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Priority"
+msgstr "Prioriteta"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_probability
+msgid "Probability (%)"
+msgstr "Verjetnost (%)"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Query"
+msgstr "Poizvedba"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Request Date by Month"
+msgstr "Datum zahtevka po mesecih"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Request Month"
+msgstr "Mesec zahtevka"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_user_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Responsible"
+msgstr "Odgovorni"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Responsible User"
+msgstr "Odgovorni uporabnik"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_team_id
+msgid ""
+"Responsible sales team. Define Responsible user and Email account for mail "
+"gateway."
+msgstr ""
+"Odgovorna prodajna ekipa. Določite odgovornega uporabnika in e-poštni naslov "
+"za elektronsko sporočanje."
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_team_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Sales Team"
+msgstr "Prodajna ekipa"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Salesperson"
+msgstr "Prodajalec"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Search"
+msgstr "Iskanje"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Search Helpdesk"
+msgstr "Iskanje po službi za pomoč"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_state
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_state
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Status"
+msgstr "Status"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_tag_ids
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_tag_ids
+msgid "Tags"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_team_id
+msgid "Team"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_state
+msgid ""
+"The status is set to 'Draft', when a case is created.              \n"
+"If the case is in progress the status is set to 'Open'.              \n"
+"When the case is over, the status is set to 'Done'.              \n"
+"If the case needs to be reviewed then the status is set to 'Pending'."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_email_cc
+msgid ""
+"These email addresses will be added to the CC field of all inbound and "
+"outbound emails for this record before being sent. Separate multiple email "
+"addresses with a comma"
+msgstr ""
+"Ti e-poštni naslovi bodo dodani v CC polje vseh vhodnih in izhodnih sporočil "
+"za ta zapis, preden bodo razposlana. V primeru več e-poštnih naslovov jih "
+"ločite z vejico."
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_write_date
+msgid "Update Date"
+msgstr "Datum posodobitve"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid ""
+"Use the Odoo Issues system to manage your support\n"
+"                activities. Issues can be connected to the email gateway: "
+"new\n"
+"                emails may create issues, each of them automatically gets "
+"the\n"
+"                history of the conversation with the customer."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_user_id
+msgid "User"
+msgstr "Uporabnik"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_email_cc
+msgid "Watchers Emails"
+msgstr "E-pošta opazovalcev"
+
+#~ msgid ""
+#~ "<p class=\"oe_view_nocontent_create\">\n"
+#~ "                Click to create a new request. \n"
+#~ "              </p><p>\n"
+#~ "                Helpdesk and Support allow you to track your "
+#~ "interventions.\n"
+#~ "              </p><p>\n"
+#~ "                Use the Odoo Issues system to manage your support\n"
+#~ "                activities. Issues can be connected to the email gateway: "
+#~ "new\n"
+#~ "                emails may create issues, each of them automatically gets "
+#~ "the\n"
+#~ "                history of the conversation with the customer.\n"
+#~ "              </p>\n"
+#~ "            "
+#~ msgstr ""
+#~ "<p class=\"oe_view_nocontent_create\">\n"
+#~ "                Ustvari nov zahtevek. \n"
+#~ "              </p><p>\n"
+#~ "                Služba za pomoč in podporo omogoča sledenje "
+#~ "intervencijam.\n"
+#~ "              </p><p>\n"
+#~ "                Odoo sistem sledenja zadev služi upravljanju ukrepov\n"
+#~ "                podpore. Zadeve se lahko poveže z e-poštnim strežnikom: "
+#~ "nova\n"
+#~ "                sporočila lahko ustvarijo zadeve in vsaka od njih "
+#~ "samodejnodobi\n"
+#~ "                kronologijo komunikacij s stranko.\n"
+#~ "              </p>\n"
+#~ "            "
+
+#~ msgid "Categories"
+#~ msgstr "Kategorije"
+
+#~ msgid "Category"
+#~ msgstr "Kategorija"
+
+#~ msgid ""
+#~ "Create and manage helpdesk categories to better manage and classify your "
+#~ "support requests."
+#~ msgstr ""
+#~ "Ustvarjanje in upravljanje kategorij službe za pomoč omogoča boljše "
+#~ "upravljanje in klasifikacijo zahtevkov za podporo."
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "Datum zadnjega objavljenega sporočila na zapisu."
+
+#~ msgid "Error!"
+#~ msgstr "Napaka!"
+
+#~ msgid "Escalate"
+#~ msgstr "Stopnjuj"
+
+#~ msgid "Estimates"
+#~ msgstr "Ocene"
+
+#~ msgid "Followers"
+#~ msgstr "Sledilci"
+
+#~ msgid "Helpdesk Categories"
+#~ msgstr "Kategorije službe za pomoč"
+
+#~ msgid ""
+#~ "Holds the Chatter summary (number of messages, ...). This summary is "
+#~ "directly in html format in order to be inserted in kanban views."
+#~ msgstr ""
+#~ "Povzetek klepeta (število sporočil,..). Ta povzetek je v html formatu, da "
+#~ "se lahko vključi v kanban prikaze."
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Če je označeno, zahtevajo nova sporočila vašo pozornost."
+
+#~ msgid "Is a Follower"
+#~ msgstr "Je sledilec"
+
+#~ msgid "Last Message Date"
+#~ msgstr "Datum zadnjega sporočila"
+
+#~ msgid "Messages"
+#~ msgstr "Sporočila"
+
+#~ msgid "Messages and communication history"
+#~ msgstr "Komunikacije in kronologija"
+
+#~ msgid "Planned Costs"
+#~ msgstr "Načrtovani stroški"
+
+#~ msgid "Reference"
+#~ msgstr "Sklic"
+
+#~ msgid "Reference 2"
+#~ msgstr "Sklic 2"
+
+#~ msgid "References"
+#~ msgstr "Sklici"
+
+#~ msgid "Section"
+#~ msgstr "Razdelek"
+
+#~ msgid "Summary"
+#~ msgstr "Povzetek"
+
+#~ msgid ""
+#~ "The status is set to 'Draft', when a case is "
+#~ "created.                                  \n"
+#~ "If the case is in progress the status is set to "
+#~ "'Open'.                                  \n"
+#~ "When the case is over, the status is set to "
+#~ "'Done'.                                  \n"
+#~ "If the case needs to be reviewed then the status is set to 'Pending'."
+#~ msgstr ""
+#~ "Ob nastanku primera: status 'Osnutek'.                                  \n"
+#~ "Ob zagonu primera: status 'Odprto'.                                  \n"
+#~ "Ob zaključku primera: status "
+#~ "'Opravljeno'.                                  \n"
+#~ "Če primer potrebuje pregled: status 'Na čakanju'."
+
+#~ msgid "Unread Messages"
+#~ msgstr "Neprebrana sporočila"
+
+#~ msgid "Website Messages"
+#~ msgstr "Sporočila iz spletne strani"
+
+#~ msgid "Website communication history"
+#~ msgstr "Kronologija komunikacij spletne strani"
+
+#~ msgid ""
+#~ "You can not escalate, you are already at the top level regarding your "
+#~ "sales-team category."
+#~ msgstr ""
+#~ "Stopnjevanje ni mogoče, ker ste že na vrhnji stopnji glede na kategorije "
+#~ "prodajnih ekip"

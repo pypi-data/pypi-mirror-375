@@ -1,0 +1,602 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * crm_helpdesk
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-21 14:07+0000\n"
+"PO-Revision-Date: 2016-12-13 10:11+0000\n"
+"Last-Translator: Khwunchai Jaengsawang <khwunchai.j@ku.th>\n"
+"Language-Team: Thai (http://www.transifex.com/odoo/odoo-8/language/th/)\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_email
+msgid "# Emails"
+msgstr "# อีเมล"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_nbr_requests
+msgid "# of Requests"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_active
+msgid "Active"
+msgstr "เปิดใช้งาน"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "All pending Helpdesk Request"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Assigned to Me or My Sales Team(s)"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+msgid "Cancelled"
+msgstr "ถูกยกเลิก"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Categorization"
+msgstr "การจัดประเภท"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_channel_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_channel_id
+msgid "Channel"
+msgstr "ช่องทาง"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Click to create a new request."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date_closed
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Close Date"
+msgstr "วันปิด"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_closed
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Closed"
+msgstr "ปิดแล้ว"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Communication"
+msgstr "การติดต่อสื่อสาร"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_channel_id
+msgid "Communication channel."
+msgstr "ช่องทางการสื่อสาร."
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_company_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_company_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Company"
+msgstr "บริษัท"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_contact_name
+msgid "Contact Name"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_create_uid
+msgid "Created by"
+msgstr "สร้างโดย"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_create_date
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_create_date
+msgid "Creation Date"
+msgstr "วันที่สร้าง"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+msgid "Date"
+msgstr "วันที่"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Dates"
+msgstr "วันที่"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_deadline
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date_deadline
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Deadline"
+msgstr "เส้นตาย"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_delay_close
+msgid "Delay to Close"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_description
+msgid "Description"
+msgstr "รายละเอียด"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_email_from
+msgid "Destination email for email gateway"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_display_name
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,state:0
+msgid "Draft"
+msgstr "ฉบับร่าง"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_duration
+msgid "Duration"
+msgstr "ระยะเวลา"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_email_from
+msgid "Email"
+msgstr "อีเมล์"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Extended Filters..."
+msgstr "ตัวกรองเพิ่มเติม"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Extra Info"
+msgstr "ข้อมูลเพิ่มเติม"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "General"
+msgstr "ทั่วไป"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Group By"
+msgstr "จัดกลุ่มโดย"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.action_report_crm_helpdesk
+msgid ""
+"Have a general overview of all support requests by sorting them with "
+"specific criteria such as the processing time, number of requests answered, "
+"emails sent and costs."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model,name:crm_helpdesk.model_crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_graph
+msgid "Helpdesk"
+msgstr "ฝ่ายช่วยเหลือ"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,name:crm_helpdesk.action_report_crm_helpdesk
+#: model:ir.ui.menu,name:crm_helpdesk.menu_report_crm_helpdesks_tree
+msgid "Helpdesk Analysis"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,name:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Helpdesk Requests"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Helpdesk Support"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+msgid "Helpdesk Support Tree"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_helpdesk_calendar_view
+msgid "Helpdesk Supports"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.menu,name:crm_helpdesk.menu_help_support_main
+msgid "Helpdesk and Support"
+msgstr "ฝ่ายช่วยเหลือ"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Helpdesk and Support allow you to track your interventions."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model,name:crm_helpdesk.model_crm_helpdesk_report
+msgid "Helpdesk report after Sales Services"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid ""
+"Helpdesk requests that are assigned to me or to one of the sale teams I "
+"manage"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "High"
+msgstr "สูง"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,priority:0
+msgid "Highest"
+msgstr "สูงสุด"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_id
+msgid "ID"
+msgstr "รหัส"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0
+msgid "In Progress"
+msgstr "กำลังดำเนินการ"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_action_last
+msgid "Last Action"
+msgstr "การกระทำล่าสุด"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk___last_update
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_write_uid
+msgid "Last Updated by"
+msgstr "อัพเดทครั้งสุดท้ายโดย"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_lost_reason
+msgid "Lost Reason"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "Low"
+msgstr "ต่ำ"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,priority:0
+msgid "Lowest"
+msgstr "ต่ำสุด"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Misc"
+msgstr "เบ็ดเตล็ด"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Month"
+msgstr "เดือน"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Month of helpdesk requests"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Case(s)"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Company"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Sales Team(s)"
+msgstr "ทีมขายของฉัน"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_name
+msgid "Name"
+msgstr "ชื่อ"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "New"
+msgstr "ใหม่"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "New Helpdesk Request"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_action_next
+msgid "Next Action"
+msgstr "การกระทำต่อไป"
+
+#. module: crm_helpdesk
+#: code:addons/crm_helpdesk/models/crm_helpdesk.py:98
+#, python-format
+msgid "No Subject"
+msgstr "ไม่มีชื่อเรื่อง"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "Normal"
+msgstr "ปกติ"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Notes"
+msgstr "บันทึกย่อ"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,state:0
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_open
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Open"
+msgstr "เปิด"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Open Helpdesk Request"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_delay_expected
+msgid "Overpassed Deadline"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_partner_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_partner_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Partner"
+msgstr "คู่ค้า"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Pending"
+msgstr "รอดำเนินการ"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_planned_revenue
+msgid "Planned Revenue"
+msgstr "รายได้ตามแผน"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_priority
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_priority
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Priority"
+msgstr "ระดับความสำคัญ"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_probability
+msgid "Probability (%)"
+msgstr "คาดว่า"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Query"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Request Date by Month"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Request Month"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_user_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Responsible"
+msgstr "รับผิดชอบ"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Responsible User"
+msgstr "ผู้ใช้ที่รับผิดชอบ"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_team_id
+msgid ""
+"Responsible sales team. Define Responsible user and Email account for mail "
+"gateway."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_team_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Sales Team"
+msgstr "ทีมขาย"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Salesperson"
+msgstr "พนักงานขาย"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Search"
+msgstr "ค้นหา"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Search Helpdesk"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_state
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_state
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Status"
+msgstr "สถานะ"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_tag_ids
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_tag_ids
+msgid "Tags"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_team_id
+msgid "Team"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_state
+msgid ""
+"The status is set to 'Draft', when a case is created.              \n"
+"If the case is in progress the status is set to 'Open'.              \n"
+"When the case is over, the status is set to 'Done'.              \n"
+"If the case needs to be reviewed then the status is set to 'Pending'."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_email_cc
+msgid ""
+"These email addresses will be added to the CC field of all inbound and "
+"outbound emails for this record before being sent. Separate multiple email "
+"addresses with a comma"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_write_date
+msgid "Update Date"
+msgstr "วันที่ปรับปรุง"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid ""
+"Use the Odoo Issues system to manage your support\n"
+"                activities. Issues can be connected to the email gateway: "
+"new\n"
+"                emails may create issues, each of them automatically gets "
+"the\n"
+"                history of the conversation with the customer."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_user_id
+msgid "User"
+msgstr "ผู้ใช้งาน"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_email_cc
+msgid "Watchers Emails"
+msgstr ""
+
+#~ msgid "Categories"
+#~ msgstr "ประเภท"
+
+#~ msgid "Category"
+#~ msgstr "หมวดหมู่"
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "วันที่ของข้อความสุดท้ายที่ลงบันทึก"
+
+#~ msgid "Error!"
+#~ msgstr "ผิดพลาด!"
+
+#~ msgid "Followers"
+#~ msgstr "ติดตาม"
+
+#~ msgid ""
+#~ "Holds the Chatter summary (number of messages, ...). This summary is "
+#~ "directly in html format in order to be inserted in kanban views."
+#~ msgstr ""
+#~ "ยึดติดสรุปตัวแชท (จำนวนของข้อความ., …) สรุปนี้จะถูกจัดในรูปแบบ html "
+#~ "โดยตรงเพื่อที่จะถูกใส่ในมุมมองคัมบัง"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "ถ้าการตรวจสอบข้อความใหม่ให้ระบุความสนใจของคุณ"
+
+#~ msgid "Is a Follower"
+#~ msgstr "เป็นผู้ติดตาม"
+
+#~ msgid "Last Message Date"
+#~ msgstr "วันที่ของข้อความสุดท้าย"
+
+#~ msgid "Messages"
+#~ msgstr "ข้อความ"
+
+#~ msgid "Messages and communication history"
+#~ msgstr "ข้อความและประวัติการสื่อสาร"
+
+#~ msgid "Planned Costs"
+#~ msgstr "ต้นทุนที่วางแผนไว้"
+
+#~ msgid "Reference"
+#~ msgstr "ข้อมูลอ้างอิง"
+
+#~ msgid "Reference 2"
+#~ msgstr "อ้างอิงที่ 2"
+
+#~ msgid "References"
+#~ msgstr "อ้างอิง"
+
+#~ msgid "Section"
+#~ msgstr "หัวข้อ"
+
+#~ msgid "Summary"
+#~ msgstr "สรุป"
+
+#~ msgid "Unread Messages"
+#~ msgstr "ข้อความที่ไม่ได้อ่าน"
+
+#~ msgid "Website Messages"
+#~ msgstr "ข้อความเว็บไซต์"
+
+#~ msgid "Website communication history"
+#~ msgstr "ประวัติการสื่อสารเว็บไซต์"

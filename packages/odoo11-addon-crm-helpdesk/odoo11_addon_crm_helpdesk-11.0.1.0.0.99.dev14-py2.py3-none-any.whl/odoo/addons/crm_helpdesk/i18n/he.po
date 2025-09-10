@@ -1,0 +1,612 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * crm_helpdesk
+#
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-21 14:07+0000\n"
+"PO-Revision-Date: 2015-07-17 07:01+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Hebrew (http://www.transifex.com/odoo/odoo-8/language/he/)\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_email
+msgid "# Emails"
+msgstr "# מיילים"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_nbr_requests
+msgid "# of Requests"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_active
+msgid "Active"
+msgstr "פעילה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "All pending Helpdesk Request"
+msgstr "כל הפניות הממתינות במוקד התמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Assigned to Me or My Sales Team(s)"
+msgstr "משוייכת לי או לצוות(י) המכירות שלי"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+msgid "Cancelled"
+msgstr "בוטלה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Categorization"
+msgstr "מיון לקטיגוריות"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_channel_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_channel_id
+msgid "Channel"
+msgstr "ערוץ"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Click to create a new request."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date_closed
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Close Date"
+msgstr "תאריך סגירה"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_closed
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Closed"
+msgstr "סגורה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Communication"
+msgstr "תקשורת"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_channel_id
+msgid "Communication channel."
+msgstr "ערוץ תקשורת."
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_company_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_company_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Company"
+msgstr "חברה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_contact_name
+msgid "Contact Name"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_create_uid
+msgid "Created by"
+msgstr "נוצר על ידי"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_create_date
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_create_date
+msgid "Creation Date"
+msgstr "תאריך היצירה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+msgid "Date"
+msgstr "תאריך"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Dates"
+msgstr "תאריכים"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_deadline
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_date_deadline
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Deadline"
+msgstr "תאריך יעד"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_delay_close
+msgid "Delay to Close"
+msgstr "עיכוב עד לסגירה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_description
+msgid "Description"
+msgstr "תיאור"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_email_from
+msgid "Destination email for email gateway"
+msgstr "דוא\"ל המשמש לקבלת פניות תמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_display_name
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,state:0
+msgid "Draft"
+msgstr "טיוטה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_duration
+msgid "Duration"
+msgstr "משך"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_email_from
+msgid "Email"
+msgstr "דוא\"ל"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Extended Filters..."
+msgstr "מסננים מתקדמים..."
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Extra Info"
+msgstr "מידע נוסף"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "General"
+msgstr "כללי"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Group By"
+msgstr "קבץ לפי"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.action_report_crm_helpdesk
+msgid ""
+"Have a general overview of all support requests by sorting them with "
+"specific criteria such as the processing time, number of requests answered, "
+"emails sent and costs."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model,name:crm_helpdesk.model_crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_graph
+msgid "Helpdesk"
+msgstr "מוקד תמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,name:crm_helpdesk.action_report_crm_helpdesk
+#: model:ir.ui.menu,name:crm_helpdesk.menu_report_crm_helpdesks_tree
+msgid "Helpdesk Analysis"
+msgstr "ניתוח מוקד תמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,name:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Helpdesk Requests"
+msgstr "פניות למוקד תמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Helpdesk Support"
+msgstr "תמיכה במוקד"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+msgid "Helpdesk Support Tree"
+msgstr "עץ תמיכה במוקד"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_helpdesk_calendar_view
+msgid "Helpdesk Supports"
+msgstr "תמיכה במוקד התמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.menu,name:crm_helpdesk.menu_help_support_main
+msgid "Helpdesk and Support"
+msgstr "תמיכה ומענה לפניות"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid "Helpdesk and Support allow you to track your interventions."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model,name:crm_helpdesk.model_crm_helpdesk_report
+msgid "Helpdesk report after Sales Services"
+msgstr "דוח תמיכה לשירותים לאחר מכירה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid ""
+"Helpdesk requests that are assigned to me or to one of the sale teams I "
+"manage"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "High"
+msgstr "גבוהה"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,priority:0
+msgid "Highest"
+msgstr "גבוהה ביותר"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_id
+msgid "ID"
+msgstr "מזהה"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0
+msgid "In Progress"
+msgstr "בתהליך"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_action_last
+msgid "Last Action"
+msgstr "פעולה אחרונה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk___last_update
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_write_uid
+msgid "Last Updated by"
+msgstr "עודכן לאחרונה על ידי"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_lost_reason
+msgid "Lost Reason"
+msgstr ""
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "Low"
+msgstr "נמוכה"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,priority:0
+msgid "Lowest"
+msgstr "נמוכה ביותר"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Misc"
+msgstr "שונות"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Month"
+msgstr "חודש"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Month of helpdesk requests"
+msgstr "חודש של בקשות התמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Case(s)"
+msgstr "הפניות שלי"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Company"
+msgstr "החברה שלי"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "My Sales Team(s)"
+msgstr "צוות(י) המכירות שלי"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_name
+msgid "Name"
+msgstr "שם"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "New"
+msgstr "חדשה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "New Helpdesk Request"
+msgstr "בקשה חדשה ממוקד התמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_action_next
+msgid "Next Action"
+msgstr "הפעולה הבאה"
+
+#. module: crm_helpdesk
+#: code:addons/crm_helpdesk/models/crm_helpdesk.py:98
+#, python-format
+msgid "No Subject"
+msgstr "ללא נושא"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,priority:0 selection:crm.helpdesk.report,priority:0
+msgid "Normal"
+msgstr "רגילה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+msgid "Notes"
+msgstr "הערות"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk.report,state:0
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_date_open
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Open"
+msgstr "פתוחה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Open Helpdesk Request"
+msgstr "פניה פתוחה למוקד התמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_delay_expected
+msgid "Overpassed Deadline"
+msgstr "תאריך היעד חלף"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_partner_id
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_partner_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Partner"
+msgstr "שותף"
+
+#. module: crm_helpdesk
+#: selection:crm.helpdesk,state:0 selection:crm.helpdesk.report,state:0
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Pending"
+msgstr "ממתינה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_planned_revenue
+msgid "Planned Revenue"
+msgstr "הכנסה מתוכננת"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_priority
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_priority
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Priority"
+msgstr "עדיפות"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_probability
+msgid "Probability (%)"
+msgstr "הסתברות (%)"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_form_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.crm_case_tree_view_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Query"
+msgstr "שאילתה"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Request Date by Month"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Request Month"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_user_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Responsible"
+msgstr "אחראי"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Responsible User"
+msgstr "משתמש אחראי"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_team_id
+msgid ""
+"Responsible sales team. Define Responsible user and Email account for mail "
+"gateway."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_team_id
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Sales Team"
+msgstr "צוות מכירות"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Salesperson"
+msgstr "איש מכירות"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Search"
+msgstr "חיפוש"
+
+#. module: crm_helpdesk
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+msgid "Search Helpdesk"
+msgstr "חפש במוקד התמיכה"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_state
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_state
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_crm_case_helpdesk_filter
+#: model:ir.ui.view,arch_db:crm_helpdesk.view_report_crm_helpdesk_filter
+msgid "Status"
+msgstr "סטטוס"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_tag_ids
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_tag_ids
+msgid "Tags"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_team_id
+msgid "Team"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_state
+msgid ""
+"The status is set to 'Draft', when a case is created.              \n"
+"If the case is in progress the status is set to 'Open'.              \n"
+"When the case is over, the status is set to 'Done'.              \n"
+"If the case needs to be reviewed then the status is set to 'Pending'."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,help:crm_helpdesk.field_crm_helpdesk_email_cc
+msgid ""
+"These email addresses will be added to the CC field of all inbound and "
+"outbound emails for this record before being sent. Separate multiple email "
+"addresses with a comma"
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_write_date
+msgid "Update Date"
+msgstr "עדכן תאריך"
+
+#. module: crm_helpdesk
+#: model:ir.actions.act_window,help:crm_helpdesk.crm_case_helpdesk_act111
+msgid ""
+"Use the Odoo Issues system to manage your support\n"
+"                activities. Issues can be connected to the email gateway: "
+"new\n"
+"                emails may create issues, each of them automatically gets "
+"the\n"
+"                history of the conversation with the customer."
+msgstr ""
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_report_user_id
+msgid "User"
+msgstr "משתמש"
+
+#. module: crm_helpdesk
+#: model:ir.model.fields,field_description:crm_helpdesk.field_crm_helpdesk_email_cc
+msgid "Watchers Emails"
+msgstr "מיילים של הצופים בפניה"
+
+#~ msgid "Categories"
+#~ msgstr "קטיגוריות"
+
+#~ msgid "Category"
+#~ msgstr "קטיגוריה"
+
+#~ msgid ""
+#~ "Create and manage helpdesk categories to better manage and classify your "
+#~ "support requests."
+#~ msgstr ""
+#~ "צור ונהל קטיגוריות מוקד תמיכה על מנת לנהל ולמיין טוב יותר את הפניות "
+#~ "לתמיכה."
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "תאריך הודעה אחרונה שפורסמה ברשומה."
+
+#~ msgid "Error!"
+#~ msgstr "שגיאה!"
+
+#~ msgid "Escalate"
+#~ msgstr "בצע אסקלציה"
+
+#~ msgid "Estimates"
+#~ msgstr "אומדנים"
+
+#~ msgid "Followers"
+#~ msgstr "עוקבים"
+
+#~ msgid "Helpdesk Categories"
+#~ msgstr "קטיגוריות תמיכה"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "אם מסומן אז הודעות חדשות דורשות את תשומת לבך."
+
+#~ msgid "Is a Follower"
+#~ msgstr "הוא עוקב"
+
+#~ msgid "Last Message Date"
+#~ msgstr "תאריך הודעה אחרונה"
+
+#~ msgid "Messages"
+#~ msgstr "הודעות"
+
+#~ msgid "Messages and communication history"
+#~ msgstr "היסטוריית הודעות ותקשורת"
+
+#~ msgid "Planned Costs"
+#~ msgstr "עלויות מתוכננות"
+
+#~ msgid "Reference"
+#~ msgstr "הפנייה"
+
+#~ msgid "Reference 2"
+#~ msgstr "הפנייה 2"
+
+#~ msgid "References"
+#~ msgstr "הפניות"
+
+#~ msgid "Section"
+#~ msgstr "תחום"
+
+#~ msgid "Summary"
+#~ msgstr "סיכום"
+
+#~ msgid "Unread Messages"
+#~ msgstr "הודעות שלא נקראו"
+
+#~ msgid "Website Messages"
+#~ msgstr "הודעות מהאתר אינטרנט"
+
+#~ msgid "Website communication history"
+#~ msgstr "היסטוריית תקשורת מהאתר"
