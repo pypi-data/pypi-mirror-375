@@ -1,0 +1,19 @@
+[project]
+name = "sugus-mcp-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Billy", email = "57972928@qq.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.13.1",
+]
+
+[project.scripts]
+sugus-mcp-demo = "sugus_mcp_demo:main"
+
+[build-system]
+requires = ["uv_build>=0.8.6,<0.9.0"]
+build-backend = "uv_build"
