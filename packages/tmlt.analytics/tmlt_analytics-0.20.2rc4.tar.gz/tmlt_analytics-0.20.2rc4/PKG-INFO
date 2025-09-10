@@ -1,0 +1,123 @@
+Metadata-Version: 2.4
+Name: tmlt.analytics
+Version: 0.20.2rc4
+Summary: Tumult's differential privacy analytics API
+Project-URL: homepage, https://www.tmlt.dev/
+Project-URL: documentation, https://tmlt.dev/platform/latest
+Project-URL: repository, https://github.com/opendp/tumult-analytics
+License-Expression: Apache-2.0
+License-File: LICENSE
+License-File: LICENSE.docs
+License-File: NOTICE
+Keywords: differential privacy
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: <3.13,>=3.9
+Requires-Dist: pandas<2,>=1.4.0; python_version < '3.11'
+Requires-Dist: pandas<2,>=1.5.0; python_version == '3.11'
+Requires-Dist: pandas<3,>=2.2.0; python_version >= '3.12'
+Requires-Dist: pyspark[sql]<3.6,>=3.3.1; python_version < '3.11'
+Requires-Dist: pyspark[sql]<3.6,>=3.4.0; python_version == '3.11'
+Requires-Dist: pyspark[sql]<3.6,>=3.5.0; python_version >= '3.12'
+Requires-Dist: sympy<1.13,>=1.8
+Requires-Dist: tabulate<0.9,>=0.8.9
+Requires-Dist: tmlt-core<0.19,>=0.18.0
+Requires-Dist: tqdm<5,>=4.66.4
+Requires-Dist: typeguard<5,>=4.0.0
+Requires-Dist: types-tabulate<0.9,>=0.8.10
+Requires-Dist: typing-extensions<5,>=4.1.0
+Description-Content-Type: text/markdown
+
+[![PyPI - Version](https://img.shields.io/pypi/v/tmlt-analytics?color=006dad)](https://pypi.org/project/tmlt-analytics/) |
+[![Documentation - Latest](https://img.shields.io/badge/documentation-latest-cc3d56)](https://docs.tmlt.dev/analytics/latest/) |
+[![Join our Slack!](https://img.shields.io/badge/Join%20our%20Slack!-634ad3?logo=slack)][slack]
+
+[slack]: https://join.slack.com/t/opendp/shared_invite/zt-1aca9bm7k-hG7olKz6CiGm8htI2lxE8w
+
+# Tumult Analytics — an OpenDP project
+
+Tumult Analytics is a Python library to execute differentially private
+operations on data, with a strong emphasis on usability and scalability. It is
+built atop the [Tumult Core library](https://github.com/opendp/tumult-core).
+
+It was originally developed by
+[Tumult Labs](https://www.linkedin.com/company/tmltlabs), and joined the
+[OpenDP project](https://opendp.org) after the Tumult Labs team joined LinkedIn.
+
+## Demo video
+
+Want to see Tumult Analytics in action? Check out this video introducing the
+interface fundamentals:
+
+[![Screenshot of the demo video](https://img.youtube.com/vi/SNfbYOp0CEs/0.jpg)](https://www.youtube.com/watch?v=SNfbYOp0CEs)
+
+A selection of more advanced features is shown on the second part of this demo,
+in a [separate video](https://www.youtube.com/watch?v=BRUPlfwzHHo).
+
+## Installation
+
+See the [installation instructions in the documentation](https://docs.tmlt.dev/analytics/latest/installation.html#prerequisites)
+for information about setting up prerequisites such as Spark.
+
+Once the prerequisites are installed, you can install Tumult Analytics using [pip](https://pypi.org/project/pip).
+
+```bash
+pip install tmlt.analytics
+```
+
+## Documentation
+
+The full documentation is located at https://docs.tmlt.dev/analytics/latest/.
+
+## Support
+
+If you have any questions, feedback, or feature requests, please reach out via the [OpenDP Slack][slack].
+
+## Contributing
+
+We welcome external volunteers! If you are interested in contributing, please
+let us know on [Slack][slack].
+
+See [CONTRIBUTING.md](https://github.com/opendp/tumult-analytics/blob/main/CONTRIBUTING.md) for information about installing our development dependencies and running tests.
+
+## Citing Tumult Analytics
+
+If you use Tumult Analytics for a scientific publication, we would appreciate citations to the published software or/and its whitepaper. Both citations can be found below; for the software citation, please replace the version with the version you are using.
+
+```
+@software{tumultanalyticssoftware,
+    author = {Tumult Labs},
+    title = {Tumult {{Analytics}}},
+    month = dec,
+    year = 2022,
+    version = {latest},
+    url = {https://tmlt.dev}
+}
+```
+
+```
+@article{tumultanalyticswhitepaper,
+  title={Tumult {{Analytics}}: a robust, easy-to-use, scalable, and expressive framework for differential privacy},
+  author={Berghel, Skye and Bohannon, Philip and Desfontaines, Damien and Estes, Charles and Haney, Sam and Hartman, Luke and Hay, Michael and Machanavajjhala, Ashwin and Magerlein, Tom and Miklau, Gerome and Pai, Amritha and Sexton, William and Shrestha, Ruchit},
+  journal={arXiv preprint arXiv:2212.04133},
+  month = dec,
+  year={2022}
+}
+```
+
+## License
+
+Tumult Analytics' source code is licensed under the Apache License, version 2.0
+(Apache-2.0). Tumult Analytics' documentation is licensed under Creative Commons
+Attribution-ShareAlike 4.0 International (CC-BY-SA-4.0).

@@ -1,0 +1,242 @@
+[project]
+name = "tmlt.analytics"
+description = "Tumult's differential privacy analytics API"
+readme = "README.md"
+authors = []
+license = "Apache-2.0"
+
+dynamic = ["version"]
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: English",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Security",
+
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+keywords = [
+  "differential privacy",
+]
+
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    # When updating Core, PySpark, Pandas, or SymPy, remember to update the
+    # dependency matrix in the noxfile.
+    "tmlt.core >=0.18.0,<0.19",
+    "pandas >=1.4.0,<2 ; python_version < '3.11'",
+    "pandas >=1.5.0,<2 ; python_version == '3.11'",
+    "pandas >=2.2.0,<3 ; python_version >= '3.12'",
+    "pyspark[sql] >=3.3.1,<3.6 ; python_version < '3.11'",
+    "pyspark[sql] >=3.4.0,<3.6 ; python_version == '3.11'",
+    "pyspark[sql] >=3.5.0,<3.6 ; python_version >= '3.12'",
+    "sympy >=1.8,<1.13",
+    "typeguard >=4.0.0,<5",
+    "typing-extensions >=4.1.0,<5",
+    "tqdm >=4.66.4,<5",
+    "tabulate >=0.8.9,<0.9",
+    "types-tabulate >=0.8.10,<0.9",
+]
+
+[project.urls]
+homepage = "https://www.tmlt.dev/"
+documentation = "https://tmlt.dev/platform/latest"
+repository = "https://github.com/opendp/tumult-analytics"
+
+[tool.uv]
+required-version = ">=0.7.0"
+default-groups = "all"
+
+[dependency-groups]
+black = ["black >=23.3,<24"]
+isort = ["isort >=5.11,<6"]
+mypy = ["mypy >=1.14.0"]
+pylint = ["pylint >=3.2.5"]
+pydocstyle = ["pydocstyle[toml] >=6.3"]
+test = [
+    "pytest",
+    "pytest-cov >=5.0,<6",
+    "pytest-xdist >=3.6,<4",
+]
+docs = [
+    "pydata-sphinx-theme >=0.14.4,<15",
+    "sphinx >=7.2.0,<8",
+    "sphinx-autoapi >=3.1.1,<4",
+    "sphinx-autodoc-typehints >=2.0.1,<3",
+    "sphinx-automodapi >=0.17.0,<0.18",
+    "sphinx-copybutton >=0.5.2,<0.6",
+    "sphinx-design >=0.5.0,<0.6",
+    "sphinx-reredirects >=0.1.5,<0.2",
+    "sphinxcontrib-bibtex >=2.6.2,<3",
+    "sphinxcontrib-images >=0.9.4,<0.10",
+]
+docs-examples = [
+    "matplotlib >=3.1.0,<4",
+    "seaborn >=0.13.0,<0.14",
+]
+audit = ["pip-audit >=2.9.0,<3"]
+ci-tools = ["requests >=2.31.0,<3"]
+scripting = [
+    "nox >=2024.03.02",
+    "tmlt.nox_utils"
+]
+
+[tool.uv.sources]
+# Switch which of these is commented out to test local changes to nox-utils:
+# "tmlt.nox_utils" = { path = "../tumult-tools/nox-utils", editable = true }
+"tmlt.nox_utils" = { git = "https://github.com/opendp/tumult-tools.git", subdirectory = "nox-utils" }
+
+################################################################################
+# Build configuration
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "semver"
+# The default configuration expect vX.Y.Z, but we haven't been using the 'v' prefix.
+pattern = "^(?P<base>\\d+\\.\\d+\\.\\d+)(-(?P<stage>[a-zA-Z]+)\\.(?P<revision>\\d+))?"
+commit-length = 8
+
+[tool.hatch.build.hooks.version]
+path = "src/tmlt/analytics/_version.py"
+template = '''
+"""Package version information."""
+__version__ = "{version}"
+'''
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+  "CHANGELOG.rst",
+  "benchmark/",
+  "doc/",
+  "src/",
+  "test/",
+  "LICENSE",
+  "NOTICE",
+]
+[tool.hatch.build.targets.wheel]
+packages = ["src/tmlt"]
+
+################################################################################
+# Linter configuration
+
+[tool.black]
+force-exclude = "noxfile.py"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 88
+
+[tool.mypy]
+mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
+explicit_package_bases = true
+follow_imports = "silent"
+ignore_missing_imports = true
+namespace_packages = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "test.*"
+disallow_untyped_defs = false
+check_untyped_defs = true
+
+[tool.pylint.master]
+# See https://github.com/PyCQA/pylint/issues/1975#issuecomment-387924981
+extension-pkg-whitelist = ['numpy']
+load-plugins = ['pylint.extensions.docparams']
+# Only check param docs in docstrings that contain an Args: section.
+# Set to "no" to show docstrings missing argument documentation.
+accept-no-param-doc = true
+
+[tool.pylint.'MESSAGES CONTROL']
+enable = [
+  # Note: there is a false positive on 'useless-suppression' when you
+  # use 'disable=line-too-long' at the end of a docstring.
+  # See: https://github.com/pylint-dev/pylint/issues/8301
+  'useless-suppression'
+]
+# By default, informational rules like useless-suppression don't cause PyLint to
+# produce an error.
+fail-on = ['useless-suppression']
+disable = [
+  'arguments-differ',
+  'duplicate-code',
+  'fixme',
+  'invalid-name',
+  'logging-format-interpolation',
+  'logging-fstring-interpolation',
+  'missing-function-docstring',  # Redundant with pydocstyle
+  'missing-raises-doc',
+  'missing-return-doc',
+  'no-else-return',
+  'super-init-not-called',
+  'too-few-public-methods',
+  'too-many-ancestors',
+  'too-many-arguments',
+  'too-many-branches',
+  'too-many-instance-attributes',
+  'too-many-lines',
+  'too-many-locals',
+  'too-many-positional-arguments',
+  'too-many-public-methods',
+  'too-many-return-statements',
+  'too-many-statements',
+  'unbalanced-tuple-unpacking',
+  'unnecessary-lambda-assignment',
+  'unsubscriptable-object',
+  'use-dict-literal',
+  # There are a lot of false positives for unsupported-binary-operation
+  # on Python 3.9: https://github.com/pylint-dev/pylint/issues/7381
+  'unsupported-binary-operation',
+  # black and isort group tmlt.core separately from tmlt.analytics,
+  # but pylint thinks they should both be grouped as 'tmlt'.
+  'ungrouped-imports',
+  'wrong-import-order',
+]
+
+[tool.pylint.FORMAT]
+max-line-length = 88
+
+[tool.pydocstyle]
+convention = "google"
+add-ignore = [
+  # `D200: One-line docstring should fit on one line with quotes`
+  # conflicts with pylint's `max-line-length`.
+  "D200",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "serial",
+]
+# Avoids an re-import issue with serializers. See tumult-labs/tumult#3343 for
+# more information and a better future fix.
+addopts = ["--import-mode=importlib"]
+
+################################################################################
+# Test configuration
+
+[tool.coverage.run]
+relative_files = true
