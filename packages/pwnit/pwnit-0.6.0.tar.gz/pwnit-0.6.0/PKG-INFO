@@ -1,0 +1,97 @@
+Metadata-Version: 2.4
+Name: pwnit
+Version: 0.6.0
+Summary: Automatic tool to quickly start a pwn CTF challenge
+Project-URL: Homepage, https://github.com/Church-17/pwnit
+Author-email: Matteo Chiesa <matteo.chiesa.mc@gmail.com>
+Maintainer-email: Matteo Chiesa <matteo.chiesa.mc@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2022 Marco Meinardi
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: ctf,pwn
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.10
+Requires-Dist: cerberus
+Requires-Dist: pwntools
+Requires-Dist: pyyaml
+Requires-Dist: requests
+Requires-Dist: yara-python
+Description-Content-Type: text/markdown
+
+# PwnIt
+
+This repository started as a fork of [spwn](https://github.com/MarcoMeinardi/spwn). It was a good tools for initialize a PWN challenge, but I wanted more customization, and since it had not been maintained for a couple of years, I started to look into the code to give more freedom to the user. In the end, I ended up completely refactoring the code and adding some useful features.
+
+## Features
+- Auto detect files from cwd (executable and all the libs)
+- Analyze executable:
+  - `checksec`
+  - interesting functions
+  - seccomp rules
+  - cryptographic constants
+- Patch executable:
+  - Download and unstrip all the libraries related to the detected libc (loader included)
+  - Set runpath and interpreter of the executable with the libraries from the cwd or from the downloaded ones
+- Set binary and loader to be executable
+- Interactively generate functions to navigate a menu in the binary
+- Generate the solve script from your template
+- Download the libc source code
+
+## Usage
+```
+usage: pwnit [-h] [-r REMOTE] [-i] [-t TEMPLATE] [-o] [--libc-source] [--patch] [--seccomp] [--yara]
+
+pwnit is a tool to quickly start a pwn challenge
+
+options:
+  -h, --help            show this help message and exit
+  -r REMOTE, --remote REMOTE
+                        Specify <host>:<port>
+  -i, --interactions    Create the interactions
+  -t TEMPLATE, --template TEMPLATE
+                        Create the script from the template
+  -o, --only            Do only the actions specified in args
+  --libc-source         Donwload the libc source
+  --patch               Patch the executable with the specified path
+  --seccomp             Check seccomp
+  --yara                Check for given Yara rules
+```
+
+If the files have weird names (such as the libc name not starting with `libc`), the autodetection will fail; the best fix for this is to rename the files.
+
+To understand how the interactions creation works, I suggest to just try it out. It should be pretty straight forward, but if you want to pwn as fast as possible, you cannot waste any time :)
+
+## Installation
+This tool requires this packages:
+```bash
+sudo apt update
+sudo apt install patchelf elfutils ruby-rubygems
+# Or the equivalent for you package manager
+
+sudo gem install seccomp-tools
+```
