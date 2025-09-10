@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: geochemdb
+Version: 1.1.0
+Summary: Manage a database of geochemical data with Python.
+Home-page: https://github.com/sarttiso/geochemdb
+Author: Adrian Tasistro-Hart
+Author-email: adrian@tasistro-hart.com
+License: GPL-3.0-only
+Project-URL: Documentation, https://sarttiso.github.io/geochemdb/
+Project-URL: Source, https://github.com/sarttiso/geochemdb
+Project-URL: Changelog, https://sarttiso.github.io/geochemdb/changelog.html
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: importlib-metadata; python_version < "3.8"
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: thefuzz
+Provides-Extra: testing
+Requires-Dist: setuptools; extra == "testing"
+Requires-Dist: pytest; extra == "testing"
+Requires-Dist: pytest-cov; extra == "testing"
+Dynamic: license-file
+
+# geochemdb
+
+This python module provides a class and methods for adding, updating, and reading data from a SQLite database. It is geared towards a database of geochemical measurements on geologic materials, but it will be as general as possible with respect to admit a variety of data sources.
+
+Package documentation and source is available at https://github.com/sarttiso/geochemdb.
