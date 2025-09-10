@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: zenith-trade-client
+Version: 0.1.1
+Summary: Python client for accessing Zenith-Trade FastAPI backend
+Author-email: Your Name <your.email@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/yourusername/zenith-trade-client
+Project-URL: Issues, https://github.com/yourusername/zenith-trade-client/issues
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.31.0
+Requires-Dist: pydantic>=1.10
+Dynamic: license-file
+
+# Zenith Trade Client
+
+A simple Python client to interact with the **Zenith-Trade FastAPI backend**.
+
+## Installation
+
+```bash
+pip install zenith-trade-client
