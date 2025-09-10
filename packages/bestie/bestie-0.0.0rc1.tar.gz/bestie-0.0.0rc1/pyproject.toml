@@ -1,0 +1,15 @@
+[project]
+version = "0.0.0rc1"
+name = "bestie"
+authors = [
+    {name = "jqssun", email = "jqssun+git@googlemail.com"},
+]
+description = "Beast"
+readme = "README.md"
+
+[tool.setuptools]
+packages = ["beast", "mode_s"]
+
+[project.urls]
+Homepage = "https://github.com/jqssun/bestie"
+Repository = "https://github.com/jqssun/bestie.git"
