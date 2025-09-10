@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastbackup"
+dynamic = ["version"]
+description = "一行导入式Python项目实验备份工具"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "chenziwen", email = "1304005976@qq.com"},
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7", 
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+requires-python = ">=3.6"
+keywords = ["backup", "experiment", "version-control", "development"]
+
+[project.urls]
+Homepage = "https://github.com/chenziwenhaoshuai/fastbackup"
+Repository = "https://github.com/chenziwenhaoshuai/fastbackup.git"
+Issues = "https://github.com/chenziwenhaoshuai/fastbackup/issues"
+
+[project.scripts]
+fastbackup = "fastbackup.cli:main"
