@@ -1,0 +1,26 @@
+[project]
+name = "waveletnn"
+version = "0.3.4"
+description = "WaveletNN blocks and losses"
+keywords = ["wavelet", "dwt", "idwt", "pytorch"]
+authors = [{ name = "Scurrra (Ilja Baroŭski)", email = "iscurrra@gmail.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+]
+requires-python = ">=3.11"
+dependencies = ["torch>=2", "numpy"]
+
+[project.optional-dependencies]
+pywt = ["PyWavelets"]
+
+[project.urls]
+Repository = "https://github.com/Scurrra/WaveletNN-PyTorch.git"
+Issues = "https://github.com/Scurrra/WaveletNN-PyTorch/issues"
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
