@@ -1,0 +1,51 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test
+
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12', '3.13']
+        os: [ubuntu-latest] # [ubuntu-latest, windows-latest, macos-latest]
+        pydantic-version: ['>=1.10,<2', '>=2.6']
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON_VERSION: ${{ matrix.python-version }}
+      PYDANTIC_VERSION: ${{ matrix.pydantic-version }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PDM
+        uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: true
+
+      - name: Install prerequisites
+        run: |-
+          pdm install -G:all
+          pdm run playwright install chromium
+
+      - name: Install Specific Version Pydantic (Bash)
+        if: runner.os != 'Windows'
+        run: pdm add "pydantic$PYDANTIC_VERSION"
+      - name: Install Specific Version Pydantic (PowerShell)
+        if: runner.os == 'Windows'
+        run: pdm add "pydantic$env:PYDANTIC_VERSION"
+
+      - name: Run Pytest
+        run: pdm run pytest
+      - name: Run standabone tests
+        run: pdm run python -m tests_standalone
