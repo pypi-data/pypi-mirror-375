@@ -1,0 +1,15 @@
+fsspec
+adlfs
+gcsfs
+s3fs
+pyarrow
+pandas
+google
+
+[dev]
+pytest
+pytest-mock
+pytest-cov~=6.1
+pre-commit
+twine
+mypy-to-codeclimate
