@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+ndsharray/__init__.py
+ndsharray/ndsharray.py
+ndsharray.egg-info/PKG-INFO
+ndsharray.egg-info/SOURCES.txt
+ndsharray.egg-info/dependency_links.txt
+ndsharray.egg-info/not-zip-safe
+ndsharray.egg-info/requires.txt
+ndsharray.egg-info/top_level.txt
+tests/test_ndsharry.py
