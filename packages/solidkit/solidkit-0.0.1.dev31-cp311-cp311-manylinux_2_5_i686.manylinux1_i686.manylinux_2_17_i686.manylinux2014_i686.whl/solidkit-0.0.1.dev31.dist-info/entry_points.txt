@@ -1,0 +1,2 @@
+[console_scripts]
+solidkit = solidkit.cli.main:main
