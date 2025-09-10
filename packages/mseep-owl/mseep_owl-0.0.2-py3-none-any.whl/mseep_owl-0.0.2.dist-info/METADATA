@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: mseep-owl
+Version: 0.0.2
+Summary: Optimized Workforce Learning for General Multi-Agent Assistance in Real-World Task Automation
+Project-URL: Homepage, https://www.camel-ai.org/
+Project-URL: Repository, https://github.com/camel-ai/owl
+Project-URL: Documentation, https://docs.camel-ai.org
+Author-email: mseep <support@skydeck.ai>
+License-Expression: Apache-2.0
+Keywords: agent-collaboration,artificial-intelligence,learning-systems,multi-agent-assistance,optimized-workforce-learning,real-world-tasks,task-automation,workforce-optimization
+Requires-Python: <3.13,>=3.10
+Requires-Dist: camel-ai[owl]==0.2.57
+Requires-Dist: docx2markdown>=0.1.1
+Requires-Dist: firecrawl>=2.5.3
+Requires-Dist: gradio>=3.50.2
+Requires-Dist: mcp-server-fetch==2025.1.17
+Requires-Dist: mcp-simple-arxiv==0.2.2
+Requires-Dist: mistralai>=1.7.0
+Requires-Dist: xmltodict>=0.14.2
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
