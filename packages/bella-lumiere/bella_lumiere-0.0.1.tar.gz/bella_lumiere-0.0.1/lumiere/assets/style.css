@@ -1,0 +1,54 @@
+:root {
+    --logo-color: rgb(222, 183, 82)
+}
+
+.column {
+    height: 100vh;
+    overflow: auto;
+}
+
+.row {
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    align-items: center;
+}
+
+#left-column {
+    background-color: whitesmoke;
+    border-right: 1px solid lightgray;
+}
+
+#logo {
+    width: 100%;
+}
+
+input[type="radio"]:checked {
+    background-color: var(--logo-color);
+    border-color: var(--logo-color);
+}
+
+.btn,
+.btn:hover,
+.btn:active {
+    background-color: var(--logo-color) !important;
+    border-color: var(--logo-color) !important;
+}
+
+.Select.is-focused .Select-control {
+    border-color: var(--logo-color);
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: var(--logo-color);
+    box-shadow: none;
+}
+
+#features-grid-upload {
+    line-height: 40px;
+    width: 100%;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: dashed;
+    text-align: center;
+}
