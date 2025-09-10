@@ -1,0 +1,18 @@
+{
+    "@jupyterlab/docmanager-extension:plugin":
+    {
+	"defaultViewers":
+	{
+	    "markdown": "Jupytext Notebook",
+	    "myst": "Jupytext Notebook"
+	}
+    },
+    "@jupyterlab/translation-extension:plugin":
+    {
+	"locale": "fr_FR"
+    },
+    "@jupyter/nbgrader:formgrader":
+    {
+	"local_config": true
+    }
+}

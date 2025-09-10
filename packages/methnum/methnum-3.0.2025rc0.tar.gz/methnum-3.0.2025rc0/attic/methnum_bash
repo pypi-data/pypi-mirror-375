@@ -1,0 +1,1030 @@
+#!/bin/bash
+
+export COURSE_NAME=MethNum
+export COURSE_SCRIPT=methnum
+export COURSE_ROOT=/public/methnum
+export COURSE_STUDENT_DIR=${COURSE_STUDENT_DIR:-"~/${COURSE_NAME}"}
+export COURSE_GIT_ROOT_URL="https://gitlab.dsi.universite-paris-saclay.fr/MethNum/"
+export TRAVO_GITLAB="https://gitlab.dsi.universite-paris-saclay.fr/"
+export COURSE_GITLAB_PATH="MethNum/2020-2021"
+export COURSE_SIF=tp-ssh1.dep-informatique.u-psud.fr
+export COURSE_SUBMITTED_DIR="./submitted"
+export COURSE_GROUPS="MP1 MP2 MP3 MP4 MP5 MP6 MP7 MP8 LDD-MP1 LDD-MP2 LDD-MP3 LDD-PC1 LDD-PC2 LDD-GEO LDD-STAPS LDD-CSVT CandidatsLibres"
+export COURSE_MAIL_EXTENSION="@universite-paris-saclay.fr"
+
+# export TRAVO_DEBUG=true
+
+source travo
+
+help () {
+    cat <<EOF
+
+Aide pour l'utilisation de la commande methnum
+===============================================
+
+Télécharger un TP ou un projet (ici pour la séance 1 du L1):
+
+       methnum fetch L1/Seance1 GROUPE
+
+avec GROUPE parmis [$COURSE_GROUPS]
+
+Soumettre son TP ou projet (ici pour la séance L1/Seance1):
+
+       methnum submit L1/Seance1 GROUPE
+
+Soumettre son examen (ici pour l'évaluation L1/Examen) avec un numero d'anonymat:
+
+       methnum submit-exam L1/Examen NUMEROANONYMAT
+
+Lancer le notebook Jupyter:
+
+       methnum jupyter notebook
+
+EOF
+}
+
+advanced_help() {
+    cat <<EOF
+
+Aide pour l'utilisation de la commande methnum
+===============================================
+
+Collecter les soumissions des étudiants; à lancer par un responsable de cours sur les machines du SIF.
+Option: en second argument, rajouter une chaine de charactères (* autorisé) pour récupérer l'évaluation d'un seul
+étudiant ou d'un groupe (par exemple MP1.guido.van-rossum ou MP1*):
+
+     methnum collect L1/Seance1 [STUDENT_ID]
+
+Noter les soumissions des étudiants; le dossier submitted contenant les épreuves doit être présent:
+Option: en second argument, rajouter une chaine de charactères (* autorisé) pour récupérer l'évaluation d'un seul
+étudiant ou d'un groupe (par exemple MP1.guido.van-rossum ou MP1*):
+
+     methnum autograde L1/Seance1 [STUDENT_ID]
+
+Générer des versions HTML des évaluations notées et commentées; le dossier autograded contenant les épreuves doit être présent:
+Option: en second argument, rajouter une chaine de charactères (* autorisé) pour récupérer l'évaluation d'un seul
+étudiant ou d'un groupe (par exemple MP1.guido.van-rossum ou MP1*):
+
+     methnum feedback L1/Seance1 [STUDENT_ID]
+
+Envoyer par email les versions HTML des évaluations notées et commentées (générées avec methnum feedback); le dossier feedback contenant les pages htmml doit être présent:
+Option: en second argument, rajouter une chaine de charactères (* autorisé) pour récupérer l'évaluation d'un seul
+étudiant ou d'un groupe (par exemple MP1.guido.van-rossum ou MP1*):
+
+     methnum send_feedback L1/Seance1 LOGIN-UPS [STUDENT_ID]
+
+Se connecter à distance au SIF:
+
+     methnum connect L1 LOGIN-UPS
+
+avec LOGIN-UPS le username pour se connecter au SIF $COURSE_SIF.
+
+Pour l'envoi de la séance L1/Seance1 sur le dépôt gitab contenant les sujets et au SIF,
+se placer dans le dépôt de cours du L1, puis exécutez:
+
+     methnum make_sujet L1/Seance1
+
+Cette commande copie un dossier contenant un sujet en jupyter notebook dans un
+dossier source et fabrique des sujets sans les solutions placés dans le dossier
+release. Se placer dans le dossier contenant le dossier du sujet, puis exécuter:
+
+     methnum remove_solution MONSUJET
+
+avec MONSUJET le nom du dossier contenant le jupyter notebook.
+
+Lancer une commande arbitraire dans l'environnement conda methnum:
+
+     methnum run commande arg1 arg2
+
+Mettre à jour son répertoire $COURSE_NAME à partir du répertoire éponyme sur les machines du SIF (par unison):
+
+     methnum sync
+
+EOF
+}
+
+
+check_dir() {
+    (travo_check_dir ${COURSE_STUDENT_DIR} > /dev/null 2>&1 ) && return 0
+    local dir="${COURSE_STUDENT_DIR/#~/$HOME}"
+    if [ ! -d "$dir" ]; then
+        if [ -e "$dir" ]; then
+            travo_error "$dir n'est pas un répertoire"
+        fi
+        travo_raise_info "- Création répertoire ${COURSE_STUDENT_DIR}"
+        travo_run mkdir "$dir"
+    fi
+    travo_raise_info "- Déplacement dans ${COURSE_STUDENT_DIR}"
+    travo_run cd "${COURSE_STUDENT_DIR/#~/$HOME}" ||
+        travo_error "  Échec"
+}
+
+ensure_submitted() {
+    (travo_check_dir ./submitted > /dev/null 2>&1 ) && return 0
+    if [ ! -d "$COURSE_SUBMITTED_DIR" ]; then
+        if [ -e "$COURSE_SUBMITTED_DIR" ]; then
+            travo_error "$SUBMITTED_DIR n'est pas un répertoire"
+        fi
+        travo_raise_info "- Création répertoire ${COURSE_SUBMITTED_DIR}"
+        travo_run mkdir "$COURSE_SUBMITTED_DIR"
+    fi
+    travo_raise_info "- Déplacement dans ${COURSE_SUBMITTED_DIR}"
+    travo_run cd "${COURSE_SUBMITTED_DIR}" ||
+        travo_error "  Échec"
+}
+
+http_url_to_repo() {
+    local path=$1
+    echo "${TRAVO_GITLAB}${path}.git"
+}
+
+assignment_repo_path() {
+    local assignment=$1
+    local group=$2
+    local dirname=$(dirname "$assignment")
+    local basename=$(basename "$assignment")
+    # works even if no dirname and/or no group
+    if [ "$group" == "" ]; then
+        echo "${COURSE_GITLAB_PATH}/${assignment}"
+    else
+        echo "${COURSE_GITLAB_PATH}/${dirname}/${group}/${basename}"
+    fi
+}
+
+assignment_repo_http_url() {
+    local assignment=$1
+    local group=$2
+    local repo=$(assignment_repo_path $assignment $group)
+    http_url_to_repo "${repo}"
+}
+
+assignment_dashed_repo_name() {
+    local assignment=$1
+    echo "${COURSE_NAME}-${assignment////-}"
+}
+
+assignment_personal_repo_path() {
+    local assignment=$1
+    username=`travo_gitlab_username`
+    echo "${username}/$(assignment_dashed_repo_name $assignment)"
+    # echo "${username}/${assignment}"
+}
+
+assignment_personal_repo_http_url() {
+    local assignment=$1
+    local repo=$(assignment_personal_repo_path $assignment)
+    http_url_to_repo "${repo}"
+}
+
+oauth2_https_url() {
+    local url=$1
+    echo "${url/https:\/\//https://oauth2@}"
+}
+
+assignment_repo_doc=\
+"Query the repository for this assignment
+Return whether the repository exist
+retval: the metadata of this repository"
+assignment_repo() {
+    local assignment=$1
+    local group=$2
+    travo_raise_debug "Query repository for assignment ${assignment}"
+    local repo=$(assignment_repo_path ${assignment} ${group})
+    travo_raise_debug "  Repository: ${TRAVO_GITLAB}${repo}"
+    retval=$(travo_project_metadata "${repo}")
+}
+
+assignment_personal_repo_doc=\
+"Query the user's personal repository for this assignment
+Return whether the user has a personal repository for this assignment
+retval: the metadata of this repository"
+assignment_personal_repo() {
+    local assignment=$1
+    travo_raise_debug "Query personal repository for assignment ${assignment}"
+    travo_gitlab_authenticate
+    local repo=$(assignment_personal_repo_path ${assignment})
+    travo_raise_debug "  Repository: ${TRAVO_GITLAB}${repo}"
+    retval="$(travo_project_metadata "${repo}" 2>/dev/null)"
+}
+
+
+assignment_ensure_personal_repo_created_doc=\
+"Ensure that the user has a personal repository for this assignement,
+creating it if needed
+Input: the name of the assignement
+retval: set to the metadata of this repository"
+assignment_ensure_personal_repo_created() {
+    local assignment=$1
+    local group=$2
+
+    local myrepo=$(assignment_personal_repo_path ${assignment})
+    local repo=$(assignment_repo_path "$assignment" "$group")
+
+    check_assignment $assignment
+    travo_raise_debug "Ensure personal repository is created for assignment ${assignment}"
+    if assignment_personal_repo "${assignment}"; then
+        local metadata="$retval"
+        local web_url=$(jq -r .web_url <<< "${metadata}")
+        local default_branch=$(jq -r .default_branch <<< "${metadata}")
+        if [ "$default_branch" == "null" ]; then
+           travo_error "Dépôt personnel corrompu: $web_url
+Consultez le à l'adresse ci-dessus; s'il est vide, vous
+pouvez le détruire avec la commande:
+
+    $COURSE_SCRIPT travo_gitlab_remove_project $myrepo
+
+Il sera reconstruit lors du prochain dépôt"
+        fi
+        travo_raise_debug "repo already created"
+       return
+    fi;
+
+    check_group $group
+    travo_raise_info "Création du dépôt personnel pour $assignment:"
+    travo_raise_info "- Fork de ${repo} vers ${myrepo}"
+    local myreponame=$(assignment_dashed_repo_name $assignment)
+    local metadata=$(travo_gitlab_fork_project "${repo}" "${myrepo}" "${myreponame}")
+    local web_url=$(jq -r .web_url <<< "${metadata}")
+    local basename=$(basename "$web_url")
+    local username=`travo_gitlab_username`
+    # Our gitlab does not seem to support yet setting the name upon fork
+    # https://gitlab.com/gitlab-org/gitlab-foss/-/merge_requests/25363
+    # travo_project_set "$username/$basename" path="$myreponame" > /dev/null  # after that path is user/MethNum-L1-Seance1
+    # travo_project_set "$myrepo" name="$myreponame" > /dev/null  # need to be in two lines
+    travo_raise_info "- Configuration accès enseignants (groupe $COURSE_GITLAB_PATH)"
+    travo_project_share_with_group "$myrepo" "$COURSE_GITLAB_PATH" 30 > /dev/null # maintainer
+    travo_raise_info "- Configuration en dépôt privé"
+    travo_project_set "$myrepo" jobs_enabled=false > /dev/null
+    travo_project_set "$myrepo" visibility=private > /dev/null
+    travo_raise_info "- Votre dépôt personnel a été créé:"
+    travo_raise_info "  ${web_url}"
+    retval="${metadata}"
+}
+
+assignment_ensure_remote_configuration_doc=\
+"Ensure that the remotes of this git clone are configured as follows:
+- 'origin' points to the original assignment repository
+- 'submission' points to the personal fork of the assignment
+
+Precondition: this command should be run from a clone of
+the (personal fork of) the assignement repository
+Input: the name of the assignment  # Should not be needed
+"
+assignment_ensure_remote_configuration() {
+    local assignment=$1
+    local group=$2
+
+    assignment_ensure_personal_repo_created "${assignment}" "${group}"
+    local metadata="${retval}"
+    http_url_to_repo=$(jq -r .http_url_to_repo <<< "${metadata}")
+
+    travo_raise_debug "Ensure that the remote of this repository is configured"
+    local myrepo=$(assignment_personal_repo_path ${assignment})
+    if git remote -v | fgrep "${myrepo}" > /dev/null; then
+        travo_raise_debug "Personal remote already configured"
+        return
+    fi
+
+    travo_raise_info "Reconfiguration du dépôt distant de la copie de travail: ${http_url_to_repo}"
+    travo_run git remote set-url origin "${http_url_to_repo}"
+}
+
+# Provide default local git configuration values for name and e-mail,
+# based on gitlab's user information
+assignment_ensure_git_author_config() {
+    local assignment=$1
+    for item in name email; do
+        if ! git config "user.$item" > /dev/null; then
+            travo_run git config --local "user.$item" "$(travo_gitlab_user_info "$item")"
+        fi
+    done
+}
+
+assignment_clone() {
+    local assignment=$1
+    local group=$2
+    travo_raise_info "Création d'une copie de travail du devoir dans $assignment"
+    if assignment_personal_repo "${assignment}"; then
+        local metadata="${retval}"
+        http_url_to_repo=$(jq -r .http_url_to_repo <<< "${metadata}")
+        travo_raise_info "  à partir de votre dépot personnel ${http_url_to_repo}"
+    else
+        assignment_repo "${assignment}" "${group}" || return 1
+        local metadata="${retval}"
+        http_url_to_repo=$(jq -r .http_url_to_repo <<< "${metadata}")
+        travo_raise_info "  à partir du dépôt d'origine ${http_url_to_repo}"
+    fi
+    authenticated_git clone "$http_url_to_repo" "${assignment}"
+}
+
+check_assignment() {
+    test -n "$1" ||
+        travo_error "Nom de devoir manquant; tapez «methnum» pour de l'aide"
+}
+
+check_group() {
+    test -n "$1" ||
+        travo_error "Groupe non spécifié; tapez «methnum pour de l'aide"
+    for group in $COURSE_GROUPS; do
+        if [ "$1" == "$group" ]; then
+            return 0
+        fi
+    done
+    travo_error "Groupe $1 inconnu; tapez «methnum» pour de l'aide"
+}
+
+check_nbgrader_config () {
+     if [ ! -f "nbgrader_config.py" ]; then
+        travo_error "Vous devez être dans le dépôt contenant le fichier nbgrader_config.py du cours pour lancer cette commande (par exemple ~/MethNum/L1-Profs) ."
+        exit 0
+    fi
+}
+
+# Exemple:
+# authenticated_git <command> <url> ...
+authenticated_git() {
+    local command=$1
+    local url=$(oauth2_https_url $2)
+    shift; shift;
+    GIT_ASKPASS="travo-gitlab-token.sh" travo_run git "$command" "$url" "$@"
+}
+
+methnum-fetch() {
+    local assignment=$1
+    local group=$2
+    local option=$3 # Can be --force
+    local backup
+    check_dir
+    check_assignment "$assignment"
+    check_group "$group"
+    if [ -e "${assignment}" ]; then
+        if [ ! -d "$assignment/.git" ]; then
+            travo_raise_error "Un fichier ou répertoire $assignment existe mais n'est pas une copie de travail du devoir"
+            travo_error "Déplacez ou supprimez le."
+        fi
+        if assignment_personal_repo "${assignment}"; then
+            (
+                cd $assignment;
+                assignment_ensure_remote_configuration ${assignment}
+                travo_raise_info "Intégration mises à jour:"
+                travo_raise_info "- Sauvegarde préalable:"
+                (travo_run git commit --all -m "Sauvegarde avant mise à jour")
+                travo_raise_info "- Téléchargement:"
+                authenticated_git fetch $(assignment_personal_repo_http_url $assignment) ||
+	            travo_error "- Échec au téléchargement des mises à jour"
+                travo_raise_info "- Tentative d'intégration:"
+                (travo_run git merge -m "Intégration des mises à jour" FETCH_HEAD) || {
+                    travo_run git merge --abort
+                    if [ "$option" == "--force" ]; then
+                        cd ..
+                        backup=${assignment}-$(date +%Y-%m-%d-%H:%M)
+                        travo_raise_warning "- La mise à jour n'a pas pu se faire du fait d'un conflit"
+                        travo_raise_warning "  Votre devoir local va être renommé en ${backup}"
+                        travo_raise_warning "  et une copie fraîche du sujet téléchargée à la place"
+                        mv ${assignment} ${backup}
+                    else
+                        travo_raise_error "- La mise à jour n'a pas pu se faire du fait d'un conflit"
+                        travo_raise_info "Pour renommer votre devoir local et forcer la mise à jour, utiliser:"
+                        travo_raise_info "    methnum fetch $assignment --force"
+                        exit 1
+                    fi
+                }
+            ) || exit 1
+        fi
+    fi
+    if [ ! -d "${assignment}" ]; then
+        assignment_clone "${assignment}" "${group}"
+    fi
+    # methnum-errata ${assignment}
+}
+
+methnum-errata() {
+    assignment=$1
+    group=$2
+    check_dir
+    check_assignment "$assignment"
+    (
+        cd $assignment;
+        travo_raise_info "Intégration erratas:"
+        travo_raise_info "- Sauvegarde préalable:"
+        (travo_run git commit --all -m "Sauvegarde")
+        travo_raise_info "- Téléchargement:"
+        travo_run git fetch $(assignment_repo_http_url $assignment $group) errata ||
+	    travo_raise_error "Échec au téléchargement des erratas"
+        travo_raise_info "- Tentative d'intégration:"
+        (travo_run git merge -m "Intégration des erratas" FETCH_HEAD) || {
+            travo_run git merge --abort
+            travo_error "- L'intégration des erratas induirait un conflit; abandon"
+        }
+    ) || exit 1
+}
+
+check_login() {
+    given_login=$1
+    if [ -z "$(id "$given_login")" ]; then
+        error "Login $given_login inconnu à UPS. Vérifier l'orthographe."
+    fi
+    local_id=$(whoami)
+    if [ $(echo "$local_id" | tr -cd '.' | wc -c) == 1 ]; then
+        if [ "$local_id" != "$given_login" ]; then
+            error "Vous soumettez au nom de $given_login alors que vous êtes connecté sous le nom $local_id. Vérifier l'orthographe."
+        fi
+    else
+        uid1=$(id -u "$given_login")
+        uid2=$(id -u "$local_id")
+        if [ "$uid1" != "$uid2" ]; then
+            error "Le login $local_id ne correspond pas au soumetteur $given_login. Vérifier l'orthographe."
+        fi
+    fi
+}
+
+check_login_jupyter() {
+    given_login=$1
+    local_id=$(basename -s -at-u-psud.fr "$JUPYTERHUB_USER")
+    if [ "$local_id" != "$given_login" ]; then
+        error "Vous soumettez au nom de $given_login alors que vous êtes connecté sous le nom $local_id. Vérifier l'orthographe."
+    fi
+}
+
+
+methnum-submit() {
+    local assignment=$1
+    local group=$2
+
+    travo_raise_info "Soumission de $assignment:"
+    check_dir
+    check_assignment "$assignment"
+    check_group "$group"
+
+    travo_raise_info "- Vérification de la présence du devoir ${assignment}"
+    test -d "${assignment}" ||
+        travo_error "Dossier ${assignment} non trouvé. Voulez-vous utiliser ${COURSE_SCRIPT} fetch ?"
+
+    travo_raise_info "- Vérification que le devoir a un dépôt personnel configuré"
+    travo_gitlab_authenticate
+    (cd "$assignment" &&
+         assignment_ensure_remote_configuration $assignment $group &&
+         assignment_ensure_git_author_config) ||
+        travo_error "Échec de la soumission"  # Must be a failure connecting to gitlab
+
+    travo_raise_info "- Enregistrement des changements:"
+    (cd "$assignment" &&
+         travo_run git commit --all -m "Soumission depuis $(hostname) par $(travo_gitlab_username)" ) || {
+        travo_raise_info "  Pas de changement à enregistrer"
+    }
+
+    local http_url=$(assignment_personal_repo_http_url $assignment)
+    travo_raise_info "- Envoi des changements:"
+    (cd "$assignment" &&
+         authenticated_git push "$http_url" master &&
+         authenticated_git pull "$http_url") ||
+        travo_error "- Échec de la soumission"
+    # The git pull above is a workaround to force an update of origin/master
+
+    local http_url=$(assignment_personal_repo_http_url $assignment)
+    travo_raise_info "- Soumission effectuée. Vous pouvez consulter votre dépôt:"
+    travo_raise_info "  ${http_url}"
+}
+
+test-submission() {
+    ASSIGNMENT=$1
+    dir=$(dirname "$1")
+    seance=$(basename "$1")
+    SUBMITTER=$2
+
+    date="$(grep -Eo '[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} [[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{2}.[[:digit:]]{6}' submit.log | tail -1)"
+
+    if [ -n "$JUPYTERHUB_USER" ]; then # Sur le serveur JupyterHub
+        echo "test"
+    else
+        for path_notebook in $COURSE_EXCHANGE/$dir/outbound/$seance/*.ipynb
+        do
+            notebook=$(basename "$path_notebook")
+            if [ -f $COURSE_EXCHANGE/$dir/inbound/$SUBMITTER+$seance+"$date"*/$notebook ]; then
+                info "$ASSIGNMENT/$notebook a été soumis au nom de $2 le $(date -d "$date UTC")"
+            else
+                error "Le serveur attend un Jupyter notebook nommé $ASSIGNMENT/$notebook.
+                Vérifier que vous n'avez pas changé le nom de ce notebook. Si c'est le cas, renommer-le en $notebook et retenter la soumission de votre travail. Sinon vérifier qu'il est bien présent dans le dossier $ASSIGNMENT correctement nommé."
+            fi
+        done
+    fi
+
+}
+
+submit-exam() {
+
+    if [ -z "$1" ]; then
+        help;
+        error "Le nom de la SEANCE est manquant (par exemple L1/DM1)."
+        exit 0
+    fi
+
+    if [ -z "$2" ]; then
+        help;
+        error "Le NUMERO D'ANONYMAT est manquant en second argument."
+        exit 0
+    fi
+
+    ASSIGNMENT=$1
+    dir=$(dirname "$1")
+    seance=$(basename "$1")
+    SUBMITTER=$2
+    MACHINE=$(hostname)
+    warning "Vous êtes sur le point de soumettre l'évaluation $1 sous le nom:"
+    echo "        $2"
+    read -p $"Confirmez-vous l'orthographe du numéro d'anonymat ? [y/n] " -n 1 -r
+    echo " "
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        nbgrader submit --Exchange.root="$COURSE_EXCHANGE" --student="$SUBMITTER--$MACHINE" --course="$dir" "$ASSIGNMENT"  2>&1 | tee ./submit.log
+    fi
+    echo "*******************************************************************"
+    test-submission $1 $SUBMITTER--$MACHINE
+    rm -rf ./submit.log
+}
+
+build_student_name() {
+    # remove quotes spaces, slashes and backslashes when grepping the room name and computer names
+    local salle=$(grep  "$1/*.ipynb" -e SALLE | sed "s/\"/_/g" | sed 's/[\]//g' | sed 's/[/]//g' | sed 's/ //g' )
+    local salle="$(cut -d'_' -f3 <<<"$salle")"
+    local poste=$(grep  "$1/*.ipynb" -e POSTE| sed "s/\"/_/g" | sed 's/[\]//g' | sed 's/[/]//g' | sed 's/ //g' )
+    local poste="$(cut -d'_' -f3 <<<"$poste")"
+    local licence=$(grep  "$1/*.ipynb" -e LICENCE| sed "s/\"/_/g" | sed 's/[\]//g' | sed 's/[/]//g' | sed 's/ //g' )
+    local licence="$(cut -d'_' -f3 <<<"$licence")"
+    student=$(echo "$licence-$salle-$poste")
+}
+
+rename_exams_in_inbound() {
+    ASSIGNMENT=$1
+    dir=$(dirname "$1")
+    export seance=$(basename "$1")
+    inbound="$COURSE_EXCHANGE/$dir/inbound"
+    echo "Ouverture de $inbound..."
+    run cd "${inbound}"
+    COUNTER=0
+    DIR=0
+    # this line is able to deal with directory names containing spaces
+    find "$inbound" -name "*$seance*" -type d | while read submission ; do
+        current=$(pwd)
+        dir=$(echo "$submission")
+        # echo $first_dir
+        #mv "$submission" "$dir"
+        build_student_name "$dir"
+        echo "Dossier $dir"
+        original_student="$(cut -d'+' -f1 <<<$(basename "$dir")  )"
+        echo "  Submission ID: $original_student"
+        export STUDENT_USER_ID="$student"
+        echo "  Student ID: $STUDENT_USER_ID"
+        new_dir=$(echo "$dir" | sed "s/$original_student/$student/g")
+        if [ -d "$new_dir" ]; then
+            echo "$new_dir existe déjà. Skipped."
+        else
+            run mv "$dir" "$new_dir"
+        fi
+    done
+}
+
+methnum-collect() {
+    local assignment=$1
+    local group=$2
+
+    check_nbgrader_config
+
+    travo_raise_info "Collecte de $assignment:"
+    check_group "$group"
+
+    local repo=$(assignment_repo_path "$assignment" "$group")
+    local url="${TRAVO_GITLAB}${repo}"
+    ensure_submitted
+    travo_run methnum-collect.py -u "${url}" -g "${group}"
+    cd ../
+}
+
+methnum-autograde() {
+    if [ -z "$1" ]; then
+        advanced_help;
+        error "Le nom de la SEANCE est manquant (par exemple L1/DM1)."
+        exit 0
+    fi
+
+    check_nbgrader_config
+    echo "start" $2
+    # ajout du cours a la database
+    seance=$(basename "$1")
+    travo_run nbgrader --version
+
+    travo_raise_warning "Vous devez avoir la dernière version de la $seance pour pouvoir la corriger."
+    read -p $'Voulez la télécharger par un "git pull"? [y/n] '  -n 1 -r
+    echo ' '
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        travo_run git pull origin master
+    fi
+
+    travo_run nbgrader generate_assignment "$seance" --create --force
+    # creation liste etudiants
+    travo_run nbgrader db student list > student.list
+    # ajout des etudiants a la database
+    for dir in ${COURSE_SUBMITTED_DIR}/*; do
+        dir=${dir%*/}
+        student=${dir##*/}
+        echo $dir $student $2
+        if [ "$2" ]; then
+            if [[ "$student" != $2 ]]; then
+                continue
+            fi
+        fi
+        if [ $(grep -e $student student.list | wc -l) -gt 0 ]; then
+            continue
+        fi
+        IFS='.'
+        echo $student
+        if [ $(echo "$student" | tr -cd '.' | wc -c)  -eq 2 ]; then
+            read -ra ADDR <<< "$student"
+            group="${ADDR[0]}"
+            firstname=$(echo "${ADDR[1]}" | awk '{print tolower($0)}')
+            lastname=$(echo "${ADDR[2]}" | awk '{print tolower($0)}')
+            email="$firstname.$lastname$COURSE_MAIL_EXTENSION"
+            travo_run nbgrader db student add "$student" --first-name="$firstname" --last-name="$lastname" --email="$email"
+        elif [ $(echo "$student" | tr -cd '.' | wc -c) -eq 1 ]; then
+            read -ra ADDR <<< "$student"
+            firstname=$(echo "${ADDR[0]}" | awk '{print tolower($0)}')
+            lastname=$(echo "${ADDR[1]}" | awk '{print tolower($0)}')
+            email="$firstname.$lastname$COURSE_MAIL_EXTENSION"
+            travo_run nbgrader db student add "$student" --first-name="$firstname" --last-name="$lastname" --email="$email"
+        else
+            travo_run nbgrader db student add "$student"
+        fi
+        IFS=' '
+    done
+    rm -rf student.list
+    # correction
+    if [ -z "$2" ]; then
+        travo_run nbgrader autograde --Exchange.root=./ "$seance"
+    else
+        travo_run nbgrader autograde --Exchange.root=./ "$seance" --student="$2"
+    fi
+    # run methnum jupyter notebook
+}
+
+methnum-formgrader() {
+    check_nbgrader_config
+    travo_run travo-py formgrader
+}
+
+methnum-update() {
+    travo_run git submodule update --remote --recursive
+    travo_run conda env update -n methnum -f scripts/environment.yml --prune
+    travo_run pip install git+https://gitlab.info.uqam.ca/info/travo.git --force-reinstall
+    travo_run jupyter nbextension install --sys-prefix --py nbgrader --overwrite
+    travo_run jupyter nbextension enable --sys-prefix --py nbgrader
+    travo_run jupyter serverextension enable --sys-prefix --py nbgrader
+    travo_run nbgrader --version
+}
+
+methnum-feedback() {
+    if [ -z "$1" ]; then
+        advanced_help;
+        error "Le nom de la SEANCE est manquant (par exemple L1/DM1)."
+        exit 0
+    fi
+
+    check_nbgrader_config
+
+    seance=$(basename "$1")
+    travo_run nbgrader --version
+    if [ -z "$2" ]; then
+        travo_run nbgrader generate_feedback --Exchange.root=./ --force "$seance"
+    else
+        travo_run nbgrader generate_feedback --Exchange.root=./ --force "$seance" --student="$2"
+    fi
+
+}
+
+methnum-send_feedback() {
+    if [ -z "$1" ]; then
+        advanced_help;
+        travo_raise_error "Le nom de la SEANCE est manquant (par exemple L1/DM1)."
+        exit 0
+    fi
+
+    if [ -z "$2" ]; then
+        advanced_help;
+        travo_raise_error "LOGIN de l'enseignant est manquant."
+        exit 0
+    fi
+
+    check_nbgrader_config
+
+    if [ -z "$3" ]; then
+        travo_run send_feedback.py -s $1 -l $2
+    else
+        travo_run send_feedback.py -s $1 -l $2 -S $3
+    fi
+}
+
+connect() {
+    if [ -z "$1" ]; then
+        advanced_help;
+        travo_raise_error "Le nom de la FILIERE est manquant (par exemple L1)."
+        exit 0
+    fi
+    if [ -z "$2" ]; then
+        advanced_help;
+        travo_raise_error "Le LOGIN UPS est manquant (par exemple guido.van-rossum)."
+        exit 0
+    fi
+    travo_run stackyter.py -u "$2" --config tp-ssh1-"$1" --configfile scripts/stackyter-config.yaml
+
+}
+
+outbound() {
+    dir=$(dirname "$1")
+    seance=$(basename "$1")
+    outbound_path="$COURSE_EXCHANGE/$dir/outbound/$seance"
+    if [ ! -d "$outbound_path" ]; then
+        git clone "$COURSE_GIT_ROOT_URL/$dir-Sujets/$seance" "$outbound_path"
+    else
+	      cd "$outbound_path"
+	      git pull
+    fi
+    owner=$(stat --format '%U' "$outbound_path")
+    if [ "${owner}" = "${2}" ]; then
+        chmod -R g+w "$outbound_path"
+    fi
+}
+
+
+methnum-release () {
+    local assignment=$1
+    local visible=$2
+    local option=$3
+    if [ "$visible" == "" ]; then
+        local visible="public"
+    fi
+    travo_raise_info "- Publish the assignment $assignment with visibility=$visible."
+    local dirname=$(dirname $1)
+    local basename=$(basename $1)
+
+    check_assignment "${assignment}"
+    local repo=$(assignment_repo_path "${assignment}")
+    local myreponame=$(basename $assignment)
+    travo_raise_debug "Releasing $assignment"
+    local assignment_dir="_build/$basename"
+    travo_gitlab_authenticate
+    local metadata
+    # travo_gitlab_remove_project "${repo}"
+    project_properties=(
+        visibility=$visible
+        issues_enabled=false
+        merge_requests_enabled=false
+        container_registry_enabled=false
+        wiki_enabled=false
+        snippets_enabled=false
+        lfs_enabled=false
+        name=$myreponame
+        jobs_enabled=false
+    )
+
+    if [ "$option" == "--remove" ]; then
+        read -p $'Etes-vous sûr de vouloir supprimer tous les dépôts liés à cette séance ? [y/n] '  -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            travo_raise_info "- Ok on poursuit en supprimant tous les dépôts $assignment..."
+        else
+            echo ' '
+            travo_raise_error "- Ok on stoppe tout et on réfléchit."
+            exit 0
+        fi
+    fi
+
+    metadata="$(travo_project_metadata "$repo" 2>/dev/null)" || {
+        travo_raise_debug "Creating project ${assignment} at ${repo}"
+        metadata=$(travo_gitlab_create_project "${repo}" "${myreponame}" ${project_properties[@]}) ||
+            travo_error "could not create assignment repo ${repo}"
+    }
+    http_url_to_repo=$(jq -r .http_url_to_repo <<< "${metadata}")
+    (cd "$assignment_dir" && authenticated_git push ${http_url_to_repo} --mirror && travo_project_set "${repo}" visibility=$visible > /dev/null) ||
+        travo_raise_error "Could not push to ${http_url_to_repo}"
+
+    for group in ${COURSE_GROUPS}; do
+        group_path=$(assignment_repo_path "${dirname}/${group}")
+        travo_gitlab_ensure_group ${group_path} ${group} visibility=public
+        group_repo=$(assignment_repo_path "${assignment}" "${group}")
+        if [ "$option" == "--remove" ]; then
+            travo_gitlab_remove_project "$group_repo"
+        fi
+        travo_gitlab_ensure_fork_project "$repo" "$group_repo" "$myreponame" \
+                                         ${project_properties[@]} \
+                                         jobs_enabled=false
+        http_url_to_repo=$(jq -r .http_url_to_repo <<< "${retval}")
+        (cd "$assignment_dir" && authenticated_git push ${http_url_to_repo} --mirror && travo_project_set "${group_repo}" visibility=$visible > /dev/null) ||
+            travo_raise_error "Could not push to ${http_url_to_repo}"
+    done
+}
+
+methnum-make_sujet() {
+    if [ -z "$1" ]; then
+        advanced_help;
+        travo_raise_error "Le nom de la SEANCE est manquant (par exemple L1/DM1)."
+        exit 0
+    fi
+
+    local assignment=$1
+    local option=$2
+    local dirname=$(dirname "$1")  # annee de licence
+    local seance=$(basename "$1")  # nom de la seance
+
+    if [ "$dir" == '.' ]; then
+        help;
+        travo_raise_error "La FILIERE est manquante (par exemple L1/)."
+        exit 0
+    fi
+
+    if [ ! -d "source" ]; then
+       mkdir source
+    fi
+
+    if [ ! -d "release" ]; then
+       mkdir release
+    fi
+
+    if [ ! -d "_build" ]; then
+       mkdir _build
+    fi
+
+    if [ -d "source/$seance" ]; then
+       rm -rf "source/$seance"
+    fi
+
+    if [ -d "_build/$seance" ]; then
+       rm -rf "_build/$seance"
+    fi
+
+    local repo=$(assignment_repo_path ${assignment})
+    http_url_to_repo=${TRAVO_GITLAB}${repo}
+
+    travo_run cd _build
+    travo_raise_info "  à partir du dépôt d'origine ${http_url_to_repo}"
+    (authenticated_git clone "$http_url_to_repo" "${seance}") ||
+        (travo_run mkdir $seance && travo_run cd $seance && travo_run git init && travo_run cd ../)
+    travo_run cd ../
+
+    remove_solution $seance
+
+    # peut-etre remplacer les lignes suivantes avec nbgitpuller
+    echo '*************************************************'
+    travo_raise_info "- Poste le sujet sur le gitlab privé enseignant $(git config --get remote.origin.url)."
+    travo_run git pull $(git config --get remote.origin.url) master
+    git add "$seance/"*
+    git add "source/$seance"
+    git add "source/$seance/"*
+    travo_run git commit -n --allow-empty -m "sujet $seance $timestamp"
+    travo_run git push
+    travo_raise_info "- Soumission du sujet effectuée sur le dépôt enseignant. Vous pouvez consulter le dépôt enseignant:"
+    travo_raise_info "  $(git config --get remote.origin.url)"
+
+    local visible="public"
+    if [[ $seance != *"Seance"* ]]; then
+        travo_raise_warning "Il semble que cette séance est peut-être un examen (le mot 'Seance' est absent du titre)."
+        travo_raise_warning "Le dépôt étudiant est en mode public, ce devoir sera visible des étudiants."
+        read -p $'Voulez-vous le publier en mode public ou private ? Tapez [public] ou [private]. '
+        if [[ $REPLY == "public" ]]; then
+            read -p $'Etes-vous sûr de vouloir le poster \e[33m** maintenant **\e[0m sur gitlab en mode public? [y/n] '  -n 1 -r
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                travo_raise_info "- Ok on poursuit en mode $visible..."
+            else
+                echo ' '
+                travo_raise_warning "- Le devoir $assignment n'a pas été posté sur les dépôts étudiants, mais uniquement sur le dépôt enseignant $(git config --get remote.origin.url)."
+                travo_raise_warning "- Pensez à refaire un make_sujet juste avant l'évaluation en mode public cette fois."
+                return 1
+            fi
+        elif [[ $REPLY == "private" ]]; then
+            local visible="private"
+            travo_raise_info "- Ok on poursuit en mode $visible..."
+        else
+            travo_raise_info "- Réponse $REPLY inconnue."
+            travo_raise_warning "- Le devoir $assignment n'a pas été posté sur les dépôts étudiants, mais uniquement sur le dépôt enseignant $(git config --get remote.origin.url)."
+            travo_raise_warning "- Pensez à refaire un make_sujet juste avant l'évaluation en mode public cette fois."
+            return 1
+        fi
+    fi
+
+    # poste le sujet sur gitlab etudiant
+    echo '*************************************************'
+    travo_raise_info "- Poste le sujet sur le gitlab public $http_url_to_repo."
+    cp .gitignore "_build/$seance/"
+    printf '*.tex\n' >> "_build/$seance/.gitignore"
+    printf '*.gitignore\n' >> "_build/$seance/.gitignore"
+    travo_run cd "_build/$seance/"
+    timestamp=$(date)
+
+    git rm -rf . || travo_raise_info "Empty directory."
+    travo_run cp -r "../../release/$seance/"* .
+    git add .
+    travo_run git commit -n --allow-empty  -m "sujet $seance $timestamp $USER"
+    travo_run cd ../../
+
+    methnum-release "$assignment" "$visible" "$option"
+    travo_run rm -rf _build
+
+    travo_raise_info "- Soumission du sujet effectuée sur le dépôt étudiant en mode $visible. Vous pouvez consulter le dépôt étudiant:"
+    travo_raise_info "  ${http_url_to_repo}"
+    travo_raise_info "- Soumission du sujet effectuée sur le dépôt enseignant. Vous pouvez consulter le dépôt enseignant:"
+    travo_raise_info "  $(git config --get remote.origin.url)"
+
+}
+
+remove_solution() {
+    if [ -z "$1" ]; then
+        help;
+        exit 0
+    fi
+
+    export seance=$1
+
+    if [ ! -d "source" ]; then
+       mkdir source
+    fi
+
+    if [ -d "source/$seance" ]; then
+       rm -rf "source/$seance/"
+    fi
+
+    if [ -d "release/$seance" ]; then
+       rm -rf "release/$seance/"
+    fi
+
+    echo '*************************************************'
+    travo_raise_info 'Copie des nouveaux fichiers dans ./source/'
+    mkdir "source/$seance"
+    travo_run cp -r "$seance/"* "source/$seance/"
+
+    # creer le sujet sans solutions
+    echo '*************************************************'
+    travo_raise_info 'Retire les solutions des notebooks'
+    travo_run nbgrader --version
+    travo_run nbgrader generate_assignment "$seance" --create --force
+}
+
+main() {
+
+command=$1
+
+if [ "$command" = "-n" ]; then
+    DRY_RUN="true"
+    shift
+    command=$1
+fi
+
+if [ -z $command ]; then
+    help;
+    exit 0
+fi
+
+shift || help
+
+case $command in
+    help)
+        help
+        exit 0;;
+    advanced_help)
+        advanced_help
+        exit 0;;
+    g++)
+        command="g++ -g -Wall -pedantic -Wno-sign-compare -Wno-unused-value -std=c++11 $CPPFLAGS $LDFLAGS ";;
+    jupyter)
+        if [ "$1" = "notebook" ]; then
+            shift
+            command="jupyter notebook --ip=127.0.0.1"
+        fi;;
+#    collect)
+#        collect "$@"
+#        exit 0;;
+    run) # run an arbitrary command in the conda environment; for testing and teacher's use
+        command="$1"
+        shift;;
+    mount)
+        mount
+        exit 0;;
+    sync)
+        sif-tools-unison "$@"
+        exit 0;;
+    clean_root_files)
+        clean_root_files
+        exit 0;;
+    env)
+        cd $COURSE_ROOT/binder
+        git pull
+        travo_run conda env $1
+        travo_run ./postBuild
+        exit 0;;
+    *)
+        #echo command: "$command $@"
+        travo_run_unknown_command "$command" "$@"
+        exit $?;;
+esac
+
+travo_run $command "$@"
+}
+
+if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
+    main "$@"
+fi
