@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: mseep-ultimate_mcp_client
+Version: 1.0.1
+Summary: A comprehensive client for the Model Context Protocol (MCP) that connects AI models with external tools, servers, and data sources.
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Typing :: Typed
+Requires-Python: >=3.13
+Requires-Dist: aiofiles
+Requires-Dist: anthropic
+Requires-Dist: colorama
+Requires-Dist: diskcache
+Requires-Dist: fastapi
+Requires-Dist: fastmcp
+Requires-Dist: httpx
+Requires-Dist: json5
+Requires-Dist: mcp
+Requires-Dist: mypy
+Requires-Dist: numpy
+Requires-Dist: openai
+Requires-Dist: opentelemetry-api
+Requires-Dist: opentelemetry-instrumentation
+Requires-Dist: opentelemetry-sdk
+Requires-Dist: psutil
+Requires-Dist: python-decouple
+Requires-Dist: python-dotenv
+Requires-Dist: python-levenshtein
+Requires-Dist: python-multipart
+Requires-Dist: pyyaml
+Requires-Dist: rich
+Requires-Dist: ruff
+Requires-Dist: scipy
+Requires-Dist: thefuzz
+Requires-Dist: tiktoken
+Requires-Dist: typer
+Requires-Dist: typing-extensions
+Requires-Dist: uvicorn[standard]
+Requires-Dist: websockets
+Requires-Dist: zeroconf
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
