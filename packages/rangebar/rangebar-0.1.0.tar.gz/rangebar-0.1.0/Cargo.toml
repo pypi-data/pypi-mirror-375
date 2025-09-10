@@ -1,0 +1,33 @@
+[package]
+name = "rangebar-rust"
+version = "0.1.0"
+edition = "2021"
+description = "High-performance range bar construction from Binance UM Futures aggTrades"
+authors = ["Terry Li <terry@eonlabs.com>"]
+license = "MIT"
+readme = "README.md"
+
+[lib]
+name = "rangebar_rust"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22", features = ["extension-module"] }
+numpy = "0.22"
+rayon = "1.10"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+
+[profile.release]
+lto = true              # Link-time optimization for better performance
+codegen-units = 1       # Single codegen unit for better optimization  
+overflow-checks = false # Disable overflow checks in release for speed
+panic = "abort"         # Smaller binary size
+
+[profile.dev]
+overflow-checks = true  # Keep overflow checks in debug builds
+
+[features]
+default = []
+simd = []              # Optional SIMD optimizations
