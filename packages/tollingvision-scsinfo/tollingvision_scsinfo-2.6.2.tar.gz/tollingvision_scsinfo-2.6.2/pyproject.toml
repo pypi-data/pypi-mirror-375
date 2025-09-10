@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tollingvision_scsinfo"
+version = "2.6.2"
+authors = [
+  { name="Tolling Vision", email="info@tollingvision.com" },
+]
+description = "Python client for Tolling Vision"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://tollingvision.com"
