@@ -1,0 +1,116 @@
+[build-system]
+requires = ["hatchling", "hatch-regex-commit"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nextline-alert"
+description = 'A plugin of nextline-graphql. Emit alerts to Campana'
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Simons Observatory", email = "so_software@simonsobservatory.org" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = ["nextline-graphql>=0.7.8", "httpx>=0.26"]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+tests = [
+  "pytest-asyncio>=0.23",
+  "pytest-cov>=4.1",
+  "pytest-timeout>=2.2",
+  "pytest>=7.4",
+  "hypothesis>=6.130",
+  "respx>=0.20.1",
+  "deepdiff>=7.0",
+]
+
+[project.urls]
+Documentation = "https://github.com/simonsobs/nextline-alert#readme"
+Issues = "https://github.com/simonsobs/nextline-alert/issues"
+Source = "https://github.com/simonsobs/nextline-alert"
+
+[project.entry-points."nextline_graphql"]
+alert = "nextline_alert:Plugin"
+
+[tool.hatch.version]
+source = "regex_commit"
+path = "src/nextline_alert/__about__.py"
+tag_sign = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+timeout = 60
+addopts = "--doctest-modules"
+# doctest_optionflags = ["ELLIPSIS", "NORMALIZE_WHITESPACE",]
+doctest_optionflags = ["ELLIPSIS"]
+log_cli = false
+log_cli_level = "INFO"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.format]
+quote-style = "preserve"
+
+[tool.ruff.lint]
+select = [
+  "E", # pycodestyle errors
+  "W", # pycodestyle warnings
+  "F", # pyflakes
+  "I", # isort
+]
+ignore = [
+  "E203", # Whitespace before '{symbol}'
+  "E265", # Block comment should start with #
+  "E266", # Too many leading # before block comment
+  "E501", # Line too long ({width} > {limit})
+  "E741", # Ambiguous variable name '{name}'
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 20
+
+[tool.ruff.lint.isort]
+known-first-party = ["nextline", "nextlinegraphql"]
+
+[tool.coverage.run]
+source_pkgs = ["nextline_alert", "tests"]
+branch = true
+parallel = true
+omit = ["src/nextline_alert/__about__.py"]
+
+[tool.coverage.paths]
+nextline_alert = ["src/nextline_alert", "*/nextline-alert/src/nextline_alert"]
+tests = ["tests", "*/nextline-alert/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  'if __name__ == "__main__":',
+  "if TYPE_CHECKING:",
+  "\\.\\.\\.$",
+]
+
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+plugins = "strawberry.ext.mypy_plugin"
+
+[[tool.mypy.overrides]]
+module = ["dynaconf.*", "apluggy.*"]
+ignore_missing_imports = true

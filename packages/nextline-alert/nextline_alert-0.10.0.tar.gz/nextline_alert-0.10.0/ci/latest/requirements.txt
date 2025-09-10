@@ -1,0 +1,12 @@
+# The exact requirements of the latest versions of the dependencies. This file
+# is used in a GitHub Actions workflow to test the compatibility with the
+# latest versions of the dependencies. This file is monitored by Dependabot.
+nextline-graphql==0.7.11
+httpx==0.28.1
+pytest-asyncio==1.1.0
+pytest-cov==6.3.0
+pytest-timeout==2.4.0
+pytest==8.4.2
+hypothesis==6.135.26
+respx==0.22.0
+deepdiff==8.6.0
