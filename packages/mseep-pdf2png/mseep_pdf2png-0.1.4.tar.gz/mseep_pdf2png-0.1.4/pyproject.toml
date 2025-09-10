@@ -1,0 +1,26 @@
+[project]
+name = "mseep-pdf2png"
+version = "0.1.4"
+description = "MCP server to convert a PDF to a PNG file."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.2.0",
+    "pdf2image>=1.16.3",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+pdf2png = "pdf2png:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

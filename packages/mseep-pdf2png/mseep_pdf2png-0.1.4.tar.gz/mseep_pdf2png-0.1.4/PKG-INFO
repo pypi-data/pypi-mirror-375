@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mseep-pdf2png
+Version: 0.1.4
+Summary: MCP server to convert a PDF to a PNG file.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp>=1.2.0
+Requires-Dist: pdf2image>=1.16.3
+
+Package managed by MseeP.ai
