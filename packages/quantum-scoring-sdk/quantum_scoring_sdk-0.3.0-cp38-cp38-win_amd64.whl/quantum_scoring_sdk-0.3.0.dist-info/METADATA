@@ -1,0 +1,58 @@
+Metadata-Version: 2.1
+Name: quantum-scoring-sdk
+Version: 0.3.0
+Summary: Quantum-native framework with IBM Quantum hardware support
+Home-page: UNKNOWN
+Author: Jaime Alexander Jimenez Lozano
+Author-email: jaimeajl@hotmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: qiskit>=0.45.0
+Requires-Dist: qiskit-aer>=0.13.0
+Provides-Extra: ibm
+Requires-Dist: qiskit-ibm-runtime>=0.15.0; extra == "ibm"
+
+﻿# Quantum Scoring SDK v0.3.0
+
+Quantum-native framework with IBM Quantum hardware support.
+
+## Installation
+
+### Basic (with simulator)
+pip install quantum-scoring-sdk
+
+### With IBM Quantum support
+pip install quantum-scoring-sdk[ibm]
+
+## Features
+- Built-in quantum simulator
+- IBM Quantum hardware support
+- F1=0.774 demonstrated on real hardware
+- No PhD required
+
+## Usage
+
+### Simulator (default)
+from quantum_sdk import Optimizer
+opt = Optimizer()
+score = opt.evaluate(data, config)
+
+### IBM Quantum Hardware
+from quantum_sdk import Optimizer
+opt = Optimizer()
+opt.configure_ibm(token='YOUR_IBM_TOKEN', backend='ibm_brisbane')
+score = opt.evaluate(data, config, backend='ibm_brisbane')
+
+## License
+Proprietary. Contact jaimeajl@hotmail.com
+
+
