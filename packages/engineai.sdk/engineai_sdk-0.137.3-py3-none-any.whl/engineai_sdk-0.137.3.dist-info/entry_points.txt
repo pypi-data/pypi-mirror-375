@@ -1,0 +1,2 @@
+[console_scripts]
+engineai = engineai.sdk.cli.cli:main
