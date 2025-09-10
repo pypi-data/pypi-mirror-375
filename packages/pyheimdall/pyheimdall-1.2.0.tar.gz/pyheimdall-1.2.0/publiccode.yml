@@ -1,0 +1,135 @@
+publiccodeYmlVersion: 0.4
+ 
+name: HEIMDALL
+applicationSuite: HERA
+url: https://gitlab.huma-num.fr/datasphere/heimdall/python
+landingURL: https://datasphere.readthedocs.io/projects/heimdall
+isBasedOn: https://gitlab.huma-num.fr/datasphere/heimdall/xquery
+logo: https://gitlab.huma-num.fr/datasphere/doc/assets/-/raw/main/thumbs/128x128/HEIMDALL.png
+roadmap: https://gitlab.huma-num.fr/datasphere/heimdall/python/-/milestones
+developmentStatus: stable
+softwareType: library
+
+platforms:
+  - linux
+  - mac
+  - windows
+
+categories:
+  - application-development
+  - backup
+  - business-intelligence
+  - business-process-management
+  - collaboration
+  - communications
+  - compliance-management
+  - content-management
+  - data-analytics
+  - data-collection
+  - data-visualization
+  - design
+  - document-management
+  - educational-content
+  - geographic-information-systems
+  - integrated-library-system
+  - inventory-management
+  - it-development
+  - knowledge-management
+  - mind-mapping
+  - project-collaboration
+  - resource-management
+  - web-collaboration
+  - workflow-management
+
+intendedAudience:
+  scope:
+    - culture
+    - education
+    - research
+    - science-and-technology
+
+usedBy:
+  - ESTRADES
+  - CHI-KNOW-PO
+
+fundedBy:
+  - name: Centre national de la recherche scientifique (CNRS)
+    url: https://lannuaire.service-public.fr/gouvernement/35a8a489-89b3-40ea-9838-803dcd5f7d18
+  - name: Université de Haute-Alsace (UHA)
+    url: https://lannuaire.service-public.fr/gouvernement/7ef60b5d-8466-4793-a8e1-ba11e0424094
+  - name: Université de Strasbourg
+    url: https://lannuaire.service-public.fr/gouvernement/8d43f65b-9236-4938-bfa5-1c5c5049b33d
+
+description:
+  en:
+    genericName: Heimdall
+    shortDescription: >
+      Python library for easily exporting or migrating
+      between one or more databases formats.
+    longDescription: |
+      HEIMDALL is a tool for converting more easily one or more databases from one format to another. It makes a technical no-brainer migration and interoperability between SQL databases, REST APIs, and general-purpose exchange formats such as CSV (used for example by spreadsheets), JSON, XML or YAML.
+
+      If, for example, you find yourself in one of the following situations
+
+      * you need access to data, but it is not stored in a format compatible with your favorite software…
+      * you'd prefer to merge several heterogeneous databases into a single corpus, easier to analyze…
+      * you're considering which input format to use for your software or database…
+      * you want to make your data more accessible and interoperable…
+
+      … then HEIMDALL can offer you an exchange format, and abstract the details of data implementation ; yours, but also those of others. Thanks to HEIMDALL, you can also switch from one technology to another in a matter of moments, as and when you need to, without ever losing, disorganizing or corrupting your data –or even by improving them over time, documenting them and linking them to current standards in your field.
+
+      In a nutshell, HEIMDALL is your High-End Interoperability Module when Data is ALL over the place. It’s a bridge between scattered islands of data. 🌉🌈⚔️
+    features:
+       - Importing from/Exporting to a vast range of databases or file formats
+       - Create new connectors to custom database or formats
+       - Upgrade databases schemas without modifying them
+       - Improve databases documentation and make them support the latest standards
+    documentation: https://datasphere.readthedocs.io/projects/heimdall/en/latest/
+    apiDocumentation: https://datasphere.gitpages.huma-num.fr/heimdall/python/doc/
+  fr:
+    genericName: Heimdall
+    shortDescription: >
+      Librairie Python pour facilement exporter ou migrer
+      d'un format base de données à un autre.
+    longDescription: |
+      Heimdall est un outil permettant de convertir facilement une ou plusieurs bases de données d'un format à un autre. Il rend techniquement plus facile la migration et l'interopérabilité entre les bases de données SQL, celles disposant d'une API REST, ou les formats génériques tels que CSV, JSON, XML ou YAML.
+
+      Si vous êtes, par exemple, dans une des situations suivantes …
+
+      * vous avez besoin d'accéder à des données, mais elle ne sont pas stockées dans un format compatible avec votre logiciel favori, …
+      * vous préféreriez unifier plusieurs bases de données hétérogènes en un seul corpus plus facile à analyser, …
+      * vous vous demandez quel format d'entrée privilégier pour votre logiciel de traitement ou votre base de données, …
+      * vous désirez rendre vos données plus accessibles et interopérables, …
+
+      … alors, Heimdall peut vous proposer un format d'échange, et abstraire les détails d'implémentation des données ; les vôtres, mais aussi celles des autres. Grâce à Heimdall, vous pouvez aussi passer en quelques instants d'une technologie à l'autre au gré de vos besoins, sans jamais perdre, désorganiser ou corrompre vos données.
+
+      En résumé, HEIMDALL peut constituer un pont entre des îlots de données dispersées. 🌉🌈⚔️
+    features:
+       - Importez/Exportez de nombreux types et formats de bases de données différents
+       - Créez vos propres connecteurs vers de nouveaux formats ou bases de données
+       - Modifiez les schemas de vos bases de données de manière non invasive
+       - Améliorer la documentation de vos données et supportez les standards récents
+    documentation: https://datasphere.readthedocs.io/projects/heimdall/fr/latest/
+    apiDocumentation: https://datasphere.gitpages.huma-num.fr/heimdall/python/doc/
+
+legal:
+  license: AGPL-3.0-or-later
+  mainCopyrightOwner: All Heimdall contributors
+
+maintenance:
+  type: community
+  contacts:
+    - name: Régis Witz
+      affiliation: CNRS
+
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - en
+    - fr
+
+dependsOn:
+  open:
+    - name: Python
+      versionMin: 3
+      optional: false
