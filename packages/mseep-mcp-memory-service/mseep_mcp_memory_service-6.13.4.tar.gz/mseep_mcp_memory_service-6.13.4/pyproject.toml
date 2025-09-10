@@ -1,0 +1,163 @@
+[build-system]
+requires = [
+    "hatchling",
+    "python-semantic-release",
+    "build",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "mseep-mcp-memory-service"
+version = "6.13.4"
+description = "Universal MCP memory service with semantic search, multi-client support, and autonomous consolidation for Claude Desktop, VS Code, and 13+ AI applications"
+requires-python = ">=3.10"
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "claude-desktop",
+    "semantic-memory",
+    "vector-database",
+    "ai-assistant",
+    "sqlite-vec",
+    "multi-client",
+    "semantic-search",
+    "memory-consolidation",
+    "ai-productivity",
+    "vs-code",
+    "cursor",
+    "continue",
+    "fastapi",
+    "developer-tools",
+    "cross-platform",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Database :: Database Engines/Servers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Framework :: FastAPI",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "chromadb==0.5.23",
+    "tokenizers==0.20.3",
+    "mcp>=1.0.0,<2.0.0",
+    "sqlite-vec>=0.1.0",
+    "sentence-transformers>=2.2.2",
+    "torch>=2.0.0",
+    "build>=0.10.0",
+    "aiohttp>=3.8.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "python-multipart>=0.0.9",
+    "sse-starlette>=2.1.0",
+    "aiofiles>=23.2.1",
+    "psutil>=5.9.0",
+    "zeroconf>=0.130.0",
+    "PyPDF2>=3.0.0",
+    "chardet>=5.0.0",
+    "click>=8.0.0",
+    "httpx>=0.24.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "Apache-2.0"
+
+[project.optional-dependencies]
+ml = [
+    "sentence-transformers>=2.2.2",
+    "torch>=2.0.0",
+]
+chromadb = [
+    "chromadb==0.5.23",
+]
+sqlite = [
+    "sqlite-vec>=0.1.0",
+]
+
+[project.scripts]
+memory = "mcp_memory_service.cli.main:main"
+memory-server = "mcp_memory_service.cli.main:memory_server_main"
+mcp-memory-server = "mcp_memory_service.mcp_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mcp_memory_service",
+]
+
+[tool.hatch.version]
+path = "src/mcp_memory_service/__init__.py"
+
+[tool.semantic_release]
+version_variable = [
+    "src/mcp_memory_service/__init__.py:__version__",
+    "pyproject.toml:version",
+]
+branch = "main"
+changelog_file = "CHANGELOG.md"
+build_command = "pip install build && python -m build"
+build_command_env = []
+dist_path = "dist/"
+upload_to_pypi = false
+upload_to_release = true
+commit_message = "chore(release): bump version to {version}"
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = [
+    "build",
+    "chore",
+    "ci",
+    "docs",
+    "feat",
+    "fix",
+    "perf",
+    "style",
+    "refactor",
+    "test",
+]
+minor_tags = [
+    "feat",
+]
+patch_tags = [
+    "fix",
+    "perf",
+]
+
+[tool.semantic_release.changelog]
+template_dir = "templates"
+changelog_sections = [
+    [
+        "feat",
+        "Features",
+    ],
+    [
+        "fix",
+        "Bug Fixes",
+    ],
+    [
+        "perf",
+        "Performance",
+    ],
+    [
+        "refactor",
+        "Code Refactoring",
+    ],
+    [
+        "test",
+        "Tests",
+    ],
+]
