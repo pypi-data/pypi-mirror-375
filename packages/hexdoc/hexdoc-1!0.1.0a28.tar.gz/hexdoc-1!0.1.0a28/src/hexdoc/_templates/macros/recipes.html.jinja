@@ -1,0 +1,27 @@
+{% import "macros/textures.html.jinja" as texture_macros with context -%}
+{% import "macros/formatting.html.jinja" as fmt with context -%}
+
+{# show the names of all the recipe results in a list of recipes #}
+{% macro generic(recipes, result_attribute, description, separator) -%}
+  <blockquote class="crafting-info">
+    {{ description }} {{
+      recipes
+      |map(attribute="result."~result_attribute)
+      |map("hexdoc_wrap", "code")
+      |join(separator)
+    }}.
+  </blockquote>
+{%- endmacro %}
+
+{# render a list of recipe ingredients #}
+{% macro render_ingredients(ingredients, is_recursive=false) -%}
+  {% for ingredient in ingredients %}
+    {% if ingredient.type|string == "hexcasting:mod_conditional" %}
+      {# recursion! what could possibly go wrong? (TODO: refactor out of hexdoc) #}
+      {{ render_ingredients(ingredient.default, true) }}
+      {{ render_ingredients(ingredient.if_loaded, true) }}
+    {% else %}
+      {{ texture_macros.render_item(ingredient.item, is_first=loop.first and not is_recursive) }}
+    {% endif %}
+  {% endfor %}
+{%- endmacro %}

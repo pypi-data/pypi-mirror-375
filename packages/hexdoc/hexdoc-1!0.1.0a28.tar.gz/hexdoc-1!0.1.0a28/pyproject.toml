@@ -1,0 +1,254 @@
+[build-system]
+requires = [
+    "hatchling>=1.19.0",
+    "hatch-regex-commit",
+]
+build-backend = "hatchling.build"
+
+# project metadata
+
+[project]
+name = "hexdoc"
+dynamic = ["version"]
+description = "Python web book docgen for Patchouli and Hex Casting."
+authors = [
+    { name="object-Object" },
+    { name="Alwinfy" },
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+keywords = ["hexdoc"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Java",
+    "Programming Language :: JavaScript",
+    "Programming Language :: Kotlin",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Documentation",
+    "Topic :: File Formats :: JSON",
+    "Topic :: Games/Entertainment",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Localization",
+    "Topic :: Text Processing :: Markup :: HTML",
+    "Typing :: Typed",
+]
+requires-python = ">=3.11"
+dependencies = [
+    # https://github.com/hexdoc-dev/hexdoc/issues/88
+    "click<8.2.0",
+    "frozendict~=2.4",
+    "hatch~=1.9",
+    "importlib_resources~=6.0",
+    "Jinja2~=3.1",
+    "moderngl[headless]~=5.10",
+    "moderngl-window~=2.4",
+    "more_itertools~=10.1",
+    "nbtlib==1.12.1",
+    "networkx~=3.2",
+    "ordered-set~=4.1",
+    "packaging~=23.2",
+    "pluggy~=1.3",
+    # !=2.6.0 - https://github.com/pydantic/pydantic-settings/issues/445
+    "pydantic_settings~=2.0,!=2.6.0",
+    "pydantic>=2.7.1,<3,!=2.9.0",
+    "pygithub~=2.1",
+    "pyjson5~=1.6",
+    "requests~=2.31",
+    "typer~=0.12",
+    "typing_extensions~=4.6",
+    "yarl~=1.9",
+
+    # DEPRECATED
+    "minecraft-render~=2.0.0a6",
+
+    # Favicons deps, because it's vendored
+    "pillow~=11.0",
+    "rich~=13.3.4",
+    "svglib~=1.5.1",
+]
+
+[project.optional-dependencies]
+pdoc = [
+    "pdoc~=14.1",
+]
+test = [
+    "pyright==1.1.361",
+    "pytest~=7.4",
+    "pytest-dependency~=0.5",
+    "pytest-describe~=2.2",
+    "syrupy~=4.6",
+    "copier_template_tester",
+    "pyyaml-include<2", # https://github.com/copier-org/copier/issues/1568
+]
+dev = [
+    "hexdoc[pdoc,test]",
+    "ruff~=0.3.2",
+    "pre-commit",
+    "nox[uv]",
+]
+
+[project.urls]
+Homepage = "https://hexdoc.hexxy.media"
+Documentation = "https://hexdoc.hexxy.media/docs"
+Changelog = "https://github.com/hexdoc-dev/hexdoc/blob/main/CHANGELOG.md"
+Source = "https://github.com/hexdoc-dev/hexdoc"
+Demo = "https://book.hexxy.media"
+
+[tool.hatch.version]
+source = "regex_commit"
+path = "src/hexdoc/__version__.py"
+commit_message = "Bump version to `{new_version}`"
+tag_message = "Bump version to `{new_version}`"
+commit_extra_args = ["--edit"]
+
+[project.scripts]
+hexdoc = "hexdoc.cli.app:app"
+
+[project.entry-points.hexdoc]
+hexdoc = "hexdoc._hooks:HexdocPlugin"
+modonomicon = "hexdoc_modonomicon._hooks:ModonomiconPlugin"  # TODO: remove
+
+[tool.hatch.build]
+artifacts = [
+    "_export/generated",
+]
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+    "src",
+    "vendor",
+]
+exclude = [
+    "src/_scripts",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/hexdoc",
+    "src/hexdoc_modonomicon",  # TODO: remove
+    "vendor/_hexdoc_favicons",
+]
+
+# Pytest
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+pythonpath = ["."]
+addopts = [
+    "--import-mode=importlib",
+    "-m=not copier and not hexcasting",
+]
+markers = [
+    "copier",
+    "hexcasting",
+    "template",
+]
+filterwarnings = [
+    'ignore:setDaemon\(\) is deprecated, set the daemon attribute instead:DeprecationWarning:javascript.events',
+    'ignore:invalid escape sequence:DeprecationWarning:pyrr.vector',
+]
+
+[tool.coverage.report]
+include_namespace_packages = true
+
+# formatting
+
+[tool.ruff]
+extend-exclude = [
+    "vendor",
+    "venv",
+    "**/.*",
+    "**/node_modules",
+    "**/__pycache__",
+]
+
+[tool.ruff.lint]
+preview = true
+extend-select = [
+    "I", # import sorting
+    "RUF022", # __all__ sorting
+]
+extend-ignore = [
+    # covered by Pyright
+    "F821", # undefined variable
+    "F401", # imported but unused
+    "F841", # unused variable
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+# type checking
+
+[tool.pyright]
+pythonVersion = "3.11"
+pythonPlatform = "All"
+
+include = [
+    "src",
+    "test",
+]
+extraPaths = [
+    "vendor",
+]
+exclude = [
+    "noxfile.py",
+    "vendor",
+    "**/venv",
+    "**/.*",
+    "**/node_modules",
+    "**/__pycache__",
+]
+
+typeCheckingMode = "basic"
+
+enableExperimentalFeatures = true
+strictDictionaryInference = true
+strictListInference = true
+strictSetInference = true
+
+reportAssertAlwaysTrue = "error"
+reportConstantRedefinition = "error"
+reportDeprecated = "error"
+reportFunctionMemberAccess = "error"
+reportIncompatibleMethodOverride = "error"
+reportIncompatibleVariableOverride = "error"
+reportIncompleteStub = "error"
+reportInconsistentConstructor = "error"
+reportInvalidStringEscapeSequence = "error"
+reportInvalidStubStatement = "error"
+reportInvalidTypeVarUse = "error"
+reportMatchNotExhaustive = "error"
+reportMissingParameterType = "error"
+reportOverlappingOverload = "error"
+reportSelfClsParameterName = "error"
+reportTypeCommentUsage = "error"
+reportUnknownParameterType = "error"
+reportUnnecessaryCast = "error"
+reportUnnecessaryContains = "error"
+reportUnsupportedDunderAll = "error"
+reportUntypedBaseClass = "error"
+reportUntypedClassDecorator = "error"
+reportUntypedFunctionDecorator = "error"
+reportUntypedNamedTuple = "error"
+reportWildcardImportFromLibrary = "error"
+
+reportMissingTypeArgument = "warning"
+reportPrivateUsage = "warning"
+reportUnknownArgumentType = "warning"
+reportUnknownLambdaType = "warning"
+reportUnknownMemberType = "warning"
+reportUnknownVariableType = "warning"
+reportUnnecessaryComparison = "warning"
+reportUnnecessaryIsInstance = "warning"
+reportUnusedClass = "warning"
+reportUnusedExpression = "warning"
+reportUnusedFunction = "warning"
+reportUnusedImport = "warning"
+reportUnusedVariable = "warning"
+
+reportMissingTypeStubs = "none"
+reportDuplicateImport = "none"
