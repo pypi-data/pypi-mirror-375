@@ -1,0 +1,130 @@
+name: Build and Upload intake-esm to PyPI
+
+on:
+  release:
+    types:
+      - published
+  push:
+
+jobs:
+  build-artifacts:
+    runs-on: ubuntu-latest
+    if: github.repository == 'access-nri/intake-esm'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        name: Install Python
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install setuptools setuptools-scm wheel twine check-manifest
+
+      - name: Build tarball and wheels
+        run: |
+          git clean -xdf
+          git restore -SW .
+          python -m build --sdist --wheel .
+
+      - name: Check built artifacts
+        run: |
+          python -m twine check dist/*
+          pwd
+          if [ -f dist/intake-esm-unknown.tar.gz ]; then
+            echo "❌ INVALID VERSION NUMBER"
+            exit 1
+          else
+            echo "✅ Looks good"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: releases
+          path: dist
+
+  test-built-dist:
+    needs: build-artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        name: Install Python
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@v4
+        with:
+          name: releases
+          path: dist
+      - name: List contents of built dist
+        run: |
+          ls -ltrh
+          ls -ltrh dist
+
+      - name: Verify the built dist/wheel is valid
+        if: github.event_name == 'push'
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install dist/intake_esm*.whl
+          python -c "import intake_esm; print(intake_esm.__version__)"
+
+  upload-to-pypi:
+    needs: test-built-dist
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: releases
+          path: dist
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.13.0
+
+
+  conda:
+    name: build and deploy to conda
+    needs: upload-to-pypi
+    if: always() && needs.upload-to-pypi.result == 'success'
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup conda environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniconda-version: "latest"
+          python-version: 3.11
+          environment-file: ci/environment.yml
+          auto-update-conda: false
+          auto-activate-base: false
+          show-channel-urls: true
+          
+      - name: Enforce .tar.bz2 packages
+        # Temporary work-arounds while the action uibcdf/action-build-and-upload-conda-packages gets updated:
+        # We create a `~/.condarc` file with the correct options to enforce the use of `.tar.bz2` packages
+        # and we set the channels to be used by conda build
+        shell: bash
+        run: |
+            cat > ~/.condarc << EOF
+            conda-build:
+                pkg_format: .tar.bz2
+            channels:
+                - accessnri
+                - conda-forge
+                - nodefaults
+            EOF
+
+      - name: Build and upload the conda package
+        uses: uibcdf/action-build-and-upload-conda-packages@v1.4.0
+        with:
+          meta_yaml_dir: .conda
+          python-version: 3.11
+          user: accessnri
+          label: main
+          token: ${{ secrets.anaconda_token }}
+
