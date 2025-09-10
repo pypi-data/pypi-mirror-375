@@ -1,0 +1,40 @@
+# Include documentation and metadata files
+include README.md
+include LICENSE
+include CHANGELOG.md
+include pyproject.toml
+include setup.py
+
+# Include package source files
+recursive-include rouge_torch *.py
+
+# Include tests
+include test_rouge_torch.py
+recursive-include tests *.py
+
+# Exclude development and build files
+exclude .gitignore
+exclude .github/
+exclude .pytest_cache/
+exclude __pycache__/
+exclude *.pyc
+exclude *.pyo
+exclude *.pyd
+exclude .Python
+exclude build/
+exclude dist/
+exclude *.egg-info/
+exclude .coverage
+exclude .tox/
+exclude venv/
+exclude env/
+
+# Documentation
+include docs/Makefile
+recursive-include docs *.rst
+recursive-include docs *.py
+recursive-exclude docs/_build *
+
+# Configuration files
+include tox.ini
+include .pre-commit-config.yaml

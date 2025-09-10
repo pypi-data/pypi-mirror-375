@@ -1,0 +1,16 @@
+CHANGELOG.md
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+test_rouge_torch.py
+rouge_torch/__init__.py
+rouge_torch/core.py
+rouge_torch/utils.py
+rouge_torch.egg-info/PKG-INFO
+rouge_torch.egg-info/SOURCES.txt
+rouge_torch.egg-info/dependency_links.txt
+rouge_torch.egg-info/not-zip-safe
+rouge_torch.egg-info/requires.txt
+rouge_torch.egg-info/top_level.txt
