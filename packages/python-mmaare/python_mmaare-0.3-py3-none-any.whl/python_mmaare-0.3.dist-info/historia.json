@@ -1,0 +1,52 @@
+[
+  {
+    "revisio": "8fe6358854ec8dedb634d7ff4496334ca6418152",
+    "versio": "0.3",
+    "kuvaus": "P\u00e4ivitetty projektim\u00e4\u00e4ritys pyproject.toml-muotoon"
+  },
+  {
+    "revisio": "828e483fb325302c1fc8a7eeb929ebe6329fbcff",
+    "versio": "0.2.4",
+    "kuvaus": "P\u00e4ivitetty paketointim\u00e4\u00e4ritys"
+  },
+  {
+    "revisio": "162807ec04b040b9b76b27337ca594e9e7a9c33a",
+    "versio": "0.2.3",
+    "kuvaus": "Otetaan kiinni poikkeus `__getattr__`-funktiota ylikuormitettaessa"
+  },
+  {
+    "revisio": "d2f973240c9fe29d27560b7dfc1c8522f8085431",
+    "versio": "0.2.2",
+    "kuvaus": "P\u00e4ivitetty k\u00e4ytt\u00f6oikeusasiakirja"
+  },
+  {
+    "revisio": "dda376cf29a29ddfe08672f5ab2829d0f8d69997",
+    "versio": "0.2.1",
+    "kuvaus": "Parannettu rekursion sietoa"
+  },
+  {
+    "revisio": "efd4b5d0be3962c1512c6fe87c315d7c29cb270b",
+    "versio": "0.2",
+    "kuvaus": "PEP 517/8 -asennusm\u00e4\u00e4ritys"
+  },
+  {
+    "revisio": "61da541803965c0e696e9e9c96536ec52e722092",
+    "versio": "0.1.3",
+    "kuvaus": "Sallitaan `staticmethod`-tyyppinen (argumentiton) moduulim\u00e4\u00e4re"
+  },
+  {
+    "revisio": "9ba6654fadb4aba9110c406a42c8516db55c1104",
+    "versio": "0.1.2",
+    "kuvaus": "P\u00e4ivitetty asennusm\u00e4\u00e4ritys"
+  },
+  {
+    "revisio": "8340839fd71fda628962800bf8a43e5b21a790c8",
+    "versio": "0.1.1",
+    "kuvaus": "Muutettu Python 3.6 -toteutus datakuvaajaksi: sallitaan sijoitus"
+  },
+  {
+    "revisio": "b728f98b45f309a151e4725cc6023cd40ed71293",
+    "versio": "0.1",
+    "kuvaus": "Alustava toteutus"
+  }
+]
