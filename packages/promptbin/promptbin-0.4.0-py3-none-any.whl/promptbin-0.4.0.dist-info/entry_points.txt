@@ -1,0 +1,4 @@
+[console_scripts]
+promptbin = promptbin.cli:main
+promptbin-install-tunnel = promptbin.utils.install_devtunnel:main
+promptbin-setup = promptbin.utils.setup_checker:main
