@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/weight_analyse/__init__.py
+src/weight_analyse/core.py
+src/weight_analyse/log.py
+src/weight_analyse/server.py
+src/weight_analyse.egg-info/PKG-INFO
+src/weight_analyse.egg-info/SOURCES.txt
+src/weight_analyse.egg-info/dependency_links.txt
+src/weight_analyse.egg-info/requires.txt
+src/weight_analyse.egg-info/top_level.txt
+tests/test_main.py
