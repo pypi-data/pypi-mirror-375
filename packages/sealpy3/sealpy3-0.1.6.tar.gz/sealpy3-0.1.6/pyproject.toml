@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "sealpy3"
+version = "0.1.6"
+license = "MIT"
+description = "seal your pyfiles or project by using cythonize."
+authors = ["limoncc <limoncc@icloud.com>"]
+readme = "README.md"
+homepage = "https://github.com/limoncc/sealpy"
+repository = "https://github.com/limoncc/sealpy"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4"
+cython = "^3.0.11"
+
+[tool.poetry.scripts]
+sealpy = "sealpy3.cmdline:execute"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
