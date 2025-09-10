@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: haske
+Version: 0.2.2
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Rust
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Requires-Dist: starlette>=0.27.0
+Requires-Dist: uvicorn>=0.20.0
+Requires-Dist: jinja2>=3.0.0
+Requires-Dist: sqlalchemy>=1.4.0
+Requires-Dist: typer>=0.9.0
+Requires-Dist: python-multipart>=0.0.5
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: itsdangerous>=2.1.0
+Requires-Dist: haske-core
+Requires-Dist: pytest>=7.0.0 ; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.20.0 ; extra == 'dev'
+Requires-Dist: black>=22.0.0 ; extra == 'dev'
+Requires-Dist: mypy>=0.991 ; extra == 'dev'
+Requires-Dist: ruff>=0.0.260 ; extra == 'dev'
+Provides-Extra: dev
+License-File: LICENSE
+Summary: A high-performance Python web framework with Rust extensions
+Author-email: Yusee Habibu <yusee201520@gmail.com>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Project-URL: Homepage, https://github.com/Python-Katsina/haske
+Project-URL: Documentation, https://haske.readthedocs.io
+Project-URL: Repository, https://github.com/Python-Katsina/haske
+Project-URL: Changelog, https://github.com/Python-Katsina/haske/releases
+
+# Haske Python Package
+
