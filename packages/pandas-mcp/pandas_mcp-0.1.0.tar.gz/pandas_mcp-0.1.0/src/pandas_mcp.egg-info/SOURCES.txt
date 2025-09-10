@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/pandas_mcp.egg-info/PKG-INFO
+src/pandas_mcp.egg-info/SOURCES.txt
+src/pandas_mcp.egg-info/dependency_links.txt
+src/pandas_mcp.egg-info/entry_points.txt
+src/pandas_mcp.egg-info/requires.txt
+src/pandas_mcp.egg-info/top_level.txt
+src/pandas_mcp_server/__init__.py
+src/pandas_mcp_server/cli.py
+src/pandas_mcp_server/server.py
