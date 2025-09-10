@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: ying
+Version: 0.3.0
+Summary: My personal python library.
+Author-email: Ying Cai <i@caiying.me>
+Requires-Python: >=3.10
+Requires-Dist: dynaconf<4.0.0,>=3.2.11
+Requires-Dist: requests<3.0.0,>=2.31.0
+Provides-Extra: all
+Requires-Dist: azure-storage-blob; extra == 'all'
+Requires-Dist: boto3; extra == 'all'
+Requires-Dist: dynaconf; extra == 'all'
+Requires-Dist: google-cloud-monitoring; extra == 'all'
+Requires-Dist: google-cloud-storage; extra == 'all'
+Requires-Dist: minio; extra == 'all'
+Requires-Dist: oss2; extra == 'all'
+Requires-Dist: python-dotenv; extra == 'all'
+Provides-Extra: cli
+Requires-Dist: dynaconf; extra == 'cli'
+Requires-Dist: python-dotenv; extra == 'cli'
+Provides-Extra: storage
+Requires-Dist: azure-storage-blob; extra == 'storage'
+Requires-Dist: boto3; extra == 'storage'
+Requires-Dist: google-cloud-monitoring; extra == 'storage'
+Requires-Dist: google-cloud-storage; extra == 'storage'
+Requires-Dist: minio; extra == 'storage'
+Requires-Dist: oss2; extra == 'storage'
+Description-Content-Type: text/markdown
+
+# My Python Library
