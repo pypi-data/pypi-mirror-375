@@ -1,0 +1,32 @@
+include README.md
+include CHANGELOG.md
+include LICENSE
+include pyproject.toml
+include requirements.txt
+include .gitignore
+
+# Include package data
+recursive-include src/*.py
+recursive-include src/*.html
+recursive-include src/*.css
+recursive-include src/*.json
+recursive-include src/*.yaml
+recursive-include src/*.yml
+recursive-include src/*.jinja2
+recursive-include src/*.md
+recursive-include tests/*.py
+recursive-include tests/data/*
+recursive-include docs/*.md
+recursive-include templates/*.html
+recursive-include config/*.yaml
+recursive-include config/*.yml
+
+# Exclude unnecessary files
+global-exclude *.py[cod] __pycache__/* *.so *.dylib *.pyd
+prune examples
+prune docs/_build
+prune .github
+prune .pytest_cache
+prune .mypy_cache
+prune .vscode
+prune .idea
