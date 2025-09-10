@@ -1,0 +1,21 @@
+dogpile.cache<1.5
+python-dateutil<2.10
+requests<3,>=2.27
+six<2
+
+[:python_version < "3.8"]
+importlib-metadata
+
+[develop]
+twine<7
+wheel<1
+
+[develop:python_version >= "3.7"]
+ruff<0.13
+
+[test]
+pytest<9
+pytest-cache<2
+pytest-cov<7.1
+python-dotenv<1.2
+responses<0.26
