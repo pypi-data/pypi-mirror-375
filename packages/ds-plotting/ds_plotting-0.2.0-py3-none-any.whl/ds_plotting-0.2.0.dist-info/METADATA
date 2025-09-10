@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: ds-plotting
+Version: 0.2.0
+Author-email: Thomas Camminady <0milieux_member@icloud.com>
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: altair>=5.5.0
+Requires-Dist: fire>=0.7.1
+Requires-Dist: ipython>=9.5.0
+Requires-Dist: polars>=1.33.1
+Requires-Dist: pycrux>=0.2.0
+Requires-Dist: rich>=14.1.0
+Description-Content-Type: text/markdown
+
+# ds-plotting
+
+## Usage
+
+Let's say you want to plot all data in
+
+```shell
+"/Users/YOU/Downloads/set"
+```
+
+and there is a file `MyReference.fit` that is your reference, then you can simply run
+
+```shell
+uv run src/ds_plotting/main.py                      \
+    --crux_common="/PATH/TO/YOUR/crux_common/"  \
+    --width=1600                                \
+    --height=200                                \
+    --rolling_window=1                          \
+    --silent=True                               \
+    --zero=False                                \
+    --folder="/Users/YOU/Downloads/set"         \
+    --reference_file="MyReference.fit"          \
+    --cleanup=True                              \
+;
+```
+
+If you have `crux_common` defined in your `~/.wahoofitness.json`, you can skip that argument.
