@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ariadne-graphql-proxy"
+description = "Ariadne toolkit for building GraphQL proxies."
+authors = [{ name = "Mirumee Software", email = "hello@mirumee.com" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+version = "0.5.0"
+dependencies = [
+  "graphql-core>=3.2.0,<3.3",
+  "httpx",
+  "ariadne>=0.23.0",
+]
+
+[project.optional-dependencies]
+test = [
+  "black",
+  "freezegun",
+  "moto[dynamodb]",
+  "mypy",
+  "pytest",
+  "pytest-mock",
+  "pytest-httpx",
+  "pytest-asyncio",
+  "ruff",
+]
+
+orjson = [
+  "orjson",
+]
+
+aws = [
+  "asgiref",
+  "boto3",
+]
+
+[project.urls]
+"Homepage" = "https://ariadnegraphql.org/"
+"Repository" = "https://github.com/mirumee/ariadne-graphql-proxy"
+"Bug Tracker" = "https://github.com/mirumee/ariadne-graphql-proxy/issues"
+"Community" = "https://github.com/mirumee/ariadne/discussions"
+"Twitter" = "https://twitter.com/AriadneGraphQL"
+
+[tool.hatch.build]
+include = [
+  "ariadne_graphql_proxy/**/*.py",
+  "ariadne_graphql_proxy/py.typed",
+]
+exclude = [
+  "tests",
+]
+
+[tool.hatch.envs.default]
+features = ["test"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311']
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+testpaths = ["tests"]
