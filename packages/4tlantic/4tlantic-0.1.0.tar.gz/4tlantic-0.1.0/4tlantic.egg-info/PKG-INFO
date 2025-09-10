@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: 4tlantic
+Version: 0.1.0
+Summary: Información sobre algúnas rutas por Galicia
+Home-page: https://roadtrip.io
+Author: 4tlantic
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: summary
+
+# Road trip _4tlantic test
+
+Algo de información sobre algúnas rutas desde Santiago de Compostela.
+
+## Rutas descritas:
+
+- Santiago - Vigo
+- Santiago - Lugo
+- Santaigo - Ourense
+
+## Instalación
+
+Instalar el paquete usando `pip3`:
+
+```python3
+pip3 install hack_4_u
+```
+## Uso básico
+
+### Listar todas las rutas
+
+```python
+from testing_hack4u import trip
+
+for ciudad in viajes:
+    print(ciudad)
+```
+
+### Obtener ruta por nombre de ciudad
+
+```python
+from testing_hack4u import buscar
+
+buscar()
+Ingresar ciudad buscada --> "ciudad"
+```
