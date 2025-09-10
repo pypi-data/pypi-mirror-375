@@ -1,0 +1,9 @@
+littletable>=3.0.1
+rich
+textual
+
+[:python_version >= "3.13"]
+typing-extensions>=4.12.0
+
+[pcap]
+pyshark
