@@ -1,0 +1,194 @@
+Metadata-Version: 2.4
+Name: ebs-initializer-mcp
+Version: 0.5.0
+Summary: MCP server for AWS EBS volume initialization
+Project-URL: Homepage, https://github.com/jsk6387/ebs_init_mcp
+Project-URL: Repository, https://github.com/jsk6387/ebs_init_mcp
+Project-URL: Documentation, https://github.com/jsk6387/ebs_init_mcp#readme
+Project-URL: Bug Reports, https://github.com/jsk6387/ebs_init_mcp/issues
+Project-URL: Source Code, https://github.com/jsk6387/ebs_init_mcp
+Author-email: sangkyuu <jsk6387@naver.com>
+License: MIT
+Keywords: aws,ebs,fastmcp,initialization,mcp,volume
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: System :: Systems Administration
+Classifier: Topic :: Utilities
+Requires-Python: >=3.10
+Requires-Dist: boto3>=1.4.0
+Requires-Dist: mcp[cli]>=0.8.0
+Provides-Extra: dev
+Requires-Dist: black>=23.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: ruff>=0.1.0; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# EBS Initialization MCP Server
+
+A Model Context Protocol (MCP) server for automating AWS EBS volume initialization. This server provides tools to initialize EBS volumes attached to EC2 instances using AWS Systems Manager.
+
+## Features
+
+- 🔍 **Volume Discovery**: Automatically discover all EBS volumes attached to an EC2 instance
+- 🚀 **Automated Initialization**: Initialize volumes using `fio` (recommended) or `dd`
+- 📊 **Progress Monitoring**: Check initialization status and view detailed logs
+- 🌐 **Multi-Region Support**: Works across all AWS regions
+- 🔒 **Secure Execution**: Uses AWS Systems Manager for secure remote execution
+
+## Installation
+
+### Using uvx (Recommended)
+
+```bash
+# Run directly without installation (latest version)
+uvx ebs-initializer-mcp@latest
+
+# Or run specific version
+uvx ebs-initializer-mcp==0.4.5
+
+# Install globally
+uv tool install ebs-initializer-mcp
+
+# Upgrade to latest version
+uvx --upgrade ebs-initializer-mcp
+```
+
+### From GitHub
+
+```bash
+uvx --from git+https://github.com/username/ebs-init-mcp.git ebs-mcp-server
+```
+
+## Usage
+
+### As MCP Server
+
+Add to your MCP configuration (`mcp_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "ebs-initializer": {
+      "command": "uvx",
+      "args": ["ebs-initializer-mcp@latest"],
+      "env": {
+        "AWS_REGION": "us-west-2"
+      }
+    }
+  }
+}
+```
+
+### Available Tools
+
+1. **get_instance_volumes**: Get all EBS volumes attached to an instance
+2. **initialize_all_volumes**: Initialize all volumes on an instance (parallel processing)
+3. **initialize_volume_by_id**: Initialize a specific volume by its volume ID
+4. **check_initialization_status**: Monitor initialization progress and view detailed logs
+
+### Example Usage with Claude Code
+
+```
+"Initialize all EBS volumes for instance i-1234567890abcdef0 using fio"
+"Initialize volume vol-1234567890abcdef0 using fio"
+"Check the status of the newly attached volume vol-abcdef1234567890"
+```
+
+The MCP server will:
+1. Discover all attached EBS volumes
+2. Install fio on the target instance
+3. Run initialization commands in parallel
+4. Provide status updates and logs
+
+## Prerequisites
+
+- AWS CLI configured with appropriate permissions
+- EC2 instances must have Systems Manager agent installed
+- **Supported Operating Systems:**
+  - Amazon Linux 2
+  - Amazon Linux 2023
+  - Red Hat Enterprise Linux (RHEL)
+  - Ubuntu (18.04, 20.04, 22.04, 24.04)
+  - SUSE Linux Enterprise Server (SLES)
+- Required IAM permissions:
+  - `ec2:DescribeVolumes`
+  - `ssm:SendCommand`
+  - `ssm:GetCommandInvocation`
+
+## AWS IAM Permissions
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVolumes",
+                "ssm:SendCommand",
+                "ssm:GetCommandInvocation"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+## Configuration
+
+### Environment Variables
+
+The server automatically detects AWS region from environment variables:
+
+```bash
+# Option 1: AWS_DEFAULT_REGION (preferred)
+export AWS_DEFAULT_REGION=ap-northeast-2
+
+# Option 2: AWS_REGION (also supported)  
+export AWS_REGION=ap-northeast-2
+```
+
+**Priority order:**
+1. `AWS_DEFAULT_REGION` environment variable
+2. `AWS_REGION` environment variable  
+3. Fallback to `us-east-1`
+
+### MCP Configuration
+
+```json
+{
+  "mcpServers": {
+    "ebs-initializer": {
+      "command": "uvx",
+      "args": ["ebs-initializer-mcp@latest"],
+      "env": {
+        "AWS_DEFAULT_REGION": "ap-northeast-2"
+      }
+    }
+  }
+}
+```
+
+## Development
+
+```bash
+git clone <repository>
+cd ebs-init-mcp
+pip install -e ".[dev]"
+
+# Run tests
+pytest
+
+# Format code
+black src/
+ruff check src/
+```
+
+## License
+
+MIT License
