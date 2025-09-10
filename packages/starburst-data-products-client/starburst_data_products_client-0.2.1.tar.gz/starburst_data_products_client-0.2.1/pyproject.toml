@@ -1,0 +1,30 @@
+[project]
+name = "starburst-data-products-client"
+version = "0.2.1"
+description = "Client for the Starburst Galaxy and Enterprise data products REST APIs"
+authors = [
+    {name = "Starburst Data", email = " <info@starburstdata.com>"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "requests (>=2.32.3,<3.0.0)",
+    "marshmallow-dataclass (>=8.7.1,<9.0.0)",
+    "pytest (>=8.3.5,<9.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.test.dependencies]
+trino = "^0.333.0"
+testcontainers = "^4.10.0"
+
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^8.2.3"
+sphinxcontrib-jquery = "^4.1"
+sphinx-mdinclude = "^0.6.2"
+sphinx-material = "^0.0.36"
