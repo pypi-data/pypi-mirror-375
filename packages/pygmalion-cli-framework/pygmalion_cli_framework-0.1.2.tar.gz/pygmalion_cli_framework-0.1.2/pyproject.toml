@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygmalion-cli-framework"
+version = "0.1.2"
+description = "A micro-framework for building adaptive CLI interfaces that learn from user behavior"
+readme = "README.md"
+authors = [{name = "Pygmalion CLI Framework Developers"}]
+license = {text = "MIT"}
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: System Shells",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+]
+keywords = ["cli", "command-line", "adaptive", "learning", "interface"]
+dependencies = [
+    "click>=8.0.0",
+    "rich>=12.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Okymi-X/pygmalion-cli-framework"
+Repository = "https://github.com/Okymi-X/pygmalion-cli-framework"
+Documentation = "https://pygmalion-cli-framework.readthedocs.io"
+
+[project.scripts]
+pygmalion-cli-framework-demo = "pygmalion.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pygmalion*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=pygmalion --cov-report=term-missing --disable-warnings"
+filterwarnings = [
+    "ignore::ResourceWarning",
+    "ignore::DeprecationWarning",
+]
