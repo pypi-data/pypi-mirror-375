@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: sch-lib
+Version: 1.0.2
+Requires-Python: >=3.9
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: toml>=0.10.2
+Provides-Extra: mysql
+Requires-Dist: pymysql>=1.1.1; extra == "mysql"
+Requires-Dist: sqlalchemy>=2.0.43; extra == "mysql"
+Provides-Extra: s3
+Requires-Dist: boto3>=1.40.10; extra == "s3"
+Provides-Extra: image
+Requires-Dist: pillow>=11.3.0; extra == "image"
+Provides-Extra: request
+Requires-Dist: bs4>=0.0.2; extra == "request"
+Requires-Dist: requests>=2.32.4; extra == "request"
+Provides-Extra: all
+Requires-Dist: pymysql>=1.1.1; extra == "all"
+Requires-Dist: sqlalchemy>=2.0.43; extra == "all"
+Requires-Dist: boto3>=1.40.10; extra == "all"
+Requires-Dist: pillow>=11.3.0; extra == "all"
+Requires-Dist: bs4>=0.0.2; extra == "all"
+Requires-Dist: requests>=2.32.4; extra == "all"
