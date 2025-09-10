@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+        with:
+          version: "latest"
+      - uses: Swatinem/rust-cache@v2
+      - uses: astral-sh/setup-uv@v3
+      - name: Lint
+        run: scripts/lint
+      - name: Test
+        run: scripts/test
+      - name: CLI smoke test
+        run: uv run cql2 < examples/text/example01.txt
+      - name: Build WASM
+        run: scripts/buildwasm
