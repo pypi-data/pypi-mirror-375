@@ -1,0 +1,37 @@
+Metadata-Version: 2.3
+Name: cooper-epic-jungle
+Version: 2.0.1
+Summary: An extension of the mipi package. Contains a repository of sql scripts and functions to build modular reports using them
+Author: murphy-sean1
+Author-email: murphy-sean1@cooperhealth.edu
+Requires-Python: >=3.12,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: bump-my-version (>=1.2.1,<2.0.0)
+Requires-Dist: mipi-datamanager (>=1.3.5,<2.0.0)
+Description-Content-Type: text/markdown
+
+# CooperEpicJungle
+
+This is the Cooper internal Epic Jungle. It  is an extension of the MiPi package.
+It contains pre-configured SQL templates
+
+## Access the scripts using mipi
+
+```python
+# Import the data manager
+from mipi_datamanager import DataManager
+
+# Import the Epic Jungle
+from cooper_epic_jungle import COOPER_EPIC_JUNGLE
+
+# use the default jungle with all of its presets (COOPER_EPIC_JUNGLE)
+mipi = DataManager.from_jinja_repo_preset("epic/EPT/encounters/ambulatory/population/generic.sql")
+
+# override the jungle for the entire datamanager object
+from cooper_epic_jungle import EPT
+mipi = DataManager.from_jinja_repo_preset(override_jinja_repo_source=EPT)
+
+
+```

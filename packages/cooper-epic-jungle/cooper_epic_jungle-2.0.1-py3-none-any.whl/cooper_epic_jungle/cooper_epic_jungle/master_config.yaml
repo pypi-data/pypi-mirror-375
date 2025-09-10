@@ -1,0 +1,260 @@
+epic/EPT/encounters/general/information:
+    get_revenue_location.sql:
+        meta:
+            name: "get_revenue_location"
+            join_key: "CSN"
+            connection: "CLARITY"
+            description: "Given CSNs outputs the revenue location of either Cooper or Cape, update. "
+            population: false
+        jinja_parameters_dict: {}
+epic/EPT/encounters/ambulatory/population:
+    generic.sql:
+        meta:
+            name: "Generic"
+            join_key: null
+            connection: "CDW"
+            description: "Population scrip for ambulatory encounters. Uses CDW full access. In addition to listed defaults, defaulted encounter type is \"face to face\"."
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-01-01"
+            date_end: "2024-01-03"
+            include_department: true
+            include_provider_details: true
+            include_encounter_details: true
+            include_service_date_grouping: false
+            filt_encounter_status: [
+                "Arrived",
+                "Completed"
+            ]
+            filt_encounter_type: null
+            filt_encounter_department: null
+            filt_encounter_department_specialty: null
+            filt_encounter_provider_id: null
+epic/EPT/patient/demographics/information:
+    demographics.sql:
+        meta:
+            name: "demographics"
+            join_key: "MRN"
+            connection: "CLARITY"
+            description: "Record level patient demographics including DOB, Race, Ethnicity, and Gender."
+            population: false
+        jinja_parameters_dict: {}
+    patient_demographics.sql:
+        meta:
+            name: "patient_demographics"
+            join_key: "PAT_ID"
+            connection: "CLARITY"
+            description: "Acquires patient demographic information like the patient's name, address, email, phone number, etc. The PAT_ID is the primary key."
+            population: false
+        jinja_parameters_dict:
+            include_detail_columns: true
+    info_patient_languages.sql:
+        meta:
+            name: "pat_lang"
+            join_key: "PAT_ID"
+            insert_table_name: "PAT_ID"
+            connection: "odbc.Clarity()"
+            description: "Given PAT_ID's, return primary spoken language, written language, preferred language, and a 1/0 flag for 'is_spanish_speaking.'"
+            population: false
+        jinja_parameters_dict: {}
+epic/EPT/encounters/billing/information:
+    encounter_payor.sql:
+        meta:
+            name: "Payor"
+            join_key: "CSN"
+            connection: "CDW"
+            description: "Get Primary and secondary payor information for encounter."
+            population: false
+        jinja_parameters_dict: {}
+    info_enc_based_professional_billing.sql:
+        meta:
+            name: "pb_billing"
+            join_key: "CSN"
+            insert_table_name: "CSN"
+            connection: "odbc.Clarity()"
+            description: "Given CSN's, return professional billing columns"
+            population: false
+        jinja_parameters_dict: {}
+epic/EPT/encounters/notes/information:
+    provider_notes.sql:
+        meta:
+            name: "All Provider Notes"
+            join_key: "CSN"
+            connection: "CLARITY"
+            description: "Returns encounter provider's NOTE_ID, with priority to the progress note if there are multiple."
+            population: false
+        jinja_parameters_dict: {}
+epic/HNO/notes/smart_templates/information:
+    smart_phrases.sql:
+        meta:
+            name: "Smart Phrases"
+            join_key: "NOTE_ID"
+            connection: "CLARITY"
+            description: "If all_smartphrases is TRUE this will return a \"; \" delimited list of all smartphrases attached to the NOTE_ID. Otherwise specify the target_smartphrases and this will return 1 if it is present."
+            population: false
+        jinja_parameters_dict:
+            toggle_all_smartphrases: true
+            target_smartphrase: null
+    smart_texts.sql:
+        meta:
+            name: "Smart Texts"
+            join_key: "NOTE_ID"
+            connection: "CLARITY"
+            description: "If all_smarttexts is TRUE this will return a \"; \" delimited list of all smart texts attached to the NOTE_ID. Otherwise specify the target_smarttext and this will return 1 if it is present."
+            population: false
+        jinja_parameters_dict:
+            toggle_all_smarttexts: true
+            target_smarttext: null
+epic/EPT/encounters/hospital/population:
+    hsp_obs_ip_encounters.sql:
+        meta:
+            name: "hsp_obs_ip_enc"
+            join_key: null
+            connection: "CLARITY"
+            description: "Captures inpatient and/or observations encounters from the PAT_ENC_HSP."
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-09-06"
+            date_end: "2024-10-21"
+            filt_patient_class: [
+                "INPATIENT",
+                "OBSERVATION"
+            ]
+            filt_discharge_department: null
+            toggle_use_discharge_date: true
+            include_detail_columns: false
+    pop_ed_encs.sql:
+        meta:
+            name: "ed_encs"
+            join_key: null
+            connection: "CLARITY"
+            description: "Get ED encounters by EMER_ADM_DATE or ED_DEPARTURE_TIME"
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-10-01"
+            date_end: "2024-10-31"
+            toggle_use_admit_date: true
+            filt_admit_dept: null
+            filt_ed_disposition: null
+            include_details: true
+    pop_surgeries_by_date.sql:
+        meta:
+            name: "surg_encs"
+            join_key: null
+            connection: "CLARITY"
+            description: "Get completed surgeries by date and additional parameters."
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-11-01"
+            date_end: "2024-11-30"
+            include_details: true
+            filt_surg_serv: null
+            filt_location: null
+            filt_prim_surg: null
+            filt_resp_anes: null
+            filt_cpt_codes: nul
+    pop_scheduled_surgeries_by_date.sql:
+        meta:
+            name: "sched_surg_encs"
+            join_key: null
+            connection: "CLARITY"
+            description: "Get scheduled surgeries by date and additional parameters."
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-11-01"
+            date_end: "2024-11-30"
+            include_details: true
+            filt_surg_serv: null
+            filt_location: null
+            filt_prim_surg: null
+            include_cancelled: false
+epic/EPT/encounters/ambulatory/information:
+    info_ambulatory_encounter_dx.sql:
+        meta:
+            name: "amb_enc_dx"
+            join_key: "CSN"
+            connection: "CLARITY"
+            description: "Given CSN's, get encounter DX from PAT_ENC_DX and/or HSP_ACCT_DX_LIST"
+            population: false
+        jinja_parameters_dict:
+            dx_line_limit: "1"
+            toggle_use_hsp_billing_dxs: true
+            toggle_use_pat_enc_dxs: true
+            filts_dx: null
+epic/EPT/encounters/hospital/information:
+    info_hospital_encounter_dx.sql:
+        meta:
+            name: "hsp_enc_dx"
+            join_key: "CSN"
+            connection: "CLARITY"
+            description: "Given CSN's, get ICD DX per encounter."
+            population: false
+        jinja_parameters_dict:
+            filts_dx: null
+            toggle_use_admit_order_dx: false
+            toggle_use_hsp_prob_list_dxs: false
+            dx_line_limit: "10"
+            toggle_use_ed_dxs: true
+            toggle_use_hsp_billing_dxs: true
+    opat_patient_encounters.sql:
+        meta:
+            name: "info_opat_hosp_encounters"
+            join_key: "CSN"
+            connection: "CLARITY"
+            description: "Outpatient parenteral antimicrobial therapy (OPAT) program serves as a way to safely monitor patients discharged from the hospital on intravenous antibiotics to treat serious infections."
+            population: false
+        jinja_parameters_dict: {}
+epic/EPT/patient/medical history/information:
+    info_dx_history_up_to_csn_date.sql:
+        meta:
+            name: "info_historical_dx"
+            join_key: "CSN"
+            connection: "CLARITY"
+            description: "Returns flag for given dx dictionary list up to given CSN contact date. "
+            population: false
+        jinja_parameters_dict:
+            filts_icd: null
+epic/EPT/encounters/general/population:
+    pop_adt_events.sql:
+        meta:
+            name: "adt_events"
+            join_key: null
+            connection: "CLARITY"
+            description: "Get ADT transfer in events given a number of parameters."
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-11-01"
+            date_end: "2024-11-30"
+            filt_depts: null
+            filt_pat_class: null
+            filt_event_type: null
+            filt_service: null
+    pop_cpt_date_based_encounters.sql:
+        meta:
+            name: "cpt_encs"
+            join_key: null
+            insert_table_name: null
+            connection: "odbc.Clarity()"
+            description: "Given a date range and a list of CPT codes, return encounters."
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-01-01"
+            date_end: "2024-01-02"
+            filt_cpt_codes: null
+epic/EPT/patient/general/information:
+    info_patid_from_mrn.sql:
+        meta:
+            name: "patid_from_mrn"
+            join_key: "MRN"
+            connection: "CLARITY"
+            description: "Get PAT_ID's for info script joins, given a list of MRN's."
+            population: false
+        jinja_parameters_dict: {}
+    mrn_from_patid.sql:
+        meta:
+            name: "mrn_from_patid"
+            join_key: "PAT_ID"
+            connection: "CLARITY"
+            description: "Convert PAT_ID to MRN"
+            population: false
+        jinja_parameters_dict: {}

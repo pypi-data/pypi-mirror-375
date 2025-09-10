@@ -1,0 +1,26 @@
+SET NOCOUNT ON;
+
+IF OBJECT_ID('tempdb.dbo.#MRN', 'U') IS NOT NULL
+DROP TABLE #MRN;
+
+DECLARE @MRN TABLE
+(
+	MRN NVARCHAR(15)
+)
+
+{{ MRN }};
+
+SELECT *
+INTO #MRN
+FROM @MRN;
+
+SELECT mrn.MRN
+		,pat.PAT_ID
+FROM #MRN mrn
+JOIN PATIENT pat
+ON pat.PAT_MRN_ID 
+ = mrn.MRN
+JOIN PATIENT_3 pat3
+ON pat.PAT_ID 
+ = pat3.PAT_ID
+AND pat3.IS_TEST_PAT_YN = 'N'
