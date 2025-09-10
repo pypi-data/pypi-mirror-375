@@ -1,0 +1,197 @@
+[build-system]
+requires = ["build", "setuptools-scm"]
+
+[project]
+dynamic = ["version"]
+name = "message-ix-models"
+description = "Tools for the MESSAGEix-GLOBIOM family of models"
+authors = [{ name = "IIASA Energy, Climate, and Environment (ECE) Program" }]
+maintainers = [
+  { name = "Paul Natsuo Kishimoto", email = "mail@paul.kishimoto.name" },
+  { name = "Fridolin Glatter", email = "glatter@iiasa.ac.at" },
+]
+readme = "README.rst"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: R",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+license = "Apache-2.0"
+requires-python = ">=3.9"
+dependencies = [
+  "click",
+  "colorama",
+  # When the minimum is greater than the minimum via message_ix. Currently:
+  # - message_ix >= 3.8.0 → ixmp >= 3.8.0 → genno >= 1.16"
+  # - message_ix >= 3.8.0 → genno >= 1.18.1"
+  "genno >= 1.25",
+  "iam_units >= 2023.9.11",
+  "message_ix >= 3.8",
+  "pooch",
+  "pyam-iamc >= 0.6",
+  "pyarrow",
+  "pycountry",
+  "PyYAML",
+  "sdmx1 >= 2.22.0",
+  "tqdm",
+  "pyxlsb >= 1.0.10",
+]
+
+[project.urls]
+Documentation = "https://docs.messageix.org/models"
+"Release notes" = "https://docs.messageix.org/projects/models/en/stable/whatsnew.html"
+Repository = "https://github.com/iiasa/message-ix-models"
+"Issue tracker" = "https://github.com/iiasa/message-ix-models/issues"
+
+[project.optional-dependencies]
+buildings = ["jaydebeapi"]
+docs = [
+  # sphinx.ext.autosummary covers the test suite, so all test requirements
+  "message_ix_models[tests]",
+  "sphinx >= 4",
+  "sphinx_rtd_theme",
+  "sphinxcontrib-bibtex",
+]
+iea-web = ["dask[dataframe]"]
+material = ["xlrd"]
+migrate = [
+  "git-filter-repo",
+  "GitPython",
+]
+report = ["plotnine", "xlsxwriter"]
+tests = [
+  "message-ix[tests]",
+  "message_ix_models[buildings,material,report,transport]",
+  "pytest",
+  "pytest-cov",
+  "pytest-timeout",
+  "pytest-xdist",
+  # On RTD, pip tries to build this version from .tar.gz, but
+  # it contains packaging errors that cause the job to error.
+  "gamsapi > 47.6.0",
+]
+transport = [
+  "message-ix-models[iea-web,report]",
+  "requests-cache",
+  "transport-energy",
+  "xarray",
+]
+
+[project.scripts]
+mix-models = "message_ix_models.cli:main"
+
+[tool.coverage.report]
+exclude_also = [
+  # Don't complain about abstract methods, they aren't run
+  "@(abc\\.)?abstractmethod",
+  # Imports only used by type checkers
+  "if TYPE_CHECKING:",
+  # Requires message_data
+  "if HAS_MESSAGE_DATA:",
+]
+
+[tool.coverage.run]
+omit = [
+  "message_ix_models/project/ssp/script/*",
+  # The single existing test is far from enough
+  "message_ix_models/report/legacy/*",
+  "message_ix_models/util/migrate.py",
+]
+
+[tool.mypy]
+files = [
+  "doc",
+  "message_ix_models",
+]
+
+[[tool.mypy.overrides]]
+module = [
+  # TODO Satisfy mypy in the following
+  "message_ix_models.model.material.build",
+  "message_ix_models.model.material.data_ammonia_new",
+  "message_ix_models.model.material.data_generic",
+  "message_ix_models.model.material.data_petro",
+  "message_ix_models.model.material.data_steel",
+  "message_ix_models.model.material.data_util",
+  "message_ix_models.model.material.material_demand.*",
+  "message_ix_models.model.material.util",
+  "message_ix_models.model.water.*",
+  # Legacy codes that may not be type hinted
+  "message_ix_models.report.legacy.*",
+  "message_ix_models.tools.messagev",
+  "message_ix_models.util.compat.message_data.*",
+]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+# Packages/modules for which no type hints are available
+module = [
+  "colorama",
+  "message_data.*",
+  "plotnine",
+  "pooch",
+  "pycountry",
+  # Indirectly via message_ix
+  # This should be a subset of the list in message_ix's pyproject.toml
+  "matplotlib.*",
+  "pandas.*",
+  "pyam",
+  # Indirectly via ixmp
+  # This should be a subset of the list in ixmp's pyproject.toml
+  "dask.*",
+  "jpype",
+  "memory_profiler",
+  "scipy",
+  "sklearn",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+# Default options for invoking pytest
+# - Skip tests with the "ece_db" marker
+# - Disable faulthandler plugin on Windows to prevent spurious console noise
+# - No coverage report
+addopts = """
+  -m "not ece_db"
+  -p no:faulthandler
+  --cov=message_ix_models --cov-report="""
+filterwarnings = "ignore:distutils Version classes.*:DeprecationWarning"
+markers = [
+  "ece_db: Tests requiring access to IIASA ECE internal databases",
+  "slow: Tests that typically take more than ~45 seconds wall time",
+  "snapshot: Slow tests using the public MESSAGEix-GLOBIOM baseline snapshot",
+]
+
+[tool.ruff]
+exclude = [
+  "doc/_static/png_source_files/Land-use_emulator_figures.ipynb",
+  "message_ix_models/model/material/report/Historical Power Sector Stock Reporting-.ipynb",
+  "message_ix_models/report/legacy/",
+  "message_ix_models/util/compat/message_data/",
+]
+
+[tool.ruff.lint]
+select = ["C9", "E", "F", "I", "W"]
+# Exceptions:
+# 13  .project.navigate.workflow.generate()
+# 30  .project.ssp.script.util.shares.main()
+# 12  .tools.wb.assign_income_groups()
+# 13  .util.sdmx.as_codes()
+mccabe.max-complexity = 11
+
+[tool.setuptools]
+packages = ["message_ix_models"]
+
+[tool.setuptools_scm]
