@@ -1,0 +1,8 @@
+agentmake>=1.0.65
+agentmakemcp>=0.0.8
+alive-progress
+fastmcp[cli]
+rich
+
+[genai]
+google-genai>=1.25.0
