@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=70"]
+
+[project]
+name = "nens-meta"
+description = "Basic project automation and update tool"
+authors = [
+    {name = "Reinout van Rees", email = "reinout.vanrees@nelen-schuurmans.nl"},
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+dependencies = [
+    "Jinja2",
+    "tomlkit",
+    "typer",
+]
+dynamic = ["version"]
+
+[project.urls]
+Documentation = "https://nens-meta.readthedocs.io/"
+Repository = "https://github.com/nens/nens-meta"
+Changelog = "https://github.com/nens/nens-meta/blob/main/CHANGES.md"
+
+[tool.setuptools.dynamic]
+version = {attr = "nens_meta.__version__"}
+
+[project.scripts]
+nens-update-project = "nens_meta.update_project:main"
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-fail-under=95"
+
+[tool.zest-releaser]
+release = true
+python-file-with-version = "src/nens_meta/__init__.py"
+
+[tool.dependencychecker]
+ignore-packages = ["pytest-sugar"]
+
+[tool.ruff]
+# See https://docs.astral.sh/ruff/configuration/ for defaults.
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "C901"]
+
+[tool.pyright]
+# Pyright/pylance/vscode configuration.
+# Note: if you want a different setup, you can overwrite this with a
+# "pyrightconfig.json", which takes precedence.
+include = ["src"]
+venvPath = "."
+venv = ".venv"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+    "pytest-cov>=6.3.0",
+    "pytest-mock>=3.15.0",
+    "pytest-sugar>=1.1.1",
+    "ty>=0.0.1a20",
+]
+docs = [
+    "linkify-it-py>=2.0.3",
+    "myst-parser>=4.0.1",
+    "sphinx>=2.1",
+    "sphinx-immaterial>=0.13.6",
+]
