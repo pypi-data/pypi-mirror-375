@@ -1,0 +1,5 @@
+[aiida.calculations]
+fans = aiida_fans.calculations:FansCalculation
+
+[aiida.parsers]
+fans = aiida_fans.parsers:FansParser
