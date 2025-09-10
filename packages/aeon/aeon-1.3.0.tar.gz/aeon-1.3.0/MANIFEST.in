@@ -1,0 +1,27 @@
+recursive-include aeon *.py
+recursive-include aeon/datasets *.csv *.arff *.txt *.ts *.tsv *.tsf
+recursive-include aeon/testing/example_results_files *.csv
+include aeon/registry/README.md
+include .coveragerc
+include conftest.py
+include LICENSE
+include MANIFEST.in
+include pyproject.toml
+include README.md
+
+recursive-exclude .binder *
+recursive-exclude .github *
+recursive-exclude docs *
+recursive-exclude examples *
+exclude .all-contributorsrc
+exclude .codecov.yml
+exclude .gitattributes
+exclude .gitignore
+exclude .pre-commit-config.yaml
+exclude .readthedocs.yml
+exclude CHANGELOG.md
+exclude CODE_OF_CONDUCT.md
+exclude CODEOWNERS
+exclude CONTRIBUTING.md
+exclude CONTRIBUTORS.md
+exclude GOVERNANCE.md
