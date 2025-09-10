@@ -1,0 +1,56 @@
+[project]
+name = "openMINDS"
+version = "0.3.1"
+description = "Python library for interacting with openMINDS metadata schemas"
+readme = "README.md"
+authors = [
+    { name="Andrew P. Davison", email="andrew.davison@cnrs.fr" },
+    { name="Lyuba Zehl", email="lyuba.zehl@ebrains.eu" },
+    { name="Louisa Köhnen" },
+    { name="Peyman Najafi", email="peyman.najafi@cnrs.fr" }
+
+]
+requires-python = ">=3.8"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3"
+]
+keywords = ["openMINDS", "Open Metadata Initiative", "metadata"]
+dependencies=[
+    "rfc3987"
+]
+
+[project.optional-dependencies]
+
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "coverage",
+    "build",
+    "setuptools",
+    "wheel",
+    "sphinx",
+    "black",
+    "twine"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/openMetadataInitiative/openMINDS_Python"
+
+[tool.setuptools.packages.find]
+include = ["openminds*"]
+
+[build-system]
+ requires = [
+     "setuptools",
+     "wheel",
+ ]
+ build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 119
