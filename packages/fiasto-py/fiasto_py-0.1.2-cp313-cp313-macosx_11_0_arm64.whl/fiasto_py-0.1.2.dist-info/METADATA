@@ -1,0 +1,364 @@
+Metadata-Version: 2.1
+Name: fiasto-py
+Version: 0.1.2
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Rust
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+License-File: LICENSE
+Summary: Python bindings for fiasto - A language-agnostic modern Wilkinson's formula parser and lexer
+Keywords: formula,parser,statistics,mixed-effects,wilkinson,rust,pyo3
+Author-email: Alex Hallam <alex@example.com>
+Maintainer-email: Alex Hallam <alex@example.com>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Project-URL: Homepage, https://github.com/alexhallam/fiasto-py
+Project-URL: Repository, https://github.com/alexhallam/fiasto-py
+Project-URL: Documentation, https://github.com/alexhallam/fiasto-py#readme
+Project-URL: Bug Tracker, https://github.com/alexhallam/fiasto-py/issues
+Project-URL: Changelog, https://github.com/alexhallam/fiasto-py/blob/main/CHANGELOG.md
+
+# fiasto-py
+
+[![PyPI version](https://badge.fury.io/py/fiasto-py.svg)](https://badge.fury.io/py/fiasto-py)
+[![Python versions](https://img.shields.io/pypi/pyversions/fiasto-py.svg)](https://pypi.org/project/fiasto-py/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<h1 align="center">fiasto-py</h1>
+
+<p align="center">
+  <img src="img/mango_pixle2_py.png" alt="logo" width="240">
+</p>
+
+---
+
+<p align="center">Pronouned like <strong>fiasco</strong>, but with a <strong>t</strong> instead of a <strong>c</strong></p>
+
+---
+
+<p align="center">(F)ormulas (I)n (AST) (O)ut</p>
+
+Python bindings for [fiasto](https://github.com/alexhallam/fiasto) - A language-agnostic modern Wilkinson's formula parser and lexer.
+
+## 🎯 Features
+
+- **Parse Wilkinson's Formulas**: Convert formula strings into structured JSON metadata
+- **Tokenize Formulas**: Break down formulas into individual tokens with detailed information
+- **Python Dictionaries**: Returns native Python dictionaries for easy integration
+
+## 🎯 Simple API
+
+- `parse_formula()` - Takes a Wilkinson’s formula string and returns a Python dictionary
+- `lex_formula()` - Tokenizes a formula string and returns a Python dictionary
+
+## 🚀 Quick Start
+
+### Installation
+
+**Install from PyPI** (recommended):
+```bash
+pip install fiasto-py
+```
+
+### Usage
+
+#### Usage: Parse Formula
+
+```python
+import fiasto_py
+from pprint import pprint
+# Parse a formula into structured metadata
+print("="*30)
+print("Parse Formula")
+print("="*30)
+result = fiasto_py.parse_formula("y ~ x1 + x2 + (1|group)")
+pprint(result, compact = True)
+```
+
+**Output:**
+
+```bash
+==============================
+Parse Formula
+==============================
+{'all_generated_columns': ['y', 'x1', 'x2', 'group'],
+ 'columns': {'group': {'generated_columns': ['group'],
+                       'id': 4,
+                       'interactions': [],
+                       'random_effects': [{'correlated': True,
+                                           'grouping_variable': 'group',
+                                           'has_intercept': True,
+                                           'includes_interactions': [],
+                                           'kind': 'grouping',
+                                           'variables': []}],
+                       'roles': ['GroupingVariable'],
+                       'transformations': []},
+             'x1': {'generated_columns': ['x1'],
+                    'id': 2,
+                    'interactions': [],
+                    'random_effects': [],
+                    'roles': ['FixedEffect'],
+                    'transformations': []},
+             'x2': {'generated_columns': ['x2'],
+                    'id': 3,
+                    'interactions': [],
+                    'random_effects': [],
+                    'roles': ['FixedEffect'],
+                    'transformations': []},
+             'y': {'generated_columns': ['y'],
+                   'id': 1,
+                   'interactions': [],
+                   'random_effects': [],
+                   'roles': ['Response'],
+                   'transformations': []}},
+ 'formula': 'y ~ x1 + x2 + (1|group)',
+ 'metadata': {'family': None,
+              'has_intercept': True,
+              'has_uncorrelated_slopes_and_intercepts': False,
+              'is_random_effects_model': True}}
+```
+
+#### Usage: Lex Formula
+
+```python
+import fiasto_py
+from pprint import pprint
+print("="*30)
+print("Lex Formula")
+print("="*30)
+tokens = fiasto_py.lex_formula("y ~ x1 + x2 + (1|group)")
+pprint(tokens, compact = True)
+```
+
+**Output:**
+
+```bash
+==============================
+Lex Formula
+==============================
+[{'lexeme': 'y', 'token': 'ColumnName'},
+ {'lexeme': '~', 'token': 'Tilde'},
+ {'lexeme': 'x1', 'token': 'ColumnName'},
+ {'lexeme': '+', 'token': 'Plus'},
+ {'lexeme': 'x2', 'token': 'ColumnName'},
+ {'lexeme': '+', 'token': 'Plus'},
+ {'lexeme': '(', 'token': 'FunctionStart'},
+ {'lexeme': '1', 'token': 'One'},
+ {'lexeme': '|', 'token': 'Pipe'},
+ {'lexeme': 'group', 'token': 'ColumnName'},
+ {'lexeme': ')', 'token': 'FunctionEnd'}]
+```
+
+### Simple OLS Regression
+
+```python
+import fiasto_py
+import polars as pl
+import numpy as np
+from pprint import pprint
+
+# Load data
+mtcars_path = "https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv"
+df = pl.read_csv(mtcars_path)
+
+# Parse formula
+formula = "mpg ~ wt + cyl"
+result = fiasto_py.parse_formula(formula)
+
+pprint(result)
+
+# Find the response column(s)
+response_cols = [
+    col for col, details in result["columns"].items()
+    if "Response" in details["roles"]
+]
+
+# Find non-response columns
+preds = [
+    col for col, details in result["columns"].items()
+    if "Response" not in details["roles"]
+]
+
+# Has intercept
+has_intercept = result["metadata"]["has_intercept"]
+
+# Prepare data matrices
+X = df.select(preds).to_numpy()
+y = df.select(response_cols).to_numpy().ravel()
+
+# Add intercept if metadata says so
+if has_intercept:
+    X_with_intercept = np.column_stack([np.ones(X.shape[0]), X])
+else:
+    X_with_intercept = X
+
+# Solve normal equations: (X'X)^-1 X'y
+XTX = X_with_intercept.T @ X_with_intercept
+XTy = X_with_intercept.T @ y
+coefficients = np.linalg.solve(XTX, XTy)
+
+# Extract intercept and slopes
+if has_intercept:
+    intercept = coefficients[0]
+    slopes = coefficients[1:]
+else:
+    intercept = 0.0
+    slopes = coefficients
+
+# Calculate R2
+y_pred = X_with_intercept @ coefficients
+ss_res = np.sum((y - y_pred) ** 2)
+ss_tot = np.sum((y - np.mean(y)) ** 2)
+r_squared = 1 - (ss_res / ss_tot)
+
+# Prep Output
+# Combine intercept and slopes into one dict
+coef_dict = {"intercept": intercept} | dict(zip(preds, slopes))
+
+# Create a tidy DataFrame
+coef_df = pl.DataFrame(
+    {
+        "term": list(coef_dict.keys()),
+        "estimate": list(coef_dict.values())
+    }
+)
+
+# Print results
+print(f"Formula: {formula}")
+print(f"R² Score: {r_squared:.3f}")
+print(coef_df)
+```
+
+**Output:**
+
+```json
+{'all_generated_columns': ['mpg', 'intercept', 'wt', 'cyl'],
+ 'all_generated_columns_formula_order': {'1': 'mpg',
+                                         '2': 'intercept',
+                                         '3': 'wt',
+                                         '4': 'cyl'},
+ 'columns': {'cyl': {'generated_columns': ['cyl'],
+                     'id': 3,
+                     'interactions': [],
+                     'random_effects': [],
+                     'roles': ['Identity'],
+                     'transformations': []},
+             'mpg': {'generated_columns': ['mpg'],
+                     'id': 1,
+                     'interactions': [],
+                     'random_effects': [],
+                     'roles': ['Response'],
+                     'transformations': []},
+             'wt': {'generated_columns': ['wt'],
+                    'id': 2,
+                    'interactions': [],
+                    'random_effects': [],
+                    'roles': ['Identity'],
+                    'transformations': []}},
+ 'formula': 'mpg ~ wt + cyl',
+ 'metadata': {'family': None,
+              'has_intercept': True,
+              'has_uncorrelated_slopes_and_intercepts': False,
+              'is_random_effects_model': False,
+              'response_variable_count': 1}}
+Formula: mpg ~ wt + cyl
+R² Score: 0.830
+shape: (3, 2)
+┌───────────┬───────────┐
+│ term      ┆ estimate  │
+│ ---       ┆ ---       │
+│ str       ┆ f64       │
+╞═══════════╪═══════════╡
+│ intercept ┆ 39.686261 │
+│ cyl       ┆ -1.507795 │
+│ wt        ┆ -3.190972 │
+└───────────┴───────────┘
+```
+
+
+## 📋 Supported Formula Syntax
+
+`fiasto` supports comprehensive Wilkinson's notation including:
+
+- **Basic formulas**: `y ~ x1 + x2`
+- **Interactions**: `y ~ x1 * x2`
+- **Smooth terms**: `y ~ s(z)`
+- **Random effects**: `y ~ x + (1|group)`
+- **Complex random effects**: `y ~ x + (1+x|group)`
+
+### Supported Formulas (Coming Soon)
+
+- **Multivariate models**: `mvbind(y1, y2) ~ x + (1|g)`
+- **Non-linear models**: `y ~ a1 - a2^x, a1 ~ 1, a2 ~ x + (x|g), nl = TRUE`
+
+For the complete reference, see the [fiasto documentation](https://docs.rs/fiasto/latest/fiasto/).
+
+## 📦 PyPI Package
+
+The package is available on PyPI and can be installed with:
+
+```bash
+pip install fiasto-py
+```
+
+- **PyPI Page**: [pypi.org/project/fiasto-py](https://pypi.org/project/fiasto-py/)
+- **Source Code**: [github.com/alexhallam/fiasto-py](https://github.com/alexhallam/fiasto-py)
+- **Documentation**: This README and inline docstrings
+
+
+## 📚 API Reference
+
+### `parse_formula(formula: str) -> dict`
+
+Parse a Wilkinson's formula string and return structured JSON metadata.
+
+**Parameters:**
+- `formula` (str): The formula string to parse
+
+**Returns:**
+- `dict`: Structured metadata describing the formula
+
+**Raises:**
+- `ValueError`: If the formula is invalid or parsing fails
+
+### `lex_formula(formula: str) -> dict`
+
+Tokenize a formula string and return JSON describing each token.
+
+**Parameters:**
+- `formula` (str): The formula string to tokenize
+
+**Returns:**
+- `dict`: Token information for each element in the formula
+
+**Raises:**
+- `ValueError`: If the formula is invalid or lexing fails
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 🙏 Acknowledgments
+
+- [fiasto](https://github.com/alexhallam/fiasto) - The underlying Rust library
+- [PyO3](https://pyo3.rs/) - Python-Rust bindings
+- [maturin](https://maturin.rs/) - Build system for Python extensions
+- [PyPI](https://pypi.org/) - Python Package Index for distribution
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
