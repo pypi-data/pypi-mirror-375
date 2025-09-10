@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dependencies = [
+    "arabic-reshaper",
+    "python-bidi"
+]
+
+name = "persian_print"
+version = "0.1.2"
+description = "A Python library for easy Persian printing with advanced features and automatic dependency installation."
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+  { name = "Your Name", email = "your.email@example.com" } # Placeholder: Please update with actual author info
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing",
+    "Natural Language :: Persian"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/your-repo/persian_print" # Placeholder: Please update with actual repository URL
+"Bug Tracker" = "https://github.com/your-repo/persian_print/issues" # Placeholder: Please update with actual repository URL
+
+
