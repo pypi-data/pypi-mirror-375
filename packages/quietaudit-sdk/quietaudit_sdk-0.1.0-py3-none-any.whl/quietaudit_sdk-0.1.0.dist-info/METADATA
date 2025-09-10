@@ -1,0 +1,132 @@
+Metadata-Version: 2.4
+Name: quietaudit-sdk
+Version: 0.1.0
+Summary: Immutable audit trails for AI decisions
+Home-page: https://github.com/quietstack/quietaudit-sdk
+Author: QuietStack
+Author-email: QuietStack <support@quietstack.com>
+License: MIT
+Project-URL: Homepage, https://quietstack.com
+Project-URL: Documentation, https://docs.quietstack.com/sdk
+Project-URL: Repository, https://github.com/quietstack/quietaudit-sdk
+Project-URL: Bug Reports, https://github.com/quietstack/quietaudit-sdk/issues
+Keywords: ai,audit,blockchain,compliance,governance
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: httpx>=0.24.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-asyncio; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Provides-Extra: openai
+Requires-Dist: openai>=1.0.0; extra == "openai"
+Provides-Extra: anthropic
+Requires-Dist: anthropic>=0.3.0; extra == "anthropic"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# QuietAudit SDK
+
+**Immutable audit trails for AI decisions**
+
+Add blockchain-based audit logging to any AI model with just 2 lines of code.
+
+[![PyPI version](https://badge.fury.io/py/quietaudit-sdk.svg)](https://badge.fury.io/py/quietaudit-sdk)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+
+## 🚀 Quick Start
+
+```bash
+pip install quietaudit-sdk
+```
+
+```python
+from quietaudit_sdk import wrap_model
+import openai
+
+# Wrap your existing AI client
+openai_client = openai.OpenAI(api_key="sk-...")
+audited_openai = wrap_model(
+    openai_client, 
+    quietaudit_api_key="qa_live_..."  # Get free API key at quietstack.com
+)
+
+# Same API, automatic blockchain audit trails
+response = audited_openai.chat.completions.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": "Approve this loan"}]
+)
+
+# Every AI decision is now immutably logged on blockchain! 🎉
+```
+
+## ✨ Features
+
+- **🔗 Blockchain Immutability** - Tamper-proof audit trails
+- **🔄 Zero Code Changes** - Drop-in replacement for existing AI clients
+- **🌐 Multi-Provider Support** - OpenAI, Anthropic, and more
+- **⚡ Async/Await Ready** - Non-blocking audit logging
+- **📊 Rich Metadata** - Token usage, response times, user context
+- **🔐 Enterprise Ready** - SOC2, GDPR compliant
+
+## 🏢 Perfect For
+
+- **Financial Services** - Loan approvals, risk assessments
+- **Healthcare** - Diagnostic assistance, treatment recommendations  
+- **Legal** - Contract analysis, compliance decisions
+- **HR** - Resume screening, interview scoring
+- **Any AI system requiring audit trails**
+
+## 📚 Documentation
+
+- [Getting Started Guide](https://docs.quietstack.com/getting-started)
+- [API Reference](https://docs.quietstack.com/api)
+- [Examples](https://github.com/quietstack/quietaudit-examples)
+- [Enterprise Features](https://docs.quietstack.com/enterprise)
+
+## 🆓 Pricing
+
+- **Free Tier**: 1,000 API calls/month
+- **Pro**: $49/month for 50,000 calls  
+- **Enterprise**: Custom pricing, unlimited calls
+
+[Get your free API key →](https://quietstack.com)
+
+## 🛠️ Supported AI Providers
+
+| Provider | Status | Example |
+|----------|---------|---------|
+| OpenAI | ✅ Ready | `wrap_model(openai_client, ...)` |
+| Anthropic | ✅ Ready | `wrap_model(anthropic_client, ...)` |
+| Google | 🔄 Coming Soon | - |
+| Azure OpenAI | 🔄 Coming Soon | - |
+
+## 🤝 Support
+
+- **Documentation**: [docs.quietstack.com](https://docs.quietstack.com)
+- **Issues**: [GitHub Issues](https://github.com/quietstack/quietaudit-sdk/issues)
+- **Email**: support@quietstack.com
+- **Community**: [Discord](https://discord.gg/quietstack)
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file.
+
+---
+
+Made with ❤️ by [QuietStack](https://quietstack.com)
