@@ -1,0 +1,209 @@
+Metadata-Version: 2.4
+Name: marlo-sentiment
+Version: 1.0.3
+Summary: Python client for Marlo sentiment analysis API
+Project-URL: Homepage, https://marlo.cloud
+Project-URL: Repository, https://github.com/marlocloud/clients
+Project-URL: Documentation, https://github.com/marlocloud/clients/tree/main/packages/python
+Project-URL: Changelog, https://github.com/marlocloud/clients/blob/main/packages/python/CHANGELOG.md
+Author-email: Marlo Team <team@marlo.cloud>
+License: MIT
+Keywords: ai,analysis,marlo,nlp,sentiment
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: Linguistic
+Requires-Python: >=3.8
+Requires-Dist: requests>=2.28.0
+Requires-Dist: typing-extensions>=4.0.0; python_version < '3.10'
+Provides-Extra: dev
+Requires-Dist: black>=22.0.0; extra == 'dev'
+Requires-Dist: build>=0.8.0; extra == 'dev'
+Requires-Dist: flake8>=5.0.0; extra == 'dev'
+Requires-Dist: isort>=5.10.0; extra == 'dev'
+Requires-Dist: mypy>=1.0.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.0.0; extra == 'dev'
+Requires-Dist: pytest>=7.0.0; extra == 'dev'
+Requires-Dist: twine>=4.0.0; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# marlo-sentiment
+
+Python client for the [Marlo sentiment analysis API](https://marlo.cloud) with industry-specific intelligence.
+
+## Installation
+
+```bash
+pip install marlo-sentiment
+```
+
+## Usage
+
+### Basic Usage
+
+```python
+from marlo_sentiment import MarloClient
+
+client = MarloClient(api_key='your-rapidapi-key')
+
+# Analyze text sentiment
+result = client.analyze('I love this product!')
+print(result)
+# {
+#     'sentiment': 'positive',
+#     'confidence': 0.9162,
+#     'scores': {
+#         'positive': 0.647,
+#         'neutral': 0.353,
+#         'negative': 0.0,
+#         'compound': 0.9162
+#     },
+#     'text_length': 20
+# }
+```
+
+### Industry-Specific Analysis
+
+```python
+# Healthcare context
+healthcare_result = client.analyze(
+    'Strong medication led to successful treatment',
+    industry='healthcare'
+)
+
+# Gaming context  
+gaming_result = client.analyze(
+    'Epic gameplay but pay-to-win ruins it',
+    industry='gaming'
+)
+
+# Technology context
+tech_result = client.analyze(
+    'Memory leak in the application',
+    industry='technology'
+)
+```
+
+### Batch Analysis
+
+```python
+texts = [
+    'Great customer service!',
+    'Product arrived damaged', 
+    'Fast shipping, excellent quality'
+]
+
+results = client.batch_analyze(texts, industry='retail')
+```
+
+### Supported Industries
+
+```python
+industries = client.get_supported_industries()
+print(industries)
+# ['healthcare', 'technology', 'gaming', 'finance', 'restaurant',
+#  'automotive', 'real_estate', 'fitness', 'education', 'retail']
+```
+
+## Configuration
+
+### Using Configuration Dict
+
+```python
+from marlo_sentiment import MarloClient
+
+client = MarloClient({
+    'api_key': 'your-rapidapi-key',
+    'base_url': 'https://custom-endpoint.com',  # optional
+    'timeout': 5.0  # optional, default 10.0 seconds
+})
+```
+
+### Using API Key String
+
+```python
+client = MarloClient('your-rapidapi-key')
+```
+
+## Error Handling
+
+```python
+from marlo_sentiment import MarloClient, MarloError, MarloValidationError
+
+try:
+    result = client.analyze('')
+except MarloValidationError as e:
+    print(f"Validation error: {e}")
+except MarloError as e:
+    print(f"API error {e.status_code}: {e.message}")
+```
+
+## Context Manager Support
+
+```python
+with MarloClient('your-api-key') as client:
+    result = client.analyze('Great service!')
+    print(result.sentiment)
+```
+
+## Type Hints
+
+Full type hint support:
+
+```python
+from marlo_sentiment import MarloClient, SentimentResponse, Industry
+
+client = MarloClient('your-key')
+result: SentimentResponse = client.analyze('text', industry='healthcare')
+```
+
+## Requirements
+
+- Python 3.8+
+- requests >= 2.28.0
+
+## Development
+
+### Install Development Dependencies
+
+```bash
+pip install -e ".[dev]"
+```
+
+### Run Tests
+
+```bash
+pytest
+```
+
+### Code Formatting
+
+```bash
+black src/
+isort src/
+```
+
+### Type Checking
+
+```bash
+mypy src/
+```
+
+## Resources
+
+- **[Marlo API Documentation](https://marlo.cloud)** - Complete API guide and examples
+- **[PyPI Package](https://pypi.org/project/marlo-sentiment/)** - Install via pip
+- **[GitHub Repository](https://github.com/marlocloud/clients)** - Source code and issues
+- **[Support](https://marlo.cloud/support)** - Get help and contact support
+
+## License
+
+MIT
