@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shell-lib"
+version = "0.31"
+authors = [
+  {name="Ma Lin", email="malincns@163.com"},
+  {name="Google Gemini", email="no@no.com"}
+]
+description = "A simple Python utility to simplify the writing of Shell-like scripts."
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Topic :: System :: Shells",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://bitbucket.org/wjssz/shell_lib"
+
+[tool.setuptools.packages.find]
+where = ["."]
