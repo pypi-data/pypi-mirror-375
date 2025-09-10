@@ -1,0 +1,43 @@
+[build-system]
+requires = ["flit_core>=3.2"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "topoptlab"
+description = "topology optimization for testing and demonstration uses."
+readme = "README.md"
+authors = [
+    { name = "Stefan Hiemer", email = "stefan.hiemer@unimi.it" },
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python"
+]
+
+requires-python = ">=3.12.4"
+dynamic = ["version"]
+dependencies = ["numpy",
+                "matplotlib",
+                "scipy",
+                "cvxopt",
+                "gmsh",
+                "mmapy",
+                "meshio",
+                "symfem"]
+
+[project.optional-dependencies]
+tests = ['pytest']
+docs = [
+    "sphinx>=7.0",
+    "sphinx-rtd-theme>=1.3",
+    "myst-parser>=2.0",            # for Markdown files
+    "sphinx-autodoc-typehints",   # better type hint rendering
+    "sphinxcontrib.bibtex",        # citations
+    "linkify-it-py"
+]
+pypi = ["build","twine"]
+
+[tool.pytest.ini_options]
+addopts = "-v -m 'not slow'"
+testpaths = ["tests"]
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
