@@ -1,0 +1,2 @@
+[console_scripts]
+climatiq-mcp-server = climatiq_mcp_server.server:run_server

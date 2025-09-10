@@ -1,0 +1,33 @@
+[project]
+name = "mseep-climatiq-mcp-server"
+version = "0.2.4"
+description = "Climatiq MCP server for carbon emission calculations"
+requires-python = ">=3.11.9"
+dependencies = [
+    "mcp[cli]>=1.4.1",
+    "httpx>=0.25.2",
+    "python-dotenv>=1.0.0",
+    "rich>=13.5.0",
+    "pydantic>=2.10.6",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+climatiq-mcp-server = "climatiq_mcp_server.server:run_server"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/climatiq-mcp-server"
+Documentation = "https://github.com/yourusername/climatiq-mcp-server#readme"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
