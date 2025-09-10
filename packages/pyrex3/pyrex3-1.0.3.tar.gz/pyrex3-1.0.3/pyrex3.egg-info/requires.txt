@@ -1,0 +1,15 @@
+typing-extensions>=4.0.0
+
+[:python_version < "3.4"]
+pathlib2>=2.3.0
+
+[:python_version < "3.7"]
+dataclasses>=0.6
+
+[dev]
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.0.0
+pre-commit>=3.0.0
+tox>=4.0.0
