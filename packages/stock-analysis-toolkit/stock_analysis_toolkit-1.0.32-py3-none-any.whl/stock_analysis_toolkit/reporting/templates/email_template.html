@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Report</title>
+    <style>
+        body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: 20px auto; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .header { background-color: #007bff; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 20px; }
+        .footer { background-color: #f4f4f4; color: #666; padding: 15px; text-align: center; font-size: 12px; border-top: 1px solid #ddd; }
+        h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-top: 30px; }
+        details { border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
+        summary { padding: 10px; font-weight: bold; cursor: pointer; background-color: #f9f9f9; }
+        .details-content { padding: 15px; border-top: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Stock & Mutual Fund Analysis Report</h1>
+            <p>{{ report_date }}</p>
+        </div>
+        <div class="content">
+            <h2>Stock Analysis Summary</h2>
+            <table class="summary-table">
+                <tr>
+                    <th>Stock</th>
+                    <th>Current Price</th>
+                    <th>1D Change</th>
+                    <th>RSI (14)</th>
+                    <th>50D MA</th>
+                    <th>200D MA</th>
+                    <th>P/E Ratio</th>
+                    <th>P/B Ratio</th>
+                    <th>Recommendation</th>
+                </tr>
+                {% for result in analysis.stock_results %}
+                <tr>
+                    <td>{{ result.symbol }}</td>
+                    <td>{% if result.technical_indicators.close is number %}{{ result.technical_indicators.close|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.daily_return is number %}{{ result.technical_indicators.daily_return|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.rsi is number %}{{ result.technical_indicators.rsi|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.sma_50 is number %}{{ result.technical_indicators.sma_50|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.sma_200 is number %}{{ result.technical_indicators.sma_200|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.fundamental_metrics.pe_ratio is number %}{{ result.fundamental_metrics.pe_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.fundamental_metrics.pb_ratio is number %}{{ result.fundamental_metrics.pb_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{{ result.recommendation.action if result.recommendation else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <h2>Detailed Stock Analysis</h2>
+            {% for result in analysis.stock_results %}
+            <details open>
+                <summary style="font-size: 1.2em; font-weight: bold;">{{ result.symbol }} - {{ result.metadata['info']['longName'] }}</summary>
+                <div class="details-content">
+                    <h3>Summary</h3>
+                    <table class="summary-table">
+                        <tr>
+                            <th>Current Price</th>
+                            <th>1D Change</th>
+                            <th>RSI (14)</th>
+                            <th>50D MA</th>
+                            <th>200D MA</th>
+                            <th>P/E Ratio</th>
+                            <th>P/B Ratio</th>
+                        </tr>
+                        <tr>
+                            <td>{% if result.technical_indicators.close is number %}{{ result.technical_indicators.close|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.technical_indicators.daily_return is number %}{{ result.technical_indicators.daily_return|round(2) }}%{% else %}N/A{% endif %}</td>
+                            <td>{% if result.technical_indicators.rsi is number %}{{ result.technical_indicators.rsi|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.technical_indicators.sma_50 is number %}{{ result.technical_indicators.sma_50|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.technical_indicators.sma_200 is number %}{{ result.technical_indicators.sma_200|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.fundamental_metrics.pe_ratio is number %}{{ result.fundamental_metrics.pe_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.fundamental_metrics.pb_ratio is number %}{{ result.fundamental_metrics.pb_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                        </tr>
+                    </table>
+
+                    <h3>Detailed Analysis</h3>
+                    <table class="detailed-table">
+                        <tr><th>Metric</th><th>Value</th><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Close</td><td>{% if result.technical_indicators.close is number %}{{ result.technical_indicators.close|round(2) }}{% else %}N/A{% endif %}</td><td>Daily Return</td><td>{% if result.technical_indicators.daily_return is number %}{{ result.technical_indicators.daily_return|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>SMA 20</td><td>{% if result.technical_indicators.sma_20 is number %}{{ result.technical_indicators.sma_20|round(2) }}{% else %}N/A{% endif %}</td><td>SMA 50</td><td>{% if result.technical_indicators.sma_50 is number %}{{ result.technical_indicators.sma_50|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>SMA 200</td><td>{% if result.technical_indicators.sma_200 is number %}{{ result.technical_indicators.sma_200|round(2) }}{% else %}N/A{% endif %}</td><td>EMA 20</td><td>{% if result.technical_indicators.ema_20 is number %}{{ result.technical_indicators.ema_20|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>EMA 50</td><td>{% if result.technical_indicators.ema_50 is number %}{{ result.technical_indicators.ema_50|round(2) }}{% else %}N/A{% endif %}</td><td>RSI</td><td>{% if result.technical_indicators.rsi is number %}{{ result.technical_indicators.rsi|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>MACD</td><td>{% if result.technical_indicators.macd is number %}{{ result.technical_indicators.macd|round(2) }}{% else %}N/A{% endif %}</td><td>MACD Signal</td><td>{% if result.technical_indicators.macd_signal is number %}{{ result.technical_indicators.macd_signal|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Middle</td><td>{% if result.technical_indicators.bollinger.middle is number %}{{ result.technical_indicators.bollinger.middle|round(2) }}{% else %}N/A{% endif %}</td><td>Bollinger Upper</td><td>{% if result.technical_indicators.bollinger.upper is number %}{{ result.technical_indicators.bollinger.upper|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Lower</td><td>{% if result.technical_indicators.bollinger.lower is number %}{{ result.technical_indicators.bollinger.lower|round(2) }}{% else %}N/A{% endif %}</td><td>Volume</td><td>{{ '{:,.0f}'.format(result.technical_indicators.volume) if result.technical_indicators.volume is not none else 'N/A' }}</td></tr>
+                        <tr><td>P/E Ratio</td><td>{% if result.fundamental_metrics.pe_ratio is number %}{{ result.fundamental_metrics.pe_ratio|round(2) }}{% else %}N/A{% endif %}</td><td>P/B Ratio</td><td>{% if result.fundamental_metrics.pb_ratio is number %}{{ result.fundamental_metrics.pb_ratio|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Market Cap</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.market_cap) if result.fundamental_metrics.market_cap is not none else 'N/A' }}</td><td>Enterprise Value</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.enterprise_value) if result.fundamental_metrics.enterprise_value is not none else 'N/A' }}</td></tr>
+                        <tr><td>Price to Sales</td><td>{% if result.fundamental_metrics.price_to_sales is number %}{{ result.fundamental_metrics.price_to_sales|round(2) }}{% else %}N/A{% endif %}</td><td>Profit Margins</td><td>{% if result.fundamental_metrics.profit_margins is number %}{{ result.fundamental_metrics.profit_margins|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Revenue Growth</td><td>{% if result.fundamental_metrics.revenue_growth is number %}{{ result.fundamental_metrics.revenue_growth|round(2) }}{% else %}N/A{% endif %}</td><td>Earnings Growth</td><td>{% if result.fundamental_metrics.earnings_growth is number %}{{ result.fundamental_metrics.earnings_growth|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Debt to Equity</td><td>{% if result.fundamental_metrics.debt_to_equity is number %}{{ result.fundamental_metrics.debt_to_equity|round(2) }}{% else %}N/A{% endif %}</td><td>Total Debt</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.total_debt) if result.fundamental_metrics.total_debt is not none else 'N/A' }}</td></tr>
+                        <tr><td>Payout Ratio</td><td>{% if result.fundamental_metrics.payout_ratio is number %}{{ result.fundamental_metrics.payout_ratio|round(2) }}{% else %}N/A{% endif %}</td><td></td><td></td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No stock data available.</p>
+            {% endfor %}
+
+            <h2>Mutual Fund Analysis</h2>
+            {% for summary in analysis.mutual_fund_summaries %}
+            <details open>
+                <summary style="font-size: 1.2em; font-weight: bold;">{{ summary.name }}</summary>
+                <div class="details-content">
+                    <h3>Performance Metrics</h3>
+                    <table>
+                        <tr><th>Period</th><th>CAGR</th></tr>
+                        <tr><td>1 Year</td><td>{% if summary.cagr_1y is number %}{{ summary.cagr_1y|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>3 Years</td><td>{% if summary.cagr_3y is number %}{{ summary.cagr_3y|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>5 Years</td><td>{% if summary.cagr_5y is number %}{{ summary.cagr_5y|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                    </table>
+
+                    <h3>Indicators</h3>
+                    <table>
+                        <tr><th>Indicator</th><th>Value</th></tr>
+                        <tr><td>RSI (14)</td><td>{% if summary.rsi is number %}{{ summary.rsi|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>20-Day MA</td><td>{% if summary.ma_20 is number %}{{ summary.ma_20|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>20-Day Std Dev</td><td>{% if summary['20d_std'] is number %}{{ summary['20d_std']|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Support</td><td>{% if summary.support is number %}{{ summary.support|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Resistance</td><td>{% if summary.resistance is number %}{{ summary.resistance|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Upper</td><td>{% if summary.upper_band is number %}{{ summary.upper_band|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Lower</td><td>{% if summary.lower_band is number %}{{ summary.lower_band|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                    </table>
+
+                    <h3>Risk Analysis</h3>
+                    <table>
+                        <tr><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Max Drawdown</td><td>{% if summary.max_drawdown is number %}{{ summary.max_drawdown|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Standard Deviation</td><td>{% if summary.annual_volatility is number %}{{ summary.annual_volatility|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No mutual fund data available.</p>
+            {% endfor %}
+        </div>
+        <div class="footer">
+            <p>&copy; {{ report_date[:4] }} Stock Analysis Toolkit. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
