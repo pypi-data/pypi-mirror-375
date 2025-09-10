@@ -1,0 +1,4 @@
+[console_scripts]
+vscode-task-runner = vscode_task_runner.console:run
+vtr = vscode_task_runner.console:run
+
