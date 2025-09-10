@@ -1,0 +1,3 @@
+[console_scripts]
+whodat = whodat.__main__:main
+
