@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+server.py
+mseep_android_mcp.egg-info/PKG-INFO
+mseep_android_mcp.egg-info/SOURCES.txt
+mseep_android_mcp.egg-info/dependency_links.txt
+mseep_android_mcp.egg-info/entry_points.txt
+mseep_android_mcp.egg-info/requires.txt
+mseep_android_mcp.egg-info/top_level.txt
+tests/test_adb_device_manager.py
+tests/test_config.py
+tests/test_integration.py
