@@ -1,0 +1,16 @@
+include README.md
+include LICENSE
+include HISTORY.rst
+include pyproject.toml
+include setup.cfg
+recursive-include src *.py
+recursive-include tests *.py
+recursive-include src/rompy/templates *
+recursive-include docs *.rst *.py *.bat Makefile
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+prune .git
+prune .pytest_cache
+prune .mypy_cache
+prune build
+prune dist

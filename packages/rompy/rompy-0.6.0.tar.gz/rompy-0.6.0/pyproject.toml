@@ -1,0 +1,158 @@
+[build-system]
+requires = [
+    "setuptools",
+    "versioneer[toml]",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rompy"
+description = "Core rompy library for ocean wave modeling with plugin system"
+readme = "README.md"
+keywords = [
+    "relocatable",
+    "ocean",
+    "modelling",
+    "python",
+    "csiro",
+]
+authors = [
+    { name = "CSIRO", email = "paul.branson@csiro.au" },
+]
+maintainers = [
+  {name = "Rompy Contributors", email = "developers@rompy.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "cartopy",
+    "click",
+    "cloudpathlib",
+    "cookiecutter>=2.6",
+    "dask",
+    "fsspec",
+    "geopandas",
+    "h5py",
+    "intake",
+    "intake-xarray",
+    "intake-geopandas",
+    "matplotlib",
+    "netcdf4",
+    "numpy",
+    "oceanum",
+    "owslib",
+    "pandas",
+    "pydantic>2",
+    "pydantic-settings",
+    "pydantic_numpy",
+    "scipy",
+    "tqdm",
+    "xarray",
+    "wavespectra",
+    "isodate",
+    "appdirs",
+]
+dynamic = [
+    "version",
+]
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Documentation = "https://oceanum.github.io/rompy/index.html"
+Source = "https://github.com/rom-py/rompy"
+Tracker = "https://github.com/rom-py/rompy/issues"
+Changelog = "https://github.com/rom-py/rompy/blob/main/HISTORY.rst"
+
+[project.scripts]
+rompy = "rompy.cli:main"
+
+[project.entry-points."rompy.config"]
+base = "rompy.core.config:BaseConfig"
+
+[project.entry-points."rompy.source"]
+file = "rompy.core.source:SourceFile"
+intake = "rompy.core.source:SourceIntake"
+datamesh = "rompy.core.source:SourceDatamesh"
+wavespectra = "rompy.core.source:SourceWavespectra"
+"csv:timeseries" = "rompy.core.source:SourceTimeseriesCSV"
+
+[project.entry-points."intake.catalogs"]
+rompy_data = "rompy:cat"
+
+[project.entry-points."rompy.run"]
+local = "rompy.run:LocalRunBackend"
+docker = "rompy.run.docker:DockerRunBackend"
+
+[project.entry-points."rompy.postprocess"]
+noop = "rompy.postprocess:NoopPostprocessor"
+
+[project.entry-points."rompy.pipeline"]
+local = "rompy.pipeline:LocalPipelineBackend"
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "envyaml",
+    "coverage",
+]
+extra = [
+    "gcsfs",
+    "zarr",
+]
+dev = [
+    "pytest",
+    "envyaml",
+    "coverage",
+    "ruff",
+    "black",
+]
+docs = [
+    "autodoc_pydantic",
+    "ipython",
+    "nbsphinx",
+    "pydata_sphinx_theme",
+    "sphinx<7.3.6",
+    "sphinx-collections",
+]
+
+[tool.setuptools.packages.find]
+where = [
+    "src",
+]
+
+[tool.setuptools.package-data]
+"*" = [
+    "*.y*ml",
+    "*.csv",
+    "*.html",
+]
+
+[tool.setuptools.dynamic.version]
+attr = "rompy.__version__"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+
+[tool.black]
+line-length = 88
+
+[tool.setuptools_scm]
+write_to = "src/rompy/_version.py"
