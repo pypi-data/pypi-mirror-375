@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: minjiang_host_client
+Version: 0.3.0
+Summary: Minjiang pulse-level measurement and control SDK for quantum computing.
+Author: ZWDX
+Author-email: sales@das-zone.com
+License: Apache 2.0
+Requires-Python: >=3.7, <4
+Requires-Dist: minjiang_client
+Requires-Dist: grpcio
+Requires-Dist: grpcio-tools
+Requires-Dist: cython>=0.29.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
