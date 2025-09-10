@@ -1,0 +1,51 @@
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[project]
+name = "dbengine"
+description = "A Python package providing a unified interface for database operations, supporting Parquet, SQLite, and PostgreSQL backends."
+authors = [
+    { name = "Tome Magalhaes Gouveia", email = "tome.pmg@gmail.com" },
+]
+dependencies = [
+    "pandas>=2.0.0",
+    "pyyaml>=6.0",
+    "psycopg2-binary>=2.9.0",
+    "pyarrow>=12.0.0",
+    "sqlalchemy==2.0.43",
+    "whoosh>=2.7.4",
+    "black",
+    "flake8",
+    "isort",
+    "ipykernel",
+    "pre-commit",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dynamic = []
+version = "1.0.1"
+
+[tool.pdm.version]
+source = "file"
+path = "src/dbengine/__init__.py"
+
+[tool.isort]
+skip = [
+    ".gitignore",
+]
+line_length = 90
+include_trailing_comma = true
+
+[tool.black]
+line-length = 90
+
+[tool.flake8]
+max-line-length = 90
