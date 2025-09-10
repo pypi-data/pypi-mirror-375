@@ -1,0 +1,64 @@
+Metadata-Version: 2.1
+Name: akari-client
+Version: 0.4.3
+Summary: Akari Python package
+Home-page: https://github.com/AkariGroup/akari_software
+Author: akari
+Author-email: akari.tmc@gmail.com
+License: Apache License 2.0
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Description-Content-Type: text/markdown
+Requires-Dist: dynamixel-sdk
+Requires-Dist: feetech-servo-sdk
+Requires-Dist: numpy==1.26.4
+Requires-Dist: pydantic-settings<3.0,>=2.0
+Requires-Dist: pydantic<3.0,>=2.0
+Provides-Extra: depthai
+Requires-Dist: blobconverter; extra == "depthai"
+Requires-Dist: depthai==2.30.0; extra == "depthai"
+Requires-Dist: matplotlib; extra == "depthai"
+Requires-Dist: opencv-python; extra == "depthai"
+Provides-Extra: grpc
+Requires-Dist: akari-proto<0.5.0,>=0.4.0; extra == "grpc"
+Requires-Dist: grpcio==1.68.1; extra == "grpc"
+Requires-Dist: protobuf==5.29.2; extra == "grpc"
+
+# akari\_client
+
+[AKARI](https://github.com/AkariGroup/) を使うためのクライアントライブラリ
+
+## インストール
+
+```sh
+pip install akari_client
+```
+
+**注意:** `akari_client` を使う前に `AKARI` 本体の設定が完了している必要があります。
+詳しくはオンラインドキュメントを参照してください。
+
+## Getting Started: ディスプレイに文字を表示する
+
+```py
+with AkariClient() as akari:
+    m5 = akari.m5stack
+    m5.set_display_text("Hello, world!")
+```
+
+その他のサンプルや使い方はオンラインドキュメントを参照してください。
+
+## ドキュメント
+
+[https://AkariGroup.github.io/docs](https://AkariGroup.github.io/docs)
+
+
+
