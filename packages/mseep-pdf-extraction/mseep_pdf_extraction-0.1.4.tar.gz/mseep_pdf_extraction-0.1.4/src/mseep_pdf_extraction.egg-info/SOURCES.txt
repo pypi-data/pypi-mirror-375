@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/mseep_pdf_extraction.egg-info/PKG-INFO
+src/mseep_pdf_extraction.egg-info/SOURCES.txt
+src/mseep_pdf_extraction.egg-info/dependency_links.txt
+src/mseep_pdf_extraction.egg-info/entry_points.txt
+src/mseep_pdf_extraction.egg-info/requires.txt
+src/mseep_pdf_extraction.egg-info/top_level.txt
+src/pdf_extraction/__init__.py
+src/pdf_extraction/__main__.py
+src/pdf_extraction/pdf_extractor.py
+src/pdf_extraction/server.py
