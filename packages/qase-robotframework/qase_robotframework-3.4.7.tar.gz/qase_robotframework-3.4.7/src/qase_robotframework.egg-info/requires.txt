@@ -1,0 +1,6 @@
+qase-python-commons~=3.5.6
+filelock~=3.12.2
+
+[testing]
+pytest
+pytest-cov
