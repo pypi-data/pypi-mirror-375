@@ -1,0 +1,24 @@
+[project]
+name = "mseep-crypto-sentiment-mcp"
+version = "0.1.4"
+description = "An MCP server that delivers cryptocurrency sentiment analysis to AI agents."
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.4.1",
+    "sanpy>=0.12.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-crypto-sentiment-mcp = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
