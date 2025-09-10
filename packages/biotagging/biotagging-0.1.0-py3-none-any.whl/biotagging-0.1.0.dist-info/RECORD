@@ -1,0 +1,15 @@
+biotagging/__init__.py,sha256=BsKTYx7t82-AQ67FVluahaWsHYgfPU0TRn8wbyIQzRI,262
+biotagging/cli.py,sha256=fpPTBeOagYjkywCDiggjaRCY9cqm-DJQ1pTCM_DqPuY,9108
+biotagging/main.py,sha256=4IYp_BDW5hO2aDPUrtliqeKHuCXQxI96JK_5eIFBNsE,44
+biotagging/schema/jsonresponse.py,sha256=vyn68Oloe-l6F_zJf1dqb7m0apA3qXGFpowrkNW_UBU,1557
+biotagging/services/api.py,sha256=p6wTPRepJ0BZFPisGC2G1Q577_8fdPiG74R-dLy-ojw,2312
+biotagging/services/testapi.py,sha256=tWOmBDu32WCL6hOaxGGvBiHMbb_uZlyS3Om8pPg3kok,458
+biotagging/utils/bio.py,sha256=24LIOpq6wFXggqhronIeL8Xx4pCmtkaKI7NAvGR1mlk,3342
+biotagging/utils/tag_json.py,sha256=zRpG-1qr2VSBRa4qvX7jSTzrJTqW9Ug1xOAJzQDwzqc,851
+biotagging/utils/tag_pd.py,sha256=oFCY3ZOXwHuE-3raz_26exbfKUvJCJ_FOUsw48_x1i8,1209
+biotagging/utils/tokenization.py,sha256=H0Fhu3rAsbShXLCU_wrVmdCqFv-CHgKbMjoTbTyOzLU,1125
+biotagging-0.1.0.dist-info/METADATA,sha256=-WrGl9l49qxxzeAnlxKWEfofd6R7hPztt9ah1cADdhc,8428
+biotagging-0.1.0.dist-info/WHEEL,sha256=qtCwoSJWgHk21S1Kb4ihdzI2rlJ1ZKaIurTj_ngOhyQ,87
+biotagging-0.1.0.dist-info/entry_points.txt,sha256=pXjDemorUhLXKq-KcU9YVMJ8_pCSMUmr4LT2YA35Vf8,51
+biotagging-0.1.0.dist-info/licenses/LICENSE,sha256=1D9zAePB01T9s1CtnYXRgiPSUl7kLpI278msAythCoE,1067
+biotagging-0.1.0.dist-info/RECORD,,
