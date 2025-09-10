@@ -1,0 +1,23 @@
+{
+  "package_name": "huoshui-file-converter",
+  "version": "0.1.1",
+  "build_timestamp": "2025-09-10 00:18:52 UTC",
+  "python_version": "3.12.9 (main, Feb  4 2025, 14:38:38) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "dependencies": [
+    "fastmcp>=2.9.2",
+    "pypandoc>=1.15"
+  ],
+  "build_artifacts": [
+    {
+      "filename": "huoshui_file_converter-0.1.1.tar.gz",
+      "size_bytes": 16022797,
+      "size_mb": 15.281
+    },
+    {
+      "filename": "huoshui_file_converter-0.1.1-py3-none-any.whl",
+      "size_bytes": 12072,
+      "size_mb": 0.012
+    }
+  ],
+  "total_size_mb": 15.292
+}
