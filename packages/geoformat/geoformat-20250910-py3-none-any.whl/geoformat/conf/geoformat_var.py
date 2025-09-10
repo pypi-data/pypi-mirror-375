@@ -1,0 +1,1 @@
+GEOLAYER_DEFAULT_NAME = 'geolayer'
