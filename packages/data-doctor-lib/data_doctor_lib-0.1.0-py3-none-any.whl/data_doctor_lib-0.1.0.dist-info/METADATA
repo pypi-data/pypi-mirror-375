@@ -1,0 +1,114 @@
+Metadata-Version: 2.4
+Name: data_doctor_lib
+Version: 0.1.0
+Summary: A Python library for cleaning and preprocessing pandas DataFrames with an optional PyQt GUI
+Author: Noah Harshbarger
+Author-email: Noah Harshbarger <noahharshb@gmail.com>
+License: MIT
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: numpy>=1.25.0
+Requires-Dist: scikit-learn>=1.3.0
+Requires-Dist: PyQt5>=5.15.9
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: black>=23.7.0; extra == "dev"
+Requires-Dist: flake8>=6.1.0; extra == "dev"
+Dynamic: license-file
+
+# 💊 Data Doctor 💊
+
+**Data Doctor** is a Python library for cleaning, preprocessing, transforming, and validating pandas DataFrames with an optional PyQt GUI for non-technical users.
+
+---
+
+## Features
+
+- **Data Cleaning**
+  - Remove duplicates
+  - Fill missing values with mean, median, or custom strategies
+  - Standardize string columns (trim, lowercase)
+  - Email validation
+
+- **Data Transformation**
+  - Normalize numeric columns
+  - Encode categorical variables
+
+- **Validation**
+  - Check for missing values, duplicates, and column types
+
+- **Pipeline Support**
+  - Run cleaning, transformation, and validation in a single workflow
+
+---
+
+## Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/noahharshbarger/data-doctor.git
+cd data-doctor
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install package in editable mode with dev dependencies
+pip install -e ".[dev]"
+```
+Or directly from PyPI:
+
+```bash
+pip install data-doctor
+```
+
+## Usage
+```bash
+import pandas as pd
+from data_doctor.cleaner import DataCleaner
+from data_doctor.pipeline import DataPipeline
+
+# Example DataFrame
+df = pd.DataFrame({
+    "name": ["Alice", "Bob", None, "Charlie"],
+    "age": [25, None, 30, 22],
+    "email": ["alice@test.com", "bob@test.com", "invalid_email", None]
+})
+
+# Using DataCleaner
+cleaner = DataCleaner(df.copy())
+df_cleaned = (cleaner
+              .drop_duplicates()
+              .fill_missing(strategy="mean")
+              .standardize_strings()
+              .run_email_validation("email")
+              .get_df())
+
+# Using DataPipeline
+pipeline = DataPipeline(df.copy())
+df_pipeline = (pipeline
+               .run_basic_cleaning()
+               .run_transformations())
+validation_report = pipeline.validate()
+
+print(df_pipeline)
+print(validation_report)
+```
+
+## Testing
+```bash
+# Run all tests
+pytest tests/ 
+
+# Run tests with coverage
+pytest --cov=src/data_doctor tests/
+```
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request. 
+
+## Licensure
+MIT License
+© Noah Harshbarger
