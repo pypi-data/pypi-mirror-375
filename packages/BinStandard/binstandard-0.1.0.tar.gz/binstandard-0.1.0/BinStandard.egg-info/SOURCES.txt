@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+setup.py
+BinStandard.egg-info/PKG-INFO
+BinStandard.egg-info/SOURCES.txt
+BinStandard.egg-info/dependency_links.txt
+BinStandard.egg-info/entry_points.txt
+BinStandard.egg-info/requires.txt
+BinStandard.egg-info/top_level.txt
+binstandard/__init__.py
+binstandard/cli.py
+binstandard/client.py
+tests/test_client.py
