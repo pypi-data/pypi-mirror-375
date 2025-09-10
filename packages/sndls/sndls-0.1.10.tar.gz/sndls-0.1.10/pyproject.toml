@@ -1,0 +1,43 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "sndls"
+authors = [{name = "Esteban Gómez", email = "esteban.gomezmellado@aalto.fi"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["audio", "dataset", "dsp"]
+dynamic = ["version", "description"]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=2.0.2",
+    "polars>=1.23.0",
+    "scipy>=1.13.1",
+    "soundfile>=0.13.1",
+    "tqdm>=4.67.1"
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/eagomez2/sndls/issues"
+Changelog = "https://github.com/eagomez2/sndls/releases"
+Documentation = "https://github.com/eagomez2/sndls"
+Home = "https://github.com/eagomez2/sndls"
+Repository = "https://github.com/eagomez2/sndls"
+
+[project.scripts]
+"sndls" = "sndls.cli.main:main"
+
+[project.optional-dependencies]
+lint = [
+    "ruff>=0.9.7"
+]
+
+[tool.ruff]
+extend-select = [
+    "C4",
+    "SIM",
+    "TCH"
+]
+ignore-init-module-imports = true
+line-length = 79
