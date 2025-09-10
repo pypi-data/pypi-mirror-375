@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: sealpy3
+Version: 0.1.5
+Summary: seal your pyfiles or project by using cythonize.
+Home-page: https://github.com/limoncc/sealpy
+License: MIT
+Author: limoncc
+Author-email: limoncc@icloud.com
+Requires-Python: >=3.8,<4
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: cython (>=3.0.11,<4.0.0)
+Project-URL: Repository, https://github.com/limoncc/sealpy
+Description-Content-Type: text/markdown
+
+## 简介
+
+使用cythonize将python代码一键加密为so或pyd。支持单个文件加密，整个项目加密。
+(seal your pyfiles or project by using cythonize.)
+
+Git仓库地址: https://github.com/limoncc/sealpy.git
+
+## 安装
+
+```shell
+pip install sealpy3
+```
+    
+
+## 使用方法
+
+使用参数
+```shell
+sealpy -i "xxx project dir" [-o output dir]
+```
+
+加密后的文件默认存储在 dist/project_name/ 下
+
+使用配置文件
+
+```
+; 工作目录下的./.sealpy.cfg
+[sealpy]
+; the file that will be compiled
+paths = test
+; files that are ignored at compile time. If an empty string is not used, multiple files and folders are separated by commas
+ignores = ''
+; The build directory
+build_dir = build
+; If there is an entry file, it needs to be specified to exclude compilation
+main_py = main.py
+```
+
+运行命令
+```shell
+sealpy build
+```
+
+
+
