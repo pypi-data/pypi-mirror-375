@@ -1,0 +1,371 @@
+{% extends "base.html" %}
+
+{% block title %}Sector Performance Report{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Sector Report Specific Styles */
+    .sector-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .sector-header h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+
+    .sector-header .date {
+        color: var(--text-light);
+        font-size: 16px;
+    }
+
+    .sector-chart {
+        margin: 30px 0;
+        height: 600px;
+    }
+
+    .sector-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+
+    .sector-card {
+        background: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .sector-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .sector-card-header {
+        padding: 15px 20px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sector-card-body {
+        padding: 15px;
+    }
+
+    .sector-performance {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .positive {
+        color: var(--success-color);
+    }
+
+    .negative {
+        color: var(--danger-color);
+    }
+
+    .sector-stocks {
+        margin-top: 15px;
+    }
+
+    .stock-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .stock-item:last-child {
+        border-bottom: none;
+    }
+
+    .stock-name {
+        font-weight: 500;
+    }
+
+    .stock-change {
+        font-weight: 500;
+    }
+
+    .sector-summary {
+        margin: 30px 0;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .sector-summary h3 {
+        margin-top: 0;
+        color: var(--primary-color);
+    }
+
+    .sector-summary p {
+        margin: 10px 0;
+        line-height: 1.6;
+    }
+
+    .sector-comparison {
+        margin: 30px 0;
+    }
+
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .comparison-table th {
+        background-color: #f8f9fa;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        color: var(--text-light);
+    }
+
+    .trend-up {
+        color: var(--success-color);
+    }
+
+    .trend-down {
+        color: var(--danger-color);
+    }
+
+    .trend-neutral {
+        color: var(--text-light);
+    }
+
+    .sector-insights {
+        margin: 30px 0;
+    }
+
+    .insight-card {
+        background: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .insight-card h4 {
+        margin-top: 0;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+    }
+
+    .insight-card h4 i {
+        margin-right: 10px;
+    }
+
+    .insight-card p {
+        margin: 10px 0 0 0;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .sector-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<header class="sector-header">
+    <h1>Sector Performance Report</h1>
+    <div class="date">{{ date }}</div>
+</header>
+
+<!-- Sector Performance Chart -->
+<div class="card">
+    <div class="card-header">
+        <span><i class="fas fa-chart-bar"></i> Sector Performance Overview</span>
+    </div>
+    <div class="card-body">
+        <div class="sector-chart">
+            {% if sector_chart %}
+                <iframe src="{{ sector_chart }}" style="width: 100%; height: 100%; border: none;"></iframe>
+            {% else %}
+                <p>Chart data not available</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Sector Summary -->
+<div class="sector-summary">
+    <h3>Market Overview</h3>
+    <p>
+        The market is showing {% if sector_overview.trend == 'up' %}<strong class="trend-up">positive{% elif sector_overview.trend == 'down' %}<strong class="trend-down">negative{% else %}<strong class="trend-neutral">mixed{% endif %}</strong> trends across sectors.
+        The best performing sector is <strong>{{ sector_overview.top_performer.name }}</strong> with a return of
+        <strong class="{{ 'trend-up' if sector_overview.top_performer.change > 0 else 'trend-down' }}">
+            {{ "%+.2f"|format(sector_overview.top_performer.change) }}%
+        </strong>, while
+        <strong>{{ sector_overview.worst_performer.name }}</strong> is lagging with
+        <strong class="{{ 'trend-up' if sector_overview.worst_performer.change > 0 else 'trend-down' }}">
+            {{ "%+.2f"|format(sector_overview.worst_performer.change) }}%
+        </strong>.
+    </p>
+</div>
+
+<!-- Sector Grid -->
+<div class="sector-grid">
+    {% for sector, data in sector_data.items() %}
+    <div class="sector-card">
+        <div class="sector-card-header">
+            <span>{{ sector }}</span>
+            <span class="badge {{ 'badge-success' if data.change > 0 else 'badge-danger' }}">
+                {{ "%+.2f"|format(data.change) }}%
+            </span>
+        </div>
+        <div class="sector-card-body">
+            <div class="sector-performance {{ 'trend-up' if data.change > 0 else 'trend-down' }}">
+                {{ "%+.2f"|format(data.change) }}%
+            </div>
+
+            {% if data.top_stocks %}
+            <div class="sector-stocks">
+                <h4>Top Performers</h4>
+                {% for stock in data.top_stocks %}
+                <div class="stock-item">
+                    <span class="stock-name">{{ stock.symbol }}</span>
+                    <span class="stock-change {{ 'trend-up' if stock.change > 0 else 'trend-down' }}">
+                        {{ "%+.2f"|format(stock.change) }}%
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Sector Comparison -->
+<div class="sector-comparison">
+    <div class="card">
+        <div class="card-header">
+            <span><i class="fas fa-balance-scale"></i> Sector Comparison</span>
+        </div>
+        <div class="card-body">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Sector</th>
+                        <th>1D</th>
+                        <th>1W</th>
+                        <th>1M</th>
+                        <th>YTD</th>
+                        <th>1Y</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sector, data in sector_comparison.items() %}
+                    <tr>
+                        <td><strong>{{ sector }}</strong></td>
+                        <td class="{{ 'trend-up' if data['1D'] > 0 else 'trend-down' }}">
+                            {{ "%+.2f"|format(data['1D']) }}%
+                        </td>
+                        <td class="{{ 'trend-up' if data['1W'] > 0 else 'trend-down' }}">
+                            {{ "%+.2f"|format(data['1W']) }}%
+                        </td>
+                        <td class="{{ 'trend-up' if data['1M'] > 0 else 'trend-down' }}">
+                            {{ "%+.2f"|format(data['1M']) }}%
+                        </td>
+                        <td class="{{ 'trend-up' if data['YTD'] > 0 else 'trend-down' }}">
+                            {{ "%+.2f"|format(data['YTD']) }}%
+                        </td>
+                        <td class="{{ 'trend-up' if data['1Y'] > 0 else 'trend-down' }}">
+                            {{ "%+.2f"|format(data['1Y']) }}%
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Sector Insights -->
+<div class="sector-insights">
+    <div class="card">
+        <div class="card-header">
+            <span><i class="fas fa-lightbulb"></i> Key Insights</span>
+        </div>
+        <div class="card-body">
+            {% for insight in sector_insights %}
+            <div class="insight-card">
+                <h4><i class="fas fa-{{ insight.icon }}"></i> {{ insight.title }}</h4>
+                <p>{{ insight.summary }}</p>
+                {% if insight.stocks %}
+                <p><strong>Related Stocks:</strong> {{ insight.stocks|join(', ') }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Top Stocks by Sector -->
+<div class="top-stocks">
+    <div class="card">
+        <div class="card-header">
+            <span><i class="fas fa-star"></i> Top Performing Stocks by Sector</span>
+        </div>
+        <div class="card-body">
+            <div class="sector-grid">
+                {% for sector, stocks in top_stocks.items() %}
+                <div class="sector-card">
+                    <div class="sector-card-header">
+                        <span>{{ sector }}</span>
+                    </div>
+                    <div class="sector-card-body">
+                        {% for stock in stocks %}
+                        <div class="stock-item">
+                            <div class="stock-info">
+                                <div class="stock-name">{{ stock.symbol }}</div>
+                                <div class="stock-company" style="font-size: 12px; color: var(--text-light);">
+                                    {{ stock.company|truncate(20) }}
+                                </div>
+                            </div>
+                            <div class="stock-change {{ 'trend-up' if stock.change > 0 else 'trend-down' }}">
+                                {{ "%+.2f"|format(stock.change) }}%
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add any interactive elements here
+        console.log('Sector report loaded');
+    });
+</script>
+{% endblock %}
