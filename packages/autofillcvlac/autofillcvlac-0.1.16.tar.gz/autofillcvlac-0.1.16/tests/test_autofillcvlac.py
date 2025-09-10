@@ -1,0 +1,543 @@
+"""
+Basic tests for autofillcvlac package.
+"""
+
+import unittest
+from unittest.mock import patch, MagicMock
+from autofillcvlac import flatten
+from autofillcvlac.core import filter_products_by_year, authenticate_cvlac, fill_scientific_article
+
+
+class TestAutofillcvlac(unittest.TestCase):
+    
+    def test_flatten(self):
+        """Test the flatten function."""
+        nested = [[1, 2], [3, 4], [5]]
+        result = flatten(nested)
+        expected = [1, 2, 3, 4, 5]
+        self.assertEqual(result, expected)
+        
+    def test_flatten_empty(self):
+        """Test flatten with empty list."""
+        result = flatten([])
+        self.assertEqual(result, [])
+        
+    def test_filter_products_by_year(self):
+        """Test filtering products by year."""
+        products = [
+            {
+                "year_published": 2020,
+                "external_ids": [{"provenance": "other"}]
+            },
+            {
+                "year_published": 2000,
+                "external_ids": [{"provenance": "other"}]
+            },
+            {
+                "year_published": 2021,
+                "external_ids": [{"provenance": "scienti"}]
+            }
+        ]
+        
+        result = filter_products_by_year(products, 2010)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["year_published"], 2020)
+    
+    def test_authenticate_cvlac_function_exists(self):
+        """Test that authentication function exists and has correct signature."""
+        # Just test that the function exists and can be called
+        self.assertTrue(callable(authenticate_cvlac))
+        # Test with None values to trigger early validation
+        result = authenticate_cvlac(None, None, None, None)
+        self.assertIn("status", result)
+        self.assertIn("message", result)
+        self.assertIn("session_active", result)
+    
+    def test_authenticate_cvlac_validation(self):
+        """Test input validation for authentication function."""
+        # Test missing nationality
+        result = authenticate_cvlac(None, "John Doe", "12345678", "password123")
+        self.assertEqual(result["status"], "error")
+        self.assertFalse(result["session_active"])
+        
+        # Test missing names
+        result = authenticate_cvlac("Colombian", None, "12345678", "password123")
+        self.assertEqual(result["status"], "error")
+        self.assertFalse(result["session_active"])
+        
+        # Test missing document
+        result = authenticate_cvlac("Colombian", "John Doe", None, "password123")
+        self.assertEqual(result["status"], "error")
+        self.assertFalse(result["session_active"])
+        
+        # Test missing password
+        result = authenticate_cvlac("Colombian", "John Doe", "12345678", None)
+        self.assertEqual(result["status"], "error")
+        self.assertFalse(result["session_active"])
+        
+        # Test missing pais_nacimiento when nationality is "Extranjero - otra"
+        result = authenticate_cvlac("Extranjero - otra", "John Doe", "12345678", "password123")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("pais_nacimiento is required", result["message"])
+        self.assertFalse(result["session_active"])
+        
+        # Test missing pais_nacimiento when nationality is "E" (code for Extranjero - otra)
+        result = authenticate_cvlac("E", "John Doe", "12345678", "password123")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("pais_nacimiento is required", result["message"])
+        self.assertFalse(result["session_active"])
+        
+        # Test missing fecha_nacimiento when nationality is "Extranjero - otra"
+        result = authenticate_cvlac("Extranjero - otra", "John Doe", "12345678", "password123", pais_nacimiento="Estados Unidos")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("fecha_nacimiento is required", result["message"])
+        self.assertFalse(result["session_active"])
+        
+        # Test missing fecha_nacimiento when nationality is "E" (code for Extranjero - otra)
+        result = authenticate_cvlac("E", "John Doe", "12345678", "password123", pais_nacimiento="Estados Unidos")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("fecha_nacimiento is required", result["message"])
+        self.assertFalse(result["session_active"])
+        
+        # Test missing documento_identificacion for non-Extranjero nationality
+        result = authenticate_cvlac("Colombiana", "John Doe", None, "password123")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("documento_identificacion is required", result["message"])
+        self.assertFalse(result["session_active"])
+    
+    def test_authenticate_cvlac_extranjero_validation(self):
+        """Test validation for Extranjero - otra nationality."""
+        # Test that validation works correctly for Extranjero cases
+        # We'll test only the validation logic, not browser operations
+        
+        # Since the browser operations are complex to test, we'll verify
+        # that the validation logic works by checking parameter handling
+        # The actual browser automation would need integration tests
+        
+        # This test confirms the API accepts the new pais_nacimiento parameter
+        # and validates it correctly for Extranjero cases
+        
+        # Import and test directly at the validation level
+        from autofillcvlac.core import authenticate_cvlac
+        
+        # Test that function signature accepts pais_nacimiento and fecha_nacimiento parameters
+        import inspect
+        sig = inspect.signature(authenticate_cvlac)
+        param_names = list(sig.parameters.keys())
+        self.assertIn('pais_nacimiento', param_names)
+        self.assertIn('fecha_nacimiento', param_names)
+        
+        # Test that default values are None
+        self.assertEqual(sig.parameters['pais_nacimiento'].default, None)
+        self.assertEqual(sig.parameters['fecha_nacimiento'].default, None)
+    
+    def test_authenticate_cvlac_browser_not_killed_on_validation_error(self):
+        """Test that kill_browser is not called when validation fails."""
+        with patch('autofillcvlac.core.kill_browser') as mock_kill_browser:
+            # Test validation error case - should not call any browser functions
+            result = authenticate_cvlac(None, None, None, None)
+            self.assertEqual(result["status"], "error")
+            self.assertFalse(result["session_active"])
+            # kill_browser should not be called since validation fails before browser operations
+            mock_kill_browser.assert_not_called()
+
+    @patch('autofillcvlac.core.start_chrome')
+    @patch('autofillcvlac.core.go_to')
+    @patch('autofillcvlac.core.S')
+    @patch('autofillcvlac.core.select')
+    @patch('autofillcvlac.core.write')
+    @patch('autofillcvlac.core.click')
+    def test_authenticate_cvlac_select_parameter_order(self, mock_click, mock_write, mock_select, mock_S, mock_go_to, mock_start_chrome):
+        """Test that select() is called with correct parameter order (selector first, value second)."""
+        # Configure mocks
+        mock_start_chrome.return_value = MagicMock()
+        mock_go_to.return_value = None
+        mock_S.return_value = MagicMock()
+        mock_select.return_value = None
+        mock_write.return_value = None
+        mock_click.return_value = None
+        
+        # Call with valid parameters to trigger browser operations
+        result = authenticate_cvlac("Colombiana", "John Doe", "12345678", "password123", headless=True)
+        
+        # Should succeed with mocked operations
+        self.assertEqual(result["status"], "success")
+        self.assertTrue(result["session_active"])
+        
+        # Verify select was called with correct parameter order
+        self.assertTrue(mock_select.called)
+        call_args = mock_select.call_args_list[0]
+        args, kwargs = call_args
+        
+        # First argument should be the selector (mock object), second should be the value (string)
+        self.assertEqual(len(args), 2)
+        self.assertEqual(args[1], "Colombiana")  # Value should be second parameter
+
+    @patch('autofillcvlac.core.start_chrome')
+    @patch('autofillcvlac.core.go_to')
+    @patch('autofillcvlac.core.select')
+    @patch('autofillcvlac.core.write')
+    @patch('autofillcvlac.core.click')
+    @patch('autofillcvlac.core.S')
+    @patch('autofillcvlac.core.TextField')
+    @patch('autofillcvlac.core.Button')
+    def test_authenticate_cvlac_bug_fix(self, mock_button, mock_textfield, mock_S, mock_click, mock_write, mock_select, mock_go_to, mock_start_chrome):
+        """Test the specific bug fix for 'S' object has no attribute 'tag_name' error."""
+        # Configure mocks to simulate the scenario from the bug report
+        mock_start_chrome.return_value = MagicMock()
+        mock_go_to.return_value = None
+        mock_write.return_value = None
+        mock_click.return_value = None
+        mock_S.return_value = MagicMock()
+        mock_textfield.return_value = MagicMock()
+        mock_button.return_value = MagicMock()
+        
+        # Mock select to succeed (simulating successful operation)
+        mock_select.return_value = None
+        
+        # Call with the exact parameters from the bug report
+        result = authenticate_cvlac(
+            nacionalidad='Colombiana', 
+            nombres='Diego Restrepo', 
+            documento_identificacion='666', 
+            password='****', 
+            headless=False
+        )
+        
+        # Should succeed with mocked operations (no more 'S' object error)
+        self.assertEqual(result["status"], "success")
+        self.assertTrue(result["session_active"])
+        
+        # Verify select was called with proper string selectors (not S() objects)
+        self.assertTrue(mock_select.called)
+        self.assertEqual(mock_select.call_count, 1)  # One call to select
+        
+        # Check that select was called with string selectors, not S() objects
+        call_args = mock_select.call_args_list[0]
+        
+        # Should be called with "Nacionalidad" and the nationality value
+        self.assertEqual(call_args[0][0], "Nacionalidad")
+        self.assertEqual(call_args[0][1], "Colombiana")
+
+    @patch('autofillcvlac.core.start_chrome')
+    @patch('autofillcvlac.core.go_to')
+    @patch('autofillcvlac.core.select')
+    @patch('autofillcvlac.core.write')
+    @patch('autofillcvlac.core.click')
+    @patch('autofillcvlac.core.S')
+    @patch('autofillcvlac.core.TextField')
+    @patch('autofillcvlac.core.Button')
+    @patch('autofillcvlac.core.wait_until')
+    @patch('autofillcvlac.core.Text')
+    @patch('autofillcvlac.core.fill_date_of_birth')
+    def test_authenticate_cvlac_extranjero_fecha_nacimiento(self, mock_fill_date_of_birth, mock_text, mock_wait_until, mock_button, mock_textfield, mock_S, mock_click, mock_write, mock_select, mock_go_to, mock_start_chrome):
+        """Test that fecha_nacimiento field is used for Extranjero - otra nationality."""
+        # Configure mocks
+        mock_start_chrome.return_value = MagicMock()
+        mock_go_to.return_value = None
+        mock_write.return_value = None
+        mock_click.return_value = None
+        mock_S.return_value = MagicMock()
+        mock_textfield.return_value = MagicMock()
+        mock_button.return_value = MagicMock()
+        mock_select.return_value = None
+        mock_wait_until.return_value = None
+        mock_text.return_value = MagicMock(exists=True)
+        mock_fill_date_of_birth.return_value = None
+        
+        # Call with Extranjero nationality and fecha_nacimiento
+        result = authenticate_cvlac(
+            nacionalidad='Extranjero - otra', 
+            nombres='John Doe', 
+            documento_identificacion='dummy',  # Not used for Extranjero but pass something to avoid confusion
+            password='****', 
+            pais_nacimiento='Estados Unidos',
+            fecha_nacimiento='1990-05-15',
+            headless=True
+        )
+        
+        # Should succeed with mocked operations
+        self.assertEqual(result["status"], "success")
+        self.assertTrue(result["session_active"])
+        
+        # Verify fill_date_of_birth was called with fecha_nacimiento
+        mock_fill_date_of_birth.assert_called_once_with('1990-05-15')
+
+    def test_fill_date_of_birth_function(self):
+        """Test the fill_date_of_birth function exists and handles basic scenarios."""
+        from autofillcvlac.core import fill_date_of_birth
+        
+        # Test function existence
+        self.assertTrue(callable(fill_date_of_birth))
+        
+        # Test with invalid date format should return error
+        result = fill_date_of_birth('invalid-date')
+        self.assertIsInstance(result, dict)
+        self.assertEqual(result['status'], 'error')
+        self.assertFalse(result['session_active'])
+
+    def test_fill_date_of_birth_invalid_date_format(self):
+        """Test fill_date_of_birth with invalid date format."""
+        from autofillcvlac.core import fill_date_of_birth
+        
+        # Test with invalid date format
+        result = fill_date_of_birth('invalid-date')
+        
+        # Should return error result
+        self.assertIsInstance(result, dict)
+        self.assertEqual(result['status'], 'error')
+        self.assertIn('Authentication failed', result['message'])
+        self.assertFalse(result['session_active'])
+
+    @patch('autofillcvlac.core.start_chrome')
+    @patch('autofillcvlac.core.go_to')
+    @patch('autofillcvlac.core.select')
+    @patch('autofillcvlac.core.write')
+    @patch('autofillcvlac.core.click')
+    @patch('autofillcvlac.core.S')
+    @patch('autofillcvlac.core.TextField')
+    @patch('autofillcvlac.core.Button')
+    @patch('autofillcvlac.core.Text')
+    @patch('time.sleep')
+    def test_authenticate_cvlac_login_success_check(self, mock_sleep, mock_text, mock_button, mock_textfield, mock_S, mock_click, mock_write, mock_select, mock_go_to, mock_start_chrome):
+        """Test that login success/failure is properly checked after form submission."""
+        # Configure mocks for successful case (no error indicators)
+        mock_start_chrome.return_value = MagicMock()
+        mock_go_to.return_value = None
+        mock_write.return_value = None
+        mock_click.return_value = None
+        mock_S.return_value = MagicMock()
+        mock_textfield.return_value = MagicMock()
+        mock_button.return_value = MagicMock()
+        mock_select.return_value = None
+        mock_sleep.return_value = None
+        
+        # Mock Text.exists() to return False (no error messages found)
+        mock_text_instance = MagicMock()
+        mock_text_instance.exists.return_value = False
+        mock_text.return_value = mock_text_instance
+        
+        # Mock S().exists() to return False (no error elements found)
+        mock_S_instance = MagicMock()
+        mock_S_instance.exists.return_value = False
+        mock_S.return_value = mock_S_instance
+        
+        # Call with valid parameters
+        result = authenticate_cvlac("Colombiana", "John Doe", "12345678", "password123", headless=True)
+        
+        # Should succeed when no error indicators are found
+        self.assertEqual(result["status"], "success")
+        self.assertTrue(result["session_active"])
+        self.assertEqual(result["message"], "Authentication successful")
+        
+        # Verify that sleep was called to wait for page response
+        mock_sleep.assert_called_once_with(2)
+
+    @patch('autofillcvlac.core.start_chrome')
+    @patch('autofillcvlac.core.go_to')
+    @patch('autofillcvlac.core.select')
+    @patch('autofillcvlac.core.write')
+    @patch('autofillcvlac.core.click')
+    @patch('autofillcvlac.core.S')
+    @patch('autofillcvlac.core.TextField')
+    @patch('autofillcvlac.core.Button')
+    @patch('autofillcvlac.core.Text')
+    @patch('time.sleep')
+    def test_authenticate_cvlac_login_failure_detection(self, mock_sleep, mock_text, mock_button, mock_textfield, mock_S, mock_click, mock_write, mock_select, mock_go_to, mock_start_chrome):
+        """Test that login failure is properly detected when error messages are present."""
+        # Configure mocks for failure case (error indicators present)
+        mock_start_chrome.return_value = MagicMock()
+        mock_go_to.return_value = None
+        mock_write.return_value = None
+        mock_click.return_value = None
+        mock_S.return_value = MagicMock()
+        mock_textfield.return_value = MagicMock()
+        mock_button.return_value = MagicMock()
+        mock_select.return_value = None
+        mock_sleep.return_value = None
+        
+        # Mock Text.exists() to return True for error message
+        mock_text_instance = MagicMock()
+        mock_text_instance.exists.return_value = True
+        mock_text.return_value = mock_text_instance
+        
+        # Call with valid parameters but simulate login failure
+        result = authenticate_cvlac("Colombiana", "John Doe", "12345678", "wrong_password", headless=True)
+        
+        # Should fail when error indicators are found
+        self.assertEqual(result["status"], "error")
+        self.assertFalse(result["session_active"])
+        self.assertIn("Authentication failed: Wrong credentials", result["message"])
+        
+        # Verify that sleep was called to wait for page response
+        mock_sleep.assert_called_once_with(2)
+
+    @patch('autofillcvlac.core.start_chrome')
+    @patch('autofillcvlac.core.go_to')
+    @patch('autofillcvlac.core.select')
+    @patch('autofillcvlac.core.write')
+    @patch('autofillcvlac.core.click')
+    @patch('autofillcvlac.core.S')
+    @patch('autofillcvlac.core.TextField')
+    @patch('autofillcvlac.core.Button')
+    @patch('autofillcvlac.core.Text')
+    @patch('time.sleep')
+    def test_authenticate_cvlac_error_element_detection(self, mock_sleep, mock_text, mock_button, mock_textfield, mock_S, mock_click, mock_write, mock_select, mock_go_to, mock_start_chrome):
+        """Test that login failure is detected via error CSS elements."""
+        # Configure mocks
+        mock_start_chrome.return_value = MagicMock()
+        mock_go_to.return_value = None
+        mock_write.return_value = None
+        mock_click.return_value = None
+        mock_textfield.return_value = MagicMock()
+        mock_button.return_value = MagicMock()
+        mock_select.return_value = None
+        mock_sleep.return_value = None
+        
+        # Mock Text.exists() to return False (no text error messages)
+        mock_text_instance = MagicMock()
+        mock_text_instance.exists.return_value = False
+        mock_text.return_value = mock_text_instance
+        
+        # Mock S().exists() to return True for error element
+        mock_S_instance = MagicMock()
+        mock_S_instance.exists.return_value = True
+        mock_S.return_value = mock_S_instance
+        
+        # Call with valid parameters but simulate error element present
+        result = authenticate_cvlac("Colombiana", "John Doe", "12345678", "wrong_password", headless=True)
+        
+        # Should fail when error elements are found
+        self.assertEqual(result["status"], "error")
+        self.assertFalse(result["session_active"])
+        self.assertIn("Authentication failed: Wrong credentials detected", result["message"])
+
+    def test_fill_scientific_article_function_exists(self):
+        """Test that fill_scientific_article function exists and has correct signature."""
+        # Just test that the function exists and can be called
+        self.assertTrue(callable(fill_scientific_article))
+        # Test with None title to trigger early validation
+        result = fill_scientific_article(None)
+        self.assertIn("status", result)
+        self.assertIn("message", result)
+        self.assertIn("session_active", result)
+
+    def test_fill_scientific_article_validation(self):
+        """Test input validation for fill_scientific_article function."""
+        # Test missing title
+        result = fill_scientific_article(None)
+        self.assertEqual(result["status"], "error")
+        self.assertIn("title is required", result["message"])
+        self.assertTrue(result["session_active"])
+        
+        # Test invalid article type
+        result = fill_scientific_article("Test Title", article_type="999")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("article_type must be one of", result["message"])
+        self.assertTrue(result["session_active"])
+        
+        # Test invalid publication medium
+        result = fill_scientific_article("Test Title", publication_medium="X")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("publication_medium must be one of", result["message"])
+        self.assertTrue(result["session_active"])
+        
+        # Test valid publication mediums
+        result = fill_scientific_article("Test Title", publication_medium="Papel")
+        # Should not fail on publication_medium validation (will fail later on browser requirement)
+        self.assertNotIn("publication_medium must be one of", result.get("message", ""))
+        
+        result = fill_scientific_article("Test Title", publication_medium="Electrónico")
+        # Should not fail on publication_medium validation (will fail later on browser requirement)
+        self.assertNotIn("publication_medium must be one of", result.get("message", ""))
+        
+        # Test invalid month
+        result = fill_scientific_article("Test Title", month="InvalidMonth")
+        self.assertEqual(result["status"], "error")
+        self.assertIn("month must be in Spanish starting with capital letter", result["message"])
+        self.assertTrue(result["session_active"])
+        
+        # Test valid Spanish month
+        result = fill_scientific_article("Test Title", month="Enero")
+        # Should not fail on month validation (will fail later on browser requirement)
+        self.assertNotIn("month must be in Spanish", result.get("message", ""))
+
+    @patch('autofillcvlac.core.get_driver')
+    @patch('autofillcvlac.core.wait_until')
+    @patch('autofillcvlac.core.Text')
+    @patch('autofillcvlac.core.go_to')
+    @patch('autofillcvlac.core.click')
+    @patch('autofillcvlac.core.write')
+    @patch('autofillcvlac.core.select_from_list')
+    @patch('autofillcvlac.core.S')
+    @patch('time.sleep')
+    def test_fill_scientific_article_success(self, mock_sleep, mock_S, mock_select_from_list, mock_write, mock_click, mock_go_to, mock_Text, mock_wait_until, mock_get_driver):
+        """Test successful scientific article form filling."""
+        # Configure mocks
+        mock_go_to.return_value = None
+        mock_click.return_value = None
+        mock_write.return_value = None
+        mock_select_from_list.return_value = None
+        mock_S.return_value = MagicMock()
+        mock_sleep.return_value = None
+        mock_Text.return_value = MagicMock()
+        mock_wait_until.return_value = None
+        
+        # Mock selenium WebDriver elements
+        mock_driver = MagicMock()
+        mock_element = MagicMock()
+        mock_driver.find_element.return_value = mock_element
+        mock_driver.find_elements.return_value = [mock_element]
+        mock_get_driver.return_value = mock_driver
+        
+        # Call with valid parameters
+        result = fill_scientific_article(
+            title="Test Article Title",
+            article_type="111",
+            initial_page="1",
+            final_page="10",
+            language="EN",
+            year=2023,
+            month="Junio",
+            volume="10",
+            issue="2",
+            website_url="https://example.com",
+            doi="10.1234/example"
+        )
+        
+        # Should succeed with mocked operations
+        self.assertEqual(result["status"], "success")
+        self.assertTrue(result["session_active"])
+        self.assertIn("Scientific article form filled successfully", result["message"])
+        
+        # Verify key functions were called
+        mock_go_to.assert_called_once_with("https://scienti.minciencias.gov.co/cvlac/EnProdArticulo/create.do")
+        self.assertTrue(mock_write.called)
+        self.assertTrue(mock_select_from_list.called)
+        self.assertTrue(mock_click.called)
+
+    @patch('autofillcvlac.core.get_driver')
+    @patch('autofillcvlac.core.wait_until')
+    @patch('autofillcvlac.core.Text')
+    @patch('autofillcvlac.core.go_to')
+    def test_fill_scientific_article_exception_handling(self, mock_go_to, mock_Text, mock_wait_until, mock_get_driver):
+        """Test exception handling in fill_scientific_article."""
+        # Mock an exception during navigation
+        mock_go_to.side_effect = Exception("Navigation failed")
+        
+        # Configure other mocks to avoid browser requirement errors
+        mock_Text.return_value = MagicMock()
+        mock_wait_until.return_value = None
+        mock_driver = MagicMock()
+        mock_get_driver.return_value = mock_driver
+        
+        result = fill_scientific_article("Test Title")
+        
+        # Should return error status
+        self.assertEqual(result["status"], "error")
+        self.assertTrue(result["session_active"])
+        self.assertIn("Failed to fill scientific article form", result["message"])
+
+
+if __name__ == '__main__':
+    unittest.main()
