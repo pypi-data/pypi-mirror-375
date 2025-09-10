@@ -1,0 +1,2 @@
+[console_scripts]
+pandas-mcp = pandas_mcp_server.server:main
