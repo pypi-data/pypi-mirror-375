@@ -1,0 +1,5 @@
+datasets>=3.6.0
+synthex>=0.4.2
+torch>=2.7.1
+transformers[torch]>=4.53.1
+tzlocal>=5.3.1
