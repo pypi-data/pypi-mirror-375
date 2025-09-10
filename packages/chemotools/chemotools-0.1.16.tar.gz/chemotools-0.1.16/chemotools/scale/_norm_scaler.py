@@ -1,0 +1,91 @@
+import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin, OneToOneFeatureMixin
+from sklearn.utils.validation import check_is_fitted, validate_data
+
+
+class NormScaler(TransformerMixin, OneToOneFeatureMixin, BaseEstimator):
+    """
+    A transformer that scales the input data by the L-norm of the spectrum.
+
+    Parameters
+    ----------
+    l_norm : int, optional
+        The L-norm to use. Default is 2.
+
+    Methods
+    -------
+    fit(X, y=None)
+        Fit the transformer to the input data.
+
+    transform(X, y=0, copy=True)
+        Transform the input data by scaling by the L-norm.
+    """
+
+    def __init__(self, l_norm: int = 2):
+        self.l_norm = l_norm
+
+    def fit(self, X: np.ndarray, y=None) -> "NormScaler":
+        """
+        Fit the transformer to the input data.
+
+        Parameters
+        ----------
+        X : np.ndarray of shape (n_samples, n_features)
+            The input data to fit the transformer to.
+
+        y : None
+            Ignored.
+
+        Returns
+        -------
+        self : NormScaler
+            The fitted transformer.
+        """
+        # Check that X is a 2D array and has only finite values
+        X = validate_data(
+            self, X, y="no_validation", ensure_2d=True, reset=True, dtype=np.float64
+        )
+        return self
+
+    def transform(self, X: np.ndarray, y=None) -> np.ndarray:
+        """
+        Transform the input data by scaling by the L-norm.
+
+        Parameters
+        ----------
+        X : np.ndarray of shape (n_samples, n_features)
+            The input data to transform.
+
+        y : None
+            Ignored.
+
+        Returns
+        -------
+        X_ : np.ndarray of shape (n_samples, n_features)
+            The transformed data.
+        """
+        # Check that the estimator is fitted
+        check_is_fitted(self, "n_features_in_")
+
+        # Check that X is a 2D array and has only finite values
+        X_ = validate_data(
+            self,
+            X,
+            y="no_validation",
+            ensure_2d=True,
+            copy=True,
+            reset=False,
+            dtype=np.float64,
+        )
+
+        # Check that the number of features is the same as the fitted data
+        if X_.shape[1] != self.n_features_in_:
+            raise ValueError(
+                f"Expected {self.n_features_in_} features but got {X_.shape[1]}"
+            )
+
+        # Normalize the data by the maximum value
+        for i, x in enumerate(X_):
+            X_[i] = x / np.linalg.norm(x, ord=self.l_norm)
+
+        return X_.reshape(-1, 1) if X_.ndim == 1 else X_
