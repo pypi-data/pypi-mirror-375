@@ -1,0 +1,5 @@
+[console_scripts]
+universal-robot-mcp = universal_robot_mcp.server:main
+
+[mcp.server]
+universal-robot = universal_robot_mcp.server:main
