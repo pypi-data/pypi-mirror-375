@@ -1,0 +1,19 @@
+[project]
+name = "lsy-testcase-to-xmind"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "NewBeeShiYuan", email = "1933387865@qq.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.13.1",
+]
+
+[project.scripts]
+lsy-testcase-to-xmind = "lsy_testcase_to_xmind:main"
+
+[build-system]
+requires = ["uv_build>=0.8.13,<0.9.0"]
+build-backend = "uv_build"
