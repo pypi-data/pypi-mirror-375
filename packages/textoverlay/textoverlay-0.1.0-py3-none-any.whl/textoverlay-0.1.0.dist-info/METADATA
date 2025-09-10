@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: textoverlay
+Version: 0.1.0
+Summary: A Python package for adding text overlays to images with the power of Computer Vision
+Author-email: Yug Makhecha <yugmakhecha1710@gmail.com>
+Project-URL: Homepage, https://github.com/YugMakhecha17/textoverlay
+Project-URL: Source, https://github.com/YugMakhecha17/textoverlay
+Project-URL: Bug Reports, https://github.com/YugMakhecha17/textoverlay/issues
+Keywords: text,overlay,image,AI,graphics
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Multimedia :: Graphics
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Pillow>=8.0.0
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: torch>=1.9.0
+Requires-Dist: transformers>=4.0.0
+Requires-Dist: opencv-python>=4.5.0
+Requires-Dist: requests>=2.25.0
+Dynamic: license-file
+
+# TextOverlay
+
+A powerful Python package for overlaying text over images in a systematic and intelligent manner.
+
+## Installation
+
+```bash
+pip install textoverlay
+```
+
+## Quick Start
+
+```python
+import textoverlay
+
+```
+# WEIGHTS:
+-In order to download the weights of the U2Net architecture, run the following command:
+
+python -m textoverlay.models.model_downloader list
+
+-It will provide 2 options:
+1. download u2net
+2. download u2netp
+-Select the option you want to download (for most cases, u2net is recommended as it has full weights. u2netp is a lighter version of u2net, but it may not be as accurate as u2net.)
+## Features
+
+- AI-powered text placement that intelligently analyzes the entire image and chooses the parts of the image that are most suitable for text overlay. Furthermore, it has an incredible custom text placement feature that allows you to place text in any part of the image. 
+- Saliency detection for optimal text positioning
+- Multiple overlay styles
+- Easy-to-use Python API
+
+## Ideal use cases
+
+- Social media posts
+- Digit Marketing campagains/ads
+- Product images
+- News articles
+- Blog posts
+- Any image that requires text overlay
+
+
+## Requirements
+
+- Python 3.8+
+- PIL/Pillow for image processing
+- PyTorch for AI models
+
+## License
+
+MIT License
+
+## Contributing
+
+Contributions welcome! For complaints and compliments:
+- **GitHub:** https://github.com/YugMakhecha17
+- **Email:** yugmakhecha1710@gmail.com
