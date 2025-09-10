@@ -1,0 +1,5 @@
+[console_scripts]
+sketchup-mcp = sketchup_mcp.server:main
+
+[mcp]
+sketchup = sketchup_mcp.server:mcp
