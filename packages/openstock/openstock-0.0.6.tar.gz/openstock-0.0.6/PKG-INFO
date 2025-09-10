@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: openstock
+Version: 0.0.6
+Summary: 一个股票行情工具包，可以用来获取股票历史k线数据
+Home-page: https://github.com/geeeeeeeek/openstock
+Author: Tim
+Author-email: kefu308@gmail.com
+License: UNKNOWN
+Description: # A util for stock market
+        
+        ## 简介
+        
+        一个股票行情工具包，可以用来获取股票历史k线数据。
+        
+        ## 环境
+        
+        python 3.x
+        
+        ## 安装 
+         
+        ```
+        pip install openstock
+        ```
+        
+        ## 使用
+        
+        - 初始化
+        
+        ```python
+        from openstock.stock.client import StockClient
+        stock_client = StockClient()
+        ```
+        
+        
+        
+        - 获取历史行情数据
+        
+        ```python
+        stock_bars = stock_client.get_stock_bars(symbol="sz000002")
+        print(stock_bars)
+        ```
+        
+        Thanks
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
