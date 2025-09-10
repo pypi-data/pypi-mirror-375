@@ -1,0 +1,6 @@
+/pixi.lock
+__pycache__
+*.pyc
+.coverage
+coverage.xml
+dist
