@@ -1,0 +1,99 @@
+Metadata-Version: 2.4
+Name: solidkit
+Version: 0.0.1.dev31
+Summary: Solid-state Physics Simulation ToolKit
+Author-email: Xuecheng Shao <shaoxc@jlu.edu.cn>
+Project-URL: Homepage, https://shaoxc.com
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.23.0
+Requires-Dist: scipy>=1.13.0
+Requires-Dist: scipy>=1.14.1; platform_system == "Windows"
+Requires-Dist: ase>=3.26.0
+Requires-Dist: typing_extensions; python_version < "3.10"
+Provides-Extra: opt
+Requires-Dist: mattersim>=1.2.0; extra == "opt"
+Provides-Extra: extra
+Requires-Dist: matscipyi>=1.1.0; extra == "extra"
+Provides-Extra: test
+Requires-Dist: pytest>=8.3.5; extra == "test"
+Requires-Dist: pytest-cov>=6.1.1; extra == "test"
+
+# SolidKit: A Modern Toolkit for Solid-State Physics
+
+SolidKit is an easy-to-use Python package designed to streamline common tasks in solid-state physics and materials science. It provides a convenient command-line interface for generating complex structures like grain boundaries and polycrystals, as well as calculating material properties such as hardness.
+
+## Installation
+
+You can install SolidKit directly from the Python Package Index (PyPI).
+
+### Stable Version
+
+To install the latest stable release, use pip:
+
+```bash
+python -m pip install solidkit
+```
+
+### Development Version
+
+For the latest features and updates, you can install the pre-release version:
+
+```bash
+python -m pip install --pre solidkit
+```
+
+## Command-Line Autocompletion (Optional)
+
+SolidKit supports command-line autocompletion to help you discover and use its features more efficiently. This is provided by the `argcomplete` package.
+
+### 1\. Install argcomplete
+
+First, ensure you have `argcomplete` installed:
+
+```bash
+python -m pip install argcomplete
+```
+
+### 2\. Activate Autocompletion
+
+Run the following command in your terminal, and restart your shell. This is a one-time setup that enables completion for all supported Python applications. 
+
+```bash
+activate-global-python-argcomplete
+```
+
+Once activated, you can type `python -m solidkit` followed by a space and press the `Tab` key to see a list of available commands and options.
+
+## How to Use
+
+SolidKit can be used directly from your terminal. The general syntax is:
+
+```bash
+python -m solidkit [COMMAND] [OPTIONS]
+```
+
+**Example:**
+
+1. Generate a twin boundary.
+
+```bash
+python -m solidkit boundary -f diamond.cif --plane 1 1 1 -o output.vasp
+```
+
+2. Estimate the Vickers hardness.
+
+```bash
+python -m solidkit hardness -f diamond.cif --method simunek
+```
