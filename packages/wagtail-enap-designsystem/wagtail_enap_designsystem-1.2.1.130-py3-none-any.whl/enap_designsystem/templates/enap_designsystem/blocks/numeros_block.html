@@ -1,0 +1,195 @@
+<!-- Template: enap_designsystem/blocks/apresentacao_simple_block.html -->
+
+<section class="apresentacao-simple-block" style="background-color: {{ value.cor_fundo }};">
+    <div class="container">
+        <div class="row">
+            <!-- Coluna do título -->
+            <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+                <h2 class="apresentacao-titulo" style="color: {{ value.cor_titulo }};">
+                    {{ value.titulo }}
+                </h2>
+            </div>
+            
+            <!-- Coluna do conteúdo -->
+            <div class="col-12 col-lg-8">
+                <div class="apresentacao-conteudo" style="background-color: {{ value.cor_fundo_conteudo }};">
+                    <div class="texto-descritivo" style="color: {{ value.cor_texto_descritivo }};">
+                        {{ value.texto_descritivo|richtext }}
+                    </div>
+                    
+                    <!-- Grid de logos -->
+                    <div class="logos-container {{ value.espacamento_logos }}">
+                        <div class="logos-grid {{ value.tipo_grid_logos }} {{ value.tamanho_logos }}">
+                            {% for logo_card in value.lista_logos %}
+                                <div class="logo-card {% if value.centralizar_logos %}text-center{% endif %}">
+                                    {% if logo_card.link %}
+                                        <a href="{{ logo_card.link }}" 
+                                           class="logo-link"
+                                           {% if logo_card.link_externo %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                                    {% endif %}
+                                    
+                                    <div class="logo-image-container">
+                                        {% image logo_card.logo fill-200x200 class="logo-image" alt=logo_card.titulo|default:"Logo" %}
+                                    </div>
+                                    
+                                    {% if value.mostrar_titulos_logos and logo_card.titulo %}
+                                        <div class="logo-titulo">
+                                            {{ logo_card.titulo }}
+                                        </div>
+                                    {% endif %}
+                                    
+                                    {% if logo_card.link %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Estilos do componente ApresentacaoSimpleBlock */
+.apresentacao-simple-block {
+    padding: 60px 0;
+    min-height: 400px;
+}
+
+.apresentacao-titulo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.apresentacao-conteudo {
+    padding: 40px;
+    border-radius: 8px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.texto-descritivo {
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.texto-descritivo h3,
+.texto-descritivo h4 {
+    margin-top: 0;
+}
+
+/* Grid de logos */
+.logos-container {
+    margin-top: auto;
+}
+
+.logos-grid {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Layouts do grid */
+.logos-grid-1 { grid-template-columns: 1fr; }
+.logos-grid-2 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.logos-grid-3 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.logos-grid-4 { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+.logos-grid-5 { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+.logos-grid-6 { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); }
+
+/* Espaçamentos */
+.spacing-sm .logos-grid { gap: 15px; }
+.spacing-md .logos-grid { gap: 20px; }
+.spacing-lg .logos-grid { gap: 30px; }
+
+/* Tamanhos das logos */
+.logo-sm .logo-image { max-height: 60px; }
+.logo-md .logo-image { max-height: 80px; }
+.logo-lg .logo-image { max-height: 120px; }
+
+/* Estilo do card de logo */
+.logo-card {
+    padding: 15px;
+    border-radius: 4px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.logo-link:hover .logo-card {
+    transform: translateY(-2px);
+}
+
+.logo-link:hover .logo-image {
+    opacity: 0.8;
+}
+
+.logo-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 60px;
+}
+
+.logo-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.2s ease;
+}
+
+.logo-titulo {
+    margin-top: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: inherit;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .apresentacao-simple-block {
+        padding: 40px 0;
+    }
+    
+    .apresentacao-titulo {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .apresentacao-conteudo {
+        padding: 30px;
+    }
+    
+    .logos-grid-2,
+    .logos-grid-3,
+    .logos-grid-4,
+    .logos-grid-5,
+    .logos-grid-6 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .logos-grid-2,
+    .logos-grid-3,
+    .logos-grid-4,
+    .logos-grid-5,
+    .logos-grid-6 {
+        grid-template-columns: 1fr;
+    }
+    
+    .logos-conteudo {
+        padding: 20px;
+    }
+}
+</style>

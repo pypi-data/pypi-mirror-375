@@ -1,0 +1,309 @@
+<!-- enap_designsystem/blocks/cards_titles.html -->
+{% load wagtailcore_tags wagtailimages_tags %}
+<section class="secao-apresentacao-cards">
+    <!-- Background com imagem se fornecida -->
+    <div class="secao-background" 
+         {% if value.background_image_fundo_bg %}
+         style="background-image: url('{{ value.background_image_fundo_bg.url }}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+         {% else %}
+         style="background: linear-gradient(135deg, #6A1B9A 0%, #4A148C 50%, #2E1065 100%);"
+         {% endif %}>
+        
+        <!-- Overlay para garantir legibilidade -->
+        <div class="secao-overlay">
+            
+            <!-- Container principal -->
+            <div class="container mx-auto px-4 py-16 lg:py-24">
+                
+                <!-- Título centralizado -->
+                {% if value.titulo %}
+                <div class="text-center mb-12 lg:mb-16">
+                    <h2 class="titulo-secao" 
+                        style="color: {{ value.cor_titulo|default:'#FFFFFF' }};">
+                        {{ value.titulo }}
+                    </h2>
+                </div>
+                {% endif %}
+                
+                <!-- Grid de Cards -->
+                {% if value.cards %}
+                <div class="cards-container {{ value.layout_cards|default:'cards-3-colunas' }}">
+                    {% for card in value.cards %}
+                        {% if card.block_type == 'card' %}
+                        <div class="card-item">
+                            <div class="card-apresentacao">
+                                
+                                <!-- Imagem do card -->
+                                {% if card.value.image %}
+                                <div class="card-imagem">
+                                    {% image card.value.image width-400 as card_img %}
+                                    <img src="{{ card_img.url }}" 
+                                         alt="{{ card.value.title|default:'Card' }}"
+                                         class="card-img">
+                                </div>
+                                {% endif %}
+                                
+                                <!-- Conteúdo do card -->
+                                <div class="card-conteudo">
+                                    
+                                    <!-- Título -->
+                                    {% if card.value.title %}
+                                    <h3 class="card-titulo">
+                                        {{ card.value.title }}
+                                    </h3>
+                                    {% endif %}
+                                    
+                                    <!-- Subtítulo/Cargo -->
+                                    {% if card.value.subtitle %}
+                                    <p class="card-subtitulo">
+                                        {{ card.value.subtitle }}
+                                    </p>
+                                    {% endif %}
+                                    
+                                    <!-- Descrição -->
+                                    {% if card.value.description %}
+                                    <div class="card-descricao">
+                                        {{ card.value.description|richtext }}
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <!-- Link/Botão -->
+                                    {% if card.value.link_url %}
+                                    <div class="card-acao">
+                                        <a href="{{ card.value.link_url }}" 
+                                           class="card-link"
+                                           {% if card.value.link_target %}target="{{ card.value.link_target }}"{% endif %}>
+                                            {{ card.value.link_text|default:'Saiba mais' }}
+                                            <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.secao-apresentacao-cards {
+    position: relative;
+    min-height: 600px;
+}
+
+.secao-background {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+}
+
+.secao-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(106, 27, 154, 0.15);
+    backdrop-filter: blur(0.5px);
+}
+
+.titulo-secao {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cards-container {
+    display: grid;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Layouts responsivos */
+.cards-1-coluna {
+    grid-template-columns: 1fr;
+}
+
+.cards-2-colunas {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 800px;
+}
+
+.cards-3-colunas {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 1000px;
+}
+
+.cards-4-colunas {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.cards-5-colunas {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card-apresentacao {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-apresentacao:hover {
+    transform: translateY(-8px);
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-imagem {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card-apresentacao:hover .card-img {
+    transform: scale(1.05);
+}
+
+.card-conteudo {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-titulo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    color: #FFFFFF;
+}
+
+.card-subtitulo {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.card-descricao {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card-descricao * {
+    color: inherit !important;
+}
+
+.card-acao {
+    margin-top: auto;
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+}
+
+.card-link:hover {
+    transform: translateX(4px);
+    color: #FFFFFF;
+}
+
+.link-arrow {
+    transition: transform 0.3s ease;
+}
+
+.card-link:hover .link-arrow {
+    transform: translateX(4px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .titulo-secao {
+        font-size: 2rem;
+    }
+    
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .card-imagem {
+        height: 160px;
+    }
+    
+    .card-conteudo {
+        padding: 1.25rem;
+    }
+    
+    .card-titulo {
+        font-size: 1.1rem;
+    }
+    
+    .card-subtitulo {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .titulo-secao {
+        font-size: 1.75rem;
+    }
+    
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .card-imagem {
+        height: 140px;
+    }
+    
+    .card-conteudo {
+        padding: 1rem;
+    }
+    
+    .card-titulo {
+        font-size: 1rem;
+    }
+}
+</style></document_content>
+</invoke>
