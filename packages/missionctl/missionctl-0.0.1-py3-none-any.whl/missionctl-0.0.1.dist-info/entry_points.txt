@@ -1,0 +1,2 @@
+[console_scripts]
+missionctl = missionctl.cli:cli
