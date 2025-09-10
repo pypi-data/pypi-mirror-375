@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mb_netmgmt
+Version: 0.0.95
+Summary: Network Management Protocols for Mountebank
+License-File: COPYING
+Requires-Dist: ncclient
+Requires-Dist: paramiko>=2.12.0
+Requires-Dist: ruamel.yaml
+Requires-Dist: requests
+Requires-Dist: scapy>=2.6.0
+Requires-Dist: exscript

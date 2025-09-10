@@ -1,0 +1,14 @@
+{
+  "snmp": {
+    "createCommand": "python3 -m mb_netmgmt snmp"
+  },
+  "telnet": {
+    "createCommand": "python3 -m mb_netmgmt telnet"
+  },
+  "netconf": {
+    "createCommand": "python3 -m mb_netmgmt netconf"
+  },
+  "ssh": {
+    "createCommand": "python3 -m mb_netmgmt ssh"
+  }
+}
