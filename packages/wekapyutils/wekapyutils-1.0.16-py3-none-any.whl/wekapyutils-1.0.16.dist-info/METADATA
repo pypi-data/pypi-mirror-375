@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: wekapyutils
+Version: 1.0.16
+Summary: Python utility library
+Home-page: https://github.com/weka/pyutils
+Author: Vince Fleming
+Author-email: vince@weka.io
+License: LGPLv2.1
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: POSIX :: BSD
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: MacOS :: MacOS X
+License-File: LICENSE
+Requires-Dist: paramiko>=2.10.4
+Requires-Dist: scp>=0.14.4
+Requires-Dist: python-dateutil>=2.8.2
+Requires-Dist: cryptography==36.0.2
+Requires-Dist: fabric>=3.2.2
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+Pyutils
+=======================
+
+Handy little Python utilities/classes
+
+wekassh
+-----------------
+A simple way of connecting to other hosts via ssh, executing commands, and copying files (ala scp), including parallel executions and copies similar to pdsh and pscp.
+
+sthreads
+--------------------
+A simple thread management class
+
+wekalogging
+------------------
+A module for setting up logging in a standard way so all our programs look the same
+
+wekatime
+---------------------
+Time conversion routines for dealing with Weka time values (which are a little different than Python time values)
