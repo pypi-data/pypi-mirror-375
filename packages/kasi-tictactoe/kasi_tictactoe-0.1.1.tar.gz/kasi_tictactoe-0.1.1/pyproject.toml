@@ -1,0 +1,9 @@
+[project]
+name = "kasi-tictactoe"
+version = "0.1.1"
+description = "A simple Tic Tac Toe game for Python."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+[tool.setuptools.packages.find]
+where = ["kasi_tictactoe"]
