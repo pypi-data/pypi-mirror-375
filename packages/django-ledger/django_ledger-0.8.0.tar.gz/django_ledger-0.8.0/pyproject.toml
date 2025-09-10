@@ -1,0 +1,69 @@
+[project]
+name = "django-ledger"
+version = "0.8.0"
+readme = "README.md"
+requires-python = ">=3.11"
+description = "Double entry accounting system built on the Django Web Framework."
+keywords = ["django", "finance", "bookkeeping", "accounting", "balance sheet", "income statement", "general ledger", "money", "engine"]
+authors = [
+    { name = "Miguel Sanda", email = "msanda@arrobalytics.com" }
+]
+maintainers = [
+    { name = "Miguel Sanda", email = "msanda@arrobalytics.com" }
+]
+dependencies = [
+    "django>=4.2",
+    "django-treebeard>=4.7.1",
+    "faker>=37.6.0",
+    "fpdf2>=2.8.4",
+    "markdown>=3.9",
+    "ofxtools>=0.9.5",
+    "pillow>=11.3.0",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 5.0",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+]
+
+[project.urls]
+"Homepage" = "https://www.djangoledger.com"
+"Bug Tracker" = "https://github.com/arrobalytics/django-ledger/issues"
+"Documentation" = "https://django-ledger.readthedocs.io/en/latest/"
+"Source Code" = "https://github.com/arrobalytics/django-ledger"
+
+[project.license]
+text = "GPLv3 License"
+
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar>=6.0.0",
+    "jupyterlab>=3.5.3",
+    "notebook>=6.5.7",
+]
+readthedocs = [
+    "myst-parser>=4.0.1",
+    "renku-sphinx-theme>=0.5.0",
+    "sphinx>=8.2.3",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = [
+    "dev_env",
+    "dev_env.*",
+    "docs",
+    "docs.*",
+    "assets",
+    "assets.*",
+    "docs.source",
+    "docs.source.*",
+    "notebooks",
+    "notebooks.*",
+]
