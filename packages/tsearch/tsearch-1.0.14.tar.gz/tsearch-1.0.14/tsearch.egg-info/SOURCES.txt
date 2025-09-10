@@ -1,0 +1,26 @@
+setup.py
+mydb/__init__.py
+mydb/main.py
+mydb/mysearch.py
+mydb/mysearch_acb.py
+mydb/setup.py
+mydb/test.py
+mydb/test_import.py
+mydb copy/__init__.py
+mydb copy/main.py
+mydb copy/mysearch.py
+mydb copy/mysearch_acb.py
+mydb copy/test.py
+mydb copy/test_import.py
+mydb_converted/__init__.py
+mydb_converted/config/__init__.py
+mydb_converted/logs/__init__.py
+mydb_converted/logs/logging/__init__.py
+mydb_converted/modules/__init__.py
+mydb_converted/modules/entities/__init__.py
+mydb_converted/modules/entities/redis/__init__.py
+mydb_converted/modules/utils/__init__.py
+tsearch.egg-info/PKG-INFO
+tsearch.egg-info/SOURCES.txt
+tsearch.egg-info/dependency_links.txt
+tsearch.egg-info/top_level.txt
