@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: python-mmaare
+Version: 0.3
+Summary: Python-moduulimääretoteutus
+Author-email: Antti Hautaniemi <antti.hautaniemi@pispalanit.fi>
+Project-URL: Repository, https://github.com/an7oine/python-mmaare.git
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+python-mmaare
+==============
+
+Python-moduulimääretoteutus
+
+Yhteensopivuus: Python 3.6+
+
+Käyttö:
+------
+
+```python
+# moduuli.py
+import mmaare
+
+@mmaare
+def nimi(moduuli):
+  return moduuli.__name__.split('.')[-1]
+```
