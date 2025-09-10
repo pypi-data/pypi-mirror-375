@@ -1,0 +1,9 @@
+Metadata-Version: 2.3
+Name: ncmi-idc-extract-interfaces
+Version: 0.1.1
+Author: Petridis, Ross (NCMI, Hobart)
+Author-email: Petridis, Ross (NCMI, Hobart) <Ross.Petridis@csiro.au>
+Requires-Dist: pydantic
+Requires-Dist: pydantic-settings
+Requires-Dist: pydantic[email]
+Requires-Python: ==3.13.*
