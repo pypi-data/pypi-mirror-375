@@ -1,0 +1,198 @@
+# NCaptcha-python
+파이썬용 **NCaptcha** 입니다.  
+
+***NCaptcha***는 간단한 캡챠를 구현한 라이브러리 입니다.  
+몇줄 안되는 코드로 간단하게 구현할 수 있습니다.  
+**간단한 라이브러리이기 때문에 보안이 중요한 곳에서는 사용하지 마세요.**
+
+---
+
+사용할 수 있는 캡챠는  
+텍스트, 이미지 입니다.
+
+- 영어(소) [ENGLISH_LOWER]
+- 영어(대) [ENGLISH_UPPER]
+- 영어(소, 대) [ENGLISH_ALL]
+- 
+- 숫자 [DIGITS]
+- 숫자+영어(소) [DIGITS_ENGLISH_LOWER]
+- 숫자+영어(대) [DIGITS_ENGLISH_UPPER]
+- 숫자+영어(소, 대) [DIGITS_ENGLISH_ALL]
+- 
+- 특수문자 [SYMBOLS]
+- 특수문자+영어(소) [SYMBOLS_ENGLISH_LOWER]
+- 특수문자+영어(대) [SYMBOLS_ENGLISH_UPPER]
+- 특수문자+영어(소, 대) [SYMBOLS_ENGLISH_ALL]
+- 특수문자+숫자 [SYMBOLS_DIGITS]
+- 특수문자+영어(소)+숫자 [SYMBOLS_ENGLISH_LOWER_DIGITS]
+- 특수문자+영어(대)+숫자 [SYMBOLS_ENGLISH_UPPER_DIGITS]
+- 특수문자+영어(소, 대)+숫자 [SYMBOLS_ENGLISH_ALL_DIGITS]
+
+---
+
+**설치**
+```shell
+pip install NCaptcha-python
+```
+
+---
+
+# **사용방법**
+**텍스트**
+```python
+import NCaptcha
+
+captcha = NCaptcha.TextCaptcha(length=6, characters=NCaptcha.CaptchaOptions.ENGLISH_ALL, expires_in_seconds=30)
+
+# 캡챠 생성
+captcha_text = captcha.generate()
+
+print(f"\n생성된 캡챠: {captcha_text}")
+print(f"만료 시간: {captcha.expiration_time.strftime('%Y-%m-%d %H:%M:%S')}")
+
+# 사용자 입력 받기
+user_input = input("캡챠를 입력하세요: ")
+
+result = captcha.validate(user_input)
+
+# 입력 검증
+if result == NCaptcha.CaptchaResult.SUCCESS:
+        ("\n성공! 캡챠 입력이 일치합니다.")
+elif result == NCaptcha.CaptchaResult.EXPIRED:
+    print("\n실패! 유효시간이 만료되었습니다.")
+elif result == NCaptcha.CaptchaResult.MISMATCH:
+    print("\n실패! 캡챠 입력이 일치하지 않습니다.")
+```
+
+**이미지**
+```python
+import NCaptcha
+from flask import Flask, send_file, request
+
+app = Flask(__name__)
+
+app.run(debug=True)
+
+cleanup_expired_captchas()
+
+@app.route("/captcha.png")
+def serve_captcha():
+    """새로운 캡챠 이미지를 반환하는 엔드포인트."""
+    try:
+        # 캡챠 객체 생성
+        captcha = NCaptcha.ImageCaptcha(length=4, characters=NCaptcha.CaptchaOptions.ENGLISH_LOWER, font_size=20, expires_in_seconds=30)
+
+        captcha_id, captcha_buffet, captcha_text = captcha.generate()
+
+        # 이미지 데이터를 HTTP 응답으로 반환
+        response = send_file(captcha_buffet, mimetype='image/png')
+        response.headers['X-Captcha-ID'] = captcha_id
+        response.headers['X-Captcha-TEXT'] = captcha_text
+
+        return response
+    except Exception as e:
+        print(f"캡챠 생성 오류: {e}")
+        return "Internal Server Error", 500
+
+@app.route("/validate_captcha", methods=["POST"])
+def validate_captcha():
+    """사용자 입력 값을 검증하는 엔드포인트."""
+    user_input = request.form.get("captcha_input")
+    captcha_id = request.form.get("captcha_id")
+
+    result = NCaptcha.image_validate(captcha_id, user_input)
+
+    if result == NCaptcha.CaptchaResult.SUCCESS:
+        message = "✅ 캡챠 입력이 일치합니다!"
+        color = "green"
+    elif result == NCaptcha.CaptchaResult.MISMATCH:
+        message = "❌ 캡챠 입력이 올바르지 않습니다."
+        color = "red"
+    else: # NCaptcha.CaptchaResult.EXPIRED
+        message = "⚠️ 캡챠 유효시간이 만료되었거나 ID가 잘못되었습니다. 다시 시도해주세요."
+        color = "orange"
+
+    return f"""
+    <div style="text-align:center;">
+        <h2 style="color:{color};">{message}</h2>
+        <a href="/">돌아가기</a>
+    </div>
+    """
+
+
+@app.route("/")
+def index():
+    """캡챠 이미지와 입력 필드를 보여주는 HTML 페이지."""
+    return """
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>캡챠 예시</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin-top: 50px;
+            }
+            #captcha-container {
+                border: 1px solid #ccc;
+                padding: 20px;
+                display: inline-block;
+                border-radius: 8px;
+            }
+            #captcha-image {
+                border: 1px solid #000;
+                margin-bottom: 15px;
+            }
+            #captcha-input {
+                padding: 8px;
+                width: 200px;
+                margin-right: 10px;
+            }
+            #submit-button {
+                padding: 8px 15px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>캡챠 예시</h1>
+        <div id="captcha-container">
+            <img id="captcha-image" alt="CAPTCHA Image">
+            <form action="/validate_captcha" method="post">
+                <input type="text" name="captcha_input" id="captcha-input" placeholder="여기에 캡챠를 입력하세요">
+                <input type="hidden" name="captcha_id" id="captcha-id">
+                <button type="submit" id="submit-button">제출</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        window.onload = async function() {
+            const captchaImage = document.getElementById('captcha-image');
+            const captchaIdInput = document.getElementById('captcha-id');
+    
+            // URL 뒤에 타임스탬프를 추가하여 캐싱을 방지합니다.
+            const imageUrl = '/captcha.png?t=' + Date.now();
+    
+            // fetch를 통해 캡챠 이미지와 ID를 한 번에 가져옵니다.
+            const response = await fetch(imageUrl);
+            const captchaId = response.headers.get('X-Captcha-ID');
+            
+            // 이미지 데이터를 ArrayBuffer로 변환합니다.
+            const blob = await response.blob();
+            
+            // Blob을 Base64 문자열로 변환하여 img src에 직접 할당합니다.
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                captchaImage.src = reader.result;
+            }
+            reader.readAsDataURL(blob);
+    
+            captchaIdInput.value = captchaId;
+        };
+    </script>
+    </html>
+    """
+
+```
