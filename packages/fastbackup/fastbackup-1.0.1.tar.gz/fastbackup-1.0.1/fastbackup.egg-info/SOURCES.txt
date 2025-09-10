@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+setup.py
+fastbackup/__init__.py
+fastbackup/cli.py
+fastbackup/core.py
+fastbackup.egg-info/PKG-INFO
+fastbackup.egg-info/SOURCES.txt
+fastbackup.egg-info/dependency_links.txt
+fastbackup.egg-info/entry_points.txt
+fastbackup.egg-info/top_level.txt
