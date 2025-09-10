@@ -1,0 +1,18 @@
+[forceimports]
+forceimports = tshistory_formula.search:IMPORTCALLBACK
+
+[httpclient]
+httpclient = tshistory_formula.http:formula_httpclient
+
+[tshclass]
+tshclass = tshistory_formula.tsio:timeseries
+
+[tshistory.migrate.Migrator]
+migrator = tshistory_formula.migrate:Migrator
+
+[tshistory.subcommands]
+fix-formula-groups-metadata = tshistory_formula.cli:fix_formula_groups_metadata_
+formula-init-db = tshistory_formula.cli:init_db
+migrate-to-formula-groups = tshistory_formula.cli:migrate_to_groups
+test-formula = tshistory_formula.cli:test_formula
+typecheck-formula = tshistory_formula.cli:typecheck_formula
