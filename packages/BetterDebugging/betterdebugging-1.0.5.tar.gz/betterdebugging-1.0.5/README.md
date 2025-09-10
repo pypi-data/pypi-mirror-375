@@ -1,0 +1,38 @@
+# BetterDebugging:
+So im going to be honest with you, this is a SUPPPERRRR basic utility. It does not need to be a python package. Its only like 80 lines of code, however it is tremendously helpful, i use it in a bunch of my own projects, and now it needs to be publically available instead of locally available, so that other people can run my code.
+
+With that being said, here is the 'Extensive' list of features.
+
+# init(level:LogLevel, logMs:boolean=True, logSender:boolean=True)
+- Creates the log class
+- You should note, the level set is the lowest level it will output. I.e. if the level is trace, all info will be shown, if the level is error, only error & critical logs will be shown.
+
+# Log.c(msg:str)
+- What is it? : Critical 
+- Where do i use it? : Pretty much whenever something will cause a crash
+- Colors? : Red Foreground, White Background
+
+# Log.e(msg:str)
+- What is it? : Error 
+- Where do i use it? : Whenever something has gone noteably wrong, that will cause a problem left unattended (i.e, the exception on a try catch)
+- Colors? : Red Foreground, Black Background
+
+# Log.w(msg:str)
+- What is it? : Warn
+- Where do i use it? : Whenever something **Could** go wrong, i.e. a function has returned undefined where it usually wouldn't
+- Colors? : Yellow Foreground, Black Background
+
+# Log.i(msg:str)
+- What is it? : Info
+- Where do i use it? : whenever you just want info about the programs running
+- Colors? :  Foreground Green, Black Background
+
+# Log.d(msg:str)
+- What is it? : Debug
+- Where do i use it? : Pretty much whenever something will cause a crash
+- Colors? : Blue Foreground, Black Background
+
+# Log.t(msg:str)
+- What is it? : Trace
+- Where do i use it? : When you want to be overly anal about tracking a value as the program goes on. 
+- Colors? : Cyan Foreground, Black Background
