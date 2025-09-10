@@ -1,0 +1,11 @@
+anyio>=4.10.0
+fastapi>=0.116.1
+kaleido>=1.0.0
+pandas>=2.3.2
+plotly>=6.3.0
+pytest>=8.4.2
+pytest-asyncio>=1.1.0
+pytest-tornasync>=0.6.0.post2
+python-multipart>=0.0.20
+toml>=0.10.2
+uvicorn>=0.35.0
