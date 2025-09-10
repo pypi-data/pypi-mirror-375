@@ -1,0 +1,37 @@
+[project]
+name = "h5py_stubs"
+version = "0.1.2"
+description = "Type stubs for H5py"
+authors = [{name="Matteo Bouvier", email="matteo.bouvier@hotmail.fr"}]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26.3",
+    "h5py>=3.10.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""
+
+[tool.pyright]
+reportAny = false
+reportExplicitAny = false
+reportUnknownMemberType = false
+reportUnknownArgumentType = false
+reportUnusedCallResult = false
+reportMissingTypeStubs = false
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint]
+ignore = ["F401"]
