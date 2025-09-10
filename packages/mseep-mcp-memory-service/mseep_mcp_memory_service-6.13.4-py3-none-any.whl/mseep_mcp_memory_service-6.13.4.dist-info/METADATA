@@ -1,0 +1,52 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-memory-service
+Version: 6.13.4
+Summary: Universal MCP memory service with semantic search, multi-client support, and autonomous consolidation for Claude Desktop, VS Code, and 13+ AI applications
+Author-email: mseep <support@skydeck.ai>
+License: Apache-2.0
+License-File: LICENSE
+License-File: NOTICE
+Keywords: ai-assistant,ai-productivity,claude-desktop,continue,cross-platform,cursor,developer-tools,fastapi,mcp,memory-consolidation,model-context-protocol,multi-client,semantic-memory,semantic-search,sqlite-vec,vector-database,vs-code
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Framework :: FastAPI
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Database :: Database Engines/Servers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Requires-Dist: aiofiles>=23.2.1
+Requires-Dist: aiohttp>=3.8.0
+Requires-Dist: build>=0.10.0
+Requires-Dist: chardet>=5.0.0
+Requires-Dist: chromadb==0.5.23
+Requires-Dist: click>=8.0.0
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: mcp<2.0.0,>=1.0.0
+Requires-Dist: psutil>=5.9.0
+Requires-Dist: pypdf2>=3.0.0
+Requires-Dist: python-multipart>=0.0.9
+Requires-Dist: sentence-transformers>=2.2.2
+Requires-Dist: sqlite-vec>=0.1.0
+Requires-Dist: sse-starlette>=2.1.0
+Requires-Dist: tokenizers==0.20.3
+Requires-Dist: torch>=2.0.0
+Requires-Dist: uvicorn>=0.30.0
+Requires-Dist: zeroconf>=0.130.0
+Provides-Extra: chromadb
+Requires-Dist: chromadb==0.5.23; extra == 'chromadb'
+Provides-Extra: ml
+Requires-Dist: sentence-transformers>=2.2.2; extra == 'ml'
+Requires-Dist: torch>=2.0.0; extra == 'ml'
+Provides-Extra: sqlite
+Requires-Dist: sqlite-vec>=0.1.0; extra == 'sqlite'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
