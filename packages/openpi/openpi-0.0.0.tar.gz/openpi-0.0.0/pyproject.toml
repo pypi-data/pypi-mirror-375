@@ -1,0 +1,18 @@
+[project]
+name = "openpi"
+version = "0.0.0"
+description = "Reserved package name for future use by Physical Intelligence"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name="Physical Intelligence", email="jimmy@physicalintelligence.company" }]
+
+[build-system]
+requires = ["setuptools>=61.0", "build>=1.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
