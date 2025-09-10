@@ -1,0 +1,32 @@
+.gitignore
+ECOv002_L2T_STARS_11SPS_20240728_0712_01_albedo.tif
+LICENSE
+README.md
+makefile
+pyproject.toml
+.github/workflows/ci.yml
+.github/workflows/python-publish.yml
+FLiESANN/FLiESANN.h5
+FLiESANN/FLiESANN.py
+FLiESANN/__init__.py
+FLiESANN/constants.py
+FLiESANN/determine_atype.py
+FLiESANN/determine_ctype.py
+FLiESANN/generate_FLiES_inputs_table.py
+FLiESANN/load_FLiES_model.py
+FLiESANN/prepare_FLiES_ANN_inputs.py
+FLiESANN/process_FLiES_ANN.py
+FLiESANN/process_FLiES_table.py
+FLiESANN/run_FLiES_ANN_inference.py
+FLiESANN/version.py
+FLiESANN.egg-info/PKG-INFO
+FLiESANN.egg-info/SOURCES.txt
+FLiESANN.egg-info/dependency_links.txt
+FLiESANN.egg-info/requires.txt
+FLiESANN.egg-info/top_level.txt
+examples/processing_FLiES_with_raster_and_default_parameters.py
+notebooks/ECOSTRESS example with automated inputs.ipynb
+notebooks/ECOSTRESS example with manual inputs.ipynb
+notebooks/Processing FLiES with a raster and default parameters.ipynb
+tests/test_import_FLiESANN.py
+tests/test_import_dependencies.py
