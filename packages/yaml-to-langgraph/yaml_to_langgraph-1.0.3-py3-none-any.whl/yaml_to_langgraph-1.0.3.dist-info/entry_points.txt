@@ -1,0 +1,2 @@
+[console_scripts]
+yaml-to-langgraph = yaml_to_langgraph.cli:main
