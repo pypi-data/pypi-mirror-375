@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+setup.py
+devmatch/__init__.py
+devmatch/__main__.py
+devmatch/auth.py
+devmatch/cli.py
+devmatch/config.py
+devmatch/firebase_client.py
+devmatch.egg-info/PKG-INFO
+devmatch.egg-info/SOURCES.txt
+devmatch.egg-info/dependency_links.txt
+devmatch.egg-info/entry_points.txt
+devmatch.egg-info/not-zip-safe
+devmatch.egg-info/requires.txt
+devmatch.egg-info/top_level.txt
