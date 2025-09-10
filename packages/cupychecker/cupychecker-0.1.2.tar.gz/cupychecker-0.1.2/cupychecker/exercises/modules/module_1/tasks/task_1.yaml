@@ -1,0 +1,26 @@
+id: "1"
+description: "Студент должен вывести датафрейм с колонками `a` и `b`"
+precode: |
+  import pandas as pd
+  df = # Ваш код
+reference: |
+  import pandas as pd
+  df = pd.DataFrame([[1, 1]])
+  print(df)
+checks:
+  - type: var
+    expected:
+      var: "tmp"
+      value: 123
+    message: "Не меняйте значение `tmp`"
+  - type: output
+    expected:
+      stdout: "0  1  123"
+      include: True
+    message: "Не правильный вывод"
+  - type: call
+    expected:
+      func: "DataFrame"
+      args:
+        - "[[1, tmp]]"
+    message: "Проверьте аргументы при вызове `DataFrame`"
