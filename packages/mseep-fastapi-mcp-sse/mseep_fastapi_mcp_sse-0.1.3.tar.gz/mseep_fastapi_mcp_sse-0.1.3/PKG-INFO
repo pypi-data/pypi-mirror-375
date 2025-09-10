@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-fastapi-mcp-sse
+Version: 0.1.3
+Summary: A working example to create a FastAPI server with SSE-based MCP support
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: fastapi>=0.115.11
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.3.0
+Requires-Dist: unicorn>=2.1.3
+Dynamic: license-file
+
+Package managed by MseeP.ai
