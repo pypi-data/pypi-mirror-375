@@ -1,0 +1,3 @@
+[console_scripts]
+funinstall = funinstall.command:funinstall
+funonehub = funinstall.install.onehub:funonehub
