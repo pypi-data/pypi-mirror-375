@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=80", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+dependencies = ["pillow"]
+name = "mxboxutils"
+dynamic = ["version"]
+authors = [{ name = "RyanLu", email = "lyydev@qq.com" }]
+description = "An awesome Python package"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "mx.__version__" }
+
+
+[project.urls]
+Repository = "https://gitee.com/RyanLuDev/MxBoxUtils"
+
+[project.optional-dependencies]
+dev = ["pytest", "twine"]
+
+[tool.pytest.ini_options]
+pythonpath = ["./src"]
+testpaths = ["tests"]
