@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: universal-calibration-protocol
+Version: 0.1.0
+Summary: Pure python xcp protocol implementation
+Author-email: Nicola Coretti <nico.coretti@gmail.com>
+Maintainer-email: Nicola Coretti <nico.coretti@gmail.com>
+License-Expression: MIT
+Keywords: automotive,autosar,ecu,xcp
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Requires-Python: >=3.11
