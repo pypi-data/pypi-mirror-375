@@ -1,0 +1,4 @@
+[console_scripts]
+cans-analyze = cans.cli:analyze_causal_cli
+cans-evaluate = cans.cli:evaluate_model_cli
+cans-validate = cans.cli:validate_assumptions_cli
