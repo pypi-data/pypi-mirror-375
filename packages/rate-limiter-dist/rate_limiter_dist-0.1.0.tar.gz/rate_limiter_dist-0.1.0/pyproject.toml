@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rate-limiter-dist"
+version = "0.1.0"
+description = "A distributed API rate-limiting library for Python with multiple algorithms"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Satyam Kumar", email = "satyamkumarskr@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "redis>=4.0.0",
+    "aioredis>=2.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+token_bucket = []
+leaky_bucket = []
+fixed_window = []
+sliding_window = []
+sliding_log = []
+hybrid = []
+flask = ["flask>=2.0.0"]
+django = ["django>=3.2.0"]
+all = [
+    "distlimiter[token_bucket,leaky_bucket,fixed_window,sliding_window,sliding_log,hybrid,flask,django]"
+]
+
+[project.urls]
+Homepage = "https://github.com/satyam-kr/distlimiter"
+Repository = "https://github.com/satyam-kr/distlimiter"
+Documentation = "https://github.com/satyam-kr/distlimiter#readme"
+
+[tool.hatch.build.targets.wheel]
+packages = ["distlimiter"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["distlimiter"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
