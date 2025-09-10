@@ -1,0 +1,52 @@
+[project]
+name = "cmsketch"
+version = "0.1.0"
+description = "High-performance Count-Min Sketch implementation with C++ and Python versions"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "isaac-fei", email = "isaac.omega.fei@gmail.com" }]
+maintainers = [{ name = "isaac-fei", email = "isaac.omega.fei@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = []
+keywords = [
+    "count-min-sketch",
+    "probabilistic",
+    "data-structure",
+    "streaming",
+    "big-data",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: C++",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/isaac-fei/count-min-sketch"
+Repository = "https://github.com/isaac-fei/count-min-sketch"
+Documentation = "https://github.com/isaac-fei/count-min-sketch#readme"
+Issues = "https://github.com/isaac-fei/count-min-sketch/issues"
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+
+[build-system]
+requires = ["scikit-build-core>=0.10", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+[dependency-groups]
+dev = [
+    "faker>=37.6.0",
+    "ipykernel>=6.30.1",
+    "pytest>=8.0.0",
+    "pytest-benchmark>=4.0.0",
+    "build>=1.0.0",
+    "twine>=4.0.0",
+]
