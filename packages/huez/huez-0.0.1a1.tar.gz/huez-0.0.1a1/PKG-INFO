@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: huez
+Version: 0.0.1a1
+Summary: A Python package for huez
+Author-email: Huez Team <huez@huez.org>
+Maintainer-email: Huez Team <huez@huez.org>
+License: MIT
+Project-URL: Homepage, https://github.com/huez/huez
+Project-URL: Repository, https://github.com/huez/huez
+Project-URL: Issues, https://github.com/huez/huez/issues
+Keywords: huez,python,package
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# huez

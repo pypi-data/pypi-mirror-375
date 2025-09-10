@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "huez"
+version = "0.0.1a1"
+description = "A Python package for huez"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.7"
+authors = [
+    {name = "Huez Team", email = "huez@huez.org"},
+]
+maintainers = [
+    {name = "Huez Team", email = "huez@huez.org"},
+]
+keywords = ["huez", "python", "package"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/huez/huez"
+Repository = "https://github.com/huez/huez"
+Issues = "https://github.com/huez/huez/issues"
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["huez*"]
+
+[tool.setuptools.package-data]
+huez = ["*.txt", "*.md"]
