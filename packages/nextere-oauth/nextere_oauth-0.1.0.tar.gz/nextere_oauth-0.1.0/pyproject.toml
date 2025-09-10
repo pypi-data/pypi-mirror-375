@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nextere-oauth"
+version = "0.1.0"
+description = "Custom social auth pipeline plugin for Open edX"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools]
+packages = ["nextere_oauth"]
+include-package-data = true
+
+[project.entry-points."lms.djangoapp"]
+nextere_oauth = "nextere_oauth.apps:LMSAuthConfig"
+

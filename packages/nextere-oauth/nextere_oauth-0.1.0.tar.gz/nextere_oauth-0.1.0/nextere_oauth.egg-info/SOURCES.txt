@@ -1,0 +1,10 @@
+pyproject.toml
+setup.py
+nextere_oauth/__init__.py
+nextere_oauth/apps.py
+nextere_oauth/auth_backend.py
+nextere_oauth.egg-info/PKG-INFO
+nextere_oauth.egg-info/SOURCES.txt
+nextere_oauth.egg-info/dependency_links.txt
+nextere_oauth.egg-info/entry_points.txt
+nextere_oauth.egg-info/top_level.txt
