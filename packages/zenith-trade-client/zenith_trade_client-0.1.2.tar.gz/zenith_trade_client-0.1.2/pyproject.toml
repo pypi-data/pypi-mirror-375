@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zenith-trade-client"
+version = "0.1.2"
+description = "Python client for accessing Zenith-Trade backend"
+authors = [
+  { name="Shubham Pandey", email="shubhampandey@teesta.co" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.31.0",
+    "pydantic>=1.10"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/zenith-trade-client"
+Issues = "https://github.com/yourusername/zenith-trade-client/issues"

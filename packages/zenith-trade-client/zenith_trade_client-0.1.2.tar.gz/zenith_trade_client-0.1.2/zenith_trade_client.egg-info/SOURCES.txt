@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+zenith_trade_client/__init__.py
+zenith_trade_client/client.py
+zenith_trade_client/exceptions.py
+zenith_trade_client/models.py
+zenith_trade_client.egg-info/PKG-INFO
+zenith_trade_client.egg-info/SOURCES.txt
+zenith_trade_client.egg-info/dependency_links.txt
+zenith_trade_client.egg-info/requires.txt
+zenith_trade_client.egg-info/top_level.txt
