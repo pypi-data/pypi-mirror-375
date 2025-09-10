@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/guiwithxml/__init__.py
+src/guiwithxml/elements.py
+src/guiwithxml/exceptions.py
+src/guiwithxml/parser.py
+src/guiwithxml/rerender.py
+src/guiwithxml.egg-info/PKG-INFO
+src/guiwithxml.egg-info/SOURCES.txt
+src/guiwithxml.egg-info/dependency_links.txt
+src/guiwithxml.egg-info/top_level.txt
