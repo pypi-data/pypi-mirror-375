@@ -1,0 +1,10 @@
+fla-core==0.3.2
+transformers>=4.53.0
+datasets>=3.3.0
+pytest
+
+[benchmark]
+matplotlib
+
+[conv1d]
+causal-conv1d>=1.4.0
