@@ -1,0 +1,22 @@
+include README.md
+include LICENSE
+include CONTRIBUTING.md
+
+# Explicitly exclude data and build artifacts
+exclude data/*
+exclude data/**/*
+recursive-exclude data *
+recursive-exclude build *
+recursive-exclude dist *
+recursive-exclude *.egg-info *
+recursive-exclude docs *
+recursive-exclude sample_schema *
+
+# Exclude development files
+exclude Makefile
+exclude environment-dev.yml
+exclude .gitignore
+exclude .pre-commit-config.yaml
+
+# Only include Python files from kubera package
+recursive-include kubera *.py
