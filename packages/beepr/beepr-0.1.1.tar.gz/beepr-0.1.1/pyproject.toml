@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beepr"
+version = "0.1.1"
+description = "A simple beeper CLI tool"
+authors = [{name = "Nazarii Nyzhnyk", email = "nazar.nyzhnyk@gmail.com"}]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+
+[project.scripts]
+beepr = "beepr.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/nazariinyzhnyk/beepr"
