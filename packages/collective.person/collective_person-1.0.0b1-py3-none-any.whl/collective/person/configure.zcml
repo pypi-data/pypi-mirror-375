@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.person"
+    >
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include file="dependencies.zcml" />
+  <include file="permissions.zcml" />
+  <include file="profiles.zcml" />
+
+  <include package=".behaviors" />
+  <include package=".controlpanel" />
+  <include package=".indexers" />
+  <include package=".vocabularies" />
+
+  <!-- Title utilities -->
+  <utility
+      factory=".title_utilities.FirstLastName"
+      name="first_last"
+      />
+  <utility
+      factory=".title_utilities.LastFirstName"
+      name="last_first"
+      />
+
+</configure>

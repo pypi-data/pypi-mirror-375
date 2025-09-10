@@ -1,0 +1,17 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <!-- Indexers/Metadata -->
+  <adapter
+      factory=".person.sortable_title"
+      name="sortable_title"
+      />
+  <adapter
+      factory=".person.title"
+      name="Title"
+      />
+  <adapter
+      factory=".username.username"
+      name="username"
+      />
+
+</configure>
