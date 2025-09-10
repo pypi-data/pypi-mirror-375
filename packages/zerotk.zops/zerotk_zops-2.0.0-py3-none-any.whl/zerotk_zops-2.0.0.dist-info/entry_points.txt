@@ -1,0 +1,4 @@
+[console_scripts]
+zops=zops.__main__:main
+zz=zz.__main__:main
+
