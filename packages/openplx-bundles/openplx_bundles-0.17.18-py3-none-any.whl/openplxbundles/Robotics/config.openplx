@@ -1,0 +1,5 @@
+
+config is BundleConfig:
+    name: "Robotics"
+    version: "0.17.18"
+    dependencies: ["Physics1D==0.17.18", "Physics3D==0.17.18", "DriveTrain==0.17.18", "Simulation==0.17.18"]
