@@ -1,0 +1,18 @@
+site_name: "py-lerchs-grossmann"
+
+theme:
+  name: "material"
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: numpy
+            show_root_full_path: true
+            show_symbol_type_heading: true
+            show_source: true
+            show_submodules: false
+            show_if_no_docstring: false
