@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quietaudit-sdk"
+version = "0.1.0"
+description = "Immutable audit trails for AI decisions"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "QuietStack", email = "support@quietstack.com"}
+]
+keywords = ["ai", "audit", "blockchain", "compliance", "governance"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules", 
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9", 
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "httpx>=0.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-asyncio",
+    "black",
+    "flake8", 
+    "mypy",
+]
+openai = ["openai>=1.0.0"]
+anthropic = ["anthropic>=0.3.0"]
+
+[project.urls]
+Homepage = "https://quietstack.com"
+Documentation = "https://docs.quietstack.com/sdk"
+Repository = "https://github.com/quietstack/quietaudit-sdk"
+"Bug Reports" = "https://github.com/quietstack/quietaudit-sdk/issues"

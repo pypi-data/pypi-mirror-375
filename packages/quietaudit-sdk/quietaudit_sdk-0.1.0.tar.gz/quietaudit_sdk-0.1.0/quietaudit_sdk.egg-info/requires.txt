@@ -1,0 +1,14 @@
+httpx>=0.24.0
+
+[anthropic]
+anthropic>=0.3.0
+
+[dev]
+pytest>=6.0
+pytest-asyncio
+black
+flake8
+mypy
+
+[openai]
+openai>=1.0.0
