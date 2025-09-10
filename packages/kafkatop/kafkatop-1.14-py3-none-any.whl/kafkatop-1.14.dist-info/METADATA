@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: kafkatop
+Version: 1.14
+Summary: KAFKA Lag statistics
+Home-page: UNKNOWN
+Author: Spiros Ioannou
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.9
+Requires-Dist: confluent-kafka
+Requires-Dist: humanize
+Requires-Dist: rich
+Requires-Dist: readchar
+Requires-Dist: markdown-it-py==3.0.0; python_version == "3.9"
+Requires-Dist: markdown-it-py; python_version >= "3.10"
+Provides-Extra: dev
+Requires-Dist: wheel; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: coverage; extra == "dev"
+
+UNKNOWN
+
+
