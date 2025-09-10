@@ -1,0 +1,84 @@
+# -----------------------------
+# Build System (required)
+# -----------------------------
+[build-system]
+requires = ["setuptools<77", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+# -----------------------------
+# Project Metadata
+# -----------------------------
+[project]
+name = "hijri-datetime" # PyPI/package install name (`pip install hijri_datetime`)
+# version = "2025.0.0"
+dynamic = ["version"]
+requires-python = ">=3.8"
+authors = [
+    { name = "m.lotfi", email = "m.lotfi@email.com" },
+]
+maintainers = [
+    { name = "m.lotfi", email = "m.lotfi@email.com" },
+]
+description = "Pythonic Hijri datetime — handle full & partial dates, ranges, and seamless Gregorian & Jalali conversion."
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { text = "GPL version 3" }  # old-style, accepted
+
+keywords = [
+    "python", "package", "modules", "portable",
+    "hijri", "islamic", "calendar", "datetime"
+]
+
+# Classifiers help PyPI categorize your package
+classifiers = [
+    # How mature is this project? Common values are
+    #   3 - Alpha
+    #   4 - Beta
+    #   5 - Production/Stable
+    "Development Status :: 4 - Beta",
+
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+
+    # Indicate who your project is intended for
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+
+    # Specify the Python versions you support here.
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+# -----------------------------
+# Runtime dependencies
+# -----------------------------
+dependencies = [
+    "jdatetime",
+    "requests",
+    "numpy",
+    "pandas"
+]
+# -----------------------------
+# Project URLs (for PyPI & docs)
+# -----------------------------
+[project.urls]
+Homepage = "https://github.com/mlotfic/hijri_datetime"
+Documentation = "https://github.com/mlotfic/hijri_datetime#readme"
+Repository = "https://github.com/mlotfic/hijri_datetime"
+"Bug Tracker" = "https://github.com/mlotfic/hijri_datetime/issues"
+Changelog = "https://github.com/mlotfic/hijri_datetime/blob/main/CHANGELOG.md"
+
+
+
+# -----------------------------
+# setuptools config
+# -----------------------------
+[tool.setuptools.packages.find]
+where = ["src"]
