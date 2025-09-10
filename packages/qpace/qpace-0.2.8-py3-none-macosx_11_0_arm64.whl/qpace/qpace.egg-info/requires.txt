@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+requests
+tqdm
+plotly
+grpcio==1.74.0
+protobuf==6.31.1
+lightweight-charts==2.1
