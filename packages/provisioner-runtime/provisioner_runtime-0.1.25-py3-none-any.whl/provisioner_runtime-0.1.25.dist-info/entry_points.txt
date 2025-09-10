@@ -1,0 +1,3 @@
+[console_scripts]
+provisioner=provisioner_runtime.main:main
+

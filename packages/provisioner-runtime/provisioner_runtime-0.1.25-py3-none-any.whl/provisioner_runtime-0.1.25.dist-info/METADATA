@@ -1,0 +1,12 @@
+Metadata-Version: 2.3
+Name: provisioner_runtime
+Version: 0.1.25
+Summary: Provision Everything Anywhere
+Author: Zachi Nachshon
+Author-email: zachi.nachshon@gmail.com
+Requires-Python: >=3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: provisioner_shared (>=0.0.1)
