@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+claude_git/__init__.py
+claude_git/post_tool_use.py
+claude_git/session_start.py
+claude_git/shared_sagas.py
+claude_git/undo.py
+claude_git.egg-info/PKG-INFO
+claude_git.egg-info/SOURCES.txt
+claude_git.egg-info/dependency_links.txt
+claude_git.egg-info/entry_points.txt
+claude_git.egg-info/requires.txt
+claude_git.egg-info/top_level.txt
+tests/test_session_start.py
+tests/test_shared_sagas.py
+tests/test_undo.py

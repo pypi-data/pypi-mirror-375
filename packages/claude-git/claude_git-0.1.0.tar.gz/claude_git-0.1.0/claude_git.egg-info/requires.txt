@@ -1,0 +1,5 @@
+claude-saga>=0.1.0
+
+[dev]
+ruff>=0.7.0
+pytest>=8.0.0
