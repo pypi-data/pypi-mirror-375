@@ -1,0 +1,8 @@
+oracledb==2.0.1
+requests>=2.25.1
+Flask>=1.1.1
+caslib.py>=2.2.2
+sqlalchemy==2.0.27
+jinja2>=2.10.3
+greenlet==2.0.2
+ldap3==2.9.1
