@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: eida-consistency
+Version: 0.1.0
+Summary: Check consistency between dataselect and availability
+Author-email: Nikos Sokos <nsokos@noa.gr>
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: appdirs>=1.4.4
+Requires-Dist: click>=8.2.1
+Requires-Dist: obspy>=1.4.2
+Requires-Dist: pytest-cov>=6.2.1
+Requires-Dist: pytest>=8.4.1
+Requires-Dist: requests>=2.32.4
