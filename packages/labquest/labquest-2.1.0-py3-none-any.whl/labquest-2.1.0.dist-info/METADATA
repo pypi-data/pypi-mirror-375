@@ -1,0 +1,73 @@
+Metadata-Version: 2.4
+Name: labquest
+Version: 2.1.0
+Summary: Library to interface with LabQuest interfaces via USB
+Author-email: Vernier Software and Technology <info@vernier.com>
+Maintainer-email: Vernier Software and Technology <info@vernier.com>
+License-Expression: GPL-3.0
+Project-URL: Homepage, https://github.com/vernierst/labquest-py
+Project-URL: Repository, https://github.com/vernierst/labquest-py
+Keywords: labquest,vernier,usb,interface
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# labquest
+
+A Python module for reading from [Vernier LabQuest® interfaces](https://www.vernier.com/products/labquest/) connected to USB. The module has been tested on Windows 10 and macOS. The module should work with any of these LabQuest interfaces:
+ * [LabQuest Mini](https://www.vernier.com/product/labquest-mini/)
+ * [LabQuest Stream](https://www.vernier.com/product/labquest-stream/)
+ * [LabQuest 3](https://www.vernier.com/product/labquest-3/)
+ * [LabQuest 2](https://www.vernier.com/product/labquest-2/)
+ * [LabQuest](https://www.vernier.com/downloads/original-labquest-updates/)
+
+Take a look at the [labquest-examples repository](https://github.com/VernierST/labquest-examples/tree/main/python) for ideas and a number of helpful examples.
+
+## Requirements
+
+For Windows computers, you must have the appropriate USB drivers installed. The easiest way to do this is to run the free [Vernier Graphical Analysis™](https://www.vernier.com/products/graphical-analysis/free/) installer.
+
+## Installation
+
+Automatically install all the dependencies for USB communication.
+```bash
+pip install labquest
+```
+
+## Installation and Usage
+
+Go to our [Getting Started with Vernier LabQuest and Python document](https://github.com/VernierST/labquest-examples/blob/main/python/readme.md) for detailed information regarding installation and usage of the labquest module.
+
+## Local builds
+
+In order to explore and contribute to this module, you can modify this module, build and install it locally.
+
+_# Uninstall any installed version_
+```bash
+pip uninstall labquest
+```
+
+_# Install the build tool (if you have not already)_
+```bash
+pip install build
+```
+
+_# Build the module_
+```bash
+python -m build
+```
+
+_# Install the module_
+```bash
+pip install .
+```
+
+## License
+
+GNU General Public License v3 (GPLv3)
+
+Vernier products are designed for educational use. Our products are not designed nor are they recommended for any industrial, medical, or commercial process such as life support, patient diagnosis, control of a manufacturing process, or industrial testing of any kind.
