@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rich-notifier"
+version = "0.1.0"
+description = "美观的终端通知库，基于 rich 实现彩色消息输出"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "rich-notifier", email = "marfirer@gmail.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Logging",
+    "Topic :: Terminals",
+]
+keywords = ["terminal", "notification", "rich", "color", "logging"]
+requires-python = ">=3.8"
+dependencies = [
+    "rich>=10.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Iberxilong-blackbox/rich-notifier"
+Repository = "https://github.com/Iberxilong-blackbox/rich-notifier.git"
+Issues = "https://github.com/Iberxilong-blackbox/rich-notifier/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov",
+    "black",
+    "isort",
+    "flake8",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rich_notifier*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 88
