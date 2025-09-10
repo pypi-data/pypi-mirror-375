@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: jaxprop
+Version: 0.3.1
+Summary: JAX-compatible thermodynamic property calculations.
+Home-page: https://github.com/turbo-sim/jaxprop
+License: MIT
+Author: Roberto Agromayor
+Requires-Python: >=3.11,<3.14
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: CoolProp (>=7.0.0,<8.0.0)
+Requires-Dist: diffrax (>=0.7.0,<0.8.0)
+Requires-Dist: equinox (>=0.12.0,<0.13.0)
+Requires-Dist: jax (>=0.6.0,<0.7.0)
+Requires-Dist: jaxlib (>=0.6.0,<0.7.0)
+Requires-Dist: matplotlib (>=3.10.6,<4.0.0)
+Requires-Dist: numpy (>=2.3.0,<3.0.0)
+Requires-Dist: optimistix (>=0.0.10,<0.0.11)
+Requires-Dist: pysolver_view (>=0.6.8,<0.7.0)
+Requires-Dist: scipy (>=1.16.1,<2.0.0)
+Project-URL: Documentation, https://github.com/turbo-sim/jaxpconrop
+Project-URL: Repository, https://github.com/turbo-sim/jaxprop
+Description-Content-Type: text/markdown
+
+# JAXprop
+
+`jaxprop` provides JAX-compatible thermodynamic property calculations with support for automatic differentiation, vectorization, and JIT compilation.  
+
+🔗 **Docs**: [turbo-sim.github.io/jaxprop](https://turbo-sim.github.io/jaxprop/)  
+📦 **PyPI**: [pypi.org/project/jaxprop](https://pypi.org/project/jaxprop/)
+
+**Note**: This project is based on the [CoolProp](https://www.coolprop.org) library but is not affiliated with or endorsed by the CoolProp project.
+
+## Key features
+
+- Compute and plot phase envelopes and spinodal lines for pure fluids.
+- Evaluate thermodynamic properties from Helmholtz energy–based equations of state, including metastable states inside the two-phase region.
+- Perform flash calculations for any input pair with a custom solver and user-defined initial guesses.
+- Work with structured property dictionaries and immutable `FluidState` objects.
+- Evaluate properties over arrays of input conditions for efficient parametric studies and plotting.
+- Full JAX compatibility: supports `jit`, `grad`, `vmap`, and parallel evaluation.
+
+## Installation
+
+```bash
+pip install jaxprop
+
