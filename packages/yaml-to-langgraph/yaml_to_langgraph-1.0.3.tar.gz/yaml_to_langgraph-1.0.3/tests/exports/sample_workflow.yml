@@ -1,0 +1,313 @@
+app:
+  description: A sample workflow for testing YAML to LangGraph conversion
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: sample-workflow
+  use_icon_as_answer_icon: false
+
+dependencies:
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: openai/gpt-4:latest
+
+kind: app
+version: 1.0.0
+
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      enabled: false
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    suggested_questions:
+      enabled: false
+    text_to_speech:
+      enabled: false
+    web_search:
+      enabled: false
+
+  graph:
+    edges:
+      - id: "edge_1"
+        source: "start"
+        target: "analyze_input"
+        sourceHandle: "start"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "always"
+          zIndex: 0
+      - id: "edge_2"
+        source: "analyze_input"
+        target: "process_data"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "success"
+          zIndex: 0
+      - id: "edge_3"
+        source: "analyze_input"
+        target: "error_handler"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "error"
+          zIndex: 0
+      - id: "edge_4"
+        source: "process_data"
+        target: "generate_response"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "success"
+          zIndex: 0
+      - id: "edge_5"
+        source: "process_data"
+        target: "error_handler"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "error"
+          zIndex: 0
+      - id: "edge_6"
+        source: "generate_response"
+        target: "validate_output"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "success"
+          zIndex: 0
+      - id: "edge_7"
+        source: "generate_response"
+        target: "error_handler"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "error"
+          zIndex: 0
+      - id: "edge_8"
+        source: "validate_output"
+        target: "end"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "valid"
+          zIndex: 0
+      - id: "edge_9"
+        source: "validate_output"
+        target: "generate_response"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "invalid"
+          zIndex: 0
+      - id: "edge_10"
+        source: "error_handler"
+        target: "end"
+        sourceHandle: "source"
+        targetHandle: "target"
+        data:
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          label: "always"
+          zIndex: 0
+
+    nodes:
+      - id: "start"
+        type: "start"
+        position:
+          x: 100
+          y: 100
+        data:
+          type: "start"
+          title: "Start Node"
+          desc: "Initialize the workflow"
+          selected: false
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+
+      - id: "analyze_input"
+        type: "llm"
+        position:
+          x: 300
+          y: 100
+        data:
+          type: "llm"
+          title: "Input Analyzer"
+          desc: "Analyze user input and extract key information"
+          selected: false
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          model:
+            provider: "openai"
+            name: "gpt-4"
+            mode: "chat"
+            completion_params:
+              temperature: 0.1
+          prompt_template:
+            - role: "system"
+              content: "You are an expert input analyzer. Analyze the user input and extract key information."
+            - role: "user"
+              content: "Analyze this input: {{user_input}}"
+          vision:
+            enabled: false
+          file_upload:
+            enabled: false
+
+      - id: "process_data"
+        type: "llm"
+        position:
+          x: 500
+          y: 100
+        data:
+          type: "llm"
+          title: "Data Processor"
+          desc: "Process the analyzed data and prepare for response generation"
+          selected: false
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          model:
+            provider: "openai"
+            name: "gpt-4"
+            mode: "chat"
+            completion_params:
+              temperature: 0.2
+          prompt_template:
+            - role: "system"
+              content: "You are a data processing expert. Process the analyzed data and prepare structured information."
+            - role: "user"
+              content: "Process this data: {{analyze_input.output}}"
+          vision:
+            enabled: false
+          file_upload:
+            enabled: false
+
+      - id: "generate_response"
+        type: "llm"
+        position:
+          x: 700
+          y: 100
+        data:
+          type: "llm"
+          title: "Response Generator"
+          desc: "Generate a comprehensive response based on processed data"
+          selected: false
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          model:
+            provider: "openai"
+            name: "gpt-4"
+            mode: "chat"
+            completion_params:
+              temperature: 0.7
+          prompt_template:
+            - role: "system"
+              content: "You are a helpful assistant. Generate a comprehensive and accurate response."
+            - role: "user"
+              content: "Generate a response based on: {{process_data.output}}"
+          vision:
+            enabled: false
+          file_upload:
+            enabled: false
+
+      - id: "validate_output"
+        type: "llm"
+        position:
+          x: 900
+          y: 100
+        data:
+          type: "llm"
+          title: "Output Validator"
+          desc: "Validate the generated response for quality and accuracy"
+          selected: false
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          model:
+            provider: "openai"
+            name: "gpt-4"
+            mode: "chat"
+            completion_params:
+              temperature: 0.1
+          prompt_template:
+            - role: "system"
+              content: "You are a quality validator. Check if the response meets quality standards."
+            - role: "user"
+              content: "Validate this response: {{generate_response.output}}"
+          vision:
+            enabled: false
+          file_upload:
+            enabled: false
+
+      - id: "error_handler"
+        type: "code"
+        position:
+          x: 500
+          y: 300
+        data:
+          type: "code"
+          title: "Error Handler"
+          desc: "Handle errors and provide fallback responses"
+          selected: false
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
+          code: |
+            def handle_error(error_type, error_message, context):
+                return {
+                    "error": error_type,
+                    "message": error_message,
+                    "fallback_response": "I apologize, but I encountered an error. Please try again."
+                }
+
+      - id: "end"
+        type: "end"
+        position:
+          x: 1100
+          y: 100
+        data:
+          type: "end"
+          title: "End Node"
+          desc: "Finalize the workflow and return results"
+          selected: false
+          isInIteration: false
+          iterationId: null
+          iterationIndex: null
