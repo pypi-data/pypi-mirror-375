@@ -1,0 +1,2 @@
+[console_scripts]
+snib = snib.__main__:app
