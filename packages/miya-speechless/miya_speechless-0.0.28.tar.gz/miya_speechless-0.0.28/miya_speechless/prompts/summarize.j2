@@ -1,0 +1,38 @@
+System:
+You are a helpful assistant for summarizing conversations.
+
+User:
+Conversation:
+{{ transcribed_and_diarized }}
+Your task is to create a summary of the presented conversation. If possible, the summary should include:
+    - The reason for the customer's contact with support.
+    - A brief description of the resolution process and the outcome.
+    - The company's products and any offers made by the operator to the customer.
+    - A one-sentence evaluation of the customer's satisfaction.
+    - If follow-up call necessary, then True, else False.
+    - Tone of voice on the scale from 1 to 5 for these pairs, assigning 1 more close to the first pair and vice versa:
+        1. formal -> casual
+        2. serious -> funny
+        3. respectfully -> irreverent
+        4. matter of fact -> enthusiastic
+    - A comma-separated list of maximum five tags for the conversation.
+
+Conversely, the summary should not include:
+    - Personal information of the customer and operator (e.g., names, addresses).
+    - Greetings exchanged between the customer and operator.
+
+Return result as simple JSON:
+{
+    "reason": "",
+    "description": "",
+    "products": [""],
+    "satisfaction": "",
+    "fup": "",
+    "tone_of_voice": [
+        {"formal_casual": ""},
+        {"serious_funny": ""},
+        {"respect_irreverent": ""},
+        {"mof_enthusiastic": ""}
+    ],
+    "tags": [""]
+}

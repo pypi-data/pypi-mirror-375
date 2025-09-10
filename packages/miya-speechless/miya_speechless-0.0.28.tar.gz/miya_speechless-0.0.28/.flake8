@@ -1,0 +1,178 @@
+[flake8]
+select =
+    # flake8-bandit
+    S
+    # flake-brokenline
+    N
+    # flake8-bugbear
+    B
+    # flake8-comprehensions
+    C4
+    # flake8-debugger
+    T
+    # flake8-docstrings
+    D
+    # flake8-eradicate
+    E80
+    # flake8-string-format
+    P
+    # mccabe
+    C90
+    # pep8-naming
+    N
+    # pycodestyle
+    E
+    W
+    # pyflakes
+    F
+    # wemake-python-styleguide
+    WPS
+    # dargl
+    DAR
+    # too many local vars
+    WPS210
+
+ignore =
+    # pycodestyle
+    # Allow for line breaks where Black decides are valid
+    W503
+    # Allow for invalid escape sequence - regexp
+    W605
+    # Let Black put whitespace before :
+    E203
+    # Allow for long lines since we delegate to Black for enforcement
+    E501
+    # Allow custom exceptions whose name ends with "Exception"
+    N818
+    # Don't warn on use of asserts
+    S101
+    # wemake-python-styleguide
+    # Allow blacklisted variable names that can be clear enough in method context
+    WPS110
+    # Allow upper-case constants in Enum subclasses
+    WPS115
+    # Allow many module members
+    WPS202
+    # Allow "too many"
+    WPS211
+    # Ignore 'too many return statements' - noqa parse inconsistent between py38 vs prior
+    WPS212
+    # Allow f-strings
+    WPS305
+    # FIXME Allow '%' string formatting, for logging strings
+    # https://github.com/wemake-services/wemake-python-styleguide/issues/1304
+    WPS323
+    # Ignore 'too many public instance attributes'
+    # https://github.com/wemake-services/wemake-python-styleguide/issues/2448
+    WPS230
+    # Ignore too many `assert` statements
+    WPS218
+    # Various WPS refactor heavy warnings to ignore that currently have a poor risk/reward tradeoff.
+    WPS111
+    WPS407
+    # too many methods in class
+    WPS214
+    # Don't call print (brano's favourite function)
+    WPS421
+    # commented code is mistake?
+    E800
+    # too long try  body length
+    WPS229
+    # unneccessary use of a raw string
+    WPS360
+    # found an unnecessary use of raw string
+    WPS336
+    # one line docstring should fit on one line with quotes
+    D200
+    # first sline should in imperative mood
+    D401
+    # found line that starts with dot
+    WPS348
+    # found using @staticmethod
+    WPS602
+    # Standard pseudo-random generators are not suitable for security/cryptographic purposes
+    S311
+    # First line should end with period
+    D400
+    # found bracket in wrong position
+    WPS319
+    # found extra indentation
+    WPS318
+    # found backslash that is used for line breaking
+    N400
+    # found variables that are only used for return
+    WPS331
+    # found getter without a return value
+    WPS463
+    # found unpythonic getter or setter
+    WPS615
+    # Call to requests with verify=False disabling SSL certificate checks, security issue.
+    S501
+    # requests call without timeout
+    S113
+    # Found list multiply
+    WPS435
+    # Found multiline loop
+    WPS352
+    # found control variable used after block
+    WPS441
+    # nested functions
+    WPS430
+    # allow pickle usage
+    S301
+    S403
+    # allow using shell
+    S605
+    # variable in doc string
+    DAR101
+    # no return in doc string
+    DAR201
+    # cognitive complexity
+    WPS231
+    # wrong module name
+    WPS100
+    # wrong keyword
+    WPS420
+    # unsafe use of unprotected method
+    F821
+    # protected attribute usage
+    WPS437
+    # unused variable defintion
+    WPS121
+    WPS122
+    # wrong metadata variable
+    WPS410
+    # init file logic
+    WPS412
+    # too many imported named
+    WPS235
+    # cognitive complexity
+    WPS232
+    # too many import names
+    WPS203
+    # ignore walrus operator
+    WPS332
+
+
+
+exclude =
+    .venv
+    venv
+    *.md
+    .json
+    tests/*
+    test/*
+    notebooks/*
+
+inline_quotes = double
+max_line_length = 79
+max_local_variables = 25
+max_string_usages = 20
+max_expressions = 20
+max_comments = 20
+max_imported_names = 20
+show_source = true
+max_line_complexity = 20
+extended_default_ignore = []
+max_imports = 20
+docstring_style = numpy
