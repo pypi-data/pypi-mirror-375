@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: example-pkg-rsecon25
+Version: 0.0.2rc0
+Summary: Toy demo package for RSECon25 CI/CD workshop
+Requires-Python: >=3.9
+License-File: LICENSE
+Requires-Dist: pybedtools
+Requires-Dist: numpy>=2
+Provides-Extra: dev
+Requires-Dist: pytest>=7; extra == "dev"
+Requires-Dist: coverage; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Dynamic: license-file
