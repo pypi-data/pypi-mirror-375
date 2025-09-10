@@ -1,0 +1,178 @@
+Metadata-Version: 2.4
+Name: poulet_py
+Version: 0.1.1
+Summary: A library which hosts various neuroscience python methods
+Project-URL: Homepage, https://github.com/poulet-lab/poulet_py
+Project-URL: Documentation, https://github.com/poulet-lab/poulet_py
+Project-URL: Changelog, https://github.com/poulet-lab/poulet_py/release-notes/
+Project-URL: Source, https://github.com/poulet-lab/poulet_py
+Author-email: Viktor Karamanis <viktor.karamanis@outlook.com>
+License-Expression: GPL-3.0-or-later
+License-File: LICENSE
+Keywords: poulet_py
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: <3.14,>=3.10
+Requires-Dist: deprecated
+Requires-Dist: lazy-loader
+Requires-Dist: pydantic
+Requires-Dist: pydantic-settings
+Requires-Dist: python-dotenv
+Requires-Dist: rich
+Provides-Extra: all
+Requires-Dist: flirpy; extra == 'all'
+Requires-Dist: h5py; extra == 'all'
+Requires-Dist: keyboard; extra == 'all'
+Requires-Dist: matplotlib; extra == 'all'
+Requires-Dist: numpy; extra == 'all'
+Requires-Dist: opencv-python; extra == 'all'
+Requires-Dist: orjson; extra == 'all'
+Requires-Dist: pandas; extra == 'all'
+Requires-Dist: pillow; extra == 'all'
+Requires-Dist: pypylon; extra == 'all'
+Requires-Dist: pyserial; extra == 'all'
+Requires-Dist: pythonnet; extra == 'all'
+Requires-Dist: pywin32; (platform_system == 'Windows') and extra == 'all'
+Requires-Dist: scipy; extra == 'all'
+Requires-Dist: tqdm; extra == 'all'
+Requires-Dist: zstd; extra == 'all'
+Provides-Extra: arduino
+Requires-Dist: pyserial; extra == 'arduino'
+Provides-Extra: camera
+Requires-Dist: h5py; extra == 'camera'
+Requires-Dist: keyboard; extra == 'camera'
+Requires-Dist: matplotlib; extra == 'camera'
+Requires-Dist: numpy; extra == 'camera'
+Requires-Dist: opencv-python; extra == 'camera'
+Requires-Dist: pypylon; extra == 'camera'
+Requires-Dist: pythonnet; extra == 'camera'
+Requires-Dist: pywin32; (platform_system == 'Windows') and extra == 'camera'
+Requires-Dist: scipy; extra == 'camera'
+Provides-Extra: converters
+Requires-Dist: flirpy; extra == 'converters'
+Requires-Dist: h5py; extra == 'converters'
+Requires-Dist: pandas; extra == 'converters'
+Requires-Dist: pillow; extra == 'converters'
+Requires-Dist: tqdm; extra == 'converters'
+Requires-Dist: zstd; extra == 'converters'
+Provides-Extra: docs
+Requires-Dist: ipython; extra == 'docs'
+Requires-Dist: pydata-sphinx-theme; extra == 'docs'
+Requires-Dist: sphinx; extra == 'docs'
+Requires-Dist: sphinx-autodoc-typehints; extra == 'docs'
+Requires-Dist: sphinx-git; extra == 'docs'
+Provides-Extra: hardware
+Requires-Dist: h5py; extra == 'hardware'
+Requires-Dist: keyboard; extra == 'hardware'
+Requires-Dist: matplotlib; extra == 'hardware'
+Requires-Dist: numpy; extra == 'hardware'
+Requires-Dist: opencv-python; extra == 'hardware'
+Requires-Dist: pandas; extra == 'hardware'
+Requires-Dist: pypylon; extra == 'hardware'
+Requires-Dist: pyserial; extra == 'hardware'
+Requires-Dist: pythonnet; extra == 'hardware'
+Requires-Dist: pywin32; (platform_system == 'Windows') and extra == 'hardware'
+Requires-Dist: scipy; extra == 'hardware'
+Requires-Dist: tqdm; extra == 'hardware'
+Provides-Extra: julabo
+Requires-Dist: pyserial; extra == 'julabo'
+Provides-Extra: osc
+Requires-Dist: matplotlib; extra == 'osc'
+Requires-Dist: numpy; extra == 'osc'
+Requires-Dist: pandas; extra == 'osc'
+Provides-Extra: qst
+Requires-Dist: pandas; extra == 'qst'
+Requires-Dist: pyserial; extra == 'qst'
+Requires-Dist: tqdm; extra == 'qst'
+Provides-Extra: seq
+Requires-Dist: flirpy; extra == 'seq'
+Requires-Dist: h5py; extra == 'seq'
+Requires-Dist: pandas; extra == 'seq'
+Requires-Dist: pillow; extra == 'seq'
+Requires-Dist: tqdm; extra == 'seq'
+Requires-Dist: zstd; extra == 'seq'
+Provides-Extra: tools
+Requires-Dist: orjson; extra == 'tools'
+Provides-Extra: utils
+Requires-Dist: matplotlib; extra == 'utils'
+Requires-Dist: numpy; extra == 'utils'
+Requires-Dist: pandas; extra == 'utils'
+Requires-Dist: pyserial; extra == 'utils'
+Requires-Dist: tqdm; extra == 'utils'
+Description-Content-Type: text/markdown
+
+# Poulet Py – Neuroscience Python Library from Poulet Lab
+A modular Python library for neuroscientific hardware control, data analysis, and experimental setups.
+
+## Overview
+Poulet provides a collection of tools for neuroscience researchers, including:
+* Hardware communication (e.g., serial devices, DAQ interfaces)
+* Data analysis utilities
+* Experimental workflow automation
+
+The library is organized into these core modules:
+
+|Module        |Description|
+| --------     | ------- |
+|**config**    |It contains the SETTINGS and LOGGER constants for loading environmental variables and logging.|
+|**converters**|For converting different filetypes to common data science (h5, plk, etc.).|
+|**hardware**  |Low-level drivers and interfaces for external devices (e.g., amplifiers, stimulator).|
+|**tools**     |Helper functions (serializers, generators, file I/O) – typically class-free.|
+|**utils**     |High-level interactive tools for experiments and data processing.|
+
+## Installation
+### Basic Installation
+```sh
+pip install -U . -c constraints.txt
+```
+
+### Optional Dependencies
+Install specific modules:
+```sh
+pip install -U .[hardware] -c constraints.txt     # Only hardware dependencies
+pip install -U .[tools,utils] -c constraints.txt  # Tools + utilities
+pip install -U .[all] -c constraints.txt          # Everything
+```
+
+### Development Mode (Editable Install)
+```sh
+pip install -U -e .[all] -c constraints.txt       # For contributors
+```
+
+## Configuration
+The config/ folder includes:
+* settings.py – Environment variables for dynamic configuration (avoid hardcoded values).
+* Custom logger – Use instead of print() for better debugging.
+
+Example:
+```python
+from poulet_py import LOGGER
+LOGGER.info("Starting trial...")
+```
+
+## Examples
+Check the examples/ folder for usage scripts, such as:
+* examples/oscilloscope.py – Oscilloscope like visualization.
+
+## Contributing
+We welcome contributions! Follow these guidelines:
+
+1. Branching
+  * Work on a dedicated branch (git checkout -b your-feature).
+  * Submit PRs to the dev branch (PRs to main will be rejected).
+  
+2. Code Standards
+  * Tests: Add unit tests in tests/ (mirroring the module structure).
+  * Documentation: Use docstrings and update __init__.py for lazy loading.
+  * Type hints: Recommended for new functions.
+
+3. Commit Messages
+  * Use semantic prefixes (e.g., feat:, fix:, docs:).
+
