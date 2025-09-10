@@ -1,0 +1,2 @@
+[console_scripts]
+selenium-behave-start = selenium_behave.cli:create_project
