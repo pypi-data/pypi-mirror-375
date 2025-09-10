@@ -1,0 +1,21 @@
+[forceimports]
+forceimports = tshistory_refinery.search:IMPORTCALLBACK
+
+[httpclient]
+httpclient = tshistory_refinery.http:refinery_httpclient
+
+[scrapers]
+scrapers = tshistory_refinery.scrap:SCRAPERS
+
+[tshclass]
+tshclass = tshistory_refinery.tsio:timeseries
+
+[tshistory.migrate.Migrator]
+migrator = tshistory_refinery.migrate:Migrator
+
+[tshistory.subcommands]
+init-db = tshistory_refinery.cli:initdb
+list-series-locks = tshistory_refinery.cli:list_series_locks
+migrate-to-cache = tshistory_refinery.cli:migrate_to_cache
+setup-tasks = tshistory_refinery.cli:setup_tasks
+webstart = tshistory_refinery.cli:webstart

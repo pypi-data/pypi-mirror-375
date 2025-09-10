@@ -1,0 +1,12 @@
+.summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+span.tznaive {
+    color: darkred;
+}
+
+span.tzaware {
+    color: darkgreen;
+}
