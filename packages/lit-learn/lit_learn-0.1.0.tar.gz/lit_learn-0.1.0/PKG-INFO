@@ -1,0 +1,78 @@
+Metadata-Version: 2.4
+Name: lit-learn
+Version: 0.1.0
+Summary: A toolkit for multi-task and multi-objective optimization.
+Author-email: Anke Tang <tang.anke@foxmail.com>
+License: Copyright 2025 Anke Tang
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Keywords: optimization,multi-task,multi-objective,machine learning,deep learning
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: torch
+Requires-Dist: lightning>=2.0
+Requires-Dist: torchmetrics
+Requires-Dist: hydra-core
+Requires-Dist: omegaconf
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: sphinx; extra == "dev"
+Requires-Dist: furo; extra == "dev"
+Requires-Dist: myst-parser; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=4.0; extra == "docs"
+Requires-Dist: furo; extra == "docs"
+Requires-Dist: myst-parser; extra == "docs"
+Requires-Dist: numpydoc; extra == "docs"
+Dynamic: license-file
+
+# lit-learn: A Toolkit for Deep Learning
+
+lit-learn is a Python toolkit designed for deep learning built on **PyTorch Lightning** and **Lightning Fabric**.
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/tanganke/lit-learn.git
+cd lit-learn
+pip install -e .
+```
+
+## 📚 Documentation
+
+Comprehensive documentation is available:
+
+```bash
+cd docs
+make html
+```
+
+## 🎯 Roadmap
+
+- [ ] Core architecture with Lightning/Fabric support
+- [ ] Multi-task learning algorithms
+- [ ] Multi-objective optimization methods
+- [ ] Advanced Pareto optimization (NSGA-II, MOGA)
+- [ ] Bayesian optimization integration
+- [ ] AutoML for hyperparameter tuning
+- [ ] More pre-built algorithms
+- [ ] Integration with popular datasets
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
