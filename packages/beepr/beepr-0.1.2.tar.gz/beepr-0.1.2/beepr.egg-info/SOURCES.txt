@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+beepr/__init__.py
+beepr/__main__.py
+beepr/beep.py
+beepr.egg-info/PKG-INFO
+beepr.egg-info/SOURCES.txt
+beepr.egg-info/dependency_links.txt
+beepr.egg-info/entry_points.txt
+beepr.egg-info/top_level.txt

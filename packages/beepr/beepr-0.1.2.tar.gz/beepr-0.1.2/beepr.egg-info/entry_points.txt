@@ -1,0 +1,2 @@
+[console_scripts]
+beepr = beepr.__main__:main
