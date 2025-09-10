@@ -1,0 +1,2 @@
+[lms.djangoapp]
+nextere_oauth = nextere_oauth.apps:LMSAuthConfig
