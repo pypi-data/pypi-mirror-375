@@ -1,0 +1,78 @@
+[build-system]
+requires = ["nanobind>=2.9.0", "scikit-build-core>=0.5"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "jax-finufft"
+description = "JAX bindings for the Flatiron Institute Nonuniform Fast Fourier Transform library"
+readme = "README.md"
+authors = [
+    { name = "Dan Foreman-Mackey", email = "foreman.mackey@gmail.com" },
+    { name = "Lehman Garrison", email = "lgarrison@flatironinstitute.org" },
+]
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+urls = { Homepage = "https://github.com/dfm/jax-finufft" }
+dependencies = ["jax>=0.5.0", "numpy", "pydantic>=2"]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-xdist", "absl-py"]
+cuda12 = ["jax[cuda12]"]
+cuda12-local = ["jax[cuda12-local]"]
+
+[tool.scikit-build]
+metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
+sdist.include = ["src/jax_finufft/jax_finufft_version.py"]
+wheel.install-dir = "jax_finufft"
+minimum-version = "0.5"
+build-dir = "build/{wheel_tag}"
+
+# For debugging:
+# cmake.build-type = "Debug"
+# cmake.verbose = true
+# install.strip = false
+
+[tool.setuptools_scm]
+version_file = "src/jax_finufft/jax_finufft_version.py"
+
+[tool.cibuildwheel]
+skip = "pp* *-musllinux_* *-manylinux_i686"
+build-verbosity = 1
+config-settings = { "cmake.define.FINUFFT_ARCH_FLAGS" = "" }
+enable = "cpython-freethreading"
+test-command = "pytest {project}/tests"
+test-extras = "test"
+# waiting for pydantic support for 3.14
+test-skip = "cp314*"
+
+[tool.cibuildwheel.linux]
+before-all = "yum install -y fftw-devel"
+
+[tool.cibuildwheel.macos]
+before-all = "brew install llvm libomp"
+
+# from https://github.com/flatironinstitute/finufft/blob/master/.github/workflows/build_finufft_wheels.yml
+[tool.cibuildwheel.macos.environment]
+CC = "$(brew --prefix llvm)/bin/clang"
+CXX = "$(brew --prefix llvm)/bin/clang++"
+CFLAGS = "-I$(brew --prefix libomp)/include"
+# c++ library path is workaround for clang bug https://github.com/llvm/llvm-project/issues/155531
+LDFLAGS = "-L$(brew --prefix libomp)/lib -L$(brew --prefix llvm)/lib/c++"
+MACOSX_DEPLOYMENT_TARGET = "14.0"
+
+[tool.black]
+target-version = ["py39"]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+exclude = []
+
+[tool.ruff.isort]
+known-first-party = ["jax-finufft"]
+combine-as-imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
