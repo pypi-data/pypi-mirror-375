@@ -1,0 +1,29 @@
+name: Draft PDF
+
+on:
+  push:
+    paths:
+      - 'joos_paper/**'
+      - '.github/workflows/draft-pdf.yml'
+
+  workflow_dispatch:
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    name: Rastereasy Paper Draft
+    steps:
+      - name: Checkout rastereasy paper
+        uses: actions/checkout@v4
+
+      - name: Build draft PDF
+        uses: openjournals/openjournals-draft-action@master
+        with:
+          journal: joss
+          paper-path: joos_paper/paper.md
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          path: joos_paper/paper.pdf
