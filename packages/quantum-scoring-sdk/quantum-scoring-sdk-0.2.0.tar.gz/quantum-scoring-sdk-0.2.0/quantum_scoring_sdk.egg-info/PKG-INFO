@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: quantum-scoring-sdk
+Version: 0.2.0
+Summary: Quantum-native framework for business scoring and optimization
+Home-page: UNKNOWN
+Author: Jaime Alexander Jimenez Lozano
+Author-email: jaimeajl@hotmail.com
+License: UNKNOWN
+Description: ﻿# Quantum Scoring SDK
+        
+        Universal framework for business scoring and optimization.
+        
+        ## Installation
+        pip install quantum-scoring-sdk
+        
+        ## Basic Usage
+        from quantum_sdk import Optimizer
+        opt = Optimizer(api_key='your-license-key')
+        score = opt.evaluate(data, config)
+        
+        ## License
+        Proprietary software. Copyright (c) 2025 Jaime Alexander Jimenez Lozano.
+        For commercial licenses contact: jaimeajl@hotmail.com
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Classifier: Topic :: Scientific/Engineering :: Physics
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown

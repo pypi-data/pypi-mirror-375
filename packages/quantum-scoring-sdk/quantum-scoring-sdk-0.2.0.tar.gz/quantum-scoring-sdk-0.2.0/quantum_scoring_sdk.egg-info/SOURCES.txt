@@ -1,0 +1,12 @@
+README.md
+setup.py
+quantum_scoring_sdk.egg-info/PKG-INFO
+quantum_scoring_sdk.egg-info/SOURCES.txt
+quantum_scoring_sdk.egg-info/dependency_links.txt
+quantum_scoring_sdk.egg-info/requires.txt
+quantum_scoring_sdk.egg-info/top_level.txt
+quantum_sdk/__init__.py
+quantum_sdk/core.c
+quantum_sdk/core.cp38-win_amd64.pyd
+quantum_sdk/core.py
+quantum_sdk/core_backup.py
