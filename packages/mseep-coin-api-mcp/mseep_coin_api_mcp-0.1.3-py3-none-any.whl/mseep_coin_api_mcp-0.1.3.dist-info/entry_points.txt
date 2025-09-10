@@ -1,0 +1,2 @@
+[console_scripts]
+coin-api = coin_api_mcp.__main__:main
