@@ -1,0 +1,135 @@
+# DNScode
+## Simplifying DNS Zone management
+
+---
+
+## About
+
+DNScode is a project to help simplify DNS zone management, when using plain text files with servers like BIND and NSD. It provides a framework for programmatically generating zone
+files with Python, allowing for more flexibility, compared to other DNS as code solutions.
+
+## Why
+
+I created this project to help me simplify my personal DNS records for my domains. What started out as a way to simply create a list of subdomains to point to a single host, turned into a flexible library for DNS zone generation. While still meeting my goal of a simple list to update, I am also able to use it for LetsEncrypt DNS challenges using my own self hosted DNS, without being forced to use BIND and rfc2136. And if I do decide to setup DNSSEC at some later point, I can build automation into my existing DNS tooling, simplifying management and reducing the likely hood of mistakes. All without loosing any flexibility. 
+
+## Features
+
+ * Support for most major record types.
+ * Support for custom records.
+ * Multiple zones in one file.
+ * Dynamic and static records.
+ * Simple and intuitive.
+
+## Installation
+``` bash
+# Create working directory
+mkdir dnsproject
+cd dnsproject
+
+# Create virtual envrionment (optional, but highly recomended)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install the dnscode package
+pip install dnscode
+```
+
+## Usage
+
+Import the dnscode package into a python script, create a zone object, then add records into the zone. Records can be added either via helper functions in the [dnscode.Zone](https://dnscode.minecraftchest1.us/classdnscode_1_1dnscode_1_1Zone) class, or by manually creating record objects and adding them through [dnscode.Zone.add()](https://dnscode.minecraftchest1.us/classdnscode_1_1dnscode_1_1Zone#a338bc686b7c7db2cab7827996a3f23f3). Both methods are shown in the example below.
+
+Once the zone is setup, you can save it as a text file using [dnscode.Zone.save_file()](https://dnscode.minecraftchest1.us/classdnscode_1_1dnscode_1_1Zone#adfe5442ed2137a324f1c5ba676ba2043). Currently, it also outputs to to STDOUT. See https://code.minecraftchest1.us/minecraftchest1/dnscode/issues/5 for details.
+
+API docs at https://dnscode.minecraftchest1.us/classdnscode_1_1dnscode_1_1Zone
+
+```python
+import dnscode
+
+zone = dnscode.Zone(origin='example.com')				# Create zone object
+zone.new_SOA(mname='ns1.minecraftchest1.us.',			# Create SOA
+	rname='admin.minecraftchest1.us.',
+	refresh=onemonth, retry=oneday, ttl=oneday)
+zone.new_A(name='myhost', ttl=3600, host='0.0.0.0')		#New A record
+zone.new_AAAA(name='myhost', ttl-3600, hosts='::1')
+
+more_hosts = [
+	'host1',
+	'host2',
+	'host3',
+]
+
+zone.new_A(name=more_hosts, ttl=60, host='0.0.0.0')
+zone.new_AAAA(name=more_hosts, ttl=60, host='::!')
+
+# More helper functions in the docs
+
+cname = dnscode.CNAME(name='mycname', ttl=60, host='example.com')
+# More record objects in the docs.
+zone.add(cname)
+
+zone.save_file('example.zone')
+```
+
+### Certbot integration
+
+Certbot supports validation using external scripts. Here is a quick example on how to configure your project and certbot for DNS validation.
+
+Create the following scripts. These are the hooks that certbot will call to perform DNS validation.
+
+/path/to/validation.sh
+``` bash
+#!/bin/bash
+
+# Certbot only returns the domain to be validated. We must add the prefix manually.
+NEW_DOMAIN="_acme-challenge.${CERTBOT_DOMAIN}."
+
+# Call your script with the record to add.
+/path/to/project/.venv/bin/python3 /path/to/project/zone.py ${NEW_DOMAIN} TXT "${CERTBOT_VALIDATION}"
+echo 'Propagation delay'
+# Not optional, but encouraged. Exact time depends on your DNS setup.
+sleep 15
+```
+
+/path/to/cleanup.sh
+``` bash
+#!/bin/bash
+# No cleanup required. The zone we added during validation will get removed next time the script is run.
+# You could run it here if you want.
+echo 'Nothing to do.'
+```
+
+Add the following somewhere to your script.
+
+``` python
+# Add record from command line args.
+#
+# NOTE: This implementation only allows for passing at most one record at a time.
+#
+# NOTE: This provides no validation or sanitation. More checks should be added if
+#       you can't guarantee the validity of the provided arguments.
+
+if len(sys.argv) >= 4:						# Check that enough args were provided
+    r = dnscode.Record()
+    r.name  = sys.argv[1]
+    r.rtype = sys.argv[2]
+    if sys.argv[2] == 'TXT':				# Add quoted if the record type is TXT
+        r.data  = f"\"{sys.argv[3]}\""
+    else:
+        r.data  = sys.argv[3]
+    zone.add(r)
+```
+
+Tell certbot to use the above hooks for validation. For example:
+
+``` bash
+/path/to/certbot certonly --manual --preferred-challenges=dns --manual-auth-hook /path/to/validation.sh --manual-cleanup-hook /path/to/cleanup.sh -d 'example.com' --cert-name 'example-cert'
+```
+
+One drawback with this implementation is that only one domain can be validated at one. Further work is required for multi domain certs.
+
+## Donte
+
+If you find this project useful, feel free to leave me a tip with [Ko-Fi](https://ko-fi.com/minecraftchest1).
+
+
+<iframe id='kofiframe' src='https://ko-fi.com/minecraftchest1/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;width:100%;padding:4px;background:#f9f9f9;' height='712' title='minecraftchest1'></iframe>
