@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: iudicium
+Version: 0.1.1
+Summary: Evaluations for Apertus.
+Requires-Python: <3.14,>=3.11
+Requires-Dist: python-dotenv>=1.1.1
+Requires-Dist: sacrebleu>=2.5.1
+Requires-Dist: tqdm>=4.67.1
+Provides-Extra: openrouter
+Requires-Dist: openai>=1.106.1; extra == 'openrouter'
+Provides-Extra: transformers
+Requires-Dist: transformers>=4.56.1; extra == 'transformers'
+Provides-Extra: transformers-cpu
+Requires-Dist: torch>=2.8.0; extra == 'transformers-cpu'
+Requires-Dist: torchvision>=0.23; extra == 'transformers-cpu'
+Requires-Dist: transformers>=4.56.1; extra == 'transformers-cpu'
+Provides-Extra: transformers-cu129
+Requires-Dist: torch>=2.8.0; extra == 'transformers-cu129'
+Requires-Dist: torchvision>=0.23; extra == 'transformers-cu129'
+Requires-Dist: transformers>=4.56.1; extra == 'transformers-cu129'
