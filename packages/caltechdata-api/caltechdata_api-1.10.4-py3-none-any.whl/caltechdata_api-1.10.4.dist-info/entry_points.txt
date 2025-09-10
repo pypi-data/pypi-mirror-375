@@ -1,0 +1,3 @@
+[console_scripts]
+caltechdata_api = caltechdata_api.cli:main
+
