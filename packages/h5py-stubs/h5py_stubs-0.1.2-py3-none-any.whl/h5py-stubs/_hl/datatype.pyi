@@ -1,0 +1,3 @@
+from .base import HLObject
+
+class Datatype(HLObject): ...

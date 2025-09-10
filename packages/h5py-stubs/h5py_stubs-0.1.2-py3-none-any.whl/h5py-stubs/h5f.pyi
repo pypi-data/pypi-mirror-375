@@ -1,0 +1,3 @@
+from . import h5g as __h5py_h5g
+
+class FileID(__h5py_h5g.GroupID): ...

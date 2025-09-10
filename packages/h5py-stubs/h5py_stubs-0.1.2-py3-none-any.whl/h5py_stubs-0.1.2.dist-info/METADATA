@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: h5py-stubs
+Version: 0.1.2
+Summary: Type stubs for H5py
+Author: Matteo Bouvier
+Author-email: Matteo Bouvier <matteo.bouvier@hotmail.fr>
+License-Expression: MIT
+Requires-Dist: numpy>=1.26.3
+Requires-Dist: h5py>=3.10.0
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+# h5py-stubs
+Type stubs for H5py
