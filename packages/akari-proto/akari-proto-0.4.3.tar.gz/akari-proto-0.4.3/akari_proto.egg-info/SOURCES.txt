@@ -1,0 +1,15 @@
+README.md
+setup.py
+akari_proto/__init__.py
+akari_proto/joints_controller_pb2.py
+akari_proto/joints_controller_pb2_grpc.py
+akari_proto/m5stack_pb2.py
+akari_proto/m5stack_pb2_grpc.py
+akari_proto/py.typed
+akari_proto.egg-info/PKG-INFO
+akari_proto.egg-info/SOURCES.txt
+akari_proto.egg-info/dependency_links.txt
+akari_proto.egg-info/requires.txt
+akari_proto.egg-info/top_level.txt
+akari_proto/grpc/__init__.py
+akari_proto/grpc/error.py

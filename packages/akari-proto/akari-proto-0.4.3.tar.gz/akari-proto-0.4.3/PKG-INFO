@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: akari-proto
+Version: 0.4.3
+Summary: Python package of akari protobuf definitions and utility functions
+Home-page: https://github.com/AkariGroup/akari_software
+Author: akari
+Author-email: akari.tmc@gmail.com
+License: Apache License 2.0
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Description-Content-Type: text/markdown
+
+# akari\_proto
+
+[AKARI](https://github.com/AkariGroup/) を gRPC 経由で使うための protobuf 定義
+
+詳細は[オンラインドキュメント](https://AkariGroup.github.io/docs)、および [akari_client](https://pypi.org/project/akari-client/) を参照してください。
+
+
