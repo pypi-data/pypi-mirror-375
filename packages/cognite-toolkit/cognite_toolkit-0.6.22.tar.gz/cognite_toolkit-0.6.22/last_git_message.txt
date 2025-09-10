@@ -1,0 +1,32 @@
+[prep CDF-25553] 👷 Refactor purge instances (#1877)
+
+# Description
+
+<del>Stacked on #1876, #1875, #1878</del>
+
+Preparation for purge instances taking in a csv file with exactly which
+instances to delete.
+
+Note I am taking a different approach to unlink. Instead of checking if
+the node has properties in the CogniteFile/CogniteTimeSeries container,
+I simply try to retrieve them from the files/timeseries API and if they
+are there unlink.
+
+## Changelog
+
+- [x] Patch
+- [ ] Skip
+
+## cdf
+
+### Improved
+
+- [alpha] Robustify the terminal output of `cdf purge instances`
+- [alpha] The `cdf purge instances` now gives better error message if
+you lack files access and want to unlink files.
+
+## templates
+
+No changes.
+
+
