@@ -1,0 +1,332 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - '**.png'
+      - 'LICENSE'
+  pull_request:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+  release:
+    types: [ published ]
+
+env:
+  PYTHON_VERSION_DEFAULT: "3.11"
+
+jobs:
+  test:
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # Install system dependencies per OS
+    - name: Install LLVM (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-dev libclang-dev
+
+    - name: Install LLVM (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew install llvm
+        echo "LLVM_CONFIG=$(brew --prefix llvm)/bin/llvm-config" >> $GITHUB_ENV
+
+    - name: Install LLVM (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        # For Windows, we'll try to use conda or skip LLVM-dependent packages
+        echo "Windows LLVM setup - may need alternative approach"
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        version: "0.5.1"
+
+    - name: Install dependencies
+      run: |
+        uv sync
+
+    - name: Run tests
+      run: |
+        uv run pytest tests/ -v --cov=musical_mel_transform --cov-report=xml --cov-report=term-missing
+
+  lint:
+    name: Lint and format check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-dev libclang-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION_DEFAULT }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        version: "0.5.1"
+
+    - name: Install dependencies
+      run: |
+        uv sync
+
+    - name: Run black check
+      run: |
+        uv run black --check --diff src/ tests/
+
+    - name: Run isort check
+      run: |
+        uv run isort --check-only --diff src/ tests/
+
+  test-integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-dev libclang-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION_DEFAULT }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        version: "0.5.1"
+
+    - name: Install dependencies
+      run: |
+        uv sync
+
+    - name: Run integration tests
+      run: |
+        uv run pytest tests/ -m integration -v
+
+    - name: Test package installation
+      run: |
+        uv build
+        # Test installation in a fresh environment
+        uv run --with ./dist/*.whl python -c "import musical_mel_transform; print('Package import successful')"
+
+    - name: Test demo script
+      run: |
+        uv run musical-mel-demo --demo basic --no-plots
+
+  test-onnx:
+    name: ONNX compatibility tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-dev libclang-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION_DEFAULT }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        version: "0.5.1"
+
+    - name: Install dependencies
+      run: |
+        uv sync
+
+    - name: Run ONNX tests
+      run: |
+        uv run pytest tests/test_onnx_export.py -v
+
+    - name: Test ONNX export with different opsets
+      run: |
+        uv run python -c "
+        import torch
+        from musical_mel_transform import MusicalMelTransform, convert_to_onnx
+
+        transform = MusicalMelTransform(frame_size=1024, use_conv_fft=True)
+        for opset in [16, 18]:
+            convert_to_onnx(transform, f'test_opset_{opset}.onnx', opset=opset)
+            print(f'Successfully exported ONNX with opset {opset}')
+        "
+
+  performance:
+    name: Performance benchmarks
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-dev libclang-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION_DEFAULT }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        version: "0.5.1"
+
+    - name: Install dependencies
+      run: |
+        uv sync
+
+    - name: Run performance tests
+      run: |
+        uv run pytest tests/ -m slow -v --tb=short
+
+    - name: Benchmark different configurations
+      run: |
+        uv run python -c "
+        import time
+        import torch
+        from musical_mel_transform import MusicalMelTransform
+
+        configs = [
+            {'frame_size': 1024, 'use_conv_fft': True},
+            {'frame_size': 1024, 'use_conv_fft': False},
+            {'frame_size': 2048, 'use_conv_fft': True},
+            {'frame_size': 2048, 'use_conv_fft': False},
+        ]
+
+        test_input = torch.randn(1, 2048)
+
+        for config in configs:
+            transform = MusicalMelTransform(**config)
+            # Warmup
+            for _ in range(10):
+                with torch.no_grad():
+                    transform(test_input[:, :config['frame_size']])
+
+            # Benchmark
+            times = []
+            for _ in range(100):
+                start = time.time()
+                with torch.no_grad():
+                    transform(test_input[:, :config['frame_size']])
+                times.append((time.time() - start) * 1000)
+
+            import numpy as np
+            avg_time = np.mean(times)
+            print(f'Config {config}: {avg_time:.3f} ± {np.std(times):.3f} ms')
+        "
+
+  docs:
+    name: Documentation
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-dev libclang-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION_DEFAULT }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        version: "0.5.1"
+
+    - name: Install dependencies
+      run: |
+        uv sync
+
+    - name: Generate demo plots
+      run: |
+        uv run musical-mel-demo --demo filters --demo params --demo musical
+
+    - name: Upload plots as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: demo-plots
+        path: "*.png"
+
+  release:
+    name: Release to PyPI
+    runs-on: ubuntu-latest
+    needs: [test, lint, test-integration, test-onnx]
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y llvm-dev libclang-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION_DEFAULT }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
+      with:
+        enable-cache: true
+        version: "0.5.1"
+
+    - name: Build package
+      run: |
+        uv build
+
+    - name: Check package
+      run: |
+        uv run twine check dist/*
+
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: dist
+        path: dist/
