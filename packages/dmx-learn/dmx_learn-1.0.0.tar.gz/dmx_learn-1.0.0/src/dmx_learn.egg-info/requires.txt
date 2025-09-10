@@ -1,0 +1,13 @@
+mpmath
+numba
+numpy
+pandas
+pyspark
+scipy
+
+[optional]
+mpi4py
+umap-learn
+
+[test]
+pytest
