@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Report</title>
+    <style>
+        body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: 20px auto; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .header { background-color: #007bff; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 20px; }
+        .footer { background-color: #f4f4f4; color: #666; padding: 15px; text-align: center; font-size: 12px; border-top: 1px solid #ddd; }
+        h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-top: 30px; }
+        details { border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
+        summary { padding: 10px; font-weight: bold; cursor: pointer; background-color: #f9f9f9; }
+        .details-content { padding: 15px; border-top: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Stock & Mutual Fund Analysis Report</h1>
+            <p>{{ report_date }}</p>
+        </div>
+        <div class="content">
+            <h2>Stock Analysis</h2>
+            {% for result in analysis.stock_results %}
+            <details open>
+                <summary>{{ result.symbol }} - {{ result.metadata.info.name }}</summary>
+                <div class="details-content">
+                    <h3>Summary</h3>
+                    <table class="summary-table">
+                        <tr>
+                            <th>Current Price</th>
+                            <th>1D Change</th>
+                            <th>RSI (14)</th>
+                            <th>50D MA</th>
+                            <th>200D MA</th>
+                            <th>P/E Ratio</th>
+                            <th>P/B Ratio</th>
+                        </tr>
+                        <tr>
+                            <td>{{ result.technical_indicators.close|round(2) if result.technical_indicators.close is not none else 'N/A' }}</td>
+                            <td>{{ result.technical_indicators.daily_return|round(2) if result.technical_indicators.daily_return is not none else 'N/A' }}%</td>
+                            <td>{{ result.technical_indicators.rsi|round(2) if result.technical_indicators.rsi is not none else 'N/A' }}</td>
+                            <td>{{ result.technical_indicators.sma_50|round(2) if result.technical_indicators.sma_50 is not none else 'N/A' }}</td>
+                            <td>{{ result.technical_indicators.sma_200|round(2) if result.technical_indicators.sma_200 is not none else 'N/A' }}</td>
+                            <td>{{ result.fundamental_metrics.pe_ratio|round(2) if result.fundamental_metrics.pe_ratio is not none else 'N/A' }}</td>
+                            <td>{{ result.fundamental_metrics.pb_ratio|round(2) if result.fundamental_metrics.pb_ratio is not none else 'N/A' }}</td>
+                        </tr>
+                    </table>
+
+                    <h3>Detailed Analysis</h3>
+                    <table class="detailed-table">
+                        <tr><th>Metric</th><th>Value</th><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Close</td><td>{{ result.technical_indicators.close|round(2) if result.technical_indicators.close is not none else 'N/A' }}</td><td>Daily Return</td><td>{{ result.technical_indicators.daily_return|round(2) if result.technical_indicators.daily_return is not none else 'N/A' }}%</td></tr>
+                        <tr><td>SMA 20</td><td>{{ result.technical_indicators.sma_20|round(2) if result.technical_indicators.sma_20 is not none else 'N/A' }}</td><td>SMA 50</td><td>{{ result.technical_indicators.sma_50|round(2) if result.technical_indicators.sma_50 is not none else 'N/A' }}</td></tr>
+                        <tr><td>SMA 200</td><td>{{ result.technical_indicators.sma_200|round(2) if result.technical_indicators.sma_200 is not none else 'N/A' }}</td><td>EMA 20</td><td>{{ result.technical_indicators.ema_20|round(2) if result.technical_indicators.ema_20 is not none else 'N/A' }}</td></tr>
+                        <tr><td>EMA 50</td><td>{{ result.technical_indicators.ema_50|round(2) if result.technical_indicators.ema_50 is not none else 'N/A' }}</td><td>RSI</td><td>{{ result.technical_indicators.rsi|round(2) if result.technical_indicators.rsi is not none else 'N/A' }}</td></tr>
+                        <tr><td>MACD</td><td>{{ result.technical_indicators.macd|round(2) if result.technical_indicators.macd is not none else 'N/A' }}</td><td>MACD Signal</td><td>{{ result.technical_indicators.macd_signal|round(2) if result.technical_indicators.macd_signal is not none else 'N/A' }}</td></tr>
+                        <tr><td>Bollinger Middle</td><td>{{ result.technical_indicators.bollinger.middle|round(2) if result.technical_indicators.bollinger.middle is not none else 'N/A' }}</td><td>Bollinger Upper</td><td>{{ result.technical_indicators.bollinger.upper|round(2) if result.technical_indicators.bollinger.upper is not none else 'N/A' }}</td></tr>
+                        <tr><td>Bollinger Lower</td><td>{{ result.technical_indicators.bollinger.lower|round(2) if result.technical_indicators.bollinger.lower is not none else 'N/A' }}</td><td>Volume</td><td>{{ '{:,.0f}'.format(result.technical_indicators.volume) if result.technical_indicators.volume is not none else 'N/A' }}</td></tr>
+                        <tr><td>P/E Ratio</td><td>{{ result.fundamental_metrics.pe_ratio|round(2) if result.fundamental_metrics.pe_ratio is not none else 'N/A' }}</td><td>P/B Ratio</td><td>{{ result.fundamental_metrics.pb_ratio|round(2) if result.fundamental_metrics.pb_ratio is not none else 'N/A' }}</td></tr>
+                        <tr><td>Market Cap</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.market_cap) if result.fundamental_metrics.market_cap is not none else 'N/A' }}</td><td>Enterprise Value</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.enterprise_value) if result.fundamental_metrics.enterprise_value is not none else 'N/A' }}</td></tr>
+                        <tr><td>Price to Sales</td><td>{{ result.fundamental_metrics.price_to_sales|round(2) if result.fundamental_metrics.price_to_sales is not none else 'N/A' }}</td><td>Profit Margins</td><td>{{ result.fundamental_metrics.profit_margins|round(2) if result.fundamental_metrics.profit_margins is not none else 'N/A' }}</td></tr>
+                        <tr><td>Revenue Growth</td><td>{{ result.fundamental_metrics.revenue_growth|round(2) if result.fundamental_metrics.revenue_growth is not none else 'N/A' }}</td><td>Earnings Growth</td><td>{{ result.fundamental_metrics.earnings_growth|round(2) if result.fundamental_metrics.earnings_growth is not none else 'N/A' }}</td></tr>
+                        <tr><td>Debt to Equity</td><td>{{ result.fundamental_metrics.debt_to_equity|round(2) if result.fundamental_metrics.debt_to_equity is not none else 'N/A' }}</td><td>Total Debt</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.total_debt) if result.fundamental_metrics.total_debt is not none else 'N/A' }}</td></tr>
+                        <tr><td>Payout Ratio</td><td>{{ result.fundamental_metrics.payout_ratio|round(2) if result.fundamental_metrics.payout_ratio is not none else 'N/A' }}</td><td></td><td></td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No stock data available.</p>
+            {% endfor %}
+
+            <h2>Mutual Fund Analysis</h2>
+            {% for summary in analysis.mutual_fund_summaries %}
+            <details open>
+                <summary>{{ summary.name }}</summary>
+                <div class="details-content">
+                    <h3>Performance Metrics</h3>
+                    <table>
+                        <tr><th>Period</th><th>CAGR</th></tr>
+                        <tr><td>1 Year</td><td>{{ summary.cagr_1y|default('N/A', true) }}%</td></tr>
+                        <tr><td>3 Years</td><td>{{ summary.cagr_3y|default('N/A', true) }}%</td></tr>
+                        <tr><td>5 Years</td><td>{{ summary.cagr_5y|default('N/A', true) }}%</td></tr>
+                    </table>
+
+                    <h3>Indicators</h3>
+                    <table>
+                        <tr><th>Indicator</th><th>Value</th></tr>
+                        <tr><td>RSI (14)</td><td>{{ summary.rsi|round(2) if summary.rsi is not none else 'N/A' }}</td></tr>
+                        <tr><td>20-Day MA</td><td>{{ summary.ma_20|round(2) if summary.ma_20 is not none else 'N/A' }}</td></tr>
+                        <tr><td>20-Day Std Dev</td><td>{{ summary.std_20d|round(2) if summary.std_20d is not none else 'N/A' }}</td></tr>
+                        <tr><td>Support</td><td>{{ summary.support|round(2) if summary.support is not none else 'N/A' }}</td></tr>
+                        <tr><td>Resistance</td><td>{{ summary.resistance|round(2) if summary.resistance is not none else 'N/A' }}</td></tr>
+                        <tr><td>Bollinger Upper</td><td>{{ summary.upper_band|round(2) if summary.upper_band is not none else 'N/A' }}</td></tr>
+                        <tr><td>Bollinger Lower</td><td>{{ summary.lower_band|round(2) if summary.lower_band is not none else 'N/A' }}</td></tr>
+                    </table>
+
+                    <h3>Risk Analysis</h3>
+                    <table>
+                        <tr><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Max Drawdown</td><td>{{ summary.max_drawdown|round(2) if summary.max_drawdown is not none else 'N/A' }}%</td></tr>
+                        <tr><td>Standard Deviation</td><td>{{ summary.annual_volatility|round(2) if summary.annual_volatility is not none else 'N/A' }}%</td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No mutual fund data available.</p>
+            {% endfor %}
+        </div>
+        <div class="footer">
+            <p>&copy; {{ report_date[:4] }} Stock Analysis Toolkit. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
