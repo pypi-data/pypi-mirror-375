@@ -1,0 +1,10 @@
+pyproject.toml
+src/mathlibdanval/__init__.py
+src/mathlibdanval/cli.py
+src/mathlibdanval/mathlib.py
+src/mathlibdanval.egg-info/PKG-INFO
+src/mathlibdanval.egg-info/SOURCES.txt
+src/mathlibdanval.egg-info/dependency_links.txt
+src/mathlibdanval.egg-info/entry_points.txt
+src/mathlibdanval.egg-info/top_level.txt
+test/test_math.py
