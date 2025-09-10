@@ -1,0 +1,5 @@
+[console_scripts]
+shai-plugin = shai_plugin.cli:main
+
+[gui_scripts]
+
