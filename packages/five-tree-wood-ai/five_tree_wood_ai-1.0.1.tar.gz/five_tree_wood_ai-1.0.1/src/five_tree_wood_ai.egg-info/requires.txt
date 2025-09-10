@@ -1,0 +1,12 @@
+pandas>=2.3
+scikit_learn>=1.7
+packaging>=25.0
+influxdb-client>=1.49
+flask>=3.1.2
+
+[dev]
+black>=24.0
+isort>=5.13
+pylint>=3.2
+autopep8>=2.3
+pytest>=8.0
