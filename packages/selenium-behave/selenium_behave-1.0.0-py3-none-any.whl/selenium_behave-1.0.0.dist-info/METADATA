@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: selenium-behave
+Version: 1.0.0
+Summary: Custom Behave BDD + Selenium framework template
+Author-email: Lovemesh <Lovemesh.1@gmail.com>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: behave
+Requires-Dist: boto3
+Requires-Dist: python-dotenv
+Requires-Dist: PyYAML
+Requires-Dist: requests
+Requires-Dist: allure-behave
+Requires-Dist: selenium
+Requires-Dist: beautifulsoup4
+Requires-Dist: openpyxl
+Requires-Dist: behave-html-formatter
+Requires-Dist: pillow
+Requires-Dist: imagehash
