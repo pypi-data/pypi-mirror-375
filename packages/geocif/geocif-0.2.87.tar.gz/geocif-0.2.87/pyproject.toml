@@ -1,0 +1,27 @@
+[project]
+name = "geocif"
+version = "0.2.87"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "boruta>=0.4.3",
+    "catboost>=1.2.8",
+    "fiona",
+    "gdal",
+    "pyeogpr>=2.4.7",
+    "pyproj",
+    "rasterio",
+    "rtree",
+    "scipy<1.16",
+    "shap>=0.48.0",
+    "shapely",
+]
+
+[tool.uv.sources]
+gdal = { url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.3.30/gdal-3.10.2-cp311-cp311-win_amd64.whl" }
+rasterio = { url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.3.30/rasterio-1.4.3-cp311-cp311-win_amd64.whl" }
+shapely = { url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.3.30/shapely-2.0.7-cp311-cp311-win_amd64.whl" }
+pyproj = { url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.3.30/pyproj-3.7.1-cp311-cp311-win_amd64.whl" }
+rtree = { url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.3.30/rtree-1.4.0-cp311-cp311-win_amd64.whl" }
+fiona = { url = "https://github.com/cgohlke/geospatial-wheels/releases/download/v2025.3.30/fiona-1.10.1-cp311-cp311-win_amd64.whl" }
