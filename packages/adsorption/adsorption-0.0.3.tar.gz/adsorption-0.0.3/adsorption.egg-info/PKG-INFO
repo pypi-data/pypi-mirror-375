@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: adsorption
+Version: 0.0.3
+Summary: Adsorption Based on ASE
+Author-email: LiuGaoyong <liugaoyong_88@163.com>
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: GraphAtoms>=0.0.2
+Requires-Dist: pygfn0>=0.0.2
+Requires-Dist: pygfnff>=0.0.2
+Requires-Dist: scikit-optimize>=0.10.2
+Requires-Dist: typing-extensions
+Dynamic: license-file
+
+# Adsorption
+
+[![Pypi version](https://img.shields.io/pypi/v/adsorption)](https://pypi.org/project/adsorption/)
+[![PyPI Downloads](https://static.pepy.tech/badge/adsorption)](https://pepy.tech/projects/adsorption)
+
+The Adsorption package is a Python package for the adsorption of molecules on clusters or surfaces.
