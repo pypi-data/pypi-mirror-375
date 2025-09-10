@@ -1,0 +1,7 @@
+cssutils>=2.11.1
+
+[dev]
+pytest>=8.0.0
+black>=25.0.0
+mypy>=1.17.0
+ruff>=0.12.0
