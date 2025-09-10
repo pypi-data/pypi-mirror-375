@@ -1,0 +1,46 @@
+{
+    "extends": [
+        "@commitlint/config-conventional"
+    ],
+    "formatter": "@commitlint/format",
+    "rules": {
+        "type-enum": [
+            2,
+            "always",
+            [
+                "init",
+                "feat",
+                "fix",
+                "docs",
+                "style",
+                "refactor",
+                "perf",
+                "test",
+                "build",
+                "ci",
+                "chore",
+                "revert"
+            ]
+        ],
+        "scope-enum": [
+            2,
+            "always",
+            [
+                "setup",
+                "config",
+                "deps",
+                "feature",
+                "bug",
+                "docs",
+                "style",
+                "refactor",
+                "test",
+                "build",
+                "ci",
+                "release",
+                "other",
+                "core"
+            ]
+        ]
+    }
+}

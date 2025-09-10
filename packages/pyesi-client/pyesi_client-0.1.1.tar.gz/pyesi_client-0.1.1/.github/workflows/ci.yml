@@ -1,0 +1,72 @@
+name: Continuous Integration 🏃‍♂️
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: 'uv.lock'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run lint
+        run: |
+          source .venv/bin/activate
+          ruff check .
+          ruff format --check .
+
+      - name: Run type checking with pyright
+        uses: jakebailey/pyright-action@v2
+        with:
+          version: latest
+          annotate: all
+          warnings: true
+          level: warning
+
+      - name: Run tests with pytest
+        run: |
+          uv run pytest -v --cov=. --cov-report=term-missing:skip-covered --cov-report=xml --junitxml=pytest.xml | tee pytest-coverage.txt
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            .coverage
+            coverage.xml
+            pytest.xml
+            pytest-coverage.txt
+
+      - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          pytest-xml-coverage-path: ./coverage.xml
+          junitxml-path: ./pytest.xml
+          title: 'Test Coverage Report'
+          badge-title: 'Coverage'
