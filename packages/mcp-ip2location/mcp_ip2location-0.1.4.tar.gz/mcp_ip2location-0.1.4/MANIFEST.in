@@ -1,0 +1,2 @@
+include *.dat
+recursive-include src/mcp_ip2location/data *

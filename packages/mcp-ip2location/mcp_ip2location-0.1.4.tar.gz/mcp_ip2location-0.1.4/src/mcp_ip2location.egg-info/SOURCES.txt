@@ -1,0 +1,12 @@
+MANIFEST.in
+README.md
+pyproject.toml
+src/mcp_ip2location/__init__.py
+src/mcp_ip2location/main.py
+src/mcp_ip2location.egg-info/PKG-INFO
+src/mcp_ip2location.egg-info/SOURCES.txt
+src/mcp_ip2location.egg-info/dependency_links.txt
+src/mcp_ip2location.egg-info/entry_points.txt
+src/mcp_ip2location.egg-info/requires.txt
+src/mcp_ip2location.egg-info/top_level.txt
+src/mcp_ip2location/data/qqwry.dat
