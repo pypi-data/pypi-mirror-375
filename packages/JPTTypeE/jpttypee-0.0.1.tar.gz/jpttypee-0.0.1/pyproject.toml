@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "JPTTypeE"
+version = "0.0.1"
+description = "Python driver for JPT TypeE laser"
+readme = "README.md"
+authors = [{name="cjdaic"}]
+license = {text = "MIT"}
+dependencies = ["pyserial>=3.5"]
+requires-python = ">=3.7"
+
+[project.scripts]
+jpt-typee-tester = "JPTTypeE.tester:main"
