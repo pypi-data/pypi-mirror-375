@@ -1,0 +1,69 @@
+# Scatter Plot Showcase Preset Configurations
+# These presets demonstrate different scatter plot configurations for the CLI framework
+
+# Multi-dimensional data focused preset
+multi_dimensional_preset:
+  data_type: "multi_dimensional"
+  experiments: 3
+  conditions: 2
+  categories: 2
+  n_samples: 200
+  seed: 501
+  figsize: [16, 12]
+  legend_strategy: "subplot"
+
+# Time series scatter preset
+time_series_preset:
+  data_type: "time_series"
+  n_samples: 150
+  seed: 502
+  figsize: [15, 12]
+  legend_strategy: "figure"
+  legend_position: [0.5, 0.05]
+
+# Categorical analysis preset
+categorical_preset:
+  data_type: "categorical"
+  categories: 5
+  n_samples: 250
+  seed: 503
+  figsize: [14, 10]
+  tight_layout_pad: 1.2
+
+# High-density scatter preset
+high_density_preset:
+  data_type: "multi_dimensional"
+  experiments: 4
+  conditions: 3
+  categories: 3
+  n_samples: 400
+  seed: 504
+  figsize: [18, 14]
+  subplot_width: 4.0
+  subplot_height: 3.5
+
+# Publication ready preset
+publication_preset:
+  data_type: "multi_dimensional"
+  experiments: 2
+  conditions: 2
+  categories: 2
+  n_samples: 120
+  seed: 505
+  figsize: [12, 9]
+  legend_strategy: "figure"
+  tight_layout: true
+  tight_layout_pad: 2.0
+  figure_title: "Experimental Results Scatter Analysis"
+
+# Marker encoding showcase preset
+marker_showcase_preset:
+  data_type: "multi_dimensional"
+  experiments: 3
+  conditions: 2
+  categories: 4
+  n_samples: 180
+  seed: 506
+  figsize: [16, 12]
+  legend_strategy: "subplot"
+  subplot_height: 4.0

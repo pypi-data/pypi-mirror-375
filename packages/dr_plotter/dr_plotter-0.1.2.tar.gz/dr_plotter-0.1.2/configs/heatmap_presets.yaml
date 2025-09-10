@@ -1,0 +1,71 @@
+# Heatmap Plot Showcase Preset Configurations
+# These presets demonstrate different heatmap configurations for the CLI framework
+
+# Basic heatmap preset
+basic_heatmap_preset:
+  pattern_type: "heatmap"
+  matrix_rows: 6
+  matrix_cols: 8
+  correlation_strength: 0.3
+  colormap: "viridis"
+  seed: 701
+  figsize: [15, 6]
+
+# Correlation matrix preset
+correlation_preset:
+  pattern_type: "correlation"
+  matrix_rows: 8
+  matrix_cols: 8
+  correlation_strength: 0.7
+  colormap: "RdBu"
+  seed: 702
+  figsize: [14, 6]
+  tight_layout_pad: 1.5
+
+# Contour density heatmap preset
+contour_density_preset:
+  pattern_type: "contour"
+  matrix_rows: 8
+  matrix_cols: 10
+  colormap: "plasma"
+  seed: 703
+  figsize: [16, 6]
+  legend_strategy: "figure"
+
+# Large matrix preset
+large_matrix_preset:
+  pattern_type: "heatmap"
+  matrix_rows: 12
+  matrix_cols: 15
+  correlation_strength: 0.2
+  colormap: "inferno"
+  seed: 704
+  figsize: [18, 8]
+  subplot_width: 7.0
+  subplot_height: 5.0
+
+# Strong correlation preset
+strong_correlation_preset:
+  pattern_type: "correlation"
+  matrix_rows: 10
+  matrix_cols: 10
+  correlation_strength: 0.9
+  colormap: "coolwarm"
+  seed: 705
+  figsize: [14, 6]
+  tight_layout: true
+  tight_layout_pad: 2.0
+
+# Publication ready preset
+publication_preset:
+  pattern_type: "heatmap"
+  matrix_rows: 8
+  matrix_cols: 10
+  correlation_strength: 0.4
+  colormap: "viridis"
+  seed: 706
+  figsize: [12, 6]
+  legend_strategy: "figure"
+  tight_layout: true
+  tight_layout_pad: 1.8
+  figure_title: "Data Correlation Matrix"

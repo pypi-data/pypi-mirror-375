@@ -1,0 +1,74 @@
+# Bar Plot Showcase Preset Configurations
+# These presets demonstrate different bar plot configurations for the CLI framework
+
+# Categorical data analysis preset
+categorical_preset:
+  data_type: "categorical"
+  categories: 5
+  groups: 3
+  n_samples: 150
+  aggregate: "mean"
+  seed: 601
+  figsize: [15, 6]
+  legend_strategy: "subplot"
+
+# Distribution comparison preset
+distribution_preset:
+  data_type: "distribution"
+  groups: 4
+  n_samples: 200
+  aggregate: "mean"
+  seed: 602
+  figsize: [14, 6]
+  legend_strategy: "figure"
+  legend_position: [0.5, 0.05]
+
+# Count-based analysis preset
+count_analysis_preset:
+  data_type: "categorical"
+  categories: 6
+  groups: 4
+  n_samples: 300
+  aggregate: "count"
+  seed: 603
+  figsize: [16, 7]
+  tight_layout_pad: 1.2
+
+# Multi-dimensional experiment preset
+experiment_preset:
+  data_type: "multi_dimensional"
+  categories: 3
+  groups: 3
+  n_samples: 180
+  aggregate: "mean"
+  seed: 604
+  figsize: [15, 6]
+  subplot_width: 5.0
+  subplot_height: 4.0
+
+# Sum aggregation preset
+sum_analysis_preset:
+  data_type: "categorical"
+  categories: 4
+  groups: 2
+  n_samples: 120
+  aggregate: "sum"
+  seed: 605
+  figsize: [12, 5]
+  legend_strategy: "figure"
+  tight_layout_pad: 1.0
+
+# Publication ready preset
+publication_preset:
+  data_type: "categorical"
+  categories: 4
+  groups: 3
+  n_samples: 150
+  aggregate: "mean"
+  seed: 606
+  figsize: [12, 6]
+  legend_strategy: "figure"
+  tight_layout: true
+  tight_layout_pad: 2.0
+  figure_title: "Category Analysis Results"
+  y_labels: [["Mean Value", "Group Comparison"]]

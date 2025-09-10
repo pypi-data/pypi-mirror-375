@@ -1,0 +1,66 @@
+# Contour Plot Showcase Preset Configurations
+# These presets demonstrate different contour plot configurations for the CLI framework
+
+# Basic Gaussian mixture preset
+basic_mixture_preset:
+  n_components: 2
+  n_samples: 300
+  density_levels: 10
+  colormap: "viridis"
+  seed: 801
+  figsize: [15, 6]
+
+# Complex mixture preset
+complex_mixture_preset:
+  n_components: 3
+  n_samples: 500
+  density_levels: 15
+  colormap: "plasma"
+  seed: 802
+  figsize: [16, 6]
+  tight_layout_pad: 1.2
+
+# High density preset
+high_density_preset:
+  n_components: 4
+  n_samples: 800
+  density_levels: 20
+  colormap: "coolwarm"
+  seed: 803
+  figsize: [18, 7]
+  subplot_width: 7.0
+  subplot_height: 5.0
+
+# Cool colors preset
+cool_colors_preset:
+  n_components: 2
+  n_samples: 400
+  density_levels: 12
+  colormap: "Blues"
+  seed: 804
+  figsize: [14, 6]
+  legend_strategy: "figure"
+  legend_position: [0.5, 0.05]
+
+# Thermal colormap preset
+thermal_preset:
+  n_components: 3
+  n_samples: 600
+  density_levels: 18
+  colormap: "hot"
+  seed: 805
+  figsize: [16, 6]
+  tight_layout: true
+
+# Publication ready preset
+publication_preset:
+  n_components: 2
+  n_samples: 300
+  density_levels: 10
+  colormap: "viridis"
+  seed: 806
+  figsize: [12, 6]
+  legend_strategy: "figure"
+  tight_layout: true
+  tight_layout_pad: 2.0
+  figure_title: "Gaussian Mixture Density Analysis"
