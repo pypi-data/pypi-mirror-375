@@ -1,0 +1,57 @@
+[project]
+name = "google-adk-extras"
+version = "0.3.0"
+description = "Production-ready services and FastAPI wiring for Google ADK"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+authors = [
+  { name = "DeadMeme5441", email = "deadunderscorememe@gmail.com" }
+]
+dependencies = [
+    "google-adk",
+    "google-genai",
+]
+
+[project.optional-dependencies]
+# Storage backends
+sql = ["sqlalchemy"]
+mongodb = ["pymongo"]
+redis = ["redis"]
+yaml = ["pyyaml"]
+s3 = ["boto3"]
+
+# Credentials
+jwt = ["PyJWT"]
+
+# Web server integration
+web = ["fastapi", "watchdog"]
+
+
+# Dev / test tooling only
+dev = ["pytest", "pytest-asyncio", "build", "twine"]
+
+# Docs site (MkDocs)
+docs = ["mkdocs", "mkdocs-material", "mkdocs-llmstxt"]
+
+# Everything
+all = [
+    "google-adk-extras[sql,mongodb,redis,yaml,s3,jwt,web,docs]",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F"]
+ignore = [
+  "F401",  # unused-import (common in optional backends)
+  "F841",  # unused-variable (tests and examples)
+  "F821",  # undefined-name (forward-ref type strings in optional extras)
+  "E402",  # module-import-not-at-top-of-file (test-only patterns)
+  "E501",  # line-too-long (permissive until we tighten rules)
+]
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
