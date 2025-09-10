@@ -1,0 +1,24 @@
+Metadata-Version: 2.3
+Name: ucla_plha
+Version: 1.0.4
+Summary: A code for performing probabilistic liquefaction hazard analysis inside the hazard integral
+License: LICENSE
+Author: Meera L. Kota
+Requires-Python: >=3.8,<4.0
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: importlib_resources (>0)
+Requires-Dist: ngl_tools (>0)
+Requires-Dist: numpy (>=1.22,<2.0)
+Requires-Dist: scikit_learn (>0)
+Description-Content-Type: text/markdown
+
+# ucla_plha
+Probabilistic Liquefaction Hazard Assessment (PLHA) python package 
+
