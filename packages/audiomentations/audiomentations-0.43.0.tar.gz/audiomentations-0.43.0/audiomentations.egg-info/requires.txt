@@ -1,0 +1,13 @@
+numpy<3,>=1.22.0
+numpy-minmax<1,>=0.3.0
+numpy-rms<1,>=0.4.2
+librosa!=0.10.0,<0.12.0,>=0.8.0
+python-stretch<1,>=0.3.1
+scipy<2,>=1.4
+soxr<1.0.0,>=0.3.2
+
+[extras]
+fast-mp3-augment<1
+loudness<1
+numpy-audio-limiter<1
+pyroomacoustics>=0.7.4
