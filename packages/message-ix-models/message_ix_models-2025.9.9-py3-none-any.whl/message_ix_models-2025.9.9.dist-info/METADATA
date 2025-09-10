@@ -1,0 +1,105 @@
+Metadata-Version: 2.4
+Name: message-ix-models
+Version: 2025.9.9
+Summary: Tools for the MESSAGEix-GLOBIOM family of models
+Author: IIASA Energy, Climate, and Environment (ECE) Program
+Maintainer-email: Paul Natsuo Kishimoto <mail@paul.kishimoto.name>, Fridolin Glatter <glatter@iiasa.ac.at>
+License-Expression: Apache-2.0
+Project-URL: Documentation, https://docs.messageix.org/models
+Project-URL: Release notes, https://docs.messageix.org/projects/models/en/stable/whatsnew.html
+Project-URL: Repository, https://github.com/iiasa/message-ix-models
+Project-URL: Issue tracker, https://github.com/iiasa/message-ix-models/issues
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: R
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Requires-Python: >=3.9
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: click
+Requires-Dist: colorama
+Requires-Dist: genno>=1.25
+Requires-Dist: iam_units>=2023.9.11
+Requires-Dist: message_ix>=3.8
+Requires-Dist: pooch
+Requires-Dist: pyam-iamc>=0.6
+Requires-Dist: pyarrow
+Requires-Dist: pycountry
+Requires-Dist: PyYAML
+Requires-Dist: sdmx1>=2.22.0
+Requires-Dist: tqdm
+Requires-Dist: pyxlsb>=1.0.10
+Provides-Extra: buildings
+Requires-Dist: jaydebeapi; extra == "buildings"
+Provides-Extra: docs
+Requires-Dist: message_ix_models[tests]; extra == "docs"
+Requires-Dist: sphinx>=4; extra == "docs"
+Requires-Dist: sphinx_rtd_theme; extra == "docs"
+Requires-Dist: sphinxcontrib-bibtex; extra == "docs"
+Provides-Extra: iea-web
+Requires-Dist: dask[dataframe]; extra == "iea-web"
+Provides-Extra: material
+Requires-Dist: xlrd; extra == "material"
+Provides-Extra: migrate
+Requires-Dist: git-filter-repo; extra == "migrate"
+Requires-Dist: GitPython; extra == "migrate"
+Provides-Extra: report
+Requires-Dist: plotnine; extra == "report"
+Requires-Dist: xlsxwriter; extra == "report"
+Provides-Extra: tests
+Requires-Dist: message-ix[tests]; extra == "tests"
+Requires-Dist: message_ix_models[buildings,material,report,transport]; extra == "tests"
+Requires-Dist: pytest; extra == "tests"
+Requires-Dist: pytest-cov; extra == "tests"
+Requires-Dist: pytest-timeout; extra == "tests"
+Requires-Dist: pytest-xdist; extra == "tests"
+Requires-Dist: gamsapi>47.6.0; extra == "tests"
+Provides-Extra: transport
+Requires-Dist: message-ix-models[iea-web,report]; extra == "transport"
+Requires-Dist: requests-cache; extra == "transport"
+Requires-Dist: transport-energy; extra == "transport"
+Requires-Dist: xarray; extra == "transport"
+Dynamic: license-file
+
+Tools for MESSAGEix-GLOBIOM models
+**********************************
+|pypi| |rtd| |gha| |codecov|
+
+``message_ix_models`` provides tools for research using the MESSAGEix-GLOBIOM family of models.
+These models are built in the `MESSAGEix framework <https://docs.messageix.org>`_ and on the `ix modeling platform (ixmp) <https://docs.messageix.org/ixmp/>`_.
+
+See the `online documentation <https://docs.messageix.org/projects/models/>`_ for further information.
+
+License
+=======
+
+Copyright © 2020–2025 IIASA Energy, Climate, and Environment (ECE) program
+
+Licensed under the Apache License, version 2.0.
+
+.. |pypi| image:: https://img.shields.io/pypi/v/message-ix-models.svg
+   :alt: PyPI version
+   :target: https://pypi.python.org/pypi/message-ix-models/
+
+.. |rtd| image:: https://readthedocs.com/projects/iiasa-energy-program-message-ix-models/badge/?version=latest
+   :alt: Documentation status
+   :target: https://docs.messageix.org/projects/models/en/latest/?badge=latest
+
+.. |gha| image:: https://github.com/iiasa/message-ix-models/actions/workflows/pytest.yaml/badge.svg
+   :alt: Test status
+   :target: https://github.com/iiasa/message-ix-models/actions/workflows/pytest.yaml
+
+.. |codecov| image:: https://codecov.io/gh/iiasa/message-ix-models/branch/main/graph/badge.svg
+   :alt: Test coverage
+   :target: https://codecov.io/gh/iiasa/message-ix-models
