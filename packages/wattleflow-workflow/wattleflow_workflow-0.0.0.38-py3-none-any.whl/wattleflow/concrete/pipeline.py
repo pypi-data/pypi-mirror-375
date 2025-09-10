@@ -1,0 +1,67 @@
+# Module Name: concrete/pipeline.py
+# Description: This modul contains pipeline classes.
+# Author: (wattleflow@outlook.com)
+# Copyright: (c) 2022-2025 WattleFlow
+# License: Apache 2 Licence
+
+from abc import ABC, abstractmethod
+from logging import Handler, NOTSET
+from typing import Any, Optional
+from wattleflow.core import IProcessor, IPipeline, ITarget
+from wattleflow.concrete import AuditLogger
+from wattleflow.constants import Event
+from wattleflow.decorators.preset import PresetDecorator
+from wattleflow.helpers import Attribute, MissingAttribute
+
+
+class GenericPipeline(IPipeline, AuditLogger, ABC):
+    def __init__(
+        self,
+        level: int = NOTSET,
+        handler: Optional[Handler] = None,
+        *args,
+        **kwargs,
+    ):
+        IPipeline.__init__(self)
+        AuditLogger.__init__(self, level=level, handler=handler)
+
+        self.debug(
+            msg=Event.Constructor.value,
+            level=level,
+            handler=handler,
+            *args,
+            **kwargs,
+        )
+
+        self._preset: PresetDecorator = PresetDecorator(self, **kwargs)
+
+    @abstractmethod
+    def process(
+        self,
+        processor: IProcessor,
+        document: ITarget,
+        *args,
+        **kwargs,
+    ) -> None:
+        self.debug(
+            msg=Event.Processing.value,
+            processor=processor,
+            id=getattr(document, "identifier", "unknown"),
+            document=document,
+            *args,
+            **kwargs,
+        )
+
+        Attribute.evaluate(caller=self, target=processor, expected_type=IProcessor)
+
+        if document is None:
+            msg = f"{self.name!r}.process: document parameter is not assigned!."
+            self.error(msg=msg, document=document, **kwargs)
+            raise MissingAttribute(caller=self, error=msg)
+
+    # Must be implemented if using PresetDecorator
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._preset, name)
+
+    def __repr__(self) -> str:
+        return f"{self.name}"
