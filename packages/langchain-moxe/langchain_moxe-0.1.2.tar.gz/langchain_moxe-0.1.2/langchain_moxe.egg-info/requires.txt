@@ -1,0 +1,8 @@
+requests>=2.31.0
+langchain-core>=0.2.0
+pydantic>=2.0.0
+
+[dev]
+pytest>=7.0
+black
+flake8
