@@ -1,0 +1,107 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrex3"
+version = "1.0.2"
+description = "Lightning-fast multi-language code execution engine with security-first design"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "kendroooo", email = "sudo@shiro.lol"}
+]
+maintainers = [
+    {name = "kendroooo", email = "sudo@shiro.lol"}
+]
+keywords = [
+    "compiler",
+    "rust",
+    "c",
+    "cpp", 
+    "execution",
+    "fast",
+    "security",
+    "multi-language",
+    "code-execution",
+    "performance"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Rust",
+    "Programming Language :: C",
+    "Programming Language :: C++",
+    "Topic :: Software Development :: Compilers",
+    "Topic :: Software Development :: Interpreters",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+    "Typing :: Typed"
+]
+requires-python = ">=3.8"
+dependencies = [
+    "typing-extensions>=4.0.0",
+    "pathlib2>=2.3.0; python_version<'3.4'",
+    "dataclasses>=0.6; python_version<'3.7'"
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "tox>=4.0.0"
+]
+[project.urls]
+Homepage = "https://github.com/kendroooo/pyrex"
+Repository = "https://github.com/kendroooo/pyrex.git"
+Discussions = "https://github.com/kendroooo/pyrex/discussions"
+
+
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+include = ["pyrex*"]
+
+
+[tool.setuptools.package-data]
+pyrex = ["py.typed"]
+
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["pyrex3"]
