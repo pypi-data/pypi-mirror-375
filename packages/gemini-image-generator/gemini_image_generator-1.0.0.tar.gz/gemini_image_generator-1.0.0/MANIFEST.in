@@ -1,0 +1,28 @@
+# --- Manifest for gemini-image-generator ---
+
+# 1. 包含核心的元数据文件
+include pyproject.toml
+include README.md
+include LICENSE
+
+# 2. 递归地包含所有在 gemini_image_generator 包目录下的 Python 文件
+recursive-include gemini_image_generator *.py
+
+# 3. ！！！最重要的部分：排除所有我们不想要的目录和文件 ！！！
+
+# 递归地排除整个 examples 目录
+prune examples
+
+# 排除所有 Python 缓存文件
+global-exclude *.py[co] __pycache__
+
+# 排除构建过程中产生的临时目录
+prune build
+prune dist
+prune *.egg-info
+
+# 排除任何可能存在的敏感文件或生成文件
+exclude .env
+exclude *.log
+exclude *.json
+exclude *.csv
