@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-bigquery
+Version: 0.3.5
+Summary: A Model Context Protocol server that provides access to BigQuery. This server enables LLMs to inspect database schemas and execute queries.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: google-cloud-bigquery>=3.27.0
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: pydantic-ai
+Requires-Dist: python-dotenv
+Requires-Dist: logfire>=0.8.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

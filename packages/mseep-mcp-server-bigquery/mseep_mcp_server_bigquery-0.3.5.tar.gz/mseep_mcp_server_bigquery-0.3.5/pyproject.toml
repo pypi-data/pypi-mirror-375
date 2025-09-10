@@ -1,0 +1,29 @@
+[project]
+name = "mseep-mcp-server-bigquery"
+version = "0.3.5"
+description = "A Model Context Protocol server that provides access to BigQuery. This server enables LLMs to inspect database schemas and execute queries."
+requires-python = ">=3.12"
+dependencies = [
+    "google-cloud-bigquery>=3.27.0",
+    "mcp>=1.0.0",
+    "pydantic-ai",
+    "python-dotenv",
+    "logfire>=0.8.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp-server-bigquery = "mcp_server_bigquery:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
