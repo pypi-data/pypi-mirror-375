@@ -1,0 +1,80 @@
+Metadata-Version: 2.4
+Name: database-smartools
+Version: 0.0.1
+Summary: 数据库操作工具包
+Home-page: 
+Author: joelz
+Author-email: zhongbj_26210@163.com
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: altgraph==0.17.4
+Requires-Dist: annotated-types==0.7.0
+Requires-Dist: anyio==4.9.0
+Requires-Dist: click==8.1.8
+Requires-Dist: colorama==0.4.6
+Requires-Dist: oracledb==3.0.0
+Requires-Dist: DBUtils==3.0.0
+Requires-Dist: dmPython==2.5.8
+Requires-Dist: fastapi==0.115.12
+Requires-Dist: greenlet==3.2.1
+Requires-Dist: h11==0.16.0
+Requires-Dist: idna==3.10
+Requires-Dist: mysql-connector-python==8.4.0
+Requires-Dist: numpy==2.0.0
+Requires-Dist: packaging==25.0
+Requires-Dist: pandas==2.2.3
+Requires-Dist: pefile==2023.2.7
+Requires-Dist: psycopg2-binary==2.9.8
+Requires-Dist: pydantic==2.11.3
+Requires-Dist: pydantic_core==2.33.1
+Requires-Dist: pyinstaller==6.14.0
+Requires-Dist: pyinstaller-hooks-contrib==2025.4
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: pytz==2025.2
+Requires-Dist: pywin32-ctypes==0.2.3
+Requires-Dist: six==1.17.0
+Requires-Dist: sniffio==1.3.1
+Requires-Dist: SQLAlchemy==2.0.40
+Requires-Dist: starlette==0.46.2
+Requires-Dist: typing-inspection==0.4.0
+Requires-Dist: typing_extensions==4.13.2
+Requires-Dist: tzdata==2025.2
+Requires-Dist: uvicorn==0.34.2
+Requires-Dist: JayDeBeApi==1.2.3
+Requires-Dist: jpype1>=1.5.2
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# python-main
+
+#### 介绍
+python web服务，api - module - model - db
+
+/logRefresh：是日志配置初始化接口（开发调试用的）
+/configRefresh：是配置文件初始化接口，修改了项目下的conf.ini后可以调用这个接口刷新
+/etl/functionCall：调用etl脚本主入口
+/etl/dbpool/refresh：修改数据库链接后，用于刷新数据库连接池 
+/etl/lo
+
+#### 软件架构
+软件架构说明
+目录结构参照项目目录下的Readme.txt
+
+
+#### 安装教程
+进入到项目主目录下
+1. 安装Python 3.10.16
+2. pip install -r requirement.txt
+
+
+#### 使用说明
+1.  运行服务器，python main.py [可选参数：dev/pro，分别为开发环境和产品环境，默认dev]，对应配置信息在conf.ini中
+2.   控制台会输出对应的Swagger UI界面，可在该页面上调试api
+![输入图片说明](statics/imagesimage.png)
