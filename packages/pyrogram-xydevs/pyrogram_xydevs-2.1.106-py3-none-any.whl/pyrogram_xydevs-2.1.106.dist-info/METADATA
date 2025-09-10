@@ -1,0 +1,95 @@
+Metadata-Version: 2.4
+Name: pyrogram-xydevs
+Version: 2.1.106
+Summary: Fork of Pyrogram maintained by xydevs - Telegram MTProto API Client Library for Python
+Author-email: XyDevs <its@xydevs.com>
+Maintainer-email: XyDevs <its@xydevs.com>
+License: LGPL-3.0-or-later
+Project-URL: Homepage, https://github.com/xydevs/pyrogram-fork
+Project-URL: Documentation, https://docs.pyrogram.org
+Project-URL: Repository, https://github.com/xydevs/pyrogram-fork
+Project-URL: Bug Tracker, https://github.com/xydevs/pyrogram-fork/issues
+Keywords: telegram,chat,messenger,api,client,library,python,mtproto
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Internet
+Classifier: Topic :: Communications
+Classifier: Topic :: Communications :: Chat
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: tgcrypto>=1.2.5
+Requires-Dist: pyaes>=1.6.1
+Requires-Dist: PySocks>=1.7.1
+
+# Pyrogram XyDevs Fork
+
+[![PyPI - Version](https://img.shields.io/pypi/v/pyrogram-xydevs)](https://pypi.org/project/pyrogram-xydevs/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyrogram-xydevs)](https://pypi.org/project/pyrogram-xydevs/)
+
+> Elegant, modern and asynchronous Telegram MTProto API framework in Python for users and bots
+
+This is a fork of the original [Pyrogram](https://github.com/pyrogram/pyrogram) library, maintained by XyDevs with additional features and improvements.
+
+## Key Features
+
+- **Ready**: Install Pyrogram with pip and start building your applications right away.
+- **Easy**: Makes the Telegram API simple and intuitive, while still allowing advanced usages.
+- **Elegant**: Low-level details are abstracted and re-presented in a more convenient way.
+- **Fast**: Boosted up by [TgCrypto](https://github.com/pyrogram/tgcrypto), a high-performance cryptography library written in C.
+- **Type-hinted**: Types and methods are all type-hinted, enabling excellent editor support.
+- **Async**: Fully asynchronous (also usable synchronously if wanted, for convenience).
+- **Powerful**: Full access to Telegram's API to execute any official client action and more.
+
+## Installing
+
+``` bash
+pip install pyrogram-xydevs
+```
+
+## Quick Start
+
+```python
+from pyrogram import Client, filters
+
+app = Client("my_account")
+
+@app.on_message(filters.private)
+async def hello(client, message):
+    await message.reply("Hello from Pyrogram XyDevs!")
+
+app.run()
+```
+
+**Pyrogram** is a modern, elegant and asynchronous MTProto API framework. It enables you to easily interact with the main Telegram API through a user account (custom client) or a bot identity (bot API alternative) using Python.
+
+## Requirements
+
+- Python 3.8 or higher.
+- A [Telegram API key](https://docs.pyrogram.org/intro/setup#api-keys).
+
+## Resources
+
+- Check out the docs at https://docs.pyrogram.org to learn more about Pyrogram, get started right away and discover more in-depth material for building your client applications.
+- Join the official channel at https://t.me/pyrogram and stay tuned for news, updates and announcements.
+
+## Changes from Original Pyrogram
+
+This fork includes additional features and improvements maintained by XyDevs team. For detailed changelog, please check our releases.
+
+## License
+
+This project is licensed under the terms of the [GNU Lesser General Public License v3 or later (LGPLv3+)](COPYING.lesser).
