@@ -1,0 +1,80 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fastapi-tenants"
+version = "0.0.1"
+description = "A multi-tenancy solution for FastAPI (database-per-tenant, schema-per-tenant, and row-level-tenants strategies)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Kapil Dagur", email = "kapildagur1306@gmail.com" }
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: FastAPI",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+]
+
+[project.urls]
+Homepage = "https://github.com/KapilDagur/fastapi-tenants"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "fastapi_tenants",
+  "README.md",
+  "LICENSE",
+  "pyproject.toml",
+]
+exclude = [
+  "tests",
+  ".venv",
+  "tmp",
+  ".gitignore",
+  ".git",
+  "uv.lock",
+  ".python-version",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+fix = true
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.mypy]
+python_version = "3.12"
+disallow_untyped_defs = true
+check_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.19",
+    "mypy>=1.17.1",
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.12.12",
+]
