@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: xronai
+Version: 0.1.2
+Summary: XronAI: The Python SDK for building powerful, agentic AI chatbots.
+Author-email: Mubashir ul Islam <mubashir54000@gmail.com>
+Project-URL: Homepage, https://github.com/XronForce/xronai
+Project-URL: Bug Tracker, https://github.com/XronForce/xronai/issues
+Keywords: ai,sdk,chatbot,agent,llm,orchestration
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: openai==1.66.3
+Requires-Dist: python-dotenv==1.0.1
+Requires-Dist: streamlit>=1.38.0
+Requires-Dist: pytest==8.3.4
+Requires-Dist: PyYAML==6.0.2
+Requires-Dist: mcp[cli]==1.6.0
+Dynamic: license-file
+
+# xronai
+XronAI: The Python SDK for building powerful, agentic AI chatbots.
