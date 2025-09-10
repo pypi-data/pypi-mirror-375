@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+requirements.txt
+setup.py
+examples/examples.py
+rrule_humanize/__init__.py
+rrule_humanize/humanize.py
+rrule_humanize.egg-info/PKG-INFO
+rrule_humanize.egg-info/SOURCES.txt
+rrule_humanize.egg-info/dependency_links.txt
+rrule_humanize.egg-info/requires.txt
+rrule_humanize.egg-info/top_level.txt
+tests/test_humanize.py
