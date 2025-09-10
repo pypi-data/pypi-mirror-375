@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+arena_interface/__about__.py
+arena_interface/__init__.py
+arena_interface/arena_interface.py
+arena_interface/cli.py
+arena_interface.egg-info/PKG-INFO
+arena_interface.egg-info/SOURCES.txt
+arena_interface.egg-info/dependency_links.txt
+arena_interface.egg-info/entry_points.txt
+arena_interface.egg-info/requires.txt
+arena_interface.egg-info/top_level.txt
