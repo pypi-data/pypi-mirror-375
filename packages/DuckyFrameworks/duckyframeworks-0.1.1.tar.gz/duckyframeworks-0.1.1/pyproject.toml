@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DuckyFrameworks"
+version = "0.1.01"
+description = "La libreria oficial de Ducky (no Duckyngscript) para poder usar Frameworks de manera sencilla y hay mucho de donde escojer"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  {name = "José Pato", email = "tu_email@example.com"}
+]
+license = {text = "MIT"}
+dependencies = []
