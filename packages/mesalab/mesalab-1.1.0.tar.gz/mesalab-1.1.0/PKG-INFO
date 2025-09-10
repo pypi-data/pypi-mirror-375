@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: mesalab
+Version: 1.1.0
+Summary: Tools for analyzing MESA stellar evolution simulation data, specifically for mass and metallicity grids.
+Home-page: https://github.com/tnehezd/mesa_blue_loop
+Author: Dora Tarczay-Nehez
+Author-email: tarczaynehez.dora@csfk.org
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering :: Astronomy
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas>=1.3.5
+Requires-Dist: numpy>=1.21.6
+Requires-Dist: matplotlib>=3.5.3
+Requires-Dist: PyYAML>=6.0.1
+Requires-Dist: tqdm>=4.67.1
+Requires-Dist: scipy>=1.7.3
+Requires-Dist: astropy>=4.3.1
+Requires-Dist: isochrones>=2.1
+Requires-Dist: pygyre>=1.3.2
+Requires-Dist: seaborn>=0.12.2
+Requires-Dist: numba>=0.56.4
+Requires-Dist: swifter>=1.4.0
+Requires-Dist: f90nml>=1.4.5
+Requires-Dist: addict
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+A collection of tools designed for the analysis of MESA stellar evolution simulation data, with a specific focus on outputs from grids run across varying mass and metallicity parameters. Key functionalities include the searching for and characterization of blue loops, and the generation of Hertzsprung-Russell Diagrams (HRDs) and Color-Magnitude Diagrams (CMDs).
