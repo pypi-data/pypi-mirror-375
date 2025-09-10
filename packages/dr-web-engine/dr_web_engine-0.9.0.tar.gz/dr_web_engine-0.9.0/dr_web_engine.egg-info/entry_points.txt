@@ -1,0 +1,3 @@
+[console_scripts]
+dr-web-engine = cli.cli:app
+drweb = cli.cli:app
