@@ -1,0 +1,39 @@
+#!/bin/bash
+## Compare effect sizes between two GWAS summary statistics files using GWASLab
+#################################
+## NOTE #########################
+## This script uses GWASLab to compare effect sizes, standard errors, and p-values between two sumstats files.
+## It can help identify discrepancies, concordance, or batch effects.
+## Options:
+##   - in_fmt1 and in_fmt2: Input formats (e.g., auto, gwaslab, plink)
+##   - build: Genome build (e.g., 19, 38)
+##   - out: Output prefix for results
+##   - plot: If True, generate comparison plots
+#################################
+## ARGUMENTS ####################
+## sumstats1 : Path to first sumstats file
+## sumstats2 : Path to second sumstats file
+## in_fmt1 = auto : Format of first sumstats
+## in_fmt2 = auto : Format of second sumstats
+## build = 19 : Genome build
+## out = comparison_results : Output prefix
+## plot = True : Generate plots
+## SCRIPT #####################
+
+python3 <<EOF
+import gwaslab as gl
+
+# Load sumstats
+sumstats1 = gl.Sumstats("${sumstats1}", fmt="${in_fmt1}", build="${build}", verbose=True)
+sumstats2 = gl.Sumstats("${sumstats2}", fmt="${in_fmt2}", build="${build}", verbose=True)
+
+# Compare effect sizes
+comparison = gl.compare_sumstats(sumstats1, sumstats2, plot=${plot})
+
+# Save results
+comparison.to_csv("${out}.csv", index=False)
+if ${plot}:
+    comparison.save_plots("${out}_plots.png")
+
+print(f"Comparison results saved to ${out}.csv")
+EOF

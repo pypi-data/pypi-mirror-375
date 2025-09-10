@@ -1,0 +1,11 @@
+#!/bin/bash
+## 
+#################################
+## NOTE #########################
+## https://docs.nvidia.com/clara/parabricks/latest/gettingstarted/gettingthesoftware.html#running-nvidia-parabricks
+#################################
+## ARGUMENTS ####################
+## 
+## SCRIPT #####################
+
+ docker pull nvcr.io/nvidia/clara/clara-parabricks:4.5.1-1

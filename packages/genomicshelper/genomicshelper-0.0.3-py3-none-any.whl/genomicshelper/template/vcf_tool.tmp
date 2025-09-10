@@ -1,0 +1,12 @@
+#!/bin/bash
+## Show only the specified tool information in the header in VCF using bcftools.
+#################################
+## NOTE #########################
+## 
+#################################
+## ARGUMENTS ####################
+## vcf : input vcf
+## tool
+## SCRIPT #####################
+
+bcftools view --header-only ${vcf} | grep ${tool}

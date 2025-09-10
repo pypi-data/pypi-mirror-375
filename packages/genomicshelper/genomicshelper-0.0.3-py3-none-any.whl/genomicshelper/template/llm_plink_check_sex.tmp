@@ -1,0 +1,16 @@
+#!/bin/bash
+## Run PLINK sex check to identify sex discrepancies
+#################################
+## NOTE #########################
+## --check-sex: calculates F statistic for X chromosome heterozygosity
+##              females typically have higher heterozygosity (F ~ 0.2-0.8)
+##              males have lower heterozygosity (F ~ 0.8-1.0)
+##              outputs .sexcheck file with F values and inferred sex
+##              use --update-sex to correct sex information if needed
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK binary file prefix
+## out : output prefix (default: plink_sex_check)
+## SCRIPT #####################
+
+plink2 --bfile ${bfile} --check-sex --out ${out:-plink_sex_check}

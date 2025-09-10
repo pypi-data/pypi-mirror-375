@@ -1,0 +1,30 @@
+#!/bin/bash
+## Configure Git with common settings
+#################################
+## NOTE #########################
+## Sets up Git user name, email, and other common configurations.
+## Options:
+## - user.name: Git username
+## - user.email: Git email address
+## - core.editor: Default text editor
+## - init.defaultBranch: Default branch name
+#################################
+## ARGUMENTS ####################
+## username: Git username
+## useremail: Git email address
+## editor: Default text editor (default: "vim")
+## default_branch: Default branch name (default: "main")
+## SCRIPT #####################
+
+# Set Git configuration
+git config --global user.name "${username}"
+git config --global user.email "${useremail}"
+git config --global core.editor "${editor}"
+git config --global init.defaultBranch "${default_branch}"
+
+# Optional: Add other common settings
+git config --global color.ui auto
+
+# Display current configuration
+echo "Git configuration set:"
+git config --list

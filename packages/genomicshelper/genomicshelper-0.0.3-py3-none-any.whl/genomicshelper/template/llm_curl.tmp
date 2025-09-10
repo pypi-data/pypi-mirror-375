@@ -1,0 +1,28 @@
+#!/bin/bash
+## Use curl to transfer data from or to a server
+#################################
+## NOTE #########################
+## Common options:
+## -O: Save output to a file named like the remote file
+## -L: Follow redirects
+## -s: Silent mode (no progress or error messages)
+## -v: Verbose mode for debugging
+## -o <file>: Write output to <file>
+## -H: Add a header (e.g., -H "Authorization: Bearer token")
+## -X: Specify request method (e.g., -X GET, -X POST)
+## -d: Send data in POST request
+#################################
+## ARGUMENTS ####################
+## url: URL to fetch
+## output_file: Optional output file name
+## options: Additional curl options
+## SCRIPT #####################
+
+# Basic usage: download a file
+curl -L -o "${output_file}" "${url}" ${options}
+
+# Example with silent mode and follow redirects
+# curl -s -L -o "output.txt" "https://example.com/file"
+
+# Example POST request with data
+# curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' "${url}"

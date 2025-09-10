@@ -1,0 +1,20 @@
+#!/bin/bash
+## Run MAGMA for gene-based association analysis
+#################################
+## NOTE #########################
+## - MAGMA is used for gene-based tests using GWAS summary statistics
+## - Input file should be in MAGMA-compatible format
+## - Gene annotation file is required; default paths can be set
+## - N is the sample size for the GWAS
+#################################
+## ARGUMENTS ####################
+## sumstats : Input GWAS summary statistics file
+## out : Output prefix for results
+## gene_annot : Gene annotation file (default=path_to_annotation)
+## n : Sample size for the GWAS
+## SCRIPT #####################
+
+magma --bfile ${bfile} \\
+      --gene-annot ${gene_annot} \\
+      --pval ${sumstats} N=${n} \\
+      --out ${out}

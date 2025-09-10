@@ -1,0 +1,40 @@
+#!/bin/bash
+## Run regenie step 2 for quantitative traits using BGEN files
+#################################
+## NOTE #########################
+## - Step 2 performs association testing for quantitative traits
+## - Uses BGEN format for genetic data
+## - Requires output from step 1 (--pred flag)
+## - Adjust --minMAC for minor allele count filter
+## - Use --threads for parallel processing
+## - --af-cc adjusts for case-control ascertainment
+#################################
+## ARGUMENTS ####################
+## bgenfile : BGEN file prefix (e.g., data.bgen)
+## phenoFile : phenotype file path
+## phenoColList : comma-separated list of phenotype columns (e.g., "Q1,Q2")
+## covarFile : covariate file path
+## covarColList : comma-separated list of covariate columns (e.g., "sex,age,PC1,PC2")
+## catCovarList : comma-separated list of categorical covariates (e.g., "sex")
+## step1out : output prefix from step 1 (for --pred)
+## step2out : output prefix for step 2
+## nthreads : number of threads (default: 1)
+## bsize : block size for variant processing (default: 1000)
+## minMAC : minimum minor allele count (default: 5)
+#################################
+## SCRIPT #####################
+
+regenie \
+  --step 2 \
+  --qt \
+  --bgen ${bgenfile} \
+  --covarFile ${covarFile} \
+  --covarColList ${covarColList} \
+  --catCovarList ${catCovarList} \
+  --phenoFile ${phenoFile} \
+  --phenoColList ${phenoColList} \
+  --bsize ${bsize} \
+  --minMAC ${minMAC} \
+  --threads ${nthreads} \
+  --pred ${step1out}_pred.list \
+  --out ${step2out}

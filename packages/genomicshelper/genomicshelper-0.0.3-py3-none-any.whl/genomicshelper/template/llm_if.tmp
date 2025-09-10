@@ -1,0 +1,32 @@
+#!/bin/bash
+## Basic if-else conditions in shell scripting
+#################################
+## NOTE #########################
+## - Use [ condition ] for tests, with spaces around brackets
+## - Common conditions:
+##   [ -f file ]: file exists and is a regular file
+##   [ -d dir ]: directory exists
+##   [ -z string ]: string is empty
+##   [ -n string ]: string is not empty
+##   [ string1 = string2 ]: strings are equal
+##   [ string1 != string2 ]: strings not equal
+##   [ num1 -eq num2 ]: numbers are equal
+##   [ num1 -ne num2 ]: numbers not equal
+##   [ num1 -lt num2 ]: num1 less than num2
+##   [ num1 -le num2 ]: num1 less or equal
+##   [ num1 -gt num2 ]: num1 greater than num2
+##   [ num1 -ge num2 ]: num1 greater or equal
+## - Use && for AND, || for OR
+#################################
+## ARGUMENTS ####################
+## condition: condition to check
+## then_command: command to run if true
+## else_command: command to run if false (optional)
+#################################
+## SCRIPT #####################
+
+if [ ${condition} ]; then
+    ${then_command}
+else
+    ${else_command}
+fi

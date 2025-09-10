@@ -1,0 +1,30 @@
+#!/bin/bash
+## Run GCTB (Genome-wide Complex Trait Bayesian analysis) for Bayesian GWAS
+#################################
+## NOTE #########################
+## GCTB is a tool for Bayesian analysis of GWAS data
+## Common options:
+## --bfile: PLINK binary file prefix
+## --pheno: phenotype file
+## --out: output prefix
+## --chain-length: MCMC chain length
+## --burn-in: burn-in iterations
+## --thin: thinning interval
+#################################
+## ARGUMENTS ####################
+## bfile: PLINK bfile prefix
+## pheno: phenotype file path
+## out: output prefix
+## chain_length=10000
+## burn_in=1000
+## thin=10
+## SCRIPT #####################
+
+# Example GCTB command for SBayesR
+GCTB --bfile ${bfile} \
+     --pheno ${pheno} \
+     --out ${out} \
+     --chain-length ${chain_length} \
+     --burn-in ${burn_in} \
+     --thin ${thin} \
+     --sbayes R

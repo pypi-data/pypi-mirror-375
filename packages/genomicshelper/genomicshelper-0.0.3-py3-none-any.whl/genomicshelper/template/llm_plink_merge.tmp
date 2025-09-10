@@ -1,0 +1,52 @@
+#!/bin/bash
+## Merge multiple PLINK files (e.g., bed/bim/fam or pgen/psam/pvar)
+#################################
+## NOTE #########################
+## - This script uses PLINK2 to merge files.
+## - Files should have the same build and format.
+## - Common options:
+##   --merge-list: file containing list of files to merge
+##   --make-bed: output in bed format
+##   --make-pgen: output in pgen format
+##   --threads: number of threads for parallel processing
+#################################
+## ARGUMENTS ####################
+## file_list: path to file containing list of PLINK files to merge (one per line)
+## out: output prefix for merged files
+## threads: number of threads (default=1)
+## format: output format, 'bed' or 'pgen' (default='bed')
+#################################
+## SCRIPT #####################
+
+# Check if output format is specified, default to bed
+if [ -z "${format}" ]; then
+    format="bed"
+fi
+
+# Merge files based on the list
+plink2 \
+    --merge-list ${file_list} \
+    --threads ${threads} \
+    --out ${out}
+
+# Convert to desired format if needed
+if [ "${format}" = "bed" ]; then
+    plink2 \
+        --pfile ${out} \
+        --make-bed \
+        --threads ${threads} \
+        --out ${out}
+elif [ "${format}" = "pgen" ]; then
+    plink2 \
+        --bfile ${out} \
+        --make-pgen \
+        --threads ${threads} \
+        --out ${out}
+fi
+
+# Check for merge errors
+if [ -f "${out}.log" ]; then
+    echo "Merge completed. Check ${out}.log for details."
+else
+    echo "Error: Merge may have failed. Check the input files and paths."
+fi

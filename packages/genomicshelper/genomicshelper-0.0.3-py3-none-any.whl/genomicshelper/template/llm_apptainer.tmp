@@ -1,0 +1,22 @@
+#!/bin/bash
+## Run commands using Apptainer (formerly Singularity) for containerization
+#################################
+## NOTE #########################
+## Apptainer is used to run containers in HPC environments.
+## Common commands:
+## - build: Build a container from a definition file
+## - run: Run a container
+## - exec: Execute a command inside a container
+## - pull: Pull a container from a registry
+## - shell: Start a shell inside a container
+## Use 'apptainer --help' for more options.
+#################################
+## ARGUMENTS ####################
+## command: apptainer command (e.g., run, exec, build)
+## image: container image file or URI
+## options: additional options for the command
+## args: arguments for the command or container
+#################################
+## SCRIPT #####################
+
+apptainer ${command} ${options} ${image} ${args}

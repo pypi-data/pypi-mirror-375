@@ -1,0 +1,19 @@
+#!/bin/bash
+## Calculate polygenic risk scores using PLINK
+#################################
+## NOTE #########################
+## This script uses PLINK2's --score command to calculate polygenic risk scores (PRS)
+## The score file should have columns: SNP ID, effect allele, and weight (e.g., beta or OR)
+## Use --q-score-range for p-value thresholding if needed
+## Common options:
+##   --score: specify the score file and columns
+##   --q-score-range: for applying p-value thresholds
+##   --out: output prefix
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK bfile prefix (without extension)
+## scorefile : file with SNP weights (columns: SNP, allele, weight)
+## out : output prefix for results
+## SCRIPT #####################
+
+plink2 --bfile ${bfile} --score ${scorefile} 2 4 6 header --out ${out}

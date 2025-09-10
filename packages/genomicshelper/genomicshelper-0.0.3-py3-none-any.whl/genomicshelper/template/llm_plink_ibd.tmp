@@ -1,0 +1,22 @@
+#!/bin/bash
+## Calculate Identity by Descent (IBD) using PLINK
+#################################
+## NOTE #########################
+## This script runs PLINK to compute IBD shares between samples using genome-wide SNPs.
+## It outputs the proportion of alleles shared IBD (PI_HAT) and other metrics for detecting related samples.
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK binary files prefix
+## out : Output prefix
+## min_maf : Minimum MAF for variants to include (default 0.01)
+## min_geno : Minimum genotype calling rate (default 0.05)
+## SCRIPT #####################
+
+plink2 \
+    --bfile ${bfile} \
+    --genome \
+    --maf ${min_maf:-0.01} \
+    --geno ${min_geno:-0.05} \
+    --out ${out}
+
+echo "IBD calculation complete. Check ${out}.genome for results."

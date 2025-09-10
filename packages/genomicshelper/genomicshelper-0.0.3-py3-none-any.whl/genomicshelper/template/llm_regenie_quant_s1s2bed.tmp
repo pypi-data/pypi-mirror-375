@@ -1,0 +1,57 @@
+#!/bin/bash
+## Run regenie for quantitative traits with bed files for step 1 and step 2
+#################################
+## NOTE #########################
+## regenie: version 3.2.9 or later
+## For quantitative traits, use --qt flag
+## Step 1: generates prediction files
+## Step 2: performs association testing
+## Ensure bed files are in PLINK format
+#################################
+## ARGUMENTS ####################
+## bfile1 : prefix for step 1 bed file
+## bfile2 : prefix for step 2 bed file
+## phenoFile: path to phenotype file
+## phenoCol: phenotype column name
+## covarFile: path to covariate file
+## covarColList: list of covariate columns, e.g. "age,sex,PC1,PC2"
+## catCovarList: categorical covariates, e.g. "sex"
+## step1out : output prefix for step 1
+## step2out : output prefix for step 2
+## nthreads : number of threads
+## bsize : block size for regenie, e.g. 1000
+## minMAC : minimum minor allele count for step 2, e.g. 5
+#################################
+## SCRIPT #####################
+
+regenie \\
+  --step 1 \\
+  --qt \\
+  --bed ${bfile1} \\
+  --covarFile ${covarFile} \\
+  --covarColList ${covarColList} \\
+  --catCovarList ${catCovarList} \\
+  --phenoFile ${phenoFile} \\
+  --phenoCol ${phenoCol} \\
+  --bsize ${bsize} \\
+  --maxCatLevels 99 \\
+  --lowmem \\
+  --threads ${nthreads} \\
+  --lowmem-prefix tmp_rg \\
+  --out ${step1out}
+
+regenie \\
+  --step 2 \\
+  --qt \\
+  --bed ${bfile2} \\
+  --covarFile ${covarFile} \\
+  --covarColList ${covarColList} \\
+  --catCovarList ${catCovarList} \\
+  --phenoFile ${phenoFile} \\
+  --phenoCol ${phenoCol} \\
+  --bsize ${bsize} \\
+  --ref-first \\
+  --minMAC ${minMAC} \\
+  --threads ${nthreads} \\
+  --pred ${step1out}_pred.list \\
+  --out ${step2out}

@@ -1,0 +1,24 @@
+#!/bin/bash
+## Display directory structures in a tree-like format
+#################################
+## NOTE #########################
+## -a: Include hidden files and directories
+## -d: List directories only
+## -f: Print the full path prefix for each file
+## -l: Follow symbolic links like directories
+## -p: Print the protections for each file
+## -u: Print the username, or UID if no username is available
+## -g: Print the group name, or GID if no group name is available
+## -s: Print the size in bytes of each file
+## -h: Print the size in a human-readable format
+## -t: Sort files by last modification time instead of alphabetically
+## -L level: Max display depth of the directory tree
+## -P pattern: List only those files that match the pattern given
+## -I pattern: Do not list files that match the given pattern
+#################################
+## ARGUMENTS ####################
+## path = "." : Directory path to display (default: current directory)
+## options = "-h" : Options for tree command (e.g., "-a -L 2")
+## SCRIPT #####################
+
+tree ${options} ${path}

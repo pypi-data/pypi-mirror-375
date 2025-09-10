@@ -1,0 +1,29 @@
+#!/bin/bash
+## Perform basic quality control in PLINK
+#################################
+## NOTE #########################
+## This script runs common QC steps in PLINK, including sample and variant missingness, Hardy-Weinberg equilibrium, and allele frequency.
+## Adjust arguments as needed for specific thresholds.
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK binary files prefix (e.g., data)
+## out : Output prefix (e.g., qc_results)
+## missing_rate : Missingness threshold (default 0.05)
+## hwe_p : HWE p-value threshold (default 1e-6)
+## maf : Minor allele frequency threshold (default 0.01)
+## SCRIPT #####################
+
+plink2 \
+    --bfile ${bfile} \
+    --missing \
+    --hwe ${hwe_p} midp \
+    --maf ${maf} \
+    --make-bed \
+    --out ${out}
+
+# Check missingness reports
+echo "Sample missingness:"
+cat ${out}.imiss
+
+echo "Variant missingness:"
+cat ${out}.lmiss

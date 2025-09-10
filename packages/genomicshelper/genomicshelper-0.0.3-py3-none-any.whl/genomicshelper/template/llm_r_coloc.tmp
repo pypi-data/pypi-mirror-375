@@ -1,0 +1,36 @@
+#!/bin/bash
+## Run colocalization analysis using R coloc package
+#################################
+## NOTE #########################
+## Coloc is used to test for colocalization of GWAS signals
+## Install R and coloc package if not present: install.packages("coloc")
+## Input files should be formatted with SNP, beta, se, etc.
+## Common arguments: dataset1, dataset2, priors for hypotheses
+## Output includes posterior probabilities for H0-H4
+#################################
+## ARGUMENTS ####################
+## dataset1 : path to first dataset file (e.g., QTL data)
+## dataset2 : path to second dataset file (e.g., GWAS data)
+## out : output file prefix for results
+## priors = "c(1e-4,1e-4,1e-4,1e-4)" : priors for hypotheses
+## SCRIPT #####################
+
+Rscript <<EOF
+# Load coloc library
+library(coloc)
+
+# Read datasets
+data1 <- read.table("${dataset1}", header=TRUE)
+data2 <- read.table("${dataset2}", header=TRUE)
+
+# Perform colocalization analysis
+result <- coloc.abf(dataset1=list(beta=data1\$beta, varbeta=data1\$se^2, type="quant"),
+                    dataset2=list(beta=data2\$beta, varbeta=data2\$se^2, type="quant"),
+                    p1=1e-4, p2=1e-4, p12=1e-5)
+
+# Save results
+write.table(result\$summary, file="${out}_coloc_summary.txt", quote=FALSE, row.names=FALSE)
+write.table(result\$results, file="${out}_coloc_results.txt", quote=FALSE, row.names=FALSE)
+
+cat("Colocalization analysis complete. Results saved to ${out}_coloc_summary.txt and ${out}_coloc_results.txt\n")
+EOF

@@ -1,0 +1,36 @@
+#!/bin/bash
+## Run regenie for quantitative traits step 1 with BED file
+#################################
+## NOTE #########################
+## REGENIE version: v3.2.9 or later
+## Step 1: Fits a whole-genome regression model
+## For quantitative traits, use --qt flag
+## Input: BED file for genotypes
+## Output: Predictions for step 2
+## Common options:
+## --bed : prefix for BED/BIM/FAM files
+## --phenoFile : file with phenotype data
+## --covarFile : file with covariates
+## --bsize : block size for fitting
+## --threads : number of threads
+## --out : output prefix
+#################################
+## ARGUMENTS ####################
+## bfile : prefix for BED file
+## phenoFile : path to phenotype file
+## covarFile : path to covariate file
+## out : output prefix
+## bsize : block size, default=1000
+## threads : number of threads, default=1
+#################################
+## SCRIPT #####################
+
+regenie \\
+  --step 1 \\
+  --qt \\
+  --bed ${bfile} \\
+  --phenoFile ${phenoFile} \\
+  --covarFile ${covarFile} \\
+  --bsize ${bsize} \\
+  --threads ${threads} \\
+  --out ${out}
