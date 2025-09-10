@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+<div>
+    {{ partial "author.html" . }}
+
+    {{ partial "date-maybe.html" . }}
+    <div class="clear-float"></div>
+    {{ if (ne (dateFormat (site.Params.dateform | default "Mon Jan 2, 2006") .Date) (dateFormat (site.Params.dateform | default "Mon Jan 2, 2006") .Lastmod)) }}
+        <span class="post-date"><small>Last modified on {{ dateFormat (site.Params.dateform | default "Mon Jan 2, 2006") .Lastmod }}</small></span>
+    {{ end }}
+    <div class="clear-float"></div>
+</div>
+
+<div class="post">
+    {{ with .Description }}
+        <div class="description">
+            {{ . | markdownify }}
+        </div>
+    {{ end }}
+
+    {{ partial "headline-hash.html" .Content }}
+</div>
+
+{{ end }}

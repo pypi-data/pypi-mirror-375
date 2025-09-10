@@ -1,0 +1,158 @@
+* TOC
+:PROPERTIES:
+:TOC:      :include all :depth 3
+:END:
+
+:CONTENTS:
+- [[#toc][TOC]]
+- [[#extension-features][Extension features]]
+  - [[#sidebar][sidebar]]
+  - [[#excludelist][excludelist]]
+  - [[#highlights][highlights]]
+  - [[#search][search]]
+  - [[#search-around]['search around']]
+  - [[#mark-visited]['mark visited']]
+- [[#indexer-features][Indexer features]]
+  - [[#config][config]]
+  - [[#using-multiple-cores][using multiple cores]]
+  - [[#partial-update][partial update]]
+  - [[#exclude-files-from-auto-indexer][exclude files from auto indexer]]
+- [[#faq][FAQ]]
+  - [[#what-does-the-name-mean][what does the name mean?]]
+  - [[#how-is-my-data-used][how is my data used?]]
+  - [[#what-data-sources-can-promnesia-use][what data sources can Promnesia use?]]
+  - [[#which-hotkeysshortcuts-promnesia-uses][which hotkeys/shortcuts Promnesia uses?]]
+  - [[#is-windows-supported][is Windows supported?]]
+  - [[#how-to-customize-extension-style][how to customize extension style?]]
+:END:
+
+
+* Extension features
+The extension offers the following features.
+You can find some sceenshot and videos demonstrating the features [[file:../README.org#questions][here]] and [[file:../README.org#demos][here]].
+
+** sidebar
+Sidebar displays a summary of page visits, including direct (exact page) visits and relative (subpage) visits.
+You can toggle the sidebar with:
+
+- hotkey: =Ctrl+Shift+E/Ctrl+Alt+E= (Chrome/Firefox correspondingly)
+- click on the eye icon
+- automatically on page load (see the extension settings)
+
+Here's an annotated screenshot, demonstrating the sidebar (click to zoom):
+#+html: <img width="600" src="https://karlicoss.github.io/promnesia-demos/screens/visits_childvisits_locator_popups_boring_interesting.png"></img>
+
+** excludelist
+Allows you to prevent links/domains from being processed by Promnesia.
+This might be useful for extra privacy (so the URL isn't even sent to the local backend), or to work around certain slow pages.
+
+You can add/remove pages to the excludelist via
+
+- Promnesia context menu (extension icon, or right click somewhere on the page)
+- in the settings
+
+  In addition, you can add links to "External exclude lists", if you want to use someone else's excludelist (e.g. from ublock).
+
+** highlights
+Promnesia tries to match the [[file:../README.org#glossary][contexts]] against the page body and highlight the matching bits.
+
+- you can disable highlights in the extension settings
+
+Here's an annotated screenshot, demonstrating highlights (click to zoom):
+#+html: <img width="600" src="https://karlicoss.github.io/promnesia-demos/screens/highlights_filelinks_locator.png"></img>
+
+** search
+Searches in visits and their contexts. You can toggle search via:
+
+- hotkey: =Ctrl+Shift+H/Ctrl+Alt+H= (Chrome/Firefox correspondingly)
+- Promnesia context menu
+- sidebar button
+- search just for a =#tag=
+
+** 'search around'
+Shows you browsing history 'around' another visit, useful to remember how/why did you get on the page.
+
+- to trigger 'search around', click on any visit timestamp in the sidebar
+
+** 'mark visited'
+Reveals which links on the current page you've already visited before and the popups with some metadata.
+
+You can toggle it via:
+
+- hotkey: =Ctrl+Shift+V/Ctrl+Alt+V= (Chrome/Firefox correspondingly)
+- Promnesia context menu
+- sidebar button
+
+Note that in addition to the global [[#excludelist][excludelist]], it also maintains its own excludelist.
+It's quite useful to prevent marks from showing on site menus/headers. You can exclude link via:
+
+- extension settings
+- *link* context menu ("Promnesia: do not mark this link")
+
+You can also exclude multiple links with an 'element zapper' via "Promnesia context menu -> exclude multiple links", e.g.
+it's useful to exclude the whole site menu in bulk, or if you can't right-click (some naughty web apps like Discord hijack it).
+Note that at the moment it will exclude the actual URLs, not the corresponding page elements (like, for example, uBlock would).
+
+Here's a screenshot explaining this feature (zoomable on click):
+
+#+html: <img width="600" alt="image" src="https://karlicoss.github.io/promnesia-demos/screens/promnesia-showvisited-help.png"></img>
+
+
+* Indexer features
+
+** config
+See [[file:config.py][config.py]] for some comments on configuration
+
+** using multiple cores
+(experimental) Makes =auto= indexer use multiple threads, might give it a considerable speedup: env variable =PROMNESIA_CORES=.
+
+Also see [[https://github.com/karlicoss/promnesia/issues/172][issues/172]].
+
+** partial update
+
+Only index sources given in =promnesia index --sources SOURCE [SOURCE] ...=
+(or all sources, if no =--sources= given), unless =--overwrite= is given,
+in which case all existing visits are removed from db prior to indexing.
+
+** exclude files from =auto= indexer
+
+(experimental) Only supported if you have =fd= installed for now. Set env variable ~PROMNESIA_FD_EXTRA_ARGS=--ignore-file=/path/to/fdignorefile~
+
+* FAQ
+** what does the name mean?
+
+  [[https://en.wiktionary.org/wiki/promnesia][Promnesia]] is coming from Ancient Greek and means "déjà vu".
+  (ironically, promnesia project is kind of doing the opposite -- it replaces a vague feeling of seeing a page before with a reliable digital tool)
+** how is my data used?
+See [[file:PRIVACY.org][privacy/security policy]]
+** what data sources can Promnesia use?
+
+See [[file:SOURCES.org][sources]] for the incomplete list.
+** how to configure the hotkeys?
+You can view the shortkey key combinations to press at [[chrome://extensions/shortcuts][chrome://extensions/shortcuts]] in Chrome and [[https://support.mozilla.org/en-US/kb/manage-extension-shortcuts-firefox][see here]] for instructions for Firefox.
+** is Windows supported?
+Sort of, some people have successfully run Promnesia under Windows, but I don't have a Windows computer around so it's hard for me to ensure it works.
+See [[https://github.com/karlicoss/promnesia/issues/91][issues/91]].
+** how to customize extension style?
+There are 'Style settings' in the extension settings, which get injected both in the sidebar and the main page.
+It's a bit undocumented at the moment, but there are some comments there and you can generally experiment in the browser devtools.
+
+Note that at the moment it's still stabilizing, and while I'm trying to keep this backwards compatible, it's still possible that some styles might break with updates.
+
+Some of my personal customizations:
+
+#+begin_src css
+/* set sidebar font to monospace visits indexed from the 'code' */
+.promnesia *[data-sources*=code] .context {
+  font-family: monospace;
+}
+
+/* tweak 'visited' marks for certain data sources */
+:root {
+  --promnesia-src-twitter-color: #00acee77;
+  --promnesia-src-notes-color: #00ff0077;
+}
+#+end_src
+
+**** Custom sidebar example ( [[https://gist.github.com/kvgc/9bd2f6a93f0bbcd3bc486a6ca3a96b18][Link to css file]] )
+#+html: <img width="100%" src="https://user-images.githubusercontent.com/33746143/158910983-6bc47aae-5985-4bfd-bda9-3972fb001a7e.gif"></img>

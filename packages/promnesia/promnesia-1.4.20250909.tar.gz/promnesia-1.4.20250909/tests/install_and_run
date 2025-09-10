@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+from pathlib import Path
+from subprocess import check_call, check_output
+import time
+import json
+import os
+from tempfile import TemporaryDirectory
+
+
+# TODO reuse example config?
+CONFIG = """
+
+OUTPUT_DIR = {output_dir}
+
+SOURCES = [
+    'promnesia.sources.demo',
+]
+
+"""
+
+def systemctl(*args):
+    check_call([
+        'systemctl', '--no-pager', '--user', *args,
+    ])
+
+
+# TODO do it in pipenv?
+def run(tdir: Path):
+    cfg = CONFIG.format(output_dir=f'"{tdir}"')
+    cfg_file = tdir / 'config.py'
+    cfg_file.write_text(cfg)
+
+
+    promnesia = Path(__file__).absolute().parent.parent / 'scripts/promnesia'
+
+    check_call([promnesia, 'index', '--config', cfg_file])
+
+    check_call([
+        promnesia, 'install-server',
+        '--name' , 'promnesia-test', # should add .serice arg
+        '--db', str(tdir / 'promnesia.sqlite'),
+        '--timezone', 'Europe/Moscow',
+        '--port', '17777', # TODO get free port?
+    ])
+
+    response = None
+    for x in range(10):
+        time.sleep(1)
+        try:
+            response = json.loads(check_output([
+                'curl', 'localhost:17777/status', '--data', '',
+            ]).decode('utf8'))
+            break
+        except Exception as e:
+            print(str(e))
+    assert response is not None
+
+    response = json.loads(check_output([
+        'curl', 'localhost:17777/status', '--data', '',
+    ]).decode('utf8'))
+
+    print(response)
+    assert response['db'] == str(tdir / 'promnesia.sqlite')
+
+    time.sleep(1)
+    systemctl('is-active', 'promnesia-test.service')
+    print("Test succeeded!")
+
+    # TODO prompt for cleanup?
+    systemctl('stop'   , 'promnesia-test.service')
+    systemctl('disable', 'promnesia-test.service')
+
+
+def main():
+    with TemporaryDirectory() as tdir:
+        run(Path(tdir))
+
+
+if __name__ == '__main__':
+    main()

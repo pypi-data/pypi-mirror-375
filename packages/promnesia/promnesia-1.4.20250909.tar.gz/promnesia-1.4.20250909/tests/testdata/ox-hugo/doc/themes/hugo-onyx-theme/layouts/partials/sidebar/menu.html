@@ -1,0 +1,11 @@
+{{ $page := . }}
+{{ range $menu_name, $menu := site.Menus }}
+    <h3>{{ $menu_name | replaceRE "^[0-9]+\\." "" | humanize | title }}</h3>
+    <ul>
+        {{ range $menu }}
+            <li class="toctree-l1">
+                <a class="reference{{if or ($page.IsMenuCurrent $menu_name .) ($page.HasMenuCurrent $menu_name .) }} active{{end}}" href="{{ .URL }}">{{ printf "%s%s%s" .Pre .Title .Post | safeHTML }}</a>
+            </li>
+        {{ end }}
+    </ul>
+{{ end }}

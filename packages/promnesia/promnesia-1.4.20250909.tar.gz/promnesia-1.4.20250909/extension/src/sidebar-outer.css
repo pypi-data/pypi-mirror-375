@@ -1,0 +1,86 @@
+/* Resets for sites  https://github.com/karlicoss/promnesia/issues/102 */
+body.promnesia-sidebar-active {
+    transform: none;
+}
+.promnesia-sidebar-active #promnesia-frame {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    max-height: none;
+    border: 0;
+    border-left: 1px solid #999;
+}
+
+#promnesia-frame {
+    /* e.g. left should result in: left initial, right 0px, top 0px, bot 0px, height 100%, width 30%
+       need to set irrelevant dimensions to 0px, otherwise it misbehaves
+    */
+
+    /* NOTE: default is --right: 1, set via javascript in sidebar.js */
+
+    --size: 30%;
+
+    --is-v: var(--left, var(--right ));
+    --is-h: var(--top , var(--bottom));
+
+    --init-left  : var(--left  , var(--top , var(--bottom)));
+    --init-right : var(--right , var(--top , var(--bottom)));
+    --init-top   : var(--top   , var(--left, var(--right )));
+    --init-bottom: var(--bottom, var(--left, var(--right )));
+
+
+    left  : calc(var(--init-left  ) * 0px);
+    right : calc(var(--init-right ) * 0px);
+    top   : calc(var(--init-top   ) * 0px);
+    bottom: calc(var(--init-bottom) * 0px);
+
+    --whelper: calc(var(--is-v) * var(--size));
+    --hhelper: calc(var(--is-h) * var(--size));
+    width : var(--whelper, 100%);
+    height: var(--hhelper, 100%);
+
+    position: fixed;
+    z-index: 2147483647;
+
+    display: none;
+}
+
+.promnesia {
+    padding-left  : calc(var(--left)   * var(--size));
+    padding-right : calc(var(--right)  * var(--size));
+    padding-top   : calc(var(--top)    * var(--size));
+    padding-bottom: calc(var(--bottom) * var(--size));
+}
+
+
+/* TODO expose this in settings ? */
+.promnesia-highlight {
+    background-color: #ffff6688;
+}
+
+
+.nonselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.promnesia-highlight-reference {
+    color: orange;
+    font-weight: bold;
+    margin: 0.1em;
+
+    white-space: nowrap; /* prevent from breaking numbers onto newlines */
+    bottom: 1em;
+}
+
+
+div.toastify {
+    /* eh. just a quick hack to make close button appear on the top instead of bottom */
+    /* otherwise if the notification is too long, it might be hidden */
+    display: flex;
+}

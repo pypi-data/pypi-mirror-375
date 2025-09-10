@@ -1,0 +1,49 @@
+/* TODO use variables */
+
+/* actual popup with the metadata */
+.promnesia-visited-popup {
+    display: block; /* otherwise border etc don't work? */
+    white-space: pre-wrap; /* keep whitespace intact */
+
+    background: #e6e6e6fa; /* same color as in sidebar */
+    color: black; /* to prevent it inheriting white text colour in dark mode */
+
+    outline: solid 1px;
+    padding: 2px;
+    /* not sure about initial?? */
+    font-weight: initial;
+    font-size: initial;
+}
+
+.promnesia-visited-popup .promnesia-visited-popup-link {
+    display: inline-block;
+    text-decoration: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.promnesia-visited-popup .context {
+    display: block;
+    /* color: black; */
+    background: lightyellow;
+    margin: 2px;
+}
+
+/* TODO need to use these styles in tippy */
+.promnesia-visited-popup .datetime {
+    display: inline-block;
+    float: right;
+    padding-left: 0.5em;
+}
+
+
+/* TODO not really sure about !important...  */
+.promnesia-visited.promnesia-eye {
+    /* note: outline is defined in sidebar.css */
+    background-repeat: no-repeat !important; /* repeats by default */
+    background-position-x: right !important; /* left by default */
+
+    /* same as text size, we just want a small icon */
+    /* using rem to prevent it from scaling too much on navigation elements etc */
+    background-size: '1rem' !important;
+}

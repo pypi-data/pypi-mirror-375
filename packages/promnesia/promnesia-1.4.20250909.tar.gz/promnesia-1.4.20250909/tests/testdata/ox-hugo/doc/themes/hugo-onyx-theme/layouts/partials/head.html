@@ -1,0 +1,46 @@
+<head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+    <!-- Above is a short hand for the below line. -->
+    <!-- http://htmldog.com/guides/html/intermediate/metatags/ -->
+    <!-- <meta http-equiv="content-type" content="text/html; charset=utf-8"> -->
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+
+    <!-- No referrer: https://webbkoll.dataskydd.net/en/ -->
+    <meta name="referrer" content="no-referrer">
+
+    {{ with site.Params.description }}
+        <meta name="description" content="{{ . }}">
+    {{ end }}
+
+    {{ hugo.Generator }}
+
+    <title>{{ if not .IsHome }}{{ .Title }} &mdash;{{ end }} {{ site.Title }}</title>
+
+    <link rel="stylesheet" href="{{ "css/basic.css" | relURL }}" type="text/css" />
+    <link rel="stylesheet" href="{{ "css/onyx.css" | relURL }}" type="text/css" />
+
+    {{ range site.Params.custom_css }}
+        <link rel="stylesheet" href="{{ . | relURL }}">
+    {{ end }}
+
+    {{ range site.Params.custom_css_absolute }}
+        <link rel="stylesheet" href="{{ . }}">
+    {{ end }}
+
+    {{ with site.Params.favicon }}
+        <link rel="shortcut icon" href="{{ . | relURL }}" type="image/x-icon"/>
+    {{ else }}
+        <link rel="shortcut icon" href="{{ "favicon.ico" | relURL }}" type="image/x-icon"/>
+    {{ end }}
+
+    {{ with .Params.mathjax }}
+        {{ partial "mathjax.html" }}
+    {{ end }}
+
+    <!-- Opengraph and Twitter -->
+    {{ partial "opengraph.html" . }}
+    {{ partial "twitter_cards.html" . }}
+</head>

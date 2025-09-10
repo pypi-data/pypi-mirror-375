@@ -1,0 +1,50 @@
+body {
+    width: 800px;
+}
+
+textarea {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* some magic to make it scrollabel on too much content, yet not always expand to max-height  */
+.CodeMirror {
+    height: auto !important;
+}
+.CodeMirror-scroll {
+    max-height: 25em; /*  */
+}
+/*  */
+
+
+input:invalid {
+    background-color: red;
+}
+
+.description {
+    margin-left: 1em;
+    color: #777777;
+    white-space: pre;
+}
+
+hr {
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+}
+
+pre {
+    margin: 0 0 0 0;
+}
+
+label {
+    display: block;
+}
+
+/* ugh, at least in chrome default browser style didn't work??? */
+input:indeterminate {
+    box-shadow: inset 0 0 6px 0px grey;
+}

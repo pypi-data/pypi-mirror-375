@@ -1,0 +1,20 @@
+#!/bin/bash -eux
+
+# install sudo if it's missing
+# probably means that we're running under local docker..
+if ! which sudo; then
+    apt update
+    apt -y install sudo
+fi
+
+sudo apt update  # github actions might fail if we don't update it?
+
+# make up for differences between ubuntu:focal and github action image...
+sudo apt -y install python3.12 python3.12-dev
+sudo apt -y install python3-pip python3-setuptools
+
+# otherwise setuptools don't work..
+sudo apt -y install git
+
+# jq wants it??
+sudo apt -y install dh-autoreconf

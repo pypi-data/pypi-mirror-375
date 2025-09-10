@@ -1,0 +1,44 @@
+#!/bin/bash
+set -eu
+
+cd "$(dirname "$0")"
+cd .. # git root
+
+if ! command -v sudo; then
+    # CI or Docker sometimes doesn't have it, so useful to have a dummy
+    function sudo {
+        "$@"
+    }
+fi
+
+# --parallel-live to show outputs while it's running
+tox_cmd='run-parallel --parallel-live'
+if [ -n "${CI-}" ]; then
+    # install OS specific stuff here
+    # TODO: pyjq is not necessary anymore? will keep CI deps just in case I guess
+    PYJQ_DEPS=('autoconf' 'automake' 'libtool') # see https://github.com/mwilliamson/jq.py#installation
+    case "$OSTYPE" in
+    darwin*) 
+        # macos
+        brew install "${PYJQ_DEPS[@]}"
+
+        # TODO hmm. this should be in setup.py?
+        brew install libmagic # for python-magic
+        ;;
+    cygwin* | msys* | win*)
+        # windows
+        # ugh. parallel stuff seems super flaky under windows, some random failures, "file used by other process" and crap like that
+        tox_cmd='run'
+        ;;
+    *)
+        # must be linux?
+        sudo apt update
+
+        # TODO also need to warn from readme??
+        sudo apt install "${PYJQ_DEPS[@]}" python3-dev
+        ;;
+    esac
+fi
+
+# NOTE: expects uv installed
+uv tool run --with tox-uv tox $tox_cmd "$@"

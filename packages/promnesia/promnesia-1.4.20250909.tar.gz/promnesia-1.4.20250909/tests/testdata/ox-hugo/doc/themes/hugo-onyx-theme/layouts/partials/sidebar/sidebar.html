@@ -1,0 +1,23 @@
+<div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+    <div class="sphinxsidebarwrapper">
+        <p class="logo">
+            <a href="{{ site.BaseURL }}">
+                {{ with site.Params.sidebar.logo -}}
+                    <img class="logo" src="{{ . | relURL }}" alt="Logo"/>
+                {{ end }}
+                <br />
+                <span class="logo logo-name">{{ site.Params.name }}</span>
+            </a>
+        </p>
+
+        {{ with site.Params.description -}}
+            <p class="blurb">{{ . | markdownify }}</p>
+        {{ end }}
+
+        {{ partial "sidebar/buttons.html" . }}
+        {{ partial "sidebar/donate.html" . }}
+        {{ partial "sidebar/menu.html" . }}
+        {{ partial "sidebar/relations.html" . }}
+    </div>
+</div>
+<div class="clearer"></div>

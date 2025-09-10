@@ -1,0 +1,31 @@
+{{ if site.Params.github_user | and site.Params.github_repo }}
+    {{ $path := printf "%s/%s" site.Params.github_user site.Params.github_repo }}
+
+    {{ if site.Params.sidebar.github_button }}
+        <iframe src="https://ghbtns.com/github-btn.html?user={{ site.Params.github_user }}&repo={{ site.Params.github_repo }}&type=watch&count=true&size=large"
+                style="border: 0; overflow: hidden;" width="200" height="35"
+                sandbox="allow-scripts allow-popups"></iframe>
+        <!-- allow-scripts: Needed for the script to run that updates the star count
+             allow-popups: Needed for the links to open in new tab on
+             clicking the button or star count.
+        -->
+    {{ end }}
+
+    {{ if site.Params.sidebar.travis_button }}
+	<p>
+	    <a href="https://travis-ci.org/{{ $path }}">
+		<img alt="https://api.travis-ci.org/{{ $path }}.svg?branch=master"
+		     src="https://api.travis-ci.org/{{ $path }}.svg?branch=master" />
+	    </a>
+	</p>
+    {{ end }}
+
+    {{ if site.Params.sidebar.codecov_button }}
+	<p>
+	    <a href="https://codecov.io/github/{{ $path }}">
+		<img alt="https://codecov.io/github/{{ $path }}/coverage.svg?branch=master"
+		     src="https://codecov.io/github/{{ $path }}/coverage.svg?branch=master" />
+	    </a>
+	</p>
+    {{ end }}
+{{ end }}

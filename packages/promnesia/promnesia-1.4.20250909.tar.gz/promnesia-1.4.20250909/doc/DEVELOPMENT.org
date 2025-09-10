@@ -1,0 +1,111 @@
+* Use Github actions
+The main source of truth is the [[file:../.github/workflows/main.yml][Github Actions CI pipeline]]. There is also a [[file:../.circleci/config.yml][CircleCI]] pipeline, but it only tests systemd integration.
+
+If you fork the repository, *go to "Actions" tab on your fork and click "I understand my workflows, go ahead and enable them"* (like on this [[https://raw.githubusercontent.com/tahseenkhan31/technical-portfolio/master/assets/enableactions.png][screen]]).
+This will run CI for your commits/branches even before you open the PR.
+
+If you have any issues, looking at what github actions do might be the quickest way to investigate them.
+In particular, you can try [[https://github.com/karlicoss/promnesia/blob/0703ffad16a56e002113ef5404775d83d61d9e98/.github/workflows/main.yml#L37][uncommenting]] the tmate SSH helper and pushing this change (as a separate commit).
+This will allow you to SSH directly onto the CI server and run any commands to investigate/reproduce tests.
+See [[https://github.com/marketplace/actions/debugging-with-tmate#getting-started][tmate]] docs for more info.
+
+If you open a PR and some checks fail, please try to fix them if possible, but if it's unclear to you why a partucular check failing, don't hesitate to ask!
+
+* Working on backend (promnesia indexer/server)
+** use editable install
+- during development, the easiest way to run =promnesia= as =scripts/promnesia=. Alternatively, you can use =pip install -e .=.
+- similarly, if you're working on a module which uses HPI, it's much easier to install it in editable mode
+  Also see [[https://github.com/karlicoss/HPI/blob/master/doc/DEVELOPMENT.org][HPI development docs]].
+
+** running tests & mypy checks
+First, check out all submodules: ~git submodule update --init --recursive~. This will fetch some input data only used by tests.
+
+To actually run checks there are several options. Some examples:
+- ~tox~: would just run all of them (takes a while)
+  (tox is a tool to run tests in isolated Python environments, google it for moe info if you're curious)
+- ~tox -e mypy-core~: will run only ~mypy-core~ checks
+- ~tox -e tests -- -k test_search~: only run tests that contain ~test_search~ substring (everything after ~--~ passed down to pytest)
+- ~pytest -s tests/config_tests.py~: run just one file via pytest
+- ~mypy -p promnesia.sources.hypothesis~: only checks this module via mypy
+
+You might want to consult [[file:../tox.ini][tox.ini]], [[file:pytest.ini][pytest.ini]] and [[file:../mypy.ini][mypy.ini]].
+
+When you run tests, some tests will be marked as yellow and as =SKIPPED=.
+There is no need to worry about it -- by default some tests aren't running because they are using GUI (so only run manually), or work in progress, or something else. As long as github actions are happy it generally should be fine.
+
+** structure of tests
+- =tests/indexer_test.py= -- usually tests sources and how they extract visits (without creating the database)
+- =tests/integration_test.py= -- usually tests indexing, and does checks against actual database
+- =tests/server_test.py= -- usually tests server responses
+- =tests/cli.py= -- tests everything, starting from CLI interation
+- =tests/end2end_test.py= -- tests everything, including the extension! These don't run by default because they are using GUI and the setup is quite elaborate..
+- =tests/demos.py= -- extra end-to-end tests, also used for recording Promnesia feature demo videos.
+
+I say 'usually' because it's a little messy and the separation is not 100% clear at times.
+For example, most tests in =server_test= also run indexing and extraction, so they aren't very 'unit' tests.
+I'm not against it, but with limited time resources full-scale tests give better coverage (at the expense of more confusion when they fail).
+
+* Build extension
+
+   : cd extension
+   : npm install # (if necessary)
+   : ./build --firefox # you can also use --chrome
+   :         --lint    # [optional], run webext linter
+   :         --release # [optional], build in the release mode (with optimizations)
+   :         --publish listed # [optional], release to the Chrome Web Store/Mozilla addons
+
+   You'll find the result in =dist/=. After that, you can load it in your browser and develop.
+
+   - on Firefox, the temporary loaded extensions only persist until the browser restart. Chrome doesn't have that issue.
+   - on Firefox for Android, web extensions on Android are mostly broken at the moment, see [[https://discourse.mozilla.org/t/add-on-support-in-new-firefox-for-android/53488][here]] (unless you're using [[https://blog.mozilla.org/addons/2020/09/29/expanded-extension-support-in-firefox-for-android-nightly][Firefox Nightly]])
+
+* Run end-to-end tests
+
+End-to-end tests go through the full cycle from indexing & backend to automated extension tests, and are very helpful to make sure you don't break things.
+
+You need:
+
+- firefox + =geckodriver=, or chrome + =chromedriver=
+- =pip3 install pyautogui= for keyboard automation
+
+Example of running a test:
+
+: PYTHONPATH=src python3 -m pytest -s 'tests/end2end_test.py::test_add_to_blacklist[chrome]'
+
+You can also run them via tox:
+
+# TODO https://github.com/tox-dev/tox/discussions/2681
+: TOX_TESTENV_PASSENV='DISPLAY HOME' tox -e end2end -- -s -k 'test_blacklist_custom[firefox]'
+
+- it's useful to pass =--pdb= to pytest, so you don't have to restart webdriver all over
+- after initial run, it's best pass =--skip-pkg-install= to tox to speedup repetitive test runs
+- when you're in development/debugging process, perhaps best to run the firefox version of tests -- Chrome has a 5-ish seconds lag after installing the extension
+- since these tests can be quite slow, you can benefit from installing =pytest-xdist= plugin and using =-n= flag to parallelize
+- to debug flaky tests, it's useful to install =pytest-repeat= in addition, e.g. =--repeat=5 -n 5=
+
+* Releasing
+** AMO (addons.mozilla.org)
+
+: cd extension
+: npm install # (if necessary)
+: ./build --firefox --lint --release --publish listed
+
+Note that this will only upload the extension (see [[https://extensionworkshop.com/documentation/develop/web-ext-command-reference/#channel][web-ext sign command reference]] and [[https://github.com/fregante/web-ext-submit#readme][web-ext-submit]] for more info).
+You need go to https://addons.mozilla.org/en-GB/developers/addon/promnesia/versions, there you should see your extension as 'pending approval'. Usually it's approved within minutes.
+
+Sometimes it may be flagged for a review, so you'll need to upload source code.
+You can use =git archive master --output=promnesia-source.zip= if you're asked for it.
+For build instructions, you can point the reviewers at [[file:addons-mozilla-org.org][these instructions]], =https://github.com/karlicoss/promnesia/blob/master/doc/DEVELOPMENT.org#build-extension= or/and the github actions config.
+
+** CWS (chrome web store)
+: cd extension
+: npm install # (if necessary)
+: ./build --chrome  --lint --release --publish listed
+
+This command should work in theory and upload automatically... however getting the api keys is super annoying (see [[https://github.com/DrewML/chrome-webstore-upload/blob/master/How%20to%20generate%20Google%20API%20keys.md][this]]).
+
+NOTE: even after succcessful upload, seems that you still need to go to "Privacy practices" tab and click "Submit for review".
+
+Also it might still fail anyway, and require you to justify permissions etc..
+If you only release the extension once in a while maybe simpler to [[https://chrome.google.com/webstore/developer/dashboard][upload the zip manually]] :shrug:
+Usually review in CWS takes a couple of days.

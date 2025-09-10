@@ -1,0 +1,192 @@
+<!doctype html>
+
+<!-- Recommended way to check: open the same tab both in normal (with the extension active) and incognitro mode and alt-tab to compare -->
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test page for 'mark visited'. Make sure the elements are not disturbed when marks are displayed</title>
+        <style>
+.promnesia-visited-toggler {
+    /* for debug */
+    background: #ff000066 !important;
+}
+
+
+body {
+         /* line-height: 1.6; */
+}
+.logo {
+    height: 20px;
+    overflow: hidden;
+}
+.pageheader {
+    width: 1ch;
+    height: 1ch;
+    position: absolute;
+}
+
+#l_holder {
+    background-position: center;
+    display: block;
+    width: 16px;
+    height: 16px;
+    padding: 1px;
+    margin-left: 4px;
+    margin-right: 11px;
+}
+
+#l_holder:after {
+    content: '';
+    /* TODO use svg? */
+    background: red no-repeat;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.UnderlineNav-body {
+    display: flex;
+}
+.hx_underlinenav-item {
+    display: flex;
+    align-items: center;
+}
+.d-flex {
+    display: flex!important;
+}
+        </style>
+    </head>
+
+    <!-- simulate weird invisible Github header -->
+    <div style="position: relative !important;">
+    <a style="padding: 24px !important; overflow: hidden" class="pageheader" href="https://github.com">github</a>
+    <!-- <header style="padding: 16px">hello</header> -->
+    </div>
+
+    <header class="page-header" data-testid="header"><a href="https://developer.mozilla.org/en-US/" class="logo" aria-label="MDN Web Docs">
+        <svg width="200" height="50">
+            <rect width="200" height="50" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+        </svg>
+    </a>
+    </header>
+
+    <div>Headers above are testing position: absolute behaviour and overflow handling</div>
+    <!-- TODO header from lobsters -->
+
+    <div>This vvv is testing block-like layout handling </div>
+
+    <div>
+        <a style="display: block;"" href="https://github.com">Github 1</a>
+        <a style="display: block;"" href="https://github.com">Github 2</a>
+        <a style="display: block;"" href="https://github.com">Github 3</a>
+    </div>
+
+    <!-- like on lobsters -->
+<div id="headerleft">
+        <!-- float:left causes it to display on the same line despite display: block... -->
+        <a style="float:left" id="l_holder" style="background-color: #7f0000;" href="https://lobste.rs/" title="Lobsters">hdr</a>
+
+        <span class="headerlinks">
+            <a href="https://lobste.rs/" class="cur_url">Lobsters</a>
+            <a href="https://lobste.rs/recent" class="">Recent</a>
+            <a href="https://lobste.rs/comments" class="">Comments</a>
+            <a href="https://lobste.rs/search" class="">Search</a>
+        </span>
+      </div>
+
+    <!-- copied from hackernews -->
+    <body style="margin:0px">
+        <table><tbody>
+            <tr><td>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:0px"><tbody><tr>
+                <td style="width:18px;padding-right:4px" bgcolor="#ff6600"><a href="https://news.ycombinator.com">
+                    <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid;">
+                </a></td>
+                <td style="line-height:12pt; height:10px;" bgcolor="#ff6600">
+                    <b class="hnname">
+                      <a href="https://news.ycombinator.com/news">Hacker News</a></b>
+                    | <a href="https://news.ycombinator.com/newest">new</a>
+                    | <a href="https://news.ycombinator.com/front">past</a>
+                    | <a href="https://news.ycombinator.com/newcomments">comments</a>
+                    | <a href="https://news.ycombinator.com/ask">ask</a>
+                    | <a href="https://news.ycombinator.com/show">show</a>
+                    | <a href="https://news.ycombinator.com/jobs">jobs</a>
+                    | <a href="https://news.ycombinator.com/submit">submit</a>
+                </td>
+                </tr>
+            </tbody></table>
+            </td></tr>
+        <tr id="pagespace" title="" style="height:10px"></tr>
+        </tbody></table>
+
+        <div><a href="https://github.com">Github</a></div>
+        <div><a href="https://github.com">Github</a></div>
+        <div><a href="https://github.com">Github</a></div>
+        <div><a href="https://github.com">Github</a></div>
+
+        <!-- copied from github.com -->
+<nav class="overflow-hidden UnderlineNav"><ul class="UnderlineNav-body list-style-none ">
+    <li>
+        <a class="selected UnderlineNav-item" aria-current="page" href="https://github.com/karlicoss/promnesia">
+            <svg class="octicon octicon-code UnderlineNav-octicon d-none d-sm-inline" height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"></path></svg>
+            <span>Code</span><span title="Not available" class="Counter "></span>
+        </a>
+    </li>
+    <li>
+        <a class="UnderlineNav-item" href="https://github.com/karlicoss/promnesia/issues">
+            <svg class="octicon octicon-issue-opened UnderlineNav-octicon d-none d-sm-inline" height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-6.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z"></path></svg>
+            <span>Issues</span><span title="44" class="Counter ">44</span>
+        </a>
+    </li>
+    <li>
+        <a class="UnderlineNav-item" href="https://github.com/karlicoss/promnesia/pulls">
+            <svg class="octicon octicon-git-pull-request UnderlineNav-octicon d-none d-sm-inline" height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"></path></svg>
+            <span>Pull requests</span><span title="0" hidden="hidden" class="Counter ">0</span>
+        </a>
+    </li>
+</ul>
+</nav>
+<nav class="overflow-hidden UnderlineNav"><ul class="UnderlineNav-body list-style-none ">
+    <li class="d-flex">
+        <a class="hx_underlinenav-item selected UnderlineNav-item" aria-current="page" href="https://github.com/karlicoss/promnesia">
+            <svg class="octicon octicon-code UnderlineNav-octicon d-none d-sm-inline" height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"></path></svg>
+            <span>Code</span><span title="Not available" class="Counter "></span>
+        </a>
+    </li>
+    <li class="d-flex">
+        <a class="hx_underlinenav-item UnderlineNav-item" href="https://github.com/karlicoss/promnesia/issues">
+            <svg class="octicon octicon-issue-opened UnderlineNav-octicon d-none d-sm-inline" height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-6.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z"></path></svg>
+            <span>Issues</span><span title="44" class="Counter ">44</span>
+        </a>
+    </li>
+    <li class="d-flex">
+        <a class="hx_underlinenav-item UnderlineNav-item" href="https://github.com/karlicoss/promnesia/pulls">
+            <svg class="octicon octicon-git-pull-request UnderlineNav-octicon d-none d-sm-inline" height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"></path></svg>
+            <span>Pull requests</span><span title="0" hidden="hidden" class="Counter ">0</span>
+        </a>
+    </li>
+</ul>
+</nav>
+
+<span>NOTE: this vvvv doesn't work... overflow:auto seems to spoil things :(</span>
+<nav style="width: 40rem; overflow: auto">
+<span style="float:right">
+    <a href="https://github.com/karlicoss" style="display:block;">@github</a>
+</span>
+</nav>
+        whatever
+
+<form>
+<a href="https://github.com/karlicoss/promnesia">SHOULD NOT ADD VISITED MARK HERE!</a>
+<button id="submit-file" type="submit">SUBMIT</button>
+</form>
+    </body>
+</html>

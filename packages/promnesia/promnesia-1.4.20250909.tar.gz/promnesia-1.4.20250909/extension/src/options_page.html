@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Promnesia preferences</title>
+        <script type="module" src="options_page.js" defer></script>
+        <link rel="stylesheet" type="text/css" href="options_page.css">
+    </head>
+
+<body>
+    <!-- TODO rename to 'preferences' everywhere for consistency -->
+    <h1>Promnesia preferences</h1>
+    <!-- TODO link from the page here straight to the features? -->
+    <fieldset>
+        <legend><strong>Don't forget to save settings after changing</strong></legend>
+        <table>
+            <tr>
+                <td>
+        <button id="save_id" style="color:green; font-size: 2em">Save</button>
+                </td>
+                <td>
+        <div>Note: you can quickly toggle some of these settings via the context menu on any page (typically need to reload the page to see the effect).</div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>Troubleshoot</legend>
+        <div>
+            See <a href="https://github.com/karlicoss/promnesia/blob/master/doc/TROUBLESHOOTING.org">troubleshooting guide/help</a>
+        </div>
+        <div>
+            If you messed up any extension settings, you can check
+            <a href="https://github.com/karlicoss/promnesia/blob/master/extension/src/options.js">src/options.js</a>.
+            Alternatively, use 'reset settings' button in the bottom of the page.
+        </div>
+        Make sure to regularly <strong>export/backup</strong> settings (after saving first): <button id="export_settings_id">Export</button>
+        (there is no import yet, will be added later)
+        <!-- TODO give some quick help on using CSS, some examples too?<!--  -->
+    </fieldset>
+
+    <fieldset>
+    <legend>Sources</legend>
+    <fieldset>
+        <legend>Backend settings</legend>
+        <b>Don't forget to setup & run the <a href="https://github.com/karlicoss/promnesia#try-it-out">backend</a> first.</b>
+        <br>However, you can leave it empty if you want to use in-browser visits only.
+        <div style='display:flex'>
+        <input title="Host" type="URL" id="host_id" style='flex-grow: 1'>
+        <input title="Basic auth token" type="password" id="token_id" placeholder="Basic auth token (if needed)">
+        <button id="backend_status_id">Check status</button>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>In-browser sources</legend>
+Note that these sources aren't typically as useful as the backend ones, and support for them is still limited (see <a href="https://github.com/karlicoss/promnesia/issues/120">issues/120</a>)
+            <fieldset>
+            <legend>Browser bookmarks</legend>
+            <table>
+                <tr>
+                    <td><input  id="use_bookmarks_id" type="checkbox" /></td>
+                    <td><label for="use_bookmarks_id">Enable</label></td>
+                </tr>
+            </table>
+            </fieldset>
+
+            <fieldset>
+            <legend>Browser history</legend>
+            <table>
+                <tr>
+                    <td><input  id="use_browserhistory_id" type="checkbox" /></td>
+                    <td><label for="use_browserhistory_id">Enable</label></td>
+                </tr>
+            </table>
+            <hr>
+            <label for="browserhistory_max_results_id">
+                History results limit
+                (controls <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/history/search#Parameters">this</a> parameter).
+                Set it to lower value if you suspect browser history search is causing slowdowns for you (pretty unlikely though)</label>
+            <input  id="browserhistory_max_results_id" title="History results limit" type="number">
+            </fieldset>
+    </fieldset>
+    </fieldset>
+
+    <fieldset>
+        <legend>Sidebar</legend>
+        <table>
+            <tr>
+                <td><input  id="sidebar_detect_urls_id" type="checkbox"/></td>
+                <td><label for="sidebar_detect_urls_id">Detect and linkify URLs in the sidebar</label></td>
+            </tr>
+            <tr>
+                <td><input  id="sidebar_always_show_id" type="checkbox"/></td>
+                <td><label for="sidebar_always_show_id">Always show sidebar (experimental)</label></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+       <legend><a href="https://www.youtube.com/watch?v=9PsOeYheIY4">'Mark visited'</a> feature</legend>
+       <table>
+            <tr>
+                <td><input  id="mark_visited_always_id" type="checkbox"/></td>
+                <td><label for="mark_visited_always_id">
+                    Mark visited links on page load (experimental, but highly recommended to try)
+                </label></td>
+                <!-- TODO use excludelist -->
+            </tr>
+       </table>
+        <label for="mark_visited_excludelist_id">Exclude links from being marked as visited:</label>
+        <!-- TODO  may result in slowdowns/glitches) -->
+        <div    id="mark_visited_excludelist_id"></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Other behaviour</legend>
+        <table>
+            <tr>
+                <td><input type="checkbox" id="highlight_id"/></td>
+                <td><label for="highlight_id">
+                    Highlight <a href="https://github.com/karlicoss/promnesia#glossary">contexts/annotations</a>
+                </label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="contexts_popup_id"/></td>
+                <td><label for="contexts_popup_id">Popup notification when link has contexts (may be spammy)</label></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="verbose_errors_id"/></td>
+                <td><label for="verbose_errors_id">Verbose errors (for debugging, may result in notification spam)</label></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Global excludes</legend>
+        <div style='white-space: pre;'>Global excluding might be useful for several purposes:
+- less distraction: if you don't want to be notified of specific pages (e.g. they are too broad, like "google.com")
+- privacy: to avoid passing sensitive information to the extension (e.g. from your bank website)
+- performance: if you experience problems with certain pages
+NOTE: you can also exclude links from the context menu.</div>
+        <div>
+            <label for="global_excludelist_id">Globally excluded links and domains:</label>
+            <!-- TODO copy pasted from filterlist.js -->
+            <div class="description">Supported formats:
+- <code>domain.name</code>, e.g.: <code>web.telegram.org</code>
+      Will exclude whole Telegram website.
+- <code>http://exact/match</code>, e.g.: <code>http://github.com</code>
+      Will only exclude Github main page. Subpages will still work.
+- <code>/regul.r.*expression/</code>, e.g.: <code>/github.*/yourusername/</code>
+      Quick way to exclude your own Github repostitories.</div>
+            <div    id="global_excludelist_id"></div>
+        </div>
+        <hr>
+        <div>
+            <label for="global_excludelists_ext_id">External exclude lists:<label>
+            <div class="description">In addition to specific excludes above, you can specify links to external filter lists.
+They will be autoupdated every 3 days. Spec format (Json):<pre>[
+    ["name (arbitrary)", "link"],
+    ["name2"           , "link 2", "optional comment"]
+]</pre></div>
+            <div    id="global_excludelists_ext_id"></div>
+        </div>
+    </fieldset>
+    <!-- TODO hmm. iframe css can't be applied from outside; so we have to use two separate CSS settings.. -->
+    <!-- could be a bit confusing for user -->
+    <fieldset>
+        <legend>Style settings (CSS)</legend>
+        <div class="description">Not very documented at the moment; you can use your browser devtools to experiment</div>
+        <div id="position_css_id"></div>
+    </fieldset>
+    <!-- TODO shit, under details, codemirror breaks... -->
+    <!-- <details> -->
+    <fieldset>
+        <legend>Deprecated/misc settings</legend>
+        <fieldset>
+            <div>
+                <label for="source_map_id">Source map (json):</label>
+                <div class="description">Can be used to rename the sources</div>
+                <div id="source_map_id"></div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Sidebar style (DEPRECATED!)</legend>
+            <div>If you had any settings here, please move them to the field above</div>
+            <div id="extra_css_id"></div>
+        </fieldset>
+        <button id="reset_id" style="color:red">DANGER: reset settings to defaults</button>
+    </fieldset>
+        <!-- </details> -->
+</body>
+</html>

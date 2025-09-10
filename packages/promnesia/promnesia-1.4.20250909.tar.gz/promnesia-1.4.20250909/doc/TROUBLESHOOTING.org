@@ -1,0 +1,105 @@
+* TOC
+:PROPERTIES:
+:TOC:      :include all :depth 3
+:END:
+
+:CONTENTS:
+- [[#toc][TOC]]
+  - [[#general-notes][General notes]]
+- [[#known-bugsissues][Known bugs/issues]]
+  - [[#extension-some-irrelevant-visits-are-displayed-in-the-sidebar][extension: some irrelevant visits are displayed in the sidebar]]
+  - [[#extension-the-eye-iconpopup-doesnt-appear-immediately-when-the-page-is-opened][extension: the eye icon/popup doesn't appear immediately when the page is opened]]
+  - [[#highlights-too-much-is-highlighted-or-highlight-isnt-detected][highlights: too much is highlighted or highlight isn't detected]]
+  - [[#sidebar-might-be-glitchy-when-the-search-tab-is-open][sidebar: might be glitchy when the search tab is open]]
+  - [[#sidebar-looks-weirdtruncated-on-some-sites][sidebar: looks weird/truncated on some sites]]
+  - [[#mark-visited-general-glitches][mark visited: general glitches]]
+  - [[#mark-visited-links-i-havent-visited-are-marked][mark visited: links I haven't visited are marked]]
+  - [[#extension-too-slow-on-certain-pages][extension: too slow on certain pages]]
+  - [[#markdown-no-line-numbers-in-the-link-locators][markdown: no line numbers in the link locators]]
+- [[#misc][Misc]]
+  - [[#i-expect-to-see-a-specific-visit-but-it-doesnt-appear-in-the-extension][I expect to see a specific visit, but it doesn't appear in the extension?]]
+  - [[#nothing-happens-when-i-click-on-the-file-link-editor-in-the-sidebar][Nothing happens when I click on the file link (editor://) in the sidebar]]
+  - [[#activate-extension-hotkey-for-chrome-ctrl-shift-e-doesnt-work-in-ubuntu][Activate extension hotkey for Chrome (Ctrl-Shift-E) doesn't work in Ubuntu]]
+:END:
+
+** General notes
+
+- your browsing history may contain *sensitive data*. If you're posting or sending me error logs *make sure you strip away all private information* (ideally only attach the relevant bits of the log, containing errors)
+
+- check your config: =promnesia doctor config=
+- check the database: =promnesia doctor database=
+- check the server: =promnesia doctor server=
+- make sure you [[file:../README.org#install][installed promnesia]] properly, and [[file:SOURCES.org][extra dependencies]], if necessary
+- make sure [[file:../README.org#try-it-out][demo]] works as expected
+
+  It doesn't require any extra setup and dependencies, so if this doesn't work it's a good sign something is broken.
+  If necessary, run it on a different port (e.g. =--port 15555=) and choose the same port in the extension settings in your browser.
+
+- if you have issues with HPI (=my.= modules, etc), follow [[https://github.com/karlicoss/HPI/blob/master/doc/SETUP.org#troubleshooting][HPI: troubleshooting]] guide
+- run =promnesia index= in your terminal, and pay attention to the error messages and warnings
+- run =promnesia serve= in your terminal (on a different port if necessary). Similarly, pay attention to the errors.
+- in your browser: try [[https://developer.chrome.com/extensions/tut_debugging][opening the debugger]] and checking for the errors in the extension logs
+- check [[https://github.com/karlicoss/promnesia/issues][issues]] in case someone else had the same issue too
+- if you're posting an issue with the extension UI, post the page you're having problem with and ideally attach a screenshot (if you think it might help)
+
+* Known bugs/issues
+** extension: some irrelevant visits are displayed in the sidebar
+Most likely the issue is with canonical/normalised URLs.
+Many websites use [[https://beepb00p.xyz/promnesia.html#urls_broken][weird]] ways of addressing content, e.g. in the query parameters or fragments.
+This makes it tricky to figure out the canonical URL.
+
+You can see the canonical URL for current page if you hover the mouse over the extension eye icon.
+To double check whether you're having a normalisation issue, you can open the promnesia database with =sqlitebrowser= and compare =orig_url= and =norm_url= columns. You can quickly call it with =promnesia doctor database=.
+
+If you want to try to fix it at least for yourself, check out [[https://github.com/karlicoss/promnesia/blob/feef7c35f60fed67e8148a565fb267afdb944c39/src/promnesia/cannon.py][cannon.py]] and [[https://github.com/karlicoss/promnesia/blob/feef7c35f60fed67e8148a565fb267afdb944c39/tests/cannon.py][tests/cannon.py]].
+
+** extension: the eye icon/popup doesn't appear immediately when the page is opened
+
+The reason is that Promnesia waits until the page is fully loaded (more specifically, until  [[https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/onUpdated][onUpdated]] status is =complete=),
+otherwise Promnesia might request too much unnecessary data from the backend, and spend time processing unneeded data.
+It's possible to fix in the future by some careful caching or listening on some more specific event.s
+
+Possibly related: [[https://github.com/karlicoss/promnesia/issues/177][issues/177]]
+
+** highlights: too much is highlighted or highlight isn't detected
+The highlight matching algorithm is very simple, so some issues are possible. See [[https://github.com/karlicoss/promnesia/issues/30][issues/30]]
+** sidebar: might be glitchy when the search tab is open
+See [[https://github.com/karlicoss/promnesia/issues/109][issues/109]]
+** sidebar: looks weird/truncated on some sites
+See [[https://github.com/karlicoss/promnesia/issues/102][issues/102]]
+** mark visited: general glitches
+Usually, the more popular the website is, the more dynamic bullshit is on it (e.g. youtube/twitter), which might make things more glitchy and slow.
+
+If the page is too dynamic, it might load more content after the page body (DOM) is loaded (e.g. infinite scroll features).
+It's trickier to detect such changes (see [[https://github.com/karlicoss/promnesia/issues/171][issues/171]]).
+
+In the meantime the easiest is just to toggle 'mark/unmark visited' twice to redraw the marks.
+
+That said, I've spent effort into making sure the marks aren't moving the page elements: the marks can display an outline/border, but they should never disturb and shift the original page elements, since the flickering is very annoying. So if you notice a misbehaving page, please report it: [[https://github.com/karlicoss/promnesia/issues/168][issues/168]]
+** mark visited: links I haven't visited are marked
+
+Most likely, it's the issue with canonical URLs (see above).
+
+You can check it by opening the popup, and hovering the mouse above the URL, it will show 'normalised:<normalised url>'.
+
+** extension: too slow on certain pages
+I've tried to to make sure everything is responsive and asynchronous, but it is still possible in theory for the  extension to slow the page down. Usually that happens if there are too many visits corresponding to the page, e.g. main pages like ~twitter.com~ or ~reddit.com~.
+The easiest workaround is to add the exact page (e.g. ~https://www.reddit.com~ or ~https://twitter.com/home~) to the [[file:GUIDE.org#excludelist][excludelist]].
+
+In addition, some pages like ~twitter.com~ cause =onUpdated= events all the time which might cause issues when scrolling (see [[https://github.com/karlicoss/promnesia/issues/177][issues/177]]).
+** markdown: no line numbers in the link locators
+This is because the library I'm using to process markdown (=mistletoe=) doesn't support it.
+The easiest workaround is probably to uninstall =mistletoe=, this will make the indexer use =grep= to extract links (which supports line numbers). The downside then is that the contexts won't be as good.
+
+* Misc
+** I expect to see a specific visit, but it doesn't appear in the extension?
+You can check the database (e.g. with =sqlitebrowser=), and make sure it's there.
+
+If it's not however, that means the issue is with the indexing.
+If it is, and the promnesia server works as expected otherwise, perhaps it's a bug.
+** Nothing happens when I click on the file link (=editor://=) in the sidebar
+
+You probably need to install [[https://github.com/karlicoss/open-in-editor][open-in-editor]].
+** Activate extension hotkey for Chrome (=Ctrl-Shift-E=) doesn't work in Ubuntu
+Likely, it conflicts with 'emoji input', which Ubuntu aggressively hijacking.
+Either [[https://askubuntu.com/a/1159087/427470][rebind emoji input hotkey]] ([[https://superuser.com/questions/1587172/how-to-disable-ctrlshiftu-in-ubuntu-20-04][it might not work though]]), or set a different hotkey in Chrome extension settings.

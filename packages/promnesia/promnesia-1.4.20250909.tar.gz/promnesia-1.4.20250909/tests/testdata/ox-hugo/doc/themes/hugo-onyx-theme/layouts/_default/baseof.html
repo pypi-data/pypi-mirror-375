@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+    {{ partial "head.html" . }}
+    <body>
+	<div class="document">
+	    <div class="documentwrapper">
+		<div class="bodywrapper">
+		    <div class="body">
+                        {{ if not .Params.notoc }}
+                            {{ with .TableOfContents }}
+                                <div class="toc">
+                                    {{ . }}
+                                    <a href="#" class="back-to-top">Back to top</a>
+                                </div>
+                            {{ end }}
+                            {{ partial "toc_on_side.html" . }}
+                        {{ end }}
+
+			{{ block "main" . }}{{ end }}
+
+			{{ if not .IsHome -}}
+			    {{ template "_internal/disqus.html" . }}
+			{{ end }}
+		    </div>
+		</div>
+	    </div>
+
+	    {{ partial "sidebar/sidebar.html" . }}
+	    {{ partial "footer.html" . }}
+
+	    {{ range site.Params.custom_js -}}
+		<script src="{{ . | relURL }}"></script>
+	    {{ end }}
+
+            {{ block "footer" . }}{{ end }}
+
+	    {{ template "_internal/google_analytics.html" . }}
+	</div>
+    </body>
+</html>
