@@ -1,0 +1,396 @@
+Metadata-Version: 2.4
+Name: rich-notifier
+Version: 0.1.0
+Summary: 美观的终端通知库，基于 rich 实现彩色消息输出
+Author-email: rich-notifier <marfirer@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/Iberxilong-blackbox/rich-notifier
+Project-URL: Repository, https://github.com/Iberxilong-blackbox/rich-notifier.git
+Project-URL: Issues, https://github.com/Iberxilong-blackbox/rich-notifier/issues
+Keywords: terminal,notification,rich,color,logging
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Logging
+Classifier: Topic :: Terminals
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: rich>=10.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Dynamic: license-file
+
+# Rich Notifier 📢
+
+一个基于 [Rich](https://github.com/Textualize/rich) 库的轻量级终端通知系统，**专注于放大成功和失败的情绪表达**，让关键信息在海量输出中脱颖而出。
+
+![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+## 🎯 核心价值
+
+### 情绪放大 + 关键信息突出
+
+在复杂的程序输出中，最重要的往往是**成功**和**失败**信息。Rich Notifier 通过美观的彩色输出和格式化面板，将这些关键时刻的情绪进行放大：
+
+- ✅ **成功时刻** - 亮青背景+黑色文字，强化积极反馈
+- ❌ **失败警报** - 红色加粗，增强警示效果  
+- ⚠️ **警告提示** - 黄色下划线，突出需要关注的信息
+- 📊 **结果面板** - 彩色边框 + 结构化显示，重要数据一目了然
+
+### 零门槛代码迁移
+
+无需重构现有代码！只需简单替换输出函数：
+
+```python
+# 原代码
+print("处理完成")
+
+# 升级后 - 仅替换函数名
+Notifier.success("处理完成")
+```
+
+## ✨ 特性
+
+- 🎯 **情绪增强** - 放大成功喜悦，强化失败警示
+- 🔍 **关键信息突出** - 在海量日志中快速识别重要信息
+- 🚀 **零门槛迁移** - 保持原代码结构，仅替换输出函数
+- 🎨 **美观输出** - 基于 Rich 库的强大渲染能力
+- 📊 **结构化面板** - 彩色边框 + 键值对显示
+- 🔧 **轻量级** - 极简 API，专注核心功能
+
+## 📦 安装
+
+```bash
+pip install rich-notifier
+```
+
+或从源码安装：
+
+```bash
+git clone https://github.com/yourusername/rich-notifier.git
+cd rich-notifier
+pip install -e .
+```
+
+## 🚀 快速开始
+
+```python
+from rich_notifier import Notifier
+
+# 基本消息类型
+Notifier.info("正在处理数据...")
+Notifier.success("操作完成！")
+Notifier.warning("请检查网络连接")
+Notifier.error("发生了错误")
+
+# 显示信息面板
+data = {
+    "用户": "admin",
+    "状态": "已登录",
+    "权限": "管理员"
+}
+Notifier.show_panel("🔐 登录信息", data, border_color="blue")
+```
+
+## 🎨 效果预览
+
+### 基本消息类型
+
+```
+正在处理数据...
+✓ 操作完成！
+⚠ 请检查网络连接  
+✗ 发生了错误
+```
+
+*实际输出中，成功消息为亮青背景+黑色文字，警告消息为黄色下划线，错误消息为红色加粗*
+
+### 信息面板
+
+```
+┏━━━━━━━━━━━━━━ 🔐 登录信息 ━━━━━━━━━━━━━━┓
+┃ 用户: admin                        ┃
+┃ 状态: 已登录                       ┃
+┃ 权限: 管理员                       ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
+*实际输出中，边框为彩色（可自定义颜色）*
+
+## 📖 API 文档
+
+### Notifier.info(message: str)
+
+显示普通信息消息，使用默认终端颜色。
+
+**参数：**
+- `message` (str): 要显示的消息内容
+
+**示例：**
+```python
+Notifier.info("开始执行任务...")
+```
+
+### Notifier.success(message: str)
+
+显示成功消息，使用亮青背景+黑色文字样式。
+
+**参数：**
+- `message` (str): 要显示的成功消息
+
+**示例：**
+```python
+Notifier.success("文件上传成功！")
+```
+
+### Notifier.warning(message: str)
+
+显示警告消息，使用黄色下划线样式。
+
+**参数：**
+- `message` (str): 要显示的警告消息
+
+**示例：**
+```python
+Notifier.warning("磁盘空间不足，请及时清理")
+```
+
+### Notifier.error(message: str)
+
+显示错误消息，使用红色加粗样式。
+
+**参数：**
+- `message` (str): 要显示的错误消息
+
+**示例：**
+```python
+Notifier.error("数据库连接失败")
+```
+
+### Notifier.show_panel(title: str, content: dict, border_color: str = "green")
+
+显示一个带有标题和彩色边框的信息面板。
+
+**参数：**
+- `title` (str): 面板标题
+- `content` (dict): 要显示的键值对数据
+- `border_color` (str, 可选): 边框颜色，默认为 "green"
+
+**示例：**
+```python
+stats = {
+    "处理文件": "1,234 个",
+    "耗时": "2.5 秒",
+    "成功率": "99.8%"
+}
+Notifier.show_panel("📊 处理统计", stats, border_color="cyan")
+```
+
+## 🎭 效果对比演示
+
+### 传统输出 vs Rich Notifier
+
+运行对比演示看看区别：
+
+```bash
+cd examples
+python contrast_demo.py
+```
+
+这个演示会展示：
+1. **传统方式** - 在30+行日志中寻找4个关键信息有多困难
+2. **Rich Notifier** - 如何让关键信息一目了然
+3. **代码迁移** - 从 `print()` 升级到 `Notifier` 有多简单
+
+### 情绪表达效果
+
+| 传统输出 | Rich Notifier | 情绪增强效果 |
+|---------|---------------|-------------|
+| `print("成功")` | `Notifier.success("成功")` | 🟦 **亮青背景+黑色文字** - 强化成就感 |
+| `print("错误")` | `Notifier.error("错误")` | 🔴 **红色加粗** - 强化警示感 |
+| `print("警告")` | `Notifier.warning("警告")` | 🟡 **黄色下划线** - 突出关注度 |
+| 普通文本显示 | `Notifier.show_panel()` | 📊 **彩色面板** - 重要信息可视化 |
+
+## 🚀 零门槛代码升级
+
+### 完全兼容的 API 设计
+
+Rich Notifier 特意设计为与常见输出函数兼容，让你的代码升级过程无比简单：
+
+```python
+# ============ 升级前 ============
+import logging
+logger = logging.getLogger(__name__)
+
+def process_data():
+    print("开始处理...")
+    logger.info("连接数据库...")
+    
+    try:
+        result = perform_task()
+        print(f"处理成功: {result}")
+        logger.info("任务完成")
+    except Exception as e:
+        print(f"错误: {e}")
+        logger.error(f"处理失败: {e}")
+
+# ============ 升级后 ============
+from rich_notifier import Notifier
+
+def process_data():
+    Notifier.info("开始处理...")          # 替换 print
+    Notifier.info("连接数据库...")        # 替换 logger.info
+    
+    try:
+        result = perform_task()
+        Notifier.success(f"处理成功: {result}")  # 替换 print，增强情绪
+        Notifier.success("任务完成")               # 替换 logger.info，增强情绪
+    except Exception as e:
+        Notifier.error(f"错误: {e}")             # 替换 print，增强警示
+        Notifier.error(f"处理失败: {e}")         # 替换 logger.error，增强警示
+```
+
+### 升级优势
+
+- ✅ **代码结构完全不变** - 业务逻辑保持原样
+- ✅ **只需替换函数名** - `print` → `Notifier.info/success/error`
+- ✅ **立即获得视觉增强** - 彩色 + 格式化 + 图标
+- ✅ **情绪表达更强烈** - 成功更有成就感，错误更有警示性
+- ✅ **关键信息更突出** - 在复杂输出中快速定位重要信息
+
+## 💡 使用场景
+
+### 1. 数据处理脚本
+```python
+from rich_notifier import Notifier
+
+def process_data():
+    Notifier.info("开始数据处理...")
+    
+    try:
+        # 处理逻辑
+        result = perform_analysis()
+        
+        Notifier.success("数据处理完成")
+        
+        # 显示结果摘要
+        summary = {
+            "总记录数": f"{result['total']:,}",
+            "处理时间": f"{result['duration']:.2f}s",
+            "输出文件": result['output_file']
+        }
+        Notifier.show_panel("📈 处理结果", summary)
+        
+    except Exception as e:
+        Notifier.error(f"处理失败: {e}")
+```
+
+### 2. API 客户端
+```python
+from rich_notifier import Notifier
+import requests
+
+def api_call():
+    Notifier.info("正在连接 API...")
+    
+    try:
+        response = requests.get("https://api.example.com/data")
+        
+        if response.status_code == 200:
+            Notifier.success("API 调用成功")
+            
+            # 显示响应信息
+            info = {
+                "状态码": response.status_code,
+                "响应时间": f"{response.elapsed.total_seconds():.2f}s",
+                "数据大小": f"{len(response.content)} bytes"
+            }
+            Notifier.show_panel("🌐 API 响应", info, border_color="green")
+        else:
+            Notifier.warning(f"API 返回状态码: {response.status_code}")
+            
+    except requests.RequestException as e:
+        Notifier.error(f"API 调用失败: {e}")
+```
+
+### 3. 文件操作
+```python
+from rich_notifier import Notifier
+import os
+
+def backup_files(source_dir, backup_dir):
+    Notifier.info(f"开始备份 {source_dir}...")
+    
+    try:
+        # 备份逻辑
+        file_count = 0
+        total_size = 0
+        
+        for root, dirs, files in os.walk(source_dir):
+            for file in files:
+                # 复制文件逻辑
+                file_count += 1
+                total_size += os.path.getsize(os.path.join(root, file))
+        
+        Notifier.success("备份完成！")
+        
+        # 显示备份统计
+        stats = {
+            "备份文件": f"{file_count:,} 个",
+            "总大小": f"{total_size / (1024**2):.1f} MB",
+            "源目录": source_dir,
+            "目标目录": backup_dir
+        }
+        Notifier.show_panel("💾 备份统计", stats, border_color="blue")
+        
+    except Exception as e:
+        Notifier.error(f"备份失败: {e}")
+```
+
+## 🔧 开发
+
+克隆仓库并安装开发依赖：
+
+```bash
+git clone https://github.com/yourusername/rich-notifier.git
+cd rich-notifier
+pip install -e ".[dev]"
+```
+
+运行测试：
+
+```bash
+pytest
+```
+
+代码格式化：
+
+```bash
+black .
+isort .
+```
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📄 许可证
+
+MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+## 🙏 鸣谢
+
+- [Rich](https://github.com/Textualize/rich) - 强大的 Python 终端渲染库
