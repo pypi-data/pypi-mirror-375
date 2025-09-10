@@ -1,0 +1,17 @@
+pyproject.toml
+src2/aiko_monitor/core.py
+src2/aiko_monitor/dlq.py
+src2/aiko_monitor/main.py
+src2/aiko_monitor/schema.py
+src2/aiko_monitor/send.py
+src2/aiko_monitor.egg-info/PKG-INFO
+src2/aiko_monitor.egg-info/SOURCES.txt
+src2/aiko_monitor.egg-info/dependency_links.txt
+src2/aiko_monitor.egg-info/requires.txt
+src2/aiko_monitor.egg-info/top_level.txt
+src2/aiko_monitor/integrations/__init__.py
+src2/aiko_monitor/integrations/fastapi.py
+src2/aiko_monitor/integrations/flask.py
+tests/test_core.py
+tests/test_integration_fastapi.py
+tests/test_integration_flask.py

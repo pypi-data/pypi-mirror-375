@@ -1,0 +1,70 @@
+from __future__ import annotations
+
+import logging
+from importlib.metadata import version
+from typing import Any, Dict, Optional
+
+from src2.aiko_monitor.schema import SchemaUserConfig
+from src2.aiko_monitor.send import SenderPool
+
+_AIKO_PKG_VERSION = version("aiko-monitor")  # can this break?
+
+logger = logging.getLogger("aiko.monitor")
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
+
+
+class Monitor:
+    def __init__(
+        self,
+        app: Optional[Any] = None,
+        *,
+        project_key: str,
+        secret_key: str,
+        endpoint: Optional[str] = None,
+        enabled: bool = True,
+    ):
+        self.cfg = SchemaUserConfig(
+            project_key=project_key,
+            secret_key=secret_key,
+            endpoint=endpoint or "https://main.aikocorp.ai/api/monitor/ingest",
+            enabled=enabled,
+        )
+        self._pool = SenderPool(
+            cfg=self.cfg,
+            workers=5,
+            timeout_s=10.0,
+            http2=False,
+        )
+        self._auto_instrument(app)
+
+    def _auto_instrument(self, app) -> None:
+        try:
+            app_type = type(app).__name__
+            module_name = type(app).__module__
+            data = {"app_type": app_type, "module_name": module_name, "project_key": self.cfg.project_key}
+            logger.debug("auto instrumenting", extra=data)
+
+            if app_type == "FastAPI":
+                from src2.aiko_monitor.integrations.fastapi import instrument
+
+                instrument(self, app, _AIKO_PKG_VERSION)
+            elif app_type == "Flask":
+                from src2.aiko_monitor.integrations.flask import instrument
+
+                instrument(self, app, _AIKO_PKG_VERSION)
+            else:
+                data = {"app_type": app_type, "module_name": module_name, "project_key": self.cfg.project_key}
+                logger.error("unsupported app type", extra=data)
+        except ImportError as e:
+            logger.error(f"Missing integration: {e}")
+        except Exception as e:
+            logger.error(f"Instrumentation failed: {e}", exc_info=True)
+
+    def add_event(self, event: Dict[str, Any]) -> None:
+        if not self.cfg.enabled:
+            return
+        self._pool.submit(event)
+
+    def destroy(self) -> None:
+        self._pool.shutdown()
