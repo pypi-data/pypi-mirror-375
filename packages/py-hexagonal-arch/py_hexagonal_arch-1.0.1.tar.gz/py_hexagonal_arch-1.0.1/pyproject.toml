@@ -1,0 +1,233 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py-hexagonal-arch"
+dynamic = ["version"]
+description = "A comprehensive Python framework implementing Hexagonal Architecture with multi-framework, multi-database, and multi-messaging support"
+readme = "README.md"
+license = "MIT"
+authors = [
+  { name = "Alberto Sanmartin Martinez", email = "albertosanmartinmartinez@gmail.com" },
+]
+maintainers = [
+  { name = "Alberto Sanmartin Martinez", email = "albertosanmartinmartinez@gmail.com" },
+]
+keywords = [
+  "hexagonal-architecture",
+  "clean-architecture",
+  "ports-adapters",
+  "fastapi",
+  "flask",
+  "tornado",
+  "sqlalchemy",
+  "postgresql",
+  "mysql",
+  "redis",
+  "kafka",
+  "microservices",
+  "async",
+  "framework",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+  "Framework :: FastAPI",
+  "Framework :: Flask",
+  "Topic :: Database",
+  "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+  "Topic :: System :: Distributed Computing",
+]
+requires-python = ">=3.8"
+dependencies = ["pydantic>=2.0.0", "sqlalchemy[asyncio]>=2.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/AlbertoSanmartinMartinez/py-hexagonal-arch"
+Documentation = "https://github.com/AlbertoSanmartinMartinez/py-hexagonal-arch"
+Repository = "https://github.com/AlbertoSanmartinMartinez/py-hexagonal-arch"
+
+[project.optional-dependencies]
+# Web framework extras
+fastapi = ["fastapi>=0.100.0", "uvicorn[standard]>=0.20.0"]
+flask = ["flask>=2.3.0", "flask-cors>=4.0.0"]
+tornado = ["tornado>=6.3.0"]
+
+# Database extras
+postgresql = ["asyncpg>=0.28.0"]
+mysql = ["aiomysql>=0.2.0"]
+mariadb = ["aiomysql>=0.2.0"]
+sqlserver = ["aioodbc>=0.4.0"]
+oracle = ["cx_oracle_async>=0.3.0"]
+
+# Cache extras
+redis = ["redis[hiredis]>=4.5.0", "aioredis>=2.0.0"]
+memcache = ["aiomcache>=0.7.0"]
+
+# Event messaging extras
+kafka = ["aiokafka>=0.8.0"]
+rabbitmq = ["aio-pika>=9.0.0"]
+kinesis = ["aioboto3>=11.0.0", "boto3>=1.26.0"]
+pubsub = ["google-cloud-pubsub>=2.18.0"]
+
+# Development extras
+dev = [
+  "pytest>=7.4.0",
+  "pytest-asyncio>=0.21.0",
+  "pytest-cov>=4.1.0",
+  "black>=23.7.0",
+  "isort>=5.12.0",
+  "flake8>=6.0.0",
+  "mypy>=1.5.0",
+  "pre-commit>=3.4.0",
+]
+
+# Documentation extras
+docs = [
+  "mkdocs>=1.5.0",
+  "mkdocs-material>=9.2.0",
+  "mkdocs-mermaid2-plugin>=1.1.0",
+]
+
+# Convenience extras
+web = ["fastapi>=0.100.0", "uvicorn[standard]>=0.20.0"] # FastAPI by default
+database = ["asyncpg>=0.28.0"]                          # PostgreSQL by default
+
+# All extras (convenience)
+all = [
+  "fastapi>=0.100.0",
+  "uvicorn[standard]>=0.20.0",
+  "flask>=2.3.0",
+  "flask-cors>=4.0.0",
+  "tornado>=6.3.0",
+  "asyncpg>=0.28.0",
+  "aiomysql>=0.2.0",
+  "aioodbc>=0.4.0",
+  "cx_oracle_async>=0.3.0",
+  "redis[hiredis]>=4.5.0",
+  "aioredis>=2.0.0",
+  "aiomcache>=0.7.0",
+  "aiokafka>=0.8.0",
+  "aio-pika>=9.0.0",
+  "aioboto3>=11.0.0",
+  "boto3>=1.26.0",
+  "google-cloud-pubsub>=2.18.0",
+]
+
+
+[tool.setuptools.dynamic]
+version = { attr = "py_hexagonal_arch.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+# Black configuration
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+# isort configuration
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 100
+known_first_party = ["py_hexagonal_arch"]
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+  "aiokafka.*",
+  "aio_pika.*",
+  "aioboto3.*",
+  "google.cloud.*",
+  "aiomcache.*",
+  "aioredis.*",
+  "aiomysql.*",
+  "aioodbc.*",
+  "cx_oracle_async.*",
+]
+ignore_missing_imports = true
+
+# Pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+  "-ra",
+  "--strict-markers",
+  "--strict-config",
+  "--cov=src",
+  "--cov-report=term-missing",
+  "--cov-report=html",
+  "--cov-report=xml",
+]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["src"]
+omit = [
+  "*/tests/*",
+  "*/test_*",
+  "*/__pycache__/*",
+  "*/venv/*",
+  "*/virtualenv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "if self.debug:",
+  "if settings.DEBUG",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if 0:",
+  "if __name__ == .__main__.:",
+  "class .*\\bProtocol\\):",
+  "@(abc\\.)?abstractmethod",
+]

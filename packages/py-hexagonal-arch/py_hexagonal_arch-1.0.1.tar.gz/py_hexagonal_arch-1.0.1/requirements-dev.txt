@@ -1,0 +1,45 @@
+# Development dependencies
+-r requirements.txt
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Code formatting and linting
+black>=23.7.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Pre-commit hooks
+pre-commit>=3.4.0
+
+# Documentation
+mkdocs>=1.5.0
+mkdocs-material>=9.2.0
+mkdocs-mermaid2-plugin>=1.1.0
+
+# Build tools
+build>=0.10.0
+twine>=4.0.0
+
+# Optional dependencies for full testing
+# Web frameworks
+flask>=2.3.0
+flask-cors>=4.0.0
+tornado>=6.3.0
+
+# Databases
+aiomysql>=0.2.0
+aioodbc>=0.4.0
+
+# Cache
+redis[hiredis]>=4.5.0
+aioredis>=2.0.0
+aiomcache>=0.7.0
+
+# Event messaging
+aiokafka>=0.8.0
+aio-pika>=9.0.0
