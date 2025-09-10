@@ -1,0 +1,10 @@
+flake8
+flake8-html
+
+[dev]
+black
+flake8
+pytest
+pytest-html
+flake8-html
+pre-commit
