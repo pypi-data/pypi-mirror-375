@@ -1,0 +1,109 @@
+.horizon-widget {
+    grid-area: horizon-widget;
+}
+
+.status-plot {
+    grid-area: status-plot;
+    min-height: 20px;
+}
+
+.tables {
+    grid-area: tables;
+    display: grid;
+    grid-template:
+        "button-save-data button-save-data"
+        "data-table save-data-table";
+    justify-content: left;
+    column-gap: 50px;
+    row-gap: 20px;
+}
+
+.table-style {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-style td, .table-style th {
+    border: 1px solid #DDD;
+    padding: 5px;
+}
+
+.table-style tr:nth-child(even) {
+    background-color: #EFF1ED;
+}
+
+.table-style tr:hover {
+    background-color: #DDD;
+}
+
+.table-style th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+}
+
+.data-table {
+    grid-area: data-table;
+}
+
+.save-data-table {
+    grid-area: save-data-table;
+}
+
+.button-save-data {
+    grid-area: button-save-data;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.greenbutton {
+    padding: 0.5rem 0.5rem;
+    background: green;
+    border: 1px solid green;
+    border-radius: 8px;
+    color: white;
+}
+
+.invisible {
+    padding: 0.5rem 0.5rem;
+    background: white;
+    color: white;
+}
+
+
+.row-editing {
+    color: purple;
+}
+
+.row-nan {
+    color: maroon;
+}
+
+.row-override {
+    color: blue;
+}
+
+.row-invalid {
+    color: red;
+}
+
+.editor-values-table-dates {
+    font-size: 0.9em;
+    width:auto;
+    position: sticky;
+    left:0px;
+    background-color:white;
+    z-index:50;
+}
+
+.editor-values-table-series {
+    position: sticky;
+    top:0px;
+    background-color:white;
+}
+
+.editor-values-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}

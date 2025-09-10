@@ -1,0 +1,6 @@
+[tshistory.migrate.Migrator]
+migrator = tsview.migrate:Migrator
+
+[tshistory.subcommands]
+view = tsview.cli:view
+view-init = tsview.cli:init_horizon

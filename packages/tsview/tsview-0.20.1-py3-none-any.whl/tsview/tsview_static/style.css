@@ -1,0 +1,275 @@
+.title-like {
+    font-size: 1.5em;
+}
+
+.page-title {
+    font-size: 1.5em;
+    color: rgb(92, 91, 91);
+    justify-content: left;
+    font-weight: 400;
+}
+
+div.main-content {
+    margin: 0.5em;
+ }
+
+.action-container {
+    display:flex;
+}
+
+.bi-clipboard {
+    cursor: pointer;
+}
+
+.action-left {
+    display: flex;
+    flex: initial;
+    justify-content: left;
+    align-items: center; /* vertical */
+}
+
+.action-left > * {
+    margin-left: .5em;
+}
+
+.action-center {
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center; /* vertical */
+}
+
+.action-center > * {
+    margin-left: .5em;
+}
+
+.action-right {
+    display: flex;
+    flex: initial;
+    justify-content: right;
+    align-items: center; /* vertical */
+}
+
+.action-right > * {
+    margin-left: .5em;
+}
+
+.horizon-trinity.read .widget-date {
+    width: 10ch;
+    text-align: center;
+    vertical-align:middle;
+    cursor: pointer;
+}
+
+.widget-date.from-zoom {
+    color: grey;
+    font-style: italic;
+}
+
+.horizon-trinity {
+    display: flex;
+}
+
+.horizon-trinity.write .widget-date {
+}
+
+.horizon-trinity .edit-buttons button {
+    width: 3ch;
+    background-color: white;
+    font-weight: bold;
+}
+
+.edit-buttons .yes {
+    color: green;
+}
+
+.edit-buttons .no {
+    color: red;
+}
+
+.widget-loading-status
+    {font-size: 30px;}
+
+.widget-loading-status .loading
+    {color: orange;}
+
+.widget-loading-status .success
+    {color: green;}
+
+.widget-loading-status .failure
+    {color: red;}
+
+.widget-idates {
+    padding: 10px;
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget-idates div {
+    width: 15ch;
+}
+
+.widget-idates .idate-history {
+    user-select: none;
+    text-align: center;
+}
+
+.widget-idates .idate-adjacent {
+    user-select: none;
+    cursor: pointer;
+    color:  #a6a6a6;
+    text-align: center;
+
+}
+
+.widget-idates .idate-adjacent:hover {
+    color:  #007bff;
+}
+
+
+form.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    background: lightsteelblue;
+}
+
+.form-inline .item {
+    flex: 1 0 25%;
+    box-sizing: border-box;
+    padding: .5em;
+}
+
+.form-inline label {
+    display: block;
+}
+
+.form-inline .btn {
+    margin: .5em;
+}
+
+label.option {
+    display: inline-block;
+    padding: .25em;
+}
+
+.tsview-form-input {
+    padding: 1rem;
+}
+
+.square {
+    list-style: square inside;
+    padding-left: 1em;
+}
+
+.placeholder-text-hover {
+    height: 24px;
+}
+
+/* cache ui */
+.btn {
+    padding: 3px;
+    margin: 2px;
+}
+
+.policy_list {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.policy_list :not(thead) tr {
+  border: 1px dotted black;
+}
+
+.gridded_policy:not(:last-child) {
+    border-bottom: none;
+}
+
+.gridded_policy:nth-child(2n) {
+    background-color: lightgrey;
+}
+
+.gridded_policy:hover {
+    background-color: lightblue;
+}
+
+
+.link_policy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    grid-auto-rows: 5fr;
+    align-items: top;
+}
+
+.link_policy ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.link_policy button {
+    margin-right: 1rem;
+}
+
+.field_error {
+    background: tomato;
+}
+
+.badges-spacing > * {
+    margin-right: .2rem;
+}
+
+.quickview .list-series {
+    z-index: 10;
+    position: absolute;
+}
+
+.quickview .selected {
+    background-color: #FFECC3;
+}
+
+.quickview .list-group-item {
+    font-size: 14px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    max-width: 1000px;
+}
+
+.quickview #plotly_div {
+}
+
+.quickview .btn-primary {
+    color: white !important;
+}
+
+.js-plotly-plot div {
+    overflow: visible !important;
+}
+
+/* Settings */
+
+.settings {
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+.settings h2 {
+    font-size: 1.2em;
+    color: rgb(92, 91, 91);
+    justify-content: left;
+    font-weight: 400;
+}
+
+.settings .settings-date input {
+    width: 20vw;
+}
+
+.settings table input {
+    border-style: none;
+    background-color:  #f8f8f8;
+}
+

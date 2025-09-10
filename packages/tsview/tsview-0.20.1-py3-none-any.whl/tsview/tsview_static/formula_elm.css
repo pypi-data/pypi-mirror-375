@@ -1,0 +1,141 @@
+
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+.formula_editor div {
+    overflow: visible !important;
+}
+
+.main {
+    display: grid;
+    grid-template-columns:
+        [left-start] 1fr
+        [center-start left-end] auto
+        [right-start center-end] 1fr
+        [right-end]
+    ;
+    grid-auto-flow: column;
+}
+
+.main > * + * {
+    margin-top: 1em;
+}
+
+.code_editor {
+    margin: 1em;
+}
+
+.code_left {
+    grid-column: left;
+    grid-row: span 1;
+}
+
+.code_right {
+    grid-column: right;
+    grid-row: span 1;
+}
+
+.code_left pre {
+    min-height: var(--min-height-editor, 36vh);
+}
+
+.center_item {
+    justify-self: center;
+    align-self: center;
+}
+
+header[class~="code_left"] {
+    padding: 0.6em 1.2em;
+    background-color: LightGrey;
+    border-top-right-radius: .2em;
+    border-top-left-radius: .2em;
+}
+
+footer[class~="code_left"] {
+    padding: 0.6em 1.2em;
+    background-color: LightGrey;
+    border-bottom-right-radius: .2em;
+    border-bottom-left-radius: .2em;
+}
+
+.code_editor a,
+.code_editor button {
+    cursor: pointer;
+}
+
+.code_editor > aside {
+    padding: 1em;
+}
+
+/* tree editor */
+
+.ui_editor {
+    display: inline-grid;
+    grid-gap: 0.3em;
+    grid-template-columns:
+        [expanded-start] auto
+        [editor-start expanded-end] minmax(50vw, auto)
+        [editor-end]
+    ;
+    grid-auto-rows: 1fr;
+    align-items: center;
+}
+
+.ui_editor div {
+    width: 100%;
+}
+
+.col_expand {
+    grid-column: expanded;
+    grid-row: span 1;
+    text-align: center;
+}
+
+.col_editor {
+    grid-column: editor;
+    grid-row: span 1;
+}
+
+.col_editor * + * {
+    margin-left: 0.6em;
+}
+
+.header {
+    padding: 0.3em 0.8em;
+    color: #001b44;
+    background-color: LightGrey;
+    border-radius: .2em;
+}
+
+.margin_button {
+    margin: 0 1em;
+}
+
+.error {
+    display: block;
+    padding: .8em .3em;
+}
+
+.even {
+    background-color: #DCEBFF;
+}
+
+.series_dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.series_dropdown_menu {
+    display: block;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    z-index: 2;
+}
