@@ -1,0 +1,2 @@
+[console_scripts]
+structgen = structgen.cli:main
