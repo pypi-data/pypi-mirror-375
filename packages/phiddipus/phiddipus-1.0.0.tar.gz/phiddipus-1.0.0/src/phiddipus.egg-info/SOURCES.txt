@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/phiddipus/__init__.py
+src/phiddipus/cli.py
+src/phiddipus/nvdRequests.py
+src/phiddipus/vulnerabilityScanner.py
+src/phiddipus.egg-info/PKG-INFO
+src/phiddipus.egg-info/SOURCES.txt
+src/phiddipus.egg-info/dependency_links.txt
+src/phiddipus.egg-info/entry_points.txt
+src/phiddipus.egg-info/requires.txt
+src/phiddipus.egg-info/top_level.txt
