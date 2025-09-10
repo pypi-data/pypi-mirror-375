@@ -1,0 +1,125 @@
+Metadata-Version: 2.4
+Name: genitext
+Version: 0.4.2
+Summary: A CLI tool for generating high-quality image-text pairs for AI training
+Home-page: https://github.com/CodeKnight314/GenIText
+Author: Richard Tang
+Author-email: Richard Tang <richardgtang@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2025 Richard Tang
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/CodeKnight314/GenIText
+Project-URL: Repository, https://github.com/CodeKnight314/GenIText
+Project-URL: Issues, https://github.com/CodeKnight314/GenIText/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=2.0.0
+Requires-Dist: torchvision>=0.15.0
+Requires-Dist: Pillow>=9.0.0
+Requires-Dist: tqdm>=4.64.0
+Requires-Dist: matplotlib>=3.6.0
+Requires-Dist: kagglehub>=0.1.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: bitsandbytes>=0.41.0
+Requires-Dist: accelerate>=0.26.0
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: transformers>=4.21.0
+Requires-Dist: typing-extensions>=4.5.0
+Requires-Dist: ollama>=0.1.7
+Requires-Dist: prompt-toolkit>=3.0.0
+Requires-Dist: click>=8.0.0
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# GenIText: Generative Image-Text Automated package
+
+<p align="center">
+  <img src="resources/demo.gif" alt="Demonstration video of GenIText tool">
+</p>
+
+## Overview
+This repository is independently developed as a flexible framework to generate high-quality Image-Text pairs for finetuning Image-Generation models, such as Stable Diffusion, DALL-E, and other generative models. By leveraging open-source captioning models, GenIText automates the process of generating diverse captions for corresponding images, ensuring that the text data is well-suited for downstream applications such as style-specific generations or domain adaptation. This framework is designed to complement contemporary repositories or modules in the field, offering an additional option for flexibility and automation to create customized datasets.
+
+GenIText will become distributable as a CLI tool once package is ready for testing across systems. Please support in any way you see fit!
+
+## Table of Contents
+- [Installation](#installation)
+- [Benchmarks](#benchmarks)
+- [Use-cases](#use-cases)
+
+## Benchmarks
+| Model         | Auto-Batch Memory Usage | Auto-Batch Seconds per Image | 1 Batch Memory Usage | 1 Batch Seconds per Image |
+|--------------|------------------------|-----------------------------|----------------------|-------------------------|
+| LLaVA 7B     | 17,978 MB               | 3.25                        | 7,014 MB             | 3.62                    |
+| ViT-GPT2 0.27B | 7,570 MB                | 0.08                        | 914 MB               | 0.79                    |
+| BLIPv2 2.7B  | 13,534 MB               | 0.25                        | 4,590 MB             | 2.53                    |
+
+All models were tested on 502 random image from kaggle dataset found [here](https://www.kaggle.com/datasets/cyanex1702/cyberversecyberpunk-imagesdataset). Images were resized based on their config files and tested on GeForce RTX 4090 Graphics Card with 24 Gb memory.
+
+## Installation
+### Base installation
+GenIText is available as a Python package and can be installed easily using `pip`. 
+
+To install GenIText, simply run:
+```bash
+pip install genitext
+```
+After installation, you can verify that the CLI tool is accessible by running:
+```bash 
+genitext --help
+```
+To initiate the CLI tool, run: 
+```bash
+genitext
+```
+### Ollama installation
+GenIText incorporates LLMs from Ollama to assist with prompt refinement which means ollama has to be available on the device when running `/refine` in the CLI tool. You can download the software for Mac or Windows OS from [here](https://ollama.com/download/). For Linux OS, you can install directly via the following: 
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+After installing, pull the appropriate LLM you want from ollama to use in `/refine`. Currently, the default config is set to `deepseek-r1:7b` since it offers strong performance with its reasoning capabilities while using relatively manageable memory. You can configure the ollama model with `/config <c_model>`
+
+## Use-cases
+### Direct Captioning
+Currently, GenIText is enabled to run captioning for a selected directory of images. Output formats can be specified for either `json`, `jsonl`, `csv`, or `img&txt`. The `--format` flag defaults to json if none is specified.
+
+An example would be: 
+```bash
+/caption /path/to/images --model <c_model> --output /path/to/output --format <output_format>
+```
+### Prompt Refinement for Captioning
+GenIText also offers a prompt-refinement tool for image-captioning models. It's recommended to run `/refine` with 5 - 20 images for prompt refinement. Any set beyond 20 images offers diminishing returns at higher compute time. 
+
+An example would be: 
+```bash
+/refine "<prompt>" /path/to/images "<Context>" --model <c_model>
+```
+Ollama is incorporated as the main LLM Judge rather than LLM APIs (e.g. OpenAI, Gemini, Anthropic) since it's free and offers sufficient performance for handling prompt refinment. The significant tradeoff is that `/refine` is dependent on local hardware and chosen LLM for compute time, taking 5 - 10 mins for 5 generations of refinment.
