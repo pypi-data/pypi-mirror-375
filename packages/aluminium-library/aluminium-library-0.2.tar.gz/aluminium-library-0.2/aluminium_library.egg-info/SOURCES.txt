@@ -1,0 +1,12 @@
+LICENSE.txt
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+aluminium_library.egg-info/PKG-INFO
+aluminium_library.egg-info/SOURCES.txt
+aluminium_library.egg-info/dependency_links.txt
+aluminium_library.egg-info/top_level.txt
+libal/__init__.py
+libal/camera/__init__.py
+libal/net/__init__.py

@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: aluminium-library
+Version: 0.2
+Summary: Aluminium Library is a cross-platform computer vision library
+Home-page: https://github.com/mansourmoufid/aluminium-library
+Author: Mansour Moufid
+Author-email: mansourmoufid@gmail.com
+License: GPL
+Project-URL: Source, https://github.com/mansourmoufid/aluminium-library
+Project-URL: Documentation, https://mansourmoufid.github.io/aluminium-library/python/
+Description: Aluminium Library is a cross-platform computer vision library.
+        
+        # Install
+        
+        On macOS:
+        
+            pip install aluminium-library
+        
+Keywords: camera,video,image processing
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Multimedia :: Graphics
+Classifier: Topic :: Multimedia :: Video
+Classifier: Topic :: Multimedia :: Video :: Capture
+Classifier: Topic :: Scientific/Engineering :: Image Processing
+Description-Content-Type: text/markdown
