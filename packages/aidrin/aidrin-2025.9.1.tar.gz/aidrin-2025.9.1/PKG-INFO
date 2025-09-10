@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: aidrin
+Version: 2025.9.1
+Summary: A tool to evaluate the readiness of data for AI
+Maintainer-email: Kaveen Hiniduma <hiniduma.1@osu.edu>, Suren Byna <byna.1@osu.edu>
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+License-File: AUTHORS.txt
+Requires-Dist: flask
+Requires-Dist: matplotlib
+Requires-Dist: dython
+Requires-Dist: pandas
+Requires-Dist: shap
+Requires-Dist: h5py
+Requires-Dist: celery
+Requires-Dist: redis
+Dynamic: license-file
+
+# AIDRIN – AI Data Readiness Inspector
+
+**AIDRIN** (AI Data Readiness Inspector) is a lightweight, open-source tool designed to evaluate the readiness of datasets for AI and machine learning workflows. It provides an intuitive web interface to assess dataset quality, completeness, and structure through quantitative metrics.
+
+For installation, usage, and contribution guidelines, please refer to the [AIDRIN documentation](https://aidrin.readthedocs.io/en/latest/).
