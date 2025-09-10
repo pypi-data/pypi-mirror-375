@@ -1,0 +1,10 @@
+pull_request_rules:
+  - name: "Auto merge bot PRs"
+    conditions:
+      - or:
+        - "author = github-actions[bot]"
+        - "author = pre-commit-ci[bot]"
+      - not: "conflict"
+    actions:
+      merge:
+        method: squash

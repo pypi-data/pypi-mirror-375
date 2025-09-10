@@ -1,0 +1,54 @@
+name: Update Help Image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/update-help-image.yml'
+      - 'scripts/update_help_image/**'
+      - 'docs/usage.md'
+      - 'YetAnotherPicSearch/res/usage.jpg'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: 'pyproject.toml'
+
+      - name: Install Pre-requisites
+        run: |-
+          sudo apt-get install -y fonts-noto
+
+      - name: Run Job
+        run: |-
+          cd scripts
+          uv sync
+          uv run poe update-help-image
+
+      - name: Commit and Push
+        run: |-
+          if [[ -n "$(git status -s)" ]]; then
+            git add .
+            git config user.name github-actions[bot]
+            git config user.email github-actions[bot]@users.noreply.github.com
+            git commit -m "chore: update help image"
+            git push
+          else
+            echo "No changes detected."
+          fi
