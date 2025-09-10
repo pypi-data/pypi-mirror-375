@@ -1,0 +1,9 @@
+[project]
+name = "scm-kit"
+version = "0.0.0"
+readme = "README.md"
+requires-python = ">=3.11"
+
+[project.scripts]
+scm-format = "scm_utils.format:main"
+scm-lint = "scm_utils.lint:main"
