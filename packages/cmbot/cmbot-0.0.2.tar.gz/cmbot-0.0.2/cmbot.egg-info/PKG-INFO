@@ -1,0 +1,107 @@
+Metadata-Version: 2.4
+Name: cmbot
+Version: 0.0.2
+Summary: A simple RPA framework.
+Home-page: https://github.com/mling17
+Author: ChenMing
+Author-email: mling17@163.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: attrs==25.3.0
+Requires-Dist: babel==2.17.0
+Requires-Dist: backports.tarfile==1.2.0
+Requires-Dist: build==1.2.2.post1
+Requires-Dist: certifi==2025.7.14
+Requires-Dist: cffi==2.0.0
+Requires-Dist: charset-normalizer==3.4.2
+Requires-Dist: colorama==0.4.6
+Requires-Dist: Cython==3.1.2
+Requires-Dist: docutils==0.21.2
+Requires-Dist: greenlet==3.2.4
+Requires-Dist: h11==0.16.0
+Requires-Dist: id==1.5.0
+Requires-Dist: idna==3.10
+Requires-Dist: webdriver_manager==4.0.2
+Requires-Dist: importlib_metadata==8.7.0
+Requires-Dist: jaraco.classes==3.4.0
+Requires-Dist: jaraco.context==6.0.1
+Requires-Dist: jaraco.functools==4.2.1
+Requires-Dist: keyring==25.6.0
+Requires-Dist: loguru==0.7.3
+Requires-Dist: markdown-it-py==3.0.0
+Requires-Dist: mdurl==0.1.2
+Requires-Dist: more-itertools==10.7.0
+Requires-Dist: MouseInfo==0.1.3
+Requires-Dist: nh3==0.2.22
+Requires-Dist: Nuitka==2.7.14
+Requires-Dist: numpy==2.2.6
+Requires-Dist: opencv-python==4.12.0.88
+Requires-Dist: ordered-set==4.1.0
+Requires-Dist: outcome==1.3.0.post0
+Requires-Dist: packaging==25.0
+Requires-Dist: pandas==2.3.2
+Requires-Dist: pillow==11.3.0
+Requires-Dist: psutil==7.0.0
+Requires-Dist: PyAutoGUI==0.9.54
+Requires-Dist: pycparser==2.22
+Requires-Dist: PyGetWindow==0.0.9
+Requires-Dist: Pygments==2.19.2
+Requires-Dist: PyMsgBox==2.0.1
+Requires-Dist: PyMuPDF==1.26.4
+Requires-Dist: pyotp==2.9.0
+Requires-Dist: pyperclip==1.9.0
+Requires-Dist: pyproject_hooks==1.2.0
+Requires-Dist: PyRect==0.2.0
+Requires-Dist: PyScreeze==1.0.1
+Requires-Dist: PySocks==1.7.1
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: pytweening==1.2.0
+Requires-Dist: pytz==2025.2
+Requires-Dist: pywin32==311
+Requires-Dist: pywin32-ctypes==0.2.3
+Requires-Dist: readme_renderer==44.0
+Requires-Dist: requests==2.32.4
+Requires-Dist: requests-toolbelt==1.0.0
+Requires-Dist: rfc3986==2.0.0
+Requires-Dist: rich==14.0.0
+Requires-Dist: selenium==4.35.0
+Requires-Dist: six==1.17.0
+Requires-Dist: sniffio==1.3.1
+Requires-Dist: sortedcontainers==2.4.0
+Requires-Dist: SQLAlchemy==2.0.43
+Requires-Dist: tabula==1.0.5
+Requires-Dist: tkcalendar==1.6.1
+Requires-Dist: trio==0.30.0
+Requires-Dist: trio-websocket==0.12.2
+Requires-Dist: twine==6.1.0
+Requires-Dist: typing_extensions==4.14.1
+Requires-Dist: tzdata==2025.2
+Requires-Dist: urllib3==2.5.0
+Requires-Dist: websocket-client==1.8.0
+Requires-Dist: win32_setctime==1.2.0
+Requires-Dist: wsproto==1.2.0
+Requires-Dist: xlwings==0.33.15
+Requires-Dist: zipp==3.23.0
+Requires-Dist: zstandard==0.24.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+一个RPA代码库
