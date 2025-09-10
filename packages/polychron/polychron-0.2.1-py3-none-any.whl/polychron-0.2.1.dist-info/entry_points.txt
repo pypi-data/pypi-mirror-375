@@ -1,0 +1,2 @@
+[console_scripts]
+polychron = polychron.entrypoint:main
