@@ -1,0 +1,81 @@
+{% import "macros/styles.html.jinja" as styles_html with context %}
+{% import "macros/textures.html.jinja" as texture_macros with context %}
+{% import "macros/formatting.jinja" as fmt_base with context %}
+
+{# jump to top icon in section headers #}
+{% macro jump_to_top() -%}
+  <a
+    href="#table-of-contents"
+    class="permalink small"
+    title="Jump to top"
+  ><i class="bi bi-box-arrow-up"></i></a>
+{%- endmacro %}
+
+{# link icon in section headers to get a permalink to that section #}
+{% macro permalink(href, class_name="") -%}
+  <a
+    href="#{{ href }}"
+    class="permalink small{{ ' '~class_name if class_name }}"
+    title="Permalink"
+  ><i class="bi bi-link-45deg"></i></a>
+{%- endmacro %}
+
+{# header for categories and entries #}
+{% macro section_header(value, header_tag, class_name) -%}
+  <{{ header_tag }} class="{{ class_name }} page-header">
+    {{ texture_macros.render_icon(value.icon) }}
+    {{- value.name ~ jump_to_top() ~ permalink(value.id.path) -}}
+  </{{ header_tag }}>
+{%- endmacro %}
+
+{# link to value.id, with spoiler blur if value is a spoiler #}
+{% macro maybe_spoilered_link(value) -%}
+  <a href="#{{ value.id.path }}" class="toc-elem {{ 'spoilered' if value.is_spoiler }}">
+    {{- texture_macros.render_icon(value.icon) }} {{ value.name -}}
+  </a>
+{%- endmacro %}
+
+{# macro block which spoiler blurs its content if value is a spoiler #}
+{% macro maybe_spoilered(value) -%}
+  {% if value.is_spoiler %}
+    <div class="spoilered">
+      {{ caller() }}
+    </div>
+  {% else %}
+    {{ caller() }}
+  {% endif %}
+{%- endmacro %}
+
+{% macro styled(value, safe=false) -%}
+  {{ fmt_base.styled(
+    value,
+    safe=safe,
+    separator="<br />"|safe,
+    styles=styles_html,
+  ) }}
+{%- endmacro %}
+
+{# dropdown(base_key: str) #}
+{% macro dropdown(base_key) -%}
+  <summary class="collapse-details">
+    <span class="collapse-recipe-show">{{ _(base_key~".show") }}</span>
+    <span class="collapse-recipe-hide">{{ _(base_key~".hide") }}</span>
+  </summary>
+{%- endmacro %}
+
+{% defaultmacro navbar_link(data) -%}
+  {% set external = data.external|default(true)|hexdoc_smart_var %}
+  {% set icon = data.icon|default("box-arrow-up-right" if external else false)|hexdoc_smart_var %}
+  <li>
+    <a
+      href="{{ data.href|hexdoc_smart_var }}"
+      {% if external %}
+        target="_blank"
+      {% endif %}
+      class="navbar-link"
+      role="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >{{ data.text|hexdoc_smart_var|safe }}{% if icon %} <i class="bi bi-{{ icon }} external-link-icon"></i>{% endif %}</a>
+  </li>
+{%- enddefaultmacro %}
