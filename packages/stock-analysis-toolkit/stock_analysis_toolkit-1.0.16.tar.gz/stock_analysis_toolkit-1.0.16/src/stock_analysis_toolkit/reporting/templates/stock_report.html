@@ -1,0 +1,486 @@
+{% extends "base.html" %}
+
+{% block title %}{{ symbol }} - Stock Analysis Report{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Stock-specific styles */
+    .stock-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .stock-title h1 {
+        font-size: 28px;
+        margin: 0;
+        color: var(--primary-color);
+    }
+
+    .stock-meta {
+        display: flex;
+        gap: 15px;
+    }
+
+    .stock-price {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .price-change {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 4px;
+    }
+
+    .positive {
+        color: var(--success-color);
+        background-color: #e8f5e9;
+    }
+
+    .negative {
+        color: var(--danger-color);
+        background-color: #ffebee;
+    }
+
+    .neutral {
+        color: var(--text-light);
+        background-color: #f5f5f5;
+    }
+
+    .key-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .metric-card {
+        background: var(--card-bg);
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: var(--shadow);
+        text-align: center;
+    }
+
+    .metric-value {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 5px 0;
+    }
+
+    .metric-label {
+        font-size: 14px;
+        color: var(--text-light);
+    }
+
+    .chart-container {
+        margin: 30px 0;
+    }
+
+    .recommendation {
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .recommendation i {
+        font-size: 24px;
+        margin-right: 15px;
+    }
+
+    .recommendation-content {
+        flex: 1;
+    }
+
+    .recommendation-strong-buy {
+        background-color: #e8f5e9;
+        border-left: 4px solid var(--success-color);
+    }
+
+    .recommendation-buy {
+        background-color: #e3f2fd;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .recommendation-hold {
+        background-color: #fff8e1;
+        border-left: 4px solid var(--warning-color);
+    }
+
+    .recommendation-sell {
+        background-color: #ffebee;
+        border-left: 4px solid var(--danger-color);
+    }
+
+    .news-item {
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .news-item:last-child {
+        border-bottom: none;
+    }
+
+    .news-date {
+        font-size: 12px;
+        color: var(--text-light);
+    }
+
+    .news-title {
+        font-weight: 500;
+        margin: 5px 0;
+    }
+
+    .news-summary {
+        font-size: 14px;
+        color: var(--text-light);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="stock-header">
+    <div class="stock-title">
+        <h1>{{ symbol }}
+            {% if analysis.company_info.name %}
+                - {{ analysis.company_info.name }}
+            {% endif %}
+        </h1>
+        {% if analysis.company_info.sector %}
+        <div class="stock-sector">
+            {{ analysis.company_info.sector }}
+            {% if analysis.company_info.industry %}
+                | {{ analysis.company_info.industry }}
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="stock-meta">
+        {% if analysis.price.current is defined %}
+        <div class="stock-price">
+            ${{ "%.2f"|format(analysis.price.current) }}
+        </div>
+        {% if analysis.price.change is defined and analysis.price.change_pct is defined %}
+        <div class="price-change {% if analysis.price.change > 0 %}positive{% elif analysis.price.change < 0 %}negative{% else %}neutral{% endif %}">
+            {{ "%+.2f"|format(analysis.price.change) }} ({{ "%+.2f"|format(analysis.price.change_pct) }}%)
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+<!-- Key Metrics -->
+<div class="card">
+    <div class="card-header">
+        <span><i class="fas fa-tachometer-alt"></i> Key Metrics</span>
+    </div>
+    <div class="card-body">
+        <div class="key-metrics">
+            {% if analysis.price is defined %}
+            <div class="metric-card">
+                <div class="metric-label">Market Cap</div>
+                <div class="metric-value">
+                    {% if analysis.price.market_cap %}
+                        ${{ "%.2f"|format(analysis.price.market_cap / 1000000000) }}B
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">52-Week Range</div>
+                <div class="metric-value">
+                    {% if analysis.fifty_two_week_high is defined and analysis.fifty_two_week_low is defined and analysis.fifty_two_week_high is not none and analysis.fifty_two_week_low is not none %}
+                        ${{ "%.2f"|format(analysis.fifty_two_week_low) }} - ${{ "%.2f"|format(analysis.fifty_two_week_high) }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Volume (Avg)</div>
+                <div class="metric-value">
+                    {% if analysis.price.volume and analysis.price.avg_volume %}
+                        {{ "%.2f"|format(analysis.price.volume / 1000000) }}M / {{ "%.2f"|format(analysis.price.avg_volume / 1000000) }}M
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if analysis.fundamentals is defined %}
+            <div class="metric-card">
+                <div class="metric-label">P/E Ratio</div>
+                <div class="metric-value">
+                    {% if analysis.fundamentals.pe_ratio %}
+                        {{ "%.2f"|format(analysis.fundamentals.pe_ratio) }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">P/B Ratio</div>
+                <div class="metric-value">
+                    {% if analysis.fundamentals.pb_ratio %}
+                        {{ "%.2f"|format(analysis.fundamentals.pb_ratio) }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Dividend Yield</div>
+                <div class="metric-value">
+                    {% if analysis.fundamentals.dividend_yield %}
+                        {{ "%.2f"|format(analysis.fundamentals.dividend_yield * 100) }}%
+                    {% else %}
+                        0.00%
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Price Chart -->
+<div class="card">
+    <div class="card-header">
+        <span><i class="fas fa-chart-line"></i> Price Chart</span>
+    </div>
+    <div class="card-body">
+        <div class="chart-container">
+            {% if charts.price_chart %}
+                <iframe src="{{ charts.price_chart }}" style="width: 100%; height: 500px; border: none;"></iframe>
+            {% else %}
+                <p>Chart data not available</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Technical Analysis -->
+<div class="card">
+    <div class="card-header">
+        <span><i class="fas fa-chart-bar"></i> Technical Indicators</span>
+    </div>
+    <div class="card-body">
+        <div class="chart-container">
+            {% if charts.tech_chart %}
+                <iframe src="{{ charts.tech_chart }}" style="width: 100%; height: 600px; border: none;"></iframe>
+            {% else %}
+                <p>Technical indicators not available</p>
+            {% endif %}
+        </div>
+
+        {% if analysis.technical is defined %}
+        <div class="row">
+            <div class="col">
+                <h3>Summary</h3>
+                <table>
+                    <tr>
+                        <th>Indicator</th>
+                        <th>Value</th>
+                        <th>Signal</th>
+                    </tr>
+                    {% if analysis.technical.rsi is defined %}
+                    <tr>
+                        <td>RSI (14)</td>
+                        <td>{{ "%.2f"|format(analysis.technical.rsi) }}</td>
+                        <td>
+                            {% if analysis.technical.rsi > 70 %}
+                                <span class="badge badge-danger">Overbought</span>
+                            {% elif analysis.technical.rsi < 30 %}
+                                <span class="badge badge-success">Oversold</span>
+                            {% else %}
+                                <span class="badge">Neutral</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if analysis.technical.macd is defined %}
+                    <tr>
+                        <td>MACD</td>
+                        <td>{{ "%.4f"|format(analysis.technical.macd) }}</td>
+                        <td>
+                            {% if analysis.technical.macd_signal is defined %}
+                                {% if analysis.technical.macd > analysis.technical.macd_signal %}
+                                    <span class="badge badge-success">Bullish</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Bearish</span>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if analysis.technical.bollinger_bands is defined %}
+                    <tr>
+                        <td>Bollinger Bands</td>
+                        <td>
+                            {% if analysis.technical.bollinger_bands.upper is defined and
+                                  analysis.technical.bollinger_bands.lower is defined %}
+                                {{ "%.2f - %.2f"|format(analysis.technical.bollinger_bands.lower,
+                                                     analysis.technical.bollinger_bands.upper) }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if analysis.price.current is defined and
+                                  analysis.technical.bollinger_bands.upper is defined and
+                                  analysis.technical.bollinger_bands.lower is defined %}
+                                {% if analysis.price.current > analysis.technical.bollinger_bands.upper %}
+                                    <span class="badge badge-danger">Overbought</span>
+                                {% elif analysis.price.current < analysis.technical.bollinger_bands.lower %}
+                                    <span class="badge badge-success">Oversold</span>
+                                {% else %}
+                                    <span class="badge">Neutral</span>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Recommendation -->
+{% if analysis.recommendation is defined %}
+<div class="recommendation recommendation-{{ analysis.recommendation.rating|lower|replace(' ', '-') }}">
+    {% if analysis.recommendation.rating == 'Strong Buy' %}
+        <i class="fas fa-arrow-up"></i>
+    {% elif analysis.recommendation.rating == 'Buy' %}
+        <i class="fas fa-arrow-up"></i>
+    {% elif analysis.recommendation.rating == 'Hold' %}
+        <i class="fas fa-pause"></i>
+    {% elif analysis.recommendation.rating == 'Sell' %}
+        <i class="fas fa-arrow-down"></i>
+    {% elif analysis.recommendation.rating == 'Strong Sell' %}
+        <i class="fas fa-arrow-down"></i>
+    {% else %}
+        <i class="fas fa-info-circle"></i>
+    {% endif %}
+
+    <div class="recommendation-content">
+        <h3>{{ analysis.recommendation.rating }}</h3>
+        <p>{{ analysis.recommendation.summary }}</p>
+    </div>
+</div>
+{% endif %}
+
+{% if analysis.news is defined and analysis.news|length > 0 %}
+<!-- News -->
+<div class="card">
+    <div class="card-header">
+        <span><i class="far fa-newspaper"></i> Latest News</span>
+    </div>
+    <div class="card-body">
+        {% for item in analysis.news[:5] %}
+        <div class="news-item">
+            <div class="news-date">{{ item.date }}</div>
+            <div class="news-title">
+                <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+            </div>
+            <div class="news-summary">{{ item.summary|truncate(200) }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if not is_index %}
+<!-- Fundamental Analysis -->
+<div class="card">
+    <div class="card-header">
+        <span><i class="fas fa-chart-pie"></i> Fundamental Analysis</span>
+    </div>
+    <div class="card-body">
+        {% if analysis.fundamentals is defined %}
+        <div class="row">
+            <div class="col-6">
+                <h3>Valuation Metrics</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    {% for key, value in analysis.fundamentals.get('valuation_metrics', {}).items() %}
+                    <tr>
+                        <td>{{ key|replace('_', ' ')|title }}</td>
+                        <td>
+                            {% if value is number %}
+                                {% if key.endswith('_ratio') or key.endswith('_yield') %}
+                                    {{ "%.2f"|format(value) }}
+                                {% else %}
+                                    ${{ "%.2f"|format(value) }}
+                                {% endif %}
+                            {% else %}
+                                {{ value }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="col-6">
+                <h3>Financial Health</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    {% for key, value in analysis.fundamentals.get('financial_health', {}).items() %}
+                    <tr>
+                        <td>{{ key|replace('_', ' ')|title }}</td>
+                        <td>
+                            {% if value is number %}
+                                {% if key.endswith('_ratio') or key.endswith('_yield') %}
+                                    {{ "%.2f"|format(value) }}
+                                {% else %}
+                                    ${{ "%.2f"|format(value) }}
+                                {% endif %}
+                            {% else %}
+                                {{ value }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <p>Fundamental data not available for this security.</p>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add any interactive elements here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add any client-side functionality
+    });
+</script>
+{% endblock %}
