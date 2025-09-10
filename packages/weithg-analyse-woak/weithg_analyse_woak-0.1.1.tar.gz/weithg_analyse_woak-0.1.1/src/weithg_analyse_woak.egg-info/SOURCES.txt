@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/weithg_analyse_woak/__init__.py
+src/weithg_analyse_woak/core.py
+src/weithg_analyse_woak/log.py
+src/weithg_analyse_woak/server.py
+src/weithg_analyse_woak.egg-info/PKG-INFO
+src/weithg_analyse_woak.egg-info/SOURCES.txt
+src/weithg_analyse_woak.egg-info/dependency_links.txt
+src/weithg_analyse_woak.egg-info/top_level.txt
+tests/test_main.py
