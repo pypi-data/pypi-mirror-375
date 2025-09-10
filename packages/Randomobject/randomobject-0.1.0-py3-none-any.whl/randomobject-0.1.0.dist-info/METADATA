@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: Randomobject
+Version: 0.1.0
+Summary: A simple random object selector
+Author-email: Your Name <your@email.com>
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Randomobject
+
+کتابخونه‌ای ساده برای انتخاب رندومی از بین آبجکت‌ها یا متن‌ها.
+
+## نصب
+```bash
+pip install Randomobject
+```
+
+## استفاده
+```python
+from Randomobject import RandomObject
+
+r = RandomObject("سلام", "خوبی؟", "چه خبر؟")
+print(r.get())
+```
