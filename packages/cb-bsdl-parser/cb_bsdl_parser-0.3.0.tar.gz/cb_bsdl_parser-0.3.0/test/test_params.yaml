@@ -1,0 +1,79 @@
+test0:
+  name: "Test0 LPC1857FET256"
+  file_name: "./test/bsdl_files/lpc1857fet256_revA_20180227-v1.bsd"
+  entity_name: "LPC1857FET256"
+  physical_pin_map: "LBGA256"
+  bsr_len: "545"
+  bsr_cell: "PF_11_in"
+  bsr_data_cell: 2
+  bsr_cell_desc: "PF_11"
+  bsr_cell_type: "BC_4"
+  bsr_cell_func: "OBSERVE_ONLY"
+  bsr_cell_val: "X"
+  bsr_ctrl_cell:
+  bsr_disval:
+
+test1:
+  name: "Test1 STM32G431_441"
+  file_name: "./test/bsdl_files/STM32G431_441_LQFP64.bsd"
+  entity_name: "STM32G431_441_LQFP64"
+  physical_pin_map: "LQFP64_PACKAGE"
+  bsr_len: "240"
+  bsr_cell: "PC13_out"
+  bsr_data_cell: 223
+  bsr_cell_desc: "PC13"
+  bsr_cell_type: "BC_1"
+  bsr_cell_func: "OUTPUT3"
+  bsr_cell_val: "X"
+  bsr_ctrl_cell: 224
+  bsr_disval: 1
+
+
+test2:
+  name: "Test2 STM32G471_473_474_483_484"
+  file_name: "./test/bsdl_files/STM32G471_473_474_483_484_LQFP64.bsdl"
+  entity_name: "STM32G471_473_474_483_484_LQFP64"
+  physical_pin_map: "LQFP64_PACKAGE"
+  bsr_len: "303"
+  bsr_cell: "PC13_in"
+  bsr_data_cell: 285
+  bsr_cell_desc: "PC13"
+  bsr_cell_type: "BC_4"
+  bsr_cell_func: "INPUT"
+  bsr_cell_val: "X"
+  bsr_ctrl_cell:
+  bsr_disval:
+
+test3:
+  name: "Test3 STM32U575_U585"
+  file_name: "./test/bsdl_files/STM32U575_U585_LQFP64.bsd"
+  entity_name: "STM32U575_U585_LQFP64"
+  physical_pin_map: "LQFP64_PACKAGE"
+  bsr_len: "393"
+  bsr_cell: "PC13_out"
+  bsr_data_cell: 376
+  bsr_cell_desc: "PC13"
+  bsr_cell_type: "BC_1"
+  bsr_cell_func: "OUTPUT3"
+  bsr_cell_val: "X"
+  bsr_ctrl_cell: 377
+  bsr_disval: 1
+
+test4:
+  name: "Test4 sn74bct8244a"
+  file_name: "./test/bsdl_files/sctm002.bsm"
+  entity_name: "sn74bct8244a"
+  physical_pin_map: "UNDEFINED"
+  bsr_len: "18"
+  # This BSDL file "attribute BOUNDARY_LENGTH" (18)  does not match the length
+  # of the "attribute BOUNDARY_REGISTER" (20). This is a known issue with this BSDL file,
+  # and the parser is designed to handle this discrepancy. Therefore, we skip the check.
+  check_bsr: false
+  bsr_cell: "Y1(3)_out"
+  bsr_data_cell: 5
+  bsr_cell_desc: "Y1(3)"
+  bsr_cell_type: "BC_1"
+  bsr_cell_func: "output3"
+  bsr_cell_val: "X"
+  bsr_ctrl_cell: 17
+  bsr_disval: 1
