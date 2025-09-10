@@ -1,0 +1,2 @@
+[console_scripts]
+hailctl = hailtop.hailctl.__main__:main
