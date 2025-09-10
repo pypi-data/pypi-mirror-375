@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/dellin/__init__.py
+src/dellin/api.py
+src/dellin/py.typed
+src/dellin.egg-info/PKG-INFO
+src/dellin.egg-info/SOURCES.txt
+src/dellin.egg-info/dependency_links.txt
+src/dellin.egg-info/requires.txt
+src/dellin.egg-info/top_level.txt
+tests/test_basic.py
