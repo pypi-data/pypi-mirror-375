@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-git-ingest = mcp_git_ingest.main:mcp.run
