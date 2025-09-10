@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-paypal-invoice-mcp-server
+Version: 0.1.4
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.5.0
+Requires-Dist: paypalrestsdk>=1.13.3
+
+Package managed by MseeP.ai
