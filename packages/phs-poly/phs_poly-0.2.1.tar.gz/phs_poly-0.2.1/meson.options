@@ -1,0 +1,2 @@
+option('lapack', type: 'string', value: 'accelerate',
+        description: 'option for LAPACK library switching')
