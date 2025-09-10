@@ -1,0 +1,83 @@
+.sidebar-aware {
+    @media only screen and (min-width: 992px) {
+        padding-left: 300px;
+    }
+}
+
+.d-sidebar-header {
+    height: 64px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    padding: 12px 24px 12px 24px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.sidenav .collapsible-header {
+    padding-left: 24px;
+    font-weight: 500;
+}
+
+.sidenav .collapsible-body {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    li a {
+        padding-left: 48px;
+        line-height: 32px;
+        height: 32px;
+        color: rgba(0, 0, 0, 0.87) !important;
+        font-weight: normal !important;
+
+        &:hover {
+            background: transparent !important;
+        }
+    }
+}
+
+.d-sidebar-github {
+    display: flex;
+    font-size: 14px;
+    height: 48px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    padding: 8px 24px 8px 24px;
+    align-items: center;
+
+    * { margin: 4px; }
+
+    svg {
+        width: 1.5em;
+        height: 1.5em;
+    }
+}
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.d-sidebar-footer {
+    padding: 12px 24px 12px 24px;
+
+    .d-sidebar-footer-links {
+        display: flex;
+        gap: 8px;
+        a {
+            color: rgb(97, 97, 97);
+            font-size: 14px;
+        }
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    .d-sidebar-footer-copy {
+        color: rgb(97, 97, 97);
+        font-size: 14px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+}
+
+.d-sidebar-single-link a {
+    padding-left: 24px!important;
+}
