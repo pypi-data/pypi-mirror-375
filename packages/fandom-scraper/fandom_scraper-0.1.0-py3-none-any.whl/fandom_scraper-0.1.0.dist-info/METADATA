@@ -1,0 +1,11 @@
+Metadata-Version: 2.3
+Name: fandom-scraper
+Version: 0.1.0
+Summary: A simple AI (span-marker) powered fandom scraper
+Author: AnthonyP57
+Author-email: AnthonyP57 <antonipawlowicz123@gmail.com>
+Requires-Dist: fandom-py>=0.2.1
+Requires-Dist: span-marker>=1.7.0
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
