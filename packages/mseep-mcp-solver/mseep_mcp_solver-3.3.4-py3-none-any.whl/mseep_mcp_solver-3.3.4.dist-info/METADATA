@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-solver
+Version: 3.3.4
+Summary: MCP server for Constraint, SAT, and SMT solving
+Author-email: mseep <support@skydeck.ai>
+License-File: LICENSE
+Requires-Python: >=3.11
+Requires-Dist: mcp>=1.5.0
+Requires-Dist: nest-asyncio>=1.6.0
+Requires-Dist: six>=1.17.0
+Requires-Dist: tomli>=2.2.1
+Provides-Extra: all
+Requires-Dist: mcp-solver[client,dev,mzn,pysat,z3]; extra == 'all'
+Provides-Extra: client
+Requires-Dist: langchain-anthropic>=0.3.10; extra == 'client'
+Requires-Dist: langchain-core>=0.3.49; extra == 'client'
+Requires-Dist: langchain-google-genai>=2.0.0; extra == 'client'
+Requires-Dist: langchain-openai>=0.3.11; extra == 'client'
+Requires-Dist: langchain>=0.3.21; extra == 'client'
+Requires-Dist: langgraph>=0.3.21; extra == 'client'
+Requires-Dist: openai>=1.69.0; extra == 'client'
+Requires-Dist: python-dotenv>=1.1.0; extra == 'client'
+Requires-Dist: rich>=13.9.4; extra == 'client'
+Requires-Dist: uuid>=1.30; extra == 'client'
+Provides-Extra: dev
+Requires-Dist: coverage>=7.7.1; extra == 'dev'
+Requires-Dist: pytest>=8.3.5; extra == 'dev'
+Requires-Dist: ruff>=0.4.10; extra == 'dev'
+Provides-Extra: mzn
+Requires-Dist: minizinc<=0.10.0; extra == 'mzn'
+Provides-Extra: pysat
+Requires-Dist: python-sat>=1.8.dev16; extra == 'pysat'
+Provides-Extra: z3
+Requires-Dist: z3-solver>=4.14.1.0; extra == 'z3'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
