@@ -1,0 +1,60 @@
+# Introduction
+Python client for Midgard API
+
+THORChain has several APIs - Midgard, THORNode, Cosmos RPC, CometBFT RPC. This python client focuses on interactions with Midgard API.
+
+Built for Midgard Public API version 2.32.8.
+
+[API Docs](https://midgard.ninerealms.com/v2/doc)
+
+# Warning
+
+I needed this to use only one endpoint, so first release will be very much useless for anyone. I will continue working on this and covering all API endpoints in the future when I have more free time.
+
+# Progress
+
+Below is the implementation status of the major sections of Midgard API in this Python client:
+
+| Section      | Implemented | Notes |
+|--------------|-------------|-------|
+| Health Info  | ✅           |       |
+| Pools List   | ✅           |       |
+
+If you notice any discrepancy or want a section prioritized, please open an issue or PR.
+
+# Installation
+
+## Normal installation
+
+```bash
+pip install midgard-py
+```
+
+## Development installation
+
+```bash
+git clone https://github.com/jpleorx/midgard-py.git
+cd midgard-py
+pip install --editable .
+```
+
+# Usage
+
+```python
+from midgard_py import MidgardAPI
+
+api = MidgardAPI()
+
+# Check that it's online
+health = api.health()
+
+# Get pools
+pools = api.pools()
+```
+
+# Links
+In case you’d like to check my other work or contact me:
+* E-mail: [leo.ertuna@gmail.com](mailto:leo.ertuna@gmail.com)
+* [GitHub](https://github.com/jpleorx)
+* [PyPI](https://pypi.org/user/JPLeoRX/)
+* [DockerHub](https://hub.docker.com/u/jpleorx)
