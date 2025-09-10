@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/work_test11/__init__.py
+src/work_test11/core.py
+src/work_test11/log.py
+src/work_test11/server.py
+src/work_test11.egg-info/PKG-INFO
+src/work_test11.egg-info/SOURCES.txt
+src/work_test11.egg-info/dependency_links.txt
+src/work_test11.egg-info/top_level.txt
+tests/test_main.py
