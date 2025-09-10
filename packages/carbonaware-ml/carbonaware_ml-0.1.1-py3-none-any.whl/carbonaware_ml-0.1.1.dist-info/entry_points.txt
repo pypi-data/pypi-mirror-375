@@ -1,0 +1,3 @@
+[console_scripts]
+carbonaware=carbonaware_ml.cli:main
+
