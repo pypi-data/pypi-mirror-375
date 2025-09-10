@@ -1,0 +1,6 @@
+*.pyc
+*.pyo
+__pycache__/
+/chromatic/_version.py
+/chromatic/data/userfont.json
+/tests/_*
