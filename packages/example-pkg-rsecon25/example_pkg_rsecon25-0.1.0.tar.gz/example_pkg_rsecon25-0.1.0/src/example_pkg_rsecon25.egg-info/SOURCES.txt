@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/arithmetic/__init__.py
+src/arithmetic/addition.py
+src/arithmetic/draft/addition_3.py
+src/arithmetic/draft/addition_4.py
+src/example_pkg_rsecon25.egg-info/PKG-INFO
+src/example_pkg_rsecon25.egg-info/SOURCES.txt
+src/example_pkg_rsecon25.egg-info/dependency_links.txt
+src/example_pkg_rsecon25.egg-info/requires.txt
+src/example_pkg_rsecon25.egg-info/top_level.txt
+src/genomics/__init__.py
+src/genomics/annotation.py
+src/genomics/draft/annotation_2.py
+tests/test_arithmetic.py
+tests/test_genomics.py
