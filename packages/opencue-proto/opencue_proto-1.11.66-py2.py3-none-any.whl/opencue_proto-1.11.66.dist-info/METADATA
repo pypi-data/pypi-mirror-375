@@ -1,0 +1,5 @@
+Metadata-Version: 2.1
+Name: opencue_proto
+Version: 1.11.66
+Requires-Dist: grpcio-tools>=1.62.0
+Requires-Dist: grpcio>=1.62.0
