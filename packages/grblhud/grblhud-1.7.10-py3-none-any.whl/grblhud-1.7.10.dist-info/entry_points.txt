@@ -1,0 +1,3 @@
+[console_scripts]
+grblhud=grblhud.__main__:main
+
