@@ -1,0 +1,28 @@
+# .readthedocs.yml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+version: 2
+
+build:
+  os: ubuntu-22.04
+  apt_packages:
+    - git-lfs
+  tools:
+    python: "3.11"
+  jobs:
+    post_install:
+      # download LFS data
+      - git lfs install --local
+      - git lfs fetch
+      - git lfs checkout
+
+sphinx:
+  configuration: docs/conf.py
+
+python:
+  install:
+    - method: pip
+      path: .
+      extra_requirements:
+        - docs

@@ -1,0 +1,547 @@
+include:
+  - project: computing/gitlab-ci-templates
+    file:
+      - debian.yml
+      - python.yml
+
+  # -- conda ------------------------
+  # https://computing.docs.ligo.org/guide/gitlab/components/conda/base/
+  - component: $CI_SERVER_FQDN/computing/gitlab/components/conda/base@main
+
+
+stages:
+  - build
+  - basic
+  - test
+  - compatibility
+  - coverage
+  - docs
+  - deploy
+
+
+default:
+  retry:
+    # retry all jobs at most twice if the runner failed to start the job
+    max: 2
+    when:
+      - api_failure
+      - runner_system_failure
+      - stale_schedule
+      - archived_failure
+      - scheduler_failure
+      - data_integrity_failure
+  # cancel jobs when a newer pipeline starts
+  interruptible: true
+
+
+.parallel_python: &parallel_python
+  parallel:
+    matrix:
+      - PY_VERSION: ["3.10", "3.11"]
+  tags:
+    - executor-docker
+
+
+.parallel_gwtc: &parallel_gwtc
+  parallel:
+    matrix:
+      - CATALOG: ["1", "2", "3"]
+  tags:
+    - executor-docker
+
+
+variables:
+  # caching
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
+  XDG_CACHE_HOME: "${CI_PROJECT_DIR}/.cache"
+  # force individual tests to only use one core
+  # (list taken from
+  #  https://github.com/htcondor/htcondor/blob/v23.0.0/src/condor_utils/param_info.in#L2693)
+  CUBACORES: 1
+  GOMAXPROCS: 1
+  JULIA_NUM_THREADS: 1
+  MKL_NUM_THREADS: 1
+  NUMEXPR_NUM_THREADS: 1
+  OMP_NUM_THREADS: 1
+  OMP_THREAD_LIMIT: 1
+  OPENBLAS_NUM_THREADS: 1
+  TF_LOOP_PARALLEL_ITERATIONS: 1
+  TF_NUM_THREADS: 1
+
+cache:
+  key: "${CI_JOB_NAME}"
+  paths:
+    - .cache/pip
+    - .cache/pesummary/download
+
+
+before_script:
+  - mkdir -p "${CI_PROJECT_DIR}/.cache/pesummary"
+  - python -m pip install .[test,extras]
+  - cat pesummary/.version
+  - 'apt-get update -y && bash && apt-get -y install pandoc'
+  - export USER=albert.einstein
+  - export NCPU=`python -c "import multiprocessing; print(min(4, multiprocessing.cpu_count()))"`
+
+
+.prepare_testing: &prepare_testing
+  - export BASE=`pwd`
+  - export PESUMMARY_REPO_DIR=${BASE}
+  - export PESUMMARY_TESTING_DIR=`python -c "import pkg_resources; print(pkg_resources.resource_filename('pesummary', 'tests'))"`
+  - mkdir -p _testing
+  - cd _testing
+
+
+.finalise_testing: &finalise_testing
+  - cd ${BASE}
+
+
+tarball:
+  extends:
+    # https://computing.docs.ligo.org/gitlab-ci-templates/python/#.python:build
+    - .python:build
+  stage: build
+  needs: []
+  tags:
+    - executor-docker
+
+
+conda:
+  extends:
+    # https://computing.docs.ligo.org/guide/gitlab/components/conda/base/
+    - .conda_base
+  stage: build
+  needs: []
+  variables:
+    PYTHON_VERSION: "3.10"
+  before_script:
+    - !reference [".conda_base", before_script]
+    - conda install --name base pip2conda
+    - python -m pip2conda --all --output environment.yml --python ${PYTHON_VERSION} -vv
+    - echo "-----------------"
+    - cat environment.yml
+    - echo "-----------------"
+    - mamba env create --name py${PYTHON_VERSION} --file environment.yml
+    - conda activate py${PYTHON_VERSION}
+  script:
+    - python -m pip install .
+  tags:
+    - executor-docker
+
+
+docker:
+  stage: build
+  image: docker:19.03.10
+  variables:
+    PYTHON_VERSION: "3.10"
+  before_script:
+    - apk update
+    - apk add py3-pip
+    - apk add python3
+  script:
+    - python3 containers/write_dockerfile.py --python ${PYTHON_VERSION}
+    - docker build -f containers/Dockerfile-pesummary-python${PYTHON_VERSION/./} -t pesummary-dev/latest . --build-arg installation=./
+    - docker run pesummary-dev/latest summarytest --type imports
+  artifacts:
+    paths:
+      - "containers/Dockerfile-pesummary-python*"
+  tags:
+    - executor-docker
+
+
+executables:
+  stage: basic
+  image: python:3.10
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --type executables
+    - *finalise_testing
+  tags:
+    - executor-docker
+
+
+imports:
+  stage: basic
+  image: python:3.10
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --type imports
+    - *finalise_testing
+  tags:
+    - executor-docker
+
+
+style:
+  extends:
+    # https://computing.docs.ligo.org/gitlab-ci-templates/python/#.python:flake8
+    - .python:flake8
+  stage: basic
+  needs: []
+  variables:
+    # don't fail the pipeline because of linting issues,
+    # these are presented in the code-quality box in the
+    # merge_request UI
+    FLAKE8_OPTIONS: "--exit-zero"
+  tags:
+    - executor-docker
+
+
+examples:
+  stage: basic
+  image: python:3.10
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --type examples --repository ${PESUMMARY_REPO_DIR}
+    - *finalise_testing
+  allow_failure: true
+  tags:
+    - executor-docker
+
+
+authors:
+  stage: basic
+  image: python:3.10
+  needs: []
+  script:
+    - curl --request POST --form "token=$CI_EXAMPLES_TRIGGER_TOKEN" --form "variables[TYPE]=authors" --form ref=master https://git.ligo.org/api/v4/projects/3386/trigger/pipeline
+  only:
+    refs:
+      - master@lscsoft/pesummary
+  tags:
+    - executor-docker
+
+
+.python-3.10-testing:
+  needs: []
+  image: python:3.10
+  artifacts:
+    paths:
+      - .coverage*
+      - htmlcov/
+      - coverage_badge.svg
+
+
+test:base:
+  <<: *parallel_python
+  stage: test
+  image: python:$PY_VERSION
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --multi_process ${NCPU} -m "not executabletest and not ligoskymaptest and not workflowtest" --type tests --coverage --output ${BASE} --pytest_config ${BASE}/pyproject.toml
+    - *finalise_testing
+    - mv _testing/.coverage* .
+    - mv .coverage .coverage_base
+  artifacts:
+    paths:
+      - .coverage*
+      - htmlcov/
+      - coverage_badge.svg
+
+
+test:executables:
+  extends: test:base
+  script:
+    - *prepare_testing
+    - summarytest --multi_process ${NCPU} -m "executabletest and not ligoskymaptest and not workflowtest" --type tests --coverage --output ${BASE} --pytest_config ${BASE}/pyproject.toml
+    - *finalise_testing
+    - mv _testing/.coverage* .
+    - mv .coverage .coverage_exe
+
+
+end-to-end:core:
+  <<: *parallel_python
+  stage: test
+  image: python:$PY_VERSION
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --multi_process ${NCPU} --type workflow -k "Core or core" --pytest_config ${BASE}/pyproject.toml
+    - *finalise_testing
+
+
+end-to-end:gw:
+  extends: end-to-end:core
+  script:
+    - *prepare_testing
+    - summarytest --multi_process ${NCPU} --type workflow -k "GW or gw" --pytest_config ${BASE}/pyproject.toml
+    - *finalise_testing
+
+
+ligo_skymap:
+  extends: .python-3.10-testing
+  stage: compatibility
+  script:
+    - *prepare_testing
+    - summarytest --type skymap --coverage
+    - *finalise_testing
+    - mv _testing/.coverage* .
+    - mv .coverage .coverage_sky
+  only:
+    - schedule
+    - pushes
+  tags:
+    - executor-docker
+
+
+bilby:
+  stage: compatibility
+  image: python:3.10
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --type bilby
+    - *finalise_testing
+  only:
+    - schedule
+    - pushes
+  tags:
+    - executor-docker
+
+
+bilby_pipe:
+  stage: compatibility
+  image: python:3.10
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --type bilby_pipe
+    - *finalise_testing
+  only:
+    - schedule
+    - pushes
+  tags:
+    - executor-docker
+
+
+pycbc_inference:
+  stage: compatibility
+  image: python:3.10
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --type pycbc
+    - *finalise_testing
+  only:
+    - schedule
+    - pushes
+  tags:
+    - executor-docker
+
+
+GWTC:
+  <<: *parallel_gwtc
+  stage: compatibility
+  image: python:3.10
+  needs: []
+  script:
+    - *prepare_testing
+    - summarytest --type GWTC$CATALOG
+    - *finalise_testing
+
+
+coverage:
+  extends: .python-3.10-testing
+  stage: coverage
+  needs:
+    - test:base
+    - test:executables
+    - ligo_skymap
+  script:
+    - *prepare_testing
+    - *finalise_testing
+    - coverage combine .coverage_base .coverage_exe .coverage_sky
+    - coverage report
+    - coverage html --directory ./htmlcov/
+    - coverage-badge -o coverage_badge.svg -f
+
+# -- docs
+
+.docs:
+  # https://computing.docs.ligo.org/gitlab-ci-templates/python/#.python:sphinx
+  extends: .python:sphinx
+  image: python:3.10
+  stage: docs
+  needs: []
+  variables:
+    # install this package and it's [docs] extra
+    REQUIREMENTS: ".[docs]"
+    # options to pass to sphinx
+    SPHINXOPTS: "-j 4"
+  before_script:
+    - !reference [".debian:base", "before_script"]
+    - apt-get -y install pandoc
+    - !reference [".python:sphinx", "before_script"]
+    - pip install --upgrade sphinx
+  tags:
+    - executor-docker
+
+documentation:
+  extends: .docs
+  artifacts:
+    expose_as: Latest docs
+
+.old-docs:
+  extends:
+    - .debian:base
+    - .docs
+  variables:
+    # we need the full history to guarantee that we can check out the
+    # old reference/stable tags
+    GIT_DEPTH: 0
+  rules:
+    # only run on pushes to the a branch of the main repo
+    - if: '$CI_PROJECT_PATH == "lscsoft/pesummary" && $CI_PIPELINE_SOURCE == "push"'
+
+reference-docs:
+  extends: .old-docs
+  image: python:3.9
+  variables:
+    CONDA_YAML: "https://computing.docs.ligo.org/conda/environments/linux-64/igwn-py310.yaml"
+  before_script:
+    - !reference [".debian:base", "before_script"]
+    - apt-get -y install git-lfs pandoc
+    # create a virtualenv to support finding the reference version
+    - python -m venv --system-site-packages venv
+    - ./venv/bin/python -m pip install requests pyyaml
+    # parse the IGWN Conda Distribution igwn-py39 environment YAML file
+    # for the version of pesummary
+    - |
+      REFERENCE_VERSION=v$(./venv/bin/python -c "
+      import requests
+      import yaml
+      resp = requests.get('${CONDA_YAML}')
+      resp.raise_for_status()
+      refenv = yaml.safe_load(resp.content)
+      for pkg in refenv['dependencies']:
+          if pkg.startswith('pesummary='):
+              print(pkg.split('=', 2)[1])
+              break
+      ")
+    # clean up and then check out that version of the project
+    - rm -rf ./venv/
+    - git checkout "${REFERENCE_VERSION}"
+    # hack out the warning from old branches, see
+    # https://git.ligo.org/lscsoft/pesummary/-/blob/v0.13.9/docs/index.rst#L14-L20
+    - if [[ "${REFERENCE_VERSION}" == "v0.13.9" ]]; then
+          sed -i 's/.. warning::/.. ignore::/g' docs/index.rst;
+          export SETUPTOOLS_SCM_PRETEND_VERSION="${REFERENCE_VERSION/v/}";
+      fi
+    # configure Sphinx
+    - !reference [".python:sphinx", before_script]
+    # FIXME: misc fixes for old docs
+    # FIXME: can be removed once pesummary >=1.2.0 is approved by SCCB
+    - python -m pip install
+          "GitPython"
+          "ipykernel"
+          "nbsphinx"
+          "seaborn>=0.12.2,<0.13.0"
+          "Sphinx >=4.0.0,!=5.0.0"
+          "sphinx-argparse"
+          "sphinx-panels"
+          "sphinx_rtd_theme"
+          "sphinxcontrib-programoutput"
+  script:
+    - !reference [".python:sphinx", script]
+    # insert the reference version into the output
+    - echo ${REFERENCE_VERSION} > html/.version
+    - mv html reference
+  artifacts:
+    expose_as: Reference docs
+    paths:
+      - reference/index.html
+      - reference
+
+stable-docs:
+  extends: .old-docs
+  before_script:
+    - !reference [".debian:base", "before_script"]
+    - apt-get -y install git-lfs pandoc
+    # find the most recent tag and check that out
+    - STABLE_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+    - git checkout "${STABLE_TAG}"
+    # hack out the warning from the 0.13.9 stable branch, see
+    # https://git.ligo.org/lscsoft/pesummary/-/blob/v0.13.9/docs/index.rst#L14-L20
+    - if [[ "${STABLE_TAG}" == "v0.13.9" ]]; then
+          sed -i 's/.. warning::/.. ignore::/g' docs/index.rst;
+          export SETUPTOOLS_SCM_PRETEND_VERSION="${STABLE_TAG/v/}";
+      fi
+    # configure Sphinx
+    - !reference [".python:sphinx", before_script]
+    # FIXME: misc fixes for old docs
+    # FIXME: can be removed once pesummary-0.13.10 is released
+    - python -m pip install
+          "GitPython"
+    # FIXME: can be removed on pesummary-1.2.0 is released
+    - python -m pip install 'Sphinx >=4.0.0,!=5.0.0'
+  script:
+    - !reference [".python:sphinx", script]
+    # insert the reference version into the output
+    - echo ${STABLE_TAG} > html/.version
+    - mv html stable
+  artifacts:
+    expose_as: Stable docs
+    paths:
+      - stable/index.html
+      - stable
+
+# -- deploy
+
+build_examples:
+  stage: deploy
+  image: python:3.10
+  script:
+    - curl --request POST --form "token=$CI_EXAMPLES_TRIGGER_TOKEN" --form ref=master https://git.ligo.org/api/v4/projects/3386/trigger/pipeline
+  only:
+    - master@lscsoft/pesummary
+
+
+pages:
+  stage: deploy
+  image: python:3.10
+  dependencies:
+    - tarball
+    - executables
+    - imports
+    - style
+    - examples
+    - test:base
+    - test:executables
+    - end-to-end:core
+    - end-to-end:gw
+    - bilby
+    - bilby_pipe
+    - GWTC
+    - coverage
+    - documentation
+    - reference-docs
+    - stable-docs
+  script:
+    - mkdir -v public
+    # latest docs
+    - mv html public/latest
+    # stable docs
+    - STABLE_VERSION=$(cat stable/.version)
+    - mv stable public/
+    - REFERENCE_VERSION=$(cat reference/.version)
+    - mv reference public/
+    # move coverage
+    - mv htmlcov/ public/
+    - mv coverage_badge.svg public/
+    # create front page
+    - sed
+          -e "s/REFERENCE_VERSION/"${REFERENCE_VERSION/v/}"/g"
+          -e "s/STABLE_VERSION/"${STABLE_VERSION/v/}"/g"
+          docs/front.html.in
+          > public/index.html
+    - cp pesummary/core/webpage/copyright.txt public
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  rules:
+    # only run on pushes to the default branch of the main repo
+    - if: '$CI_PROJECT_PATH == "lscsoft/pesummary" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

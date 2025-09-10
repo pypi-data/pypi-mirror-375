@@ -1,0 +1,101 @@
+Metadata-Version: 2.4
+Name: pesummary
+Version: 1.5.2
+Summary: Python package to produce summary pages for Parameter estimation codes
+Author-email: Charlie Hoy <charlie.hoy@ligo.org>
+License: MIT
+Project-URL: Homepage, https://lscsoft.docs.ligo.org/pesummary
+Project-URL: Documentation, https://lscsoft.docs.ligo.org/pesummary/
+Project-URL: Issue Tracker, https://git.ligo.org/lscsoft/pesummary/-/issues/
+Project-URL: Source Code, https://git.ligo.org/lscsoft/pesummary.git
+Project-URL: Download, https://lscsoft.docs.ligo.org/pesummary/stable/installation.html
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: astropy>=5.0
+Requires-Dist: corner
+Requires-Dist: gwpy>=3.0.11
+Requires-Dist: h5py
+Requires-Dist: lalsuite>7.11
+Requires-Dist: python-ligo-lw<2.0.0
+Requires-Dist: ligo-gracedb
+Requires-Dist: matplotlib<3.10.0,>=3.6.0
+Requires-Dist: numpy>=1.15.4
+Requires-Dist: pandas
+Requires-Dist: pygments
+Requires-Dist: plotly
+Requires-Dist: pillow
+Requires-Dist: seaborn<0.13.0,>=0.12.2
+Requires-Dist: statsmodels
+Requires-Dist: scipy>=1.8.0
+Requires-Dist: tables
+Requires-Dist: tqdm>=4.44.0
+Provides-Extra: docs
+Requires-Dist: ipykernel; extra == "docs"
+Requires-Dist: nbsphinx; extra == "docs"
+Requires-Dist: pycbc; extra == "docs"
+Requires-Dist: requests; extra == "docs"
+Requires-Dist: Sphinx!=5.0.0,>=4.0.0; extra == "docs"
+Requires-Dist: sphinx-argparse; extra == "docs"
+Requires-Dist: sphinx_rtd_theme; extra == "docs"
+Requires-Dist: sphinx-panels; extra == "docs"
+Requires-Dist: sphinxcontrib-programoutput; extra == "docs"
+Provides-Extra: lint
+Requires-Dist: flake8>=3.7.0; extra == "lint"
+Requires-Dist: flake8-bandit; extra == "lint"
+Provides-Extra: test
+Requires-Dist: astropy!=4.3.0,>=4.0; extra == "test"
+Requires-Dist: beautifulsoup4>=4.13.3; extra == "test"
+Requires-Dist: bilby_pipe; extra == "test"
+Requires-Dist: coverage<=7.4.4; extra == "test"
+Requires-Dist: coverage-badge; extra == "test"
+Requires-Dist: cython>=0.28.5; extra == "test"
+Requires-Dist: lalsuite!=7.23,!=7.24; extra == "test"
+Requires-Dist: markupsafe==2.0.1; extra == "test"
+Requires-Dist: pycbc>=2.0.3; extra == "test"
+Requires-Dist: pytest>=3.0.0; extra == "test"
+Requires-Dist: pytest-xdist; extra == "test"
+Requires-Dist: pytest-rerunfailures; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: requests; extra == "test"
+Requires-Dist: testfixtures; extra == "test"
+Provides-Extra: extras
+Requires-Dist: bilby>=1.1.1; extra == "extras"
+Requires-Dist: coloredlogs; extra == "extras"
+Requires-Dist: GitPython; extra == "extras"
+Requires-Dist: gwosc; extra == "extras"
+Requires-Dist: jupyter_client; extra == "extras"
+Requires-Dist: ligo-em-bright>=1.1.5; extra == "extras"
+Requires-Dist: ligo.skymap; extra == "extras"
+Requires-Dist: nbformat; extra == "extras"
+Dynamic: license-file
+
+# PESummary
+
+## Release status
+
+[![PyPI version](https://badge.fury.io/py/pesummary.svg)](http://badge.fury.io/py/pesummary)
+[![Conda version](https://img.shields.io/conda/vn/conda-forge/pesummary.svg)](https://anaconda.org/conda-forge/pesummary/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/pesummary)](https://img.shields.io/pypi/dm/pesummary)
+[![Total Downloads](https://anaconda.org/conda-forge/pesummary/badges/downloads.svg)](https://anaconda.org/conda-forge/pesummary/badges/downloads.svg)
+
+[![License](https://img.shields.io/pypi/l/pesummary.svg)](https://choosealicense.com/licenses/mit/)
+[![Python versions](https://img.shields.io/pypi/pyversions/pesummary.svg)](https://img.shields.io/pypi/pyversions/pesummary.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4771187.svg)](https://doi.org/10.5281/zenodo.4771187)
+
+## Development status
+
+[![Pipeline Status](https://git.ligo.org/lscsoft/pesummary/badges/master/pipeline.svg)](https://git.ligo.org/lscsoft/pesummary/commits/master)
+[![Coverage report](https://docs.ligo.org/lscsoft/pesummary/coverage_badge.svg)](https://docs.ligo.org/lscsoft/pesummary/htmlcov/index.html)
+
+This package helps the user to generate summary webpages to visualise the output from any sample generating code.
+
+ * [Installation instructions](https://docs.ligo.org/lscsoft/pesummary/installation.html)
+ * [Documentation](https://docs.ligo.org/lscsoft/pesummary)
+ * [Issue Tracker](https://git.ligo.org/lscsoft/pesummary/issues)
