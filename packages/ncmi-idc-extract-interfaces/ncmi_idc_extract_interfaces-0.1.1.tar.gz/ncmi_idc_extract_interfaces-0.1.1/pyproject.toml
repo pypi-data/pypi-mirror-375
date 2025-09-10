@@ -1,0 +1,34 @@
+# currently using uv 0.8.15 (8473ecba1 2025-09-03)
+
+[project]
+name = "ncmi-idc-extract-interfaces"
+version = "0.1.1"
+requires-python = "==3.13.*"
+authors = [
+    { name = "Petridis, Ross (NCMI, Hobart)", email = "Ross.Petridis@csiro.au" }
+]
+
+dependencies = [
+    "pydantic",
+    "pydantic-settings",
+    "pydantic[email]",
+]
+
+# adding to these, each uv command will nsure that all groups resolve with each other and itll update lock, but not install into venv unless the group is used
+[dependency-groups]
+dev = [
+    "mypy",
+    "pytest",
+    "ruff",
+    ]
+
+[tool.ruff]
+lint.select = ["E", "F", "I"]  # example: errors, pyflakes, imports
+lint.extend-select = ["TCH"]   # add type checking
+lint.ignore = ["E501"]  # ignore line length
+
+
+[build-system]
+# requires = ["uv_build>=0.8.13,<0.9.0"]
+requires = ["uv-build"]
+build-backend = "uv_build"
