@@ -1,0 +1,232 @@
+# strands-clova
+
+[![PyPI version](https://badge.fury.io/py/strands-clova.svg)](https://badge.fury.io/py/strands-clova)
+[![Python Support](https://img.shields.io/pypi/pyversions/strands-clova.svg)](https://pypi.org/project/strands-clova/)
+[![Tests](https://github.com/aidendef/strands-clova/actions/workflows/test.yml/badge.svg)](https://github.com/aidendef/strands-clova/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+CLOVA Studio model provider for [Strands Agents SDK](https://github.com/strands-agents/sdk-python)
+
+## Features
+
+- **Native Korean Language Support** - Optimized for Korean context and nuances
+- **Bilingual Capabilities** - Seamlessly handle both Korean and English
+- **Full Streaming Support** - Real-time response streaming with SSE
+- **Simple Authentication** - Just needs CLOVA_API_KEY
+- **Easy Integration** - Drop-in replacement for any Strands model provider
+- **Type Safe** - Full type hints and mypy support
+
+## Requirements
+
+- Python 3.10+
+- Strands Agents SDK 1.7.0+
+- CLOVA Studio API key from [Naver Cloud Platform](https://www.ncloud.com/product/aiService/clovaStudio)
+
+## Installation
+
+```bash
+pip install strands-agents strands-clova
+```
+
+## Quick Start
+
+### Basic Usage
+
+```python
+from strands_clova import ClovaModel
+from strands import Agent
+
+# Initialize CLOVA model
+model = ClovaModel(
+    api_key="your-clova-api-key",  # or set CLOVA_API_KEY env var
+    model="HCX-005",
+    temperature=0.7,
+    max_tokens=2048
+)
+
+# Create an agent
+agent = Agent(model=model)
+
+# Use the agent
+response = await agent.invoke_async("안녕하세요! 오늘 날씨가 어떤가요?")
+print(response.message)
+```
+
+### Streaming Responses
+
+```python
+import asyncio
+from strands_clova import ClovaModel
+
+async def stream_example():
+    model = ClovaModel(api_key="your-api-key")
+    
+    async for event in model.stream("한국의 전통 음식 3가지를 소개해주세요"):
+        if event.get("type") == "text":
+            print(event["text"], end="", flush=True)
+
+asyncio.run(stream_example())
+```
+
+### With System Prompt
+
+```python
+model = ClovaModel(api_key="your-api-key")
+
+async for event in model.stream(
+    "Python 리스트 컴프리헨션을 설명해주세요",
+    system_prompt="You are a helpful coding assistant. Provide concise answers."
+):
+    # Process streaming events
+    pass
+```
+
+## Configuration
+
+### Environment Variables
+
+```bash
+export CLOVA_API_KEY="your-api-key"
+export CLOVA_REQUEST_ID="optional-request-id"  # For request tracking
+```
+
+### Model Parameters
+
+```python
+model = ClovaModel(
+    model="HCX-005",        # Model ID (currently only HCX-005 is supported)
+    temperature=0.7,        # Sampling temperature (0.0-1.0)
+    max_tokens=4096,        # Maximum tokens to generate
+    top_p=0.8,             # Nucleus sampling parameter
+    top_k=0,               # Top-k sampling parameter
+    repeat_penalty=1.1,     # Repetition penalty
+    stop=["\\n\\n"],        # Stop sequences
+)
+```
+
+### Dynamic Configuration
+
+```python
+# Update configuration at runtime
+model.update_config(
+    temperature=0.2,
+    max_tokens=1024
+)
+
+# Get current configuration
+config = model.get_config()
+print(config)
+```
+
+## Examples
+
+### Korean Customer Support Bot
+
+```python
+from strands_clova import ClovaModel
+from strands import Agent
+
+model = ClovaModel(api_key="your-api-key", temperature=0.3)
+agent = Agent(
+    model=model,
+    system_prompt="당신은 친절한 고객 서비스 상담원입니다."
+)
+
+response = await agent.invoke_async(
+    "제품 반품 절차를 알려주세요"
+)
+```
+
+### Bilingual Document Processing
+
+```python
+# Process Korean document and get English summary
+response = await agent.invoke_async(
+    "다음 한국어 문서를 영어로 요약해주세요: [문서 내용]"
+)
+```
+
+### Creative Content Generation
+
+```python
+model = ClovaModel(temperature=0.9, max_tokens=2048)
+agent = Agent(model=model)
+
+response = await agent.invoke_async(
+    "AI가 교육에 미치는 영향에 대한 블로그 포스트를 작성해주세요"
+)
+```
+
+## Testing
+
+### Run Unit Tests
+
+```bash
+pip install -e ".[dev]"
+pytest tests/unit/ -v
+```
+
+### Run Integration Tests
+
+Requires `CLOVA_API_KEY` environment variable:
+
+```bash
+export CLOVA_API_KEY="your-api-key"
+pytest tests/integration/ -v
+```
+
+## API Reference
+
+### ClovaModel
+
+Main model class that implements the Strands `Model` abstract base class.
+
+#### Methods
+
+- `stream(messages, tool_specs, system_prompt, **kwargs)` - Stream responses
+- `get_config()` - Get current configuration
+- `update_config(**kwargs)` - Update configuration
+- `structured_output()` - Not yet implemented (raises NotImplementedError)
+
+### ClovaModelError
+
+Exception raised for CLOVA-specific errors.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Links
+
+- [Strands Agents SDK](https://github.com/strands-agents/sdk-python)
+- [CLOVA Studio Documentation](https://www.ncloud.com/product/aiService/clovaStudio)
+- [PyPI Package](https://pypi.org/project/strands-clova/)
+- [Issue Tracker](https://github.com/aidendef/strands-clova/issues)
+
+## Acknowledgments
+
+- Thanks to the Strands Agents team for creating an excellent SDK
+- Thanks to Naver for providing CLOVA Studio API
+
+## Status
+
+- Basic streaming support - Complete
+- Korean and English language support - Complete  
+- System prompts - Complete
+- Configuration management - Complete
+- Structured output support - In Progress
+- Tool/Function calling - In Progress
+
+---
+
+Made for the Korean AI community
