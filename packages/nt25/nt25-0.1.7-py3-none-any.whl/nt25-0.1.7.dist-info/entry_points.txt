@@ -1,0 +1,3 @@
+[console_scripts]
+demo = nt25.demo:main
+et = nt25.lib.et:main
