@@ -1,0 +1,106 @@
+# VietCardLib Package .gitignore
+# ==============================
+
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyPI upload credentials
+.pypirc
+twine.cfg
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
+*.lnk
+
+# Test files
+test_*.py
+temp_*
+*.tmp
+*.temp
+
+# Upload logs
+upload.log
+upload_result.txt
+upload_error.txt
+
+# Demo outputs
+demo_output/
+test_output/
+aligned_*/
+
+# Backup files
+*.bak
+*.backup
+
+# Local configuration
+local_config.py
+secrets.py
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# Pytest
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Template images (keep structure but not actual files)
+# templates/base/*.jpg
+# templates/base/*.png
+# templates/adjusted/*.jpg
+# templates/adjusted/*.png
+
+# Keep template directories but not files
+!templates/base/.gitkeep
+!templates/adjusted/.gitkeep
+
+# Documentation build
+docs/_build/
+docs/build/
+
+# Package artifacts
+MANIFEST
+*.manifest
+
+# Temporary upload files
+.tox/
+.cache/

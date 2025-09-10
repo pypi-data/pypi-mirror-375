@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include requirements.txt
+include MANIFEST.in
+recursive-include VietCardLib *.py
+recursive-include VietCardLib/templates *.jpg *.png
+recursive-include VietCardLib/data *.db
+recursive-include tests *.py
+recursive-include examples *.py *.jpg *.png
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude .DS_Store

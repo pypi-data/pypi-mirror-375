@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "VietCardLib"
+authors = [
+    {name = "Đoàn Ngọc Thành", email = "dnt.doanngocthanh@gmail.com"}
+]
+description = "Thư viện xử lý ORB, tiền xử lý và OCR giấy tờ tùy thân Việt Nam"
+readme = {file = "README.md", content-type = "text/markdown"}
+license = {text = "MIT"}
+keywords = ["orb", "opencv", "image-processing", "computer-vision", "vietnam-id", "card-recognition"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "opencv-python>=4.0.0",
+    "numpy>=1.18.0",
+    "matplotlib>=3.0.0",
+    "scikit-image>=0.17.0",
+    "Pillow>=8.0.0",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/doanngocthanh/VietCardLib"
+Repository = "https://github.com/doanngocthanh/VietCardLib"
+Documentation = "https://github.com/doanngocthanh/VietCardLib/blob/main/README.md"
+"Bug Reports" = "https://github.com/doanngocthanh/VietCardLib/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0.0",
+    "pytest-cov>=2.10.0",
+    "black>=21.0.0",
+    "flake8>=3.8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["VietCardLib*"]
+
+[tool.setuptools.package-data]
+VietCardLib = [
+    "templates/base/*.jpg",
+    "templates/base/*.png", 
+    "templates/adjusted/*.jpg",
+    "templates/adjusted/*.png",
+    "data/*.db"
+]
