@@ -1,0 +1,10 @@
+[project]
+name = "cp-pyflink-libraries"
+version = "0.0.0"
+description = "Flink libraries for PyFlink on Confluent Platform"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+classifiers = [
+"Programming Language :: Python :: 3",
+"Operating System :: OS Independent",
+]
