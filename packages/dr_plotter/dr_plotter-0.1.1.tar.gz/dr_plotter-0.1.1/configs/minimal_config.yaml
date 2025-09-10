@@ -1,0 +1,10 @@
+# dr_plotter dimensional plotting configuration
+# This file demonstrates the YAML config structure
+
+faceting:
+  rows_and_cols: params
+  hue_by: data
+  fixed_dimensions:
+    metric: pile-valppl
+legend:
+  strategy: figure

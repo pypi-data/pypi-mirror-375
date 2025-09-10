@@ -1,0 +1,34 @@
+# dr_plotter dimensional plotting configuration
+# This file demonstrates the YAML config structure
+
+faceting:
+  rows: null
+  cols: null
+  rows_and_cols: model_size
+  max_cols: 4
+  hue_by: dataset
+  alpha_by: seed
+  size_by: null
+  marker_by: null
+  style_by: null
+  fixed_dimensions:
+    metric: loss
+  ordered_dimensions:
+    model_size:
+    - 1B
+    - 7B
+    - 30B
+    - 70B
+    - 180B
+  exclude_dimensions:
+    dataset:
+    - deprecated_data
+layout:
+  subplot_width: 3.5
+  subplot_height: 3.0
+  auto_titles: true
+legend:
+  strategy: grouped
+output:
+  save_dir: ./plots
+  pause: 5

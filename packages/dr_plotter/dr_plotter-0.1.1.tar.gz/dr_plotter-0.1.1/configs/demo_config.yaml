@@ -1,0 +1,11 @@
+# dr_plotter dimensional plotting configuration
+# This file demonstrates the YAML config structure
+
+faceting:
+  rows_and_cols: model_size
+  hue_by: dataset
+  alpha_by: seed
+  fixed_dimensions:
+    metric: loss
+legend:
+  strategy: grouped

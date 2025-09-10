@@ -1,0 +1,51 @@
+# Line Plot Showcase Preset Configurations
+# These presets demonstrate different line plot configurations for the CLI framework
+
+# Time series focused preset
+time_series_preset:
+  data_type: "time_series"
+  groups: 6
+  time_points: 50
+  seed: 301
+  figsize: [16, 10]
+  legend_strategy: "figure"
+  theme: "default"
+
+# ML training curves preset
+ml_training_preset:
+  data_type: "ml_training"
+  time_points: 30
+  seed: 302
+  figsize: [14, 10]
+  legend_strategy: "subplot"
+  tight_layout_pad: 1.5
+
+# A/B testing results preset
+ab_test_preset:
+  data_type: "ab_test" 
+  time_points: 25
+  seed: 303
+  figsize: [15, 8]
+  legend_strategy: "figure"
+  legend_position: [0.5, 0.02]
+
+# Compact layout preset
+compact_preset:
+  data_type: "time_series"
+  groups: 3
+  time_points: 30
+  figsize: [12, 8]
+  tight_layout_pad: 0.3
+  subplot_height: 2.5
+  subplot_width: 3.0
+
+# Publication ready preset
+publication_preset:
+  data_type: "ml_training"
+  time_points: 40
+  seed: 304
+  figsize: [12, 9]
+  legend_strategy: "figure"
+  tight_layout: true
+  tight_layout_pad: 2.0
+  figure_title: "Training Progress Analysis"
