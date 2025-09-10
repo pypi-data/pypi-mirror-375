@@ -1,0 +1,568 @@
+Metadata-Version: 2.1
+Name: jax-finufft
+Version: 1.1.0rc2
+Summary: JAX bindings for the Flatiron Institute Nonuniform Fast Fourier Transform library
+Author-Email: Dan Foreman-Mackey <foreman.mackey@gmail.com>, Lehman Garrison <lgarrison@flatironinstitute.org>
+License:                                  Apache License
+                                    Version 2.0, January 2004
+                                 http://www.apache.org/licenses/
+         
+         TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+         
+         1.  Definitions.
+         
+             "License" shall mean the terms and conditions for use, reproduction,
+             and distribution as defined by Sections 1 through 9 of this document.
+         
+             "Licensor" shall mean the copyright owner or entity authorized by
+             the copyright owner that is granting the License.
+         
+             "Legal Entity" shall mean the union of the acting entity and all
+             other entities that control, are controlled by, or are under common
+             control with that entity. For the purposes of this definition,
+             "control" means (i) the power, direct or indirect, to cause the
+             direction or management of such entity, whether by contract or
+             otherwise, or (ii) ownership of fifty percent (50%) or more of the
+             outstanding shares, or (iii) beneficial ownership of such entity.
+         
+             "You" (or "Your") shall mean an individual or Legal Entity
+             exercising permissions granted by this License.
+         
+             "Source" form shall mean the preferred form for making modifications,
+             including but not limited to software source code, documentation
+             source, and configuration files.
+         
+             "Object" form shall mean any form resulting from mechanical
+             transformation or translation of a Source form, including but
+             not limited to compiled object code, generated documentation,
+             and conversions to other media types.
+         
+             "Work" shall mean the work of authorship, whether in Source or
+             Object form, made available under the License, as indicated by a
+             copyright notice that is included in or attached to the work
+             (an example is provided in the Appendix below).
+         
+             "Derivative Works" shall mean any work, whether in Source or Object
+             form, that is based on (or derived from) the Work and for which the
+             editorial revisions, annotations, elaborations, or other modifications
+             represent, as a whole, an original work of authorship. For the purposes
+             of this License, Derivative Works shall not include works that remain
+             separable from, or merely link (or bind by name) to the interfaces of,
+             the Work and Derivative Works thereof.
+         
+             "Contribution" shall mean any work of authorship, including
+             the original version of the Work and any modifications or additions
+             to that Work or Derivative Works thereof, that is intentionally
+             submitted to Licensor for inclusion in the Work by the copyright owner
+             or by an individual or Legal Entity authorized to submit on behalf of
+             the copyright owner. For the purposes of this definition, "submitted"
+             means any form of electronic, verbal, or written communication sent
+             to the Licensor or its representatives, including but not limited to
+             communication on electronic mailing lists, source code control systems,
+             and issue tracking systems that are managed by, or on behalf of, the
+             Licensor for the purpose of discussing and improving the Work, but
+             excluding communication that is conspicuously marked or otherwise
+             designated in writing by the copyright owner as "Not a Contribution."
+         
+             "Contributor" shall mean Licensor and any individual or Legal Entity
+             on behalf of whom a Contribution has been received by Licensor and
+             subsequently incorporated within the Work.
+         
+         2.  Grant of Copyright License. Subject to the terms and conditions of
+             this License, each Contributor hereby grants to You a perpetual,
+             worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+             copyright license to reproduce, prepare Derivative Works of,
+             publicly display, publicly perform, sublicense, and distribute the
+             Work and such Derivative Works in Source or Object form.
+         
+         3.  Grant of Patent License. Subject to the terms and conditions of
+             this License, each Contributor hereby grants to You a perpetual,
+             worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+             (except as stated in this section) patent license to make, have made,
+             use, offer to sell, sell, import, and otherwise transfer the Work,
+             where such license applies only to those patent claims licensable
+             by such Contributor that are necessarily infringed by their
+             Contribution(s) alone or by combination of their Contribution(s)
+             with the Work to which such Contribution(s) was submitted. If You
+             institute patent litigation against any entity (including a
+             cross-claim or counterclaim in a lawsuit) alleging that the Work
+             or a Contribution incorporated within the Work constitutes direct
+             or contributory patent infringement, then any patent licenses
+             granted to You under this License for that Work shall terminate
+             as of the date such litigation is filed.
+         
+         4.  Redistribution. You may reproduce and distribute copies of the
+             Work or Derivative Works thereof in any medium, with or without
+             modifications, and in Source or Object form, provided that You
+             meet the following conditions:
+         
+             (a) You must give any other recipients of the Work or
+             Derivative Works a copy of this License; and
+         
+             (b) You must cause any modified files to carry prominent notices
+             stating that You changed the files; and
+         
+             (c) You must retain, in the Source form of any Derivative Works
+             that You distribute, all copyright, patent, trademark, and
+             attribution notices from the Source form of the Work,
+             excluding those notices that do not pertain to any part of
+             the Derivative Works; and
+         
+             (d) If the Work includes a "NOTICE" text file as part of its
+             distribution, then any Derivative Works that You distribute must
+             include a readable copy of the attribution notices contained
+             within such NOTICE file, excluding those notices that do not
+             pertain to any part of the Derivative Works, in at least one
+             of the following places: within a NOTICE text file distributed
+             as part of the Derivative Works; within the Source form or
+             documentation, if provided along with the Derivative Works; or,
+             within a display generated by the Derivative Works, if and
+             wherever such third-party notices normally appear. The contents
+             of the NOTICE file are for informational purposes only and
+             do not modify the License. You may add Your own attribution
+             notices within Derivative Works that You distribute, alongside
+             or as an addendum to the NOTICE text from the Work, provided
+             that such additional attribution notices cannot be construed
+             as modifying the License.
+         
+             You may add Your own copyright statement to Your modifications and
+             may provide additional or different license terms and conditions
+             for use, reproduction, or distribution of Your modifications, or
+             for any such Derivative Works as a whole, provided Your use,
+             reproduction, and distribution of the Work otherwise complies with
+             the conditions stated in this License.
+         
+         5.  Submission of Contributions. Unless You explicitly state otherwise,
+             any Contribution intentionally submitted for inclusion in the Work
+             by You to the Licensor shall be under the terms and conditions of
+             this License, without any additional terms or conditions.
+             Notwithstanding the above, nothing herein shall supersede or modify
+             the terms of any separate license agreement you may have executed
+             with Licensor regarding such Contributions.
+         
+         6.  Trademarks. This License does not grant permission to use the trade
+             names, trademarks, service marks, or product names of the Licensor,
+             except as required for reasonable and customary use in describing the
+             origin of the Work and reproducing the content of the NOTICE file.
+         
+         7.  Disclaimer of Warranty. Unless required by applicable law or
+             agreed to in writing, Licensor provides the Work (and each
+             Contributor provides its Contributions) on an "AS IS" BASIS,
+             WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+             implied, including, without limitation, any warranties or conditions
+             of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+             PARTICULAR PURPOSE. You are solely responsible for determining the
+             appropriateness of using or redistributing the Work and assume any
+             risks associated with Your exercise of permissions under this License.
+         
+         8.  Limitation of Liability. In no event and under no legal theory,
+             whether in tort (including negligence), contract, or otherwise,
+             unless required by applicable law (such as deliberate and grossly
+             negligent acts) or agreed to in writing, shall any Contributor be
+             liable to You for damages, including any direct, indirect, special,
+             incidental, or consequential damages of any character arising as a
+             result of this License or out of the use or inability to use the
+             Work (including but not limited to damages for loss of goodwill,
+             work stoppage, computer failure or malfunction, or any and all
+             other commercial damages or losses), even if such Contributor
+             has been advised of the possibility of such damages.
+         
+         9.  Accepting Warranty or Additional Liability. While redistributing
+             the Work or Derivative Works thereof, You may choose to offer,
+             and charge a fee for, acceptance of support, warranty, indemnity,
+             or other liability obligations and/or rights consistent with this
+             License. However, in accepting such obligations, You may act only
+             on Your own behalf and on Your sole responsibility, not on behalf
+             of any other Contributor, and only if You agree to indemnify,
+             defend, and hold each Contributor harmless for any liability
+             incurred by, or claims asserted against, such Contributor by reason
+             of your accepting any such warranty or additional liability.
+         
+         END OF TERMS AND CONDITIONS
+         
+         APPENDIX: How to apply the Apache License to your work.
+         
+               To apply the Apache License to your work, attach the following
+               boilerplate notice, with the fields enclosed by brackets "[]"
+               replaced with your own identifying information. (Don't include
+               the brackets!)  The text should be enclosed in the appropriate
+               comment syntax for the file format. We also recommend that a
+               file or class name and description of purpose be included on the
+               same "printed page" as the copyright notice for easier
+               identification within third-party archives.
+         
+         Copyright 2021 The Simons Foundation, Inc.
+         
+         Licensed under the Apache License, Version 2.0 (the "License");
+         you may not use this file except in compliance with the License.
+         You may obtain a copy of the License at
+         
+                http://www.apache.org/licenses/LICENSE-2.0
+         
+         Unless required by applicable law or agreed to in writing, software
+         distributed under the License is distributed on an "AS IS" BASIS,
+         WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+         See the License for the specific language governing permissions and
+         limitations under the License.
+         
+Project-URL: Homepage, https://github.com/dfm/jax-finufft
+Requires-Python: >=3.10
+Requires-Dist: jax>=0.5.0
+Requires-Dist: numpy
+Requires-Dist: pydantic>=2
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-xdist; extra == "test"
+Requires-Dist: absl-py; extra == "test"
+Provides-Extra: cuda12
+Requires-Dist: jax[cuda12]; extra == "cuda12"
+Provides-Extra: cuda12-local
+Requires-Dist: jax[cuda12-local]; extra == "cuda12-local"
+Description-Content-Type: text/markdown
+
+# JAX bindings to FINUFFT
+
+[![GitHub Tests](https://github.com/flatironinstitute/jax-finufft/actions/workflows/tests.yml/badge.svg)](https://github.com/flatironinstitute/jax-finufft/actions/workflows/tests.yml)
+[![Jenkins Tests](https://jenkins.flatironinstitute.org/buildStatus/icon?job=jax-finufft%2Fmain&subject=Jenkins%20Tests)](https://jenkins.flatironinstitute.org/job/jax-finufft/job/main/)
+
+This package provides a [JAX](https://github.com/google/jax) interface to (a
+subset of) the [Flatiron Institute Non-uniform Fast Fourier Transform (FINUFFT)
+library](https://github.com/flatironinstitute/finufft). Take a look at the
+[FINUFFT docs](https://finufft.readthedocs.io) for all the necessary
+definitions, conventions, and more information about the algorithms and their
+implementation. This package uses a low-level interface to directly expose the
+FINUFFT library to JAX's XLA backend, as well as implementing differentiation
+rules for the transforms.
+
+## Included features
+
+This library includes CPU and GPU (CUDA) support. GPU support is implemented
+through the [cuFINUFFT interface](https://finufft.readthedocs.io/en/latest/c_gpu.html)
+of the FINUFFT library.
+
+[Type 1 and 2](https://finufft.readthedocs.io/en/latest/math.html) transforms
+are supported in 1, 2, and 3 dimensions on the CPU and GPU.
+All of these functions support forward, reverse, and higher-order differentiation,
+as well as batching using `vmap`.
+
+## Installation
+
+The easiest ways to install jax-finufft is to install a pre-compiled binary from
+PyPI or conda-forge, but if you need GPU support or want to get tuned
+performance, you'll want to follow the instructions to install from source as
+described below.
+
+### Install binary from PyPI
+
+> [!NOTE]
+> Only the CPU-enabled build of jax-finufft is available as a binary wheel on
+> PyPI. For a GPU-enabled build, you'll need to build from source as described
+> below.
+
+To install a binary wheel from [PyPI](https://pypi.org/project/jax-finufft/)
+using pip, run the following commands:
+
+```bash
+python -m pip install "jax[cpu]"
+python -m pip install jax-finufft
+```
+
+If this fails, you may need to use a conda-forge binary, or install from source.
+
+### Install binary from conda-forge
+
+> [!NOTE]
+> Only the CPU-enabled build of jax-finufft is available as a binary from
+> conda-forge. For a GPU-enabled build, you'll need to build from source as
+> described below.
+
+To install using [mamba](https://github.com/mamba-org/mamba) (or
+[conda](https://docs.conda.io)), run:
+
+```bash
+mamba install -c conda-forge jax-finufft
+```
+
+### Install from source
+
+#### Dependencies
+
+Unsurprisingly, a key dependency is JAX, which can be installed following the
+directions in [the JAX
+documentation](https://jax.readthedocs.io/en/latest/installation.html). If
+you're going to want to run on a GPU, make sure that you install the appropriate
+JAX build.
+
+The non-Python dependencies that you'll need are:
+
+- [FFTW](https://www.fftw.org),
+- [OpenMP](https://www.openmp.org) (for CPU, optional),
+- CUDA (for GPU, >= 11.8)
+
+Below we provide some example workflows for installing the required dependencies:
+
+<details>
+<summary>Install CPU dependencies with mamba or conda</summary>
+
+```bash
+mamba create -n jax-finufft -c conda-forge python jax fftw cxx-compiler
+mamba activate jax-finufft
+```
+</details>
+
+<details>
+<summary>Install GPU dependencies with mamba or conda</summary>
+
+For a GPU build, while the CUDA libraries and compiler are nominally available
+through conda, our experience trying to install them this way suggests that the
+"traditional" way of obtaining the [CUDA
+Toolkit](https://developer.nvidia.com/cuda-downloads) directly from NVIDIA may
+work best (see [related advice for
+Horovod](https://horovod.readthedocs.io/en/stable/conda_include.html)). After
+installing the CUDA Toolkit, one can set up the rest of the dependencies with:
+
+```bash
+mamba create -n gpu-jax-finufft -c conda-forge python numpy scipy fftw 'gxx<12'
+mamba activate gpu-jax-finufft
+export CMAKE_PREFIX_PATH=$CONDA_PREFIX:$CMAKE_PREFIX_PATH
+python -m pip install "jax[cuda11_local]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+```
+
+Other ways of installing JAX are given on the JAX website; the ["local CUDA"
+install
+methods](https://jax.readthedocs.io/en/latest/installation.html#pip-installation-gpu-cuda-installed-locally-harder)
+are preferred for jax-finufft as this ensures the CUDA extensions are compiled
+with the same Toolkit version as the CUDA runtime. However, this is not required
+as long as both JAX and jax-finufft use CUDA with the same major version.
+</details>
+
+<details>
+<summary>Install GPU dependencies using Flatiron module system</summary>
+
+```bash
+ml modules/2.3 \
+   gcc \
+   python/3.11 \
+   fftw \
+   cuda/12
+
+export CMAKE_ARGS="$CMAKE_ARGS -DCMAKE_CUDA_ARCHITECTURES=60;70;80;90 -DJAX_FINUFFT_USE_CUDA=ON"
+```
+</details>
+
+#### Notes on CUDA versions
+While jax-finufft may build with a wide range of CUDA
+versions, the resulting binaries may not be compatible with JAX (resulting in
+odd runtime errors, like failed cuDNN or cuBLAS initialization). For the greatest
+chance of success, we recommend building with the same version as JAX was built with.
+To discover that, one can look at the requirements in [JAX's `build` directory](https://github.com/jax-ml/jax/tree/main/build)
+(be sure to select the git tag for your version of JAX). Similarly, we encourage installing
+`jax[cuda12-local]` so JAX and jax-finufft use the same CUDA libraries.
+
+Depending on how challenging the installation is, users might want to run jax-finufft in a container. The [`.devcontainer`](./.devcontainer) directory is a good starting point for this.
+
+#### Configuring the build
+There are several important CMake variables that control aspects of the jax-finufft and (cu)finufft builds. These include:
+
+- **`JAX_FINUFFT_USE_CUDA`** [disabled by default]: build with GPU support
+- **`CMAKE_CUDA_ARCHITECTURES`** [default `native`]: the target GPU architecture. `native` means the GPU arch of the build system.
+- **`FINUFFT_ARCH_FLAGS`** [default `-march=native`]: the target CPU architecture. The default is the native CPU arch of the build system.
+
+Each of these can be set as `-Ccmake.define.NAME=VALUE` arguments to `pip install`. For example,
+to build with GPU support from the repo root, run:
+
+```bash
+pip install -Ccmake.define.JAX_FINUFFT_USE_CUDA=ON .
+```
+
+Use multiple `-C` arguments to set multiple variables. The `-C` argument will work with any of the source installation methods (e.g. PyPI source dist, GitHub, etc).
+
+Build options can also be set with the `CMAKE_ARGS` environment variable. For example:
+
+```bash
+export CMAKE_ARGS="$CMAKE_ARGS -DJAX_FINUFFT_USE_CUDA=ON"
+```
+
+#### GPU build configuration
+Building with GPU support requires passing `JAX_FINUFFT_USE_CUDA=ON` to CMake. See [Configuring the build](#configuring-the-build).
+
+By default, jax-finufft will build for the GPU of the build machine. If you need to target
+a different compute capability, such as 8.0 for Ampere, set `CMAKE_CUDA_ARCHITECTURES` as a CMake define:
+
+```bash
+pip install -Ccmake.define.JAX_FINUFFT_USE_CUDA=ON -Ccmake.define.CMAKE_CUDA_ARCHITECTURES=80 .
+```
+
+`CMAKE_CUDA_ARCHITECTURES` also takes a semicolon-separated list.
+
+To detect the arch for a specific GPU, one can run:
+```bash
+$ nvidia-smi --query-gpu=compute_cap --format=csv,noheader
+8.0
+```
+
+The values are also listed on the [NVIDIA website](https://developer.nvidia.com/cuda-gpus).
+
+In some cases, you may also need the following at runtime:
+
+```bash
+export LD_LIBRARY_PATH="$CUDA_PATH/extras/CUPTI/lib64:$LD_LIBRARY_PATH"
+```
+
+If `CUDA_PATH` isn't set, you'll need to replace it with the path to your CUDA
+installation in the above line, often something like `/usr/local/cuda`.
+
+#### Install source from PyPI
+
+The source code for all released versions of jax-finufft are available on PyPI,
+and this can be installed using:
+
+```bash
+python -m pip install --no-binary jax-finufft
+```
+
+#### Install source from GitHub
+
+Alternatively, you can check out the source repository from GitHub:
+
+```bash
+git clone --recurse-submodules https://github.com/flatironinstitute/jax-finufft
+cd jax-finufft
+```
+
+> [!NOTE]
+> Don't forget the `--recurse-submodules` argument when cloning the repo because
+> the upstream FINUFFT library is included as a git submodule. If you do forget,
+> you can run `git submodule update --init --recursive` in your local copy to
+> checkout the submodule after the initial clone.
+
+After cloning the repository, you can install the local copy using:
+
+```bash
+python -m pip install -e .
+```
+
+where the `-e` flag optionally runs an "editable" install.
+
+As yet another alternative, the latest development version from GitHub can be
+installed directly (i.e. without cloning first) with
+
+```bash
+python -m pip install git+https://github.com/flatironinstitute/jax-finufft.git
+```
+
+## Usage
+
+This library provides two high-level functions (and these should be all that you
+generally need to interact with): `nufft1` and `nufft2` (for the two "types" of
+transforms). If you're already familiar with the [Python
+interface](https://finufft.readthedocs.io/en/latest/python.html) to FINUFFT,
+_please note that the function signatures here are different_!
+
+For example, here's how you can do a 1-dimensional type 1 transform (CPU or GPU):
+
+```python
+import numpy as np
+from jax_finufft import nufft1
+
+M = 100000
+N = 200000
+
+x = 2 * np.pi * np.random.uniform(size=M)
+c = np.random.standard_normal(size=M) + 1j * np.random.standard_normal(size=M)
+f = nufft1(N, c, x, eps=1e-6, iflag=1)
+```
+
+Noting that the `eps` and `iflag` are optional, and that (for good reason, I
+promise!) the order of the positional arguments is reversed from the `finufft`
+Python package.
+
+The syntax for a 2-, or 3-dimensional transform (CPU or GPU) is:
+
+```python
+f = nufft1((Nx, Ny), c, x, y)  # 2D
+f = nufft1((Nx, Ny, Nz), c, x, y, z)  # 3D
+```
+
+The syntax for a type 2 transform is (also allowing optional `iflag` and `eps`
+parameters):
+
+```python
+c = nufft2(f, x)  # 1D
+c = nufft2(f, x, y)  # 2D
+c = nufft2(f, x, y, z)  # 3D
+```
+
+All of these functions support batching using `vmap`, and forward and reverse
+mode differentiation.
+
+## Selecting a platform
+If you compiled jax-finufft with GPU support, you can force it to use a particular
+backend by setting the environment variable `JAX_PLATFORMS=cpu` or `JAX_PLATFORMS=cuda`.
+
+## Advanced usage
+
+The tuning parameters for the library can be set using the `opts` parameter to
+`nufft1` and `nufft2`. For example, to explicitly set the CPU [up-sampling
+factor](https://finufft.readthedocs.io/en/latest/opts.html) that FINUFFT should
+use, you can update the example from above as follows:
+
+```python
+from jax_finufft import options
+
+opts = options.Opts(upsampfac=2.0)
+nufft1(N, c, x, opts=opts)
+```
+
+The corresponding option for the GPU is `gpu_upsampfac`. In fact, all options
+for the GPU are prefixed with `gpu_`.
+
+One complication here is that the [vector-Jacobian
+product](https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#vector-jacobian-products-vjps-aka-reverse-mode-autodiff)
+for a NUFFT requires evaluating a NUFFT of a different type. This means that you
+might want to separately tune the options for the forward and backward pass.
+This can be achieved using the `options.NestedOpts` interface. For example, to
+use a different up-sampling factor for the forward and backward passes, the code
+from above becomes:
+
+```python
+import jax
+
+opts = options.NestedOpts(
+  forward=options.Opts(upsampfac=2.0),
+  backward=options.Opts(upsampfac=1.25),
+)
+jax.grad(lambda args: nufft1(N, *args, opts=opts).real.sum())((c, x))
+```
+
+or, in this case equivalently:
+
+```python
+opts = options.NestedOpts(
+  type1=options.Opts(upsampfac=2.0),
+  type2=options.Opts(upsampfac=1.25),
+)
+```
+
+See [the FINUFFT docs](https://finufft.readthedocs.io/en/latest/opts.html) for
+descriptions of all the CPU tuning parameters. The corresponding GPU parameters
+are currently only listed in source code form in
+[`cufinufft_opts.h`](https://github.com/flatironinstitute/finufft/blob/master/include/cufinufft_opts.h).
+
+## Similar libraries
+
+- [finufft](https://finufft.readthedocs.io/en/latest/python.html): The
+  "official" Python bindings to FINUFFT. A good choice if you're not already
+  using JAX and if you don't need to differentiate through your transform.
+- [mrphys/tensorflow-nufft](https://github.com/mrphys/tensorflow-nufft):
+  TensorFlow bindings for FINUFFT and cuFINUFFT.
+
+## License & attribution
+
+This package, developed by Dan Foreman-Mackey is licensed under the Apache
+License, Version 2.0, with the following copyright:
+
+Copyright 2021-2025 The Simons Foundation, Inc.
+
+If you use this software, please cite the primary references listed on the
+[FINUFFT docs](https://finufft.readthedocs.io/en/latest/refs.html).
