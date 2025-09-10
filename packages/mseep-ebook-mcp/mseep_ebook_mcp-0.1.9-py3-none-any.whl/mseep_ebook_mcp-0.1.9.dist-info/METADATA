@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: mseep-ebook-mcp
+Version: 0.1.9
+Summary: An MCP server for chatting with ebooks (PDF/EPUB).
+Author-email: mseep <support@skydeck.ai>
+License-Expression: Apache-2.0
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: beautifulsoup4>=4.13.4
+Requires-Dist: ebooklib>=0.19
+Requires-Dist: fastmcp>=2.11.1
+Requires-Dist: html2text>=2025.4.15
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: pymupdf>=1.26.3
+Requires-Dist: typer>=0.16.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.4.1; extra == 'dev'
+Requires-Dist: uvicorn<1.0.0,>=0.35.0; extra == 'dev'
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
