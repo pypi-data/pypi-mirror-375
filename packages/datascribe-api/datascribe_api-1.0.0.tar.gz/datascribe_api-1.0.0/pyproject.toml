@@ -1,0 +1,86 @@
+[project]
+name = "datascribe_api"
+version = "1.0.0"
+description = "A Python client for the Datascribe API"
+readme = "README.md"
+authors = [
+    { name = "Doguhan Sariturk", email = "dogu.sariturk@gmail.com" }
+]
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "backoff>=2.2.1",
+    "pydantic>=2.11.7",
+    "requests>=2.32.4",
+    "rich>=14.0.0",
+    "typer>=0.16.0",
+]
+
+[project.urls]
+Repository = "https://github.com/DataScribe-Cloud/datascribe_api"
+Issues = "https://github.com/DataScribe-Cloud/datascribe_api/issues"
+
+[build-system]
+requires = ["uv_build>=0.8.3,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pip>=25.1.1",
+    "pre-commit>=4.2.0",
+    "ruff>=0.12.4",
+]
+
+[project.scripts]
+datascribe_cli = "datascribe_cli.cli:app"
+
+[tool.ruff]
+line-length = 130
+
+[tool.ruff.lint]
+select = [
+    "ERA", # Eradicate
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "C4",  # flake8-comprehensions
+    "FA",  # flake8-future-annotations
+    "ICN", # flake8-import-conventions
+    "Q",   # flake8-quotes
+    "SIM", # flake8-simplify
+    "TC",  # flake8-type-checking
+    "PTH", # flake8-use-pathlib
+    "I",   # isort
+    "N",   # pep8-naming
+    "E",   # pycodestyle Errors
+    "W",   # pycodestyle Warnings
+    "D",   # pydocstyle
+    "F",   # Pyflakes
+    "PL",  # Pylint
+    "UP",  # pyupgrade
+]
+ignore = [
+    "PLR0913", # Too many arguments in function definition
+    "E501",    # Line too long
+    "F401",    # Module imported but unused
+    "ERA001",  # Eradicate: Commented-out code
+    "D105",    # Missing docstring in magic method
+    "PLR0911", # Too many return statements
+    "PLR0912", # Too many branches
+    "B006",    # Do not use mutable data structures for argument defaults
+]
+pydocstyle.convention = "google"
+
+[tool.ruff.format]
+docstring-code-format = true
