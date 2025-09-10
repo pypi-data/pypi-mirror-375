@@ -1,0 +1,15 @@
+calimero/__init__.py,sha256=2MIdy4Sz4QBS7ePrEgI611tbxeqikoXoCgPAN3u9Vzw,466
+calimero/client.py,sha256=23yliEEIWxeA1As-UCza_ew1HJ_yYCvGXRgoy1DfsN4,43028
+calimero/types.py,sha256=cUa2ilt8m7_obfBN0bRTLQBGKmzc9aCNIA2XyE3NUAc,28547
+calimero/ws_subscriptions_client.py,sha256=ZaxXtGhlZ9uenQD54Qf8IwvwW91e_IRZ66bJttZ2uew,3136
+tests/conftest.py,sha256=7SxKxdisBtTt5PbSAMGCR92T-oPcKrO3hMBTW4Iw8us,1135
+tests/test_application_workflows.py,sha256=_0ynxjU_V9qHYHWbn0ry_q75b7fllOHAsQUaWk7FDhU,5667
+tests/test_basic_functionality.py,sha256=nLQhoCPJDKhGOf5epdxjh-XB3VIsvNNhNpGLBPjQosQ,1178
+tests/test_basic_imports.py,sha256=FOvUv9MiyWAmtkbahYpqv_UoCaLA0i66b2MtKbjQVko,1480
+tests/test_context_workflows.py,sha256=oddiva4e4u9auN0hN6J6xBe0C29mmC7KG80Y3JbkQsc,23736
+tests/test_execute_workflows.py,sha256=9YQqPVgtzNhWQCmzQ56vw0ZXPEvdTarEgiEcQ3oO8Yw,5182
+tests/test_identity_workflows.py,sha256=8n1xJmVBZIHgIn6XpZcpouYyFQv-LMfATs_QQ6KTdIQ,9428
+calimero_client_py-0.2.2.dist-info/METADATA,sha256=8Bb8pJY-idbo1vXoPfVuHhxOTThB03PUf6ZaA8aiczQ,10844
+calimero_client_py-0.2.2.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+calimero_client_py-0.2.2.dist-info/top_level.txt,sha256=rRcYu47zXEnCrkEtYicqL2x99nWFM3Ld7_J47oDYps0,15
+calimero_client_py-0.2.2.dist-info/RECORD,,
