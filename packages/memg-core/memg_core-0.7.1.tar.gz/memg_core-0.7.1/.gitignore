@@ -1,0 +1,129 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb*
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.#*
+\#*#
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Runtime files
+*.pid
+*.lock
+*.tmp
+*.temp
+*.log
+
+# Database files (local development data)
+*.db
+*.sqlite
+*.sqlite3
+memg_data/
+memg_data_dev_*/
+
+# Local development and experimental data
+local_*
+temp_*
+tmp/
+_stash*
+artifacts/
+
+# Auto-generated version file
+src/memg_core/version.py
+
+# Linting reports
+.bandit
+bandit*.json
+.ruff_cache/
+.mypy_cache/
+
+# Documentation builds
+docs/_build/
+
+# MCP server database directories (runtime data)
+experiments/mcp/examples/software_developer_*/
+experiments/fastapi/local_memory_data_*/
+
+# Backup files
+*.bak
+*.zip
+
+# Test artifacts
+test_*
+!tests/
+tests/*tmp*
+
+# python venvs
+**/venv*
+**/*_venv
+**/venv_*
+
+experiments/fastapi/*
+experiments/job*
+
+.cursor*
