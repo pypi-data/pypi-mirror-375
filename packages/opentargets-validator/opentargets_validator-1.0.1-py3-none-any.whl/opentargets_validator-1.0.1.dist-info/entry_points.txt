@@ -1,0 +1,2 @@
+[console_scripts]
+opentargets_validator = opentargets_validator.cli:main
