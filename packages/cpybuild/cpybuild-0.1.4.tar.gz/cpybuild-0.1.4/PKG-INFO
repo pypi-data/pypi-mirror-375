@@ -1,0 +1,100 @@
+Metadata-Version: 2.4
+Name: cpybuild
+Version: 0.1.4
+Summary: A Python build tool that transpiles Python code to C using Cython.
+Author: jayendra1107
+License: MIT License
+        
+        Copyright (c) 2025 Jayendra Singh
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyyaml
+Requires-Dist: cython
+Requires-Dist: setuptools
+Requires-Dist: wheel
+Dynamic: license-file
+Dynamic: requires-python
+
+# cpybuild
+
+**cpybuild** is a Python build tool that transpiles Python code to C using Cython, inspired by tools like Maven and Gulp but designed for Python projects. It automates the build, clean, and test workflow for Python-to-C projects and can be installed as a pip package with a simple CLI.
+
+## Features
+- Transpile Python code to C using Cython
+- Simple CLI: `cpybuild [init|build|clean|test]`
+- Configurable build output location via `CPYBUILD_LOC` environment variable
+- Ensures commands are run from the project root
+- Easily extensible for custom tasks
+
+## Installation
+
+```sh
+pip install cpybuild
+```
+
+## Quick Start
+
+1. **Initialize your project:**
+	```sh
+	cpybuild init
+	```
+	This creates a `cpybuild.yaml` config file.
+
+2. **Build your project:**
+	```sh
+	cpybuild build
+	```
+	This transpiles Python files (as configured in `cpybuild.yaml`) to C in the build directory.
+
+3. **Clean build artifacts:**
+	```sh
+	cpybuild clean
+	```
+
+4. **Run tests:**
+	```sh
+	cpybuild test
+	```
+
+## Configuration
+
+Edit `cpybuild.yaml` to specify source files and output directory:
+
+```yaml
+sources:
+  - src/**/*.py
+output: build/
+```
+
+## Environment Variable
+
+Set `CPYBUILD_LOC` to override the build output directory:
+
+```sh
+export CPYBUILD_LOC=/custom/build/dir
+cpybuild build
+```
+
+## License
+
+MIT
