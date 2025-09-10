@@ -1,0 +1,2 @@
+[console_scripts]
+oracledb_mcp_server = oracledb_mcp_server.__main__:main

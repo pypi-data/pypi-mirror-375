@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: mseep-oracledb-mcp-server
+Version: 0.1.3
+Summary: MCP Server For Oracle Database
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/rahgadda/oracledb_mcp_server
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.5.0
+Requires-Dist: oracledb>=3.0.0
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: sqlalchemy>=2.0.39
+Dynamic: license-file
+
+Package managed by MseeP.ai
