@@ -1,0 +1,181 @@
+Metadata-Version: 2.1
+Name: mape
+Version: 0.1.2
+Summary: Method for structural preservation via Attractiveness-based Pairwise Embedding
+Home-page: https://www.hannan-u.ac.jp/doctor/i_info-science/matsuda/n5fenj000002lis4.html
+Author: Takeshi Matsuda
+Author-email: matsuken.tit@gmail.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy<2.0,>=1.26
+Requires-Dist: pandas<2.3,>=2.2
+Requires-Dist: scipy<1.12,>=1.11
+Requires-Dist: scikit-learn<1.5,>=1.4
+Requires-Dist: matplotlib<3.9,>=3.8
+Requires-Dist: torch<2.5,>=2.4
+
+## `README.md`
+
+```markdown
+# MAPE: Method for structural preservation via Attractiveness-based Pairwise Embedding
+
+MAPE is a custom embedding tool designed to preserve structural relationships through pairwise attractiveness modeling.  
+It uses mutual pair extraction and repel-enhanced loss to generate interpretable low-dimensional representations.  
+Ideal for educational, linguistic, and visualization tasks.
+
+---
+## Dependencies
+
+MAPE requires the following Python libraries with specific version constraints to ensure compatibility and reproducibility:
+
+| Library         | Required Version Range     |
+|----------------|----------------------------|
+| `numpy`        | >=1.26, <2.0               |
+| `pandas`       | >=2.2, <2.3                |
+| `scipy`        | >=1.11, <1.12              |
+| `scikit-learn` | >=1.4, <1.5                |
+| `matplotlib`   | >=3.8, <3.9                |
+| `torch`        | >=2.4, <2.5                |
+
+> Please ensure these versions are installed before running MAPE.  
+> Using other versions may result in unexpected behavior or compatibility issues.
+
+To install the required dependencies manually:
+
+```bash
+pip install numpy>=1.26,<2.0 pandas>=2.2,<2.3 scipy>=1.11,<1.12 scikit-learn>=1.4,<1.5 matplotlib>=3.8,<3.9 torch>=2.4,<2.5
+
+
+---
+## Installation
+
+To install locally from source:
+
+```bash
+pip install .
+```
+
+To install from TestPyPI:
+
+```bash
+pip install -i https://test.pypi.org/simple/ mape
+```
+
+---
+
+## CLI Usage
+
+To reduce the dimensionality of a dataset containing a `label` column, use the following command:
+
+```bash
+mape data.csv --n_components 2 --output_csv result.csv --plot_file result.png
+```
+
+### Key Options
+
+- `--output_csv result.csv`  
+  Saves the low-dimensional coordinates to `result.csv`.
+
+- `--n_components 2`  
+  Specifies that the data should be reduced to 2 dimensions.
+
+- `--plot_file result.png`  
+  Generates a scatter plot (`result.png`) with points color-coded by their label values.
+
+> The tool automatically extracts numeric columns for embedding and uses the `label` column (if present) for visualization.
+
+To see all available options:
+
+```bash
+sppa --help
+```
+
+---
+
+## Python API Usage
+
+To generate low-dimensional coordinates and a 2D scatter plot from your dataset, run the following script.  
+Make sure that `data.csv` is placed in the same directory.
+
+```python
+# test.py
+from mape import run_embedding
+from mape.mape import DEFAULT_PARAMS
+
+run_embedding("data.csv", output_csv="result.csv", plot_file="result.png", **DEFAULT_PARAMS)
+```
+
+This will produce:
+
+- `result.csv`: a file containing the embedded coordinates
+- `result.png`: a scatter plot where points are color-coded by their label (if present)
+
+---
+
+## Input Format
+
+The input CSV should contain:
+
+- One or more numeric columns (used for embedding)
+- An optional `label` column (used for coloring the scatter plot)
+
+Example:
+
+```csv
+label,value1,value2,value3
+A,1.0,2.0,3.0
+B,2.5,3.1,1.2
+A,0.9,1.8,2.5
+C,3.0,2.9,0.5
+```
+
+---
+
+## Parameters
+
+You can customize the embedding behavior using the following parameters:
+
+| Parameter       | Description                                      | Default |
+|----------------|--------------------------------------------------|---------|
+| `n_components`  | Target dimensionality                            | `2`     |
+| `steps`         | Optimization steps                               | `300`   |
+| `k`             | Number of neighbors for mutual pair extraction   | `5`     |
+| `alpha1`        | Weight for cosine similarity                     | `5.0`   |
+| `alpha2`        | Weight for Euclidean distance                    | `1.0`   |
+| `a`, `b`        | Kernel shape parameters                          | `1.0`   |
+| `alpha_mix`     | Mixing ratio between standard and Gaussian kernel| `0.5`   |
+| `tau`, `gamma`  | Repel threshold and sharpness                    | `0.5`, `30.0` |
+| `lambda_repel`  | Weight of repel loss                             | `5.0`   |
+| `init_mode`     | Initialization method (`random`, `pca`, `spectral`) | `spectral` |
+| `device`        | Computation device (`cpu` or `cuda`)            | `cpu`   |
+
+---
+
+## Output
+
+- `embedding.csv`: Contains the embedded coordinates and labels
+- `embedding_result.png`: 2D scatter plot (if `n_components == 2`)
+
+---
+## License
+
+This project is licensed under the MIT License.  
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Author
+
+**Takeshi Matsuda**  
+[Hannan University – Information Science](https://www.hannan-u.ac.jp/doctor/i_info-science/matsuda/n5fenj000002lis4.html)
