@@ -1,0 +1,3 @@
+[console_scripts]
+mcpclient = mcp_client:app
+mcpclientm = mcp_client_multi:app
