@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-xtquantai
+Version: 0.1.1
+Summary: AI know use xtquant to do quantative project.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.11
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.3.0
+Requires-Dist: xtquant
+Requires-Dist: anyio>=3.0.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

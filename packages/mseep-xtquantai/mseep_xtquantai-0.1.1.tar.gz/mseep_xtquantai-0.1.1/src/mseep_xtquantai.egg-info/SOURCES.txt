@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_xtquantai.egg-info/PKG-INFO
+src/mseep_xtquantai.egg-info/SOURCES.txt
+src/mseep_xtquantai.egg-info/dependency_links.txt
+src/mseep_xtquantai.egg-info/entry_points.txt
+src/mseep_xtquantai.egg-info/requires.txt
+src/mseep_xtquantai.egg-info/top_level.txt
+src/xtquantai/__init__.py
+src/xtquantai/server.py
