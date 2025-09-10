@@ -1,0 +1,235 @@
+<div id="context_panel_root" style="position:relative;">
+  <div id="backend_status_dot" title="Checking backend..." style="position:absolute; top:10px; right:10px; width:10px; height:10px; border-radius:50%; background:#9ca3af; box-shadow:0 0 0 1px #e5e7eb;"></div>
+  <div class="right" style="display:flex;align-items:center;gap:8px;">
+    <p style="margin: 0px; min-width: 130px;">Platform Context</p>
+    <select id="ctx_select" class="ctx-select" style="margin-top: 0px; cursor:pointer;"></select>
+  </div>
+  <div id="projects_container" style="margin-top:10px; display:grid; grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) ); gap:10px;"></div>
+  <div id="issues_container" style="margin-top:10px; display:grid; grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) ); gap:10px;"></div>
+  <div id="setup_platform_card" class="studio-setup-card" style="display:none;">
+    <div style="display:flex; align-items:flex-start; gap:10px;">
+      <div>
+        <div class="studio-setup-title">Setup platform</div>
+        <div class="studio-setup-text">
+          Your current context doesn't provide Qalita platform credentials.<br><br>
+          To use contextual data quality metadata, configure your Platform endpoint and token.
+        </div>
+        <div class="studio-setup-actions">
+          <a class="studio-setup-doc-btn" href="https://cloud.platform.qalita.io/signup" target="_blank" rel="noopener noreferrer">Create a free account</a>
+        </div>
+        <div class="studio-setup-actions">
+          <a class="studio-setup-doc-btn outlined" href="https://doc.qalita.io/docs/studio" target="_blank" rel="noopener noreferrer">Open documentation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    function showSetupCardIfNeeded(status) {
+      try {
+        var card = document.getElementById('setup_platform_card');
+        if (!card) return;
+        var configured = !!(status && status.configured);
+        var endpointPresent = !!(status && status.endpoint_present);
+        var tokenPresent = !!(status && status.token_present);
+        // Show card if either endpoint or token is missing
+        if (!endpointPresent || !tokenPresent) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      } catch (e) { /* noop */ }
+    }
+    function checkBackend() {
+      var dot = document.getElementById('backend_status_dot');
+      if (dot) { dot.style.background = '#9ca3af'; dot.title = 'Checking backend...'; }
+      // Use server-side proxy to avoid CORS and rely on current context
+      fetch('/studio/check-backend')
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          var isOk = !!(j && j.ok);
+          var url = (j && j.url) ? String(j.url) : '';
+          var code = (j && j.status != null) ? String(j.status) : 'N/A';
+          if (dot) { dot.style.background = isOk ? '#10b981' : '#ef4444'; dot.title = (isOk ? 'Backend reachable: ' : 'Backend not reachable: ') + (url || '(unknown)') + ' (HTTP ' + code + ')'; }
+          showSetupCardIfNeeded(j || {});
+        })
+        .catch(function () { if (dot) { dot.style.background = '#ef4444'; dot.title = 'Backend check failed'; } });
+    }
+    function renderIssues(items) {
+      var root = document.getElementById('issues_container');
+      if (!root) return;
+      root.innerHTML = '';
+      if (!Array.isArray(items) || !items.length) {
+        var e = document.createElement('div');
+        e.className = 'muted';
+        e.textContent = 'No issues';
+        root.appendChild(e);
+        return;
+      }
+      var params = new URLSearchParams(window.location.search);
+      var selectedId = params.get('issue_id');
+      items.forEach(function (it) {
+        var id = String(it.id || it.issue_id || '');
+        var title = it.title || it.name || ('Issue ' + id);
+        var status = it.status || it.state || '';
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.style.cursor = 'pointer';
+        card.style.padding = '8px 10px';
+        card.style.border = '1px solid #e5e7eb';
+        card.style.borderRadius = '8px';
+        card.style.background = '#ffffff';
+        card.innerHTML = '<div style="font-weight:600; color:#111827;">' + title + '</div>' +
+          '<div class="muted" style="font-size:12px;">' + (status ? ('Status: ' + status) : '') + '</div>' +
+          '<div class="muted" style="font-size:12px;">#' + id + '</div>';
+        try {
+          // Persist full issue object for agent context usage
+          sessionStorage.setItem('studio_issue_' + id, JSON.stringify(it));
+        } catch (e) { /* ignore */ }
+        if (selectedId && id === selectedId) {
+          card.style.boxShadow = '0 0 0 2px rgba(65,105,225,0.35)';
+        }
+        card.addEventListener('click', function () {
+          var p = new URLSearchParams(window.location.search);
+          p.set('issue_id', id);
+          var newUrl = window.location.pathname + '?' + p.toString();
+          window.history.replaceState({}, '', newUrl);
+          try { sessionStorage.setItem('studio_issue_' + id, JSON.stringify(it)); } catch (e) { }
+          // update highlight
+          renderIssues(items);
+          // ensure local conversations synced
+          try { fetch('/studio/sync-conversations?issue_id=' + encodeURIComponent(id)).then(function(){ /*noop*/ }).catch(function(){}); } catch(e){}
+        });
+        root.appendChild(card);
+      });
+    }
+    function getProjectInitials(name) {
+      try {
+        if (!name) return '?';
+        var parts = String(name).trim().split(/\s+/).filter(Boolean);
+        var initials = parts.slice(0, 2).map(function (p) { return p[0]; }).join('').toUpperCase();
+        return initials || '?';
+      } catch (e) { return '?'; }
+    }
+    function renderProjects(items) {
+      var root = document.getElementById('projects_container');
+      if (!root) return;
+      root.innerHTML = '';
+      if (!Array.isArray(items) || !items.length) {
+        var e = document.createElement('div');
+        e.className = 'muted';
+        e.textContent = 'No projects';
+        root.appendChild(e);
+        return;
+      }
+      var params = new URLSearchParams(window.location.search);
+      var selectedId = params.get('project_id');
+      items.forEach(function (it) {
+        var id = String(it.id || it.project_id || it.uid || it.key || '');
+        var title = it.name || it.title || it.key || ('Project ' + id);
+        var description = it.description || '';
+        var avatar = it.avatar || '';
+        var initials = getProjectInitials(title);
+        var avatarHtml = avatar
+          ? '<img src="' + avatar + '" alt="' + initials + '" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #e5e7eb;" />'
+          : '<div style="width:28px;height:28px;border-radius:50%;background:#f3f4f6;color:#374151;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;border:1px solid #e5e7eb;">' + initials + '</div>';
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.style.cursor = 'pointer';
+        card.style.padding = '8px 10px';
+        card.style.border = '1px solid #e5e7eb';
+        card.style.borderRadius = '8px';
+        card.style.background = '#ffffff';
+        card.innerHTML = '<div style="display:flex;align-items:center;gap:10px;">' +
+          avatarHtml +
+          '<div style="min-width:0;">' +
+            '<div style="font-weight:600;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + title + '</div>' +
+            (description ? '<div class="muted" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + description + '</div>' : '') +
+            '<div class="muted" style="font-size:12px;">#' + id + '</div>' +
+          '</div>' +
+        '</div>';
+        try {
+          sessionStorage.setItem('studio_project_' + id, JSON.stringify(it));
+        } catch (e) { /* ignore */ }
+        if (selectedId && id === selectedId) {
+          card.style.boxShadow = '0 0 0 2px rgba(65,105,225,0.35)';
+        }
+        card.addEventListener('click', function () {
+          var p = new URLSearchParams(window.location.search);
+          p.set('project_id', id);
+          var newUrl = window.location.pathname + '?' + p.toString();
+          window.history.replaceState({}, '', newUrl);
+          try { sessionStorage.setItem('studio_project_' + id, JSON.stringify(it)); } catch (e) { }
+          renderProjects(items);
+          // Reload issues to reflect potential project scoping on server
+          loadIssues();
+        });
+        root.appendChild(card);
+      });
+    }
+    function loadIssues() {
+      fetch('/context/issues')
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.ok) { renderIssues(j.items || []); }
+          else { renderIssues([]); }
+        })
+        .catch(function () { renderIssues([]); });
+    }
+    function loadProjects() {
+      function normalizeProjects(j) {
+        try {
+          if (!j) return [];
+          if (Array.isArray(j)) return j;
+          // Common wrappers
+          if (Array.isArray(j.items)) return j.items;
+          if (Array.isArray(j.data)) return j.data;
+          if (Array.isArray(j.results)) return j.results;
+          if (j.data && Array.isArray(j.data.items)) return j.data.items;
+          if (j.projects && Array.isArray(j.projects)) return j.projects;
+          // Single object cases
+          if (j.items && typeof j.items === 'object') return [j.items];
+          if (j.data && typeof j.data === 'object' && !Array.isArray(j.data)) return [j.data];
+          if (typeof j === 'object' && (j.id != null || j.name != null)) return [j];
+        } catch (e) { /* ignore */ }
+        return [];
+      }
+      fetch('/studio/projects')
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          var items = normalizeProjects(j && (j.items != null ? j.items : j));
+          renderProjects(items);
+        })
+        .catch(function () { renderProjects([]); });
+    }
+    function loadContexts() {
+      fetch('/contexts').then(r => r.json()).then(j => {
+        var sel = document.getElementById('ctx_select'); if (!sel) return;
+        sel.innerHTML = '';
+        var opt = document.createElement('option');
+        opt.value = ''; opt.textContent = 'Default context'; sel.appendChild(opt);
+        (j.items || []).forEach(function (it) {
+          var o = document.createElement('option');
+          o.value = it.path; o.textContent = it.name; sel.appendChild(o);
+        });
+        if (j.selected) { sel.value = j.selected; }
+      }).catch(() => { });
+    }
+    function onSelect() {
+      var sel = document.getElementById('ctx_select'); if (!sel) return;
+      fetch('/context/select', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ path: sel.value }) })
+        .then(() => { window.location.reload(); })
+        .catch(() => { window.location.reload(); });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      loadContexts();
+      var sel = document.getElementById('ctx_select'); if (sel) sel.addEventListener('change', onSelect);
+      checkBackend();
+      loadProjects();
+      loadIssues();
+      // On navigation (back/forward), re-render selection highlight
+      window.addEventListener('popstate', function () { loadProjects(); loadIssues(); });
+    });
+  })();
+</script>
