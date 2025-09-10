@@ -1,0 +1,34 @@
+Metadata-Version: 2.4
+Name: ddex-builder
+Version: 0.1.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Rust
+Classifier: Topic :: Multimedia :: Sound/Audio
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: Markup :: XML
+Requires-Dist: pytest>=6.0 ; extra == 'dev'
+Requires-Dist: pandas>=1.0 ; extra == 'dev'
+Requires-Dist: numpy>=1.20 ; extra == 'dev'
+Requires-Dist: pandas>=1.0 ; extra == 'pandas'
+Requires-Dist: numpy>=1.20 ; extra == 'pandas'
+Requires-Dist: pytest>=6.0 ; extra == 'test'
+Requires-Dist: pytest-asyncio>=0.18 ; extra == 'test'
+Provides-Extra: dev
+Provides-Extra: pandas
+Provides-Extra: test
+Summary: High-performance DDEX XML builder with deterministic output and DB-C14N/1.0 canonicalization
+Keywords: ddex,xml,builder,music,deterministic,canonicalization
+Author: Kevin Marques Moo
+License: MIT
+Requires-Python: >=3.8
+Project-URL: homepage, https://github.com/daddykev/ddex-suite
+Project-URL: repository, https://github.com/daddykev/ddex-suite
+Project-URL: documentation, https://github.com/daddykev/ddex-suite/tree/main/packages/ddex-builder
