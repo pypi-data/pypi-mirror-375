@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+faonet/__init__.py
+faonet/export.py
+faonet/filtering.py
+faonet/fitting.py
+faonet/io.py
+faonet/metrics.py
+faonet/network.py
+faonet/plots.py
+faonet.egg-info/PKG-INFO
+faonet.egg-info/SOURCES.txt
+faonet.egg-info/dependency_links.txt
+faonet.egg-info/requires.txt
+faonet.egg-info/top_level.txt
+tests/test_faonet.py
