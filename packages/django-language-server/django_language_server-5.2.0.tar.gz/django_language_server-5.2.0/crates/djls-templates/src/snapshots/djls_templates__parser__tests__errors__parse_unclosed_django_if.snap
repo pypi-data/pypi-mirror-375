@@ -1,0 +1,19 @@
+---
+source: crates/djls-templates/src/parser.rs
+expression: test_ast
+---
+nodelist:
+  - type: Tag
+    name: if
+    bits:
+      - user.is_authenticated
+    span:
+      - 0
+      - 30
+  - type: Text
+    content: Welcome
+    span:
+      - 30
+      - 7
+line_offsets:
+  - 0

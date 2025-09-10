@@ -1,0 +1,22 @@
+[package]
+name = "djls-workspace"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+camino = { workspace = true }
+dashmap = { workspace = true }
+notify = { workspace = true }
+percent-encoding = { workspace = true }
+salsa = { workspace = true }
+tokio = { workspace = true }
+tower-lsp-server = { workspace = true }
+tracing = { workspace = true }
+url = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

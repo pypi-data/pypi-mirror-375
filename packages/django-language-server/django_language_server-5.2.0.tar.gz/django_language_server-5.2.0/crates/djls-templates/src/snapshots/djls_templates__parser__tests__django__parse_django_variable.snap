@@ -1,0 +1,13 @@
+---
+source: crates/djls-templates/src/parser.rs
+expression: test_ast
+---
+nodelist:
+  - type: Variable
+    var: user.name
+    filters: []
+    span:
+      - 0
+      - 15
+line_offsets:
+  - 0
