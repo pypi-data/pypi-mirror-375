@@ -1,0 +1,26 @@
+[CDF-25698] 🤓 HTTP Client Part 1 (#1922)
+
+# Description
+
+Adds an HTTPClient that does not use any queues or threading to make it
+compatible with a WorkerProducer.
+
+Redoing the changelog from last commit to trigger release.
+
+## Changelog
+
+- [x] Patch
+- [ ] Skip
+
+## cdf
+
+### Improved
+
+- Warning on syntax errors when running `cdf build` for resources types
+containers, views, extraction pipeline, extraction pipeline conig,
+workflow, workflow version, workflow trigger, and datapoint
+subscriptions.
+
+## templates
+
+No changes.
