@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+openstock/__init__.py
+openstock.egg-info/PKG-INFO
+openstock.egg-info/SOURCES.txt
+openstock.egg-info/dependency_links.txt
+openstock.egg-info/requires.txt
+openstock.egg-info/top_level.txt
+openstock/stock/__init__.py
+openstock/stock/client.py
