@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mkinf
+Version: 0.1.9
+Summary: mkinf python SDK
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.9
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: requests<3,>=2.32.3
+Requires-Dist: python-dotenv<2,>=1.0.1
+Requires-Dist: langchain-core<0.4,>=0.3.31
+Requires-Dist: pydantic<3,>=2.10.5
+Requires-Dist: toml>=0.10.2
+Dynamic: license-file
+
+Package managed by MseeP.ai

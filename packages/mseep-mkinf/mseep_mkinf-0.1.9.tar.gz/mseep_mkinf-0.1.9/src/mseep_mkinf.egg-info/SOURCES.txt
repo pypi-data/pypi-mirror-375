@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/mkinf/__init__.py
+src/mkinf/mkinf.py
+src/mkinf/hub/__init__.py
+src/mkinf/hub/pull.py
+src/mseep_mkinf.egg-info/PKG-INFO
+src/mseep_mkinf.egg-info/SOURCES.txt
+src/mseep_mkinf.egg-info/dependency_links.txt
+src/mseep_mkinf.egg-info/requires.txt
+src/mseep_mkinf.egg-info/top_level.txt
