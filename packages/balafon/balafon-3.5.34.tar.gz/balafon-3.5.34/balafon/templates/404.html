@@ -1,0 +1,19 @@
+{% extends "balafon/bs_base.html" %}{% load i18n %}
+
+{% block header_bar %}
+{% endblock %}
+
+{% block meta_title %}{% trans "Page not found" %}{% endblock %}
+
+{% block main %}
+<div class="login-header">
+    <a href="{% url 'balafon_homepage' %}">
+        <i class="fa fa-address-book"></i> Balafon
+    </a>
+</div>
+
+<h2>{% block document_title %}{% trans "Page not found" %}{% endblock %}</h2>
+
+{% block document_content %}{% trans "The request page can't be found on the server" %}{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load i18n %}
+<span class="action-opprtunity">
+{% if action.opportunity %}
+  <span class="label label-default">
+    <i class="fas fa-tag"></i>
+    <span class="label-text">{% trans "Opportunity" %}: </span>
+    <a href="{% url 'crm_view_opportunity' action.opportunity.id %}">
+      {{action.opportunity.name}}
+    </a>
+    <a href="{% url 'crm_remove_action_from_opportunity' action.id action.opportunity.id %}"
+       class="colorbox-form">
+        <i class="fas fa-times"></i>
+    </a>
+  </span>
+{% endif %}
+</span>
+

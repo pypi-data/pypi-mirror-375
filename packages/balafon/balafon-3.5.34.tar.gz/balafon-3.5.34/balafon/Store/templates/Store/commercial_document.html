@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html>
+<head lang="{{ LANGUAGE_CODE }}">
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="{{ DOMAIN }}{{ STATIC_URL }}bs4/css/bootstrap.css" />
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}js/popper.min.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}modules/jquery/dist/jquery.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}modules/angular/angular.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}bs4/js/bootstrap.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}modules/moment/moment.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}modules/angular-messages/angular-messages.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}modules/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}modules/angular-i18n/angular-locale_{{ LANGUAGE_CODE }}-{{ LANGUAGE_CODE }}.js"></script>
+  <script src="{{ DOMAIN }}{{ STATIC_URL }}modules/angular-translate/angular-translate.js"></script>
+  <link rel="stylesheet" href="{{ DOMAIN }}{{ STATIC_URL }}fontawesome/css/all.min.css" type="text/css" />
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    {{ DJANGO_APP|safe }}
+    var saleVatTotalUrl = '{% url "store_documents_sale_vat_total" action.sale.id %}';
+
+    var app = angular.module('commercialDocApp', ['ui.bootstrap', 'pascalprecht.translate']);
+
+    app.config(['$httpProvider', '$translateProvider', function($httpProvider, $translateProvider) {
+      $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+      $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+      $translateProvider.translations('en', {
+        LABEL: 'Label',
+        QUANTITY: 'Quantity',
+        UNIT_PRICE: 'Unit Price',
+        PRE_TAX_TOTAL: 'Pre-tax total',
+        PRE_TAX_PRICE: 'Pre-tax price',
+        PRE_TAX_SUB_TOTAL: 'Pre-tax sub-total',
+        VAT_RATE: 'VAT rate',
+        TAX_INCL_TOTAL: 'Tax Incl. total',
+        TAX_INCL_PRICE: 'Tax Incl. price',
+        DISCOUNT: 'Discount',
+        NO_QUANTITY: "Don't show quantity",
+        OK: 'Ok',
+        CANCEL: 'Cancel',
+        ADD: 'Add',
+        BLANK: 'Add an empty line',
+        EDIT: 'Edit',
+        DELETE: 'Delete',
+        SEARCH: 'Search',
+        SELECT_A_STORE_ITEM: 'Select a store item',
+        TOTAL: 'Total',
+        ENTER_A_NAME: 'Enter a name',
+        AN_ERROR_OCCURED: 'An error occured',
+        ERROR: 'Error',
+        PERCENTAGE: 'Percentage',
+        SHOW_PERCENTAGE: "Display percentage",
+        THE_ORDER_INDEX_FIELD_IS_REQUIRED_NUMBER: 'The order index is required number',
+        THE_LABEL_FIELD_IS_REQUIRED: 'The label field is required',
+        THE_QUANTITY_FIELD_IS_REQUIRED_NUMBER: 'The quantity field is required number',
+        THE_PRE_TAX_PRICE_FIELD_IS_REQUIRED_NUMBER: 'The pre-tax price field is required number',
+        THE_PERCENTAGE_FIELD_IS_REQUIRED_NUMBER: "The percentage filed is required number",
+        THE_VAT_REQUIRED: 'The VAT rate is required',
+        SEND_BY_MAIL: 'Send by email',
+        READ_ONLY: 'Read_only',
+        DOWNLOAD_AS_PDF: 'Download as PDF',
+        EDIT_ORDER: 'Change order',
+        VAT: 'VAT'
+      });
+
+      $translateProvider.translations('fr', {
+        LABEL: 'Libellé',
+        QUANTITY: 'Quantité',
+        UNIT_PRICE: 'Prix unitaire',
+        PRE_TAX_TOTAL: 'Total HT',
+        PRE_TAX_SUB_TOTAL: 'Sous-Total HT',
+        PRE_TAX_PRICE: 'Prix HT',
+        VAT_RATE: 'TVA',
+        TAX_INCL_TOTAL: 'Total TTC',
+        TAX_INCL_PRICE: 'Prix TTC',
+        DISCOUNT: 'Réduction',
+        NO_QUANTITY: "Ne pas afficher la quantité",
+        OK: 'Ok',
+        CANCEL: 'Annuler',
+        ADD: 'Ajouter',
+        BLANK: 'Ajouter une ligne vide',
+        EDIT: 'Editer',
+        DELETE: 'Supprimer',
+        SEARCH: 'Chercher dans le catalogue',
+        SELECT_A_STORE_ITEM: 'Selectionner un élément du catalogue',
+        TOTAL: 'Total',
+        ENTER_A_NAME: 'Entrez un nom',
+        AN_ERROR_OCCURED: 'Une erreur est survenue',
+        ERROR: 'Erreur',
+        PERCENTAGE: 'Pourcentage',
+        SHOW_PERCENTAGE: "Afficher le pourcentage",
+        THE_ORDER_INDEX_FIELD_IS_REQUIRED_NUMBER: 'Le numéro d\'ordre doit être un nombre',
+        THE_LABEL_FIELD_IS_REQUIRED: 'Le libellé est requis',
+        THE_QUANTITY_FIELD_IS_REQUIRED_NUMBER: 'La quantité doit être un nombre',
+        THE_PRE_TAX_PRICE_FIELD_IS_REQUIRED_NUMBER: 'Le prix unitaire doit être un nombre',
+        THE_PERCENTAGE_FIELD_IS_REQUIRED_NUMBER: "Le pourcentage doit être un nombre",
+        THE_VAT_REQUIRED: 'La TVA est requise',
+        SEND_BY_MAIL: 'Envoyer par email',
+        READ_ONLY: 'Lecture seule',
+        DOWNLOAD_AS_PDF: 'Télécharger en PDF',
+        EDIT_ORDER: 'Changer l\'ordre',
+        VAT: 'TVA'
+      });
+      $translateProvider.preferredLanguage('{{ LANGUAGE_CODE }}');
+      $translateProvider.useSanitizeValueStrategy('escape');
+    }]);
+
+    app.controller('CommercialDocCtrl', ['$scope', '$modal', '$http', '$translate', '$filter', '$log',
+    function ($scope, $modal, $http, $translate, $filter, $log) {
+      $scope.app = DJANGO_APP;
+      $scope.editMode = false;
+      $scope.showPercentage = $scope.app.showPercentage;
+      $scope.columnsCount = ($scope.showPercentage)?6:5;
+      $scope.allowEdit = !$scope.app.isReadOnly;
+      $scope.formErrors = '';
+      $scope.editBackup = null;
+      $translate.use('{{ LANGUAGE_CODE }}');
+      var translate = $filter('translate');
+
+      var initMe = function() {
+        for (var i= 0, l=$scope.app.sale_items.length; i<l; i++) {
+          $scope.app.sale_items[i].order_index = i + 1;
+          $scope.app.sale_items[i].order_memory = $scope.app.sale_items[i].order_index;
+        }
+      };
+      initMe();
+
+      $scope.getDefaultVatRate = function() {
+        for (var i=0; i<$scope.app.vat_rates.length; i++){
+          if ($scope.app.vat_rates[i].is_default) {
+            return $scope.app.vat_rates[i];
+          }
+        }
+        return null;
+      };
+
+      $scope.getEditedItem = function() {
+        if ($scope.editMode) {
+          for (var i=0; i<$scope.app.sale_items.length; i++){
+            if ($scope.editedLines[i]) {
+              return $scope.app.sale_items[i];
+            }
+          }
+        }
+        return null;
+      };
+
+      $scope.editItem = function(item, index) {
+        $scope.editMode = true;
+        $scope.editBackup = JSON.parse(JSON.stringify($scope.app.sale_items));
+        $scope.editedLines[index] = true;
+      };
+
+      $scope.editOrder = function(item, index) {
+        $scope.editItem(item, index);
+        $scope.changeOrder = true;
+      };
+
+      $scope.updateVatTotals = function() {
+        $scope.app.vat_totals = [];
+        $http.get(saleVatTotalUrl).success(function(respData) {
+          $scope.app.vat_totals = respData.vat_totals;
+        });
+      };
+
+      $scope.addItem = function(item, isBlank) {
+        $scope.editMode = true;
+        $scope.editBackup = JSON.parse(JSON.stringify($scope.app.sale_items));
+        $scope.app.sale_items.push({
+          id: 0,
+          order_index: $scope.app.sale_items.length + 1,
+          order_memory: $scope.app.sale_items.length + 1,
+          pre_tax_price: 0.0,
+          percentage: 100,
+          showPercentage: $scope.showPercentage,
+          vat_rate: $scope.getDefaultVatRate(),
+          quantity: 1,
+          text: isBlank?' ':'',
+          is_blank: isBlank?true:false,
+          added: true
+        });
+        $scope.editedLines.push(true);
+      };
+
+      $scope.addBlank = function(item) {
+        $scope.addItem(item, true);
+        $scope.saveEdit();
+      };
+
+      $scope.deleteItem = function(item, index) {
+        var text = translate('DELETE') + " '" + item.text + "' ?";
+        if (confirm(text)) {
+          $scope.editBackup = JSON.parse(JSON.stringify($scope.app.sale_items));
+          $scope.app.sale_items.splice(index, 1);
+          $scope.editedLines.splice(index, 1);
+          var url = '/store/api/' + $scope.app.action.id + '/sales-items/' + item.id + '/';
+          $http.delete(url).success(function() {
+            $scope.formErrors = '';
+            $scope.editBackup = null;
+            $scope.updateVatTotals();
+          }).error(function() {
+            $scope.formErrors = translate('AN_ERROR_OCCURED');
+            $scope.app.sale_items = $scope.editBackup;
+            $scope.editBackup = null;
+          });
+        }
+      };
+
+      $scope.switchOffEditMode = function() {
+        $scope.editMode = false;
+        $scope.changeOrder = false;
+        $scope.editedLines = [];
+        for (var i=0; i<$scope.app.sale_items.length; i++){
+          $scope.editedLines.push(false);
+        }
+        $scope.app.sale_items.sort(function(itemA, itemB) {
+            if (itemA.order_index < itemB.order_index) {
+              return -1;
+            } else if (itemA.order_index > itemB.order_index){
+              return 1;
+            }
+            return 0;
+        });
+        for (var j=0; j<$scope.app.sale_items.length; j++){
+          $scope.app.sale_items[j].order_index = j + 1;
+        }
+      };
+
+      $scope.cancelEdit = function() {
+        $scope.app.sale_items = $scope.editBackup;
+        $scope.editBackup = null;
+        $scope.switchOffEditMode();
+        $scope.formErrors = '';
+      };
+
+      $scope.itemsToUpdate = [];
+
+      var reorderItems = function(item, nbItems) {
+        var isChangeOrder = $scope.changeOrder;
+        if (isChangeOrder) {
+          var newPos = item.order_index;
+          if (newPos < 1) {
+            newPos = 1;
+          } else if (newPos > nbItems) {
+            newPos = nbItems;
+          }
+          var oldPos = item.order_memory;
+          var i = 0;
+          var curItem = 0;
+          if (newPos < oldPos) {
+            for (i=0; i<nbItems; i++) {
+              curItem = $scope.app.sale_items[i];
+              if (curItem.id !== item.id) {
+                if ((curItem.order_index >= newPos) && (curItem.order_index < oldPos)) {
+                  curItem.order_index += 1;
+                  curItem.order_memory = curItem.order_index;
+                  $scope.itemsToUpdate.push(curItem);
+                }
+              }
+            }
+          } else if (newPos > oldPos) {
+            for (i=0; i<nbItems; i++) {
+              curItem = $scope.app.sale_items[i];
+              if (curItem.id !== item.id) {
+                if ((curItem.order_index > oldPos) && (curItem.order_index <= newPos)) {
+                  curItem.order_index -= 1;
+                  curItem.order_memory = curItem.order_index;
+                  $scope.itemsToUpdate.push(curItem);
+                }
+              }
+            }
+          }
+        }
+      };
+
+      var pushData = function() {
+        var item = $scope.itemsToUpdate.pop();
+        if (item) {
+          var postData = {
+            sale: $scope.app.sale.id,
+            text: item.text,
+            vat_rate: item.vat_rate?item.vat_rate.id:null,
+            pre_tax_price: item.pre_tax_price,
+            percentage: item.percentage,
+            quantity: item.quantity,
+            item: item.item,
+            is_blank: item.is_blank,
+            no_quantity: item.no_quantity,
+            is_discount: item.is_discount,
+            is_extra: item.is_extra,
+            order_index: item.order_index
+          };
+          var url = '/store/api/' + $scope.app.action.id + '/sales-items/' + item.id + '/';
+          $http.put(url, postData).success(function (respData) {
+            pushData(); //update next one
+          }).error(function (response) {
+            $log.error('push data fail: '+JSON.stringify(response))
+          });
+        }
+      };
+
+      var getItemData = function(item) {
+        var url = '/store/api/' + $scope.app.action.id + '/sales-items/' + item.id + '/';
+        $http.get(url).success(function(respData) {
+          item.text = respData.text;
+          item.vat_rate = respData.vat_rate;
+          item.pre_tax_price = respData.pre_tax_price;
+          item.unit_price = respData.unit_price;
+          item.discount = respData.discount;
+          item.is_blank = respData.is_blank;
+          item.quantity = respData.quantity;
+          item.item = respData.item;
+          item.is_discount = respData.is_discount;
+          item.is_extra = respData.is_extra;
+          item.no_quantity = respData.no_quantity;
+          item.percentage = respData.percentage;
+          item.showPercentage = (respData.percentage !== 100);
+          $scope.updateVatTotals();
+
+        });
+      };
+
+      $scope.saveEdit = function() {
+        var item = $scope.getEditedItem();
+
+        reorderItems(item, $scope.app.sale_items.length);
+        if (item.text === '' && item.is_blank){
+          item.text = ' ';
+        }
+
+        $scope.formErrors = $scope.isFormInvalid(item);
+        if (!$scope.formErrors) {
+          var url = '/store/api/' + $scope.app.action.id + '/sales-items/';
+          var httpMethod = $http.post;
+          if (item.id) {
+            url += item.id + '/';
+            httpMethod = $http.put;
+          }
+          var postData = {
+            sale: $scope.app.sale.id,
+            text: item.text,
+            vat_rate: item.vat_rate?item.vat_rate.id:null,
+            pre_tax_price: item.pre_tax_price,
+            percentage: item.percentage,
+            quantity: item.quantity,
+            item: item.item,
+            is_blank: item.is_blank,
+            is_discount: item.is_discount,
+            is_extra: item.is_extra,
+            no_quantity: item.no_quantity,
+            order_index: item.order_index
+          };
+          httpMethod(url, postData).success(function(respData) {
+            $scope.formErrors = '';
+            if (item.id === 0) {
+              item.id = respData.id;
+            }
+            getItemData(item);
+            $scope.editBackup = null;
+            $scope.switchOffEditMode();
+            pushData();  //update positions of others
+          }).error(function(response) {
+            $scope.formErrors = translate('AN_ERROR_OCCURED')+' : '+JSON.stringify(response);
+          });
+        }
+      };
+
+      $scope.getUnitPrice = function(item) {
+        var value = item.unit_price;
+        if (isNaN(value)) {
+          return translate('ERROR');
+        }
+        return value;
+      };
+
+      $scope.getItemPreTaxPrice = function(item) {
+        var value = item.unit_price * item.quantity * (item.percentage / 100);
+        if (isNaN(value)) {
+          return translate('ERROR');
+        }
+        return value;
+      };
+
+      $scope.getItemTaxInclPrice = function(item, noRound) {
+        if (item.vat_rate !== null) {
+          var value = item.quantity * item.unit_price  * (item.percentage / 100) * (100 + item.vat_rate.rate) / 100;
+          if (isNaN(value)) {
+            return translate('ERROR');
+          }
+          if (noRound) {
+            return value;
+          } else {
+            return Math.round(value * 100) / 100;
+          }
+
+        } else {
+          return $scope.getItemPreTaxPrice(item);
+        }
+      };
+
+      $scope.getVatTotalAmount = function() {
+        var sum = 0;
+        for (var i = 0, l = $scope.app.vat_totals.length; i < l; i++) {
+          sum += parseFloat($scope.app.vat_totals[i].amount);
+        }
+
+        if (isNaN(sum)) {
+          return translate('ERROR');
+        }
+        return sum;
+      };
+
+      $scope.getTotalPreTaxPriceNoDiscount = function() {
+        var sum = 0;
+        for (var i= 0, l=$scope.app.sale_items.length; i<l; i++) {
+          if (!$scope.app.sale_items[i].is_blank && !$scope.app.sale_items[i].is_discount && !$scope.app.sale_items[i].is_extra) {
+            sum += $scope.getItemPreTaxPrice($scope.app.sale_items[i]);
+          }
+        }
+        if (isNaN(sum)) {
+          return translate('ERROR');
+        }
+        return sum;
+      };
+
+      $scope.hasDiscount = function () {
+        for (var i= 0, l=$scope.app.sale_items.length; i<l; i++) {
+          if ($scope.app.sale_items[i].is_discount) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      $scope.hasExtra = function () {
+        for (var i= 0, l=$scope.app.sale_items.length; i<l; i++) {
+          if ($scope.app.sale_items[i].is_extra) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      $scope.hasPercentage = function () {
+        hasPercentage = false;
+        for (var i= 0, l=$scope.app.sale_items.length; i<l && !hasPercentage; i++) {
+          if ($scope.app.sale_items[i].showPercentage || ($scope.app.sale_items[i].percentage !== 100)) {
+            hasPercentage = true;
+          }
+        }
+        if (hasPercentage) {
+            $scope.columnsCount = 6;
+        } else {
+            $scope.columnsCount = 5;
+        }
+        return hasPercentage;
+      };
+
+      $scope.getTotalPreTaxPrice = function() {
+        var sum = 0;
+        for (var i= 0, l=$scope.app.sale_items.length; i<l; i++) {
+          if (!$scope.app.sale_items[i].is_blank) {
+            sum += $scope.getItemPreTaxPrice($scope.app.sale_items[i]);
+          }
+        }
+        if (isNaN(sum)) {
+          return translate('ERROR');
+        }
+        return sum;
+      };
+
+      $scope.getTotalTaxInclPrice = function() {
+        var sum = 0;
+        for (var i=0, l=$scope.app.sale_items.length; i<l; i++) {
+          if (!$scope.app.sale_items[i].is_blank) {
+            var value = $scope.getItemTaxInclPrice($scope.app.sale_items[i], true);
+            sum += value;
+          }
+        }
+        if (isNaN(sum)) {
+          return translate('ERROR');
+        }
+        return Math.round(sum * 100) / 100;
+      };
+
+      $scope.switchOffEditMode();
+
+      $scope.isFormInvalid = function(item) {
+        if (!item.text) {
+          return translate('THE_LABEL_FIELD_IS_REQUIRED');
+        }
+
+        if (isNaN(item.quantity)) {
+          return translate('THE_QUANTITY_FIELD_IS_REQUIRED_NUMBER');
+        }
+
+        if (isNaN(item.order_index)) {
+          return translate('THE_ORDER_INDEX_FIELD_IS_REQUIRED_NUMBER');
+        }
+
+        if (isNaN(item.pre_tax_price)) {
+          return translate('THE_PRE_TAX_PRICE_FIELD_IS_REQUIRED_NUMBER');
+        }
+
+        if (isNaN(item.percentage)) {
+          return translate('THE_PERCENTAGE_FIELD_IS_REQUIRED_NUMBER');
+        }
+
+        if (!item.vat_rate && !item.is_blank) {
+          return translate('THE_VAT_REQUIRED');
+        }
+
+        return "";
+      };
+
+      $scope.sortableListeners = {
+          accept: function (sourceItemHandleScope, destSortableScope) {return true;},
+          itemMoved: function (event) {},
+          orderChanged: function(event) {}
+          //containment: '#board'//optional param.
+      };
+
+      $scope.lookFor = function(item) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'LoadItemModal.html',
+          controller: 'LoadItemModalCtrl',
+          resolve: {
+            $http: function () {
+              return $http
+            }
+          }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          //$scope.selected = selectedItem;
+          item.text = selectedItem.name;
+          item.vat_rate = selectedItem.vat_rate;
+          item.pre_tax_price = selectedItem.pre_tax_price;
+          item.unit_price = selectedItem.pre_tax_price;
+          item.percentage = 100;
+          item.showPercentage = $scope.hasPercentage();
+          item.item = selectedItem.id;
+          item.discount = null;
+        }, function () {
+
+        });
+      };
+
+    }]);
+
+    app.controller('LoadItemModalCtrl', function ($scope, $modalInstance, $http) {
+      $scope.selectedItem = null;
+
+      $scope.formatStoreItem = function(model) {
+        if (model) {
+          if (model.name) {
+            return model.name;
+          } else {
+            return model;
+          }
+        } else {
+          return '';
+        }
+      };
+
+      /**
+       * typeahead-on-select='onClientSelected($item, $model, $label)
+       */
+      $scope.onStoreItemSelected = function() {
+      };
+
+      $scope.getStoreItems = function(name) {
+        var storeItems = [];
+        var fullUrl = "/store/api/store-items/?name="+name;
+        return $http.get(fullUrl).then(function(response){
+          return response.data;
+        });
+      };
+
+      $scope.ok = function () {
+        $modalInstance.close($scope.selectedItem);
+      };
+
+      $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+      };
+    });
+
+  </script>
+  {% block extra_head %}
+  <style>
+    body {
+      background: #fff;
+    }
+
+    .content {
+      padding: 10px;
+      margin: 10px auto;
+      background: #fff;
+    }
+
+    .header {
+      margin-bottom: 20px;
+    }
+
+    .doc-header {
+      margin-bottom: 20px;
+    }
+
+    .contacts {
+      margin-bottom: 20px;
+    }
+
+    .doc-footer {
+      margin-top: 20px;
+    }
+
+
+    tr td {
+      height: 42px;
+    }
+
+    tr .show-on-hover, div .show-on-hover {
+    }
+
+    tr .show-on-hover a, div > .show-on-hover a{
+      display: none;
+    }
+
+    tr:hover .show-on-hover a, div:hover > .show-on-hover a{
+      display: inline-block;
+    }
+
+    tr.tr-row:hover {
+      background: #f0f0f0;
+    }
+
+    tr.tr-row:hover .show-on-hover{
+      background: #444;
+      padding: 2px;
+    }
+
+    tr td.cell-order {
+      width: 6%;
+      padding: 0.5;
+    }
+
+    tr td input, tr td textarea, tr td select {
+      font-size: 0.9em !important;
+    }
+
+    tr td.cell-label {
+      width: 47%;
+    }
+
+    tr td.cell-label textarea {
+      width: 92%;
+    }
+
+    tr td.cell-label > div {
+      display: inline-block;
+    }
+
+    tr td.cell-label > .checkboxes > div {
+      display: inline-block;
+      padding: 2px 5px;
+      margin-top: 2px;
+      margin-right: 10px;
+      border: solid 1px #ccc;
+    }
+
+    input[type=number] {
+      max-width: 100px;
+    }
+
+    th.number, td.number {
+      text-align: right;
+      width: 9%;
+    }
+
+    th {
+      font-size: 0.7em;
+      background: #444;
+      color: #fff;
+    }
+
+    tr.results td {
+      background: #ccc;
+      font-weight: bold;
+    }
+
+    tr.results td > div {
+      font-weight: normal;
+    }
+
+    .selected-item-details {
+      padding: 10px;
+      border: solid thin #ccc;
+      border-radius: 8px;
+    }
+
+    .contacts .contact, .contacts .entity {
+      margin-bottom: 10px;
+    }
+
+    .badges {
+      text-align: right;
+    }
+
+    .badges {
+      text-align: right;
+    }
+
+    .badges .badge {
+      background: #888;
+    }
+
+    .badges .badge:hover {
+      background: #777;
+    }
+
+    .badges .badge.badge-inactive {
+      background: #000;
+    }
+
+    .badge a {
+      color: #fff;
+    }
+
+    .badge a:hover {
+      color: #eee;
+    }
+
+    input.inline {
+      display: inline-block;
+    }
+
+    {% if is_pdf %}
+    body {
+      font-size: 0.7em;
+    }
+
+    tr td {
+      height: auto;
+    }
+    {% endif %}
+
+  </style>
+  <style media="print">
+    .badges {
+      display: none;
+    }
+  </style>
+  {% endblock %}
+</head>
+<body>
+  {% verbatim %}
+  <div ng-app="commercialDocApp">
+
+    <div ng-controller="CommercialDocCtrl" class="container-fluid">
+
+      <div ng-hide="app.isPdf" class="badges">
+        <div class="badge badge-inactive" ng-show="app.isReadOnly && !app.isPublic">
+          <i class="fas fa-eye"></i> {{ 'READ_ONLY' | translate }}
+        </div>
+
+        <div class="badge" ng-show="app.action.mail_to && !app.isPublic">
+          <a href="{{app.action.mail_to}}">
+            <i class="fas fa-envelope"></i> {{ 'SEND_BY_MAIL' | translate}}
+          </a>
+        </div>
+
+        <div class="badge" ng-repeat="entity in app.action.entities" ng-show="!app.isPublic">
+          <a href="{{ entity.get_view_url }}">
+            <i class="fas fa-cog"></i> {{ entity.name }}
+          </a>
+        </div>
+
+        <div class="badge" ng-repeat="contact in app.action.contacts" ng-show="!app.isPublic">
+          <a href="{{ contact.get_view_url }}">
+            <i class="fas fa-user"></i> {{ contact.fullname }}
+            <a ng-show="contact.email" href="mailto:{{contact.email}}">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </a>
+        </div>
+
+        <div class="badge">
+          {% endverbatim %}
+            {% if user.is_staff %}
+              <a href="{% url 'store_view_sales_document_pdf' action.id %}">
+            {% else %}
+              {% if action.uuid %}
+              <a href="{% url 'store_view_sales_document_pdf_public' action.uuid %}">
+              {% else %}
+              <a ng-show="false">
+              {% endif %}
+            {% endif %}
+            {% verbatim %}
+            <i class="fas fa-download"></i> {{ 'DOWNLOAD_AS_PDF' | translate }}</a>
+        </div>
+
+        {% endverbatim %}{% block extra_badges %}{% endblock %}{% verbatim %}
+      </div>
+
+      <div class="content">
+        <div class="row"><div class="col-xl-12">
+          <div class="header">
+            <div class="row"><div class="col-xl-12">
+              {% endverbatim %}{% block header %}{% endblock %}{% verbatim %}
+            </div></div>
+          </div>
+
+          {% endverbatim %}{% block doc_header %}{% verbatim %}
+          <div class="doc-header">
+            <div class="row"><div class="col-xl-12">
+              <div class="action-date">{{ app.action.planned_date|date }}</div>
+              <div class="action-number" ng-show="app.action.get_action_number">{{ app.action.get_action_number }}</div>
+              <div class="action-subject">
+              {% endverbatim %}{% block subject %}{{ action.subject }}{% endblock %}{% verbatim %}
+              </div>
+              {% endverbatim %}{% block extra_doc_header %}{% endblock %}{% verbatim %}
+            </div></div>
+          </div>
+          {% endverbatim %}{% endblock doc_header %}{% verbatim %}
+
+          {% endverbatim %}{% block contacts_before %}{% endblock %}{% verbatim %}
+
+          <div class="contacts">
+            {% endverbatim %}{% block contacts_intro %}{% endblock %}{% verbatim %}
+            <div ng-repeat="entity in app.action.entities" class="entity">
+              <div class="row"><div class="col-xl-12">
+                <div>
+                  {{ entity.name }}
+                </div>
+                <span ng-show="entity.billing_city">
+                <div ng-show="entity.billing_address">{{ entity.billing_address }}</div>
+                <div ng-show="entity.billing_address2">{{ entity.billing_address2 }}</div>
+                <div ng-show="entity.billing_address3">{{ entity.billing_address3 }}</div>
+                <div>{{ entity.billing_zip_code }} {{ entity.billing_city.name }} {{ entity.billing_cedex }}</div>
+                <div ng-show="entity.billing_country.is_foreign_country">{{ entity.billing_country.name }}</div>
+                </span>
+                <span ng-hide="entity.billing_city">
+                <div ng-show="entity.address">{{ entity.address }}</div>
+                <div ng-show="entity.address2">{{ entity.address2 }}</div>
+                <div ng-show="entity.address3">{{ entity.address3 }}</div>
+                <div>{{ entity.zip_code }} {{ entity.city.name }} {{ entity.cedex }}</div>
+                <div ng-show="entity.country.is_foreign_country">{{ entity.country.name }}</div>
+                </span>
+              </div></div>
+            </div>
+            <div ng-repeat="contact in app.action.contacts" class="contact">
+              <div class="row"><div class="col-xl-12">
+                <div>
+                  {{ contact.fullname }}
+                </div>
+                <span ng-show="contact.get_billing_city">
+                <div ng-show="contact.get_billing_address">{{ contact.get_billing_address }}</div>
+                <div ng-show="contact.get_billing_address2">{{ contact.get_billing_address2 }}</div>
+                <div ng-show="contact.get_billing_address3">{{ contact.get_billing_address3 }}</div>
+                <div>{{ contact.get_billing_zip_code }} {{ contact.get_billing_city.name }} {{ contact.billing_cedex }}</div>
+                <div ng-show="contact.get_billing_country.is_foreign_country">{{ contact.get_billing_country.name }}</div>
+                </span>
+                <span ng-hide="contact.get_billing_city">
+                <div ng-show="contact.get_address">{{ contact.get_address }}</div>
+                <div ng-show="contact.get_address2">{{ contact.get_address2 }}</div>
+                <div ng-show="contact.get_address3">{{ contact.get_address3 }}</div>
+                <div>{{ contact.get_zip_code }} {{ contact.get_city.name }} {{ contact.cedex }}</div>
+                <div ng-show="contact.get_country.is_foreign_country">{{ contact.get_country.name }}</div>
+                </span>
+              </div></div>
+            </div>
+          </div>
+
+          {% endverbatim %}
+          {% block contacts_about %}{% endblock %}
+          {% verbatim %}
+
+          <div class="sale_items">
+            <div>
+              <div class="row"><div class="col-xl-12">
+                <form role="form" class="form" name="editForm">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>
+                      {{ 'LABEL' | translate }}
+                      <div ng-show="allowEdit" class="float-right">
+                        <div class="show-on-hover">
+                          <a href ng-hide="editMode" class="btn btn-xs btn-secondary" ng-click="addItem()" title="{{ 'ADD' | translate }}" data-toggle="tooltip">
+                            <i class="fas fa-plus"></i>
+                          </a>
+
+                          <a href ng-hide="editMode" class="btn btn-xs btn-secondary" ng-click="addBlank()" title="{{ 'BLANK' | translate }}" data-toggle="tooltip">
+                            <i class="fas fa-arrows-alt-v"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </th>
+                    <th class="number">{{ 'UNIT_PRICE' | translate }}</th>
+                    <th class="number" ng-if="hasPercentage()">{{ 'PERCENTAGE' | translate }}</th>
+                    <th class="number">{{ 'QUANTITY' | translate }}</th>
+                    <th class="number">{{ 'PRE_TAX_PRICE' | translate }}</th>
+                    <th class="number">{{ 'VAT_RATE' | translate }}</th>
+                    <th class="number">{{ 'TAX_INCL_PRICE' | translate }}</th>
+                  </tr>
+
+                  <tr class="tr-row" ng-repeat="item in app.sale_items" ng-if="!item.is_discount && !item.is_extra">
+                    {% endverbatim %}{% include "Store/_commercial_document_line.html" %}{% verbatim %}
+                  </tr>
+
+                  <tr class="results tr-row" ng-if="hasDiscount() || hasExtra()">
+                    <td colspan="{{ hasPercentage ? 2:1 }}">
+                      {{ 'PRE_TAX_SUB_TOTAL' | translate }}
+                    </td>
+                    <td>&nbsp;</td>
+                    <td class="number">{{ getTotalPreTaxPriceNoDiscount() | number:2 }} €</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                  </tr>
+
+                  <tr class="tr-row" ng-repeat="item in app.sale_items" ng-if="item.is_discount">
+                    {% endverbatim %}{% include "Store/_commercial_document_line.html" %}{% verbatim %}
+                  </tr>
+
+                  <tr class="tr-row" ng-repeat="item in app.sale_items" ng-if="item.is_extra">
+                    {% endverbatim %}{% include "Store/_commercial_document_line.html" %}{% verbatim %}
+                  </tr>
+
+                  <tr class="results tr-row">
+                    <td colspan="{{ columnsCount - 2 }}">
+                      {{ 'PRE_TAX_TOTAL' | translate }}
+                    </td>
+                    <td class="number">{{ getTotalPreTaxPrice() | number:2 }} €</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                  </tr>
+
+                  <tr class="results tr-row" ng-repeat="vat_total in app.vat_totals" ng-show="!editMode && vat_total.amount != 0">
+                    <td colspan="{{ columnsCount - 2 }}">{{ "VAT" | translate }} {{ vat_total.vat_rate.name }}</td>
+                    <td>&nbsp;</td>
+                    <td class="number">{{ vat_total.amount| number:2 }} €</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr class="results tr-row" ng-show="!editMode && app.vat_totals.length > 1">
+                    <td colspan="{{ columnsCount - 2 }}">{{ 'TOTAL' | translate }} {{ "VAT" | translate }}</td>
+                    <td>&nbsp;</td>
+                    <td class="number">{{ getVatTotalAmount() | number:2 }} €</td>
+                    <td>&nbsp;</td>
+                  </tr>
+
+                  <tr class="results tr-row">
+                    <td colspan="{{ columnsCount - 2 }}">
+                      {{ 'TAX_INCL_TOTAL' | translate }}
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td class="number">{{ getTotalTaxInclPrice() | number:2 }} €</td>
+                  </tr>
+
+                </table>
+                </form>
+              </div></div>
+
+              <div class="row"><div class="col-xl-12">
+                <div class="alert alert-danger" role="alert" ng-show="editMode && formErrors">
+                  {{ formErrors }}
+                </div>
+
+                <div ng-show="allowEdit" class="float-right">
+
+                  <a href ng-show="editMode" class="btn btn-sm btn-secondary" ng-click="saveEdit()">
+                    <i class="fas fa-check"></i> {{ 'OK' | translate }}
+                  </a>
+
+                  <a href ng-show="editMode" class="btn btn-sm btn-secondary" ng-click="cancelEdit()">
+                    <i class="fas fa-times"></i> {{ 'CANCEL' | translate }}
+                  </a>
+                </div>
+              </div></div>
+            </div>
+          </div>
+
+          <div ng-show="app.vat_totals.length" class="vat-total">
+            <table class="table">
+
+            </table>
+          </div>
+
+          <div class="doc-footer">
+            <div class="row"><div class="col-xl-12">
+              {% endverbatim %}{% block footer %}{{ references_text|safe }}{% endblock %}{% verbatim %}
+            </div></div>
+          </div>
+
+        </div></div>
+
+        <script type="text/ng-template" id="storeItemSelector.html">
+          <a class="typeahead-item">
+              <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
+              <span class="typeahead-item-description">
+                  {{match.model.category.name}}
+              </span>
+          </a>
+        </script>
+
+        <script type="text/ng-template" id="LoadItemModal.html">
+          <div class="modal-header">
+              <h3 class="modal-title">{{ 'SELECT_A_STORE_ITEM' | translate }}</h3>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xl-6">
+                <input
+                  class="form-control"
+                  ng-model="selectedItem"
+                  typeahead-template-url="storeItemSelector.html"
+                  typeahead="item for item in getStoreItems($viewValue)"
+                  typeahead-input-formatter="formatStoreItem($model)"
+                  placeholder="{{ 'ENTER_A_NAME' | translate }}"
+                  ng-trim="false"
+                  typeahead-loading="loading"
+                  name="item"
+                  required
+                />
+                <i ng-show="loading" class="fas fa-sync-alt"></i>
+              </div>
+              <div class="col-xl-6">
+                <div ng-show="selectedItem.name" class="selected-item-details">
+                  <div>{{ selectedItem.category.name }}</div>
+                  <div ng-if="selectedItem.accounting_code">{{ selectedItem.accounting_code }}</div>
+                  <div>{{ 'PRE_TAX_PRICE' | translate }}: {{ selectedItem.pre_tax_price }} €</div>
+                  <div>{{ 'VAT_RATE' | translate }}: {{ selectedItem.vat_rate.name }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-xs btn-primary" ng-click="ok()">{{ 'OK' | translate }}</button>
+              <button class="btn btn-xs btn-deafult" ng-click="cancel()">{{ 'CANCEL' | translate }}</button>
+          </div>
+      </script>
+
+    </div>
+      </div>
+
+  </div>
+{% endverbatim %}
+</body>
+</html>

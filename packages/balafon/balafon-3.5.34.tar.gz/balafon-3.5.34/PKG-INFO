@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: balafon
+Version: 3.5.34
+Summary: Contacts management
+Home-page: https://github.com/ljean/balafon
+Author: Luc Jean
+Author-email: ljean@apidev.fr
+License: CeCILL 2.1
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Framework :: Django
+Classifier: Natural Language :: English
+Classifier: Natural Language :: French
+Classifier: Topic :: Office/Business
+Requires-Dist: django<3.0,>=2.2.13
+Requires-Dist: djangorestframework<3.11.0,>=3.10.3
+Requires-Dist: django-extensions
+Requires-Dist: apidev-coop_cms>=1.5.12
+Requires-Dist: beautifulsoup4
+Requires-Dist: django-wkhtmltopdf
+Requires-Dist: xlwt
+Requires-Dist: xlrd
+Requires-Dist: django-recaptcha2
+Requires-Dist: django-registration==3.0.1
+Requires-Dist: model_mommy
+Requires-Dist: django-cors-headers
+
+balafon
+===============================================
+
+.. image:: https://semaphoreci.com/api/v1/ljean/balafon/branches/master/badge.svg
+
+Overview
+------------------------------------
+
+balafon moto is Organize > Target > Communicate. It helps you to work with your contacts in your day-to-day work
+
+
+License
+=======
+
+CeCCIL 2.1. see license.txt

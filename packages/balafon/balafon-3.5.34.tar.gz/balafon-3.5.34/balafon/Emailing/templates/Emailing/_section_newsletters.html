@@ -1,0 +1,65 @@
+{% extends "balafon/_bs_section.html" %}
+{% load i18n favorite_tags coop_utils %}
+
+{% block section_title %}
+    <i class="fas fa-file-upload"></i>
+{% trans "Newsletters" %}
+{% endblock %}
+  
+{% block section_data %}
+  
+  {% if newsletters %}
+    <div class="">
+      <table class="table table-striped">
+        <tr>
+          <th><i class="fas fa-file"></i> {% trans "Newsletter" %}</th>
+          <th><i class="fas fa-file-upload"></i> {% trans "Sending" %}</th>
+        </tr>
+      {% for newsletter in newsletters %}
+        <tr>
+          <td>
+            {% favorite_item object=newsletter %}
+            {{newsletter.subject|dehtml }}
+            <a class="btn btn-xs btn-secondary" href="{{ newsletter.get_absolute_url }}">
+              <i class="fas fa-eye"></i> {% trans "View" %}
+            </a>
+          </td>
+          <td>
+            {% if newsletter.emailing_set.count %}
+              {% for e in newsletter.emailing_set.all %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% favorite_item object=e %}
+                        {{e.get_info}} ({{e.get_contacts|length}} {% trans "recipients" %})
+                        <a class="btn btn-xs btn-secondary" href="{% url 'emailing_view' e.id %}">
+                          <i class="fas fa-cog"></i> {% trans "Settings" %}
+                        </a>
+                    </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              &nbsp;
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+    {% include "coop_cms/_pagination.html" %}
+  {% else %}
+    {% trans "No newsletters" %}
+  {% endif %}
+{% endblock %}
+
+{% block section_menu_name %}
+  <i class="fas fa-plus"></i> {% trans "Add" %}
+{% endblock %}
+
+{% block section_buttons %}
+  <li><a class="colorbox-form dropdown-link" href="{% url "emailing_new_newsletter" %}">
+    <i class="fas fa-file"></i> {% trans "New Newsletter" %}
+  </a></li>
+  <li><a href="{% url "search" %}" class="dropdown-link">
+    <i class="fas fa-file-upload"></i> {% trans "New Sending" %}
+  </a></li>
+{% endblock %}
