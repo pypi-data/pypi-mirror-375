@@ -1,0 +1,135 @@
+Metadata-Version: 2.4
+Name: PyPlotJuggling
+Version: 1.0.2
+Summary: A Python client library for PlotJuggling JSON UDP API
+Author: KilianSen
+License-Expression: MIT
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Framework :: AsyncIO
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pydantic
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file
+
+# PyPlotJuggling
+
+PyPlotJuggling is a Python library for sending data over UDP, with a focus on providing analytics about the data transmission. It's designed to be used in applications where you need to stream data to a remote endpoint and monitor the performance of the data transfer.
+
+## Installation
+
+You can install PyPlotJuggling using pip:
+
+```bash
+pip install pyplotjuggling
+```
+
+## Usage
+
+The main component of PyPlotJuggling is the `PortJugglerClient`, which is used to send data to a specified IP address and port. It also provides analytics about the data being sent.
+
+### Basic Usage
+
+Here's a simple example of how to use `PortJugglerClient`:
+
+```python
+from PyPlotJuggling import PlotJugglerClient, PJData
+import time
+
+# Create a client
+client = PlotJugglerClient("127.0.0.1", 12345)
+
+# Send some data
+for i in range(10):
+    data = PJData(values={"value": i})
+    client.send(data)
+    time.sleep(0.1)
+
+# Close the client
+client.close()
+```
+
+### Analytics
+
+`PortJugglerClient` can provide analytics about the data being sent. There are four analytics modes, which can be set using the `analytics` parameter in the constructor:
+
+- `AnalyticsMode.OFF`: No analytics are collected. This is the default.
+- `AnalyticsMode.BASIC`: Basic analytics are collected, but not sent with the data. You can get the analytics by calling the `get_analytics()` method.
+- `AnalyticsMode.IN_JUGGLER`: The analytics data is included in the data sent to the remote endpoint. The analytics data is added to the `values` dictionary of the `PJData` object, under the key "analytics".
+- `AnalyticsMode.PERIODIC`: Analytics are logged periodically to the console. The interval can be set with the `periodic_interval` parameter.
+
+Here's an example of how to use the `IN_JUGGLER` analytics mode:
+
+```python
+from PyPlotJuggling import PlotJugglerClient, PJData, AnalyticsMode
+import time
+
+# Create a client with IN_JUGGLER analytics mode
+client = PlotJugglerClient("127.0.0.1", 12345, analytics=AnalyticsMode.IN_JUGGLER)
+
+# Send some data
+for i in range(10):
+    data = PJData(values={"value": i})
+    client.send(data)
+    time.sleep(0.1)
+
+# Close the client
+client.close()
+```
+
+### Analytics Data
+
+The analytics data is provided as an `AnalyticsModel` object, which has the following fields:
+
+- `num_values`: The number of values in the last sent `PJData` object.
+- `frequency`: The momentary frequency of messages sent, in Hz.
+- `duration`: The total duration of the client's life, in seconds.
+- `rate`: The momentary rate of data sent, in bytes per second.
+- `ow_warning`: A boolean that is set to `True` if the `analytics` key is already present in the `PJData` object's `values` dictionary when using `IN_JUGGLER` mode.
+- `window_size`: The size of the analytics window in seconds.
+
+### Periodic Analytics with Callback
+
+When using `AnalyticsMode.PERIODIC`, you can also provide a callback function to process the analytics data.
+
+```python
+from PyPlotJuggling import PlotJugglerClient, PJData, AnalyticsMode, AnalyticsModel
+import time
+
+
+def my_analytics_callback(analytics: AnalyticsModel):
+    print(f"Custom callback: {analytics.frequency:.2f} Hz")
+
+
+# Create a client with a callback
+client = PlotJugglerClient(
+    "127.0.0.1",
+    12345,
+    analytics=AnalyticsMode.PERIODIC,
+    periodic_interval=1.0,
+    analytics_callback=my_analytics_callback
+)
+
+# Send data for a few seconds
+for i in range(50):
+    data = PJData(values={"value": i})
+    client.send(data)
+    time.sleep(0.1)
+
+client.close()
+```
+
+## Contributing
+
+Contributions are welcome! Please see `CONTRIBUTING.md` for details.
+
+## License
+
+This project is licensed under the terms of the `LICENSE` file.
+

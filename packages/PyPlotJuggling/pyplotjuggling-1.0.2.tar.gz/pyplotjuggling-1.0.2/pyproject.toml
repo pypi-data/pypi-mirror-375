@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyPlotJuggling"
+version = "1.0.2"
+description = "A Python client library for PlotJuggling JSON UDP API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    {name = "KilianSen"}
+]
+dependencies = [
+    "pydantic"
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: AsyncIO",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
