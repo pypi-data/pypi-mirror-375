@@ -1,0 +1,72 @@
+Metadata-Version: 2.4
+Name: tscompare
+Version: 0.2
+Summary: Tools for comparing tree sequences.
+Author-email: Tskit Developers <admin@tskit.dev>
+Maintainer-email: Tskit Developers <admin@tskit.dev>
+License: MIT
+Project-URL: Homepage, https://tskit.dev/tscompare
+Project-URL: Bug Tracker, https://github.com/tskit-dev/tscompare/issues
+Project-URL: Documentation, https://tskit.dev/tscompare/docs/
+Project-URL: Source Code, https://github.com/tskit-dev/tscompare
+Keywords: population genetics,tree sequence,tskit
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: MacOS
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: tskit>=0.5.0
+Requires-Dist: scipy>=1.7.0
+Provides-Extra: test
+Requires-Dist: tskit==0.6.0; extra == "test"
+Requires-Dist: numpy==2.2.4; extra == "test"
+Requires-Dist: pytest==8.3.5; extra == "test"
+Requires-Dist: pytest-cov==6.0.0; extra == "test"
+Requires-Dist: pytest-xdist==3.6.1; extra == "test"
+Requires-Dist: scipy==1.15.2; extra == "test"
+Requires-Dist: msprime==1.3.4; extra == "test"
+Provides-Extra: docs
+Requires-Dist: jupyter-book==1.0.4.post1; extra == "docs"
+Requires-Dist: breathe==4.35.0; extra == "docs"
+Requires-Dist: sphinx-autodoc-typehints==2.3.0; extra == "docs"
+Requires-Dist: sphinx-issues==5.0.0; extra == "docs"
+Requires-Dist: sphinx-argparse==0.5.2; extra == "docs"
+Requires-Dist: svgwrite==1.4.3; extra == "docs"
+Requires-Dist: tskit==0.6.0; extra == "docs"
+Requires-Dist: tsinfer==0.4.1; extra == "docs"
+Requires-Dist: scipy==1.15.2; extra == "docs"
+Requires-Dist: msprime==1.3.4; extra == "docs"
+Requires-Dist: sphinx-book-theme; extra == "docs"
+Requires-Dist: numcodecs<0.15.1,>=0.6; extra == "docs"
+Provides-Extra: dev
+Requires-Dist: tskit; extra == "dev"
+Requires-Dist: numpy; extra == "dev"
+Requires-Dist: scipy; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: pytest-xdist; extra == "dev"
+Requires-Dist: msprime; extra == "dev"
+Dynamic: license-file
+
+# tscompare
+
+Utilities for comparing ARGs in tree sequence format;
+at present this only contains tools described in;
+[Fritze et al, "A forest is more than its trees: haplotypes and ancestral recombination graphs"](https://doi.org/10.1101/2024.11.30.626138);
+in the future this might have more methods.
+
+
