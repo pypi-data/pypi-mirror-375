@@ -1,0 +1,46 @@
+*.py[cod]
+*.*~
+.#*
+*#*#
+.DS_Store
+*.txt
+!requirements/base.txt
+!requirements/development.txt
+!requirements/travis.txt
+*.pdf
+.~lock.*
+logs/*.log*
+old
+docs/htmlcov
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+var
+sdist
+develop-eggs
+.installed.cfg
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
