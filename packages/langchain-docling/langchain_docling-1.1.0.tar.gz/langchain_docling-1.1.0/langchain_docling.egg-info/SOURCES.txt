@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+langchain_docling/__init__.py
+langchain_docling/_plugins.py
+langchain_docling/loader.py
+langchain_docling/picture_description.py
+langchain_docling/py.typed
+langchain_docling.egg-info/PKG-INFO
+langchain_docling.egg-info/SOURCES.txt
+langchain_docling.egg-info/dependency_links.txt
+langchain_docling.egg-info/entry_points.txt
+langchain_docling.egg-info/requires.txt
+langchain_docling.egg-info/top_level.txt
+test/test_data_gen_flag.py
+test/test_loader.py
