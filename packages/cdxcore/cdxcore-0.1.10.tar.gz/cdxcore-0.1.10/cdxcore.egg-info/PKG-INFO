@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: cdxcore
+Version: 0.1.10
+Summary: Basic Python Tools; upgraded cdxbasics
+Author-email: Hans Buehler <github@buehler.london>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/hansbuehler/cdxcore
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+Requires-Dist: sortedcontainers
+Requires-Dist: psutil
+Requires-Dist: jsonpickle
+Requires-Dist: numba
+Requires-Dist: joblib
+Requires-Dist: blosc
+Requires-Dist: mkdocstrings[python]>=0.18
+Dynamic: license-file
+
+# cdxcore
+Under construction.
+
