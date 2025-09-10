@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: mseep-mcp-tavily-proxy
+Version: 0.1.4
+Summary: Tavily MCP Server with HTTP/HTTPS Proxy Support
+Author-Email: mseep <support@skydeck.ai>
+License: MIT
+Requires-Python: >=3.8
+Requires-Dist: tavily-python
+Requires-Dist: mcp
+Requires-Dist: pydantic
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai

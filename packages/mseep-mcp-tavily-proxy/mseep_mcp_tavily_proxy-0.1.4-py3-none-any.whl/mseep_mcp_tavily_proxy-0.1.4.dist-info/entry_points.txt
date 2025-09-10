@@ -1,0 +1,5 @@
+[console_scripts]
+mcp-tavily-proxy = mcp_server_tavily.__main__:main
+
+[gui_scripts]
+
