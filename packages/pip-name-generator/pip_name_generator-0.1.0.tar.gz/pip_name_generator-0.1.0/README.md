@@ -1,0 +1,46 @@
+[![PyPI version](https://badge.fury.io/py/pip_name_generator.svg)](https://badge.fury.io/py/pip_name_generator)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://static.pepy.tech/badge/pip_name_generator)](https://pepy.tech/project/pip_name_generator)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/eugene-evstafev-716669181/)
+
+# pip_name_generator
+
+`pip_name_generator` is a Python package designed for generating minimal setup.py scripts based on provided metadata. It simplifies the creation of setup files for Python packages with configurable author information.
+
+## Installation
+
+To install `pip_name_generator`, use pip:
+
+```bash
+pip install pip_name_generator
+```
+
+## Usage
+
+Using `pip_name_generator` is straightforward. Here's an example:
+
+```python
+from pip_name_generator import generate_setup_py_from_metadata
+
+# Generate setup.py content
+setup_content = generate_setup_py_from_metadata(
+    custom_text="This is a sample package for demonstration purposes.",
+    author="Jane Doe"
+)
+print(setup_content)
+```
+
+## Features
+
+- Generates valid setup.py scripts with minimal input.
+- Supports optional author or author email specification.
+- Customizable description and long description.
+
+## License
+
+`pip_name_generator` is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+## Author
+
+Eugene Evstafev<br>
+[LinkedIn](https://www.linkedin.com/in/eugene-evstafev-716669181/)
