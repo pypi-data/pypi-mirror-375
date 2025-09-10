@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: mapentity
+Version: 8.14.2
+Summary: Generic CRUD with maps for django
+Home-page: https://github.com/makinacorpus/django-mapentity
+Download-URL: https://pypi.python.org/pypi/mapentity/
+Author: Makina Corpus
+Author-email: geobi@makina-corpus.com
+License: BSD, see LICENSE file.
+Classifier: Topic :: Utilities
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Developers
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.9
+Provides-Extra: dev
+License-File: LICENSE
+
+Mapentity is a django Framework to manage geographic entities through CRUD interface. Built with Leaflet, Bootstrap, Python and Django. Requires a spatial database backend.
