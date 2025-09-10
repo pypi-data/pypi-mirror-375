@@ -1,0 +1,2 @@
+[console_scripts]
+gcslock = gcslock._cli:main

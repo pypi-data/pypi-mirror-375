@@ -1,0 +1,15 @@
+gcslock/__init__.py,sha256=2n1Gr9E0ICnHJlRyfW4O7P9VOIJf1zZzVO0PltJML18,173
+gcslock/__version__.py,sha256=qSuE7XE6WuK3LjoCpunIWLZhh-T-o48lG_iYyHrBlig,18
+gcslock/_cli.py,sha256=ELBzrHh6LiLpTh2soRYhuiGQvbrPY6AzDKLISgaDd-w,2095
+gcslock/_logger.py,sha256=mnz09URmIsG4PW0rtQXpzyvu8efjwRYGtee1cfV_f34,425
+gcslock/_ttl_dict.py,sha256=NSmxhJZVPdw8_P50JR2rb2he9zt7nLQ0olkyQlKVwXA,3298
+gcslock/core.py,sha256=rtopN8nLUJt1IaqE7_CUu6gMZB4LCrOceb5mCW19F_c,11615
+gcslock/exception.py,sha256=cLaTf29ru73BWDodDOxteOPWOYhNsEyw12BH4xw6Dxk,1919
+gcslock/_apis/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+gcslock/_apis/accessor.py,sha256=ZcD2YNsMqTKItOQczfzZ6_g7NCcLMvNWs-fva3ttxTs,11698
+gcslock/_apis/model.py,sha256=6hB56kd1QzG5X9wz9asHodJuqbDU4y-mYfyUL0Nhogw,4805
+gcslock-0.0.5.dist-info/METADATA,sha256=WZk3VPC-KzROgZ_ymhDqN_XkKIHt-twt6dO1X35mtRE,3613
+gcslock-0.0.5.dist-info/WHEEL,sha256=qtCwoSJWgHk21S1Kb4ihdzI2rlJ1ZKaIurTj_ngOhyQ,87
+gcslock-0.0.5.dist-info/entry_points.txt,sha256=gzSr-ufT29pBcNyG0K18hPde5T2vIZirjraX1dyJmPQ,46
+gcslock-0.0.5.dist-info/licenses/LICENSE,sha256=YtG2915hu6qu6OiXmZH6q0RemgdBlnEqWkKH4AvOuig,1064
+gcslock-0.0.5.dist-info/RECORD,,
