@@ -1,0 +1,53 @@
+# Include the README and other documentation files
+include README.md
+include LICENSE
+include CHANGELOG.md
+include requirements.txt
+include pyproject.toml
+
+# Include configuration files
+include *.cfg
+include *.ini
+include *.toml
+include *.yaml
+include *.yml
+
+# Include data files
+recursive-include cans/data *.json *.csv *.yaml *.yml
+recursive-include cans/config *.json *.yaml *.yml
+
+# Include examples
+recursive-include examples *.py *.ipynb *.md
+
+# Include tests (for source distribution)
+recursive-include tests *.py
+
+# Include type information
+include cans/py.typed
+
+# Exclude unnecessary files
+exclude .gitignore
+exclude .pre-commit-config.yaml
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.orig
+recursive-exclude * *.rej
+recursive-exclude * .DS_Store
+recursive-exclude * .coverage
+recursive-exclude * .pytest_cache
+recursive-exclude * .mypy_cache
+
+# Documentation
+recursive-include docs *.rst *.md *.py *.bat *.txt
+recursive-exclude docs/_build *
+
+# Exclude build artifacts
+exclude build
+recursive-exclude build *
+exclude dist
+recursive-exclude dist *
+exclude *.egg-info
+recursive-exclude *.egg-info *
+
+# Include version file if it exists
+include cans/_version.py
