@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: clickzetta-ingestion-python-v2
+Version: 0.8.104
+Summary: clickzetta python ingestion library
+Author-email: "wei.liu" <wei.liu@clickzetta.com>, "guantao.gao" <guantao.gao@clickzetta.com>, "lin.zhang" <lin.zhang@clickzetta.com>
+License: Apache-2.0
+Project-URL: documentation, https://www.yunqi.tech/
+Platform: Posix
+Platform: MacOS X
+Classifier: Development Status :: 3 - Alpha
+Requires-Python: >=3.7
+License-File: LICENSE
+Requires-Dist: proto-plus<2.0.0dev,>=1.22.0
+Requires-Dist: packaging>=14.3
+Requires-Dist: protobuf~=5.28.1
+Requires-Dist: grpcio
+Requires-Dist: clickzetta-connector-python
+Requires-Dist: apscheduler
+Provides-Extra: dev
+Requires-Dist: grpcio-tools<=1.66.0; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: grpcio; extra == "dev"
+Requires-Dist: protobuf~=5.28.1; extra == "dev"
+Requires-Dist: protoletariat; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-xdist; extra == "dev"
+Requires-Dist: pytz; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Requires-Dist: pyroaring; extra == "dev"
+Dynamic: license-file
