@@ -1,0 +1,35 @@
+# MANIFEST.in para nseekfs v1.0.4 - Configuração limpa e otimizada
+
+recursive-include nseekfs *.py
+include nseekfs/__init__.py
+
+include README.md
+include CHANGELOG.md
+include LICENSE
+
+include pyproject.toml
+
+exclude Cargo.toml
+exclude Cargo.lock
+exclude .gitignore
+exclude deploy.yml
+exclude .git*
+exclude *.yml
+exclude *.yaml
+exclude build.rs
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.orig
+recursive-exclude * *.rej
+recursive-exclude * .DS_Store
+recursive-exclude target *
+recursive-exclude .github *
+recursive-exclude .vscode *
+recursive-exclude .idea *
+recursive-exclude src *
+recursive-exclude tests *
+
+exclude *.so
+exclude *.dll
+exclude *.dylib
