@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "twixtools"
+dynamic = ["version"]
+license = {file = "LICENSE"}
+authors = [{ name = "Philipp Ehses", email = "philipp.ehses@dzne.de" }]
+description = "file reader for Siemens twix(.dat)-files"
+readme = "README.md"
+requires-python = ">=3.8, <4"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+keywords = ["twix", "siemens", "mri"]
+dependencies = [
+  "numpy",
+  "scipy",
+  "matplotlib",
+  "setuptools",
+  "tqdm"
+]
+
+[project.urls]
+Homepage = "https://github.com/pehses/twixtools"
+Issues = "https://github.com/pehses/twixtools/issues"
+
+[project.optional-dependencies]
+test = [
+    "pytest"
+]
+
+[project.scripts]
+convert_to_cfl = "twixtools.utils.convert_to_cfl:main"
+rotate_3Dcfl = "twixtools.utils.rotate_3Dcfl:main"
+datmeta2json = "twixtools.utils.datmeta2json:main"
+twix_starttime = "twixtools.utils.twix_starttime:main"
+
+[tool.setuptools]
+packages = [
+    "twixtools",
+    "twixtools.contrib",
+    "twixtools.utils"
+]
+zip-safe = false
+
+[tool.setuptools_scm]
+write_to = "_version.py"
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+
+max-line-length = 127
+max-complexity = 10
