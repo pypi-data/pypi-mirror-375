@@ -1,0 +1,121 @@
+[package]
+name = "ddex-builder"
+version = "0.1.0"
+edition = "2021"
+authors = ["Kevin Marques Moo"]
+license = "MIT"
+repository = "https://github.com/daddykev/ddex-suite"
+description = "Deterministic DDEX XML builder with DB-C14N/1.0 canonicalization"
+keywords = ["ddex", "xml", "builder", "deterministic", "music"]
+categories = ["encoding", "multimedia::audio"]
+readme = "README.md"
+
+[dependencies]
+# Core dependency
+ddex-core = { path = "../core" }
+
+# Deterministic collections (CRITICAL for determinism)
+indexmap = { version = "2.2", features = ["serde"] }
+
+# XML generation
+quick-xml = { workspace = true }
+xmltree = "0.10"
+
+# Core dependencies
+thiserror = { workspace = true }
+chrono = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# ID generation
+uuid = { workspace = true }
+sha2 = "0.10"
+blake3 = "1.5"
+hex = "0.4"
+
+# String operations
+unicode-normalization = "0.1"
+regex = "1.10"
+once_cell = "1.19"
+html-escape = "0.2"
+smallstr = "0.3"
+string_cache = "0.8"
+smartstring = { version = "1.0", features = ["serde"] }
+
+# Validation
+url = "2.5"
+mime = "0.3"
+
+# CLI dependencies
+clap = { version = "4.4", features = ["derive", "env", "color"] }
+clap_complete = "4.4"
+indicatif = "0.17"
+console = "0.15"
+is-terminal = "0.4"
+
+# File format support
+serde_yaml = "0.9"
+toml = { version = "0.8", features = ["preserve_order"] }
+
+# Parallel processing
+rayon = "1.8"
+
+# System information
+num_cpus = "1.16"
+
+# Logging
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Optional features
+tokio = { workspace = true, optional = true }
+futures = { workspace = true, optional = true }
+tracing = { workspace = true }
+
+# Performance profiling (optional)
+dhat = { version = "0.3", optional = true }
+
+[dev-dependencies]
+criterion = { workspace = true }
+tempfile = { workspace = true }
+pretty_assertions = { workspace = true }
+proptest = { workspace = true }
+insta = { workspace = true }
+similar = "2.4"
+
+# Performance profiling
+pprof = { version = "0.15", features = ["flamegraph", "criterion"] }
+
+[features]
+default = ["async"]
+async = ["tokio", "futures"]
+strict = []  # Enable strict validation
+bench = []
+ffi = []  # Foreign Function Interface support
+wasm = []  # WebAssembly support
+dhat-heap = ["dhat"]  # Memory profiling
+
+# Benchmarks
+[[bench]]
+name = "building"
+harness = false
+
+[[bench]]
+name = "canonicalization"
+harness = false
+
+[[bench]]
+name = "performance"
+harness = false
+
+[[bench]]
+name = "profiling"
+harness = false
+
+# Binary target for CLI
+[[bin]]
+name = "ddex-builder"
+path = "src/bin/ddex-builder.rs"
+
+# Strict linting configuration to ensure determinism
+[lints.clippy]
+disallowed_types = "deny"
