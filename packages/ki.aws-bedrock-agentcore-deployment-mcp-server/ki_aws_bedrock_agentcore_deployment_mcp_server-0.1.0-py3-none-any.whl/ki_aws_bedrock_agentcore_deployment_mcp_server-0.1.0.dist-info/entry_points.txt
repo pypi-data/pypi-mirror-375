@@ -1,0 +1,2 @@
+[console_scripts]
+ki-aws-bedrock-agentcore-deployment-mcp-server = ki_aws_bedrock_agentcore_deployment_mcp_server.main:main
