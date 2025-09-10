@@ -1,0 +1,3 @@
+[console_scripts]
+pinion = pinion.cli:main
+pinion-queue = pinion.cli:main
