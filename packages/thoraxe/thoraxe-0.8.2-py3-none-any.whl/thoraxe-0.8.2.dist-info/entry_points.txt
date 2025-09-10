@@ -1,0 +1,4 @@
+[console_scripts]
+add_transcripts = thoraxe.add_transcripts:main
+thoraxe = thoraxe:main
+transcript_query = thoraxe.transcript_query:main
