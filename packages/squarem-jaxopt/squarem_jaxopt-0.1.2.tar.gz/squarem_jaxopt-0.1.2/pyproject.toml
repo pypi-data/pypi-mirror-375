@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "squarem-jaxopt"
+version = "0.1.2"
+description = "SQUAREM accelerator for JAXopt solvers"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jax>=0.7.1",
+    "jaxopt>=0.8.5",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+
+[tool.pyright]
+pythonPath = "src"
+
+[tool.ruff]
+src = ["src"]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.405",
+    "pytest>=8.4.2",
+    "ruff>=0.12.12",
+]

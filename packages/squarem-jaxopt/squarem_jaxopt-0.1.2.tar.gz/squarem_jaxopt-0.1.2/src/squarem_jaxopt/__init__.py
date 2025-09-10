@@ -1,0 +1,1 @@
+from .squarem_jaxopt import SquaremAcceleration as SquaremAcceleration

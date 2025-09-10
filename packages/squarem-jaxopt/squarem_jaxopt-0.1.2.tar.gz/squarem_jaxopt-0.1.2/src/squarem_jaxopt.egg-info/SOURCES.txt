@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/squarem_jaxopt/__init__.py
+src/squarem_jaxopt/squarem_jaxopt.py
+src/squarem_jaxopt.egg-info/PKG-INFO
+src/squarem_jaxopt.egg-info/SOURCES.txt
+src/squarem_jaxopt.egg-info/dependency_links.txt
+src/squarem_jaxopt.egg-info/requires.txt
+src/squarem_jaxopt.egg-info/top_level.txt
+tests/test_squarem.py
