@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-image-gen
+Version: 0.1.4
+Summary: MCP server enabling Image Generation for LLMs, built in Python and integrated with Together AI.
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.1.2
+Dynamic: license-file
+
+Package managed by MseeP.ai

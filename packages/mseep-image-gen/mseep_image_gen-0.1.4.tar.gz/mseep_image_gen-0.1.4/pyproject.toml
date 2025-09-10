@@ -1,0 +1,26 @@
+[project]
+name = "mseep-image-gen"
+version = "0.1.4"
+description = "MCP server enabling Image Generation for LLMs, built in Python and integrated with Together AI."
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=1.1.2",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+image-gen = "image_gen:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
