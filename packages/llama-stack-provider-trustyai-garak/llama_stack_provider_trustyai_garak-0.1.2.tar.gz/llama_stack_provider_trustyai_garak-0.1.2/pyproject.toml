@@ -1,0 +1,47 @@
+[project]
+name = "llama-stack-provider-trustyai-garak"
+version = "0.1.2"
+description = "Out-Of-Tree Llama Stack provider for Garak Red-teaming"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+authors = [
+    {name = "Sai Chandra Pandraju", email = "saichandrapandraju@gmail.com"},
+    {name = "TrustyAI Team"}
+]
+keywords = ["llama-stack", "garak", "red-teaming", "security", "ai-safety"]
+dependencies = [
+    "llama-stack>=0.2.15",
+    "fastapi",
+    "opentelemetry-api",
+    "opentelemetry-exporter-otlp",
+    "aiosqlite",
+    "greenlet",
+    "uvicorn",
+    "ipykernel",
+    "httpx[http2]",
+    #"grpcio-tools==1.67.1", # for pymilvus conflict (except the latest pymilvus)
+    #"grpcio-status==1.67.1", # for pymilvus conflict (except the latest pymilvus)
+    "garak==0.12.0",
+]
+
+[project.urls]
+homepage = "https://github.com/trustyai-explainability/llama-stack-provider-trustyai-garak"
+repository = "https://github.com/trustyai-explainability/llama-stack-provider-trustyai-garak"
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+remote = ["kfp>=2.5.0", "kfp-kubernetes>=2.5.0", "kfp-server-api>=2.5.0", "boto3>=1.40.0"]
+dev = ["pytest", "pytest-cov",  "pytest-asyncio", "black", "isort"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_paths = ["src"]
+addopts = "-v"
