@@ -1,0 +1,184 @@
+Metadata-Version: 2.4
+Name: vexy-formi
+Version: 1.0.4
+Summary: Fast code formatting and minification tool using the best available tools
+Project-URL: Documentation, https://github.com/vexyart/vexy-formi#readme
+Project-URL: Issues, https://github.com/vexyart/vexy-formi/issues
+Project-URL: Source, https://github.com/vexyart/vexy-formi
+Author-email: Fontlab Ltd <opensource@vexy.art>
+License: MIT
+License-File: LICENSE
+Keywords: biome,code-formatter,esbuild,formatter,minifier,ruff,swc
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: Utilities
+Requires-Python: >=3.10
+Requires-Dist: chardet>=5.0.0
+Requires-Dist: fire>=0.7.0
+Requires-Dist: pathspec>=0.12.0
+Requires-Dist: rich>=13.0.0
+Provides-Extra: all
+Provides-Extra: dev
+Requires-Dist: absolufy-imports>=0.3.1; extra == 'dev'
+Requires-Dist: isort>=6.0.1; extra == 'dev'
+Requires-Dist: mypy>=1.15.0; extra == 'dev'
+Requires-Dist: pre-commit>=4.1.0; extra == 'dev'
+Requires-Dist: pyupgrade>=3.19.1; extra == 'dev'
+Requires-Dist: ruff>=0.9.7; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: myst-parser>=3.0.0; extra == 'docs'
+Requires-Dist: sphinx-autodoc-typehints>=2.0.0; extra == 'docs'
+Requires-Dist: sphinx-rtd-theme>=2.0.0; extra == 'docs'
+Requires-Dist: sphinx>=7.2.6; extra == 'docs'
+Provides-Extra: test
+Requires-Dist: coverage[toml]>=7.6.12; extra == 'test'
+Requires-Dist: pytest-asyncio>=0.25.3; extra == 'test'
+Requires-Dist: pytest-benchmark[histogram]>=5.1.0; extra == 'test'
+Requires-Dist: pytest-cov>=6.0.0; extra == 'test'
+Requires-Dist: pytest-xdist>=3.6.1; extra == 'test'
+Requires-Dist: pytest>=8.3.4; extra == 'test'
+Description-Content-Type: text/markdown
+
+# VexyFormi
+
+Fast code formatting and minification using the best available tools.
+
+## Features
+
+- 🔥 **Blazing Fast**: Uses fastest available tools (esbuild, swc, biome, ruff)
+- 🛡️ **Safe**: Atomic operations with automatic backups
+- 🎯 **Smart**: Automatic tool detection and fallbacks
+- 📦 **Simple**: Zero-config operation with sensible defaults
+- 🌐 **Universal**: Supports JS, TS, CSS, HTML, Python, JSON, YAML, TOML, Markdown
+
+## Quick Start
+
+```bash
+# Install
+pip install vexy-formi
+
+# Install all required tools automatically
+vfor install
+
+# Minify current directory
+vfor mini
+
+# Format Python files
+vfor fmt --verbose src/
+
+# Show available tools
+vfor tools
+
+# Update all tools to latest versions
+vfor update
+
+# Use as Python package
+python -c "import vexy_formi; vexy_formi.minify('src/')"
+```
+
+## Supported Tools
+
+- **JavaScript/TypeScript**: esbuild, swc, terser, biome, prettier
+- **CSS/SCSS**: biome, lightningcss, prettier
+- **Python**: ruff, black  
+- **HTML**: html-minifier-terser, prettier
+- **JSON**: biome, jq, prettier
+- **TOML**: taplo, dprint
+- **YAML**: prettier, yq
+- **Markdown**: dprint, prettier
+
+## Configuration
+
+Set preferences via environment variables:
+- `VFOR_PREFERRED_JS_TOOL=esbuild`
+- `VFOR_PREFERRED_CSS_TOOL=biome`
+- `VFOR_PREFERRED_PYTHON_TOOL=ruff`
+- `VFOR_MAX_WORKERS=8`
+
+Or create `.vfor.json` in your project:
+```json
+{
+    "preferred_js_tool": "esbuild",
+    "preferred_css_tool": "biome", 
+    "max_workers": 4
+}
+```
+
+## CLI Usage
+
+```bash
+# Minify files
+vfor mini                    # Current directory  
+vfor mini src/              # Specific directory
+vfor mini --verbose src/    # Show detailed output
+vfor mini --no-backup src/  # Skip backups
+
+# Format files
+vfor fmt                     # Current directory
+vfor fmt --recursive src/    # Process recursively  
+vfor fmt --exclude "*.min.*" # Exclude patterns
+
+# Tool management
+vfor install                 # Install all required tools
+vfor update                  # Update tools to latest versions
+vfor tools                   # Show available tools
+vfor cleanup                 # Clean backup files
+```
+
+## Python API
+
+```python
+import vexy_formi
+
+# Simple API
+result = vexy_formi.minify('src/')
+result = vexy_formi.format('src/', recursive=True, exclude=['*.test.*'])
+
+# Advanced usage
+from vexy_formi import FileProcessor
+
+processor = FileProcessor()
+result = processor.minify_files(
+    Path('src/'), 
+    recursive=True,
+    max_workers=8,
+    create_backup=True
+)
+
+print(f"Processed {result.total_files} files")
+print(f"Size reduction: {result.total_size_reduction_percent:.1f}%")
+```
+
+## Development
+
+```bash
+# Clone repository
+git clone https://github.com/vexyart/vexy-formi.git
+cd vexy-formi
+
+# Install dependencies  
+pip install -e .[dev,test]
+
+# Run CLI directly
+./vfor mini examples/
+
+# Run tests
+pytest
+
+# Format code
+ruff format src/
+```
+
+## License
+
+MIT License
