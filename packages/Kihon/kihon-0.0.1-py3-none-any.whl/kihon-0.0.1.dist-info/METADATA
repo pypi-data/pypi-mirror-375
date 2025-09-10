@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: Kihon
+Version: 0.0.1
+Summary: Kihon package
+Author-email: Ian Budman <ian@kihon.ai>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/pypa/KihonAi
+Project-URL: Issues, https://github.com/pypa/KihonAi/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Kihon Package
+
+This is Kihon package.
