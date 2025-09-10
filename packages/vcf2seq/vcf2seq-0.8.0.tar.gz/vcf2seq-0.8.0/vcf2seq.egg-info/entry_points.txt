@@ -1,0 +1,2 @@
+[console_scripts]
+vcf2seq = vcf2seq.vcf2seq:main
