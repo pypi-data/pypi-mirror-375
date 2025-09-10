@@ -1,0 +1,31 @@
+## pytractive
+
+**Unofficial** Asynchronous Python client for the [Tractive](https://tractive.com) REST API.
+
+**This project and it's author are not affilated with Tractive GmbH**
+
+
+Important notes:
+
+- In order to use Tractive devices and their service you need to have an active subscription.
+- Tractive may change their API at any point of time and this project will be broken. Please, report any issues.
+
+## Installation
+
+`pip install pytractive`
+
+## Usage
+🚧
+
+## Development Guide
+`git clone https://forge.wolfhound.dev/wolfhound/pytractive.git`
+
+`cd pytractive`
+
+This project uses [uv](https://docs.astral.sh/uv/) for project management. Install guide [here](https://docs.astral.sh/uv/getting-started/installation/#installing-uv).
+
+🚧
+
+## Credit
+This project's start is a fork of [zhulik/aiotractive](https://github.com/zhulik/aiotractive).
+Thank you open-source community.

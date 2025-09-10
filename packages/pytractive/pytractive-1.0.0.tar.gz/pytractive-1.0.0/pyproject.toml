@@ -1,0 +1,26 @@
+[project]
+name = "pytractive"
+version = "1.0.0"
+description = "Unofficial Asynchronous Python client for the Tractive REST API."
+readme = "README.md"
+authors = [
+    { name = "Wolfhound", email = "contact@wolfhound.dev" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.12.15",
+    "asyncio>=4.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.12",
+]
+
+
+[project.scripts]
+aiotractive = "aiotractive:main"
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
