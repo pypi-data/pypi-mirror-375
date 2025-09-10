@@ -1,0 +1,54 @@
+pipeline {
+    agent {
+        dockerfile {
+            filename 'ci/Dockerfile'
+            args '--gpus 1'
+            label 'docker && v100'
+        }
+    }
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
+    environment {
+        HOME = "$WORKSPACE"
+    }
+    stages {
+        stage('CPU Tests') {
+            environment {
+                JAX_PLATFORMS = "cpu"
+                OMP_NUM_THREADS = "${env.PARALLEL}"
+                CMAKE_ARGS = "-DJAX_FINUFFT_USE_CUDA=ON"
+            }
+            steps {
+                sh '''
+                    uv run --extra test pytest -n 8
+                '''
+            }
+        }
+        stage('GPU Tests') {
+            environment {
+                JAX_PLATFORMS = "cuda"
+                OMP_NUM_THREADS = "${env.PARALLEL}"
+                CMAKE_ARGS = "-DJAX_FINUFFT_USE_CUDA=ON"
+            }
+            steps {
+                // TODO: add "-n 8", but GPU kernels don't seem to be thread-safe
+                sh '''
+                    uv run --extra test --extra cuda12-local pytest
+                '''
+            }
+        }
+        stage('Free-threaded GPU Tests') {
+            environment {
+                JAX_PLATFORMS = "cuda"
+                OMP_NUM_THREADS = "${env.PARALLEL}"
+                CMAKE_ARGS = "-DJAX_FINUFFT_USE_CUDA=ON"
+            }
+            steps {
+                sh '''
+                    uv run -p 3.13t --extra test --extra cuda12-local pytest
+                '''
+            }
+        }
+    }
+}
