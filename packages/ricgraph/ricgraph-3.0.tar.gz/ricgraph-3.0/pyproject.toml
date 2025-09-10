@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["ricgraph"]
+
+[project]
+name = "ricgraph"
+version = "3.0"
+authors = [
+  { name="Rik D.T. Janssen" },
+]
+description = "Ricgraph - Research in context graph"
+readme = "README-PyPI.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+]
+license = "MIT"
+keywords = ["Research in context graph", "Ricgraph", "Ricgraph Explorer",
+	    "Ricgraph REST API", "Data enrichment", "Data harvesting",
+	    "Data linking", "Enrichment", "Graph", "Graph database",
+	    "Harvest", "Harvest data", "Harvester", "Knowledge graph",
+	    "Linked data", "Metadata", "Utrecht University", "Visualization"]
+dependencies = [
+    "neo4j>=5.8",
+    "numpy",
+    "pandas",
+    "requests",
+    "unidecode",
+]
+
+[project.urls]
+Website = "https://www.ricgraph.eu"
+Documentation = "https://docs.ricgraph.eu"
+GitHub = "https://github.com/UtrechtUniversity/ricgraph"
+Issues = "https://github.com/UtrechtUniversity/ricgraph/issues"
+Download = "https://github.com/UtrechtUniversity/ricgraph/releases"
+"Release Notes" = "https://github.com/UtrechtUniversity/ricgraph/releases"
