@@ -1,0 +1,2 @@
+[console_scripts]
+musical-mel-demo = musical_mel_transform.scripts.demo:main
