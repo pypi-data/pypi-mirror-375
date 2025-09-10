@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mseep-freecad-mcp
+Version: 0.1.16
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp[cli]>=1.12.2
+Dynamic: license-file
+
+Package managed by MseeP.ai
