@@ -1,0 +1,33 @@
+[build-system]
+requires = ["maturin>=1.4,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "storage-layout-extractor"
+description = "Python bindings for storage-layout-extractor - EVM bytecode storage layout analysis"
+requires-python = ">=3.10"
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Disassemblers",
+    "Topic :: Security",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+]
+dependencies = []
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["ethereum", "evm", "storage", "layout", "smart-contracts", "bytecode", "analysis"]
+
+[project.urls]
+Homepage = "https://github.com/jalbrekt85/storage-layout-extractor-py"
+Repository = "https://github.com/jalbrekt85/storage-layout-extractor-py"
+Issues = "https://github.com/jalbrekt85/storage-layout-extractor-py/issues"
+
+[tool.maturin]
+module-name = "storage_layout_extractor"
