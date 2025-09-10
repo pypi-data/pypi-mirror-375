@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: mseep-compiler-explorer-mcp
+Version: 0.1.3
+Summary: MCP server allowing LLMs to interact remotely with compilers
+Project-URL: Homepage, https://github.com/anthropic/compiler-explorer-mcp
+Project-URL: Repository, https://github.com/anthropic/compiler-explorer-mcp
+Project-URL: Documentation, https://github.com/anthropic/compiler-explorer-mcp#readme
+Project-URL: Bug Tracker, https://github.com/anthropic/compiler-explorer-mcp/issues
+Author-email: mseep <support@skydeck.ai>
+License-Expression: MIT
+Keywords: claude,compiler,explorer,llm,mcp
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Compilers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.12
+Requires-Dist: fastapi>=0.115.11
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp[cli]>=1.5.0
+Requires-Dist: pydantic>=2.10.6
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: uvicorn>=0.34.0
+Requires-Dist: websockets>=15.0.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
