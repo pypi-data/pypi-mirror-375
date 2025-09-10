@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+
+from re import split
+import traceback
+import sys
+from os.path import exists, dirname, join
+from getopt import getopt
+from sys import argv
+from py3toolset.txt_color import col, Color, bold, frame, print_frame, warn
+from py3toolset.cmd_interact import contains_help_switch
+from py3toolset.nmath import str_isfloat
+import pymineos
+from pymineos import Mineos #, MineosInput # , MineosOutput, mineos,
+from py3toolset.fs import check_file
+
+
+def warn_opt_override(short_opt, long_opt):
+    warn(" option -" + short_opt + "|--" + long_opt +
+         " set more than once. Overriding old value.")
+
+
+def check_opt(opt):
+    global scale, fmin, fmax, wavetype, mod_filepath
+    if(opt == "scale"):
+        scale = str(scale).lower()
+        if(scale not in ("mars", "earth")):
+            raise Exception("Scale must be Earth or Mars.")
+    elif(opt == "fmin"):
+        fmin = float(fmin)
+        if(fmax is not None and float(fmax) <= fmin):
+            raise Exception("min freq. must be lower than max freq.")
+    elif(opt == "fmax"):
+        fmax = float(fmax)
+        if(fmin is not None and fmax <= float(fmin)):
+            raise Exception("max freq. must be greater than min freq.")
+    elif(opt == "wavetype"):
+        if(wavetype.upper() not in ["RAYL", "LOVE"]):
+            raise Exception("Wave type must be RAYL or LOVE.")
+    elif(opt == "mod_filepath"):
+        check_file(mod_filepath)
+
+
+def parse_opts(opts):
+    global scale, fmin, fmax, wavetype, veltype
+    for opt, val in opts:
+        if(opt in ("-s", "--scale")):
+            if (scale):
+                warn_opt_override("s", "scale")
+            scale = val
+            check_opt("scale")
+        elif(opt in ("-f", "--freqs")):
+            if(fmin):
+                warn_opt_override("f", "freqs")
+            if(":" in val and not val.endswith(":")):
+                fmin, fmax = split(":", val)
+                check_opt("fmin")
+                check_opt("fmax")
+            else:
+                fmin = val
+                check_opt("fmin")
+        elif(opt in ("-r", "--rayl")):
+            if(wavetype):
+                warn_opt_override("r|-l", "rayl|--love")
+            wavetype = "RAYL"
+        elif(opt in ("-l", "--love")):
+            if(wavetype):
+                warn_opt_override("r|-l", "rayl|--love")
+            wavetype = "LOVE"
+        elif(opt in ['-g', "--group"]):
+            veltype = 'group'
+        elif(opt in ['-p', "--phase"]):
+            veltype = 'phase'
+
+
+
+def check_mandatory_opts(interactive):
+    global scale, fmin, fmax, wavetype, mod_filepath
+    gen_msg = "mandatory parameter not set: "
+    if(not scale):
+        # and narrow_fil_amount and fmin and (fmax or scale == "local") )):
+        if(interactive):
+            scale = input("Enter scale (Mars/Earth): ")
+        else:
+            raise Exception(gen_msg + " scale (-s|--scale).")
+    check_opt("scale")
+    if(not fmin):
+        if(interactive):
+            fmin = input("Enter fmin: (float, Hz): ")
+            check_opt("fmin")
+        else:
+            raise Exception(gen_msg + " min frequency (-f|--freqs).")
+    if(not fmax):
+        if(interactive):
+            fmax = input("Enter fmax: (float, Hz): ")
+            check_opt("fmax")
+        else:
+            raise Exception(gen_msg + " max frequency (-f|--freqs).")
+    check_opt("fmax")
+    if(not wavetype):
+        if(interactive):
+            wavetype = input("Enter wave type: (RAYL, LOVE): ")
+            check_opt("wavetype")
+        else:
+            raise Exception(gen_msg + " wave type (-r|--rayl|-l|--love).")
+    check_opt("wavetype")
+    if(not mod_filepath):
+        if(interactive):
+            mod_filepath = input("Enter the model filepath: ")
+            check_opt("mod_filepath")
+        else:
+            raise Exception(gen_msg + " model filepath.")
+
+
+def usage():
+    print(frame("USAGE") + """
+    """ + col(Color.BLUE, """
+
+    """ + col(Color.RED, bold(argv[0])) + " " +
+              col(Color.RED, bold("-s|--scale")) + " Mars|Earth " +
+              col(Color.RED, bold("-f|--freqs")) +
+              " <min_f(mHz)>:<max_f(mHz)> " +
+              col(Color.RED, bold("-l|--love|-r|--rayl")) + " " +
+              col(Color.RED, bold("[-g|--group|-p|--phase]"))+ " " +
+              col(Color.RED, bold("<mod_filepath>")) + """
+    """ + col(Color.RED, bold(argv[0] + " -h|--help"))) + """
+
+    Defaultly group velocities are computed.
+
+    Syntax notes:
+        - Parameters enclosed by brackets (`[]') are optional parameters (not mandatory).
+        - The pipe character `|' represents an alternative between two options or values.
+          For example, `-s|--scale' means that you can use -s (short option) or --scale (long option).
+        - The chevron characters `<>' designate a value the user has to set.
+          The inner text gives sense to this value.
+ """)
+
+
+def print_params():
+    print_frame("PARAMETERS")
+    for p in ["scale", "wavetype", "fmin", "fmax"]:
+        if(eval(p) is not None):
+            print(p + " = " + str(eval(p)))
+
+def mineos(mod_filepath, wavetype, fmin, fmax, planet, nmin,
+           nmax, rhobar,
+           lmin,  lmax,  return_ncall=False):
+    if(not isinstance(mod_filepath, str)):
+        raise TypeError("model filepath must be a str.")
+    if(not exists(mod_filepath)):
+        raise Exception("Error: file "+str(mod_filepath)+" not found.")
+    fmin *= 1000  # mineos wants millihertz
+    fmax *= 1000
+    jcom = 3  # rayl
+    if(wavetype.lower() == "love"):
+        jcom = 2
+    ifreq = 1
+    # nic, noc are retrieved from model file
+    print("mod_filepath=", mod_filepath, "ifreq=", ifreq, "nmin=", nmin,
+          "nmax=", nmax, "jcom=", jcom, "rhobar=", rhobar,
+          "lmin=", lmin, "lmax=", lmax, "fmin=", fmin, "fmax=", fmax)
+    # m_in = MineosInput()
+    _mineos = Mineos() # (m_in)
+    _mineos.config(ifreq, nmin, nmax, jcom, rhobar, lmin, lmax,
+                    fmin, fmax)
+    _mineos.read_model(mod_filepath)
+    # TODO: timeout should be an option
+    print("Mineos is computing on model", mod_filepath, "with a timeout of 60 secs")
+    m_out = _mineos.calc_timeout(60)
+    #m_out = _mineos.calc() # without timeout
+    T, gvel, cvel = m_out.t, m_out.g, m_out.c
+    if(veltype == 'group'):
+        if(not gvel):
+            raise Exception("failed to compute group velocities for this model: " +
+                            mod_filepath)
+        vel = gvel
+    if(veltype == 'phase'):
+        if(not cvel):
+            raise Exception("failed to compute phase velocities for this model: " +
+                        mod_filepath)
+        vel = cvel
+    # other way to do without MineosInput/Output
+    #import pymineos
+    #T, gvel, cvel = pymineos.mineos(mod_filepath, ifreq, nmin,
+#                                      nmax, jcom, rhobar,
+#                                      lmin, lmax, fmin, fmax)
+#    print("cvel=", cvel)
+    if(return_ncall):
+        return [(t, v) for t, v in zip(T, vel)], len(T)
+    else:
+        return [(t, v) for t, v in zip(T, vel)]
+
+short_opts = "s:f:rlhgp"
+long_opts = ["scale=", "freqs=", "love", "rayl", "help", "group", "phase"]
+
+# TODO: compute group velocities or/and phase velocities
+
+scale, fmin, fmax, wavetype, veltype = None, None, None, None, 'group'
+mod_filepath = None
+
+planet_ini_fpath = join(dirname(pymineos.__file__), 'planet_parameters.ini')
+
+def parse_planet_ini(planet, planet_ini_fpath=planet_ini_fpath):
+    from configparser import ConfigParser
+    from os.path import dirname, join
+    cp = ConfigParser()
+    cp.read(planet_ini_fpath)
+    if(planet not in cp):
+        raise ValueError(planet+' not found in '+planet_ini_fpath)
+    for key in ['nmin', 'nmax', 'lmin', 'lmax', 'rhobar']:
+        if(key not in cp[planet]):
+            raise Exception(key+' not found in section '+planet+
+                            ' of '+planet_ini_fpath)
+        if(not str_isfloat(cp[planet][key],float)):
+            raise TypeError(key+' in section '+planet+' of '+planet_ini_fpath+
+                            ' must be a float but is not. value:'+
+                            cp[planet][key])
+    return [ float(cp[planet][key]) for key in ['nmin', 'nmax',
+                                               'lmin', 'lmax',
+                                               'rhobar']][:]
+
+
+def main(nmin=None, nmax=None, rhobar=None, lmin=None, lmax=None):
+    global mod_filepath
+    try:
+        opts, remaining = getopt(argv[1:], short_opts, long_opts)
+        r_len = len(remaining)
+        if (len(argv) < 2 or contains_help_switch(argv[1:])):
+            usage()
+        else:
+            parse_opts(opts)
+            if(r_len > 0):
+                mod_filepath = remaining[0]
+            check_mandatory_opts(False)
+            if None in [nmin, nmax, rhobar, lmin, lmax]:
+                nmin, nmax, lmin, lmax, rhobar = parse_planet_ini(scale)
+            print_params()
+            res_list = mineos(mod_filepath, wavetype, fmin, fmax, scale, nmin,
+                             nmax, rhobar, lmin, lmax)
+            print_frame("Mineos Results (line format: period, "+
+                        veltype+" velocity)", Color.RED)
+            for t, v in res_list:
+                print(t, v)
+    except Exception as e:
+        traceback.print_exc(file=sys.stdout)
+        msg = str(e)
+        if(not msg.lower().startswith("error")):
+            msg = "Error: " + msg
+        print_frame(msg, Color.RED, centering=False)
+        print(col(Color.GREEN, "Use -h, --help option for help."))
+
+if __name__ == '__main__':
+    main()

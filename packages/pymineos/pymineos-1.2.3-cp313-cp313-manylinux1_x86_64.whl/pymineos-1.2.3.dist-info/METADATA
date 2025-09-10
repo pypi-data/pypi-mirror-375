@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: pymineos
+Version: 1.2.3
+Summary: Python binding to Mineos C/Fortran routines.
+Home-page: 
+License: GPL v2
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Physics
+License-File: COPYING
+Requires-Dist: py3toolset
+Dynamic: classifier
+Dynamic: description
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+Full documentation is coming soon.
