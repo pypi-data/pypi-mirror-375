@@ -1,0 +1,2 @@
+[console_scripts]
+nens-update-project = nens_meta.update_project:main
