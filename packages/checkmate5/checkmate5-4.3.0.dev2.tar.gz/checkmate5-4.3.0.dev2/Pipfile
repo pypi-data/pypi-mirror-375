@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pylint = "*"
+pyflakes = "*"
+chardet = "*"
+pep8 = "*"
+cffi = "*"
+blitzdb5 = "*"
+sqlalchemy = "*"
+pyyaml = "*"
+tqdm = "*"
+requests = "*"
+psycopg2-binary = "*"
+
+[dev-packages]
+
+[requires]
+# Use a version specifier to indicate compatibility with 3.12 and newer.
+# This tells pipenv to look for a Python interpreter that is 3.12 or greater.
+python_version = ">=3.12"
+
+# OPTIONAL: If you want to be more specific about a "full" version,
+# you could use python_full_version, but python_version is usually sufficient.
+# For example, if you specifically knew you wanted 3.12.5 or newer:
+# python_full_version = ">=3.12.5"
+
+# If you prefer to allow any 3.x version but ensure it's at least 3.12,
+# you could also use a combination:
+# python_version = "3"
+# python_full_version = ">=3.12" # This might be redundant with the line above
