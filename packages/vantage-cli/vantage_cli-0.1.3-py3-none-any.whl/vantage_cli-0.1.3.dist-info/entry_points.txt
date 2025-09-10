@@ -1,0 +1,2 @@
+[console_scripts]
+vantage = vantage_cli.main:app
