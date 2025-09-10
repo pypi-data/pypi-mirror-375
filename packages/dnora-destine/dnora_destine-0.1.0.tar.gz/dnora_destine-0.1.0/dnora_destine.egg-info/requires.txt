@@ -1,0 +1,7 @@
+dnora>=2.0.4
+polytope-client
+cfgrib
+eccodes==2.41.0
+
+[test]
+pytest>=7.0
