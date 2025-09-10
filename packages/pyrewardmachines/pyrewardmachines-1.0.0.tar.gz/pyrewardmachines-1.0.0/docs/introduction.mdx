@@ -1,0 +1,71 @@
+---
+title: 'Introduction'
+description: 'Learn about Reward Machines (RMs), Counting Reward Machines (CRMs), and their applications in reinforcement learning'
+---
+
+# Reward Machines and Counting Reward Machines
+
+Many real-world reinforcement learning (RL) tasks require agents to reason over **history**, not just the current state. Examples include completing sequences of goals, satisfying temporal conditions, or achieving objectives multiple times. Standard RL approaches often address these scenarios with complex, ad hoc reward functions that are difficult to debug, reproduce, or interpret.
+
+**Reward Machines (RMs)** and their Turing-complete extension, **Counting Reward Machines (CRMs)**, provide a principled solution. Both offer structured, automaton-based representations of reward functions that separate task logic from environment dynamics. This makes them powerful tools for specifying **non-Markovian reward functions** in RL.
+
+## What are RMs and CRMs?
+
+- **Reward Machines (RMs)**:  
+  Represent tasks as finite-state automata that track progress and assign rewards based on event sequences. RMs naturally express loops, conditionals, and temporal dependencies while remaining intuitive and interpretable.
+
+- **Counting Reward Machines (CRMs)**:  
+  Extend RMs by introducing integer counters as additional memory. This generalisation is *Turing-complete*, capable of specifying any computable reward structure. CRMs are essential for tasks that require counting or more complex forms of memory.
+
+Together, RMs and CRMs cover a wide spectrum of tasks, from simple sequential goals to rich, temporally extended problems.
+
+## Why use them?
+
+- **Structured Rewards**: Move beyond ad hoc reward shaping to formal, interpretable specifications.  
+- **Expressiveness**: Model anything from regular languages (RMs) to fully algorithmic tasks (CRMs).  
+- **Sample Efficiency**: Support for counterfactual experience generation enables agents to learn multiple sub-tasks in parallel.  
+- **Reproducibility**: Clear separation between reward specification and RL implementation improves clarity and reliability.  
+
+## PyCRM: A Unified Framework
+
+The pycrm framework brings RMs and CRMs into a practical, Python-based toolkit for RL research. Key features include:
+
+- **High-Level Abstractions**: Clean separation between task specification and learning algorithms.
+- **Automatic Gymnasium Wrapping**: Compile labelling functions and machines into Gymnasium-compatible environments.
+- **Counterfactual Learning**: Drop-in SB3 agents (DQN, DDPG, TD3, SAC) with counterfactual replay for improved efficiency.
+- **Support for Both RMs and CRMs**: Choose the right level of expressiveness for your task.
+- **Extensive Examples**: Worked examples in discrete, continuous, tabular, and deep RL domains.  
+
+By supporting both RMs and CRMs, pycrm lowers the barrier to entry for non-Markovian RL, making it easy to design structured tasks, leverage sample-efficient algorithms, and explore new research directions without the heavy engineering overhead.
+
+## Papers using PyCRM
+
+PyCRM has been used in several research papers exploring reward machines and reinforcement learning:
+
+- **Pushdown Reward Machines for Reinforcement Learning** - [arXiv:2508.06894](https://arxiv.org/abs/2508.06894)
+- **Counting Reward Automata: Sample Efficient Reinforcement Learning Through the Exploitation of Reward Function Structure** - [arXiv:2312.11364](https://arxiv.org/abs/2312.11364)
+- **Thesis work** - [Wits University Repository](https://wiredspace.wits.ac.za/server/api/core/bitstreams/b30b3b50-b780-4236-bc9a-cf6938e04a3a/content)
+
+## Community Contributions
+
+We welcome contributions to PyCRM! If you've used PyCRM in your research or have interesting applications, please consider sharing your work with the community:
+
+- **Open an issue** on our GitHub repository to share your work
+- We'll add your research to the "Papers using PyCRM" section above
+- Help others discover new applications and use cases
+
+## Getting Started
+
+1. [Installation Guide](/installation)
+2. [Quick Start Tutorial](/quickstart)
+
+## Core Concepts
+
+- [Labelling Functions](/core-concepts/labelling-functions)
+- [Automata](/core-concepts/automata)
+- [Cross-Product MDPs](/core-concepts/cross-products)
+- [Agents](/core-concepts/agents)
+
+## Worked Examples
+
+See our [Letter World Example](/worked-examples/letter-env/ground-environment) for a complete walkthrough of using CRMs in practice. 
