@@ -1,0 +1,285 @@
+# Zapdos-Py
+
+A CLI tool for indexing video files by extracting keyframes that can also be used programmatically with enhanced events streaming support.
+
+## Installation
+
+To install zapdos-py, you can use pip:
+
+```bash
+pip install zapdos-py
+```
+
+Or if you're using uv:
+
+```bash
+uv pip install zapdos-py
+```
+
+## Usage
+
+### Command Line Interface
+
+After installation, you can use the zapdos-py command with different subcommands:
+
+#### Index a video file:
+
+```bash
+ZAPDOS_API_KEY=your_api_key_here zapdos-py index <video_file_path> [--interval <seconds>]
+```
+
+This command will index the specified video file by extracting keyframes at regular intervals.
+
+You can also set your API key as an environment variable:
+
+```bash
+export ZAPDOS_API_KEY=your_api_key_here
+zapdos-py index <video_file_path> [--interval <seconds>]
+```
+
+#### Search for content:
+
+```bash
+ZAPDOS_API_KEY=your_api_key_here zapdos-py search "your search query"
+```
+
+You can also search with multiple queries:
+
+```bash
+# Search with a JSON array of strings
+ZAPDOS_API_KEY=your_api_key_here zapdos-py search '["query 1", "query 2"]'
+
+# Search with a JSON array of dictionaries
+ZAPDOS_API_KEY=your_api_key_here zapdos-py search '[{"type": "text", "value": "query 1"}, {"type": "text", "value": "query 2"}]'
+```
+
+### Programmatic Usage
+
+You can also use zapdos-py programmatically in your Python code using the client-based approach:
+
+```python
+from zapdos import Client
+
+# Create a client with your API key
+client = Client(api_key="your_api_key_here")
+
+# Index a video file
+try:
+    result = client.index("path/to/your/video.mp4", interval_sec=30)
+    print(f"Indexed {len(result['items'])} items")
+except FileNotFoundError as e:
+    print(f"Error: {e}")
+except ValueError as e:
+    print(f"Error: {e}")
+
+# Search for content
+try:
+    # Search with a single string
+    search_result = client.search("your search query")
+    print(f"Found {len(search_result['results'])} result sets")
+    
+    # Search with multiple strings
+    search_result = client.search(["query 1", "query 2"])
+    
+    # Search with dictionaries
+    search_result = client.search([
+        {"type": "text", "value": "query 1"},
+        {"type": "text", "value": "query 2"}
+    ])
+except Exception as e:
+    print(f"Error: {e}")
+```
+
+#### With Progress Tracking
+
+You can also provide a callback function to receive progress updates during the indexing process with enhanced event streaming:
+
+```python
+from zapdos import Client
+from zapdos.definitions import IndexEvents
+
+def progress_callback(event_data):
+    """Callback function to handle progress updates with enhanced event streaming."""
+    event_type = event_data.get("event")
+    if event_type == IndexEvents.INSERTED_VIDEO_FILE_RECORD:
+        video_file_id = event_data.get("video_file_id")
+        print(f"✓ Created video file record with ID: {video_file_id}")
+    elif event_type == IndexEvents.UPLOADED_FRAME:
+        print("📤 Uploaded a frame")
+    elif event_type == IndexEvents.INSERTED_FRAMES_RECORDS:
+        count = event_data.get("count", 0)
+        print(f"💾 Indexed {count} items into database")
+    elif event_type == IndexEvents.CREATED_IMAGE_DESCRIPTION_JOB:
+        job_id = event_data.get("job_id")
+        print(f"⚙️  Created image description job with ID: {job_id}")
+    elif event_type == IndexEvents.COMPLETED_IMAGE_DESCRIPTION_JOB:
+        job_id = event_data.get("job_id")
+        print(f"✅ Completed image description job with ID: {job_id}")
+    elif event_type == IndexEvents.CREATED_OBJECT_DETECTION_JOB:
+        job_id = event_data.get("job_id")
+        print(f"🔍 Created object detection job with ID: {job_id}")
+    elif event_type == IndexEvents.COMPLETED_OBJECT_DETECTION_JOB:
+        job_id = event_data.get("job_id")
+        print(f"✅ Completed object detection job with ID: {job_id}")
+    elif event_type == IndexEvents.CREATED_SUMMARY_JOB:
+        job_id = event_data.get("job_id")
+        print(f"📝 Created summary job with ID: {job_id}")
+    elif event_type == IndexEvents.COMPLETED_SUMMARY_JOB:
+        job_id = event_data.get("job_id")
+        print(f"✅ Completed summary job with ID: {job_id}")
+    elif event_type == IndexEvents.DONE_INDEXING:
+        print(f"🎉 Video indexing completed successfully!")
+    elif event_type == IndexEvents.ERROR_INDEXING:
+        error_msg = event_data.get("message", "Unknown error")
+        print(f"❌ Error: {error_msg}")
+    else:
+        print(f"ℹ️  Unknown event: {event_data}")
+
+# Create a client with your API key
+client = Client(api_key="your_api_key_here")
+
+# Index a video file with progress updates
+try:
+    result = client.index(
+        "path/to/your/video.mp4", 
+        interval_sec=30,
+        progress_callback=progress_callback
+    )
+    print(f"Indexed {len(result['items'])} items")
+    # Print details of the first few items
+    for item in result['items'][:3]:
+        print(f"  - {item}")
+    if len(result['items']) > 3:
+        print(f"  ... and {len(result['items']) - 3} more items")
+except FileNotFoundError as e:
+    print(f"Error: {e}")
+except ValueError as e:
+    print(f"Error: {e}")
+```
+
+## Example
+
+### CLI Usage
+```bash
+# Extract frames every 30 seconds (default)
+export ZAPDOS_API_KEY=your_api_key_here
+zapdos-py index ./video.mp4
+
+# Extract frames every 10 seconds
+export ZAPDOS_API_KEY=your_api_key_here
+zapdos-py index ./video.mp4 --interval 10
+
+# Single command example (setting API key and running in one line)
+ZAPDOS_API_KEY=your_api_key_here zapdos-py index ./video.mp4 --interval 10
+
+# Search for content
+export ZAPDOS_API_KEY=your_api_key_here
+zapdos-py search "cat playing with ball"
+
+# Search with multiple queries
+ZAPDOS_API_KEY=your_api_key_here
+zapdos-py search '["dog", "cat", "bird"]'
+```
+
+### Programmatic Usage
+```python
+from zapdos import Client
+from pathlib import Path
+
+# Create a client with your API key
+client = Client(api_key="your_api_key_here")
+
+# Index a video file
+video_path = Path("video.mp4")
+try:
+    result = client.index(video_path, interval_sec=30)
+    print(f"Indexed {len(result['items'])} items")
+    for item in result['items'][:3]:  # Show first 3 items
+        if item['type'] == 'frame':
+            desc = item.get('description', 'No description')
+            objects = len(item.get('objects', []))
+            print(f"  Frame {item['id']}: {desc} ({objects} objects detected)")
+        elif item['type'] == 'segment':
+            summary = item.get('summary', 'No summary')
+            print(f"  Segment {item['id']}: {summary}")
+    if len(result['items']) > 3:
+        print(f"  ... and {len(result['items']) - 3} more items")
+except FileNotFoundError as e:
+    print(f"Error: {e}")
+except ValueError as e:
+    print(f"Error: {e}")
+
+# Search for content
+try:
+    # Search with a single string
+    search_result = client.search("cat playing with ball")
+    print(f"Search returned {len(search_result['results'])} result sets")
+    
+    # Process search results
+    for i, result_set in enumerate(search_result['results']):
+        print(f"Query {i+1} returned {len(result_set)} results")
+        for j, result in enumerate(result_set[:3]):  # Show first 3 results
+            field_value = result['field']['value'].get('string_value', 'N/A')
+            print(f"  Result {j+1}: {field_value}")
+        if len(result_set) > 3:
+            print(f"  ... and {len(result_set) - 3} more results")
+            
+    # Search with multiple queries
+    search_result = client.search(["dog", "cat", "bird"])
+    print(f"Multi-query search returned {len(search_result['results'])} result sets")
+    
+except Exception as e:
+    print(f"Error: {e}")
+```
+
+## Supported Video Formats
+
+Zapdos-Py supports the following video formats:
+- MP4 (.mp4)
+- AVI (.avi)
+- MOV (.mov)
+- MKV (.mkv)
+- WMV (.wmv)
+- FLV (.flv)
+- WEBM (.webm)
+- M4V (.m4v)
+- 3GP (.3gp, .3g2)
+- MPG/MPEG (.mpg, .mpeg, .m2v)
+
+## Development
+
+To set up the project for development:
+
+1. Clone the repository
+2. Install uv if you haven't already: `pip install uv`
+3. Install the package in development mode:
+   ```bash
+   uv pip install --editable .
+   ```
+4. Run the CLI tool:
+   ```bash
+   zapdos-py <video_file_path>
+   ```
+
+## Testing
+
+There are several ways to run the tests:
+
+### Using pytest (recommended):
+```bash
+pytest tests/
+```
+
+### Using unittest directly:
+```bash
+python -m unittest tests.test_cli
+```
+
+### Running the video indexer test:
+```bash
+python tests/test_video_indexer.py
+```
+
+## License
+
+This project is licensed under the MIT License.
