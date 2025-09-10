@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: anonymacy
+Version: 0.0.5
+Summary: anonymaCy is a spaCy extension for anonymizing PII using rule-based recognizers, context-aware processing, conflict resolution and customizable anonymization.
+Author-email: viclang <viclang.github@pm.me>
+License-File: LICENSE
+Requires-Python: <3.14,>=3.9
+Requires-Dist: phonenumbers>=9.0.8
+Requires-Dist: spacy>=3.8.7
+Description-Content-Type: text/markdown
+
+# anonymaCy
