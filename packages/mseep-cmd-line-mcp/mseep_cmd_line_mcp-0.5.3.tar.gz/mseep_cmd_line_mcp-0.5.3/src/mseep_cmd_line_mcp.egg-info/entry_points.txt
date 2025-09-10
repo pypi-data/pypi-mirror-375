@@ -1,0 +1,2 @@
+[console_scripts]
+cmd-line-mcp = cmd_line_mcp.server:main

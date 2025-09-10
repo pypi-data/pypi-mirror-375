@@ -1,0 +1,72 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-cmd-line-mcp"
+version = "0.5.3"
+description = "Command-line MCP server for safe command execution"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "mcp>=1.6.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.18.0",
+    "flake8>=4.0.0",
+    "black>=22.0.0",
+]
+
+[project.scripts]
+cmd-line-mcp = "cmd_line_mcp.server:main"
+
+[tool.setuptools]
+packages = [
+    "cmd_line_mcp",
+]
+include-package-data = true
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.data-files]
+"." = [
+    "default_config.json",
+]
+
+[tool.setuptools.package-data]
+examples = [
+    "*.py",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+python_files = "test_*.py"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
