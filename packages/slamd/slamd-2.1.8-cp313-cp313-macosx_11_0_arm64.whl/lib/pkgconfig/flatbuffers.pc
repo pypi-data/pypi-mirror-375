@@ -1,0 +1,9 @@
+libdir=/var/folders/x7/ch5v91h56_zbvbd1y2f600dm0000gn/T/tmpq8q3stqe/wheel/platlib/lib
+includedir=/var/folders/x7/ch5v91h56_zbvbd1y2f600dm0000gn/T/tmpq8q3stqe/wheel/platlib/include
+
+Name: FlatBuffers
+Description: Memory Efficient Serialization Library
+Version: 25.2.10
+
+Libs: -L${libdir} -lflatbuffers
+Cflags: -I${includedir}
