@@ -1,0 +1,262 @@
+Metadata-Version: 2.4
+Name: mseep-txtai
+Version: 9.1.1
+Summary: All-in-one open-source AI framework for semantic search, LLM orchestration and language model workflows
+Home-page: https://github.com/neuml/txtai
+Author: mseep
+License: Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
+Project-URL: Documentation, https://github.com/neuml/txtai
+Project-URL: Issue Tracker, https://github.com/neuml/txtai/issues
+Project-URL: Source Code, https://github.com/neuml/txtai
+Keywords: search embedding machine-learning nlp
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development
+Classifier: Topic :: Text Processing :: Indexing
+Classifier: Topic :: Utilities
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: faiss-cpu>=1.7.1.post2
+Requires-Dist: msgpack>=1.0.7
+Requires-Dist: torch>=2.1
+Requires-Dist: transformers>=4.45.0
+Requires-Dist: huggingface-hub>=0.34.0
+Requires-Dist: numpy>=1.18.4
+Requires-Dist: pyyaml>=5.3
+Requires-Dist: regex>=2022.8.17
+Requires-Dist: safetensors>=0.4.5
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: coverage; extra == "dev"
+Requires-Dist: coveralls; extra == "dev"
+Requires-Dist: httpx; extra == "dev"
+Requires-Dist: mkdocs-material; extra == "dev"
+Requires-Dist: mkdocs-redirects; extra == "dev"
+Requires-Dist: mkdocstrings[python]; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: pylint; extra == "dev"
+Provides-Extra: agent
+Requires-Dist: mcpadapt>=0.1.0; extra == "agent"
+Requires-Dist: smolagents>=1.17; extra == "agent"
+Provides-Extra: ann
+Requires-Dist: annoy>=1.16.3; extra == "ann"
+Requires-Dist: scikit-learn>=0.23.1; extra == "ann"
+Requires-Dist: hnswlib>=0.5.0; extra == "ann"
+Requires-Dist: pgvector>=0.4.1; extra == "ann"
+Requires-Dist: scipy>=1.4.1; extra == "ann"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "ann"
+Requires-Dist: sqlite-vec>=0.1.1; extra == "ann"
+Provides-Extra: api
+Requires-Dist: aiohttp>=3.8.1; extra == "api"
+Requires-Dist: fastapi>=0.94.0; extra == "api"
+Requires-Dist: fastapi-mcp>=0.2.0; extra == "api"
+Requires-Dist: httpx>=0.28.1; extra == "api"
+Requires-Dist: pillow>=7.1.2; extra == "api"
+Requires-Dist: python-multipart>=0.0.7; extra == "api"
+Requires-Dist: uvicorn>=0.12.1; extra == "api"
+Provides-Extra: cloud
+Requires-Dist: apache-libcloud>=3.3.1; extra == "cloud"
+Requires-Dist: fasteners>=0.14.1; extra == "cloud"
+Provides-Extra: console
+Requires-Dist: rich>=12.0.1; extra == "console"
+Provides-Extra: database
+Requires-Dist: duckdb>=0.7.1; extra == "database"
+Requires-Dist: pillow>=7.1.2; extra == "database"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "database"
+Provides-Extra: graph
+Requires-Dist: grand-cypher>=0.6.0; extra == "graph"
+Requires-Dist: grand-graph>=0.6.0; extra == "graph"
+Requires-Dist: networkx>=2.7.1; extra == "graph"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "graph"
+Provides-Extra: model
+Requires-Dist: onnx>=1.11.0; extra == "model"
+Requires-Dist: onnxruntime>=1.11.0; extra == "model"
+Provides-Extra: pipeline-audio
+Requires-Dist: onnx>=1.11.0; extra == "pipeline-audio"
+Requires-Dist: onnxruntime>=1.11.0; extra == "pipeline-audio"
+Requires-Dist: scipy>=1.4.1; extra == "pipeline-audio"
+Requires-Dist: sounddevice>=0.5.0; extra == "pipeline-audio"
+Requires-Dist: soundfile>=0.10.3.post1; extra == "pipeline-audio"
+Requires-Dist: ttstokenizer>=1.1.0; extra == "pipeline-audio"
+Requires-Dist: webrtcvad-wheels>=2.0.14; extra == "pipeline-audio"
+Provides-Extra: pipeline-data
+Requires-Dist: beautifulsoup4>=4.9.3; extra == "pipeline-data"
+Requires-Dist: chonkie>=1.0.2; extra == "pipeline-data"
+Requires-Dist: docling>=2.8.2; extra == "pipeline-data"
+Requires-Dist: nltk>=3.5; extra == "pipeline-data"
+Requires-Dist: pandas>=1.1.0; extra == "pipeline-data"
+Requires-Dist: tika>=1.24; extra == "pipeline-data"
+Provides-Extra: pipeline-image
+Requires-Dist: imagehash>=4.2.1; extra == "pipeline-image"
+Requires-Dist: pillow>=7.1.2; extra == "pipeline-image"
+Requires-Dist: timm>=0.4.12; extra == "pipeline-image"
+Provides-Extra: pipeline-llm
+Requires-Dist: litellm>=1.37.16; extra == "pipeline-llm"
+Requires-Dist: llama-cpp-python>=0.2.75; extra == "pipeline-llm"
+Provides-Extra: pipeline-text
+Requires-Dist: gliner>=0.2.16; extra == "pipeline-text"
+Requires-Dist: sentencepiece>=0.1.91; extra == "pipeline-text"
+Requires-Dist: staticvectors>=0.2.0; extra == "pipeline-text"
+Provides-Extra: pipeline-train
+Requires-Dist: accelerate>=0.26.0; extra == "pipeline-train"
+Requires-Dist: bitsandbytes>=0.42.0; extra == "pipeline-train"
+Requires-Dist: onnx>=1.11.0; extra == "pipeline-train"
+Requires-Dist: onnxmltools>=1.9.1; extra == "pipeline-train"
+Requires-Dist: onnxruntime>=1.11.0; extra == "pipeline-train"
+Requires-Dist: peft>=0.8.1; extra == "pipeline-train"
+Requires-Dist: skl2onnx>=1.9.1; extra == "pipeline-train"
+Provides-Extra: pipeline
+Requires-Dist: onnx>=1.11.0; extra == "pipeline"
+Requires-Dist: onnxruntime>=1.11.0; extra == "pipeline"
+Requires-Dist: scipy>=1.4.1; extra == "pipeline"
+Requires-Dist: sounddevice>=0.5.0; extra == "pipeline"
+Requires-Dist: soundfile>=0.10.3.post1; extra == "pipeline"
+Requires-Dist: ttstokenizer>=1.1.0; extra == "pipeline"
+Requires-Dist: webrtcvad-wheels>=2.0.14; extra == "pipeline"
+Requires-Dist: beautifulsoup4>=4.9.3; extra == "pipeline"
+Requires-Dist: chonkie>=1.0.2; extra == "pipeline"
+Requires-Dist: docling>=2.8.2; extra == "pipeline"
+Requires-Dist: nltk>=3.5; extra == "pipeline"
+Requires-Dist: pandas>=1.1.0; extra == "pipeline"
+Requires-Dist: tika>=1.24; extra == "pipeline"
+Requires-Dist: imagehash>=4.2.1; extra == "pipeline"
+Requires-Dist: pillow>=7.1.2; extra == "pipeline"
+Requires-Dist: timm>=0.4.12; extra == "pipeline"
+Requires-Dist: litellm>=1.37.16; extra == "pipeline"
+Requires-Dist: llama-cpp-python>=0.2.75; extra == "pipeline"
+Requires-Dist: gliner>=0.2.16; extra == "pipeline"
+Requires-Dist: sentencepiece>=0.1.91; extra == "pipeline"
+Requires-Dist: staticvectors>=0.2.0; extra == "pipeline"
+Requires-Dist: accelerate>=0.26.0; extra == "pipeline"
+Requires-Dist: bitsandbytes>=0.42.0; extra == "pipeline"
+Requires-Dist: onnx>=1.11.0; extra == "pipeline"
+Requires-Dist: onnxmltools>=1.9.1; extra == "pipeline"
+Requires-Dist: onnxruntime>=1.11.0; extra == "pipeline"
+Requires-Dist: peft>=0.8.1; extra == "pipeline"
+Requires-Dist: skl2onnx>=1.9.1; extra == "pipeline"
+Provides-Extra: scoring
+Requires-Dist: sqlalchemy>=2.0.20; extra == "scoring"
+Provides-Extra: vectors
+Requires-Dist: litellm>=1.37.16; extra == "vectors"
+Requires-Dist: llama-cpp-python>=0.2.75; extra == "vectors"
+Requires-Dist: model2vec>=0.3.0; extra == "vectors"
+Requires-Dist: scikit-learn>=0.23.1; extra == "vectors"
+Requires-Dist: scipy>=1.4.1; extra == "vectors"
+Requires-Dist: sentence-transformers>=5.0.0; extra == "vectors"
+Requires-Dist: skops>=0.9.0; extra == "vectors"
+Requires-Dist: staticvectors>=0.2.0; extra == "vectors"
+Provides-Extra: workflow
+Requires-Dist: apache-libcloud>=3.3.1; extra == "workflow"
+Requires-Dist: croniter>=1.2.0; extra == "workflow"
+Requires-Dist: openpyxl>=3.0.9; extra == "workflow"
+Requires-Dist: pandas>=1.1.0; extra == "workflow"
+Requires-Dist: pillow>=7.1.2; extra == "workflow"
+Requires-Dist: requests>=2.26.0; extra == "workflow"
+Requires-Dist: xmltodict>=0.12.0; extra == "workflow"
+Provides-Extra: similarity
+Requires-Dist: annoy>=1.16.3; extra == "similarity"
+Requires-Dist: scikit-learn>=0.23.1; extra == "similarity"
+Requires-Dist: hnswlib>=0.5.0; extra == "similarity"
+Requires-Dist: pgvector>=0.4.1; extra == "similarity"
+Requires-Dist: scipy>=1.4.1; extra == "similarity"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "similarity"
+Requires-Dist: sqlite-vec>=0.1.1; extra == "similarity"
+Requires-Dist: litellm>=1.37.16; extra == "similarity"
+Requires-Dist: llama-cpp-python>=0.2.75; extra == "similarity"
+Requires-Dist: model2vec>=0.3.0; extra == "similarity"
+Requires-Dist: scikit-learn>=0.23.1; extra == "similarity"
+Requires-Dist: scipy>=1.4.1; extra == "similarity"
+Requires-Dist: sentence-transformers>=5.0.0; extra == "similarity"
+Requires-Dist: skops>=0.9.0; extra == "similarity"
+Requires-Dist: staticvectors>=0.2.0; extra == "similarity"
+Provides-Extra: all
+Requires-Dist: mcpadapt>=0.1.0; extra == "all"
+Requires-Dist: smolagents>=1.17; extra == "all"
+Requires-Dist: aiohttp>=3.8.1; extra == "all"
+Requires-Dist: fastapi>=0.94.0; extra == "all"
+Requires-Dist: fastapi-mcp>=0.2.0; extra == "all"
+Requires-Dist: httpx>=0.28.1; extra == "all"
+Requires-Dist: pillow>=7.1.2; extra == "all"
+Requires-Dist: python-multipart>=0.0.7; extra == "all"
+Requires-Dist: uvicorn>=0.12.1; extra == "all"
+Requires-Dist: apache-libcloud>=3.3.1; extra == "all"
+Requires-Dist: fasteners>=0.14.1; extra == "all"
+Requires-Dist: rich>=12.0.1; extra == "all"
+Requires-Dist: duckdb>=0.7.1; extra == "all"
+Requires-Dist: pillow>=7.1.2; extra == "all"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "all"
+Requires-Dist: grand-cypher>=0.6.0; extra == "all"
+Requires-Dist: grand-graph>=0.6.0; extra == "all"
+Requires-Dist: networkx>=2.7.1; extra == "all"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "all"
+Requires-Dist: onnx>=1.11.0; extra == "all"
+Requires-Dist: onnxruntime>=1.11.0; extra == "all"
+Requires-Dist: onnx>=1.11.0; extra == "all"
+Requires-Dist: onnxruntime>=1.11.0; extra == "all"
+Requires-Dist: scipy>=1.4.1; extra == "all"
+Requires-Dist: sounddevice>=0.5.0; extra == "all"
+Requires-Dist: soundfile>=0.10.3.post1; extra == "all"
+Requires-Dist: ttstokenizer>=1.1.0; extra == "all"
+Requires-Dist: webrtcvad-wheels>=2.0.14; extra == "all"
+Requires-Dist: beautifulsoup4>=4.9.3; extra == "all"
+Requires-Dist: chonkie>=1.0.2; extra == "all"
+Requires-Dist: docling>=2.8.2; extra == "all"
+Requires-Dist: nltk>=3.5; extra == "all"
+Requires-Dist: pandas>=1.1.0; extra == "all"
+Requires-Dist: tika>=1.24; extra == "all"
+Requires-Dist: imagehash>=4.2.1; extra == "all"
+Requires-Dist: pillow>=7.1.2; extra == "all"
+Requires-Dist: timm>=0.4.12; extra == "all"
+Requires-Dist: litellm>=1.37.16; extra == "all"
+Requires-Dist: llama-cpp-python>=0.2.75; extra == "all"
+Requires-Dist: gliner>=0.2.16; extra == "all"
+Requires-Dist: sentencepiece>=0.1.91; extra == "all"
+Requires-Dist: staticvectors>=0.2.0; extra == "all"
+Requires-Dist: accelerate>=0.26.0; extra == "all"
+Requires-Dist: bitsandbytes>=0.42.0; extra == "all"
+Requires-Dist: onnx>=1.11.0; extra == "all"
+Requires-Dist: onnxmltools>=1.9.1; extra == "all"
+Requires-Dist: onnxruntime>=1.11.0; extra == "all"
+Requires-Dist: peft>=0.8.1; extra == "all"
+Requires-Dist: skl2onnx>=1.9.1; extra == "all"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "all"
+Requires-Dist: annoy>=1.16.3; extra == "all"
+Requires-Dist: scikit-learn>=0.23.1; extra == "all"
+Requires-Dist: hnswlib>=0.5.0; extra == "all"
+Requires-Dist: pgvector>=0.4.1; extra == "all"
+Requires-Dist: scipy>=1.4.1; extra == "all"
+Requires-Dist: sqlalchemy>=2.0.20; extra == "all"
+Requires-Dist: sqlite-vec>=0.1.1; extra == "all"
+Requires-Dist: litellm>=1.37.16; extra == "all"
+Requires-Dist: llama-cpp-python>=0.2.75; extra == "all"
+Requires-Dist: model2vec>=0.3.0; extra == "all"
+Requires-Dist: scikit-learn>=0.23.1; extra == "all"
+Requires-Dist: scipy>=1.4.1; extra == "all"
+Requires-Dist: sentence-transformers>=5.0.0; extra == "all"
+Requires-Dist: skops>=0.9.0; extra == "all"
+Requires-Dist: staticvectors>=0.2.0; extra == "all"
+Requires-Dist: apache-libcloud>=3.3.1; extra == "all"
+Requires-Dist: croniter>=1.2.0; extra == "all"
+Requires-Dist: openpyxl>=3.0.9; extra == "all"
+Requires-Dist: pandas>=1.1.0; extra == "all"
+Requires-Dist: pillow>=7.1.2; extra == "all"
+Requires-Dist: requests>=2.26.0; extra == "all"
+Requires-Dist: xmltodict>=0.12.0; extra == "all"
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+Package managed by MseeP.ai
