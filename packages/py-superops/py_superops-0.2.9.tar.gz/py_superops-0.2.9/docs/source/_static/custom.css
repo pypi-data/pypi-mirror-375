@@ -1,0 +1,173 @@
+/* Custom CSS for py-superops documentation */
+
+/* Improve code block styling */
+.highlight {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.highlight pre {
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    border: none;
+}
+
+/* Better table styling */
+.wy-table-responsive table td,
+.wy-table-responsive table th {
+    white-space: normal !important;
+}
+
+.rst-content table.docutils {
+    border: 1px solid #e1e4e5;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.rst-content table.docutils th,
+.rst-content table.docutils td {
+    border-left: 1px solid #e1e4e5;
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 8px 16px;
+}
+
+.rst-content table.docutils th {
+    background-color: #f3f6f6;
+    border-bottom: 1px solid #e1e4e5;
+    font-weight: bold;
+}
+
+/* Improve admonition styling */
+.rst-content .admonition {
+    border-left: 0.2rem solid #448aff;
+    border-radius: 0.1rem;
+    margin: 1.5625em 0;
+    padding: 0 1.2rem;
+    page-break-inside: avoid;
+}
+
+.rst-content .admonition.note {
+    border-left-color: #448aff;
+}
+
+.rst-content .admonition.warning {
+    border-left-color: #ff9800;
+}
+
+.rst-content .admonition.danger {
+    border-left-color: #ff5722;
+}
+
+.rst-content .admonition.tip {
+    border-left-color: #00c853;
+}
+
+/* Better API documentation styling */
+.rst-content dl:not(.docutils) dt {
+    background-color: #f8f9fa;
+    border-left: 3px solid #2980b9;
+    color: #2980b9;
+    font-weight: bold;
+    margin-bottom: 6px;
+    padding: 6px;
+}
+
+.rst-content dl:not(.docutils) dd {
+    margin-left: 24px;
+    margin-bottom: 12px;
+}
+
+/* Code styling improvements */
+.rst-content code.literal {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 0.25rem;
+    color: #e74c3c;
+    font-size: 90%;
+    padding: 0.125rem 0.25rem;
+}
+
+/* Navigation improvements */
+.wy-menu-vertical li.current > a {
+    background-color: #fcfcfc;
+    border-bottom: solid 1px #c9c9c9;
+    border-right: solid 1px #c9c9c9;
+    border-top: solid 1px #c9c9c9;
+    color: #404040;
+    position: relative;
+}
+
+.wy-menu-vertical li.current > a:hover {
+    background-color: #d6d6d6;
+}
+
+/* Make the content area wider */
+.wy-nav-content {
+    max-width: 1200px;
+}
+
+/* Improve search result styling */
+.search li:first-child {
+    border-top: none;
+}
+
+.search li {
+    border-top: 1px solid #e1e4e5;
+    padding: 1em 0;
+}
+
+.search li:last-child {
+    border-bottom: 1px solid #e1e4e5;
+}
+
+/* Better parameter list styling */
+.rst-content .field-list {
+    border-bottom: 1px solid #e1e4e5;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+.rst-content .field-list .field-name {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 0.25rem;
+    color: #495057;
+    display: inline-block;
+    font-size: 85%;
+    font-weight: bold;
+    margin-right: 8px;
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap;
+    width: auto;
+}
+
+/* Improve version badge */
+.wy-side-nav-search > .version {
+    color: hsla(0,0%,100%,.8);
+}
+
+/* Better mobile responsiveness */
+@media (max-width: 768px) {
+    .wy-nav-content {
+        padding: 1.618em 1em;
+    }
+
+    .rst-content table.docutils {
+        font-size: 14px;
+    }
+
+    .highlight {
+        font-size: 12px;
+        padding: 0.5rem;
+    }
+}
