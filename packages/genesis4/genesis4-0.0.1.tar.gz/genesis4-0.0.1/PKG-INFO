@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: genesis4
+Version: 0.0.1
+Summary: A warpper for Genesis4.
+Author-email: Dait <dyj24@mails.tsinghua.edu.cn>
+License-Expression: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# genesis4
+
+A warpper for Genesis4 in accelerator physics, a simulation for FEL dynamics.
+
+```shell
+pip install genesis4
+```
+
+follow the guidance of Genesis4.
+
+https://github.com/svenreiche/Genesis-1.3-Version4
+
