@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+src/GamELY/__init__.py
+src/GamELY/core.py
+src/GamELY/provider_mapper.py
+src/GamELY.egg-info/PKG-INFO
+src/GamELY.egg-info/SOURCES.txt
+src/GamELY.egg-info/dependency_links.txt
+src/GamELY.egg-info/top_level.txt
+tests/test_evaluation.py
+tests/test_validation.py
