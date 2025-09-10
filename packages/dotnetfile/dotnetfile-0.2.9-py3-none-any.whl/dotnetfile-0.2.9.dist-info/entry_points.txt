@@ -1,0 +1,3 @@
+[console_scripts]
+dotnetfile_disassemble = tools.dotnetfile_disassemble:main
+dotnetfile_dump = tools.dotnetfile_dump:main
