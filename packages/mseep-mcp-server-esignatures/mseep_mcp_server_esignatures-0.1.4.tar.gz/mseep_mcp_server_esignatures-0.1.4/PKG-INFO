@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-esignatures
+Version: 0.1.4
+Summary: MCP server for eSignatures (https://esignatures.com)
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://github.com/esignaturescom/mcp-server-perplexity
+Project-URL: Repository, https://github.com/esignaturescom/mcp-server-perplexity
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.2.0
+Requires-Dist: twine>=6.1.0
+Dynamic: license-file
+
+Package managed by MseeP.ai

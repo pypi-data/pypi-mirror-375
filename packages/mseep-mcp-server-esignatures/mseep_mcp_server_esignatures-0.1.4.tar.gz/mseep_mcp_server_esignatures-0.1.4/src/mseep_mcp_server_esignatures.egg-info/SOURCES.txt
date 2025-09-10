@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/mcp_server_esignatures/__init__.py
+src/mcp_server_esignatures/input_schema_contracts.py
+src/mcp_server_esignatures/input_schema_document_elements.py
+src/mcp_server_esignatures/input_schema_template_collaborators.py
+src/mcp_server_esignatures/input_schema_templates.py
+src/mcp_server_esignatures/server.py
+src/mseep_mcp_server_esignatures.egg-info/PKG-INFO
+src/mseep_mcp_server_esignatures.egg-info/SOURCES.txt
+src/mseep_mcp_server_esignatures.egg-info/dependency_links.txt
+src/mseep_mcp_server_esignatures.egg-info/entry_points.txt
+src/mseep_mcp_server_esignatures.egg-info/requires.txt
+src/mseep_mcp_server_esignatures.egg-info/top_level.txt

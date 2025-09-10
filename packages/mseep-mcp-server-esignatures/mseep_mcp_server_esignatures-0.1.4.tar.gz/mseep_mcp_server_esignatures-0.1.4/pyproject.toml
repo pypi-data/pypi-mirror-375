@@ -1,0 +1,30 @@
+[project]
+name = "mseep-mcp-server-esignatures"
+version = "0.1.4"
+description = "MCP server for eSignatures (https://esignatures.com)"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.2.0",
+    "twine>=6.1.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.urls]
+Homepage = "https://github.com/esignaturescom/mcp-server-perplexity"
+Repository = "https://github.com/esignaturescom/mcp-server-perplexity"
+
+[project.scripts]
+mcp-server-esignatures = "mcp_server_esignatures:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
