@@ -1,0 +1,19 @@
+#!/bin/bash
+## Extract SNP-only data from PLINK files (excluding indels and other variants)
+#################################
+## NOTE #########################
+## - This script uses PLINK2 to filter for SNPs only (--snps-only).
+## - The 'just-acgt' option ensures only A/C/G/T alleles are kept, which is typical for SNPs.
+## - Useful for analyses that require only biallelic SNPs, excluding indels or multi-allelic sites.
+## - Outputs new PLINK files with the specified prefix.
+#################################
+## ARGUMENTS ####################
+## bfile : Input PLINK bed file prefix (e.g., data)
+## out : Output file prefix (e.g., data_snps_only)
+## SCRIPT #####################
+
+plink2 \\
+    --bfile ${bfile} \\
+    --snps-only just-acgt \\
+    --make-bed \\
+    --out ${out}

@@ -1,0 +1,54 @@
+#!/bin/bash
+## Submit a job to SLURM workload manager
+#################################
+## NOTE #########################
+## Common SLURM directives:
+## -J, --job-name: Name of the job
+## -o, --output: File for stdout
+## -e, --error: File for stderr
+## -p, --partition: Partition to use
+## -N, --nodes: Number of nodes
+## -n, --ntasks: Number of tasks
+## -c, --cpus-per-task: CPUs per task
+## --mem: Memory per node
+## --time: Time limit
+## --mail-type: Email notifications
+## --mail-user: Email address
+## -A, --account: Account to charge
+## -D, --chdir: Working directory
+## --array: Array job indices
+#################################
+## ARGUMENTS ####################
+## job_name: Name of the job
+## output_file: Output file for stdout
+## error_file: Error file for stderr
+## partition: Partition name
+## nodes: Number of nodes (default=1)
+## ntasks: Number of tasks (default=1)
+## cpus_per_task: CPUs per task (default=1)
+## mem: Memory per node (e.g., 4G)
+## time: Time limit (e.g., 01:00:00)
+## mail_type: Email type (e.g., BEGIN,END,FAIL)
+## mail_user: Email address
+## account: Account name
+## work_dir: Working directory
+## array_indices: Array indices (e.g., 1-100)
+## script: Path to the script to run
+## SCRIPT #####################
+
+sbatch \
+  --job-name="${job_name}" \
+  --output="${output_file}" \
+  --error="${error_file}" \
+  --partition="${partition}" \
+  --nodes=${nodes} \
+  --ntasks=${ntasks} \
+  --cpus-per-task=${cpus_per_task} \
+  --mem="${mem}" \
+  --time="${time}" \
+  --mail-type="${mail_type}" \
+  --mail-user="${mail_user}" \
+  --account="${account}" \
+  --chdir="${work_dir}" \
+  --array="${array_indices}" \
+  "${script}"

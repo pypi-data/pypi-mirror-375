@@ -1,0 +1,16 @@
+#!/bin/bash
+## Run allele frequency calculation using PLINK
+#################################
+## NOTE #########################
+## This script uses PLINK to calculate allele frequencies.
+## Common options:
+## --bfile: PLINK binary file prefix
+## --freq: calculate allele frequencies
+## --out: output file prefix
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK binary file prefix
+## out : output file prefix
+## SCRIPT #####################
+
+plink --bfile ${bfile} --freq --out ${out}

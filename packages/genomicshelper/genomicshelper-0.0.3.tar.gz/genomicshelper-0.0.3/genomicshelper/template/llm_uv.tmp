@@ -1,0 +1,15 @@
+#!/bin/bash
+## Install Python packages using uv
+#################################
+## NOTE #########################
+## uv is a fast Python package installer and resolver.
+## Common commands:
+## uv pip install package_name  # Install a package
+## uv venv .venv               # Create a virtual environment
+## uv run script.py            # Run a Python script with uv-managed environment
+#################################
+## ARGUMENTS ####################
+## package: Package name to install
+## SCRIPT #####################
+
+uv pip install ${package}

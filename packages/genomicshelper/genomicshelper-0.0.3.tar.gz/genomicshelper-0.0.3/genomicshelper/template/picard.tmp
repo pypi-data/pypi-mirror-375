@@ -1,0 +1,14 @@
+#!/bin/bash
+## Identifies duplicate reads.
+#################################
+## NOTE #########################
+## https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard
+#################################
+## ARGUMENTS ####################
+## 
+## SCRIPT #####################
+
+java -jar picard.jar MarkDuplicates \
+      I=input.bam \
+      O=marked_duplicates.bam \
+      M=marked_dup_metrics.txt

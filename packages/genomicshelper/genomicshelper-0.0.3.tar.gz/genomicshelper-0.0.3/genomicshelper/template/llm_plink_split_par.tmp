@@ -1,0 +1,25 @@
+#!/bin/bash
+## Split PLINK files by chromosome
+#################################
+## NOTE #########################
+## This script splits a PLINK bfile into separate files for each chromosome.
+## Useful for parallel processing or chromosome-specific analysis.
+## - chr: Chromosome to extract (1-22, X, Y, MT) or 'all' for all chromosomes
+## - bfile: Input PLINK bfile prefix (without extension)
+## - out: Output directory for split files
+#################################
+## ARGUMENTS ####################
+## bfile : plink bfile prefix
+## out : output directory
+## chr : chromosome to extract (default: all)
+## SCRIPT #####################
+
+mkdir -p ${out}
+
+if [ "${chr}" = "all" ]; then
+    for i in {1..22} X Y MT; do
+        plink --bfile ${bfile} --chr $i --make-bed --out ${out}/chr_$i
+    done
+else
+    plink --bfile ${bfile} --chr ${chr} --make-bed --out ${out}/chr_${chr}
+fi

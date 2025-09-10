@@ -1,0 +1,26 @@
+#!/bin/bash
+## Detect Runs of Homozygosity (ROH) using PLINK
+#################################
+## NOTE #########################
+## Requires PLINK1.9 or later
+## Adjust arguments based on your data and needs
+#################################
+## ARGUMENTS ####################
+## bfile : plink bfile prefix
+## out = "plink_roh_results" : output prefix
+## window_snp = 50 : window size in SNPs
+## window_kb = 1000 : window size in KB
+## het = 1 : maximum number of heterozygous calls allowed in window
+## missing = 1 : maximum number of missing calls allowed in window
+## density = 50 : density threshold (SNPs per KB)
+#################################
+
+plink \
+    --bfile ${bfile} \
+    --homozyg \
+    --homozyg-window-snp ${window_snp} \
+    --homozyg-window-kb ${window_kb} \
+    --homozyg-window-het ${het} \
+    --homozyg-window-missing ${missing} \
+    --homozyg-density ${density} \
+    --out ${out}

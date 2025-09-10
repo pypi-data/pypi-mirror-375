@@ -1,0 +1,38 @@
+#!/bin/bash
+## Update sex information in PLINK files using --update-sex
+#################################
+## NOTE #########################
+## --update-sex expects a file with sample IDs and sex information
+## - If there is a recognized header line (starting with '#FID' or '#IID'), it defaults to loading sex information from the first column titled 'SEX' (any capitalization)
+## - Otherwise, it assumes the 3rd column
+## - To force a specific column number, use the 'col-num=' modifier
+## - Only the first character in the sex column is processed
+## - By default, '1'/'M'/'m' is interpreted as male, '2'/'F'/'f' is interpreted as female, and '0'/'N'/'U'/'u' is interpreted as unknown-sex
+## - To change interpretation to '0'/'M'/'m' = male, '1'/'F'/'f' = female, anything else other than '2' = unknown-sex, add the 'male0' modifier
+#################################
+## ARGUMENTS ####################
+## bfile: PLINK bfile prefix (path)
+## sex: Sex file path (contains sample IDs and sex codes)
+## out: Output bfile prefix (path)
+## col_num: Optional column number for sex information (default: auto-detect)
+## male0: Optional flag to use male0 modifier (set to "male0" if needed)
+#################################
+## SCRIPT #####################
+
+# Basic command with auto-detection
+plink2 \\
+    --bfile ${bfile} \\
+    --update-sex ${sex} \\
+    --out ${out}
+
+# Optional: If column number is specified
+# plink2 \\
+#     --bfile ${bfile} \\
+#     --update-sex ${sex} col-num=${col_num} \\
+#     --out ${out}
+
+# Optional: If male0 modifier is needed
+# plink2 \\
+#     --bfile ${bfile} \\
+#     --update-sex ${sex} male0 \\
+#     --out ${out}

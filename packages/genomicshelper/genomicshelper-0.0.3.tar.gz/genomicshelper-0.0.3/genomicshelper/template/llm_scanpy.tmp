@@ -1,0 +1,55 @@
+#!/bin/bash
+## Run basic Scanpy analysis for single-cell RNA-seq data
+#################################
+## NOTE #########################
+## Scanpy is a Python library for analyzing single-cell gene expression data.
+## Common steps include reading data, filtering, normalization, PCA, and clustering.
+## Ensure Scanpy is installed: pip install scanpy
+## Input file should be in formats like H5AD, CSV, or MTX.
+#################################
+## ARGUMENTS ####################
+## input_file : path to input file (e.g., .h5ad, .csv)
+## output_file : path to output file (e.g., .h5ad)
+## n_pcs = 50 : number of principal components for PCA
+## perplexity = 30 : perplexity for t-SNE or UMAP
+## resolution = 1.0 : resolution for clustering
+## SCRIPT #####################
+
+python3 <<EOF
+import scanpy as sc
+
+# Read data
+adata = sc.read("${input_file}")
+
+# Basic preprocessing
+sc.pp.filter_cells(adata, min_genes=200)
+sc.pp.filter_genes(adata, min_cells=3)
+
+# Normalize and log-transform
+sc.pp.normalize_total(adata, target_sum=1e4)
+sc.pp.log1p(adata)
+
+# Identify highly variable genes
+sc.pp.highly_variable_genes(adata, min_mean=0.0125, max_mean=3, min_disp=0.5)
+adata = adata[:, adata.var.highly_variable]
+
+# Scale data
+sc.pp.scale(adata, max_value=10)
+
+# PCA
+sc.tl.pca(adata, n_comps=${n_pcs})
+
+# Compute neighborhood graph
+sc.pp.neighbors(adata, n_pcs=${n_pcs})
+
+# UMAP
+sc.tl.umap(adata, perplexity=${perplexity})
+
+# Clustering
+sc.tl.leiden(adata, resolution=${resolution})
+
+# Save results
+adata.write("${output_file}")
+
+print("Scanpy analysis completed. Output saved to ${output_file}")
+EOF

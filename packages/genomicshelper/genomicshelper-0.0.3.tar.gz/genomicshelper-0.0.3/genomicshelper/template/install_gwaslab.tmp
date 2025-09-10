@@ -1,0 +1,13 @@
+#!/bin/bash
+## install gwaslab using pip or uv
+#################################
+## NOTE #########################
+## 
+#################################
+## ARGUMENTS ####################
+## file :
+## SCRIPT #####################
+
+pip install gwaslab
+
+# uv add gwaslab

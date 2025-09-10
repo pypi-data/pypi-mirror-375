@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: genomicshelper
+Version: 0.0.3
+Summary: A collection of script templates for Complex Trait Genomics analysis
+Author-email: Yunye <gwaslab@gmail.com>
+Project-URL: Github, https://github.com/Cloufield/genomicshelper
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# genomicshelper
+A collection of script templates for Complex Trait Genomics analysis

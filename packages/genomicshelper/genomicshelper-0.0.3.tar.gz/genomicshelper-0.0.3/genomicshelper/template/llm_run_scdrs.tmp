@@ -1,0 +1,29 @@
+#!/bin/bash
+## Run SCDRS for single-cell deconvolution and regression scoring
+#################################
+## NOTE #########################
+## SCDRS is used for deconvolving single-cell RNA-seq data and calculating regression scores.
+## Common options:
+## -i, --input: Input file (e.g., expression matrix)
+## -o, --output: Output directory or file prefix
+## -c, --covariates: Covariates file (optional)
+## -t, --threads: Number of threads to use (default: 1)
+## Refer to the SCDRS documentation for more details: https://github.com/scdrs/scdrs
+#################################
+## ARGUMENTS ####################
+## input : Input file path (e.g., expression matrix in CSV or H5AD format)
+## output : Output directory or file prefix
+## covariates = "" : Path to covariates file (optional)
+## threads = 1 : Number of threads
+## SCRIPT #####################
+
+# Basic command to run SCDRS
+scdrs --input ${input} --output ${output} \\
+    --covariates ${covariates} \\
+    --threads ${threads}
+
+# Example of additional options (uncomment and modify as needed)
+# scdrs --input ${input} --output ${output} \\
+#     --covariates ${covariates} \\
+#     --threads ${threads} \\
+#     --verbose  # Enable verbose output

@@ -1,0 +1,27 @@
+#!/bin/bash
+## Converts raw FASTQ format into an aligned, compressed, and indexed BAM file by performing quality control, alignment to a reference genome, and sorting.
+#################################
+## NOTE #########################
+## fq2bam uses an accelerated version of BWA-MEM to generate BAM/CRAM output 
+## given one or more pairs of FASTQ files. The user can turn-off marking of 
+## duplicates by adding the --no-markdups option. 
+## The BQSR step is only performed if the --knownSites input and 
+## --out-recal-file output options are provided; 
+## doing so will also generate a BQSR report.
+##
+## https://docs.nvidia.com/clara/parabricks/latest/documentation/tooldocs/man_fq2bam.html
+#################################
+## ARGUMENTS ####################
+## 
+## SCRIPT #####################
+
+# This command assumes all the inputs are in the current working directory and all the outputs go to the same place.
+docker run --rm --gpus all --volume $(pwd):/workdir --volume $(pwd):/outputdir \
+    --workdir /workdir \
+    nvcr.io/nvidia/clara/clara-parabricks:4.5.1-1 \
+    pbrun fq2bam \
+    --ref /workdir/${REFERENCE_FILE} \
+    --in-fq /workdir/${INPUT_FASTQ_1} /workdir/${INPUT_FASTQ_2}  \
+    --knownSites /workdir/${KNOWN_SITES_FILE} \
+    --out-bam /outputdir/${OUTPUT_BAM} \
+    --out-recal-file /outputdir/${OUTPUT_RECAL_FILE}

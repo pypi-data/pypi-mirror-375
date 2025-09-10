@@ -1,0 +1,24 @@
+#!/bin/bash
+## Replace strings in files using shell commands
+#################################
+## NOTE #########################
+## - Use sed for basic string replacement
+## - Use awk for more complex replacements
+## - Always backup files before replacement
+## - Options:
+##   -i: Edit files in place (with sed)
+##   -e: Specify expression (with sed)
+##   -v: Assign variables (with awk)
+#################################
+## ARGUMENTS ####################
+## file : input file path
+## old_string : string to be replaced
+## new_string : replacement string
+## output : output file path (optional, if not using in-place)
+## SCRIPT #####################
+
+# Using sed for in-place replacement
+sed -i 's/${old_string}/${new_string}/g' ${file}
+
+# Alternatively, using awk and saving to new file
+# awk '{gsub(/${old_string}/, "${new_string}"); print}' ${file} > ${output}

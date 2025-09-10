@@ -1,0 +1,20 @@
+#!/bin/bash
+## View or filter VCF/BCF files using bcftools
+#################################
+## NOTE #########################
+## Common options for bcftools view:
+## -v, --verbose: Print verbose output
+## -H, --header-only: Output only the header
+## -s, --samples [LIST]: Output only specified samples (comma-separated)
+## -r, --regions [REGION]: Output only specific regions (e.g., chr1:1000-2000)
+## -O, --output-type [b|u|z|v]: Output type (b: BCF, u: uncompressed BCF, z: compressed VCF, v: uncompressed VCF)
+## -o, --output [FILE]: Output file name
+## -G, --drop-genotypes: Remove genotypes, output only variants
+## -S, --samples-file [FILE]: File containing sample names to include
+#################################
+## ARGUMENTS ####################
+## file: Input VCF/BCF file path
+## options: Additional bcftools view options (optional)
+## SCRIPT #####################
+
+bcftools view ${file} ${options}

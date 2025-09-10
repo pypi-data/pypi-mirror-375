@@ -1,0 +1,23 @@
+#!/bin/bash
+## Calculate linkage disequilibrium (LD) using PLINK
+#################################
+## NOTE #########################
+## - This script computes LD between SNPs using PLINK.
+## - The --r2 flag calculates the squared correlation coefficient (r²).
+## - Use --ld-window to specify the number of SNPs to consider for LD calculation.
+## - The --ld-window-kb option sets the physical distance window in kilobases.
+## - Output includes an LD matrix or pairwise LD values.
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK binary files prefix (e.g., data)
+## out : Output prefix for results (default: "plink_ld_output")
+## ld_window : Number of SNPs to consider for LD (default: 50)
+## ld_window_kb : Physical distance window in KB (default: 1000)
+## SCRIPT #####################
+
+plink \
+    --bfile ${bfile} \
+    --r2 \
+    --ld-window ${ld_window} \
+    --ld-window-kb ${ld_window_kb} \
+    --out ${out}

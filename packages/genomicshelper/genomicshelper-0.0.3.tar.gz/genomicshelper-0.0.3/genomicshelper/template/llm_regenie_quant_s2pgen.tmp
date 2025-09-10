@@ -1,0 +1,36 @@
+#!/bin/bash
+## Run REGENIE step 2 for quantitative traits using PGEN files
+#################################
+## NOTE #########################
+## REGENIE is a tool for whole-genome regression analysis
+## Step 2 performs association testing for quantitative traits
+## - Uses PGEN format for genotype data
+## - Supports covariates and phenotype files
+## - Outputs association results with statistics
+## - Common options: --phenoFile, --covarFile, --bsize, --threads
+#################################
+## ARGUMENTS ####################
+## pfile : PGEN file prefix for genotype data
+## phenoFile : Path to phenotype file
+## phenoCol : Name of phenotype column in phenoFile
+## covarFile : Path to covariate file (optional)
+## covarColList : Comma-separated list of covariate columns (e.g., "age,sex,PC1")
+## out : Output prefix for results
+## bsize : Block size for regression (default: 1000)
+## threads : Number of threads to use (default: 1)
+## minMAC : Minimum minor allele count for testing (default: 5)
+#################################
+## SCRIPT #####################
+
+regenie \
+  --step 2 \
+  --qt \
+  --pgen ${pfile} \
+  --phenoFile ${phenoFile} \
+  --phenoCol ${phenoCol} \
+  --covarFile ${covarFile} \
+  --covarColList ${covarColList} \
+  --bsize ${bsize} \
+  --threads ${threads} \
+  --minMAC ${minMAC} \
+  --out ${out}

@@ -1,0 +1,49 @@
+#!/bin/bash
+## GWASLab pipeline for comprehensive GWAS analysis
+#################################
+## NOTE #########################
+## This script runs a full GWAS pipeline using GWASLab
+## Steps include: data loading, QC, analysis, and visualization
+## Adjust parameters as needed for your data
+#################################
+## ARGUMENTS ####################
+## sumstats : input summary statistics file
+## out : output prefix
+## in_fmt = auto : input format
+## build = 19 : genome build
+## n_cores = 4 : number of cores for parallel processing
+## SCRIPT #####################
+
+python3 <<EOF
+import gwaslab as gl
+
+# Load sumstats
+mysumstats = gl.Sumstats("${sumstats}",
+             fmt="${in_fmt}",
+             build="${build}", 
+             verbose=True)
+
+# Basic checks and fixes
+mysumstats.basic_check()
+mysumstats.fix_id()
+mysumstats.fix_chr()
+mysumstats.fix_pos()
+mysumstats.fix_allele()
+
+# Optional: Filter HapMap3 SNPs
+mysumstats.filter_hapmap3(inplace=True)
+
+# Optional: Infer ancestry
+mysumstats.infer_ancestry()
+
+# Optional: Estimate heritability using LDSC
+mysumstats.estimate_h2_by_ldsc(ref_ld_chr="/path/to/ldscores/")
+
+# Save processed sumstats
+mysumstats.to_format("${out}", fmt="gwaslab")
+
+# Generate plots
+mysumstats.plot_mqq(save="${out}_mqq.png")
+mysumstats.plot_manhattan(save="${out}_manhattan.png")
+
+EOF

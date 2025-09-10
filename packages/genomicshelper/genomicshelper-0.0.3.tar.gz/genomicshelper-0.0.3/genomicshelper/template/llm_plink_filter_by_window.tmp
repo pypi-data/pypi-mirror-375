@@ -1,0 +1,35 @@
+#!/bin/bash
+## Perform window-based filtering using PLINK (e.g., for LD pruning)
+#################################
+## NOTE #########################
+## This script uses PLINK to filter SNPs based on a sliding window approach, commonly used for linkage disequilibrium (LD) pruning.
+## Key options:
+##   --indep-pairwise: Performs LD pruning with specified window size, step size, and r^2 threshold.
+##   --window-size: Size of the window in kilobases or number of SNPs.
+##   --window-step: Step size for moving the window.
+##   --r2: Threshold for r^2 to consider SNPs in LD.
+## Use cases: Preprocessing for PCA, reducing multicollinearity in genetic data.
+#################################
+## ARGUMENTS ####################
+## bfile: PLINK binary files prefix (e.g., data)
+## out: Output prefix for results (default: "plink_filtered")
+## window_size: Window size in kilobases (default: 50)
+## window_step: Step size for moving the window (default: 5)
+## r2: r^2 threshold for LD pruning (default: 0.2)
+## threads: Number of threads for parallel processing (default: 1)
+#################################
+## SCRIPT #####################
+
+plink2 \
+    --bfile ${bfile} \
+    --indep-pairwise ${window_size} ${window_step} ${r2} \
+    --threads ${threads} \
+    --out ${out}
+
+# Optional: Create a new dataset with pruned SNPs
+plink2 \
+    --bfile ${bfile} \
+    --extract ${out}.prune.in \
+    --make-bed \
+    --threads ${threads} \
+    --out ${out}_pruned

@@ -1,0 +1,26 @@
+#!/bin/bash
+## Run EAGLE for haplotype phasing
+#################################
+## NOTE #########################
+## EAGLE (Efficient Ancient Genome Likelihood Estimator) is used for haplotype phasing.
+## Common options:
+##   --vcfRef: Reference VCF file for phasing
+##   --vcfTarget: Target VCF file to be phased
+##   --geneticMapFile: Genetic map file
+##   --outPrefix: Output prefix for phased files
+##   --numThreads: Number of threads to use
+##   --allowRefAltSwap: Allow reference/alternate allele swapping if needed
+#################################
+## ARGUMENTS ####################
+## vcfRef: Reference VCF file path
+## vcfTarget: Target VCF file path
+## geneticMapFile: Genetic map file path
+## outPrefix: Output prefix (default="phased")
+## numThreads: Number of threads (default=1)
+## allowRefAltSwap: Allow allele swapping (default="false")
+## SCRIPT #####################
+
+EAGLE \\\n    --vcfRef ${vcfRef} \\\n    --vcfTarget ${vcfTarget} \\\n    --geneticMapFile ${geneticMapFile} \\\n    --outPrefix ${outPrefix} \\\n    --numThreads ${numThreads} \\\n    --allowRefAltSwap ${allowRefAltSwap} \\\n    --vcfOutFormat z
+
+# Index the output VCF if needed
+tabix -p vcf ${outPrefix}.vcf.gz

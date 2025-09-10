@@ -1,0 +1,13 @@
+#!/bin/bash
+## Run fastqc for quality control of next-generation sequencing data using fastq files
+#################################
+## NOTE #########################
+## A .html report (interactive quality summary).
+## A .zip file (containing raw QC data).
+#################################
+## ARGUMENTS ####################
+## -t=4 : threads
+## files=./ : fastq files
+## SCRIPT #####################
+
+fastqc -t 4 ${files}

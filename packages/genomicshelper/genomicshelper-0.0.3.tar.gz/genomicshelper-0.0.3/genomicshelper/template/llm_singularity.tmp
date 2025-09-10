@@ -1,0 +1,31 @@
+#!/bin/bash
+## Run Singularity container commands
+#################################
+## NOTE #########################
+## Singularity is a container platform for high-performance computing.
+## Common commands:
+## - singularity run: Run a container
+## - singularity exec: Execute a command in a container
+## - singularity shell: Start a shell in a container
+## - singularity build: Build a container from a recipe
+## - singularity pull: Pull a container from a registry
+## Options:
+## --bind: Bind host directories to container (e.g., --bind /host/path:/container/path)
+## --nv: Enable NVIDIA GPU support
+## --cleanenv: Clean environment variables
+## --writable: Make container writable (requires sudo)
+#################################
+## ARGUMENTS ####################
+## image: Singularity image file (.sif)
+## command: Command to run inside container (for exec)
+## bind: Directory bindings (optional, default="")
+## SCRIPT #####################
+
+# Example: Run a container
+singularity run ${bind} ${image}
+
+# Example: Execute a specific command
+# singularity exec ${bind} ${image} ${command}
+
+# Example: Start a shell
+# singularity shell ${bind} ${image}

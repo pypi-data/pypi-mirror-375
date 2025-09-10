@@ -1,0 +1,25 @@
+#!/bin/bash
+## Create a set of high LD SNPs using PLINK
+#################################
+## NOTE #########################
+## This script uses PLINK to identify and create a set of SNPs in high linkage disequilibrium.
+## Common options:
+## --indep-pairwise: for LD pruning with window size, step, and r2 threshold
+## --make-set: to create SNP sets from a list
+## Adjust parameters based on data characteristics.
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK binary file prefix
+## out : output prefix
+## window = 50 : window size in SNPs for LD pruning
+## step = 5 : step size for LD pruning
+## r2 = 0.2 : r-squared threshold for LD pruning
+## SCRIPT #####################
+
+# Perform LD pruning to get high LD SNPs
+plink --bfile ${bfile} \
+    --indep-pairwise ${window} ${step} ${r2} \
+    --out ${out}
+
+# Alternatively, create a set from a predefined list if available
+# plink --bfile ${bfile} --make-set high_ld_snps.txt --write-set --out ${out}_set

@@ -1,0 +1,28 @@
+#!/bin/bash
+## Run association test using PLINK2 --glm
+#################################
+## NOTE #########################
+## --glm: performs linear or logistic regression for association testing
+## --allow-no-sex: skip sex check in the analysis
+## --pheno: specify phenotype file with sample phenotypes
+## --covar: specify covariate file for adjustment
+## --out: output prefix for results
+## --threads: number of CPU threads to use
+## For binary traits, use --glm with no additional flags for logistic regression
+## For quantitative traits, --glm performs linear regression by default
+#################################
+## ARGUMENTS ####################
+## bfile: plink bfile prefix (without extension)
+## pheno: phenotype file path
+## covar: covariate file path
+## out: output prefix for results
+## threads: number of threads (default=1)
+## SCRIPT #####################
+
+plink2 \\
+    --bfile ${bfile} \\
+    --glm hide-covar allow-no-sex \\
+    --pheno ${pheno} \\
+    --covar ${covar} \\
+    --threads ${threads} \\
+    --out ${out}

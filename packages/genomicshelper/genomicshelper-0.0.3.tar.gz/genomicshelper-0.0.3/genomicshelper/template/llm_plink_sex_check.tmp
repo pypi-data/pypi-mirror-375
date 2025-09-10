@@ -1,0 +1,13 @@
+#!/bin/bash
+## Check sex of samples using PLINK --check-sex
+#################################
+## NOTE #########################
+## This script runs PLINK's --check-sex command to infer sex based on X chromosome heterozygosity.
+## Outputs a .sexcheck file with columns like FID, IID, PEDSEX, SNPSEX, STATUS.
+#################################
+## ARGUMENTS ####################
+## bfile : PLINK bfile prefix
+## out = "sex_check_results" : output prefix
+#################################
+
+plink --bfile ${bfile} --check-sex --out ${out}
