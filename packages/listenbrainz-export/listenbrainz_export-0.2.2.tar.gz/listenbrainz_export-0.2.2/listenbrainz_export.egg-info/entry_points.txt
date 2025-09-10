@@ -1,0 +1,2 @@
+[console_scripts]
+listenbrainz_export = listenbrainz_export.__main__:main

@@ -1,0 +1,56 @@
+[project]
+name = "listenbrainz_export"
+version = "0.2.2"
+description = "Export your scrobbling history from ListenBrainz"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+keywords = ["music", "scrobble", "data"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = ["click>=8.0", "logzero", "requests"]
+[[project.authors]]
+name = "purarue"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+listenbrainz_export = "listenbrainz_export.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/purarue/listenbrainz_export"
+
+[project.optional-dependencies]
+testing = ["flake8", "mypy"]
+
+[tool.mypy]
+pretty = true
+show_error_context = true
+show_error_codes = true
+check_untyped_defs = true
+namespace_packages = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+
+[tool.pytest.ini_options]
+addopts = []
+
+[tool.setuptools.packages.find]
+include = ["listenbrainz_export"]
+exclude = []

@@ -1,0 +1,7 @@
+click>=8.0
+logzero
+requests
+
+[testing]
+flake8
+mypy
