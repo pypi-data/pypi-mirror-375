@@ -1,0 +1,18 @@
+[project]
+name = "clumpick"
+version = "0.1.0"
+description = "INteractive Visualization Tool for Clustering Alignment"
+authors = [
+    {name = "Avery Guo",email = "avery_guo@brown.edu"}
+]
+license = {text = "MIT License"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests (>=2.32.5,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
