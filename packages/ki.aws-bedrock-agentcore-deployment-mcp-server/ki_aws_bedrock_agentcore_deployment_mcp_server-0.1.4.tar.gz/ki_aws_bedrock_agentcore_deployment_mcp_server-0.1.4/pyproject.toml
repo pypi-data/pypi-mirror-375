@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ki.aws-bedrock-agentcore-deployment-mcp-server"
+version = "0.1.4"
+description = "MCP server for Bedrock AgentCore deployment automation"
+authors = [{name = "Ki", email = "ki@example.com"}]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=0.8.0.dev0",
+    "fastmcp>=0.1.0",
+    "strands-agents>=0.1.0",
+    "strands-agents-tools>=0.1.0",
+    "bedrock-agentcore>=0.1.0",
+    "bedrock-agentcore-starter-toolkit>=0.1.0"
+]
+
+[project.scripts]
+"ki.aws-bedrock-agentcore-deployment-mcp-server" = "ki_aws_bedrock_agentcore_deployment_mcp_server.main:main"
+
+[project.urls]
+Homepage = "https://github.com/ki/ki.aws-bedrock-agentcore-deployment-mcp-server"
+Repository = "https://github.com/ki/ki.aws-bedrock-agentcore-deployment-mcp-server"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
