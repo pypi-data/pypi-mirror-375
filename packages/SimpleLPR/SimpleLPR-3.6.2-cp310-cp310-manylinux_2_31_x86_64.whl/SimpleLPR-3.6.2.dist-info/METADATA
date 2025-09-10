@@ -1,0 +1,523 @@
+Metadata-Version: 2.1
+Name: SimpleLPR
+Version: 3.6.2
+Summary: SimpleLPR License Plate Recognition (LPR/ANPR) library.
+Home-page: https://www.warelogic.com
+Author: Xavier Girones
+Author-email: xavier.girones@warelogic.com
+Keywords: LPR,ANPR,SDK,toolkit,library,component,number plate recognition,license plate recognition,read license plates,read number plates,shareware
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Topic :: Scientific/Engineering :: Image Recognition
+Requires-Python: >=3.8, <3.13
+Description-Content-Type: text/markdown
+
+# SimpleLPR Python
+
+🚗 High-performance license plate recognition for Python developers. Detect and read vehicle license plates from images and video streams with just a few lines of code.
+
+## 🎯 Overview
+
+SimpleLPR brings professional-grade license plate recognition to Python. Whether you're building a parking management system, analyzing traffic patterns, or developing security applications, SimpleLPR handles the complexity of plate detection and OCR so you can focus on your application logic.
+
+Built on over 10  years of continuous development and deployed in thousands of production systems worldwide, SimpleLPR delivers reliable performance with a developer-friendly API.
+
+### ✨ Key Features
+
+- 📊 **High Accuracy**: 85-95% recognition rate under typical conditions
+- ⚡ **Real-time Processing**: Analyze video streams with multi-threaded performance
+- 🌍 **Global Coverage**: Support for ~90 countries with region-specific formats
+- 🔄 **Video Tracking**: Track plates across frames for improved accuracy
+- 🐍 **Pythonic API**: Native Python interface that feels natural
+- 🏭 **Production Ready**: Battle-tested in commercial deployments worldwide
+
+## 📋 What is SimpleLPR?
+
+SimpleLPR is more than just an OCR library - it's a complete license plate recognition system that handles the entire workflow from image acquisition to final text output. The library automatically:
+
+1. **Detects** license plates in complex scenes
+2. **Extracts** the plate region with precise boundaries
+3. **Corrects** perspective and lighting issues
+4. **Reads** alphanumeric characters with high accuracy
+5. **Validates** results against country-specific formats
+6. **Tracks** plates across video frames for consistency
+
+### 🎯 Real-World Performance
+
+SimpleLPR achieves industry-leading accuracy under typical conditions:
+- Plate text height of at least 20 pixels
+- Reasonable image quality without severe motion blur
+- Plates in good physical condition
+- Viewing angles within ±30 degrees
+
+The library has been extensively tested in production environments including:
+- 🅿️ Parking facilities with varying lighting conditions
+- 🛣️ Highway toll collection systems processing thousands of vehicles
+- 🚪 Access control gates with fixed camera positions
+- 📱 Mobile enforcement units with handheld cameras
+- 📹 Traffic monitoring systems with wide-angle views
+
+## 💻 Requirements
+
+- **Python**: 3.8, 3.9, 3.10, 3.11, or 3.12 (64-bit)
+- **OS**: Windows x64, Linux x64 (Ubuntu 20.04+)
+- **Memory**: 2GB RAM minimum, 4GB+ recommended for video
+- **License**: 60-day trial included, production licenses available
+
+## 📦 Installation
+
+```bash
+pip install SimpleLPR
+```
+
+## 🚀 Quick Start
+
+### Basic Image Recognition
+
+```python
+import simplelpr
+
+# Initialize the engine
+setup_params = simplelpr.EngineSetupParms()
+engine = simplelpr.SimpleLPR(setup_params)
+
+# Configure for your country (e.g., UK = 90)
+engine.set_countryWeight(90, 1.0)
+engine.realizeCountryWeights()
+
+# Create a processor
+processor = engine.createProcessor()
+
+# Analyze an image
+candidates = processor.analyze("car_image.jpg")
+
+# Print results
+for candidate in candidates:
+    for match in candidate.matches:
+        print(f"Plate: {match.text}")
+        print(f"Confidence: {match.confidence:.3f}")
+```
+
+### 🌍 Country Configuration
+
+SimpleLPR supports approximately 90 countries. Use `--list-countries` in the demo below to see all options.
+
+Popular countries:
+- 🇦🇹 **Austria**: 5
+- 🇧🇷 **Brazil**: 12  
+- 🇨🇦 **Canada**: 16
+- 🇫🇷 **France**: 32
+- 🇩🇪 **Germany**: 34
+- 🇮🇳 **India**: 41
+- 🇮🇹 **Italy**: 45
+- 🇪🇸 **Spain**: 82
+- 🇬🇧 **UK**: 90
+
+## 🎬 Complete Video Tracking Demo
+
+This demo shows how to process video files or RTSP streams with real-time plate tracking:
+
+```python
+#!/usr/bin/env python3
+"""
+SimpleLPR Video Tracking Demo
+
+Track license plates across video frames with temporal correlation.
+This improves accuracy by reducing transient misreads.
+
+Usage:
+    python tracking_demo.py <video_source> <country_id> [product_key]
+    python tracking_demo.py --list-countries
+
+Examples:
+    python tracking_demo.py traffic.mp4 82
+    python tracking_demo.py rtsp://camera:554/stream 90 license.xml
+"""
+
+import sys
+import os
+import argparse
+import time
+from datetime import datetime
+from collections import deque
+
+try:
+    import simplelpr
+except ImportError:
+    print("❌ Error: SimpleLPR is not installed. Run 'pip install SimpleLPR'")
+    sys.exit(1)
+
+
+def list_supported_countries():
+    """Display all supported countries"""
+    print("\n🌍 SimpleLPR - Supported Countries")
+    print("="*50)
+    
+    setup_params = simplelpr.EngineSetupParms()
+    engine = simplelpr.SimpleLPR(setup_params)
+    
+    # Show version
+    ver = engine.versionNumber
+    print(f"📌 Version: {ver.A}.{ver.B}.{ver.C}.{ver.D}\n")
+    
+    print("ID  : Country")
+    print("-"*30)
+    for i in range(engine.numSupportedCountries):
+        print(f"{i:3d} : {engine.get_countryCode(i)}")
+    
+    print("\n💡 Use either the country name or ID as the country_id parameter.")
+
+
+def configure_country(engine, country_id):
+    """Configure engine for specific country"""
+    # Disable all countries first
+    for i in range(engine.numSupportedCountries):
+        engine.set_countryWeight(i, 0.0)
+    
+    # Try as string first, then as integer
+    country_name = None
+    if isinstance(country_id, str):
+        try:
+            engine.set_countryWeight(country_id, 1.0)
+            country_name = country_id
+        except:
+            # Try as integer
+            try:
+                country_idx = int(country_id)
+                if 0 <= country_idx < engine.numSupportedCountries:
+                    engine.set_countryWeight(country_idx, 1.0)
+                    country_name = engine.get_countryCode(country_idx)
+                else:
+                    raise ValueError(f"Country ID {country_idx} out of range")
+            except ValueError:
+                print(f"\n❌ Error: Invalid country '{country_id}'")
+                print("💡 Run with --list-countries to see valid options")
+                sys.exit(1)
+    else:
+        # Integer country ID
+        engine.set_countryWeight(country_id, 1.0)
+        country_name = engine.get_countryCode(country_id)
+    
+    engine.realizeCountryWeights()
+    return country_name
+
+
+def process_tracker_result(tracker_result, track_count):
+    """Process and display tracker results"""
+    # Process new tracks
+    for track in tracker_result.newTracks:
+        track_count += 1
+        if track.representativeCandidate.matches:
+            match = track.representativeCandidate.matches[0]
+            print(f"🆕 [NEW #{track_count:03d}] {match.text:12} "
+                  f"Country: {match.country} "
+                  f"Confidence: {match.confidence:.3f} "
+                  f"Frame: {track.firstDetectionFrameId}")
+    
+    # Process closed tracks
+    for track in tracker_result.closedTracks:
+        if track.representativeCandidate.matches:
+            match = track.representativeCandidate.matches[0]
+            duration = (track.newestDetectionTimestamp - 
+                       track.firstDetectionTimestamp)
+            frames = (track.newestDetectionFrameId - 
+                     track.firstDetectionFrameId + 1)
+            print(f"✅ [CLOSED] {match.text:12} "
+                  f"Duration: {duration:.1f}s ({frames} frames)")
+    
+    return track_count
+
+
+def process_pending_results(proc_pool, tracker, frame_queue, track_count):
+    """Process all pending results from the pool"""
+    while True:
+        result = proc_pool.pollNextResult(0, simplelpr.TIMEOUT_IMMEDIATE)
+        if result is None:
+            break
+        
+        if frame_queue:
+            orig_frame = frame_queue.popleft()
+            tracker_result = tracker.processFrameCandidates(
+                result, orig_frame
+            )
+            track_count = process_tracker_result(tracker_result, track_count)
+    
+    return track_count
+
+
+def process_video(video_path, country_id, product_key=None):
+    """Main video processing function"""
+    
+    print("\n🚗 SimpleLPR Video Tracking Demo")
+    print("="*50)
+    
+    # Initialize engine
+    setup_params = simplelpr.EngineSetupParms()
+    setup_params.maxConcurrentImageProcessingOps = 0   # Let the ANPR engine decide
+    
+    engine = simplelpr.SimpleLPR(setup_params)
+    
+    # Show version
+    ver = engine.versionNumber
+    print(f"📌 Version: {ver.A}.{ver.B}.{ver.C}.{ver.D}")
+    
+    # Load product key if provided
+    if product_key:
+        try:
+            engine.set_productKey(product_key)
+            print("🔑 Product key loaded")
+        except:
+            print("⚠️  Warning: Failed to load product key")
+    else:
+        print("🔓 Running in evaluation mode")
+    
+    # Configure country
+    country_name = configure_country(engine, country_id)
+    print(f"🌍 Country: {country_name}")
+    
+    # Create processor pool
+    proc_pool = engine.createProcessorPool(3) # 3 processors in the pool
+    proc_pool.plateRegionDetectionEnabled = True
+    
+    # Create tracker
+    tracker_params = simplelpr.PlateCandidateTrackerSetupParms()
+    tracker = engine.createPlateCandidateTracker(tracker_params)
+    print(f"🔄 Tracker: {tracker_params.minTriggerFrameCount} min frames, "
+          f"{tracker_params.maxIdleTimeInSec}s max idle")
+    
+    # Open video
+    print(f"\n📹 Opening: {video_path}")
+    video = engine.openVideoSource(
+        video_path,
+        simplelpr.FrameFormat.FRAME_FORMAT_BGR24,
+        1920, 1080  # Max resolution
+    )
+    
+    if video.state != simplelpr.VideoSourceState.VIDEO_SOURCE_STATE_OPEN:
+        print(f"❌ Error: Failed to open video (state: {video.state})")
+        sys.exit(1)
+    
+    print(f"📡 Type: {'Live stream' if video.isLiveSource else 'Video file'}")
+    print("\n▶️  Processing... Press Ctrl+C to stop\n")
+    
+    # Processing variables
+    frame_queue = deque()
+    frame_count = 0
+    track_count = 0
+    start_time = time.time()
+    
+    try:
+        # Main processing loop
+        while True:
+            # Get next frame
+            frame = video.nextFrame()
+            if frame is None:
+                if video.isLiveSource:
+                    print("🔄 Stream interrupted, reconnecting...")
+                    video.reconnect()
+                    time.sleep(0.1)
+                    continue
+                else:
+                    break  # End of file
+            
+            frame_count += 1
+            frame_queue.append(frame)
+            
+            # Submit for processing
+            success = proc_pool.launchAnalyze(
+                0,  # Stream ID
+                frame.sequenceNumber,
+                simplelpr.TIMEOUT_INFINITE,
+                frame
+            )
+            
+            if not success:
+                frame_queue.pop()
+                continue
+            
+            # Process all available results
+            track_count = process_pending_results(
+                proc_pool, tracker, frame_queue, track_count
+            )
+            
+            # Progress update
+            if frame_count % 100 == 0:
+                elapsed = time.time() - start_time
+                fps = frame_count / elapsed
+                print(f"📊 [Progress] {frame_count} frames @ {fps:.1f} fps")
+        
+        # Process remaining results
+        print("\n⏳ Finalizing...")
+        while proc_pool.ongoingRequestCount_get(0) > 0:
+            result = proc_pool.pollNextResult(0, 100)  # 100ms timeout
+            if result and frame_queue:
+                orig_frame = frame_queue.popleft()
+                tracker_result = tracker.processFrameCandidates(
+                    result, orig_frame
+                )
+                track_count = process_tracker_result(tracker_result, track_count)
+        
+        # Final tracker flush
+        final_result = tracker.flush()
+        for track in final_result.closedTracks:
+            if track.representativeCandidate.matches:
+                match = track.representativeCandidate.matches[0]
+                print(f"📍 [FINAL] {match.text}")
+        
+    except KeyboardInterrupt:
+        print("\n\n⚠️  Stopped by user")
+    
+    # Statistics
+    elapsed = time.time() - start_time
+    print(f"\n{'='*50}")
+    print(f"✅ Processing Complete!")
+    print(f"📊 Frames processed: {frame_count:,}")
+    print(f"🚗 Plates tracked: {track_count}")
+    print(f"⏱️  Processing time: {elapsed:.1f}s")
+    print(f"⚡ Average speed: {frame_count/elapsed:.1f} fps")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="SimpleLPR Video Tracking Demo",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+📝 Examples:
+  %(prog)s traffic.mp4 82              # Spain
+  %(prog)s video.avi France            # Using country name
+  %(prog)s rtsp://camera:554 90 key.xml  # UK with license
+
+💡 Tips:
+  - Use --list-countries to see all supported regions
+  - Country can be specified by name or ID number
+  - RTSP streams will reconnect automatically
+        """
+    )
+    
+    parser.add_argument("video_source", nargs='?',
+                        help="Video file path or RTSP stream URL")
+    parser.add_argument("country_id", nargs='?',
+                        help="Country name (e.g., 'Spain') or ID (0-102)")
+    parser.add_argument("product_key", nargs='?',
+                        help="License key file path (optional)")
+    parser.add_argument("--list-countries", action="store_true",
+                        help="Show all supported countries and exit")
+    
+    args = parser.parse_args()
+    
+    if args.list_countries:
+        list_supported_countries()
+        return
+    
+    if not args.video_source or not args.country_id:
+        parser.print_help()
+        print("\n💡 Tip: Use --list-countries to see supported regions")
+        sys.exit(1)
+    
+    # Process video
+    process_video(args.video_source, args.country_id, args.product_key)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## 🔧 Key Concepts
+
+### 🔄 Processor Pools
+Enable concurrent processing of multiple frames for better throughput:
+```python
+pool = engine.createProcessorPool(3)  # 3 parallel processors
+pool.plateRegionDetectionEnabled = True  # Better accuracy
+```
+
+### 🎯 Plate Tracking
+The tracker correlates detections across frames, eliminating transient misreads:
+```python
+tracker_params = simplelpr.PlateCandidateTrackerSetupParms()
+tracker_params.minTriggerFrameCount = 3  # Frames needed to confirm
+tracker_params.maxIdleTimeInSec = 2.0    # Time before closing track
+tracker = engine.createPlateCandidateTracker(tracker_params)
+```
+
+### 📹 Video Sources
+SimpleLPR handles both files and live streams transparently:
+```python
+# Video file
+video = engine.openVideoSource("traffic.mp4", ...)
+
+# RTSP stream
+video = engine.openVideoSource("rtsp://camera:554/stream", ...)
+
+# Auto-reconnect for streams
+if video.isLiveSource:
+    video.reconnect()
+```
+
+## 🏗️ Architecture
+
+SimpleLPR employs a multi-stage processing pipeline:
+
+1. **🖼️ Image Preprocessing**: Noise reduction, contrast enhancement
+2. **🔍 Plate Detection**: Locate potential plate regions
+3. **📐 Perspective Correction**: Transform skewed plates to frontal view
+4. **✂️ Character Segmentation**: Identify individual character boundaries
+5. **🔤 OCR Recognition**: Classify characters using specialized neural networks
+6. **✅ Format Validation**: Match against country-specific templates
+7. **🔄 Tracking**: Correlate detections across frames for consistency
+
+## 💡 Common Use Cases
+
+### 🅿️ Parking Management
+- Entry/exit gate control
+- Space occupancy monitoring
+- Permit verification
+- Duration tracking
+
+### 🛣️ Toll Collection
+- High-speed highway processing
+- Multi-lane free-flow systems
+- Violation enforcement
+
+### 🚨 Security & Access Control
+- Gated community entry
+- Corporate campus security
+- VIP list verification
+- Visitor management
+
+### 📊 Analytics & Smart City
+- Traffic flow analysis
+- Journey time calculation
+- Congestion monitoring
+- Environmental zone enforcement
+
+## 📚 Documentation
+
+- 📖 **[User Guide](https://www.warelogic.com/doc/SimpleLPR3.pdf)** - Complete documentation
+- 🐍 **[Python API Reference](https://www.warelogic.com/doc/simplelpr_python_api_reference.htm)** - Detailed API docs
+- 🚀 **[Python Quick Start](https://www.warelogic.com/doc/simplelpr_python_quickstart_guide.htm)** - Get started fast
+- 💻 **[GitHub Examples](https://github.com/xgirones/SimpleLPR-samples)** - More sample code
+
+## 🤝 Support
+
+- 📧 **Email**: support@warelogic.com
+- 🌐 **Website**: https://www.warelogic.com
+
+## 📄 License
+
+SimpleLPR is commercial software with a 60-day evaluation period. Production licenses include:
+- ✅ One-time payment - no recurring fees
+- ✅ Unlimited deployments
+- ✅ Royalty-free redistribution
+- ✅ 1 year of updates and support
+
+Contact support@warelogic.com for pricing.
+
+---
+
+*🚗 SimpleLPR - Professional license plate recognition for Python developers*
