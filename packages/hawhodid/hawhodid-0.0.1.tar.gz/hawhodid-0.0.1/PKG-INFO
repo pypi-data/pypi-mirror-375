@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: hawhodid
+Version: 0.0.1
+Summary: Get the user responsible for chnage
+Author-email: Tobias Thiemann <tobithieman@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/Tabisch/hawhodid
+Project-URL: Issues, https://github.com/Tabisch/hawhodid/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# ha-whodid
