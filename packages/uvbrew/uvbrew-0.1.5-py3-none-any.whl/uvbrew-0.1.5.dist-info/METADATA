@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: uvbrew
+Version: 0.1.5
+Summary: create homebrew formulae from a uv package
+Author-email: thewisenerd <thewisenerd@protonmail.com>
+Project-URL: Homepage, https://github.com/thewisenerd/uvbrew
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: click>=8.2.1
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: structlog>=25.4.0
+Dynamic: license-file
+
+uvbrew
+======
+
+create homebrew formulae from a uv package.
+
+uses `uv export --format=pylock.toml` with `--no-dev` as default.
+
+
+## todo
+
+- [ ] improve tests with `project.scripts` instead of `meta.name`
+- [ ] hosting url
