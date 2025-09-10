@@ -1,0 +1,79 @@
+Metadata-Version: 2.3
+Name: pyrfume
+Version: 0.20
+Summary: A validation library for human olfactory psychophysics research.
+License: MIT
+Author: Rick Gerkin
+Author-email: rgerkin@asu.edu
+Requires-Python: >=3.9,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Provides-Extra: optimize
+Requires-Dist: PubChemPy (>=1.0.4,<2.0.0)
+Requires-Dist: dask[bag] (<=2021.3.0) ; extra == "optimize"
+Requires-Dist: datajoint (>0.12)
+Requires-Dist: deap (>=1.3.1,<2.0.0) ; extra == "optimize"
+Requires-Dist: eden-kernel (>=0.3.1348,<0.4.0)
+Requires-Dist: ipykernel (>=5.5.6)
+Requires-Dist: lxml (<=5.1.1)
+Requires-Dist: mordredcommunity (>=2.0.5,<3.0.0)
+Requires-Dist: numpy (>=1.22,<2.0)
+Requires-Dist: pandas (>=1.4)
+Requires-Dist: plotly (>=5.9.0,<6.0.0)
+Requires-Dist: quantities (>=0.13.0,<0.14.0)
+Requires-Dist: rdkit (>=2023.9.3)
+Requires-Dist: requests (>=2.20.0)
+Requires-Dist: scikit-learn (>=0.23.1)
+Requires-Dist: scipy (>=1.8)
+Requires-Dist: sympy (>=1.6)
+Requires-Dist: toml (>=0.10.2,<0.11.0)
+Project-URL: Documentation, https://pyrfume.readthedocs.io
+Project-URL: Homepage, http://pyrfume.org
+Description-Content-Type: text/markdown
+
+# Pyrfume
+
+![Pyrfume logo](https://avatars3.githubusercontent.com/u/34174393?s=200&v=4)
+
+#### `pyrfume` is a python library for olfactory psychophysics research. See "notebooks" for examples of use.
+[![Python package](https://github.com/pyrfume/pyrfume/actions/workflows/pythonpackage.yml/badge.svg)](https://github.com/pyrfume/pyrfume/actions/workflows/pythonpackage.yml)
+[![Travis](https://travis-ci.org/pyrfume/pyrfume.svg?branch=master)](https://travis-ci.org/pyrfume/pyrfume) 
+[![Coverage Status](https://coveralls.io/repos/github/pyrfume/pyrfume/badge.svg?branch=master)](https://coveralls.io/github/pyrfume/pyrfume?branch=master)
+![Zenodo](https://user-images.githubusercontent.com/549787/165869234-79bf95db-0b6c-495c-a1a8-b3db751f3352.png)
+
+
+### Examples:
+```
+# Load data for Snitz et al, 2013 (PLOS Computational Biology)
+import pyrfume
+behavior = pyrfume.load_data('snitz_2013/behavior.csv')
+molecules = pyrfume.load_data('snitz_2013/molecules.csv')
+
+# Load data for Bushdid et al, 2014 (Science)
+import pyrfume
+behavior = pyrfume.load_data('bushdid_2014/behavior.csv')
+molecules = pyrfume.load_data('bushdid_2014/molecules.csv')
+stimuli = pyrfume.load_data('bushdid_2014/stimuli.csv')
+```
+
+### Contributing
+
+Just run `./develop.sh` to get started with developing `pyrfume`.
+
+### [Website](http://pyrfume.org)
+
+### [Data Repository](https://github.com/pyrfume/pyrfume-data)
+
+### [Paper](https://www.biorxiv.org/content/10.1101/2022.09.08.507170)
+
+### [Data Curation Status](http://status.pyrfume.org)
+
+### [Docs](http://docs.pyrfume.org)
+
+*Licensing/Copyright*: Data is provided as-is.  Licensing information for individual datasets is available in the data repository.  Takedown requests for datasets may be directed to admin at pyrfume dot org.  
+
