@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mseep-crawlab-mcp
+Version: 0.7.4
+Summary: Crawlab Model Control Protocol (MCP) - A framework for AI agents
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/crawlab-team/crawlab-mcp-server
+Project-URL: Issues, https://github.com/crawlab-team/crawlab-mcp-server/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/plain
+Requires-Dist: fastapi>=0.95.0
+Requires-Dist: uvicorn>=0.21.1
+Requires-Dist: aiohttp>=3.8.4
+Requires-Dist: python-dotenv>=1.0.0
+
+Package managed by MseeP.ai

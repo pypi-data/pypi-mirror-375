@@ -1,0 +1,83 @@
+[build-system]
+requires = [
+    "setuptools>=42.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-crawlab-mcp"
+version = "0.7.4"
+description = "Crawlab Model Control Protocol (MCP) - A framework for AI agents"
+requires-python = ">=3.8"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "fastapi>=0.95.0",
+    "uvicorn>=0.21.1",
+    "aiohttp>=3.8.4",
+    "python-dotenv>=1.0.0",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/crawlab-team/crawlab-mcp-server"
+Issues = "https://github.com/crawlab-team/crawlab-mcp-server/issues"
+
+[project.scripts]
+crawlab-mcp = "crawlab_mcp.cli:main"
+
+[tool.ruff]
+select = [
+    "E",
+    "F",
+    "I",
+]
+ignore = [
+    "B027",
+    "FBT003",
+    "T201",
+    "D203",
+]
+line-length = 100
+
+[tool.ruff.isort]
+case-sensitive = true
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = [
+    "F401",
+]
+"test_*.py" = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+]
+
+[tool.ruff.mccabe]
+max-complexity = 12
+
+[tool.ruff.lint.extend-per-file-ignores]
+"server.py" = [
+    "E501",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
