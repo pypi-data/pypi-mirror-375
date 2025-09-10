@@ -1,0 +1,215 @@
+import asyncio
+import functools
+import inspect
+import json
+from dataclasses import dataclass
+from typing import Any, Callable, Dict, Optional, Type, TypedDict, Union
+
+from loguru import logger
+from pydantic import BaseModel, ValidationError
+
+from lamina.config import get_hooks
+from lamina.helpers import DecimalEncoder, Lamina
+
+
+@dataclass
+class Request:
+    """Request object passed to decorated handlers.
+
+    Attributes:
+        data: Parsed body or model instance according to schema_in and flags.
+        event: Original AWS Lambda event.
+        context: Lambda context object.
+    """
+
+    data: Union[BaseModel, str]
+    event: Union[Dict[str, Any], bytes, str]
+    context: Optional[Dict[str, Any]]
+    pre_execute_result: Optional[Any] = None
+
+
+class ResponseDict(TypedDict):
+    statusCode: int
+    headers: Dict[str, str]
+    body: str
+
+
+def lamina(
+    schema_in: Optional[Type[BaseModel]] = None,
+    schema_out: Optional[Type[BaseModel]] = None,
+    content_type: Lamina = Lamina.JSON,
+    step_functions: bool = False,
+) -> Callable[[Callable[..., Any]], Callable[..., ResponseDict]]:
+    def decorator(f: Callable[..., Any]) -> Callable[..., ResponseDict]:
+        @functools.wraps(f)
+        def wrapper(
+            event: Dict[str, Any] | bytes | str,
+            context: Optional[Dict[str, Any]],
+            *args: Any,
+            **kwargs: Any,
+        ) -> ResponseDict:
+            if f.__doc__:
+                title = f.__doc__.split("\n")[0].strip()
+            else:
+                # event may not be a dict; guard get
+                path = event.get("path") if isinstance(event, dict) else "unknown"
+                title = f"{f.__name__} for path {path}"
+            logger.info(f"******* {title.upper()} *******")
+            logger.debug(event)
+
+            try:
+                # Load hooks
+                (
+                    pre_parse_hook,
+                    pre_execute_hook,
+                    pos_execute_hook,
+                    pre_response_hook,
+                ) = get_hooks()
+
+                # Run pre-parse hook (may adjust event)
+                if inspect.iscoroutinefunction(pre_parse_hook):
+                    event = asyncio.run(pre_parse_hook(event, context))  # type: ignore[misc]
+                else:
+                    event = pre_parse_hook(event, context)
+
+                # Parse input (after possible pre-parse modification)
+                if schema_in is None:
+                    data = (
+                        event["body"]
+                        if (isinstance(event, dict) and not step_functions)
+                        else event
+                    )
+                else:
+                    request_body = (
+                        json.loads(event["body"])
+                        if (isinstance(event, dict) and not step_functions)
+                        else event
+                    )
+                    data = schema_in(**request_body)
+
+                # Build initial Request and run pre-execute hook
+                request = Request(
+                    data=data,
+                    event=event,
+                    context=context,
+                )
+                if inspect.iscoroutinefunction(pre_execute_hook):
+                    request = asyncio.run(pre_execute_hook(request, event, context))  # type: ignore[misc]
+                else:
+                    request = pre_execute_hook(request, event, context)
+
+                status_code = 200
+
+                headers: Dict[str, str] = {}
+                # check if function is a coroutine
+                if inspect.iscoroutinefunction(f):
+                    response: Any = asyncio.run(f(request))
+                else:
+                    response = f(request)
+
+                # Execute post-execution hook on raw response (before schema_out)
+                if inspect.iscoroutinefunction(pos_execute_hook):
+                    response = asyncio.run(pos_execute_hook(response, request))  # type: ignore[misc]
+                else:
+                    response = pos_execute_hook(response, request)
+
+                if isinstance(response, tuple):
+                    status_code = response[1]
+                    if len(response) == 3:
+                        headers = response[2]
+                    response = response[0]
+
+                try:
+                    body: str | Any = response
+                    if content_type == Lamina.JSON:
+                        if schema_out is None:
+                            body = json.dumps(response, cls=DecimalEncoder)
+                        else:
+                            body = schema_out(**response).model_dump_json(by_alias=True)
+                except Exception as e:
+                    # This is an Internal Server Error
+                    logger.error(f"Error when attempt to serialize response: {e}")
+                    status_code = 500
+                    body = json.dumps(
+                        [
+                            {
+                                "field": (
+                                    schema_out.__name__ if schema_out else "DumpJson"
+                                ),
+                                "message": str(e),
+                            }
+                        ],
+                        cls=DecimalEncoder,
+                    )
+
+                full_headers: Dict[str, str] = {
+                    "Content-Type": content_type.value,
+                }
+                if headers:
+                    full_headers.update(headers)
+
+                # Run pre-response hook just before returning
+                if inspect.iscoroutinefunction(pre_response_hook):
+                    body = asyncio.run(pre_response_hook(body))  # type: ignore[misc]
+                else:
+                    body = pre_response_hook(body)
+
+                return {
+                    "statusCode": status_code,
+                    "headers": full_headers,
+                    "body": body,  # type: ignore[return-value]
+                }
+            except ValidationError as e:
+                messages = [
+                    {
+                        "field": (
+                            error["loc"][0] if error.get("loc") else "ModelValidation"
+                        ),
+                        "message": error["msg"],
+                    }
+                    for error in e.errors()
+                ]
+                logger.error(messages)
+                body = json.dumps(messages)
+                if inspect.iscoroutinefunction(pre_response_hook):
+                    body = asyncio.run(pre_response_hook(body))  # type: ignore[misc]
+                else:
+                    body = pre_response_hook(body)
+                return {
+                    "statusCode": 400,
+                    "body": body,
+                    "content-type": content_type.value,
+                }  # type: ignore[return-value]
+            except (ValueError, TypeError) as e:
+                message = f"Error when attempt to read received event: {event}."
+                logger.error(str(e))
+                body = json.dumps(message)
+                if inspect.iscoroutinefunction(pre_response_hook):
+                    body = asyncio.run(pre_response_hook(body))  # type: ignore[misc]
+                else:
+                    body = pre_response_hook(body)
+                return {
+                    "statusCode": 400,
+                    "body": body,
+                    "headers": {
+                        "Content-Type": content_type.value,
+                    },
+                }
+            except Exception as e:
+                logger.exception(e)
+                body = json.dumps({"error_message": str(e)})
+                if inspect.iscoroutinefunction(pre_response_hook):
+                    body = asyncio.run(pre_response_hook(body))  # type: ignore[misc]
+                else:
+                    body = pre_response_hook(body)
+                return {
+                    "statusCode": 500,
+                    "body": body,
+                    "headers": {
+                        "Content-Type": "application/json; charset=utf-8",
+                    },
+                }
+
+        return wrapper
+
+    return decorator
