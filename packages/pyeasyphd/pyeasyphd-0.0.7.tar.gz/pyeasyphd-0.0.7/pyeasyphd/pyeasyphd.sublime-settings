@@ -1,0 +1,236 @@
+{
+    // config
+    // config path
+    // Must be configured by the user.
+    "path_config": "",
+
+    // figures, templates, bibs
+    "path_bibs": "",
+    "path_figures": "",
+    "path_templates": "",
+
+    // pyeasyphd/bib/core/convert_str_to_str.py
+    "default_additional_field_list": [],
+
+    // pyeasyphd/bib/bibtexparser/middlewares_str_to_str.py
+    "substitute_in_bib": true,
+    "substitute_old_list": [],
+    "substitute_new_list": [],
+
+
+    // pyeasyphd/bib/core/convert_str_to_library.py
+    "is_standardize_bib": true,
+
+    // pyeasyphd/bib/bibtexparser/middlewares_str_to_library.py
+    "is_display_implicit_comments": true,
+
+
+    // pyeasyphd/bib/core/convert_library_to_library.py
+    // "abbr", "zotero", or "save"
+    "choose_abbr_zotero_save": "save",
+
+    // pyeasyphd/bib/bibtexparser/middlewares_library_to_library.py
+    "function_common_again": true,
+    "function_common_again_abbr": true,
+    "function_common_again_zotero": true,
+    "function_common_again_save": true,
+    // "is_sort_entry_fields": false,
+    // "is_sort_blocks": false,
+    // "sort_entries_by_cite_keys": [],
+    // "sort_entries_by_field_keys": ["year", "volume", "number", "month", "pages"],
+    // "sort_entries_by_field_keys_reverse": false,
+
+    // for common
+    "lower_entry_type": true,
+    "lower_entry_field_key": true,
+    "keep_entries_by_cite_keys": [],
+    "update_month_year": true,
+    "update_number_volume": true,
+    "update_pages": true,
+    "update_title": true,
+    "sentence_title_case": true,
+    "generate_entry_cite_keys": false,
+    "full_abbr_article_dict": {},
+    "full_abbr_inproceedings_dict": {},
+    "full_names_in_json": "names_full",
+    "abbr_names_in_json": "names_abbr",
+
+    // special for abbr
+    // abbreviate
+    "full_to_abbr_for_abbr": true,
+    // 0, 1, 2
+    "abbr_index_article_for_abbr": 1,
+    "abbr_index_inproceedings_for_abbr": 2,
+
+    // format doi and url
+    // keep only doi or url
+    "doi_or_url_for_abbr": true,
+    // change doi to url format (https://doi.org/xxx)
+    "doi_to_url_for_abbr": true,
+    // add link to fields
+    "add_link_to_fields_for_abbr": null,
+
+    // keep some fields for abbr
+    // true, false
+    "keep_fields_for_abbr": true,
+    "keep_entry_list_for_abbr": ["article", "inproceedings", "incollection", "misc", "book", "phdthesis", "mastersthesis", "techreport"],
+    "keep_field_list_list_for_abbr": [
+        ["author", "title", "year", "month", "journal", "pages", "volume", "number", "doi", "url", "annotation"],
+        ["author", "title", "year", "month", "booktitle", "pages", "doi", "url", "annotation"],
+        ["author", "title", "year", "month", "booktitle", "pages", "publisher", "doi", "url", "annotation"],
+        ["author", "title", "year", "month", "publisher", "howpublished", "pages", "doi", "url", "annotation"],
+        ["author", "title", "year", "month", "publisher", "edition", "doi", "url", "annotation"],
+        ["author", "title", "year", "month", "type", "school", "address", "pages", "doi", "url", "annotation"],
+        ["author", "title", "year", "month", "type", "school", "address", "pages", "doi", "url", "annotation"],
+        ["author", "title", "year", "month", "type", "institution", "address", "pages", "doi", "url", "annotation"],
+    ],
+
+    // delete fields list for abbr
+    "delete_fields_list_for_abbr": [],
+
+    // replace some fields for abbr
+    "replace_fields_for_abbr": true,
+    "replace_old_field_list_for_abbr": [["publisher"]],
+    "replace_new_field_list_for_abbr": [["howpublished"]],
+    "replace_entry_list_for_abbr": ["misc"],
+    // constrain the number of authors for abbr
+    "maximum_authors_for_abbr": 0,
+
+    // special for zotero
+    // format doi and url
+    "doi_or_url_for_zotero": true,
+
+    // keep some fields for zotero
+    // true, false
+    "keep_fields_for_zotero": true,
+    "keep_entry_list_for_zotero": ["article", "inproceedings", "incollection", "misc", "book", "phdthesis", "mastersthesis", "techreport"],
+    "keep_field_list_list_for_zotero": [
+        ["abstract", "author", "title", "year", "month", "journal", "pages", "volume", "number", "doi", "url", "annotation"],
+        ["abstract", "author", "title", "year", "month", "booktitle", "pages", "doi", "url", "annotation"],
+        ["abstract", "author", "title", "year", "month", "booktitle", "pages", "publisher", "doi", "url", "annotation"],
+        ["abstract", "author", "title", "year", "month", "publisher", "pages", "doi", "url", "annotation"],
+        ["abstract", "author", "title", "year", "month", "publisher", "edition", "doi", "url", "annotation"],
+        ["abstract", "author", "title", "year", "month", "type", "school", "address", "pages", "doi", "url", "annotation"],
+        ["abstract", "author", "title", "year", "month", "type", "school", "address", "pages", "doi", "url", "annotation"],
+        ["abstract", "author", "title", "year", "month", "type", "institution", "address", "pages", "doi", "url", "annotation"],
+    ],
+
+    // delete fields list for zotero
+    "delete_fields_list_for_zotero": [],
+
+    // delete redundant in `journal` or `booktitle`
+    "delete_redundant_in_journal_booktitle": true,
+
+    // title (lower, upper) journal and booktitle
+    "title_journal_booktitle_for_zotero": true,
+
+    // add field 'archive'.
+    "add_archive_for_zotero": true,
+
+    // add field 'journal abbreviation'.
+    "add_journal_abbr_for_zotero": true,
+
+    // special for save
+    // delete fields list for save
+    "delete_fields_list_for_save": [],
+
+
+    // pyeasyphd/bib/core/convert_library_to_str.py
+    "is_standardize_library": false,
+    "empty_entry_cite_keys": false,
+    "add_index_to_entries": false,
+    "entries_necessary": true,
+
+    // pyeasyphd/bib/bibtexparser/middlewares_library_to_str.py
+    "is_sort_entry_fields": true,
+    "is_sort_blocks": true,
+    "sort_entries_by_cite_keys": [],
+    "sort_entries_by_field_keys": ["year", "volume", "number", "month", "pages"],
+    "sort_entries_by_field_keys_reverse": true,
+
+
+    // pyeasyphd/main/pandoc_md_to.py
+    // for pandoc
+    "csl_name": "apa-no-ampersand",
+    // the number of columns in md files
+    "columns_in_md": 120,
+    // display one line reference note
+    "google_connected_paper_scite": true,
+    "display_one_line_reference_note": false,
+    // "fullcite", "cite"
+    "cite_flag_in_tex": "cite",
+
+    // for bib file
+    // pyeasyphd/main/python_writers.py
+    // "abbr.bib", "zotero.bib", "save.bib"
+    "bib_for_abbr_name": "abbr.bib",
+    "bib_for_zotero_name": "zotero.bib",
+    "bib_for_save_name": "save.bib",
+    // "choose_abbr_zotero_save": "save",
+    // choose multiple items ["google", "connected", "scite"]
+    "display_google_connected_scite": ["google", "connected", "scite"],
+    // bib format
+    "bibtex_format_indent": "  ",
+    "bibtex_format_trailing_comma": true,
+    "bibtex_format_block_separator": "",
+
+    // for md file
+    // pyeasyphd/main/python_run_md.py
+    // default is ""
+    "final_output_main_md_name": "",
+    // true, false
+    "delete_temp_generate_md": true,
+    // add reference to markdown files
+    "add_reference_in_md": true,
+    // add bib to markdown files
+    "add_bib_in_md": false,
+    // true, false
+    "replace_cite_to_fullcite_in_md": false,
+    // basic, beauty, complex
+    "replace_by_basic_beauty_complex_in_md": "beauty",
+    // basic, beauty, complex
+    "display_basic_beauty_complex_references_in_md": "beauty",
+
+    // for tex file
+    // pyeasyphd/main/python_run_tex.py
+    // handly preamble
+    "handly_preamble": false,
+
+    // default is ""
+    "final_output_main_tex_name": "",
+    // true, false
+    "run_latex": false,
+    // "pdflatex", "xelatex"
+    "pdflatex_xelatex": "pdflatex",
+    // true, false
+    "delete_run_latex_cache": true,
+    "latex_clean_file_types": [
+        ".aux", ".bbl", ".bcf", ".blg", ".fdb_latexmk", ".fls", ".log", ".out", ".run.xml", ".synctex.gz", ".gz",
+        ".nav", ".snm", ".toc", ".xdv"
+    ],
+
+    // pyeasyphd/tools/python_run_latex_md.py
+    // true, false
+    "generate_html": false,
+
+    // true, false
+    "generate_tex": true,
+
+    // ture, false
+    "shutil_figures": true,
+
+    // for figure, bib, tex, and md
+    "figure_folder_name": "fig", // "" or "figs" or "main"
+    "bib_folder_name": "bib", // "" or "bibs" or "main"
+    "md_folder_name": "md", // "" or "mds" or "main"
+    "tex_folder_name": "tex", // "" or "texes" or "main"
+
+    // for delete original md, tex, and bib files in output folder
+    "delete_original_md_in_output_folder": false,
+    "delete_original_tex_in_output_folder": false,
+    "delete_original_bib_in_output_folder": false,
+
+    // pyeasyphd/pyeasyphd.py
+    // default is the same with the active file
+    "path_output": "",
+}
