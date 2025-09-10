@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package epoch_proto;
+
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/epochlab/epoch_protos/go";
+option java_package = "com.epochlab.epoch_protos";
+option java_outer_classname = "CommonProto";
+option csharp_namespace = "EpochLab.EpochProtos.EpochProto";
+
+// Enum representing different types of dashboard widgets
+enum EpochFolioDashboardWidget {
+  WidgetUnspecified = 0;
+  WidgetCard = 1;
+  WidgetLines = 2;
+  WidgetBar = 3;
+  WidgetDataTable = 4;
+  WidgetXRange = 5;
+  WidgetHistogram = 6;
+  WidgetPie = 7;
+  WidgetHeatMap = 8;
+  WidgetBoxPlot = 9;
+  WidgetArea = 10;
+  WidgetColumn = 11;
+}
+
+// Enum representing different data types for table columns and values
+enum EpochFolioType {
+  TypeUnspecified = 0;
+  TypeString = 1;
+  TypeInteger = 2;
+  TypeDecimal = 3;
+  TypePercent = 4;
+  TypeBoolean = 5;
+  TypeDateTime = 6;
+  TypeDate = 7;
+  TypeDayDuration = 8;
+  TypeMonetary = 9;
+  TypeDuration = 10;
+}
+
+// Generic scalar value that can hold different types of data
+message Scalar {
+  oneof value {
+    double double_value = 1;
+    int64 int64_value = 2;
+    uint64 uint64_value = 3;
+    string string_value = 4;
+    bool bool_value = 5;
+    int64 timestamp_nanos = 6;  // For datetime values
+    google.protobuf.NullValue null_value = 7;  // Explicit null support
+  }
+}
+
+// Array of scalar values for bulk data operations
+message Array {
+  repeated Scalar values = 1;
+}
+
+// Axis types for charts
+enum AxisType {
+  AxisUnspecified = 0;
+  AxisLinear = 1;
+  AxisLogarithmic = 2;
+  AxisDateTime = 3;
+  AxisCategory = 4;
+}

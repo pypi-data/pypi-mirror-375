@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package epoch_proto;
+
+import "common.proto";
+
+option go_package = "github.com/epochlab/epoch_protos/go";
+option java_package = "com.epochlab.epoch_protos";
+option java_outer_classname = "TableDefProto";
+option csharp_namespace = "EpochLab.EpochProtos.EpochProto";
+
+// Column definition for tables
+message ColumnDef {
+  string id = 1;
+  string name = 2;
+  EpochFolioType type = 3;
+}
+
+message TableRow {
+  repeated Scalar values = 1;
+}
+
+message TableData {
+  // Row data - each row contains values in the same order as columns
+  repeated TableRow rows = 1;
+}
+
+message Table {
+  EpochFolioDashboardWidget type = 1;
+  string category = 2;
+  string title = 3;
+  repeated ColumnDef columns = 4;  // schema
+  TableData data = 5;              // rows only
+}
+
+// Card data for dashboard cards
+message CardData {
+  string title = 1;
+  Scalar value = 2;
+  EpochFolioType type = 3;
+  uint64 group = 4;
+}
+
+// Card definition for dashboard
+message CardDef {
+  EpochFolioDashboardWidget type = 1;
+  string category = 2;
+  repeated CardData data = 3;
+  uint64 group_size = 4;
+}

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package epoch_proto;
+
+import "common.proto";
+import "table_def.proto";
+import "chart_def.proto";
+
+option go_package = "github.com/epochlab/epoch_protos/go";
+option java_package = "com.epochlab.epoch_protos";
+option java_outer_classname = "TearSheetProto";
+option csharp_namespace = "EpochLab.EpochProtos.EpochProto";
+
+// Type aliases for easier serialization
+message CardDefList {
+  repeated CardDef cards = 1;
+}
+
+message ChartList {
+  repeated Chart charts = 1;
+}
+
+message TableList {
+  repeated Table tables = 1;
+}
+
+// Tearsheet containing cards, charts, and tables for a specific analysis category
+message TearSheet {
+  CardDefList cards = 1;
+  ChartList charts = 2;
+  TableList tables = 3;
+}
+
+// Complete tearsheet containing all analysis categories as a dictionary
+message FullTearSheet {
+  map<string, TearSheet> categories = 1;
+}

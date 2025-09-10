@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include *.proto
+recursive-include * *.proto
+recursive-include * *.pyi
+global-exclude *.pyc
+global-exclude __pycache__

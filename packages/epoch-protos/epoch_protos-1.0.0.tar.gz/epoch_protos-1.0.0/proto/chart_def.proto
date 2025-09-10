@@ -1,0 +1,169 @@
+syntax = "proto3";
+
+package epoch_proto;
+
+import "common.proto";
+
+option go_package = "github.com/epochlab/epoch_protos/go";
+option java_package = "com.epochlab.epoch_protos";
+option java_outer_classname = "ChartDefProto";
+option csharp_namespace = "EpochLab.EpochProtos.EpochProto";
+
+// Axis definition for charts
+message AxisDef {
+  optional AxisType type = 1;
+  optional string label = 2;
+  repeated string categories = 3;
+}
+
+// Base chart definition
+message ChartDef {
+  string id = 1;
+  string title = 2;
+  EpochFolioDashboardWidget type = 3;
+  string category = 4;
+  optional AxisDef y_axis = 5;
+  optional AxisDef x_axis = 6;
+}
+
+// Straight line definition for reference lines
+message StraightLineDef {
+  string title = 1;
+  Scalar value = 2;
+  bool vertical = 3;
+}
+
+// Band definition for plot bands
+message Band {
+  Scalar from = 1;
+  Scalar to = 2;
+}
+
+// Point definition for line charts
+message Point {
+  Scalar x = 1;
+  Scalar y = 2;
+}
+
+// Line definition for series data
+message Line {
+  repeated Point data = 1;
+  string name = 2;
+  optional string dash_style = 3;
+  optional uint32 line_width = 4;
+}
+
+// Lines chart definition
+message LinesDef {
+  ChartDef chart_def = 1;
+  repeated Line lines = 2;
+  repeated StraightLineDef straight_lines = 3;
+  repeated Band y_plot_bands = 4;
+  repeated Band x_plot_bands = 5;
+  optional Line overlay = 6;
+  bool stacked = 7;
+}
+
+// Heat map point definition
+message HeatMapPoint {
+  Scalar x = 1;
+  Scalar y = 2;
+  Scalar value = 3;
+}
+
+// Heat map chart definition
+message HeatMapDef {
+  ChartDef chart_def = 1;
+  repeated HeatMapPoint points = 2;
+}
+
+// Bar chart definition
+message BarDef {
+  ChartDef chart_def = 1;
+  Array data = 2;
+  repeated StraightLineDef straight_lines = 3;
+  optional uint32 bar_width = 4;
+}
+
+// Histogram chart definition
+message HistogramDef {
+  ChartDef chart_def = 1;
+  Array data = 2;
+  repeated StraightLineDef straight_lines = 3;
+  optional uint32 bins_count = 4;
+}
+
+// Box plot data point
+message BoxPlotDataPoint {
+  double low = 1;
+  double q1 = 2;
+  double median = 3;
+  double q3 = 4;
+  double high = 5;
+}
+
+// Box plot outlier
+message BoxPlotOutlier {
+  uint64 category_index = 1;
+  double value = 2;
+}
+
+// Box plot data container
+message BoxPlotDataPointDef {
+  repeated BoxPlotOutlier outliers = 1;
+  repeated BoxPlotDataPoint points = 2;
+}
+
+// Box plot chart definition
+message BoxPlotDef {
+  ChartDef chart_def = 1;
+  BoxPlotDataPointDef data = 2;
+}
+
+// XRange point definition
+message XRangePoint {
+  Scalar x = 1;
+  Scalar x2 = 2;
+  uint64 y = 3;
+  bool is_long = 4;
+}
+
+// XRange chart definition
+message XRangeDef {
+  ChartDef chart_def = 1;
+  repeated string categories = 2;
+  repeated XRangePoint points = 3;
+}
+
+// Pie chart data point
+message PieData {
+  string name = 1;
+  Scalar y = 2;
+}
+
+// Pie chart data definition
+message PieDataDef {
+  string name = 1;
+  repeated PieData points = 2;
+  string size = 3;
+  optional string inner_size = 4;
+}
+
+// Pie chart definition
+message PieDef {
+  ChartDef chart_def = 1;
+  repeated PieDataDef data = 2;
+}
+
+// Union type for all chart types
+message Chart {
+  oneof chart_type {
+    LinesDef lines_def = 1;
+    HeatMapDef heat_map_def = 2;
+    BarDef bar_def = 3;
+    HistogramDef histogram_def = 4;
+    BoxPlotDef box_plot_def = 5;
+    XRangeDef x_range_def = 6;
+    PieDef pie_def = 7;
+  }
+}
