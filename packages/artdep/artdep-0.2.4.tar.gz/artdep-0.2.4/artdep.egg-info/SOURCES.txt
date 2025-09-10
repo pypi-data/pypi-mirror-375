@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+artdep.egg-info/PKG-INFO
+artdep.egg-info/SOURCES.txt
+artdep.egg-info/dependency_links.txt
+artdep.egg-info/top_level.txt
+matmacore/__init__.py
+matmacore/mol.py
+matmacore/plot.py
+matmacore/utilities.py
