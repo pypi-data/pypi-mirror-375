@@ -1,0 +1,11 @@
+[console_scripts]
+tsh = tshistory.cli:tsh
+
+[httpclient]
+httpclient = tshistory.http.client:httpclient
+
+[tshclass]
+tshclass = tshistory.tsio:timeseries
+
+[tshistory.migrate.Migrator]
+migrator = tshistory.migrate:Migrator
