@@ -1,0 +1,27 @@
+[project]
+name = "pandas-mcp-server-unofficial"
+version = "0.1.0"
+description = "An unofficial, packaged release of Marlon Luo's pandas-mcp-server for easy installation."
+readme = "README.md"
+authors = [
+    { name = "Marlon Luo", email = "marlonluo2018@gmail.com" }
+]
+maintainers = [
+    { name = "Peter Kuik", email = "peter_kuik@epam.com" }
+]
+requires-python = ">=3.8"
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "pandas>=1.0.0"
+]
+
+[project.scripts]
+pandas-mcp = "pandas_mcp_server.server:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["pandas_mcp_server"]
