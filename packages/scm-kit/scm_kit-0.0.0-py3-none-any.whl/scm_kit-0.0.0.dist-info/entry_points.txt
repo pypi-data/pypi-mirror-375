@@ -1,0 +1,3 @@
+[console_scripts]
+scm-format = scm_utils.format:main
+scm-lint = scm_utils.lint:main
