@@ -1,0 +1,79 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyBADA"
+version = "0.1.7"
+authors = [
+  { name="Henrich Glaser-Opitz", email="henrich.glaser-opitz@eurocontrol.int" },
+  { name="Antonio Vivace", email="antonio.vivace@eurocontrol.int" }
+]
+description = "Aircraft performance modelling, trajectory prediction and optimisation, and visualisation with EUROCONTROL's BADA."
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)"
+]
+dependencies = [
+  "scipy>=1.16.1",
+  "numpy>=2.3.2",
+  "pandas>=2.3.2",
+  "simplekml>=1.3.6",
+  "XlsxWriter>=3.2.5",
+  "xarray >=2025.9.0"
+]
+license = { text = "EUPL-1.2" }
+
+# Some additional deps not needed to run the package but to develop on it
+# linter, formatter, to build the docs, ..
+[project.optional-dependencies]
+dev = [
+  "sphinx-rtd-theme==3.0.2",
+  "Sphinx==8.2.3",
+  "pre-commit==4.2.0",
+  "sphinx-gallery==0.19.0",
+  "matplotlib==3.10.6",
+  "folium==0.20.0",
+  "pytest==8.4.2",
+  "build",
+  "twine",
+  "readthedocs-sphinx-search>=0.3.2",
+  "ruff==0.12.12",
+  ]
+
+[project.urls]
+"Homepage" = "https://github.com/eurocontrol-bada/pybada"
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff]
+target-version = 'py312'
+line-length = 79
+exclude = [
+  ".git",
+  ".hg",
+  ".mypy_cache",
+  ".tox",
+  ".venv",
+  "_build",
+  "buck-out",
+  "docs",
+  "dist",
+]
+
+[tool.ruff.lint]
+# select = ["E", "F401", "W", "C90", "B", "UP", "SIM", "I"]
+select = ["E", "F401", "W", "I"]
+ignore = ["E501"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pyBADA"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/aircraft/BADA3/DUMMY" = "pyBADA/aircraft/BADA3/DUMMY"
+"src/aircraft/BADA4/DUMMY" = "pyBADA/aircraft/BADA4/DUMMY"
+"src/aircraft/BADAH/DUMMY" = "pyBADA/aircraft/BADAH/DUMMY"
+"src/data" = "pyBADA/data"
