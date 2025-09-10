@@ -1,0 +1,3 @@
+[console_scripts]
+datascribe_cli = datascribe_api.cli:app
+
