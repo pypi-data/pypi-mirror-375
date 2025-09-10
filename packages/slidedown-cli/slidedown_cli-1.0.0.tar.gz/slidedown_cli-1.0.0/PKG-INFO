@@ -1,0 +1,211 @@
+Metadata-Version: 2.4
+Name: slidedown-cli
+Version: 1.0.0
+Summary: A terminal-based presentation application
+Author-email: mr <madushankarajapaksha999@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/MadushankaRajapaksha/slidedown
+Project-URL: Repository, https://github.com/MadushankaRajapaksha/slidedown
+Project-URL: Issues, https://github.com/MadushankaRajapaksha/slidedown/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: textual>=0.41.0
+
+# SlideDown Documentation
+
+## Table of Contents
+- [SlideDown Documentation](#slidedown-documentation)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Installation](#installation)
+  - [Getting Started](#getting-started)
+  - [User Guide](#user-guide)
+    - [Home Screen](#home-screen)
+    - [Creating a New Presentation](#creating-a-new-presentation)
+    - [Editing a Presentation](#editing-a-presentation)
+    - [Viewing a Presentation](#viewing-a-presentation)
+    - [Playing a Presentation](#playing-a-presentation)
+    - [Keyboard Shortcuts](#keyboard-shortcuts)
+      - [Global Shortcuts](#global-shortcuts)
+      - [Home Screen](#home-screen-1)
+      - [Editor Screen](#editor-screen)
+      - [Presentation Viewer](#presentation-viewer)
+      - [Play Mode](#play-mode)
+  - [Features](#features)
+  - [Troubleshooting](#troubleshooting)
+    - [Common Issues](#common-issues)
+    - [Getting Help](#getting-help)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+## Introduction
+
+SlideDown is a terminal-based presentation application built with Python and the Textual framework. It allows you to create, edit, and view Markdown-based presentations directly from your terminal. With SlideDown, you can quickly create professional-looking presentations without leaving the comfort of your command line.
+
+## Installation
+
+To install SlideDown, you can use pip:
+
+```bash
+pip install slidedown
+```
+
+Alternatively, you can clone the repository and install it manually:
+
+```bash
+git clone https://github.com/yourusername/slidedown.git
+cd slidedown
+pip install -e .
+```
+
+## Getting Started
+
+Once SlideDown is installed, you can start the application by running:
+
+```bash
+slidedown
+```
+
+This will launch the SlideDown interface in your terminal, where you can begin creating and managing your presentations.
+
+## User Guide
+
+### Home Screen
+
+The home screen is the main interface of SlideDown. It consists of two main sections:
+
+1. **Sidebar**: Contains navigation options including:
+   - Open File
+   - New Presentation
+   - Edit Project
+   - Help
+   - Quit
+
+2. **Main Content Area**: Displays your recent presentations in a grid layout. If you don't have any presentations yet, it will show a message with a button to create your first presentation.
+
+### Creating a New Presentation
+
+To create a new presentation:
+
+1. From the home screen, select "New Presentation" from the sidebar or press `n`.
+2. Fill in the project name and file path fields.
+3. Click "Save & Edit" to create the presentation and open it in the editor.
+4. Your presentation will be created with a basic template that you can customize.
+
+### Editing a Presentation
+
+To edit an existing presentation:
+
+1. From the home screen, click on the "✏️" button on any presentation card.
+2. Alternatively, you can select "Edit Project" from the sidebar or press `e` to edit the most recent project.
+3. Make your changes in the editor.
+4. Click "💾 Save" to save your changes or "❌ Cancel" to discard them.
+
+The editor supports all standard Markdown formatting for your slides. Use `---` on a new line to separate slides.
+
+### Viewing a Presentation
+
+To view a presentation:
+
+1. From the home screen, click on any presentation card or click the "Open" button on a card.
+2. Alternatively, you can select "Open File" from the sidebar or press `o` to browse for a file.
+3. The presentation viewer will open, showing your slides in a sidebar and the current slide in the main area.
+4. Use the navigation buttons or keyboard shortcuts to move between slides.
+
+### Playing a Presentation
+
+To play a presentation in full-screen mode:
+
+1. Open a presentation in the viewer.
+2. Click the "Play" button or press `p`.
+3. The presentation will open in full-screen mode.
+4. Use the left and right arrow keys to navigate between slides.
+5. Press `Escape` to exit play mode.
+
+### Keyboard Shortcuts
+
+SlideDown provides several keyboard shortcuts to improve your workflow:
+
+#### Global Shortcuts
+- `Ctrl+Q`: Quit the application
+
+#### Home Screen
+- `O`: Open file
+- `Q`: Quit application
+- `N`: Create new presentation
+- `E`: Edit most recent project
+
+#### Editor Screen
+- `Escape`: Cancel editing
+- `Ctrl+S`: Save changes
+
+#### Presentation Viewer
+- `Escape`: Back to home screen
+- `Left`: Previous slide
+- `Right`: Next slide
+- `P`: Play presentation
+- `E`: Edit presentation
+
+#### Play Mode
+- `Escape`: Exit play mode
+- `Left`: Previous slide
+- `Right`: Next slide
+
+## Features
+
+- **Markdown-based**: Create presentations using simple Markdown syntax.
+- **Terminal-based**: No need for a GUI; works entirely in your terminal.
+- **Recent Projects**: Quick access to your recent presentations.
+- **Built-in Editor**: Edit your presentations without leaving the application.
+- **Presentation Mode**: View your presentations in a distraction-free full-screen mode.
+- **Keyboard Navigation**: Efficient keyboard shortcuts for all common actions.
+- **File Browser**: Built-in file browser to open existing presentations.
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Error: 'NoneType' object is not callable**
+   - This usually occurs when the application is not properly initialized. Make sure you're running the application with the correct command: `slidedown`
+
+2. **Duplicate Widget ID Error**
+   - This can happen when updating project widgets. The application has been fixed to prevent this issue by ensuring unique IDs for all widgets.
+
+3. **File Not Found Errors**
+   - Make sure the file path you're trying to access exists and is readable.
+   - Check that you have the necessary permissions to access the file.
+
+4. **CSS Parsing Errors**
+   - The application uses a custom CSS-like syntax for styling. Some CSS properties might not be supported. The application has been tested with the included CSS, but custom modifications might cause errors.
+
+### Getting Help
+
+If you encounter any issues not covered here, please:
+
+1. Check the [Issues](https://github.com/yourusername/slidedown/issues) page on GitHub to see if the problem has already been reported.
+2. If not, create a new issue with a detailed description of the problem, including any error messages and steps to reproduce the issue.
+
+## Contributing
+
+We welcome contributions to SlideDown! If you'd like to contribute:
+
+1. Fork the repository on GitHub.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and test them thoroughly.
+4. Submit a pull request with a clear description of your changes.
+
+Please ensure that your code follows the existing style and includes appropriate tests.
+
+## License
+
+SlideDown is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.

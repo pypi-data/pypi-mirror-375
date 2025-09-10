@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "slidedown-cli"
+version = "1.0.0"
+description = "A terminal-based presentation application"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "mr", email = "madushankarajapaksha999@gmail.com"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "textual>=0.41.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/MadushankaRajapaksha/slidedown"
+Repository = "https://github.com/MadushankaRajapaksha/slidedown"
+Issues = "https://github.com/MadushankaRajapaksha/slidedown/issues"
+
+[project.scripts]
+slidedown-cli = "slidedown.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["slidedown*"]
+exclude = ["tests*"]
