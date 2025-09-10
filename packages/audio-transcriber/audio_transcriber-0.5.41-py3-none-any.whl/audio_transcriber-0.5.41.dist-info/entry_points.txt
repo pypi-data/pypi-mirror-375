@@ -1,0 +1,3 @@
+[console_scripts]
+audio-transcriber = audio_transcriber.audio_transcriber:main
+audio-transcriber-mcp = audio_transcriber.audio_transcriber_mcp:main
