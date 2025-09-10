@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Report</title>
+    <style>
+        body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: 20px auto; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .header { background-color: #007bff; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 20px; }
+        .footer { background-color: #f4f4f4; color: #666; padding: 15px; text-align: center; font-size: 12px; border-top: 1px solid #ddd; }
+        h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-top: 30px; }
+        details { border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
+        summary { padding: 10px; font-weight: bold; cursor: pointer; background-color: #f9f9f9; }
+        .details-content { padding: 15px; border-top: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Stock & Mutual Fund Analysis Report</h1>
+            <p>{{ report_date }}</p>
+        </div>
+        <div class="content">
+            <h2>Stock Analysis</h2>
+            {% for result in analysis.stock_results %}
+            <details>
+                <summary>{{ result.symbol }} - {{ result.metadata.info.name }}</summary>
+                <div class="details-content">
+                    <table>
+                        <tr><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Latest Price</td><td>{{ result.technical_indicators.latest_price|round(2) if result.technical_indicators.latest_price is not none else 'N/A' }}</td></tr>
+                        <tr><td>P/E Ratio</td><td>{{ result.fundamental_metrics.pe_ratio|round(2) if result.fundamental_metrics.pe_ratio is not none else 'N/A' }}</td></tr>
+                        <tr><td>52 Week High</td><td>{{ result.fundamental_metrics.fifty_two_week_high|round(2) if result.fundamental_metrics.fifty_two_week_high is not none else 'N/A' }}</td></tr>
+                        <tr><td>52 Week Low</td><td>{{ result.fundamental_metrics.fifty_two_week_low|round(2) if result.fundamental_metrics.fifty_two_week_low is not none else 'N/A' }}</td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No stock data available.</p>
+            {% endfor %}
+
+            <h2>Mutual Fund Analysis</h2>
+            {% for summary in analysis.mutual_fund_summaries %}
+            <details>
+                <summary>{{ summary.name }}</summary>
+                <div class="details-content">
+                    <table>
+                        <tr><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Latest NAV</td><td>{{ summary.latest_nav }} as on {{ summary.nav_date }}</td></tr>
+                        <tr><td>1Y CAGR</td><td>{{ summary.cagr_1y|default('N/A', true) }}%</td></tr>
+                        <tr><td>3Y CAGR</td><td>{{ summary.cagr_3y|default('N/A', true) }}%</td></tr>
+                        <tr><td>5Y CAGR</td><td>{{ summary.cagr_5y|default('N/A', true) }}%</td></tr>
+                        <tr><td>Expense Ratio</td><td>{{ summary.expense_ratio }}%</td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No mutual fund data available.</p>
+            {% endfor %}
+        </div>
+        <div class="footer">
+            <p>&copy; {{ report_date[:4] }} Stock Analysis Toolkit. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
