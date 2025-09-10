@@ -1,0 +1,4 @@
+django>=3.2
+
+[:python_version < "3.13"]
+typing_extensions>=4.12.0
