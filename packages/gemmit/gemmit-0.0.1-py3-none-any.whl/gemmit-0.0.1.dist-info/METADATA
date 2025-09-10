@@ -1,0 +1,52 @@
+Metadata-Version: 2.3
+Name: gemmit
+Version: 0.0.1
+Summary: AI-powered Conventional Commit generator using Gemini
+License: MIT
+Author: Md Romjan Ali
+Author-email: romjanvr5@gmail.com
+Requires-Python: >=3.9
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Description-Content-Type: text/markdown
+
+# 💎 Gemmit
+
+> **Gem**ini + Com**mit** = **Gemmit**
+>
+> AI-powered conventional commit messages using Google's Gemini
+
+[![PyPI version](https://badge.fury.io/py/gemmit.svg)](https://badge.fury.io/py/gemmit)
+
+Gemmit uses Google's Gemini AI to generate professional, conventional commit messages from your staged changes. Say goodbye to "fix stuff" and "wip" commits!
+
+## ✨ Features
+
+- 🤖 **AI-powered**: Uses Google's Gemini for intelligent commit messages
+- 📏 **Conventional**: Follows [Conventional Commits](https://conventionalcommits.org/) specification
+- ⚡ **Fast**: Gemini Flash model for quick generation
+- 🎯 **Interactive**: Review, edit, or regenerate messages
+- 🚀 **Auto-commit**: Skip confirmation with `-y` flag
+- 🔧 **Customizable**: Multiple models and configuration options
+
+## 🚀 Quick Start
+
+```bash
+# Install
+pip install gemmit
+
+# Get API key from Google AI Studio
+export GEMINI_API_KEY='your-api-key'
+
+# Stage your changes
+git add .
+
+# Generate and commit
+gemmit
+```
+
