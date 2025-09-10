@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "telegram-grpc-dispatch"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "elastic-apm",
+    "grpcio",
+    "grpcio-health-checking",
+    "grpcio-tools",
+    "protobuf",
+    "requests"
+]
+
+[project.scripts]
+tg-notifier = "telegram_notifier.tg_notifier:tg_notifier"
+tg-notifier-healthcheck = "telegram_notifier.tg_notifier_healthcheck:tg_notifier_healthcheck"

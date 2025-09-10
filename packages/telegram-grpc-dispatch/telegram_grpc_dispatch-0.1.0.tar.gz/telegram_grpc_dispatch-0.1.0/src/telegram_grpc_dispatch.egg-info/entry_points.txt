@@ -1,0 +1,3 @@
+[console_scripts]
+tg-notifier = telegram_notifier.tg_notifier:tg_notifier
+tg-notifier-healthcheck = telegram_notifier.tg_notifier_healthcheck:tg_notifier_healthcheck
