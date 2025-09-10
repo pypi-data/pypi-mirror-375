@@ -1,0 +1,32 @@
+[project]
+name = "mseep-mcp-tavily-proxy"
+version = "0.1.4"
+description = "Tavily MCP Server with HTTP/HTTPS Proxy Support"
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "tavily-python",
+    "mcp",
+    "pydantic",
+]
+requires-python = ">=3.8"
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.scripts]
+mcp-tavily-proxy = "mcp_server_tavily.__main__:main"
+
+[build-system]
+requires = [
+    "pdm-backend",
+]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+package-dir = "src"
