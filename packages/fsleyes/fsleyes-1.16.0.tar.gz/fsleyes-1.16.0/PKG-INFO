@@ -1,0 +1,172 @@
+Metadata-Version: 2.4
+Name: fsleyes
+Version: 1.16.0
+Summary: FSLeyes, the FSL image viewer
+Author-email: Paul McCarthy <pauldmccarthy@gmail.com>
+License: Apache License Version 2.0
+Project-URL: Repository, https://git.fmrib.ox.ac.uk/fsl/fsleyes/fsleyes/
+Project-URL: User documentation, https://open.win.ox.ac.uk/pages/fsl/fsleyes/fsleyes/userdoc/
+Project-URL: API documentation, https://open.win.ox.ac.uk/pages/fsl/fsleyes/fsleyes/apidoc/
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires-Python: >=3.9
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: jinja2>=2
+Requires-Dist: pillow>=3.2.0
+Requires-Dist: pyopengl>=3.1.0
+Requires-Dist: fsleyes-props>=1.12
+Requires-Dist: fsleyes-widgets>=0.15
+Requires-Dist: fslpy>=3.22
+Requires-Dist: matplotlib>=3.5
+Requires-Dist: nibabel>=2.3
+Requires-Dist: numpy>=1.14
+Requires-Dist: pyparsing>=2
+Requires-Dist: scipy>=0.18
+Requires-Dist: wxpython>=4
+Provides-Extra: darwin
+Requires-Dist: appnope==0.1.*; extra == "darwin"
+Provides-Extra: extra
+Requires-Dist: file-tree; extra == "extra"
+Requires-Dist: file-tree-fsl; extra == "extra"
+Requires-Dist: indexed_gzip>=0.7.0; extra == "extra"
+Requires-Dist: ipykernel>=4.8; extra == "extra"
+Requires-Dist: ipython>=5; extra == "extra"
+Requires-Dist: jupyter_client>=5.3.1; extra == "extra"
+Requires-Dist: nbclassic; extra == "extra"
+Requires-Dist: pyzmq>=17.0; extra == "extra"
+Requires-Dist: rtree>=0.8.3; extra == "extra"
+Requires-Dist: tornado>=5.0; extra == "extra"
+Requires-Dist: trimesh>=2.37.29; extra == "extra"
+Requires-Dist: wxnatpy>=0.4.0; extra == "extra"
+Requires-Dist: xnat>=0.3.3; extra == "extra"
+Provides-Extra: doc
+Requires-Dist: sphinx; extra == "doc"
+Requires-Dist: sphinx-rtd-theme; extra == "doc"
+Requires-Dist: sphinx-rtd-dark-mode; extra == "doc"
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: coverage; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: tomli; python_version < "3.11" and extra == "test"
+Provides-Extra: style
+Requires-Dist: pylint; extra == "style"
+Requires-Dist: flake8; extra == "style"
+Dynamic: license-file
+
+FSLeyes
+=======
+
+.. image:: https://img.shields.io/pypi/v/fsleyes.svg
+   :target: https://pypi.python.org/pypi/fsleyes/
+
+.. image:: https://anaconda.org/conda-forge/fsleyes/badges/version.svg
+   :target: https://anaconda.org/conda-forge/fsleyes
+
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.1470761.svg
+   :target: https://doi.org/10.5281/zenodo.1470761
+
+.. image:: https://git.fmrib.ox.ac.uk/fsl/fsleyes/fsleyes/badges/master/coverage.svg
+   :target: https://git.fmrib.ox.ac.uk/fsl/fsleyes/fsleyes/commits/master/
+
+
+`FSLeyes <https://git.fmrib.ox.ac.uk/fsl/fsleyes/fsleyes>`_ is the `FSL
+<https://fsl.fmrib.ox.ac.uk/fsl/docs/>`_ image viewer.
+
+
+Installation
+------------
+
+
+FSLeyes is a GUI application written in Python, and built on `wxPython
+<https://www.wxpython.org>`_. FSLeyes requires OpenGL for visualisation.
+
+
+In the majority of cases, you should be able to follow the installation
+instructions outlined at the FSLeyes home page:
+
+https://fsl.fmrib.ox.ac.uk/fsl/docs/#/utilities/fsleyes
+
+
+Dependencies
+------------
+
+
+All of the dependencies of FSLeyes are listed in `pyproject.toml
+<pyproject.toml>`_.
+
+Being an OpenGL application, FSLeyes can only be used on computers with
+graphics hardware (or a software GL renderer) that supports one of the
+following versions:
+
+- OpenGL 3.3
+
+- OpenGL 2.1, with the following extensions:
+
+  - ``EXT_framebuffer_object``
+  - ``ARB_instanced_arrays``
+  - ``ARB_draw_instanced``
+
+- OpenGL 1.4, with the following extensions:
+
+  - ``ARB_vertex_program``
+  - ``ARB_fragment_program``
+  - ``EXT_framebuffer_object``
+  - ``GL_ARB_texture_non_power_of_two``
+
+
+Documentation
+-------------
+
+The FSLeyes user and API documentation are hosted at:
+
+ - https://open.win.ox.ac.uk/pages/fsl/fsleyes/fsleyes/userdoc/
+ - https://open.win.ox.ac.uk/pages/fsl/fsleyes/fsleyes/apidoc/
+
+
+The FSLeyes user and API documentation is written in ReStructuredText, and can
+be built using `sphinx <http://www.sphinx-doc.org/>`_::
+
+    pip install -e ".[doc]"
+    sphinx-build userdoc userdoc/html
+    sphinx-build apidoc  apidoc/html
+
+The documentation will be generated and saved in ``userdoc/html/`` and
+``apidoc/html/``.
+
+
+Credits
+-------
+
+
+Some of the FSLeyes icons are derived from the Freeline icon set, by Enes Dal,
+available at https://www.iconfinder.com/Enesdal, and released under the
+Creative Commons (Attribution 3.0 Unported) license.
+
+The volumetric spline interpolation routine uses code from:
+
+  Daniel Ruijters and Philippe Thévenaz,
+  GPU Prefilter for Accurate Cubic B-Spline Interpolation,
+  The Computer Journal, vol. 55, no. 1, pp. 15-20, January 2012.
+  http://dannyruijters.nl/docs/cudaPrefilter3.pdf
+
+The GLSL parser is based on code by Nicolas P . Rougier, available at
+https://github.com/rougier/glsl-parser, and released under the BSD license.
+
+DICOM to NIFTI conversion is performed with Chris Rorden's dcm2niix
+(https://github.com/rordenlab/dcm2niix).
+
+The *brain_colours* colour maps were produced and provided by Cyril Pernet
+(https://doi.org/10.1111/ejn.14430).
+
+The data files used in the FSLeyes ``tractogram`` unit tests are from the
+`DIPY <https://dipy.org/>`_ example data sets
+(``dipy.data.fetch_stanford_hardi``).
