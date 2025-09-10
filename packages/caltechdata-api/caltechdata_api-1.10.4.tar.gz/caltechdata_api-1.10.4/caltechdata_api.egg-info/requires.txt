@@ -1,0 +1,7 @@
+requests
+datacite>1.1.0
+tqdm>=4.62.3
+pyyaml
+s3fs
+cryptography
+s3cmd
