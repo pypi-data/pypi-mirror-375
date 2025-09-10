@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: gj_unitrad
+Version: 0.1.35
+Summary: unitrad打包
+Author: yanli
+Author-email: 1498046515@qq.com
+Requires-Python: >3.9
+Description-Content-Type: text/markdown
+
+新增日志保存功能和结果保存功能（position，trades）
