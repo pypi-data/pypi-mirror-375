@@ -1,0 +1,2 @@
+[console_scripts]
+eida-consistency = eida_consistency.cli:cli
