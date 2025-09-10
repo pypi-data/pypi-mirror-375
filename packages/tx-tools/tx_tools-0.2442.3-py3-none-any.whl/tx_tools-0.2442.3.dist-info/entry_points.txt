@@ -1,0 +1,3 @@
+[console_scripts]
+tx_make = maker.main:main
+tx_themes = themes.main:main
