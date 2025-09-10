@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: mseep-prefect-mcp-server
+Version: 1.1.6
+Summary: MCP server for interacting with the Prefect API
+Project-URL: Homepage, https://github.com/fortunto2/prefect-mcp-server
+Project-URL: Repository, https://github.com/fortunto2/prefect-mcp-server
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Requires-Dist: httpx>=0.24.0
+Requires-Dist: mcp[cli]
+Requires-Dist: prefect>=3.0.0
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
