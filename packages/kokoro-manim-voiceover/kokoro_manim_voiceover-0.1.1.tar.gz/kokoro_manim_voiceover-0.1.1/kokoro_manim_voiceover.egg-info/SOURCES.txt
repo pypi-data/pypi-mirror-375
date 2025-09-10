@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+kokoro_manim_voiceover.egg-info/PKG-INFO
+kokoro_manim_voiceover.egg-info/SOURCES.txt
+kokoro_manim_voiceover.egg-info/dependency_links.txt
+kokoro_manim_voiceover.egg-info/entry_points.txt
+kokoro_manim_voiceover.egg-info/requires.txt
+kokoro_manim_voiceover.egg-info/top_level.txt
+kokoro_mv/__init__.py
+kokoro_mv/koko.py
+kokoro_mv/setup.py
