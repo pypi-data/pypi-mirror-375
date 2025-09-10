@@ -1,0 +1,2 @@
+[console_scripts]
+chess-mcp = chess_mcp.main:run_server
