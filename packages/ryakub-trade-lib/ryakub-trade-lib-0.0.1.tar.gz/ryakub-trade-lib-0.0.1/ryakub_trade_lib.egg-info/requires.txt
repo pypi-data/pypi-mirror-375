@@ -1,0 +1,4 @@
+requests>=2.32.5
+pyarrow==21.0.0
+boto3==1.40.22
+pandas==2.3.2
