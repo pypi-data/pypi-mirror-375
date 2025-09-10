@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/listofdicts/__init__.py
+src/listofdicts/listofdicts.py
+src/listofdicts.egg-info/PKG-INFO
+src/listofdicts.egg-info/SOURCES.txt
+src/listofdicts.egg-info/dependency_links.txt
+src/listofdicts.egg-info/requires.txt
+src/listofdicts.egg-info/top_level.txt
+tests/test_lod_filter.py
+tests/test_lod_initialize.py
+tests/test_lod_integrations.py
+tests/test_lod_neg_indexes.py
+tests/test_lod_reporting.py
+tests/test_lod_sort.py
+tests/test_lod_usage.py
