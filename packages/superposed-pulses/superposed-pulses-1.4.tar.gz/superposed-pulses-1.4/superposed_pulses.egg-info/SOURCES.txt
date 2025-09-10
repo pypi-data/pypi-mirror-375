@@ -1,0 +1,15 @@
+LICENSE
+README.md
+setup.py
+superposed_pulses.egg-info/PKG-INFO
+superposed_pulses.egg-info/SOURCES.txt
+superposed_pulses.egg-info/dependency_links.txt
+superposed_pulses.egg-info/not-zip-safe
+superposed_pulses.egg-info/requires.txt
+superposed_pulses.egg-info/top_level.txt
+superposedpulses/__init__.py
+superposedpulses/example.py
+superposedpulses/forcing.py
+superposedpulses/point_model.py
+superposedpulses/pulse_shape.py
+superposedpulses/two_point_forcing.py
