@@ -1,0 +1,3 @@
+defaults = dict(
+    theme = 'lightbulb',
+)
