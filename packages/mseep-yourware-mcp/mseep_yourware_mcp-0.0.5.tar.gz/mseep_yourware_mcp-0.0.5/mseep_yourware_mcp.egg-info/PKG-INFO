@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: mseep-yourware-mcp
+Version: 0.0.5
+Summary: yourware mcp server
+Author-email: mseep <support@skydeck.ai>
+Project-URL: Homepage, https://ai-zerolab.github.io/yourware-mcp/
+Project-URL: Repository, https://github.com/ai-zerolab/yourware-mcp
+Project-URL: Documentation, https://ai-zerolab.github.io/yourware-mcp/
+Keywords: python
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: <4.0,>=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: loguru>=0.7.3
+Requires-Dist: mcp[cli]>=1.6.0
+Requires-Dist: pydantic>=2.11.1
+Requires-Dist: typer>=0.15.2
+Dynamic: license-file
+
+Package managed by MseeP.ai
