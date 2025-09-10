@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mseep-weather
+Version: 0.1.7
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]>=1.2.0
+Requires-Dist: requests>=2.32.3
+
+Package managed by MseeP.ai
