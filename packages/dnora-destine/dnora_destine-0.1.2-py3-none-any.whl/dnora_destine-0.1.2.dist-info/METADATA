@@ -1,0 +1,88 @@
+Metadata-Version: 2.4
+Name: dnora-destine
+Version: 0.1.2
+Summary: Add-on to dnora: Access to DestinE weather products
+Author-email: Konstantinos Christakos <konstantinosc@met.no>, Jan-Victor Björkqvist <janvb@met.no>
+License: MIT License
+        
+        Copyright (c) 2025 MET-OM: software for Oceanography and Marine Meteorology 
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: homepage, https://github.com/MET-OM/dnora-destine
+Project-URL: download, https://github.com/MET-OM/dnora-destine
+Requires-Python: <3.11,>=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: dnora>=2.0.4
+Requires-Dist: polytope-client
+Requires-Dist: cfgrib
+Requires-Dist: eccodes==2.41.0
+Provides-Extra: test
+Requires-Dist: pytest>=7.0; extra == "test"
+Dynamic: license-file
+
+# dnora-destine
+Add-on to dnora: Access to DestinE weather products
+
+# Quick Installation
+
+```shell
+$ conda create -n dnora_destine python=3.9
+$ conda activate dnora_destine
+$ python -m pip install dnora-destine 
+```
+
+# Minimal example
+
+Download boundary spectra (JONSWAP spectra determined from parameters), wind and ice. Write output files for WAVEWATCH III.
+
+```python
+import dnora as dn
+import dnora_destine as dnd
+
+grid = dn.grid.EMODNET(
+    lon=(5.65, 6.05),
+    lat=(68.00, 69.55),
+    name="SmallTestDomain",
+)
+grid.set_spacing(dm=1000)
+grid.import_topo()
+grid.mesh_grid()
+grid.set_boundary_points(dn.grid.mask.Edges(edges=["N", "W", "S", "E"]))
+
+# Data is not saved, so update dates to be close to todays date
+model = dnd.modelrun.ECMWF(grid, year=2025, month=8, day=26)
+model.import_spectra()
+model.import_wind()
+model.import_ice()
+
+exporter = dn.export.WW3(model)
+exporter.export_grid()
+exporter.export_wind()
+exporter.export_spectra()
+exporter.export_ice()
+
+exe = dn.executer.WW3(model)
+exe.write_grid_file()
+exe.write_wind_file()
+exe.write_ice_file()
+exe.write_spectra_file()
+exe.write_input_file()
+```
