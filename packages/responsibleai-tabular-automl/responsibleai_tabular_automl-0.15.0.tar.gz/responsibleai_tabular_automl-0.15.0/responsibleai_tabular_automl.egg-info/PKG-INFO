@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: responsibleai_tabular_automl
+Version: 0.15.0
+Summary: SDK for computing RAI insights for AutoML models.
+Home-page: 
+Author: Gaurav Gupta, Ke Xu
+Author-email: raiwidgets-maintain@microsoft.com
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: responsibleai~=0.36.0
+Requires-Dist: ml-wrappers>=0.5.5
+Requires-Dist: azureml-mlflow
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# SDK for computing and uploading RAI insights for AutoML models
+
+### This package has been tested with Python 3.6, 3.7, 3.8 and 3.9
