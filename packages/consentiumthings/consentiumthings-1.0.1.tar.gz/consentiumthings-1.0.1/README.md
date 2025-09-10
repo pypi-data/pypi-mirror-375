@@ -1,0 +1,177 @@
+# ConsentiumThings Python API
+
+## Overview
+
+`ConsentiumThings` is a Python library for sending and receiving IoT data from the **Consentium Cloud**. It provides an easy-to-use interface to interact with the Consentium IoT APIs, including sensor data ingestion (`/v2/updateData`) and retrieval (`/getData`).
+
+## Installation
+
+```bash
+pip install consentiumthings
+```
+
+## Usage
+
+### Importing ConsentiumThings
+
+```python
+from consentiumthings import ConsentiumThings
+```
+
+### Initializing ConsentiumThings
+
+You need to provide your **board key** when creating a new instance:
+
+```python
+ct = ConsentiumThings("YOUR-BOARD-KEY")
+```
+
+---
+
+### Sending Data
+
+To send data, initialize with your **send key**, then call `send_data()`:
+
+```python
+ct.begin_send("YOUR-SEND-KEY")
+
+response = ct.send_data(
+    data_buff=[40.0, 90.0], 
+    info_buff=["Temperature", "Humidity"]
+)
+
+print(response)
+```
+
+Example response (success):
+
+```json
+{
+  "status": "success",
+  "message": "Sensor data updated successfully"
+}
+```
+
+Example response (MAC mismatch):
+
+```json
+{
+  "message": "MAC mismatch"
+}
+```
+
+---
+
+### Receiving Data
+
+To fetch data, initialize with your **receive key**, then call `receive_data()`.
+
+* By default, it fetches the **most recent data**.
+* Set `recent=False` to fetch the full history.
+
+```python
+ct.begin_receive("YOUR-RECEIVE-KEY", recent=True)
+data = ct.receive_data()
+print(data)
+```
+
+Example response (parsed into Python dicts):
+
+```python
+[
+  {
+    "updated_at": "2025-09-05T14:20:56Z",
+    "Temperature": 40.0,
+    "Humidity": 90.0
+  }
+]
+```
+
+---
+
+## Methods
+
+### `ConsentiumThings(board_key)`
+
+Initialize the client.
+
+* **Parameters**:
+
+  * `board_key` (str): Unique key for your board.
+
+### `begin_send(send_key)`
+
+Set up the client for sending data.
+
+* **Parameters**:
+
+  * `send_key` (str): The key for authenticated send operations.
+
+### `send_data(data_buff, info_buff)`
+
+Send sensor data.
+
+* **Parameters**:
+
+  * `data_buff` (list): List of sensor values.
+  * `info_buff` (list): Labels for each sensor value.
+* **Returns**: Dict containing API response.
+
+### `begin_receive(receive_key, recent=True)`
+
+Set up the client for retrieving data.
+
+* **Parameters**:
+
+  * `receive_key` (str): Key for authenticated receive operations.
+  * `recent` (bool): If True, fetch only most recent entry. Default: True.
+
+### `receive_data()`
+
+Fetch data from the cloud.
+
+* **Returns**: List of dicts with parsed sensor data.
+
+---
+
+## Example
+
+```python
+from consentiumthings import ConsentiumThings
+
+# Initialize client
+ct = ConsentiumThings("YOUR-BOARD-KEY")
+
+# Send data
+ct.begin_send("YOUR-SEND-KEY")
+print(ct.send_data([40.0, 90.0], ["Temperature", "Humidity"]))
+
+# Receive most recent data
+ct.begin_receive("YOUR-RECEIVE-KEY", recent=True)
+print(ct.receive_data())
+```
+
+---
+
+## Error Handling
+
+The API may return structured JSON errors. Common cases:
+
+| Code  | Example Response                | Meaning                                     |
+| ----- | ------------------------------- | ------------------------------------------- |
+| `200` | `{"status":"success"}`          | Data sent/received successfully             |
+| `422` | `{"message":"MAC mismatch"}`    | MAC address does not match registered board |
+| `401` | `{"message":"Invalid key"}`     | Send/receive key invalid                    |
+| `404` | `{"message":"Board not found"}` | Board key is invalid                        |
+
+---
+
+## Support
+
+For any issues or questions regarding ConsentiumThings Python API, please contact **[official@consentiumiot.com](mailto:official@consentiumiot.com)**.
+
+---
+
+## License
+
+This software is licensed under the MIT License. See the LICENSE file for details.
