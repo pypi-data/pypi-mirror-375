@@ -1,0 +1,125 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# TA-Lib
+/ta-lib/
+ta-lib-*.tar.gz
+*.a
+*.la
+*.lai
+*.lo
+*.o
+*.slo
+*.trs
+*.stamp
+*.log
+*.status
+*.loT
+*.rej
+*.orig
+*.pc
+*.m4
+*.in
+*.sub
+*.guess
+*.spec
+*.dpkg
+*.am
+*.m4
+aclocal.m4
+compile
+config.*
+configure
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+stamp-h1
+*.test
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.*.local
+!.env.example
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Local development data
+data/cache/
+reports/
+!reports/.gitkeep
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Custom files
+code_explaination.txt
+run_commands.txt
+
+# Cache and temporary files
+cache/
+temp_charts/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Library build files
+**/*.dylib
+**/*.dll
+**/*.so
+**/*.pyd
+**/*.lib
+**/*.h
+**/*.hpp
+**/include/
+**/bin/
+**/obj/
+**/Debug/
+**/Release/
