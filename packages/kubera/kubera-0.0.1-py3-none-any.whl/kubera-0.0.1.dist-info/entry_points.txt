@@ -1,0 +1,7 @@
+[console_scripts]
+kubera-chatgpt-extract-stats = kubera.chatgpt.extract_stats:main
+kubera-chatgpt-extract-trace = kubera.chatgpt.extract_trace:main
+kubera-claude-code-extract-stats = kubera.claude_code.extract_stats:main
+kubera-claude-code-extract-trace = kubera.claude_code.extract_trace:main
+kubera-claude-web-extract-stats = kubera.claude_web.extract_stats:main
+kubera-claude-web-extract-trace = kubera.claude_web.extract_trace:main

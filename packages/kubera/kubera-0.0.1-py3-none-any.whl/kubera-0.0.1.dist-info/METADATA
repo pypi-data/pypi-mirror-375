@@ -1,0 +1,390 @@
+Metadata-Version: 2.4
+Name: kubera
+Version: 0.0.1
+Summary: Kubera is a tool for annonymizing and extracting traces from from ChatGPT, Claude, etc. usage data
+Author: Vajra Team
+Maintainer: Vajra Team
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/project-vajra/kubera
+Project-URL: Repository, https://github.com/project-vajra/kubera
+Project-URL: Bug Tracker, https://github.com/project-vajra/kubera/issues
+Keywords: data-extraction,data-anonymization,chatgpt,claude,openai,gpt
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: transformers>=4.21.0
+Requires-Dist: humanize>=4.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: pytest-html; extra == "dev"
+Requires-Dist: pytest-xdist; extra == "dev"
+Requires-Dist: coverage[toml]; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: autoflake; extra == "dev"
+Requires-Dist: pyright; extra == "dev"
+Requires-Dist: codespell; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Provides-Extra: all
+Requires-Dist: kubera[dev]; extra == "all"
+Dynamic: license-file
+
+# Kubera: AI Usage Data Extraction and Analysis
+
+Kubera is a comprehensive tool for extracting, anonymizing, and analyzing usage traces from AI platforms including ChatGPT, Claude (web), and Claude Code. It provides standardized trace extraction, token counting using configurable tokenizers, and statistical analysis across different AI platforms.
+
+## Features
+
+- 📊 **Multi-platform support**: Extract data from ChatGPT, Claude web, and Claude Code
+- 🔢 **Accurate token counting**: Uses DeepSeek V3 tokenizer by default (configurable)
+- 📈 **Comprehensive analytics**: Detailed statistics on usage patterns, token distribution, and conversation flows
+- 🔄 **Standardized output**: Consistent CSV trace format across all platforms
+- 📋 **Rich statistics**: JSON output with detailed breakdowns and human-readable summaries
+
+## Installation
+
+### Option 1: Using uvx (Recommended)
+
+Run without installing:
+
+```bash
+# ChatGPT trace extraction
+uvx --from kubera kubera-chatgpt-extract-trace --input-file conversations.json
+
+# ChatGPT statistics
+uvx --from kubera kubera-chatgpt-extract-stats --input-file chatgpt_trace.csv
+
+# Claude Code trace extraction
+uvx --from kubera kubera-claude-code-extract-trace --input-file usage.jsonl
+
+# Claude Code statistics
+uvx --from kubera kubera-claude-code-extract-stats --input-file claude_code_trace.csv
+
+# Claude Web trace extraction
+uvx --from kubera kubera-claude-web-extract-trace --input-file conversations.json
+
+# Claude Web statistics
+uvx --from kubera kubera-claude-web-extract-stats --input-file claude_web_trace.csv
+```
+
+### Option 2: Traditional Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/project-vajra/kubera.git
+cd kubera
+
+# Install dependencies
+pip install -e .
+
+# Or install with development dependencies
+pip install -e ".[dev]"
+```
+
+## Supported Platforms
+
+### 1. ChatGPT
+Extract conversation data from ChatGPT exports including message chains, tokens, and timestamps.
+
+### 2. Claude Web
+Analyze Claude web conversations with response timing analysis and token breakdowns.
+
+### 3. Claude Code
+Extract usage statistics from Claude Code JSONL files with cache efficiency metrics.
+
+## Quick Start
+
+### 1. Export Your Data
+
+#### ChatGPT Export
+1. Go to ChatGPT Settings
+   
+   ![ChatGPT Settings](docs/assets/chatgpt_settings.png)
+
+2. Click "Export data" button
+   
+   ![ChatGPT Export](docs/assets/chatgpt_export_button.png)
+
+3. Download and extract the ZIP file to get `conversations.json`
+
+#### Claude Web Export
+1. Go to Claude Settings
+   
+   ![Claude Web Settings](docs/assets/claude_web_settings.png)
+
+2. Click "Export data" button
+   
+   ![Claude Web Export](docs/assets/claude_web_export_button.png)
+
+3. Download and extract to get `conversations.json`
+
+#### Claude Code Data
+Claude Code automatically stores usage data in `~/.claude/projects/` as JSONL files.
+
+### 2. Extract Traces
+
+```bash
+# ChatGPT
+python kubera/chatgpt/extract_trace.py --input-file path/to/chatgpt/conversations.json
+
+# Claude Web  
+python kubera/claude_web/extract_trace.py --input-file path/to/claude_web/conversations.json
+
+# Claude Code
+python kubera/claude_code/extract_trace.py --claude-dir ~/.claude
+```
+
+### 3. Generate Statistics
+
+```bash
+# ChatGPT analysis
+python kubera/chatgpt/extract_stats.py --input-file data/chatgpt_trace.csv
+
+# Claude Web analysis
+python kubera/claude_web/extract_stats.py --input-file data/claude_web_trace.csv
+
+# Claude Code analysis
+python kubera/claude_code/extract_stats.py --input-file data/claude_code_trace.csv
+```
+
+## Detailed Usage
+
+### ChatGPT Data Extraction
+
+#### Trace Extraction
+```bash
+python kubera/chatgpt/extract_trace.py \
+  --input-file raw_data/chatgpt/conversations.json \
+  --output-file data/chatgpt_trace.csv \
+  --tokenizer deepseek-ai/DeepSeek-V3
+```
+
+**Output CSV Fields:**
+- `session_uuid`: Conversation ID
+- `message_uuid`: Unique message identifier  
+- `parent_uuid`: Parent message ID (conversation threading)
+- `role`: Message sender (user/assistant/system)
+- `timestamp`: Message creation time
+- `tokens`: Token count using specified tokenizer
+
+#### Statistics Generation
+```bash
+python kubera/chatgpt/extract_stats.py \
+  --input-file data/chatgpt_trace.csv \
+  --output-file data/stats/chatgpt_stats.json
+```
+
+**Statistics Include:**
+- Overall message/conversation/token counts
+- Role distribution (user vs assistant messages)
+- Token analysis (averages, distribution by role)
+- Conversation patterns (length distribution, duration)
+- Conversation token breakdown by role
+
+### Claude Web Data Extraction
+
+#### Trace Extraction
+```bash
+python kubera/claude_web/extract_trace.py \
+  --input-file raw_data/claude_web/conversations.json \
+  --output-file data/claude_web_trace.csv \
+  --tokenizer deepseek-ai/DeepSeek-V3
+```
+
+**Output CSV Fields:**
+- `session_uuid`: Conversation UUID
+- `message_uuid`: Message UUID
+- `parent_uuid`: Parent message (empty for Claude web format)
+- `role`: Sender (human/assistant)
+- `start_timestamp`: Message start time
+- `stop_timestamp`: Message completion time  
+- `tokens`: Token count using specified tokenizer
+
+#### Statistics Generation
+```bash
+python kubera/claude_web/extract_stats.py \
+  --input-file data/claude_web_trace.csv \
+  --output-file data/stats/claude_web_stats.json
+```
+
+**Statistics Include:**
+- All ChatGPT statistics plus:
+- Response timing analysis (start/stop timestamps)
+- Response time distribution
+- Average response times
+
+### Claude Code Data Extraction
+
+#### Trace Extraction
+```bash
+python kubera/claude_code/extract_trace.py \
+  --claude-dir ~/.claude \
+  --output-file data/claude_code_trace.csv
+```
+
+**Output CSV Fields:**
+- `timestamp`: Request timestamp
+- `parentUuid`: Parent message UUID
+- `sessionId`: Session identifier
+- `uuid`: Message UUID
+- `input_tokens`: Base input tokens
+- `cache_creation_input_tokens`: Cache creation tokens
+- `cache_read_input_tokens`: Cache read tokens  
+- `output_tokens`: Response tokens
+- `total_input_tokens`: Sum of all input token types
+
+#### Statistics Generation
+```bash
+python kubera/claude_code/extract_stats.py \
+  --input-file data/claude_code_trace.csv \
+  --output-file data/stats/claude_code_stats.json
+```
+
+**Statistics Include:**
+- Overall request/token statistics
+- Cache efficiency metrics
+- Session statistics (average requests, tokens, duration)
+- Token breakdown by type (input, cache, output)
+
+## Configuration Options
+
+### Tokenizer Selection
+
+All extraction scripts support configurable tokenizers:
+
+```bash
+# Use DeepSeek V3 (default)
+--tokenizer deepseek-ai/DeepSeek-V3
+
+# Use Llama 3
+--tokenizer meta-llama/Meta-Llama-3-8B
+
+# Use GPT-4 tokenizer  
+--tokenizer gpt-4
+
+# Any HuggingFace tokenizer
+--tokenizer <model-name>
+```
+
+### Output Customization
+
+```bash
+# Custom output locations
+--output-file /path/to/custom/output.csv
+--output-file /path/to/custom/stats.json
+
+# For Claude Code, custom source directory
+--claude-dir /custom/claude/directory
+```
+
+## Output Formats
+
+### Trace CSV Format
+Standardized CSV format across all platforms with platform-specific fields:
+- Common: session_uuid, message_uuid, role, tokens
+- ChatGPT: timestamp, parent_uuid  
+- Claude Web: start_timestamp, stop_timestamp, parent_uuid (empty)
+- Claude Code: timestamp, parentUuid, sessionId, input/output token breakdown
+
+### Statistics JSON Format
+Comprehensive JSON with nested statistics:
+```json
+{
+  "overall": {
+    "total_messages": 1250,
+    "total_conversations": 45,
+    "total_tokens": 125000,
+    "role_distribution": {"user": 625, "assistant": 625}
+  },
+  "conversations": {
+    "conv-uuid-1": {
+      "messages": 10,
+      "total_tokens": 2500,
+      "tokens_by_role": {"user": 1000, "assistant": 1500},
+      "duration_minutes": 15.5
+    }
+  },
+  "token_analysis": {...},
+  "conversation_patterns": {...}
+}
+```
+
+## Examples
+
+### Complete Workflow Example
+
+```bash
+# 1. Extract ChatGPT data
+python kubera/chatgpt/extract_trace.py \
+  --input-file raw_data/chatgpt/conversations.json \
+  --output-file data/chatgpt_trace.csv
+
+# 2. Generate statistics
+python kubera/chatgpt/extract_stats.py \
+  --input-file data/chatgpt_trace.csv \
+  --output-file data/stats/chatgpt_stats.json
+
+# 3. View results
+cat data/stats/chatgpt_stats.json
+```
+
+### Batch Processing Multiple Platforms
+
+```bash
+#!/bin/bash
+
+# Extract traces from all platforms
+python kubera/chatgpt/extract_trace.py --input-file raw_data/chatgpt/conversations.json
+python kubera/claude_web/extract_trace.py --input-file raw_data/claude_web/conversations.json  
+python kubera/claude_code/extract_trace.py
+
+# Generate statistics for all platforms
+python kubera/chatgpt/extract_stats.py --input-file data/chatgpt_trace.csv
+python kubera/claude_web/extract_stats.py --input-file data/claude_web_trace.csv
+python kubera/claude_code/extract_stats.py --input-file data/claude_code_trace.csv
+
+echo "Analysis complete! Check data/stats/ for results."
+```
+
+## Data Privacy
+
+Kubera processes data locally and does not send any information to external servers. The tokenizers are downloaded once and cached locally. All analysis is performed on your machine.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/project-vajra/kubera/issues)
+- 💡 **Feature Requests**: [GitHub Issues](https://github.com/project-vajra/kubera/issues)
+- 📚 **Documentation**: [GitHub Wiki](https://github.com/project-vajra/kubera/wiki)
+
+## Roadmap
+
+- [ ] Support for additional AI platforms (Anthropic API, OpenAI API)
+- [ ] Advanced anonymization techniques
+- [ ] Interactive visualization dashboard
+- [ ] Automated trend analysis and insights
+- [ ] Integration with popular data science tools
+
+---
+
+Built by the [Vajra Team](https://github.com/project-vajra) for AI usage analytics and research.
