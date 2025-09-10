@@ -1,0 +1,16 @@
+{
+	"routes" : [
+		{
+			"name" : "Home",
+			"path" : ""
+		},
+		{
+			"name" : "Getting started",
+			"path" : "start"
+		}
+	],
+
+	"contacts" : "Contacts",
+	"otherProjects" : "Other projects",
+	"siteDescription" : "A simple and lightweight JavaScript library for creating web applications."
+}

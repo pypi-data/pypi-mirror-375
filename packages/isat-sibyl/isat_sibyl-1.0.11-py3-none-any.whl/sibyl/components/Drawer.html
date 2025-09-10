@@ -1,0 +1,60 @@
+<template>
+	<div id="drawer">
+		<Slot></Slot>
+	</div>
+</template>
+
+<style>
+	#drawer {
+		top: var(--header-height);
+		left: 0;
+		position: fixed;
+		transition: 0.5s;
+		z-index: 9;
+		background-color: var(--header-bg);
+		border-right: 2px solid var(--accent-secondary-transition);
+		max-width: 300px;
+		min-width: 200px;
+		height: calc(100vh - var(--header-height));
+		overflow-x: auto;
+		padding-bottom: 50px;
+		color: white;
+	}
+
+	#drawer .drawer-item.active {
+		background-color: var(--primary);
+	}
+
+	body:not(:has(header)) #drawer {
+		top: 0;
+		height: 100vh;
+	}
+</style>
+
+<script>
+	function drawerComputeActive() {
+		const pages = document.querySelector("#drawer");
+		if (pages) {
+			const links = pages.querySelectorAll("a");
+			let longest = "";
+			let longestLink = null;
+			for (const link of links) {
+				if (window.location.pathname.includes(link.getAttribute('href')) && link.getAttribute('href').length > longest.length) {
+					longest = link.getAttribute('href');
+					longestLink = link;
+				}
+			}
+			if (longestLink) longestLink.classList.add("active");
+		}
+	}
+	function drawerInitialComputeActive() {
+		drawerComputeActive();
+		window.removeEventListener("load", drawerInitialComputeActive);
+	}
+	window.addEventListener("load", drawerInitialComputeActive);
+	window.addEventListener("prepare-unload", () => {
+		const active = document.querySelector(`#drawer a.active`);
+		if (active) active.classList.remove("active");
+		drawerComputeActive();
+	});
+</script>

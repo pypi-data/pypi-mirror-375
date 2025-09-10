@@ -1,0 +1,15 @@
+{
+	"routes" : [
+		{
+			"name" : "Home",
+			"path" : ""
+		},
+		{
+			"name" : "Começar",
+			"path" : "start"
+		}
+	],
+
+	"contacts" : "Contactos",
+	"otherProjects" : "Outros projetos"
+}
