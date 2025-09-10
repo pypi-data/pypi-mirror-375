@@ -1,0 +1,403 @@
+Metadata-Version: 2.4
+Name: modular-noc-scheduling
+Version: 1.0.8
+Summary: Shift Scheduling Algorithm using OR-Tools with Modular Constraints
+Author: Innovation Team - Digital Transformation Directorate
+Maintainer: Innovation Team - Digital Transformation Directorate
+License: MIT
+Project-URL: Homepage, https://github.com/abdalkarimnael/scheduling_package
+Project-URL: Repository, https://github.com/abdalkarimnael/scheduling_package
+Project-URL: Documentation, https://github.com/abdalkarimnael/scheduling_package#readme
+Project-URL: Bug Reports, https://github.com/abdalkarimnael/scheduling_package/issues
+Keywords: scheduling,optimization,constraint-programming,ortools,employee-scheduling,shift-scheduling,noc-scheduling,ramadan-scheduling,holiday-scheduling,workforce-management
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Office/Business :: Scheduling
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: ortools>=9.0.0
+Requires-Dist: hijri-converter>=2.2.4
+Provides-Extra: ui
+Requires-Dist: streamlit>=1.28.0; extra == "ui"
+Requires-Dist: pandas>=1.5.0; extra == "ui"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: flake8>=5.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: pre-commit>=2.20.0; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=5.0.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0.0; extra == "docs"
+Requires-Dist: myst-parser>=0.18.0; extra == "docs"
+Dynamic: license-file
+
+# Modular NOC Scheduling System
+
+![Version](https://img.shields.io/badge/version-1.0.8-green.svg)
+[![PyPI version](https://badge.fury.io/py/modular-noc-scheduling.svg)](https://pypi.org/project/modular-noc-scheduling/)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+High‑performance, constraint‑based shift scheduling for 24/7 NOC / SOC teams. Built on Google OR-Tools CP-SAT. Supports expert/beginner supervision, holidays, weekends, Ramadan adjustments, fairness and workload balancing, off‑day allocation, and extensible modular constraints.
+
+## What's New in v1.0.8 (New Release)
+* Reorganized developer-centric documentation (architecture, data model, extension patterns)
+* Clear separation between core API and optional UI layer (Streamlit sample now considered a reference sandbox only)
+* Detailed guide for: microservice integration (FastAPI), custom UI frameworks, exporting & parsing schedule data
+* Shift name mapping + parsing helpers + CSV export examples
+* Clarified constraint semantics & extension workflow
+---
+## Contents
+1. Overview
+2. Core Concepts & Data Model
+3. Installation & Quick Start
+4. Troubleshooting
+5. Technical Information
+6. API Reference
+7. License
+8. Support
+9. Version History
+
+---
+## 1. Overview
+The package exposes a single high-level function that turns (year, month, employees, optional holidays, constraint toggles) into an optimized monthly assignment matrix. It can be:
+* Called directly in Python scripts or notebooks
+* Wrapped in a REST / gRPC microservice
+* Driven via CLI for ad-hoc generation
+* Connected to any UI (React, Vue, Django, Flask, FastAPI, Streamlit, etc.)
+
+The repository formerly included a Streamlit prototype UI. Treat that file strictly as a developer sandbox example—NOT a required dependency. You can substitute any web layer; the API surface you need is the returned `schedule_data` structure and auxiliary output files.
+
+---
+## 2. Core Concepts & Data Model
+### Employees
+Each employee is defined minimally as:
+```python
+{"type": "EXPERT" | "BEGINNER", "vacation_days": int}
+```
+Fairness and supervision logic relies on a valid expert/beginner ratio (at least one expert when beginners exist).
+
+### Shifts (Technical Codes)
+Regular: M (Morning), E (Evening), N (Night)
+Ramadan: MR, E1R, E2R, NR
+Holiday regular: HM, HE, HN
+Holiday Ramadan: HMR, HE1R, HE2R, HNR
+Non-working states: OFF (Annual Leave), No Shift Assigned (Weekend / free), No Shift Assigned - Rest (Mandatory rest)
+
+### Returned Schedule Structure
+```python
+schedule_data = {
+  "Employee 1": {"Day 1": "M", "Day 2": "N", ...},
+  "Employee 2": {"Day 1": "No Shift Assigned", ...},
+  # ... one dict per employee
+}
+```
+All days are labeled `Day 1` .. `Day N` (N = days in month). Values are technical shift codes above.
+
+### Output Files (Optional Artifacts)
+* `solution_YYYY_MM_timestamp_sol1.txt` – human-readable schedule
+* `input_summary_YYYY_MM_timestamp.txt` – configuration + constraint flags
+* `off_days_distribution_...txt` – off-day fairness calculation
+* `month_calendar_info_...txt` – calendar metadata (weekends, holidays, Ramadan)
+
+---
+## 3. Installation & Quick Start
+### Install from PyPI
+```bash
+pip install modular-noc-scheduling
+```
+Only PyPI installation is supported. Source / editable installs are not part of the standard distribution for this release.
+
+## Common Scenarios and Solutions
+
+### Scenario 1: "The Algorithm Says No Solution Found"
+**What this means**: Your requirements cannot be met with the current team size or constraints.
+
+**Solutions**:
+- Add more team members
+- Reduce minimum shift requirements
+- Check if vacation day allocations are realistic
+
+### Scenario 2: "Someone Has Too Many Shifts"
+**What this means**: The workload distribution isn't perfectly even.
+
+**Solutions**:
+- Enable the "Fair Distribution" constraints
+- Increase the solution search time
+- Consider if the person has fewer vacation days (affecting their off-day allocation)
+
+### Scenario 3: "Weekend Coverage Looks Uneven"
+**What this means**: Some people work more weekends than others.
+
+**Solutions**:
+- Ensure "Fair Weekend Distribution" is enabled
+- Check that you have enough team members for weekend coverage
+- Consider the impact of vacation day differences
+
+### Scenario 4: "Holiday Coverage Is Missing"
+**What this means**: Some holidays don't have proper shift coverage.
+
+**Solutions**:
+- Upload a complete holiday calendar file
+- Enable holiday shift constraints
+- Ensure minimum holiday staffing requirements are met
+
+---
+
+## 4. Troubleshooting
+### When to Contact Support
+Contact us if:
+- The algorithm doesn't load or crashes
+- You get error messages you don't understand
+- The schedule results seem completely wrong
+- You need to modify algorithm rules or constraints
+
+---
+
+## 5. Technical Information
+
+### Algorithm Architecture
+
+**Core Components**
+- **Scheduler Engine**: Uses Google OR-Tools constraint programming
+- **Constraint Algorithm**: Modular rules that can be enabled/disabled
+- **Calendar Integration**: Supports both Gregorian and Hijri calendars
+
+**How It Works**
+1. **Input Processing**: Algorithm converts your requirements into mathematical constraints
+2. **Optimization**: Advanced algorithms find the best schedule that satisfies all rules
+3. **Solution Generation**: Multiple valid schedules may be found
+4. **Output Formatting**: Results are presented in user-friendly formats
+
+### Constraint Categories
+
+**Coverage Constraints**
+- Ensure all shifts have adequate staffing
+- Guarantee weekend and holiday coverage
+- Maintain 24/7 operations continuity
+
+**Fairness Constraints**
+- Equal distribution of workload
+- Balanced weekend/holiday assignments
+- Fair vacation day consideration
+
+**Safety Constraints**
+- Expert supervision for beginners
+- Mandatory rest after certain shift sequences
+- Limits on consecutive working days
+
+**Cultural Constraints**
+- Special Ramadan shift patterns
+- Regional holiday observances
+- Cultural work week conventions
+
+### File Formats
+
+**Employee Data Input**
+Employee information is entered through the web interface with the following parameters:
+- **Employee Type**: `EXPERT` or `BEGINNER`
+- **Vacation Days**: Integer value (0-21 for experts, 0-14 for beginners)
+
+No separate employee data file is required - all input is handled through the interactive web interface.
+
+**Holiday File Format**
+Upload a text file (.txt) with holidays using this exact format:
+```
+day; month; description
+1; 1; New Year's Day
+15; 8; Independence Day
+25; 12; Christmas Day
+```
+
+Format requirements:
+- Each line contains: `day; month; description`
+- Semicolon (`;`) separated values
+- Day and month as integers (e.g., 1-31 for day, 1-12 for month)
+- Description is optional but recommended for clarity
+- Lines starting with "day" are treated as headers and ignored
+- Empty lines are ignored
+- File encoding: UTF-8
+
+**Generated Output Files**
+The algorithm automatically creates several output files with structured formats:
+
+1. **Input Summary** (`input_summary_YYYY_MM_timestamp.txt`)
+   - Contains all input parameters and constraint settings
+   - Employee details and configuration used
+2. **Month Calendar Info** (`month_calendar_info_{YYYY_MM}_{YYYYMMDD_HHMMSS}.txt`)
+   - Title + month
+   - **Counts**: Number of employees, solution limit, maximum shifts per employee
+   - **Employee Details**: List of all employees with type and vacation days
+   - **Active Constraints**: List of enabled constraint flags
+   - **Solver Results**: Status, number of solutions found, success indicator
+3. **Off Days Distribution** (`off_days_distribution_{YYYY_MM}_{YYYYMMDD_HHMMSS}.txt`)
+   - Title + month
+   - Repeated per-employee block: name/role, remaining vacation days, remaining months, min/max off days this month
+
+4. **Solution File** (`solution_YYYY_MM_timestamp_sol1.txt`)
+   - Complete day-by-day schedule assignments
+   - Employee-day-shift mappings in readable format
+
+---
+
+## 6. API Reference
+
+### Main Function
+
+#### `run_modular_scheduling_algorithm()`
+The primary function for generating NOC schedules.
+
+**Function Signature:**
+```python
+from modular_scheduling.modular_scheduler import run_modular_scheduling_algorithm
+
+success, output_files, solver_status, error_msg, schedule_data, max_shifts_per_employee = run_modular_scheduling_algorithm(
+    year,                    # int: Gregorian year (e.g., 2025)
+    month,                   # int: Month (1-12)
+    employees_data,          # list: Employee information
+    holidays_file_path=None, # str or None: Path to holidays file
+    solution_limit=1,        # int: Maximum solutions to generate
+    constraints=None         # dict or None: Constraint configuration
+)
+```
+
+**Parameters:**
+- `year` (int): The Gregorian year for scheduling
+- `month` (int): Month (1-12) for scheduling  
+- `employees_data` (list): List of employee dictionaries with format:
+  ```python
+  [
+      {'type': 'EXPERT', 'vacation_days': 10},
+      {'type': 'BEGINNER', 'vacation_days': 5} ## vacation_days: remaining vation days for the employee until the end of this year
+  ]
+  ```
+- `holidays_file_path` (str, optional): Path to holidays file in specified format
+- `solution_limit` (int): Maximum number of solutions to generate (default: 1)
+- `constraints` (dict): Constraint configuration dictionary
+
+**Returns:**
+- `success` (bool): True if scheduling succeeded, False otherwise
+- `output_files` (list): List of generated output file paths
+- `solver_status` (str): OR-Tools solver status ("OPTIMAL", "FEASIBLE", "INFEASIBLE", etc.)
+- `error_msg` (str): Error message if failed, empty string if successful
+- `schedule_data` (dict): Complete schedule in format: `{employee_name: {day_name: shift_assignment}}`
+- `max_shifts_per_employee` (int): Maximum number of shifts assigned to any employee
+
+**Example:**
+```python
+employees_data = [
+    {'type': 'EXPERT', 'vacation_days': 12},
+    {'type': 'EXPERT', 'vacation_days': 8},
+    {'type': 'BEGINNER', 'vacation_days': 6} ## Vacation days are the remaining vacation days for this employee
+]
+## Configure constraints
+constraints = {
+    'constraint_weekday_shifts': True,
+    'constraint_expert_supervision': True,
+    'constraint_e_n_rest': True,
+    'constraint_holiday_shifts': True,
+    'constraint_weekend_shifts': True,
+    'constraint_one_shift_per_person_per_day': True,
+    'constraint_fair_weekend_distribution': True,
+    'constraint_fair_holiday_distribution': True,
+    'constraint_min_normal_evening_shifts': True,
+    'constraint_min_abnormal_evening_shifts': True,
+    'constraint_evenly_distribute_max_shifts': True,
+    'constraint_off_days_based_on_vacation_balance': True,
+    'constraint_limit_contiguous_shifts': True
+}
+
+success, output_files, solver_status, error_msg, schedule_data, max_shifts_per_employee = run_modular_scheduling_algorithm(
+year=2025, month=9, employees_data=employees_data, holidays_file_path="holidays.txt", solution_limit=1, constraints=constraints
+)
+
+if success:
+    print(f"Success! Status: {status}")
+    print(f"Generated files: {files}")
+    print(f"Max shifts per employee: {max_shifts}")
+else:
+    print(f"Failed: {error}")
+```
+
+### Available Constraints
+
+All constraints are modular and can be enabled/disabled through the `constraints` parameter:
+
+```python
+constraints = {
+    'constraint_weekday_shifts': True,                    # Ensure proper weekday shift coverage
+    'constraint_expert_supervision': True,               # Require expert supervision for beginners
+    'constraint_one_shift_per_person_per_day': True,     # One shift per employee per day
+    'constraint_e_n_rest': True,                         # Rest after evening and night shifts
+    'constraint_holiday_shifts': True,                   # Special holiday shift coverage
+    'constraint_weekend_shifts': True,                   # Weekend shift coverage
+    'constraint_fair_weekend_distribution': True,        # Fair weekend shift distribution
+    'constraint_fair_holiday_distribution': True,        # Fair holiday shift distribution
+    'constraint_min_normal_evening_shifts': True,        # Minimum evening shifts on normal days
+    'constraint_min_abnormal_evening_shifts': True,      # Minimum evening shifts on Ramadan days
+    'constraint_evenly_distribute_max_shifts': True,     # Equal maximum shifts for all employees
+    'constraint_off_days_based_on_vacation_balance': True, # Off-days based on vacation balance
+    'constraint_limit_contiguous_shifts': True           # Limit consecutive working days
+}
+```
+
+**Constraint Descriptions:**
+- `constraint_weekday_shifts`: Ensures adequate coverage during weekdays
+- `constraint_expert_supervision`: Beginners must work with at least one expert
+- `constraint_one_shift_per_person_per_day`: Prevents double-booking employees
+- `constraint_e_n_rest`: Mandatory rest after evening/night shift sequences
+- `constraint_holiday_shifts`: Special requirements for holiday coverage
+- `constraint_weekend_shifts`: Ensures weekend shift coverage
+- `constraint_fair_weekend_distribution`: Balances weekend work among employees
+- `constraint_fair_holiday_distribution`: Balances holiday work among employees
+- `constraint_min_normal_evening_shifts`: Minimum evening shifts for each employee
+- `constraint_min_abnormal_evening_shifts`: Minimum evening shifts during Ramadan
+- `constraint_evenly_distribute_max_shifts`: Forces equal workload distribution
+- `constraint_off_days_based_on_vacation_balance`: Allocates off-days based on vacation entitlement
+- `constraint_limit_contiguous_shifts`: Prevents excessive consecutive working days
+
+---
+
+## 7. License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 8. Support
+
+- **Documentation**: [GitHub Repository](https://github.com/abdalkarimnael/scheduling_package)
+- **Issues**: [Report bugs or request features](https://github.com/abdalkarimnael/scheduling_package/issues)
+- **PyPI Package**: [modular-noc-scheduling](https://pypi.org/project/modular-noc-scheduling/)
+
+---
+
+## 9. Version History
+- **v1.0.8** - Updated release: improved README
+- **v1.0.7** - New release: improved README with developer and IT guidance, notes and examples
+- **v1.0.6** - Version update for latest release
+- **v1.0.5** - Updated documentation
+- **v1.0.4** - Updated documentation with package-focused installation and improved usage examples
+- **v1.0.3** - Enhanced documentation and installation instructions
+- **v1.0.2** - Enhanced documentation and installation instructions
+- **v1.0.1** - Enhanced documentation and installation instructions
+- **v1.0.0** - Initial release with core scheduling functionality
+
+---
+
+**Developed by the Innovation Team - Digital Transformation Directorate**
