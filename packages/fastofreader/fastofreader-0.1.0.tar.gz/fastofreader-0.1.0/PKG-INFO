@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: fastofreader
+Version: 0.1.0
+Summary: Fast numerical operations implemented in Cython
+Author-email: Tomas Vicar <tomasvicar@gmail.com>
+License: MIT
+Project-URL: Homepage, https://example.com/fastops
+Project-URL: Issues, https://example.com/fastops/issues
+Keywords: cython,numerics,performance
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Cython
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# fastofreader
+
+Rychlý demonstrační balíček s Cython rozšířením.
+
+Autor: Tomas Vicar <tomasvicar@gmail.com>
+
+## Instalace (vývoj)
+```bash
+pip install -e .

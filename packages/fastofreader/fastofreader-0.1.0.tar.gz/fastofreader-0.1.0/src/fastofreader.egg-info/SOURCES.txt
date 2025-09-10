@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+src/fastofreader/__init__.py
+src/fastofreader/core.c
+src/fastofreader/core.pyx
+src/fastofreader.egg-info/PKG-INFO
+src/fastofreader.egg-info/SOURCES.txt
+src/fastofreader.egg-info/dependency_links.txt
+src/fastofreader.egg-info/top_level.txt
+tests/test_core.py
+tests/test_points.py
