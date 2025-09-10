@@ -1,0 +1,19 @@
+{% extends "pages/patchouli/text.html.jinja" %}
+
+{% import "macros/formatting.html.jinja" as fmt with context %}
+
+{% block inner_body %}
+  <details class="details-collapsible recipe-details">
+    {% block dropdown %}
+      {{ fmt.dropdown("hexdoc.recipe") }}
+    {% endblock dropdown %}
+
+    <div class="{% block recipes_class %}{% endblock %}">
+      {% for recipe in page.recipes %}
+        {% include recipe.template~".html.jinja" %}
+      {% endfor %}
+    </div>
+  </details>
+
+  {{ super() }}
+{% endblock inner_body %}

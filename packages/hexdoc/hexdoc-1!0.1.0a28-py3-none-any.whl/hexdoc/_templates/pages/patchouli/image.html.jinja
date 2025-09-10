@@ -1,0 +1,26 @@
+{% extends "pages/patchouli/text.html.jinja" %}
+{% import "macros/textures.html.jinja" as texture_macros with context %}
+
+{% block inner_body %}
+  <p class="img-wrapper">
+    {% for image in page.images %}
+      {#- TODO: figure out a better default name if there's no title #}
+      {{
+        texture_macros.render_texture(
+          name=page.title or "",
+          texture=image,
+          lazy=false,
+        )
+      }}
+    {% endfor %}
+  </p>
+  {{ super() }}
+{% endblock inner_body %}
+
+{% block redirect_image -%}
+  {{ texture_macros.texture_url(page.images|first) }}
+{%- endblock redirect_image %}
+
+{% block redirect_extra_opengraph %}
+  <meta name="twitter:card" content="summary_large_image">
+{% endblock redirect_extra_opengraph %}

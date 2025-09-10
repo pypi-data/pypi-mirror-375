@@ -1,0 +1,74 @@
+{% import "macros/formatting.html.jinja" as fmt with context %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <title>{{ _("hexdoc."~props.modid~".title") }}</title>
+
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="description" content="{{ _('hexdoc.'~props.modid~'.description') }}" />
+      <meta name="author" content="{{ author }}" />
+    {% endblock head %}
+
+    {% block favicon %}
+      {% for element in favicons_html %}
+        {{ element|safe }}
+      {% endfor %}
+      <link rel="mask-icon" href="{{ safari_pinned_tab_href }}" color="{{ safari_pinned_tab_color }}">
+    {% endblock favicon %}
+
+    {% block opengraph %}
+      {% include "components/opengraph.html.jinja" %}
+    {% endblock opengraph %}
+
+    {% block jquery %}
+      <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    {% endblock jquery %}
+
+    {% block bootstrap %}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    {% endblock bootstrap %}
+
+    {% block styles %}
+      <link rel="stylesheet" href="index.css">
+      <link rel="stylesheet" href="textures.css">
+
+      <noscript>
+        <style>
+          /* for accessibility */
+          .spoilered {
+            filter: none !important;
+          }
+        </style>
+      </noscript>
+    {% endblock styles %}
+
+    {% block scripts %}
+      <script type="module" src="index.js"></script>
+    {% endblock scripts %}
+  </head>
+
+  <body>
+    {% block body %}
+      {% include "components/navbar.html.jinja" +%}
+      {% include "components/welcome.html.jinja" +%}
+      {% include "book.html.jinja" +%}
+    {% endblock body %}
+
+    {% block footer %}
+      <footer class="footer">
+        <div class="container text-muted">
+          {{ fmt.styled(_f("hexdoc.footer")) }}
+        </div>
+      </footer>
+    {% endblock footer %}
+  </body>
+</html>
