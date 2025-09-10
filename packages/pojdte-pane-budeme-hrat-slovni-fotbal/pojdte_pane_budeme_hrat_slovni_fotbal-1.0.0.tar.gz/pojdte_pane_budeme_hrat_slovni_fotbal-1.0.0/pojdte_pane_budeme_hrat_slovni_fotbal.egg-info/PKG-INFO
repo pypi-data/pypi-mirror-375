@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: pojdte-pane-budeme-hrat-slovni-fotbal
+Version: 1.0.0
+Summary: Potkali se u Kolína
+Author: velci panove tacru
+Author-email: rozalie.bilkova@tacr.cz
+Project-URL: Documentation, https://youtu.be/QprFGNxrMj0?feature=shared
+Requires-Dist: pojdte-pane-budeme-si-hrat
+Requires-Dist: pandas
+Requires-Dist: gspread
+Requires-Dist: numpy
+Requires-Dist: sentence-transformers
+Requires-Dist: nltk
+Requires-Dist: requests
+Requires-Dist: corpy
+Requires-Dist: unidecode
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: summary
+
+
+    Jak skoupá je má  nenávist, když nedovedu střílet 
+    jak skoupá je má hrdost někde na mezi
+    místo jizev na duši jen fleky z rybích filet 
+    a místo čáry života hovězí.
+    
