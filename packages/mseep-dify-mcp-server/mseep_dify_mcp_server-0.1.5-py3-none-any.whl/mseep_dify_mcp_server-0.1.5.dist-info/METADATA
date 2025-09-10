@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: mseep-dify-mcp-server
+Version: 0.1.5
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.1.2
+Requires-Dist: omegaconf>=2.3.0
+Requires-Dist: pip>=24.3.1
+Requires-Dist: python-dotenv>=1.0.1
+Requires-Dist: requests
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
