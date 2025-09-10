@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "test_123_testtt_123"
+version = "0.1.0"
+description = "Простой пакет для получения внешнего IP через 2ip.io"
+authors = [{name = "Твое Имя", email = "you@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["requests"]
+
+[project.urls]
+Homepage = "https://pypi.org/project/my-packet/"

@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: test_123_testtt_123
+Version: 0.1.0
+Summary: Простой пакет для получения внешнего IP через 2ip.io
+Author-email: Твое Имя <you@example.com>
+License: MIT
+Project-URL: Homepage, https://pypi.org/project/my-packet/
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+
+# my-packet
+
+Простой Python-пакет для получения вашего внешнего IP через 2ip.io
+
+## Установка
+
+```bash
+pip install my-packet
