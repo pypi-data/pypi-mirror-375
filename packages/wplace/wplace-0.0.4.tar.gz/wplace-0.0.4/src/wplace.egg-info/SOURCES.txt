@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/wplace/__init__.py
+src/wplace/api.py
+src/wplace/canvas.py
+src/wplace/color.py
+src/wplace/country.py
+src/wplace/dto.py
+src/wplace/temp.py
+src/wplace/utils.py
+src/wplace.egg-info/PKG-INFO
+src/wplace.egg-info/SOURCES.txt
+src/wplace.egg-info/dependency_links.txt
+src/wplace.egg-info/requires.txt
+src/wplace.egg-info/top_level.txt
