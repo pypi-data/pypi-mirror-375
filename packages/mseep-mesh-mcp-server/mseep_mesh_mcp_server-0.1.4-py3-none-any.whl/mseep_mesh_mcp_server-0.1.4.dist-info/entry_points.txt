@@ -1,0 +1,2 @@
+[console_scripts]
+mesh-tool-server = mesh_mcp_server.server:main
