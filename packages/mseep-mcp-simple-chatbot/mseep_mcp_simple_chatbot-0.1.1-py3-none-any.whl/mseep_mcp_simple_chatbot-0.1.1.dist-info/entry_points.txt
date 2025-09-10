@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-simple-chatbot = mcp_simple_chatbot.client:main
