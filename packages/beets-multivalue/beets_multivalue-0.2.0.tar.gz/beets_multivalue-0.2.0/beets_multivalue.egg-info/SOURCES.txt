@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+beets_multivalue.egg-info/PKG-INFO
+beets_multivalue.egg-info/SOURCES.txt
+beets_multivalue.egg-info/dependency_links.txt
+beets_multivalue.egg-info/requires.txt
+beets_multivalue.egg-info/top_level.txt
+beetsplug/__init__.py
+beetsplug/multivalue.py
+tests/__init__.py
+tests/test_multivalue.py

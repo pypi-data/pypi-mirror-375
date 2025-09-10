@@ -1,0 +1,2 @@
+[tool.mypy]
+follow_untyped_imports = true
