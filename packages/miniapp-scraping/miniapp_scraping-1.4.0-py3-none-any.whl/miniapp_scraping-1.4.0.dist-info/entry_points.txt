@@ -1,0 +1,2 @@
+[console_scripts]
+miniapp-scraping = miniapp_scraping.cli:main
