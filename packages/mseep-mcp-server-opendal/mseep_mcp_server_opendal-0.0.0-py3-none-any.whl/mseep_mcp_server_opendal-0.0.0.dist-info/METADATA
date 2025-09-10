@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-opendal
+Version: 0.0.0
+Summary: A Model Context Protocol server providing tools to access storage services for usage by LLMs
+Author-email: mseep <support@skydeck.ai>
+License: Apache-2.0
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.0.0
+Requires-Dist: opendal<0.46.0,>=0.45.16
+Requires-Dist: python-dotenv>=1.0.1
+Dynamic: license-file
+
+Package managed by MseeP.ai
