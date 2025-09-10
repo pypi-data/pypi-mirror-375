@@ -1,0 +1,10 @@
+LICENSE.lic
+README_ru.md
+pyproject.toml
+src/HaramDetector/IsHaram.py
+src/HaramDetector/__init__.py
+src/HaramDetector.egg-info/PKG-INFO
+src/HaramDetector.egg-info/SOURCES.txt
+src/HaramDetector.egg-info/dependency_links.txt
+src/HaramDetector.egg-info/top_level.txt
+tests/testHaram.py
