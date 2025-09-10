@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrogram-xydevs"
+version = "2.1.107"
+description = "Fork of Pyrogram maintained by xydevs - Telegram MTProto API Client Library for Python"
+readme = "README.md"
+license = {text = "LGPL-3.0-or-later"}
+authors = [
+  { name = "XyDevs", email = "its@xydevs.com" }
+]
+maintainers = [
+  { name = "XyDevs", email = "its@xydevs.com" }
+]
+keywords = ["telegram", "chat", "messenger", "api", "client", "library", "python", "mtproto"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Internet",
+    "Topic :: Communications",
+    "Topic :: Communications :: Chat",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+dependencies = [
+  "tgcrypto>=1.2.5",
+  "pyaes>=1.6.1",
+  "PySocks>=1.7.1"
+]
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/xydevs/pyrogram-fork"
+Documentation = "https://docs.pyrogram.org"
+Repository = "https://github.com/xydevs/pyrogram-fork"
+"Bug Tracker" = "https://github.com/xydevs/pyrogram-fork/issues"
+
+[tool.setuptools.packages.find]
+where = ["main"]
+include = ["pyrogram", "pyrogram.*"]
+
+[tool.setuptools.package-data]
+"pyrogram" = ["*.json", "*.md"]
