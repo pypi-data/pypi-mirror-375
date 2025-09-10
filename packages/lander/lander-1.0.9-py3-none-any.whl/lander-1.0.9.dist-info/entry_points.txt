@@ -1,0 +1,3 @@
+[console_scripts]
+lander = lander.main:main
+lsstprojectmeta-deparagraph = lander.lsstprojectmeta.pandoc.filters.deparagraph:main
