@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-shioaji
+Version: 0.1.4
+Summary: MCP server for interacting with Shioaji trading API
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+Requires-Dist: mcp[cli]>=1.5.0
+Requires-Dist: shioaji[speed]>=1.2.5
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: polars>=1.26.0
+Requires-Dist: loguru>=0.6.0
+Requires-Dist: fire>=0.7.0
+
+Package managed by MseeP.ai
