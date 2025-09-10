@@ -1,0 +1,16 @@
+LICENSE.md
+MANIFEST.in
+README.md
+pyproject.toml
+requirements.txt
+requirements_test.txt
+setup.py
+pysoldaemon/__init__.py
+pysoldaemon.egg-info/PKG-INFO
+pysoldaemon.egg-info/SOURCES.txt
+pysoldaemon.egg-info/dependency_links.txt
+pysoldaemon.egg-info/not-zip-safe
+pysoldaemon.egg-info/requires.txt
+pysoldaemon.egg-info/top_level.txt
+pysoldaemon/daemon/Daemon.py
+pysoldaemon/daemon/__init__.py
