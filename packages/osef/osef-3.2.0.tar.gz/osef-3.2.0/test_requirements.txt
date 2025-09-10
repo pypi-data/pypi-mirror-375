@@ -1,0 +1,7 @@
+# Formatting
+black==23.7.0
+pylint==2.17.3
+
+# Testing
+pytest-cov==2.12.1
+parameterized==0.9.0
