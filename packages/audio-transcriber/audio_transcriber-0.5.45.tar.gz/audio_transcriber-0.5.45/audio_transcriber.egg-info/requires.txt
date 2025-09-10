@@ -1,0 +1,6 @@
+fastmcp>=2.11.3
+torch>=2.8.0
+transformers>=4.56.1
+pyaudio>=0.2.14
+openai-whisper>=20250625
+setuptools-rust>=1.12.0
