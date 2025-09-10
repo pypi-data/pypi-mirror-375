@@ -1,0 +1,31 @@
+[project]
+name = "xcoding-plugin"
+version = "0.1.0"
+description = "XCoding Plugin Python package for plugin development and management"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.25.0",
+    "PyYAML>=6.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "mypy>=0.910"
+]
+
+[project.scripts]
+xcoding-plugin = "main:cli_main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.urls]
+Homepage = "https://github.com/xcoding/plugin"
+Repository = "https://github.com/xcoding/plugin"
+Documentation = "https://xcoding-plugin.readthedocs.io/"
+"Changelog" = "https://github.com/xcoding/plugin/blob/main/CHANGELOG.md"
