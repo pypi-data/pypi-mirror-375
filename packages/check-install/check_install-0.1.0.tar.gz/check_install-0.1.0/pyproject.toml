@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "check-install"
+version = "0.1.0"
+description = "Auto-installs missing Python packages at runtime or startup."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Dayton Jones" }
+]
+dependencies = []
+keywords = ["auto-install", "pip", "helper", "import", "dependency", "missing", "runtime", "preflight"]
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/daytonjones/check-install"
+Source = "https://github.com/daytonjones/check-install"
+Issues = "https://github.com/daytonjones/check-install/issues"
