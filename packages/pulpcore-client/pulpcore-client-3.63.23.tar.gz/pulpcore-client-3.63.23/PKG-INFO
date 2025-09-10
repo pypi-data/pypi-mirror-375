@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: pulpcore-client
+Version: 3.63.23
+Summary: Pulp 3 API
+Home-page: 
+Author: Pulp Team
+Author-email: pulp-list@redhat.com
+License: GPL-2.0-or-later
+Keywords: pulp,pulpcore,client,Pulp 3 API
+Requires-Python: >=3.4
+
+    Fetch, Upload, Organize, and Distribute Software Packages  # noqa: E501
+    
