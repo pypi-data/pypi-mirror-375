@@ -1,0 +1,3 @@
+[console_scripts]
+att = attachments.cli:app
+attachments = attachments.cli:app
