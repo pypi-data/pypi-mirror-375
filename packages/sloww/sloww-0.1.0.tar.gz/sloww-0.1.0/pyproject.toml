@@ -1,0 +1,24 @@
+[project]
+name = "sloww"
+version = "0.1.0"
+description = "A lightweight TCP proxy that adds configurable delays and bandwidth limits"
+authors = [
+    {name = "Eric Gazoni",email = "eric@adimian.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "click (>=8.2.1,<9.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+sloww = 'sloww.cli:main'
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.3.0"

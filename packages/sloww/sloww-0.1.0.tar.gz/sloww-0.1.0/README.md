@@ -1,0 +1,165 @@
+# Sloww - Simple Slow TCP Proxy
+
+A lightweight TCP proxy that adds configurable delays and bandwidth limits.
+Perfect for testing application behavior under poor network conditions.
+
+## Why Sloww?
+
+- **Simple**: Single Python file, no complex configuration
+- **Lightweight**: Uses asyncio, handles many connections efficiently
+- **Cross-platform**: Works on Linux, macOS, Windows
+- **No root required**: Runs in userspace
+- **Docker-ready**: Easy containerization for development environments
+
+## Installation
+
+```bash
+pip install sloww
+```
+
+## Usage
+
+```bash
+# Basic usage
+sloww LISTEN_PORT DESTINATION:PORT [OPTIONS]
+
+# Slow down PostgreSQL
+sloww localhost:5432 -l :5433 -s 100kb -d 50ms
+
+# Simulate 3G connection
+sloww api.example.com:80 -l :8080 --preset 3g
+
+# Listen on all interfaces
+sloww db.internal:3306 -l 0.0.0.0:3307 -s 1mb
+```
+
+### Options
+
+- `-l, --listen`: Listen address (default: 127.0.0.1:RANDOM_PORT)
+- `-s, --speed`: Speed limit (e.g., 100kb, 1mb) (default: unlimited)
+- `-d, --delay`: Delay per packet (e.g., 50ms, 0.5s) (default: none)
+- `-b, --buffer-size`: Buffer size in bytes (default: 8192)
+- `--preset`: Network preset (3g, slow-3g, dialup, terrible) (default: none)
+- `--stats-interval`: Print stats every N minute
+- `--connect-timeout`: Timeout for establishing a connection to the origin
+
+### Network Presets
+
+| Preset   | Speed | Delay | Use Case                     |
+|----------|-------|-------|------------------------------|
+| fast-4g  | 9mb   | 60ms  | Mobile 4G connection         |
+| 4g       | 1.6mb | 150ms | Regular mobile 4G connection |
+| 3g       | 500kb | 400ms | Poor mobile 3G connection    |
+| dialup   | 56kb  | 100ms | 56k modem (nostalgia!)       |
+| terrible | 10kb  | 500ms | Worst case scenario testing  |
+
+## Docker
+
+### Quick Start
+
+```bash
+docker build -t sloww .
+
+# Proxy PostgreSQL with 3G speeds
+docker run -p 5433:5432 sloww your-db:5432 -l :5432 --preset 3g
+```
+
+### Docker Compose Example
+
+```yaml
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  postgres-slow:
+    image: ghcr.io/ericgazoni/sloww:latest
+    command: ["postgres:5432", "-l", "0.0.0.0:5432", "--preset", "3g"]
+    ports:
+      - "5433:5432"  # Access slow PG on localhost:5433
+```
+
+### Testing Different Network Conditions
+
+```yaml
+services:
+  # Your API
+  api:
+    image: your-api:latest
+
+  # Near region (low latency)
+  api-near:
+    image: ghcr.io/ericgazoni/sloww:latest
+    command: ["api:8080", "-l", "0.0.0.0:8081", "-d", "20ms"]
+    ports:
+      - "8081:8080"
+
+  # Remote region (medium latency)
+  api-remote:
+    image: ghcr.io/ericgazoni/sloww:latest
+    command: ["api:8080", "-l", "0.0.0.0:8082", "-d", "100ms"]
+    ports:
+      - "8082:8080"
+
+  # Far region (high latency)
+  api-far:
+    image: ghcr.io/ericgazoni/sloww:latest
+    command: ["api:8080", "-l", "0.0.0.0:8083", "-d", "200ms"]
+    ports:
+      - "8083:8080"
+
+  # Mobile 3G
+  api-mobile:
+    image: ghcr.io/ericgazoni/sloww:latest
+    command: ["api:8080", "-l", "0.0.0.0:8084", "--preset", "3g"]
+    ports:
+      - "8084:8080"
+```
+
+## Use Cases
+
+### Development & Testing
+- Test timeout handling
+- Verify loading states and spinners
+- Test progressive data loading
+- Validate error recovery
+- Check connection pooling behavior
+
+### Database Testing
+```bash
+# Test your app with slow database
+sloww production.db:5432 -l :5433 -s 50kb -d 100ms
+psql postgresql://localhost:5433/myapp
+
+# See how your ORM handles connection delays
+sloww mysql.prod:3306 -l :3307 --preset slow-3g
+```
+
+### API Testing
+```bash
+# Test mobile app with realistic 3G
+sloww api.example.com:443 -l :8080 --preset 3g
+
+# Simulate cross-region latency
+sloww api.example.com:443 -l :8080 -d 200ms
+```
+
+## Contributing
+
+This is a simple tool that does one thing well. PRs welcome for:
+- Additional network presets
+- IPV6 Support
+- Better statistics/monitoring
+- Connection persistence options
+- HTTP/WebSocket protocol awareness
+- TLS/SSL support
+- Jitter/loss
+
+## License
+
+MIT License
+
+## Credits
+
+Inspired by [Sloxy](https://github.com/jakob/sloxy) C implementation by Jakob Egger.
