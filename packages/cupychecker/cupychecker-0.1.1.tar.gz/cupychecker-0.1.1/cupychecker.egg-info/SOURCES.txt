@@ -1,0 +1,14 @@
+MANIFEST.in
+README.md
+pyproject.toml
+setup.cfg
+cupychecker/__init__.py
+cupychecker/checker.py
+cupychecker/helpers.py
+cupychecker/magic_runner.py
+cupychecker/task_loader.py
+cupychecker.egg-info/PKG-INFO
+cupychecker.egg-info/SOURCES.txt
+cupychecker.egg-info/dependency_links.txt
+cupychecker.egg-info/top_level.txt
+cupychecker/exercises/modules/module_1/tasks/task_1.yaml
