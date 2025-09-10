@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: wdb_utils
+Version: 3.5.0
+Summary: Utilities for querying and loading data into an Oracle, Snowflake, or Postgres database.
+Home-page: https://github.com/cwade/wdb_utils
+Author: Courtney Wade
+Project-URL: repository, https://github.com/cwade/wdb_utils
+Keywords: pandas,oracle,query
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7, <4
+Description-Content-Type: text/markdown
+Requires-Dist: oracledb>=1.2
+Requires-Dist: pandas>=1.0
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: snowflake-connector-python>=3.15.0
+Requires-Dist: psycopg2>=2.9.10
+Dynamic: author
+Dynamic: description
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+Utilities for querying and loading data into an Oracle, Snowflake, or Postgres database. Queries return to pandas dataframes. Faster than SQLAlchemy.
