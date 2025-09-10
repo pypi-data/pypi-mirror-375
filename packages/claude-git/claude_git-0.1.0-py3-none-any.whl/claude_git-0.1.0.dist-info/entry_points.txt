@@ -1,0 +1,3 @@
+[console_scripts]
+claude-git-commit = claude_git.post_tool_use:main
+claude-git-init = claude_git.session_start:main
