@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dieopt"
+version = "0.1.0"
+description = "Die layout and optimisation tool"
+authors = [{ name = "Bjorn Schroder Nielsen", email = "Bjorn@SchroderNielsen.com" }]
+readme = "README.md"
+license = "MPL-2.0"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.22",
+    "matplotlib"
+]
+
+[project.urls]
+Homepage = "https://github.com/BjornFS/dieopt"
+Issues = "https://github.com/BjornFS/dieopt/issues"
