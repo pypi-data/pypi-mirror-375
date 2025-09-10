@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: rasaio_integrations
+Version: 1.0.15
+Summary: Python class to integrate rasa.io and another customer database
+Home-page: https://bitbucket.org/rasa-io/rasa-integrations.git
+Author: rasa.io
+Author-email: chandra.bhushan@rasa.io
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
+Requires-Python: >=3.6, <4
+Description-Content-Type: text/x-rst
+License-File: LICENSE.txt
+
+Python class to integrate rasa.io and another customer database
+
