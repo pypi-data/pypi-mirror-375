@@ -1,0 +1,16 @@
+MANIFEST.in
+README.md
+pyproject.toml
+setup.cfg
+src/ai_ebash.egg-info/PKG-INFO
+src/ai_ebash.egg-info/SOURCES.txt
+src/ai_ebash.egg-info/dependency_links.txt
+src/ai_ebash.egg-info/entry_points.txt
+src/ai_ebash.egg-info/requires.txt
+src/ai_ebash.egg-info/top_level.txt
+src/aiebash/__init__.py
+src/aiebash/__main__.py
+src/aiebash/api_client.py
+src/aiebash/block_runner.py
+src/aiebash/formatter_text.py
+src/aiebash/settings.py
