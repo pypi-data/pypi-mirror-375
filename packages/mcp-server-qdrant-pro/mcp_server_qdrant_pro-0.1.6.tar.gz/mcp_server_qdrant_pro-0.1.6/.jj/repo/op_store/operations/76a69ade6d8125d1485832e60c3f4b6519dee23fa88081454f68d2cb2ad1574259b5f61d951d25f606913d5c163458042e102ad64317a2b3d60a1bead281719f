@@ -1,0 +1,41 @@
+
+@RjzÇşc:p*­4âO(-Ö)]Ä:¶ı
+¾»Ÿ]ù/	äÉÏ,¸˜­*‹;gìä¬w”İ×‹/²‘mv@@CœÀf7îÊ°|—€Sğ›@Jz‚'XŞ5^d|¶K6	}+X³õµ¾ºU[%;}t¨s:=NKËÒ[“ñcœá
+
+õêÙ’3ÜüÿÿÿÿÿÿÿøêÙ’3Üüÿÿÿÿÿÿÿ/commit 2ec1c530eeb61d523ac898cfac4d11255b7b30f8"Hyperion.local*taika2î	
+argså	jj commit -m 'feat: add comprehensive test coverage for VoyageAI provider
+
+Added 40 new tests covering:
+
+VoyageAI Provider Integration (21 tests):
+- Provider initialization and configuration
+- Vector naming and dimensions for all supported models  
+- Lazy client initialization and error handling
+- Async embedding methods with mocked API calls
+- API error handling and exception propagation
+- Factory integration and settings validation
+- Model dimensions coverage and consistency
+- Vector naming conflicts prevention with FastEmbed
+- Environment variable API key detection
+
+Embedding Factory Tests (11 tests):
+- Provider creation via factory pattern
+- Multiple VoyageAI model support
+- Interface compliance validation
+- Vector specification differences
+- Model name preservation
+- Environment variable integration
+- Provider validation fallback behavior
+- Case insensitive provider handling
+
+Settings Tests (8 new tests):
+- VoyageAI provider string validation
+- Environment variable configuration
+- Invalid provider fallback behavior  
+- Case insensitive and whitespace handling
+- Multiple VoyageAI model configurations
+
+Total test coverage: 118 tests (40 new for VoyageAI)
+All tests pass with comprehensive mocking to avoid external API dependencies'",
+œI	’ÏN–bÅ¾a³œ@ä.ÁÅ0î¶R:È˜Ï¬M%[{0ø"
+¾•»Š~ùæ\D¬‚¨Ö¥é¡á(
