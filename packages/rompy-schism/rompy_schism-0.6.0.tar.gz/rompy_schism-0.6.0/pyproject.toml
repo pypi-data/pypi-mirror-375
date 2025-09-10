@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools", "versioneer[toml]"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rompy-schism"
+description = "SCHISM model plugin for rompy"
+readme = "README.md"
+authors = [
+  {name = "Rompy Contributors", email = "developers@rompy.com"}
+]
+maintainers = [
+  {name = "Rompy Contributors", email = "developers@rompy.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+license = {text = "Apache Software License 2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "rompy>=0.6",
+    "pydantic>2",
+    "pylibs-ocean",
+    "pytmd",
+]
+
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "coverage",
+    "mypy",
+    "pytest",
+    "ruff",
+    "requests"
+]
+test = [
+    "pytest",
+    "coverage",
+    "requests"
+]
+docs = [
+    "autodoc_pydantic",
+    "ipython",
+    "nbsphinx",
+    "pydata_sphinx_theme",
+    "sphinx<7.3.6",
+    "sphinx-collections",
+]
+
+[project.entry-points."rompy.config"]
+schismcsiro = "rompy_schism.config:SchismCSIROConfig"
+schism = "rompy_schism.config:SCHISMConfig"
+
+[project.urls]
+bugs = "https://github.com/rom-py/rompy-schism/issues"
+changelog = "https://github.com/rom-py/rompy-schism/blob/master/changelog.md"
+homepage = "https://github.com/rom-py/rompy-schism"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+"*" = ["*.y*ml", "*.csv", "*.html"]
+
+[tool.setuptools.dynamic]
+version = {attr = "rompy_schism.__version__"}
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+
+[tool.black]
+line-length = 88

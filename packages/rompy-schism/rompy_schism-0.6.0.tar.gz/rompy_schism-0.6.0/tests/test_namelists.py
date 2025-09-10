@@ -1,0 +1,40 @@
+from pathlib import Path
+
+import pytest
+
+# Import test utilities
+from test_utils.logging import get_test_logger
+
+from tests.utils import compare_nmls
+
+# Initialize logger
+logger = get_test_logger(__name__)
+
+
+# Import test utilities
+from test_utils.logging import get_test_logger
+
+# Initialize logger
+logger = get_test_logger(__name__)
+
+pytest.importorskip("rompy_schism")
+
+from rompy_schism.namelists import Ice, Icm, Mice, Param, Sediment
+
+SAMPLE_DIR = (
+    Path(__file__).parent.parent
+    / "src"
+    / "rompy_schism"
+    / "namelists"
+    / "sample_inputs"
+)
+
+
+def test_namelists(tmp_path):
+    for nml in [Icm, Param, Sediment, Mice, Ice]:
+        instance = nml()
+        instance.write_nml(tmp_path)
+        name = instance.__class__.__name__.lower()
+        compare_nmls(
+            tmp_path / f"{name}.nml", SAMPLE_DIR / f"{name}.nml", raise_missing=False
+        )
