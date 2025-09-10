@@ -1,0 +1,3 @@
+[console_scripts]
+segyrecover = segyrecover.__main__:main
+segyrecover-cleanup = segyrecover.cleanup:cleanup_config
