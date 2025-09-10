@@ -1,0 +1,48 @@
+Metadata-Version: 2.4
+Name: mseep-agentica
+Version: 1.1.2
+Summary: LLM agents
+Home-page: https://github.com/shibing624/agentica
+Author: mseep
+Author-email: support@skydeck.ai
+License: Apache License 2.0
+Keywords: Agentica,Agent Tool,action,agent,agentica
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.10.0
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx
+Requires-Dist: loguru
+Requires-Dist: beautifulsoup4
+Requires-Dist: openai
+Requires-Dist: python-dotenv
+Requires-Dist: pydantic
+Requires-Dist: requests
+Requires-Dist: sqlalchemy
+Requires-Dist: scikit-learn
+Requires-Dist: markdownify
+Requires-Dist: tqdm
+Requires-Dist: rich
+Requires-Dist: pyyaml
+Requires-Dist: mcp
+Requires-Dist: puremagic
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+Package managed by MseeP.ai
