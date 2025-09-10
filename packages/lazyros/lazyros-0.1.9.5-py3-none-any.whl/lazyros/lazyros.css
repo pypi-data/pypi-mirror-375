@@ -1,0 +1,66 @@
+Horizontal {
+    height: 1fr;
+}
+
+TabbedContent Tabs .underline--bar {
+    color: transparent;
+}
+
+TabbedContent Tabs .-active {
+    color: green;
+}
+
+#left-pane, #right-pane {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#left-pane {
+    width: 30%;
+}
+
+#right-pane {
+    width: 70%;
+    border: round white;
+    border-title-align: left;
+}
+
+#right-pane.-active{
+    border: round green;
+}
+
+#node-container,
+#topic-container,
+#parameter-container
+{
+    border: round white;
+    border-title-align: left;
+}
+
+#node-container.-active,
+#topic-container.-active,
+#parameter-container.-active 
+{
+    border: round green;
+}
+
+.list-view ListView, .view-content RichLog {
+    border: none;
+    height: 1.2fr;
+    overflow-y: auto;
+    background: transparent;
+}
+
+.list-container {
+    border:round white;
+    height: 1fr;
+}
+
+.hidden {
+    display: none;
+}
+
+HeaderTitle {
+    content-align: right middle;
+    width: 100%;
+}
