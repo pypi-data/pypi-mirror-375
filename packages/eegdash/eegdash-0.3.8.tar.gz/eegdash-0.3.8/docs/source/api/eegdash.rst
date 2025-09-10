@@ -1,0 +1,30 @@
+eegdash package
+===============
+
+.. automodule:: eegdash
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   eegdash.dataset
+   eegdash.features
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   eegdash.api
+   eegdash.bids_eeg_metadata
+   eegdash.const
+   eegdash.data_utils
+   eegdash.mongodb
+   eegdash.paths
+   eegdash.utils
