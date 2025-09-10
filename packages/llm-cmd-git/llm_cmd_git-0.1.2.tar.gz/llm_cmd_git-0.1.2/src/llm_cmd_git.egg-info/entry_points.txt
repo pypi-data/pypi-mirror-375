@@ -1,0 +1,5 @@
+[console_scripts]
+git-llm = llm_cmd_git.cli:cli
+
+[llm]
+git = llm_cmd_git.hooks

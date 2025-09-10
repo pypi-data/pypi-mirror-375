@@ -1,0 +1,22 @@
+[project]
+name = "llm-cmd-git"
+version = "0.1.2"
+description = "LLM plugin to enhance Git experience"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "llm",
+    "pydanclick",
+    "pydantic-settings",
+    "questionary",
+    "rich-click",
+]
+
+[project.scripts]
+git-llm = "llm_cmd_git.cli:cli"
+
+[project.entry-points."llm"]
+git = "llm_cmd_git.hooks"
+
+[tool.uv]
+package = true
