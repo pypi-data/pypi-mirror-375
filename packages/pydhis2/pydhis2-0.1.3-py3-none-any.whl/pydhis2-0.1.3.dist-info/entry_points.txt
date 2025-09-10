@@ -1,0 +1,7 @@
+[console_scripts]
+pydhis2 = pydhis2.cli.main:app
+pydhis2-daily-sync = examples.daily_sync:main
+pydhis2-demo-test = demo_test:main
+pydhis2-health-demo = real_health_data_demo:main
+pydhis2-monthly-report = examples.monthly_report:main
+pydhis2-quick-demo = quick_demo:main
