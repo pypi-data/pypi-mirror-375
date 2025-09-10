@@ -1,0 +1,12 @@
+sqlalchemy>=2.0
+
+[dev]
+mqlalchemy[docs,test]
+
+[docs]
+sphinx>=8.1
+sphinx-rtd-theme
+sphinx-autodoc-typehints
+
+[test]
+coverage[toml]
