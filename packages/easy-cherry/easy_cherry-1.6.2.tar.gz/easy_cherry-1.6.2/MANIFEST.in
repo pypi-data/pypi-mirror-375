@@ -1,0 +1,3 @@
+This file tells setuptools which non-Python files to include in the package.
+It's necessary for including the 'py.typed' marker file.
+include easy_cherry/py.typed

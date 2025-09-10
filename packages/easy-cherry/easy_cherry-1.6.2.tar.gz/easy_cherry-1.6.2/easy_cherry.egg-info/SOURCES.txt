@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+easy_cherry/__init__.py
+easy_cherry/py.typed
+easy_cherry/slack.py
+easy_cherry.egg-info/PKG-INFO
+easy_cherry.egg-info/SOURCES.txt
+easy_cherry.egg-info/dependency_links.txt
+easy_cherry.egg-info/requires.txt
+easy_cherry.egg-info/top_level.txt
