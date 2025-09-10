@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: mseep-mcpdemo
+Version: 0.1.2
+Summary: Add your description here
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.13
+Description-Content-Type: text/plain
+Requires-Dist: mcp-use>=0.1.0
+Requires-Dist: langchain-groq>=0.3.2
+Requires-Dist: python-dotenv>=1.1.0
+
+Package managed by MseeP.ai
