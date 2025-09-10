@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "force_overwrite": false,
+    "packages": 
+        {   
+            "templateflow": 
+            {
+                "home_dir": "local"
+            },         
+            "ants": 
+            {
+                "cont_tech": "local",
+                "version": "2.5.3",
+                "container": "local"
+            },
+            "freesurfer": 
+            {
+                "cont_tech": "local",
+                "version": "7.4.1",
+                "container": "local",
+                "license": "/opt/freesurfer/.license"
+            },
+            "fsl": 
+            {
+                "cont_tech": "local",
+                "version": "6.10.0",
+                "container": "local"
+            }
+        },
+    "templates": 
+        {
+            "annots": 
+            {
+                "tool": "templateflow",
+                "space": "fsaverage7",
+                "folder": "annot_atlases"
+            },
+            "gcs":
+            {
+                "tool": "local",
+                "space": "fsaverage7",
+                "folder": "gcs_atlases"
+            },
+            "volume": 
+            {
+                "tool": "templateflow",
+                "space": "MNI152NLin2009cAsym",
+                "folder": "vol_atlases"
+            }
+        },
+    "outputs":
+        {
+            "transforms": "ants-spattransf",
+            "freesurfer": "freesurfer"
+        }
+}
