@@ -1,0 +1,17 @@
+torch
+monai
+numpy
+scipy
+connected-components-3d
+nibabel
+tqdm
+
+[all]
+pytest
+cupy-cuda12x
+
+[gpu]
+cupy-cuda12x
+
+[test]
+pytest
