@@ -1,0 +1,6 @@
+httpx[http2]>=0.23.0
+xmltodict>=0.13.0
+
+[cli]
+click>=8.1.0
+loguru>=0.6.0
