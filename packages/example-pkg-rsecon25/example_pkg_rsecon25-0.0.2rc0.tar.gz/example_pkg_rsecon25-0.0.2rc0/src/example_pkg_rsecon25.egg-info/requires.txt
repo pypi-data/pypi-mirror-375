@@ -1,0 +1,8 @@
+pybedtools
+numpy>=2
+
+[dev]
+pytest>=7
+coverage
+flake8
+mypy
