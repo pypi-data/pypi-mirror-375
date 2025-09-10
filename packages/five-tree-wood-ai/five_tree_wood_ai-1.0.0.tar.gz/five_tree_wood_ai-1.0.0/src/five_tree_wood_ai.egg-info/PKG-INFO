@@ -1,0 +1,284 @@
+Metadata-Version: 2.4
+Name: five-tree-wood-ai
+Version: 1.0.0
+Summary: Five Tree Wood AI - AI utilities for home assistant
+Author-email: Penny Wood <github@ninjateaparty.com>
+License: MIT
+Project-URL: Homepage, https://github.com/Swamp-Ig/Five-Tree-Wood-AI
+Project-URL: Repository, https://github.com/Swamp-Ig/Five-Tree-Wood-AI
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pandas>=2.3.2
+Requires-Dist: scikit_learn>=1.7.1
+Requires-Dist: packaging>=25.0
+Requires-Dist: influxdb-client>=1.49
+Requires-Dist: flask>=3.1.2
+Provides-Extra: dev
+Requires-Dist: black>=24.0.0; extra == "dev"
+Requires-Dist: isort>=5.13.0; extra == "dev"
+Requires-Dist: pylint>=3.2.0; extra == "dev"
+Requires-Dist: autopep8>=2.3.0; extra == "dev"
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Dynamic: license-file
+
+# Five Tree Wood AI
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+![Supports armhf Architecture][armhf-shield]
+![Supports armv7 Architecture][armv7-shield]
+![Supports i386 Architecture][i386-shield]
+
+AI-powered aircon temperature prediction for Home Assistant.
+
+## About
+
+Five Tree Wood AI is a machine learning model for predicting indoor temperature using environmental sensor data. It can be used as a standalone application or as a Home Assistant add-on.
+
+## Home Assistant Add-on Installation
+
+### Method 1: Add Repository (Recommended)
+
+1. In Home Assistant, go to **Supervisor** → **Add-on Store**
+2. Click the **⋮** menu → **Repositories**
+3. Add this repository URL: `https://github.com/Swamp-Ig/five-tree-wood-ai`
+4. Find "Five Tree Wood AI" in the add-on store and click **Install**
+5. Configure the add-on (see Configuration section)
+6. Start the add-on
+
+### Method 2: Manual Installation
+
+1. Clone this repository to your Home Assistant `addons` folder
+2. Restart Home Assistant Supervisor
+3. The add-on will appear in your local add-ons list
+
+## Standalone Installation
+
+### 1. Configuration
+
+Copy the secrets template and configure your InfluxDB connection:
+
+```bash
+cp secrets.ini.template secrets.ini
+# Edit secrets.ini with your actual InfluxDB credentials
+```
+
+### 2. Install Dependencies
+
+Install the package in development mode with all dependencies:
+
+```bash
+# Install package with production dependencies
+pip install -e .
+
+# Or install with development dependencies
+pip install -e .[dev]
+```
+
+Alternatively, you can still use requirements.txt:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Setup Code Formatting (Optional)
+
+```bash
+# Install git hooks for automatic formatting
+python scripts/install_hooks.py
+
+# Or manually format code anytime
+python scripts/format_code.py
+```
+
+## Package Structure
+
+```
+src/
+└── five_tree_wood/
+    └── ai/
+        └── aircon/
+            ├── train.py        # Model training functionality
+            ├── predict.py      # Model prediction functionality
+            └── __init__.py     # Package-level exports
+scripts/
+├── format_code.py      # Code formatting script
+├── check_tools.py      # Tool availability checker
+├── install_hooks.py    # Git hooks installer
+└── pre_commit_hook.py  # Pre-commit hook implementation
+```
+
+## Usage
+
+### Package-level imports
+
+```python
+from five_tree_wood.ai.aircon import train_model, predict_temperature
+
+# Train a model
+model, features = train_model()
+
+# Make a prediction
+prediction = predict_temperature(
+    time="2025-09-08T14:30:00",
+    inside_temperature=22.5,
+    outside_temperature=15.0,
+    roof_temperature=18.0
+)
+```
+
+## Usage
+
+### Training the Model
+
+```bash
+# Using the installed script
+aircon-ai train
+
+# Or directly with Python
+python src/main.py train
+```
+
+### Making Predictions
+
+```bash
+# Using the installed script
+aircon-ai predict now 22.5 15.0 18.0
+
+# Or directly with Python
+python src/main.py predict now 22.5 15.0 18.0
+```
+
+### Running the API Server
+
+```bash
+# Using the installed script
+aircon-ai api
+
+# Or directly with Python
+python src/main.py api
+```
+
+### Direct Package Usage
+
+```python
+# Simple package-level imports
+from five_tree_wood.ai.aircon import train_model, predict_temperature
+
+# Train a model
+model, features = train_model()
+
+# Make a prediction
+prediction = predict_temperature(
+    time="2025-09-08T14:30:00",
+    inside_temperature=22.5,
+    outside_temperature=15.0,
+    roof_temperature=18.0
+)
+```
+
+### API Endpoints
+
+- `POST /predict` - Make temperature predictions
+- `GET /health` - Health check
+- `GET /info` - API information
+- `POST /train` - Train the model
+
+## Configuration
+
+The application uses `secrets.ini` for sensitive configuration:
+
+```ini
+[influxdb]
+url = http://your-influxdb-server:8086
+token = your-influxdb-token
+org = your-organization
+bucket = your-bucket-name
+```
+
+**Important**: Never commit `secrets.ini` to version control. Use `secrets.ini.template` as a reference.
+
+## Development
+
+### Installation for Development
+
+```bash
+# Install in editable mode with dev dependencies
+pip install -e .[dev]
+
+# Or install dev tools separately
+pip install black isort pylint pytest
+```
+
+### Running Tests
+
+```bash
+# Using pytest directly
+python -m pytest tests/ -v
+
+# Or with setuptools
+python -m pytest
+```
+
+### Code Formatting
+
+This project uses automated PEP8 code formatting with the following tools:
+
+- **Black**: Code formatter for consistent style
+- **isort**: Import statement organizer
+- **pylint**: Style guide enforcement
+
+#### Manual Formatting
+
+```bash
+# Format all code
+black src tests
+
+# Check with pylint
+pylint src tests
+```
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
+
+# Format all code using our script
+
+python scripts/format_code.py
+
+# Or use tools directly
+
+python -m black src/
+python -m isort src/
+python -m pylint src/
+
+```
+
+#### Automatic Formatting
+
+- **Git hooks**: Install with `python scripts/install_hooks.py`
+- **VS Code**: Automatic formatting on save (configured in `.vscode/settings.json`)
+
+#### Configuration
+
+Tool configuration is centralized in modern Python standards:
+
+- **pyproject.toml**: Black, isort, and pytest configuration
+  # (flake8 configuration removed; pylint is now used)
+
+## Node-RED Integration
+
+Import the flow from `node-red-aircon-flow.json` to integrate with Node-RED.
+```
