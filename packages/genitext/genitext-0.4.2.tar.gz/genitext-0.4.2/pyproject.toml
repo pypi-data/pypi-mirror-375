@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genitext"
+version = "0.4.2"
+description = "A CLI tool for generating high-quality image-text pairs for AI training"
+authors = [
+    {name = "Richard Tang", email = "richardgtang@gmail.com"}
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "Pillow>=9.0.0",
+    "tqdm>=4.64.0",
+    "matplotlib>=3.6.0",
+    "kagglehub>=0.1.0",
+    "pyyaml>=6.0",
+    "bitsandbytes>=0.41.0",
+    "accelerate>=0.26.0",
+    "numpy>=1.21.0",
+    "transformers>=4.21.0",
+    "typing-extensions>=4.5.0",
+    "ollama>=0.1.7",
+    "prompt-toolkit>=3.0.0",
+    "click>=8.0.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/CodeKnight314/GenIText"
+Repository = "https://github.com/CodeKnight314/GenIText"
+Issues = "https://github.com/CodeKnight314/GenIText/issues"
+
+[project.scripts]
+genitext = "GenIText.cli:cli"
+
