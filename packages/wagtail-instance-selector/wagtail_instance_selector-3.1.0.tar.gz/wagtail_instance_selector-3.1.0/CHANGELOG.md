@@ -1,0 +1,71 @@
+Changelog
+=========
+
+### 3.1.0 (09/09/2025)
+
+- Wagtail 6.3+ support, drops support for all versions before 6.3.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/38
+- Replaces setup.py w/ pyproject.toml
+- Replaces black w/ ruff & fixes linting
+- Adds a CI file to test multiple wagtail/python versions & check linting.
+
+### 3.0.1 (03/11/2023)
+
+- Wagtail 5.0+ - Update get_value_data to assign None value instead of empty string
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/36
+
+### 3.0.0 (27/09/2023)
+
+- Add support for Wagtail 5 and drop support for all Wagtail versions before 4.1.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/28
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/35
+
+### 2.1.2
+
+- Fix Django 3.2+ compatibility re: default_app_config declarations
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/24
+
+### 2.1.1
+
+- Fix version check for WidgetWithScript.get_value_data #17
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/17
+
+### 2.1.0 (17/05/2021)
+
+- Wagtail 2.13 compatibility.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/14
+
+### 2.0.1 (01/05/2021)
+
+- Fix for custom user model compatibility.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/13.
+
+### 2.0.0 (24/08/2020)
+
+- Django 3 compatibility: replaced calls to django.conf.urls.url with django.urls.path or re_path.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/9.
+- Frontend: fixed a bug where the actions container used for the select button might not exist.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/8
+- Frontend: simplified object selection in list items by consolidating on the
+  data-instance-selector-pk attribute.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/8
+
+### 1.2.1 (23/03/2020)
+
+- Django 3 import fix.
+  PR: https://github.com/ixc/wagtail-instance-selector/pull/2.
+
+
+### 1.1.0 (23/09/2019)
+
+- Added hooks to enable selection on non-standard list views.
+
+
+### 1.0.1 (06/06/2019)
+
+- PyPI fix.
+
+
+### 1.0.0 (06/06/2019)
+
+- Initial release.

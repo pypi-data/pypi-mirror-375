@@ -1,0 +1,10 @@
+wagtail>=6.3
+wagtail-modeladmin
+
+[dev]
+django>=4.2
+ruff==0.12.12
+ipdb<1.0,>=0.13
+
+[testing]
+django_webtest
