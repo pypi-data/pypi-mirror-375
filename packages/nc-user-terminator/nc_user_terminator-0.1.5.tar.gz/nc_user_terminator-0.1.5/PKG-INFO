@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: nc-user-terminator
+Version: 0.1.5
+Summary: OAuth client wrapper for multi-tenant projects
+Author: bw_song
+Author-email: m132777096902@gmail.com
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: cachetools==6.2.0
+Dynamic: author-email
+Dynamic: requires-python
+
+# 更新
++ V0.1.5
+  - 新增本地缓存机制
