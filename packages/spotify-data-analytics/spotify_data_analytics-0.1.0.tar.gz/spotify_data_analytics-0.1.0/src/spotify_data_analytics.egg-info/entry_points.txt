@@ -1,0 +1,2 @@
+[console_scripts]
+spotify-pipeline = spotify_data_analytics.cli:main

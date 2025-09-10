@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/spotify_data_analytics/__init__.py
+src/spotify_data_analytics/cli.py
+src/spotify_data_analytics/extract_data.py
+src/spotify_data_analytics/load_data.py
+src/spotify_data_analytics/transform_data.py
+src/spotify_data_analytics/utils.py
+src/spotify_data_analytics.egg-info/PKG-INFO
+src/spotify_data_analytics.egg-info/SOURCES.txt
+src/spotify_data_analytics.egg-info/dependency_links.txt
+src/spotify_data_analytics.egg-info/entry_points.txt
+src/spotify_data_analytics.egg-info/requires.txt
+src/spotify_data_analytics.egg-info/top_level.txt
