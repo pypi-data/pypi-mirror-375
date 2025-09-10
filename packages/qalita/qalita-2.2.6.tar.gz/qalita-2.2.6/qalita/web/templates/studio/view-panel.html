@@ -1,0 +1,282 @@
+<div id="view_panel_root">
+    <div class="muted" id="view_panel_splash" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+        <h1>View Panel</h1>
+        <p>Here will be displayed contextualized data.</p>
+    </div>
+
+    <div id="vp_image" style="display:none; height:100%; overflow:auto;">
+        <img id="vp_image_img" alt="image" style="max-width:100%; height:auto; display:block; margin: 0 auto;" />
+    </div>
+
+    <div id="vp_pdf" style="display:none; height:100%;">
+        <iframe id="vp_pdf_iframe" title="PDF" style="width:100%; height:100%; border:0;"></iframe>
+    </div>
+
+    <div id="vp_text" style="display:none; height:100%; overflow:auto;">
+        <pre id="vp_text_pre" style="white-space:pre-wrap; word-break:break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; line-height: 1.5; padding: 8px;"></pre>
+    </div>
+
+    <div id="vp_json" style="display:none; height:100%; overflow:auto;">
+        <pre id="vp_json_pre" style="white-space:pre; word-break:normal; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; line-height: 1.5; padding: 8px;"></pre>
+    </div>
+
+    <div id="vp_table" style="display:none; height:100%; overflow:auto;">
+        <div style="width:100%; overflow:auto;">
+            <table id="vp_table_tbl" style="border-collapse: collapse; width:100%; min-width: 520px;">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="vp_sources" style="margin-top:10px;">
+        <div id="vp_sources_container" style="display:grid; grid-template-columns: repeat( auto-fit, minmax(220px, 1fr) ); gap:10px;"></div>
+    </div>
+</div>
+
+<script>
+  (function(){
+    var root = document.getElementById('view_panel_root');
+    var splash = document.getElementById('view_panel_splash');
+    var vpImage = document.getElementById('vp_image');
+    var vpImageImg = document.getElementById('vp_image_img');
+    var vpPdf = document.getElementById('vp_pdf');
+    var vpPdfIframe = document.getElementById('vp_pdf_iframe');
+    var vpText = document.getElementById('vp_text');
+    var vpTextPre = document.getElementById('vp_text_pre');
+    var vpJson = document.getElementById('vp_json');
+    var vpJsonPre = document.getElementById('vp_json_pre');
+    var vpTable = document.getElementById('vp_table');
+    var vpTableTbl = document.getElementById('vp_table_tbl');
+    var vpSources = document.getElementById('vp_sources');
+    var vpSourcesContainer = document.getElementById('vp_sources_container');
+
+    function hideAll(){
+      [vpImage, vpPdf, vpText, vpJson, vpTable].forEach(function(el){ if (el) el.style.display = 'none'; });
+      if (splash) splash.style.display = 'none';
+    }
+
+    function toObjectRowsFromItems(items){
+      // items: array of objects -> { headers: string[], rows: string[][] }
+      if (!Array.isArray(items) || !items.length) return { headers: [], rows: [] };
+      var headers = Object.keys(items[0]);
+      var rows = items.map(function(it){ return headers.map(function(h){ var v = it[h]; return v == null ? '' : String(v); }); });
+      return { headers: headers, rows: rows };
+    }
+
+    function toRowsFromCsv(csv){
+      // naive CSV split (no advanced quoting); acceptable for simple cases
+      var lines = String(csv || '').split(/\r?\n/).filter(Boolean);
+      var rows = lines.map(function(line){ return line.split(',').map(function(cell){ return cell.trim(); }); });
+      var headers = rows.length ? rows[0] : [];
+      var body = rows.length > 1 ? rows.slice(1) : [];
+      return { headers: headers, rows: body };
+    }
+
+    function renderTable(data){
+      // data may be: { headers, rows } or { items } or { csv }
+      var headers = [];
+      var rows = [];
+      if (data && Array.isArray(data.headers) && Array.isArray(data.rows)){
+        headers = data.headers; rows = data.rows;
+      } else if (data && Array.isArray(data.items)){
+        var obj = toObjectRowsFromItems(data.items);
+        headers = obj.headers; rows = obj.rows;
+      } else if (data && typeof data.csv === 'string'){
+        var parsed = toRowsFromCsv(data.csv);
+        headers = parsed.headers; rows = parsed.rows;
+      }
+      var thead = vpTableTbl.querySelector('thead');
+      var tbody = vpTableTbl.querySelector('tbody');
+      thead.innerHTML = '';
+      tbody.innerHTML = '';
+      if (headers && headers.length){
+        var trh = document.createElement('tr');
+        headers.forEach(function(h){
+          var th = document.createElement('th');
+          th.textContent = String(h);
+          th.style.textAlign = 'left';
+          th.style.borderBottom = '1px solid #e5e7eb';
+          th.style.padding = '6px 8px';
+          th.style.position = 'sticky';
+          th.style.top = '0';
+          th.style.background = '#ffffff';
+          trh.appendChild(th);
+        });
+        thead.appendChild(trh);
+      }
+      if (rows && rows.length){
+        rows.forEach(function(r){
+          var tr = document.createElement('tr');
+          r.forEach(function(c){
+            var td = document.createElement('td');
+            td.textContent = c == null ? '' : String(c);
+            td.style.borderBottom = '1px solid #f3f4f6';
+            td.style.padding = '6px 8px';
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    function pretty(obj){
+      try { return JSON.stringify(obj, null, 2); } catch(e) { return String(obj); }
+    }
+
+    function setView(conf){
+      conf = conf || {};
+      var type = (conf.type || '').toLowerCase();
+      hideAll();
+      if (type === 'image'){
+        var src = conf.src;
+        if (conf.file instanceof Blob){ src = URL.createObjectURL(conf.file); }
+        if (vpImageImg) vpImageImg.src = src || '';
+        if (vpImage) vpImage.style.display = 'block';
+        return;
+      }
+      if (type === 'pdf'){
+        var psrc = conf.src;
+        if (conf.file instanceof Blob){ psrc = URL.createObjectURL(conf.file); }
+        if (vpPdfIframe) vpPdfIframe.src = psrc || '';
+        if (vpPdf) vpPdf.style.display = 'block';
+        return;
+      }
+      if (type === 'text'){
+        if (vpTextPre) vpTextPre.textContent = conf.text || '';
+        if (vpText) vpText.style.display = 'block';
+        return;
+      }
+      if (type === 'json'){
+        var raw = conf.data;
+        var out = (typeof raw === 'string') ? raw : pretty(raw);
+        if (vpJsonPre) vpJsonPre.textContent = out || '';
+        if (vpJson) vpJson.style.display = 'block';
+        return;
+      }
+      if (type === 'table'){
+        renderTable(conf || {});
+        if (vpTable) vpTable.style.display = 'block';
+        return;
+      }
+      // fallback
+      if (splash) splash.style.display = 'flex';
+    }
+
+    // Expose a simple API to other panels
+    window.StudioViewPanel = { setView: setView };
+
+    function readUrlParam(key){ try { return new URLSearchParams(window.location.search).get(key) || ''; } catch(e){ return ''; } }
+    function showError(message){
+      try {
+        hideAll();
+        if (vpTextPre) vpTextPre.textContent = String(message || 'Error');
+        if (vpText) vpText.style.display = 'block';
+      } catch (e) { /* noop */ }
+    }
+    async function loadFromUrl(){
+      var srcId = readUrlParam('source_id');
+      if (!srcId) return;
+      try {
+        var limit = readUrlParam('limit');
+        var url = '/sources/preview?source_id=' + encodeURIComponent(srcId) + (limit ? ('&limit=' + encodeURIComponent(limit)) : '') + '&verbose=1';
+        console.log('[ViewPanel] fetching preview:', url);
+        var r = await fetch(url);
+        var j = await r.json();
+        if (j && j.ok && j.view) {
+          if (j.debug) console.log('[ViewPanel] debug:', j.debug);
+          setView(j.view);
+        } else {
+          console.warn('[ViewPanel] preview error:', j);
+          showError((j && (j.message || j.error && (j.error.detail || j.error.message))) || 'Preview failed');
+        }
+      } catch (e) {
+        console.error('[ViewPanel] preview request failed', e);
+        showError('Preview request failed');
+      }
+    }
+    function normalizeSources(j){
+      try {
+        if (!j) return [];
+        if (Array.isArray(j)) return j;
+        if (Array.isArray(j.items)) return j.items;
+        if (Array.isArray(j.data)) return j.data;
+        if (Array.isArray(j.results)) return j.results;
+        if (j.data && Array.isArray(j.data.items)) return j.data.items;
+        if (Array.isArray(j.sources)) return j.sources;
+        if (typeof j === 'object' && (j.id != null || j.name != null)) return [j];
+      } catch(e) {}
+      return [];
+    }
+    function renderSources(items){
+      var root = vpSourcesContainer; if (!root) return;
+      root.innerHTML = '';
+      if (!Array.isArray(items) || !items.length){
+        var e = document.createElement('div');
+        e.className = 'muted';
+        e.textContent = 'No sources';
+        root.appendChild(e);
+        return;
+      }
+      var params = new URLSearchParams(window.location.search);
+      var selectedId = params.get('source_id');
+      items.forEach(function(it){
+        var id = String(it.id || it.source_id || '');
+        var name = it.name || (it.source && it.source.name) || ('Source ' + id);
+        var type = it.type || (it.source && it.source.type) || '';
+        var localPresent = !!it.local_present;
+        var localValidate = (it.local_validate || '').toLowerCase();
+        var isInvalid = localValidate && localValidate !== 'valid';
+        var disabled = (!localPresent) || isInvalid;
+        var hoverMsg = '';
+        if (!localPresent) {
+          hoverMsg = 'Configuration de la source non disponible localement';
+        } else if (isInvalid) {
+          hoverMsg = 'Source non accéssible';
+        }
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.style.cursor = disabled ? 'not-allowed' : 'pointer';
+        card.style.padding = '8px 10px';
+        card.style.border = '1px solid #e5e7eb';
+        card.style.borderRadius = '8px';
+        card.style.background = '#ffffff';
+        if (hoverMsg) card.title = hoverMsg;
+        if (disabled) {
+          card.style.opacity = '0.5';
+          card.style.filter = 'grayscale(100%)';
+        }
+        card.innerHTML = '<div style="font-weight:600; color:#111827;">' + name + '</div>' +
+                         '<div class="muted" style="font-size:12px;">' + (type ? ('Type: ' + type) : '') + '</div>' +
+                         '<div class="muted" style="font-size:12px;">#' + id + '</div>';
+        if (selectedId && id === selectedId) {
+          card.style.boxShadow = '0 0 0 2px rgba(65,105,225,0.35)';
+        }
+        if (!disabled) {
+          card.addEventListener('click', function(){
+            var p = new URLSearchParams(window.location.search);
+            p.set('source_id', id);
+            var newUrl = window.location.pathname + '?' + p.toString();
+            window.history.replaceState({}, '', newUrl);
+            renderSources(items);
+            loadFromUrl();
+          });
+        }
+        root.appendChild(card);
+      });
+    }
+    async function loadSources(){
+      try {
+        var projectId = readUrlParam('project_id');
+        var url = '/studio/sources' + (projectId ? ('?project_id=' + encodeURIComponent(projectId)) : '');
+        var r = await fetch(url);
+        var j = await r.json();
+        var items = normalizeSources(j && (j.items != null ? j.items : j));
+        renderSources(items);
+      } catch (e) {
+        renderSources([]);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function(){ loadSources(); loadFromUrl(); });
+    window.addEventListener('popstate', function(){ loadSources(); loadFromUrl(); });
+  })();
+</script>
