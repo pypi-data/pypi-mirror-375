@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+tests/test_contest.py
+tests/test_submission.py
+tests/test_team.py
+tests/test_types.py
+xcpcio/__init__.py
+xcpcio/constants.py
+xcpcio/types.py
+xcpcio.egg-info/PKG-INFO
+xcpcio.egg-info/SOURCES.txt
+xcpcio.egg-info/dependency_links.txt
+xcpcio.egg-info/requires.txt
+xcpcio.egg-info/top_level.txt
