@@ -1,0 +1,26 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content_title %}{{ block.super }}{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        {{ block.super }}
+        <div class="app-list">
+            <div class="app-core module">
+                <table>
+                    <caption>
+                        <a href="#" class="section" title="Módulos personalizados">Site tools</a>
+                    </caption>
+                    <tbody>
+                        <tr class="model-robottxt">
+                            <th scope="row">
+                                                       </th>
+                            <td><a href="{% url 'cs_robots:edit_robots_txt' %}">Edit robots.txt</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

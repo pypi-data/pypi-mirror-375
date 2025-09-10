@@ -1,0 +1,14 @@
+MANIFEST.in
+README.md
+pyproject.toml
+src/cs_robots/apps.py
+src/cs_robots/forms.py
+src/cs_robots/urls.py
+src/cs_robots/views.py
+src/cs_robots/templates/cs_robots/edit_cs_robots.html
+src/cs_robots/templates/cs_robots/admin/index.html
+src/django_cs_robots.egg-info/PKG-INFO
+src/django_cs_robots.egg-info/SOURCES.txt
+src/django_cs_robots.egg-info/dependency_links.txt
+src/django_cs_robots.egg-info/requires.txt
+src/django_cs_robots.egg-info/top_level.txt

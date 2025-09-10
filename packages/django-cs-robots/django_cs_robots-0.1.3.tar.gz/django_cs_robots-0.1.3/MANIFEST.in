@@ -1,0 +1,4 @@
+# MANIFEST.in
+
+# Incluye recursivamente todo lo que haya en la carpeta templates
+recursive-include src/cs_robots/templates *
