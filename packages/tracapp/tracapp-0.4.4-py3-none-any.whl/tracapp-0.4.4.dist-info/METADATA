@@ -1,0 +1,199 @@
+Metadata-Version: 2.4
+Name: tracapp
+Version: 0.4.4
+Summary: common facilities to be used by Prima services
+License-Expression: MIT
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: logfire>=4.0.0
+Requires-Dist: pydantic-settings>=2.10.1
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+
+# TracApp - the common libraries
+
+This is the prima package that provides common facilities for Prima Control
+Tower, Prima Engine, and future Prima packages.
+
+The package provides:
+
+1. A mechanism for reading project `settings` from the environment and .env files.
+2. A logging object `log` that follows the standard logging interface.
+3. An OAuth client for authenticating users.
+4. A JWT library for creating and verifying JSON Web Tokens.
+
+where the last two features will be implemented shortly.
+
+The prima package is intentionally opinionated and minimal, sacrificing
+flexibility for ease of use and consistency across Prima packages.
+
+## Installation
+
+The tracapp distribution wheel will be published to PyPI as package `tracapp`
+so can be installed with
+
+    uv add tracapp
+
+or directly from this repository with
+
+    uv add git+ssh://git@github.com/esimplicityinc/prima-tracapp.git
+
+
+## Using the TracApp logger
+
+You already know how to use it:
+
+```python
+from tracapp.logger import log
+log.info("This is an info message")
+log.error("This is an error message")
+```
+
+Log messages are sent to the process console and either or both of:
+
+- An OpenTelemetry collector if the `OTEL_EXPORTER_OTLP_ENDPOINT`
+  environment variable is set.
+- The logfire.dev service if the `LOGFIRE_TOKEN` environment variable
+  is set.
+
+Logfire is a paid service from Pydantic that provides a sophisticated
+OpenTelemetry trace and log view. It has very generous free tier limits and has
+really helped with AiOx development.
+
+### FastAPI instrumentation
+
+Because the prima logger is likely to be instantiated early you'll need
+to add Logfire instrumentation to your FastAPI app manually after it is
+instantiated:
+
+```python
+from fastapi import FastAPI
+from prima.logger import log, logfire
+app = FastAPI()
+logfire.instrument_fastapi(app)
+```
+
+Pydantic-AI, Celery and HTTPX instrumentations are automatically enabled when
+the prima logger is instantiated. There are a slew of Logfire supported
+[instrumentations](https://logfire.pydantic.dev/docs/integrations/) that
+can be added if wanted.
+
+## Using settings
+
+The TracApp settings system uses [Pydantic Settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/)
+to define, import, and validate settings. The prima.settings mechanism
+enforces a strict hierarchy of configuration sources:
+
+1. Environment variables (os.environ)
+2. A `.env` file in the current working directory
+3. Defaults defined in the `Settings` class
+
+and the filling of them are in that order. This means that an Environment
+variable if present will always override a value in the .env file, and only
+if neither is present will the default value be used. Note that empty
+environment or .env values are affirmatively ignored because they are almost
+always wrong. For example:
+
+    export AIOX_PORT=
+
+will *not* override the default value of 8001. Also be aware that
+quoting in docker-compose.yml files is tricky. Use
+
+    environment:
+      - AIOX_REDIS_BASE=redis://redis:6379
+
+without quotes around the value. This is a YAML weirdness which does crop
+up in the `tracapp.settings` context.
+
+This hierarchy is just what you want for Dockerized and host-based execution.
+For example, you can have a .env file containing
+
+    AIOX_REDIS_BASE=redis://localhost:6379
+
+and a docker-compose.yml file containing
+
+    environment:
+      - AIOX_REDIS_BASE=redis://redis:6379
+
+which will supersede the .env file, making obvious and deterministic where the
+application can find Redis.
+
+## TracApp global settings
+
+You must define the `TRACAPP_PACKAGE_NAME` environment variable or .env entry
+to be the name of the package using TracApp. This is used to
+
+1. determine the package version which is available as `tracapp.settings.package_version`.
+2. name the service in OpenTelemetry traces.
+
+for example, in Prima Engine this is
+
+    TRACAPP_PACKAGE_NAME=aiox
+
+The logging level is set as `TRACAPP_LOGLEVEL` which defaults to "INFO" but
+can be overridden in the environment or .env file.
+
+To send logs and traces to an OpenTelemetry collector, set the
+`OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to the collector URL.
+The default is None.
+
+An optional `LOGFIRE_TOKEN` (default: None) if set will allow @mwartell
+to use his developer Logfire account to see his logs. This is useful if you
+are him, and possibly if you are not him and want to use Logfire.
+
+## Application specific settings
+
+There is a `prima.settings.PrimaSettings` class that defines the common
+behavior requiring an application to only define its own settings. Here
+is an example from Prima Engine:
+
+```python
+from tracapp.settings import PrimaSettings
+
+class AioxSettings(PrimaSettings):
+    """Application settings for aiox service."""
+
+    # if we don't override, this will be "prima"
+    logfire_service_name: str = "aiox"
+
+    # the defaults here will be used if not overridden in os.environ or .env
+    # this makes minimal .env files possible
+    aiox_port: int = 8000
+    aiox_redis_base: str = "redis://localhost:6379"
+
+    celery_task_timeout: float = 30.0  # seconds to wait for task result
+    llm_task_queue: str = "llm"  # Redis pub/sub channel for LLM tasks
+
+settings = AioxSettings()
+```
+
+The last line instantiates the settings object at import time so that
+member values are available immediately.
+
+    from aiox.config import settings
+    print(settings.aiox_port)
+
+Because every element here has a default value, aiox can be usefully run
+with neither an .env file nor environment variables. The variables are
+fully type validated by Pydantic; indeed AioxSettings is an instance
+of `pydantic.BaseModel`. All of these could be overridden in a .env
+file and if there are entries in os.environ their values win.
+
+PrimaSettings does not currently handle command line arguments, but by
+virtue of Pydantic-settings, it easily could.
+
+For those who like shouting members are also available as uppercase like
+`settings.AIOX_PORT`.
+
+I recommend that application settings be prefixed with an application name like
+`AIOX_` or `TOWER_`. This could be enforced but I've chosen not to currently
+because it adds complexity and semantic noise.
+
+## Building a wheel
+
+You can build a wheel for the tracapp package by running
+
+    uv build --wheel tracapp
+
+in the prima-tracapp root directory. The wheel will be placed in the `dist`
+directory.
