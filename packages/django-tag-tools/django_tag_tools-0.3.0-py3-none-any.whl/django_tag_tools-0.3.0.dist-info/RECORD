@@ -1,0 +1,17 @@
+tagtools/__init__.py,sha256=TtPRHwOLMZRMIRYrGoFIEdZOyWXLkF6NXiZVuqUXbG8,146
+tagtools/apps.py,sha256=5JzbEv_x9MynfWCrA23imag6zdz1U165IaC4mP3Ppx4,161
+tagtools/models.py,sha256=AqVsOaF2xRk9C0LW1T0Q4BSzqqBJuMIa306R87OUtdI,34
+tagtools/settings.py,sha256=utBtJT0Lts5c54ZpJ6EjIAXZkSbd1dAsnslAVtJH9CQ,331
+tagtools/tagcloud.py,sha256=h_K61XFhwzva6I8HCzzdmIda-TrgR1OIoaeWUryz0AU,3501
+tagtools/tools.py,sha256=HBMD7AVN6FjCIsD5Y9HEmhxhg452xFOVLB3ZqLXYbKU,965
+tagtools/views.py,sha256=wF80jQbNENvmcUe2ejnGUKCnwNlaYh3zJypoXQ2hdPY,1935
+tagtools/management/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+tagtools/management/commands/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+tagtools/management/commands/migrate_tagging_to_taggit.py,sha256=BL5tvZQvXjGe4rOxPSYKTvRm23G4fQQ7FGL9Rr6S6-o,2714
+tagtools/tests/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+tagtools/tests/models.py,sha256=Jolnv1NOk39VPUOaVFF8EZExJ7sws21lJE12M9VaXmc,307
+tagtools/tests/settings.py,sha256=-fu5obQjECwHEf9I4vT1kBVw8rK6v6jadKSztRyWdLA,362
+tagtools/tests/tests.py,sha256=BdY3yL04mwbwZhYbOmeGKxbHPvyzzIwwnzIKAhBga1o,3225
+django_tag_tools-0.3.0.dist-info/WHEEL,sha256=G2gURzTEtmeR8nrdXUJfNiB3VYVxigPQ-bEQujpNiNs,82
+django_tag_tools-0.3.0.dist-info/METADATA,sha256=BeBYjpq_4QihsVtUNrSSu_ahjlWrnmNhH-gNuZyuZ1s,2048
+django_tag_tools-0.3.0.dist-info/RECORD,,
