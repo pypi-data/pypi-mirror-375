@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+test-env/
+test-pip-env/
+*-env/
+
+# Project specific files
+*.png
+window_dump.xml
+output.mov
+config.yaml
+test.py
+.coverage
+
+# Backup files
+*.backup
+pyproject.toml.backup
+
+# Test artifacts
+claude_config_test.json
+compressed_screenshot.png
+screenshot.png
