@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: DevDebugger
+Version: 0.1.0
+Summary: A debugging and profiling helper library for developers
+Author-email: 4rmy <hjacob215@gmail.com>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# my-library
+
+A small debugging and profiling helper library for Python developers.
+
+## Install
+
+```bash
+pip install DevOps
+```
+
+> The project is a work in progress.
+> I am currently working on the documentation.
