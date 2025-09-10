@@ -1,0 +1,8 @@
+[console_scripts]
+gribscan = gribscan.tools:cli
+gribscan-build = gribscan.tools:build_dataset
+gribscan-index = gribscan.tools:create_index
+
+[numcodecs.codecs]
+gribscan.rawgrib = gribscan.rawgribcodec:RawGribCodec
+rawgrib = gribscan.rawgribcodec:RawGribCodec
