@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: genepy3d
+Version: 0.3.4
+Summary: Python Library for 3D Quantitative Geometry in Computation Microscopy
+Home-page: https://gitlab.com/genepy3d/genepy3d
+Author: genepy3d-team
+License: BSD-3-Clause
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: anytree>=2.8.0
+Requires-Dist: matplotlib>=3.3.4
+Requires-Dist: numpy<2,>=1.21
+Requires-Dist: numpy-stl>=2.17.1
+Requires-Dist: pathos>=0.2.8
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: pot>=0.8.2
+Requires-Dist: pynrrd>=0.4.3
+Requires-Dist: pyevtk>=1.5.0
+Requires-Dist: pillow>=8.4.0
+Requires-Dist: PyAstronomy>=0.18.0
+Requires-Dist: requests>=2.27.1
+Requires-Dist: scikit-learn>=0.24.2
+Requires-Dist: scikit-image>=0.19.1
+Requires-Dist: seaborn>=0.11.2
+Requires-Dist: tables>=3.7.0
+Requires-Dist: trimesh>=3.14.1
+Requires-Dist: vtk>=9.1.0
+Requires-Dist: alphashape>=1.3.1
+Requires-Dist: h5py>=3.11.0
+
+# GENEPY3D
+
+GeNePy3D is an open-source python library for quantitative geometry, in particular in the context of quantitative microscopy. 
+It provides an easy interface to perform complex data science workflow on geometric data, 
+manipulating point cloud, surfaces, curves and trees, converting between them, 
+and performing analysis tasks to extract information and knowledge out of raw geometrical data.
+
+GeNePy3D can be used as a 'middleware' library, that is linking out to recognised and established specialised library when needed but providing easy to use interfaces. 
+The aim is to democratise access to methods from a wide range of mathematical sub-discipline to biological data scientist and computational biologist.
+
+Further information can be found in the main documentation https://genepy3d.gitlab.io/.
+
+Reference documentation is on readthedocs https://genepy3d.readthedocs.io/
+
+
+
