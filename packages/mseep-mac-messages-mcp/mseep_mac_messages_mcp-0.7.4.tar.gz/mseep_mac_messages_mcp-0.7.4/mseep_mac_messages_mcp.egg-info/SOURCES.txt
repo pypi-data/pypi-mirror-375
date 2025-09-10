@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+mac_messages_mcp/__init__.py
+mac_messages_mcp/messages.py
+mac_messages_mcp/server.py
+mseep_mac_messages_mcp.egg-info/PKG-INFO
+mseep_mac_messages_mcp.egg-info/SOURCES.txt
+mseep_mac_messages_mcp.egg-info/dependency_links.txt
+mseep_mac_messages_mcp.egg-info/entry_points.txt
+mseep_mac_messages_mcp.egg-info/requires.txt
+mseep_mac_messages_mcp.egg-info/top_level.txt
+tests/test_integration.py
+tests/test_messages.py
