@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "esrf-data-compressor"
+version = "0.1.1"
+authors = [{ name = "ESRF", email = "dau-pydev@esrf.fr" }]
+description = "A library to compress ESRF data and reduce their footprint"
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
+keywords = ["ESRF", "pathlib"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.10" #because of blosc2
+dependencies = [
+    "h5py",
+    "hdf5plugin",
+    "blosc2-grok",
+    "scikit-image",
+    "tqdm"
+]
+
+[project.urls]
+Homepage       = "https://gitlab.esrf.fr/dau/esrf-data-compressor"
+Documentation  = "https://esrf-data-compressor.readthedocs.io/"
+Repository     = "https://gitlab.esrf.fr/dau/esrf-data-compressor"
+Issues         = "https://gitlab.esrf.fr/dau/esrf-data-compressor/issues"
+Changelog      = "https://gitlab.esrf.fr/dau/esrf-data-compressor/-/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+test = [
+    "pytest >=7.0"
+]
+dev = [
+    "esrf-data-compressor[test]",
+    "black >=22",
+    "flake8 >=4.0",
+    "ruff"
+]
+doc = [
+    "sphinx >=6.0",
+    "sphinxcontrib-mermaid >=0.7",
+    "sphinx-autodoc-typehints >=1.16",
+    "pydata-sphinx-theme"
+]
+
+[project.scripts]
+compress-hdf5 = "esrf_data_compressor.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.ipynb"]
+
+[tool.coverage.run]
+omit = ["*/tests/*"]
+
+[tool.isort]
+profile = "black"
+force_single_line = true
