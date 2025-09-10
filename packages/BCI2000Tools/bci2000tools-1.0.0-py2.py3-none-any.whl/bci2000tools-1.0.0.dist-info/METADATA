@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: BCI2000Tools
+Version: 1.0.0
+Summary: A suite of Python tools for working with BCI2000 data files, processing chains, and live sessions
+Home-page: https://bci2000.org
+License: GPL v3+
+Description-Content-Type: text/x-rst
+Requires-Dist: numpy
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: summary
+
+
+This toolbox is part of the BCI2000, a platform for real-time biosignal
+acquisition, analysis and feedback for brain-computer interfacing and related
+neurotechnologies. These files provide a mixed collection of tools for
+reading BCI2000 .dat files, for performing simple analyses of biosignal data,
+and for interacting with a running BCI2000 session.
+
+Some of the functionality relies on BCI2000 binaries that are not included in
+the PyPI release: for example, the ``BCI2000Tools.Chain`` submodule is designed
+as a Python wrapper around the C++-compiled binaries found in the ``tools/cmdline``
+subdirectory of a full BCI2000 distribution; ``BCI2000Tools.Remote`` is a wrapper
+around ``prog/BCI2000Remote.py`` which in turn loads a dynamic library from, and
+sends messages to the binaries in, the ``prog`` directory. For this reason, the
+canonical way to install and manage BCI2000Tools is not via PyPI at all, but
+via the bci2000.org subversion repository::
+
+    # after registering for a free username on bci2000.org:
+    svn checkout https://bci2000.org/svn/trunk/   bci2000-svn
+    cd bci2000-svn/tools/python  # BCI2000Tools and its setup.py both live here
+    python -m pip install -e .   # install in-place ("editable")
+
+and if you do it that way, BCI2000Tools will automatically find the corresponding
+``tools/cmdline/*`` and ``prog/*`` elements.
+
+If you install another way (e.g. from PyPI via a simple non-editable
+``python -m pip install BCI2000Tools``), you should specify the bci2000 root
+explicitly, certainly before you import ``BCI2000Tools.Remote`` and ideally
+before you import ``BCI2000Tools.Chain``::
+
+    from BCI2000Tools import bci2000root
+    bci2000root('/PATH/TO/BCI2000/DISTRO/WITH/BINARIES')
+    
+    from BCI2000Tools.Remote import BCI2000
+    from BCI2000Tools.Chain import bci2000chain
+
