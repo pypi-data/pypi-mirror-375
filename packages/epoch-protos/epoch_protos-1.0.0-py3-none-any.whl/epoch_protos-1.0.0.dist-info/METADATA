@@ -1,0 +1,162 @@
+Metadata-Version: 2.4
+Name: epoch-protos
+Version: 1.0.0
+Summary: Protocol Buffer definitions for EpochFolio models
+Home-page: https://github.com/epochlab/epoch-protos
+Author: EpochLab
+Author-email: EpochLab <aadedewe@epoch.trade>
+License: MIT
+Project-URL: Homepage, https://github.com/epochlab/epoch-protos
+Project-URL: Repository, https://github.com/epochlab/epoch-protos
+Project-URL: Issues, https://github.com/epochlab/epoch-protos/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Office/Business :: Financial
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: protobuf>=4.21.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: typing-extensions>=4.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# EpochProtos
+
+Protocol Buffer definitions for EpochFolio - generates C++, Python, and TypeScript code.
+
+## Quick Start
+
+### Build Everything
+```bash
+mkdir build && cd build
+cmake ..
+make -j$(nproc)
+```
+
+### Deploy to Local Projects
+```bash
+# Build and copy C++ headers + library (recommended)
+./scripts/build_and_copy.sh
+
+# Or just copy (requires build first)
+./scripts/copy_to_local.sh
+
+# Quick headers only
+./quick-deploy
+```
+
+### What You Get
+- **C++**: Static library in `build/generated/cpp/`
+- **Python**: Package in `build/generated/python/`
+- **TypeScript**: Package in `build/generated/typescript/`
+
+## Usage
+
+### C++
+```cpp
+#include "common.pb.h"
+#include "chart_def.pb.h"
+
+epoch_proto::ChartDef chart;
+chart.set_id("my_chart");
+chart.set_type(epoch_proto::EpochFolioDashboardWidget::Lines);
+```
+
+### Python
+```python
+import common_pb2
+import chart_def_pb2
+
+chart = chart_def_pb2.ChartDef()
+chart.id = "my_chart"
+chart.type = common_pb2.EpochFolioDashboardWidget.Lines
+```
+
+### TypeScript
+```typescript
+import { ChartDef, EpochFolioDashboardWidget } from './chart_def';
+
+const chart = new ChartDef();
+chart.setId("my_chart");
+chart.setType(EpochFolioDashboardWidget.Lines);
+```
+
+## Deployment
+
+### C++ Local Copy (No vcpkg needed)
+```bash
+# Build and copy headers + library to EpochFolio (recommended)
+./scripts/build_and_copy.sh
+
+# Or just copy (requires build first)
+./scripts/copy_to_local.sh
+
+# Quick C++ headers only
+./quick-deploy
+```
+
+### Python Local Install
+```bash
+./scripts/python_publish.sh install-local
+```
+
+### TypeScript Local Install
+```bash
+./scripts/typescript_publish.sh install-local
+```
+
+### Deploy Everything
+```bash
+./scripts/deploy.sh all
+```
+
+## Integration
+
+### C++ Project
+```cmake
+# After running copy_to_local.sh
+add_subdirectory(/path/to/epoch_protos)
+target_link_libraries(your_target PRIVATE epoch::proto)
+```
+
+### Python Project
+```bash
+cd build/generated/python
+pip install .
+```
+
+### TypeScript Project
+```bash
+cd build/generated/typescript
+npm install
+```
+
+## Proto Files
+- `common.proto` - Basic types and enums
+- `chart_def.proto` - Chart definitions
+- `table_def.proto` - Table definitions  
+- `tearsheet.proto` - Dashboard tearsheet structure
+
+## Testing
+```bash
+cd test
+g++ -std=c++20 -I../build -o test_cpp test_cpp.cpp ../build/generated/cpp/libepoch_protos_cpp.a -lprotobuf
+./test_cpp
+
+python3 test_python.py
+```
