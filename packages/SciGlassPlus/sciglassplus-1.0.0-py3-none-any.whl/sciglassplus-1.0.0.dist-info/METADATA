@@ -1,0 +1,97 @@
+Metadata-Version: 2.4
+Name: SciGlassPlus
+Version: 1.0.0
+Home-page: https://github.com/zhaoyj21/SciGlassPlus
+Author: Wei Chen, Yingjie Zhao, Zhiping Xu
+Author-email: wchen314@qq.com
+License: MIT License
+        
+        Copyright (c) 2025 Chen Wei
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: license-file
+
+# Welcome to SciGlassPlus
+
+A python library for the access of SciGlassPlus database.
+
+## How to install
+
+```commandline
+pip install SciGlassPlus
+```
+
+## Examples
+
+### 1. Access available elements, compounds, properties and metadata
+
+```python
+from SciGlassPlus.load import SGP, available_columns
+
+columnNames = available_columns()
+```
+The function `available_columns()` will return a python dictionary containing 4 `keys`: `"Elements"`, `"Compounds"`, `"Properties"`, `"Metadata"`. The `value` of each key form a list, which includes available items.
+
+### 2. Access all data
+
+```python
+df_all = SGP()
+```
+### 3. Access the specified data
+
+This method can  help you filter out items you do not pay attention to and filter out data you do care about.
+```python
+elements_cfg = {
+    "drop": ["Ca"],
+    "keep": ["Si"]
+}
+
+compounds_cfg = {
+    "drop": ["CaO", "TiO2"],
+    "keep": ["SiO2", "Al2O3"]
+}
+
+properties_cfg = {
+    "drop": ["T1", "T2"],
+    "keep": ["Tg"]
+}
+
+metadata_cfg = {
+    "drop": ["Institutions"],
+    "keep": ["Doi"]
+}
+
+df_filtered = SGP(
+    elements_cfg=elements_cfg,
+    compounds_cfg=compounds_cfg,
+    properties_cfg=properties_cfg,
+    metadata_cfg=metadata_cfg
+)
+```
+For all the 4 configurations, the items in the list after the key `"drop"` means that the columns of these items are deleted from the returned data.
+By the way, for *elements* and *compounds*, entries containing non-zero values in these items are filtered out.
+
+For all the 4 configurations, the items in the list after the key `"keep"` means that only entries with defined values in these items are kept in the filtered data.
