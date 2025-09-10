@@ -1,0 +1,12 @@
+opensearch/protobufs/schemas/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+opensearch/protobufs/schemas/common_pb2.py,sha256=kBwZjWWtjPcP4GP2Jm5uHX9yrIBDNHHAxuN4ReLuhd4,97847
+opensearch/protobufs/schemas/document_pb2.py,sha256=G0BDUOaVvXTgZQFMBRuzT1Tfo_Klv7eiGsvFxo9iWyc,26459
+opensearch/protobufs/schemas/search_pb2.py,sha256=69zwqnH7I_mZ9ni5_Dm2jTIFDJqaZlX9OZgALgoHsPI,37731
+opensearch/protobufs/services/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+opensearch/protobufs/services/document_service_pb2.py,sha256=Lv4JZfpVVaN84Vp23E5cX7nbgy-YrCuaSh6S3Py08yA,2079
+opensearch/protobufs/services/document_service_pb2_grpc.py,sha256=NlbeE8zGGNStLh4SvnAfXwgvP6miPOxtaLr-D-HmGao,12575
+opensearch/protobufs/services/search_service_pb2.py,sha256=6UJDa4OuiTYevua-tcXb5h-jYJrTNkXBBfI2xqKBGSM,1695
+opensearch/protobufs/services/search_service_pb2_grpc.py,sha256=Hscue9opwZfrl1rtKhpMBXeyVy3M39OCiN24rT1HDSk,4867
+opensearch_protobufs-0.11.0.dist-info/METADATA,sha256=zhEUOt1i5p7np_EDZoqFUAr2zGiX-YPkD7boTjBt-Hk,678
+opensearch_protobufs-0.11.0.dist-info/RECORD,,
+opensearch_protobufs-0.11.0.dist-info/WHEEL,sha256=sobxWSyDDkdg_rinUth-jxhXHqoNqlmNMJY3aTZn2Us,91
