@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/mseep_sefaria_jewish_library.egg-info/PKG-INFO
+src/mseep_sefaria_jewish_library.egg-info/SOURCES.txt
+src/mseep_sefaria_jewish_library.egg-info/dependency_links.txt
+src/mseep_sefaria_jewish_library.egg-info/entry_points.txt
+src/mseep_sefaria_jewish_library.egg-info/requires.txt
+src/mseep_sefaria_jewish_library.egg-info/top_level.txt
+src/sefaria_jewish_library/__init__.py
+src/sefaria_jewish_library/demo.py
+src/sefaria_jewish_library/sefaria_handler.py
+src/sefaria_jewish_library/server.py
