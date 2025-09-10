@@ -1,0 +1,52 @@
+Metadata-Version: 2.1
+Name: superposed-pulses
+Version: 1.5
+Summary: Python scripts used by the fusion energy group at UiT The Arctic University of Norway.
+Home-page: https://github.com/uit-cosmo/filtered-point-process
+Download-URL: https://github.com/uit-cosmo/3ppy/archive/refs/tags/1.1.tar.gz
+Author: Juan Manuel Losada
+Author-email: juan.m.losada@uit.no
+License: MiT
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires-Python: >=3.0
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.15.0
+Requires-Dist: scipy>=1.4.0
+Requires-Dist: tqdm>=4.50.2
+
+# superposed-pulses
+Collection of tools designed to generate realizations of the Poisson point process.
+
+## Installation
+The package is published to PyPI and can be installed with
+
+```sh
+pip install superposed-pulses
+```
+
+If you want the development version you must first clone the repo to your local machine,
+then install the project in development mode:
+
+```sh
+git clone https://github.com/uit-cosmo/superposed-pulses.git
+cd superposed-pulses
+pip install -e .
+```
+## Usage
+The simplest case, using defaults: exponential pulse shape, exponentially distributed amplitudes, constant duration times, write
+```Python
+import matplotlib.pyplot as plt
+import superposedpulses.point_model as pm
+
+model = pm.PointModel(waiting_time=10.0, total_duration=100, dt=0.01)
+times, signal = model.make_realization()
+
+plt.plot(times, signal)
+plt.show()
+```
+Take a look at `superposed-pulses/superposedpulses/example.py` to find out how to change amplitudes, waiting times, duration times and the pulse shape of the process.
