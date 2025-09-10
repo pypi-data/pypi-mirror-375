@@ -1,0 +1,9 @@
+graft src/isal/isa-l
+include src/isal/*.h
+prune docs
+prune .github
+exclude .git*
+prune benchmark_scripts
+exclude requirements-docs.txt
+exclude codecov.yml
+exclude .readthedocs.yml
