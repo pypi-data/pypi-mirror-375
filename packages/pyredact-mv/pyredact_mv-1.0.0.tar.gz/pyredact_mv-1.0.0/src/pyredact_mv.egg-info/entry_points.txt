@@ -1,0 +1,2 @@
+[console_scripts]
+pyredact-mv = pyredact.main:app

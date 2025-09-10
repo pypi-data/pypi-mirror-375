@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/pyredact/__init__.py
+src/pyredact/anonymizer.py
+src/pyredact/detector.py
+src/pyredact/main.py
+src/pyredact/regex_patterns.py
+src/pyredact/report_generator.py
+src/pyredact_mv.egg-info/PKG-INFO
+src/pyredact_mv.egg-info/SOURCES.txt
+src/pyredact_mv.egg-info/dependency_links.txt
+src/pyredact_mv.egg-info/entry_points.txt
+src/pyredact_mv.egg-info/requires.txt
+src/pyredact_mv.egg-info/top_level.txt
