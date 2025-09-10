@@ -1,0 +1,8 @@
+include:
+  - include_first.yaml
+  - include_second.yaml
+
+top:
+  third_key:
+    name: this will override the value from include_second.yaml
+

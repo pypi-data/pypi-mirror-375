@@ -1,0 +1,20 @@
+characters:
+  jane:
+    name: Jane Doe
+    age: 30
+    skills:
+      - hacking
+      - parkour
+      - martial arts
+
+templates:
+  character_prompt: |
+    <CHARACTER>
+      <NAME>{{ character.name }}</NAME>
+      <AGE>{{ character.age }}</AGE>
+      <SKILLS>
+        {% for skill in character.skills %}
+          <SKILL>{{ skill }}</SKILL>
+        {% endfor %}
+      </SKILLS>
+    </CHARACTER>
