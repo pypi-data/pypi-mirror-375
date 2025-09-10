@@ -1,0 +1,33 @@
+encounters/ambulatory/population:
+    generic.sql:
+        meta:
+            name: "Generic"
+            join_key: null
+            connection: "CDW"
+            description: "Population script for ambulatory encounters. Uses CDW full access. In addition to listed defaults, defaulted encounter type is \"face to face\"."
+            population: true
+        jinja_parameters_dict:
+            date_start: "2024-01-01"
+            date_end: "2024-01-03"
+            include_department: false
+            include_provider_details: false
+            include_encounter_details: false
+            include_service_date_grouping: false
+            filt_encounter_status: [
+                "Arrived",
+                "Completed"
+            ]
+            filt_encounter_type: null
+            filt_encounter_department: null
+            filt_encounter_department_specialty: null
+            filt_encounter_provider_id: null
+patient/demographics/information:
+    patient_demographics.sql:
+        meta:
+            name: "patient_demographics"
+            join_key: "PAT_ID"
+            connection: "CLARITY"
+            description: "Acquires patient demographic information like the patient's name, address, email, phone number, etc. The PAT_ID is the primary key."
+            population: false
+        jinja_parameters_dict:
+            include_detail_columns: true
