@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "python-web3-wallet"
+version = "0.0.17"
+description = "Streamlit component that allows users to connect a wallet and send transactions with dynamic recipients and amounts"
+authors = ["Gnosis AI <ai@gnosis.io>"]
+license = "MIT"
+readme = "README.md"
+# If format not specified, include only applies to sdist not wheel https://python-poetry.org/docs/pyproject/#exclude-and-include.
+include = [
+    { path = "python_web3_wallet/frontend/build/**/*", format = ["sdist", "wheel"] }
+]
+packages = [
+    { include = "python_web3_wallet" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.49.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
