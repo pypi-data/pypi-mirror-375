@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: grand-challenge-dicom-de-identifier
+Version: 0.0.1
+Summary: Python package to de-identify DICOM files using a pre-defined procedure
+Author: Chris van Run
+License: Apache-2.0
+Project-URL: repository, https://github.com/DIAGNijmegen/rse-grand-challenge-dicom-de-identifier
+Requires-Python: <4.0,>=3.10
+Description-Content-Type: text/markdown
+License-File: LICENCE.md
+Requires-Dist: pydicom>=2.4.0
+Requires-Dist: grand-challenge-dicom-de-id-procedure
+Dynamic: license-file
+
+# Grand-Challenge DICOM De-Identifier
+
+This is a work-in-progress.
