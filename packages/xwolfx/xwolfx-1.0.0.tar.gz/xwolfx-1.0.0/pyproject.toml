@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xwolfx"
+version = "1.0.0"
+description = "An unofficial Python API for WOLF (AKA Palringo) - Python port of wolf.js"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Python Port of wolf.js"},
+]
+keywords = ["wolf", "palringo", "chat", "bot", "api", "python"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "websocket-client>=1.0.0",
+    "requests>=2.25.0",
+    "pyyaml>=5.4.0",
+    "aiohttp>=3.7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/xwolfx-python/xwolfx"
+Repository = "https://github.com/xwolfx-python/xwolfx"
+Issues = "https://github.com/xwolfx-python/xwolfx/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-asyncio>=0.18.0",
+    "black>=21.0.0",
+    "flake8>=3.8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["xwolfx*"]
+
+[tool.setuptools.package-data]
+xwolfx = ["py.typed"]

@@ -1,0 +1,77 @@
+Metadata-Version: 2.4
+Name: xwolfx
+Version: 1.0.0
+Summary: An unofficial Python API for WOLF (AKA Palringo) - Python port of wolf.js
+Home-page: https://github.com/xwolfx-python/xwolfx
+Author: Python Port of wolf.js
+Author-email: 
+License: MIT
+Project-URL: Homepage, https://github.com/xwolfx-python/xwolfx
+Project-URL: Repository, https://github.com/xwolfx-python/xwolfx
+Project-URL: Issues, https://github.com/xwolfx-python/xwolfx/issues
+Keywords: wolf,palringo,chat,bot,api,python
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: websocket-client>=1.0.0
+Requires-Dist: requests>=2.25.0
+Requires-Dist: pyyaml>=5.4.0
+Requires-Dist: aiohttp>=3.7.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.18.0; extra == "dev"
+Requires-Dist: black>=21.0.0; extra == "dev"
+Requires-Dist: flake8>=3.8.0; extra == "dev"
+Dynamic: home-page
+Dynamic: requires-python
+
+# xwolfx
+
+An unofficial Python API for WOLF (AKA Palringo) - Python port of wolf.js
+
+## Installation
+
+```bash
+pip install xwolfx
+```
+
+## Quick Start
+
+```python
+from xwolfx import WOLF
+
+client = WOLF()
+
+@client.on('ready')
+def on_ready():
+    print('Bot is ready!')
+
+@client.on('channel_message')
+def on_channel_message(message):
+    if message.body == '!ping':
+        message.reply('Pong!')
+
+client.login()
+```
+
+## Features
+
+- Connect to WOLF chat platform
+- Send and receive messages
+- Command handling system
+- Event-driven architecture
+- Multi-language support
+- Channel and private messaging
+
+## License
+
+MIT License - Python port of the original wolf.js library
