@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: hplog
+Version: 0.4.0
+Summary: Add your description here
+Author-email: Arian Ott <arian.ott@ieee.org>
+Requires-Python: >=3.13
+Requires-Dist: pandas>=2.3.2
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: pymongo>=4.14.1
+Requires-Dist: python-dotenv>=1.1.1
+Provides-Extra: dev
+Requires-Dist: pytest-xdist>=3.8.0; extra == 'dev'
+Requires-Dist: pytest>=8.4.2; extra == 'dev'
+Requires-Dist: ruff>=0.12.12; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# HPLOG
+
+## About HPLOG
+
+HPLOG (short for High Performance Logging) enables the user to log their pydantic models in a mongo DB.
+
