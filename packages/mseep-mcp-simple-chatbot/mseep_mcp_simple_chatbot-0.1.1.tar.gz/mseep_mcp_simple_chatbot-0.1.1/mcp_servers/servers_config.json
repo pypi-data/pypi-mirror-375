@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "markdown_processor": {
+            "command": "/path/to/your/uv/path",
+            "args": [
+                "--directory",
+                "/path/to/your/mcp_chatbot/mcp_servers",
+                "run",
+                "markdown_processor.py"
+            ]
+        }
+    }
+}

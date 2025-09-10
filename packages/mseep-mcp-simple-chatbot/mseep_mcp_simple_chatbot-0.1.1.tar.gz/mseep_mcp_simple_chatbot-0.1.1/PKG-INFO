@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-simple-chatbot
+Version: 0.1.1
+Summary: A simple CLI chatbot using the Model Context Protocol (MCP)
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+License-File: LICENSE
+Keywords: chatbot,cli,llm,mcp
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.10
+Requires-Dist: mcp[cli]>=1.0.0
+Requires-Dist: openai>=1.66.3
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: streamlit>=1.43.2
+Requires-Dist: uvicorn>=0.32.1
+Description-Content-Type: text/plain
+
+Package managed by MseeP.ai
