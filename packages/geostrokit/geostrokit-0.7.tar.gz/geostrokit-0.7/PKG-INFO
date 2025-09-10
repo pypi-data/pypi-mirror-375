@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: geostrokit
+Version: 0.7
+Summary: A set of python scripts to handle QG outputs and more
+Author-email: Bruno Deremble <bruno.deremble@cnrs.fr>
+Requires-Dist: numpy
+Requires-Dist: scipy

@@ -1,0 +1,16 @@
+[build-system]
+#requires = ["setuptools"]
+#build-backend = "setuptools.build_meta"
+#requires = ["hatchling >= 1.26"]
+#build-backend = "hatchling.build"
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "geostrokit"
+description = "A set of python scripts to handle QG outputs and more"
+version = "0.7"
+dependencies = ['numpy', 'scipy' ]
+authors = [
+  {name = "Bruno Deremble", email = "bruno.deremble@cnrs.fr"}
+]

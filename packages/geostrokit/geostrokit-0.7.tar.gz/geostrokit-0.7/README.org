@@ -1,0 +1,30 @@
+
+#+TITLE: GeostroKit readme
+
+GeostroKit provides a couple of functions useful in the QG world and
+elsewhere.
+
+* Installation
+
+#+begin_src bash
+pip install . --user
+#+end_src
+
+* Exemple 1: Compute a deformation radius
+- Suppose we have 2 layers of thickness 500 and 2500 m
+- The Brunt-Vaisala frequency (squared) N^2 = 10^-5 s^-2
+- the coriolis parameter is f0 = 10^-4 s^-1
+
+#+begin_src python :results output
+import numpy as np
+import geostrokit as qg
+
+dh = np.array([500,2500]) # thickness of the layers 
+N2 = np.array([1e-5])
+Rd = qg.comp_modes(dh,N2,f0=1e-4)
+
+print("First deformation radius = {0:.0f} m".format(Rd[1]))
+#+end_src
+
+#+RESULTS:
+: First deformation radius = 25000 m
