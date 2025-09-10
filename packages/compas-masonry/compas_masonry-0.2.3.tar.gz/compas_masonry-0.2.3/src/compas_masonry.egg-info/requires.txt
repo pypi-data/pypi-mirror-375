@@ -1,0 +1,17 @@
+compas>=2.14.1
+compas_cgal>=0.9.1
+compas_dem>=0.4.1
+compas_libigl>=0.7.6
+compas_rui>=0.6
+compas_session>=0.7
+compas_tna>=0.7
+compas_tno>=0.3
+
+[dev]
+bump-my-version
+compas_invocations2
+invoke>=0.14
+ruff
+sphinx_compas2_theme
+twine
+wheel
