@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="HDF5 data selection" qualified_name="orangecontrib.darfix.widgets.hdf5dataselection.HDF5DataSelectionWidgetOW" project_name="darfix" version="" title="HDF5 data selection" position="(190.0, 220.0)" />
+		<node id="1" name="noise removal" qualified_name="orangecontrib.darfix.widgets.noiseremoval.NoiseRemovalWidgetOW" project_name="darfix" version="" title="noise removal" position="(501.0, 178.0)" />
+		<node id="2" name="Dimension definition" qualified_name="orangecontrib.darfix.widgets.dimensions.DimensionWidgetOW" project_name="darfix" version="" title="Dimension definition" position="(314.0, 177.0)" />
+		<node id="3" name="grain plot" qualified_name="orangecontrib.darfix.widgets.grainplot.GrainPlotWidgetOW" project_name="darfix" version="" title="grain plot" position="(639.0, 160.0)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="2" source_channel="dataset" sink_channel="dataset" enabled="true" source_channel_id="dataset" sink_channel_id="dataset" />
+		<link id="1" source_node_id="2" sink_node_id="1" source_channel="dataset" sink_channel="dataset" enabled="true" source_channel_id="dataset" sink_channel_id="dataset" />
+		<link id="2" source_node_id="1" sink_node_id="3" source_channel="dataset" sink_channel="dataset" enabled="true" source_channel_id="dataset" sink_channel_id="dataset" />
+	</links>
+	<annotations />
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="literal">{'_ewoks_default_inputs': {'raw_input_file': '/home/ruyer/Downloads/input (1).h5', 'raw_detector_data_path': '/2.1/measurement/my_detector', 'raw_metadata_path': '/2.1/instrument/positioners', 'in_memory': True}, '_ewoks_execinfo': {}, '_ewoks_task_options': {}, '_ewoks_varinfo': {}, 'controlAreaVisible': True, 'default_inputs': {}, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x04\x10\x00\x00\x01L\x00\x00\x06\x8f\x00\x00\x03@\x00\x00\x04\x10\x00\x00\x01L\x00\x00\x06\x8f\x00\x00\x03@\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x04\x10\x00\x00\x01L\x00\x00\x06\x8f\x00\x00\x03@', '__version__': 1}</properties>
+		<properties node_id="1" format="pickle">gASVVQEAAAAAAAB9lCiMFV9ld29rc19kZWZhdWx0X2lucHV0c5R9lIwKb3BlcmF0aW9uc5RdlH2U
+KIwEdHlwZZSMEGRhcmZpeC5jb3JlLmRhdGGUjAlPcGVyYXRpb26Uk5RLAoWUUpSMCnBhcmFtZXRl
+cnOUfZSMC2tlcm5lbF9zaXpllEsDc3Vhc4wPX2V3b2tzX2V4ZWNpbmZvlH2UjBNfZXdva3NfdGFz
+a19vcHRpb25zlH2UjA5fZXdva3NfdmFyaW5mb5R9lIwSY29udHJvbEFyZWFWaXNpYmxllIiMDmRl
+ZmF1bHRfaW5wdXRzlH2UjBNzYXZlZFdpZGdldEdlb21ldHJ5lENCAdnQywADAAAAAAKDAAAA5gAA
+BdAAAAP3AAACgwAAAOYAAAW0AAADtQAAAAAAAAAACgAAAAKDAAAA5gAABbQAAAO1lIwLX192ZXJz
+aW9uX1+USwF1Lg==
+</properties>
+		<properties node_id="2" format="literal">{'_ewoks_default_inputs': {'dims': {0: {'name': 'diffry', 'size': 8, 'start': 0.508000016, 'stop': 0.578000009}, 1: {'name': 'diffrx', 'size': 9, 'start': 0.0, 'stop': 8.0}}, 'is_zigzag': False, 'tolerance': 1e-09}, '_ewoks_execinfo': {}, '_ewoks_task_options': {}, '_ewoks_varinfo': {}, 'controlAreaVisible': True, 'default_inputs': {}, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x01z\x00\x00\x00\xe4\x00\x00\x04`\x00\x00\x02\xe8\x00\x00\x01z\x00\x00\x01\t\x00\x00\x04`\x00\x00\x02\xe8\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x01z\x00\x00\x01\t\x00\x00\x04`\x00\x00\x02\xe8', '__version__': 1}</properties>
+		<properties node_id="3" format="literal">{'_ewoks_default_inputs': {}, '_ewoks_execinfo': {}, '_ewoks_task_options': {}, '_ewoks_varinfo': {}, 'controlAreaVisible': True, 'default_inputs': {}, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x02\t\x00\x00\x00\xdf\x00\x00\x02%\x00\x00\x01!\x00\x00\x02\t\x00\x00\x00\xdf\x00\x00\t\x13\x00\x00\x03\xe5\x00\x00\x00\x00\x00\x00\x00\x00\n\x00\x00\x00\x02\t\x00\x00\x00\xdf\x00\x00\t\x13\x00\x00\x03\xe5', '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups />
+	</session_state>
+</scheme>
