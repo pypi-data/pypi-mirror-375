@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "granite-suite"
+version = "0.4.0"
+description = "granite is a collection of software to call, filter and work with genomic variants."
+authors = ["Michele Berselli <berselli.michele@gmail.com>", "Phil Grayson"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/dbmi-bgm/granite"
+homepage = "https://github.com/dbmi-bgm/granite"
+classifiers = [
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: POSIX :: Linux',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3'
+]
+packages = [
+    { include="granite" }
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+bitarray = "^2.9.2"
+h5py = "^3.11.0"
+numpy = "^1.26.4"
+matplotlib = "^3.9.0"
+pysam = "^0.22.1"
+pytabix = "^0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+
+
+[tool.poetry.scripts]
+granite = "granite.granite:main"
+
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
