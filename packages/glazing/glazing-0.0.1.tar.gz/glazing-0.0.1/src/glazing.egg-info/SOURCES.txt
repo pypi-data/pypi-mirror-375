@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+src/glazing/__init__.py
+src/glazing/__version__.py
+src/glazing.egg-info/PKG-INFO
+src/glazing.egg-info/SOURCES.txt
+src/glazing.egg-info/dependency_links.txt
+src/glazing.egg-info/requires.txt
+src/glazing.egg-info/top_level.txt
+src/glazing/framenet/__init__.py
+src/glazing/propbank/__init__.py
+src/glazing/references/__init__.py
+src/glazing/utils/__init__.py
+src/glazing/verbnet/__init__.py
+src/glazing/wordnet/__init__.py
