@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/stkweight/__init__.py
+src/stkweight/core.py
+src/stkweight/log.py
+src/stkweight/server.py
+src/stkweight.egg-info/PKG-INFO
+src/stkweight.egg-info/SOURCES.txt
+src/stkweight.egg-info/dependency_links.txt
+src/stkweight.egg-info/top_level.txt
+tests/test_main.py
