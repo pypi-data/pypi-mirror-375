@@ -1,0 +1,106 @@
+Metadata-Version: 2.4
+Name: advio
+Version: 0.1.1
+Summary: Smart tool for sending automated
+Author-email: Abbas Bachari <abbas-bachari@hotmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/abbas-bachari/advio
+Project-URL: Documentation, https://github.com/abbas-bachari/advio#readme
+Project-URL: Source, https://github.com/abbas-bachari/advio
+Keywords: advertising,automation,marketing,bot,telegram
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: teloxi>=1.0.1
+Requires-Dist: dbflux>=1.0.2
+Requires-Dist: loguru>=0.7.3
+Requires-Dist: colored>=2.3.0
+Dynamic: license-file
+
+
+<h1 align="center">🚀 Advio: Smart Advertising Tool</h1>
+<p align="center">
+    <!-- PyPI Version -->
+    <a href="https://pypi.org/project/advio/">
+        <img src="https://img.shields.io/pypi/v/advio?style=plastic" alt="PyPI - Version">
+    </a>
+    <!-- Python Versions -->
+    <a href="https://pypi.org/project/advio/">
+        <img src="https://img.shields.io/pypi/pyversions/advio?style=plastic" alt="Python Versions">
+    </a>
+    <!-- License -->
+    <a href="https://pypi.org/project/advio/">
+        <img src="https://img.shields.io/pypi/l/advio?style=plastic" alt="License">
+    </a>
+    <!-- Downloads -->
+    <a href="https://pepy.tech/project/advio">
+        <img src="https://pepy.tech/badge/advio?style=flat-plastic" alt="Downloads">
+    </a>
+    <!-- Issues -->
+    <a href="https://github.com/abbas-bachari/advio/issues">
+        <img src="https://img.shields.io/github/issues/abbas-bachari/advio?style=plastic" alt="GitHub Issues">
+    </a>
+</p>
+
+---
+
+## **Advio** is a smart tool for sending automated advertisements
+
+### 🛠️ Version: 0.1.1
+
+---
+
+## 📥 Installation
+
+```bash
+pip install advio
+```
+
+## 💡 Quick Start
+
+```python
+from advio  import AdvioTG,Settings
+```
+
+---
+
+## 🧑‍💻 Usage
+
+```python
+from advio  import AdvioTG,Settings
+```
+
+---
+
+## ⚙️ Configuration
+
+```python
+from advio  import AdvioTG,Settings
+
+telegram_proxy=['http','127.0.0.1', 10808]
+settings = Settings(sessions_path='sessions.ses', join_list='join_list.txt', sleep_time=1, telegram='A', last_index=0)
+advio = AdvioTG(settings=settings,proxy=telegram_proxy)
+
+```
+
+
+## **Links**
+
+- [PyPI](https://pypi.org/project/advio/)
+- [GitHub](https://github.com/abbas-bachari/advio)
+
+## **License**
+
+Advio is released under the MIT License.
+
+## 👤 About the Author
+
+**Abbas Bachari / عباس بچاری** – Developer & Maintainer of **Advio**
+
+- 📧 Telegram: [@abbas_bachari](https://t.me/abbas_bachari)  
+- 🌐 GitHub: [github.com/abbas-bachari](https://github.com/abbas-bachari)
