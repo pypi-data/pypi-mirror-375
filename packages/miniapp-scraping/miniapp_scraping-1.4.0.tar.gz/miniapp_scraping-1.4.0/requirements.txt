@@ -1,0 +1,7 @@
+# Miniapp Scraping v1.4.0 - Minimal Dependencies
+# Pure Python web scraping with email extraction
+
+# Core dependencies (only 3 packages!)
+requests>=2.25.1
+beautifulsoup4>=4.9.3
+lxml>=4.6.3

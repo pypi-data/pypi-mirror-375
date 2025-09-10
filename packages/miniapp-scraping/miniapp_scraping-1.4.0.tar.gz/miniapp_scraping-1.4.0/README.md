@@ -1,0 +1,330 @@
+# Miniapp Scraping v1.4.0
+
+A lightweight, efficient Python tool for web scraping press releases with advanced email extraction capabilities.
+
+## 🎯 Features v1.4.0
+
+### ✨ Core Functionality
+- **📧 Email Extraction**: Advanced email address detection from press releases
+- **🔍 Contact Information**: Extract phone numbers, FAX, and company details  
+- **🚀 Pure Python**: Uses only requests + BeautifulSoup4 (no external APIs)
+- **⚡ Lightweight**: Minimal dependencies, fast execution
+- **🛠️ CLI Interface**: Easy command-line integration
+
+### 🏆 Proven Technology
+- **✅ Real Web Scraping**: Tested on actual PRTimes pages
+- **📧 Email Success Rate**: Validated email extraction patterns
+- **🐍 Pure Python**: No browser automation or heavy frameworks
+- **💾 JSON Output**: Structured data format for easy integration
+
+## Version Information
+- **Version**: 1.4.0 - PyPI Release
+- **Released**: September 2025
+- **Language**: Python 3.8+
+- **Dependencies**: 3 core packages only
+
+## 🚀 Quick Start
+
+### Installation
+```bash
+pip install miniapp-scraping
+```
+
+### Command Line Usage
+```bash
+# Basic scraping
+miniapp-scraping https://prtimes.jp/main/html/rd/p/000000001.000000001.html
+
+# Verbose output with custom filename
+miniapp-scraping https://prtimes.jp/main/html/rd/p/000000001.000000001.html -v -o my_data.json
+```
+
+### Python Integration
+```python
+from miniapp_scraping import MiniappScraper
+
+# Initialize scraper
+scraper = MiniappScraper()
+
+# Scrape a press release
+url = "https://prtimes.jp/main/html/rd/p/000000001.000000001.html"
+result = scraper.scrape(url)
+
+# Access extracted data
+print(f"Title: {result['title']}")
+print(f"Company: {result['company']}")
+print(f"Emails found: {result['emails']}")
+
+# Save to JSON
+scraper.save_json(result, "output.json")
+```
+
+## 📊 Data Structure
+
+### Extracted Information
+```json
+{
+  "url": "https://prtimes.jp/...",
+  "title": "Press Release Title",
+  "company": "Company Name Ltd.",
+  "date": "2025年9月10日",
+  "content": "Full press release content...",
+  "emails": ["contact@company.com", "info@company.com"],
+  "scraped_at": "2025-09-10T12:00:00",
+  "version": "1.4.0"
+}
+```
+
+## 🔧 Advanced Usage
+
+### CLI Options
+```bash
+# Help
+miniapp-scraping --help
+
+# Verbose mode
+miniapp-scraping URL --verbose
+
+# Custom output file
+miniapp-scraping URL --output custom_name.json
+```
+
+### Python API
+```python
+from miniapp_scraping import MiniappScraper
+
+scraper = MiniappScraper()
+
+# Scrape multiple URLs
+urls = [
+    "https://prtimes.jp/main/html/rd/p/000000001.000000001.html",
+    "https://prtimes.jp/main/html/rd/p/000000002.000000001.html"
+]
+
+results = []
+for url in urls:
+    data = scraper.scrape(url)
+    if data:
+        results.append(data)
+
+# Batch save
+for i, result in enumerate(results):
+    scraper.save_json(result, f"release_{i+1}.json")
+```
+
+## 📁 Project Structure
+
+```
+miniapp_scraping/
+├── __init__.py       # Package initialization
+├── scraper.py        # Core scraping functionality  
+└── cli.py           # Command-line interface
+```
+
+## 🧪 Tested Email Patterns
+
+### Supported Formats
+- **Context emails**: お問い合わせ：contact@example.com
+- **Standard format**: info@company.co.jp
+- **Special purpose**: press@, support@, inquiry@
+- **HTML entities**: Encoded email addresses
+
+### Validation
+- ✅ RFC-compliant email format checking
+- ✅ Duplicate removal
+- ✅ Priority-based extraction (contact info first)
+
+## 🎯 Use Cases
+
+### Business Applications
+- **Media Monitoring**: Track company announcements
+- **Lead Generation**: Extract contact information for outreach
+- **Market Research**: Analyze industry press releases
+- **Journalism**: Gather information for news stories
+
+### Technical Integration
+- **Data Pipelines**: Integrate with existing workflows
+- **Automation**: Schedule regular scraping tasks
+- **Analysis**: Feed data into business intelligence tools
+- **Archives**: Build press release databases
+
+## ⚙️ System Requirements
+
+- **Python**: 3.8 or higher
+- **OS**: Windows, macOS, Linux
+- **Internet**: Required for scraping
+- **Memory**: Minimal (< 50MB typical usage)
+
+## 🔄 Changelog
+
+### v1.4.0 (September 2025) - PyPI Release
+- **🎯 PyPI Publication**: Official package release
+- **📧 Enhanced Email Extraction**: Multi-pattern detection
+- **🛠️ CLI Interface**: Command-line tool included
+- **⚡ Performance**: Optimized for speed and efficiency
+- **📝 Documentation**: Comprehensive English documentation
+
+### Previous Versions
+- v1.3.0: Email extraction enhancement
+- v1.2.1: JSONL database integration
+- v1.1.0: Structured data output
+
+## 🛠️ Development
+
+### Local Development
+```bash
+# Clone repository
+git clone https://github.com/TECHFUND/miniapp-scraping
+cd miniapp-scraping
+
+# Install in development mode
+pip install -e .
+
+# Run tests
+python -m pytest
+```
+
+### Building Package
+```bash
+# Build distribution
+python setup.py sdist bdist_wheel
+
+# Upload to PyPI (maintainers only)
+twine upload dist/*
+```
+
+## 📞 Support & Contributing
+
+- **GitHub Issues**: [Report bugs or request features](https://github.com/TECHFUND/miniapp-scraping/issues)
+- **Documentation**: [Full documentation](https://github.com/TECHFUND/miniapp-scraping#readme)
+- **Contributing**: Pull requests welcome
+
+## 📋 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## ⚠️ Legal Notice
+
+This tool is designed for legitimate research and business purposes. Please respect website terms of service and robots.txt when using this scraper.
+
+---
+
+**✨ v1.4.0 Highlights**: Production-ready PyPI package with enhanced email extraction and CLI interface for seamless integration into any workflow.
+
+# Miniapp Scraping v1.4.0
+
+プレスリリースを効率的にスクレイピングし、メールアドレスの抽出に特化した軽量Pythonツールです。
+
+## 🎯 特徴 v1.4.0
+
+### ✨ 主要機能
+- **📧 メールアドレス抽出**: プレスリリースから高精度でメール抽出
+- **🔍 連絡先情報**: 電話番号・FAX・企業詳細も自動取得
+- **🚀 純粋Python**: requests + BeautifulSoup4のみ使用
+- **⚡ 軽量設計**: 最小限の依存関係、高速実行
+- **🛠️ CLI対応**: コマンドライン統合が簡単
+
+### 🏆 実証済み技術
+- **✅ リアルWebスクレイピング**: 実際のPRTimesページでテスト済み
+- **📧 メール抽出精度**: 検証済みパターンマッチング
+- **🐍 Pure Python**: ブラウザ自動化や重いフレームワーク不要
+- **💾 JSON出力**: 構造化データで簡単統合
+
+## バージョン情報
+- **Version**: 1.4.0 - PyPI公開版
+- **Released**: 2025年9月
+- **Language**: Python 3.8+
+- **Dependencies**: 核となる3パッケージのみ
+
+## 🚀 クイックスタート
+
+### インストール
+```bash
+pip install miniapp-scraping
+```
+
+### コマンドライン使用
+```bash
+# 基本的なスクレイピング
+miniapp-scraping https://prtimes.jp/main/html/rd/p/000000001.000000001.html
+
+# 詳細出力でカスタムファイル名指定
+miniapp-scraping https://prtimes.jp/main/html/rd/p/000000001.000000001.html -v -o my_data.json
+```
+
+### Python統合
+```python
+from miniapp_scraping import MiniappScraper
+
+# スクレイパー初期化
+scraper = MiniappScraper()
+
+# プレスリリース取得
+url = "https://prtimes.jp/main/html/rd/p/000000001.000000001.html"
+result = scraper.scrape(url)
+
+# 抽出データアクセス
+print(f"タイトル: {result['title']}")
+print(f"会社名: {result['company']}")
+print(f"メール発見数: {result['emails']}")
+
+# JSON保存
+scraper.save_json(result, "output.json")
+```
+
+## 🔧 高度な使用方法
+
+### CLIオプション
+```bash
+# ヘルプ
+miniapp-scraping --help
+
+# 詳細モード
+miniapp-scraping URL --verbose
+
+# カスタム出力ファイル
+miniapp-scraping URL --output custom_name.json
+```
+
+## 📞 サポート・貢献
+
+- **GitHub Issues**: [バグレポートや機能リクエスト](https://github.com/TECHFUND/miniapp-scraping/issues)
+- **ドキュメント**: [完全ドキュメント](https://github.com/TECHFUND/miniapp-scraping#readme)
+- **貢献**: プルリクエスト歓迎
+
+---
+
+**✨ v1.4.0の特徴**: メール抽出とCLIインターフェースを強化した本格的なPyPIパッケージ、あらゆるワークフローへのシームレスな統合が可能。
+
+# Miniapp Scraping v1.4.0
+
+一个轻量级、高效的Python工具，用于抓取新闻稿并提取电子邮件地址。
+
+## 🎯 特性 v1.4.0
+
+### ✨ 核心功能
+- **📧 电子邮件提取**: 从新闻稿中高精度提取电子邮件
+- **🔍 联系信息**: 自动获取电话号码、传真、公司详情
+- **🚀 纯Python**: 仅使用requests + BeautifulSoup4
+- **⚡ 轻量设计**: 最小依赖关系，快速执行
+- **🛠️ CLI支持**: 轻松命令行集成
+
+## 🚀 快速开始
+
+### 安装
+```bash
+pip install miniapp-scraping
+```
+
+### 命令行使用
+```bash
+# 基本抓取
+miniapp-scraping https://prtimes.jp/main/html/rd/p/000000001.000000001.html
+
+# 详细输出自定义文件名
+miniapp-scraping https://prtimes.jp/main/html/rd/p/000000001.000000001.html -v -o my_data.json
+```
+
+---
+
+**✨ v1.4.0亮点**: 生产就绪的PyPI包，增强的电子邮件提取和CLI界面，可无缝集成到任何工作流程中。

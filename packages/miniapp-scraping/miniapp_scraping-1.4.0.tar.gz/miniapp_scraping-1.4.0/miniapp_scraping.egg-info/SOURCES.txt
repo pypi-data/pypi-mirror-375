@@ -1,0 +1,16 @@
+CHANGELOG.md
+LICENSE
+MANIFEST.in
+README.md
+requirements.txt
+setup.py
+miniapp_scraping/__init__.py
+miniapp_scraping/cli.py
+miniapp_scraping/scraper.py
+miniapp_scraping.egg-info/PKG-INFO
+miniapp_scraping.egg-info/SOURCES.txt
+miniapp_scraping.egg-info/dependency_links.txt
+miniapp_scraping.egg-info/entry_points.txt
+miniapp_scraping.egg-info/not-zip-safe
+miniapp_scraping.egg-info/requires.txt
+miniapp_scraping.egg-info/top_level.txt
