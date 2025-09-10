@@ -1,0 +1,188 @@
+Metadata-Version: 2.4
+Name: brief-develop
+Version: 1.0.0
+Summary: 一个轻量级的Python测试框架，提供简洁的测试运行和彩色输出功能。
+Author-email: hh66dw <hh66dw@163.com>
+License: MIT License
+        
+        Copyright (c) 2025 hh66dw
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE NOT LIMITED TO ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+        ===============================================================================
+        
+        MIT 许可证
+        
+        版权所有 (c) 2025 hh66dw
+        
+        特此免费授予任何获得本软件及相关文档文件（以下简称“软件”）副本的人，允许不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售本软件的副本，以及允许向其提供本软件的人员这样做，但须符合以下条件：
+        
+        上述版权声明和本许可声明应包含在本软件的所有副本或主要部分中。
+        
+        本软件按“原样”提供，不附带任何明示或暗示的担保，包括但不限于对适销性、特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人均不对因本软件或使用本软件或其他方式引起的任何索赔、损害或其他责任承担责任，无论是在合同、侵权或其他行为中。
+        
+        
+        
+Project-URL: Homepage, https://gitee.com/hh66dw/brief_develop
+Project-URL: Documentation, https://gitee.com/hh66dw/brief_develop#readme
+Project-URL: Repository, https://gitee.com/hh66dw/brief_develop
+Project-URL: Issues, https://gitee.com/hh66dw/brief_develop/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: termcolor==2.4.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: black>=22.0; extra == "dev"
+Requires-Dist: flake8>=4.0; extra == "dev"
+Requires-Dist: isort>=5.0; extra == "dev"
+Dynamic: license-file
+
+# Brief-Develop
+
+一个轻量级的Python测试框架，提供简洁的测试运行和彩色输出功能。
+
+## 功能特性
+
+- 🎨 彩色终端输出，提升测试结果的可读性
+- 📊 自动统计测试通过率
+- 🧪 支持正常测试和异常测试
+- 🔧 简单易用的API设计
+- 📦 轻量级无依赖（仅需termcolor）
+
+## 安装
+
+### 使用pip安装
+
+```bash
+pip install brief_develop
+```
+
+## 快速开始
+
+### 基本用法
+
+```python
+from brief_develop import BriefTest
+
+# 创建测试实例
+brief_test = BriefTest()
+
+# 运行正常测试
+def test_addition(a,b):
+    return a+b
+
+brief_test.run_test(    test_func        = lambda:test_addition(1,1),
+                        detail           = lambda:f"test_addition 功能测试",
+                        expected_source  = lambda:test_addition(1,1),
+                        expected_message = 2
+                    )
+
+# 运行异常测试
+def test_division_by_zero():
+    1 / 0
+
+brief_test.run_test(    test_func        = lambda: test_division_by_zero(),
+                        detail           = lambda:f"test_division_by_zero 功能测试",
+                        expected_message = "division by zero"
+                    )
+
+# 获取测试统计
+print(f"测试通过率: {brief_test.get_stats()}%")
+
+```
+
+## API文档
+
+### BriefTest类
+
+#### `__init__()`
+初始化测试实例。
+
+#### `print_Brief_Test(message: str, color: str = None)`
+打印彩色消息到终端。
+
+- `message`: 要显示的消息
+- `color`: 颜色名称（如 'red', 'green', 'blue' 等）
+
+#### `run_test(test_func, detail=None, expected_source=None, expected_message=None)`
+运行单个测试用例。
+
+- `test_func`: 测试函数或可调用对象
+- `detail`: 测试描述信息
+- `expected_source`: 期望的返回值（正常测试）
+- `expected_message`: 期望的异常消息（异常测试）
+
+#### `get_stats()`
+获取测试统计信息，返回通过率百分比。
+
+## 项目结构
+
+```
+brief_develop/
+├── src/
+│   └── brief_develop/
+│       ├── __init__.py      # 包初始化文件
+│       └── module.py        # 主要功能实现
+├── .gitignore              # Git忽略规则
+├── requirements.txt        # 项目依赖
+├── LICENSE                # 许可证文件
+└── README.md              # 项目说明文档
+```
+
+## 贡献指南
+
+欢迎提交Issue和Pull Request来改进这个项目。在提交代码前请确保：
+1. 所有现有测试通过
+2. 新增功能包含相应的测试用例
+3. 代码风格符合项目规范
+
+## 许可证
+
+本项目基于MIT许可证开源 - 详见[LICENSE](LICENSE)文件。
+
+
+## 版本信息
+
+- **v1.0.0** - 初始版本发布
+  - 基础测试框架功能
+  - 彩色输出支持
+  - 测试统计功能
+
+## 作者
+
+- **hh66dw** - 项目创建者和维护者
+
+## 第三方库致谢 (Acknowledgements)
+本项目得益于以下优秀的开源库：
+
+termcolor - Copyright (c) 2008-2011 Volvox Development Team - 基于MIT许可证
+
+感谢所有开源贡献者的辛勤工作。
