@@ -1,0 +1,43 @@
+[project]
+name = "hplog"
+version = "0.6.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Arian Ott", email = "arian.ott@ieee.org" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "pandas>=2.3.2",
+    "pydantic>=2.11.7",
+    "pymongo>=4.14.1",
+    "python-dotenv>=1.1.1",
+]
+
+[project.scripts]
+hplog = "hplog:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4.2",
+    "pytest-xdist>=3.8.0",
+    "ruff>=0.12.12",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+
+exclude = [
+  "tests/**",
+  "docs/**",
+  "*.log",
+  "*.tmp",
+  ".gitignore",
+  ".DS_Store",
+  ".ruff_cache",
+  "tst.py",
+  "docker-compose.yaml",
+]
