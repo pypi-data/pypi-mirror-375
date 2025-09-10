@@ -1,0 +1,3 @@
+[console_scripts]
+easy=easy_whitelist.__main__:main
+
