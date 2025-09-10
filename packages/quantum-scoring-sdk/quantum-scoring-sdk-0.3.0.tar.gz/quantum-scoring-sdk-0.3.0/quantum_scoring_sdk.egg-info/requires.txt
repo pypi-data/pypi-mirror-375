@@ -1,0 +1,7 @@
+numpy
+scikit-learn
+qiskit>=0.45.0
+qiskit-aer>=0.13.0
+
+[ibm]
+qiskit-ibm-runtime>=0.15.0
