@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: cosmic-flagger
+Version: 0.2.0
+Summary: A small package for flagging, verifying, and removing cosmic ray contamination from data.
+Home-page: https://github.com/Autumn10677/cosmic-flagger
+Author: Autumn Stephens
+Author-email: aust8150@colorado.edu
+Requires-Dist: astropy
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: tqdm
+Requires-Dist: jax
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: summary
