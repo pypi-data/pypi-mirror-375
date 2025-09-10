@@ -1,0 +1,11 @@
+ipython>=9.5.0
+lidb>=1.1.2
+matplotlib>=3.10.6
+numpy>=2.3.1
+pandas>=2.3.1
+plotly>=6.3.0
+polars==1.31.0
+pyecharts>=2.0.8
+scikit-learn>=1.7.0
+xgboost>=3.0.5
+ygo>=1.1.6
