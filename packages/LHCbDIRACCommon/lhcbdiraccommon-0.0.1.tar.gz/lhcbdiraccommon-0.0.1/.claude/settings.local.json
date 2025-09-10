@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/cburr/Development/DIRAC-dev/lhcbdiracx/**)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebSearch",
+      "Read(//Users/cburr/Development/DIRAC-dev/LHCbDIRAC/src/LHCbDIRAC/ConfigurationSystem/Client/Helpers/**)",
+      "Read(//Users/cburr/Development/DIRAC-dev2/DIRAC/dirac-common/**)",
+      "Bash(pixi run test:*)",
+      "Bash(pixi info:*)",
+      "Bash(pixi install:*)",
+      "Bash(pixi run python -m pytest:*)",
+      "Bash(glab ci:*)",
+      "Bash(python -m zipfile:*)",
+      "Bash(pixi run python:*)",
+      "Bash(python-build:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
