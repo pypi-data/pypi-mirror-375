@@ -1,0 +1,40 @@
+/* Set some custom css variables to avoid duplication */
+:root {
+    --polychron-blue: #33658a;
+    --polychron-orange: #cc5f00;
+}
+
+/* Set custom colours for the default (i.e. light) theme.
+   see https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/stylesheets/main/_colors.scss */
+[data-md-color-scheme="default"]  {
+    --md-primary-fg-color: var(--polychron-blue);
+    --md-accent-fg-color: var(--polychron-orange);
+}
+
+/* Set custom colours for the slate (i.e. dark) theme.
+   see https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/stylesheets/main/_colors.scss */
+[data-md-color-scheme="slate"] {
+    --md-primary-fg-color: var(--polychron-blue);
+    --md-accent-fg-color: var(--polychron-orange);
+}
+
+
+/* Increase the font size of admonitions */
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 1em;
+}
+
+/* Add a bottom-border to h2 elements to make sections more obvious */
+.md-typeset h2 {
+    border-bottom: 1px solid var(--md-default-fg-color--lighter);
+}
+
+.md-typeset h3 {
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Hide mermaid code blocks, i.e. before they have been rendered.*/
+.md-typeset pre.mermaid {
+    display: none;
+}

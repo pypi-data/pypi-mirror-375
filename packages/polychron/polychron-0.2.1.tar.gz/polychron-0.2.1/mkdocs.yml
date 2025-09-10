@@ -1,0 +1,113 @@
+site_name: "PolyChron"
+docs_dir: docs
+site_dir: _site
+repo_url: https://github.com/bryonymoody/PolyChron
+repo_name: GitHub
+site_description: PolyChron Documentation 
+
+extra_css:
+  - assets/css/polychron.css
+  - assets/css/mkdocstrings.css
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  locale: en
+  icon:
+    logo: material/graph
+  # logo: assets/img/logo.png
+  features:
+    - content.code.copy
+    - navigation.indexes 
+    - content.tabs.link
+    - navigation.footer
+
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+nav:
+  - About: index.md
+  - Getting Started: getting-started.md
+  - Using PolyChron:
+    - using/index.md
+    - using/project-loading.md
+    - using/prior-elicitation.md
+    - using/posterior-inference.md
+    - using/post-mcmc-analysis.md
+    - using/configuration.md
+  - Developer Reference: reference/
+
+extra:
+  polychron_footer_version: ""
+  footer_code_scheme: "slate"
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/bryonymoody
+
+hooks:
+  - docs/hooks.py
+
+plugins:
+- macros:
+    module_name: docs/macros
+- search
+- section-index
+- literate-nav:
+    nav_file: SUMMARY.md
+- gen-files:
+    scripts:
+      - docs/generate_dynamic_pages.py
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [src]
+        options:
+          docstring_style: google
+          show_source: false
+          show_root_heading: false
+          show_root_full_path: false
+          show_signature_annotations: true
+          separate_signature: true
+          members_order: source
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - callouts
+  - github-callouts
+  - pymdownx.details
+  - pymdownx.tasklist
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        # Enable Mermaid, via the material theme
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+watch:
+- docs
+- src/
