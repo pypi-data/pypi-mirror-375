@@ -1,0 +1,70 @@
+[project]
+name = "StrainFish"
+version = "0.2.0"
+description = "An Ensemble Machine Learning algorithm for classification of bacterial strains."
+authors = [{ name = "Kranti.Konganti", email = "Kranti.Konganti@fda.hhs.gov" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "numpy (>=2.2.3,<3.0.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "scikit-learn (>=1.6.1,<2.0.0)",
+    "xgboost (>=3.0.0,<4.0.0)",
+    "joblib (>=1.4.2,<2.0.0)",
+    "rich (>=14.1.0,<15.0.0)",
+    "rich-click (>=1.8.9,<2.0.0)",
+    "psutil (>=6.1.1,<7.0.0)",
+    "humanize (>=4.12.3,<5.0.0)",
+    "treelite (>=4.4.1,<5.0.0)",
+    "importlib-metadata (>=8.7.0,<9.0.0)",
+    "biopython (>=1.85,<2.0)",
+    "sourmash (>=4.9.4,<5.0.0)",
+    "pynvml (>=12.0,<13.0)",
+    "sentencepiece (>=0.2.0,<0.3.0)",
+    "cuml-cu12 (>=25.08,<26.0)",
+    "imbalanced-learn (>=0.14.0,<0.15.0)",
+]
+
+[project.scripts]
+strainfish = "strainfish.cli:strainfish"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+include = [
+    { path = "src/strainfish/models/**/*", format = [
+        "sdist",
+        "wheel",
+    ] },
+    { path = "tests/**/*", format = [
+        "sdist",
+        "wheel",
+    ] },
+    { path = "README.md", format = [
+        "sdist",
+        "wheel",
+    ] },
+]
+
+# Exclude test files' cache from package
+exclude = ["**/__pycache__/**/*", "**/*.pyc"]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+black = "^25.1.0"
+flake8 = "^7.3.0"
+ruff = "^0.12.8"
+flynt = "^1.0.6"
+pdoc3 = "^0.11.6"
+
+[[tool.poetry.source]]
+name = "nvidia"
+url = "https://pypi.nvidia.com"
+priority = "supplemental"
+
+[tool.poetry.dependencies]
+cuml-cu12 = { source = "nvidia" }
