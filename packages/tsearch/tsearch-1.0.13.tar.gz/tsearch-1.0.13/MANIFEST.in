@@ -1,0 +1,7 @@
+# Bao gồm tất cả các file trong thư mục gốc và các thư mục con
+recursive-include . *.*
+
+# Bao gồm các file cụ thể nếu cần
+include requirements.txt
+include mydb/README.md
+include LICENSE

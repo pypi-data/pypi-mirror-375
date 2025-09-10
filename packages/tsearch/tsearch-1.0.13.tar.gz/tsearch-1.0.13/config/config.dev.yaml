@@ -1,0 +1,7 @@
+
+log:
+  verbose: True
+  logdir: './logging'  
+  logfile: 'MySearch.log'
+
+distance_type: ["cosin", "L2"]
