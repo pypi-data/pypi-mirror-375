@@ -1,0 +1,30 @@
+Metadata-Version: 2.3
+Name: pillar-security
+Version: 1.1.1
+Summary: Official Python SDK for the Pillar Security
+License: Apache-2.0
+Keywords: security,llm,ai-security,prompt-injection,llm-security
+Author: eagle-p
+Author-email: igal@pillar.security
+Requires-Python: >=3.9,<4.0
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: httpx (>=0.28.1,<0.29.0)
+Requires-Dist: openai (>=1.76.0)
+Requires-Dist: pydantic (>=2.11.3)
+Requires-Dist: python-dotenv (>=1.1.0)
+Requires-Dist: requests (>=2.32.3)
+Requires-Dist: wrapt (>=1.17.2)
+Project-URL: Documentation, https://docs.pillar.security/sdk-reference/python-sdk/overview
+Project-URL: Get A Demo, https://www.pillar.security/get-a-demo
+Project-URL: Homepage, https://pillar.security
