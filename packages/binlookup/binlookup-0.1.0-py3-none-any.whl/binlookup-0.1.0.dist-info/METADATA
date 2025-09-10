@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: binlookup
+Version: 0.1.0
+Summary: Python wrapper for binlist.net BIN lookup
+Home-page: https://github.com/YOUR_GITHUB/binlookup
+Author: Yuvraj Singh
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.25.0
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# binlookup
+
+A simple Python wrapper for [binlist.net](https://binlist.net) API.
+
+## Installation
+```bash
+pip install binlookup
+
