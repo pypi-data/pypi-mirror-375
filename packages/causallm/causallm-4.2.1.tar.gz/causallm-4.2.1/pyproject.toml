@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "causallm"
+version = "4.2.1"
+authors = [
+    {name = "CausalLLM Team", email = "durai@infinidatum.net"},
+]
+description = "Production-ready causal inference with comprehensive monitoring, testing, and LLM integration"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["causal-inference", "machine-learning", "statistics", "llm", "artificial-intelligence", "monitoring", "testing", "property-based-testing", "benchmarking", "mutation-testing"]
+dependencies = [
+    "numpy>=1.21.0",
+    "pandas>=1.3.0", 
+    "scikit-learn>=1.0.0",
+    "networkx>=2.6.0",
+    "scipy>=1.7.0",
+    "matplotlib>=3.3.0",
+    "plotly>=5.0.0",
+    "openai>=1.0.0",
+    "numba>=0.56.0",
+    "dask>=2022.1.0",
+    "psutil>=5.8.0",
+    "pyyaml>=6.0.0",
+    "aiofiles>=23.0.0",
+    "pyarrow>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0", 
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+testing = [
+    "hypothesis>=6.0.0",
+    "pytest-benchmark>=4.0.0",
+    "mutmut>=2.0.0",
+    "pytest-xdist>=3.0.0",
+    "pytest-mock>=3.0.0",
+]
+plugins = [
+    "langchain>=0.0.200",
+    "llama-index>=0.7.0",
+    "transformers>=4.20.0",
+    "torch>=1.11.0",
+]
+ui = [
+    "streamlit>=1.25.0",
+    "dash>=2.10.0",
+    "gradio>=3.35.0",
+]
+full = [
+    "langchain>=0.0.200",
+    "llama-index>=0.7.0", 
+    "transformers>=4.20.0",
+    "torch>=1.11.0",
+    "streamlit>=1.25.0",
+    "dash>=2.10.0",
+    "gradio>=3.35.0",
+    "anthropic>=0.7.0",
+    "hypothesis>=6.0.0",
+    "pytest-benchmark>=4.0.0",
+    "mutmut>=2.0.0",
+    "pytest-xdist>=3.0.0",
+    "pytest-mock>=3.0.0",
+]
+
+[project.scripts]
+causallm = "causallm.cli:cli_entry_point"
+
+[project.urls]
+"Homepage" = "https://github.com/rdmurugan/causallm"
+"Bug Tracker" = "https://github.com/rdmurugan/causallm/issues"
+"Repository" = "https://github.com/rdmurugan/causallm"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["causallm*"]
+exclude = ["tests*"]
