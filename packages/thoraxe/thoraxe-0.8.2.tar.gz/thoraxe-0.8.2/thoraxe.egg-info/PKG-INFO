@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: thoraxe
+Version: 0.8.2
+Summary: Disentangle homology relationships between exons.
+Home-page: https://github.com/PhyloSofS-Team/thoraxe
+Author: Diego Javier Zea, Hugues Richard & Elodie Laine
+Author-email: diegozea@gmail.com
+License: MIT license
+Keywords: orthologous exons,protein isoforms,gene transcripts
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.6.1,<3.9
+License-File: LICENSE
+Requires-Dist: pandas<1.5,>0.21.0
+Requires-Dist: biopython<1.78,>1.44
+Requires-Dist: requests
+Requires-Dist: numpy<1.20
+Requires-Dist: recordclass
+Requires-Dist: urllib3>=1.26.5
+Requires-Dist: networkx==2.3.0
+Requires-Dist: tabulate
