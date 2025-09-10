@@ -1,0 +1,5 @@
+[console_scripts]
+devix = devix.cli:main
+devix-analyze = devix.cli:analyze_command
+devix-report = devix.cli:report_command
+devix-supervisor = devix.core.supervisor:main
