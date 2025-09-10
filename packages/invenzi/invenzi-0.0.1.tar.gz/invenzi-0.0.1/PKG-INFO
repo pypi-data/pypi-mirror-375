@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: invenzi
+Version: 0.0.1
+Summary: Package for integration with the Invenzi access control system.
+Author-email: Raphael Pires <rphspires@gmail.com>
+Project-URL: Homepage, https://github.com/rphpires/Invenzi
+Project-URL: Bug Tracker, https://github.com/rphpires/Invenzi/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Dynamic: license-file
+
+# Invenzi
+
+Package for integration with the Invenzi access control system.
