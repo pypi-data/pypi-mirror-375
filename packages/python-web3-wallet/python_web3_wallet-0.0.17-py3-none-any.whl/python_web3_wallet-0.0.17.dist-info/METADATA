@@ -1,0 +1,38 @@
+Metadata-Version: 2.3
+Name: python-web3-wallet
+Version: 0.0.17
+Summary: Streamlit component that allows users to connect a wallet and send transactions with dynamic recipients and amounts
+License: MIT
+Author: Gnosis AI
+Author-email: ai@gnosis.io
+Requires-Python: >=3.10,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: streamlit (>=1.49.0,<2.0.0)
+Description-Content-Type: text/markdown
+
+# Python Web3 Wallet
+
+Streamlit component that allows you to connect a wallet and trigger send transactions.
+
+## Installation instructions
+
+```sh
+pip install web3-wallet-connect
+```
+ 
+## Usage instructions
+
+```python
+import streamlit as st
+
+from python_web3_wallet import wallet_component
+
+c = wallet_component(recipient="0x...", amount_in_ether="0.01")  # Displays RainbowKit wallet
+# Optionally data (as a Hex-formatted string) can be passed to populate the data field when sending a transaction.
+# c = wallet_component(recipient="0x...", amount_in_ether="0.01", data="0x78da2b492d2e0100045d01c1")
+```

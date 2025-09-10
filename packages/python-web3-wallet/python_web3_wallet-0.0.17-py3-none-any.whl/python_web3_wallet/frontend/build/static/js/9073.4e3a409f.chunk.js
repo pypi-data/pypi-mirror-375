@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_component=self.webpackChunkmy_component||[]).push([[9073],{19073:(e,n,c)=>{c.r(n),c.d(n,{default:()=>p.n});var p=c(66126)}}]);
