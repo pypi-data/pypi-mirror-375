@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+src/missionctl/__init__.py
+src/missionctl/cli.py
+src/missionctl.egg-info/PKG-INFO
+src/missionctl.egg-info/SOURCES.txt
+src/missionctl.egg-info/dependency_links.txt
+src/missionctl.egg-info/entry_points.txt
+src/missionctl.egg-info/top_level.txt
