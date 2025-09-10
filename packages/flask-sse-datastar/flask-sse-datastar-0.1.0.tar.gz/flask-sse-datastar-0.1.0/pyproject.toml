@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flask-sse-datastar"
+version = "0.1.0"
+authors = [
+  { name="Michael McDougal", email="michael.93.mcdougal@gmail.com" },
+]
+description = "Server-Sent Events for Flask"
+readme = "README.md"
+requires-python = ">=3.5"
+license = { text = "MIT" }
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Framework :: Flask",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.5",
+]
+dependencies = [
+  "flask>=0.9",
+  "redis",
+  "six",
+]
+
+[project.urls]
+Homepage = "https://github.com/Amatuon/flask-sse-datastar"
+
+[tool.setuptools]
+py-modules = ["flask_sse"]
