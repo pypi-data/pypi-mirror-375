@@ -1,0 +1,7 @@
+idna>=2.0
+multidict>=4.0
+propcache>=0.2.1
+requests~=2.32.0
+
+[:python_version < "3.8"]
+typing-extensions>=3.7.4
