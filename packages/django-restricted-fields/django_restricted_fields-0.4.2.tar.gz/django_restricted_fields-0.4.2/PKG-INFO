@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: django-restricted-fields
+Version: 0.4.2
+Summary: Provides date and date/time fields with restrictions for Django forms.
+Keywords: web,django,forms
+Author: Detlef Lannert
+Author-email: Detlef Lannert <detlef@lannert.de>
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Framework :: Django
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Requires-Dist: django>=4.0
+Maintainer: Detlef Lannert
+Maintainer-email: Detlef Lannert <detlef@lannert.de>
+Requires-Python: >=3.9
+Project-URL: Homepage, https://github.com/detlefla/django-restricted-fields
+Project-URL: Issues, https://github.com/detlefla/django-restricted-fields/issues
+Project-URL: Repository, https://github.com/detlefla/django-restricted-fields
+Description-Content-Type: text/markdown
+
+django-restricted-fields
+========================
+
+Usage
+-----
+
+Add this package to your virtual environment. In your Django application's `forms.py`,
+import the field(s) you want to use (currently only `RestrictedDateField` and
+`RestrictedDateTimeField`). These offer additional options:
+
+-  `future_allowed=False` – inhibit the input of dates / times that are in the future
+
+-  `past_allowed=False` – inhibit the input of dates / times that are in the past
+
+-  `min_value=X`, `max_value=X` – inhibit the input of dates / times before / after X,
+   where X can be a Python date / datetime value or a callable that returns such a value
+
+Most browsers will display a date and / or time picker whose range is limited by these
+options.
+
+Other than with Django's native fields, dates (and times) should be formatted according to
+the locale settings of the browser (which normally is the right thing to do).
