@@ -1,0 +1,32 @@
+[CDF-25682] avoid pandas dtype-mixing warning when filling NaNs (#1912)
+
+# Description
+
+Temporary suppressing pandas futurewarnings that are inconsequential but
+confuse users
+ 
+<img width="2254" height="994" alt="Screenshot 2025-09-03 at 14 57 01"
+src="https://github.com/user-attachments/assets/5f01494d-be66-4b8b-a5f6-0af32d26920e"
+/>
+
+
+
+## Changelog
+
+- [x] Patch
+- [ ] Skip
+
+## cdf
+
+### Fixed
+
+- Suppressing misleading pandas FutureWarning
+
+## templates
+
+No changes.
+
+---------
+
+Co-authored-by: gemini-code-assist[bot] <176961590+gemini-code-assist[bot]@users.noreply.github.com>
+Co-authored-by: Anders Albert <60234212+doctrino@users.noreply.github.com>
