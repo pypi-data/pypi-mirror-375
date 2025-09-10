@@ -1,0 +1,15 @@
+LICENSE
+README.md
+setup.py
+py2sambvca/__init__.py
+py2sambvca/py2sambvca.py
+py2sambvca.egg-info/PKG-INFO
+py2sambvca.egg-info/SOURCES.txt
+py2sambvca.egg-info/dependency_links.txt
+py2sambvca.egg-info/top_level.txt
+py2sambvca/radii_tables/__init__.py
+py2sambvca/radii_tables/default.py
+py2sambvca/radii_tables/format_table.py
+py2sambvca/radii_tables/vanDerWaals.py
+test/test_py2sambvca.py
+test/test_static_output.py
