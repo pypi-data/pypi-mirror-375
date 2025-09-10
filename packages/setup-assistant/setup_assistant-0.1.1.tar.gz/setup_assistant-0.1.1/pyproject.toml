@@ -1,0 +1,24 @@
+[project]
+name = "setup-assistant"
+version = "0.1.1"
+description = "A CLI Setup Assistant powered by AI"
+authors = [{name = "Varshik Chebrolu"}]
+dependencies = [
+    "typer",
+    "google-generativeai",
+    "google-genai",
+    "httpx",
+    "python-docx",
+    "pandas",
+    "google-api-python-client",
+    "google-auth-httplib2",
+    "google-auth-oauthlib",
+    "markdown"
+]
+
+[project.scripts]
+setup-assistant = "setup_assistant.cli:app"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
