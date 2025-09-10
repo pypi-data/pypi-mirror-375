@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "py-lerchs-grossmann"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "BSD-3-Clause"
+keywords = []
+authors = [
+  { name = "Mau-Aravena", email = "mau.aravena@outlook.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "pandas",
+  "numpy",
+]
+
+[project.urls]
+Documentation = "https://github.com/Mau-Aravena/py-lerchs-grossmann#readme"
+Issues = "https://github.com/Mau-Aravena/py-lerchs-grossmann/issues"
+Source = "https://github.com/Mau-Aravena/py-lerchs-grossmann"
+
+[tool.hatch.version]
+path = "src/py_lerchs_grossmann/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocstrings",
+  "mkdocstrings-python",
+]
+
+[tool.hatch.envs.dev]
+dependencies = [
+  "ruff",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/py_lerchs_grossmann tests}"
+
+[tool.coverage.run]
+source_pkgs = ["py_lerchs_grossmann", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/py_lerchs_grossmann/__about__.py",
+]
+
+[tool.coverage.paths]
+py_lerchs_grossmann = ["src/py_lerchs_grossmann", "*/py-lerchs-grossmann/src/py_lerchs_grossmann"]
+tests = ["tests", "*/py_lerchs_grossmann/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
