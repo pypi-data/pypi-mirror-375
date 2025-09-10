@@ -1,0 +1,8 @@
+[console_scripts]
+cans = cans.cli:main_cli
+cans-analyze = cans.cli:analyze_causal_cli
+cans-evaluate = cans.cli:evaluate_model_cli
+cans-mcp = cans.api.mcp_server:main
+cans-server = cans.api.server:start_server
+cans-tutorials = cans.tutorials:setup_tutorials
+cans-validate = cans.cli:validate_assumptions_cli
