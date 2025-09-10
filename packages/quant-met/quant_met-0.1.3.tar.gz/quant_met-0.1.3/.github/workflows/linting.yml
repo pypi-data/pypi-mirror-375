@@ -1,0 +1,33 @@
+
+
+name: Linting
+
+on:
+  workflow_call:
+  pull_request:
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  pull-requests: write
+
+jobs:
+  test:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Install the project
+        run: uv sync --group=lint
+      - uses: extractions/setup-just@v3
+      - name: Run test suite
+        run: just lint

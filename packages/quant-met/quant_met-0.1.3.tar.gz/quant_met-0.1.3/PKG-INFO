@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: quant-met
+Version: 0.1.3
+Summary: Calculate superconductivity in flat-band systems.
+Author-email: Tjark Sievers <tjarksievers@icloud.com>
+License-File: LICENSE.txt
+Requires-Python: >=3.11
+Requires-Dist: click>=8.1.8
+Requires-Dist: h5py>=3.12.1
+Requires-Dist: matplotlib>=3.10.0
+Requires-Dist: numba>=0.61.0
+Requires-Dist: numpy>=2.1
+Requires-Dist: numpydantic>=1.6.8
+Requires-Dist: pandas>=2.2.3
+Requires-Dist: pydantic>=2.10.4
+Requires-Dist: pyyaml>=6.0.2
+Requires-Dist: scipy>=1.15.0
+Requires-Dist: sisl[viz]>0.16.0
+Requires-Dist: tables>=3.10.2
+Requires-Dist: tbmodels>=1.4.3
+Description-Content-Type: text/markdown
+
+
+# quant-met
+
+[![DOI](https://zenodo.org/badge/800628635.svg)](https://zenodo.org/badge/latestdoi/800628635)
+[![Test](https://github.com/Ruberhauptmann/quant-met/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/Ruberhauptmann/quant-met/actions/workflows/unit_tests.yml)
+[![Coverage Status](https://coveralls.io/repos/github/Ruberhauptmann/quant-met/badge.svg?branch=main)](https://coveralls.io/github/Ruberhauptmann/quant-met?branch=main)
+[![PyPI - Version](https://img.shields.io/pypi/v/quant-met)](https://pypi.org/project/quant-met/)
+
+quant-met is a python package to treat superconductivity in flat-band systems.
+
+More information:
+- Documentation: [quant-met.tjarksievers.de](https://quant-met.tjarksievers.de)
+- [User guide](https://quant-met.tjarksievers.de/en/latest/user_guide.html)
+
+
+## Contributing
+
+This is a personal project, very geared to the work I did in my master's thesis.
+If someone is using this and experiencing bugs or want the software extended, feel free to open an [issue](https://github.com/Ruberhauptmann/quant-met/issues/new/choose)!
+
+If you want to contribute, see [documentation](https://quant-met.tjarksievers.de/en/latest/development.html).
