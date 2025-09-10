@@ -1,0 +1,13 @@
+jsonschema[format]>=4.24.0
+
+[dev]
+weblate_schemas[lint,test]
+
+[lint]
+pre-commit==4.3.0
+
+[test]
+pytest
+pytest-cov
+fedora-messaging
+jsonschema[format]
