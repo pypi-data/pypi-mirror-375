@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: ggsci
+Version: 0.1.0
+Summary: Plotnine color palettes inspired by plots in scientific journals, data visualization libraries, science fiction movies, and TV shows
+Project-URL: Homepage, https://nanx.me/py-ggsci/
+Project-URL: Documentation, https://nanx.me/py-ggsci/
+Project-URL: Repository, https://github.com/nanxstats/py-ggsci
+Project-URL: Issues, https://github.com/nanxstats/py-ggsci/issues
+Project-URL: Changelog, https://github.com/nanxstats/py-ggsci/blob/main/CHANGELOG.md
+Author-email: Nan Xiao <me@nanx.me>
+License-File: LICENSE
+Requires-Python: >=3.10
+Requires-Dist: matplotlib>=3.10.6
+Requires-Dist: numpy>=2.2.6
+Requires-Dist: plotnine>=0.15.0
+Description-Content-Type: text/markdown
+
+# ggsci for Python
+
+[![PyPI version](https://img.shields.io/pypi/v/ggsci)](https://pypi.org/project/ggsci/)
+![Python versions](https://img.shields.io/pypi/pyversions/ggsci)
+[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
+[![CI Tests](https://github.com/nanxstats/py-ggsci/actions/workflows/ci-tests.yml/badge.svg)](https://github.com/nanxstats/py-ggsci/actions/workflows/ci-tests.yml)
+[![mkdocs](https://github.com/nanxstats/py-ggsci/actions/workflows/mkdocs.yml/badge.svg)](https://nanx.me/py-ggsci/)
+![License](https://img.shields.io/pypi/l/ggsci)
+
+ggsci for Python provides color palettes for plotnine.
+
+## Installation
+
+You can install py-ggsci from PyPI:
+
+```bash
+pip install ggsci
+```
+
+Or install the development version from GitHub:
+
+```bash
+git clone https://github.com/nanxstats/py-ggsci.git
+cd py-ggsci
+python3 -m pip install -e .
+```
