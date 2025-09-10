@@ -1,0 +1,3 @@
+[console_scripts]
+container-manager = container_manager_mcp.container_manager:main
+container-manager-mcp = container_manager_mcp.container_manager_mcp:main
