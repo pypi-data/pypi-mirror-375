@@ -1,0 +1,161 @@
+Metadata-Version: 2.2
+Name: xtrapnet
+Version: 0.2.0
+Summary: A robust package for extrapolation control in neural networks
+Home-page: https://github.com/cykurd/xtrapnet
+Author: cykurd
+Author-email: cykurd@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: torch>=2.0.0
+Requires-Dist: numpy
+Requires-Dist: scipy
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# XtrapNet - Extrapolation-Aware Neural Networks  
+[![PyPI Version](https://img.shields.io/pypi/v/xtrapnet)](https://pypi.org/project/xtrapnet/)  
+[![Python Version](https://img.shields.io/pypi/pyversions/xtrapnet)](https://pypi.org/project/xtrapnet/)  
+[![License](https://img.shields.io/pypi/l/xtrapnet)](https://opensource.org/licenses/MIT)  
+
+XtrapNet v0.2.0 is a cutting-edge deep learning framework designed to handle out-of-distribution (OOD) extrapolation in neural networks. Unlike traditional models that fail when encountering unseen data, XtrapNet:
+
+- ✅ **Modular Pipeline Architecture** - Complete end-to-end pipeline with configurable components
+- ✅ **Advanced OOD Detection** - Multiple detectors (Mahalanobis, KNN, Null) for robust OOD identification
+- ✅ **Conformal Prediction** - Uncertainty quantification with statistical guarantees
+- ✅ **Ensemble Wrappers** - Built-in support for ensemble methods and uncertainty estimation
+- ✅ **Extrapolation Control** - Multiple fallback modes for handling OOD inputs
+- ✅ **PyTorch Integration** - Seamless integration with any PyTorch model  
+
+## Installation
+To install XtrapNet:
+```pip install xtrapnet```
+
+## Quick Start
+
+### Basic Usage
+```python
+import numpy as np 
+from xtrapnet import XtrapNet, XtrapTrainer, XtrapController
+
+# Generate dummy training data
+features = np.random.uniform(-3.14, 3.14, (100, 2)).astype(np.float32)
+labels = np.sin(features[:, 0]) * np.cos(features[:, 1]).reshape(-1, 1)
+
+# Train the model
+net = XtrapNet(input_dim=2)
+trainer = XtrapTrainer(net)
+trainer.train(labels, features)
+
+# Define an extrapolation-aware controller
+controller = XtrapController(
+    trained_model=net,
+    train_features=features,
+    train_labels=labels,
+    mode='warn'
+)
+
+# Test prediction with OOD handling
+test_input = np.array([[5.0, -3.5]])  # OOD point
+prediction = controller.predict(test_input)
+print("Prediction:", prediction)
+```
+
+### Advanced Pipeline Usage (v0.2.0)
+```python
+from xtrapnet import XtrapPipeline, PipelineConfig, default_config
+
+# Create a complete pipeline with all components
+config = default_config()
+config.model.input_dim = 2
+config.ood.detector_type = 'mahalanobis'
+config.uncertainty.enable_conformal = True
+
+# Initialize and run the complete pipeline
+pipeline = XtrapPipeline(config)
+pipeline.fit(features, labels)
+
+# Make predictions with full uncertainty quantification
+predictions, uncertainty = pipeline.predict(test_input, return_uncertainty=True)
+print(f"Prediction: {predictions}")
+print(f"Uncertainty: {uncertainty}")
+```
+
+## Extrapolation Handling Modes
+XtrapNet allows you to control how the model reacts to out-of-distribution (OOD) inputs:
+
+| Mode             | Behavior |
+|-----------------|-------------|
+| clip            | Restricts predictions within known value ranges |
+| zero            | Returns 0 for OOD inputs |
+| nearest_data    | Uses the closest training point's prediction |
+| symmetry        | Uses symmetry-based assumptions to infer values |
+| warn           | Prints a warning but still predicts |
+| error           | Raises an error when encountering OOD data |
+| highest_confidence | Selects the lowest-variance prediction |
+| backup          | Uses a secondary model when uncertainty is high |
+| deep_ensemble   | Averages predictions from multiple expert models |
+| llm_assist      | Queries an LLM for a fallback prediction |
+
+
+## Visualizing Extrapolation Behavior
+```
+import matplotlib.pyplot as plt 
+x_test = np.linspace(-5, 5, 100).reshape(-1, 1) 
+mean_pred, var_pred = controller.predict(x_test, return_variance=True)
+
+plt.plot(x_test, mean_pred, label='Ensemble Mean', color='blue') 
+plt.fill_between(x_test.flatten(), mean_pred - var_pred, mean_pred + var_pred, color='blue', alpha=0.2, label='Uncertainty (Variance)') 
+plt.legend() 
+plt.show()
+```
+
+This generates an extrapolation-aware prediction plot with uncertainty bands! 🔥
+
+## New in v0.2.0
+
+### 🎉 Major Features Added
+- **XtrapPipeline**: Complete end-to-end pipeline for OOD-aware machine learning
+- **EnsembleWrapper**: Built-in ensemble methods with uncertainty quantification
+- **OOD Detectors**: Multiple detection methods (Mahalanobis, KNN, Null)
+- **Conformal Prediction**: Statistical uncertainty quantification with guarantees
+- **Modular Architecture**: Configurable components for maximum flexibility
+
+### 🔧 API Improvements
+- Cleaner import structure: `from xtrapnet import XtrapPipeline, PipelineConfig`
+- Configuration-based setup with `default_config()`
+- Enhanced error handling and logging
+- Better documentation and type hints
+
+## Future Roadmap
+We are actively developing new features:
+- ✅ **v0.2.0**: Modular pipeline, ensemble wrappers, OOD detectors, conformal prediction
+- 🚀 **v0.3.0**: Bayesian Neural Network support
+- 🚀 **v0.4.0**: Physics-Informed Neural Networks
+- 🚀 **v0.5.0**: Integration with Large Language Models (LLMs)
+- 🚀 **v0.6.0**: Adaptive learning for OOD generalization
+- 🚀 **v0.7.0**: Built-in anomaly detection for real-world data
+
+## Contributing
+Want to improve XtrapNet? Feel free to submit a pull request! Contributions are welcome.  
+🔗 **GitHub:** [https://github.com/cykurd/xtrapnet](https://github.com/cykurd/xtrapnet)  
+
+## License
+This project is licensed under the **MIT License**.
+
+## Support
+If you have any questions, feel free to open an issue on **GitHub** or reach out via **cykurd@gmail.com**. 🚀
+
+🔥 Why Use XtrapNet?
+Traditional neural networks struggle with out-of-distribution (OOD) data.  
+🔥 XtrapNet is the first open-source library designed to intelligently control extrapolation!  
