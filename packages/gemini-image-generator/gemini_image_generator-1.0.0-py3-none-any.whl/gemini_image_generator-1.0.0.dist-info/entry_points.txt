@@ -1,0 +1,2 @@
+[console_scripts]
+gemini-image = gemini_image_generator.cli:main
