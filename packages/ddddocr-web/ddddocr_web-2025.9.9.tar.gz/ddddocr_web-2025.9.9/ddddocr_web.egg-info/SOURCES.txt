@@ -1,0 +1,8 @@
+MANIFEST.in
+pyproject.toml
+ddddocr_web/__init__.py
+ddddocr_web.egg-info/PKG-INFO
+ddddocr_web.egg-info/SOURCES.txt
+ddddocr_web.egg-info/dependency_links.txt
+ddddocr_web.egg-info/top_level.txt
+ddddocr_web/bin/common_q8.onnx
