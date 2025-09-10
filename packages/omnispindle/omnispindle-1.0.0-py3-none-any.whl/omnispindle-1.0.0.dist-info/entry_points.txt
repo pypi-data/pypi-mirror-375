@@ -1,0 +1,4 @@
+[console_scripts]
+omnispindle = src.Omnispindle.__main__:main
+omnispindle-server = src.Omnispindle.__main__:main
+omnispindle-stdio = src.Omnispindle.stdio_server:main
