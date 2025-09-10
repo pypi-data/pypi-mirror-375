@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fixit.ai/schemas/v1/security_findings.schema.json",
+  "title": "Security Findings",
+  "description": "Security issues found in code or API endpoints",
+  "type": "object",
+  "required": [
+    "scan_id",
+    "findings",
+    "summary",
+    "timestamp"
+  ],
+  "properties": {
+    "scan_id": {
+      "type": "string",
+      "description": "Unique identifier for this security scan"
+    },
+    "target": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["api_endpoint", "file", "function", "module"]
+        },
+        "path": {"type": "string"},
+        "method": {"type": "string"}
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "type", "description", "recommendation"],
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low", "info"]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "sql_injection",
+              "xss",
+              "csrf",
+              "auth_bypass",
+              "information_disclosure",
+              "insecure_deserialization",
+              "xxe",
+              "ssrf",
+              "path_traversal",
+              "command_injection",
+              "other"
+            ]
+          },
+          "description": {"type": "string"},
+          "affected_code": {
+            "type": "object",
+            "properties": {
+              "file": {"type": "string"},
+              "line_start": {"type": "integer"},
+              "line_end": {"type": "integer"},
+              "snippet": {"type": "string"}
+            }
+          },
+          "recommendation": {"type": "string"},
+          "cwe_id": {"type": "string"},
+          "owasp_category": {"type": "string"},
+          "fix_example": {"type": "string"}
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "total_issues": {"type": "integer"},
+        "critical": {"type": "integer"},
+        "high": {"type": "integer"},
+        "medium": {"type": "integer"},
+        "low": {"type": "integer"},
+        "info": {"type": "integer"}
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
