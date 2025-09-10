@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mseep-email_client
+Version: 0.1.1
+Summary: Email search and management tool using MCP protocol
+Author-email: mseep <support@skydeck.ai>
+Requires-Python: >=3.12
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: mcp>=1.1.2
+Requires-Dist: python-dotenv>=1.0.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
