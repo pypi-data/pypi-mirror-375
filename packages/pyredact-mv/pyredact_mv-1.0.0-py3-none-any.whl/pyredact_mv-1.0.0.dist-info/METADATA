@@ -1,0 +1,102 @@
+Metadata-Version: 2.4
+Name: pyredact-mv
+Version: 1.0.0
+Summary: A professional CLI tool to detect and de-identify PII from CSV files.
+Author-email: MonishV0017 <monishv0017@gmail.com>
+Project-URL: Homepage, https://github.com/MonishV0017/pii-redactor
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: pandas
+Requires-Dist: typer
+Requires-Dist: rich
+Requires-Dist: chardet
+
+# PyRedact 🛡️
+
+A professional, installable command-line tool to detect and de-identify Personally Identifiable Information (PII) from various file types.
+
+## Features
+
+- **Multi-Format Support**: Scans `.csv`, `.pdf`, and `.txt` files.
+- **Comprehensive PII Detection**: Detects a wide range of global and Indian-specific PII types.
+- **Flexible Input**: Scan a single file or an entire directory of `.csv` files.
+- **Selective Scanning**: Choose to scan for all PII types or only for specific ones.
+- **Professional CLI**: A user-friendly interface with a startup banner, progress bars, a self-documenting `--help` menu, and clear error messages.
+- **Secure and Robust**: Handles permission errors and various text encodings automatically.
+
+---
+
+## Installation
+
+It is highly recommended to create a dedicated folder and use a virtual environment for a clean and stable experience.
+
+1.  **Create a Project Folder and Open a Terminal:**
+
+    ```powershell
+    mkdir My-PII-Scans
+    cd My-PII-Scans
+    ```
+
+2.  **Create and Activate a Virtual Environment:**
+
+    ```powershell
+    python -m venv venv
+    .\venv\Scripts\Activate.ps1
+    ```
+
+3.  **Install `pyredact` from PyPI:**
+    ```powershell
+    pip install pyredact
+    ```
+    _(Note: To install a testing version, use the command `pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple pyredact`)_
+
+---
+
+## Usage Guide
+
+Once installed, use the `pyredact` command from your terminal.
+
+### Getting Help
+
+To see a full list of all available commands and options, run:
+
+```bash
+pyredact --help
+```
+
+### Example Scenarios
+
+- **Scan a single PDF file and save to the default `output/` folder:**
+
+  ```bash
+  pyredact --input C:\Users\YourName\Documents\report.pdf
+  ```
+
+- **Scan all `.csv` files in a specific directory:**
+
+  ```bash
+  pyredact --input-dir path/to/your/folder_with_csvs
+  ```
+
+- **Scan a file for only Emails and PAN Cards:**
+
+  ```bash
+  pyredact --input data.csv --types "EMAIL,PAN_CARD"
+  ```
+
+- **Scan a file and save the results to a custom folder:**
+
+  ```bash
+  pyredact --input data.txt --output C:/My_Secure_Results
+  ```
+
+- **Scan a file with detailed, line-by-line logging:**
+  ```bash
+  pyredact --input sensitive_data.csv --verbose
+  ```
+- **Scan a file and overwrite any existing output without asking for confirmation:**
+  ```bash
+  pyredact --input sensitive_data.csv --force
+  ```
