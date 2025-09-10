@@ -1,0 +1,90 @@
+Metadata-Version: 2.4
+Name: teuthology
+Version: 1.2.2
+Summary: Ceph test framework
+Home-page: https://github.com/ceph/teuthology
+Author: Red Hat, Inc.
+License: MIT
+Keywords: teuthology,test,ceph,cluster
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: System :: Distributed Computing
+Classifier: Topic :: System :: Filesystems
+Requires-Python: >=3.10
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: PyYAML
+Requires-Dist: ansible-core==2.17.7
+Requires-Dist: apache-libcloud
+Requires-Dist: backports.ssl-match-hostname
+Requires-Dist: beanstalkc3>=0.4.0
+Requires-Dist: configobj
+Requires-Dist: configparser
+Requires-Dist: docopt
+Requires-Dist: gevent<25
+Requires-Dist: httplib2
+Requires-Dist: humanfriendly
+Requires-Dist: lupa
+Requires-Dist: lxml
+Requires-Dist: ndg-httpsclient
+Requires-Dist: netaddr
+Requires-Dist: openstacksdk
+Requires-Dist: paramiko
+Requires-Dist: pexpect
+Requires-Dist: pip-tools
+Requires-Dist: prettytable
+Requires-Dist: prometheus_client>=0.16.0
+Requires-Dist: psutil>=2.1.0
+Requires-Dist: pyasn1
+Requires-Dist: pynacl>=1.5.0
+Requires-Dist: pyopenssl>=0.13
+Requires-Dist: python-dateutil
+Requires-Dist: requests>2.13.0
+Requires-Dist: sentry-sdk
+Requires-Dist: types-psutil
+Requires-Dist: urllib3<1.27,>=1.25.4
+Provides-Extra: manhole
+Requires-Dist: manhole; extra == "manhole"
+Provides-Extra: rocketchat
+Requires-Dist: rocket-python>=1.2.15; extra == "rocketchat"
+Provides-Extra: sentry
+Requires-Dist: sentry-sdk; extra == "sentry"
+Provides-Extra: test
+Requires-Dist: PyJWT; extra == "test"
+Requires-Dist: boto>=2.0b4; extra == "test"
+Requires-Dist: boto3; extra == "test"
+Requires-Dist: coverage; extra == "test"
+Requires-Dist: ipy; extra == "test"
+Requires-Dist: mock; extra == "test"
+Requires-Dist: pynose; extra == "test"
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: toml; extra == "test"
+Requires-Dist: tox; extra == "test"
+Requires-Dist: xmltodict; extra == "test"
+Provides-Extra: openstack
+Requires-Dist: python-openstackclient; extra == "openstack"
+Requires-Dist: python-novaclient; extra == "openstack"
+Dynamic: license-file
+
+===================================================
+`Teuthology` -- The Ceph integration test framework
+===================================================
+
+
+Welcome! Teuthology's documentation is primarily hosted at `docs.ceph.com
+<https://docs.ceph.com/projects/teuthology/>`__.
+
+You can also look at docs `inside this repository <docs/>`__, but note that
+GitHub's `RST <http://docutils.sourceforge.net/rst.html>`__ rendering is quite
+limited. Mainly that means that links between documents will be broken.
