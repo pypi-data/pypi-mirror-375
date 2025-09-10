@@ -1,0 +1,22 @@
+[package]
+name = "pertalde_sincronitzar"
+version = "0.1.0"
+publish = true
+authors = { workspace = true }
+edition = { workspace = true }
+rust-version = { workspace = true }
+homepage = { workspace = true }
+documentation = { workspace = true }
+repository = { workspace = true }
+license = { workspace = true }
+readme = "README.md"
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true, features = ["derive"] }
+prv = { workspace = true }
+pertalde_utils = { workspace = true }
+indicatif = { workspace = true }
+color-eyre = { workspace = true }
+flate2 = { workspace = true }
+thiserror = { workspace = true }

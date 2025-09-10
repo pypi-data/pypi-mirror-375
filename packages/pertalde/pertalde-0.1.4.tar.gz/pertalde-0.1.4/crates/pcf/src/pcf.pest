@@ -1,0 +1,76 @@
+eol        = _{ NEWLINE }
+WHITESPACE = _{ eol | " " }
+
+// utils
+alpha = @{ 'a'..'z' | 'A'..'Z' }
+
+word   = @{ (!(eol | " " | "\t") ~ ASCII)+ }
+phrase = @{ (!(eol) ~ ASCII)+ }
+
+digit   = @{ '0'..'9' }
+integer = @{ (digit)+ }
+
+// The pcf file
+pcf = {
+    &SOI ~ (default_options | default_semantic | state_colors | states | gradient_colors | gradient_names | event)+ ~ &EOI
+}
+
+// Options
+default_options = {
+    "DEFAULT_OPTIONS" ~ level ~ units ~ look_back ~ speed ~ flag_icons ~ num_of_state_colors ~ ymax_scale
+}
+
+level               = { "LEVEL" ~ phrase }
+units               = { "UNITS" ~ phrase }
+look_back           = { "LOOK_BACK" ~ integer }
+speed               = { "SPEED" ~ integer }
+flag_icons          = { "FLAG_ICONS" ~ phrase }
+num_of_state_colors = { "NUM_OF_STATE_COLORS" ~ integer }
+ymax_scale          = { "YMAX_SCALE" ~ integer }
+
+// Semantics
+default_semantic = {
+    "DEFAULT_SEMANTIC" ~ thread_func
+}
+
+thread_func = { "THREAD_FUNC" ~ phrase }
+
+color = ${ "{" ~ integer ~ "," ~ integer ~ "," ~ integer ~ "}" }
+
+color_by_id = {
+    integer ~ color
+}
+
+name_by_id = {
+    integer ~ phrase
+}
+
+// States
+state_colors = {
+    "STATES_COLOR" ~ color_by_id+
+}
+
+states = {
+    "STATES" ~ name_by_id+
+}
+
+// Gradients
+gradient_colors = {
+    "GRADIENT_COLOR" ~ color_by_id+
+}
+
+gradient_names = {
+    "GRADIENT_NAMES" ~ name_by_id+
+}
+
+// Events
+event = {
+    "EVENT_TYPE" ~ event_types+ ~ event_values?
+}
+
+event_types = { integer ~ integer ~ phrase }
+
+event_values = {
+    "VALUES" ~ (integer ~ phrase)+
+}
+

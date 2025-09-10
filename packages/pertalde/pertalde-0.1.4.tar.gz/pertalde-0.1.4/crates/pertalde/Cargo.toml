@@ -1,0 +1,52 @@
+[package]
+name = "pertalde"
+version = "0.1.4"
+edition.workspace = true
+rust-version.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+repository.workspace = true
+authors.workspace = true
+license.workspace = true
+readme = "README.md"
+
+[dependencies]
+pertalde_comprovar = { workspace = true }
+pertalde_entendre = { workspace = true }
+pertalde_separar = { workspace = true }
+pertalde_sincronitzar = { workspace = true }
+pertalde_tallar = { workspace = true }
+pertalde_unir = { workspace = true }
+pertalde_comptar = { workspace = true }
+
+anyhow = { workspace = true }
+color-eyre = { workspace = true }
+clap = { workspace = true }
+colored = { workspace = true }
+thiserror = { workspace = true }
+env_logger = { workspace = true }
+log = { workspace = true }
+
+[[bin]]
+name = "ptd"
+path = "src/main.rs"
+
+[[bin]]
+name = "pertalde"
+path = "src/pertalde.rs"
+
+[[bin]]
+name = "parajuntar"
+path = "src/parajuntar.rs"
+
+[[bin]]
+name = "paracomprovar"
+path = "src/paracomprovar.rs"
+
+[[bin]]
+name = "paraentender"
+path = "src/paraentender.rs"
+
+[[bin]]
+name = "parasync"
+path = "src/parasync.rs"
