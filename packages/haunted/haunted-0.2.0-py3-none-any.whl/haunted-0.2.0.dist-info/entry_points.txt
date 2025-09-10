@@ -1,0 +1,2 @@
+[console_scripts]
+haunted = haunted.cli.main:cli
