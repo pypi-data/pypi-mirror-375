@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: pyimg2ascii
+Version: 0.1.0
+Summary: Convert images to ASCII art
+Home-page: https://github.com/yourname/image2ascii
+Author: Your Name
+Author-email: your_email@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+License-File: LICENSE
+Requires-Dist: pillow
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
