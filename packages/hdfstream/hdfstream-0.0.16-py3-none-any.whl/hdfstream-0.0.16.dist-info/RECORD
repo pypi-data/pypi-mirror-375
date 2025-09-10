@@ -1,0 +1,17 @@
+hdfstream/__init__.py,sha256=mR4fqKanCMbInTHNA3Mg-PhXmMRY1pb0YzNnxu7TYy8,2385
+hdfstream/connection.py,sha256=bT_KyNqdRT0O6Kd3uGiQpjz31cO__7PFAJrexqClGJ4,6499
+hdfstream/decoding.py,sha256=7ar04zgr7MBaVr92iB6qN_W0Z7fYCmXH76R1drJpi6U,7868
+hdfstream/defaults.py,sha256=hI_RHHYMPf_stXPaEgM6tYGWvo94bL3SyawNPoyLYsI,336
+hdfstream/exceptions.py,sha256=68QuXLTTUIer9GWa-u8rgIhqiRllW--AuvV8pYYG0y4,68
+hdfstream/remote_dataset.py,sha256=CzU-7zdhfTz3j0m4muQDDIuzgz1xtzC7lniqHA-0wi8,10306
+hdfstream/remote_directory.py,sha256=Zdp2hb35S7PdWhA5Ay7tO1U_zg6In9MLM_S9kMKfWVc,10740
+hdfstream/remote_file.py,sha256=fJzZ4NsqBs7Et3JGA5evDo7sXPNdKfZloQnmS9hUcPM,6650
+hdfstream/remote_group.py,sha256=h_akiwvc2fZvbVnKf9gF-YORe4h7XfzyhI9b-Uyk66I,14805
+hdfstream/remote_links.py,sha256=KK0moAKc4BbZYSOHPGiR0FPfrdhake3GqM69gIkAy7U,482
+hdfstream/streaming_decoder.py,sha256=x-VDjQEcch80E1f3asBx8DabcS1fdMX97o6E-dImGqw,4091
+hdfstream/testing.py,sha256=gqZZAW_5pYYuhfsiIgewrJMxZzD7ZO5MqKd-vfLkY44,3459
+hdfstream-0.0.16.dist-info/licenses/LICENSE.md,sha256=OXLcl0T2SZ8Pmy2_dmlvKuetivmyPd5m1q-Gyd-zaYY,35149
+hdfstream-0.0.16.dist-info/METADATA,sha256=Yry4yzIdARS3HFt-lLOPaIMH0AKCIaT9jSxNIWL0BWo,3741
+hdfstream-0.0.16.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+hdfstream-0.0.16.dist-info/top_level.txt,sha256=LWsBbR7nXvcb2QpQv82_rp2ftEynPUOyNibsbsEAGFU,10
+hdfstream-0.0.16.dist-info/RECORD,,
