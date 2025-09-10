@@ -1,0 +1,6 @@
+[console_scripts]
+hexdoc = hexdoc.cli.app:app
+
+[hexdoc]
+hexdoc = hexdoc._hooks:HexdocPlugin
+modonomicon = hexdoc_modonomicon._hooks:ModonomiconPlugin

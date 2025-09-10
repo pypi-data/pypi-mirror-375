@@ -1,0 +1,58 @@
+{
+  hexdoc: {
+    welcome: {
+      "header": "This is the online version of the {} documentation.",
+      "bleeding_edge": "This page is built from the latest code on GitHub. \
+        It may describe $(bold)newer/$ features that you may not necessarily have, \
+        even on the latest Modrinth/CurseForge version!",
+      "spoilers": "$(bold)Entries which are blurred are spoilers/$. \
+        Click to reveal them, but be aware that they may spoil endgame progression. \
+        Alternatively, click $(l:?nospoiler)here/$ to get a version with all spoilers showing.",
+      "old_version": "$(italic)The past is a foreign country; they do things differently there./$",
+    },
+
+    toc: {
+      // use the span tag to make everything after it wrap with the toc button
+      // or put it at the very end to make the button wrap by itself
+      // either way, do NOT remove it entirely
+      title: "Table of <span class=\"nobr\">Contents",
+      toggle_all: "Toggle all",
+    },
+
+    nav: {
+      dropdown: {
+        minecraft: "Minecraft {version}",
+      },
+    },
+
+    linkout: "Link: ",
+
+    recipe: {
+      show: "Click to show recipes",
+      hide: "Click to hide recipes",
+      smelting: {
+        cooktime: "{} Seconds",
+        exp: "{} XP"
+      }
+    },
+
+    multiblock: {
+      show: "Click to show multiblock",
+      hide: "Click to hide multiblock",
+    },
+
+    when_clicked: "When clicked, would execute: {}",
+
+    any_block:  "Any Block",
+
+    redirect: {
+      "category.title": "Category: {}",
+      "entry.title": "Entry: {}",
+      "page.title": "Page: {}",
+    },
+
+    footer: "Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.$(br2)\
+      Minecraft content and materials are the intellectual property of their respective owners.$(br2)\
+      Made with ❤️ using $(l:https://pypi.org/project/hexdoc/)hexdoc/$."
+  },
+}
