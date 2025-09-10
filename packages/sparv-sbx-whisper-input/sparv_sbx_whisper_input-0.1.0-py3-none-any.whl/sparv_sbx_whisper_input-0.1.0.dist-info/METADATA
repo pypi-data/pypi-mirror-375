@@ -1,0 +1,11 @@
+Metadata-Version: 2.3
+Name: sparv-sbx-whisper-input
+Version: 0.1.0
+Summary: Add your description here
+Author: Språkbanken Text, Kristoffer Andersson
+Author-email: Språkbanken Text <sb-info@svenska.gu.se>, Kristoffer Andersson <kristoffer.andersson@gu.se>
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+
+# sparv-sbx-whisper-input
+Allow Sparv to take audio as input
