@@ -1,0 +1,12 @@
+{% extends "django_registration/base.html" %}
+{% block body %}
+<div class="col-6 offset-3">
+  <h3>Activation Failed</h3>
+  <div class="alert alert--danger">
+    <div class="alert__icon icon-error-outline"></div>
+    <div class="alert__message">
+      {{ activation_error.message }}
+    </div>
+  </div>
+</div>
+{% endblock %}

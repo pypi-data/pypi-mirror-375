@@ -1,0 +1,10 @@
+Hello Admin,
+
+The following account was created on the YANG Suite server:
+
+Server: {{ server }}
+Username: {{ username }}
+Email: {{ email }}
+
+Thanks,
+YANG Suite.

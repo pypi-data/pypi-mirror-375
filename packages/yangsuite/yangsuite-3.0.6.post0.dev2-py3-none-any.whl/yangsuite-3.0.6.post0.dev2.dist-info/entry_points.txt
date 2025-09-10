@@ -1,0 +1,3 @@
+[console_scripts]
+yangsuite = yangsuite.application:main
+yangsuite.apps = yangsuite.apps:_YangsuiteConfig
