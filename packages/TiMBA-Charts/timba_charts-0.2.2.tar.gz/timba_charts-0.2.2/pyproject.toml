@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TiMBA_Charts"
+version = "0.2.2"
+description = """
+A toolbox for analysing forest sector model results.
+"""
+readme = "README.md"
+requires-python = ">=3.9"
+license = "AGPL-3.0-or-later"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "click",
+    "dash==3.0.0",
+    "dash-bootstrap-components==2.0.0",
+    "ipywidgets==8.1.7",
+    "numpy==1.26.4",
+    "pandas==1.5.3",
+    "plotly==6.0.1",
+    "pytest==8.3.5",
+    "pytest-cov==6.2.1",
+    "seaborn==0.13.2"
+]
+
+[project.urls]
+Repository = "https://github.com/TI-Forest-Sector-Modelling/TiMBA_Charts"
+
+[project.scripts]
+show_dashboard = "Toolbox.cli.cli:dashboard_cli"
+show_validation = "Toolbox.cli.cli:validation_cli"
