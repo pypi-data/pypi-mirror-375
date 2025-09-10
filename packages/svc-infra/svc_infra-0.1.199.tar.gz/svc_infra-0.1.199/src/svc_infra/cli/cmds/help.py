@@ -1,0 +1,19 @@
+_HELP = """\
+svc-infra — service infrastructure CLI
+
+How to run (pick what fits your workflow):
+
+  1) Installed console script (recommended)
+     $ svc-infra <command> [options]
+     e.g.:
+     $ svc-infra setup-and-migrate
+
+  2) Poetry shim (inside a Poetry project)
+     $ poetry run svc-infra <command> [options]
+     e.g.:
+     $ poetry run svc-infra setup-and-migrate
+
+Notes:
+* Make sure you’re in the right virtual environment (or use `pipx`).
+* You can point `--project-root` at your Alembic root; if omitted we auto-detect.
+"""
