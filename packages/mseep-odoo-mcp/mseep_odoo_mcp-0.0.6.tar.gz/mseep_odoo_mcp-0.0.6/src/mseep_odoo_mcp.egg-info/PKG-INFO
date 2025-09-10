@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: mseep-odoo-mcp
+Version: 0.0.6
+Summary: MCP Server for Odoo Integration
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/tuanle96/mcp-odoo
+Project-URL: Issues, https://github.com/tuanle96/mcp-odoo/issues
+Keywords: odoo,mcp,server
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=0.1.1
+Requires-Dist: requests>=2.31.0
+Requires-Dist: pypi-xmlrpc==2020.12.3
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Dynamic: license-file
+
+Package managed by MseeP.ai

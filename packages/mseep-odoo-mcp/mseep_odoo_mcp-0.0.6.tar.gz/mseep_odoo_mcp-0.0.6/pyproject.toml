@@ -1,0 +1,79 @@
+[build-system]
+requires = [
+    "setuptools>=61.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mseep-odoo-mcp"
+version = "0.0.6"
+description = "MCP Server for Odoo Integration"
+requires-python = ">=3.10"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: OS Independent",
+]
+keywords = [
+    "odoo",
+    "mcp",
+    "server",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+dependencies = [
+    "mcp>=0.1.1",
+    "requests>=2.31.0",
+    "pypi-xmlrpc==2020.12.3",
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Homepage = "https://github.com/tuanle96/mcp-odoo"
+Issues = "https://github.com/tuanle96/mcp-odoo/issues"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "isort",
+    "mypy",
+    "ruff",
+    "build",
+    "twine",
+]
+
+[project.scripts]
+odoo-mcp = "odoo_mcp.__main__:main"
+
+[tool.setuptools]
+packages = [
+    "odoo_mcp",
+]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 88
+target-version = [
+    "py310",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
