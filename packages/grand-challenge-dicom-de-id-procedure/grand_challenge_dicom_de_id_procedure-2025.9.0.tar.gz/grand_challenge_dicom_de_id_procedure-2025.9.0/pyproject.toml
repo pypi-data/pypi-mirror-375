@@ -1,0 +1,12 @@
+[project]
+name = "grand-challenge-dicom-de-id-procedure"
+version = "2025.9.0"
+description = "De-identification procedure that descibes how to de-identify DICOM files"
+readme = "README.md"
+license = { file = "LICENSE.md" }
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"grand_challenge_dicom_de_id_procedure" = ["*.json"]
