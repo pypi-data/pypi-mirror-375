@@ -1,0 +1,24 @@
+[project]
+name = "mseep-mcp-x"
+version = "0.1.3"
+description = "This is MCP to fetch Tweets using RAPID API Client"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.4.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mseep-mcp-x = "main:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+]
