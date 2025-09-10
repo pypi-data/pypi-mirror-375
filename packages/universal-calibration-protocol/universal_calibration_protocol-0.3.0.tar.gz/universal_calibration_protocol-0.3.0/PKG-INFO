@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: universal-calibration-protocol
+Version: 0.3.0
+Summary: Pure python xcp protocol implementation
+Project-URL: Repository, https://github.com/Nicoretti/xcp
+Project-URL: Homepage, https://nicoretti.github.io/xcp/
+Project-URL: Documentation, https://nicoretti.github.io/xcp/
+Project-URL: Source, https://github.com/Nicoretti/xcp
+Project-URL: Issues, https://github.com/Nicoretti/xcp/issues
+Author-email: Nicola Coretti <nico.coretti@gmail.com>
+Maintainer-email: Nicola Coretti <nico.coretti@gmail.com>
+License-Expression: MIT
+Keywords: automotive,autosar,ecu,xcp
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+
+# XCP - Universal Calibration Protocol
+
+
+## Changelog
+
+### 0.3.0 
+
+- Updated project metadata
+
+### 0.2.0 
+
+- Added README
+
+### 0.1.0 
+
+- Initial Release
+
