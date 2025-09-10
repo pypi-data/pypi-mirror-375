@@ -1,0 +1,26 @@
+[project]
+name = "ts-storagetools"
+version = "0.2.2"
+authors = [{ name = "Mauritz Mälzer", email = "mauritz.maelzer@tu-dresden.de" }]
+description = "SQLite schema, Python classes and data management tools for working with time series from engineering test beds"
+readme = "README.md"
+classifiers = [
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+]
+requires-python = ">=3.13"
+dependencies = ["tqdm", "rich", "toolz", "lmdb>=1.6.2", "typeguard>=4.4.2"]
+
+[project.urls]
+Homepage = "https://codeberg.org/mlzr/storagetools"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+package = true
+
+[tool.setuptools.package-data]
+"storagetools" = ["**/*.sql"]
