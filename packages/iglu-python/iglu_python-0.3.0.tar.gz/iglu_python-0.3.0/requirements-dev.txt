@@ -1,0 +1,12 @@
+#
+# CiCd tools
+#
+pytest
+pytest-cov
+black>=25.1.0
+isort
+mypy
+hatch
+twine
+ruff
+safety
