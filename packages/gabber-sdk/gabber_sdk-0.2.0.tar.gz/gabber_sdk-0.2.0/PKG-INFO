@@ -1,0 +1,45 @@
+Metadata-Version: 2.4
+Name: gabber-sdk
+Version: 0.2.0
+Summary: Python client SDK for interacting with the Gabber Engine
+Project-URL: Homepage, https://github.com/gabber-dev/gabber
+Project-URL: Repository, https://github.com/gabber-dev/gabber
+Author-email: Neil Dwyer <neil@gabber.dev>
+License-Expression: Apache-2.0
+Requires-Python: >=3.11
+Requires-Dist: aiohttp-retry
+Requires-Dist: aiohttp~=3.0
+Requires-Dist: livekit~=1.0
+Requires-Dist: numpy~=2.3.2
+Requires-Dist: pydantic~=2.11
+Description-Content-Type: text/markdown
+
+# Gabber Python SDK
+
+Python client for Gabber.
+
+## Install
+
+```bash
+pip install gabber-client
+# or
+uv pip install gabber-client
+```
+
+## Quickstart
+
+```python
+import asyncio
+from gabber import Engine
+
+async def main():
+    engine = Engine()
+    await engine.connect(url="your-gabber-url", token="your-token")
+    sub = await engine.subscribe_to_node(output_node_id="node-id")
+    async for out in sub:
+        print(out)
+
+asyncio.run(main())
+```
+
+See examples in the main repo.
