@@ -1,0 +1,27 @@
+[project]
+name = "mseep-email_client"
+version = "0.1.1"
+description = "Email search and management tool using MCP protocol"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp>=1.1.2",
+    "python-dotenv>=1.0.0",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+email-client = "email_client:main"
+
+[build-system]
+requires = [
+    "setuptools>=61.0",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"

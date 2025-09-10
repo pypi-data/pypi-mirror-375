@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/email_client/__init__.py
+src/email_client/server.py
+src/mseep_email_client.egg-info/PKG-INFO
+src/mseep_email_client.egg-info/SOURCES.txt
+src/mseep_email_client.egg-info/dependency_links.txt
+src/mseep_email_client.egg-info/entry_points.txt
+src/mseep_email_client.egg-info/requires.txt
+src/mseep_email_client.egg-info/top_level.txt
