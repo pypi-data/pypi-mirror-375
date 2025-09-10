@@ -1,0 +1,16 @@
+[project]
+name = "genesis4"
+version = "0.0.2"
+authors = [
+  { name="Dait", email="dyj24@mails.tsinghua.edu.cn" },
+]
+description = "A warpper for Genesis4."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICENSE"]
+
