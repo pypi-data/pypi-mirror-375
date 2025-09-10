@@ -1,0 +1,36 @@
+[project]
+name = "mseep-mcp_my_apple_remembers"
+version = "0.1.1"
+description = "A simple Apple Remembers MCP server"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.4.1",
+    "python-dotenv>=1.0.1",
+    "paramiko>=3.5.1",
+]
+authors = [
+    { name = "mseep", email = "support@skydeck.ai" },
+]
+
+[project.readme]
+content-type = "text/plain"
+text = "Package managed by MseeP.ai"
+
+[project.scripts]
+mcp_my_apple_remembers = "mcp_my_apple_remembers:main"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "pyright>=1.1.389",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/mcp_my_apple_remembers",
+]
