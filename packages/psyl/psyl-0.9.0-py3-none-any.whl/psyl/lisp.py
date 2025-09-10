@@ -1,0 +1,390 @@
+# Lisp Interpreter in Python
+# inpired from See http://norvig.com/lispy2.html
+import io
+from threading import Thread
+
+try:
+    import re2 as re
+except ImportError:
+    import re
+
+
+class Keyword(str):
+
+    def __repr__(self):
+        return f"#:{self}"
+
+
+class Symbol(str):
+
+    @staticmethod
+    def get(s, symbol_table={}):
+        "Find or create unique Symbol entry for str s in symbol table."
+        if s not in symbol_table:
+            symbol_table[s] = Symbol(s)
+        return symbol_table[s]
+
+    def __repr__(self):
+        return f"'{self}"
+
+
+class Reader(object):
+    "Reads line of chars."
+    tokenizer = re.compile(
+        r"""\s*([('`,)]|"(?:[\\].|[^\\"])*"|;.*|[^\s('"`,;)]*)(.*)"""
+    )
+    eof = Symbol('#<eof-object>')  # Note: uninterned; can't be read
+
+    def __init__(self, stream):
+        self.stream = stream
+        self.line = ''
+
+    def next_token(self):
+        prevtoken = None
+        while True:
+            if self.line == '':
+                self.line = self.stream.readline()
+            if self.line == '':
+                return self.eof
+            token, self.line = self.tokenizer.match(self.line).groups()
+            if token != '' and not token.startswith(';'):
+                return token
+            if prevtoken == token:
+                raise SyntaxError(f'{self.line} (did you forget an opening quote ?)')
+            prevtoken = token
+
+    def read(self):
+        def read_ahead(token):
+            if '(' == token:
+                items = []
+                while True:
+                    token = self.next_token()
+                    if token == ')':
+                        return items
+                    else:
+                        items.append(
+                            read_ahead(token)
+                        )
+            elif ')' == token:
+                raise SyntaxError('unexpected )')
+            elif token is self.eof:
+                raise SyntaxError('unexpected EOF in list')
+            else:
+                return atom(token)
+
+        # body of read:
+        token1 = self.next_token()
+        return self.eof if token1 is self.eof else read_ahead(token1)
+
+
+SPLICE = Symbol('<|')
+
+
+class Env(dict):
+
+    def __init__(self, *a, **k):
+        super().__init__(*a, **k)
+        self._outer = None
+
+    def find(self, var):
+        if var in self:
+            return self[var]
+        if self._outer:
+            return self._outer.find(var)
+        # splice symbol evaluates to itself
+        if isinstance(var, Symbol) and var == SPLICE:
+            return var
+        raise LookupError(var)
+
+    def add_parent(self, env):
+        assert not self._outer
+        self._outer = env
+
+    def __repr__(self):
+        return (
+            f'Env({super().__repr__()}'
+            f'{(" → " + repr(self._outer)) if self._outer else ""})'
+        )
+
+
+def atom(token):
+    if token == '#t':
+        return True
+    if token == '#f':
+        return False
+    if token == 'nil':
+        return None
+    if token[0] == '"':
+        return token[1:-1]
+    if token.startswith('#:'):
+        return Keyword(token[2:])
+
+    for trytype in (int, float):
+        try:
+            return trytype(token)
+        except ValueError:
+            continue
+
+    return Symbol.get(token)
+
+
+def parse(source):
+    reader = Reader(io.StringIO(source))
+    return expand(reader.read())
+
+
+def expand(x):
+    if not isinstance(x, list):
+        return x
+    else:
+        return [expand(item) for item in x]
+
+
+def serialize(tree):
+    """ transform a plain python tree made of nested lists
+    and atoms into a parseable expression
+    """
+    expr = []
+    for node in tree:
+        if isinstance(node, list):
+            expr.append(serialize(node))
+        elif isinstance(node, Symbol):
+            expr.append(node)
+        elif isinstance(node, Keyword):
+            expr.append(f'#:{node}')
+        elif isinstance(node, str):
+            expr.append(f'"{node}"')
+        elif isinstance(node, bool):
+            if node:
+                expr.append('#t')
+            else:
+                expr.append('#f')
+        elif node is None:
+            expr.append('nil')
+        elif isinstance(node, (int, float)):
+            expr.append(f'{node}')
+
+    return f'({" ".join(expr)})'
+
+
+def pretty(tree, indent=4, softbreak=0):
+
+    def leafnode(tree):
+        kw = False
+        for node in tree:
+            if isinstance(node, Keyword):
+                kw = True
+                continue
+            if isinstance(node, list):
+                if not kw:
+                    return False
+            kw = False
+        return True
+
+    def prettyvalue(node):
+        if isinstance(node, Symbol):
+            return node
+        if isinstance(node, Keyword):
+            return f'#:{node}'
+        if isinstance(node, str):
+            return f'"{node}"'
+        if isinstance(node, bool):
+            return '#t' if node else '#f'
+        if isinstance(node, (int, float)):
+            return f'{node}'
+        if node is None:
+            return 'nil'
+
+    def _pretty(tree, depth=1):
+        leftpad = depth * indent * ' '
+        expr = ['(']
+        key = False
+        for idx, node in enumerate(tree):
+
+            # operator symbol
+            if idx == 0:
+                expr.append(
+                    prettyvalue(node)
+                )
+                continue
+
+            # leafnodes subtrees/subtrees right of a keyword are just flat
+            if isinstance(node, list):
+                if key:
+                    expr.append(
+                        ' ' + serialize(node)
+                    )
+                elif leafnode(node):
+                    chunk = '\n' + leftpad + serialize(node)
+                    if softbreak and len(chunk) > softbreak:
+                        chunk = '\n' + leftpad + _pretty(node, depth + 1)
+                    expr.append(chunk)
+                else:
+                    expr.append(
+                        '\n' + leftpad + _pretty(node, depth + 1)
+                    )
+                key = False
+                continue
+
+            # the item following a keyword must be aligned with it
+            if isinstance(node, Keyword):
+                key = True
+                expr.append(
+                    '\n' + leftpad + prettyvalue(node)
+                )
+                continue
+
+            # atom
+            if key:
+                expr.append(
+                    ' ' + prettyvalue(node)
+                )
+            else:
+                expr.append(
+                    '\n' + leftpad + prettyvalue(node)
+                )
+            key = False
+
+        expr.append(')')
+        return ''.join(expr)
+
+    return _pretty(tree)
+
+
+def buildargs(expr_args):
+    args = []
+    kw = {}
+    splice = False
+    lastarg = None
+    for arg in expr_args:
+        # keywords
+        if isinstance(lastarg, Keyword):
+            assert not isinstance(arg, Keyword)
+            kw[lastarg] = arg
+            lastarg = arg
+            continue
+        if isinstance(arg, Keyword):
+            lastarg = arg
+            continue
+
+        # posargs
+        if isinstance(arg, Symbol) and arg == SPLICE:
+            splice = True
+            continue
+        if splice:
+            args.extend(arg)
+        else:
+            args.append(arg)
+
+    return args, kw
+
+
+def pairwise(iterable):
+    # itertools.pairwise will be available from Python 3.10
+    a = iter(iterable)
+    return zip(a, a)
+
+
+def let(env, bindings_expr, evaluator):
+    newenv = Env()
+    bindings = bindings_expr[:-1]
+    tree = bindings_expr[-1]
+    for sym, val in pairwise(bindings):
+        newenv[sym] = evaluator(val, env)
+    newenv.add_parent(env)
+    return tree, newenv
+
+
+def expreval(tree, env):
+    if isinstance(tree, map):
+        tree = list(tree)
+    if isinstance(tree, Symbol):
+        return env.find(tree)
+    elif not isinstance(tree, list):
+        return tree
+    if tree[0] == 'let':
+        tree, env = let(env, tree[1:], expreval)
+        return expreval(tree, env)
+
+    exps = [expreval(exp, env) for exp in tree]
+    proc = exps[0]
+    posargs, kwargs = buildargs(exps[1:])
+    return proc(*posargs, **kwargs)
+
+
+def evaluate(expr, env):
+    return expreval(parse(expr), env=env)
+
+
+# parallel evaluator
+
+class future:
+    __slots__ = ('_t', '_value')
+
+    def __init__(self, func, args=(), kw={}):
+        def dofunc():
+            try:
+                self._value = func(*args, **kw)
+            except Exception as e:
+                self._value = e
+        self._t = Thread(target=dofunc)
+        self._t.start()
+
+    @property
+    def value(self):
+        self._t.join()
+        if isinstance(self._value, Exception):
+            raise self._value
+        return self._value
+
+
+def pexpreval(tree, env):
+    if not isinstance(tree, list):
+        # atom, we're done there as quasiexpreval
+        # did the heavy lifting
+        return tree
+
+    # // thing: if we have at least two computable sub-expressions
+    #    let's shine
+    if [type(item) for item in tree[1:]].count(list) > 1:
+        # // compute
+        newtree = []
+        for arg in tree:
+            if isinstance(arg, list):
+                newtree.append(future(pexpreval, (arg, env)))
+            else:
+                newtree.append(pexpreval(arg, env))
+        # collect results
+        newtree = [
+            arg.value if isinstance(arg, future) else arg
+            for arg in newtree
+        ]
+        proc = tree[0]
+        posargs, kwargs = buildargs(newtree[1:])
+    else:
+        exps = [pexpreval(exp, env) for exp in tree]
+        proc = exps[0]
+        posargs, kwargs = buildargs(exps[1:])
+    return proc(*posargs, **kwargs)
+
+
+def quasiexpreval(tree, env):
+    if isinstance(tree, map):
+        tree = list(tree)
+    if isinstance(tree, Symbol):
+        return env.find(tree)
+    elif not isinstance(tree, list):
+        return tree
+    exps = [quasiexpreval(exp, env) for exp in tree]
+    proc = exps[0]
+    posargs, kwargs = buildargs(exps[1:])
+    newtree = [proc, *posargs]
+    for name, arg in kwargs.items():
+        newtree.append(name)
+        newtree.append(arg)
+    return newtree
+
+
+def pevaluate(expr, env):
+    newtree = quasiexpreval(parse(expr), env=env)
+    return pexpreval(newtree, env=env)

@@ -1,0 +1,22 @@
+Metadata-Version: 2.2
+Name: psyl
+Version: 0.9.0
+Summary: a stripped down scheme-like parser and python-based evaluator
+Home-page: https://hg.sr.ht/~pythonian/psyl
+Author: Pythonian
+Author-email: aurelien.campeas@pythonian.fr
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Lisp
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+License-File: LICENSE
+Requires-Dist: google-re2
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: summary
