@@ -1,0 +1,22 @@
+[project]
+name = "csam"
+version = "0.1.0"
+description = "Cliente de sistema de almacenamiento en memoria."
+authors = [
+    {name = "Julio Salazar", email = "julio.salazar@cinvestav.mx"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests (>=2.32.4,<3.0.0)",
+    "paho-mqtt==2.1.0",
+    "certifi==2025.6.15",
+    "charset-normalizer==3.4.2",
+    "idna==3.10",
+    "urllib3==2.5.0"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
