@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "connorav"
+version = "0.2.1"
+description = "Fast Generation of Correlated Non-Normal Random Variates"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+  { name="Chris Bates", email="1314008+chrsbats@users.noreply.github.com" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+  'numpy>=1.22,<2.0; python_version < "3.10"',
+  'numpy>=1.26; python_version >= "3.10"',
+  'scipy>=1.10,<1.12; python_version < "3.10"',
+  'scipy>=1.13; python_version >= "3.10"',
+]
+
+[project.urls]
+Homepage = "https://github.com/chrsbats/connorav"
+Issues = "https://github.com/chrsbats/connorav/issues"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7",
+  "pytest-cov>=4",
+  "pytest-randomly>=3.12",
+  "pytest-repeat>=0.9",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["connorav*"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["connorav"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 85
