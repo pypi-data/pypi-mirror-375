@@ -1,0 +1,16 @@
+[build-system]
+requires = ["scikit-build-core", "nanobind"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pylmcf"
+version = "0.9.0"
+description = "Python bindings for Network Simplex algorithm from LEMON library"
+authors = [
+    { name="Michał Startek", email="michal.startek@mimuw.edu.pl" }
+]
+license = "BSL-1.0"
+
+[tool.setuptools]
+packages = { find = { include = ["my_package*", "utils*"], exclude = ["tests*", ".vscode"] } }
+include-package-data = true
