@@ -1,0 +1,80 @@
+Metadata-Version: 2.4
+Name: mixtrain
+Version: 0.1.0
+Summary: Mixtrain SDK and CLI
+Author-email: Dharmesh Kakadia <dharmesh.kakadia@gmail.com>
+Requires-Python: >=3.10
+Requires-Dist: duckdb>=1.3.2
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: pandas>=2.3.1
+Requires-Dist: polars>=1.32.0
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: pyiceberg[pyarrow,sql-postgres]>=0.9.1
+Requires-Dist: textual>=5.0.1
+Requires-Dist: typer>=0.16.0
+Description-Content-Type: text/markdown
+
+# Mixtrain
+
+**Mixtrain** is a Python SDK and CLI for [mixtrain.ai](https://mixtrain.ai) platform.
+
+## Installation
+
+Using uv
+```bash
+uv add mixtrain
+```
+or if you use pip
+
+```bash
+pip install mixtrain
+```
+
+To install mixtrain CLI globally, using uv
+
+```bash
+uv tool install mixtrain
+```
+or if you use pipx
+
+```bash
+pipx mixtrain
+```
+
+## Quick Start
+
+### Authentication
+
+First, authenticate with the Mixtrain platform:
+
+```bash
+mixtrain login
+```
+
+### CLI Usage
+
+Refer to `mixtrain --help` for the full list of commands.
+
+### Python SDK
+
+#### Basic Dataset Operations
+
+```python
+import mixtrain.client as mix
+
+# Create a dataset from file
+mix.create_dataset_from_file("my_dataset", "data.csv", description="My dataset")
+
+# List datasets
+datasets = mix.list_datasets()
+print(datasets)
+
+# Get direct access to remote dataset
+table = mix.get_dataset("my_dataset")
+
+# Scan table data
+scan = table.scan(limit=1000)
+df = scan.to_polars()  # or .to_pandas() or .to_duckdb("my_dataset")
+print(df.head())
+
+```
