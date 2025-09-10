@@ -1,0 +1,25 @@
+Metadata-Version: 2.3
+Name: clumpick
+Version: 0.1.0
+Summary: INteractive Visualization Tool for Clustering Alignment
+License: MIT
+Author: Avery Guo
+Author-email: avery_guo@brown.edu
+Requires-Python: >=3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: requests (>=2.32.5,<3.0.0)
+Description-Content-Type: text/markdown
+
+# Clumpick: An interactive visualization tool for aligned clustering results from population structures analyses
+Powered by JavaScript D3
+
+## Basic Usage
+````
+python -m clumpick --membership_folder Data/Cape_Verde_Data --alignment_file Data/Cape_Verde_Alignment.txt 
+````
+
