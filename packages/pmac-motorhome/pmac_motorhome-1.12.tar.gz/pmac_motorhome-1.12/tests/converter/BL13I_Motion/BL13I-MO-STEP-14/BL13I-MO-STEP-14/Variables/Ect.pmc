@@ -1,0 +1,12 @@
+; Encoder Conversion Table for Geobrick 14.
+; I don't know whether these values are important but I
+; read them out of the Geobrick.  None of the axes have
+; encoders so why should there be an ECT?
+; Jon Thompson
+
+i8032 = $00D03505
+i8033 = $00000400
+i8034 = $00010000
+i8035 = $00D03506
+i8036 = $00000400
+i8037 = $00010000

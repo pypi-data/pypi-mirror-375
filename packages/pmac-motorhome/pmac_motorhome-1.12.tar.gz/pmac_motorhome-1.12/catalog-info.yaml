@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pmac-motorhome
+  title: pmac_motorhome
+  description: pmac_motorhome is a python3 tool to generator homing PLCs from a python script
+spec:
+  type: library
+  lifecycle: production
+  owner: group:default/controls

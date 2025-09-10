@@ -1,0 +1,9 @@
+# This line tells make that anything defined before this point is not to be
+# used as an msi include dir
+NON_MSI_VARS := $(.VARIABLES)
+SUPPORT   = /dls_sw/prod/R3.14.12.3/support
+
+# PMACUTIL must be specified
+PMACUTIL  = $(SUPPORT)/pmacUtil/4-30
+PMACCOORD = $(SUPPORT)/pmacCoord/1-20
+BL16B     = $(SUPPORT)/BL16B/3-10

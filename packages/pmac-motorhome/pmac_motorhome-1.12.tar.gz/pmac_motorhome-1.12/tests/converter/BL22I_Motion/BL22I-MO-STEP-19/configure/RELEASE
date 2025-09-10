@@ -1,0 +1,12 @@
+# This line tells make that anything defined before this point is not to be
+# used as an msi include dir
+NON_MSI_VARS := $(.VARIABLES)
+
+# pmac (for latest prog 10 and trajectory scanning)
+PMAC = /dls_sw/prod/R3.14.12.7/support/pmac/2-5-8
+
+# PMACUTIL must be specified
+PMACUTIL = /dls_sw/prod/R3.14.12.7/support/pmacUtil/5-10
+PMACCOORD = /dls_sw/prod/R3.14.12.7/support/pmacCoord/1-68-1
+
+# Other modules can also be specified here

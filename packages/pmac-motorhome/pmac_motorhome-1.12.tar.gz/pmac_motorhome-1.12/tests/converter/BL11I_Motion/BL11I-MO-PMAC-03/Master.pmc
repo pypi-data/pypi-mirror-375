@@ -1,0 +1,43 @@
+; First we want to clear all the PLCs and CSs
+#include "../../../Common/clear_PLC_CS.pmc"
+
+; Add the axis and control I Variables
+#include "Variables/STANDARD_VME_PMAC3.pmc"
+#include "Variables/STANDARD_AXES.pmc"
+#include "Variables/PMAC3_msdefaults.pmc"
+#include "Variables/PMAC3_ivariables.pmc"
+
+; And the m-variable definitions
+#include "../../../Common/PMAC_M_variables.pmc"
+
+; a PLC to initialise the brick
+#include "PLCs/PLC1_initialise.pmc"
+
+; a PLC to sync m7501 with amplifier enable
+#include "PLCs/PLC3_micromech_enable.pmc"
+
+; a PLC to do encoder loss and amp status protection
+#include "PLCs/PLC4_encoder_loss.pmc"
+
+; a PLC for cpu load
+#include "PLCs/PLC5_cpu_load.pmc"
+
+; slits co-ordinate systems
+#include "PLCs/PLC17_S1X.pmc"
+#include "PLCs/PLC18_S1Y.pmc"
+#include "PLCs/PLC19_S2X.pmc"
+#include "PLCs/PLC20_S2Y.pmc"
+#include "PLCs/PLC21_S3X.pmc"
+#include "PLCs/PLC22_S3Y.pmc"
+
+; Finally add some homing PLCs
+#include "PLCs/PLC9_S1_HM.pmc"
+#include "PLCs/PLC10_D1_HM.pmc"
+#include "PLCs/PLC11_S2_HM.pmc"
+#include "PLCs/PLC12_BPM1_HM.pmc"
+#include "PLCs/PLC13_M1_HM.pmc"
+#include "PLCs/PLC14_S3_HM.pmc"
+#include "PLCs/PLC15_BPM2_HM.pmc"
+
+; a motion program for the CS moves
+#include "PROGs/PROG10_CS_motion.pmc"

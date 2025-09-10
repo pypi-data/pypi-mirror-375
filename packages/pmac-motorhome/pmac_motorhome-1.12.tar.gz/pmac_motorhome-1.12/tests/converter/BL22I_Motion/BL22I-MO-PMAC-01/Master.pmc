@@ -1,0 +1,45 @@
+; First we want to clear all the PLCs and CSs
+#include "../../../Common/clear_PLC_CS.pmc"
+
+; And the m-variable definitions
+#include "../../../Common/PMAC_M_variables.pmc"
+
+; Add the axis and control I Variables
+#include "Variables/STANDARD_VME_PMAC1.pmc"
+#include "Variables/STANDARD_AXES.pmc"
+#include "Variables/PMAC1_msdefaults.pmc"
+#include "Variables/PMAC1_ivariables.pmc"
+
+; a PLC to initialise the PMAC
+#include "PLCs/PLC1_initialise.pmc"
+
+; a PLC to sync m7501 with amplifier enable
+#include "PLCs/PLC3_micromech_enable.pmc"
+
+; a PLC to do encoder loss and amp status protection
+#include "PLCs/PLC4_encoder_loss.pmc"
+
+; a PLC to do cpu load
+#include "PLCs/PLC5_cpu_load.pmc"
+
+; Finally add some homing PLCs
+#include "PLCs/PLC9_S1_HM.pmc"
+#include "PLCs/PLC10_D1_HM.pmc"
+#include "PLCs/PLC11_D2_HM.pmc"
+#include "PLCs/PLC12_S2_HM.pmc"
+#include "PLCs/PLC13_D3_HM.pmc"
+#include "PLCs/PLC14_VFM_HM.pmc"
+#include "PLCs/PLC15_HFM_HM.pmc"
+
+; Some CS defs
+#include "PLCs/PLC17_S1X_CS.pmc"
+#include "PLCs/PLC18_S1Y_CS.pmc"
+#include "PLCs/PLC19_S2X_CS.pmc"
+#include "PLCs/PLC20_S2Y_CS.pmc"
+#include "PLCs/PLC21_VFMX_CS.pmc"
+#include "PLCs/PLC22_VFMY_CS.pmc"
+#include "PLCs/PLC23_HFMX_CS.pmc"
+#include "PLCs/PLC24_HFMY_CS.pmc"
+
+; a motion program for the CS moves
+#include "PROGs/PROG10_CS_motion.pmc"

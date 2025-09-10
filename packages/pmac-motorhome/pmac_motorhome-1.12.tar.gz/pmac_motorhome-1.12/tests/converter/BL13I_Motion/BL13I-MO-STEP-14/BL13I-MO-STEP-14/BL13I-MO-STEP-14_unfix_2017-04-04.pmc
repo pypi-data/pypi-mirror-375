@@ -1,0 +1,15 @@
+i503=$3517              ;Position loop feedback address
+i530=4096               ;PID proportional gain
+i531=0                  ;PID derivative gain
+i532=16384              ;PID velocity feedforward gain
+i533=10000              ;PID integral gain
+i535=4096               ;PID acceleration feedforward gain
+i823=1.5                ;Home speed and direction
+
+open program 10 clear
+RAPID
+ABS
+FRAX
+A(Q71)B(Q72)C(Q73)U(Q74)V(Q75)W(Q76)X(Q77)Y(Q78)Z(Q79)
+DWELL0
+close

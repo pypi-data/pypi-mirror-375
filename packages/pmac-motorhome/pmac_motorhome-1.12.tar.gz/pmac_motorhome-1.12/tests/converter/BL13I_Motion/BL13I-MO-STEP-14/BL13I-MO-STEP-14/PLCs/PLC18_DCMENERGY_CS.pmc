@@ -1,0 +1,157 @@
+;####################################################
+; DO NOT MODIFY: File created from src/PLC18_DCMENERGY_CS.psub
+;####################################################
+
+CLOSE
+
+;################################################
+; Define motion for the energy axis of the I13 DCM
+; Original Author: Jonathan Thompson
+; From equations supplied by Joan
+; Modified 2016-11-30 to freeze Y and Z when a variable is set
+;
+; Macros:
+; COORD = 3 ;CS number, e.g. 2
+; PLC = 18 ;PLC number, should be CS number+15, e.g. 17
+; BRAGG = 7 ;Axisnum for Bragg motor, e.g. 1
+; ZPAR = 5 ;Axisnum for Z motor (parallel), e.g. 2
+; YPERP = 6 ;Axisnum for Y motor (perpendicular), e.g. 3
+; PGM = 11  ;The motion program to use
+;
+; Coordinate system axes:
+; X (Q7) - energy in keV
+; Y (Q8) - offset from nominal of the perpendicular axis
+; Z (Q9) - offset from nominal of the parallel axis
+;
+; The conversion from energy to bragg angles and X,Y slide positions is:
+;    bragg = asin(Kwavelengthtoenergy / (Ekev * Ktwicelatticespacing))
+;    Y = 25*sin(bragg)/sin(2*bragg) - 0.02955*(12.6456-5/sin(bragg)) + offsetFromNominalY
+;    Z = 25.13 - (12.64 - 5/sin(bragg)) + offsetFromNominalZ
+;
+; And the forward equations are:
+;    Ekev = Kwavelengthtoenergy / (Ktwicelatticespacing * sin(bragg))
+;    offsetFromNominalY = Y - 25*sin(bragg)/sin(2*bragg) + 0.02955*(12.6456-5/sin(bragg))
+;    offsetFromNominalZ = Z - 25.13 + (12.64 - 5/sin(bragg))
+;
+;################################################
+
+; Change to CS3
+&3
+
+; Set relevant axes to use kinematics
+#7->I ; Bragg rotation
+#5->I ; Y motor
+#6->I ; Z motor
+
+; These are set by motor_in_cs.template
+#define BRAGGMOVE  P(4700+7)
+#define BRAGGMRES  P(4800+7)
+#define BRAGGOFF   P(4900+7)
+#define ZPARMOVE   P(4700+5)
+#define ZPARMRES   P(4800+5)
+#define ZPAROFF    P(4900+5)
+#define YPERPMOVE  P(4700+6)
+#define YPERPMRES  P(4800+6)
+#define YPERPOFF   P(4900+6)
+
+; P Variable use
+#define WavelengthToEnergy P1801
+#define TwiceLatticeConstant P1802
+#define RbvBragg P1810
+
+; Default P Variable values
+WavelengthToEnergy = 12.3984
+TwiceLatticeConstant = 6.2712
+
+; Coordinate system axes in Q variables
+#define EnergyAxis q7
+#define YOffsetAxis q8
+#define ZOffsetAxis q9
+#define EnergyRbv q87
+#define YOffsetRbv q88
+#define ZOffsetRbv q89
+#define EnergyDemand q77
+#define YOffsetDemand q78
+#define ZOffsetDemand q79
+#define FwdBragg q51
+#define InvBragg q52
+#define DesiredBragg q53
+
+; Set this to 1 to prevent CS moving Y and Z axes
+; Q variable number for consistency with CS_accel_dcm.pmc
+#define FreezeYAndZ q21
+
+; Angles in degrees
+i15=0
+
+OPEN FORWARD
+; Calculate energy and Y,Z offsets from motor positions
+CLEAR
+    FwdBragg = (P7*BRAGGMRES) + BRAGGOFF
+    EnergyAxis = WavelengthToEnergy / (TwiceLatticeConstant * SIN(FwdBragg))
+    YOffsetAxis = ((P6*YPERPMRES)+YPERPOFF) - (25*SIN(FwdBragg)/SIN(2*FwdBragg)) + (0.02955*(12.6456-5/SIN(FwdBragg)))
+    ZOffsetAxis = ((P5*ZPARMRES)+ZPAROFF) - 25.13 + (12.64 - 5/SIN(FwdBragg))
+CLOSE
+
+OPEN INVERSE
+; Calculate motor positions from energy.
+CLEAR
+    InvBragg = ASIN(WavelengthToEnergy / (TwiceLatticeConstant * EnergyAxis))
+    P7 = (InvBragg - BRAGGOFF) / BRAGGMRES
+; Don't move Y and Z if the "freeze" variable is set
+    IF (FreezeYAndZ = 0)
+        P6 = ((25*SIN(InvBragg)/SIN(2*InvBragg) - 0.02955*(12.6456-5/SIN(InvBragg)) + YOffsetAxis) - YPERPOFF) / YPERPMRES
+        P5 = ((25.13 - (12.64 - 5/SIN(InvBragg)) + ZOffsetAxis) - ZPAROFF) / ZPARMRES
+    ENDIF
+CLOSE
+
+; A PLC(sx+15) needs to be made to do position reporting
+; Readbacks should be in &{axisnum}Q81..89 
+#define BraggVal (m762/(i708*32))
+#define ZParVal (m562/(i508*32))
+#define YPerpVal (m662/(i608*32))
+OPEN PLC18
+CLEAR
+    ADDRESS&3
+    RbvBragg = (BraggVal*BRAGGMRES) + BRAGGOFF
+    EnergyRbv = WavelengthToEnergy / (TwiceLatticeConstant * SIN(RbvBragg))
+    YOffsetRbv = ((YPerpVal*YPERPMRES)+YPERPOFF) - (25*SIN(RbvBragg)/SIN(2*RbvBragg)) + (0.02955*(12.6456-5/SIN(RbvBragg)))
+    ZOffsetRbv = ((ZParVal*ZPARMRES)+ZPAROFF) - 25.13 + (12.64 - 5/SIN(RbvBragg))
+    IF (BRAGGMOVE = 1)
+    OR (ZPARMOVE = 1)
+    OR (YPERPMOVE = 1)
+        BRAGGMOVE = 0
+        ZPARMOVE = 0
+        YPERPMOVE = 0
+        EnergyDemand = EnergyRbv
+        YOffsetDemand = YOffsetRbv
+        ZOffsetDemand = ZOffsetRbv
+    ENDIF
+CLOSE
+ENABLE PLC18
+
+; Set some defaults for all CS axes
+i5213,15,100=10   ; segmentation time (needed for lookahead)
+i5220,15,100=50   ; lookahead length (needed to limit max velocity to max set in CS)
+i5250,15,100=1    ; Enable kinematics
+
+; The motion program.
+; Note the use of rapid mode.  This prevents the speeds getting messed up by the
+; feed rate that the coordinate system driver writes to the pmac based on the
+; coordinate system motor record velocity, which seems to mess up in this case.
+; This motion program also always forces the offsets from nominal to zero.
+open prog11
+clear
+    rapid
+;    linear
+    abs
+    frax(X,Y,Z)
+    X(EnergyDemand)Y(0)Z(0)
+    dwell 0
+    ; Note that there is no point including more things after the move
+    ; as EPICS usually (but not always!) sends a stop that exits the program
+close
+
+
+;substitute "COORD=3,PLC=18,BRAGG=7,T2=5"
+;include "CS_accel_dcm.pmc"

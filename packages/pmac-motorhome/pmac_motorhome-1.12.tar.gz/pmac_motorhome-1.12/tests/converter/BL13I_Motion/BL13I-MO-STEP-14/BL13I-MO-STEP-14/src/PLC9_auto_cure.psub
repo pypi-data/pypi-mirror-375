@@ -1,0 +1,25 @@
+substitute "PLC=9"
+ 
+; Define number of axis on controller
+substitute "NAXIS=8"
+ 
+; Define which axis are in stepper mode - set to 1 for a stepper, 0 for servo
+; (All 16 defs are needed, even though only have 8 axis on GeoBrick.)
+substitute "SM1=1"
+substitute "SM2=1"
+substitute "SM3=1"
+substitute "SM4=1"
+substitute "SM5=1"
+substitute "SM6=1"
+substitute "SM7=0"
+substitute "SM8=1"
+substitute "SM9=1"
+substitute "SM10=1"
+substitute "SM11=1"
+substitute "SM12=1"
+substitute "SM13=1"
+substitute "SM14=1"
+substitute "SM15=1"
+substitute "SM16=1"
+ 
+include "PLC_auto_cure.pmc"
