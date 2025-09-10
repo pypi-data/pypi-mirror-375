@@ -1,0 +1,21 @@
+[project]
+name = "fandom-scraper"
+version = "0.1.1"
+description = "A simple AI (span-marker) powered fandom scraper"
+readme = "README.md"
+authors = [
+    { name = "AnthonyP57", email = "antonipawlowicz123@gmail.com" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "fandom-py>=0.2.1",
+    "span-marker>=1.7.0",
+    "transformers<4.38",
+]
+
+[project.scripts]
+fandom-scraper = "fandom_scraper:main"
+
+[build-system]
+requires = ["uv_build>=0.8.0,<0.9"]
+build-backend = "uv_build"
