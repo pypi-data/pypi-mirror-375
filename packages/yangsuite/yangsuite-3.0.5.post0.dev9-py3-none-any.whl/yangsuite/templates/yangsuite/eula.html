@@ -1,0 +1,83 @@
+{% extends 'yangsuite/base-general.html' %}
+{% load static %}
+{% block cui-css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/cui-standard-1.3.3.min.css' %}"/>
+{% endblock %}
+<title>Cisco General Terms</title>
+{% block body %}
+<div class="col-6 offset-3" style="background-color: aliceblue;">
+  <h3><strong>Cisco YANG Suite User Agreement</strong></h3>
+    <div class="row">
+        <div class="col center">
+          <strong>
+              <p>YANG Suite users must agree to the "Cisco General Terms" and "Privacy Statement".</p>
+          </strong>
+        </div>
+    </div>
+    <form id="ys-eula-form" action="/yangsuite/eula/" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <strong><p>Choose to accept or decline "<a id="see-eula">Cisco General Terms</a>".</p></strong>
+            <div class="form-group__text radio">
+                <label  class="radio radio--alt">
+                <input type="radio" name="cisco-eula" value="accepted" checked/>
+                <span class="radio__input"></span>
+                <span class="radio__label">Accept</span>
+                </label>
+                <label  class="radio radio--alt">
+                <input type="radio" name="cisco-eula" value="declined"/>
+                <span class="radio__input"></span>
+                <span class="radio__label">Decline</span>
+                </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <strong><p>Choose to accept or decline "<a id="see-privacy">Cisco Online Privacy Statement</a>".</p></strong>
+            <div class="form-group__text radio">
+                <label  class="radio radio--alt">
+                <input type="radio" name="cisco-privacy" value="accepted" checked/>
+                <span class="radio__input"></span>
+                <span class="radio__label">Accept</span>
+                </label>
+                <label  class="radio radio--alt">
+                <input type="radio" name="cisco-privacy" value="declined"/>
+                <span class="radio__input"></span>
+                <span class="radio__label">Decline</span>
+                </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div>
+              <button id="eula-btn" type="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+</div>
+<script>
+$(function() {
+    $("#see-eula").click(function() {
+        window.open(
+            "https://www.cisco.com/c/dam/en_us/about/doing_business/legal/Cisco_General_Terms.pdf",
+            "Cisco General Terms",
+            "_blank"
+        );
+    });
+    $("#see-privacy").click(function() {
+        window.open(
+            "https://www.cisco.com/c/en/us/about/legal/privacy-full.html",
+            "Cisco Online Privacy Statement",
+            "_blank"
+        );
+    });
+});
+</script>
+{% endblock body %}

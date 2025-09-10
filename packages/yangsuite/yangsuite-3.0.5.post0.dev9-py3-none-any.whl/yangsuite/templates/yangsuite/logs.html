@@ -1,0 +1,116 @@
+{% extends 'yangsuite/base-cui.html' %}
+{% load static %}
+{% block cui-css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/cui-standard-1.3.3.min.css' %}"/>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/yangsuite_logs.css' %}"/>
+{% endblock %}
+{% block breadcrumbs %}<li><span>Logs</span></li>{% endblock %}
+{% block page-title %}YANG Suite Application Log{% endblock %}
+{% block body %}
+<div class="container">
+  <form id="admin-log-form" action="/yangsuite/logs/getlog" method="get">
+    <div class="row">
+      <div class="col">
+        <div class="form-group label--inline">
+          <div class="form-group__text select">
+            <label for="log-levelname">Log verbosity:</label>
+            <select id="log-levelname" name="levelname" required="">
+              <option value="ERROR">Errors</option>
+              <option value="WARNING">Warnings</option>
+              <option value="INFO" selected="">Informational</option>
+              <option value="DEBUG">Debugging</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group label--inline">
+          <div class="form-group__text">
+            <label for="log-maxlines">Maximum lines to show:</label>
+            <input id="log-maxlines" name="maxlines" value="100" type="number"/>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn" id="log-refresh">Load logs</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="content">
+  <div class="row">
+    <div id="log-contents" class="col">
+      <table class="log_table table table--bordered table--wrap">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Level</th>
+              <th>Message</th>
+              <th>Module</th>
+              <th>Line</th>
+              <th>Function</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block script %}
+<script>
+$(function() {
+    $("#admin-log-form").submit(function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+
+        let data = $("#admin-log-form").serialize();
+
+        $("#log-contents tbody").empty();
+        $.ajax(
+            {url: "/yangsuite/logs/getlog",
+                data: data,
+                type: 'GET',
+                datatype: "json",
+                success: function(retObj) {
+                    let tbody = $("#log-contents tbody");
+                    $.each(retObj.result, function() {
+                        tbody.append(
+                            to_row(this,
+                                   ['timestamp', 'levelname', 'message',
+                                    'name', 'lineno', 'funcName'],
+                                   {'name': 'modulename'}));
+                    });
+                    /* Scroll to the bottom of the table if necessary */
+                    $("#log-contents").scrollTop($("#log-contents").prop("scrollHeight"));
+                }
+            }
+        );
+    });
+
+    function to_row(data, keys, classes={}, cell_type="td") {
+        let result = "<tr>";
+        $.each(keys, function() {
+            if (! data.hasOwnProperty(this)) {
+                data[this] = "?";
+            }
+            let cell_class = this;
+            if (classes.hasOwnProperty(this)) {
+                cell_class = classes[this];
+            }
+            result += "<" + cell_type + ' class="' + cell_class + '">';
+            if (cell_class == 'modulename') {
+                result += data[this].replace(/^yangsuite./, '');
+            } else {
+                result += data[this];
+            }
+            result += "</" + cell_type + ">";
+        });
+        result += "</tr>";
+        return result;
+    }
+});
+</script>
+{% endblock %}
