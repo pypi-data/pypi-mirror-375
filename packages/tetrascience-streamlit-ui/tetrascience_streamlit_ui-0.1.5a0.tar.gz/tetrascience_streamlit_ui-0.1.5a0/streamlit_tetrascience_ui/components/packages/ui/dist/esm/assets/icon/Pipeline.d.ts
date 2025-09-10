@@ -1,0 +1,4 @@
+import React from "react";
+import { IconProps } from "@atoms/Icon";
+declare const Pipeline: React.FC<IconProps>;
+export default Pipeline;

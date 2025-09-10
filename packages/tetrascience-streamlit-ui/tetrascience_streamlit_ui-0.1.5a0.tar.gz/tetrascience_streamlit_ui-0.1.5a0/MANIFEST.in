@@ -1,0 +1,18 @@
+# Include the README and LICENSE files
+include README.md
+include LICENSE
+
+# Include all dist folders and their contents from the components packages
+recursive-include streamlit_tetrascience_ui/components/packages/frontend/dist *
+recursive-include streamlit_tetrascience_ui/components/packages/streamlit-component-lib/dist *
+recursive-include streamlit_tetrascience_ui/components/packages/ui/dist *
+
+# Include package.json files for reference
+include streamlit_tetrascience_ui/components/packages/*/package.json
+
+# Exclude unnecessary files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *~
+global-exclude .DS_Store
+prune streamlit_tetrascience_ui/components/node_modules
