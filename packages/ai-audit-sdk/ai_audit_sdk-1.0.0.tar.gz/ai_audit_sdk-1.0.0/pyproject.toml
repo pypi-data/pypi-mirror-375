@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-audit-sdk"
+dynamic = ["version"]
+description = "SDK for logging AI/ML decisions with compliance tracking"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "AI Audit Trail", email = "support@explainable-ai.dev"}
+]
+maintainers = [
+    {name = "AI Audit Trail", email = "support@explainable-ai.dev"}
+]
+keywords = ["ai", "audit", "compliance", "gdpr", "ai-act", "logging", "ml", "openai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.25.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "build>=0.8.0",
+    "twine>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/appdroidinc/TrailJustifier"
+Repository = "https://github.com/appdroidinc/TrailJustifier"
+Issues = "https://github.com/appdroidinc/TrailJustifier/issues"
+Documentation = "https://docs.aiaudit.com"
+
+[tool.setuptools]
+packages = ["ai_audit_sdk"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ai_audit_sdk.__version__"}
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
