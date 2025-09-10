@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+src/xronai/__init__.py
+src/xronai.egg-info/PKG-INFO
+src/xronai.egg-info/SOURCES.txt
+src/xronai.egg-info/dependency_links.txt
+src/xronai.egg-info/requires.txt
+src/xronai.egg-info/top_level.txt
+src/xronai/core/__init__.py
+src/xronai/core/agents.py
+src/xronai/core/ai.py
+src/xronai/core/supervisor.py
+src/xronai/history/__init__.py
+src/xronai/history/history_manager.py
+src/xronai/utils/__init__.py
+src/xronai/utils/debugger.py
