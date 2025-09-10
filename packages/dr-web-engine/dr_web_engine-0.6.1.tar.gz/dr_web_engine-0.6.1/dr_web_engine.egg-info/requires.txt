@@ -1,0 +1,11 @@
+playwright
+pydantic
+json5
+pyyaml
+typer
+
+[dev]
+pytest
+pytest-playwright
+pytest-mock
+tomli
