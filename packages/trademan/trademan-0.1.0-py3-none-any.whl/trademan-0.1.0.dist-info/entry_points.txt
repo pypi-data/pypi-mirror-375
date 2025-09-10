@@ -1,0 +1,3 @@
+[console_scripts]
+market_dl = trademan.data:main
+trademan = trademan.portfolio:cli
