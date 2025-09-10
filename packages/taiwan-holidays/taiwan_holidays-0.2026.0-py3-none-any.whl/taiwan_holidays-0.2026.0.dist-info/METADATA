@@ -1,0 +1,104 @@
+Metadata-Version: 2.4
+Name: taiwan-holidays
+Version: 0.2026.0
+Summary: A Python package for determining whether a given date is a workday or a holiday in Taiwan, based on the official administrative calendar.
+Project-URL: homepage, https://github.com/Chesham/taiwan-holidays
+Project-URL: repository, https://github.com/Chesham/taiwan-holidays
+Project-URL: documentation, https://github.com/Chesham/taiwan-holidays
+Author-email: chesham <c.moweb@gmail.com>
+License: The MIT License (MIT)
+        
+        Copyright (c) 2024 to present, Chesham Chou.
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Requires-Dist: pandas==2.2.3
+Requires-Dist: python-dateutil==2.9.0.post0
+Description-Content-Type: text/markdown
+
+# taiwan-holidays
+
+`taiwan-holidays` is a Python package designed to check whether a specific date is a workday or a holiday in Taiwan, based on the official work calendar provided by the Taiwan government.
+
+![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+![license](https://img.shields.io/badge/license-MIT-green)
+![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)
+![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
+![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)
+
+## Features
+
+- Determine if a date is a workday or holiday.
+- Support for official Taiwan government work calendar rules, including special adjusted workdays and holidays.
+- Easy-to-use API for date checking.
+- Currently, only the official Taiwanese government calendar of public working days starting from the year 2019 (Republic of China year 108) **onwards** is supported.
+
+## Installation
+
+You can install `taiwan-holidays` via pip:
+
+```bash
+pip install taiwan-holidays
+```
+
+## Usage
+
+Here's how you can use taiwan-holidays in your Python project.
+
+### Example
+
+```python
+from taiwan_holidays.taiwan_calendar import TaiwanCalendar
+
+
+calendar = TaiwanCalendar()
+date = dateutil.parser.parse('2024-12-08')
+print(calendar.is_holiday(date))
+print(calendar.is_holiday('2024-12-08'))
+print(calendar.is_holiday('20241208'))
+print(calendar.is_holiday('2024/12/08'))
+
+# Iterate workdays through a range of dates, including the start and end dates
+calendar.iter_workdays('2024-12-01', '2024-12-31')
+
+# Also you can iterate with reversed dates
+calendar.iter_workdays('2024-12-31', '2024-12-01')
+```
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Acknowledgements
+
+Special thanks to the Taiwan government for providing the official administrative calendar as the basis for this package.
+
+Feel free to report any issues or suggest new features in the Issues section.
