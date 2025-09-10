@@ -1,0 +1,11 @@
+boruta>=0.4.3
+catboost>=1.2.8
+fiona
+gdal
+pyeogpr>=2.4.7
+pyproj
+rasterio
+rtree
+scipy<1.16
+shap>=0.48.0
+shapely
