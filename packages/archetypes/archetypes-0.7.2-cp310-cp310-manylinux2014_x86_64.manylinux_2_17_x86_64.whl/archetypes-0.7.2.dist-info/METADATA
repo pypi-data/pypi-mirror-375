@@ -1,0 +1,82 @@
+Metadata-Version: 2.4
+Name: archetypes
+Version: 0.7.2
+Summary: A scikit-learn compatible Python package for archetypal analysis
+Project-URL: Documentation, https://archetypes.readthedocs.io
+Project-URL: Source code, https://github.com/aleixalcacer/archetypes
+Author-email: Aleix Alcacer <aleixalcacer@gmail.com>, Zanchenling Wang <wangzancl@gmail.com>
+License-Expression: BSD-3-Clause
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.9
+Requires-Dist: custom-inherit
+Requires-Dist: jax
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: numpy>=1.25
+Requires-Dist: optax
+Requires-Dist: scikit-learn>=1.6
+Requires-Dist: scipy<1.12,>=1.8
+Requires-Dist: torch
+Description-Content-Type: text/markdown
+
+# Archetypes
+![PyPI](https://img.shields.io/pypi/v/archetypes)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/archetypes)
+[![Python package](https://github.com/aleixalcacer/archetypes/actions/workflows/python-package.yml/badge.svg)](https://github.com/aleixalcacer/archetypes/actions/workflows/python-package.yml)
+![PyPI - License](https://img.shields.io/pypi/l/archetypes)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](CODE_OF_CONDUCT.md)
+
+**archetypes** is a [scikit-learn](https://scikit-learn.org) compatible Python package for archetypal analysis.
+
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install archetypes
+
+```bash
+pip install archetypes
+```
+
+or install the latest version from the repository
+
+```bash
+pip install git+https://github.com/aleixalcacer/archetypes.git
+```
+
+
+
+## Usage
+
+```python
+from archetypes import AA
+import numpy as np
+
+X = np.random.normal(0, 1, (100, 2))
+
+aa = AA(n_archetypes=4)
+
+X_trans = aa.fit_transform(X)
+
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+
+## License
+
+Distributed under the BSD 3-Clause License. See [LICENSE](LICENSE) for more information.
