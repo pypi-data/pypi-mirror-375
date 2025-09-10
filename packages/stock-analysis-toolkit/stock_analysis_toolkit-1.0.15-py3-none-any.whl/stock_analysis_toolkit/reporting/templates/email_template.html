@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ subject }}</title>
+    <style>
+        /* Reset styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f4f4f4;
+        }
+
+        /* Container */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+
+        /* Header */
+        .email-header {
+            background-color: #2196F3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .email-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        /* Content */
+        .email-content {
+            padding: 20px;
+        }
+
+        .greeting {
+            margin-bottom: 20px;
+        }
+
+        .report-intro {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .btn:hover {
+            background-color: #1976D2;
+        }
+
+        /* Report Preview */
+        .report-preview {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+        }
+
+        .preview-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2196F3;
+        }
+
+        /* Accordion styles using <details> tag */
+        details {
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        summary {
+            background-color: #f9f9f9;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            outline: none; /* Removes the default focus outline */
+        }
+
+        .accordion-content {
+            padding: 15px;
+            background-color: #ffffff;
+        }
+
+        /* Footer */
+        .email-footer {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .social-links {
+            margin: 15px 0;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: #2196F3;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+
+            .email-header h1 {
+                font-size: 20px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .no-print, .no-print * {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="email-header">
+            <h1>Stock Analysis Report</h1>
+            <div>{{ date }}</div>
+        </div>
+
+        <!-- Content -->
+        <div class="email-content">
+            <div class="greeting">
+                <p>Hello,</p>
+                <p>Your {{ report_type }} report is ready. Here's a quick summary:</p>
+            </div>
+
+            {% if report_summary %}
+            <div class="report-preview">
+                <div class="preview-header">Report Summary:</div>
+                <p>{{ report_summary|safe }}</p>
+            </div>
+            {% endif %}
+
+            {% if stock_results %}
+            <div class="report-preview">
+                <div class="preview-header">Stock Analysis:</div>
+                {% for stock in stock_results %}
+                <details>
+                    <summary>{{ stock.name }}</summary>
+                    <div class="accordion-content">
+                        <ul>
+                            {% for metric, value in stock.key_metrics.items() %}
+                            <li><strong>{{ metric }}:</strong> {{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </details>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div style="text-align: center; margin: 25px 0;">
+                <a href="{{ report_url }}" class="btn" target="_blank">View Full Report</a>
+                <p style="font-size: 12px; color: #666666; margin-top: 5px;">
+                    (Link valid for 7 days)
+                </p>
+            </div>
+
+            <div class="report-intro">
+                <p>This report was generated on {{ date }}. For the most up-to-date information, please log in to your account.</p>
+
+                {% if recommendations and recommendations|length > 0 %}
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #2196F3; margin-bottom: 10px;">Recommendations</h3>
+                    <ul>
+                        {% for rec in recommendations %}
+                        <li>{{ rec|safe }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <p>Need help or have questions? <a href="mailto:support@stockanalysis.com" style="color: #2196F3;">Contact our support team</a>.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="email-footer">
+            <div style="margin-bottom: 15px;">
+                <strong>Stock Analysis Pro</strong><br>
+                123 Market Street, Suite 100<br>
+                New York, NY 10001
+            </div>
+
+            <div class="social-links">
+                <a href="#" target="_blank">Website</a> |
+                <a href="#" target="_blank">Twitter</a> |
+                <a href="#" target="_blank">LinkedIn</a>
+            </div>
+
+            <div class="no-print" style="font-size: 11px; color: #999999; margin-top: 15px;">
+                <p>You're receiving this email because you're subscribed to Stock Analysis Pro reports.</p>
+                <p>
+                    <a href="#" style="color: #666666;">Unsubscribe</a> |
+                    <a href="#" style="color: #666666;">Preferences</a> |
+                    <a href="#" style="color: #666666;">Privacy Policy</a>
+                </p>
+                <p>&copy; {{ now.year }} Stock Analysis Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
