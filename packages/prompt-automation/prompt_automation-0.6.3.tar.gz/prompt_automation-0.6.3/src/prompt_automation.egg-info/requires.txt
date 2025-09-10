@@ -1,0 +1,6 @@
+pyperclip
+dateparser
+PyYAML<7,>=6.0.1
+
+[windows]
+keyboard
