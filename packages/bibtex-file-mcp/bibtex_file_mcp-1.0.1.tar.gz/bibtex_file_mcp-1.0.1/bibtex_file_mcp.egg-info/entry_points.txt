@@ -1,0 +1,3 @@
+[console_scripts]
+bibtex-file-mcp = bibtex_file_mcp:main
+bibtex-mcp-server = bibtex_file_mcp:main
