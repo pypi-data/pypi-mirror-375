@@ -1,0 +1,7 @@
+---
+- name: "Create or verify bin directory (path: {{ local_bin_folder }})"
+  script: path_local_bin.sh {{ task_action }} {{ local_bin_folder }} {{ rc_file_path }}
+  register: scriptOut
+  changed_when: False # nothing really gets changed
+
+- debug: msg={{ scriptOut.stdout }}

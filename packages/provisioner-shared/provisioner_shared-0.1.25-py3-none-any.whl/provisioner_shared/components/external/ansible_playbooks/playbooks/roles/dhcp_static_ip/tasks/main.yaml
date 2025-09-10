@@ -1,0 +1,35 @@
+---
+- name: Set default facts
+  set_fact:
+    become_root: False
+    reboot_required: False
+  tags: ['define_static_ip']
+
+- name: Display facts values
+  debug:
+    msg: |
+      become_root: {{ become_root }}
+      reboot_required: {{ reboot_required }}
+  tags: ['define_static_ip']
+
+- name: Copy shell scripts library to remote host
+  copy:
+    src: "{{ role_path }}/files/shell_lib.sh"
+    dest: "/tmp/shell_lib.sh"
+  tags: ['define_static_ip']
+
+- name: Configure RPi node network (static IP and hostname)
+  script: add_dhcp_entry.sh
+  register: scriptOut
+  async: 0
+  poll: 0
+  ignore_errors: false
+  become: "{{ become_root }}"
+  environment:
+    STATIC_IP: "{{ static_ip | mandatory }}"
+    GATEWAY_ADDRESS: "{{ gateway_address | mandatory }}"
+    DNS_ADDRESS: "{{ dns_address | mandatory }}"
+  tags: ['define_static_ip']
+
+- debug: msg={{ scriptOut.stdout }}
+  tags: ['define_static_ip']
