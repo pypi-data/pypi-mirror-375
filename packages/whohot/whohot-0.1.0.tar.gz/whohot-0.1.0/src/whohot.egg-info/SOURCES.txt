@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/whohot/__init__.py
+src/whohot/hello.py
+src/whohot.egg-info/PKG-INFO
+src/whohot.egg-info/SOURCES.txt
+src/whohot.egg-info/dependency_links.txt
+src/whohot.egg-info/entry_points.txt
+src/whohot.egg-info/top_level.txt
+src/whohot/cli/__init__.py
+src/whohot/cli/config_manager.py
+src/whohot/cli/main.py
