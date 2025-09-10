@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: mseep-mcp-server-unitycatalog
+Version: 0.1.4
+Summary: A Model Context Protocol server that enables LLM agents to execute Unity Catalog functions seamlessly.
+Author-email: mseep <support@skydeck.ai>
+Maintainer-email: Shingo OKAWA <shingo.okawa.g.h.c@gmail.com>
+License: MIT
+Keywords: unitycatalog,mcp,llm,automation
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.10
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: mcp>=1.2.1
+Requires-Dist: pydantic>=2.10.6
+Requires-Dist: pydantic-settings>=2.7.1
+Requires-Dist: unitycatalog-ai>=0.1.0
+Dynamic: license-file
+
+Package managed by MseeP.ai
