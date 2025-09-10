@@ -1,0 +1,15 @@
+matplotlib
+numpy
+scipy
+bruker_utils
+pybaselines
+Pillow>=10.0.0
+
+[dev]
+pyproject-flake8
+pytest
+pytest-cov
+
+[docs]
+Sphinx
+sphinx-nameko-theme
