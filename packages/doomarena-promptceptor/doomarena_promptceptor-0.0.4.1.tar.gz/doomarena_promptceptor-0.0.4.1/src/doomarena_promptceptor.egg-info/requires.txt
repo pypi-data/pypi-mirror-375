@@ -1,0 +1,4 @@
+openai>=1.78.0
+pytest
+PyYAML
+litellm>=1.66.3
