@@ -1,0 +1,3 @@
+[console_scripts]
+simple-client = srpc.examples.simple.client:main
+simple-server = srpc.examples.simple.server:main

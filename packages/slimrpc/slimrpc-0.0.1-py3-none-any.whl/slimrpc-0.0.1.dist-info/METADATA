@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: slimrpc
+Version: 0.0.1
+Summary: RPC over SLIM Library
+License-Expression: Apache-2.0
+Requires-Python: >=3.9
+Requires-Dist: async-timeout>=5.0.1
+Requires-Dist: googleapis-common-protos>=1.70.0
+Requires-Dist: grpcio>=1.74.0
+Requires-Dist: slim-bindings>=0.4.1
