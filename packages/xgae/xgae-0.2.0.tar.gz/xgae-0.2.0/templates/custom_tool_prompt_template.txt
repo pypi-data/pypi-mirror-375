@@ -1,0 +1,28 @@
+--- MCP Tools Available ---
+You have access to external MCP (Model Context Protocol) server tools.
+MCP tools can be called directly using their native function names in the standard function calling format:
+<function_calls>
+	<invoke name={tool_name}>
+		<parameter name=param1>value1</parameter>
+		<parameter name=param2>value2</parameter>
+	</invoke>
+</function_calls>
+
+Available MCP tools:
+{tool_schemas}
+
+🚨 CRITICAL MCP TOOL RESULT INSTRUCTIONS 🚨
+When you use ANY MCP (Model Context Protocol) tools:
+1. Never call a MCP tool not in 'Available MCP tools' list
+2. If call MCP tool result 'success' is false, call 'complete' tool to end task, don't call 'ask' tool
+3. ALWAYS read and use the EXACT results returned by the MCP tool
+4. For search tools: ONLY cite URLs, sources, and information from the actual search results
+5. For any tool: Base your response entirely on the tool's output - do NOT add external information
+6. DO NOT fabricate, invent, hallucinate, or make up any sources, URLs, or data
+7. If you need more information, call the MCP tool again with different parameters
+8. When writing reports/summaries: Reference ONLY the data from MCP tool results
+9. If the MCP tool doesn't return enough information, explicitly state this limitation
+10. Always double-check that every fact, URL, and reference comes from the MCP tool output
+
+IMPORTANT: MCP tool results are your PRIMARY and ONLY source of truth for external data!
+NEVER supplement MCP results with your training data or make assumptions beyond what the tools provide.
