@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocStrange Local - Document Extraction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title-48">DocStrange Local</h1>
+            <p class="body-big">Extract and convert content from various file types using local processing</p>
+        </header>
+
+        <main class="main-content">
+            <div class="upload-section">
+                <div class="upload-card">
+                    <h2 class="title-24">Upload File</h2>
+                    
+                    <form id="uploadForm" class="upload-form">
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <div class="upload-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#546FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 2V8H20" stroke="#546FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16 13H8" stroke="#546FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16 17H8" stroke="#546FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10 9H9H8" stroke="#546FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <p class="body-big">Drag and drop your file here</p>
+                            <p class="body-normal">or</p>
+                            <button type="button" class="btn btn-secondary">
+                                Choose File
+                            </button>
+                            <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.txt,.png,.jpg,.jpeg,.tiff,.bmp,.ppt,.pptx,.html,.htm" style="display: none;">
+                        </div>
+
+                        <div class="file-info" id="fileInfo" style="display: none;">
+                            <div class="file-details">
+                                <span class="file-name" id="fileName"></span>
+                                <span class="file-size" id="fileSize"></span>
+                            </div>
+                            <button type="button" class="btn-remove" onclick="removeFile()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18" stroke="#676767" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M6 6L18 18" stroke="#676767" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Output Format Selection -->
+                        <div class="form-section">
+                            <h3 class="title-20">Output Format</h3>
+                            <p class="body-small">Choose how you want the extracted content formatted</p>
+                            
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="outputFormat" value="markdown" checked>
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">Markdown</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="outputFormat" value="html">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">HTML</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="outputFormat" value="json">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">JSON</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="outputFormat" value="csv">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">CSV</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="outputFormat" value="flat-json">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">Flat JSON</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Processing Mode Selection -->
+                        <div class="form-section">
+                            <h3 class="title-20">Processing Mode</h3>
+                            <p class="body-small">Choose how you want to process the document</p>
+                            
+                            <div class="warning-message" id="gpuWarning" style="display: none;">
+                                <div class="warning-content">
+                                    <span class="warning-icon">⚠️</span>
+                                    <span class="warning-text">GPU processing is not available on your system. CPU mode recommended.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="processingMode" value="cpu" checked>
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">Local CPU</span>
+                                    <span class="radio-description">Process locally using CPU. Works offline, slower but private.</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="processingMode" value="gpu">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">Local GPU</span>
+                                    <span class="radio-description">Process locally using GPU. Fastest local processing, requires CUDA.</span>
+                                </label>
+                            </div>
+                            
+                            <div class="cloud-redirect">
+                                <p class="body-small">Need cloud processing? <a href="https://docstrange.nanonets.com/" target="_blank" class="cloud-link">Use DocStrange Cloud →</a></p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                            <span class="btn-text">Extract Content</span>
+                            <div class="spinner" id="spinner" style="display: none;"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-card">
+                    <div class="results-header">
+                        <h2 class="title-24">Extraction Results</h2>
+                        <div class="results-meta">
+                            <span class="meta-item" id="fileType"></span>
+                            <span class="meta-item" id="pagesProcessed"></span>
+                            <span class="meta-item" id="processingTime"></span>
+                            <span class="meta-item" id="processingMode"></span>
+                        </div>
+                    </div>
+
+                    <div class="results-content">
+                        <div class="content-tabs">
+                            <button class="tab-btn active" data-tab="preview">Preview</button>
+                            <button class="tab-btn" data-tab="raw">Raw Output</button>
+                            <button class="tab-btn" data-tab="download">Download</button>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="preview">
+                                <div class="preview-content" id="previewContent"></div>
+                            </div>
+                            <div class="tab-pane" id="raw">
+                                <pre class="raw-content" id="rawContent"></pre>
+                            </div>
+                            <div class="tab-pane" id="download">
+                                <div class="download-options">
+                                    <button class="btn btn-secondary" onclick="downloadAsText()">Download as Text</button>
+                                    <button class="btn btn-secondary" onclick="downloadAsJson()">Download as JSON</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="supported-formats">
+            <h3 class="title-20">Supported File Formats</h3>
+            <div class="format-tags">
+                <span class="format-tag">PDF</span>
+                <span class="format-tag">Word (.docx, .doc)</span>
+                <span class="format-tag">Excel (.xlsx, .xls)</span>
+                <span class="format-tag">PowerPoint (.pptx, .ppt)</span>
+                <span class="format-tag">HTML (.html, .htm)</span>
+                <span class="format-tag">CSV</span>
+                <span class="format-tag">Text</span>
+                <span class="format-tag">Images (PNG, JPG, TIFF, BMP)</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html> 
