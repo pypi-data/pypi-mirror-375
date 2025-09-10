@@ -1,0 +1,14 @@
+LICENSE
+README.md
+setup.py
+chtoolbox/__init__.py
+chtoolbox/add_license.py
+chtoolbox/misc.py
+chtoolbox/testing.py
+chtoolbox.egg-info/PKG-INFO
+chtoolbox.egg-info/SOURCES.txt
+chtoolbox.egg-info/dependency_links.txt
+chtoolbox.egg-info/requires.txt
+chtoolbox.egg-info/top_level.txt
+tests/__init__.py
+tests/test_testing.py
