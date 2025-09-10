@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: tshistory_supervision
+Version: 0.13.1
+Summary: Provide a supervision mechanism over `tshistory`
+Home-page: https://hg.sr.ht/~pythonian/tshistory_supervision
+Author: Pythonian
+Author-email: aurelien.campeas@pythonian.fr, arnaud.campeas@pythonian.fr
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Database
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Version Control
+License-File: LICENSE
+Requires-Dist: simplejson
+Requires-Dist: tshistory >=0.18.0
+
