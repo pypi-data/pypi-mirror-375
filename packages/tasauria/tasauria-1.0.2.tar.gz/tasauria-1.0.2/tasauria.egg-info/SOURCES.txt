@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+requirements.txt
+setup.py
+tasauria/__init__.py
+tasauria/client.py
+tasauria/exceptions.py
+tasauria/types.py
+tasauria.egg-info/PKG-INFO
+tasauria.egg-info/SOURCES.txt
+tasauria.egg-info/dependency_links.txt
+tasauria.egg-info/requires.txt
+tasauria.egg-info/top_level.txt
