@@ -1,0 +1,11 @@
+torch>=1.9.0
+
+[dev]
+pytest>=6.0
+black
+isort
+flake8
+mypy
+
+[test]
+pytest>=6.0
