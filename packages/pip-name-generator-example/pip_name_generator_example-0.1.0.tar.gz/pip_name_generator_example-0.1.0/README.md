@@ -1,0 +1,58 @@
+[![PyPI version](https://badge.fury.io/py/pip_name_generator.svg)](https://badge.fury.io/py/pip_name_generator)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://static.pepy.tech/badge/pip_name_generator)](https://pepy.tech/project/pip_name_generator)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/eugene-evstafev-716669181/)
+
+# pip_name_generator
+
+`pip_name_generator` is a minimal Python package that provides a simple function to generate a `setup.py` script as a string. It's useful for programmatically creating package setup files based on input metadata.
+
+## Installation
+
+Install via pip:
+
+```bash
+pip install pip_name_generator
+```
+
+## Usage
+
+Import the function and generate a setup.py content by providing the required description, with an optional author or email:
+
+```python
+from pip_name_generator import generate_setup_py_from_metadata
+
+# Example with description and author name
+setup_code = generate_setup_py_from_metadata(
+    custom_text="This is a sample package.",
+    author="Jane Doe"
+)
+
+print(setup_code)
+
+# Example with email
+setup_code_email = generate_setup_py_from_metadata(
+    custom_text="Test package for production.",
+    author="john@example.com"
+)
+
+print(setup_code_email)
+```
+
+This will produce a minimal setup.py script that includes the specified metadata.
+
+## Features
+
+- Generates a valid `setup.py` script as a string
+- Supports specifying author name or email
+- Easy to incorporate into automated workflows
+
+## Author
+
+Eugene Evstafev  
+[LinkedIn](https://www.linkedin.com/in/eugene-evstafev-716669181/)  
+Email: hi@eugene.plus
+
+## License
+
+This project is licensed under the MIT License.
