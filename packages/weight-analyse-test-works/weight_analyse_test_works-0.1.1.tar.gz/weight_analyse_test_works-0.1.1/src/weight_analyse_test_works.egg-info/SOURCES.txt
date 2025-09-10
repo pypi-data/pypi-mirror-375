@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/weight_analyse_test_works/__init__.py
+src/weight_analyse_test_works/core.py
+src/weight_analyse_test_works/log.py
+src/weight_analyse_test_works/server.py
+src/weight_analyse_test_works.egg-info/PKG-INFO
+src/weight_analyse_test_works.egg-info/SOURCES.txt
+src/weight_analyse_test_works.egg-info/dependency_links.txt
+src/weight_analyse_test_works.egg-info/top_level.txt
+tests/test_main.py
