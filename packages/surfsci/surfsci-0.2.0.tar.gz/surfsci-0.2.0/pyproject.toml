@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "surfsci"
+dynamic = ["version"]
+description = "A suite of tools for handling surface science related x-ray data"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "BSD-2-Clause"
+keywords = ["Surface Science"]
+authors = [
+  { name = "David Kalliecharan", email = "david@david.science" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Scientific/Engineering :: Physics",
+  "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = ["xps"]
+
+[project.scripts]
+surfsci-gpol = "surfsci.utils.gpol:main"
+surfsci-xy-conv = "surfsci.utils.xy_conv:main"
+
+[project.urls]
+Documentation = "https://gitlab.com/ddkn/surfsci#readme"
+Issues = "https://gitlab.com/ddkn/surfsci/issues"
+Source = "https://gitlab.com/ddkn/surfsci"
+
+[tool.hatch.version]
+path = "src/surfsci/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/surfsci tests}"
+
+[tool.coverage.run]
+source_pkgs = ["surfsci", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/surfsci/__about__.py",
+]
+
+[tool.coverage.paths]
+surfsci = ["src/surfsci", "*/surfsci/src/surfsci"]
+tests = ["tests", "*/surfsci/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
