@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=60", "setuptools-scm>=8.0", "wheel"]
+
+[project]
+name = "MODISCI"
+version = "1.4.0"
+description = "generates rasters of MODIS clumping index"
+readme = "README.md"
+authors = [
+    { name = "Gregory H. Halverson", email = "gregory.h.halverson@jpl.nasa.gov" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "ECOv002-calval-tables>=1.6.0",
+    "colored_logging",
+    "rasters>=1.9.0",
+]
+
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+exclude = ["notebooks*"]
+
+[project.urls]
+"Homepage" = "https://github.com/JPL-Evapotranspiration-Algorithms/MODISCI"
+

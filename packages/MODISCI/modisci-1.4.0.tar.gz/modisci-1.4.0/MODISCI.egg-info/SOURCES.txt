@@ -1,0 +1,18 @@
+.gitignore
+LICENSE
+README.md
+makefile
+pyproject.toml
+.github/workflows/ci.yml
+.github/workflows/python-publish.yml
+MODISCI/MODISCI.py
+MODISCI/__init__.py
+MODISCI/version.py
+MODISCI.egg-info/PKG-INFO
+MODISCI.egg-info/SOURCES.txt
+MODISCI.egg-info/dependency_links.txt
+MODISCI.egg-info/requires.txt
+MODISCI.egg-info/top_level.txt
+notebooks/Loading Clumping Index at Points.ipynb
+tests/test_import_MODISCI.py
+tests/test_import_dependencies.py
