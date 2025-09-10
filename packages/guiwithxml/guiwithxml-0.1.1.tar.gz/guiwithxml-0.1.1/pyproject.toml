@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guiwithxml"
+version = "0.1.1"  # <-- VERSİYONU ARTIRMAYI UNUTMAYIN!
+authors = [
+  { name="Adınız Soyadınız", email="email@adresiniz.com" },
+]
+description = "XML kullanarak özel Tkinter arayüzleri çizen bir kütüphane."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
