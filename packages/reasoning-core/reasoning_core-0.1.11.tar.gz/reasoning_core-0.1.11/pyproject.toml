@@ -1,0 +1,53 @@
+#[build-system]
+#requires = ["setuptools"]
+#build-backend = "setuptools.build_meta"
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "reasoning_core"
+dynamic = ["version"]
+
+dependencies = [
+    "faker",
+    "unified-planning[pyperplan]",
+    "reasoning_gym",
+    "prime",
+    "networkx",
+    "pooch",
+    "requests",
+    "beautifulsoup4",
+    "easydict",
+    "appdirs",
+    "regex",
+    "num2words",
+    "tqdm",
+    "timeout_decorator",
+    "timeoutcontext",
+    "pandas",
+    "funcy",
+    "multiprocess",
+    "xpflow",
+    "exrex",
+    "unigram",
+    "nltk",
+    "pyagrum",
+    "numpy",
+    "sympy",
+    "verifiers",
+    "pyparsing",
+    "lazy_object_proxy",
+    "udocker"
+]
+
+[tool.setuptools.packages.find]
+include = ["reasoning_core*"]
+
+[tool.setuptools.package-data]
+"reasoning_core" = ["resources/**"]
+
+[tool.hatch.version]
+path = "reasoning_core/__init__.py"
