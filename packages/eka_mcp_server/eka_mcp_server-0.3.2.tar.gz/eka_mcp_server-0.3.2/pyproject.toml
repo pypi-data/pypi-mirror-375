@@ -1,0 +1,30 @@
+[project]
+name = "eka_mcp_server"
+version = "0.3.2"
+description = "The official Eka MCP Server for medical science tools curated by eka.care"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[all]>=1.3.0",
+    "httpx>=0.28.1",
+    "logging>=0.4.9.6",
+    "pillow>=11.0.0",
+    "pytest>=8.3.5",
+    "pyjwt>=2.10.0",
+]
+
+[[project.authors]]
+name = "praveenkumar"
+email = "praveenkumar@eka.care"
+
+[project.urls]
+Repository = "https://github.com/eka-care/eka_mcp_server"
+Documentation = "https://developer.eka.care/api-reference/eka_mcp/overview"
+
+
+[build-system]
+requires = [ "hatchling",]
+build-backend = "hatchling.build"
+
+[project.scripts]
+eka_mcp_server = "eka_mcp_server:main"
