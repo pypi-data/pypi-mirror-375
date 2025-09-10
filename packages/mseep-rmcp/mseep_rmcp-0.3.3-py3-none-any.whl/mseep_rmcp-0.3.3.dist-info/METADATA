@@ -1,0 +1,50 @@
+Metadata-Version: 2.4
+Name: mseep-rmcp
+Version: 0.3.3
+Summary: Comprehensive Model Context Protocol server with 33 statistical analysis tools across 8 categories
+Author-email: mseep <support@skydeck.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/gojiplus/rmcp
+Project-URL: Repository, https://github.com/gojiplus/rmcp
+Project-URL: Documentation, https://github.com/gojiplus/rmcp#readme
+Project-URL: Issues, https://github.com/gojiplus/rmcp/issues
+Keywords: mcp,r,statistics,econometrics,model-context-protocol,data-analysis
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: R
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Distributed Computing
+Requires-Python: >=3.8
+Description-Content-Type: text/plain
+License-File: LICENSE
+Requires-Dist: click>=8.1.0
+Requires-Dist: jsonschema>=4.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0.0; extra == "dev"
+Requires-Dist: pytest-mock>=3.12.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: flake8>=6.0.0; extra == "dev"
+Requires-Dist: mypy>=1.5.0; extra == "dev"
+Requires-Dist: pre-commit>=3.0.0; extra == "dev"
+Provides-Extra: http
+Requires-Dist: fastapi>=0.100.0; extra == "http"
+Requires-Dist: uvicorn>=0.20.0; extra == "http"
+Requires-Dist: sse-starlette>=1.6.0; extra == "http"
+Provides-Extra: r
+Requires-Dist: subprocess32>=3.5.0; python_version < "3.3" and extra == "r"
+Dynamic: license-file
+
+Package managed by MseeP.ai
