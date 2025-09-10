@@ -1,0 +1,27 @@
+[project]
+name = "uvbrew"
+version = "0.1.7"
+description = "create homebrew formulae from a uv package"
+readme = "README.md"
+authors = [
+    { name = "thewisenerd", email = "thewisenerd@protonmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.2.1",
+    "httpx>=0.28.1",
+    "structlog>=25.4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/thewisenerd/uvbrew"
+
+[project.scripts]
+uvbrew = "uvbrew:main"
+
+[build-system]
+# for some reason, colorama doesn't work with uv_build
+# requires = ["uv_build>=0.8.15,<0.9.0"]
+# build-backend = "uv_build"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
