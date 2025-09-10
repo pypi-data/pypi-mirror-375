@@ -1,0 +1,2 @@
+[console_scripts]
+stock-analyzer = stock_analysis_toolkit.main:main
