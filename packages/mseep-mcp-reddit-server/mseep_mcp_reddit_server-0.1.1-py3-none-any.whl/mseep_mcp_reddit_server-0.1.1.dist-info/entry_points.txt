@@ -1,0 +1,2 @@
+[console_scripts]
+mcp-reddit = mcp_reddit.reddit_fetcher:mcp.run
