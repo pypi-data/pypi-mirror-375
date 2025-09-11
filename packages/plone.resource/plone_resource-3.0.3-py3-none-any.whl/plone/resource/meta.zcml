@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta"
+    >
+
+  <meta:directive
+      name="static"
+      handler=".zcml.registerResourceDirectory"
+      namespace="http://namespaces.plone.org/plone"
+      schema=".zcml.IResourceDirectoryDirective"
+      />
+
+</configure>

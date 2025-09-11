@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rolemap>
+  <permissions>
+    <permission acquire="False"
+                name="plone.resource: Export ZIP file"
+    >
+      <role name="Manager" />
+    </permission>
+  </permissions>
+</rolemap>
