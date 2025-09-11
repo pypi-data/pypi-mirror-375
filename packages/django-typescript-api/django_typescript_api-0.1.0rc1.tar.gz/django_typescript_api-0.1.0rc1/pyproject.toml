@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-typescript-api"
+version = "0.1.0rc1"
+description = "Generate TypeScript clients from Django APIs"
+authors = [
+    { name = "Py Env Studio Team", email = "contact.shaikh.wasim@gmail.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+dependencies = [
+    "Django>=4.0",
+    "Jinja2",
+]
+requires-python = ">=3.8"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+django_typescript_api = [
+    "static/**/*",
+    "templates/**/*",
+]
