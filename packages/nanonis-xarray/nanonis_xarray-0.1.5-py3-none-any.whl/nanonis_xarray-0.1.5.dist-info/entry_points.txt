@@ -1,0 +1,2 @@
+[xarray.backends]
+nanonis_dat = nanonis_xarray.nanonis_dat_backend_entrypoint:NanonisDatBackendEntrypoint
