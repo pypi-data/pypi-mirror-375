@@ -1,0 +1,193 @@
+Metadata-Version: 2.4
+Name: safentic
+Version: 1.0.6
+Summary: Safentic SDK for AI agent runtime enforcement interception.
+Author-email: Safentic <contact@safentic.com>
+License-Expression: LicenseRef-Proprietary
+Project-URL: Homepage, https://safentic.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: PyYAML
+Requires-Dist: langchain
+Requires-Dist: langchain-community
+Requires-Dist: langchain-openai
+Requires-Dist: openai
+Requires-Dist: python-dotenv
+Requires-Dist: sentence-transformers==3.2.1
+Requires-Dist: requests
+Requires-Dist: SQLAlchemy
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: coverage; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pip-audit-extra; extra == "dev"
+Requires-Dist: types-requests; extra == "dev"
+Requires-Dist: types-PyYAML; extra == "dev"
+Dynamic: license-file
+
+# Safentic SDK
+
+- **Safentic is a runtime guardrail SDK for agentic AI systems.**
+- It intercepts and evaluates tool calls between agent intent and execution, enforcing custom safety policies and generating structured audit logs for compliance.
+
+## Installation
+`pip install safentic`
+
+# Quickstart: Wrap Your Agent
+
+- Safentic works at the action boundary, not inside the model itself. You wrap your agent with SafetyLayer:
+
+```
+from safentic.layer import SafetyLayer
+from agent import AgentClassInstance  # your existing agent
+
+agent = AgentClassInstance()
+```
+
+## Wrap with Safentic
+``` layer = SafetyLayer(agent=agent, api_key="your-api-key", agent_id="demo-agent") ```
+
+## Example tool call
+```
+try:
+    result = layer.call_tool("some_tool", {"body": "example input"})
+    print(result)
+except Exception as e:
+    print("Blocked:", e)
+```
+
+## Output:
+
+- Blocked: Blocked by policy
+
+# Configuring Your Policy File
+
+- Safentic enforces rules defined in a YAML configuration file (e.g. policy.yaml).
+- By default, it looks for config/policy.yaml, or you can set the path with:
+
+```
+export SAFENTIC_POLICY_PATH=/path/to/policy.yaml
+```
+
+## Schema
+
+- At the moment, Safentic supports the llm_verifier rule type.
+
+``` 
+tools:
+  <tool_name>:
+    rules:
+      - type: llm_verifier
+        description: "<short description of what this rule enforces>"
+        instruction: "<prompt instruction given to the verifier LLM>"
+        model: "<llm model name, e.g. gpt-4>"
+        fields: [<list of input fields to check>]
+        reference_file: "<path to reference text file, optional>"
+        response_format: boolean
+        response_trigger: yes
+        match_mode: exact
+        level: block         # enforcement level: block | warn
+        severity: high       # severity: low | medium | high
+        tags: [<labels for filtering/searching logs>]
+
+logging:
+  level: INFO
+  destination: "safentic/logs/txt_logs/safentic_audit.log"
+  jsonl: "safentic/logs/json_logs/safentic_audit.jsonl"
+
+Example Policy (obfuscated)
+tools:
+  sample_tool:
+    rules:
+      - type: llm_verifier
+        description: "Block outputs that contain disallowed terms"
+        instruction: "Does this text contain disallowed terms or references?"
+        model: gpt-4
+        fields: [body]
+        reference_file: sample_guidelines.txt
+        response_format: boolean
+        response_trigger: yes
+        match_mode: exact
+        level: block
+        severity: high
+        tags: [sample, denylist]
+
+  another_tool:
+    rules: []  # Explicitly allow all actions for this tool
+
+logging:
+  level: INFO
+  destination: "safentic/logs/txt_logs/safentic_audit.log"
+  jsonl: "safentic/logs/json_logs/safentic_audit.jsonl"
+```
+
+## Audit Logs
+
+- Every decision is logged with context for compliance and debugging:
+
+```
+{
+  "timestamp": "2025-09-09T14:25:11Z",
+  "agent_id": "demo-agent",
+  "tool": "sample_tool",
+  "allowed": false,
+  "reason": "Blocked by policy",
+  "rule": "sample_tool:denylist_check",
+  "severity": "high",
+  "level": "block",
+  "tags": ["sample", "denylist"]
+}
+```
+
+### Log Fields
+
+- timestamp – when the action was evaluated
+- agent_id – the agent issuing the action
+- tool – tool name
+- allowed – whether the action was permitted
+- reason – why it was allowed or blocked
+- rule – the rule that applied (if any)
+- severity – severity of the violation
+- level – enforcement level (block, warn)
+- tags – categories attached to the rule
+- extra – additional metadata (e.g., missing fields, matched text)
+
+# CLI Commands
+
+- Safentic ships with a CLI for validating policies, running one-off checks, and inspecting logs:
+
+## Validate a policy file
+```
+safentic validate-policy --policy config/policy.yaml --strict
+```
+
+## Run a one-off tool check
+```
+safentic check-tool --tool sample_tool \
+  --input-json '{"body": "some text"}' \
+  --policy config/policy.yaml
+```
+## Tail the audit log (JSONL by default)
+```
+safentic logs tail --path safentic/logs/json_logs/safentic_audit.jsonl -f
+```
+
+## Environment Variables
+
+Set these before running Safentic:
+
+- ```OPENAI_API_KEY``` – **required** for rules that use llm_verifier (e.g., GPT-4).
+- ```SAFENTIC_POLICY_PATH``` – path to your policy.yaml (default: config/policy.yaml).
+- ```SAFENTIC_LOG_PATH``` – override the default text audit log path.
+- ```SAFENTIC_JSON_LOG_PATH``` – override the default JSONL audit log path.
+- ```LOG_LEVEL``` – optional, sets verbosity (DEBUG, INFO, etc.).
+
+# Supported Stacks
+
+- Safentic integrates with frameworks like LangChain, AutoGen, and MCP by wrapping the tool dispatcher rather than modifying the model or prompts.
