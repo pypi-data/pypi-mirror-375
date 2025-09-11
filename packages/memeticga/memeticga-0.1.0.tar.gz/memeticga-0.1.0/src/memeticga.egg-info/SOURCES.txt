@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/memeticga/__init__.py
+src/memeticga/core.py
+src/memeticga.egg-info/PKG-INFO
+src/memeticga.egg-info/SOURCES.txt
+src/memeticga.egg-info/dependency_links.txt
+src/memeticga.egg-info/requires.txt
+src/memeticga.egg-info/top_level.txt
+tests/test_module.py
