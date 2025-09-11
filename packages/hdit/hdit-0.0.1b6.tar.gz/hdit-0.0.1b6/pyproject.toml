@@ -1,0 +1,34 @@
+[project]
+name = "hdit"
+version = "0.0.1-beta.6"
+authors = [
+  { name = "Caewinix", email = "Caewinix@yeah.net" },
+]
+dependencies = [
+    "einop",
+    "torch",
+    "dctorch",
+    "scipy",
+    "torchdiffeq",
+    "torchsde",
+    "tqdm",
+    "pillow",
+    "safetensors",
+    "torchvision"
+]
+description = "The Hourglass Diffusion Transformer (HDiT) is an image generative model that exhibits linear scaling with pixel count, supporting training at high-resolution directly in pixel-space."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+"Homepage" = "https://github.com/Caewinix/hdit"
+"Bug Tracker" = "https://github.com/Caewinix/hdit/issues"
