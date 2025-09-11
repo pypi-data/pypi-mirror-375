@@ -1,0 +1,146 @@
+# Gitstack
+
+**Version everything.**
+
+Git has been the gold standard for version control in software for decades. But Git is built almost entirely around source code: lines of text, commits, branches. What about *everything else*? What about the evolving mess of dependencies, environment variables, datasets, models, project states, configs, and the “invisible glue” that makes your project work today but breaks tomorrow?
+
+That’s where **Gitstack** comes in.
+
+Gitstack is an **open-source versioning tool for your entire project environment**. It lets you snapshot, restore, and eventually deploy entire working states, not just code, but the invisible layers that make code runnable. Think of it as `git` for **time, dependencies, and states**.
+
+---
+
+## What It Does
+
+Gitstack introduces a set of simple, powerful commands:
+
+- `gitstack snap` → Takes a snapshot of your project. At its simplest, this means recording the file structure, timestamps, and metadata into a `.gitstack/` folder. As it matures, snapshots will also capture Python dependencies, environment variables, and container states.
+
+- `gitstack restore` → Restores your project to the last snapshot. If you broke something, nuked a dependency, or misconfigured your environment, you can roll back instantly.
+
+- `gitstack time` → Prints the current time. A small command, but the beginning of Gitstack’s philosophy: projects are not just files, they’re *states in time*.
+
+- `gitstack date` → Prints the current date. Together with `time`, this sets up Gitstack’s baseline — every snapshot is anchored to a real moment.
+
+- `gitstack deploy` → A placeholder for the future: containerized deployment of your current snapshot. Eventually, Gitstack will help you push your entire environment to the cloud with a single command.
+
+The core idea is simple: **your project is more than code. Gitstack makes it reproducible, restorable, and sharable.**
+
+---
+
+## How It Works (Under the Hood)
+
+At this stage, Gitstack is lightweight. When you run `gitstack snap`, it creates a hidden `.gitstack/` directory in your project root. Inside it, Gitstack writes a JSON file containing:
+
+- A list of files and directories  
+- Their timestamps and metadata  
+- A unique snapshot ID linked to the current time/date  
+
+When you run `gitstack restore`, Gitstack reads that JSON file and reconstructs the file list for you. As the tool evolves, restore will expand to:
+
+- Rebuilding Python environments (`pip freeze`)  
+- Restoring `.env` configs  
+- Saving and reloading datasets and AI checkpoints  
+- Eventually, rebuilding Docker containers or even remote cloud states  
+
+So while today’s Gitstack is an early foundation, the roadmap points toward full project state management — **a new layer of version control**.
+
+---
+
+## Why Gitstack?
+
+Software engineers, data scientists, AI researchers, and indie hackers all face the same nightmare: *“It worked on my machine yesterday. Now it doesn’t.”*
+
+Traditional Git doesn’t solve this. It saves code, not states. Gitstack exists to bridge that gap. It’s for:
+
+- **Developers** tired of broken builds when switching branches.  
+- **Researchers** who need to reproduce AI experiments exactly.  
+- **Teams** who want to share environments, not just code.  
+- **Indie hackers** who want to roll back bad decisions without nuking their progress.  
+
+Version control should not stop at lines of code. Gitstack pushes the idea forward: **version everything.**
+
+---
+
+## Installation
+
+Gitstack is available on [PyPI](https://pypi.org/project/gitstack). Install it globally with pip:
+
+```bash
+pip install gitstack
+```
+```
+Verify it’s working:
+gitstack time
+# Ex output: 08:48:15.743508
+gitstack date
+# Ex output: 2025-09-10
+```
+Now you’re ready to snapshot your first project:
+```
+cd my_project
+gitstack snap
+```
+---
+Usage
+---
+Example workflow:
+```
+# Take a snapshot
+gitstack snap
+
+# Break something (oops!)
+
+# Restore to your last snapshot
+gitstack restore
+```
+---
+Coming soon:
+---
+```
+gitstack deploy
+Deploy your entire snapshot to a containerized environment
+```
+## The Web App (Coming Soon)
+
+The Gitstack CLI is the foundation. But Gitstack will also include a **visual dashboard**, accessible at [gitstack.com](https://gitstack.com).
+
+The dashboard will let you:
+
+- View and manage snapshots visually  
+- Compare different states of your project  
+- Share environments with collaborators  
+- Push to the cloud for team access  
+
+CLI power, paired with a clean visual layer.
+
+---
+
+## Author
+
+Gitstack was created by **Bola Banjo**.
+
+- X (Twitter): [@bolaabanjo](https://x.com/bolaabanjo)  
+- Open to contributions, collaborations, and feedback.
+
+
+## Contributing
+
+Gitstack is open-source. Anyone can fork, extend, and contribute. To contribute:
+
+1. Fork the repository  
+2. Create a feature branch  
+3. Write tests for your feature  
+4. Open a pull request  
+
+NB. These will be updated periodically, do ensure to check back.
+
+---
+
+## License & Future Direction
+
+Gitstack is currently licensed under the **MIT License**, meaning you are free to use, modify, and distribute it with proper attribution.  
+
+However, this license applies only to the **open-source CLI tool**. Future commercial offerings, advanced features, or hosted services may be released under different licensing terms via [gitstack.com](https://gitstack.com).  
+
+This dual approach ensures that Gitstack remains accessible for developers while leaving room for sustainable growth and enterprise-level innovation.
