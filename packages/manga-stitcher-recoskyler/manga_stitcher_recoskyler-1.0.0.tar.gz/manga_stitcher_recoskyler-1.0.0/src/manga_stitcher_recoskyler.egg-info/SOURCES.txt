@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/manga_stitcher_recoskyler/__init__.py
+src/manga_stitcher_recoskyler/__main__.py
+src/manga_stitcher_recoskyler/cli.py
+src/manga_stitcher_recoskyler/manga_stitcher.py
+src/manga_stitcher_recoskyler.egg-info/PKG-INFO
+src/manga_stitcher_recoskyler.egg-info/SOURCES.txt
+src/manga_stitcher_recoskyler.egg-info/dependency_links.txt
+src/manga_stitcher_recoskyler.egg-info/entry_points.txt
+src/manga_stitcher_recoskyler.egg-info/top_level.txt
