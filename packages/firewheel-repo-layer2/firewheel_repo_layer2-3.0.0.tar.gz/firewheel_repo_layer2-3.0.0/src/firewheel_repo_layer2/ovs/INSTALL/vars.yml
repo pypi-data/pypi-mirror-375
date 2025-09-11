@@ -1,0 +1,22 @@
+---
+download_dir: "{{ mc_dir }}/vm_resources"
+parents:
+  - name: "ovs"
+    tarball: "openvswitch-switch.tgz"
+
+files:
+  - parent: "ovs"
+    dest: "openvswitch-common_2.5.9-0ubuntu0.16.04.3_amd64.deb"
+    url: "https://mirror.cs.uchicago.edu/ubuntu/pool/main/o/openvswitch/openvswitch-common_2.5.9-0ubuntu0.16.04.3_amd64.deb"
+    sha256: "4196971b94d428a411f158a95983733d36ec603879551b8b7e4ff1403b69bce6"
+  - parent: "ovs"
+    dest: "openvswitch-switch_2.5.9-0ubuntu0.16.04.3_amd64.deb"
+    url: "https://mirror.cs.uchicago.edu/ubuntu/pool/main/o/openvswitch/openvswitch-switch_2.5.9-0ubuntu0.16.04.3_amd64.deb"
+    sha256: "bd3cbc6600f190abd1e8fd9d26d65f2a03356ce3a9a8376bc77aa06695cc899e"
+  - parent: "ovs"
+    dest: "python-six_1.10.0-3_all.deb"
+    url: "http://launchpadlibrarian.net/238247204/python-six_1.10.0-3_all.deb"
+    sha256: "b126333e5fc21d97ceda0ca1b839093657aa4a0f90d5fca198359b583314e54d"
+
+required_files:
+  - destination: "{{ download_dir }}/openvswitch-switch.tgz"

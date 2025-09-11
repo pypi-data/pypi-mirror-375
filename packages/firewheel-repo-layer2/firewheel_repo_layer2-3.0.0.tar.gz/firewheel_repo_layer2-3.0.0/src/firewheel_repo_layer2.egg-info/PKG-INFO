@@ -1,0 +1,47 @@
+Metadata-Version: 2.4
+Name: firewheel_repo_layer2
+Version: 3.0.0
+Summary: This repository contains FIREWHEEL Model Components for enabling layer-2 networking within an experiment.
+Author-email: FIREWHEEL Developers <firewheel@sandia.gov>
+License: Apache License (2.0)
+Project-URL: Homepage, https://www.sandia.gov/emulytics
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Telecommunications Industry
+Classifier: Intended Audience :: Science/Research
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Internet
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Security
+Classifier: Topic :: System :: Clustering
+Classifier: Topic :: System :: Distributed Computing
+Classifier: Topic :: System :: Emulators
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: Utilities
+Requires-Python: >=3.8
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: firewheel>=2.9.0
+Requires-Dist: firewheel-repo-base
+Requires-Dist: firewheel-repo-linux
+Dynamic: license-file
+
+.. _layer2_mc_repo:
+
+*********************
+firewheel-repo-layer2
+*********************
+
+This repository contains FIREWHEEL Model Components for enabling `layer-2 <https://en.wikipedia.org/wiki/Data_link_layer>`_ networking within an experiment.
