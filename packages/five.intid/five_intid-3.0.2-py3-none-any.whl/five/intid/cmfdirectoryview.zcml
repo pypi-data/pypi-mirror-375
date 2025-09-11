@@ -1,0 +1,50 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    zcml:condition="installed Products.CMFCore"
+    >
+
+  <!-- DirectoryViews -->
+  <subscriber
+      for="Products.CMFCore.interfaces.IDirectoryView
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".unreferenceable.addIntIdSubscriber"
+      />
+  <subscriber
+      for="Products.CMFCore.interfaces.IDirectoryView
+           zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+      handler=".unreferenceable.removeIntIdSubscriber"
+      />
+  <subscriber
+      for="Products.CMFCore.interfaces.IDirectoryView
+           zope.lifecycleevent.interfaces.IObjectMovedEvent"
+      handler=".unreferenceable.moveIntIdSubscriber"
+      />
+  <adapter
+      factory=".unreferenceable.KeyReferenceNever"
+      for="Products.CMFCore.interfaces.IDirectoryView"
+      trusted="y"
+      />
+
+  <!-- FSObject -->
+  <subscriber
+      for="Products.CMFCore.FSObject.FSObject
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".unreferenceable.addIntIdSubscriber"
+      />
+  <subscriber
+      for="Products.CMFCore.FSObject.FSObject
+           zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+      handler=".unreferenceable.removeIntIdSubscriber"
+      />
+  <subscriber
+      for="Products.CMFCore.FSObject.FSObject
+           zope.lifecycleevent.interfaces.IObjectMovedEvent"
+      handler=".unreferenceable.moveIntIdSubscriber"
+      />
+  <adapter
+      factory=".unreferenceable.KeyReferenceNever"
+      for="Products.CMFCore.FSObject.FSObject"
+      trusted="y"
+      />
+</configure>
