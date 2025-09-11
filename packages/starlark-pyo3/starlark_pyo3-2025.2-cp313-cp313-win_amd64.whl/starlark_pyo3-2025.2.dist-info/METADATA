@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: starlark-pyo3
+Version: 2025.2
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Dist: typing-extensions>=4.5
+License-File: LICENSE
+Summary: Wraps starlark-rust into Python
+Home-Page: https://github.com/inducer/starlark-pyo3
+Author-email: Andreas Kloeckner <inform@tiker.net>
+Requires-Python: >=3.9
+Project-URL: homepage, https://github.com/inducer/starlark-pyo3
