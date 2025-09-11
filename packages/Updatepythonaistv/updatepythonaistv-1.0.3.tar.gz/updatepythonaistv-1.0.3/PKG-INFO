@@ -1,0 +1,38 @@
+Metadata-Version: 2.4
+Name: Updatepythonaistv
+Version: 1.0.3
+Summary: Library auto update & upload Python packages on Termux
+Home-page: https://github.com/phuctrong1tuv/Updatepythonaistv
+Author: Trọng Phúc
+Author-email: phuctrongytb16@gmail.com
+Keywords: termux update python package pypi aistv
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: twine
+Requires-Dist: setuptools
+Requires-Dist: wheel
+Requires-Dist: build
+Requires-Dist: rust
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Updatepythonaistv
+
+📦 Công cụ hỗ trợ cập nhật & upload gói Python lên PyPI ngay trên Termux.
+
+## 🚀 Cài đặt
+```bash
+pip install Updatepythonaistv
+```
