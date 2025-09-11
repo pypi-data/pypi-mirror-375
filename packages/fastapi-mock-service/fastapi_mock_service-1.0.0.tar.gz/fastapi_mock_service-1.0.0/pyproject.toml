@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastapi-mock-service"
+version = "1.0.0"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" },
+]
+description = "Professional FastAPI mock service library with load testing infrastructure and Prometheus metrics"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Framework :: FastAPI",
+]
+keywords = ["fastapi", "mock", "testing", "load-testing", "prometheus", "metrics", "api", "development"]
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "prometheus-client>=0.19.0",
+    "tortoise-orm>=0.20.0",
+    "pydantic>=2.0.0",
+    "jinja2>=3.1.0",
+    "python-multipart>=0.0.6",
+    "aiosqlite>=0.19.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.25.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+]
+examples = [
+    "pydantic>=2.0.0",
+]
+
+[project.scripts]
+fastapi-mock = "fastapi_mock_service.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/fastapi-mock-service"
+"Bug Reports" = "https://github.com/yourusername/fastapi-mock-service/issues"
+Source = "https://github.com/yourusername/fastapi-mock-service"
+Documentation = "https://github.com/yourusername/fastapi-mock-service#readme"
+
+[tool.setuptools.packages.find]
+include = ["fastapi_mock_service*"]
+
+[tool.setuptools.package-data]
+fastapi_mock_service = ["templates/*.html", "static/*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
