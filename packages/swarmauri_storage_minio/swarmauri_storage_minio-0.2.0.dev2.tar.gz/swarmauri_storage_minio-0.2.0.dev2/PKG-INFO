@@ -1,0 +1,48 @@
+Metadata-Version: 2.3
+Name: swarmauri_storage_minio
+Version: 0.2.0.dev2
+Summary: MinIO storage adapter for Peagen
+License: Apache-2.0
+Author: Jacob Stewart
+Author-email: jacob@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Requires-Dist: minio
+Requires-Dist: peagen
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_standard
+Description-Content-Type: text/markdown
+
+# Swarmauri MinIO Storage Adapter
+
+Peagen storage adapter that saves artifacts to a MinIO or S3-compatible bucket.
+
+## Installation
+
+```bash
+# pip install swarmauri_storage_minio (when published)
+```
+
+## Usage
+
+```python
+from swarmauri_storage_minio import MinioStorageAdapter
+from pydantic import SecretStr
+import io
+
+adapter = MinioStorageAdapter(
+    endpoint="localhost:9000",
+    access_key=SecretStr("minio"),
+    secret_key=SecretStr("minio123"),
+    bucket="peagen",
+)
+uri = adapter.upload("artifact.txt", io.BytesIO(b"data"))
+print(uri)
+```
+
