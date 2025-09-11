@@ -1,0 +1,2 @@
+[console_scripts]
+coin-price = Coin_api.COIN_API:main
