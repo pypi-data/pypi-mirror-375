@@ -1,0 +1,19 @@
+# XRayLabTool Requirements
+# ========================
+#
+# For complete dependency management, see pyproject.toml
+# This file provides a simplified requirements list for quick installation.
+#
+# Install options:
+# - Core only: pip install -r requirements.txt
+# - Development: pip install -e .[dev]
+# - All features: pip install -e .[all]
+
+# Core runtime dependencies only
+# These are the minimal dependencies required to run XRayLabTool
+numpy>=1.21.0
+pandas>=1.5.0
+scipy>=1.9.0
+matplotlib>=3.5.0
+mendeleev>=0.15.0
+tqdm>=4.64.0
