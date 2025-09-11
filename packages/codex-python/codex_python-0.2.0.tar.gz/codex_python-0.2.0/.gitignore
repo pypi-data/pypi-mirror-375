@@ -1,0 +1,73 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.python-version
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+.tox/
+.nox/
+.DS_Store
+
+# uv
+.uv/
+uv.lock
+
+# Generated artifacts
+# Generated artifacts
+.generated/
+codex-proj/
+.githooks/
+test/
+tests/
+
+# Ignore new markdown files by default
+*.md
+
+# Rust build outputs
+target/
+crates/**/target/
+crates/**/Cargo.lock
+
+# Local environment files
+.env
+.env.*
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/.gitignore
+/.idea/codex-python.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/ruff.xml
+/.idea/vcs.xml
