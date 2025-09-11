@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: m4rkw-pushover
+Version: 0.0.1
+Summary: pushover
+Author-email: Your Name <your@email.com>
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: types-requests
+
+# Simple pushover client
+
+````
+from pushover import Pushover
+
+p = Pushover("USER", "APP")
+
+p.send('test', 'sup')
+````
