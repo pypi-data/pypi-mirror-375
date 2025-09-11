@@ -1,0 +1,42 @@
+{
+  "header": {
+    "author": "Zaihua Ji, zji@ucar.edu",
+    "date": "03/23/2010",
+    "description": "table of icoads IMMA data for the supplement section"
+  },
+  "database": "rdadb",
+  "schema": "ivaddb",
+  "name": "isuppl",
+  "pkey": "iidx",
+  "column": [
+    {
+      "name": "iidx",
+      "type": "bigint",
+      "pkey": "PRIMARY KEY",
+      "comment": "icoads record id"
+    },
+    {
+      "name": "date",
+      "type": "date",
+      "notnull": "NOT NULL",
+      "comment": "UTC date of the record"
+    },
+    {
+      "name": "atte",
+      "type": "smallint",
+      "comment": "Attm Encoding (missing)"
+    },
+    {
+      "name": "supd",
+      "type": "text",
+      "comment": "Supplemental Data"
+    }
+  ],
+  "index": [
+    {
+      "name": "isuppl_idx_1",
+      "column": "date"
+    }
+  ],
+  "comment": "ICOADS IMMA supplement attm section"
+}
