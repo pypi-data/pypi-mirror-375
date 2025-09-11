@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: mdquantumlite2
+Version: 0.1.0
+Summary: A lightweight quantum-enhanced regression model based on LightGBM
+Home-page: https://github.com/Parham-Dehghan/MD_library
+Author: Parham Dehghan
+Author-email: dehghanparham6@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.20
+Requires-Dist: pandas>=1.3
+Requires-Dist: scikit-learn>=1.0
+Requires-Dist: scipy>=1.7
+Requires-Dist: lightgbm>=3.0
+Provides-Extra: quantum
+Requires-Dist: pennylane>=0.20; extra == "quantum"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# MDQuantumLite
+
+A lightweight machine learning library for regression tasks, enhanced with optional quantum features using Pennylane. Based on LightGBM with GOSS sampling and target encoding.
+
+## Installation
+```bash
+pip install mdquantumlite
+
+MDQuantumLite/  # فولدر اصلی پروژه (می‌تونی این رو به MD_library تغییر بدی اگر بخشی از ریپو بزرگتر باشه)
+├── mdquantumlite/  # فولدر پکیج (اینجا کد اصلی می‌ره)
+│   ├── __init__.py  # برای ایمپورت: from mdquantumlite import MDQuantumLite
+│   ├── mdquantum_lite.py  # کد اصلی کلاس‌ها (از APP1.PY منتقل شده، بدون تابع تست)
+│   └── quantum_feature.py  # کلاس QuantumFeature رو جدا کردم برای تمیزتر شدن
+├── tests/  # فولدر تست‌ها
+│   └── test_mdquantum_lite.py  # تابع تست از APP1.PY
+├── setup.py  # فایل نصب (مهم‌ترین فایل برای PyPI)
+├── README.md  # توضیح پروژه
+├── LICENSE  # لایسنس (مثلاً MIT)
+├── MANIFEST.in  # برای شامل کردن فایل‌های غیرپایتون (اختیاری)
+├── requirements.txt  # لیست dependencies برای توسعه (اختیاری، اما خوب است)
+└── .gitignore  # برای نادیده گرفتن فایل‌های موقتی مثل __pycache__
+
+
+from mdquantumlite import MDQuantumLite
+
+model = MDQuantumLite(use_quantum_features=True)
+model.fit(X, y)
+predictions = model.predict(X_test)
