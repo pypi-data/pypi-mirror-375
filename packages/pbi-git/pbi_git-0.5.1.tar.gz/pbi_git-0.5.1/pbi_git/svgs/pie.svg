@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="320" viewBox="0 0 520 320" role="img" aria-labelledby="title desc">
+  <title id="title">Pie Chart — Category A/B/C</title>
+  <desc id="desc">Values: A=130, B=200, C=60. Slice angles proportional to values. Labels at slice mid-angles.</desc>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Chart title -->
+  <text x="50%" y="28" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#111">
+    Pie Chart (A=130, B=200, C=60)
+  </text>
+
+  <!-- Pie center and radius: center (150,150), radius 120 -->
+  <!-- Slice A (130/390 = 120°): from -90° (top) to 30° -->
+  <path d="M150,150 L150,30 A120,120 0 0,1 253.923,210 Z" fill="#4C9AFF"/>
+
+  <!-- Slice B (~184.615°): large-arc-flag = 1 -->
+  <path d="M150,150 L253.923,210 A120,120 0 1,1 51.242,81.832 Z" fill="#2DBD7E"/>
+
+  <!-- Slice C (~55.385°) -->
+  <path d="M150,150 L51.242,81.832 A120,120 0 0,1 150,30 Z" fill="#FFB86B"/>
+
+  <!-- Labels at slice mid-angles (inside the wedges), percentages with no decimals -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#111">
+    <!-- A mid-angle = -30° -->
+    <text x="227.942" y="105" text-anchor="middle">Category A — 130 (33%)</text>
+    <!-- B mid-angle ≈ 122.31° -->
+    <text x="101.898" y="226.067" text-anchor="middle">Category B — 200 (51%)</text>
+    <!-- C mid-angle ≈ 242.31° -->
+    <text x="108.175" y="70.309" text-anchor="middle">Category C — 60 (15%)</text>
+  </g>
+
+  <!-- Legend (names only), moved left to reduce right-side whitespace -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#222">
+    <rect x="340" y="56" width="14" height="14" fill="#4C9AFF"/>
+    <text x="360" y="67">Category A</text>
+
+    <rect x="340" y="78" width="14" height="14" fill="#2DBD7E"/>
+    <text x="360" y="89">Category B</text>
+
+    <rect x="340" y="100" width="14" height="14" fill="#FFB86B"/>
+    <text x="360" y="111">Category C</text>
+  </g>
+</svg>

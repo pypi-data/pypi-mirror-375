@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Mock Scatter Chart</title>
+  <desc id="desc">Scatter plot with three categories (A, B, C), gridlines, axes, and legend. Axes run 0–100.</desc>
+
+  <!-- Card container -->
+  <rect x="10" y="10" width="700" height="400" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+
+  <!-- Title -->
+  <text x="30" y="44" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#111">
+    Scatter (Mock)
+  </text>
+  <text x="30" y="64" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#666">
+    X: 0–100 • Y: 0–100
+  </text>
+
+  <!-- Plot area -->
+  <g transform="translate(20,60)">
+    <!-- Plot frame -->
+    <rect x="0" y="0" width="480" height="320" fill="#FAFBFD" stroke="#eef2f6"/>
+
+    <!-- Clip path so points don't overflow -->
+    <defs>
+      <clipPath id="plotClip">
+        <rect x="0" y="0" width="480" height="320"/>
+      </clipPath>
+    </defs>
+
+    <!-- Gridlines (x every 20, y every 20) -->
+    <g stroke="#eceff4" stroke-width="1">
+      <!-- vertical -->
+      <line x1="96"  y1="0" x2="96"  y2="320"/>
+      <line x1="192" y1="0" x2="192" y2="320"/>
+      <line x1="288" y1="0" x2="288" y2="320"/>
+      <line x1="384" y1="0" x2="384" y2="320"/>
+      <line x1="480" y1="0" x2="480" y2="320"/>
+      <!-- horizontal -->
+      <line x1="0" y1="256" x2="480" y2="256"/>
+      <line x1="0" y1="192" x2="480" y2="192"/>
+      <line x1="0" y1="128" x2="480" y2="128"/>
+      <line x1="0" y1="64"  x2="480" y2="64"/>
+      <line x1="0" y1="0"   x2="480" y2="0"/>
+    </g>
+
+    <!-- Axes -->
+    <g stroke="#3a3f45" stroke-width="2">
+      <line x1="0" y1="320" x2="480" y2="320"/> <!-- x-axis -->
+      <line x1="0" y1="0"   x2="0"   y2="320"/> <!-- y-axis -->
+    </g>
+
+    <!-- Tick labels -->
+    <g font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#555">
+      <!-- x ticks -->
+      <text x="0"   y="340" text-anchor="middle">0</text>
+      <text x="96"  y="340" text-anchor="middle">20</text>
+      <text x="192" y="340" text-anchor="middle">40</text>
+      <text x="288" y="340" text-anchor="middle">60</text>
+      <text x="384" y="340" text-anchor="middle">80</text>
+      <text x="480" y="340" text-anchor="middle">100</text>
+      <!-- y ticks -->
+      <text x="-8" y="320" text-anchor="end" dy="4">0</text>
+      <text x="-8" y="256" text-anchor="end" dy="4">20</text>
+      <text x="-8" y="192" text-anchor="end" dy="4">40</text>
+      <text x="-8" y="128" text-anchor="end" dy="4">60</text>
+      <text x="-8" y="64"  text-anchor="end" dy="4">80</text>
+      <text x="-8" y="0"   text-anchor="end" dy="4">100</text>
+    </g>
+
+    <!-- Axis labels -->
+    <text x="240" y="368" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#666">X</text>
+    <g transform="translate(-36,160) rotate(-90)">
+      <text text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#666">Y</text>
+    </g>
+
+    <!-- Points (exact mapping: x_px = x*4.8, y_px = 320 - y*3.2) -->
+    <g clip-path="url(#plotClip)" stroke="#ffffff" stroke-width="2">
+      <!-- Category A (#4C9AFF) : (15,75),(30,60),(45,65),(60,55) -->
+      <circle cx="72.0"  cy="80.0"  r="6" fill="#4C9AFF"><title>A (15, 75)</title></circle>
+      <circle cx="144.0" cy="128.0" r="6" fill="#4C9AFF"><title>A (30, 60)</title></circle>
+      <circle cx="216.0" cy="112.0" r="6" fill="#4C9AFF"><title>A (45, 65)</title></circle>
+      <circle cx="288.0" cy="144.0" r="6" fill="#4C9AFF"><title>A (60, 55)</title></circle>
+
+      <!-- Category B (#2DBD7E) : (20,30),(40,35),(55,25),(70,40) -->
+      <circle cx="96.0"  cy="224.0" r="6" fill="#2DBD7E"><title>B (20, 30)</title></circle>
+      <circle cx="192.0" cy="208.0" r="6" fill="#2DBD7E"><title>B (40, 35)</title></circle>
+      <circle cx="264.0" cy="240.0" r="6" fill="#2DBD7E"><title>B (55, 25)</title></circle>
+      <circle cx="336.0" cy="192.0" r="6" fill="#2DBD7E"><title>B (70, 40)</title></circle>
+
+      <!-- Category C (#FFB86B) : (65,85),(80,70),(90,90) -->
+      <circle cx="312.0" cy="48.0"  r="6" fill="#FFB86B"><title>C (65, 85)</title></circle>
+      <circle cx="384.0" cy="96.0"  r="6" fill="#FFB86B"><title>C (80, 70)</title></circle>
+      <circle cx="432.0" cy="32.0"  r="6" fill="#FFB86B"><title>C (90, 90)</title></circle>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(520,84)" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#222">
+    <text x="0" y="0" font-weight="600">Legend</text>
+    <circle cx="6" cy="18" r="6" fill="#4C9AFF" stroke="#ffffff" stroke-width="2"/>
+    <text x="18" y="22">Category A</text>
+    <circle cx="6" cy="38" r="6" fill="#2DBD7E" stroke="#ffffff" stroke-width="2"/>
+    <text x="18" y="42">Category B</text>
+    <circle cx="6" cy="58" r="6" fill="#FFB86B" stroke="#ffffff" stroke-width="2"/>
+    <text x="18" y="62">Category C</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="30" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#888">
+    Mock visualization • Points placed using 0–100 scales
+  </text>
+</svg>

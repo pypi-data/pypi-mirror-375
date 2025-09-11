@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="200" viewBox="0 0 380 200" role="img" aria-labelledby="title desc">
+  <title id="title">Power BI Card — Total Sales</title>
+  <desc id="desc">Card with title and a large main value. Trend removed.</desc>
+
+  <!-- Card Background -->
+  <rect x="10" y="10" width="360" height="180" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+
+  <!-- Title -->
+  <text x="24" y="42" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#444" letter-spacing="0.2">
+    Total Sales
+  </text>
+
+  <!-- Delta Badge (kept small, below title) -->
+  <g transform="translate(24,60)" font-family="Segoe UI, Arial, sans-serif">
+    <rect x="0" y="-14" width="64" height="22" rx="11" fill="#E8F5EE"/>
+    <path d="M14,-4 l4,0 0,6 6,0 0,-6 4,0 -7,-7z" fill="#2DBD7E"/>
+    <text x="30" y="2" font-size="12" fill="#2DBD7E" font-weight="600">+8%</text>
+    <text x="0" y="20" font-size="12" fill="#666">vs previous period</text>
+  </g>
+
+  <!-- Main Value (dominant) -->
+  <text x="190" y="140"
+        font-family="Segoe UI, Arial, sans-serif"
+        font-size="88" font-weight="700" fill="#111"
+        text-anchor="middle" dominant-baseline="middle">
+    $1.23M
+  </text>
+
+  <!-- Footer / Subtext (optional) -->
+  <text x="24" y="168" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#888">
+    FYTD • Updated today
+  </text>
+</svg>
