@@ -1,0 +1,275 @@
+Metadata-Version: 2.1
+Name: cellmaps_coembedding
+Version: 1.4.0
+Summary: A tool to generate coembeddings from IF image embeddings and PPI network embeddings
+Home-page: https://github.com/idekerlab/cellmaps_coembedding
+Author: Cell Maps team
+Author-email: tools@cm4ai.org
+License: MIT license
+Keywords: cellmaps_coembedding
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+License-File: AUTHORS.rst
+Requires-Dist: cellmaps-utils <1.0.0,>=0.4.0
+Requires-Dist: phenograph <2.0.0,>=1.5.7
+Requires-Dist: numpy <2.0.0,>=1.24.4
+Requires-Dist: torch <3.0.0,>=2.0.0
+Requires-Dist: pandas <3.0.0,>=2.0.0
+Requires-Dist: matplotlib <4.0.0,>=3.7.4
+Requires-Dist: dill <0.4.0,>=0.3.8
+Requires-Dist: tqdm <5.0.0,>=4.67.1
+Requires-Dist: scipy <1.13,>=1.10.1
+
+=====================
+Cell Maps CoEmbedder
+=====================
+The Cell Maps CoEmbedding is part of the Cell Mapping Toolkit
+
+.. image:: https://img.shields.io/pypi/v/cellmaps_coembedding.svg
+        :target: https://pypi.python.org/pypi/cellmaps_coembedding
+
+.. image:: https://app.travis-ci.com/idekerlab/cellmaps_coembedding.svg?branch=main
+        :target: https://app.travis-ci.com/idekerlab/cellmaps_coembedding
+
+.. image:: https://readthedocs.org/projects/cellmaps-coembedding/badge/?version=latest
+        :target: https://cellmaps-coembedding.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. image:: https://zenodo.org/badge/620523316.svg
+        :target: https://zenodo.org/doi/10.5281/zenodo.10651873
+        :alt: Zenodo DOI badge
+
+Creates Coembedding from `Cell Maps ImmunoFluorscent Image Embedder <https://cellmaps-image-embedding.readthedocs.io>`__
+and `Cell Maps PPI Embedder <https://cellmaps-ppi-embedding.readthedocs.io>`__ using an implementation of `MUSE <https://github.com/AltschulerWu-Lab/MUSE>`__
+
+* Free software: MIT license
+* Documentation: https://cellmaps-coembedding.readthedocs.io.
+
+
+Dependencies
+------------
+
+* `cellmaps_utils <https://pypi.org/project/cellmaps-utils>`__
+* `phenograph <https://pypi.org/project/phenograph>`__
+* `numpy <https://pypi.org/project/numpy>`__
+* `torch <https://pypi.org/project/torch>`__
+* `pandas <https://pypi.org/project/pandas>`__
+* `matplotlib <https://pypi.org/project/matplotlib>`__
+* `dill <https://pypi.org/project/dill>`__
+* `tqdm <https://pypi.org/project/tqdm>`__
+* `scipy <https://pypi.org/project/scipy/>`__
+
+
+Compatibility
+-------------
+
+* Python 3.8 - 3.11
+
+Installation
+------------
+
+.. code-block::
+
+   git clone https://github.com/idekerlab/cellmaps_coembedding
+   cd cellmaps_coembedding
+   pip install -r requirements_dev.txt
+   make dist
+   pip install dist/cellmaps_coembedding*whl
+
+
+Run **make** command with no arguments to see other build/deploy options including creation of Docker image
+
+.. code-block::
+
+   make
+
+Output:
+
+.. code-block::
+
+   clean                remove all build, test, coverage and Python artifacts
+   clean-build          remove build artifacts
+   clean-pyc            remove Python file artifacts
+   clean-test           remove test and coverage artifacts
+   lint                 check style with flake8
+   test                 run tests quickly with the default Python
+   test-all             run tests on every Python version with tox
+   coverage             check code coverage quickly with the default Python
+   docs                 generate Sphinx HTML documentation, including API docs
+   servedocs            compile the docs watching for changes
+   testrelease          package and upload a TEST release
+   release              package and upload a release
+   dist                 builds source and wheel package
+   install              install the package to the active Python's site-packages
+   dockerbuild          build docker image and store in local repository
+   dockerpush           push image to dockerhub
+
+Before running tests, please install ``pip install -r requirements_dev.txt``.
+
+For developers
+-------------------------------------------
+
+To deploy development versions of this package
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Below are steps to make changes to this code base, deploy, and then run
+against those changes.
+
+#. Make changes
+
+   Modify code in this repo as desired
+
+#. Build and deploy
+
+.. code-block::
+
+    # From base directory of this repo cellmaps_coembedding
+    pip uninstall cellmaps_coembedding -y ; make clean dist; pip install dist/cellmaps_coembedding*whl
+
+
+
+Needed files
+------------
+
+The output directories for the image embeddings (see `Cell Maps Image Embedding <https://github.com/idekerlab/cellmaps_image_embedding/>`__) and protein-protein interaction network embeddings (see `Cell Maps PPI Embedding <https://github.com/idekerlab/cellmaps_ppi_embedding/>`__) are required.
+
+
+Usage
+-----
+
+For information invoke :code:`cellmaps_coembeddingcmd.py -h`
+
+**Example usage**
+
+.. code-block::
+
+   cellmaps_coembeddingcmd.py ./cellmaps_coembedding_outdir --embeddings ./cellmaps_image_embedding_outdir ./cellmaps_ppi_embedding_outdir
+
+
+
+Via Docker
+~~~~~~~~~~~~~~~~~~~~~~
+
+**Example usage**
+
+
+.. code-block::
+
+   Coming soon...
+
+Cite
+-------
+
+If you find this tool useful, please cite:
+
+Lenkiewicz, J., Churas, C., Hu, M., Qian, G., Jain, M., Levinson, M. A., ... & Schaffer, L. V. (2025). Cell Mapping Toolkit: An end-to-end pipeline for mapping subcellular organization. Bioinformatics, 41(6), btaf205.
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+.. _NDEx: http://www.ndexbio.org
+
+
+=======
+History
+=======
+
+1.4.0 (2025-09-10)
+--------------------
+
+* Expose k parameter as flag
+
+1.3.1 (2025-07-03)
+--------------------
+
+* Fix for UD-3116, missing header 0 row
+
+1.3.0 (2025-05-29)
+-------------------
+
+* Create flags for parameters of proteingps coembedding algorithm
+
+1.2.2 (2025-05-15)
+-------------------
+
+* Updated to PEP 517 compliant build system
+* Bug fixes: update constants, add back L2 normalization and fix separator issue for proteinGPS
+
+1.2.1 (2025-04-14)
+-------------------
+
+* Fix scipy package version
+
+1.2.0 (2025-03-19)
+-------------------
+
+* Added functionality to generate umap of embeddings (in cellmaps_coembedding.utils)
+
+1.1.0 (2025-03-05)
+-------------------
+
+* Added functionality to evaluate embeddings using statistical analysis and visualization (functions
+  `get_embedding_eval_data` and `generate_embedding_evaluation_figures` in cellmaps_coembedding.utils).
+
+* Update defauls (EPOCHS and DROPOUT)
+
+1.0.0 (2025-01-28)
+-------------------
+
+* Rename auto coembedding name and proteinGPS. `--algorithm auto` option is depreacted and `--algorithm proteingps`
+  should be used. The coembedding implementation was moved to `ProteinGPSCoEmbeddingGenerator` class and
+  `AutoCoEmbeddingGenerator` is deprecated and calls proteingps. The package name was renamed from `autoembed_sc`
+  to `proteingps`.
+
+* Removed l2 normalization
+
+* Constants updated in `ProteinGPSCoEmbeddingGenerator` (triplet_margin=0.2) and in proteingps's fit_predict
+  (triplet_margin=0.2, lambda_reconstruction=5.0, lambda_triplet=5.0)
+
+* Bug fix: add missing a `.to(device)` call to ensure tensors are correctly moved to the appropriate device.
+
+* Update version bounds of required packages
+
+0.4.0 (2024-12-02)
+-------------------
+
+* Added README generation.
+
+* Refactor code.
+
+* Update defaults (EPOCHS)
+
+0.3.1 (2024-09-13)
+------------------
+
+* Bug fix: raise more informative error when no embeddings overlap.
+
+0.3.0 (2024-09-06)
+------------------
+
+* Added ``--provenance`` flag to pass a path to json file with provenance information. This removes the
+  necessity of input directory to be an RO-Crate.
+
+0.2.0 (2024-07-17)
+------------------
+
+* Added a new coembedding algorithm accessible via flag ``--algorithm auto``. This algorithm utilizes neural networks
+  to generate latent embeddings, optimizing both reconstruction and triplet losses to improve embedding accuracy
+  by learning intra- and inter-modality relationships.
+
+0.1.0 (2024-02-12)
+------------------
+
+* First release on PyPI.
