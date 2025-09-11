@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "filehandls"              # MUST be unique on PyPI
+version = "0.1.0"
+description = "A simple file handling library by Lucas"
+authors = [{ name = "Lucas" }]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+dependencies = []
