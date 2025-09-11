@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "booleangene"
+version = "0.0.2"
+description = "Analysis of Boolean gene networks"
+readme = "README.md"
+requires-python = ">=3.6"
+authors = [
+    { name = "Chris Viets" }
+]
+dependencies = [
+    "numpy",
+    "networkx",
+    "sympy",
+    "tqdm"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/cviets/booleangene"
+"Bug Tracker" = "https://github.com/cviets/booleangene/issues"
+
+[project.scripts]
+booleangene = "booleangene.cli:main"
