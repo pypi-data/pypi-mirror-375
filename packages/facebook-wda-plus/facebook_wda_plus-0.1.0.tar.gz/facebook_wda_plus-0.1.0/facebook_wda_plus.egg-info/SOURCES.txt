@@ -1,0 +1,17 @@
+AUTHORS
+LICENSE
+README.md
+pyproject.toml
+facebook_wda_plus.egg-info/PKG-INFO
+facebook_wda_plus.egg-info/SOURCES.txt
+facebook_wda_plus.egg-info/dependency_links.txt
+facebook_wda_plus.egg-info/top_level.txt
+tests/test_utils.py
+wda/__init__.py
+wda/_proto.py
+wda/exceptions.py
+wda/utils.py
+wda/xcui_element_types.py
+wda/usbmux/__init__.py
+wda/usbmux/exceptions.py
+wda/usbmux/pyusbmux.py
