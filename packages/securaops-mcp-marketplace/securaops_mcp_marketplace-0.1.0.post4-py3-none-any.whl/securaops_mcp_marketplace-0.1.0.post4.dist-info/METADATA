@@ -1,0 +1,148 @@
+Metadata-Version: 2.4
+Name: securaops-mcp-marketplace
+Version: 0.1.0.post4
+Summary: A marketplace for MCP (Model Context Protocol) connectors
+Home-page: https://github.com/securacoder/mcp-marketplace/sdks
+Author: Nephthali Djabon Tchounda
+Author-email: Nephthali Djabon Tchounda <securaops5@gmail.com>
+License: SecuraOps MCP Marketplace SDK
+        Copyright (c) 2024, SecuraOps Inc. All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice,
+           this list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice,
+           this list of conditions and the following disclaimer in the documentation
+           and/or other materials provided with the distribution.
+        
+        3. Neither the name of the copyright holder nor the names of its
+           contributors may be used to endorse or promote products derived from
+           this software without specific prior written permission.
+        
+        4. Commercial use of this software requires a valid API key obtained through
+           official registration at https://mcp.securaops.tech.
+        
+        5. This software may not be used to create competing products or services
+           without express written permission from SecuraOps Inc.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+        AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+        ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+        LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+        CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+        SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+        INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+        CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+        ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+        POSSIBILITY OF SUCH DAMAGE.
+        
+        PROPRIETARY RIGHTS NOTICE:
+        This software includes proprietary components and methods that are the
+        exclusive property of SecuraOps Inc. Unauthorized use, reproduction,
+        or distribution of these proprietary elements is strictly prohibited.
+        
+        For licensing inquiries, contact: licensing@securaops.tech
+        Documentation: https://mcp.securaops.tech/docs
+        Platform: https://mcp.securaops.tech
+Project-URL: Homepage, https://github.com/securacoder/mcp-marketplace/sdks
+Project-URL: Documentation, https://github.com/securacoder/mcp-marketplace/sdks#readme
+Project-URL: Repository, https://github.com/securacoder/mcp-marketplace
+Project-URL: Issues, https://github.com/securacoder/mcp-marketplace/issues
+Keywords: mcp,slack,connector,llm,api
+Classifier: License :: OSI Approved :: BSD License
+Classifier: License :: Other/Proprietary License
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+License-File: NOTICE
+Requires-Dist: requests>=2.28.0
+Requires-Dist: pydantic>=1.10.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# SecuraOps MCP Marketplace
+
+A Python SDK for MCP (Model Context Protocol) connectors.
+
+## Installation
+
+```bash
+pip install securaops-mcp-marketplace
+```
+## Minimum requirements
+1. **python** => 3.8
+2. An **API_KEY** generated on [SecuraOps MCP Marketplace](https://mcp.securaops.tech) platform available on your profile management.
+
+## Documentation
+Full documentation available on https://mcp.securaops.tech
+
+## Slack Integration
+
+### Tools available
+1. slack_list_channels: List channels in the workspace
+2. slack_post_message: Post a message to a Slack channel
+3. slack_add_reaction: Add a reaction to a message
+4. slack_test_connection: Test if the Slack connection is working
+
+### Example code
+```python
+import asyncio
+import os
+from dotenv import load_dotenv
+from securaops_mcp_marketplace import SlackConnector
+
+load_dotenv()
+
+API_KEY = os.environ.get("API_KEY","your securaps mcp api key")
+BOT_TOKEN = os.environ.get("BOT_TOKEN","xoxb-your-slack-bot-token")   
+TEAM_ID = os.environ.get("TEAM_ID","T1234567890")
+CHANNEL_ID= os.environ.get("CHANNEL_ID","C1234567890")  # Replace with your test channel ID
+
+async def main():
+    async with SlackConnector(
+        api_key=API_KEY,
+        bot_token=BOT_TOKEN,
+        team_id=TEAM_ID
+    ) as connector:
+
+        print("BOT TOKEN:", BOT_TOKEN)
+
+        # Initialize the connector
+        init_result = await connector.handle_initialize()
+        print(f"Initialization: {init_result['success']}")
+            
+        # List available tools
+        tools_result = await connector.handle_tools_list()
+        print(f"Available tools: {[tool['name'] for tool in tools_result['data']['tools']]}")
+            
+        # Send a message
+        message_result = await connector.handle_tools_call(
+            "slack_post_message",
+            {"channel_id": CHANNEL_ID, "text": "Hello from MCP Slack Connector test script!"}
+        )
+        print(f"Message result: {message_result}")
+        print(f"Message sent: {message_result['success']}")
+
+# Run the async function
+asyncio.run(main())
+```
