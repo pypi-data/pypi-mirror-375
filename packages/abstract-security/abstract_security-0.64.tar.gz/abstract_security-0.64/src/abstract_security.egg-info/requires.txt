@@ -1,0 +1,7 @@
+abstract_utilities
+python-dotenv
+
+[dev]
+pytest
+flake8
+mypy
