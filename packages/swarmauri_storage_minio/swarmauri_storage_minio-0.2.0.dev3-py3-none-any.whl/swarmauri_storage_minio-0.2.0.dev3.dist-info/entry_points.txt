@@ -1,0 +1,6 @@
+[peagen.plugins.storage_adapters]
+minio=swarmauri_storage_minio.minio_storage_adapter:MinioStorageAdapter
+
+[swarmauri.storage_adapters]
+MinioStorageAdapter=swarmauri_storage_minio.minio_storage_adapter:MinioStorageAdapter
+
