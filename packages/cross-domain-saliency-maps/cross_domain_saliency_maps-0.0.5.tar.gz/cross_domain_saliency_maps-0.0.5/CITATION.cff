@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite as below."
+preferred-citation:
+  type: article
+  title: "Time series saliency maps: explaining models across multiple domains"
+  authors:
+    - family-names: Kechris
+      given-names: Christodoulos
+    - family-names: Dan
+      given-names: Jonathan
+    - family-names: Atienza
+      given-names: David
+  journal: "arXiv"
+  year: 2025
+  doi: "10.48550/arXiv.2505.13100"
+  url: "https://arxiv.org/abs/2505.13100"
+  date-published: "2025-05-19"
