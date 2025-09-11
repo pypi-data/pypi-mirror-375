@@ -1,0 +1,11 @@
+# Created by 'ftbl2mtf e_coli_growth -o mtf/'
+# Date: 2023-06-30 10:33:36 CEST +0200
+# influx_si version: 6.1.0.12
+# If edited by hand, remove these comments
+Id	Comment	Name	Value
+		MATLAB_FOR_FLUX_EQ_CONSTR_MATR	1
+		include_growth_flux	1
+		mu	0.8
+		optctrl_maxit	50
+		commandArgs	--TIMEIT
+		posttreat_R	plot_smeas.R

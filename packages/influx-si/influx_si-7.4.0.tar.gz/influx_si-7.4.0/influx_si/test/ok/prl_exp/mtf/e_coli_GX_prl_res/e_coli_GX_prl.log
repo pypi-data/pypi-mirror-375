@@ -1,0 +1,82 @@
+"/home/sokol/sysbio/dev/ftbl2sys/influx_si/influx_i.py" "--pref" "e_coli_i" "--pref" "e_coli_iv" "--pref" "ex_i_2box_var" "--pref" "../prl_exp/mtf/e_coli_GX_prl"
+code gen: 2025-09-10 17:37:21
+calcul  : 2025-09-10 17:37:22
+load    : 2025-09-10 17:37:22.97 cpu=0.68
+rinit   : 2025-09-10 17:37:22.99 cpu=0.686
+r_flux  : 2025-09-10 17:37:22.99 cpu=0.687
+Afl qr(): 2025-09-10 17:37:23.01 cpu=0.698
+dfl_dffg: 2025-09-10 17:37:23.03 cpu=0.708
+spAbr   : 2025-09-10 17:37:23.03 cpu=0.709
+weight  1: 2025-09-10 17:37:23.03 cpu=0.71
+weight  2: 2025-09-10 17:37:23.03 cpu=0.71
+weight  3: 2025-09-10 17:37:23.05 cpu=0.723
+weight  4: 2025-09-10 17:37:23.05 cpu=0.725
+weight  5: 2025-09-10 17:37:23.05 cpu=0.732
+weight  6: 2025-09-10 17:37:23.06 cpu=0.734
+weight  7: 2025-09-10 17:37:23.06 cpu=0.736
+weight  8: 2025-09-10 17:37:23.06 cpu=0.737
+weight  9: 2025-09-10 17:37:23.07 cpu=0.748
+measure : 2025-09-10 17:37:23.13 cpu=0.78
+ineq    : 2025-09-10 17:37:23.18 cpu=0.798
+Following 38 inequalities are redundant and removed:
+	d.n.v10>=-1000
+	d.n.v22>=-1000
+	f.n.v23>=-1000
+	d.n.v24>=-1000
+	d.n.v16<=1000
+	d.n.v17>=-1000
+	d.n.v17>=-1000
+	d.n.v15>=-1000
+	d.n.v16>=-1000
+	d.n.v19<=1000
+	d.n.v4<=1000
+	d.n.v5<=1000
+	d.n.v5<=1000
+	d.n.v7<=1000
+	d.n.v13>=-1000
+	d.n.v16>=-1000
+	d.n.v19>=-1000
+	d.n.v4>=-1000
+	d.n.v5>=-1000
+	d.n.v5>=-1000
+	d.n.v7>=-1000
+	d.n.v11<=1000
+	d.n.v15<=1000
+	d.n.v15<=1000
+	d.n.v16<=1000
+	d.n.v17<=1000
+	d.n.v17<=1000
+	d.n.v18<=1000
+	d.n.v3<=1000
+	d.n.v3<=1000
+	d.n.v4<=1000
+	d.n.v6<=1000
+	d.n.v15>=-1000
+	d.n.v18>=-1000
+	d.n.v3>=-1000
+	d.n.v3>=-1000
+	d.n.v4>=-1000
+	d.n.v6>=-1000
+preopt  : 2025-09-10 17:37:23.36 cpu=0.87
+labargs : 2025-09-10 17:37:23.36 cpu=0.871
+run    1: 2025-09-10 17:37:23.36 cpu=0.871
+
+Starting point
+check ja: 2025-09-10 17:37:23.69 cpu=1.188
+optim   : 2025-09-10 17:37:25.33 cpu=2.779
+it=0	res=46.694
+it=1	res=46.48103	normstep=2.927638	btk=0.25
+it=2	res=46.344	normstep=2.248907	btk=0.25
+it=3	res=46.25468	normstep=1.772153	btk=0.25
+it=4	res=46.19203	normstep=1.431594	btk=0.25
+it=5	res=46.14514	normstep=1.158672	btk=0.25
+it=6	res=46.1077	normstep=0.9127221	btk=0.25
+it=7	res=46.07336	normstep=0.7505174	btk=0.25
+it=8	res=46.03924	normstep=0.6463508	btk=0.25
+it=9	res=46.00498	normstep=0.5895323	btk=0.25
+it=10	res=45.9741	normstep=0.5662715	btk=0.25
+it=20	res=45.88456	normstep=0.005092575	btk=1
+it=27	res=45.88455	normstep=7.951337e-06	btk=1
+postopt : 2025-09-10 17:37:47.71 cpu=30.028
+linstats: 2025-09-10 17:37:47.95 cpu=30.395
+rend    : 2025-09-10 17:37:47.97 cpu=30.442

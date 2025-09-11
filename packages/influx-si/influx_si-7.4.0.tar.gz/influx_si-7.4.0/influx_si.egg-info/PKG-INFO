@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: influx_si
+Version: 7.4.0
+Summary: Metabolic flux and concentration estimation based on stable isotope labeling
+Home-page: https://github.com/sgsokol/influx/
+Author: Serguei Sokol
+Author-email: sokol@insa-toulouse.fr
+License: GNU General Public License v2 or later (GPLv2+)
+Project-URL: Documentation, https://influx-si.readthedocs.io/
+Project-URL: Source, https://github.com/sgsokol/influx
+Project-URL: Tracker, https://github.com/sgsokol/influx/issues
+Keywords: metabolic flux analysis,least squares,isotope labeling,systems biology
+Classifier: Environment :: Console
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Requires-Python: >3.5
+Requires-Dist: scipy
+Requires-Dist: python-libsbml
+Requires-Dist: pandas
+Requires-Dist: kvh
+Requires-Dist: packaging
+Requires-Dist: asteval
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+``influx_s`` and ``influx_i`` are programs designed for flux and metabolite concentration estimation based on labeling data using stable isotopes (essentially ¹³C but combination of multiple isotopes like ²H, ¹³C, ¹⁵N, ... is also possible). ``influx_s`` works with stationary data while the ``influx_i`` is able to simulate instationary labeling (hence the ``_i`` in the name). The both work in metabolically stationary context. The whole project is referred as ``influx_si``. Note also that the term ``influx_si`` is used in contexts where ``influx_s`` and ``influx_i`` are interchangeable.
+
+For installation instructions and more details, you can check the `doc online <https://influx-si.readthedocs.io/>`_.

@@ -1,0 +1,134 @@
+"/home/sokol/sysbio/dev/ftbl2sys/influx_si/influx_s.py" "--pref" "e_coli" "--pref" "e_coli_growth" "--pref" "../prl_exp/mtf/e_coli_glc1-6n"
+code gen: 2025-09-10 17:36:53
+calcul  : 2025-09-10 17:36:54
+load    : 2025-09-10 17:36:55.09 cpu=0.661
+rinit   : 2025-09-10 17:36:55.09 cpu=0.663
+r_flux  : 2025-09-10 17:36:55.09 cpu=0.663
+Afl qr(): 2025-09-10 17:36:55.11 cpu=0.685
+dfl_dffg: 2025-09-10 17:36:55.12 cpu=0.689
+spAbr   : 2025-09-10 17:36:55.12 cpu=0.69
+weight  1: 2025-09-10 17:36:55.12 cpu=0.69
+weight  2: 2025-09-10 17:36:55.12 cpu=0.691
+weight  3: 2025-09-10 17:36:55.12 cpu=0.692
+weight  4: 2025-09-10 17:36:55.12 cpu=0.694
+weight  5: 2025-09-10 17:36:55.12 cpu=0.695
+weight  6: 2025-09-10 17:36:55.13 cpu=0.695
+weight  7: 2025-09-10 17:36:55.13 cpu=0.696
+measure : 2025-09-10 17:36:55.18 cpu=0.73
+ineq    : 2025-09-10 17:36:55.19 cpu=0.741
+Following 90 inequalities are redundant and removed:
+	n:0.0<=idh
+	d.n.citsynth>=-1000
+	d.n.maldh>=-1000
+	d.n.citsynth>=-1000
+	d.n.maldh>=-1000
+	f.n.pgi<=1000
+	d.n.out_co2>=-1000
+	f.n.out_Ac>=-1000
+	d.n.Glucupt_U<=1000
+	f.n.Glucupt_1>=-1000
+	f.n.Glucupt_1<=1000
+	d.n.Glucupt_U>=-1000
+	d.n.Glucupt_U>=-1000
+	f.n.Glucupt_1>=-1000
+	d.n.xul>=-1000
+	d.n.HR3<=1000
+	d.n.HR4<=1000
+	d.n.HR5<=1000
+	d.n.rib>=-1000
+	d.n.HR4<=1000
+	d.n.HR5<=1000
+	d.n.rib>=-1000
+	d.n.HR5<=1000
+	d.n.rib>=-1000
+	d.n.rib>=-1000
+	d.n.maldh<=1000
+	d.n.pfk<=1000
+	d.n.idh<=1000
+	d.n.maldh<=1000
+	d.n.pfk<=1000
+	d.n.pyk<=1000
+	d.n.fum_b<=1000
+	d.n.maldh<=1000
+	d.n.rib>=-1000
+	d.n.pyk<=1000
+	d.n.HR2>=-1000
+	d.n.HR3>=-1000
+	d.n.HR4>=-1000
+	d.n.HR5>=-1000
+	d.n.pdh>=-1000
+	d.n.HR1>=-1000
+	f.n.pgi>=-1000
+	d.n.pdh>=-1000
+	d.n.HR4>=-1000
+	d.n.HR5>=-1000
+	d.n.pdh>=-1000
+	d.n.HR5>=-1000
+	d.n.pdh>=-1000
+	d.n.pdh>=-1000
+	d.n.eno>=-1000
+	d.n.pfk>=-1000
+	d.n.pgk>=-1000
+	d.n.pyk>=-1000
+	d.n.pgk>=-1000
+	d.n.fum_b>=-1000
+	d.n.pgk>=-1000
+	d.n.pyk>=-1000
+	d.n.HR1<=1000
+	d.n.HR2<=1000
+	d.n.HR3<=1000
+	d.n.HR3<=1000
+	d.n.HR3<=1000
+	d.n.HR4<=1000
+	d.n.HR4<=1000
+	d.n.HR5<=1000
+	d.n.akgdh<=1000
+	d.n.akgdh<=1000
+	d.n.akgdh<=1000
+	d.n.ald<=1000
+	d.n.ald<=1000
+	d.n.ald<=1000
+	d.n.ald<=1000
+	d.n.citsynth<=1000
+	d.n.eno<=1000
+	d.n.fum_a<=1000
+	d.n.pfk<=1000
+	d.n.pfk<=1000
+	d.n.xul<=1000
+	d.n.HR2>=-1000
+	d.n.HR2>=-1000
+	d.n.HR2>=-1000
+	d.n.HR3>=-1000
+	d.n.HR3>=-1000
+	d.n.HR4>=-1000
+	d.n.ald>=-1000
+	d.n.citsynth>=-1000
+	d.n.eno>=-1000
+	d.n.eno>=-1000
+	d.n.fum_a>=-1000
+	d.n.pgk>=-1000
+preopt  : 2025-09-10 17:36:55.20 cpu=0.753
+labargs : 2025-09-10 17:36:55.20 cpu=0.754
+run    1: 2025-09-10 17:36:55.21 cpu=0.755
+
+Starting point
+res esti: 2025-09-10 17:36:55.21 cpu=0.756
+The following 1 ineqalitie(s) are active at starting point:
+f.x.xul>=0
+check ja: 2025-09-10 17:36:55.27 cpu=0.77
+optim   : 2025-09-10 17:36:55.32 cpu=0.808
+it=0	res=45.2102
+it=1	res=12.83995	normstep=1.515861	btk=1
+it=2	res=12.25994	normstep=1.259661	btk=1
+it=3	res=8.098585	normstep=0.5463658	btk=1
+it=4	res=7.960851	normstep=0.0589933	btk=1
+it=5	res=7.959322	normstep=0.03050743	btk=1
+it=6	res=7.959081	normstep=0.004902886	btk=1
+it=7	res=7.959029	normstep=0.003060732	btk=1
+it=8	res=7.959017	normstep=0.001367668	btk=1
+it=9	res=7.959014	normstep=0.0006590508	btk=1
+it=10	res=7.959014	normstep=0.0003104052	btk=1
+it=15	res=7.959014	normstep=7.292324e-06	btk=1
+postopt : 2025-09-10 17:36:55.99 cpu=2.322
+linstats: 2025-09-10 17:36:56.05 cpu=2.489
+rend    : 2025-09-10 17:36:56.07 cpu=2.537
