@@ -1,0 +1,2 @@
+[console_scripts]
+vqnetrun = pyvqnet.distributed.runner.launch:run_commandline
