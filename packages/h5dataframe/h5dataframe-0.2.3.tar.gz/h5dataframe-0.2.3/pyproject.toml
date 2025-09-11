@@ -1,0 +1,38 @@
+[project]
+name = "h5dataframe"
+version = "0.2.3"
+description = "Drop-in replacement for pandas DataFrames that allows to store data on an hdf5 file and manipulate data directly from that hdf5 file without loading it in memory."
+authors = [
+    { name = "Matteo Bouvier", email="matteo.bouvier@hotmail.fr"}
+]
+license = "CECILL-B"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2",
+    "ch5mpy>=0.5.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.1.1"
+]
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = ""
+
+[tool.ruff]
+line-length = 120
+extend-select = ["I"]
+
+[tool.pyright]
+reportAny = false
+reportExplicitAny = false
+reportUnknownMemberType = false
+reportUnknownArgumentType = false
+reportUnusedCallResult = false
+reportMissingTypeStubs = false
