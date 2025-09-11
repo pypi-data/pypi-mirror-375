@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: microsoft-teams-mcpplugin
+Version: 0.0.1a5
+Summary: library for handling mcp with teams ai library
+Author-email: Microsoft <TeamsAISDKFeedback@microsoft.com>
+License-Expression: MIT
+Keywords: agents,ai,bot,microsoft,teams
+Requires-Python: >=3.12
+Requires-Dist: fastmcp>=0.5.0
+Requires-Dist: mcp>=1.13.1
+Requires-Dist: microsoft-teams-ai
+Requires-Dist: microsoft-teams-apps
+Requires-Dist: microsoft-teams-common
