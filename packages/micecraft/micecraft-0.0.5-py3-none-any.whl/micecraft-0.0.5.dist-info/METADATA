@@ -1,0 +1,47 @@
+Metadata-Version: 2.1
+Name: micecraft
+Version: 0.0.5
+Summary: MiceCraft
+Author-email: Fabrice de Chaumont <fabrice.de.chaumont@gmail.com>
+Project-URL: Homepage, https://github.com/micecraft
+Project-URL: Issues, https://github.com/micecraft/issues
+Project-URL: documentation, https://micecraft.org
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pyserial
+Requires-Dist: dynamixel-sdk
+Requires-Dist: pyqt5
+Requires-Dist: matplotlib
+
+# MiceCraft
+
+MiceCraft is designed to create, monitor and control smart habitats for animals.
+
+> [!TIP]
+> Public release coming fall 2025.
+
+> [!CAUTION]
+> This MiceCraft repository is the public version and will get progressive updates from the private closed-beta repository
+
+## Install package
+
+```
+pip install micecraft
+```
+
+## Website
+
+[https://micecraft.org](https://micecraft.org)
+
+## Main versions
+
+Version  | Change | Date
+------------- | ------------- | -------------
+0.0.?  | Setting up :tada: | September 2025
+
+
+
