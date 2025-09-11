@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+LlamaGuardMiddleware=swarmauri_middleware_llamaguard:LlamaGuardMiddleware
+
