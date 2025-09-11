@@ -1,0 +1,35 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "aws-sherlock"
+version = "0.1.0"
+description = "A powerful CLI tool for analyzing AWS CloudWatch Logs with ease"
+authors = [
+    {name = "Eric Villa",email = "eric.villa91@gmail.com"}
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["aws", "cloudwatch", "logs", "cli", "analysis"]
+dependencies = [
+    "boto3 (>=1.40.27,<2.0.0)",
+    "click (>=8.2.1,<9.0.0)"
+]
+requires-python = ">=3.13"
+
+[project.scripts]
+sherlock = "aws_sherlock.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
