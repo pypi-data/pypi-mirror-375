@@ -1,0 +1,9 @@
+click==8.2.*
+pyjwt==2.10.*
+cryptography==45.0.*
+python-dotenv==1.1.*
+
+[dev]
+bumpver
+pip-tools
+pytest
