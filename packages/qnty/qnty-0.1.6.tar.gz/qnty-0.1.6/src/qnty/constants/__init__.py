@@ -1,0 +1,30 @@
+"""
+Mathematical and numerical constants used throughout the qnty library.
+
+This module centralizes magic numbers and tolerances to improve maintainability
+and consistency across the codebase.
+"""
+
+from .numerical import (
+    CONDITION_EVALUATION_THRESHOLD,
+    DIMENSIONAL_PRECISION_TOLERANCE,
+    DIVISION_BY_ZERO_THRESHOLD,
+    FLOAT_EQUALITY_TOLERANCE,
+    PREFIX_LOOKUP_MIN_TOLERANCE,
+    PREFIX_LOOKUP_TOLERANCE,
+)
+from .solvers import SOLVER_DEFAULT_MAX_ITERATIONS, SOLVER_DEFAULT_TOLERANCE
+from .tests import TEST_DIMENSION_TOLERANCE, TEST_PRECISION_TOLERANCE
+
+__all__ = [
+    "CONDITION_EVALUATION_THRESHOLD",
+    "DIMENSIONAL_PRECISION_TOLERANCE",
+    "DIVISION_BY_ZERO_THRESHOLD",
+    "FLOAT_EQUALITY_TOLERANCE",
+    "PREFIX_LOOKUP_MIN_TOLERANCE",
+    "PREFIX_LOOKUP_TOLERANCE",
+    "SOLVER_DEFAULT_MAX_ITERATIONS",
+    "SOLVER_DEFAULT_TOLERANCE",
+    "TEST_DIMENSION_TOLERANCE",
+    "TEST_PRECISION_TOLERANCE",
+]
