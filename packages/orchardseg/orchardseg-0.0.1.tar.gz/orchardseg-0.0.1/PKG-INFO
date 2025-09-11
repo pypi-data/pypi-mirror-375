@@ -1,0 +1,273 @@
+Metadata-Version: 2.4
+Name: orchardseg
+Version: 0.0.1
+Summary: Individual tree segmentation
+Author: Herearii Metuarea
+Author-email: herearii.metuarea@univ-angers.fr
+License: 
+        Copyright (c) 2025, Herearii Metuarea
+        All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        * Redistributions of source code must retain the above copyright notice, this
+          list of conditions and the following disclaimer.
+        
+        * Redistributions in binary form must reproduce the above copyright notice,
+          this list of conditions and the following disclaimer in the documentation
+          and/or other materials provided with the distribution.
+        
+        * Neither the name of copyright holder nor the names of its
+          contributors may be used to endorse or promote products derived from
+          this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+        AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+        DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+        OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        
+Project-URL: Bug Tracker, https://github.com/hereariim/segtree/issues
+Project-URL: Documentation, https://github.com/hereariim/segtree#README.md
+Project-URL: Source Code, https://github.com/hereariim/segtree
+Project-URL: User Support, https://github.com/hereariim/segtree/issues
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Framework :: napari
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Image Processing
+Requires-Python: >=3.10.16
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=2.3.1
+Requires-Dist: torchvision>=0.18.1
+Requires-Dist: numpy
+Requires-Dist: magicgui
+Requires-Dist: qtpy
+Requires-Dist: aiofiles==23.2.1
+Requires-Dist: altair==5.5.0
+Requires-Dist: annotated-types==0.7.0
+Requires-Dist: antlr4-python3-runtime==4.9.3
+Requires-Dist: anyio==4.9.0
+Requires-Dist: attrs==25.3.0
+Requires-Dist: certifi==2025.1.31
+Requires-Dist: charset-normalizer==3.4.1
+Requires-Dist: click==8.1.8
+Requires-Dist: coloredlogs==15.0.1
+Requires-Dist: contourpy==1.3.1
+Requires-Dist: cycler==0.12.1
+Requires-Dist: fastapi==0.115.12
+Requires-Dist: ffmpy==0.5.0
+Requires-Dist: filelock==3.18.0
+Requires-Dist: flatbuffers==25.2.10
+Requires-Dist: fonttools==4.56.0
+Requires-Dist: fsspec==2025.3.2
+Requires-Dist: gradio==4.29.0
+Requires-Dist: gradio-client==0.16.1
+Requires-Dist: gradio-imageslider==0.0.20
+Requires-Dist: h11==0.14.0
+Requires-Dist: httpcore==1.0.7
+Requires-Dist: httpx==0.28.1
+Requires-Dist: huggingface-hub==0.30.1
+Requires-Dist: humanfriendly==10.0
+Requires-Dist: hydra-core==1.3.2
+Requires-Dist: idna==3.10
+Requires-Dist: imageio==2.37.0
+Requires-Dist: importlib-resources==6.5.2
+Requires-Dist: iopath==0.1.10
+Requires-Dist: jinja2==3.1.6
+Requires-Dist: joblib==1.4.2
+Requires-Dist: jsonschema==4.23.0
+Requires-Dist: jsonschema-specifications==2024.10.1
+Requires-Dist: kiwisolver==1.4.8
+Requires-Dist: lazy-loader==0.4
+Requires-Dist: markdown-it-py==3.0.0
+Requires-Dist: markupsafe==2.1.5
+Requires-Dist: matplotlib==3.10.1
+Requires-Dist: mdurl==0.1.2
+Requires-Dist: mpmath==1.3.0
+Requires-Dist: narwhals==1.33.0
+Requires-Dist: networkx==3.4.2
+Requires-Dist: numpy==1.26.4
+Requires-Dist: omegaconf==2.3.0
+Requires-Dist: onnx==1.17.0
+Requires-Dist: onnxruntime==1.21.0
+Requires-Dist: opencv-python==4.11.0.86
+Requires-Dist: orjson==3.10.16
+Requires-Dist: pandas==2.2.3
+Requires-Dist: pillow==10.4.0
+Requires-Dist: portalocker==3.1.1
+Requires-Dist: protobuf==6.30.2
+Requires-Dist: py-cpuinfo==9.0.0
+Requires-Dist: pycocotools==2.0.8
+Requires-Dist: pydantic==2.11.1
+Requires-Dist: pydantic-core==2.33.0
+Requires-Dist: pydub==0.25.1
+Requires-Dist: pyparsing==3.2.3
+Requires-Dist: pyreadline3==3.5.4
+Requires-Dist: python-multipart==0.0.20
+Requires-Dist: pytz==2025.2
+Requires-Dist: pyyaml==6.0.2
+Requires-Dist: referencing==0.36.2
+Requires-Dist: regex==2024.11.6
+Requires-Dist: requests==2.32.3
+Requires-Dist: rich==14.0.0
+Requires-Dist: rpds-py==0.24.0
+Requires-Dist: ruff==0.11.2
+Requires-Dist: safetensors==0.5.3
+Requires-Dist: scikit-image==0.25.2
+Requires-Dist: scikit-learn==1.6.1
+Requires-Dist: scipy==1.15.2
+Requires-Dist: seaborn==0.13.2
+Requires-Dist: semantic-version==2.10.0
+Requires-Dist: shellingham==1.5.4
+Requires-Dist: sniffio==1.3.1
+Requires-Dist: starlette==0.46.1
+Requires-Dist: sympy==1.13.1
+Requires-Dist: threadpoolctl==3.6.0
+Requires-Dist: tifffile==2025.3.30
+Requires-Dist: timm==1.0.15
+Requires-Dist: tokenizers==0.21.1
+Requires-Dist: tomlkit==0.12.0
+Requires-Dist: tqdm==4.67.1
+Requires-Dist: transformers==4.50.3
+Requires-Dist: typer==0.15.2
+Requires-Dist: typing-inspection==0.4.0
+Requires-Dist: tzdata==2025.2
+Requires-Dist: ultralytics==8.3.99
+Requires-Dist: ultralytics-thop==2.0.14
+Requires-Dist: urllib3==2.3.0
+Requires-Dist: uvicorn==0.34.0
+Requires-Dist: websockets==11.0.3
+Provides-Extra: testing
+Requires-Dist: tox; extra == "testing"
+Requires-Dist: pytest; extra == "testing"
+Requires-Dist: pytest-cov; extra == "testing"
+Requires-Dist: pytest-qt; extra == "testing"
+Requires-Dist: napari; extra == "testing"
+Requires-Dist: pyqt5; extra == "testing"
+Dynamic: license-file
+
+# 🌳 Segtree
+
+[![License BSD-3](https://img.shields.io/pypi/l/segtree.svg?color=green)](https://github.com/hereariim/segtree/raw/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/segtree.svg?color=green)](https://pypi.org/project/segtree)
+[![Python Version](https://img.shields.io/pypi/pyversions/segtree.svg?color=green)](https://python.org)
+[![tests](https://github.com/hereariim/segtree/workflows/tests/badge.svg)](https://github.com/hereariim/segtree/actions)
+[![codecov](https://codecov.io/gh/hereariim/segtree/branch/main/graph/badge.svg)](https://codecov.io/gh/hereariim/segtree)
+[![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/segtree)](https://napari-hub.org/plugins/segtree)
+[![npe2](https://img.shields.io/badge/plugin-npe2-blue?link=https://napari.org/stable/plugins/index.html)](https://napari.org/stable/plugins/index.html)
+[![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-purple.json)](https://github.com/copier-org/copier)
+
+Segtree is a plugin designed for the segmentation of individual trees from imagery. It isolates tree in ovelapping tree context.
+
+**Input:** RGB images or preprocessed point clouds.
+
+**Output:** Binary masks of segmentated tree.
+
+![alt text](<Screenshot from 2025-09-10 17-01-24.png>)
+
+## How it works
+
+The user provides as input a **color image** and, optionally, a **trunk detector mask**.
+With a single click, the plugin automatically places prompt points on the detected trunk labels. These prompts are then used by [SAM2 HQ](https://github.com/SysCV/sam-hq/blob/main/sam-hq2/README.md#citing-hq-sam-2) (Segment Anything Model v2, High Quality mode) to segment the tree foliage associated with each trunk.
+
+![alt text](<Screenshot from 2025-09-10 15-30-09.png>)
+
+<!--
+Don't miss the full getting started guide to set up your new package:
+https://github.com/napari/napari-plugin-template#getting-started
+
+and review the napari docs for plugin developers:
+https://napari.org/stable/plugins/index.html
+-->
+
+## Article : Individual Segmentation of Intertwined Apple Trees in a Row via Prompt Engineering
+
+METUAREA, Herearii, LAURENS, François, GUERRA, Walter, et al. [Individual Segmentation of Intertwined Apple Trees in a Row via Prompt Engineering](https://www.mdpi.com/1424-8220/25/15/4721). Sensors, 2025, vol. 25, no 15, p. 4721.
+
+## Citing segtree
+
+If you find segtree useful in your research, please star ⭐ this repository and consider citing 📝:
+
+```
+@article{metuarea2025individual,
+  title={Individual Segmentation of Intertwined Apple Trees in a Row via Prompt Engineering},
+  author={Metuarea, Herearii and Laurens, Fran{\c{c}}ois and Guerra, Walter and Lozano, Lidia and Patocchi, Andrea and Van Hoye, Shauny and Dutagaci, Helin and Labrosse, Jeremy and Rasti, Pejman and Rousseau, David},
+  journal={Sensors},
+  volume={25},
+  number={15},
+  pages={4721},
+  year={2025},
+  publisher={MDPI}
+}
+```
+
+## Installation
+
+You can install `segtree` via [pip]:
+
+    pip install segtree
+
+
+
+To install latest development version :
+
+    pip install git+https://github.com/hereariim/segtree.git
+
+
+## Contact
+
+Imhorphen team, bioimaging research group
+
+42 rue George Morel, Angers, France
+
+- Pr David Rousseau, david.rousseau@univ-angers.fr
+- Herearii Metuarea, herearii.metuarea@univ-angers.fr
+
+
+## Contributing
+
+Contributions are very welcome. Tests can be run with [tox], please ensure
+the coverage at least stays the same before you submit a pull request.
+
+## License
+
+Distributed under the terms of the [BSD-3] license,
+"segtree" is free and open source software
+
+## Issues
+
+If you encounter any problems, please [file an issue] along with a detailed description.
+
+[napari]: https://github.com/napari/napari
+[copier]: https://copier.readthedocs.io/en/stable/
+[@napari]: https://github.com/napari
+[MIT]: http://opensource.org/licenses/MIT
+[BSD-3]: http://opensource.org/licenses/BSD-3-Clause
+[GNU GPL v3.0]: http://www.gnu.org/licenses/gpl-3.0.txt
+[GNU LGPL v3.0]: http://www.gnu.org/licenses/lgpl-3.0.txt
+[Apache Software License 2.0]: http://www.apache.org/licenses/LICENSE-2.0
+[Mozilla Public License 2.0]: https://www.mozilla.org/media/MPL/2.0/index.txt
+[napari-plugin-template]: https://github.com/napari/napari-plugin-template
+
+[file an issue]: https://github.com/hereariim/segtree/issues
+
+[napari]: https://github.com/napari/napari
+[tox]: https://tox.readthedocs.io/en/latest/
+[pip]: https://pypi.org/project/pip/
+[PyPI]: https://pypi.org/
