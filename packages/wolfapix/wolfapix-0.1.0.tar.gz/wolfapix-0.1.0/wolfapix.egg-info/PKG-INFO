@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: wolfapix
+Version: 0.1.0
+Summary: Python async port of wolf.js
+Author: Your Name
+Requires-Python: >=3.7
+License-File: LICENSE
+Requires-Dist: aiohttp
+Requires-Dist: websockets
+Requires-Dist: PyYAML
+Dynamic: author
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
