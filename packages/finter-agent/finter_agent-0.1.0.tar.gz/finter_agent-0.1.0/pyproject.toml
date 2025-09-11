@@ -1,0 +1,20 @@
+[project]
+name = "finter-agent"
+version = "0.1.0"
+description = "Quantitative research platform CLI with specialized agents for various research types"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.0.0",
+    "rich>=14.1.0",
+]
+
+[project.scripts]
+finter-agent = "src.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
