@@ -1,0 +1,61 @@
+Metadata-Version: 2.3
+Name: swarmauri_tokens_rotatingjwt
+Version: 0.3.0.dev2
+Summary: Rotating JWT token service for Swarmauri
+License: Apache-2.0
+Author: Swarmauri
+Author-email: opensource@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Security :: Cryptography
+Classifier: Intended Audience :: Developers
+Provides-Extra: ecdsa
+Provides-Extra: eddsa
+Provides-Extra: hmac
+Provides-Extra: ps
+Provides-Extra: rsa
+Requires-Dist: PyJWT (>=2.9.0)
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_signing_ecdsa ; extra == "ecdsa"
+Requires-Dist: swarmauri_signing_ed25519 ; extra == "eddsa"
+Requires-Dist: swarmauri_signing_hmac ; extra == "hmac"
+Requires-Dist: swarmauri_signing_rsa ; extra == "ps"
+Requires-Dist: swarmauri_signing_rsa ; extra == "rsa"
+Description-Content-Type: text/markdown
+
+# swarmauri_tokens_rotatingjwt
+
+Rotating JWT token service plugin for Swarmauri.
+
+This package provides a token issuer/verifier that automatically rotates its
+signing key.  It exposes a `RotatingJWTTokenService` implementing
+`ITokenService` and conforms to RFC 7515, 7517, 7518 and 7519.
+
+## Features
+
+- Supports RS256, PS256, ES256, EdDSA and HS256 algorithms.
+- Automatic key rotation based on time or token count.
+- JWKS publication retaining previous key versions.
+
+## Installation
+
+```bash
+uv add swarmauri_tokens_rotatingjwt
+```
+
+Optional extras are available for specific signing canons:
+
+```bash
+uv add swarmauri_tokens_rotatingjwt[rsa]
+uv add swarmauri_tokens_rotatingjwt[ecdsa]
+uv add swarmauri_tokens_rotatingjwt[eddsa]
+uv add swarmauri_tokens_rotatingjwt[hmac]
+```
+
