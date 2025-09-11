@@ -1,0 +1,39 @@
+Metadata-Version: 2.3
+Name: swarmauri_publisher_redis
+Version: 0.3.0.dev2
+Summary: A Redis publisher implementation for Swarmauri.
+License: Apache-2.0
+Author: Jacob Stewart
+Author-email: jacob@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Requires-Dist: redis (>=4.6.0)
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_standard
+Description-Content-Type: text/markdown
+
+# Swarmauri Redis Publisher
+
+This package provides a Redis Pub/Sub publisher implementation conforming to the Swarmauri `PublishBase` interface.
+
+## Installation
+
+```bash
+# Add installation instructions if applicable, e.g., pip install .
+```
+
+## Usage
+
+```python
+from swarmauri_publisher_redis import RedisPublisher
+
+# Example usage
+publisher = RedisPublisher(host="localhost", port=6379, db=0)
+publisher.publish("my_channel", {"message": "Hello Redis!"})
+```
