@@ -1,0 +1,16 @@
+plone.resourceeditor-4.0.2-py3.13-nspkg.pth,sha256=BLI1R3lEMKmzB6WWJhK4b_5KSuPKCxbAXDyPjqDJtdY,462
+plone/resourceeditor/__init__.py,sha256=CPUn9VmB8tDBoBM2Ue5PyzwAqgD5hVN0wnBnqzB0M-g,455
+plone/resourceeditor/browser.py,sha256=0s239Wmvr--oJndBOsytRvv7-e9VXJKAQS_2W-PCSg8,40960
+plone/resourceeditor/configure.zcml,sha256=ROolrQqT7vyazHB6kMConX768z1H3WPCIRVsskkL8Uk,1573
+plone/resourceeditor/editor.pt,sha256=r7UWvAnjyHm_5d0Tdbsax9QIeHuSBxjKcunr4M9Cr_Y,1234
+plone/resourceeditor/mime.types,sha256=r9RFjb3E6g79wOrbKGoOT5tnYLYuI-ALTE4_kz1sw4I,21
+plone/resourceeditor/preview.pt,sha256=AwQun3D_ZXmoc_40xFKSbO7ECa0teA4JOvc_FHUnxaw,953
+plone/resourceeditor/testing.py,sha256=0kjZY3ixg7qZzul8mx23H6wAG_m8gTYXkroZ9QS3stQ,838
+plone/resourceeditor/tests/__init__.py,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+plone/resourceeditor/tests/test_file_manager.py,sha256=CTAUXqlhLiDUepvpmcl_TyfH99PyB4u8B7lXfzPFIhU,12917
+plone/resourceeditor/tests/test_file_manager_action.py,sha256=kLImwiwtLu7o7REGQqEgbjJCk2DeA3rEokV3gVOhugw,11832
+plone_resourceeditor-4.0.2.dist-info/METADATA,sha256=7I7tS8Ilzyvi3HqXsfh1t1c-POkEIL38axH32fswyms,6195
+plone_resourceeditor-4.0.2.dist-info/WHEEL,sha256=SmOxYU7pzNKBqASvQJ7DjX3XGUF92lrGhMb3R6_iiqI,91
+plone_resourceeditor-4.0.2.dist-info/namespace_packages.txt,sha256=56bqrkG-vurYD0l15D71FPiDL7L3QqkfRWkYkdyS7WM,6
+plone_resourceeditor-4.0.2.dist-info/top_level.txt,sha256=56bqrkG-vurYD0l15D71FPiDL7L3QqkfRWkYkdyS7WM,6
+plone_resourceeditor-4.0.2.dist-info/RECORD,,
