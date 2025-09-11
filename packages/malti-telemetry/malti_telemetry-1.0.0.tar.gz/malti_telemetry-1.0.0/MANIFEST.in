@@ -1,0 +1,11 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CONTRIBUTING.md
+recursive-include tests *.py
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__/*
+global-exclude .git/*
+global-exclude .github/*
+global-exclude .DS_Store
