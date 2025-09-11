@@ -1,0 +1,112 @@
+Metadata-Version: 2.4
+Name: legend_dashboard
+Version: 1.0.0
+Summary: Python package for processing LEGEND-200 data
+Author-email: Florian Henkes <florian.henkes@tum.de>, George Marshall <george.marshall.20@ucl.ac.uk>
+Maintainer: The LEGEND Collaboration
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: blosc2
+Requires-Dist: bokeh>=3.1.1
+Requires-Dist: colorcet>=3.0.1
+Requires-Dist: colorlog
+Requires-Dist: contourpy>=1.0.7
+Requires-Dist: dbetto>=1.2.3
+Requires-Dist: gitdb
+Requires-Dist: gitpython
+Requires-Dist: greenlet>=2.0.2
+Requires-Dist: h5py
+Requires-Dist: holoviews>=1.16.0
+Requires-Dist: h5py
+Requires-Dist: linkify-it-py>=2.0.2
+Requires-Dist: markdown>=3.4.3
+Requires-Dist: markdown-it-py>=2.2.0
+Requires-Dist: mdit-py-plugins>=0.3.5
+Requires-Dist: mdurl>=0.1.2
+Requires-Dist: msgpack>=1.0.5
+Requires-Dist: numexpr
+Requires-Dist: numpy>=1.23.5
+Requires-Dist: pandas>=2.0.1
+Requires-Dist: panel>=1.0.2
+Requires-Dist: param>=1.13.0
+Requires-Dist: psycopg2-binary
+Requires-Dist: py-cpuinfo>=9.0.0
+Requires-Dist: pyct>=0.5.0
+Requires-Dist: pylegendmeta>=1.2.5
+Requires-Dist: pyqt5-sip>=12.11.0
+Requires-Dist: python-crontab
+Requires-Dist: pyviz-comms>=2.2.1
+Requires-Dist: pywavelets>=1.4.1
+Requires-Dist: plotly
+Requires-Dist: pyyaml
+Requires-Dist: scipy
+Requires-Dist: seaborn
+Requires-Dist: smmap>=5.0.0
+Requires-Dist: sqlalchemy>=2.0.14
+Requires-Dist: tables>=3.8.0
+Requires-Dist: tqdm
+Requires-Dist: tzdata==2023.3
+Requires-Dist: uc-micro-py>=1.0.2
+Requires-Dist: xmltodict>=0.13.0
+Requires-Dist: xyzservices==2023.2.0
+Requires-Dist: jupyter
+Provides-Extra: test
+Requires-Dist: pytest>=6; extra == "test"
+Requires-Dist: pytest-cov>=3; extra == "test"
+Provides-Extra: dev
+Requires-Dist: legend_dashboard[test]; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: jupyter; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=7.0; extra == "docs"
+Requires-Dist: myst_parser>=0.13; extra == "docs"
+Requires-Dist: sphinx_inline_tabs; extra == "docs"
+Requires-Dist: sphinx_copybutton; extra == "docs"
+Requires-Dist: sphinx_autodoc_typehints; extra == "docs"
+Requires-Dist: furo>=2023.08.17; extra == "docs"
+Dynamic: license-file
+
+## Running the dashboard
+
+It is recommended to use `uv` to run the dashboard as it makes the package management easier.
+Clone the repo and update the `dashboard-config.yaml` with the desired paths then simply run:
+
+`uv run dashboard dashboard-config.yaml -p 9009`
+
+to get the full dashboard. If running remotely you will just need to forward the relevant port.
+It is also possible to disable certain pages if not needed/wanted e.g.:
+
+` uv run dashboard dashboard-config.yaml -p 9009 -d spm muon llama phy`
+
+Alternatively can just run the individual components:
+
+`uv run dashboard-cal dashboard-config.yaml -p 9009`
+`uv run dashboard-phy dashboard-config.yaml -p 9009`
+`uv run dashboard-llama dashboard-config.yaml -p 9009`
+`uv run dashboard-muon dashboard-config.yaml -p 9009`
+`uv run dashboard-spms dashboard-config.yaml -p 9009`
+
+## Developing
+
+For developing it is recommending to install the package using the following commands:
+
+`uv venv`
+`source .venv/bin/activate`
+`uv pip install -e .[dev]`
+
+From there you can start a jupyter notebook.
+All the relevant classes have a `build_*_pane(s)` function to get the panel panes which can
+be displayed in a notebook. You should also pass the `notebook=True` option to make displaying
+work better.
