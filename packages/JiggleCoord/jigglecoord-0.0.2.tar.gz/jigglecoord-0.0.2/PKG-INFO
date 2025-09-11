@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: JiggleCoord
+Version: 0.0.2
+Summary: A Python package to introduce slight perturbations to coordinates.
+Project-URL: Homepage, https://github.com/ssopic/JiggleCoord
+Project-URL: Bug Tracker, https://github.com/ssopic/JiggleCoord/issues
+Author-email: Silvio Sopic <silvio.sopic@gmail.com>
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.8
+Requires-Dist: folium
+Requires-Dist: geopy
+Requires-Dist: pandas
+Provides-Extra: dev
+Requires-Dist: pytest; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# JiggleCoord

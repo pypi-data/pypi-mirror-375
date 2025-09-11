@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "JiggleCoord"
+version = "0.0.2"
+authors = [
+    { name="Silvio Sopic", email="silvio.sopic@gmail.com" },
+]
+description = "A Python package to introduce slight perturbations to coordinates."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+# The dependencies list:
+dependencies = [
+    "pandas",
+    "folium",
+    "geopy",
+]
+
+[project.urls]
+Homepage = "https://github.com/ssopic/JiggleCoord"
+"Bug Tracker" = "https://github.com/ssopic/JiggleCoord/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["JiggleCoord"]
