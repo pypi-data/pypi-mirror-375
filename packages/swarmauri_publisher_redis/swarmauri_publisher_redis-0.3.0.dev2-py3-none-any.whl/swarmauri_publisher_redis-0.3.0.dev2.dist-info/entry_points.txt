@@ -1,0 +1,3 @@
+[swarmauri.publishers]
+RedisPublisher=swarmauri_publisher_redis:RedisPublisher
+
