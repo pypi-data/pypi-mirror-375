@@ -1,0 +1,93 @@
+name: "example-plugin"
+display_name: "example-plugin插件"
+description: "example-plugin1插件"
+category: "utility"
+version: "1.0.0"
+author: "XCoding Team"
+icon: "🐍"
+plugin_type: "python"
+
+ui:
+  title: "Python示例插件配置"
+  description: "配置Python示例插件的参数，支持所有动态表单类型"
+  fields:
+    # 文本类型字段
+    - name: "text_field"
+      label: "文本字段"
+      type: "text"
+      required: true
+      default: "Hello from Python Plugin!"
+      placeholder: "请输入文本内容"
+      description: "这是一个文本输入字段"
+
+    # 数字类型字段
+    - name: "number_field"
+      label: "数字字段"
+      type: "number"
+      required: true
+      default: 5
+      description: "这是一个数字输入字段，支持范围验证"
+
+    # 布尔类型字段
+    - name: "boolean_field"
+      label: "布尔字段"
+      type: "boolean"
+      required: false
+      default: true
+      description: "这是一个布尔值选择字段"
+
+    # 选择类型字段
+    - name: "select_field"
+      label: "选择字段"
+      type: "select"
+      required: true
+      default: "option2"
+      options: ["option1", "option2", "option3"]
+      description: "这是一个下拉选择字段"
+
+    # 多行文本类型字段
+    - name: "textarea_field"
+      label: "多行文本字段"
+      type: "textarea"
+      required: false
+      default: "这是默认的多行文本内容\n第二行内容\n第三行内容"
+      placeholder: "请输入多行文本内容"
+      description: "这是一个多行文本输入字段"
+
+    # 数组类型字段
+    - name: "array_field"
+      label: "数组字段"
+      type: "array"
+      required: false
+      default: ["item1", "item2", "item3"]
+      description: "这是一个数组字段，支持添加/删除多个值"
+
+    # 对象类型字段
+    - name: "object_field"
+      label: "对象字段"
+      type: "object"
+      required: false
+      default:
+        key1: "value1"
+        key2: "value2"
+      description: "这是一个对象字段，支持键值对配置"
+
+    # JSON类型字段
+    - name: "json_field"
+      label: "JSON字段"
+      type: "json"
+      required: false
+      default: '{"name": "test", "value": 123, "enabled": true}'
+      description: "这是一个JSON配置字段，支持复杂的JSON结构"
+
+execution:
+  main_script: "main.py"
+  env_mapping:
+    text_field: "PLUGIN_TEXT_FIELD"
+    number_field: "PLUGIN_NUMBER_FIELD"
+    boolean_field: "PLUGIN_BOOLEAN_FIELD"
+    select_field: "PLUGIN_SELECT_FIELD"
+    textarea_field: "PLUGIN_TEXTAREA_FIELD"
+    array_field: "PLUGIN_ARRAY_FIELD"
+    object_field: "PLUGIN_OBJECT_FIELD"
+    json_field: "PLUGIN_JSON_FIELD"
