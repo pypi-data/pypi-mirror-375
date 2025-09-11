@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: aplicacion_ventas_ramirez
+Version: 0.1.0
+Summary: Paquete para gestionar ventas, precios, impuestos y descuentos
+Home-page: https://github.com/curso_python_camara/gestor/aplicacionventas
+Author: Diego Ramirez Garcia
+Author-email: ramirez.garcia@gmail.com
+Classifier: Programming Language :: Python :: 3.13
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENCE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
+
+# Aplicación de Ventas
+
+Este paquete proporciona funcionalidades para gestionar ventas, incluyendo el cálculo de precios, impuestos y descuentos.
+
+## Instalación
+
+Para instalar el paquete, usa:
+
+```bash
+pip install .
