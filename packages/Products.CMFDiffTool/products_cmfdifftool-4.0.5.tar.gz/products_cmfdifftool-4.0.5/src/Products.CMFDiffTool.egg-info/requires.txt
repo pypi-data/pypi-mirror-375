@@ -1,0 +1,12 @@
+Products.GenericSetup
+Products.PortalTransforms
+Zope
+setuptools
+plone.base
+z3c.relationfield
+
+[test]
+plone.app.testing
+plone.namedfile
+plone.app.contenttypes[test]
+zope.intid
