@@ -1,0 +1,2 @@
+from .dp_hybird_vqc_qpanda import DataParallelHybirdVQCQpandaQVMLayer
+from .dp_vqc import DataParallelVQCAdjointLayer,DataParallelVQCLayer

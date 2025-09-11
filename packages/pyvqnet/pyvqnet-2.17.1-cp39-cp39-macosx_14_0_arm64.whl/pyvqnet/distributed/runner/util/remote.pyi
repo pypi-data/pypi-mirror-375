@@ -1,0 +1,6 @@
+from _typeshed import Incomplete
+
+SSH_COMMAND_PREFIX: str
+
+def get_ssh_command(local_command, host, port: Incomplete | None = None, identity_file: Incomplete | None = None, timeout_s: Incomplete | None = None): ...
+def get_remote_command(local_command, host, port: Incomplete | None = None, identity_file: Incomplete | None = None, timeout_s: Incomplete | None = None): ...

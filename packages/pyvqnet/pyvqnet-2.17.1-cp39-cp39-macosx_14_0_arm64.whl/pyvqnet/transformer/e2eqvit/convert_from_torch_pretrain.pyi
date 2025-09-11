@@ -1,0 +1,3 @@
+from _typeshed import Incomplete
+
+def get_para_from_torch_pretrain(model_path: str = '/data/whc/qvit/qtransformer/vit-base-p16_in21k-pre-3rdparty_ft-64xb64_in1k-384_20210928-98e8652b.pth', new_head_dim: Incomplete | None = None): ...
