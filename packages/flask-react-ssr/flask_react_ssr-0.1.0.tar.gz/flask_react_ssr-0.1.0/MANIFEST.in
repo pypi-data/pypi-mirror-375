@@ -1,0 +1,9 @@
+include README.md
+include LICENSE
+include DOCUMENTATION.md
+include package.json
+include package-lock.json
+recursive-include examples *
+recursive-include flask_react *.py
+recursive-exclude * __pycache__
+recursive-exclude * *.pyc

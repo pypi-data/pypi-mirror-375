@@ -1,0 +1,55 @@
+{
+  "name": "flask-react-ssr",
+  "version": "1.0.0",
+  "description": "Node.js SSR support for Flask-React",
+  "main": "ssr_server.js",
+  "scripts": {
+    "install-deps": "npm install",
+    "test": "python -m pytest tests/ -v",
+    "test-python": "python -m pytest tests/ -v",
+    "setup": "npm install && node -e \"console.log('✅ Flask-React Node.js setup complete!')\"",
+    "clean": "echo 'No temporary files to clean'"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-react": "^7.22.0",
+    "@babel/register": "^7.22.0",
+    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-typescript": "^7.23.0"
+  },
+  "babel": {
+    "presets": [
+      ["@babel/preset-env", {
+        "targets": {
+          "node": "16"
+        }
+      }],
+      "@babel/preset-react",
+      "@babel/preset-typescript"
+    ],
+    "plugins": []
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "keywords": [
+    "flask",
+    "react",
+    "ssr",
+    "server-side-rendering",
+    "node.js",
+    "jsx",
+    "typescript"
+  ],
+  "author": "Flask-React Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baraakh30/flask-react"
+  }
+}
