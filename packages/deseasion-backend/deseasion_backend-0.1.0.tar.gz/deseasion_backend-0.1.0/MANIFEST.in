@@ -1,0 +1,2 @@
+include src/deseasion/backend/sql/*.sql
+include src/deseasion/backend/openapi/spec_geo_json.yml
