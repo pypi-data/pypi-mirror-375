@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "micalcu"
+version = "0.2.0"
+description = "Ejemplo: from calculadora import MiCalculadora con suma, resta, multiplicación y división"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Pedro Shiguihara", email = "p.shiguihara@gmail.com" }]
+keywords = ["calculator", "example", "teaching"]
+
+# No hay paquetes; solo un módulo suelto llamado 'calculadora'
+[tool.setuptools]
+py-modules = ["calculadora"]
+
+[project.urls]
+Homepage = "https://github.com/pshiguihara/micalcu"
+
