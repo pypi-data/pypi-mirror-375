@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: microsoft-teams-openai
+Version: 0.0.1a5
+Summary: model package for enabling chat experiences with openai
+Author-email: Microsoft <TeamsAISDKFeedback@microsoft.com>
+License-Expression: MIT
+Keywords: agents,ai,bot,microsoft,teams
+Requires-Python: >=3.12
+Requires-Dist: microsoft-teams-ai
+Requires-Dist: microsoft-teams-common
+Requires-Dist: openai>=1.102.0
+Description-Content-Type: text/markdown
+
+# Microsoft Teams OpenAI
+
+<p>
+    <a href="https://pypi.org/project/microsoft-teams-openai/" target="_blank">
+        <img src="https://img.shields.io/pypi/v/microsoft-teams-openai" />
+    </a>
+    <a href="https://pypi.org/project/microsoft-teams-openai" target="_blank">
+        <img src="https://img.shields.io/pypi/dw/microsoft-teams-openai" />
+    </a>
+</p>
+
+OpenAI model implementations to be used with @microsoft-teams-ai. Supports all OpenAI-like API models.
+
+<a href="https://microsoft.github.io/teams-ai" target="_blank">
+    <img src="https://img.shields.io/badge/📖 Getting Started-blue?style=for-the-badge" />
+</a>
