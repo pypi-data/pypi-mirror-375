@@ -1,0 +1,52 @@
+Metadata-Version: 2.4
+Name: nrp-cmd
+Version: 0.8.3
+Summary: Python and commandline client for NRP repositories
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Requires-Dist: rich-click
+Requires-Dist: aiohttp[speedups]~=3.10.3
+Requires-Dist: aiofiles>=24.1.0
+Requires-Dist: pyyaml~=6.0.2
+Requires-Dist: python-magic~=0.4.27
+Requires-Dist: humanize
+Requires-Dist: progressbar2
+Requires-Dist: requests
+Requires-Dist: merge_args
+Requires-Dist: stuf
+Requires-Dist: deepmerge
+Requires-Dist: attrs
+Requires-Dist: cattrs
+Requires-Dist: tqdm
+Requires-Dist: uvloop
+Provides-Extra: tests
+Requires-Dist: pytest>=8.0.0; extra == "tests"
+Requires-Dist: pytest-asyncio>=0.23; extra == "tests"
+Provides-Extra: pandas
+Requires-Dist: pandas>=2.1.0; extra == "pandas"
+
+# Python and commandline client for NRP repositories
+
+Note: At this time, only the Invenio repositories are supported.
+The client uses a pluggable architecture to support other repository types.
+
+## Installation
+
+```bash
+uv venv --python=python3.12 nrp-cmd-venv
+source nrp-cmd-venv/bin/activate
+uv pip install nrp-cmd
+```
+
+Your system needs to have the `libmagic` library installed, check out the [pypi page](https://pypi.org/project/python-magic/) for installation instructions depending on your platform.
+
+## Usage
+
+```bash
+nrp-cmd create record '{"title": "abc"}' --set r
+nrp-cmd upload file @r ~/Downloads/ubuntu-24.04-desktop-amd64.iso
+nrp-cmd list records "metadata.title:abc"
+nrp-cmd get record @r
+nrp-cmd delete record @r
+```

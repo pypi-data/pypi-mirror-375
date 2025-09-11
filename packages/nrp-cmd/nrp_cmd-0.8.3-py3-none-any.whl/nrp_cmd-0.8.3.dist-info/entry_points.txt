@@ -1,0 +1,8 @@
+[console_scripts]
+nrp-cmd = nrp_cmd.cli.cli:app
+
+[nrp_cmd.async_client]
+invenio = nrp_cmd.async_client.invenio.client:AsyncInvenioRepositoryClient
+
+[nrp_cmd.sync_client]
+invenio = nrp_cmd.sync_client.invenio.client:SyncInvenioRepositoryClient
