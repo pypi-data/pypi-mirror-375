@@ -1,0 +1,205 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  description: 'A sample API for demonstration purposes'
+  version: 1.0.0
+tags:
+  - name: sample
+paths:
+  /v1/sample/feature/checkAvailability:
+    post:
+      summary: 检查功能可用性
+      description: '检查指定功能是否可用'
+      tags:
+        - sample
+      parameters:
+        - name: X-App-version
+          in: header
+          description: app版本
+          required: false
+          schema:
+            type: string
+        - name: X-Auth-Token
+          in: header
+          description: 用户认证令牌
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqCheckAvailability'
+      responses:
+        '200':
+          description: 成功响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespCheckAvailability'
+        '400':
+          description: 请求参数错误
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 服务器内部错误
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/sample/items/list:
+    get:
+      summary: 获取项目列表
+      description: '获取所有可用的项目列表'
+      tags:
+        - sample
+      parameters:
+        - name: page
+          in: query
+          description: 页码
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: 每页数量
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: X-Auth-Token
+          in: header
+          description: 用户认证令牌
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespItemList'
+        '400':
+          description: 请求参数错误
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 服务器内部错误
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    BasicResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 响应码
+          example: 200
+        msg:
+          type: string
+          description: 响应消息
+          example: 'success'
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 错误码
+          example: 400
+        msg:
+          type: string
+          description: 错误消息
+          example: 'Invalid request parameters'
+
+    ReqCheckAvailability:
+      type: object
+      properties:
+        featureId:
+          type: string
+          description: 功能ID
+          example: 'feature_001'
+        userId:
+          type: string
+          description: 用户ID
+          example: 'user_123'
+
+    RespCheckAvailability:
+      allOf:
+        - $ref: '#/components/schemas/BasicResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                isAvailable:
+                  type: boolean
+                  description: 是否可用
+                  example: true
+                featureStatus:
+                  type: string
+                  description: 功能状态
+                  example: 'active'
+
+    RespItemList:
+      allOf:
+        - $ref: '#/components/schemas/BasicResponse'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+                total:
+                  type: integer
+                  description: 总数量
+                  example: 100
+                page:
+                  type: integer
+                  description: 当前页码
+                  example: 1
+                limit:
+                  type: integer
+                  description: 每页数量
+                  example: 10
+
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 项目ID
+          example: 'item_001'
+        name:
+          type: string
+          description: 项目名称
+          example: 'Sample Item'
+        description:
+          type: string
+          description: 项目描述
+          example: 'This is a sample item'
+        status:
+          type: string
+          description: 项目状态
+          enum: ['active', 'inactive', 'pending']
+          example: 'active'
+        createdAt:
+          type: string
+          format: date-time
+          description: 创建时间
+          example: '2024-01-01T00:00:00Z'
