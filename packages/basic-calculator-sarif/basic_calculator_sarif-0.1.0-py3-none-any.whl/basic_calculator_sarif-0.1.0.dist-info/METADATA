@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: basic-calculator-sarif
+Version: 0.1.0
+Summary: A simple Python package for basic arithmetic operations
+Author-email: Your Name <your.email@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/yourusername/basic-calculator
+Project-URL: Repository, https://github.com/yourusername/basic-calculator
+Project-URL: Issues, https://github.com/yourusername/basic-calculator/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# Basic Calculator
+
+A simple Python package for performing basic arithmetic operations.
+
+## Installation
+
+```bash
+pip install basic-calculator
+```
+
+## Usage
+
+```python
+from basic_calculator import add, subtract, multiply, divide
+
+result = add(5, 3)
+print(result)  # 8
+
+result = divide(10, 2)
+print(result)  # 5.0
+```
+
+## Functions
+
+- `add(a, b)`: Returns the sum of a and b
+- `subtract(a, b)`: Returns the difference of a and b
+- `multiply(a, b)`: Returns the product of a and b
+- `divide(a, b)`: Returns the quotient of a and b (raises ValueError if b is 0)
+
+## License
+
+MIT License
