@@ -1,0 +1,90 @@
+Metadata-Version: 2.4
+Name: autofeedback
+Version: 2.22
+Summary: check basic python exercises with pretty feedback
+Author-email: Andrew Brown <andrew.brown@qub.ac.uk>
+License: BSD-3-Clause
+Project-URL: Homepage, https://github.com/abrown41/AutoFeedback
+Project-URL: Repository, https://github.com/abrown41/AutoFeedback
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: BSD License
+Requires-Python: >=3.7
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+License-File: AUTHORS.rst
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: multipledispatch
+Requires-Dist: sympy
+Requires-Dist: matplotlib
+Provides-Extra: dev
+Requires-Dist: codecov; extra == "dev"
+Requires-Dist: coverage[toml]; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Requires-Dist: setuptools; extra == "dev"
+Requires-Dist: wheel; extra == "dev"
+Requires-Dist: ipython; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=7.0; extra == "docs"
+Requires-Dist: numpydoc; extra == "docs"
+Requires-Dist: docutils>=0.17; extra == "docs"
+Requires-Dist: sphinx-copybutton; extra == "docs"
+Requires-Dist: sphinx-rtd-theme; extra == "docs"
+Requires-Dist: sphinx-autoapi>=3.0; extra == "docs"
+Dynamic: license-file
+
+================================
+AutoFeedback: Assignment Checker
+================================
+
+.. image:: https://github.com/abrown41/AutoFeedback/actions/workflows/build_test.yml/badge.svg
+        :target: https://github.com/abrown41/AutoFeedback/actions/workflows/
+
+.. image:: https://img.shields.io/pypi/v/AutoFeedback.svg
+        :target: https://pypi.python.org/pypi/AutoFeedback
+
+.. image:: https://codecov.io/gh/abrown41/AutoFeedback/branch/master/graph/badge.svg?token=R2Z5SI6T71
+        :target: https://codecov.io/gh/abrown41/AutoFeedback
+
+
+Check basic python exercises and provide pretty feedback
+
+* Free software: 3-clause BSD license
+
+===========
+Description
+===========
+AutoFeedback is a suite of python utilities for testing and providing usable feedback introductory python assignments, specifically relevant to mathematics and the use of numpy and matplotlib.
+
+=======================
+How to use AutoFeedback
+=======================
+
+AutoFeedback can be installed via pip
+
+.. code:: shell
+
+    pip install AutoFeedback
+
+The suite provides three basic checkers: one each for checking variables,
+functions and matplotlib.pyplot figures. 
+
+===========================================
+Installing a local version of AutoFeedback
+===========================================
+
+If you want to develop AutoFeedback you can install a local version of the code. 
+
+.. code:: shell
+
+    cd <path to AutoFeedback>
+    pip install -e .[dev,docs]
+
+
+=====
+Usage
+=====
+Full usage instructions can be found `here. <https://abrown41.github.io/AutoFeedback/usage.html>`_
