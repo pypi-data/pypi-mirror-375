@@ -1,0 +1,3 @@
+[console_scripts]
+secop-cli=secop_cli.__main__:cli
+
