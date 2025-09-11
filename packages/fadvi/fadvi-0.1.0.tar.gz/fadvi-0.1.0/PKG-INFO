@@ -1,0 +1,129 @@
+Metadata-Version: 2.4
+Name: fadvi
+Version: 0.1.0
+Summary: Factor Disentanglement Variational Inference for single-cell batch integration
+Author-email: Wendao Liu <liuwd15@gmail.com>
+Maintainer-email: Wendao Liu <liuwd15@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/liuwd15/fadvi
+Project-URL: Repository, https://github.com/liuwd15/fadvi
+Project-URL: Documentation, https://fadvi.readthedocs.io
+Project-URL: Bug Tracker, https://github.com/liuwd15/fadvi/issues
+Keywords: single-cell,genomics,variational-inference,deep-learning,batch-correction,disentanglement
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: scvi-tools>=1.3.0
+Requires-Dist: torch>=1.12.0
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: scanpy>=1.8.0
+Requires-Dist: anndata>=0.8.0
+Requires-Dist: scikit-learn>=1.0.0
+Requires-Dist: matplotlib>=3.5.0
+Requires-Dist: seaborn>=0.11.0
+Requires-Dist: torchmetrics>=0.10.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx-rtd-theme; extra == "docs"
+Requires-Dist: nbsphinx; extra == "docs"
+Requires-Dist: pandoc; extra == "docs"
+Dynamic: license-file
+
+# FADVI: Factor Disentanglement Variational Inference
+
+FADVI is a deep learning method for single-cell RNA sequencing analysis that disentangles batch-related variation, label-related variation, and residual variation using adversarial training and cross-correlation penalties.
+
+## Features
+
+- **Factor Disentanglement**: Separates batch effects, cell type effects, and residual variation in single-cell data
+- **Integration with scvi-tools**: Built on top of the scvi-tools framework for scalable analysis
+- **Batch Correction**: Removes unwanted batch effects while preserving biological signal
+- **Cell Type Classification**: Performs supervised learning for cell type prediction
+
+## Installation
+
+### Install from source (development)
+
+```bash
+# Clone the repository
+git clone https://github.com/liuwd15/fadvi.git
+cd fadvi
+
+# Install in development mode
+pip install -e .
+```
+
+
+## Quick Start
+
+```python
+
+import scanpy as sc
+import scvi
+from fadvi import FADVI
+
+# Load your single-cell data
+adata = sc.read_h5ad("your_data.h5ad")
+
+# Setup the model
+FADVI.setup_anndata(
+    adata,
+    batch_key="batch",
+    labels_key="cell_type",
+    unlabeled_category="Unknown",
+    layer="counts"
+)
+
+# Create and train the model
+model = FADVI(adata)
+model.train(max_epochs=30)
+
+# Get latent representations
+latent_l = model.get_latent_representation(representation="label")
+latent_b = model.get_latent_representation(representation="batch")
+
+# Get label predictions
+prediction_label = model.predict(prediction_mode="label")
+
+```
+
+## Model Architecture
+
+FADVI uses a variational autoencoder architecture with three latent spaces:
+
+- **z_b**: Batch-related latent factors
+- **z_l**: Label-related latent factors  
+- **z_r**: Residual latent factors
+
+The model uses adversarial training to ensure proper disentanglement between these factor spaces.
+
+
+## Citation
+
+If you use FADVI in your research, please cite:
+
+```bibtex
+@article{fadvi2025,
+  title={FADVI: disentangled representation learning for robust integration of single-cell and spatial omics data},
+  author={Wendao Liu},
+  journal={bioRxiv},
+  year={2025}
+}
+```
