@@ -1,0 +1,16 @@
+# Include project metadata
+include README.md
+include CHANGELOG.md
+include LICENSE
+include pyproject.toml
+
+# Graft the package directory to include all files within it.
+# This is the most reliable way to ensure all necessary data files (like templates) are included.
+graft src/stock_analysis_toolkit
+
+# Exclude unnecessary files and directories from the final package.
+global-exclude *.py[cod]
+global-exclude __pycache__
+prune .github
+prune .pytest_cache
+prune .mypy_cache

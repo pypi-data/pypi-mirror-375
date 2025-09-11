@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Stock Analysis Report{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1976D2;
+            --accent-color: #FF5722;
+            --success-color: #4CAF50;
+            --danger-color: #F44336;
+            --warning-color: #FFC107;
+            --light-bg: #f5f5f5;
+            --dark-bg: #1a1a2e;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --text-light: #757575;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .report-meta {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Charts */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+        }
+
+        .badge-success {
+            background-color: #e8f5e9;
+            color: var(--success-color);
+        }
+
+        .badge-danger {
+            background-color: #ffebee;
+            color: var(--danger-color);
+        }
+
+        .badge-warning {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+
+        /* Grid System */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col {
+            flex: 1;
+            padding: 0 15px;
+            min-width: 0;
+        }
+
+        .col-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .col-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: var(--text-light);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .col, .col-6, .col-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .report-meta {
+                margin-top: 10px;
+                text-align: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .card {
+                break-inside: avoid;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Stock Analysis Pro</span>
+                </div>
+                <div class="report-meta">
+                    <div>Report Generated: {{ date }}</div>
+                    <div>Version: 1.0.0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        {% block content %}
+        <!-- Page content will be inserted here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Data Sources</h4>
+                    <ul class="data-sources">
+                        <li><i class="fas fa-chart-line"></i> Market Data: <a href="https://www.screener.in/" target="_blank">Screener.in</a>, <a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a></li>
+                        <li><i class="fas fa-database"></i> Fundamental Data: <a href="https://www.nseindia.com/" target="_blank">NSE India</a>, <a href="https://www.alphavantage.co/" target="_blank">Alpha Vantage</a></li>
+                        <li><i class="fas fa-info-circle"></i> Company Information: Publicly available sources</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Report Information</h4>
+                    <p>This report was generated automatically on {{ date }}.</p>
+                    <p>For any questions, please contact support.</p>
+                    <p class="no-print">
+                        <a href="#" onclick="window.print()" class="btn btn-primary">
+                            <i class="fas fa-print"></i> Print Report
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-disclaimer">
+                <p><small>Disclaimer: The information provided in this report is for informational purposes only and should not be considered as investment advice. Please conduct your own research or consult a financial advisor before making investment decisions.</small></p>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
