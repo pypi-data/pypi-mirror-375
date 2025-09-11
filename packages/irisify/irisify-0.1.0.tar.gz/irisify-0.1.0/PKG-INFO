@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: irisify
+Version: 0.1.0
+Summary: A Python package for the irisify project.
+Author-email: JuzoCode <juzofr0@gmail.com>
+Maintainer-email: JuzoCode <juzofr0@gmail.com>
+License-Expression: MIT
+License-File: LICENSE
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.9
+Requires-Dist: aiohttp<3.13,>=3.9.0
+Requires-Dist: requests<3.0,>=2.25.0
+Provides-Extra: dev
+Requires-Dist: black~=25.1.0; extra == 'dev'
+Requires-Dist: hatchling~=1.27.0; extra == 'dev'
+Requires-Dist: isort~=6.0.1; extra == 'dev'
+Requires-Dist: pre-commit~=4.3.0; extra == 'dev'
+Requires-Dist: ruff~=0.12.12; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# irisify (Python)
+
+Асинхронный Python клиент для работы с [Iris Connect API](https://t.me/+zw48tL39j1E1YWMy)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+
+## Документация
+- [Асинхронные методы](docs/DOCS_ASYNC.md)
+- [Синхронные методы](docs/DOCS_SYNC.md)
+
+## Лицензия
+
+MIT License. Полный текст лицензии доступен в файле [LICENSE](LICENSE).
