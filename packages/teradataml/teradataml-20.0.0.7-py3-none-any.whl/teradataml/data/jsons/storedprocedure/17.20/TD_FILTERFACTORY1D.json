@@ -1,0 +1,150 @@
+{
+        "FuncName": "TD_FILTERFACTORY1D",
+        "FuncDescriptionShort": "TD_FILTERFACTORYID creates finite impulse response (FIR) filter coefficients.",
+        "FuncDescriptionLong": [
+                "The filters are based on certain parameters and stored into a common table for reuse."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "General Utility",
+        "JSONVersion": "1",
+        "FuncRName": "td_Filter_Factory1d",
+        "MaxInputFiles": 0,
+		"Input": [],
+        "Params":[
+                {
+                        "Name": "FILTERID",
+                        "Type": "integer",
+                        "Optional": false,
+                        "Description": [
+                                "Filter identifier, based on filter coefficients, stored in the table."
+                        ],
+                        "LangName": "filter_id"
+                },
+                {
+                        "Name": "FILTERTYPE",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "LOWPASS",
+                                "HIGHPASS",
+                                "BANDPASS",
+                                "BANDSTOP"
+                        ],
+                        "Description": [
+                                "The type of filter to generate.",
+                                "Options are:",
+                                "LOWPASS to remove frequencies above LOWCUTOFF.",
+                                "HIGHPASS to remove frequencies below HIGHCUTOFF.",
+                                "BANDPASS to remove frequencies below LOWCUTOFF and above HIGHCUTOFF.",
+                                "BANDSTOP to remove frequencies between LOWCUTOFF and HIGHCUTOFF."
+                        ],
+                        "LangName": "filter_type"
+                },
+                {
+                        "Name": "WINDOWTYPE",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "BLACKMAN",
+                                "HAMMING",
+                                "HANNING",
+                                "BARTLETT"
+                        ],
+                        "Description": [
+                                "[Optional] Window function to the filter that maintains a smooth drop off to zero, and avoids extra artifacts in the frequency domain.",
+                                "Window is applied by multiplying W(n) to the n-th coefficient of the filter",
+                                "Default is to not apply any windowing function to the filter (leave the filter coefficients as they are)",
+                                "Options are:",
+                                "BLACKMAN [ W(n) = 0.42 - 1/2*COS(2PI*n/N) + 0.08*COS(4PI * n/N) ]",
+                                "HAMMING [ W(n) = 0.54 - 0.46 * COS(2PI*n/N) ]",
+                                "HANNING [ W(n) = 0.5 - 0.5 * COS(2PI*n/N) ]",
+                                "BARTLETT [ W(n) = ",
+                                "{",
+                                "        (2 * n/N)    , for n <  N/2",
+                                "        (2 - 2 * n/N), for n >= N/2",
+                                "} ]"
+                        ],
+                        "LangName": "window_type"
+                },
+                {
+                        "Name": "FILTERLENGTH",
+                        "Type": "integer",
+                        "Optional": true,
+                        "Description": [
+                                "[Optional] Length of the filter to generate.",
+                                "Overrides TRANSITIONBANDWIDTH argument if both are supplied, and renders the other an optional argument.",
+                                "Default is approximately 4/(TRANSITIONBANDWIDTH/ SAMPLINGFREQUENCY)."
+                        ],
+                        "LangName": "filter_length"
+                },
+                {
+                        "Name": "TRANSITIONBANDWIDTH",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "Description": [
+                                "[Optional] The maximum allowed size for the range of frequencies for filter transitions between a passband and stopband.",
+                                "This also determines the number of coefficients to be generated.",
+                                "Value must be greater than 0.",
+                                "A smaller value produces faster drop off at the cost of more coefficients.",
+                                "Not used when FILTERLENGTH is supplied.",
+                                "Default is bandwidth from FILTERLENGTH."
+                        ],
+                        "LangName": "transition_bandwidth"
+                },
+                {
+                        "Name": "LOWCUTOFF",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "Description": [
+                                "[Optional] Determines the lower frequency that change between a passband and stopband occurs.",
+                                "Must be greater than 0.",
+                                "Not used by default with HIGHPASS filter."
+                        ],
+                        "LangName": "low_cutoff"
+                },
+                {
+                        "Name": "HIGHCUTOFF",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "Description": [
+                                "[Optional] Determines the higher frequency that change between a passband and stopband occurs.",
+                                "Must be greater than 0.",
+                                "Not used by default with LOWPASS filter."
+                        ],
+                        "LangName": "high_cutoff"
+                },
+                {
+                        "Name": "SAMPLINGFREQUENCY",
+                        "Type": "double",
+                        "Optional": false,
+                        "LowerBound": 0,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "Description": [
+                                "The frequency that the data to be filtered was sampled.",
+                                "Must be greater than 0."
+                        ],
+                        "LangName": "sampling_frequency"
+                },
+                {
+                        "Name": "FILTERDESCRIPTION",
+                        "Type": "string",
+                        "Optional": true,
+                        "Description": [
+                                "[Optional] Description for the filter coefficients that contain the same filter ID.",
+                                "Description is only written to one row for each filter generated, and ROW_I is 0.",
+                                "Default is a string describing parameters."
+                        ],
+                        "LangName": "filter_description"
+                }
+        ],
+        "Output": [],
+        "IsPlottable": true,
+        "InputFmt": false,
+        "OutputFmt": false
+}

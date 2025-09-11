@@ -1,0 +1,21 @@
+{
+  "burst_data": {
+    "id": "integer",
+    "start_time_column": "date",
+    "end_time_column": "date",
+    "num_custs": "real"
+  },
+  "finance_data": {
+    "id": "integer",
+    "start_time_column": "date",
+    "end_time_column": "date",
+    "expenditure": "real",
+    "income": "real",
+    "investment": "real"
+  },
+  "time_table2": {
+    "id": "integer",
+    "burst_start": "date",
+    "burst_end": "date"
+  }
+}

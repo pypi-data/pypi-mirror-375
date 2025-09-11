@@ -1,0 +1,14 @@
+{
+ "employee_table" : {
+                  "emp_id" : "integer",
+                  "emp_name" : "varchar(128)",
+                  "mgr_id" : "integer",
+                  "mgr_name" : "varchar(128)"
+        },
+ "emp_table_by_dept" : {
+                  "department" : "varchar(128)",
+                  "id" : "integer",
+                  "name" : "varchar(128)",
+                  "mgr_id" : "varchar(128)"
+        }
+}

@@ -1,0 +1,15 @@
+{
+     "ville_climatedata" : {
+
+                  "city" : "varchar(20)",
+                  "period" : "TIMESTAMP(6) FORMAT 'YYYYMMDDBHH:MI'",
+                  "temp_f" : "float",
+                  "pressure_mbar" : "float",
+                  "dewpoint_f" : "float"
+        },
+
+    "dwt_filter_dim" :{
+            "filtername" : "varchar(20)",
+            "filtervalue" : "varchar(50)"
+            }
+}

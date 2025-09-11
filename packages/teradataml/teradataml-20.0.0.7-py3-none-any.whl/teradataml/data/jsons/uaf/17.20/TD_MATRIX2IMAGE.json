@@ -1,0 +1,209 @@
+{
+        "FuncName": "TD_MATRIX2IMAGE",
+        "FuncDescriptionShort": "TD_MATRIX2IMAGE converts a matrix to an image.",
+        "FuncDescriptionLong": [
+                "The conversion produces an image using color maps.",
+                "The color image produced by TD_MATRIX2IMAGE is limited to 8-bit color depth.",
+                "In previous versions, TD_PLOT with MESH option was used to convert a matrix to an image. TD_PLOT is limited to a single payload.",
+                "TD_MATRIX2IMAGE can combine three payloads to create RGB color images."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "General Utility",
+        "JSONVersion": "1",
+        "FuncRName": "td_Matrix_2_Image",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "MATRIX",
+                        "Description": [
+                                "The TD_MATRIX2IMAGE function takes matrixes or ART as input.",
+                                "These series may have real numbers or multivariate reals (vector of real numbers) as their individual elements.",
+                                "These logical series can be regular or irregular.",
+                                "Their indexing can be based on integer or float data types."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "big_integer",
+                                "big_integer",
+                                "blob"
+                        ],
+                        "Description": [
+                                "The TD_MATRIX2IMAGE function returns a primary result set without additional layers."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "IMAGE",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "PNG",
+                                "JPG"
+                        ],
+                        "DefaultValue": "PNG",
+                        "Description": [
+                                "[Optional] The image output format. It can be PNG or JPG. The default is PNG."
+                        ]
+                },
+                {
+                        "Name": "TYPE",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "GRAY",
+                                "RGB",
+                                "COLORMAP"
+                        ],
+                        "Description": [
+                                "[Optional] The type of the image.",
+                                "It can be GRAY, RGB or COLORMAP.",
+                                "GRAY has a single payload, the output image is a gray scale image.",
+                                "RGB has three payloads corresponding to RED, GREEN and BLUE channels, the output image is a RGB color image.",
+                                "COLORMAP has a single payload. The output image is a RGB color image.",
+                                "If there is a single payload, then the default type is GRAY.",
+                                "If there are three payloads, then the default type is RGB."
+                        ]
+                },
+                {
+                        "Name": "COLORMAP",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "viridis",
+                        "Description": [
+                                "[Optional] The colormap to use when the TYPE is COLORMAP.",
+                                "The values corresponds to the COLORMAP of TD_PLOT.",
+                                "If not specified, then the default colormap is viridis.",
+                                "The value is case-sensitive."
+                        ]
+                },
+                {
+                        "Name": "RANGE",
+                        "Type": "list",
+                        "ListType": "double",
+                        "ListSize": 2,
+                        "Optional": true,
+                        "CheckDuplicates": false,
+                        "Description": [
+                                "[Optional] The range of the single payload value to be scaled.",
+                                "By default, the MIN and MAX values of the payload are used as the range.",
+                                "Used when TYPE is GRAY or COLORMAP."
+                        ]
+                },
+                {
+                        "Name": "RED",
+                        "Type": "list",
+                        "ListType": "double",
+                        "ListSize": 2,
+                        "Optional": true,
+                        "CheckDuplicates": false,
+                        "Description": [
+                                "[Optional] The range of the first payload value.",
+                                "By default, the MIN and MAX values of the payload are used as the range.",
+                                "It is only used when TYPE is RGB."
+                        ]
+                },
+                {
+                        "Name": "GREEN",
+                        "Type": "list",
+                        "ListType": "double",
+                        "ListSize": 2,
+                        "Optional": true,
+                        "CheckDuplicates": false,
+                        "Description": [
+                                "[Optional] The range of the second payload value.",
+                                "By default, the MIN and MAX values of the payload are used as the range.",
+                                "It is only used when TYPE is RGB."
+                        ]
+                },
+                {
+                        "Name": "BLUE",
+                        "Type": "list",
+                        "ListType": "double",
+                        "ListSize": 2,
+                        "Optional": true,
+                        "CheckDuplicates": false,
+                        "Description": [
+                                "[Optional] The range of the third payload value.",
+                                "By default, the MIN and MAX values of the payload are used as the range.",
+                                "It is only used when TYPE is RGB."
+                        ]
+                },
+                {
+                        "Name": "FLIPX",
+                        "Type": "integer",
+                        "Optional": true,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "[Optional] Indicator to flip the image horizontally.",
+                                "A value of 1 means flip the image.",
+                                "A value of 0 means do not flip the image."
+                        ],
+                        "LangName": "flip_x"
+                },
+                {
+                        "Name": "FLIPY",
+                        "Type": "integer",
+                        "Optional": true,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "[Optional] Indicator to flip the image vertically.",
+                                "A value of 1 means flip the image.",
+                                "A value of 0 means do not flip the image."
+                        ],
+                        "LangName": "flip_y"
+                }
+        ],
+        "InputFmt": [
+                {
+                        "Name": "INPUT_MODE",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "MANY2ONE",
+                                "ONE2ONE",
+                                "MATCH"
+                        ],
+                        "Description": [
+                                "When there are two input series, then the INPUT_FMT specification is mandatory.",
+                                "[Optional] The INPUT_MODE parameter has the following options:",
+                                "ONE2ONE: Both the primary and secondary series specifications contain a series name which identifies the two series in the function.",
+                                "MANY2ONE: The MANY specification is the primary series declaration. The secondary series specification contains a series name that identifies the single secondary series.",
+                                "MATCH: Both series are defined by their respective SERIES_SPEC(INSTANCE_NAME()) declarations."
+                        ],
+                        "LangName": "input_fmt_input_mode"
+                }
+        ],
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE"
+                        ],
+                        "Description": [
+                                "[Optional] Specify the INDEX_STYLE of the output format.",
+                                "Option is NUMERICAL_SEQUENCE."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

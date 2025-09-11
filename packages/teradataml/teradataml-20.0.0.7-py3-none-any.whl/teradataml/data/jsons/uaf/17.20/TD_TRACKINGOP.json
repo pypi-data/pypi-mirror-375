@@ -1,0 +1,101 @@
+{
+        "FuncName": "TD_TRACKINGOP",
+        "FuncDescriptionShort": "Perform Space-Time Analytics",
+        "FuncDescriptionLong": [
+                "Perform Space-Time Analytics"
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "General Utility",
+        "JSONVersion": "1",
+        "FuncRName": "td_Tracking_Op",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "a multivariate series containing object 'tracking' context.  Minimally, the payload contains three fields: an arrival time, a departure time, and a geospatial ST_POINT specifying the location; additionally, the multivariate series may contain any number of auxiliary non-LOB payload fields."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float",
+                                "ST_GEOMETRYLINESTRING",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_TRACKING function returns only a primary result set consisting of one row per unique series acted upon.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results.",
+                                "The primary result set contains one row per processed 'tracking' series."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "DISTANCE",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Indicator to calculate the track distance. A value of 1 means to calculate. A value of 0 means do not calculate. Default value is 0."
+                        ]
+                },
+                {
+                        "Name": "SPEED",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Indicator to calculate the average speed with maximum and minimum values. A value of 1 means to calculate. A value of 0 means do not calculate. Default value is 0."
+                        ]
+                },
+                {
+                        "Name": "TIME_SPENT",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Indicator to calculate the total time for the trip. A value of 1 means to calculate. A value of 0 means do not calculate. Default value is 0."
+                        ]
+                },
+                {
+                        "Name": "METRIC",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Indicator to use metric distance and time. A value of 1 means to use kilometers. A value of 0 means to use miles. Default value is 0."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

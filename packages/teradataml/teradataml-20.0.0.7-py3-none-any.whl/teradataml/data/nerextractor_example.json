@@ -1,0 +1,18 @@
+{
+  "ner_sports_test2" : {
+                 "id" : "integer",
+                 "content" : "varchar(1000)"
+  },
+ "rule_table" : {
+                 "type1" : "varchar(20)",
+                 "regex" : "varchar(50)"
+ },
+ "ner_extractor_text" : {
+                 "id" : "integer",
+                 "content" : "varchar(1000)"
+ },
+  "dict_table" : {
+                "type1" : "varchar(20)",
+                "dict" : "varchar(50)"
+  }
+}

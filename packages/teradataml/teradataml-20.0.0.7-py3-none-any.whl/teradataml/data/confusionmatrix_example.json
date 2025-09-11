@@ -1,0 +1,9 @@
+{
+     "iris_category_expect_predict" : {
+                  
+                  "id" : "integer",
+                  "expected_value" : "varchar(20)",
+                  "predicted_value" : "varchar(20)"
+        }
+}
+

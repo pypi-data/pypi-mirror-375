@@ -1,0 +1,7 @@
+{
+  "paragraphs_input": {
+    "paraid": "integer",
+    "paratopic": "varchar(30)",
+    "paratext": "varchar(3000)"
+  }
+}

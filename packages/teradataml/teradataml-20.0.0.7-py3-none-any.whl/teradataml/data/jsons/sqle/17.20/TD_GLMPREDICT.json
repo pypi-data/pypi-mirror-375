@@ -1,0 +1,168 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "2",
+  "json_content_version": "1",
+  "function_name": "TD_GLMPredict",
+  "function_version": "1.0",
+  "function_type": "fastpath",
+  "function_category": "Model Scoring",
+  "function_alias_name": "TDGLMPredict",
+  "function_r_name": "aa.td_glmpredict",
+  "ref_function_r_name": "aa.td_glm",
+  "short_description": "This function gives score according to generalized linear model.",
+  "long_description": "This function gives score according to generalized linear model.",
+  "input_tables": [
+    {
+      "requiredInputKind": [
+        "PartitionByAny",
+        "PartitionByKey"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "inputtable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the table containing the input data.",
+      "description": "Specifies the table containing the input data.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "newdata",
+      "useInR": true,
+      "rOrderNum": 2
+    },
+    {
+      "requiredInputKind": [
+        "Dimension",
+        "PartitionByKey"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "modeltable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the table containing the model data. If InputTable is partition by any, ModelTable must be specified dimension. If InputTable is partition by key, ModelTable must be specified partition by key. ",
+      "description": "Specifies the table containing the model data. If InputTable is partition by any, ModelTable must be specified dimension. If InputTable is partition by key, ModelTable must be specified partition by key. ",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "object",
+      "useInR": true,
+      "rOrderNum": 1
+    }
+  ],
+  "argument_clauses": [
+    {
+      "targetTable": [
+        "inputtable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "IDColumn",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specify the name of the column that uniquely identifies an observation in the test table.",
+      "description": "Specify the name of the column that uniquely identifies an observation in the test table.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "id.column",
+      "useInR": true,
+      "rOrderNum": 3
+    },
+    {
+      "targetTable": [
+        "inputtable"
+      ],
+      "checkDuplicate": false,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "Accumulate",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the names of the input table columns that need to be copied from the input test table to output.",
+      "description": "Specify the names of the input table columns that need to be copied from the input test table to output.",
+      "datatype": "COLUMNS",
+      "allowsLists": true,
+      "rName": "accumulate",
+      "useInR": true,
+      "rOrderNum": 4
+    },
+    {
+      "defaultValue": false,
+      "name": "OutputProb",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify whether the function should output the probability for each response. Only applicable if the family is Binomial.",
+      "description": "Specify whether the function should output the probability for each response. Only applicable if the family is Binomial.",
+      "datatype": "BOOLEAN",
+      "allowsLists": false,
+      "rName": "output.prob",
+      "useInR": true,
+      "rOrderNum": 5
+    },
+    {
+      "permittedValues": [],
+      "isOutputColumn": false,
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "Responses",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the class labels for which to output probabilities. Only applicable if OutputProb is true. A label must be 0 or 1. If not specified, the function outputs the probability of the predicted response.",
+      "description": "Specify the class labels for which to output probabilities. Only applicable if OutputProb is true. A label must be 0 or 1. If not specified, the function outputs the probability of the predicted response.",
+      "datatype": "STRING",
+      "allowsLists": true,
+      "rName": "output.responses",
+      "useInR": true,
+      "rOrderNum": 6
+    },
+    {
+        "targetTable": [
+          "InputTable"
+        ],
+        "checkDuplicate": false,
+        "allowedTypes": [],
+        "allowedTypeGroups": [
+          "STRING"
+        ],
+        "matchLengthOfArgument": "",
+        "allowPadding": false,
+        "name": "PartitionColumn",
+        "alternateNames": [],
+        "isRequired": false,
+        "rDescription": "Specify the name of the InputTable columns on which to partition the input. The name should be consistent with the partition_by_column in the ON clause. If the partition_by_column is unicode with foreign language characters, it is necessary to specify PartitionColumn argument. Note: Column range is not supported for PartitionColumn argument. It is valid when InputTable is partition by key. ",
+        "description": "Specify the name of the InputTable columns on which to partition the input. The name should be consistent with the partition_by_column in the ON clause. If the partition_by_column is unicode with foreign language characters, it is necessary to specify PartitionColumn argument. Note: Column range is not supported for PartitionColumn argument. It is valid when InputTable is partition by key. ",
+        "datatype": "COLUMNS",
+        "allowsLists": false,
+        "rName": "partition.column",
+        "useInR": true,
+        "rOrderNum": 7
+    },
+    {
+      "defaultValue": "GAUSSIAN",
+      "permittedValues": [
+        "BINOMIAL",
+        "GAUSSIAN"
+      ],
+      "isOutputColumn": false,
+      "name": "Family",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the distribution exponential family. Acceptable values are Gaussian, Binomial.",
+      "description": "Specify the distribution exponential family. Acceptable values are Gaussian, Binomial.",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "family",
+      "useInR": true,
+      "rOrderNum": 8
+    }
+
+  ]
+}

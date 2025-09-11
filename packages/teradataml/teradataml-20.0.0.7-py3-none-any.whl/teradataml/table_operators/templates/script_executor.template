@@ -1,0 +1,170 @@
+import csv
+import os
+from pandas import isna as pd_isna
+import subprocess
+import sys
+import teradatasql
+from base64 import b64decode as base64_b64decode
+from io import StringIO
+from pickle import loads as pickle_load
+
+
+# Information that is required to help with the script usage.
+
+# Whether the input data must be read from file or AMP.
+_data_source = pickle_load(base64_b64decode({DATA_SOURCE}))
+#  The delimiter to use with the input and output text.
+_template_delimiter = pickle_load(base64_b64decode({DELIMITER}))
+#  The quotechar to use.
+_quotechar = pickle_load(base64_b64decode({QUOTECHAR}))
+# User script path.
+_user_script_path = pickle_load(base64_b64decode({USER_SCRIPT_PATH}))
+# Script args.
+_script_args = pickle_load(base64_b64decode({SCRIPT_ARGS}))
+# Input data file path.
+_data_file_path = pickle_load(base64_b64decode({DATA_FILE_PATH}))
+# Input data file delimiter.
+_input_data_file_delimiter = pickle_load(base64_b64decode({INPUT_DATA_FILE_DELIMITER}))
+# Input data file quotechar
+_input_data_file_quote_char = pickle_load(base64_b64decode({INPUT_DATA_FILE_QUOTE_CHAR}))
+# The boolean flag indicating whether the input data file has header
+_input_data_file_header = pickle_load(base64_b64decode({INPUT_DATA_FILE_HEADER}))
+# DB Host.
+_db_host = pickle_load(base64_b64decode({DB_HOST}))
+# DB User.
+_db_user = pickle_load(base64_b64decode({DB_USER}))
+# DB password.
+_db_pass = pickle_load(base64_b64decode({DB_PASS}))
+# DB name.
+_db_name = pickle_load(base64_b64decode({DB_NAME}))
+# Table name.
+_table_name = pickle_load(base64_b64decode({TABLE_NAME}))
+# Logmech.
+_logmech = pickle_load(base64_b64decode({LOGMECH}))
+# Logdata.
+_logdata = pickle_load(base64_b64decode({LOGDATA}))
+
+# Function for reading data from file and passing it as input to user script.
+def read_from_file(cmd):
+    # Check if input file path not exists.
+    if not os.path.isfile(_data_file_path):
+        print(_data_file_path + " is not a valid file path.")
+        sys.exit(1)
+
+    # Read data from input file.
+    with open(_data_file_path) as data_file:
+        data_handle = StringIO()
+
+        ip_data = csv.reader(data_file, delimiter=_input_data_file_delimiter,
+                             quotechar=_input_data_file_quote_char)
+        # Skip the first row of input file if input_data_file_header is True
+        if _input_data_file_header:
+            next(ip_data)
+        for row in ip_data:
+            if _quotechar is not None:
+                # A NULL value should not be enclosed in quotes.
+                # The CSV module has no support for such output with writer,
+                # and hence the custom formatting.
+                line = ['' if pd_isna(s) else "{{}}{{}}{{}}".format(_quotechar, str(s),
+                                                                    _quotechar)
+                        for s in row]
+            else:
+                line = ['' if pd_isna(s) else str(s) for s in row]
+
+            complete_line = (_template_delimiter.join(line))
+            data_handle.write(complete_line)
+            data_handle.write("\n")
+
+        # Launch a process for running user script
+        output = execute_user_script(cmd, data_handle)
+        print(output)
+
+# Function for reading data from db and passing it as input to user script.
+def read_from_db(cmd):
+    db_data_handle = StringIO()
+    try:
+        db_name = _db_user
+        if _db_name:
+            db_name = _db_name
+
+        # Connecting to database.
+        if _logmech == 'JWT':
+            conn = teradatasql.connect(database=db_name, host=_db_host, user=_db_user,
+                                       password=_db_pass, logmech=_logmech,
+                                       logdata=_logdata)
+        else:
+            conn = teradatasql.connect(database=db_name, host=_db_host, user=_db_user,
+                                       password=_db_pass, logmech=_logmech)
+
+        with conn.cursor() as cur:
+            # Query for reading data from DB.
+            query = ("SELECT * FROM {{}} ORDER BY 1;".format(_table_name))
+            cur.execute(query)
+            row = cur.fetchone()
+            while row:
+                if _quotechar is not None:
+                    # A NULL value should not be enclosed in quotes.
+                    # The CSV module has no support for such output with writer,
+                    # and hence the custom formatting.
+                    line = ['' if pd_isna(s) else "{{}}{{}}{{}}".format(_quotechar,
+                                                                        str(s),
+                                                                        _quotechar)
+                            for s in row]
+                else:
+                    line = ['' if pd_isna(s) else str(s) for s in row]
+
+                complete_line = (_template_delimiter.join(line))
+                db_data_handle.write(complete_line)
+                db_data_handle.write("\n")
+                row = cur.fetchone()
+        conn.close()
+    except teradatasql.OperationalError as exp:
+        print("Container: Error: {{}}".format(exp), file=sys.stderr)
+        # Exit code 2 indicates either username or password is invalid.
+        sys.exit(2)
+    except teradatasql.Error as exp:
+        print("Container: Error: {{}}".format(exp), file=sys.stderr)
+        # Exit code 3 indicates problem with query.
+        sys.exit(3)
+    except Exception as exp:
+        print("Container: Error: {{}}".format(exp), file=sys.stderr)
+        # Exit code 4 indicates all other exceptions / errors.
+        sys.exit(4)
+
+    # Launching a new process to run user script.
+    output = execute_user_script(cmd, db_data_handle)
+    print(output)
+
+# Function to run user script.
+def execute_user_script(cmd, data_handle):
+    # Launch a process for running user script.
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE)
+    process_output, process_error = proc.communicate(
+        data_handle.getvalue().encode())
+    data_handle.close()
+
+    if proc.returncode != 0 or process_error:
+        print("Container: Error: {{}}".format(process_error), file=sys.stderr)
+        # Exit code 1 indicates any error thrown by subprocess.
+        sys.exit(1)
+    else:
+        return(process_output.decode("utf-8").rstrip("\r|\n"))
+
+if __name__ == "__main__":
+    # Check if python file path exists.
+    if not os.path.isfile(_user_script_path):
+        print(_user_script_path + " is not a valid file path.")
+        sys.exit(1)
+
+    # Launch a new process to run user script.
+    script_args = ""
+    if _script_args:
+        script_args = _script_args.split()
+    cmd = ["python3", _user_script_path]
+    cmd.extend(script_args)
+
+    if _data_source == "file":
+        read_from_file(cmd)
+    elif _data_source == "db":
+        read_from_db(cmd)

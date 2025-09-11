@@ -1,0 +1,7 @@
+{
+  "tfidf_input1": {
+    "docid": "integer",
+    "term": "varchar(50)",
+    "\"count\"": "integer"
+  }
+}

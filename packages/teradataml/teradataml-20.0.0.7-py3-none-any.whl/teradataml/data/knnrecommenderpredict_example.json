@@ -1,0 +1,12 @@
+{
+  "ml_ratings": {
+    "userid" : "integer",
+    "itemid" : "integer",
+    "rating" : "double PRECISION"
+  },
+  "ml_ratings_10": {
+    "userid" : "integer",
+    "itemid" : "integer",
+    "rating" : "double PRECISION"
+  }
+}

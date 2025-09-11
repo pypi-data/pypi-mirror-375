@@ -1,0 +1,13 @@
+{
+ "scale_housing" : {
+                  
+                  "types" : "varchar(20)",
+                  "id" : "integer",
+                  "price" : "real",
+                  "lotsize" : "real",
+                  "bedrooms" : "real",
+                  "bathrms" : "real",
+                  "stories" : "real"
+                     
+        }
+}

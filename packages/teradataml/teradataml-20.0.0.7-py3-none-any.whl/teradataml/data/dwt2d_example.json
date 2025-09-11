@@ -1,0 +1,16 @@
+{
+     "twod_climate_data" : {
+                  "state" : "varchar(30)",
+                  "city" : "varchar(30)",
+                  "latitude" : "integer",
+                  "longitude" : "integer",
+                  "temp_f" : "float",
+                  "pressure_mbar" : "float",
+                  "dewpoint_f" : "float"
+        },
+
+    "wft_testing" :{
+            "filtername" : "varchar(30)",
+            "filtervalue" : "varchar(1000)"
+            }
+}

@@ -1,0 +1,14 @@
+{
+ "soc_nw_vertices" : {
+
+                 "vertexid" : "varchar(10)"
+
+        },
+ "soc_nw_edges" : {
+
+                 "source" : "varchar(10)",
+                 "target" : "varchar(10)"
+
+        }
+
+}

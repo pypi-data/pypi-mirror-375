@@ -1,0 +1,36 @@
+{
+  "antiselect_input" : {
+                  
+                  "rowids" : "integer",
+                  "orderid" : "integer",
+                  "orderdate" : "date",
+                  "priority" : "varchar(15)",
+                  "quantity" : "integer",
+                  "sales" : "real",
+                  "discount" : "real",
+                  "shipmode" : "varchar(20)",
+                  "custname" : "varchar(30)",
+                  "province" : "varchar(30)",
+                  "region" : "varchar(30)",
+                  "custsegment" : "varchar(30)",
+                  "prodcat" : "varchar(30)"
+                  
+        },
+  "antiselect_input_mixed_case" : {
+
+                  "rowids" : "integer",
+                  "OrderId" : "integer",
+                  "ORDERDATE" : "date",
+                  "PRIORITY" : "varchar(15)",
+                  "quantity" : "integer",
+                  "sales" : "real",
+                  "Discount" : "real",
+                  "shipmode" : "varchar(20)",
+                  "custname" : "varchar(30)",
+                  "province" : "varchar(30)",
+                  "region" : "varchar(30)",
+                  "custsegment" : "varchar(30)",
+                  "prodcat" : "varchar(30)"
+
+        }
+}

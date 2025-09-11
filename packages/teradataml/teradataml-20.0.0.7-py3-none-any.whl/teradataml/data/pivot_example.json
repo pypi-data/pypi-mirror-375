@@ -1,0 +1,9 @@
+{
+  "pivot_input": {
+    "sn": "integer",
+    "city": "varchar(50)",
+    "week": "integer",
+    "attribute": "varchar(30)",
+    "value1": "varchar(30)"
+  }
+}

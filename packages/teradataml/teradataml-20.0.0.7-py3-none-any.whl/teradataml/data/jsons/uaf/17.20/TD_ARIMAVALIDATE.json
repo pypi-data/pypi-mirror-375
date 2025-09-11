@@ -1,0 +1,153 @@
+{
+        "FuncName": "TD_ARIMAVALIDATE",
+        "FuncDescriptionShort": "performs in-sample forecasting and then generates a residual series from the forecasted values with the observed 'test data' values",
+        "FuncDescriptionLong": [
+                "The TD_ARIMAVALIDATE function first performs an “In-Sample” forecast, followed by an analysis of the produced residuals.  The aim of this analysis is to provide the data scientist with a collection of metrics which are useful for model selection and expose the produced residuals, such that a number of model validation statistical tests can be conducted."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Model Preparation and Parameter Estimation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Arima_Validate",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "ART",
+                        "Description": [
+                                "Passed in an art table in ART_SPEC without specifying layer"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "a primary layer containing the model selection metrics",
+                                "The primary result set can be retrieved by issuing a SELECT against the analytical result table (ART) containing the results"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITMETADATA",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "varchar(16)"
+                        ],
+                        "Description": [
+                                "a secondary layer containing the goodness-of-fit metrics",
+                                "This result set is generated in response to the FUNC_PARAMS (FIT_METRICS(1) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This result set will be deposited into LAYER1 under the name ARTFITMETADATA."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITRESIDUALS",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "a tertiary layer containing the residuals left over from the validation exercise",
+                                "This result set is generated in response to the FUNC_PARAMS( RESIDUALS(1)) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This result set will be deposited into LAYER2 under the name ARTFITRESIDUALS."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTMODEL",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "varbyte(64000)"
+                        ],
+                        "Description": [
+                                "a quaternary layer, containing the model context, which can subsequently be used for forecasting with the model.",
+                                "This result set is always generated and contains the MODEL context which can subsequently be used to facilitate forecasting with the model.   Note that the main 'model' context is present in binary form and is not meant for human consumption.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This result set will be deposited into LAYER3 under the name ARTMODEL."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "FIT_METRICS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Indicator to generate a secondary result set that contains the model metadata statistics. A value of 1 means generate the secondary result set. A value of 0 means do not generate the result set. The default value is 0.",
+                                "The generated result set is retrieved by issuing a TD_EXTRACT_RESULTS function for the ART containing the results in the ARTFITMETADATA layer."
+                        ]
+                },
+                {
+                        "Name": "RESIDUALS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Indicator to generate the tertiary result set that contains the model residuals. A value of 1 means generate the tertiary result set. A value of 0 means do not generate the tertiary result set.The default is 0.",
+                                "The generated result set is retrieved by issuing a TD_EXTRACT_RESULTS function for the ART containing the results in the ARTFITRESIDUALS layer."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

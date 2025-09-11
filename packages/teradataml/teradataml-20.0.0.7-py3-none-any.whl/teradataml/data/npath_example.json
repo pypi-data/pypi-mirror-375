@@ -1,0 +1,23 @@
+{
+  "impressions": {
+    "userid": "integer",
+    "ts": "date",
+    "imp": "varchar(10)"
+  },
+  "clicks2": {
+    "userid": "integer",
+    "ts": "date",
+    "click": "varchar(10)"
+  },
+  "tv_spots": {
+    "ts": "date ",
+    "tv_imp": "varchar(10)"
+  },
+  "clickstream": {
+     "userid": "integer",
+     "sessionid": "integer",
+     "clicktime": "timestamp",
+     "pagetype": "varchar(20)"
+  }   
+}
+

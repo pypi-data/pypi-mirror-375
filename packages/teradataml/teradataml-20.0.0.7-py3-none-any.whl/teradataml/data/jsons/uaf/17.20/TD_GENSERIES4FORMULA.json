@@ -1,0 +1,85 @@
+{
+        "FuncName": "TD_GENSERIES4FORMULA",
+        "FuncDescriptionShort": "Forms a new series with the trend and/or periodicities subtracted out",
+        "FuncDescriptionLong": [
+                "In building statistical ARMA-style forecasting models, a necessary precondition is that the time series being modeled be stationary: stationary with respect to mean; stationary with respect to covariance; and, stationary with respect to variance.    Quite often, the time series that the data scientist wishes to model contains a trend - meaning that the time series is non-stationary with respect to the mean; or, alternatively may contain some periodicities (cyclic variance in data).  This trend and/or periodicities must be removed before modeling may begin. Once the data scientist has devised a formula to represent the trend or periodic behaviors, their next task is to generate a series using that formula; such that they can then input both the original series and formula driven series through a pointwise subtractor function, which forms a new series with the trend and/or periodicities subtracted out."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Data Preparation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Genseries_Formula",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": [
+                                "SERIES",
+                                "GENSERIES"
+                        ],
+                        "Description": [
+                                "The TD_GENSERIES4FORMULA function takes either: a self-generated series - GENSERIES_SPEC(); a pre-existing logical univariate series - SERIES_SPEC(CONTENT(REAL)); or, a logical multivariate series - SERIES_SPEC(CONTENT(MULTIVAR_REAL)); as input.   It then produces a formula driven univariate output series,  SERIES_SPEC(CONTENT(REAL)), in which the row-indexing mechanism is chosen by the user."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_GENSERIES4FORMULA function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.  ",
+                                "The primary result set can be accessed either via a subsequent SELECT * FROM <art table> statement or by issuing a TD_EXTRACT_RESULTS(…,LAYER(ARTPRIMARY),…) .",
+                                "<varies> Data type and values dependent upon the OUTPUT_FMT(INDEX()) declaration."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "FORMULA",
+                        "Type": "string",
+                        "Optional": false,
+                        "Description": [
+                                "A character string up to 64000 characters long which describes the formula to be applied.  See the general FORMULA section for a complete description of supported math operators and proper formulation rules."
+                        ],
+                        "LangName": "..."
+                },
+                {
+                        "Name": "ESTIMATE_MODE",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "An indicator that the output table include the input parameters with the results. A value of 1 includes input parameters. A value of 0 only returns the results column. The default is 0."
+                        ],
+                        "LangName": "..."
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

@@ -1,0 +1,10 @@
+{
+  "housing_data": {
+    "housesize" : "bigint", 
+    "lotsize" : "bigint",
+    "bedrooms" : "int",
+    "granite" : "int",
+    "upgradedbathroom" : "int",
+    "sellingprice" : "bigint"    
+  }
+}

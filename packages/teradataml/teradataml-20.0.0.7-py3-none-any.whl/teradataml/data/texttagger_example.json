@@ -1,0 +1,12 @@
+{
+  "text_inputs": {
+    "id": "integer",
+    "titles": "varchar(100)",
+    "content": "varchar(3000)",
+    "catalog": "varchar(50)"
+  },
+  "rule_inputs": {
+    "tagname": "varchar(20)",
+    "definition": "varchar(150)"
+  }
+}

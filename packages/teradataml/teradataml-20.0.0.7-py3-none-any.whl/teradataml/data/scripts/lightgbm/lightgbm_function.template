@@ -1,0 +1,216 @@
+import sys, json, io
+import pickle, base64, importlib, numpy as np
+from collections import OrderedDict
+
+func_name = "<func_name>"
+module_name = "<module_name>"
+is_lake_system = <is_lake_system>
+params = json.loads('<params>')
+data_partition_column_indices = <partition_cols_indices>
+data_partition_column_types = <partition_cols_types>
+model_file_prefix = "<model_file_prefix>" # Needed in case of lake system for writing model to /tmp
+
+DELIMITER = '\t'
+
+def convert_to_type(val, typee):
+    if typee == 'int':
+        return int(val) if val != "" else np.nan
+    if typee == 'float':
+        if isinstance(val, str):
+            val = val.replace(' ', '')
+        return float(val) if val != "" else np.nan
+    if typee == 'bool':
+        return eval(val) if val != "" else None
+    return str(val) if val != "" else None
+
+if not is_lake_system:
+    db = sys.argv[0].split("/")[1]
+
+data_present = False
+data_partition_column_values = []
+
+while 1:
+    try:
+        line = input()
+        if line == '':  # Exit if user provides blank line
+            break
+        else:
+            data_present = True
+            values = line.split(DELIMITER)
+            if not data_partition_column_values:
+                # Partition column values is same for all rows. Hence, only read once.
+                for i, val in enumerate(data_partition_column_indices): # Only partition columns are 
+                    data_partition_column_values.append(
+                        convert_to_type(values[val], typee=data_partition_column_types[i])
+                        )
+
+                # Prepare the corresponding model file name and extract model.
+                partition_join = "_".join([str(x) for x in data_partition_column_values])
+                # Replace '-' with '_' because partition_columns can be negative containing '-'.
+                partition_join = partition_join.replace("-", "_")
+
+                train_set = params.get("train_set") # Gets file name prefix.
+                model_file_path = f"{train_set}_{partition_join}"\
+                    if is_lake_system else \
+                    f"./{db}/{train_set}_{partition_join}"
+
+                with open(model_file_path, "rb") as fp:
+                    params["train_set"] = pickle.loads(fp.read())
+
+                valid_sets = params.get("valid_sets", None) # Gets file names prefix.
+                if valid_sets:
+                    params["valid_sets"] = []
+                    for valid_set in valid_sets:
+                        model_file_path = f"{valid_set}_{partition_join}"\
+                            if is_lake_system else \
+                            f"./{db}/{valid_set}_{partition_join}"
+                        with open(model_file_path, "rb") as fp:
+                            params["valid_sets"].append(pickle.load(fp))
+
+    except EOFError:  # Exit if reached EOF or CTRL-D
+        break
+
+if not data_present:
+    sys.exit(0)
+
+# Handle callbacks.
+rec_eval = None
+if "callbacks" in params and params["callbacks"] is not None:
+    callbacks = params["callbacks"]
+    callbacks = [callbacks] if not isinstance(callbacks, list) else callbacks
+    for i, callback in enumerate(callbacks):
+        c_module_name = callback["module"]
+        c_func_name = callback["func_name"]
+        c_kwargs = callback["kwargs"]
+        c_module = importlib.import_module(c_module_name)
+        if c_func_name == "record_evaluation":
+            # record_evaluation function takes empty dict. If the argument has elements in the
+            # dict, they will be deleted as per the documentation from lightgbm as described below:
+            # eval_result (dict) -
+            #   Dictionary used to store all evaluation results of all validation sets. This should
+            #   be initialized outside of your call to record_evaluation() and should be empty. Any
+            #   initial contents of the dictionary will be deleted.
+            rec_eval = {}
+            callbacks[i] = getattr(c_module, c_func_name)(rec_eval)
+        else:
+            callbacks[i] = getattr(c_module, c_func_name)(**c_kwargs)
+    
+    params["callbacks"] = callbacks
+
+module_ = importlib.import_module(module_name)
+
+### LightGBM training is giving some meaningful console output like this:
+### Hence, capturing it to show to the user.
+
+# [LightGBM] [Warning] Auto-choosing row-wise multi-threading, the overhead of testing was 0.000190 seconds.
+# You can set `force_row_wise=true` to remove the overhead.
+# And if memory is not enough, you can set `force_col_wise=true`.
+# [LightGBM] [Info] Total Bins 136
+# [LightGBM] [Info] Number of data points in the train set: 97, number of used features: 4
+# [LightGBM] [Info] Start training from score 0.556701
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [1]	valid_0's l2: 0.219637	valid_1's l2: 0.219637
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [2]	valid_0's l2: 0.196525	valid_1's l2: 0.196525
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [3]	valid_0's l2: 0.178462	valid_1's l2: 0.178462
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [4]	valid_0's l2: 0.162887	valid_1's l2: 0.162887
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [5]	valid_0's l2: 0.150271	valid_1's l2: 0.150271
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [6]	valid_0's l2: 0.140219	valid_1's l2: 0.140219
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [7]	valid_0's l2: 0.131697	valid_1's l2: 0.131697
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [8]	valid_0's l2: 0.124056	valid_1's l2: 0.124056
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [9]	valid_0's l2: 0.117944	valid_1's l2: 0.117944
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [10]	valid_0's l2: 0.11263	valid_1's l2: 0.11263
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [11]	valid_0's l2: 0.105228	valid_1's l2: 0.105228
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [12]	valid_0's l2: 0.0981571	valid_1's l2: 0.0981571
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [13]	valid_0's l2: 0.0924294	valid_1's l2: 0.0924294
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [14]	valid_0's l2: 0.0877899	valid_1's l2: 0.0877899
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [15]	valid_0's l2: 0.084032	valid_1's l2: 0.084032
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [16]	valid_0's l2: 0.080988	valid_1's l2: 0.080988
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [17]	valid_0's l2: 0.0785224	valid_1's l2: 0.0785224
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [18]	valid_0's l2: 0.0765253	valid_1's l2: 0.0765253
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [19]	valid_0's l2: 0.0750803	valid_1's l2: 0.0750803
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [20]	valid_0's l2: 0.0738915	valid_1's l2: 0.0738915
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [21]	valid_0's l2: 0.07288	valid_1's l2: 0.07288
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [22]	valid_0's l2: 0.0718676	valid_1's l2: 0.0718676
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [23]	valid_0's l2: 0.0706037	valid_1's l2: 0.0706037
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [24]	valid_0's l2: 0.0695799	valid_1's l2: 0.0695799
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [25]	valid_0's l2: 0.0687507	valid_1's l2: 0.0687507
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [26]	valid_0's l2: 0.0680819	valid_1's l2: 0.0680819
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [27]	valid_0's l2: 0.0674077	valid_1's l2: 0.0674077
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [28]	valid_0's l2: 0.0665111	valid_1's l2: 0.0665111
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [29]	valid_0's l2: 0.0659656	valid_1's l2: 0.0659656
+# [LightGBM] [Warning] No further splits with positive gain, best gain: -inf
+# [30]	valid_0's l2: 0.0652665	valid_1's l2: 0.0652665
+result = ""
+stdout = None
+try:
+    stdout = sys.stdout
+    new_stdout = io.StringIO()
+    sys.stdout = new_stdout
+    trained_model = getattr(module_, func_name)(**params)
+    result = new_stdout.getvalue()
+except Exception:
+    raise
+finally:
+    sys.stdout = stdout
+
+model_str = pickle.dumps(trained_model)
+console_output_str = result.encode()
+
+if is_lake_system:
+    model_file_path = f"/tmp/{model_file_prefix}_{partition_join}.pickle"
+    model_console_output_path = f"/tmp/{model_file_prefix}_{partition_join}_console_output.pickle"
+
+    # Write to file in Vantage, to be used in predict/scoring.
+    with open(model_file_path, "wb") as fp:
+        fp.write(model_str)
+
+    with open(model_console_output_path, "wb") as fpc:
+        fpc.write(console_output_str)
+
+
+model_data = model_file_path if is_lake_system else base64.b64encode(model_str)
+console_output = model_console_output_path if is_lake_system else base64.b64encode(console_output_str)
+
+output_data = [model_data, console_output]
+
+if rec_eval is not None:
+    rec_eval = pickle.dumps(rec_eval)
+    if is_lake_system:
+        rec_eval_file_path = f"/tmp/{model_file_prefix}_{partition_join}_rec_eval.pickle"
+
+        with open(rec_eval_file_path, "wb") as fp:
+            fp.write(rec_eval)
+
+    rec_eval = rec_eval_file_path if is_lake_system else base64.b64encode(rec_eval)
+
+    output_data.append(rec_eval)
+
+print(*(data_partition_column_values + output_data), sep=DELIMITER)

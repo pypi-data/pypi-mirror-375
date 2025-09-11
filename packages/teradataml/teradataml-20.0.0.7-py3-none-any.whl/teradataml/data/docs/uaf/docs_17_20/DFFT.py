@@ -1,0 +1,204 @@
+def DFFT(data=None, data_filter_expr=None, zero_padding_ok=True,
+         freq_style="K_INTEGRAL", hertz_sample_rate=None,
+         algorithm=None, human_readable=True,
+         output_fmt_content=None, **generic_arguments):
+    """
+    DESCRIPTION:
+        The DFFT() function takes a time or space series as an input, and produces
+        a result series containing the computed Fourier Transform Coefficients.
+        The computed coefficients can be output in either
+        rectangular (real, imaginary) or polar (amplitude, phase) forms.
+
+        The following procedure is an example of how to use DFFT() when convolving
+        two series with digital signal processing:
+            1. Use DFFT() on series 1 and series 2 to get dataframes
+               named 'dfftRes1' and 'dfftRes2', respectively.
+            2. Use BinarySeriesOp() to do point-wise multiplication
+               using 'dfftRes1' and 'dfftRes2'.
+            3. Use IDFFT() on the output of BinarySeriesOp() to get the
+               convolved result of the two series.
+
+    PARAMETERS:
+        data:
+            Required Argument.
+            Specifies a logical runtime series or the output of IDFFT in ART Spec.
+            Types: TDSeries, TDAnalyticResult
+
+        data_filter_expr:
+            Optional Argument.
+            Specifies the filter expression for "data".
+            Types: ColumnExpression
+
+        zero_padding_ok:
+            Optional Argument.
+            Specifies whether to pad zeros to the end of a given Series to
+            achieve a more efficient computation of the FFT coefficients.
+            When set to True, series is padded, otherwise not.
+            Default Value: True
+            Types: bool
+
+        freq_style:
+            Optional Argument.
+            Specifies format/values associated with the x-axis of the output.
+            Permitted Values:
+                * K_INTEGRAL: Integer representation.
+                * K_SAMPLE_RATE: Integer normalized to number entries,
+                                 with ranges from -0.5 to +0.5.
+                * K_RADIANS: Radian ranges from -π to +π.
+                * K_HERTZ: Frequency in hertz. Must be used in conjunction
+                           with HERTZ_SAMPLE_RATE.
+            Default Value: K_INTEGRAL
+            Types: str
+
+        hertz_sample_rate:
+            Optional Argument.
+            Specifies a floating point constant representing the sample rate
+            in hertz. A value of 10000.0 means that the sample points were
+            obtained by sampling at a rate of 10,000 hertz.
+            Note:
+                Applicable only when "freq_style" is set to 'K_HERTZ'.
+            Types: int OR float
+
+        algorithm:
+            Optional Argument.
+            Specifies the algorithm to be used for the primary DFFT
+            calculation. If the argument is not provided, the
+            internal DFFT planner selects the most efficient
+            algorithm for the operation.
+            Note:
+                For best performance, do not include this parameter.
+                Instead, let the internal DFFT planner select the best
+                algorithm.
+            Permitted Values: COOLEY_TUKEY, SINGLETON
+            Types: str
+
+        human_readable:
+            Optional Argument.
+            Specifies whether the input rows are in human-readable / plottable form,
+            or if they are output in the raw-form. Human-readable
+            output is symmetric around 0, such as -3, -2, -1, 0, 1, 2, 3.
+            Raw output is sequential, starting at zero, such as 0, 1, 2, 3.
+            When set to True the output is in human-readable form,
+            otherwise the output is in raw form.
+            Default Value: True
+            Types: bool
+
+        output_fmt_content:
+            Optional Argument.
+            Specifies the Fourier coefficient's output form.
+            The default value is dependent on the datatype
+            of the input series:
+              * A single var input generates COMPLEX output content by default.
+              * A multi var input generates MULTIVAR_COMPLEX output content by default.
+            Note:
+                1. Users can use COMPLEX or MULTIVAR_COMPLEX to
+                   request the Fourier coefficients in rectangular form.
+                2. AMPL_PHASE_RADIANS, AMPL_PHASE_DEGREES, AMPL_PHASE,
+                   MULTIVAR_AMPL_PHASE_RADIANS, MULTIVAR_AMPL_PHASE or
+                   MULTIVAR_AMPL_PHASE_DEGREES can be used to output
+                   the Fourier coefficients in the polar form and to further
+                   request the phase to be output in
+                   radians or degrees.
+                3. AMPL_PHASE is one of the permitted
+                   values, it is synonymous with AMPL_PHASE_RADIANS.
+                4. MULTIVAR_AMPL_PHASE is equivalent to
+                   MULTIVAR_AMPL_PHASE_RADIANS.
+            Permitted Values: COMPLEX,
+                              AMPL_PHASE_RADIANS,
+                              AMPL_PHASE_DEGREES,
+                              AMPL_PHASE,
+                              MULTIVAR_COMPLEX,
+                              MULTIVAR_AMPL_PHASE_RADIANS,
+                              MULTIVAR_AMPL_PHASE_DEGREES,
+                              MULTIVAR_AMPL_PHASE
+            Types: str
+
+        **generic_arguments:
+            Specifies the generic keyword arguments of UAF functions.
+            Below are the generic keyword arguments:
+                persist:
+                    Optional Argument.
+                    Specifies whether to persist the results of the
+                    function in a table or not. When set to True,
+                    results are persisted in a table; otherwise,
+                    results are garbage collected at the end of the
+                    session.
+                    Note that, when UAF function is executed, an
+                    analytic result table (ART) is created.
+                    Default Value: False
+                    Types: bool
+
+                volatile:
+                    Optional Argument.
+                    Specifies whether to put the results of the
+                    function in a volatile ART or not. When set to
+                    True, results are stored in a volatile ART,
+                    otherwise not.
+                    Default Value: False
+                    Types: bool
+
+                output_table_name:
+                    Optional Argument.
+                    Specifies the name of the table to store results.
+                    If not specified, a unique table name is internally
+                    generated.
+                    Types: str
+
+                output_db_name:
+                    Optional Argument.
+                    Specifies the name of the database to create output
+                    table into. If not specified, table is created into
+                    database specified by the user at the time of context
+                    creation or configuration parameter. Argument is ignored,
+                    if "output_table_name" is not specified.
+                    Types: str
+
+
+    RETURNS:
+        Instance of DFFT.
+        Output teradataml DataFrames can be accessed using attribute
+        references, such as DFFT_obj.<attribute_name>.
+        Output teradataml DataFrame attribute name is:
+            1. result
+
+
+    RAISES:
+        TeradataMlException, TypeError, ValueError
+
+
+    EXAMPLES:
+        # Notes:
+        #     1. Get the connection to Vantage to execute the function.
+        #     2. One must import the required functions mentioned in
+        #        the example from teradataml.
+        #     3. Function will raise error if not supported on the Vantage
+        #        user is connected to.
+
+        # Check the list of available UAF analytic functions.
+        display_analytic_functions(type="UAF")
+
+        # Load the example data.
+        load_example_data("uaf", "mvdfft8")
+
+        # Create teradataml DataFrame object.
+        data = DataFrame.from_table("mvdfft8")
+
+        # Create teradataml TDSeries object which is an input to DFFT function.
+        data_series_df = TDSeries(data=data,
+                                  id="sid",
+                                  row_index="n_seqno",
+                                  row_index_style= "SEQUENCE",
+                                  payload_field="magnitude1",
+                                  payload_content="REAL")
+
+        # Example 1: Compute the complex Fourier Transform Coefficients
+        #            using a sequential series.
+
+        uaf_out = DFFT(data=data_series_df,
+                       human_readable=True,
+                       output_fmt_content='COMPLEX')
+
+        # Print the result DataFrame.
+        print(uaf_out.result)
+
+    """

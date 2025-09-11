@@ -1,0 +1,39 @@
+{
+ "lungcancer" : {
+                  
+                 "id" : "integer",
+                 "trt" : "varchar(30)",
+                 "celltype" : "varchar(30)",
+                 "time_int" : "integer", 
+                 "status" : "integer",
+                 "karno" : "integer", 
+                 "diagtime" : "integer", 
+                 "age" : "integer",
+                 "prior" : "varchar(5)"
+                  
+        },
+         
+ "lc_new_reference" : {
+                 "id" : "integer",
+                 "trt" : "varchar(30)",
+                 "celltype" : "varchar(30)",
+                 "karno" : "integer",
+                 "diagtime" : "integer",
+                 "age" : "integer",
+                 "prior"  : "varchar(5)"
+                  
+        },
+ "lc_new_predictors" : {
+                  
+                 "id" : "integer",
+                 "name" : "varchar(30)",
+                 "trt" : "varchar(30)",
+                 "celltype" : "varchar(30)",
+                 "karno" : "integer",
+                 "diagtime" : "integer",
+                 "age" : "integer",
+                 "prior"  : "varchar(5)"
+                  
+        }
+        
+}

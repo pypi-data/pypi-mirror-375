@@ -1,0 +1,15 @@
+{
+ "lungcancer" : {
+                  
+                 "id" : "integer",
+                 "trt" : "varchar(30)",
+                 "celltype" : "varchar(30)",
+                 "time_int" : "integer", 
+                 "status" : "integer",
+                 "karno" : "integer", 
+                 "diagtime" : "integer", 
+                 "age" : "integer",
+                 "prior" : "varchar(5)"
+                  
+        }
+}

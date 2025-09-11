@@ -1,0 +1,8 @@
+{
+  "strsimilarity_input": {
+    "id": "integer",
+    "src_text1": "varchar(30)",
+    "src_text2": "varchar(30)",
+    "tar_text": "varchar(30)"
+  }
+}

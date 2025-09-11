@@ -1,0 +1,78 @@
+{
+    "function_tdplyr_name": "td_decision_tree_predict_sqle",
+    "function_r_name": "aa.decision.tree.predict",
+    "function_alias_name": "DecisionTreePredict",
+    "input_tables": [
+        {
+            "rName": "newdata",
+            "name": [
+                "AttributeTable",
+                "Attribute_Table"
+            ],
+            "useInR": true,
+            "rOrderNum": 2
+        },
+        {
+            "rName": "object",
+            "name": [
+                "Model",
+                "Model_Table"
+            ],
+            "useInR": true,
+            "rOrderNum": 1
+        }
+    ],
+    "function_name": "DecisionTreePredict",
+    "function_tdml_name": "DecisionTreePredict",
+    "argument_clauses": [
+        {
+            "allowsLists": true,
+            "datatype": "COLUMNS",
+            "rName": "attr.table.groupby.columns",
+            "name": ["AttrTableGroupbyColumns"],
+            "useInR": true,
+            "rOrderNum": 3
+        },
+        {
+            "allowsLists": true,
+            "datatype": "COLUMNS",
+            "rName": "attr.table.pid.columns",
+            "name": ["AttrTablePidColumns"],
+            "useInR": true,
+            "rOrderNum": 4
+        },
+        {
+            "datatype": "COLUMNS",
+            "rName": "attr.table.val.column",
+            "name": ["AttrTableValColumn"],
+            "useInR": true,
+            "rOrderNum": 5
+        },
+        {
+            "allowsLists": true,
+            "datatype": "COLUMNS",
+            "rName": "accumulate",
+            "name": [
+                "Accumulate",
+                "AccumulateLabel"
+            ],
+            "useInR": true,
+            "rOrderNum": 7
+        },
+        {
+            "datatype": "BOOLEAN",
+            "rName": "output.response.probdist",
+            "name": ["OutputResponseProbDist"],
+            "useInR": true,
+            "rOrderNum": 6
+        },
+        {
+            "allowsLists": true,
+            "datatype": "STRING",
+            "rName": "output.responses",
+            "name": ["Responses"],
+            "useInR": true,
+            "rOrderNum": 8
+        }
+    ]
+}

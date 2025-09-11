@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
+	<Header>
+		<Application name="JPMML-SkLearn" version="1.6.7"/>
+		<Timestamp>2021-02-10T20:29:07Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension>PMMLPipeline(steps=[('classifier', LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+                   intercept_scaling=1, l1_ratio=None, max_iter=100,
+                   multi_class='multinomial', n_jobs=None, penalty='l2',
+                   random_state=0, solver='lbfgs', tol=0.0001, verbose=0,
+                   warm_start=False))])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="y" optype="categorical" dataType="integer">
+			<Value value="1"/>
+			<Value value="2"/>
+			<Value value="3"/>
+		</DataField>
+		<DataField name="sepal_length" optype="continuous" dataType="double"/>
+		<DataField name="sepal_width" optype="continuous" dataType="double"/>
+		<DataField name="petal_length" optype="continuous" dataType="double"/>
+		<DataField name="petal_width" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<RegressionModel functionName="classification" normalizationMethod="softmax">
+		<MiningSchema>
+			<MiningField name="y" usageType="target"/>
+			<MiningField name="sepal_length"/>
+			<MiningField name="sepal_width"/>
+			<MiningField name="petal_length"/>
+			<MiningField name="petal_width"/>
+		</MiningSchema>
+		<Output>
+			<OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+			<OutputField name="probability(2)" optype="continuous" dataType="double" feature="probability" value="2"/>
+			<OutputField name="probability(3)" optype="continuous" dataType="double" feature="probability" value="3"/>
+		</Output>
+		<RegressionTable intercept="8.938227881001481" targetCategory="1">
+			<NumericPredictor name="sepal_length" coefficient="-0.365726676313997"/>
+			<NumericPredictor name="sepal_width" coefficient="0.8822995574583782"/>
+			<NumericPredictor name="petal_length" coefficient="-2.324927344973699"/>
+			<NumericPredictor name="petal_width" coefficient="-0.9676523741934062"/>
+		</RegressionTable>
+		<RegressionTable intercept="2.050747032825064" targetCategory="2">
+			<NumericPredictor name="sepal_length" coefficient="0.5061814224365385"/>
+			<NumericPredictor name="sepal_width" coefficient="-0.3997694043738738"/>
+			<NumericPredictor name="petal_length" coefficient="-0.07050477166298647"/>
+			<NumericPredictor name="petal_width" coefficient="-1.0668086583749683"/>
+		</RegressionTable>
+		<RegressionTable intercept="-10.988974913826715" targetCategory="3">
+			<NumericPredictor name="sepal_length" coefficient="-0.14045474612254663"/>
+			<NumericPredictor name="sepal_width" coefficient="-0.4825301530845058"/>
+			<NumericPredictor name="petal_length" coefficient="2.395432116636688"/>
+			<NumericPredictor name="petal_width" coefficient="2.034461032568374"/>
+		</RegressionTable>
+	</RegressionModel>
+</PMML>

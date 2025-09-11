@@ -1,0 +1,39 @@
+{
+        "FuncName": "TD_EXTRACT_RESULTS",
+        "FuncDescriptionShort": "Retrieve additional result sets within the ART table.",
+        "FuncDescriptionLong": [
+                "The TD_EXTRACT_RESULTS utility function is used to retrieve auxiliary result sets stored within the ART table. "
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "General Utility",
+        "JSONVersion": "1",
+        "FuncRName": "td_Extract_Results",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "ART",
+                        "Description": [
+                                "This AF function is passed an ART table specification, ART_SPEC. Within the ART_SPEC, the only thing that has to be passed in is the TABLE_NAME and LAYER. The PAYLOAD option can be omitted since all available payload columns need to be passed in to this function."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": "varies",
+                        "Description": [
+                                "The output of this function are wavelets from the specified LAYER of the ART table.",
+                                "Invoking this AF utility function retrieves all wavelets from one specified layer in the ART table. Please see the specific function’s RETURNS TABLE specification section to determine the output column descriptions for well-known layers."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [],
+        "InputFmt": false,
+        "OutputFmt": false
+}

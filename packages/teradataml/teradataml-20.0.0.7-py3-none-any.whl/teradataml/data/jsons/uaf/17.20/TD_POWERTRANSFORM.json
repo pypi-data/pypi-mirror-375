@@ -1,0 +1,98 @@
+{
+        "FuncName": "TD_POWERTRANSFORM",
+        "FuncDescriptionShort": "Applies a power transform to a series",
+        "FuncDescriptionLong": [
+                "At its core, this function takes a logical-runtime series - time series or numerically sequenced series - as an input and applies a power transform to the series, producing another series (1D array) as an output.  The passed in logical input series can be either a univariate or multivariate series, in which case the function respectively produces a univariate or multivariate output series.   The data scientist has a choice of preserving the input series indexing mechanism, or even altering it, via the OUTPUT_FMT(INDEX_STYLE()) declaration."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Model Preparation and Parameter Estimation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Power_Transform",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "this function takes a logical-runtime series - time series or numerically sequenced series - as an input"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "Series",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_POWERTRANSFORM function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.",
+                                "The produced logical result matrix always contains real number elements.  The data scientist has the choice with regards to the indexing mechanism (ROW_I) to be associated with the output series - OUTPUT_FMT(INDEX_STYLE()). "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "BACK_TRANSFORM",
+                        "Type": "integer",
+                        "Optional": false,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag set to 0 or 1.  BACK_TRANSFORM(0) is the default - means the forward transform is to be applied.  BACK_TRANSFORM(1) means the back transform is to be applied."
+                        ]
+                },
+                {
+                        "Name": "P",
+                        "Type": "double",
+                        "Optional": false,
+                        "AllowNaN": false,
+                        "Description": [
+                                "Incoming magnitudes are raised to this power.   Collectively, P and B determine the power function to be applied"
+                        ]
+                },
+                {
+                        "Name": "B",
+                        "Type": "double",
+                        "Optional": false,
+                        "AllowNaN": false,
+                        "Description": [
+                                "Germane for log functions.  The log to be applied. Collectively, P and B determine the power function to be applied"
+                        ]
+                },
+                {
+                        "Name": "LAMBDA",
+                        "Type": "double",
+                        "Optional": false,
+                        "AllowNaN": false,
+                        "Description": [
+                                "Germane for the Box-Cox transformation"
+                        ],
+                        "LangName": "lambda1"
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

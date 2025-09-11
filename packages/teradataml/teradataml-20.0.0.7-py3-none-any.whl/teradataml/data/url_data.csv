@@ -1,0 +1,10 @@
+"id","urls","part","query_key"
+0,"http://example.com:8080/path","FILE","path"
+1,"ftp://example.net:21/path","PATH","path"
+2,"https://example.net/path4/path5/path6?query4=value4#fragment3","REF","fragment3"
+3,"https://www.facebook.com","HOST","facebook.com"
+4,"https://teracloud-pod-services-pod-account-service.dummyvalue.production.pods.teracloud.ninja/v1/accounts/acc-dummyvalue/user-environment-service/api/v1/","QUERY",None
+5,"http://pg.example.ml/path150#fragment90","AUTHORITY","fragment90"
+6,"smtp://user:password@smtp.example.com:21/file.txt","USERINFO","password"
+7,"https://www.google.com","PROTOCOL","google.com"
+8,"http://example.com/api?query1=value1&query2=value2","QUERY","query1"

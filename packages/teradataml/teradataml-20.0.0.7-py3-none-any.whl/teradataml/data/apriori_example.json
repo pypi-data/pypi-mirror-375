@@ -1,0 +1,22 @@
+{
+    "trans_dense": {
+      "location": "varchar(100)",
+      "tranid": "int",
+      "period": "varchar(20)",
+      "storeid": "int",
+      "region": "varchar(20)",
+      "item": "varchar(200)",
+      "sku": "int",
+      "category": "varchar(20)"
+    },
+    "trans_sparse": {
+      "location": "varchar(20)",
+      "tranid": "int",
+      "period": "varchar(20)",
+      "storeid": "int",
+      "region": "varchar(20)",
+      "item": "varchar(20)",
+      "sku": "int",
+      "category": "varchar(20)"
+    }
+}

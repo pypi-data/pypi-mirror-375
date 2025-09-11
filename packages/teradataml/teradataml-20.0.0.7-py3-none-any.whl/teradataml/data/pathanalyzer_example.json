@@ -1,0 +1,8 @@
+{
+  "clickstream1": {
+    "userid": "integer",
+    "usertype": "varchar(10)",
+    "path": "varchar(30)",
+    "cnt": "integer"
+  }
+}

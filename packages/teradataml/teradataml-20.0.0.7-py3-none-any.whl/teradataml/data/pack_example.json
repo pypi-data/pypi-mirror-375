@@ -1,0 +1,9 @@
+{
+  "ville_temperature": {
+    "sn" : "integer",
+    "city" : " varchar(20)",
+    "state" : " varchar(20)",
+    "period" : "timestamp ",
+    "temp_f" : "real"
+  }
+}

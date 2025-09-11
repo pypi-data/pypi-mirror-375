@@ -1,0 +1,30 @@
+{
+  "target_mobile_data": {
+    "seqNo": "varchar(10)",
+    "userid": "integer",
+    "feature": "varchar(30)",
+    "value1": "double PRECISION"
+  },
+  "ref_mobile_data": {
+    "seqNo": "varchar(10)",
+    "userid": "integer",
+    "feature": "varchar(30)",
+    "value1": "double PRECISION"
+  },
+  "target_mobile_data_dense": {
+    "userid": "integer",
+    "CallDuration": "REAL",
+    "DataCounter": "REAL",
+    "SMS": "REAL"
+  },
+  "ref_mobile_data_dense": {
+    "userid": "integer",
+    "CallDuration": "REAL",
+    "DataCounter": "REAL",
+    "SMS": "REAL"
+  },
+  "target_udt_data":{
+    "id": "INTEGER", 
+    "array_col":"Vector"
+  }
+}

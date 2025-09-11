@@ -1,0 +1,12 @@
+{
+
+  "sales_transaction" :{
+        "orderid" : "integer",
+        "orderdate" : "date",
+        "orderqty" : "integer",
+        "region" : "varchar(30)",
+        "customer_segment" : "varchar(30)",
+        "prd_category" : "varchar(30)",
+        "product" : "varchar(50)"
+  }
+}

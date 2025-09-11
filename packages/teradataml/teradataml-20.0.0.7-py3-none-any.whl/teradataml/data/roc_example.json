@@ -1,0 +1,8 @@
+{
+  "roc_input" : {
+    "model_id" : "integer",
+    "id" : "integer",
+    "observation" : "integer",
+    "probability" : "real"
+  }
+}

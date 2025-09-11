@@ -1,0 +1,11 @@
+{
+  "words_input": {
+    "id": "integer",
+    "word": "varchar(30)"
+  },
+  "pos_input": {
+    "id": "integer",
+    "word": "varchar(100)",
+    "pos_tag": "varchar(100)"
+  }
+}

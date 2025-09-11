@@ -1,0 +1,32 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "1",
+  "json_content_version": "1",
+  "function_name": "TD_HNSWSummary",
+  "function_version": "1.0",
+  "function_type": "fastpath",
+  "function_category": "Model Exploration",
+  "function_alias_name": "TD_HNSWSummary",
+  "function_r_name": "td.hnswsummary",
+  "short_description": "The TD_HNSWSummary function takes the ModelTable generated from TD_HNSW function as input and converts the ModelTable data into readable format.",
+  "long_description": "The TD_HNSWSummary function takes the ModelTable generated from TD_HNSW function as input and converts the ModelTable data into readable format.",
+  "input_tables": [
+    {
+      "requiredInputKind": [
+        "PartitionByAny"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "ModelTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "The table that contains the HNSW model for exploration.",
+      "description": "The table that contains the HNSW model for exploration.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "object",
+      "useInR": true,
+      "rOrderNum": 1
+    }
+  ]
+}

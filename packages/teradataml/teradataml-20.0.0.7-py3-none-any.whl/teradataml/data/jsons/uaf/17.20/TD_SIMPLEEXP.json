@@ -1,0 +1,184 @@
+{
+        "FuncName": "TD_SIMPLEEXP",
+        "FuncDescriptionShort": "The forecasting of the original series",
+        "FuncDescriptionLong": [
+                "The Simple Exponential Smoothing (aka, Single Exponential Smoothing) approach employs a forecasting model that uses only the “level” modeling component to accomplish the forecasting of the original series."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Series Forecasting",
+        "JSONVersion": "1",
+        "FuncRName": "td_Simple_Exp",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "Passed in a logical univariate series, this function will forecast “h” periods (“h” steps) into the future, meaning “h” periods beyond the last observed sample point for the passed in series.   This function outputs up to three result sets.  The primary result set contains the historical data points, the forecasted data points, and the prediction level data points.  This result set can be retrieved by issuing a SELECT against the analytical result table.   The optional secondary result set contains a collection of goodness-of-fit metrics, roughly equivalent to those returned by the independent TD_FIT_METRICS function.  The optional tertiary result set contains the residual series, associated with the forecasting operation. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The primary result set contains the historical “observed” values, the “forecasted” values, and, if requested, the high and low prediction intervals  The primary analytical result set can be retrieved by issuing a SELECT against the table created by the INTO VOLATILE clause. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITMETADATA",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "integer",
+                                "integer",
+                                "float"
+                        ],
+                        "Description": [
+                                "The RETURNS TABLE for this optional analytical result set, containing “goodness of fit” metadata, is described in this subsection.   This result set is generated in response to the FUNC_PARAMS (FIT_METRICS(1) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This result set will be deposited into LAYER1 under the name ARTFITMETADATA.",
+                                "There is one result row returned for each unique series acted upon. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITRESIDUALS",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "This result set is generated in response to the FUNC_PARAMS( RESIDUALS(1)) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This result set will be deposited into LAYER1 under the name ARTFITRESIDUALS."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "FORECAST_PERIODS",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Number of Periods to Forecast ahead"
+                        ]
+                },
+                {
+                        "Name": "ALPHA",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "If present, this value is used in the equation to perform the forecasting.  If not present, then the value of ALPHA is estimated by using 'goodness of fit' metrics",
+                                "F_{t+1} = F_t + a(Y_t - F_t)  =  aY_t + (1- a)F_t"
+                        ]
+                },
+                {
+                        "Name": "PREDICTION_INTERVALS",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "NONE",
+                                "80",
+                                "95",
+                                "BOTH"
+                        ],
+                        "DefaultValue": "BOTH",
+                        "Description": [
+                                "Set to either of: 'NONE' or '80' or '95' or 'BOTH'; default is 'BOTH'"
+                        ]
+                },
+                {
+                        "Name": "FORECAST_STARTING_VALUE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "FIRST",
+                        "PermittedValues": [
+                                "FIRST",
+                                "MEAN"
+                        ],
+                        "Description": [
+                                "Set to either of: 'FIRST' or 'MEAN'; default is 'FIRST'  "
+                        ]
+                },
+                {
+                        "Name": "FIT_METRICS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag indicating whether or not to generate the secondary result set that contains the model metadata statistics.  A value of FIT_METRICS(1) means generate the secondary result set.   A value of FIT_METRICS(0) means do not generate the secondary result set.  Default is FIT_METRICS(0).  The generated result set can be retrieved by issuing a TD_EXTRACT_RESULTS against the analytical result table containing the results."
+                        ]
+                },
+                {
+                        "Name": "RESIDUALS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag indicating whether or not to generate the tertiary result set that contains the model residuals.  A value of RESIDUALS(1) means generate the tertiary result set.   A value of RESIDUALS(0) means do not generate the tertiary result set.  Default is RESIDUALS(0).  The generated result set can be retrieved by issuing a TD_EXTRACT_RESULTS against the analytical result table containing the results."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

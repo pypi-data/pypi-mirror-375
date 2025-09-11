@@ -1,0 +1,132 @@
+{
+      "FuncName": "TD_ACF",
+      "FuncDescriptionShort": "Calculating auto-correlation and auto-covariance of a time series",
+      "FuncDescriptionLong": [
+          "The auto-covariance and auto-correlation function compute how a time series covaries or correlates with itself, when delayed by a particular lag",
+          "Example:For a lag equal to 1, we calculate the covariance or correlation between time series Yt  and time series Yt-1 ",
+          "for lag equal to 2, we calculate the covariance or correlation between time series Yt  and time series Yt-2 "
+      ],
+      "FunctionVersion": "1.0",
+      "FunctionCategory": "Model Preparation and Parameter Estimation",
+      "JSONVersion": "1.0",
+      "FuncRName": "td_ACF",
+      "MaxInputFiles": 1,
+      "Input": [
+              {
+                    "Type": "SERIES",
+                    "Description": "Specifies a series that is one dimensional array passed as an input to the function.",
+                    "LangName": "data",
+                    "Optional": false
+              }
+      ],
+      "Output": [
+              {
+                    "Type": "ART",
+                    "PrimaryLayer": true,
+                    "LayerName": "ARTPRIMARY",
+                    "ResultTableColumnTypes": [
+                      "integer",
+                      "float",
+                      "float",
+                      "float",
+                      "float",
+                      "float"
+                    ],
+                    "Description": [
+                      "Specifies the result in an ART table"
+                    ],
+                    "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+              }
+      ],
+      "IsPlottable": true,
+      "Params": [
+              {
+                    "Name": "MAXLAGS",
+                    "Type": "integer",
+                    "LowerBound": 1,
+                    "LowerBoundType": "INCLUSIVE",
+                    "Optional": true,
+                    "AllowNaN": false,
+                    "Description": [
+                      "Maximum number of lags at which to calculate the autocorrelation/autocovariance.",
+                      "Default is 10*log10(N) where N is the number of observations.",
+                      "Automatically limited to one less than the number of observations in the series.",
+                      "If the numLags value specified by the user exceeds this limit, the user input value is ignored and replaced with the system defined max value."
+                    ],
+                    "LangName": "max_lags"
+              },
+              {
+                    "Name": "FUNC_TYPE",
+                    "Type": "integer",
+                    "Optional": true,
+                    "DefaultValue": 0,
+                    "AllowNaN": false,
+                    "Description": [
+                      "Specifies whether it is a auto-correlation or auto-covariance function.",
+                      "0 means execute the auto-correlation function.  1 means execute the auto-covariance function"
+                    ],
+                    "PermittedValues": [
+                      0,
+                      1
+                    ]
+              },
+              {
+                    "Name": "UNBIASED",
+                    "Type": "integer",
+                    "Optional": true,
+                    "DefaultValue": 0,
+          "PermittedValues": [
+              0,
+              1
+          ],
+                    "AllowNaN": false,
+                    "Description": [
+                      "If 0, then denominator for autocovariance is n-k (Jenkins & Watts formula)",
+                      "otherwise if 1, denominator for autocovariance is n (Box & Jenkins formula). "
+                    ]
+              },
+              {
+                    "Name": "DEMEAN",
+                    "Type": "integer",
+                    "Optional": true,
+                    "DefaultValue": 1,
+          "PermittedValues": [
+              0,
+              1
+          ],
+                    "AllowNaN": false,
+                    "Description": [
+                      "If 1 (default), then subtract the mean x from each element of x, as specified in the formulas for autocorrelation or autocovariance.",
+                      "If 0, then we do NOT do the subtraction on each element before computing the autocorrelation or autocovariance."
+                    ]
+              },
+              {
+                    "Name": "QSTAT",
+                    "Type": "integer",
+                    "Optional": true,
+                    "DefaultValue": 0,
+          "PermittedValues": [
+              0,
+              1
+          ],
+                    "AllowNaN": false,
+                    "Description": [
+                      "1 means provide Ljung-Box q statistic for each autocorrelation coefficient.",
+                      "0 (default) means do not provide.   Requesting a QSTAT results in a QSTATVAL and PVALUE set of result columns being returned."
+                    ]
+              },
+              {
+                    "Name": "ALPHA",
+                    "Type": "double",
+                    "Optional": true,
+                    "AllowNaN": false,
+                    "Description": [
+                      "If a non-zero positive number is given, the confidence intervals for the given level are returned.",
+                      "For example, if alpha=.05 meaning the 95% level , then confidence intervals are returned where the standard deviation is computed according to Bartlett’s formula.",
+                      "Passing in a positive number results in a CONFINT result column being returned"
+                    ]
+              }
+      ],
+      "InputFmt": false,
+      "OutputFmt": false
+}

@@ -1,0 +1,12 @@
+{
+  "friends" : {
+    "friends_name" : "varchar(20)",
+    "location" : "varchar(20)",
+    "group_id" : "varchar(20)"
+  },
+  "followers_leaders" :{
+    "follower" : "varchar(20)",
+    "leader" : "varchar(20)",
+    "intensity" : "real"
+  }
+}

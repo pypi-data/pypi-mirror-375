@@ -1,0 +1,11 @@
+{
+  "corr_input": {
+    "year_value": "integer",
+    "state": "varchar(100)",
+    "gdpdeflator": "real",
+    "gdp": "real",
+    "unemployed": "real",
+    "armedforces": "real",
+    "employed": "real"
+  }
+}

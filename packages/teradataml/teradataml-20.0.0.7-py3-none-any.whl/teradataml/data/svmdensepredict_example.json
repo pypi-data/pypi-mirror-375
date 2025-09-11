@@ -1,0 +1,19 @@
+{
+ 
+  "nb_iris_input_train" :{
+          "id" : "integer", 
+          "sepal_length" : "real", 
+          "sepal_width" : "real", 
+          "petal_length" : "real", 
+          "petal_width" : "real", 
+          "species" : "varchar(30)"
+            },
+  "nb_iris_input_test" :{
+          "id" : "integer", 
+          "sepal_length" : "real", 
+          "sepal_width" : "real", 
+          "petal_length" : "real", 
+          "petal_width" : "real", 
+          "species" : "varchar(30)"
+            }
+}

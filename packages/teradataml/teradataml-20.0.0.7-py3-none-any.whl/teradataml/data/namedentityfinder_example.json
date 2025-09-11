@@ -1,0 +1,14 @@
+{
+     "assortedtext_input" : {
+
+                  "id" : "integer",
+                  "source" : "varchar(4)",
+                  "content" : "varchar(1024)"
+        },
+
+    "name_Find_configure" :{
+            "model_name" : "varchar(12)",
+            "model_type" : "varchar(11)",
+            "model_file" : "varchar(23)"
+            }
+}

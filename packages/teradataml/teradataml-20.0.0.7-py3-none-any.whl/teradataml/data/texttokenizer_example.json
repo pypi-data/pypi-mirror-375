@@ -1,0 +1,7 @@
+{
+  "complaints": {
+    "doc_id": "integer",
+    "text_data": "varchar(3000)",
+    "category": "varchar(50)"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "applicant_reference" : {
+    "id" : "integer",
+    "firstname" : "varchar(30)",
+    "lastname" : "varchar(30)",
+    "email" : "varchar(30)",
+    "city" : "varchar(20)",
+    "zipcode" : "integer",
+    "department" : "varchar(20)",
+    "gender" : "varchar(10)"
+  },
+  "applicant_external" :{
+    "id" : "integer",
+    "firstname" : "varchar(30)",
+    "lastname" : "varchar(30)",
+    "email" : "varchar(30)",
+    "city" : "varchar(20)",
+    "zipcode" : "integer",
+    "department" : "varchar(20)",
+    "creditscore" : "real"
+  }
+}

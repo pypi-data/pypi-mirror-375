@@ -1,0 +1,5 @@
+"type_ner","regex"
+"email","[\w\-]([\.\w])+[\w]+@([\w\-]+\.)+[a-zA-Z]{2,4}"
+"Money","\s\$[0-9]+\s"
+"Digits","\s[0-9]+\s"
+"Name","[A-Z][a-z]+\s+[A-Z][a-z]+"

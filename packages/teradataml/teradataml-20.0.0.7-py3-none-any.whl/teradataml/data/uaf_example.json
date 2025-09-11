@@ -1,0 +1,529 @@
+{
+  "souvenir_timeseries": {
+    "seriesID" : "INTEGER",
+    "row_axis" : "INTEGER",
+    "sales" : "FLOAT"
+  },
+  "house_values2": {
+    "s_no" : "INTEGER",
+    "cid" : "INTEGER",
+    "salary" : "INTEGER",
+    "house_value" : "FLOAT"
+  },
+  "stock_data": {
+        "data_set_id": "INTEGER",
+        "seq_no": "INTEGER",
+        "timevalue": "DATE",
+        "magnitude": "FLOAT"
+    },
+  "river_data": {
+      "station_id": "INTEGER",
+      "seq_no": "INTEGER",
+      "timevalue": "DATE",
+      "flow_velocity": "FLOAT"
+  },
+  "store_sales": {
+      "StoreID": "INTEGER",
+      "ts": "DATE",
+      "Sales": "FLOAT"
+  },
+  "orders1_12": {
+   "OrderID": "INTEGER",
+   "SEQ": "INTEGER",
+   "Qty1": "FLOAT"
+  },
+  "orders1_12mf": {
+   "OrderID": "INTEGER",
+   "SEQ": "INTEGER",
+   "Qty1": "FLOAT",
+   "Qty2": "FLOAT"
+  },
+  "orders1": {
+   "store_id": "INTEGER",
+    "seq": "INTEGER",
+    "sales": "FLOAT"
+  },
+  "timeseriesdatasetsd4": {
+      "dataset_id": "INTEGER",
+      "seqno": "INTEGER",
+      "timevalue": "DATE",
+      "magnitude": "FLOAT"
+  },
+  "blood2ageandweight": {
+      "SeqNo": "INTEGER",
+      "PatientID": "INTEGER",
+      "Weight": "INTEGER",
+      "Age": "INTEGER",
+      "BloodFat": "INTEGER",
+      "RegrWeights": "INTEGER"
+  },
+  "fm_blood2ageandweight": {
+      "I": "INTEGER",
+      "ID": "INTEGER",
+      "Weight": "INTEGER",
+      "Age": "INTEGER",
+      "BloodFat": "INTEGER",
+      "RegrWeights": "INTEGER"
+  },
+  "inflation": {
+      "countryid": "INTEGER",
+      "year_recorded": "DATE",
+      "seqno": "INTEGER",
+      "inflation_rate": "FLOAT"
+  },
+  "BINARY_COMPLEX_LEFT": {
+      "ID": "INTEGER",
+      "SEQ": "INTEGER",
+      "REAL_VAL": "FLOAT",
+      "IMAGINARY_VAL": "FLOAT"
+  },
+  "BINARY_COMPLEX_RIGHT": {
+      "ID": "INTEGER",
+      "SEQ": "INTEGER",
+      "REAL_VAL": "FLOAT",
+      "IMAGINARY_VAL": "FLOAT"
+  },
+  "BINARY_REALS_LEFT": {
+      "ID": "INTEGER",
+      "SEQ": "INTEGER",
+      "A": "FLOAT",
+      "B": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "BINARY_REALS_RIGHT": {
+      "ID": "INTEGER",
+      "SEQ": "INTEGER",
+      "A": "FLOAT",
+      "B": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "binary_matrix_complex_left": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "tick": "INTEGER",
+      "real_val": "FLOAT",
+      "imaginary_val": "FLOAT"
+  },
+  "binary_matrix_complex_right": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "tick": "INTEGER",
+      "real_val": "FLOAT",
+      "imaginary_val": "FLOAT"
+  },
+  "binary_matrix_real_left": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "tick": "INTEGER",
+      "a": "FLOAT",
+      "b": "FLOAT",
+      "c": "FLOAT",
+      "d": "FLOAT"
+  },
+  "binary_matrix_real_right": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "tick": "INTEGER",
+      "a": "FLOAT",
+      "b": "FLOAT",
+      "c": "FLOAT",
+      "d": "FLOAT"
+  },
+  "Convolve2ValidLeft": {
+      "id": "INTEGER",
+      "row_i": "INTEGER",
+      "column_i": "INTEGER",
+      "A": "FLOAT",
+      "B": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "Convolve2ValidRight": {
+      "id": "INTEGER",
+      "row_i": "INTEGER",
+      "column_i": "INTEGER",
+      "A": "FLOAT",
+      "B": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "Convolve2RealsLeft": {
+      "id": "INTEGER",
+      "row_seq": "INTEGER",
+      "row_i_time": "TIMESTAMP",
+      "col_seq": "INTEGER",
+      "column_i_time": "TIMESTAMP",
+      "A": "FLOAT",
+      "B": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "Convolve2RealsRight": {
+      "id": "INTEGER",
+      "row_seq": "INTEGER",
+      "row_i_time": "TIMESTAMP",
+      "col_seq": "INTEGER",
+      "column_i_time": "TIMESTAMP",
+      "A": "FLOAT",
+      "B": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "CONVOLVE2_COMPLEX_LEFT": {
+      "ID": "INTEGER",
+      "ROW_SEQ": "INTEGER",
+      "ROW_I_Time": "TIMESTAMP",
+      "COL_SEQ": "INTEGER",
+      "COLUMN_I_Time": "TIMESTAMP",
+      "A_REAL": "FLOAT",
+      "A_IMAG": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "CONVOLVE2_COMPLEX_RIGHT": {
+      "ID": "INTEGER",
+      "ROW_SEQ": "INTEGER",
+      "ROW_I_Time": "TIMESTAMP",
+      "COL_SEQ": "INTEGER",
+      "COLUMN_I_Time": "TIMESTAMP",
+      "A_REAL": "FLOAT",
+      "A_IMAG": "FLOAT",
+      "C": "FLOAT",
+      "D": "FLOAT"
+  },
+  "genData": {
+      "ID": "INTEGER",
+      "row_i": "INTEGER",
+      "MAGNITUDE": "FLOAT"
+  },
+  "mvdfft8": {
+      "n_seqno": "INTEGER",
+      "sid": "INTEGER",
+      "magnitude1": "FLOAT",
+      "magnitude2": "FLOAT",
+      "magnitude3": "FLOAT"
+  },
+  "dfft2_test_matrix16": {
+      "row_i": "INTEGER",
+      "column_i": "INTEGER",
+      "buoy_id": "INTEGER",
+      "magnitude": "FLOAT"
+  },
+  "TestRiver": {
+      "N_SeqNo": "INTEGER",
+      "BuoyID": "INTEGER",
+      "MAGNITUDE": "FLOAT"
+  },
+  "xconvolve_complex_left": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "a_real": "FLOAT",
+      "a_imag": "FLOAT"
+  },
+  "hconvolve_complex_right": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "a_real": "FLOAT",
+      "a_imag": "FLOAT"
+  },
+  "xconvolve_complex_leftmulti": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "a_real": "FLOAT",
+      "a_imag": "FLOAT",
+      "b_real": "FLOAT",
+      "b_imag": "FLOAT",
+      "c_real": "FLOAT",
+      "c_imag": "FLOAT"
+  },
+  "hconvolve_complex_rightmulti": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "a_real": "FLOAT",
+      "a_imag": "FLOAT",
+      "b_real": "FLOAT",
+      "b_imag": "FLOAT",
+      "c_real": "FLOAT",
+      "c_imag": "FLOAT"
+  },
+  "TestDFFT8": {
+      "N_SeqNo": "INTEGER",
+      "BuoyID": "INTEGER",
+      "MAGNITUDE": "FLOAT"
+  },
+  "DFFTConv_Real_8_8": {
+      "ROW_I": "INTEGER",
+      "ID": "INTEGER",
+      "MAGNITUDE": "FLOAT"
+  },
+  "dfft2conv_real_4_4": {
+      "row_i": "INTEGER",
+      "column_i": "INTEGER",
+      "id": "INTEGER",
+      "magnitude": "FLOAT"
+  },
+  "seeds": {
+      "StoreID": "INTEGER",
+      "SEQ": "INTEGER",
+      "Sales": "FLOAT"
+  },
+  "dtw_t1": {
+      "id": "INTEGER",
+      "seq": "DATE",
+      "v": "FLOAT"
+  },
+  "dtw_t2": {
+      "id": "INTEGER",
+      "seq": "DATE",
+      "v": "FLOAT"
+  },
+  "BuoyData2": {
+      "BuoyId": "INTEGER",
+      "SeqNo": "INTEGER",
+      "Mag": "INTEGER"
+  },
+  "test_pacf_12": {
+      "n_seq_no": "INTEGER",
+      "buoy_id": "INTEGER",
+      "magnitude1": "FLOAT",
+      "magnitude2": "FLOAT",
+      "magnitude3": "FLOAT"
+  },
+  "HOUSE_VALUES2": {
+      "S_NO": "INTEGER",
+      "CID": "INTEGER",
+      "SALARY": "INTEGER",
+      "HOUSE_VALUE": "FLOAT"
+  },
+  "ocean_buoy": {
+      "n_seq_no": "INTEGER",
+      "buoy_id": "INTEGER",
+      "magnitude": "FLOAT"
+  },
+  "ocean_buoy2": {
+      "n_seq_no": "INTEGER",
+      "buoy_id": "INTEGER",
+      "magnitude1": "FLOAT",
+      "magnitude2": "FLOAT"
+  },
+  "ageandpressure": {
+      "I": "INTEGER",
+      "A0": "INTEGER",
+      "A1": "INTEGER",
+      "B": "INTEGER"
+  },
+  "gq_t1": {
+    "series_id": "INTEGER",
+    "row_i": "INTEGER",
+    "y2": "FLOAT",
+    "y1": "FLOAT",
+    "x1": "FLOAT"
+ },
+  "SMOOTHED_DATA": {
+      "BUOYID": "INTEGER",
+      "ROW_I": "INTEGER",
+      "COLUMN_I": "INTEGER",
+      "MAGNITUDE": "FLOAT"
+  },
+  "Traindata": {
+      "seq_no": "INTEGER",
+      "train_id": "INTEGER",
+      "next_station": "varchar(50)",
+      "destination": "varchar(50)",
+      "longitude": "FLOAT",
+      "lattitude": "FLOAT",
+      "source": "VARCHAR(50)",
+      "schedule_date": "DATE",
+      "arrivalTime": "TIMESTAMP(0)",
+      "departureTime": "TIMESTAMP(0)"
+  },
+  "ageandheight": {
+      "N_SeqNo": "INTEGER",
+      "BuoyID": "INTEGER",
+      "AGE": "INTEGER",
+      "HEIGHT": "FLOAT"
+  },
+  "mtx1": {
+    "buoy_id": "INTEGER",
+    "row_i": "INTEGER",
+    "column_i": "INTEGER",
+    "speed1": "FLOAT"
+  },
+  "mtx2": {
+    "buoy_id": "INT",
+    "row_i": "INT",
+    "column_i": "INT",
+    "speed2": "FLOAT"
+  },
+  "playerRating": {
+    "id": "INTEGER",
+    "one": "INTEGER",
+    "rating": "INTEGER",
+    "points": "INTEGER",
+    "assists": "INTEGER",
+    "rebounds": "INTEGER"
+  },
+  "waveletTable": {
+    "ID":  "VARCHAR(20)",
+    "x": "FLOAT",
+    "t": "FLOAT",
+    "y": "FLOAT",
+    "c": "FLOAT"
+  },
+  "waveletTable2": {
+    "ID": "VARCHAR(20)",
+    "x": "FLOAT",
+    "t": "FLOAT",
+    "y": "FLOAT",
+    "c": "FLOAT"
+  },
+ "buoydata_mix": {
+  "TD_TIMECODE": "timestamp(6)",
+  "buoyid": "integer",
+  "salinity": "integer",
+  "temperature": "integer",
+   "oceanname": "VARCHAR(20)",
+   "jsoncol": "JSON",
+  "<PTI_CLAUSE>": "(TIMESTAMP(6), DATE '2012-01-01', HOURS(1), COLUMNS(BUOYID), nonsequenced)"
+  },
+  "ocean_buoys2": {
+    "TD_TIMECODE": "TIMESTAMP(6)",
+    "buoyid": "INTEGER",
+    "salinity": "INTEGER",
+    "space": "FLOAT",
+    "density": "INTEGER",
+    "temperature": "FLOAT",
+    "ocean_name": "VARCHAR(40)",
+    "jsoncol": "JSON(135)",
+    "<PTI_CLAUSE>": "(TIMESTAMP(6), DATE '2012-01-01', HOURS(1), COLUMNS(buoyid), nonsequenced)"
+  },
+  "house_values": {
+    "TD_TIMECODE": "TIMESTAMP(6)",
+    "cityid": "INTEGER",
+    "house_val": "FLOAT",
+    "salary": "FLOAT",
+    "mortgage": "FLOAT",
+    "<PTI_CLAUSE>": "(TIMESTAMP(6), DATE '2012-01-01', HOURS(1), COLUMNS(cityid), nonsequenced)"
+  },
+  "production_data": {
+    "TD_TIMECODE": "TIMESTAMP(6)",
+    "TD_SEQNO": "INTEGER",
+    "product_id": "INTEGER",
+    "beer_sales": "REAL",
+    "wine_sales": "REAL",
+    "<PTI_CLAUSE>": "(TIMESTAMP(6), DATE '2017-01-01', HOURS(1), COLUMNS(product_id), SEQUENCED)"
+  },
+  "test_river2": {
+    "n_seq_no": "INTEGER",
+    "buoy_id": "INTEGER",
+    "magnitude": "FLOAT"
+  },
+  "production_data2": {
+    "TD_TIMECODE": "TIMESTAMP(0)",
+    "product_id": "INTEGER",
+    "seq_no": "INTEGER",
+    "beer_sales": "REAL",
+    "<PTI_CLAUSE>": "(TIMESTAMP(0), DATE '2017-01-01', HOURS(1), COLUMNS(product_id), nonsequenced)"
+  },
+  "train_tracking": {
+    "seq_no": "INTEGER",
+    "train_id": "INTEGER",
+    "schedule_date": "DATE",
+    "source": "VARCHAR(50)",
+    "next_station": "VARCHAR(50)",
+    "destination": "VARCHAR(50)",
+    "geo_tag": "st_geometry(400)",
+    "arrival_time": "TIMESTAMP(0)",
+    "departure_time": "TIMESTAMP(0)"
+  },
+   "binary_complex_left": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "real_val": "FLOAT",
+      "imaginary_val": "FLOAT"
+  },
+  "binary_complex_right": {
+      "id": "INTEGER",
+      "seq": "INTEGER",
+      "real_val": "FLOAT",
+      "imaginary_val": "FLOAT"
+  },
+    "us_air_pass": {
+    "TD_TIMECODE": "DATE",
+    "id": "INTEGER",
+    "idx": "INTEGER",
+    "international": "REAL",
+    "domestic": "REAL",
+    "<PTI_CLAUSE>": "(DATE, DATE '2017-01-01', CAL_MONTHS(1))"
+    },
+  "dfft2_size4_real": {
+    "row_i": "INTEGER",
+    "column_i": "INTEGER",
+    "buoy_id": "INTEGER",
+    "magnitude": "FLOAT"
+  },
+  "acf": {
+    "id": "INTEGER",
+    "ROW_I": "INTEGER",
+    "OUT_v": "FLOAT",
+    "CONF_OFF_v": "FLOAT",
+    "CONF_LOW_v": "FLOAT",
+    "CONF_HI_v": "FLOAT"
+  },
+  "dwt_dataTable":{
+	  "id": "INTEGER",
+	  "rowi": "INTEGER",
+	  "v": "FLOAT"
+  },
+  "dwt_filterTable":{
+	  "id": "INTEGER",
+	  "seq": "INTEGER",
+	  "lo": "FLOAT",
+	  "hi": "FLOAT"
+  },
+  "idwt_dataTable":{
+	  "id": "INTEGER",
+	  "rowi": "INTEGER",
+	  "approx": "FLOAT",
+	  "detail": "FLOAT"
+  },
+  "idwt_filterTable":{
+	  "id": "INTEGER",
+	  "seq": "INTEGER",
+	  "lo": "FLOAT",
+	  "hi": "FLOAT"
+  },
+   "dwt2d_dataTable":{
+	  "id": "INTEGER",
+	  "x": "INTEGER",
+	  "y": "INTEGER",
+	  "v": "FLOAT"
+  },
+  "idwt2d_dataTable":{
+	  "id": "INTEGER",
+	  "x": "INTEGER",
+	  "y": "INTEGER",
+	  "v": "FLOAT"
+  },
+  "covid_confirm_sd":{
+	  "city": "VARCHAR(15)",
+      "row_axis": "INTEGER",
+      "cnumber": "INTEGER"
+  },
+  "real_values":{
+	  "TD_TIMECODE": "TIMESTAMP(0)",
+      "id": "INTEGER",
+      "val": "FLOAT",
+      "<PTI_CLAUSE>": "(TIMESTAMP(0), DATE '2020-01-01', HOURS(1), COLUMNS(id), nonsequenced)"
+  },
+  "windowdfft":{
+    "id": "INTEGER",
+    "row_i": "INTEGER",
+    "v1": "FLOAT",
+    "v2": "FLOAT",
+    "v3": "FLOAT",
+    "v4": "FLOAT"
+  }
+}

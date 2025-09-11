@@ -1,0 +1,9 @@
+{
+ "milk_timeseries" : {
+                  
+                  "id" : "integer",
+                  "period" : "varchar(20)",
+                  "quantity" : "integer",
+                  "milkpound" : "real"
+        }
+}

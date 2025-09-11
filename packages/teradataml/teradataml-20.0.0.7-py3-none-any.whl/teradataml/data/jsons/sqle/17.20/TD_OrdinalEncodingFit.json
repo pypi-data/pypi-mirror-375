@@ -1,0 +1,229 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "1",
+  "json_content_version": "1",
+  "function_name": "TD_OrdinalEncodingFit",
+  "function_version": "1.0",
+  "function_alias_name": "TD_OrdinalEncodingFit",
+  "function_type": "fastpath",
+  "function_category": "Feature Engineering Transform",
+  "function_r_name": "aa.td.ordinal.encoding.fit",
+  "short_description": "This function generates encoded ordinal integer values for each category in a target column.",
+  "long_description": "This function takes a input table partitioned by ANY and a optional category table in case of LIST approach as Dimension and generates integer ordinal values for unique category in each of the target columns.",
+  "input_tables": [
+    {
+      "requiredInputKind": [
+        "PartitionByAny"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "InputTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the table containing the input categorical target columns.",
+      "description": "Specifies the table containing the input categorical target columns.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "data",
+      "useInR": true,
+      "rFormulaUsage": false,
+      "rOrderNum": 1
+    },
+    {
+      "requiredInputKind": [
+        "Dimension"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "CategoryTable",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the table containing the input categories for LIST approach.",
+      "description": "Specifies the table containing the input categories for LIST approach.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "category.table",
+      "useInR": true,
+      "rFormulaUsage": false,
+      "rOrderNum": 2
+    }
+  ],
+  "output_tables": [
+    {
+      "isOutputTable": true,
+      "omitPossible": false,
+      "name": "OutputTable",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Name for the table that the function will generate when OUT clause is provided.",
+      "description": "Name for the table that the function will generate when OUT clause is provided.",
+      "datatype": "TABLE_NAME",
+      "allowsLists": false,
+      "rName": "output.table",
+      "useInR": true,
+      "rOrderNum": 3
+    }
+  ],
+  "argument_clauses": [
+    {
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "STRING"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "TargetColumn",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specify the categorical input target columns.",
+      "description": "Specify the categorical input target columns.",
+      "datatype": "COLUMNS",
+      "allowsLists": true,
+      "rName": "target.column",
+      "useInR": true,
+      "rOrderNum": 4
+    },
+    {
+      "permittedValues": [
+        "AUTO",
+        "LIST"
+      ],
+      "defaultValue": "AUTO",
+      "isOutputColumn": false,
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "Approach",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies whether to determine categories automatically from the input table data (AUTO approach) or the user provided list (LIST approach).",
+      "description": "Specifies whether to determine categories automatically from the input table data (AUTO approach) or the user provided list (LIST approach).",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "approach",
+      "useInR": true,
+      "rOrderNum": 5
+    },
+	{
+      "isOutputColumn": false,
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "Categories",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the list of categories that need to be encoded in the desired order.",
+      "description": "Specifies the list of categories that need to be encoded in the desired order.",
+      "datatype": "STRING",
+      "allowsLists": true,
+      "rName": "categories",
+      "useInR": true,
+      "rOrderNum": 6
+    },
+	{
+      "name": "OrdinalValues",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies custom ordinal values to replace the categories.",
+      "description": "Specifies custom ordinal values to replace the categories.",
+      "datatype": "INTEGER",
+      "allowsLists": true,
+      "rName": "ordinal.values",
+      "useInR": true,
+      "rOrderNum": 7
+    },
+    {
+      "targetTable": [
+        "CategoryTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "STRING"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "TargetColumnNames",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the CategoryTable column which contains the names of the target columns.",
+      "description": "Specify the CategoryTable column which contains the names of the target columns.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "target.column.names",
+      "useInR": true,
+      "rOrderNum": 8
+    },
+    {
+      "targetTable": [
+        "CategoryTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "STRING"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "CategoriesColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the CategoryTable column which contains the category values.",
+      "description": "Specify the CategoryTable column which contains the category values.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "categories.column",
+      "useInR": true,
+      "rOrderNum": 9
+    },
+    {
+      "targetTable": [
+        "CategoryTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "INTEGER"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "OrdinalValuesColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the CategoryTable column which contains the ordinal values. If omitted, ordinal values will be generated based on the StartValue argument.",
+      "description": "Specify the CategoryTable column which contains the ordinal values. If omitted, ordinal values will be generated based on the StartValue argument.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "ordinal.values.column",
+      "useInR": true,
+      "rOrderNum": 10
+    },
+	{
+      "defaultValue": 0,
+      "name": "StartValue",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the starting value/values for ordinal values list. One value for all target column or multiple value for multiple target column.",
+      "description": "Specify the starting value/values for ordinal values list. One value for all target column or multiple value for multiple target column.",
+      "datatype": "INTEGER",
+      "allowsLists": true,
+      "rName": "start.value",
+      "useInR": true,
+      "rOrderNum": 11
+    },
+	{
+      "name": "DefaultValue",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the ordinal value/values to use when category is not found. One value for all target column or multiple value for multiple target column.",
+      "description": "Specify the ordinal value/values to use when category is not found. One value for all target column or multiple value for multiple target column.",
+      "datatype": "INTEGER",
+      "allowsLists": true,
+      "rName": "default.value",
+      "useInR": true,
+      "rOrderNum": 12
+    }
+  ]
+}

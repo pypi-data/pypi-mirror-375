@@ -1,0 +1,12 @@
+{
+  "computers_category" :{
+        "compid" : "integer",
+        "price" : "real",
+        "speed" : "real",
+        "hd" : "real",
+        "ram" : "real",
+        "screen" : "real",
+        "expected_compcategory" : "varchar(20)",
+        "predicted_compcategory" : "varchar(20)"
+  }
+}

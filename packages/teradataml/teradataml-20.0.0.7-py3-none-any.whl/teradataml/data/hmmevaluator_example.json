@@ -1,0 +1,25 @@
+{
+  "Pi_loan" : {
+    "model_id" : "integer",
+    "state" : "varchar(100)",
+    "probability" : "float"
+  },
+  "A_loan" : {
+    "model_id" : "integer",
+    "from_state" : "varchar(100)",
+    "to_state" : "varchar(100)",
+    "probability" : "float"
+  },
+  "B_loan" : {
+    "model_id" : "integer",
+    "state" : "varchar(100)",
+    "observed" : "varchar(100)",
+    "probability" : "float"
+  },
+  "test_loan_prediction" :{
+    "model_id" : "integer",
+    "seq_id" : "integer",
+    "seq_vertex_id" : "integer",
+    "observed_id" : "varchar(5)"
+  }
+}

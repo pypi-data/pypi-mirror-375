@@ -1,0 +1,17 @@
+ {
+
+  "diabetes" :{
+    "id" : "integer",
+    "age" : "real",
+    "sex" : "real",
+    "bmi" : "real",
+    "map1" : "real",
+    "tc" : "real",
+    "ldl" : "real",
+    "hdl" : "real",
+    "tch" : "real",
+    "ltg" : "real",
+    "glu" : "real",
+    "y" : "real"
+  }
+}

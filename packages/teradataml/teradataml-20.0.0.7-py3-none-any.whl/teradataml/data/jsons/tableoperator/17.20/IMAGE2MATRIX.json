@@ -1,0 +1,53 @@
+{
+"json_schema_major_version": "1",
+"json_schema_minor_version": "0",
+"json_content_version": "1",
+"function_name": "TD_IMAGE2MATRIX",
+"function_version": "1.0",
+"function_type": "table_operator",
+"function_alias_name": "Image2Matrix",
+"function_r_name": "aa.td_image2matrix",
+"ref_function_r_name": "aa.td_image2matrix",
+"supports_view": false,
+"short_description": "Converts an image to a matrix.",
+"long_description": "The function takes input with BLOBs that contain JPEG or PNG images. The image size cannot be greater than (16MB - 4096 bytes), and should not exceed 4,000,000 pixels.",
+"input_tables": [
+        {
+                "requiredInputKind": [
+                   "PartitionByKey"
+                ],
+                "isOrdered": false,
+                "isLocalOrdered": true,
+                "partitionByOne": false,
+                "hashByKey": true,
+                "name": "input",
+                "alternateNames": [],
+                "isRequired": true,
+                "rDescription": "Specifies the teradataml DataFrame containing the imageTable",
+                "description": "Specifies the table containing the input imageTable",
+                "datatype": "TABLE_ALIAS",
+                "allowsLists": false,
+                "rName": "data",
+                "useInR": true,
+                "rOrderNum": 1
+        }
+],
+"argument_clauses": [
+        {
+        "defaultValue": "gray",
+        "permittedValues": ["gray", "rgb"],
+        "isOutputColumn": false,
+        "alternateNames": [],
+        "name": "OUTPUT",
+        "isRequired": false,
+        "rDescription": "If the OUTPUT option is gray, then the output columns are Y, X, and GRAY, where GRAY is the gray image value. If the OUTPUT option is rgb, then the output columns are Y, X, RED, GREEN, and BLUE.",
+        "description": "If the OUTPUT option is gray, then the output columns are Y, X, and GRAY, where GRAY is the gray image value. If the OUTPUT option is rgb, then the output columns are Y, X, RED, GREEN, and BLUE.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "rName": "output",
+        "useInR": true,
+        "rOrderNum": 2
+        }
+      ]
+}
+    

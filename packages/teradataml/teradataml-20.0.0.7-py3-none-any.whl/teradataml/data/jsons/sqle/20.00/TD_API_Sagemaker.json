@@ -1,0 +1,182 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "1",
+  "json_content_version": "1",
+  "function_name": "TD_API_Sagemaker",
+  "function_version": "1.0",
+  "function_type": "fastpath",
+  "function_category": "Text Analytics AI",
+  "function_alias_name": "TDAPISagemaker",
+  "function_r_name": "aa.tdapisagemaker",
+  "supports_view": false,
+  "short_description": "This function sends an API request to a machine learning model deployed on Sagemaker, using input data from a Teradata table. The model processes the data and returns predictions, which are then provided as the output of the function for users to consume.",
+  "long_description": "This function sends an API request to a machine learning model deployed on Sagemaker, using input data from a Teradata table. The model processes the data and returns predictions, which are then provided as the output of the function for users to consume.",
+  "input_tables": [
+    {
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "InputTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the table containing the input data.",
+      "description": "Specifies the table containing the input data.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "data",
+      "useInR": true,
+      "rOrderNum": 1
+    }
+  ],
+  "argument_clauses": [
+      {
+        "name": "Endpoint",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 2,
+        "allowNaN": false,
+        "description": "Specifies the Endpoint of the model deployed on Sagemaker.",
+        "rDescription": "Specifies the Endpoint of the model deployed on Sagemaker.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "endpoint",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+        "name": "Region",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 3,
+        "allowNaN": false,
+        "description": "Specifies the name of the AWS Sagemaker service region.",
+        "rDescription": "Specifies the name of the AWS Sagemaker service region.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "region",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+        "name": "AccessKey",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 4,
+        "allowNaN": false,
+        "description": "Specifies the AWS Sagemaker service access key.",
+        "rDescription": "Specifies the AWS Sagemaker service access key.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "access.key",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+        "name": "SecretKey",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 5,
+        "allowNaN": false,
+        "description": "Specifies the AWS Sagemaker service secret key.",
+        "rDescription": "Specifies the AWS Sagemaker service secret key.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "secret.key",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+        "name": "SessionKey",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 6,
+        "allowNaN": false,
+        "description": "Specifies the AWS Sagemaker service session key.",
+        "rDescription": "Specifies the AWS Sagemaker service session key.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "session.key",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+          "targetTable": [
+            "InputTable"
+          ],
+          "checkDuplicate": true,
+          "allowedTypes": [],
+          "allowedTypeGroups": [
+            "ALL"
+          ],
+          "matchLengthOfArgument": "",
+          "allowPadding": false,
+          "name": "InputColumns",
+          "alternateNames": [],
+          "isRequired": true,
+          "rDescription": "Specifies the input table columns to be sent to the model hosted on sagemaker for inference.",
+          "description": "Specifies the input table columns to be sent to the model hosted on sagemaker for inference.",
+          "datatype": "COLUMNS",
+          "allowsLists": true,
+          "rName": "input.columns",
+          "useInR": true,
+          "rOrderNum": 7
+      },
+      {
+        "permittedValues": ["TRUE", "FALSE"],
+        "isOutputColumn": false,
+        "name": "isDebug",
+        "alternateNames": [],
+        "isRequired": false,
+        "rDescription": "Specify whether error logging is required.",
+        "description": "Specify whether error logging is required.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "rName": "is.debug",
+        "useInR": true,
+        "rOrderNum": 8
+      },
+      {
+          "targetTable": [
+            "InputTable"
+          ],
+          "checkDuplicate": true,
+          "allowedTypes": [],
+          "allowedTypeGroups": [
+            "ALL"
+          ],
+          "matchLengthOfArgument": "",
+          "allowPadding": false,
+          "name": "Accumulate",
+          "alternateNames": [],
+          "isRequired": false,
+          "rDescription": "Specifies the input table columns to copy to the output table. By default, the function copy all input table columns to the output table.",
+          "description": "Specifies the input table columns to copy to the output table. By default, the function copy all any input table columns to the output table.",
+          "datatype": "COLUMNS",
+          "allowsLists": true,
+          "rName": "accumulate",
+          "useInR": true,
+          "rOrderNum": 9
+      },
+      {
+        "name": "AUTHORIZATION",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum":10,
+        "allowNaN": false,
+        "description": "Specifies the authorization object name containing the credentials, optionally prefixed by the database name.",
+        "rDescription": "Specifies the authorization object name containing the credentials, optionally prefixed by the database name.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "authorization",
+        "useInR": true,
+        "rFormulaUsage": false
+      }
+  ]
+}
+
+    

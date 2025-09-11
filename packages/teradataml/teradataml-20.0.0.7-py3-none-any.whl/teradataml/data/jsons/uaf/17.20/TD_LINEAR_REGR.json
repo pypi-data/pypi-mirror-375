@@ -1,0 +1,182 @@
+{
+        "FuncName": "TD_LINEAR_REGR",
+        "FuncDescriptionShort": "Simple linear regression is about curve fitting ",
+        "FuncDescriptionLong": [
+                "the simple linear regression function, TD_LINEAR_REGR, which takes a FORMULA, and a multivariate series, containing two payload fields, as inputs – the first field representing the response variable and the second  representing the explanatory variable; and produces, a primary result set consisting of an ordered listed of solved coefficients.   In addition to the primary result set produced by this function, this function is also capable of producing of several additional 'optional result sets' - one containing statistical modelling metadata and the other containing residual data sets."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Model Preparation and Parameter Estimation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Linear_Regr",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "This function takes one logical multivariate series containing a two or three field payload – the first payload field reference represents the response variable; the second payload field reference represents the explanatory variable, and the optional third field, if present, is the “weight” series"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "varchar(120)",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "varchar(40)",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_LINEAR_REGR function can produce a multilayered ART table result. Invoking this UAF function generates up to three analytical result sets: a primary analytical result set containing the calculated coefficients, and one or two auxiliary result sets - one containing model statistics and the other containing residual context.   ",
+                                "The primary result set can be accessed either via a subsequent SELECT * FROM <art table> statement or by issuing a TD_EXTRACT_RESULTS(…,LAYER(ARTPRIMARY),…) ."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITMETADATA",
+                        "ResultTableColumnTypes": [
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The secondary result set can be accessed by issuing a TD_EXTRACT_RESULTS(…,LAYER(ARTFITMETADATA),…)",
+                                "This result set is generated in response to the FUNC_PARAMS MODEL_STATS(1) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This will be deposited in LAYER1, and associated with the name ARTFITMETADATA."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITRESIDUALS",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The tertiary result set can be accessed by issuing a TD_EXTRACT_RESULTS(…,LAYER(ARTFITRESIDUALS),…)",
+                                "This result set is generated in response to the FUNC_PARAMS RESIDUALS(1) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This will be deposited in LAYER2, under the name ARTFITRESIDUALS. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "VARIABLES_COUNT",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 2,
+                        "PermittedValues": [
+                                2,
+                                3
+                        ],
+                        "Description": [
+                                "An optional parameter indicating how many parameters are present in the payload.  For simple linear regression with no weighting, there are just 2 parameters in the payload: the first being the response variable and the second being the explanatory variable.  With weighting there are 3 variables: the first being the response variable, the second being the explanatory variable, and the third being the weights."
+                        ]
+                },
+                {
+                        "Name": "WEIGHTS",
+                        "Type": "integer",
+                        "Optional": false,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "A zero (0) or one (1) integer value.  A flag indicating that a third series is present in the <multivar-series-specification>.  The third series is to be interpreted as a series of weights that can be used to perform a weighted least squares regression solution."
+                        ]
+                },
+                {
+                        "Name": "FORMULA",
+                        "Type": "<td_formula>",
+                        "Optional": false,
+                        "Description": [
+                                "A Teradata formula string that defines the formula that is to be used in the regression operation.  As an example consider: FORMULA(Y = c + a*x1+ b*(exp(x1)*cos(x1))); in which Y is the response variable; x1 is the explanatory variable; and, a, b, and c are the coefficients that the regression is to determine. Note: The name of the response variable must always be Y; and, the name of the explanatory variable must always be X1.   User is free to name the coefficients whatever they wish."
+                        ]
+                },
+                {
+                        "Name": "ALGORITHM",
+                        "Type": "string",
+                        "Optional": false,
+                        "Description": [
+                                "Implementation method name.    A value of 'QR' , ALGORITHM (QR), means that QR decomposition is to be employed.  A value of 'PSI', ALGORITHM (PSI),  means that pseudo-inverse based on SVD is to be used to solve the regression."
+                        ]
+                },
+                {
+                        "Name": "COEFF_STATS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                " A zero (0) or one (1) integer value.  A flag indicating that the optional coefficient statistical columns (STD_ERROR, TSTAT_VALUE, TSTAT_PROB, SIGNIF_RATING, CONF_INT_LOW, CONF_INT_HIGH) are being requests.  See the RETURNS TABLE section below, in particular the Primary Result Set, to acquire more information on the extra columns returned.   So COEFF_STATS(0), the default, means no stats are requested, whereas COEFF_STATS(1) means that stats are being requested."
+                        ]
+                },
+                {
+                        "Name": "CONF_INT_LEVEL",
+                        "Type": "double",
+                        "Optional": true,
+                        "DefaultValue": 0.9,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "UpperBoundType": "EXCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "A positive float between 0 and 1 exclusive. Only valid when COEFF_STATS(1).",
+                                "This is the confidence interval level value used for coefficient statistics calculation. Default value: 0.9."
+                        ]
+                },
+                {
+                        "Name": "MODEL_STATS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                " A zero (0) or one (1) integer value.  A flag indicating that the optional model statistics are to be generated, and made available for retrieval via the TD_EXTRACT_RESULTS function. See the RETURNS TABLE section below, in particular the Secondary Model Statistics Result Set, to acquire more information on the extra columns returned.   So MODEL_STATS(0), the default, means no stats are requested, whereas MODEL_STATS(1) means that stats are being requested."
+                        ]
+                },
+                {
+                        "Name": "RESIDUALS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "A zero (0) or one (1) integer value.   A flag indicating that the optional residual statistics are to be generated, and made available for retrieval via the TD_EXTRACT_RESULTS function. See the RETURNS TABLE section below, in particular the Tertiary Residuals Result Set, to acquire more information on the extra columns returned.    So RESIDUALS(0), the default, means no stats are requested, whereas RESIDUALS(1) means that stats are being requested."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

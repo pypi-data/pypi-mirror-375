@@ -1,0 +1,267 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "2",
+  "json_content_version": "1",
+  "function_name": "ONNXEmbeddings",
+  "function_version": "1.0",
+  "function_type": "byom",
+  "function_r_name": "aa.onnx.embeddings",
+  "function_alias_name": "ONNXEmbeddings",
+  "short_description": "This Function generates embeddings values using an ONNX model in Vantage",
+  "long_description": "This function is used to calculate embeddings values in Vantage with a  HuggingFace model that has been created outside Vantage and exported to vantage using ONNX format",
+  "input_tables": [
+    {
+      "requiredInputKind": [
+        "PartitionByAny",
+        "PartitionByKey"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "partitionByOneInclusive": false,
+      "name": "InputTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "The input table that contains the text from which we generate embedding values ",
+      "description": "The input table that contains the text from which we generate embedding values ",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "newdata",
+      "useInR": true,
+      "rOrderNum": 1
+    },
+    {
+      "requiredInputKind": [
+        "Dimension"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "partitionByOneInclusive": false,
+      "name": "ModelTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "The model table to be used for calculating embedding values ",
+      "description": "The model table to be used for calculating embedding values ",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "modeldata",
+      "useInR": true,
+      "rOrderNum": 2
+    },
+    {
+      "requiredInputKind": [
+        "Dimension"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "partitionByOneInclusive": false,
+      "name": "TokenizerTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "The tokenizer table which contains the tokenizer json file ",
+      "description": "The tokenizer table which contains the tokenizer json file ",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "tokenizerdata",
+      "useInR": true,
+      "rOrderNum": 3
+    }
+  ],
+  "argument_clauses": [
+    {
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "Accumulate",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the names of input_table columns to copy to the output table.",
+      "description": "Specify the names of the input columns to copy to the output table. ",
+      "datatype": "COLUMNS",
+      "allowsLists": true,
+      "rName": "accumulate",
+      "useInR": true,
+      "rOrderNum": 4
+    },
+    {
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "ModelOutputTensor",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the column of the model's possible output fields that the user wants to calculate and output ",
+      "description": "Specifies the column of the model's possible output fields that the user wants to calculate and output ",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "model.output.tensor",
+      "permittedValues": ["sentence_embedding","token_embeddings"],
+      "useInR": true,
+      "rOrderNum": 5
+    },
+    {
+      "defaultValue": 512,
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "EncodeMaxLength",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the maximum length of the tokenizer output token encodings(only applies for models with symbolic dimensions) ",
+      "description": "Specifies the maximum length of the tokenizer output token encodings(only applies for models with symbolic dimensions) ",
+      "datatype": "INTEGER",
+      "allowsLists": false,
+      "rName": "encode.max.length",
+      "useInR": true,
+      "rOrderNum": 6
+    },
+    {
+      "defaultValue": false,
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "ShowModelProperties",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": " Show default or expanded ModelInputFieldsMap based on input model for defaults or ModelInputFieldsMap for expansion. ",
+      "description": " Show default or expanded ModelInputFieldsMap based on input model for defaults or ModelInputFieldsMap for expansion. ",
+      "datatype": "BOOLEAN",
+      "allowsLists": false,
+      "rName": "show.model.properties",
+      "useInR": true,
+      "rOrderNum": 7
+    },
+    {
+      "defaultValue": "emb_",
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "OutputColumnPrefix",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the column prefix for each of the output columns when using FLOAT32 OutputFormat ",
+      "description": "Specifies the column prefix for each of the output columns when using FLOAT32 OutputFormat ",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "output.column.prefix",
+      "useInR": true,
+      "rOrderNum": 8
+    },
+    {
+      "defaultValue": "VARBYTE(3072)",
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "OutputFormat",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the output format for the model embeddings output ",
+      "description": "Specifies the output format for the model embeddings output ",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "output.format",
+      "useInR": true,
+      "rOrderNum": 9
+    },
+    {
+      "permittedValues": [
+        "true",
+        "t",
+        "yes",
+        "y",
+        "1",
+        "false",
+        "f",
+        "no",
+        "n",
+        "0",
+        "*",
+        "current_cached_model"
+      ],
+      "defaultValue": "false",
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "OverwriteCachedModel",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the model name that needs to be removed from the cache. * can also be used to remove the models ",
+      "description": " Specifies the model name that needs to be removed from the cache. * can also be used to remove the models ",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "overwrite.cached.models",
+      "useInR": true,
+      "rOrderNum": 10
+    },
+    {
+      "defaultValue": false,
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "IsDebug",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Print additional information in trace table regarding execution of ONNXPredict ",
+      "description": " Print additional information in trace table regarding execution of ONNXPredict ",
+      "datatype": "BOOLEAN",
+      "allowsLists": false,
+      "rName": "is.debug",
+      "useInR": true,
+      "rOrderNum": 11
+    },
+    {
+      "defaultValue": true,
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "EnableMemoryCheck",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "If true, verifies if there is enough native memory for large models ",
+      "description": "If true, verifies if there is enough native memory for large models ",
+      "datatype": "BOOLEAN",
+      "allowsLists": false,
+      "rName": "enable.memory.check",
+      "useInR": true,
+      "rOrderNum": 12
+    }
+  ]
+}

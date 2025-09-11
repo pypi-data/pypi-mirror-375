@@ -1,0 +1,117 @@
+{
+        "FuncName": "TD_IQR",
+        "FuncDescriptionShort": "TD_IQR uses interquartile range for anomaly detection.",
+        "FuncDescriptionLong": [
+                "Anomaly detection identifies data points, events and observations that deviate from the normal behavior of the data set.",
+                "Anomalous data can indicate critical incidents, such as a change in consumer behavior or observations that are suspicious.",
+                "Anomalies in data are also called standard deviations, outliers, noise, novelties, and exceptions.",
+                "TD_IQR uses interquartile range for anomaly detection.",
+                "Any data point that falls outside of 1.5 times of an interquartile range below the first quartile and above the third quartile is considered an outlier.",
+                "The TD_IQR function creates a two-layered ART table."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Anomaly Detection",
+        "JSONVersion": "1",
+        "FuncRName": "td_IQR",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "Time series whose value can be REAL or MULTIVAR_REAL."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "VARCHAR",
+                                "<varies>",
+                                "<varies>",
+                                "integer"
+                        ],
+                        "Description": [
+                                "The primary result set contains the list of anomaly data points.",
+                                "The primary result set is accessed using a SELECT statement."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTSTATSDATA",
+                        "ResultTableColumnTypes": [
+                                "integer"
+                        ],
+                        "Description": [
+                                "The secondary result set contains the number of anomalies.",
+                                "The secondary is accessed using the TD_EXTRACT_RESULTS utility function."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITMETADATA",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "integer",
+                                "integer",
+                                "float"
+                        ],
+                        "Description": [
+                                "The RETURNS TABLE for this optional analytical result set, containing “goodness of fit” metadata, is described in this subsection.   This result set is generated in response to the FUNC_PARAMS (FIT_METRICS(1) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This result set will be deposited into LAYER1 under the name ARTFITMETADATA.",
+                                "There is one result row returned for each unique series acted upon. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name" : "STAT_METRICS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Indicator for secondary layer to give the number of outliers."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

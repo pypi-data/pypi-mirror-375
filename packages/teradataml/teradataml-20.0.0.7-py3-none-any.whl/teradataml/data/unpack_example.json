@@ -1,0 +1,10 @@
+{
+  "ville_tempdata": {
+    "sn": "integer",
+    "packed_temp_data": "varchar(100)"
+  },
+  "ville_tempdata1": {
+    "sn": "integer",
+    "packed_temp_data": "varchar(100)"
+  }
+}

@@ -1,0 +1,71 @@
+{
+    "FuncName": "TD_COPYART",
+    "FuncDescriptionShort": "TD_COPYART creates a copy of existing ART table.",
+    "FuncDescriptionLong": [
+        "creates a copy of existing ART table with permanet or volatile option."
+    ],
+    "FunctionVersion": "...",
+    "FunctionCategory": "General Utility",
+    "JSONVersion": "1",
+    "FuncRName": "td_Copy_Art",
+    "MaxInputFiles": 0,
+    "Input": [],
+    "Output": [],
+    "Params": [      
+        {
+            "Name": "DST_DATABASENAME",
+            "Type": "string",
+            "Optional": false,
+            "Description": [
+                    "Name of the target database.",
+                    "Must include where TGT_TABLENAME need to be created."
+            ],
+            "LangName": "database_name"
+        },
+        {
+            "Name": "DST_TABLENAME",
+            "Type": "string",
+            "Optional": false,
+            "Description": [
+                    "Name of the target table."
+            ],
+            "LangName": "table_name"
+        },
+        {
+            "Name": "DST_MAPNAME",
+            "Type": "string",
+            "Optional": false,
+            "Description": [
+                    "[Optional] If not specified, the default map is used.",
+                    "Provided name of the map to be used for the copy."
+            ],
+            "LangName": "map_name"
+        },
+        {
+            "Name": "DST_ISPERMTABLE",
+            "Type": "string",
+            "Optional": true,
+            "PermittedValues": [
+                    "T",
+                    "TRUE",
+                    "F",
+                    "FALSE",
+                    "t",
+                    "true",
+                    "'true'",
+                    "'false'",
+                    "f",
+                    "false"
+            ],
+            "Description": [
+                    "[Optional] If not specified, the default is true.",
+                    "If true, the target table is permanent.",
+                    "If false, the target table is volatile."
+            ],
+            "LangName": "permanent_table"
+        }
+    ],
+    "IsPlottable": true,
+    "InputFmt": false,
+    "OutputFmt": false
+}

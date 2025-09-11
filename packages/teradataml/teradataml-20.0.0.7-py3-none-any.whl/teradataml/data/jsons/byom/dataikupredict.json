@@ -1,0 +1,148 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "2",
+  "json_content_version": "1",
+  "function_name": "DataikuPredict",
+  "function_version": "1.0",
+  "function_type": "byom",
+  "function_r_name": "aa.dataiku.predict",
+  "function_alias_name": "DataikuPredict",
+  "short_description": "This Function scores data using a model in Vantage using a Dataiku model",
+  "long_description": "This function is used to score data in Vantage with a model that has been created outside Vantage and exported to vantage using Dataiku format",
+  "input_tables": [
+    {
+      "requiredInputKind": [
+        "PartitionByAny",
+        "PartitionByKey"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "partitionByOneInclusive": false,
+      "name": "InputTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "The input table that contains the data to be scored ",
+      "description": "The input table that contains the data to be scored ",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "newdata",
+      "useInR": true,
+      "rOrderNum": 1
+    },
+    {
+      "requiredInputKind": [
+        "Dimension"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "partitionByOneInclusive": false,
+      "name": "ModelTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "The model table to be used for scoring ",
+      "description": "The model table to be used for scoring ",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "modeldata",
+      "useInR": true,
+      "rOrderNum": 2
+    }
+  ],
+  "argument_clauses": [
+    {
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "Accumulate",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the names of input_table columns to copy to the output table.",
+      "description": " Specify the names of the input columns to copy to the output table. ",
+      "datatype": "COLUMNS",
+      "allowsLists": true,
+      "rName": "accumulate",
+      "useInR": true,
+      "rOrderNum": 3
+    },
+    {
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "ModelOutputFields",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the columns of the json output that the user wants to specify as individual columns instead of the entire json_report ",
+      "description": " Specifies the columns of the json output that the user wants to specify as individual columns instead of the entire json_report ",
+      "datatype": "STRING",
+      "allowsLists": true,
+      "rName": "model.output.fields",
+      "useInR": true,
+      "rOrderNum": 4
+    },
+    {
+      "permittedValues": [
+        "true",
+        "t",
+        "yes",
+        "y",
+        "1",
+        "false",
+        "f",
+        "no",
+        "n",
+        "0",
+        "*",
+        "current_cached_model"
+      ],
+      "defaultValue": "false",
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "OverwriteCachedModel",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specifies the model name that needs to be removed from the cache. * can also be used to remove the models ",
+      "description": " Specifies the model name that needs to be removed from the cache. * can also be used to remove the models ",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "overwrite.cached.models",
+      "useInR": true,
+      "rOrderNum": 5
+    },
+    {
+      "defaultValue": false,
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": true,
+      "name": "IsDebug",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Print additional information in trace table regarding execution of DataikuPredict ",
+      "description": " Print additional information in trace table regarding execution of DataikuPredict ",
+      "datatype": "BOOLEAN",
+      "allowsLists": false,
+      "rName": "is.debug",
+      "useInR": true,
+      "rOrderNum": 6
+    }
+  ]
+}

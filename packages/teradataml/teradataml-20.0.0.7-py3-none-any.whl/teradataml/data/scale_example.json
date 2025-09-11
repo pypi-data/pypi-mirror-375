@@ -1,0 +1,74 @@
+{
+ "scale_housing_test" : {
+                  
+                  "types" : "varchar(20)",
+                  "id" : "integer",
+                  "price" : "real",
+                  "lotsize" : "real",
+                  "bedrooms" : "real",
+                  "bathrms" : "real",
+                  "stories" : "real"
+                  
+        },
+ "scale_stat" : {
+                  
+                  "stattype" : "varchar(20)",
+                  "price" : "real",
+                  "lotsize" : "real",
+                  "bedrooms" : "real",
+                  "bathrms" : "real",
+                  "stories" : "real"
+                  
+        },
+"scale_attributes":{
+                   
+                   "pid" : "integer",
+                   "attribute_column" : "varchar(150)"
+                   
+           },
+"scale_parameters":{
+                   
+                   "pid" : "integer",
+                   "parameter_column" : "varchar(150)",
+                   "value_column" : "varchar(150)"
+                   
+           },
+"scale_input_partitioned":{
+                        "passenger" : "integer",
+                        "pid" : "integer",
+                        "survived" : "integer",
+                        "pclass" : "integer",
+                        "name" : "varchar(90)",
+                        "gender" : "varchar(10)",
+                        "age" : "integer",
+                        "sibsp" : "integer",
+                        "parch" : "integer",
+                        "ticket" : "varchar(20)",
+                        "fare" : "integer",
+                        "cabin" : "varchar(20)",
+                        "embarked" : "varchar(10)"
+
+
+},
+
+"scale_input_sparse":
+{
+                   
+        "passenger" : "integer",
+        "attribute_column" : "varchar(20)",
+        "attribute_value" : "real"
+                   
+},
+
+"scale_input_part_sparse":
+{
+                   
+        "pid" : "integer",
+        "passenger" : "integer",
+        "attribute_column" : "varchar(20)",
+        "attribute_value" : "real"
+                   
+}
+
+        
+}

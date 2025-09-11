@@ -1,0 +1,62 @@
+{
+    "function_tdplyr_name": "td_naivebayes_predict_sqle",
+    "function_r_name": "aa.naivebayes.predict",
+    "function_alias_name": "NaiveBayesPredict",
+    "input_tables": [
+        {
+            "rName": "newdata",
+            "name": ["input"],
+            "useInR": true,
+            "rOrderNum": 2
+        },
+        {
+            "rName": "modeldata",
+            "name": ["Model"],
+            "useInR": true,
+            "rOrderNum": 1
+        }
+    ],
+    "function_name": "NaiveBayesPredict",
+    "function_tdml_name": "NaiveBayesPredict",
+    "argument_clauses": [
+        {
+            "datatype": "COLUMNS",
+            "rName": "id.col",
+            "name": [
+                "IdColumn",
+                "IDCol"
+            ],
+            "useInR": true,
+            "rOrderNum": 3
+        },
+        {
+            "allowsLists": true,
+            "datatype": "COLUMNS",
+            "rName": "categorical.inputs",
+            "name": ["CategoricalInputs"],
+            "useInR": true,
+            "rFormulaUsage": true,
+            "rOrderNum": -2
+        },
+        {
+            "allowsLists": true,
+            "datatype": "COLUMNS",
+            "rName": "numeric.inputs",
+            "name": ["NumericInputs"],
+            "useInR": true,
+            "rFormulaUsage": true,
+            "rOrderNum": -1
+        },
+        {
+            "allowsLists": true,
+            "datatype": "STRING",
+            "rName": "responses",
+            "name": [
+                "ResponsesToOutput",
+                "Responses"
+            ],
+            "useInR": true,
+            "rOrderNum": -2
+        }
+    ]
+}

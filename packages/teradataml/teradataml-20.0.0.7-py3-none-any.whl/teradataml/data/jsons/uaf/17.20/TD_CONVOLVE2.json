@@ -1,0 +1,66 @@
+{
+        "FuncName": "TD_CONVOLVE2",
+        "FuncDescriptionShort": "TD_CONVOLVE2 expands the DSP processing to the image domain",
+        "FuncDescriptionLong": [
+                "This function, the TD_CONVOLVE2, takes two matrices as inputs: one representing the source matrix (image) to be filtered; and, the other matrix being the PSF itself.  The resultant output is the source matrix with the filtering PSF applied."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Temporal and Spatial",
+        "JSONVersion": "1",
+        "FuncRName": "td_Convolve2",
+        "MaxInputFiles": 2,
+        "Input": [
+                {
+                        "Type": "MATRIX",
+                        "Description": [
+                                "The source series to be filtered"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                },
+                {
+                        "Type": "MATRIX",
+                        "Description": [
+                                "The filter kernel itself"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_CONVOLVE2 function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [],
+        "InputFmt": [
+                {
+                        "Name": "INPUT_MODE",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "ONE2ONE",
+                                "MANY2ONE",
+                                "MATCH"
+                        ],
+                        "Description": [
+                                "Specifies the input mode supported by the function."
+                        ],
+                        "LangName": "input_fmt_input_mode"
+                }
+        ],
+        "OutputFmt": false
+}

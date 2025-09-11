@@ -1,0 +1,8 @@
+{
+  "ibm_stock": {
+    "id": "integer",
+    "name": " varchar(30)",
+    "period": "date",
+    "stockprice": "integer"
+  }
+}

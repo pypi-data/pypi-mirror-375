@@ -1,0 +1,18 @@
+{
+     "cpt" : {
+
+                  "sid" : "integer",
+                  "id" : "integer",
+                  "val" : "float"
+        },
+
+    "finance_data2" :{
+            "sid" : "integer",
+            "id" : "integer",
+            "start_time_column" : "date",
+            "end_time_column" : "date",
+            "expenditure" : "float",
+            "income" : "float",
+            "investment" : "float"
+            }
+}

@@ -1,0 +1,160 @@
+{
+        "FuncName": "TD_DWT2D",
+        "FuncDescriptionShort": "TD_DWT2D performs discrete wavelet transform (DWT) for two-dimensional data.",
+        "FuncDescriptionLong": [
+                "TD_DWT2D performs discrete wavelet transform (DWT) for two-dimensional data. The algorithm is applied first vertically by column axis, then horizontally by row axis."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Digital Signal Processing",
+        "JSONVersion": "1",
+        "FuncRName": "td_DWT2D",
+        "MaxInputFiles": 2,
+        "Input": [
+                {
+                        "Type": "MATRIX",
+                        "Description": [
+                                "Specify the MATRIX_SPEC of the matrix.",
+                                "Multiple payloads are supported, and each payload column is transformed independently.",
+                                "Only REAL or MULTIVAR_REAL payload content types are supported."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                },
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "[Optional] Specify the SERIES_SPEC of the series. The series specifies the filter.",
+                                "It should have two payload columns corresponding to low and high pass filters.",
+                                "Only MULTIVAR_REAL payload content type is supported."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": true
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "big_integer",
+                                "float",
+                                "<varies>"
+                        ],
+                        "Description": [
+                                "The TD_DWT2D function returns only a primary result set."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "WAVELET",
+                        "Type": "string",
+                        "Optional": true,
+                        "Description": [
+                                "Name of the wavelet.",
+                                "If this parameter is specified, then do not include a second input series for the function.",
+                                "If this parameter is not specified, then include a second input series to provide the filter.",
+                                "Data type is case-sensitive.",
+                                "Option families and names are:",
+                                "Daubechies: 'db1' or 'haar', 'db2', 'db3', .... ,'db38'",
+                                "Coiflets: 'coif1', 'coif2', ... , 'coif17'",
+                                "Symlets: 'sym2', 'sym3', ... ,' sym20'",
+                                "Discrete Meyer: 'dmey'",
+                                "Biorthogonal: 'bior1.1', 'bior1.3', 'bior1.5', 'bior2.2', 'bior2.4', 'bior2.6', 'bior2.8', 'bior3.1', 'bior3.3', 'bior3.5', 'bior3.7', 'bior3.9', 'bior4.4', 'bior5.5', 'bior6.8'",
+                                "Reverse Biorthogonal: 'rbio1.1', 'rbio1.3', 'rbio1.5' 'rbio2.2', 'rbio2.4', 'rbio2.6', 'rbio2.8', 'rbio3.1', 'rbio3.3', 'rbio3.5', 'rbio3.7','rbio3.9', 'rbio4.4', 'rbio5.5', 'rbio6.8'"
+                        ]
+                },
+                {
+                        "Name": "MODE",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                            "zero",
+                            "symmetric",
+                            "constant",
+                            "smooth",
+                            "periodic",
+                            "periodization",
+                            "reflect",
+                            "antisymmetric",
+                            "antireflect",
+                            "sym",
+                            "symh",
+                            "symw",
+                            "spd",
+                            "sp1",
+                            "sp0",
+                            "zpd",
+                            "ppd",
+                            "per",
+                            "asym",
+                            "asymh",
+                            "asymw"
+                        ],
+                        "DefaultValue": "symmetric",
+                        "Description": [
+                                "Signal extension mode.",
+                                "Data type is case-insensitive.",
+                                "Options are:",
+                                "symmetric, sym, symh",
+                                "reflect, symw",
+                                "smooth, spd, sp1",
+                                "constant, sp0",
+                                "zero, zpd",
+                                "periodic, ppd",
+                                "periodization, per",
+                                "antisymmetric, asym, asymh",
+                                "antireflect, asymw"
+                        ]
+                },
+                {
+                        "Name": "LEVEL",
+                        "Type": "integer",
+                        "Optional": true,
+                        "LowerBound": 1,
+                        "UpperBound": 15,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "DefaultValue": 1,
+                        "Description": "Level of decomposition. Valid values are [1,15]. Default is 1."
+                }
+        ],
+        "InputFmt": [
+                {
+                        "Name": "INPUT_MODE",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "MANY2ONE",
+                                "ONE2ONE",
+                                "MATCH"
+                        ],
+                        "Description": [
+                                "When there are two input series, then the INPUT_FMT specification is mandatory.",
+                                "[Optional] The INPUT_MODE parameter has the following options:",
+                                "ONE2ONE: Both the primary and secondary series specifications contain a series name which identifies the two series in the function.",
+                                "MANY2ONE: The MANY specification is the primary series declaration. The secondary series specification contains a series name that identifies the single secondary series.",
+                                "MATCH: Both series are defined by their respective SERIES_SPEC(INSTANCE_NAME()) declarations."
+                        ],
+                        "LangName": "input_fmt_input_mode"
+                }
+        ],
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE"
+                        ],
+                        "Description": [
+                                "[Optional] The INDEX_STYLE of the output format is NUMERICAL_SEQUENCE."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

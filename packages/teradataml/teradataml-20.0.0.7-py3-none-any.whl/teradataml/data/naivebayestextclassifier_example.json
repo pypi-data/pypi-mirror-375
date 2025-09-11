@@ -1,0 +1,8 @@
+{
+ 
+  "token_table" :{
+          "doc_id" : "INTEGER",
+          "token" : "varchar(30)",
+          "category" : "varchar(30)"
+            }
+}

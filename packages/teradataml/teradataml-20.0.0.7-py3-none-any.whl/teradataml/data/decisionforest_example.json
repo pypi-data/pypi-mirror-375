@@ -1,0 +1,37 @@
+{
+     "housing_train" : {
+                  
+                  "sn" : "integer", 
+                  "price" : "real",
+                  "lotsize" : "real", 
+                  "bedrooms" : "integer", 
+                  "bathrms" : "integer", 
+                  "stories" : "integer", 
+                  "driveway" : "varchar(10)", 
+                  "recroom" : "varchar(10)", "fullbase": "varchar(10)", 
+                  "gashw" : "varchar(10)", 
+                  "airco" : "varchar(10)", 
+                  "garagepl" : "integer", 
+                  "prefarea" : "varchar(10)", 
+                  "homestyle" : "varchar(20)"
+                  
+        },
+    "boston" :{
+            "id" : "integer",
+            "crim" : "real",
+            "zn" : "integer",
+            "indus" : "real",
+            "chas" : "integer",
+            "nox" : "real",
+            "rm" : "real",
+            "age" : "integer",
+            "dis" : "real",
+            "rad" : "integer",
+            "tax" : "integer",
+            "ptratio" : "real",
+            "black" : "real",
+            "lstat" : "real",
+            "medv" : "real"
+            
+            }
+}

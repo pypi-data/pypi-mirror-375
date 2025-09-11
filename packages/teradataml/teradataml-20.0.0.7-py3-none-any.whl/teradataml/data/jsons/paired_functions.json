@@ -1,0 +1,450 @@
+{
+  "SQLE": {
+    "BincodeFit": {
+      "transform": {
+        "reference_function": "BincodeTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "output"
+        ]
+      }
+    },
+    "DecisionForest": {
+      "predict": {
+        "reference_function": "TDDecisionForestPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "Fit": {
+      "transform": {
+        "reference_function": "Transform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "GLM": {
+      "predict": {
+        "reference_function": "TDGLMPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "GLMPerSegment": {
+      "predict": {
+        "reference_function": "GLMPredictPerSegment",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "KMeans": {
+      "predict": {
+        "reference_function": "KMeansPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "KNN": {
+      "predict": {
+        "reference_function":"KNN"
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "NaiveBayes": {
+      "predict": {
+        "reference_function": "TDNaiveBayesPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "NaiveBayesTextClassifierTrainer": {
+      "predict": {
+        "reference_function": "NaiveBayesTextClassifierPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "NonLinearCombineFit": {
+      "transform": {
+        "reference_function": "NonLinearCombineTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "OneClassSVM": {
+      "predict": {
+        "reference_function": "OneClassSVMPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "OneHotEncodingFit": {
+      "transform": {
+        "reference_function": "OneHotEncodingTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "OrdinalEncodingFit": {
+      "transform": {
+        "reference_function": "OrdinalEncodingTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "OutlierFilterFit": {
+      "transform": {
+        "reference_function": "OutlierFilterTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "PolynomialFeaturesFit": {
+      "transform": {
+        "reference_function": "PolynomialFeaturesTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "output"
+        ]
+      }
+    },
+    "RandomProjectionFit": {
+      "transform": {
+        "reference_function": "RandomProjectionTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "RowNormalizeFit": {
+      "transform": {
+        "reference_function": "RowNormalizeTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "output"
+        ]
+      }
+    },
+    "ScaleFit": {
+      "transform": {
+        "reference_function": "ScaleTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "output"
+        ]
+      }
+    },
+    "SimpleImputeFit": {
+      "transform": {
+        "reference_function": "SimpleImputeTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "output"
+        ]
+      }
+    },
+    "SVM": {
+      "predict": {
+        "reference_function": "SVMPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "TargetEncodingFit": {
+      "transform": {
+        "reference_function": "TargetEncodingTransform",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "XGBoost": {
+      "predict": {
+        "reference_function": "XGBoostPredict",
+        "input_arguments": [
+          "object"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    }
+  },
+  "VAL": {
+    "DecisionTree": {
+      "predict": {
+        "reference_function": "DecisionTreePredict",
+        "input_arguments": [
+          "model"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "PCA": {
+      "predict": {
+        "reference_function": "PCAPredict",
+        "input_arguments" : [
+          "model"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "KMeans": {
+      "predict": {
+        "reference_function": "KMeansPredict",
+        "input_arguments": [
+          "model"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "LinReg": {
+      "predict": {
+        "reference_function": "LinRegPredict",
+        "input_arguments": [
+          "model"
+        ],
+        "model_output_arguments": [
+          "model"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    },
+    "LogReg": {
+      "predict": {
+        "reference_function": "LogRegPredict",
+        "input_arguments": [
+          "model"
+        ],
+        "model_output_arguments": [
+          "model"
+        ]
+      },
+      "evaluate": {
+        "reference_function": "_TDEvaluate"
+      }
+    }
+  },
+  "UAF": {
+    "ArimaEstimate": {
+      "forecast": {
+        "reference_function": "ArimaForecast",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "validate": {
+        "reference_function": "ArimaValidate",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "DFFT": {
+      "convolve": {
+        "reference_function": "DFFTConv",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "inverse": {
+        "reference_function": "IDFFT",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "IDFFT": {
+      "inverse": {
+        "reference_function": "DFFT",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "DFFT2": {
+      "convolve": {
+        "reference_function": "DFFT2Conv",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      },
+      "inverse": {
+        "reference_function": "IDFFT2",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "IDFFT2": {
+      "inverse": {
+        "reference_function": "DFFT2",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "DIFF": {
+      "inverse": {
+        "reference_function": "UNDIFF",
+        "input_arguments": [
+          "data1"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "UNDIFF": {
+      "inverse": {
+        "reference_function": "DIFF",
+        "input_arguments": [
+          "data"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    },
+    "SeasonalNormalize": {
+      "inverse": {
+        "reference_function": "Unnormalize",
+        "input_arguments": [
+          "data2"
+        ],
+        "model_output_arguments": [
+          "result"
+        ]
+      }
+    }
+  }
+}

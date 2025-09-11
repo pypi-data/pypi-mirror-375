@@ -1,0 +1,4471 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
+	<Header>
+		<Application name="JPMML-SkLearn" version="1.6.5"/>
+		<Timestamp>2020-10-21T17:13:13Z</Timestamp>
+	</Header>
+	<MiningBuildTask>
+		<Extension>PMMLPipeline(steps=[('classifier', XGBClassifier(base_score=0.5, booster=None, colsample_bylevel=1,
+              colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
+              importance_type='gain', interaction_constraints=None,
+              learning_rate=0.300000012, max_delta_step=0, max_depth=6,
+              min_child_weight=1, missing=nan, monotone_constraints=None,
+              n_estimators=100, n_jobs=0, num_parallel_tree=1,
+              objective='multi:softprob', random_state=0, reg_alpha=0,
+              reg_lambda=1, scale_pos_weight=None, subsample=1,
+              tree_method=None, validate_parameters=False, verbosity=None))])</Extension>
+	</MiningBuildTask>
+	<DataDictionary>
+		<DataField name="y" optype="categorical" dataType="integer">
+			<Value value="1"/>
+			<Value value="2"/>
+			<Value value="3"/>
+		</DataField>
+		<DataField name="sepal_length" optype="continuous" dataType="float"/>
+		<DataField name="sepal_width" optype="continuous" dataType="float"/>
+		<DataField name="petal_length" optype="continuous" dataType="float"/>
+		<DataField name="petal_width" optype="continuous" dataType="float"/>
+	</DataDictionary>
+	<MiningModel functionName="classification" algorithmName="XGBoost (GBTree)" x-mathContext="float">
+		<MiningSchema>
+			<MiningField name="y" usageType="target"/>
+			<MiningField name="sepal_length"/>
+			<MiningField name="sepal_width"/>
+			<MiningField name="petal_length"/>
+			<MiningField name="petal_width"/>
+		</MiningSchema>
+		<Segmentation multipleModelMethod="modelChain" missingPredictionTreatment="returnMissing">
+			<Segment id="1">
+				<True/>
+				<MiningModel functionName="regression" x-mathContext="float">
+					<MiningSchema>
+						<MiningField name="petal_length"/>
+					</MiningSchema>
+					<Output>
+						<OutputField name="xgbValue(1)" optype="continuous" dataType="float" isFinalResult="false"/>
+					</Output>
+					<Targets>
+						<Target rescaleConstant="0.5"/>
+					</Targets>
+					<Segmentation multipleModelMethod="sum">
+						<Segment id="1">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.42603552">
+									<True/>
+									<Node score="-0.21884502">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="2">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.2932374">
+									<True/>
+									<Node score="-0.19578768">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="3">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.23486565">
+									<True/>
+									<Node score="-0.18016353">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="4">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.20236066">
+									<True/>
+									<Node score="-0.16910432">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="5">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.18175341">
+									<True/>
+									<Node score="-0.16075504">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="6">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.16736233">
+									<True/>
+									<Node score="-0.15397872">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="7">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.15644188">
+									<True/>
+									<Node score="-0.14799415">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="8">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.14740907">
+									<True/>
+									<Node score="-0.14257559">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="9">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.13940626">
+									<True/>
+									<Node score="-0.13711298">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="10">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.13188724">
+									<True/>
+									<Node score="-0.13144246">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="11">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.12458343">
+									<True/>
+									<Node score="-0.1256162">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="12">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.11725016">
+									<True/>
+									<Node score="-0.12010882">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="13">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.110020004">
+									<True/>
+									<Node score="-0.11411184">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="14">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.10292529">
+									<True/>
+									<Node score="-0.108088434">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="15">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.09602936">
+									<True/>
+									<Node score="-0.10185162">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="16">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.08981607">
+									<True/>
+									<Node score="-0.0960599">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="17">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.08418785">
+									<True/>
+									<Node score="-0.09083518">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="18">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.078619525">
+									<True/>
+									<Node score="-0.08541434">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="19">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.06457653">
+									<True/>
+									<Node score="-0.078457646">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="3.4"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="20">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0120015545">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="21">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.011719066">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="22">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.01210609">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="23">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.011120981">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="24">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.011008285">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="25">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008258023">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="26">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009007601">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="27">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009052471">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="28">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0074751847">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="29">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008120049">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="30">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008691555">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="31">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009149573">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="32">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009539397">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="33">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009452953">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="34">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008305124">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="35">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0088363">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="36">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009274257">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="37">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009351233">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="38">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009374376">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="39">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009815114">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="40">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009750474">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="41">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009497592">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="42">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009943621">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="43">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0103094885">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="44">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.010453302">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="45">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.010706248">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="46">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.010823816">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="47">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.010961487">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="48">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.01085987">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="49">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0109185185">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="50">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.010374589">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="51">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.010506333">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="52">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009954225">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="53">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.01003958">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="54">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009443962">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="55">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009524652">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="56">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.009611081">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="57">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0090095755">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="58">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008577047">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="59">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008814059">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="60">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008328276">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="61">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008542178">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="62">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.008515533">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="63">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.00862006">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="64">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0072357473">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="65">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0074347444">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="66">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0063091177">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="67">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0065854425">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="68">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.005579351">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="69">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.005791463">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="70">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0049243635">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="71">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0052249893">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="72">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.00439269">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="73">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.004721505">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="74">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0039216504">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="75">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0042734183">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="76">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0035031645">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="77">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.003929367">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="78">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0031360236">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="79">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0035765206">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="80">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0028496403">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="81">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.00221864">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="82">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.002705049">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="83">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0019488458">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="84">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-0.0012846405">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="85">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-7.0288987E-4">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="86">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-2.3860951E-4">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="87">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-8.6785114E-4">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="88">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="-2.8069413E-4">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="89">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="2.2663428E-4">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="90">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="6.205568E-4">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="91">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0010465415">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="92">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0014092005">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="93">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0017268687">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="94">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0020167422">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="95">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0016437627">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="96">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0019150286">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="97">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0015535017">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="98">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0017667274">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="99">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0014182875">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="100">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema/>
+								<Node score="0.0017022328">
+									<True/>
+								</Node>
+							</TreeModel>
+						</Segment>
+					</Segmentation>
+				</MiningModel>
+			</Segment>
+			<Segment id="2">
+				<True/>
+				<MiningModel functionName="regression" x-mathContext="float">
+					<MiningSchema>
+						<MiningField name="sepal_length"/>
+						<MiningField name="sepal_width"/>
+						<MiningField name="petal_length"/>
+						<MiningField name="petal_width"/>
+					</MiningSchema>
+					<Output>
+						<OutputField name="xgbValue(2)" optype="continuous" dataType="float" isFinalResult="false"/>
+					</Output>
+					<Targets>
+						<Target rescaleConstant="0.5"/>
+					</Targets>
+					<Segmentation multipleModelMethod="sum">
+						<Segment id="1">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.21301778">
+									<True/>
+									<Node score="0.4228188">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="-7.663455E-9">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+											<Node score="-0.21176474">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+											</Node>
+										</Node>
+										<Node score="0.12857142">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.95"/>
+										</Node>
+										<Node score="0.12857142">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.55"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="2">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.18951397">
+									<True/>
+									<Node score="0.27788097">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.011591504">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+											<Node score="-0.18940744">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="3">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.17329198">
+									<True/>
+									<Node score="0.07975626">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.009732658">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+											<Node score="-0.17285019">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+											</Node>
+										</Node>
+										<Node score="0.23736395">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="0.075147">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.95"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="4">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.1611161">
+									<True/>
+									<Node score="0.0641888">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.010722818">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+											<Node score="-0.16306582">
+												<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+											</Node>
+										</Node>
+										<Node score="0.20369197">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="0.067216225">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.95"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="5">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.15125857">
+									<True/>
+									<Node score="0.0515964">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.027994778">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+											<Node score="-0.1516178">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+											</Node>
+										</Node>
+										<Node score="0.18232751">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="0.05584421">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.95"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="6">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.1426649">
+									<True/>
+									<Node score="0.041324828">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.03282992">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+											<Node score="-0.14621852">
+												<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+											</Node>
+										</Node>
+										<Node score="0.1673777">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="0.04644333">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.95"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="7">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.13465998">
+									<True/>
+									<Node score="0.030755151">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.03889872">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+											<Node score="-0.13597369">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+											</Node>
+										</Node>
+										<Node score="0.15611462">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="0.0387137">
+												<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.95"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="8">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.1268367">
+									<True/>
+									<Node score="0.15056702">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.008673897">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="-0.14567697">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+											</Node>
+										</Node>
+										<Node score="-0.10794682">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+											<Node score="0.09265725">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="9">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.118970506">
+									<True/>
+									<Node score="0.14208084">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.01337287">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="-0.13922402">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+											</Node>
+										</Node>
+										<Node score="-0.09782757">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+											<Node score="0.07685975">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="10">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.11099657">
+									<True/>
+									<Node score="0.13451135">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.01574561">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="-0.13153887">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+											</Node>
+										</Node>
+										<Node score="-0.090710856">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+											<Node score="0.07025579">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="11">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.102964535">
+									<True/>
+									<Node score="0.12730935">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="0.017509475">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+											<Node score="-0.123747624">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+											</Node>
+										</Node>
+										<Node score="0.026313795">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+											<Node score="-0.023790509">
+												<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="12">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.09500686">
+									<True/>
+									<Node score="0.12040869">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="-0.07740097">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="0.029557725">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+											<Node score="-0.015467996">
+												<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="13">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.08727664">
+									<True/>
+									<Node score="-0.08974078">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.8499999"/>
+									</Node>
+									<Node score="0.11259047">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="-0.021260323">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="0.021367647">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="14">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.0799245">
+									<True/>
+									<Node score="-0.08299602">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.8499999"/>
+									</Node>
+									<Node score="0.1060347">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="2.35"/>
+										<Node score="-0.018557914">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="0.020146495">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="15">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.06208588">
+									<True/>
+									<Node score="-0.07744635">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.8499999"/>
+									</Node>
+									<Node score="0.10077276">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.45"/>
+										<Node score="-0.015950214">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="0.020921">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="16">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.055925563">
+									<True/>
+									<Node score="0.09457698">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.45"/>
+										<Node score="-0.04510989">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="0.0049245465">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="17">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.050484862">
+									<True/>
+									<Node score="0.08736515">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.45"/>
+										<Node score="-0.03992725">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="0.008822388">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="18">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="-0.040114827">
+									<True/>
+									<Node score="0.092584975">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.056282256">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+											<Node score="0.012117363">
+												<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+											</Node>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="19">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.037816092">
+									<True/>
+									<Node score="0.08280347">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.023839481">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="20">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="-0.03175839">
+									<True/>
+									<Node score="-0.036086638">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.059346404">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="21">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="-0.031059572">
+									<True/>
+									<Node score="-0.033933476">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.055697624">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="22">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.030904308">
+									<True/>
+									<Node score="-0.029412236">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+									<Node score="0.0549645">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.55"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="23">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="-0.030657103">
+									<True/>
+									<Node score="-0.03407916">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.055082835">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="24">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.034161206">
+									<True/>
+									<Node score="0.028089497">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+										<Node score="-0.047466904">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="25">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.032893844">
+									<True/>
+									<Node score="0.06198056">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.018456647">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="26">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="-0.030455148">
+									<True/>
+									<Node score="0.05003903">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.026954835">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="27">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.03257335">
+									<True/>
+									<Node score="0.020832524">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+										<Node score="-0.04221604">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="28">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.032369066">
+									<True/>
+									<Node score="0.05763898">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.015940918">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="29">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.031377476">
+									<True/>
+									<Node score="0.054373346">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.014527579">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="30">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.02908844">
+									<True/>
+									<Node score="0.051204614">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.013372457">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="31">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.028405882">
+									<True/>
+									<Node score="0.048527118">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.0122240735">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="32">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.026406428">
+									<True/>
+									<Node score="0.042647522">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.0145045305">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="33">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.029789265">
+									<True/>
+									<Node score="-0.039829675">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+										<Node score="0.021096835">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="3.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="34">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.02911968">
+									<True/>
+									<Node score="0.04693711">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.010316298">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="35">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.027028691">
+									<True/>
+									<Node score="0.04433395">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.009553976">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="36">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.026410887">
+									<True/>
+									<Node score="0.041443344">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.013135548">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="37">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.025879717">
+									<True/>
+									<Node score="0.04007338">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.0118399765">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="38">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.025310762">
+									<True/>
+									<Node score="0.043461747">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.011462938">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="39">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.024840152">
+									<True/>
+									<Node score="0.039246216">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.011685044">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="40">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.02533746">
+									<True/>
+									<Node score="0.037582234">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.6499996"/>
+										<Node score="-0.0138557125">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="41">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.023329165">
+									<True/>
+									<Node score="0.041902285">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.01111785">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="42">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.028662989">
+									<True/>
+									<Node score="-0.04226137">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+										<Node score="0.014777965">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.55"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="43">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.022584707">
+									<True/>
+									<Node score="0.0371306">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.007353412">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="44">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.026246406">
+									<True/>
+									<Node score="-0.03924304">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+										<Node score="0.014860995">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.55"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="45">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.022699913">
+									<True/>
+									<Node score="0.034502838">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.0044097104">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="46">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.021191014">
+									<True/>
+									<Node score="0.030935703">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.0044053593">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.1499996"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="47">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.026216121">
+									<True/>
+									<Node score="-0.033866156">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+										<Node score="0.0104541425">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="48">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.020264138">
+									<True/>
+									<Node score="0.028200628">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.0040152557">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.1499996"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="49">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.017617423">
+									<True/>
+									<Node score="-0.02162933">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+									<Node score="0.039719053">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="50">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.019770198">
+									<True/>
+									<Node score="0.028373012">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+										<Node score="-0.0050233975">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.1499996"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="51">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.024602614">
+									<True/>
+									<Node score="-0.013863183">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="52">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.019857677">
+									<True/>
+									<Node score="0.016561309">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="53">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.024328744">
+									<True/>
+									<Node score="-0.0136368945">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="54">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.018836165">
+									<True/>
+									<Node score="0.015818423">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="55">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.01868967">
+									<True/>
+									<Node score="0.0156000275">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="56">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.024370939">
+									<True/>
+									<Node score="-0.013740897">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="57">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.021758322">
+									<True/>
+									<Node score="-0.012024749">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="58">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.02031299">
+									<True/>
+									<Node score="0.016874926">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="59">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.021739352">
+									<True/>
+									<Node score="-0.012065518">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="60">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.019102054">
+									<True/>
+									<Node score="0.015932895">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="61">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.017727332">
+									<True/>
+									<Node score="0.013645383">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="62">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.01675046">
+									<True/>
+									<Node score="0.013017292">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="63">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.015120173">
+									<True/>
+									<Node score="-0.0147165125">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="64">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.016343733">
+									<True/>
+									<Node score="0.012169996">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="65">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.015050585">
+									<True/>
+									<Node score="-0.013404136">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="66">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.016474439">
+									<True/>
+									<Node score="0.011974123">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="67">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.014594327">
+									<True/>
+									<Node score="-0.01336354">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="68">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.016016334">
+									<True/>
+									<Node score="0.011882765">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="69">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.014498687">
+									<True/>
+									<Node score="-0.013451017">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="70">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.016058672">
+									<True/>
+									<Node score="0.01166976">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="71">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.014514274">
+									<True/>
+									<Node score="-0.013182963">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="72">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.015623019">
+									<True/>
+									<Node score="0.011515604">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="73">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.014476807">
+									<True/>
+									<Node score="-0.012966142">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="74">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.015240448">
+									<True/>
+									<Node score="0.011329058">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="75">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.014401726">
+									<True/>
+									<Node score="-0.012781697">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="76">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.01489951">
+									<True/>
+									<Node score="0.011125741">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="77">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.014017243">
+									<True/>
+									<Node score="-0.012516829">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="78">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.014588227">
+									<True/>
+									<Node score="0.010948051">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="79">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.0139459735">
+									<True/>
+									<Node score="-0.012374256">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="80">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.012789894">
+									<True/>
+									<Node score="-0.011190086">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="81">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.014503096">
+									<True/>
+									<Node score="0.010817036">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="82">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.012384056">
+									<True/>
+									<Node score="-0.013540466">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="83">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.01170108">
+									<True/>
+									<Node score="-0.012876953">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="84">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.01108574">
+									<True/>
+									<Node score="-0.012283994">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="85">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.012181774">
+									<True/>
+									<Node score="-0.010988965">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="86">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.014469593">
+									<True/>
+									<Node score="0.01045166">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="87">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.011524875">
+									<True/>
+									<Node score="-0.013132685">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="88">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.010851675">
+									<True/>
+									<Node score="-0.012443855">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="89">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.011825959">
+									<True/>
+									<Node score="-0.010879827">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="90">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.010572602">
+									<True/>
+									<Node score="-0.012112227">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="91">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.009977164">
+									<True/>
+									<Node score="-0.011527218">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="92">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.010740966">
+									<True/>
+									<Node score="-0.009908762">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="93">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.009563805">
+									<True/>
+									<Node score="-0.011079367">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="94">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.010292187">
+									<True/>
+									<Node score="-0.00971478">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="95">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.009112751">
+									<True/>
+									<Node score="-0.0105453525">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="96">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.009978279">
+									<True/>
+									<Node score="-0.009393317">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="97">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.009833495">
+									<True/>
+									<Node score="-0.008976651">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="98">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.010211514">
+									<True/>
+									<Node score="-0.009468766">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="99">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="0.009039359">
+									<True/>
+									<Node score="-0.010301042">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="100">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.010114831">
+									<True/>
+									<Node score="0.009283212">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.55"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+					</Segmentation>
+				</MiningModel>
+			</Segment>
+			<Segment id="3">
+				<True/>
+				<MiningModel functionName="regression" x-mathContext="float">
+					<MiningSchema>
+						<MiningField name="sepal_length"/>
+						<MiningField name="sepal_width"/>
+						<MiningField name="petal_length"/>
+						<MiningField name="petal_width"/>
+					</MiningSchema>
+					<Output>
+						<OutputField name="xgbValue(3)" optype="continuous" dataType="float" isFinalResult="false"/>
+					</Output>
+					<Targets>
+						<Target rescaleConstant="0.5"/>
+					</Targets>
+					<Segmentation multipleModelMethod="sum">
+						<Segment id="1">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.21844663">
+									<True/>
+									<Node score="0.39537573">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+									<Node score="-0.03600001">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="2">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.19512509">
+									<True/>
+									<Node score="0.07787265">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										<Node score="0.29640067">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+										</Node>
+									</Node>
+									<Node score="-0.012304146">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.95"/>
+									</Node>
+									<Node score="-0.0024873647">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.55"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="3">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.17981872">
+									<True/>
+									<Node score="0.21857671">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+									<Node score="-0.008137716">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="4">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.16839066">
+									<True/>
+									<Node score="0.18009295">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										<Node score="0.20205033">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="-0.02741418">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+										</Node>
+									</Node>
+									<Node score="-0.0013320078">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="5">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.15961207">
+									<True/>
+									<Node score="0.16099331">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										<Node score="0.18079282">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="-0.033812698">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+										</Node>
+									</Node>
+									<Node score="0.0049838107">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="6">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.15063795">
+									<True/>
+									<Node score="0.025216958">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										<Node score="0.17228574">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+										</Node>
+									</Node>
+									<Node score="0.06700099">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.45"/>
+										<Node score="-0.12885135">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="7">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.14619362">
+									<True/>
+									<Node score="0.13755275">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										<Node score="0.15434475">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="-0.048369307">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+										</Node>
+									</Node>
+									<Node score="0.013265152">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="8">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.14018828">
+									<True/>
+									<Node score="0.12734868">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										<Node score="0.14451496">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+										<Node score="-0.046574034">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+										</Node>
+									</Node>
+									<Node score="0.017174892">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="9">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.095307745">
+									<True/>
+									<Node score="-0.0063221245">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										<Node score="0.14616847">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+										</Node>
+									</Node>
+									<Node score="-0.13630944">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+									<Node score="0.05960263">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.45"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="10">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.08658763">
+									<True/>
+									<Node score="-0.008561933">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										<Node score="0.13901287">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+										</Node>
+									</Node>
+									<Node score="-0.12929438">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+									<Node score="0.05006891">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.45"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="11">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.12846537">
+									<True/>
+									<Node score="0.13409239">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										<Node score="-0.0029032072">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="3.15"/>
+										</Node>
+										<Node score="0.03917779">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.6"/>
+										</Node>
+									</Node>
+									<Node score="0.021612834">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.25"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="12">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.11816355">
+									<True/>
+									<Node score="0.008684167">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										<Node score="0.13519429">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.75"/>
+										</Node>
+									</Node>
+									<Node score="0.092168294">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										<Node score="-0.047489576">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.9"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="13">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.015896944">
+									<True/>
+									<Node score="0.123507135">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										<Node score="-0.02012863">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="3.15"/>
+										</Node>
+									</Node>
+									<Node score="-0.112152">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+									<Node score="0.009329087">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="14">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.009549501">
+									<True/>
+									<Node score="-0.030408597">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										<Node score="0.117170006">
+											<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+										</Node>
+									</Node>
+									<Node score="-0.10522849">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+									<Node score="0.0076820212">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="15">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.077864304">
+									<True/>
+									<Node score="0.080320485">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="-0.1152853">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="3.05"/>
+									</Node>
+									<Node score="0.06569045">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="16">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.0013763193">
+									<True/>
+									<Node score="0.105833076">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										<Node score="-0.024049679">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="3.05"/>
+										</Node>
+									</Node>
+									<Node score="-0.0931603">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="17">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.106951855">
+									<True/>
+									<Node score="-0.031998478">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										<Node score="0.11295655">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+									</Node>
+									<Node score="0.022593226">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="18">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.10243487">
+									<True/>
+									<Node score="-0.026373789">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										<Node score="0.105966896">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+									</Node>
+									<Node score="0.019109946">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="19">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.053690657">
+									<True/>
+									<Node score="0.08643188">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+										<Node score="-0.003326326">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.95"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="20">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.09116547">
+									<True/>
+									<Node score="-0.0022932657">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										<Node score="0.0798718">
+											<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+										</Node>
+									</Node>
+									<Node score="0.019122671">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="21">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.0883641">
+									<True/>
+									<Node score="0.06204501">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+										<Node score="0.012748577">
+											<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.95"/>
+										</Node>
+									</Node>
+									<Node score="0.019407075">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="22">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.052652955">
+									<True/>
+									<Node score="0.046995215">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+									<Node score="-0.0024961089">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="23">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.019798936">
+									<True/>
+									<Node score="-0.058607396">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="3.05"/>
+									</Node>
+									<Node score="0.0904676">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="24">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="0.0041206046">
+									<True/>
+									<Node score="0.049929593">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="6.05"/>
+									</Node>
+									<Node score="-0.058508184">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="25">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.020325411">
+									<True/>
+									<Node score="-0.05344567">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="3.05"/>
+									</Node>
+									<Node score="0.08667495">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="26">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.051548608">
+									<True/>
+									<Node score="0.050198622">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.0083102975">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="27">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.039950028">
+									<True/>
+									<Node score="0.03651872">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="28">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.047489185">
+									<True/>
+									<Node score="0.045160368">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.007386086">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="29">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.03765213">
+									<True/>
+									<Node score="0.0331369">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="30">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.04702604">
+									<True/>
+									<Node score="0.04426246">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.0094350595">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="31">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.035114802">
+									<True/>
+									<Node score="0.03170233">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="32">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.04640518">
+									<True/>
+									<Node score="0.043301806">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.011036446">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="33">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="-0.036584754">
+									<True/>
+									<Node score="0.009382358">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+										<Node score="0.03790851">
+											<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+										</Node>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="34">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.03238112">
+									<True/>
+									<Node score="0.028918643">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="35">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.04290201">
+									<True/>
+									<Node score="0.040962882">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.009529357">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="36">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.03236598">
+									<True/>
+									<Node score="0.028274478">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="37">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.040342364">
+									<True/>
+									<Node score="0.038582224">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="5.05"/>
+									</Node>
+									<Node score="0.010089131">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="38">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.031590443">
+									<True/>
+									<Node score="0.028563855">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="39">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.029123748">
+									<True/>
+									<Node score="0.027417315">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="40">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.03158061">
+									<True/>
+									<Node score="0.028424507">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="41">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.031557217">
+									<True/>
+									<Node score="-0.026057655">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="42">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.030819368">
+									<True/>
+									<Node score="0.027919447">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="43">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.02759191">
+									<True/>
+									<Node score="0.02665102">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="44">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.028382674">
+									<True/>
+									<Node score="0.026095191">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="45">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.027121227">
+									<True/>
+									<Node score="0.026140008">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="46">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.029989917">
+									<True/>
+									<Node score="-0.02359569">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="47">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.021614155">
+									<True/>
+									<Node score="0.03273086">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="48">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.026267255">
+									<True/>
+									<Node score="0.025485994">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="49">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.020543132">
+									<True/>
+									<Node score="0.032030616">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="50">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.030542307">
+									<True/>
+									<Node score="-0.023010228">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="51">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.026813041">
+									<True/>
+									<Node score="0.026221927">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="52">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.02816624">
+									<True/>
+									<Node score="-0.021889381">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="53">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.025967766">
+									<True/>
+									<Node score="0.026082791">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="54">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.02599199">
+									<True/>
+									<Node score="0.023967477">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="55">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.027419481">
+									<True/>
+									<Node score="-0.021347381">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="56">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.020060034">
+									<True/>
+									<Node score="0.031183055">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="57">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_length"/>
+								</MiningSchema>
+								<Node score="-0.025278466">
+									<True/>
+									<Node score="0.023948835">
+										<SimplePredicate field="sepal_length" operator="greaterOrEqual" value="5.95"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="58">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.027700545">
+									<True/>
+									<Node score="-0.022600472">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="59">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.02494677">
+									<True/>
+									<Node score="0.024328047">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="60">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.027120357">
+									<True/>
+									<Node score="-0.022048881">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="61">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.019006602">
+									<True/>
+									<Node score="0.028831681">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="62">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.026276933">
+									<True/>
+									<Node score="-0.019491429">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="63">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.018053968">
+									<True/>
+									<Node score="0.029118605">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="64">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.025712453">
+									<True/>
+									<Node score="-0.019270502">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="65">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.017169734">
+									<True/>
+									<Node score="0.027596893">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="66">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.024452047">
+									<True/>
+									<Node score="-0.018509917">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="67">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.021834934">
+									<True/>
+									<Node score="0.02276113">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="68">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.016808318">
+									<True/>
+									<Node score="0.025461523">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.75"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="69">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.024103167">
+									<True/>
+									<Node score="-0.018340774">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="70">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.021029469">
+									<True/>
+									<Node score="0.020826045">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="71">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.022750072">
+									<True/>
+									<Node score="-0.01776685">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="72">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.020844894">
+									<True/>
+									<Node score="0.02016545">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="73">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.021557758">
+									<True/>
+									<Node score="-0.017190842">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="74">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.020604644">
+									<True/>
+									<Node score="0.019576844">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="75">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.020497873">
+									<True/>
+									<Node score="-0.016625918">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="76">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.018638134">
+									<True/>
+									<Node score="-0.015651297">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="77">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_width"/>
+								</MiningSchema>
+								<Node score="-0.020905135">
+									<True/>
+									<Node score="0.020239534">
+										<SimplePredicate field="petal_width" operator="greaterOrEqual" value="1.6500001"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="78">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.017850239">
+									<True/>
+									<Node score="-0.015262595">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="79">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.016527994">
+									<True/>
+									<Node score="-0.013297071">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="80">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.0149906585">
+									<True/>
+									<Node score="-0.012592588">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="81">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.013601843">
+									<True/>
+									<Node score="-0.011907004">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="82">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.012617256">
+									<True/>
+									<Node score="-0.0102186715">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="83">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.012079694">
+									<True/>
+									<Node score="-0.010257441">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="84">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.011567504">
+									<True/>
+									<Node score="-0.010245887">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="85">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.011079886">
+									<True/>
+									<Node score="-0.010193469">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="86">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.009999748">
+									<True/>
+									<Node score="-0.0096880905">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="87">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.009311769">
+									<True/>
+									<Node score="-0.0081877215">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="88">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.0090270005">
+									<True/>
+									<Node score="-0.008354667">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="89">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.008744696">
+									<True/>
+									<Node score="-0.008460358">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="90">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.007845793">
+									<True/>
+									<Node score="-0.0080921445">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="91">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.0076534506">
+									<True/>
+									<Node score="-0.008189133">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="92">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="-0.008408513">
+									<True/>
+									<Node score="0.007520887">
+										<SimplePredicate field="petal_length" operator="greaterOrEqual" value="4.8500004"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="93">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.007173822">
+									<True/>
+									<Node score="-0.008330379">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="94">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.0070010233">
+									<True/>
+									<Node score="-0.00833409">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="95">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.007225218">
+									<True/>
+									<Node score="-0.008292795">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="96">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.007033277">
+									<True/>
+									<Node score="-0.008268135">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="97">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.007230854">
+									<True/>
+									<Node score="-0.008211672">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="98">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.0064901835">
+									<True/>
+									<Node score="-0.0077960077">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="99">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.0067473645">
+									<True/>
+									<Node score="-0.007783811">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="100">
+							<True/>
+							<TreeModel functionName="regression" noTrueChildStrategy="returnLastPrediction" x-mathContext="float">
+								<MiningSchema>
+									<MiningField name="sepal_width"/>
+								</MiningSchema>
+								<Node score="0.006593206">
+									<True/>
+									<Node score="-0.0077876495">
+										<SimplePredicate field="sepal_width" operator="greaterOrEqual" value="2.85"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+					</Segmentation>
+				</MiningModel>
+			</Segment>
+			<Segment id="4">
+				<True/>
+				<RegressionModel functionName="classification" normalizationMethod="softmax" x-mathContext="float">
+					<MiningSchema>
+						<MiningField name="y" usageType="target"/>
+						<MiningField name="xgbValue(1)"/>
+						<MiningField name="xgbValue(2)"/>
+						<MiningField name="xgbValue(3)"/>
+					</MiningSchema>
+					<Output>
+						<OutputField name="probability(1)" optype="continuous" dataType="float" feature="probability" value="1"/>
+						<OutputField name="probability(2)" optype="continuous" dataType="float" feature="probability" value="2"/>
+						<OutputField name="probability(3)" optype="continuous" dataType="float" feature="probability" value="3"/>
+					</Output>
+					<RegressionTable intercept="0.0" targetCategory="1">
+						<NumericPredictor name="xgbValue(1)" coefficient="1.0"/>
+					</RegressionTable>
+					<RegressionTable intercept="0.0" targetCategory="2">
+						<NumericPredictor name="xgbValue(2)" coefficient="1.0"/>
+					</RegressionTable>
+					<RegressionTable intercept="0.0" targetCategory="3">
+						<NumericPredictor name="xgbValue(3)" coefficient="1.0"/>
+					</RegressionTable>
+				</RegressionModel>
+			</Segment>
+		</Segmentation>
+	</MiningModel>
+</PMML>

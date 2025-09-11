@@ -1,0 +1,15 @@
+{
+  "complaints_traintoken": {
+    "doc_id": "integer",
+    "category": "varchar(20)",
+    "token": "varchar(20)",
+    "frequency": "integer",
+    "location": "varchar(20)"
+  },
+  "complaints_testtoken": {
+    "doc_id": "integer",
+    "token": "varchar(20)",
+    "frequency": "integer",
+    "location": "varchar(20)"
+  }
+}

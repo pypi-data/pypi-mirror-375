@@ -1,0 +1,17 @@
+{
+  "finance_data3": {
+    "id": "integer",
+    "period": "varchar(30)",
+    "expenditure": "integer",
+    "income": "integer",
+    "investment": "integer"
+  },
+  "finance_data4":{
+    "id": "integer",
+    "period": "integer",
+    "expenditure": "float",
+    "income": "float",
+    "investment": "float"
+
+  }
+}

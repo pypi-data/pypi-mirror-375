@@ -1,0 +1,32 @@
+{
+  "housing_test_binary": {
+    "sn" : "integer",
+    "price" : "real",
+    "lotsize" : "real",
+    "bedrooms" : "integer",
+    "bathrms" : "integer",
+    "stories" : "integer",
+    "driveway" : "varchar(10)",
+    "recroom" : "varchar(10)",
+    "fullbase": "varchar(10)",
+    "gashw" : "varchar(10)",
+    "airco" : "varchar(10)",
+    "garagepl" : "integer",
+    "prefarea" : "varchar(10)",
+    "homestyle" : "varchar(20)"
+  },
+  "sparse_iris_test": {
+    "id" : "integer",
+    "species" : "varchar(30)",
+    "attribute" : "varchar(30)",
+    "value_col" : "float"
+  },
+  "iris_test": {
+    "id" : "integer",
+    "sepal_length" : "float",
+    "sepal_width" : "float",
+    "petal_length" : "float",
+    "petal_width" : "float",
+    "species": "integer"
+  }
+}

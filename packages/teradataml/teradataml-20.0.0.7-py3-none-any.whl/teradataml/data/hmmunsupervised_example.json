@@ -1,0 +1,8 @@
+{
+  "loan_prediction" :{
+    "model_id" : "integer",
+    "seq_id" : "integer",
+    "seq_vertex_id" : "integer",
+    "observed_id" : "varchar(5)"
+  }
+}

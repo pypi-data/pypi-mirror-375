@@ -1,0 +1,12 @@
+{
+     "bin_breaks" : {
+                  "break" : "float"
+        },
+
+    "cars_hist" :{
+            "id" : "integer",
+            "name" : "varchar(30)",
+            "cyl" : "integer",
+            "hp" : "float"
+            }
+}

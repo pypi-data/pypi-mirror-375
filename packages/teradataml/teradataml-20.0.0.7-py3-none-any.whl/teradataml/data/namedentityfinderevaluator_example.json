@@ -1,0 +1,10 @@
+{
+     "nermem_sports_train" : {
+                  "id" : "integer",
+                  "content" : "varchar(300)"
+        },
+       "nermem_sports_test" : {
+                  "id" : "integer",
+                  "content" : "varchar(300)"
+        }
+}

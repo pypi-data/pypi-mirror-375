@@ -1,0 +1,40 @@
+{
+  "sample_cities": {
+    "skey": "integer",
+    "city_name": "varchar(40)",
+    "city_shape": "st_geometry(64000)"
+  },
+  "sample_mbbs": {
+    "skey": "integer",
+    "shape_mbb": "MBB"
+  },
+  "sample_mbrs": {
+    "skey": "integer",
+    "shape_mbr": "MBR"
+  },
+  "sample_shapes": {
+    "skey": "integer",
+    "points": "st_geometry(64000)",
+    "linestrings": "st_geometry(64000)",
+    "polygons": "st_geometry(64000)",
+    "geom_collections": "st_geometry(64000)",
+    "geosequence": "st_geometry(64000)"
+  },
+  "sample_streets": {
+    "skey": "integer",
+    "street_name": "varchar(40)",
+    "street_shape": "st_geometry(64000)"
+  },
+  "us_states_shapes": {
+    "id": "VARCHAR(5)",
+    "state_name": "varchar(400)",
+    "state_shape": "st_geometry(64000)"
+  },
+  "us_population": {
+    "state_name": "varchar(400)",
+    "location_type": "varchar(400)",
+    "population_year": "integer",
+    "population": "FLOAT"
+  }
+
+}

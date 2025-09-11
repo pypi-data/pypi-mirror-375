@@ -1,0 +1,8 @@
+{
+  "ibm_stock": {
+    "id": "integer",
+    "name": "varchar(15)",
+    "\"period\"": "date",
+    "stockprice": "real"
+  }
+}

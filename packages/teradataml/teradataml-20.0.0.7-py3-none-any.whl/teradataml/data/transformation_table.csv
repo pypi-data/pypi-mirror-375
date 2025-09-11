@@ -1,0 +1,6 @@
+TargetColumn,transformation,Parameters,DefaultValue
+sepal_length,log,{"base":10},10
+sepal_width,abs,{},10
+petal_length,exp,{},10
+petal_width,sigmoid,{},10
+id,tanh,{},10

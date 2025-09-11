@@ -1,0 +1,78 @@
+{
+        "FuncName": "TD_DICKEY_FULLER",
+        "FuncDescriptionShort": "The Dickey-Fuller test is a statistical test for the presence of one or more unit roots",
+        "FuncDescriptionLong": [
+                "The Dickey-Fuller test is a statistical test for the presence of one or more unit roots within a given series generating process, thus, the test strives to answer the question, 'given the sample data available, is it possible that the true data generating process for y contains one or more unit roots?''."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Diagnostic Statistical Test",
+        "JSONVersion": "1",
+        "FuncRName": "td_Dickey_Fuller",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": ["SERIES", "ART"],
+                        "Description": [
+                                "This section outlines the syntax associated with invoking the TD_DICKEY_FULLER function.   The function takes in a single logical-runtime series as an input.  The series is only permitted to have univariate elements.  "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "varchar(16)",
+                                "float",
+                                "float",
+                                "varchar(16)"
+                        ],
+                        "Description": [
+                                "The TD_DICKEY_FULLER function internally executes an OLS regression,  linear regression.    function returns only a primary result set consisting of one row per unique series acted upon.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "ALGORITHM",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "NONE",
+                                "DRIFT",
+                                "SQUARED",
+                                "DRIFTNTREND"
+                        ],
+                        "Description": [
+                                "An enumerated type with values of:  NONE, DRIFT, TREND, DRIFTNTREND, or FORMULA, which influences the type of regression that will be run for the test.",
+                                "NONE: Random walk",
+                                "DRIFT: Random walk with drift",
+                                "DRIFTNTREND: Random walk with drift and trend",
+                                "SQUARED: Random walk with drift, trend, and quadratic trend."]
+                },
+                {
+                        "Name": "MAXLAGS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBound": 100,
+                        "UpperBoundType": "INCLUSIVE",
+                        "DefaultValue": 0,
+                        "AllowNaN": false,
+                        "Description": [
+                                "The presence of the MAXLAGS parameter means the data scientist wishes to run the augmented Dickey-Fuller test. This is the maximum number of lags that will be used to form the regression equation. "
+                        ],
+                        "LangName": "max_lags"
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

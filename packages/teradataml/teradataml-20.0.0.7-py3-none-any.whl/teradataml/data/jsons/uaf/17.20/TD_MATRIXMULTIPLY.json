@@ -1,0 +1,68 @@
+{
+        "FuncName": "TD_MATRIXMULTIPLY",
+        "FuncDescriptionShort": "Perform a point-wise mathematical operation against two matrices having the same number of elements",
+        "FuncDescriptionLong": [
+                "There is a need in data science to be able to create a new data series that is the result of performing a point-wise mathematical operation against two matrices having the same number of wavelets and having the same number of data-points within a same wavelet-point from the two matrices.",
+                "C = A * B is the matrix multiplication (Product) of matrix A and B. If A is an M-by-K and B is K-by-N matrix, then C is an M-by-N matrix and is defined by, C(m,n) = ∑_{k=1 to n} A(m,k)*B(k,n)",
+                "This definition says that C (m, n) is the inner product of the m-th row of A with n-th column of B. The number of columns of A must equal the number of rows of B. Matrix multiplication is not universally commutative for non-scalar inputs. That is, A * B is typically not equal to B *A."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Data Preparation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Matrix_Multiply",
+        "MaxInputFiles": 2,
+        "Input": [
+                {
+                        "Type": "MATRIX",
+                        "Description": [
+                                "This function takes two equally sized data matrices as inputs, performs the specified mathematical operation - add, subtract, multiply, divide - on a sample point by sample point basis, producing a result matrix, which is the result of performing the mathematical operation."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                },
+                {
+                        "Type": "MATRIX",
+                        "Description": [
+                                "secondary matrix of equal size to be operated on"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "<varies>",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_MATRIXMULTIPLY function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results. ",
+                                "<varies> data type and values dependent upon If the output index style is NUMERICAL_SEQUENCE, its type is INTEGER.  Otherwise, it will match the input matrix's row or column axis type."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [],
+        "InputFmt": [
+                {
+                        "Name": "INPUT_MODE",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "ONE2ONE",
+                                "MANY2ONE",
+                                "MATCH"
+                        ],
+                        "Description": [
+                                "Specifies the input mode supported by the function."
+                        ],
+                        "LangName": "input_fmt_input_mode"
+                }
+        ],
+        "OutputFmt": false
+}

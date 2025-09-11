@@ -1,0 +1,173 @@
+{
+  "scale_housing_test" : {
+                  
+                  "types" : "varchar(20)",
+                  "id" : "integer",
+                  "price" : "real",
+                  "lotsize" : "real",
+                  "bedrooms" : "real",
+                  "bathrms" : "real",
+                  "stories" : "real"
+                  
+  },
+  "employee_info": {
+    "employee_no" : "integer",
+    "first_name" : "varchar(30)",
+    "marks" : "integer",
+    "dob" : "date",
+    "joined_date" : "date"
+  },
+  "sales": {
+    "accounts" : "varchar(20)",
+    "Feb" : "real",
+    "Jan" : "bigint",
+    "Mar" : "bigint",
+    "Apr" : "bigint",
+    "datetime" : "date FORMAT 'dd/mm/yyyy'"
+  },
+  "admissions_train" :{
+            "id" : "integer",
+            "masters" : "varchar(5)",
+            "gpa" : "real",
+            "stats" : "varchar(30)",
+            "programming" : "varchar(30)",
+            "admitted" : "integer"
+  },
+  "admissions_train_nulls" :{
+            "id" : "integer",
+            "masters" : "varchar(5)",
+            "gpa" : "real",
+            "stats" : "varchar(30)",
+            "programming" : "varchar(30)",
+            "admitted" : "integer"
+  },
+  "join_table1": {
+    "col1" : "bigint",
+    "col2" : "varchar(30)",
+    "col3" : "float",
+    "col5" : "varchar(30)"
+  },
+   "join_table2": {
+    "col1" : "bigint",
+    "col4" : "varchar(30)",
+    "col3" : "float",
+    "col7" : "varchar(30)"
+  },
+  "iris_test": {
+    "id" : "integer",
+    "sepal_length" : "float",
+    "sepal_width" : "float",
+    "petal_length" : "float",
+    "petal_width" : "float",
+    "species": "integer"
+  },
+  "numerics": {
+    "id_col": "integer",
+    "integer_col": "integer",
+    "smallint_col": "smallint",
+    "bigint_col": "bigint",
+    "decimal_col": "decimal(38,8)",
+    "float_col": "float",
+    "number_col": "number",
+    "number2_col": "number",
+    "number3_col": "number",
+    "byteint_col": "byteint"
+  },
+  "numeric_strings": {
+    "id_col": "integer",
+    "hex_col": "varchar(8)",
+    "decimal_col": "varchar(8)",
+    "commas_col": "varchar(8)",
+    "numbers_col": "varchar(8)"
+  },
+  "bytes_table": {
+    "id_col": "integer",
+    "byte_col": "byte",
+    "varbyte_col": "varbyte(100)",
+    "blob_col": "blob"
+  },
+  "ocean_buoys": {
+    "TD_TIMECODE": "timestamp(6)",
+    "buoyid": "integer",
+    "salinity": "integer",
+    "temperature": "integer",
+    "<PTI_CLAUSE>": "(TIMESTAMP(6), DATE '2012-01-01', HOURS(1), COLUMNS(buoyid), nonsequenced)"
+  },
+  "ocean_buoys_seq": {
+    "TD_TIMECODE": "timestamp(6)",
+    "TD_SEQNO": "integer",
+    "buoyid": "integer",
+    "salinity": "integer",
+    "temperature": "integer",
+    "dates": "date FORMAT 'yyyy-mm-dd'",
+    "<PTI_CLAUSE>": "(TIMESTAMP(6), DATE '2012-01-01', HOURS(1), COLUMNS(buoyid), sequenced)"
+  },
+  "ocean_buoys_nonpti": {
+    "timecode": "timestamp(6)",
+    "buoyid": "integer",
+    "salinity": "integer",
+    "temperature": "integer"
+  },
+  "package_tracking_pti": {
+    "TD_TIMECODE": "timestamp(6)",
+    "parcelnumber": "integer",
+    "status": "varchar(512)",
+    "<PTI_CLAUSE>": "(TIMESTAMP(6), DATE '2012-01-01', HOURS(1), COLUMNS(parcelnumber), nonsequenced)"
+  },
+  "package_tracking": {
+    "parcelnumber": "integer",
+    "clock_time": "timestamp",
+    "status": "varchar(512)"
+  },
+    "setop_test1" :{
+    "id" : "integer",
+    "masters" : "varchar(5)",
+    "gpa" : "real", 
+    "stats" : "varchar(30)", 
+    "programming" : "varchar(30)", 
+    "admitted" : "integer"       
+  },
+  "setop_test2" :{
+    "id" : "integer",
+    "masters" : "varchar(5)",
+    "gpa" : "real", 
+    "stats" : "varchar(30)", 
+    "programming" : "varchar(30)", 
+    "admitted" : "integer"
+  },
+  "insurance" :{
+    "age" : "integer",
+    "sex" : "varchar(7)",
+    "bmi" : "real",
+    "children" : "integer",
+    "smoker" : "varchar(4)",
+    "region" : "varchar(12)",
+    "charges" : "real"
+   },
+   "grocery_transaction":{
+    "tranid" : "integer",
+    "period" : "varchar(20)",
+    "storeid" : "integer",
+    "region" : "varchar(20)",
+    "item" : "varchar(20)",
+    "sku" : "integer",
+    "category" : "varchar(20)"
+   },
+  "medical_readings": {
+    "patient_id":  "BIGINT",
+    "record_timestamp":  "timestamp",
+    "glucose":  "BIGINT",
+    "blood_pressure":  "BIGINT",
+    "insulin":  "BIGINT",
+    "diabetes_pedigree_function":  "FLOAT",
+    "outcome": "BIGINT"
+  },
+  "patient_profile": {
+    "patient_id":  "BIGINT",
+    "record_timestamp":  "timestamp",
+    "pregnancies":  "BIGINT",
+    "age":  "BIGINT",
+    "bmi":  "FLOAT",
+    "skin_thickness":  "FLOAT"
+  }
+}

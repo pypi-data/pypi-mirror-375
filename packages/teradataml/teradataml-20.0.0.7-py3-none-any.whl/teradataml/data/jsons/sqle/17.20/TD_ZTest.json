@@ -1,0 +1,247 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "2",
+  "json_content_version": "2",
+  "function_name": "TD_ZTest",
+  "function_alias_name": "TD_ZTest",
+  "function_version": "2.0",
+  "commence_db_version" : "17.20",
+  "change_db_version" : "17.20.03.XX",
+  "function_type": "fastpath",
+  "function_category": "Hypothesis Testing",
+  "function_r_name": "aa.td_ztest",
+  "short_description": "hypothesis test function to perform ztest analysis on a data set.",
+  "long_description": "fastpath function to perform ztest analysis on a data set.",
+  "input_tables": [
+    {
+      "name": "InputTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "datatype": "TABLE_ALIAS",
+      "partitionByOne": false,
+      "isOrdered": false,
+      "description": "The input table for ztest analysis.",
+      "rDescription": "The input table for ztest analysis",
+      "rName": "data",
+      "useInR": true,
+      "rOrderNum": 1
+    }
+  ],
+  "argument_clauses": [
+    {
+      "name": "FirstSampleColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "NUMERIC"
+      ],
+      "rOrderNum": 2,
+      "description": "Specifies the first sample column in z test",
+      "rDescription": "Specifies the first sample column in z test",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "first.sample.column",
+      "useInR": true,
+      "rFormulaUsage" : false
+    },
+    {
+      "name": "SecondSampleColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "NUMERIC"
+      ],
+      "rOrderNum": 3,
+      "description": "Specifies the second sample column in z test",
+      "rDescription": "Specifies the second sample column in z test",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "second.sample.column",
+      "useInR": true,
+      "rFormulaUsage" : false
+    },
+    {
+      "name": "SampleNameColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "STRING"
+      ],
+      "rOrderNum": 4,
+      "description": "Specifies the input table column containing the names of the samples included in the z test. This argument is used when Input is in sample-value format.", 
+      "rDescription": "Specifies the input table column containing the names of the samples included in the z test. This argument is used when Input is in sample-value format.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "sample.name.column",
+      "useInR": true
+    },
+    {
+      "name": "SampleValueColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "NUMERIC"
+      ],
+      "rOrderNum": 5,
+      "description": "Specifies the input table column containing the values for each sample member. This argument is used when Input is in sample-value format.",
+      "rDescription": "Specifies the input table column containing the values for each sample member. This argument is used when Input is in sample-value format.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "sample.value.column",
+      "useInR": true
+    },
+    {
+      "name": "FirstSampleName",
+      "alternateNames": [],
+      "isRequired": false,
+      "defaultValue" : "",
+      "rOrderNum": 6,
+      "description": "Specifies the name of the first sample included in the z test. This argument is used when Input is in sample-value format.",
+      "rDescription": "Specifies the name of the first sample included in the z test. This argument is used when Input is in sample-value format.",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "first.sample.name",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "SecondSampleName",
+      "alternateNames": [],
+      "isRequired": false,
+      "defaultValue" : "",
+      "rOrderNum": 7,
+      "description": "Specifies the name of the second sample included in the z test. This argument is used when Input is in sample-value format.",
+      "rDescription": "Specifies the name of the second sample included in the z test. This argument is used when Input is in sample-value format.",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "second.sample.name",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "FirstSampleVariance",
+      "alternateNames": [],
+      "isRequired": false,
+      "rOrderNum": 8,
+      "lowerBound" : 0,
+      "lowerBoundType" : "EXCLUSIVE",
+      "upperBound" : 1e10,
+      "upperBoundType" : "EXCLUSIVE",
+      "allowNaN": false,
+      "isOutputColumn": false,
+      "matchLengthOfArgument": "",
+      "description": "Specifies the first sample variance",
+      "rDescription": "Specifies the first sample variance",
+      "datatype": "DOUBLE",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "first.sample.variance",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "SecondSampleVariance",
+      "alternateNames": [],
+      "isRequired": false,
+      "rOrderNum": 9,
+      "lowerBound" : 0,
+      "lowerBoundType" : "EXCLUSIVE",
+      "upperBound" : 1e10,
+      "upperBoundType" : "EXCLUSIVE",
+      "allowNaN": false,
+      "isOutputColumn": false,
+      "matchLengthOfArgument": "",
+      "description": "Specifies the second sample variance",
+      "rDescription": "Specifies the second sample variance",
+      "datatype": "DOUBLE",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "second.sample.variance",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "AlternativeHypothesis",
+      "alternateNames": [],
+      "isRequired": false,
+      "defaultValue": "two-tailed",
+      "rOrderNum": 10,
+      "permittedValues": [
+        "lower-tailed",
+        "two-tailed",
+        "upper-tailed"
+       ],
+      "matchLengthOfArgument": "",
+      "description": "Specifies the alternative hypothesis",
+      "rDescription": "Specifies the alternative hypothesis",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "alternate.hypothesis",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "MeanUnderH0",
+      "alternateNames": [],
+      "isRequired": false,
+      "defaultValue": 0,
+      "rOrderNum": 11,
+      "lowerBound": 0,
+      "lowerBoundType": "INCLUSIVE",
+      "upperBound": 1,
+      "upperBoundType": "INCLUSIVE",
+      "allowNaN": false,
+      "description": "Specifies the mean under the null hypothesis",
+      "rDescription": "Specifies the mean under the null hypothesis",
+      "datatype": "NUMERIC",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "mean.under.h0",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "Alpha",
+      "alternateNames": [],
+      "isRequired": false,
+      "defaultValue": 0.05,
+      "rOrderNum": 12,
+      "lowerBound": 0,
+      "lowerBoundType": "INCLUSIVE",
+      "upperBound": 1,
+      "upperBoundType": "INCLUSIVE",
+      "allowNaN": false,
+      "description": "Specifies the value of alpha in hypothesis test function",
+      "rDescription": "Specifies the value of alpha in hypothesis test function",
+      "datatype": "DOUBLE",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "alpha",
+      "useInR": true,
+      "rDefaultValue" : ""
+    }
+  ]
+}

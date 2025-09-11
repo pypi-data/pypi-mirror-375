@@ -1,0 +1,101 @@
+{
+        "FuncName": "TD_FITMETRICS",
+        "FuncDescriptionShort": "The TD_FIT_METRICS function performs several calculations",
+        "FuncDescriptionLong": [
+                "The TD_FIT_METRICS function performs several calculations, using as its input: the original series; the series predicted from the model; the original series mean; and, the residuals left over from a modeling fit exercise.  The purpose of the generated metrics is to enable the data scientist to judge the 'Goodness of Fit' afforded by the modeling fit exercise."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Diagnostic Statistical Test",
+        "JSONVersion": "1",
+        "FuncRName": "td_Fit_Metrics",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": [
+                                "SERIES",
+                                "ART"
+                        ],
+                        "Description": [
+                                "This section outlines the syntax associated with invoking the TD_FIT_METRICS function.   This function can accept either a single multivariate series as an input, or alternatively can accept an ART table containing the residual results from a previously run regression operation. ",
+                                "For the case in which the input is a single multivariate series, the fields in the SERIES_SPEC(PAYLOAD(FIELDS(). CONTENT(MULTIVAR_REAL)) must consists of: First field referenced is the original series value; Second field referenced is the calculated series value produced by the model; Third field is the calculated residual: original_value minus calculated_value",
+                                "For the scenario in which the residuals reside within the tertiary result set associated with an ART table, then the caller merely needs to pass in the TABLE_NAME identify the ART containing the residuals - the DBS software will perform the extraction of the original series, calculated series, and residuals as part of the execution of this function. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "varchar(16)"
+                        ],
+                        "Description": [
+                                "The TD_FITMETRICS  function returns only a primary result set consisting of one row per unique series acted upon.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical result table (ART) containing the results of the function invocation."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "VAR_COUNT",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 0,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "An integer indicating how many explanatory variables (N), including the constant, are to be assumed while calculating the various fit-related metrics. "
+                        ]
+                },
+                {
+                        "Name": "FSTAT",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag indicating whether to calculate an F-Statistic for the regression."
+                        ]
+                },
+                {
+                        "Name": "SIGNIFICANCE_LEVEL",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "UpperBoundType": "EXCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "This parameter is only valid when FSTAT(1).  The chosen level of significance:  0 < SIGNIFICANCE_LEVEL < 0"
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

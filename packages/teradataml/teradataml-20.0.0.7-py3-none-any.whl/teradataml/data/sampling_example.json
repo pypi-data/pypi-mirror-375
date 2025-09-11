@@ -1,0 +1,16 @@
+{
+  "students": {
+    "id": "integer",
+    "score": "real"
+  },
+  "score_category": {
+    "id": "integer",
+    "score": "real",
+    "stratum": "varchar(50)"
+  },
+  "score_summary": {
+    "stratum": "varchar(50)",
+    "stratum_count": "integer"
+    
+  }
+}

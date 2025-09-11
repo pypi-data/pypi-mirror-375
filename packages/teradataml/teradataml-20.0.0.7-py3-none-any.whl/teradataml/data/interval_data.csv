@@ -1,0 +1,5 @@
+id,int_col,value_col,value_col1,str_col1,str_col2
+0,20,"DAY","YEAR","100 04:23:59","04-10"
+1,240,"HOUR","YEAR","P100DT4H23M59S","P100Y4M"
+2,657,"MINUTE","MONTH","PT73H","-P14M"
+3,1234,"SECOND","MONTH","100 04:23:59","06-10"

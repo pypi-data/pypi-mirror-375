@@ -1,0 +1,104 @@
+{
+        "FuncName": "TD_BREUSCH_PAGAN_GODFREY",
+        "FuncDescriptionShort": "This is a statistical test that is performed on behalf of univariate or multivariate regression models",
+        "FuncDescriptionLong": [
+                "The hope relative to building a univariate or multi-variate regression model is to create a regression model (estimator) that can be characterized as being BLUE: meaning the 'Best Linear Unbiased Estimator'.  One of the properties of such an estimator is that the variance should be homoscedastic, meaning that the variance should be constant.   Variances that are not constant, are said to be heteroscedastic.  The test described in the previous section, the Goldfeld-Quandt test strived to determine whether the variance was homoscedastic or heteroscedastic by dividing the sample set into three parts; discarding the central part; determining the variance associated with the two remaining parts; and then performing a statistical test to determine if the two variances were statistically equal. A pitfall of this approach was that for the multivariate case, there was an underlying relationship between the variance and just one of the explanatory variables.  Conducting the test, relied on the data scientist identifying the correct independent variable that was then used to order the data prior to performing the test.   This statistical test, the Breusch, Pagan, Godfrey test;  eliminates the need to select just one variable, and executes against the assumption that any of the explanatory variable may be  correlated with the variance. "
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Diagnostic Statistical Test",
+        "JSONVersion": "1",
+        "FuncRName": "td_Breusch_Pagan_Godfrey",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": [
+                                "SERIES",
+                                "ART"
+                        ],
+                        "Description": [
+                                "This function is executed against the residuals left over after running a regression.  These residuals may either reside within an independent table, or may exist in the form of tertiary results resident within an analytical result table.  The SERIES_SPEC identifies the location and context associated with the residual series.  If the residual series exists as a tertiary result set within an analytical result table, the SERIES_SPEC identifies that location, and the DBS software performs the extraction as part of the execution of this function."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "varchar(16)"
+                        ],
+                        "Description": [
+                                "The TD_BREUSCH_PAGAN_GODFREY function returns only a primary result set consisting of one row per unique series acted upon.  The row contains data describing the results of running the BPG test upon that series.  There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "VARIABLES_COUNT",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 0,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "An integer indicating how many explanatory variables (N) are referenced within the PAYLOAD() declaration embedded within the original series specification.  These N explanatory variable are the variables that are to be fed into the auxiliary regression."
+                        ]
+                },
+                {
+                        "Name": "FORMULA",
+                        "Type": "<td_formula>",
+                        "Optional": true,
+                        "Description": [
+                                "This is an optional parameter.  If present, it signifies that the data scientist desires that the provided regression formula serve as the driving formula for the auxiliary regression.   In performing the regression, the software will use the explanatory variables identified within the PAYLOAD() portion of the original series specification. ",
+                                "If the FORMULA is not present, then this signifies that the BPG test should be performed using the default auxiliary regression formula, which, based on the number of explanatory variables, runs the auxiliary regression as:",
+                                "p_t = a_0 + a_1 * X1 + a_2 * X2 + ... + a_N * XN ; where N is the VARIABLES_COUNT.",
+                                "When present, the FORMULA is a Teradata formula string that defines the formula that is to be used in the auxiliary regression operation. As an example consider: FORMULA(ρt = α0 + α1 X12 );  in which ρt is the dependent variable whose data is self-generated by this test;  and X1 (which is squared in the formula) is the single explanatory variable, whose data source is identified by the PAYLOAD() portion of the original series specification; and α0 and α1 are the coefficients to be solved. "
+                        ]
+                },
+                {
+                        "Name": "STUDENTIZE",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag indicating whether the Koenker 'studentized version' of the BPG test is to be executed.   A value of '0' indicates that the standard BPG test is to be run.    A value of '1' indicates that the Koenker studentized version is to be run.  Default is 0. "
+                        ]
+                },
+                {
+                        "Name": "SIGNIFICANCE_LEVEL",
+                        "Type": "double",
+                        "Optional": true,
+                        "DefaultValue": 0.05,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "UpperBoundType": "EXCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "The desired significance level for the test."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

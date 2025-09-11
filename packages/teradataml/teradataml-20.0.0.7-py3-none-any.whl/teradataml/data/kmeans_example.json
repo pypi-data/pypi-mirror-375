@@ -1,0 +1,23 @@
+{
+  "computers_train1": {
+    "id": "integer",
+    "price": "real",
+    "speed": "real",
+    "hd": "real",
+    "ram": "real",
+    "screen": "real"
+  },
+  "kmeans_us_arrests_data": {
+    "sno": "integer",
+    "state": "varchar(30)",
+    "murder": "real",
+    "assault": "real",
+    "urban_pop": "integer",
+    "rape": "real"
+  },
+  "kmeans_table":{
+    "id":"integer",
+    "c1":"integer",
+    "c2":"integer"
+  }
+}

@@ -1,0 +1,6 @@
+"tagname","definition"
+"Tennis-Greats","contain(titles,""Tennis"",1,) and contain(content,""Roger"",1,)"
+"Tennis-Rivalry","contain(content,""Roger"",1,) and contain(content,""Nadal"",1,)"
+"Cricket-Rivalry","contain(content,""India"",1,) and contain(content,""Pakistan"",1,)"
+"The-Ashes","contain(content,""Australia"",1,) and contain(content,""England"",1,)"
+"Natural-Disaster","contain(content, ""floods"",1,) or contain(content,""tsunamis"",1,)"

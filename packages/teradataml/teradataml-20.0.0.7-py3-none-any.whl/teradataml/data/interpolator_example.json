@@ -1,0 +1,13 @@
+{
+ "ibm_stock1" : {
+                 "id" : "integer",
+                 "name" : "varchar(10)",
+                 "period" : "timestamp format 'MM/DD/YYYY'",
+                 "stockprice" : "real"
+        },
+ "time_table1" : {
+                 "id" : "integer",
+                 "period" : "timestamp format 'MM/DD/YYYY'"
+        }
+
+}

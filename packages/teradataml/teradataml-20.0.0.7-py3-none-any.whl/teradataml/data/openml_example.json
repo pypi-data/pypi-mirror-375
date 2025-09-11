@@ -1,0 +1,92 @@
+{
+    "test_classification" : {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float",
+        "label" : "integer"
+    },
+    "test_prediction": {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float"
+    },
+    "train_regression" : {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float",
+        "label" : "integer"
+    },
+    "test_regression": {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float"
+    },
+    "train_regression_multiple_labels" : {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float",
+        "label1" : "integer",
+        "label2" : "integer"
+    },
+    "train_multiclass" : {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float",
+        "label" : "integer"
+    },
+    "multi_model_regression": {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float",
+        "label" : "integer",
+        "group_column" : "integer",
+        "partition_column_1" : "integer",
+        "partition_column_2" : "integer"
+    },
+    "multi_model_classification": {
+        "col1" : "float",
+        "col2" : "float",
+        "col3" : "float",
+        "col4" : "float",
+        "label" : "integer",
+        "group_column" : "integer",
+        "partition_column_1" : "integer",
+        "partition_column_2" : "integer"
+    },
+    "onehot_encoder_train": {
+        "gender" : "varchar(20)",
+        "numb" : "integer"
+    },
+    "customer_segmentation_train": {
+        "ID" : "integer",
+        "Gender" : "varchar(10)",
+        "Ever_Married" : "varchar(10)",
+        "Age" : "integer",
+        "Graduated" : "varchar(10)",
+        "Profession" : "varchar(30)",
+        "Work_Experience" : "integer",
+        "Spending_Score" : "varchar(10)",
+        "Family_Size": "integer",
+        "Var_1": "varchar(10)",
+        "Segmentation": "varchar(2)"
+    },
+    "customer_segmentation_test": {
+        "ID" : "integer",
+        "Gender" : "varchar(10)",
+        "Ever_Married" : "varchar(10)",
+        "Age" : "integer",
+        "Graduated" : "varchar(10)",
+        "Profession" : "varchar(30)",
+        "Work_Experience" : "integer",
+        "Spending_Score" : "varchar(10)",
+        "Family_Size": "integer",
+        "Var_1": "varchar(10)"
+    }
+}

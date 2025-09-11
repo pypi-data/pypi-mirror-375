@@ -1,0 +1,32 @@
+{
+  "ccmexample": {
+    "seqid": "integer",
+    "t": "integer",
+    "a": "double PRECISION",
+    "b": "double PRECISION"
+  },
+  "ccm_input": {
+    "aster_ccm_id": "integer",
+    "id": "integer",
+    "period": "integer",
+    "expenditure": "integer",
+    "income": "integer",
+    "investment": "integer"
+  },
+  "ccm_input2": {
+    "aster_ccm_id": "integer",
+    "id": "integer",
+    "period": "integer",
+    "marketindex": "varchar(30)",
+    "indexdate": "date",
+    "indexval": "real",
+    "indexchange": "real"
+  },
+  "ccmprepare_input": {
+    "id": "integer",
+    "period": "integer",
+    "expenditure": "integer",
+    "income": "integer",
+    "investment": "integer"
+  }
+}

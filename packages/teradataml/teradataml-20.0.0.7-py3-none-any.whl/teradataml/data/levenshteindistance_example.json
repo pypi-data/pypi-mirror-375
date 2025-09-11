@@ -1,0 +1,10 @@
+{
+ "levendist_input" : {
+                  
+                  "id" : "integer",
+                  "src_text1" : "varchar(20)",
+                  "src_text2" : "varchar(20)",
+                  "tar_text" : "varchar(20)"
+                  
+        }
+}

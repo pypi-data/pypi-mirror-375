@@ -1,0 +1,9 @@
+{
+  "stock_vol": {
+    "id": "integer",
+    "name": "varchar(15)",
+    "\"period\"": "date",
+    "stockprice": "real",
+    "volume": "real"
+  }
+}

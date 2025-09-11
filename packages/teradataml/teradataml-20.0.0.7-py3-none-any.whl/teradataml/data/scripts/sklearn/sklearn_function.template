@@ -1,0 +1,126 @@
+import sys, json
+import pickle, base64, importlib, numpy as np
+from collections import OrderedDict
+
+func_name = "<func_name>"
+module_name = "<module_name>"
+params = json.loads('<params>')
+
+DELIMITER = '\t'
+
+def convert_to_type(val, typee):
+    if typee == 'int':
+        return int(val) if val != "" else np.nan
+    if typee == 'float':
+        if isinstance(val, str):
+            val = val.replace(' ', '')
+        return float(val) if val != "" else np.nan
+    if typee == 'bool':
+        return eval(val) if val != "" else None
+    return str(val) if val != "" else None
+
+def splitter(strr, delim=",", convert_to="str"):
+    """
+    Split the string based on delimiter and convert to the type specified.
+    """
+    if strr == "None":
+        return []
+    return [convert_to_type(i, convert_to) for i in strr.split(delim)]
+
+# Arguments to the Script.
+if len(sys.argv) != 3:
+    # 3 command line arguments should be passed to this file.
+    # 1: file to be run
+    # 2. Model file prefix for lake system, None otherwise.
+    # 3. Flag to check the system type. True, means Lake, Enterprise otherwise.
+    sys.exit("3 arguments command line arguments should be passed: file to be run,"
+             " model file prefix used only for lake system and flag to check lake or enterprise.")
+
+is_lake_system = eval(sys.argv[2])
+if not is_lake_system:
+    db = sys.argv[0].split("/")[1]
+else:
+    model_file_prefix = sys.argv[1]
+
+data_partition_column_indices = <partition_cols_indices>
+data_column_types = <types_of_data_cols>
+
+data_partition_column_types = [data_column_types[idx] for idx in data_partition_column_indices]
+
+# Data related arguments information of indices and types.
+data_args_indices_types = OrderedDict()
+
+# Data related arguments values - prepare dictionary and populate data later.
+data_args_values = {}
+
+data_args_info_str = <data_args_info_str>
+for data_arg in data_args_info_str.split("--"):
+    arg_name, indices, types = data_arg.split("-")
+    indices = splitter(indices, convert_to="int")
+    types = splitter(types)
+
+    data_args_indices_types[arg_name] = {"indices": indices, "types": types}
+    data_args_values[arg_name] = [] # Keeping empty for each data arg name and populate data later.
+
+data_partition_column_values = []
+data_present = False
+
+# Read data - columns information is passed as command line argument and stored in
+# data_args_indices_types dictionary. 
+while 1:
+    try:
+        line = input()
+        if line == '':  # Exit if user provides blank line
+            break
+        else:
+            data_present = True
+            values = line.split(DELIMITER)
+            if not data_partition_column_values:
+                # Partition column values is same for all rows. Hence, only read once.
+                for i, val in enumerate(data_partition_column_indices):
+                    data_partition_column_values.append(
+                        convert_to_type(values[val], typee=data_partition_column_types[i])
+                        )
+
+                # Prepare the corresponding model file name and extract model.
+                partition_join = "_".join([str(x) for x in data_partition_column_values])
+                # Replace '-' with '_' as '-' because partition_columns can be negative.
+                partition_join = partition_join.replace("-", "_")
+            
+            # Prepare data dictionary containing only arguments related to data.
+            for arg_name in data_args_values:
+                data_indices = data_args_indices_types[arg_name]["indices"]
+                types = data_args_indices_types[arg_name]["types"]
+                cur_row = []
+                for idx, data_idx in enumerate(data_indices):
+                    cur_row.append(convert_to_type(values[data_idx], types[idx]))
+                data_args_values[arg_name].append(cur_row)
+    except EOFError:  # Exit if reached EOF or CTRL-D
+        break
+
+if not data_present:
+    sys.exit(0)
+
+# Update data as numpy arrays.
+for arg_name in data_args_values:
+    np_values = np.array(data_args_values[arg_name])
+    data_args_values[arg_name] = np_values
+
+# Combine all arguments.
+all_args = {**data_args_values, **params}
+
+module_ = importlib.import_module(module_name)
+sklearn_model = getattr(module_, func_name)(**all_args)
+
+model_str = pickle.dumps(sklearn_model)
+
+if is_lake_system:
+    model_file_path = f"/tmp/{model_file_prefix}_{partition_join}.pickle"
+
+    # Write to file in Vantage, to be used in predict/scoring.
+    with open(model_file_path, "wb") as fp:
+        fp.write(model_str)
+
+model_data = model_file_path if is_lake_system else base64.b64encode(model_str)
+
+print(*(data_partition_column_values + [model_data]), sep=DELIMITER)

@@ -1,0 +1,313 @@
+{
+        "FuncName": "TD_HOLT_WINTERS_FORECASTER",
+        "FuncDescriptionShort": "An exponential smoothing approach to forecasting",
+        "FuncDescriptionLong": [
+                "The Holt-Winters forecasting approach, aka, 'Triple Exponential Smoothing'; is one of a number of exponential smoothing approaches to forecasting that can be used to predict data points in a series, provided that that series contains 'seasonal' aspects, meaning that the series is repetitive over some 'period'. ",
+                "This forecasting approach was born out of research aimed at forecasting trends in production, inventories and labor force.  The idea behind triple exponential smoothing is to apply exponential smoothing to the seasonal components in addition to also applying the exponential smoothing to the level and trend components. The smoothing is applied across seasons, e.g. the seasonal component of the 3rd point into the season would be exponentially smoothed with the  one from the 3rd point of last season, 3rd point two seasons ago, etc."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Series Forecasting",
+        "JSONVersion": "1",
+        "FuncRName": "td_Holt_Winters_Forecaster",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "Passed in a logical univariate series, this function will forecast 'h' periods ('h' steps) into the future, meaning 'h' periods beyond the last observed sample point for the passed in series.   This function outputs up to four result sets.  The primary result set contains the historical data points, the forecasted data points, and the prediction level data points.  This result set can be retrieved by issuing a SELECT against the analytical result table.   The optional secondary result set contains a collection of goodness-of-fit metrics, roughly equivalent to those returned by the independent TD_FIT_METRICS function. The optional tertiary result set contains a collection of model selection / validation metrics, roughly equivalent to those returned by the TD_SELECTION_CRITERIA function. The optional quaternary result set contains the residual series, associated with the fitting and forecasting operation."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The RETURNS TABLE for this primary analytical result set is described in this subsection.  The primary result set contains the historical “observed” values, the “forecasted” values, and, if requested, the high and low prediction intervals.  The primary analytical result set can be retrieved by issuing a SELECT against the table created by the INTO VOLATILE clause. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITMETADATA",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "varchar(16)"
+                        ],
+                        "Description": [
+                                "The RETURNS TABLE for this optional result set, containing 'goodness of fit' metadata, is described in this subsection.   This result set is generated in response to the FUNC_PARAMS (FIT_METRICS(1) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. This result set will be deposited into LAYER1 under the name ARTFITMETADATA. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTSELMETRICS",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "There is one result row returned for each unique series acted upon."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTFITRESIDUALS",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The RETURNS TABLE for this optional analytical result set is described in this subsection.   This result set is generated in response to the FUNC_PARAMS( RESIDUALS(1)) having a passed in flag value of '1'.   The result set can be retrieved by invoking the TD_EXTRACT_RESULTS function against the analytical result table containing the metadata. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "FORECAST_PERIODS",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Number of Periods to Forecast ahead"
+                        ]
+                },
+                {
+                        "Name": "ALPHA",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "The ALPHA parameter is used to control the smoothing relative to the level component of the forecasting equation. If present, this value is used in the equation to perform the forecasting.  If not present, then the value of ALPHA is estimated by using 'goodness of fit' metrics."
+                        ]
+                },
+                {
+                        "Name": "BETA",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "The BETA parameter is used to control the smoothing relative to the trend component of the forecasting equation. If present, this value is used in the equation to perform the forecasting.  If not present, then the value of BETA is estimated by using 'goodness of fit' metrics."
+                        ]
+                },
+                {
+                        "Name": "GAMMA",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "The GAMMA parameter is used to control the smoothing relative to the seasonal component of the forecasting equation. If present, this value is used in the equation to perform the forecasting.  If not present, then the value of GAMMA is estimated by using “goodness of fit” metrics."
+                        ]
+                },
+                {
+                        "Name": "SEASONAL_PERIODS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "LowerBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Number of 'periods' (aka, sample points) constituting one season.   For yearly data based containing monthly sample points, it would be '12'.  For quarterly based data against monthly sample points, it would be '4'.   This is the 'm' found within many of the formulas. "
+                        ]
+                },
+                {
+                        "Name": "INIT",
+                        "Type": "record",
+                        "Optional": true,
+                        "CheckDuplicates": true,
+                        "Description": [
+                                "It is used to specify a data series for a plot.  It contains an array of series entries, separate by comma."
+                        ],
+                        "NestedParams": [
+                                {
+                                        "Name": "LEVEL_0",
+                                        "Type": "double",
+                                        "Optional": true,
+                                        "LangName": "init_level",
+                                        "Description": [
+                                                "If the LEVEL_0 value is provided, it is used as part of the fitting and forecasting operations",
+                                                "If the LEVEL_0 is not present, then the intitialization value is calculated as, L_m = (1/m)(Y_1 + Y_2 + ... + Y_m)"
+                                        ]
+                                },
+                                {
+                                        "Name": "TREND_0",
+                                        "Type": "double",
+                                        "Optional": true,
+                                        "LangName": "init_trend",
+                                        "Description": [
+                                                "If the TREND_0 value is provided, it is used as part of the fitting and forecasting operations",
+                                                "If the TREND_0 is not present, then the intitialization value is calculated as, b_0 = (1/m)((Y_{m+1}-Y_1)/m + (Y_{m+2}-Y_2)/m + ... + (Y_{m+m}-Y_m)/m)"
+                                        ]
+                                },
+                                {
+                                        "Name": "SEASON_0",
+                                        "Type": "list",
+                                        "ListType": "double",
+                                        "Optional": true,
+                                        "LangName": "init_season",
+                                        "Description": [
+                                                "This is a list containing 'm' values; one per period within a season",
+                                                "If the SEASON_0 value list is provided, it is used as part of the fitting and forecasting operations",
+                                                "If the SEASON_0 is not present, then the intitialization value is calculated as, S_1 = Y_1/L_m , S_2 = Y_2/L_m , ... S_m = Y_m/L_m "
+                                        ]
+                                }
+                        ]
+                },
+                {
+                        "Name": "MODEL",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "ADDITIVE",
+                                "MULTIPLICATIVE"
+                        ],
+                        "Description": [
+                                "Type of Holt Winters forecasting that is desired: ADDITIVE - based on Holt Winters Additive approach; MULTIPLICATIVE - based on Holt Winters Muliplicative approach"
+                        ]
+                },
+                {
+                        "Name": "FIT_PERCENTAGE",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 100,
+                        "LowerBound": 0,
+                        "UpperBound": 100,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Percentage of passed in sample points that will be used for the model fitting / parameter estimation exercise.  The default is 100, meaning 100%."
+                        ]
+                },
+                {
+                        "Name": "PREDICTION_INTERVALS",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "BOTH",
+                        "PermittedValues": [
+                                "NONE",
+                                "80",
+                                "95",
+                                "BOTH"
+                        ],
+                        "Description": [
+                                "Set to either of: 'NONE' or '80' or '95' or 'BOTH'; default is 'BOTH'"
+                        ]
+                },
+                {
+                        "Name": "FIT_METRICS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag indicating whether or not to generate the secondary result set that contains the model metadata statistics.  A value of FIT_METRICS(1) means generate the secondary result set.   A value of FIT_METRICS(0) means do not generate the secondary result set.  Default is FIT_METRICS(0).  The generated result set can be retrieved by issuing a TD_EXTRACT_RESULTS against the analytical result table containing the results."
+                        ]
+                },
+                {
+                        "Name": "SELECTION_METRICS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag indicating whether or not to generate the tertiary result set that contains the selection metrics.  A value of SELECTION_METRICS(1) means generate the tertiary result set.   A value of  SELECTION _METRICS(0) means do not generate the tertiary result set.  Default is SELECTION _METRICS(0).  The generated result set can be retrieved by issuing a TD_EXTRACT_RESULTS against the analytical result table containing the results."
+                        ]
+                },
+                {
+                        "Name": "RESIDUALS",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag indicating whether or not to generate the quaternary result set that contains the model residuals.  A value of RESIDUALS(1) means generate the quaternary result set.   A value of RESIDUALS(0) means do not generate the quaternary result set.  Default is RESIDUALS(0).  The generated result set can be retrieved by issuing a TD_EXTRACT_RESULTS against the analytical result table containing the results."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

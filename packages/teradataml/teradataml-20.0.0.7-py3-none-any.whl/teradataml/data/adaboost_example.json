@@ -1,0 +1,34 @@
+{
+    "housing_train" : {
+        "sn" : "integer",
+        "price" : "real",
+        "lotsize" : "real",
+        "bedrooms" : "integer",
+        "bathrms" : "integer",
+        "stories" : "integer",
+        "driveway" : "varchar(10)",
+        "recroom" : "varchar(10)",
+        "fullbase": "varchar(10)",
+        "gashw" : "varchar(10)",
+        "airco" : "varchar(10)",
+        "garagepl" : "integer",
+        "prefarea" : "varchar(10)",
+        "homestyle" : "varchar(20)"
+    },
+    "housing_cat" :{
+        "attribute" : "varchar(30)"
+    },
+    "housing_train_response" :{
+        "sn" : "integer",
+        "response" : "varchar(20)"
+    },
+    "iris_attribute_train" : {
+        "pid" : "integer",
+        "attribute" : "varchar(30)",
+        "attrvalue" : "real"
+    },
+    "iris_response_train" :{
+        "pid" : "integer",
+        "response" : "varchar(30)"
+    }
+}

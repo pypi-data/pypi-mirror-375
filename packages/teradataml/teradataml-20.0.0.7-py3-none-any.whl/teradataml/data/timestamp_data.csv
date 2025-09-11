@@ -1,0 +1,4 @@
+id,timestamp_col,timestamp_col1,format_col,timezone_col
+0,"2015-01-08 00:00:12.2",123456,"YYYY-MM-DD HH24:MI:SS.FF6","GMT"
+1,"2015-01-08 13:00",878986,"YYYY-MM-DD HH24:MI","America Pacific"
+2,"2015-01-08 00:00:12.2+10:00",45678910234,"YYYY-MM-DD HH24:MI:SS.FF6 TZH:TZM","GMT+10"

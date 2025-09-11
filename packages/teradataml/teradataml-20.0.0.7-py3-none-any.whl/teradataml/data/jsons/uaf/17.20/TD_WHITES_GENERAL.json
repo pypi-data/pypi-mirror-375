@@ -1,0 +1,78 @@
+{
+        "FuncName": "TD_WHITES_GENERAL",
+        "FuncDescriptionShort": "This is a statistical test that is performed on behalf of univariate or multivariate regression models",
+        "FuncDescriptionLong": [
+                "The hope in building a univariate or multi-variate regression model is to create a regression model (estimator) that can be characterized as being BLUE: meaning the 'Best Linear Unbiased Estimator'.  One of the properties of such an estimator is that the variance should be homoscedastic, meaning that the variance should be constant.   Variances that are not constant, are said to be heteroscedastic.",
+                "The Whites General (WG) statistical test has an easier implementation and does not require any re-ordering, as the Goldfeld-Quandt test, and is not sensitive to the 'normal distribution assumption', as is the Breusch-Pagan-Godfrey test"
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Diagnostic Statistical Test",
+        "JSONVersion": "1",
+        "FuncRName": "td_Whites_General",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": [
+                                "SERIES",
+                                "ART"
+                        ],
+                        "Description": [
+                                "This function is executed against the residuals left over after running a regression.  These residuals may either reside within an independent table, or may exist in the form of tertiary results resident within an analytical result table.  The SERIES_SPEC identifies the location and context associated with the residual series.  If the residual series exists as a tertiary result set within an analytical result table, the SERIES_SPEC identifies that location, and the DBS software performs the extraction as part of the execution of this function."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "varchar(16)"
+                        ],
+                        "Description": [
+                                "The TD_WHITES_GENERAL  function returns only a primary result set consisting of one row per unique series acted upon.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "VARIABLES_COUNT",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 0,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "An integer indicating how many explanatory variables (N) are referenced within the PAYLOAD() declaration embedded within the original series specification.  These N explanatory variable are the variables that are to be fed into the auxiliary regression."
+                        ]
+                },
+                {
+                        "Name": "SIGNIFICANCE_LEVEL",
+                        "Type": "double",
+                        "Optional": false,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "UpperBoundType": "EXCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "The significance level used for the test."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

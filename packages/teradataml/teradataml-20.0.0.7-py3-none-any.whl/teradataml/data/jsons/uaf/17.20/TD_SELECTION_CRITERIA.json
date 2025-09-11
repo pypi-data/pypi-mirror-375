@@ -1,0 +1,90 @@
+{
+        "FuncName": "TD_SELECTION_CRITERIA",
+        "FuncDescriptionShort": "The TD_SELECTION_CRITERIA function calculates a number of metrics ",
+        "FuncDescriptionLong": [
+                "The TD_SELECTION_CRITERIA function calculates a number of metrics against the residuals left over from a model validation exercise.  The produced metrics can be used by the data scientist to make an intelligent choice as to which forecast model candidates to select to pursue for their forecast modeling project. "
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Diagnostic Statistical Test",
+        "JSONVersion": "1",
+        "FuncRName": "td_Selection_Criteria",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": [
+                                "SERIES",
+                                "ART"
+                        ],
+                        "Description": [
+                                "This section outlines the syntax associated with invoking the TD_SELECTION_CRITERIA function.   This function can accept either a single multivariate series as an input, or alternatively can accept an ART table containing the residual results from a previously run regression operation. ",
+                                "For the case in which the input is a single multivariate series, the fields in the SERIES_SPEC(PAYLOAD(FIELDS(). CONTENT(MULTIVAR_REAL)) must consists of: First field referenced is the original series value; Second field referenced is the calculated series value produced by the model; Third field is the calculated residual: original_value minus calculated_value",
+                                "For the scenario in which the residuals reside within the tertiary result set associated with an ART table, then the caller merely needs to pass in the TABLE_NAME identify the ART containing the residuals - the DBS software will perform the extraction of the original series, calculated series, and residuals as part of the execution of this function."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_SELECTION_CRITERIA  function returns only a primary result set consisting of one row per unique series acted upon.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical result table (ART) containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "VAR_COUNT",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 0,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "For an ARIMA(p,d,q) model, this is an integer indicating the total number of parameters: VAR_COUNT = p + q +1(CONSTANT(1)); present in the model. "
+                        ]
+                },
+                {
+                        "Name": "CONSTANT",
+                        "Type": "integer",
+                        "Optional": false,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "If  the ARIMA model has the constant part when fit the model. 0 is no constant and 1 is with constant"
+                        ]
+                },
+                {
+                        "Name": "USE_LIKELIHOOD",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "If the calculation of those selection criteria values like AIC are based on the max log-likelihood provided during the model fitting stage. Only available when input table is art generated from TD_ARIMAESTIMATE.",
+                                "If throwing regular input or art from TD_ARIMAVALIDATE, function will error out.",
+                                "0 is using RSS, and 1 is using log-likelihood. Default value is 0 - using residuals."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

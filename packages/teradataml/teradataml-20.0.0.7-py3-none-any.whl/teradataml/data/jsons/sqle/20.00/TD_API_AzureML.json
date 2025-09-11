@@ -1,0 +1,151 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "1",
+  "json_content_version": "1",
+  "function_name": "TD_API_AzureML",
+  "function_version": "1.0",
+  "function_type": "fastpath",
+  "function_category": "Text Analytics AI",
+  "function_alias_name": "TDAPIAzureML",
+  "function_r_name": "aa.td_api_azureml",
+  "supports_view": false,
+  "short_description": "This function initiates an API request to machine learning models deployed on the Azure ML platform for inference. The input data, sourced from a Teradata table, is transmitted to the model via the API. Upon processing the data, the model returns predictions, which are provided as the function's output.",
+  "long_description": "This function initiates an API request to machine learning models deployed on the Azure ML platform for inference. The input data, sourced from a Teradata table, is transmitted to the model via the API. Upon processing the data, the model returns predictions, which are provided as the function's output.",
+  "input_tables": [
+    {
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "InputTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the table containing the input data.",
+      "description": "Specifies the table containing the input data.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "data",
+      "useInR": true,
+      "rOrderNum": 1
+    }
+  ],
+  "argument_clauses": [
+      {
+        "name": "Endpoint",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 2,
+        "allowNaN": false,
+        "description": "Specifies the Endpoint of the model deployed on Azure ML",
+        "rDescription": "Specifies the Endpoint of the model deployed on Azure ML",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "endpoint",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+        "name": "Region",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 3,
+        "allowNaN": false,
+        "description": "Specifies the region of the Azure ML endpoint on which the model is deployed.",
+        "rDescription": "Specifies the region of the Azure ML endpoint on which the model is deployed.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "region",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+        "name": "ApiKey",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum": 4,
+        "allowNaN": false,
+        "description": "Specifies the primary or secondary API Key for the Azure ML endpoint.",
+        "rDescription": "Specifies the primary or secondary API Key for the Azure ML endpoint.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "api.key",
+        "useInR": true,
+        "rFormulaUsage": false
+      },
+      {
+        "targetTable": [
+          "InputTable"
+        ],
+        "checkDuplicate": true,
+        "allowedTypes": [],
+        "allowedTypeGroups": [
+          "ALL"
+        ],
+        "matchLengthOfArgument": "",
+        "allowPadding": false,
+        "name": "InputColumns",
+        "alternateNames": [],
+        "isRequired": true,
+        "rDescription": "Specifies the input table columns as inputs for the model deployed on Azure ML.",
+        "description": "Specifies the input table columns as inputs for the model deployed on Azure ML.",
+        "datatype": "COLUMNS",
+        "allowsLists": true,
+        "rName": "input.columns",
+        "useInR": true,
+        "rFormulaUsage": false,
+        "rOrderNum": 5
+      },
+      {
+        "permittedValues": ["TRUE", "FALSE"],
+        "isOutputColumn": false,
+        "name": "isDebug",
+        "alternateNames": [],
+        "isRequired": false,
+        "rDescription": "Specify whether error logging is required.",
+        "description": "Specify whether error logging is required.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "rName": "is.debug",
+        "useInR": true,
+        "rOrderNum": 6
+      },
+      {
+          "targetTable": [
+            "InputTable"
+          ],
+          "checkDuplicate": true,
+          "allowedTypes": [],
+          "allowedTypeGroups": [
+            "ALL"
+          ],
+          "matchLengthOfArgument": "",
+          "allowPadding": false,
+          "name": "Accumulate",
+          "alternateNames": [],
+          "isRequired": false,
+          "rDescription": "Specifies the input table columns to copy to the output table. By default, the function copies all input table columns to the output table.",
+          "description": "Specifies the input table columns to copy to the output table. By default, the function copies all input table columns to the output table.",
+          "datatype": "COLUMNS",
+          "allowsLists": true,
+          "rName": "accumulate",
+          "useInR": true,
+          "rOrderNum": 7
+      },
+      {
+        "name": "AUTHORIZATION",
+        "alternateNames": [],
+        "isRequired": false,
+        "rOrderNum":8,
+        "allowNaN": false,
+        "description": "Specifies the authorization object name containing the credentials, optionally prefixed by the database name.",
+        "rDescription": "Specifies the authorization object name containing the credentials, optionally prefixed by the database name.",
+        "datatype": "STRING",
+        "allowsLists": false,
+        "allowPadding": true,
+        "rName": "authorization",
+        "useInR": true,
+        "rFormulaUsage": false
+      }
+  ]
+}

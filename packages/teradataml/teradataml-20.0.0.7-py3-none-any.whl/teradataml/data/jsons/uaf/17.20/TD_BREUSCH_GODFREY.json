@@ -1,0 +1,89 @@
+{
+        "FuncName": "TD_BREUSCH_GODFREY",
+        "FuncDescriptionShort": "The Breusch-Godfrey statistical test which is run against the residuals associated with a fitted model",
+        "FuncDescriptionLong": [
+                "It is a test which looks for the presence of serial correlation amongst the error/residual terms.  It is mainly employed to analyze the residuals produced by a univariate or multivariate regression (cross-sectional data sets).  With respect to regression models, it is expected that there would exist no serial correlation amongst the error terms in contrast, with time series, the expectation is that most likely their will exist serial correlation amongst the error terms. "
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Diagnostic Statistical Test",
+        "JSONVersion": "1",
+        "FuncRName": "td_Breusch_Godfrey",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": [
+                                "SERIES",
+                                "ART"
+                        ],
+                        "Description": [
+                                "This function is executed against the residuals left over after running a regression."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "integer",
+                                "integer",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "varchar(16)"
+                        ],
+                        "Description": [
+                                "The TD_BREUSCH_GODFREY function returns only a primary result set consisting of one row per unique series acted upon.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "RESIDUAL_MAXLAGS",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Positive Integer value.  Maximum lag number for the residuals used in the auxiliary regression.  Also determines degrees of freedom associated with the test."
+                        ],
+                        "LangName": "residual_max_lags"
+                },
+                {
+                        "Name": "EXPLANATORY_COUNT",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 0,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "The number of explanatory variables that were present in the original regression; plus '1' if a constant was present: Example: the FORMULA('Y = B0 + B1*X1') has a EXPLANATORY_COUNT of '2'; '1' for 'X1' and '1' for the constant 'B0' "
+                        ]
+                },
+                {
+                        "Name": "SIGNIFICANCE_LEVEL",
+                        "Type": "double",
+                        "Optional": true,
+                        "DefaultValue": 0.05,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "UpperBoundType": "EXCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "The desired significance level for the test. Set to 0.01 or 0.05. Default is 0.05."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

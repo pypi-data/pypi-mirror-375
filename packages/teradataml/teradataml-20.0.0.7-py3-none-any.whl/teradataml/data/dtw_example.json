@@ -1,0 +1,18 @@
+{
+     "timeseriesdata" : {
+
+                  "timeseriesid" : "integer",
+                  "timestamp1" : "float",
+                  "stockprice" : "float"
+        },
+     "templatedata" : {
+
+                  "templateid" : "integer",
+                  "timestamp2" : "float",
+                  "indexprice" : "float"
+        },
+    "mappingdata" :{
+            "timeseriesid" : "integer",
+            "templateid" : "integer"
+            }
+}

@@ -1,0 +1,194 @@
+{
+        "FuncName": "TD_RESAMPLE",
+        "FuncDescriptionShort": "Interpolating data based on existing data",
+        "FuncDescriptionLong": [
+                "Another classical approach to transforming a time series from an irregular to regular, and/or altering the sampling interval associated with the time series, is to apply a resampling function to the series. Resampling functions generally take as an input: a time series, which can be regular or irregular to begin with; a starting point, aka, 'time-zero'; and a desired target sampling interval.  There are usually multiple choices available to the data scientist as to how the interpolation associated with the sample interval change is going to occur."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Data Preparation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Resample",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "The Teradata rendition of this function takes a logical series, containing any form of regular or irregular series - time series, spatial series, arbitrary numerical series - and applies an interpolation algorithm to transform it into a discrete series with the target start point and target sampling interval.    The input series and the result series both contain real numbers - CONTENT(REAL) or CONTENT(MULTIVAR_REAL)- as their series elements.  In producing the output, the data scientist has a choice of preserving or replacing the series indexing mechanism, via the OUTPUT_FMT(INDEX_STYLE()) declaration.  The default INDEX_STYLE declaration indexes the result series as: OUTPUT_FMT(INDEX_STYLE(FLOW_THROUGH)). "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_RESAMPLE function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "SEQUENCE",
+                        "Type": "record",
+                        "Optional": true,
+                        "CheckDuplicates": true,
+                        "Description": [
+                                "Describes the result series that this function is to produce.",
+                                "At least one of TIMECODE or SEQUENCE must be present.",
+                                "Input series must contain an index data type corresponding to SEQUENCE (real, integer, etc.).",
+                                "If SEQUENCE parameter exists then TIMECODE will not work, the two are mutually exclusive parameters."
+                        ],
+                        "LangName": "...",
+                        "NestedParams": [
+                                {
+                                        "Name": "START_VALUE",
+                                        "Type": "float",
+                                        "Optional": true,
+                                        "Description": [
+                                                "Starting value - this is the first sampling index that the resample function is to interpolate"
+                                        ]
+                                },
+                                {
+                                        "Name": "DURATION",
+                                        "Type": "float",
+                                        "Optional": true,
+                                        "Description": [
+                                                "Sampling duration - sampling interval associated with the result series."
+                                        ]
+                                }
+                        ]
+                },
+                {
+                        "Name": "TIMECODE",
+                        "Type": "record",
+                        "Optional": true,
+                        "CheckDuplicates": true,
+                        "Description": [
+                                "Describes the result series that this function is to produce.",
+                                "At least one of TIMECODE or SEQUENCE must be present.",
+                                "Input series must contain an index data type corresponding to TIMECODE (timstampwz, time-duration, etc.).",
+                                "If TIMECODE parameter exists then SEQUENCE will not work, the two are mutually exclusive parameters."
+                        ],
+                        "LangName": "...",
+                        "NestedParams": [
+                                {
+                                        "Name": "START_VALUE",
+                                        "Type": "timestampwz",
+                                        "Optional": true,
+                                        "Description": [
+                                                "Starting value - this is the first sampling index that the resample function is to interpolate"
+                                        ]
+                                },
+                                {
+                                        "Name": "DURATION",
+                                        "Type": "string",
+                                        "Optional": true,
+                                        "Description": [
+                                                "Sampling duration - sampling interval associated with the result series."
+                                        ]
+                                }
+                        ]
+                },
+                {
+                        "Name": "INTERPOLATE",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "LINEAR",
+                                "LAG",
+                                "LEAD",
+                                "WEIGHTED",
+                                "SPLINE"
+                        ],
+                        "Description": [
+                                "enum( LINEAR, LAG, LEAD, WEIGHTED, SPLINE  ) : enumerated value selecting one of the valid supported interpolation strategies."
+                        ]
+                },
+                {
+                        "Name": "WEIGHT",
+                        "Type": "double",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Only required when INTERPOLATE(WEIGHTED) has been selected, otherwise invalid parameter.",
+                                "The interpolated value is calculated as: Y_t  =  Y_{t_LEFT} * (1 - WEIGHT) + (Y-{t_RIGHT} * WEIGHT)"
+                        ]
+                },
+                {
+                        "Name": "SPLINE_PARAMS",
+                        "Type": "record",
+                        "Optional": true,
+                        "CheckDuplicates": true,
+                        "Description": [
+                                "Only valid when INTERPOLATE(SPLINE) has been selected. This is used to specify characteristics of the generated spline. This parameter is optional."
+                        ],
+                        "LangName": "...",
+                        "NestedParams": [
+                                {
+                                        "Name": "METHOD",
+                                        "Type": "string",
+                                        "Optional": true,
+                                        "PermittedValues": [
+                                                "NATURAL",
+                                                "CLAMPED",
+                                                "NOT_A_KNOT"
+                                        ],
+                                        "DefaultValue": "NOT_A_KNOT",
+                                        "Description": [
+                                                "Specifies which kind of spline to be produced. The available types are NATURAL, CLAMPED, and NOT_A_KNOT. This parameter is optional - the default value is NOT_A_KNOT. "
+                                        ]
+                                },
+                                {
+                                        "Name": "yp1",
+                                        "Type": "double",
+                                        "Optional": true,
+                                        "AllowNaN": false,
+                                        "DefaultValue": 0.0,
+                                        "Description": [
+                                                "Only valid when METHOD(CLAMPED) has been specified. Specifies the value of the first derivative for the left boundary condition. This parameter is optional - the default value is 0."
+                                        ]
+                                },
+                                {
+                                        "Name": "ypn",
+                                        "Type": "double",
+                                        "Optional": true,
+                                        "AllowNaN": false,
+                                        "DefaultValue": 0.0,
+                                        "Description": [
+                                                "Only valid when METHOD(CLAMPED) has been specified. Specifies the value of the first derivative for the right boundary condition. This parameter is optional - the default value is 0."
+                                        ]
+                                }
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "FLOW_THROUGH",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

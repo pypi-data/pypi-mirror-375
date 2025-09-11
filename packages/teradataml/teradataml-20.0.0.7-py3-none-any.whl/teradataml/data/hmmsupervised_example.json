@@ -1,0 +1,10 @@
+{
+  "customer_loyalty" :{
+    "id" : "integer",
+    "user_id" : "integer",
+    "seq_id" : "integer",
+    "purchase_date" : "date",
+    "loyalty_level" : "varchar(3)",
+    "observation" : "varchar(10)"
+  }
+}

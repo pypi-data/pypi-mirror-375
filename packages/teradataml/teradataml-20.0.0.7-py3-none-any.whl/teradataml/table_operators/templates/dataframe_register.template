@@ -1,0 +1,73 @@
+import json
+import sys, csv
+import datetime
+import urllib.parse
+import decimal
+
+td_buffer = {{}}
+
+
+{FUNCTION_DEFINITION}
+
+# Decode the URL encoded string and store it back as dictionary.
+dec = urllib.parse.unquote_plus(sys.argv[1])
+script_data = json.loads(dec)
+
+# Information that is required to help with the script usage.
+#  The delimiter to use with the input and output text.
+delimiter = script_data["delimiter"]
+#  The quotechar to use.
+quotechar = script_data["qoutechar"]
+#  The names of columns in the input teradataml DataFrame.
+_input_columns = script_data["input_cols"]
+#  The names of columns in the output teradataml DataFrame.
+_output_columns = script_data["output_cols"]
+#  The types of columns in the input/output teradataml DataFrame.
+# The mapper of output column name to function arguments
+function_args = script_data["function_args"]
+#  The definition for new columns in output.
+columns_definitions = {{_output_columns[-1]: "{FUNCTION_NAME}"}}
+output_type_converters = script_data["output_type_converters"]
+for k,v in output_type_converters.items():
+    if v == 'datetime.date' or v == 'datetime.time' or v == 'datetime.datetime':
+        output_type_converters[k] = 'str'
+output_type_converters = {{
+    k: (decimal.Decimal if v == 'decimal.Decimal' else getattr(__builtins__, v))
+    for k, v in output_type_converters.items()
+}}
+
+
+
+# The entry point to the script.
+if __name__ == "__main__":
+
+    records = csv.reader(sys.stdin.readlines(), delimiter=delimiter, quotechar=quotechar)
+    for record in records:
+        record = dict(zip(_input_columns, record))
+        out_rec = []
+        for column in _output_columns:
+
+            # If it is a new column, get the value from definition.
+            if column in columns_definitions:
+                f_args = tuple()
+                # Convert the argument types first.
+                for v in function_args[column]:
+                    if v in _input_columns:
+                        c_type_ = output_type_converters.get(v)
+                        if record[v]:
+                            # If it is a float, replace the empty character.
+                            if c_type_.__name__ == 'float':
+                                arg = output_type_converters.get(v)(record[v].replace(' ', ''))
+                            else:
+                                arg = output_type_converters.get(v)(record[v])
+                        else:
+                            arg = record[v] if c_type_.__name__ == 'str' else None
+                    else:
+                        arg = v
+                    f_args = f_args + (arg, )
+                func_ = globals()[columns_definitions[column]]
+                out_rec.append(output_type_converters[column](func_(*f_args)))
+            else:
+                out_rec.append(record[column])
+
+        print("{{}}".format(delimiter).join((str(i) for i in out_rec)))

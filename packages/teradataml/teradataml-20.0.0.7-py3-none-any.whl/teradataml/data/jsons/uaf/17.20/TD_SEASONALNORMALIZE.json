@@ -1,0 +1,143 @@
+{
+        "FuncName": "TD_SEASONALNORMALIZE",
+        "FuncDescriptionShort": "Generates a series has been normalized with respect to its internal period as a season and interval cycles",
+        "FuncDescriptionLong": [
+                "This section outlines the syntax associated with invoking the TD_SEASONALNORMALIZE, 'Seasonal Normalize' table function.    The TD_SEASONALNORMALIZE function takes a logical-runtime series, with real number elements (containing the original series, Xt), as an input, with a SERIES_SPEC(INTERVAL()) and a FUNC_PARAMS(SEASON_CYCLE()) declaration, specifying the season and cycle duration respectively for data normalization.  The function then generates a series having the same number of sample points as the input series, where the generated series has been normalized with respect to its internal period as a season and interval cycles.  The data scientist can then perform a statistical test to see whether or not the generated series is stationary and thus ready to model."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Model Preparation and Parameter Estimation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Seasonal_Normalize",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "It takes a logical-runtime series, with real number elements (containing the original series, Xt), as an input"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "big_integer",
+                                "big_integer"
+                        ],
+                        "Description": [
+                                "The primary layer payload contains the computed seasonal normalized values.",
+                                "The primary result set can be accessed either via a subsequent SELECT * FROM <art table> statement or by issuing a TD_EXTRACT_RESULTS(…,LAYER(ARTPRIMARY),…) .",
+                                ""
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                },
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": false,
+                        "LayerName": "ARTMETADATA",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "A second layer ARTMETADATA payload contains the <mean, standardDeviation> for each payload column in the primary layer for a season.  The prefix for the payload column is MEAN_ and SD_.",
+                                "The secondary result set can be accessed by issuing a TD_EXTRACT_RESULTS(…,LAYER(ARTMETADATA),…)",
+                                ""
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "SEASON_CYCLE",
+                        "Type": "record",
+                        "Optional": false,
+                        "CheckDuplicates": true,
+                        "Description": [
+                                "Multiple plots can be specified.  It contains an array of plot entries, separated by comma."
+                        ],
+                        "NestedParams": [
+                                {
+                                        "Name": "CYCLES",
+                                        "Type": "string",
+                                        "Optional": false,
+                                        "PermittedValues": [
+                                                "CAL_YEARS",
+                                                "CAL_MONTHS",
+                                                "CAL_DAYS",
+                                                "WEEKS",
+                                                "DAYS",
+                                                "HOURS",
+                                                "MINUTES",
+                                                "SECONDS",
+                                                "MILLISECONDS",
+                                                "MICROSECONDS"
+                                        ],
+                                        "Description": [
+                                                "The CYCLE is a logical time-unit with one of the enum values: TS_CAL_YEARS, TS_CAL_MONTHS, TS_CAL_DAYS, TS_WEEKS, TS_DAYS,  TS_HOURS, TS_MINUTES, TS_SECONDS,  TS_MILLISECONDS, TS_MICROSECONDS."
+                                        ],
+                                        "LangName": "season_cycle"
+                                },
+                                {
+                                        "Name": "DURATION",
+                                        "Type": "integer",
+                                        "Optional": false,
+                                        "LowerBound": 1,
+                                        "LowerBoundType": "INCLUSIVE",
+                                        "AllowNaN": false,
+                                        "Description": [
+                                                "duration - positive INTEGER",
+                                                "Specifies the number of time-units as the duration of each seasonal cycle."
+                                        ],
+                                        "LangName": "cycle_duration"
+                                }
+                        ]
+                },
+                {
+                        "Name": "SEASON_INFO",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1,
+                                2,
+                                3
+                        ],
+                        "Description": [
+                                "This flag is used to generate additional columns CYCLE_NO and SEASON_NO.",
+                                "SEASON_NO is the season for the data.  The value starts from 1.",
+                                "CYCLE_NO is the n-th cycle of the season.  The value starts from 1.",
+                                "The flag value is between 0 and 3.",
+                                "0 - indicates no extra columns being generated.",
+                                "1 - indicates SEASON_NO column being generated.",
+                                "2 - indicates CYCLE_NO column being generated.",
+                                "3 - indicates both SEASON_NO and CYCLE_NO columns being generated."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

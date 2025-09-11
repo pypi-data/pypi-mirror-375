@@ -1,0 +1,29 @@
+{
+  "bank_web_clicks1" :{
+            "session_id" : "integer",
+            "page" : "varchar(30)",
+            "datestamp" : "timestamp format 'MM/DD/YYYYBHH:MI'"
+            },
+
+   "bank_web_clicks2" : {
+                  "customer_id" : "integer",
+                  "session_id" : "integer",
+                  "page" : "varchar(30)",
+                  "datestamp" : "timestamp format 'MM/DD/YYYYBHH:MI'"
+            },
+  "bank_web_url" : {
+                  "session_id" : "integer",
+                  "page_url" : "varchar(30)",
+                  "datestamp" : "timestamp format 'MM/DD/YYYYBHH:MI'"
+            },
+  "ref_url" : {
+                  "page_id" : "integer",
+                  "pagedef" : "varchar(50)",
+                  "page" : "varchar(30)"
+            },
+  "sequence_table" : {
+                  "id" : "integer",
+                  "datestamp" : "timestamp format 'YYYY-MM-DDBHH:MI:SS'",
+                  "item" : "varchar(30)"
+          }
+}

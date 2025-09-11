@@ -1,0 +1,7 @@
+{
+  "ml_ratings": {
+    "userid" : "integer",
+    "itemid" : "integer",
+    "rating" : "double PRECISION"
+  }
+}

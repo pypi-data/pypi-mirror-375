@@ -1,0 +1,19 @@
+"parcelnumber", "clock_time", "status"
+55, 2016-10-15 08:00:00,picked up from customer
+59, 2016-10-15 08:05:00,picked up from customer
+55, 2016-10-15 09:10:00,arrived at receiving station
+60, 2016-10-15 09:20:00,picked up from customer
+55, 2016-10-15 10:00:00,in transit to destination
+60, 2016-10-15 10:45:00,arrived at receiving station
+55, 2016-10-15 16:10:00,arrived at destination station
+55, 2016-10-15 16:30:00,in transit to customer
+55, 2016-10-15 17:00:00,delivered to customer
+75, 2016-10-15 08:00:00,picked up from customer
+79, 2016-10-15 08:05:00,picked up from customer
+75, 2016-10-15 09:10:00,arrived at receiving station
+80, 2016-10-15 09:20:00,picked up from customer
+75, 2016-10-15 10:00:00,in transit to destination
+80, 2016-10-15 10:45:00,arrived at receiving station
+75, 2016-10-15 16:10:00,arrived at destination station
+75, 2016-10-15 16:30:00,in transit to customer
+75, 2016-10-15 17:00:00,delivered to customer

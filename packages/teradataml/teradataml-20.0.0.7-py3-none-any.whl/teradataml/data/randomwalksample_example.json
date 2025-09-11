@@ -1,0 +1,9 @@
+{
+  "citvertices_2": {
+    "id": "integer"
+  },
+  "citedges_2": {
+    "from_id": "integer",
+    "to_id": "integer"
+  }
+}

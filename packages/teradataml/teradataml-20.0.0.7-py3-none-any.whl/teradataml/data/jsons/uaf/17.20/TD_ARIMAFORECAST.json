@@ -1,0 +1,77 @@
+{
+        "FuncName": "TD_ARIMAFORECAST",
+        "FuncDescriptionShort": "ARIMA formulas that are being solved for the coefficients",
+        "FuncDescriptionLong": [
+                "ARIMA formulas that are being solved for the coefficients: Auto-Regressive: (AR1, ..., ARp) , Seasonal Auto-Regressive: (SAR1, ..., SARP) , Moving Average: (MA1, ..., MAq), and Seasonal Moving Average: (SMA1, ..., SMAQ) .  The reader should take note that the AR, SAR, MA, and SMA formulas solved by most of the statistical programs, such as 'R', may differ from the text books, relative to the 'sign' associated with the MA and SMA coefficients.",
+                "There are two approach available for the data scientist, regarding the usage of: TD_ARIMAESTIMATE, TD_ARIMAVALIDATE, and TD_ARIMAFORECAST.",
+                "Option 1: This approach uses all three phases: estimation, validation, and forecast.   First execute TD_ARIMAESTIMATE, then pass the estimate ART table result into TD_ARIMAVALIDATE, then pass the validate ART result into TD_ARIMAFORECAST. ",
+                "Option 2: The validation phase (TD_ARIMAVALIDATE) may be skipped, meaning that the ART produced by TD_ARIMAESTIMATE can directly be passed into TD_ARIMAFORECAST. In this case, TD_ARIMAESTIMATE must use FIT_PERCENTAGE(100), otherwise TD_ARIMAFORECAST will error out."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Series Forecasting",
+        "JSONVersion": "1",
+        "FuncRName": "td_Arima_Forecast",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": [
+                                "ART"
+                        ],
+                        "Description": [
+                                "Passed in an art spec with layer specified ARTMODEL, this function will forecast 'h' periods ('h' steps) into the future, meaning 'h' periods beyond the last observed sample point recorded in the passed in model.   This function only outputs a primary result set, containing forecasted value. This primary result set can be retrieved by issuing a SELECT against the analytical result table."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float",
+                                "float",
+                                "float",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "Invoking this UAF Function only generates a primary result set containing 'forecasted' values.  The primary result set can be accessed via a subsequent SELECT statement against the ART table containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "FORECAST_PERIODS",
+                        "Type": "integer",
+                        "Optional": false,
+                        "LowerBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Number of Periods to Forecast ahead"
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

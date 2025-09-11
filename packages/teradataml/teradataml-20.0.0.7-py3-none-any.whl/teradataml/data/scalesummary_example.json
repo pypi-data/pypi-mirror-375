@@ -1,0 +1,12 @@
+{
+ "scale_stat" : {
+                  
+                  "stattype" : "varchar(20)",
+                  "price" : "real",
+                  "lotsize" : "real",
+                  "bedrooms" : "real",
+                  "bathrms" : "real",
+                  "stories" : "real"
+                  
+        }
+}

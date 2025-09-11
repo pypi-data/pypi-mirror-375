@@ -1,0 +1,8 @@
+{
+  "svm_iris_input_train": {
+    "id" : "integer", 
+    "species" : "varchar(30)",
+    "attribute" : "varchar(30)",
+    "value1" : "float"    
+  }
+}

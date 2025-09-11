@@ -1,0 +1,95 @@
+{
+        "FuncName": "TD_UNNORMALIZE",
+        "FuncDescriptionShort": "provides the data scientist with the ability to 'undo' the seasonal normalization",
+        "FuncDescriptionLong": [
+                "The TD_UNNORMALIZE function is the sister-function for the TD_SEASONALNORMALIZE function.  It provides the data scientist with the ability to “undo” the seasonal normalization which was done during the stationary processing phase of the forecast modelling flow.  The TD_UNNORMALIZE is typically used during the forecasting phase of the modelling flow."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Model Preparation and Parameter Estimation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Unnormalize",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "The first input should be SERIES_SPEC wavelets that contains the wavelets of data to be unnormalized"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                },
+                {
+                        "Type": [
+                                "SERIES",
+                                "ART"
+                        ],
+                        "Description": [
+                                "The second input is either a SERIES_SPEC or an ART_SPEC which contains the <mean, standardDeviation> pairs needed to unnormalize the first input SERIES wavelets."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "input-type"
+                        ],
+                        "Description": [
+                                "The output columns should match the columns of the first input, with the exception that the row axis column is being renamed to ROW_I."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [
+                {
+                        "Name": "FIELDS",
+                        "Type": "list",
+                        "ListType": "integer",
+                        "Optional": true,
+                        "CheckDuplicates": false,
+                        "Description": [
+                                "If FIELDS is not specified, all payload fields of the first input needs to be unnormalized.  If it is specified, only the payload fields in the list are unnormalized.",
+                                "The integer values should be 0 or positive values.  The payload field indexes start from 1."
+                        ],
+                        "LangName": "..."
+                }
+        ],
+        "InputFmt": [
+                {
+                        "Name": "INPUT_MODE",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "MANY2ONE",
+                                "ONE2ONE",
+                                "MATCH"
+                        ],
+                        "Description": [
+                                "Specifies the input mode supported by the function."
+                        ],
+                        "LangName": "input_fmt_input_mode"
+                }
+        ],
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

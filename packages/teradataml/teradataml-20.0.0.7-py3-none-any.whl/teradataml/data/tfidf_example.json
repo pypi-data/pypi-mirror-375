@@ -1,0 +1,14 @@
+{
+  "tfidf_train": {
+    "docid": "integer",
+    "content": "varchar(1000)"
+  },
+  "idf_table": {
+    "token": "varchar(10)",
+    "idf": "double PRECISION"
+  },
+  "docperterm_table": {
+    "term": "varchar(10)",
+    "\"count\"": "bigint"
+  }
+}

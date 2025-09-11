@@ -1,0 +1,32 @@
+{
+  "fs_input": {
+    "sn": "integer",
+    "model": "varchar(30)",
+    "mpg": "double PRECISION",
+    "cyl": "double PRECISION",
+    "disp": "double PRECISION",
+    "hp": "double PRECISION",
+    "drat": "double PRECISION",
+    "wt": "double PRECISION",
+    "qsec": "double PRECISION",
+    "vs": "varchar(30)",
+    "am": "varchar(30)",
+    "gear": "integer",
+    "carb": "integer"
+  },
+  "fs_input1": {
+    "sn": "integer",
+    "model": "varchar(30)",
+    "mpg": "double PRECISION",
+    "cyl": "double PRECISION",
+    "disp": "double PRECISION",
+    "hp": "double PRECISION",
+    "drat": "double PRECISION",
+    "wt": "double PRECISION",
+    "qsec": "double PRECISION",
+    "vs": "varchar(30)",
+    "am": "varchar(30)",
+    "gear": "integer",
+    "carb": "integer"
+  }
+}

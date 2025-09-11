@@ -1,0 +1,149 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "2",
+  "json_content_version": "2",
+  "function_name": "TD_ANOVA",
+  "function_alias_name": "TD_ANOVA",
+  "function_version": "2.0",
+  "commence_db_version" : "17.20.00",
+  "change_db_version" : "17.20.03.XX",
+  "function_type": "fastpath",
+  "function_category": "Hypothesis Testing",
+  "function_r_name": "aa.td_anova",
+  "short_description": "hypothesis test function to perform anova analysis on a data set.",
+  "long_description": "fastpath function to perform one-way anova analysis on a data set with two or more groups.",
+  "input_tables": [
+    {
+      "requiredInputKind": [
+        "PartitionByAny"
+      ],
+      "name": "InputTable",
+      "alternateNames": [],
+      "isRequired": true,
+      "datatype": "TABLE_ALIAS",
+      "partitionByOne": false,
+      "isOrdered": false,
+      "description": "The relation that contains input data.",
+      "rDescription": "The relation that contains input data.",
+      "rName": "data",
+      "useInR": true,
+      "rOrderNum": 1
+    }
+  ],
+  "argument_clauses": [
+    {
+      "name": "GroupColumns",
+      "alternateNames": [],
+      "isRequired": false,
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "NUMERIC"
+      ],
+      "rOrderNum": 2,
+      "description": "Specifies the input table columns to use in the computation.",
+      "rDescription": "Specifies the input table columns to use in the computation.",
+      "datatype": "COLUMNS",
+      "allowsLists": true,
+      "rName": "group.columns",
+      "useInR": true,
+      "rFormulaUsage" : false
+    },
+    {
+      "name": "GroupNameColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "STRING"
+      ],
+      "rOrderNum": 3,
+      "description": "Specifies the input table column containing the names of the groups included in the ANOVA test. This argument is used when Input is in group-value format.",
+      "rDescription": "Specifies the input table column containing the names of the groups included in the ANOVA test. This argument is used when Input is in group-value format.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "group.name.column",
+      "useInR": true
+    },
+    {
+      "name": "GroupValueColumn",
+      "alternateNames": [],
+      "isRequired": false,
+      "targetTable": [
+        "InputTable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "NUMERIC"
+      ],
+      "rOrderNum": 4,
+      "description": "Specifies the input table column containing the values for each group member. This argument is used when Input is in group-value format.",
+      "rDescription": "Specifies the input table column containing the values for each group member. This argument is used when Input is in group-value format.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "group.value.column",
+      "useInR": true
+    },
+    {
+      "name": "GroupNames",
+      "alternateNames": [],
+      "isRequired": false,
+      "defaultValue" : "",
+      "rOrderNum": 5,
+      "description": "Specifies the names of the groups included in the ANOVA test. This argument is used when Input is in group-value format.",
+      "rDescription": "Specifies the names of the groups included in the ANOVA test. This argument is used when Input is in group-value format.",
+      "datatype": "STRING",
+      "allowsLists": true,
+      "allowPadding": false,
+      "rName": "group.names",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "NumGroups",
+      "alternateNames": [],
+      "isRequired": false,
+      "rOrderNum": 6,
+      "lowerBound" : 1,
+      "loweBoundType" : "INCLUSIVE",
+      "upperBound" : 2045,
+      "upperBoundType" : "INCLUSIVE",
+      "allowNaN" : false,
+      "description": "Specifies the number of different groups in the input table included in the ANOVA test. This argument is used when Input is in group-value format.", 
+      "rDescription": "Specifies the number of different groups in the input table included in the ANOVA test. This argument is used when Input is in group-value format.",
+      "datatype": "INTEGER",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "num.groups",
+      "useInR": true,
+      "rDefaultValue" : ""
+    },
+    {
+      "name": "Alpha",
+      "alternateNames": [],
+      "isRequired": false,
+      "defaultValue": 0.05,
+      "rOrderNum": 7,
+      "lowerBound": 0,
+      "lowerBoundType": "INCLUSIVE",
+      "upperBound": 1,
+      "upperBoundType": "INCLUSIVE",
+      "allowNaN": false,
+      "description": "Specifies the value of alpha in hypothesis function",
+      "rDescription": "Specifies the value of alpha in hypothesis function",
+      "datatype": "DOUBLE",
+      "allowsLists": false,
+      "allowPadding": false,
+      "rName": "alpha",
+      "useInR": true
+    }
+  ]
+}

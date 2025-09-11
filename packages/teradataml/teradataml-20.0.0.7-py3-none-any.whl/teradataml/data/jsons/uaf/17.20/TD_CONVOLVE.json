@@ -1,0 +1,78 @@
+{
+        "FuncName": "TD_CONVOLVE",
+        "FuncDescriptionShort": "apply a digital filter by convolving the source signal with the appropriate filter kernel",
+        "FuncDescriptionLong": [
+                "This function, the TD_CONVOLVE, takes two series as inputs: one representing the source series to be filtered; and, the other series being the filter kernel itself.  The resultant output, is the source series with the kernel filter applied. "
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Temporal and Spatial",
+        "JSONVersion": "1",
+        "FuncRName": "td_Convolve",
+        "MaxInputFiles": 2,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "The source series to be filtered"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                },
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "The filter kernel itself"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "integer",
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_CONVOLVE function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "ALGORITHM",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "CONV_SUMMATION",
+                                "CONV_DFFT"
+                        ],
+                        "Description": [
+                                "Optional parameter. Options are CONV_SUMMATION or CONV_DFFT. By default, the function selects the best option based on the number of entries present in the two inputs, and their types ( REAL, COMPLEX, and so on.) CONV_SUMMATION only supports:• REAL,REAL • REAL, MULTIVAR_REAL • MULTIVAR_REAL,REAL • MULTIVAR_REAL,MULTIVAR_REAL. If the CONV_SUMMATION option is passed in when the first input is greater than 64 entries or the second input is greater than 63 entries, then CONV_DFFT is used instead. This parameter is mostly used for testing."
+                        ]
+                }
+        ],
+        "InputFmt": [
+                {
+                        "Name": "INPUT_MODE",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "ONE2ONE",
+                                "MANY2ONE",
+                                "MATCH"
+                        ],
+                        "Description": [
+                                "Specifies the input mode supported by the function."
+                        ],
+                        "LangName": "input_fmt_input_mode"
+                }
+        ],
+        "OutputFmt": false
+}

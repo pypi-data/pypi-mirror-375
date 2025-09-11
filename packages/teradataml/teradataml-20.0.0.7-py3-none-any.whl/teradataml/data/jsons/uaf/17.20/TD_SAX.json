@@ -1,0 +1,210 @@
+{
+    "FuncName": "TD_SAX",
+    "FuncDescriptionShort": "TD_SAX transform a time series into sequence of symbols.",
+    "FuncDescriptionLong": [
+            "TD_SAX uses Piecewise Aggregate Approximation (PAA) and transform a timeseries into sequence of symbols.",
+            "The symbols can be characters, string, and bitmap."             
+    ],
+    "FunctionVersion": "...",
+    "JSONVersion": "1",
+    "FunctionCategory": "Digital Signal Processing",
+    "FuncRName": "td_SAX",
+    "MaxInputFiles": 1,
+    "Input": [
+        {
+            "Type": "SERIES",
+            "Description": [
+                "Time series whose value can be REAL or MULTIVAR_REAL."
+            ],
+            "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+            "Optional": false
+        }
+    ],
+    "Output": [
+        {
+            "Type": "ART",
+            "PrimaryLayer": true,
+            "LayerName": "ARTPRIMARY",
+            "ResultTableColumnTypes": [
+                "<varies>",
+                "float",
+                "float"
+            ],
+            "Description": [
+                "The primary analytical result set contains the SAX representation of the input time series.",
+                "The primary result set is accessed using a SELECT statement"
+            ],
+            "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+        }
+    ],
+    "IsPlottable": true,
+    "Params": [
+        {
+            "Name": "WINDOW_TYPE",
+            "Type": "string",
+            "Optional": true,
+            "PermittedValues": [                               
+                "GLOBAL",
+                "SLIDING"
+            ],
+            "DefaultValue": "GLOBAL",
+            "Description": [
+                "[Optional] If not specified, the GLOBAL type is the default.",
+                "Specifies the window type used in the SAX transformation."
+            ]
+        },
+        {
+            "Name": "OUTPUT_TYPE",
+            "Type": "string",
+            "Optional": true,
+            "PermittedValues": [
+                "STRING",
+                "BITMAP",
+                "O_CHARS"
+            ],
+            "DefaultValue": "STRING",
+            "Description": [
+                "[Optional] If not specified, the STRING type is the default.",
+                "The output format of the result can be string, char or bitmap."
+            ]
+        },
+        {
+            "Name": "MEAN",
+            "Type": "list",
+            "ListType": "float",
+            "Optional": true,
+            "CheckDuplicates": false,
+            "Description": [
+                "The global mean values that the function uses to calculate the SAX code for every partition",
+                "If not specified, the function calculates the mean values for every partition.",
+                "If the mean specifies one value and multiple payloads, then the specified value applies to every payload.",
+                "If the mean specifies multiple values, then the specified values apply to the corresponding payloads."
+            ]
+        },
+        {
+            "Name": "STD_DEV",
+            "Type": "list",
+            "ListType": "float",
+            "Optional": true,
+            "CheckDuplicates": false,
+            "Description": [
+                "The global mean values that the function uses to calculate the SAX code for every partition",
+                "If not specified, the function calculates the standard deviation values for every partition.",
+                "If the standard deviation specifies one value and multiple payloads, then the specified value applies to every payload.",
+                "If the standard deviation specifies multiple values, then the specified values apply to the corresponding payloads."
+            ]
+        },
+        {
+            "Name": "WINDOW_SIZE",
+            "Type": "integer",
+            "Optional": true,
+            "LowerBound": 1,
+            "LowerBoundType": "INCLUSIVE",
+            "Description": [
+                "The size of sliding window used in the SAX transformation and maximum value is 64000.",
+                "The window size is required for SLIDING window type."
+            ]
+        },
+        {
+            "Name": "OUTPUT_FREQUENCY",
+            "Type": "integer",
+            "Optional": true,
+            "LowerBound": 1,
+            "DefaultValue": 1,
+            "LowerBoundType": "INCLUSIVE",
+            "Description": [
+                "The number of data points that the window slides between successive outputs.",
+                "This is valid for SLIDING window type."
+            ]
+        },
+        {
+            "Name": "POINTS_PER_SYMBOL",
+            "Type": "integer",
+            "Optional": true,
+            "LowerBound": 1,
+            "DefaultValue": 1,
+            "LowerBoundType": "INCLUSIVE",
+            "Description": [
+                "The number of data points to be converted to one SAX symbol.",
+                "This is valid for GLOBAL window type."
+            ]
+        },
+        {
+            "Name": "SYMBOLS_PER_WINDOW ",
+            "Type": "integer",
+            "Optional": true,
+            "LowerBound": 1,
+            "DefaultValue": 1,
+            "LowerBoundType": "INCLUSIVE",
+            "Description": [
+                "The number of SAX symbols to be generated for each window.",
+                "This is valid for SLIDING window type."
+            ]
+        },
+        {
+            "Name": "ALPHABET_SIZE",
+            "Type": "integer",
+            "Optional": true,
+            "LowerBound": 2,
+            "DefaultValue": 4,
+            "LowerBoundType": "INCLUSIVE",
+            "Description": [
+                "The number of symbols in the SAX alphabet.",
+                "The alphabet consists letters a through t.",
+                "The alphabet size must be [2,20]."
+            ]
+        },
+        {
+            "Name": "BITMAP_LEVEL",
+            "Type": "integer",
+            "Optional": true,
+            "LowerBound": 1,
+            "DefaultValue": 2,
+            "LowerBoundType": "INCLUSIVE",
+            "Description": [
+                "The number of consecutive symbols to be converted to one symbol on a bitmap.",
+                "For bitmap level 1, the bitmap contains the symbols 'a', 'b', 'c', and so on.",
+                "For bitmap level 2, the bitmap contains the symbols 'aa', 'ab', 'ac', and so on.",
+                "The range must be [1,4]."
+            ]
+        },
+        {
+            "Name": "CODE_STATS",
+            "Type": "integer",
+            "Optional": true,
+            "DefaultValue": 0,
+            "PermittedValues": [
+                0, 1
+            ],
+            "Description": [
+                "Indicator that the function prints the mean and standard deviation."
+            ]
+        },
+        {
+            "Name": "BREAKPOINTS    ",
+            "Type": "list",
+            "ListType": "float",
+            "Optional": true,
+            "CheckDuplicates": false,
+            "Description": [
+                "The breakpoints to form the SAX code based on input data."
+            ]
+        }
+    ],
+    "InputFmt":  false,
+    "OutputFmt": [
+        {
+            "Name": "INDEX_STYLE",
+            "Type": "string",
+            "Optional": true,
+            "DefaultValue": "NUMERICAL_SEQUENCE",
+            "PermittedValues": [
+                "NUMERICAL_SEQUENCE"
+            ],
+            "Description": [
+                "Specifies the INDEX_STYLE of the output format."
+            ],
+            "LangName": "output_fmt_index_style"
+        }
+    ]
+}

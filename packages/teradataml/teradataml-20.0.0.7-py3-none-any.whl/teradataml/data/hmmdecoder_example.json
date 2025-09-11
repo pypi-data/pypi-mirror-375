@@ -1,0 +1,79 @@
+{
+  "Pi_loan" : {
+    "model_id" : "integer",
+    "state" : "varchar(100)",
+    "probability" : "float"
+  },
+  "A_loan" : {
+    "model_id" : "integer",
+    "from_state" : "varchar(100)",
+    "to_state" : "varchar(100)",
+    "probability" : "float"
+  },
+  "B_loan" : {
+    "model_id" : "integer",
+    "state" : "varchar(100)",
+    "observed" : "varchar(100)",
+    "probability" : "float"
+  },
+  "test_loan_prediction" :{
+    "model_id" : "integer",
+    "seq_id" : "integer",
+    "seq_vertex_id" : "integer",
+    "observed_id" : "varchar(5)"
+  },
+  "churn_initial" : {
+    "model" : "integer",
+    "tag" : "varchar(2)",
+    "probability" : "float"
+  },
+  "churn_state_transition" : {
+    "model" : "integer",
+    "from_tag" : "varchar(3)",
+    "to_tag" : "varchar(3)",
+    "probability" : "float"
+  },
+  "churn_emission" : {
+    "model" : "integer",
+    "state" : "varchar(3)",
+    "observed" : "varchar(30)",
+    "probability" : "float"
+  },
+  "churn_data" :{
+    "model" : "integer",
+    "action" : "varchar(30)",
+    "path_id" : "integer",
+    "path_max" : "integer",
+    "id" : "integer",
+    "product" : "varchar(30)"
+  },
+  "initial" : {
+    "model" : "integer",
+    "tag" : "varchar(3)",
+    "probability" : "float"
+  },
+  "state_transition" : {
+    "model" : "integer",
+    "from_tag" : "varchar(3)",
+    "to_tag" : "varchar(3)",
+    "probability" : "float"
+  },
+  "emission" : {
+    "model" : "integer",
+    "tag" : "varchar(3)",
+    "word" : "varchar(30)",
+    "probability" : "float"
+  },
+  "phrases" :{
+    "model" : "integer",
+    "phrase_id" : "integer",
+    "word" : "varchar(30)"
+  },
+  "customer_loyalty_newseq" :{
+    "id" : "integer",
+    "user_id" : "integer",
+    "seq_id" : "integer",
+    "purchase_date" : "date",
+    "observation" : "varchar(10)"
+  }
+}

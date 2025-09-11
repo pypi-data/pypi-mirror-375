@@ -1,0 +1,142 @@
+{
+  "json_schema_major_version": "1",
+  "json_schema_minor_version": "2",
+  "json_content_version": "1",
+  "function_name": "TD_SVMPredict",
+  "function_version": "1.0",
+  "function_type": "fastpath",
+  "function_category": "Model Scoring",
+  "function_alias_name": "TD_SVMPredict",
+  "function_r_name": "aa.td_svmpredict",
+  "ref_function_r_name": "aa.td_svm",
+  "short_description": "This function predicts target values (regression) and class labels (classification) for test data using an SVM model trained by TD_SVM",
+  "long_description": "This function predicts target values (regression) and class labels (classification) for test data using an SVM model trained by TD_SVM",
+  "input_tables": [
+    {
+      "requiredInputKind": [
+        "PartitionByAny"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "inputtable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the table containing the input data.",
+      "description": "Specifies the table containing the input data.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "newdata",
+      "useInR": true,
+      "rOrderNum": 2
+    },
+    {
+      "requiredInputKind": [
+        "Dimension"
+      ],
+      "isOrdered": false,
+      "partitionByOne": false,
+      "name": "modeltable",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specifies the table containing the model data.",
+      "description": "Specifies the table containing the model data.",
+      "datatype": "TABLE_ALIAS",
+      "allowsLists": false,
+      "rName": "object",
+      "useInR": true,
+      "rOrderNum": 1
+    }
+  ],
+  "argument_clauses": [
+    {
+      "targetTable": [
+        "inputtable"
+      ],
+      "checkDuplicate": true,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "IDColumn",
+      "alternateNames": [],
+      "isRequired": true,
+      "rDescription": "Specify the name of the column that uniquely identifies an observation in the test table.",
+      "description": "Specify the name of the column that uniquely identifies an observation in the test table.",
+      "datatype": "COLUMNS",
+      "allowsLists": false,
+      "rName": "id.column",
+      "useInR": true,
+      "rOrderNum": 3
+    },
+    {
+      "targetTable": [
+        "inputtable"
+      ],
+      "checkDuplicate": false,
+      "allowedTypes": [],
+      "allowedTypeGroups": [
+        "ALL"
+      ],
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "Accumulate",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the names of the input table columns that need to be copied from the input test table to output.",
+      "description": "Specify the names of the input table columns that need to be copied from the input test table to output.",
+      "datatype": "COLUMNS",
+      "allowsLists": true,
+      "rName": "accumulate",
+      "useInR": true,
+      "rOrderNum": 4
+    },
+    {
+      "defaultValue": false,
+      "name": "OutputProb",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify whether the function should output the probability for each response. Only applicable if ModelType is CLASSIFICATION.",
+      "description": "Specify whether the function should output the probability for each response. Only applicable if ModelType is CLASSIFICATION.",
+      "datatype": "BOOLEAN",
+      "allowsLists": false,
+      "rName": "output.prob",
+      "useInR": true,
+      "rOrderNum": 5
+    },
+    {
+      "isOutputColumn": false,
+      "matchLengthOfArgument": "",
+      "allowPadding": false,
+      "name": "Responses",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the class labels to output probabilities. Only applicable if OutputProb is true. A label must be 0 or 1. If not specified, the function outputs the probability of the predicted response.",
+      "description": "Specify the class labels to output probabilities. Only applicable if OutputProb is true. A label must be 0 or 1. If not specified, the function outputs the probability of the predicted response.",
+      "datatype": "STRING",
+      "allowsLists": true,
+      "rName": "output.responses",
+      "useInR": true,
+      "rOrderNum": 6
+    },
+    {
+      "permittedValues": [
+        "Regression",
+        "Classification"
+      ],
+      "defaultValue": "Classification",
+      "isOutputColumn": false,
+      "name": "ModelType",
+      "alternateNames": [],
+      "isRequired": false,
+      "rDescription": "Specify the type of the analysis. Acceptable values are Regression, Classification.",
+      "description": "Specify the type of the analysis. Acceptable values are Regression, Classification.",
+      "datatype": "STRING",
+      "allowsLists": false,
+      "rName": "model.type",
+      "useInR": true,
+      "rOrderNum": 7
+    }
+  ]
+}

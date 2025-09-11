@@ -1,0 +1,8 @@
+{
+  "sentiment_train": {
+    "id" : "integer",
+    "product" : " varchar(30)",
+    "category" : " varchar(10)",
+    "review" : "varchar(1500)"
+  }
+}

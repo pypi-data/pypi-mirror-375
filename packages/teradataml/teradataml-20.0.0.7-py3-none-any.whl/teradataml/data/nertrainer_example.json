@@ -1,0 +1,7 @@
+{
+  "ner_sports_train" : {
+    "id" : "integer",
+    "content" : "varchar(3000)"
+  }
+
+}

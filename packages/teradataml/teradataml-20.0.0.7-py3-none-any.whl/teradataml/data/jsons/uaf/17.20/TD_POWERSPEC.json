@@ -1,0 +1,175 @@
+{
+        "FuncName": "TD_POWERSPEC",
+        "FuncDescriptionShort": "Converts a series from the time or spatial domain over to the frequency domain in order to facilitate Frequency Domain Analysis",
+        "FuncDescriptionLong": [
+                "The Power Spectrum function is another function which converts a series from the time or spatial domain over to the frequency domain in order to facilitate Frequency Domain Analysis.  Once in the frequency domain, it makes it easier for the data scientist to identify periodicities that are inherent in the series, thereby enabling the data scientist to then eliminate them from the series.   "
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Temporal and Spatial",
+        "JSONVersion": "1",
+        "FuncRName": "td_Power_Spec",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "At its core, this function takes a logical-runtime series as an input and transforms the series from  the time or spatial domain to the temporal frequency or spatial frequency domain, respectively.  Like TD_LINESPEC, the input series can contain either real or complex numbers as array elements, aka, PAYLOAD(CONTENT(REAL/MULTIVAR_REAL/COMPLEX/MULTIVAR_COMPLEX)).  "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "float",
+                                "float"
+                        ],
+                        "Description": [
+                                "The TD_POWERSPEC function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.  The primary result set can be retrieved by issuing a SELECT against the analytical table containing the results.",
+                                "The scaled frequency, ROW_AXIS.  Depends on passed in value of FREQ_STYLE. FREQ_STYLE('K_RADIANS) means the ROW_AXIS is the angular frequency, 2πk/N, which varies from 0 to π. FREQ_STYLE ('K_SAMPLE_RATE) means the ROW_AXIS is the frequency k/N, which varies from 0 to 1/2.  FREQ_STYLE ('PERIODICITY') means the ROW_AXIS is the Periodicity."
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "FREQ_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "K_INTEGRAL",
+                                "K_SAMPLE_RATE",
+                                "K_RADIANS",
+                                "K_HERTZ",
+                                "K_PERIODICITY"
+                        ],
+                        "Description": [
+                                "FREQ_STYLE (FK) - The ROW_AXIS scale if frequency:  fk  =  k/N =  wk/2π  =  1/P    ",
+                                "FREQ_STYLE (WK) - The ROW_AXIS scale if angular frequency:  wk  =  2πk/N =  2πfk  =  2π/P     ",
+                                "FREQ_STYLE (PERIODICITY) - Periodicity = P = 1/fk  = 2π/wk  = N/k"
+                        ]
+                },
+                {
+                        "Name": "HERTZ_SAMPLE_RATE",
+                        "Type": "float",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "LowerBoundType": "EXCLUSIVE",
+                        "Description": [
+                                "Floating point constant representing the sample rate, in hertz.  A value of 10000.0 means that the sample points were obtained by sampling at a rate of 10,000 hertz."
+                        ]
+                },
+                {
+                        "Name": "ZERO_PADDING_OK",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 1,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Determines whether it is OK to add zeros to the end of a given Series to achieve a more efficient computation of the FFT coefficients.  A value of '1' means true; a value of '0' means false.  Default is true."
+                        ]
+                },
+                {
+                        "Name": "ALGORITHM",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "AUTOCOV",
+                                "AUTOCORR",
+                                "FOURIER",
+                                "INCRFOURIER"
+                        ],
+                        "Description": [
+                                "ALGORITHM('AUTOCOV') - Use the Fourier Cosine of the Auto covariance approach to calculate power spectrum",
+                                "ALGORITHM('AUTOCORR') - Use the Fourier Cosine of the Auto correlation approach to calculate power spectrum",
+                                "ALGORITHM('FOURIER') - Use the Fourier Transform approach to calculate power spectrum",
+                                "ALGORITHM('INCRFOURIER') - Use the Incremental Fourier Transform approach to calculate power spectrum"
+                        ]
+                },
+                {
+                        "Name": "INCRFOURIER_PARAM",
+                        "Type": "record",
+                        "Optional": true,
+                        "CheckDuplicates": true,
+                        "LangName": "incrfourier",
+                        "Description": [
+                                "Only valid when ALGORITHM(INCRFOURIER).  Provides spacing interval (K) and interval sampling lengths (L)"
+                        ],
+                        "NestedParams": [
+                                {
+                                        "Name": "INTERVAL_LENGTH",
+                                        "Type": "integer",
+                                        "Optional": true,
+                                        "LowerBound": 0,
+                                        "LowerBoundType": "INCLUSIVE",
+                                        "Description": [
+                                                ""
+                                        ]
+                                },
+                                {
+                                        "Name": "SPACING_INTERVAL",
+                                        "Type": "integer",
+                                        "Optional": true,
+                                        "LowerBound": 0,
+                                        "LowerBoundType": "INCLUSIVE",
+                                        "Description": [
+                                                ""
+                                        ]
+                                }
+                        ]
+                },
+                {
+                        "Name": "WINDOW",
+                        "Type": "record",
+                        "Optional": true,
+                        "CheckDuplicates": true,
+                        "Description": [
+                                ""
+                        ],
+                        "NestedParams": [
+                                {
+                                        "Name": "WINDOW_NAME",
+                                        "Type": "string",
+                                        "Optional": true,
+                                        "PermittedValues": [
+                                                "NONE",
+                                                "TUKEY",
+                                                "BARTLETT",
+                                                "PARZEN",
+                                                "WELCH"
+                                        ],
+                                        "Description": [
+                                                "WINDOW('NONE') - Do not apply a smoothing window.  Theoretically this translates into the application of a square wave window, which has a magnitude of '1.0' for the whole duration of the window.",
+                                                "WINDOW_NAME('TUKEY') - Apply a Tukey smoothing window with the supplied alpha value",
+                                                "WINDOW_NAME ('BARTLETT') - Apply a Bartlett smoothing window",
+                                                "WINDOW_NAME ('PARZEN') - Apply a Parzen smoothing window",
+                                                "WINDOW_NAME ('WELCH') - Apply a Welch smoothing window"
+                                        ],
+					                    "LangName": "window_name"
+
+                                },
+                                {
+                                        "Name": "WINDOW_PARAM",
+                                        "Type": "float",
+                                        "Optional": true,
+                                        "LowerBound": 0,
+                                        "LowerBoundType": "INCLUSIVE",
+                                        "Description": [
+                                                "Optional Parameter.  Only valid with a FREQ_STYLE(K_HERTZ).  A Floating point constant representing the sample rate, in hertz.  A value of 10000.0 means that the sample points were obtained by sampling at a rate of 10,000 hertz."
+                                        ],
+					                    "LangName": "window_param"
+                                }
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": false
+}

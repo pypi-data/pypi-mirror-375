@@ -1,0 +1,18 @@
+{
+  "finance_data3": {
+          "id" : "integer",
+          "period" : "varchar(30)",
+          "expenditure" : "integer",
+          "income" : "integer",
+          "investment" : "integer"
+      },
+  "orders_ex": {
+          "id" : "integer",
+          "p" : "integer",
+          "d" : "integer",
+          "q" : "integer",
+          "include_drift" : "integer",
+          "include_mean" : "integer"
+    
+  }
+}

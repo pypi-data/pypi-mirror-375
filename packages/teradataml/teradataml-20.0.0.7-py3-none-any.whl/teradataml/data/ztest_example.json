@@ -1,0 +1,16 @@
+{
+    "roc_input" : {
+      "model_id" : "integer",
+      "id" : "integer",
+      "observation" : "integer",
+      "probability" : "real"
+    },
+    "boston2cols":{
+        "groupName":"VARCHAR(40)",
+        "groupValue":"REAL"
+    },
+    "insect2Cols":{
+        "groupName":"VARCHAR(40)",
+        "groupValue":"INTEGER"
+    }
+  }

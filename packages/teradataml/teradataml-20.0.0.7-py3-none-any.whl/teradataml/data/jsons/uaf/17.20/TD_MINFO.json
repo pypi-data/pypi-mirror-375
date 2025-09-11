@@ -1,0 +1,67 @@
+{
+        "FuncName": "TD_MINFO",
+        "FuncDescriptionShort": "Used to return metadata describing the logical matrix",
+        "FuncDescriptionLong": [
+                "The TD_MINFO, 'Matrix Information', function is an AF Utility function used to return metadata describing the logical matrix identified by the MATRIX_SPEC specification passed into the function.  For each matrix this function returns:",
+                "Matrix Row/Column Index Data type - TIMESTAMP, TIMESTAMP WITH TIME ZONE, DATE, INTEGER, or FLOAT",
+                "Starting Row/Column Index value associated with the matrix ",
+                "Ending Row/Column Index value associated with the matrix ",
+                "Count of total number of entries for Row/Column Index",
+                "Flag indicating whether the matrix is regular or irregular along Row/Column Index",
+                "Row/Column Index Sample interval - row/column index sample interval associated with a discrete row/column index; or, alternatively, average of all row/column index sample intervals encountered, if it has an irregular row/column index.",
+                "Content Type of  payload “fields” - REAL, COMPLEX, AMPL_PHASE_RADIANS, AMPL_PHASE_DEGREES, MULTIVAR_REAL, MULTIVAR_COMPLEX, MULTIVAR_AMPL_PHASE_RADIANS, or MULTIVAR_AMPL_PHASE_DEGREES",
+                "For each payload “fields” entry: Minimum sample magnitude encountered in matrix; Maximum sample magnitude encountered in matrix; Average of all magnitudes encountered in matrix",
+                "Count of total number of null value in all the result payload fields.",
+                "Flag indicating whether the matrix is malformed or well input matrix."
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "General Utility",
+        "JSONVersion": "1",
+        "FuncRName": "td_MInfo",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "MATRIX",
+                        "Description": [
+                                "This AF function is passed a collection of logical matrices described by a matrix specification, MATRIX_SPEC. These logical matrices can be of either the regular or irregular variety.  Their indexing mechanisms can be based on time or space"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "ART",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "char(40) ",
+                                "varies",
+                                "varies",
+                                "float",
+                                "integer",
+                                "varchar(60)",
+                                "varchar(40)",
+                                "varies",
+                                "varies",
+                                "integer",
+                                "integer",
+                                "varchar(60)",
+                                "varchar(20)",
+                                "list<N, float>",
+                                "list<N, float>",
+                                "list<N, float>",
+                                "integer",
+                                "varchar(50)"
+                        ],
+                        "Description": [
+                                "Invoking this AF utility function generates only a primary analytical result set. There are no secondary or other results generated. The primary result set can be accessed via a subsequent SELECT statement issued against the analytical result table. "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": false,
+        "Params": [],
+        "InputFmt": false,
+        "OutputFmt": false
+}

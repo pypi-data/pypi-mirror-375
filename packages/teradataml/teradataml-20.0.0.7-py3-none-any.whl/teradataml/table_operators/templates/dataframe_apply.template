@@ -1,0 +1,184 @@
+import sys
+from pandas import DataFrame as pd_DataFrame, Series as pd_Series, read_csv as pd_read_csv, isna as pd_isna
+from numpy import ndarray as np_ndarray
+from pickle import loads as pickle_load
+from base64 import b64decode as base64_b64decode
+
+# Information that is required to help with the script usage.
+#  The delimiter to use with the input and output text.
+_template_delimiter = pickle_load(base64_b64decode({DELIMITER}))
+#  The operation that the user function is supposed to be applied for: map_row or map_partition.
+_operation = pickle_load(base64_b64decode({STO_OPERATION}))
+#  The deserialized and decoded user defined function.
+_func = pickle_load(base64_b64decode({USER_DEF_FUNC}))
+#  The names of columns in the input teradataml DataFrame.
+_col_names_list = pickle_load(base64_b64decode({DF_COL_NAMES_LIST}))
+#  The types of columns in the input teradataml DataFrame.
+_col_types_list = pickle_load(base64_b64decode({DF_COL_TYPES_LIST}))
+#  The names of the output columns expected from the user defined function.
+_output_col_names_list = pickle_load(base64_b64decode({OUTPUT_COL_NAMES_LIST}))
+#  The python types of the output columns expected from the user defined function.
+_output_converters = pickle_load(base64_b64decode({OUTPUT_CONVERTERS}))
+#  The quotechar to use.
+_quotechar = pickle_load(base64_b64decode({QUOTECHAR}))
+# converters to use for Pandas DataFrames with pd.read_csv.
+_input_converters = pickle_load(base64_b64decode({INPUT_CONVERTERS}))
+# chunk size to use with pd.read_csv.
+_chunk_size = pickle_load(base64_b64decode({CHUNK_SIZE}))
+
+
+class StdoutWriter:
+    def __init__(self, delimiter=_template_delimiter, quotechar=_quotechar):
+        """
+        DESCRIPTION:
+            A writer that helps to write delimited rows to sys.stdout.
+
+        PARAMETERS:
+            delimiter:
+                Optional Argument.
+                Specifies delimiter to use while writing the delimited string to stdout.
+                Default value: Value of _template_delimiter.
+                Types: string
+
+            quotechar:
+                Optional Argument.
+                Specifies delimiter to use while writing the delimited string to stdout.
+                Default value: Value of _quotechar.
+                Types: string
+
+        RETURNS:
+            An object of class StdoutWriter.
+
+        EXAMPLES:
+            >>> stdout_writer = StdoutWriter(delimiter="\t")
+        """
+        self.delimiter = delimiter
+        self.quotechar = quotechar
+
+    def write(self, data):
+        """
+        DESCRIPTION:
+            Function to write data to the Standard Output Stream as a delimited string.
+
+        PARAMETERS:
+            data:
+                The objects that needs to be written to the standard output stream as a delimited string.
+                Types: Pandas DataFrame, Pandas Series, or Numpy ndarray.
+
+        RETURNS:
+            None.
+
+        EXAMPLES:
+            >>> stdout_writer = StdoutWriter(delimiter="\t")
+
+            >>> # Write a numpy ndarray.
+            >>> import numpy as np
+            >>> x = np.arange(0.0,5.0,1.0)
+            >>> print(type(x))
+            <class 'numpy.ndarray'>
+            >>> stdout_writer.write(x)
+            0.0	1.0	2.0	3.0	4.0
+
+            >>> # Write a Pandas DataFrame
+            >>> import pandas as pd
+            >>> pdf = pd.DataFrame({{ 'id': [1, 2], 'value':[10, 20] }})
+            >>> stdout_writer.write(pdf)
+            1	10
+            2	20
+
+            >>> # Write a Pandas Series
+            >>> stdout_writer.write(pdf.id)
+            1	2
+        """
+        def write_np_array(row):
+            """
+            Helper function to write the numpy ndarray as a delimited string.
+
+            PARAMETERS:
+                row:
+                    Object of class numpy ndarray to write to stdout as delimited string.
+                    Types: numpy ndarray
+
+            RETURNS:
+                None.
+            """
+            # We check for NaNs and Nones in the output to make sure the output can be readily
+            # converted to the corresponding SQL type.
+            if self.quotechar is not None:
+                # A NULL value should not be enclosed in quotes.
+                # The CSV module has no support for such output with writer, and hence the custom formatting.
+                values = ['' if pd_isna(s) else "{{}}{{}}{{}}".format(self.quotechar,
+                                                                      str(_output_converters[ind](s)), self.quotechar)
+                                                                      for ind, s in enumerate(row)]
+            else:
+                values = ['' if pd_isna(s) else str(_output_converters[ind](s)) for ind, s in enumerate(row)]
+            print(self.delimiter.join(values), file=sys.stdout)
+
+        type_err_msg = "{{}} operation supports functions returning objects of type np.ndarray," \
+                       " pd.Series, or pd.DataFrame. Given: {{}}"
+
+        if data is None:
+            return
+        elif isinstance(data, pd_DataFrame):
+            # Iterate over rows and print the each row (numpy ndarray).
+            for _, row in data.iterrows():
+                write_np_array(row.values)
+        elif isinstance(data, pd_Series):
+            # Treat Series as a row - extract the numpy ndarray and write it.
+            write_np_array(data.values)
+        elif isinstance(data, np_ndarray):
+            # Print the numpy ndarray.
+            if data.ndim == 2:
+                # Two-dimensional array, with each array in the iteration
+                # representing an output row.
+                for inner_array in data:
+                    write_np_array(inner_array)
+            elif data.ndim == 1:
+                # One-dimensional array, representing an output row.
+                write_np_array(data)
+            else:
+                raise ValueError("Unsupported number of dimensions in numpy array: {{}}. "
+                                 "Expected one or two dimensions.".format(data.ndim))
+        else:
+            raise TypeError(type_err_msg.format(_operation, type(data).__name__))
+
+
+# The entry point to the script.
+if __name__ == "__main__":
+    kwargs = dict()
+    kwargs['chunksize'] = _chunk_size
+
+    # Also check if we need to use 'quotechar'.
+    if _quotechar is not None:
+        kwargs['quotechar'] = _quotechar
+        kwargs['quoting'] = 1  # QUOTE_ALL
+
+    # TODO: Add Jira number to remove the below block of code.
+    # For some reason, the STDOUT of SQL is sending a blank lines. Hence
+    # removing the blank lines and updating to file.
+    with open("/tmp/std_in.log", "w") as fp:
+        for line in sys.stdin.read().split("\n"):
+            if line.strip():
+                fp.writelines(line+"\n")
+
+    rows = pd_read_csv("/tmp/std_in.log", sep=_template_delimiter, header=None, names=_col_names_list,
+                       index_col=False, converters=_input_converters, **kwargs)
+
+    # Create the writer to write the output.
+    stdout_writer = StdoutWriter(delimiter=_template_delimiter)
+
+    if _operation == "map_row" or _operation == "apply":
+        # When the type of operation to be performed is "map_row", we first get
+        # a Pandas DataFrame of the given chunksize, and then we iterate over it
+        # to apply the user defined function each row in it.
+        for chunk in rows:
+            if chunk.shape[0] > 0:
+                for _, row in chunk.iterrows():
+                    stdout_writer.write(_func(row))
+    elif _operation == "map_partition":
+        # When the type of operation to be performed is "map_partition", we
+        # pass the input (iterator to get Pandas DataFrame in chunks or in
+        # a single call) to the user defined function.
+        stdout_writer.write(_func(rows))
+    else:
+        raise TypeError("Unknown operation: {{}}".format(_operation))

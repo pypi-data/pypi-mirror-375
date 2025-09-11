@@ -1,0 +1,21 @@
+{
+     "iris_attribute_train" : {
+                  
+                  "pid" : "integer", 
+                  "attribute" : "varchar(30)",
+                  "attrvalue" : "real"
+        },
+             
+    "iris_response_train" :{
+            "pid" : "integer", 
+            "response" : "varchar(30)"            
+            },
+            
+    "iris_altinput" :{
+            "pid" : "integer",
+            "attribute" : "varchar(30)",
+            "attrvalue" : "real",
+            "response" : "varchar(30)"
+            
+            }
+}

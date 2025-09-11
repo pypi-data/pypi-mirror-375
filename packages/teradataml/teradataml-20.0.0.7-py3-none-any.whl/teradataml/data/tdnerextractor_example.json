@@ -1,0 +1,14 @@
+{
+    "ner_input_eng": {
+      "id": "integer",
+      "txt": "varchar(500)"
+    },
+    "ner_rule": {
+      "type_ner": "varchar(500)",
+      "regex": "varchar(500)"
+    },
+    "ner_dict": {
+      "type_ner": "varchar(500)",
+      "dict": "varchar(500)"
+    }
+  }

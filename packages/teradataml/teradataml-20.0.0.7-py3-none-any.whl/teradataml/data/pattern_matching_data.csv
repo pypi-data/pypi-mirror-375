@@ -1,0 +1,11 @@
+id,data,pattern,level
+1,user_Alpha,user!_%,Advanced
+2,user%2025,user!%%,Beginner
+3,data_2024,d%,Novice
+4,data%backup,data@%%,Advanced
+5,prod_01,prod_01%,Beginner
+6,prod%v2,prod!_%,Novice
+7,log_file,log^_file,Advanced
+8,log%2024,l_g%,Beginner
+9,temp_file,temp!__%,Novice
+10,backup_9,restore!_9,Beginner

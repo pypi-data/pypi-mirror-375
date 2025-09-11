@@ -1,0 +1,10 @@
+{
+    "barrier" : {
+        "Id" : "integer",
+        "Name" : "varchar(25)"
+    },
+    "barrier_new" : {
+        "Id" : "integer",
+        "Name" : "varchar(25)"
+    }
+}

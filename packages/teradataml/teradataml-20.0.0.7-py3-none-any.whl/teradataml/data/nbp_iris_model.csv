@@ -1,0 +1,13 @@
+"class","variable","type","category","cnt","sum","sumSq","totalCnt"
+setosa,sepal_width,NUMERIC,,40,136.70000,473.29000,40
+virginica,sepal_width,NUMERIC,,40,118.80000,356.54000,40
+setosa,petal_width,NUMERIC,,40,10.10000,3.03000,40
+virginica,petal_width,NUMERIC,,40,81.20000,167.00000,40
+setosa,sepal_length,NUMERIC,,40,199.90000,1004.27000,40
+virginica,sepal_length,NUMERIC,,40,264.40000,1764.92001,40
+setosa,petal_length,NUMERIC,,40,57.70000,84.21000,40
+virginica,petal_length,NUMERIC,,40,222.30000,1249.15000,40
+versicolor,sepal_width,NUMERIC,,40,111.10000,313.13000,40
+versicolor,petal_width,NUMERIC,,40,53.30000,72.71000,40
+versicolor,sepal_length,NUMERIC,,40,239.60000,1446.13999,40
+versicolor,petal_length,NUMERIC,,40,172.40000,752.21999,40

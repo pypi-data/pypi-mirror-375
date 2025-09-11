@@ -1,0 +1,13 @@
+{
+
+  "calls" :{
+            "callerfrom" : "integer",
+            "callerto" : "integer",
+            "calls" : "integer"
+            },
+
+  "callers" : {
+                "callerid" : "integer",
+                "callername" : "varchar(10)"
+        }
+}

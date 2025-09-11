@@ -1,0 +1,163 @@
+{
+        "FuncName": "TD_SMOOTHMA",
+        "FuncDescriptionShort": "Applies a smoothing algorithm to the series",
+        "FuncDescriptionLong": [
+                "The TD_SMOOTHMA provides five forms of moving average style of smoothing functions - cumulative, exponential, simple, centered, and weighted; and, additionally provides a moving median style of smoothing.  "
+        ],
+        "FunctionVersion": "...",
+        "FunctionCategory": "Model Preparation and Parameter Estimation",
+        "JSONVersion": "1",
+        "FuncRName": "td_Smoothma",
+        "MaxInputFiles": 1,
+        "Input": [
+                {
+                        "Type": "SERIES",
+                        "Description": [
+                                "The function takes in a 1D array of real numbers as an input"
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field",
+                        "Optional": false
+                }
+        ],
+        "Output": [
+                {
+                        "Type": "SERIES",
+                        "PrimaryLayer": true,
+                        "LayerName": "ARTPRIMARY",
+                        "ResultTableColumnTypes": [
+                                "<varies>",
+                                "float"
+                        ],
+                        "Description": [
+                                "produces a 1D array of reals as an output",
+                                "The TD_SMOOTHMA function returns only a primary result set.   There are no secondary or tertiary result sets produced by this function.  ",
+                                "The transformed output series always contains elements that are univariate (in response to a CONTENT(REAL) input, or multivariate (in response to a CONTENT(MULTIVAR_REAL) real numbers.  The data scientist has the choice with regards to the indexing mechanism (ROW_I) to be associated with the output array - OUTPUT_FMT(INDEX_STYLE()). "
+                        ],
+                        "LangName": "data or object or newdata or ... --> Langauges team can work with UAF team to come up with this field"
+                }
+        ],
+        "IsPlottable": true,
+        "Params": [
+                {
+                        "Name": "MA",
+                        "Type": "string",
+                        "Optional": false,
+                        "PermittedValues": [
+                                "CUMULATIVE",
+                                "MEAN",
+                                "MEDIAN",
+                                "EXPONENTIAL"
+                        ],
+                        "Description": [
+                                "enum( CUMULATIVE, MEAN, MEDIAN, EXPONENTIAL) moving average type.  The enumerated value instructs the TD_SMOOTHMA function the type of moving average algorithms to be performed.  Only one MA type can be specified per TD_SMOOTHMA invocation.   It is a required parameter.   ",
+                                "CUMULATIVE - Cumulative Moving Average  - other applicable parameters to CMA: None",
+                                "MEAN - Simple Moving Average -  applicable parameters: M_WINDOW, ONE_SIDED, PAD, WELL_KNOWN,  WEIGHTS.",
+                                "MEDIAN - Simple Moving Median - applicable parameters: WINDOW, PAD.",
+                                "EXPONENTIAL - Exponential Moving Average - applicable parameters: "
+                        ]
+                },
+                {
+                        "Name": "WINDOW",
+                        "Type": "integer",
+                        "Optional": true,
+                        "LowerBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "AllowNaN": false,
+                        "Description": [
+                                "Positive Integer value.  The order (window size) of the moving average to be applied.  Odd numbers use the Simple Moving Average formula.  Even numbers use the Centered Moving Average formula.    Example: a 3-MA would be an order of '3'.   WINDOW(6) with MA(MEAN) uses the Centered Moving average algorithm.",
+                                "WINDOW - only applicable to MA('MEAN') and MA('MEDIAN')."
+                        ]
+                },
+                {
+                        "Name": "ONE_SIDED",
+                        "Type": "integer",
+                        "Optional": true,
+                        "DefaultValue": 0,
+                        "PermittedValues": [
+                                0,
+                                1
+                        ],
+                        "Description": [
+                                "Flag with value of 1 or 0.   ONE_SIDED(1) means that there is no centering.  The last WINDOW entries, inclusive, is averaged to form the current entry.  ONE_SIDED(0) means centering does apply.  This is the default.",
+                                "ONE_SIDED - only applicable to MA('MEAN')."
+                        ]
+                },
+                {
+                        "Name": "LAMBDA",
+                        "Type": "float",
+                        "Optional": true,
+                        "LowerBound": 0,
+                        "UpperBound": 1,
+                        "LowerBoundType": "INCLUSIVE",
+                        "UpperBoundType": "INCLUSIVE",
+                        "Description": [
+                                "LAMBDA is a float value between 0 and 1, which represents the degree of weighting decrease.  A higher LAMBDA :  λ  has the effect of discounting older observations faster.  ",
+                                "LAMBDA  - only applicable to MA('EXPONENTIAL')."
+                        ],
+                        "LangName": "lambda1"
+                },
+                {
+                        "Name": "WEIGHTS",
+                        "Type": "list",
+                        "ListType": "float",
+                        "ListSize": "WINDOW",
+                        "Optional": true,
+                        "CheckDuplicates": false,
+                        "Description": [
+                                "Optional list of weights to be applied when calculating the moving average.  The weights are described as:   ( a-k, ..., ak ).  Where k= (m-1)/2.  The general rule is that the weights should sum up to '1' and should be symmetrical : aj = a-j.   If the weights don’t sum up to '1',  The sum from the list of weights divides each element in the list to get a fraction for each element to achieve the same effect of the sum up to '1'.",
+                                "The number of elements in the WEIGHTS list must match the WINDOW value.   TD_SMOOTHMA uses the number of the WEIGHTS element as the default WINDOW value if it is not specified. ",
+                                "WEIGHTS - only applicable to MA('MEAN').   "
+                        ]
+                },
+                {
+                        "Name": "WELL_KNOWN",
+                        "Type": "string",
+                        "Optional": true,
+                        "PermittedValues": [
+                                "3MA",
+                                "5MA",
+                                "2x12MA",
+                                "3x3MA",
+                                "3x5MA",
+                                "S15MA",
+                                "S21MA",
+                                "H5MA",
+                                "H9MA",
+                                "H13MA",
+                                "H23MA"
+                        ],
+                        "Description": [
+                                "Enum ('3MA',  '5MA',  '2x12MA','3x3MA', '3x5MA', 'S15MA',  'S21MA', 'H5MA', 'H9MA', 'H13MA',  'H23MA' ) : enumerated value selecting one of the valid supported well known weighted MA combinations to be applied to the input series.  WELL_KNOWN and WEIGHTS must be used in a mutually exclusive fashion.  See Well Known Weighted MA table for details. ",
+                                "WELL_KNOWN - only applicable to SMA only.   ",
+                                "WELL_KNOWN type must have the following WINDOW.   If WINDOW is not specified, TD_SMOOTHMA() provides the value in the chart below.",
+                                "WELLKNOWN -> WINDOW; 3MA, 3X3MA, H5MA -> 5; 3X5MA -> 7; H9MA -> 9; 2X12MA, H13MA -> 13; S15MA -> 15; S21MA -> 21; H23MA -> 23"
+                        ]
+                },
+                {
+                        "Name": "PAD",
+                        "Type": "float",
+                        "Optional": true,
+                        "Description": [
+                                "The produced output series has their magnitudes set to this value for element less than WINDOW.   For example PAD(4.5) is to output a pad value of 4.5 for the series less than WINDOW.",
+                                "PAD - only applicable to MA('MEAN') and MA('MEDIAN')."
+                        ]
+                }
+        ],
+        "InputFmt": false,
+        "OutputFmt": [
+                {
+                        "Name": "INDEX_STYLE",
+                        "Type": "string",
+                        "Optional": true,
+                        "DefaultValue": "NUMERICAL_SEQUENCE",
+                        "PermittedValues": [
+                                "NUMERICAL_SEQUENCE",
+                                "FLOW_THROUGH"
+                        ],
+                        "Description": [
+                                "Specifies the INDEX_STYLE of the output format."
+                        ],
+                        "LangName": "output_fmt_index_style"
+                }
+        ]
+}

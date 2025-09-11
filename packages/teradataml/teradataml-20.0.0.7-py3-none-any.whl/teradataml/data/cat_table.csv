@@ -1,0 +1,25 @@
+column_name,category,ordinal_value
+"embarked","S",0
+"cabin","B79",0
+"embarked","C",1
+"cabin","B51 B53 B55",1
+"embarked","",2
+"cabin","A5",2
+"ticket","695",0
+"cabin","A23",3
+"ticket","11771",1
+"cabin","B37",4
+"ticket","PC 17754",2
+"cabin","",5
+"ticket","27042",3
+"sex","female",0
+"ticket","110152",4
+"sex","male",1
+"ticket","",5
+"sex","",2
+"name","Maioni; Miss. Roberta",0
+"name","Carlsson; Mr. Frans Olof",1
+"name","Goldschmidt; Mr. George B",2
+"name","Barkworth; Mr. Algernon Henry Wilson",3
+"name","Kent; Mr. Edward Austin",4
+"name","",5

@@ -1,0 +1,19 @@
+{
+  "computers_test1": {
+    "id" : "integer", 
+    "price" : "real",
+    "speed" : "real",
+    "hd" : "real",
+    "ram" : "real",
+    "screen" : "real"    
+  },
+  "computers_train1_clustered": {
+    "id" : "integer", 
+    "price" : "real",
+    "speed" : "real",
+    "hd" : "real",
+    "ram" : "real",
+    "screen" : "real",
+    "computer_category":  "varchar(20)"  
+  }
+}

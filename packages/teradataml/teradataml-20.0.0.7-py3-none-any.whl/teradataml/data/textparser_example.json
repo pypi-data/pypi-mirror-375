@@ -1,0 +1,15 @@
+{
+  "complaints": {
+    "doc_id": "integer",
+    "text_data": "varchar(3000)",
+    "category": "varchar(20)"
+  },
+  "complaints_mini": {
+    "doc_id": "integer",
+    "text_data": "varchar(3000)",
+    "category": "varchar(30)"
+ },
+ "stop_words": {
+    "word": "varchar(256)"
+ }
+}

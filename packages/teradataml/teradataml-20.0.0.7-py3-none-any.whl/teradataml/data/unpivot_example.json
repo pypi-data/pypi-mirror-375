@@ -1,0 +1,25 @@
+{
+  "unpivot_input": {
+    "sn": "integer",
+    "city": "varchar(50)",
+    "week": "integer",
+    "temp": "integer",
+    "pressure": "real",
+    "dewpoint": "varchar(30)"
+  },
+  "titanic_dataset_unpivoted":{
+    "passenger": "integer",
+    "AttributeName": "varchar(30)",
+    "AttributeValue": "varchar(30)",
+    "survived": "integer"
+  },
+  "star_pivot":{
+    "country": "varchar(30)",
+    "state": "varchar(30)",
+    "yr": "integer",
+    "qtr": "varchar(30)",
+    "sales": "integer",
+    "cogs": "integer",
+    "rating": "varchar(30)"
+  }
+}

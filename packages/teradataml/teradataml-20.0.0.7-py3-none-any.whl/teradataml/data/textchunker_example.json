@@ -1,0 +1,8 @@
+{
+  "posttagger_output": {
+    "paraid": "integer",
+    "word_sn": "integer",
+    "word": "varchar(20)",
+    "pos_tag": "varchar(20)"
+  }
+}

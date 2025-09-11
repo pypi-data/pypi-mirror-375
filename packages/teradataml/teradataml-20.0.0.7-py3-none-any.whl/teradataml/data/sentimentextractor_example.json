@@ -1,0 +1,24 @@
+{
+  "sentiment_extract_input": {
+    "id" : "integer",
+    "product" : "varchar(30)",
+    "category" : "varchar(10)",
+    "review" : "varchar(1500)"
+  },
+  "sentiment_word": {
+    "word" : "varchar(10)",
+    "opinion" : "integer"
+  },
+  "restaurant_reviews": {
+    "id" : "integer",
+    "review_text" : "varchar(500)"
+  },
+  "sentiment_word_input": {
+    "sentiment_word": "varchar(30)",
+    "polarity_strength": "integer"
+  },
+  "additional_table":{
+    "sentiment_word": "varchar(128)",
+    "polarity_strength": "integer"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "sessionize_table": {
+          "partition_id" : "integer",
+          "adid" : "integer",
+          "productid" : "integer",
+          "event" : "varchar(1024)",
+          "clicktime" : "timestamp"
+    
+  },
+  "retail_churn_table": {
+          "customer_id" : "integer",
+          "datestamp" : "timestamp",
+          "event" : "varchar(50)",
+          "churn_flag" : "char(1)"
+
+  }
+}
