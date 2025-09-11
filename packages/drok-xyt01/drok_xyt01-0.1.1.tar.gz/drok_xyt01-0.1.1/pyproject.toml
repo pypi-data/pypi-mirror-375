@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: (c) 2025 Jeff C. Jensen
+# SPDX-License-Identifier: MIT
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drok-xyt01"
+license = "MIT"
+version = "0.1.1"
+description = "DROK XY-T01 UART driver."
+readme = "README.md"
+authors = [{ name = "Jeff C. Jensen", email = "11233838+elgeeko1@users.noreply.github.com" }]
+requires-python = ">=3.12"
+keywords = ["uart", "serial", "temperature", "controller", "drok", "xyt01"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: OS Independent",
+  "Typing :: Typed"
+]
+dependencies = [
+  "pyserial>=3.5"
+]
+
+[project.scripts]
+drok-xyt01 = "drok_xyt01.cli:DrokXYT01Cli"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "mypy>=1.10",
+  "ruff>=0.5.0",
+  "build>=1.2.1",
+  "twine>=5.0.0",
+  "pre-commit>=3.7",
+]
+docs = [
+  "sphinx>=7",
+  "furo>=2024.8.6",
+  "myst-parser[linkify]>=3",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+drok_xyt01 = []
+
+[tool.setuptools.packages.find]
+where = ["src"]

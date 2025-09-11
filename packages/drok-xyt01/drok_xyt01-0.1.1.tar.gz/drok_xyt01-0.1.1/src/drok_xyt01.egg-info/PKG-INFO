@@ -1,0 +1,91 @@
+Metadata-Version: 2.4
+Name: drok-xyt01
+Version: 0.1.1
+Summary: DROK XY-T01 UART driver.
+Author-email: "Jeff C. Jensen" <11233838+elgeeko1@users.noreply.github.com>
+License-Expression: MIT
+Keywords: uart,serial,temperature,controller,drok,xyt01
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Operating System :: OS Independent
+Classifier: Typing :: Typed
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pyserial>=3.5
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: ruff>=0.5.0; extra == "dev"
+Requires-Dist: build>=1.2.1; extra == "dev"
+Requires-Dist: twine>=5.0.0; extra == "dev"
+Requires-Dist: pre-commit>=3.7; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=7; extra == "docs"
+Requires-Dist: furo>=2024.8.6; extra == "docs"
+Requires-Dist: myst-parser[linkify]>=3; extra == "docs"
+Dynamic: license-file
+
+# DROK XY-T01 Driver
+
+Thread-safe Python driver for the DROK XY-T01 digital temperature controller over UART.
+
+Supports safe lifecycle sequencing, synchronous command API, and a background reader thread
+that demultiplexes asynchronous measurement lines from command responses.
+
+## Features
+
+- Pure Python 3.12
+- Async measurement reader + synchronous ACK handling
+- Thread-safe single-command model
+- Context-manager lifecycle
+- Structured state parsing
+- CLI for manual interaction
+- Type-hinted & documented
+
+## Installation
+
+```shell
+pip install drok-xyt01
+```
+
+## Quickstart
+
+```python
+from drok_xyt01 import DrokXYT01, DrokXYT01Config
+
+def on_measurement(mode: str, temp_c: float) -> None:
+    print(f"{mode} {temp_c:.1f} °C")
+
+cfg = DrokXYT01Config(port="/dev/serial1")
+
+with DrokXYT01(cfg) as ctl:
+    if not ctl.connect(on_measurement=on_measurement):
+        raise RuntimeError("Failed to connect")
+    print("state:", ctl.query_state())
+    ctl.set_setpoint(45.0)
+    ctl.on()
+```
+
+## CLI
+
+```shell
+drok-xyt01 --port /dev/serial1 --verbose
+```
+
+## API Overview
+
+- `connect(on_measurement=...)`: open port + start background reader
+- `disconnect()`: stop thread + close port
+- `start()` / `stop()`: start/stop measurement streaming
+- `on()` / `off()`: control output relay
+- `set_setpoint(temp_c)` / `set_alarm(temp_c)`: temperature setpoints
+- `query_state()`: query device state
+- `reset()`: safe reconnect sequence
+
+## Resources
+
+- Source code on Github: [elgeeko1/drok-xyt01](https://github.com/elgeeko1/drok-xyt01)
+- API documentation: <https://elgeeko1.github.io/drok-xyt01/>
