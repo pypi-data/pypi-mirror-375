@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+ExceptionHandlingMiddleware=swarmauri_middleware_exceptionhandling:ExceptionHandlingMiddleware'
+
