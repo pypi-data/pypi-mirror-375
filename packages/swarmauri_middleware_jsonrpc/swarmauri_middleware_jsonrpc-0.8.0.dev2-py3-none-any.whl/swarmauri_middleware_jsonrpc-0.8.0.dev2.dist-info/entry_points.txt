@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+JsonRpcMiddleware=swarmauri_middleware_jsonrpc:JsonRpcMiddleware
+
