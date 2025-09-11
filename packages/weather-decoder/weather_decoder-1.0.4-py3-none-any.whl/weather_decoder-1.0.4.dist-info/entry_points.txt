@@ -1,0 +1,3 @@
+[console_scripts]
+decode-metar = weather_decoder.cli.metar_cli:main
+decode-taf = weather_decoder.cli.taf_cli:main
