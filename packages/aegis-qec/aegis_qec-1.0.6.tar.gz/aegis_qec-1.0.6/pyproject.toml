@@ -1,0 +1,44 @@
+[project]
+name = "aegis-qec"
+version = "1.0.6"
+description = "Aegis: Hardware-Aware Quantum Error Correction Platform"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [{ name = "Hamid bahri" }]
+
+dependencies = [
+  "numpy>=1.21",
+  "networkx>=3.0,<4.0",
+]
+
+[project.optional-dependencies]
+full = [
+  "matplotlib>=3.5",
+  "pyarrow>=10.0",
+  "pytest>=7.0",
+]
+mwpm = [
+  "networkx>=3.0,<4.0"
+]
+
+[project.urls]
+Repository = "https://github.com/hamidbahri92/Aegis"
+
+[project.scripts]
+aegis-run = "main:main"
+aegis-metrics = "main_metrics:main"
+aegis-threshold = "main_threshold:main"
+aegis-export-header = "main_export_header:main"
+
+# ØªØ¶Ù…ÛŒÙ† Ø§ÛŒÙ†Ú©Ù‡ a3d Ø¨Ù‡Ø¹Ù†ÙˆØ§Ù† Ù¾Ú©ÛŒØ¬ Ùˆ Ø§Ø³Ú©Ø±ÛŒÙ¾ØªÙ‡Ø§ÛŒ Ø³Ø·Ø­-Ø±ÛŒØ´Ù‡ Ø¯Ø§Ø®Ù„ wheel Ø¨ÛŒØ§ÛŒÙ†Ø¯
+[tool.setuptools]
+include-package-data = true
+py-modules = ["main", "main_metrics", "main_threshold", "main_export_header"]
+
+[tool.setuptools.packages.find]
+include = ["a3d*"]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"

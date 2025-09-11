@@ -1,0 +1,10 @@
+numpy>=1.21
+networkx<4.0,>=3.0
+
+[full]
+matplotlib>=3.5
+pyarrow>=10.0
+pytest>=7.0
+
+[mwpm]
+networkx<4.0,>=3.0

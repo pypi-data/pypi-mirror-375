@@ -1,0 +1,71 @@
+Metadata-Version: 2.4
+Name: aegis-qec
+Version: 1.0.6
+Summary: Aegis: Hardware-Aware Quantum Error Correction Platform
+Author: Hamid bahri
+License: MIT License
+        
+        Copyright (c) 2025 HamidBahri
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Repository, https://github.com/hamidbahri92/Aegis
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.21
+Requires-Dist: networkx<4.0,>=3.0
+Provides-Extra: full
+Requires-Dist: matplotlib>=3.5; extra == "full"
+Requires-Dist: pyarrow>=10.0; extra == "full"
+Requires-Dist: pytest>=7.0; extra == "full"
+Provides-Extra: mwpm
+Requires-Dist: networkx<4.0,>=3.0; extra == "mwpm"
+Dynamic: license-file
+
+﻿# Aegis - QEC Research Toolkit (by Hamid Bahri)
+
+![CI](https://github.com/hamidbahri92/Aegis/actions/workflows/ci.yml/badge.svg?branch=main)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+Aegis is a modular toolkit for simulated quantum error correction (surface code), featuring:
+- Greedy + OSD fallback and MWPM decoders
+- Reusable decoding graphs for performance
+- Metrics & threshold plots, CSV exports
+- CI, pre-commit (black+ruff), Dependabot
+
+## Quickstart (Windows/Ubuntu)
+    python -m venv .venv
+    .\.venv\Scripts\activate         # Windows PowerShell
+    # source .venv/bin/activate      # Ubuntu/macOS
+
+    pip install -e .[full] --prefer-binary
+    pytest -q
+    python .\main.py
+    python .\main_metrics.py
+    python .\main_threshold.py
+
+## Development
+- Format/Lint: `pre-commit run --all-files`
+- Tests: `pytest -q`
+- Outputs saved to `out/` (ignored in git)
+
+© Hamid Bahri
+
+
