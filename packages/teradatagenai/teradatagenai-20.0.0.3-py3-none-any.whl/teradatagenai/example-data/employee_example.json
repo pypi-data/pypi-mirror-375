@@ -1,0 +1,10 @@
+{
+    "employee_data" : {
+        "employee_id" : "varchar(20)",
+        "employee_name" : "varchar(100)",
+        "employee_data" : "varchar(100)",
+        "articles" : "varchar(100)",
+        "reviews" : "varchar(100)",
+        "quotes" : "varchar(100)"
+    }
+}

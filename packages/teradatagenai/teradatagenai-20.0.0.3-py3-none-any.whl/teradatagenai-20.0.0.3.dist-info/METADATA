@@ -1,0 +1,401 @@
+Metadata-Version: 2.1
+Name: teradatagenai
+Version: 20.0.0.3
+Summary: Teradata package for Generative-AI powered text analytics on Teradata Vantage
+Home-page: https://teradata.com
+Author: Teradata Corporation
+License: Teradata License Agreement
+Keywords: Teradata
+Platform: MacOS X, Windows, Linux
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: Database :: Front-Ends
+Classifier: License :: Other/Proprietary License
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: teradataml (>=20.00.00.07)
+
+## Teradata Package for Generative-AI
+
+`teradatagenai` is a Generative AI package developed by Teradata.
+It offers a comprehensive suite of APIs designed for a wide range of text analytics applications 
+and seamless access to the Enterprise Vector Store.
+With `teradatagenai`, users can seamlessly process and analyze text data from various sources,
+including emails, academic papers, social media posts, and product reviews.
+This enables users to gain insights with precision and depth that rival or surpass human analysis.
+
+For community support, please visit the [Teradata Community](https://support.teradata.com/community?id=community_forum&sys_id=14fe131e1bf7f304682ca8233a4bcb1d).
+
+For Teradata customer support, please visit [Teradata Support](https://support.teradata.com/csm).
+
+Copyright 2025, Teradata. All Rights Reserved.
+
+### Table of Contents
+* [Documentation](#documentation)
+* [Release Notes](#release-notes)
+* [Installation and Requirements](#installation-and-requirements)
+* [Using the Teradata Package for Generative AI](#using-the-teradata-python-package-for-generative-ai)
+* [License](#license)
+
+## Documentation
+General product information, including installation instructions, is available in the [Teradata Documentation website](https://docs.teradata.com/search/documents?query=Python+package+for+Generative-AI&sort=last_update&virtual-field=title_only&content-lang=en-US).
+
+## Release Notes
+### Version 20.00.00.03
+* ##### New Features/Functionality
+  * ##### Vector Store
+    * Compatible with August Lake drop (Tahoe-1.2.1) .
+    * Added new methods for managing and creating vector stores:
+      * `from_documents(name, documents, embedding=None, **kwargs)`: Creates a file-based vector store directly from PDF documents, directories, or wildcards. Supports embedding models and chat completion models. If the store already exists, raises an error.
+      * `from_texts(name, texts, embedding=None, **kwargs)`: Creates a content-based vector store from raw text or a list of texts. Supports embedding models and chat completion models. If the store already exists, raises an error.
+      * `from_datasets(name, data, embedding=None, **kwargs)`: Creates a content-based vector store from tables or DataFrames, specifying data columns and optional key columns, with embedding model support. If the store already exists, raises an error.
+      * `from_embeddings(name, data, **kwargs)`: Creates an embedding-based vector store from pre-embedded tables or DataFrames, specifying the embedding columns. If the store already exists, raises an error.
+      * `add_documents(documents, **kwargs)`: Adds documents (PDFs, directories, or wildcards) to an existing file-based vector store. Automatically creates the store if it does not exist.
+      * `add_datasets(data, **kwargs)`: Adds tables or DataFrames to a content-based vector store. Creates the store if needed.
+      * `add_embeddings(data, **kwargs)`: Adds embedding data to an embedding-based vector store.
+      * `add_texts(texts, **kwargs)`: Adds raw text or list of texts to a content-based vector store.
+      * `delete_documents(documents, **kwargs)`: Removes specified documents from a file-based vector store.
+      * `delete_datasets(data, **kwargs)`: Removes specified datasets from a content-based vector store.
+      * `delete_embeddings(data, **kwargs)`: Removes embedding data from an embedding-based vector store.
+    * The `name` argument for `VectorStore` initialization is now optional. If not provided, the store can be created later using the `create` method.
+    * The `create` method now accepts the `name` argument, allowing users to specify or update the vector store name at creation time.
+  * ##### TextAnalyticsAI & TeradataAI
+    * Added support to save and retrieve external ONNX models and tokenizers in Teradata Vantage for API type 'onnx'.
+      * Users can specify separate tables and schema for models and tokenizers using the following new parameters:
+        * `model_table_name`, `model_schema_name`: Specify the table and schema for storing the ONNX model.
+        * `tokenizer_table_name`, `tokenizer_schema_name`: Specify the table and schema for storing the tokenizer.
+        * `tokenizer_id`: Optionally specify a unique identifier to save or retrieve the tokenizer (defaults to `model_id` if not provided).
+        * `additional_columns_model`, `additional_columns_types_model`: Add custom metadata columns and types for the model table.
+        * `additional_columns_tokenizer`, `additional_columns_types_tokenizer`: Add custom metadata columns and types for the tokenizer table.
+  * ##### Hugging Face
+    * **Improved  Model Installation**: Added support to install models in a new way that removes torch and transformer dependencies, improving performance.
+    * **Model Detection**: Added support to detect models installed in both standard and legacy formats.
+    * **Script Updates**: Enhanced user scripts with dual format model path support.
+    * **Replace Parameter**: Added `replace` parameter to all methods to overwrite existing files.
+    * **Cleanup Method**: New `cleanup_env()` method for removing sample files from environments.
+    * **Custom Embeddings**: Added `embeddings_dim` parameter to support custom dimensions for embedding models.
+    * **Output Table Info**: Added functionality to print output table information for better visibility of results.
+    * **Accumulate Parameter**: Added `accumulate` parameter to include input columns in the output result.
+
+* ##### Bug Fixes
+  * ##### TextAnalytics
+    * `ELE-8278`: Fixed invalid SQL generation with authorization parameter for embeddings()
+    * `ELE-8384`: Incorrect error raised when pdf file does not exist during vector store creation.
+    * Fixed an issue where the `is_debug` parameter was not being added to generated SQL  in TextAnalyticsAI functions.
+
+### Version 20.00.00.02
+* ##### New Features/Functionality
+  * ##### Vector Store
+      * Exposes a new attribute `store_type` in VectorStore class allowing user 
+        to check the type of Vector Store. Supported vector store types are `metadata-based`, 
+        `content-based`, `file-based` and `embedding-based`.
+      * Exposes following new functions in VectorStore class.
+        * `get_indexes_embeddings` - Returns DataFrame containing embedding and indexing 
+                                     information of the Vector Store.
+        * `get_model_info` - Returns model specific DataFrame or dict containing DataFrames
+                             depending on the `search_algorithm`. 
+            * If `search_algorithm` is `kmeans`, dict is returned containing the two tables mentioned below:
+              * `kmeans_model` - Contains the `kmeans_model` information.
+              * `centroids_model` - Contains the `centroids` information.
+            * If `search_algorithm` is `hnsw`, DataFrame is returned containing:
+              * `hnsw_model` - Contains the `hnsw_model` information.
+          * `similarity_search_by_vector` - Performs similarity_search for 'embeddings-based' Vector Store
+                                            when question is embedded and passed in `question` argument.
+                                            or embedded question is present in a table and that is passed in `data` 
+                                            and `column` arguments.
+      * Exposes the following new parameters for create and update:
+        * `extract_infographics`
+        * `extract_method`
+        * `hf_access_token`
+
+  * ##### TextAnalyticsAI Functions
+    * Support added in TeradataAI for a new API type 'onnx' to handle external ONNX models within Teradata Vantage.
+    * Support added in TextAnalyticsAI to generate Text Embeddings with ONNX models.
+    * Support added in TeradataAI and TextAnalyticsAI to work with NVidia NIM, 
+      to perform a wide array of text analytic tasks including:
+        * KeyPhrase Extraction
+        * PII (Personally Identifiable Information) Entity Recognition
+        * Masking PII Information
+        * Language Detection
+        * Language Translation
+        * Text Summarization
+        * Entity Recognition
+        * Sentiment Analysis 
+        * Text Classification 
+        * Text Embeddings 
+        * Asking LLM
+
+* ##### Bug Fixes
+  * Response code is not shown for errors raised for async operations
+    like `create`, `update`, `destroy` from `status`.
+
+### Version 20.00.00.01
+* ##### New Features/Functionality
+  * ##### Vector Store
+    * Teradata Enterprise Vector Store is designed to store, index, and search high-dimensional vector embeddings efficiently.
+    * `teradatagenai` provides the below python APIs to easily access and manage vector store and build their own NL applications using Vantage as the foundational compute/storage engine.
+      * The following operations can be done:        
+        * `VSManager`: Contains methods to manage vector Store.
+          * `health`: Perform health check for the vector store service.
+          * `list`: List all the vector stores.
+          * `list_sessions`: List all the active sessions of the vector store service.
+          * `disconnect`: Disconnect from the database session.
+          * `list_patterns`: List all available patterns for creating metadata-based vector store.
+        * `VectorStore`: Contains methods to do operations on Vector Store.
+          * `create`: Creates a Vector Store.
+          * `update`: Updates a Vector Store.
+          * `destroy`: Destorys a Vector Store.
+          * `similarity_search`: Performs similarity search in interactive/batch mode in the Vector Store for the input question
+          * `prepare_response`: Prepare a natural language response to the user using the input question and similarity_results provided by VectorStore.similarity_search() method using interactive/batch mode.
+          * `ask`: Performs similarity search in the vector store for the input question followed by preparing a natural language response to the user using interactive/batch mode.
+          * `get_details`: Get details of the vector store.
+          * `get_objects`: Get the list of objects in the metadata-based vector store.
+          * `get_batch_results`: Retrieves the results when `similarity_search`, `prepare_response` and `ask` is triggered in batch mode.
+          * `status`: Checks the status of the below operations: `create`, `destroy` and `update`.
+        * `VSPattern`: Create/Manage patterns which provides a way to select tables/views and columns using simple regular expressions which can be used while creating metadata-based Vector Store.
+          * Following operations are supported:
+            * `create`: Creates a pattern by specifying the `pattern_string`.
+            * `get`: Gets the list of objects that matches the `pattern_string`.
+            * `delete`: Deletes the pattern.
+  * ##### InDb TextAnalytics Functions
+    * This version supports the integration of TextAnalyticsAI InDB functions, enabling seamless access to  LLM services like AWS Bedrock, Azure OpenAI, Google Gemini for a wide array of text analytics tasks, including:
+      * KeyPhrase Extraction
+      * PII (Personally Identifiable Information) Entity Recognition
+      * Masking PII Information
+      * Language Detection
+      * Language Translation
+      * Text Summarization
+      * Entity Recognition
+      * Sentiment Analysis 
+      * Text Classification 
+      * Text Embeddings 
+      * Asking LLM
+
+### Version 20.00.00.00
+* `teradatagenai 20.00.00.00` marks the first release of the package.
+* This version supports the integration of Hugging Face models into Teradata Vantage through the BYO LLM offering, enabling seamless utilization of these models for a wide array of text analytics tasks.
+    * KeyPhrase Extraction
+    * PII (Personally Identifiable Information) Entity Recognition
+    * Masking PII Information
+    * Language Detection
+    * Language Translation
+    * Text Summarization
+    * Entity Recognition
+    * Sentiment Analysis 
+    * Text Classification 
+    * Text Embeddings 
+    * Sentence Similarity
+* The package also features a versatile `task` function capable of performing any task supported by the underlying language model (LLM). This function is highly adaptable and can be customized to meet specific requirements. Refer to the [example](#get-embeddings-and-similarity-score-for-employee-data-and-articles) for more details on its usage.
+
+## Installation and Requirements
+### Package Requirements:
+* Python 3.9 or later
+
+Note: 32-bit Python is not supported.
+
+### Minimum System Requirements:
+* Windows 7 (64Bit) or later
+* macOS 10.9 (64Bit) or later
+* Red Hat 7 or later versions
+* Ubuntu 16.04 or later versions
+* CentOS 7 or later versions
+* SLES 12 or later versions
+* VantageCloud Lake on AWS with Open Analytics Framework in order to use Teradata’s BYO LLM offering.
+### Minimum Database Requirements
+* Teradata Vantage with database release 20.00.25.XX or later 
+* Vector Store (Data insights) service is enabled.
+
+### Installation
+
+Use pip to install the Teradata Package for Generative AI
+
+Platform       | Command
+-------------- | ---
+macOS/Linux    | `pip install teradatagenai`
+Windows        | `python -m pip install teradatagenai`
+
+When upgrading to a new version of the `teradatagenai`, you may need to use pip install's `--no-cache-dir` option to force the download of the new version.
+
+Platform       | Command
+-------------- | ---
+macOS/Linux    | `pip install --no-cache-dir -U teradatagenai`
+Windows        | `python -m pip install --no-cache-dir -U teradatagenai`
+
+## Using the Teradata Package for Generative AI:
+
+Your Python script must import the `teradatagenai` package in order to use the Teradata Package for Generative AI. Let us walkthrough some examples to gain a better understanding. We need a common setup to load the data and import the required packages.
+
+### Common Setup
+
+```python
+# Import the modules and create a teradataml DataFrame.
+import os
+import teradatagenai
+from teradatagenai import TeradataAI, TextAnalyticsAI, load_data
+from teradataml import DataFrame
+
+load_data('employee', 'employee_data')
+data = DataFrame('employee_data')
+df_reviews = data.select(["employee_id", "employee_name", "reviews"])
+df_articles = data.select(["employee_id", "employee_name", "articles"])
+
+# Define the base directory and script path.
+base_dir = os.path.dirname(teradatagenai.__file__)
+sentence_similarity_script = os.path.join(base_dir, 'example-data', 'sentence_similarity.py')
+```
+
+### Analyze Sentiment of Food Reviews
+
+In this example, we will be using the `analyze_sentiment` API to analyze the sentiment of food reviews in the `reviews` column of a `teradataml` DataFrame.
+
+#### Using the Hugging Face model `distilbert-base-uncased-emotion`. 
+
+```python
+# Define the model name and arguments for the Hugging Face model.
+model_name = 'bhadresh-savani/distilbert-base-uncased-emotion'
+model_args = {
+    'transformer_class': 'AutoModelForSequenceClassification',
+    'task': 'text-classification'
+}
+
+# Create a TeradataAI object with the specified model.
+llm = TeradataAI(api_type="hugging_face", model_name=model_name, model_args=model_args)
+```
+
+```python
+# Create a TextAnalyticsAI object.
+obj = TextAnalyticsAI(llm=llm)
+obj.analyze_sentiment(column='reviews', data=df_reviews, delimiter="#")
+```
+#### Using AWS Bedrock model `anthropic.claude-v2`.
+
+```python
+# Define AWS Bedrock environment variables.
+os.environ["AWS_DEFAULT_REGION"] = "<Enter AWS Region>"
+os.environ["AWS_ACCESS_KEY_ID"] = "<Enter AWS Access Key ID>"
+os.environ["AWS_SECRET_ACCESS_KEY"] = "<Enter AWS Secret Key>"
+os.environ["AWS_SESSION_TOKEN"] = "<Enter AWS Session key>"
+
+# Create a TeradataAI object with the specified model.
+llm = TeradataAI(api_type="aws", model_name="anthropic.claude-v2")
+```
+
+```python
+# Create a TextAnalyticsAI object.
+obj = TextAnalyticsAI(llm=llm)
+obj.analyze_sentiment(column='reviews', data=df_reviews, accumulate="reviews")
+```
+#### Using Azure OpenAI model `gpt-3.5-turbo`.
+
+```python
+# Define Azure OpenAI environment variables.
+os.environ["AZURE_OPENAI_API_KEY"] = "<azure OpenAI API key>"
+os.environ["AZURE_OPENAI_ENDPOINT"] = "https://****.openai.azure.com/"
+os.environ["AZURE_OPENAI_API_VERSION"] = "2000-11-35"
+os.environ["AZURE_OPENAI_DEPLOYMENT_ID"] = "<azure OpenAI engine name>"
+
+# Create a TeradataAI object with the specified model.
+llm = TeradataAI(api_type="azure", model_name="gpt-3.5-turbo")
+```
+
+```python
+# Create a TextAnalyticsAI object.
+obj = TextAnalyticsAI(llm=llm)
+obj.analyze_sentiment(column='reviews', data=df_reviews, accumulate="reviews")
+```
+#### Using Google model `gemini-1.5-pro-001`.
+
+```python
+# Define Google Cloud environment variables
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "<gcp access token>"
+os.environ["GOOGLE_CLOUD_PROJECT"] = "<gcp project name>"
+os.environ["GOOGLE_CLOUD_REGION"] = "us-central1"
+
+# Create a TeradataAI object with the specified model.
+llm = TeradataAI(api_type="gcp", model_name="gemini-1.5-pro-001")
+```
+
+```python
+# Create a TextAnalyticsAI object.
+obj = TextAnalyticsAI(llm=llm)
+obj.analyze_sentiment(column='reviews', data=df_reviews, accumulate="reviews")
+```
+#### Using NVIDIA NIM model `meta/llama-3.1-8b-instruct`.
+
+```python
+# Define Azure OpenAI environment variables.
+os.environ["NIM_API_KEY"] = "<NVIDIA NIM API key>"
+
+# Create a TeradataAI object with the specified model.
+llm = TeradataAI(api_type="nim", api_base = "<nim base url>",model_name="meta/llama-3.1-8b-instruct")
+```
+
+```python
+# Create a TextAnalyticsAI object.
+obj = TextAnalyticsAI(llm=llm)
+obj.analyze_sentiment(column='reviews', data=df_reviews, accumulate="reviews")
+```
+
+### Get Embeddings and Similarity Score for Employee Data and Articles
+
+In this example, we will use the `task` API to perform two tasks: generating embeddings and calculating similarity scores using the Hugging Face model `all-MiniLM-L6-v2`.
+
+#### Generate Embeddings for Employee Reviews
+
+We will generate embeddings for employee reviews from the `articles` column of a `teradataml` DataFrame using the Hugging Face model `all-MiniLM-L6-v2`.
+
+```python
+# Define the script path for embeddings.
+embeddings_script = os.path.join(base_dir, 'example-data', 'embeddings.py')
+
+# Construct the returns argument based on the user script.
+returns = OrderedDict([('text', VARCHAR(512))])
+_ = [returns.update({"v{}".format(i+1): VARCHAR(1000)}) for i in range(384)]
+
+# Use the task API to generate embeddings.
+llm.task(
+    column="articles",
+    data=df_articles,
+    script=embeddings_script,
+    returns=returns,
+    libs='sentence_transformers',
+    delimiter='#'
+)
+```
+
+#### Calculate Similarity Score
+
+We will calculate the similarity score between employee data and articles using the Hugging Face model `all-MiniLM-L6-v2`.
+
+```python
+# Define the model name and arguments for the Hugging Face model.
+model_name = 'sentence-transformers/all-MiniLM-L6-v2'
+model_args = {
+    'transformer_class': 'AutoModelForSequenceClassification',
+    'task': 'text-similarity'
+}
+
+# Create a TeradataAI object with the specified model.
+llm = TeradataAI(api_type="hugging_face", model_name=model_name, model_args=model_args)
+
+# Use the task API to get the similarity score.
+llm.task(
+    column=["employee_data", "articles"],
+    data=data,
+    script=sentence_similarity_script,
+    libs='sentence_transformers',
+    returns={
+        "column1": "VARCHAR(10000)",
+        "column2": "VARCHAR(10000)",
+        "similarity_score": "VARCHAR(10000)"
+    },
+    delimiter="#"
+)
+```
+
+## License
+Use of the Teradata package for Generative-AI is governed by the *License Agreement for the Teradata package for Generative-AI*. 
+After installation, the `LICENSE` file is located in the `teradatagenai` directory of the Python installation directory.

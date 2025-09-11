@@ -1,0 +1,1 @@
+from teradatagenai.utils.load_data import load_data

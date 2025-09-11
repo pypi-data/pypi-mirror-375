@@ -1,0 +1,24 @@
+{
+    "amazon_reviews_25": {
+      "rev_id": "VARCHAR(64000)",
+      "aid": "VARCHAR(64000)",
+      "rev_name": "VARCHAR(64000)",
+      "helpful": "VARCHAR(64000)",
+      "rev_text": "VARCHAR(64000)",
+      "rating": "DECIMAL(10,2)",
+      "prodsummary": "VARCHAR(64000)",
+      "unixrevtime": "BIGINT",
+      "revtime": "VARCHAR(64000)"
+    },
+    "amazon_reviews_10": {
+      "rev_id": "VARCHAR(64000)",
+      "aid": "VARCHAR(64000)",
+      "rev_name": "VARCHAR(64000)",
+      "helpful": "VARCHAR(64000)",
+      "rev_text": "VARCHAR(64000)",
+      "rating": "DECIMAL(10,2)",
+      "prodsummary": "VARCHAR(64000)",
+      "unixrevtime": "BIGINT",
+      "revtime": "VARCHAR(64000)"
+    }
+  }

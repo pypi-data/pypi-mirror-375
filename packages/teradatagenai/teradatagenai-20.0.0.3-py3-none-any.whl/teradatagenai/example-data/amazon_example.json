@@ -1,0 +1,16 @@
+{
+    "amazon_reviews_embedded": {
+      "rev_id": "VARCHAR(64000)",
+      "aid": "VARCHAR(64000)",
+      "embedding": "VECTOR"
+    },
+    "amazon_reviews_embedded_10_alter": {
+      "rev_id": "VARCHAR(64000)",
+      "aid": "VARCHAR(64000)",
+      "embedding": "VECTOR"
+    },
+    "amazon_review_query": {
+      "queryID": "INTEGER",
+      "queryEmbedding": "VECTOR"
+    }
+  }

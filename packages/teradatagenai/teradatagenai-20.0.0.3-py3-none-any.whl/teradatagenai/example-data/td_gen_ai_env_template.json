@@ -1,0 +1,8 @@
+{
+"env_specs" : [
+    {
+        "env_name": "td_gen_ai_env",
+        "libs": ["transformers", "torch"]
+    }
+]
+}
