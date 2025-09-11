@@ -1,0 +1,6 @@
+[peagen.plugins.cert_services]
+pkcs11=swarmauri_certs_pkcs11:Pkcs11CertService
+
+[swarmauri.cert_services]
+Pkcs11CertService=swarmauri_certs_pkcs11:Pkcs11CertService
+
