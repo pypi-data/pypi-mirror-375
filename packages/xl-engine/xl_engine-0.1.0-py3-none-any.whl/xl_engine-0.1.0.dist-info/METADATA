@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: xl-engine
+Version: 0.1.0
+Summary: A Python package that provides convenience functions using XLWings to parametrize,
+Author-email: Connor Ferster <connor@structuralpython.com>
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: ipywidgets>=8.1.7
+Requires-Dist: rich>=14.1.0
+Requires-Dist: xlwings>=0.33.15
+
+# xl-engine
+ Use your existing Excel workbooks like they were Python programs: A utility built on XLWings to automate the input, execution, and data retrieval of your existing Excel Workbooks. 
+
