@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fixit.ai/schemas/v1/failure_advice.schema.json",
+  "title": "Test Failure Advice",
+  "description": "Structured advice for fixing a failed test",
+  "type": "object",
+  "required": [
+    "test_id",
+    "failure_type",
+    "root_cause",
+    "fix_suggestions",
+    "confidence_score",
+    "timestamp"
+  ],
+  "properties": {
+    "test_id": { "type": "string" },
+    "failure_type": {
+      "type": "string",
+      "enum": [
+        "assertion_error",
+        "type_error",
+        "value_error",
+        "http_error",
+        "connection_error",
+        "timeout",
+        "permission_error",
+        "unknown"
+      ]
+    },
+    "root_cause": {
+      "type": "object",
+      "required": ["summary", "details"],
+      "properties": {
+        "summary": { "type": "string" },
+        "details": { "type": "string" },
+        "error_location": {
+          "type": "object",
+          "properties": {
+            "file": { "type": "string" },
+            "line": { "type": "integer" },
+            "function": { "type": "string" }
+          }
+        }
+      }
+    },
+    "fix_suggestions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["description", "code_changes", "priority"],
+        "properties": {
+          "description": { "type": "string" },
+          "code_changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["file", "change_type"],
+              "properties": {
+                "file": { "type": "string" },
+                "change_type": { "type": "string", "enum": ["add", "modify", "delete"] },
+                "line_range": {
+                  "type": "object",
+                  "properties": {
+                    "start": { "type": "integer" },
+                    "end": { "type": "integer" }
+                  }
+                },
+                "suggested_code": { "type": "string" },
+                "explanation": { "type": "string" }
+              }
+            }
+          },
+          "priority": { "type": "string", "enum": ["high", "medium", "low"] },
+          "estimated_impact": { "type": "string" }
+        }
+      }
+    },
+    "related_files": { "type": "array", "items": { "type": "string" } },
+    "confidence_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "security_implications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "description": { "type": "string" },
+          "cwe_id": { "type": "string" }
+        }
+      }
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "llm_metadata": {
+      "type": "object",
+      "properties": {
+        "model": { "type": "string" },
+        "provider": { "type": "string" },
+        "tokens_used": { "type": "integer" },
+        "response_time_ms": { "type": "integer" }
+      }
+    },
+    "code_patches": {
+      "type": "array",
+      "description": "LLM-proposed minimal unified diffs (optional)",
+      "items": {
+        "type": "object",
+        "required": ["file", "diff"],
+        "properties": {
+          "file": { "type": "string" },
+          "diff": { "type": "string" }
+        }
+      }
+    }
+  }
+}
