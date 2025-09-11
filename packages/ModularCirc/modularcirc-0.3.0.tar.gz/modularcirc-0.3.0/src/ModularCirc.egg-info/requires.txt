@@ -1,0 +1,17 @@
+matplotlib
+numba
+numpy
+pandas
+scipy
+joblib
+pandera
+tdqm
+
+[dev]
+pre-commit
+black
+flake8
+isort
+
+[notebooks]
+ipykernel
