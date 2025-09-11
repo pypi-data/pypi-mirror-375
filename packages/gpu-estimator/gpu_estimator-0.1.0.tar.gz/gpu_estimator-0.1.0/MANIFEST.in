@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include pyproject.toml
+include setup.py
+include requirements.txt
+recursive-include gpu_estimator *.py
+recursive-include examples *.py
+recursive-exclude tests *
+recursive-exclude .pytest_cache *
+recursive-exclude htmlcov *
+exclude .coverage
+exclude setup_path.sh

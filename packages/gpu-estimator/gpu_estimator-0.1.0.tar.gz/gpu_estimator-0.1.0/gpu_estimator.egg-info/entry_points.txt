@@ -1,0 +1,2 @@
+[console_scripts]
+gpu-estimate = gpu_estimator.cli:cli
