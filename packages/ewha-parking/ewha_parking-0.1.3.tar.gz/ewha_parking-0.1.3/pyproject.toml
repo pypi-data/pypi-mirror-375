@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ewha-parking"
+version = "0.1.3"
+description = "Analyze frequent and illegal parking patterns using trajectory and GIS data"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name="Jiwon Kim", email="kimjiwon4007@ewha.ac.kr" }
+]
+license = { text = "MIT" }
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: GIS",
+]
+
+dependencies = [
+  "pandas>=2.0",
+  "numpy>=1.24",
+  "geopandas>=0.14",
+  "shapely>=2.0"
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ewha_parking*"]
