@@ -1,0 +1,6 @@
+[peagen.plugins.cryptos]
+nacl_pkcs11=swarmauri_crypto_nacl_pkcs11:NaClPkcs11Crypto
+
+[swarmauri.cryptos]
+NaClPkcs11Crypto=swarmauri_crypto_nacl_pkcs11:NaClPkcs11Crypto
+
