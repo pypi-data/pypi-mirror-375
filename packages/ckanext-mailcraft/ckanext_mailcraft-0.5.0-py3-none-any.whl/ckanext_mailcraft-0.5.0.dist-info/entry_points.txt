@@ -1,0 +1,6 @@
+[babel.extractors]
+ckan = ckan.lib.extract:extract_ckan
+
+[ckan.plugins]
+mailcraft = ckanext.mailcraft.plugin:MailcraftPlugin
+mailcraft_dashboard = ckanext.mailcraft_dashboard.plugin:MailcraftDashboardPlugin
