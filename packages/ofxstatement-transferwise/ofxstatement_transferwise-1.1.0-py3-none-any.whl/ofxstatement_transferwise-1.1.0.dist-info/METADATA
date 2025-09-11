@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: ofxstatement-transferwise
+Version: 1.1.0
+Summary: Transferwise plugin for ofxstatement
+Author-email: Andrey Lebedev <andrey@lebedev.lt>
+License: GPL-3.0-or-later
+Project-URL: Homepage, https://github.com/kedder/ofxstatement-transferwise
+Keywords: ofx,banking,statement
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: Natural Language :: English
+Classifier: Topic :: Office/Business :: Financial :: Accounting
+Classifier: Topic :: Utilities
+Classifier: Environment :: Console
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: ofxstatement
+
+# Transferwise plugin for ofxstatement
+
+This plugins is able to parse CSV statements from
+[transferwise.com](https://transferwise.com/). Note, that only "accounting"
+type of statement is supported.
+
+## Configuration
+
+Configuration can be edited with `ofxstatement edit-config` command. These
+configuration parameters are understood by this plugin:
+
+
+| Name       | Required? | Description               |
+|------------|-----------|---------------------------|
+| `account`  | optional  | Name for this account     |
+| `currency` | required  | Currency for this account |
