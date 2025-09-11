@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vendor_grab"
+dynamic = ['version']
+description = "Grab files from a vendor tar file."
+readme = "README.md"
+license.text = "ISCL"
+requires-python = ">=3.9, <4"
+authors = [
+    { name = "Jake Hickenlooper", email = "jake@weboftomorrow.com" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: ISC License (ISCL)",
+    "Natural Language :: English",
+    "Operating System :: POSIX",
+    "Operating System :: OS Independent", # TODO: Verify that this works on Windows.
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+    "Topic :: Software Development :: Build Tools",
+]
+dependencies = [
+  "tomli >= 1.1.0 ; python_version < '3.11'",
+]
+
+[project.urls]
+Homepage = "https://sr.ht/~jkenlooper/vendor-grab/"
+documentation = "https://git.sr.ht/~jkenlooper/vendor-grab/tree/main/item/README.md"
+repository = "https://git.sr.ht/~jkenlooper/vendor-grab"
+changelog = "https://git.sr.ht/~jkenlooper/vendor-grab/tree/main/item/CHANGELOG.md"
+Tracker = "https://todo.sr.ht/~jkenlooper/vendor-grab"
+
+[project.optional-dependencies]
+cli = [
+]
+test = [
+    "coverage",
+    "pytest",
+]
+dev = [
+]
+
+
+[project.scripts]
+vendor_grab = "vendor_grab.vendor_grab:script"
+
+
+[tool.hatch.version]
+path = "src/vendor_grab/_version.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/vendor_grab",
+]
+
+[tool.bandit]
+exclude_dirs = [
+]
+skips = [
+]
