@@ -1,0 +1,68 @@
+Metadata-Version: 2.4
+Name: geosdhydro
+Version: 0.4.0
+Summary: GIS tools for semi-distributed hydrologic modelling
+Author-Email: J-M <jean-michel.perraud@csiro.au>
+License-Expression: BSD-3-Clause
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: 3.14
+Classifier: Topic :: Documentation
+Classifier: Topic :: Software Development
+Classifier: Topic :: Utilities
+Classifier: Typing :: Typed
+Project-URL: Homepage, https://csiro-hydroinformatics.github.io/geosdhydro
+Project-URL: Documentation, https://csiro-hydroinformatics.github.io/geosdhydro
+Project-URL: Changelog, https://csiro-hydroinformatics.github.io/geosdhydro/changelog
+Project-URL: Repository, https://github.com/csiro-hydroinformatics/geosdhydro
+Project-URL: Issues, https://github.com/csiro-hydroinformatics/geosdhydro/issues
+Project-URL: Discussions, https://github.com/csiro-hydroinformatics/geosdhydro/discussions
+Requires-Python: >=3.9
+Requires-Dist: geopandas
+Description-Content-Type: text/markdown
+
+# geosdhydro
+
+[![ci](https://github.com/csiro-hydroinformatics/geosdhydro/workflows/ci/badge.svg)](https://github.com/csiro-hydroinformatics/geosdhydro/actions?query=workflow%3Aci)
+[![documentation](https://img.shields.io/badge/docs-mkdocs-708FCC.svg?style=flat)](https://csiro-hydroinformatics.github.io/geosdhydro/)
+[![pypi version](https://img.shields.io/pypi/v/geosdhydro.svg)](https://pypi.org/project/geosdhydro/)
+[![gitter](https://badges.gitter.im/join%20chat.svg)](https://app.gitter.im/#/room/#geosdhydro:gitter.im)
+
+**Geo**spatial tools for **s**emi-**d**istributed **hydro**logic modelling
+
+## Installation
+
+You may use [`uv`](https://docs.astral.sh/uv/) (recommended) to manage venvs and install packages. Optional.
+
+```bash
+pip install geosdhydro
+# uv pip install geosdhydro
+```
+
+To install from the latest git main branch:
+
+```bash
+pip install git+https://github.com/csiro-hydroinformatics/geosdhydro@main
+# uv pip install git+https://github.com/csiro-hydroinformatics/geosdhydro@main
+```
+
+<!-- With [`uv`](https://docs.astral.sh/uv/):
+
+```bash
+uv tool install geosdhydro
+``` -->
+
+## Usage
+
+See the documentation link above for sample notebook(s).
+
+There may be some command line features also available in the future, TBC.
