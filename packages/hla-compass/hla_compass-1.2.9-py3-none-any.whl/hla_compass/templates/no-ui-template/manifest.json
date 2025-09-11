@@ -1,0 +1,58 @@
+{
+  "name": "module-name",
+  "version": "1.0.0",
+  "type": "no-ui",
+  "computeType": "lambda",
+  "description": "Backend-only module for data processing",
+  "author": {
+    "name": "Developer Name",
+    "email": "developer@example.com",
+    "organization": "Organization"
+  },
+  "runtime": {
+    "language": "python",
+    "version": "3.11"
+  },
+  "inputs": {
+    "data_source": {
+      "type": "string",
+      "description": "Data source (file path, S3 URI, or array)",
+      "required": true
+    },
+    "options": {
+      "type": "object",
+      "description": "Processing options",
+      "required": false,
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "description": "Batch size for processing",
+          "default": 100
+        },
+        "save_results": {
+          "type": "boolean",
+          "description": "Save results to storage",
+          "default": false
+        }
+      }
+    }
+  },
+  "outputs": {
+    "results": {
+      "type": "object",
+      "description": "Processing results with metadata"
+    }
+  },
+  "resources": {
+    "memory": 512,
+    "timeout": 300,
+    "environment": {
+      "LOG_LEVEL": "INFO"
+    }
+  },
+  "dependencies": {
+    "peptides": true,
+    "storage": true,
+    "api": true
+  }
+}
