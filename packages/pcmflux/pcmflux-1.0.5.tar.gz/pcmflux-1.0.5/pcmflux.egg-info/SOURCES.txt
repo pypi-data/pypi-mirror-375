@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+pcmflux/__init__.py
+pcmflux/audio_capture_module.cpp
+pcmflux.egg-info/PKG-INFO
+pcmflux.egg-info/SOURCES.txt
+pcmflux.egg-info/dependency_links.txt
+pcmflux.egg-info/top_level.txt
