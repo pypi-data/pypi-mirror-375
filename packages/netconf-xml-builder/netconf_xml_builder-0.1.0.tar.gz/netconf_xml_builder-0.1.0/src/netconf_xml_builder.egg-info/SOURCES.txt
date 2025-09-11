@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/example_usage.py
+src/netconf_xml_builder/__init__.py
+src/netconf_xml_builder/netconf_xml_builder.py
+src/netconf_xml_builder.egg-info/PKG-INFO
+src/netconf_xml_builder.egg-info/SOURCES.txt
+src/netconf_xml_builder.egg-info/dependency_links.txt
+src/netconf_xml_builder.egg-info/requires.txt
+src/netconf_xml_builder.egg-info/top_level.txt
+tests/test_netconf_xml_builder.py
