@@ -1,0 +1,10 @@
+setuptools
+plone.base
+plone.memoize
+Zope
+Products.PlonePAS
+
+[test]
+plone.app.contenttypes[test]
+plone.app.testing
+plone.testing
