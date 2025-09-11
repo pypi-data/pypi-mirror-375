@@ -1,0 +1,114 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pymethyl2sam"
+version = "0.1.2"
+description = "Simulate DNA methylation and generate synthetic NGS reads with methylation tags."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Yoni Weissler", email = "yoni.weissler@gmail.com" }
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pysam>=0.21.0",
+    "numpy>=1.21.0",
+    "pyyaml>=6.0",
+    "click>=8.0.0",
+    "typing-extensions>=4.0.0",
+    "importlib-metadata>=8.7.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "pylint>=3.2.0",
+    "pre-commit>=3.2.0",
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+    "coverage[toml]>=7.0.0"
+]
+
+[project.scripts]
+
+[project.urls]
+Homepage = "https://github.com/yoni-w/pymethyl2sam"
+Repository = "https://github.com/yoni-w/pymethyl2sam"
+Documentation = "https://pymethyl2sam.readthedocs.io"
+Issues = "https://github.com/yoni-w/pymethyl2sam/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.pylint.messages_control]
+disable = [
+    "C0114",  # missing-module-docstring
+    "C0115",  # missing-class-docstring
+    "C0116",  # missing-function-docstring
+    "W1203"   # logging-fstring-interpolation
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config"
+]
+
+[tool.coverage.run]
+branch = true
+source = ["src/pymethyl2sam"]
+omit = [
+    "setup_dev.py",
+    "examples/*",
+    "tests/*",
+]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_covered = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:"
+]
+
+[tool.sphinx]
+builder = "html"
+source-dir = "docs"
+build-dir = "docs/_build"

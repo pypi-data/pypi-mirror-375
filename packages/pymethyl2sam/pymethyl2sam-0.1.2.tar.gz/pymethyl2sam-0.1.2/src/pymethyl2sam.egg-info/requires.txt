@@ -1,0 +1,15 @@
+pysam>=0.21.0
+numpy>=1.21.0
+pyyaml>=6.0
+click>=8.0.0
+typing-extensions>=4.0.0
+importlib-metadata>=8.7.0
+
+[dev]
+pytest>=7.0.0
+black>=23.0.0
+pylint>=3.2.0
+pre-commit>=3.2.0
+sphinx>=6.0.0
+sphinx-rtd-theme>=1.2.0
+coverage[toml]>=7.0.0
