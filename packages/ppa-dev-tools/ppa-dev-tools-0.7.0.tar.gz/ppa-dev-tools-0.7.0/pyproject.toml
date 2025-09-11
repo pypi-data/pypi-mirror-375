@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools == 68.1.2", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+script-files = ["scripts/ppa"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ppa"]
+exclude = ["snap", "debian"]
+
+[tool.towncrier]
+filename = "CHANGELOG.md"
+package = "ppa-dev-tools"
+directory = "changes"
+issue_format = ""
+title_format = "ppa-dev-tools {version} ({project_date})"
+
+[project]
+name = "ppa-dev-tools"
+version = "0.7.0"
+requires-python = '>=3'
+description = "command line client for managing PPAs in Launchpad"
+readme = "README.md"
+authors = [{ name = "Bryce Harrington", email = "bryce@canonical.com" }]
+license = { file = "LICENSE.GPLv2" }
+keywords = [ 'ppa', 'archive', 'ubuntu', 'debian' ]
+classifiers = [
+    # See https://pypi.org/pypi?%3Aaction=list_classifiers
+    'Development Status :: 3 - Alpha',
+    'Intended Audience :: Information Technology',
+    'Topic :: Software Development :: Build Tools',
+    'Topic :: System :: Archiving :: Packaging',
+    'Topic :: System :: Software Distribution',
+    'Programming Language :: Python :: 3',
+]
+
+[project.urls]
+"Homepage" = "https://launchpad.net/ppa-dev-tools"
+"Bug Tracker" = "https://bugs.launchpad.net/ppa-dev-tools"

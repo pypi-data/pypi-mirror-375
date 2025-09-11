@@ -1,0 +1,1960 @@
+Package: aalib
+Format: 3.0 (quilt)
+Binary: libaa1-dev, libaa1, libaa-bin
+Architecture: any
+Version: 1.4p5-50build1
+Priority: optional
+Section: libs
+Maintainer: Jonathan Carter <jcc@debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), dpkg-dev (>= 1.14.9), libgpm-dev [linux-any], libncurses5-dev, libslang2-dev, libx11-dev, patch, texinfo
+Homepage: http://aa-project.sourceforge.net/aalib/
+Vcs-Browser: https://salsa.debian.org/debian/aalib
+Vcs-Git: https://salsa.debian.org/debian/aalib.git
+Directory: pool/main/a/aalib
+Package-List:
+ libaa-bin deb text optional arch=any
+ libaa1 deb libs optional arch=any
+ libaa1-dev deb libdevel optional arch=any
+Files:
+ ec0507a256a0a05e6ff8e1bac6a82196 1691 aalib_1.4p5-50build1.dsc
+ 9801095c42bba12edebd1902bcf0a990 391028 aalib_1.4p5.orig.tar.gz
+ 80da843a4a693b09dea85edeb9e1b17e 16436 aalib_1.4p5-50build1.debian.tar.xz
+Checksums-Sha1:
+ 5841285d5c98d1140826cbf660157f25d0d54ced 1691 aalib_1.4p5-50build1.dsc
+ a23269e950a249d2ef93625837cace45ddbce03b 391028 aalib_1.4p5.orig.tar.gz
+ 86b8b0b85b319197025f593166f4299284e83d19 16436 aalib_1.4p5-50build1.debian.tar.xz
+Checksums-Sha256:
+ 352d64870bc3406b7ee37ce1f3631b8d370a5d1e0a0da46fb5acbd03f3d97f37 1691 aalib_1.4p5-50build1.dsc
+ fbddda9230cf6ee2a4f5706b4b11e2190ae45f5eda1f0409dc4f99b35e0a70ee 391028 aalib_1.4p5.orig.tar.gz
+ cdf4f411977964b8a3e294a7805bf9a94385672167f726a1ab6f0fbab38a3dfe 16436 aalib_1.4p5-50build1.debian.tar.xz
+Checksums-Sha512:
+ 5761fbd43b150e0167fea78b4a7ec84585cc518585a0ca460d4f5d8f49cfa533c37c0bad1dd3b2f6514df4f6c65fa9b6bedf73fb2835b88392901c2ed4abd925 1691 aalib_1.4p5-50build1.dsc
+ 3e4506eccce3b81ccbbb79a4a1b90abd39e2259e6043fde90f70b9ca279bd4c37758a047167267b97c4ec92f64fb17c7c8f548114f0d0c6e78ddb9463b5f1299 391028 aalib_1.4p5.orig.tar.gz
+ 65033b401f7a91a538d1421eea1c4ea8b1c15e176adaebd2ed6d7800be347d10a59d3db14ae2a080249aea3159281e8b350c7e56fbd5ef7210377b777e344171 16436 aalib_1.4p5-50build1.debian.tar.xz
+
+Package: autopkgtest
+Format: 3.0 (native)
+Binary: autopkgtest
+Architecture: all
+Version: 5.25ubuntu4
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian CI team <team+ci@tracker.debian.org>
+Uploaders: Ian Jackson <ijackson@chiark.greenend.org.uk>, Martin Pitt <mpitt@debian.org>, Antonio Terceiro <terceiro@debian.org>, Paul Gevers <elbrus@debian.org>, Simon McVittie <smcv@debian.org>
+Standards-Version: 4.6.1
+Build-Depends: debhelper-compat (= 13), fakeroot, procps, pycodestyle | pep8, pyflakes3, python3 (>= 3.3), python3-debian, python3-docutils
+Testsuite: autopkgtest
+Vcs-Browser: https://salsa.debian.org/ci-team/autopkgtest
+Vcs-Git: https://salsa.debian.org/ci-team/autopkgtest.git
+Directory: pool/main/a/autopkgtest
+Package-List:
+ autopkgtest deb devel optional arch=all
+Files:
+ f076af7d0510465aa50f6318eeede248 2357 autopkgtest_5.25ubuntu4.dsc
+ 7cb45cc749dbf616b97cef0b81b4ba29 209500 autopkgtest_5.25ubuntu4.tar.xz
+Checksums-Sha1:
+ c36688a233b4c9b110b10a381011f70f9148fff2 2357 autopkgtest_5.25ubuntu4.dsc
+ 2f244b7b4b970726e010da6cdb0586e9577ae6e2 209500 autopkgtest_5.25ubuntu4.tar.xz
+Checksums-Sha256:
+ da5964ec464b5d3e13e2b994469f378df5b897abefc2df23b5ee926312206f78 2357 autopkgtest_5.25ubuntu4.dsc
+ d2204c3c79262283fc4a7b8a4dda37141c7e2124f6f52568a30c38ed990bf729 209500 autopkgtest_5.25ubuntu4.tar.xz
+Checksums-Sha512:
+ 8ae64cbade83549eed710b7f12c1aa45b285f303856f7029896430822e6aa31b8484e182236a10054984d83426f3341a33f24d52c533217485ea571670367204 2357 autopkgtest_5.25ubuntu4.dsc
+ a4a827620315fff7c5441d6695523f12631a984b0e5536be6c96c2ebb566f8f2b0baa5c24d7e165ebc98b292b379715d79059d1259726f1d8db826ec8cf01ad3 209500 autopkgtest_5.25ubuntu4.tar.xz
+Testsuite-Triggers: autodep8, build-essential, buildah, ca-certificates, catatonit, debhelper, debootstrap, devscripts, distro-info, docker.io, dumb-init, fakeroot, golang-github-containernetworking-plugin-dnsname, iptables, libpam-cgfs, lxc, lxc-templates, lxcfs, lxd, mmdebstrap, podman, python3-distro-info, rsync, sbuild, schroot, slirp4netns, tini, uidmap, util-linux
+
+Package: autotools-dev
+Format: 3.0 (native)
+Binary: autotools-dev
+Architecture: all
+Version: 20220109.1
+Priority: optional
+Section: devel
+Maintainer: Henrique de Moraes Holschuh <hmh@debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 12), help2man
+Build-Depends-Indep: perl
+Homepage: https://savannah.gnu.org/projects/config/
+Vcs-Browser: https://salsa.debian.org/hmh/autotools-dev
+Vcs-Git: https://salsa.debian.org/hmh/autotools-dev.git
+Directory: pool/main/a/autotools-dev
+Package-List:
+ autotools-dev deb devel optional arch=all
+Files:
+ 874b76097fca24dfa6c2df0612aa5e34 1661 autotools-dev_20220109.1.dsc
+ ffdd743da36d5c922c90e26949f3835c 87340 autotools-dev_20220109.1.tar.xz
+Checksums-Sha1:
+ a67201cdeaeb38755a27ce4429ba1a0b94676e44 1661 autotools-dev_20220109.1.dsc
+ 74c662e3e9d5046167dd89b7b9a0b54c4fb1cb02 87340 autotools-dev_20220109.1.tar.xz
+Checksums-Sha256:
+ f9ccc67437ff52a7882d6b91e7ca8bf0a316c0c1452093992bd5c5fc3b29c090 1661 autotools-dev_20220109.1.dsc
+ 8b05e5ad56cd7d9a15e9b2931eb429b6324bb89f1b46de3baf3651286dead8c1 87340 autotools-dev_20220109.1.tar.xz
+Checksums-Sha512:
+ aca60be8ed006832005e58bf176f8c7e8abe85986dbcc6d15d8b5c092c89322a132601784ef1f977d7e071c8b033debcef7c3cb5712765be00c2d298d9812d71 1661 autotools-dev_20220109.1.dsc
+ 5427cc6897685355018db547ec39fd6bcc0ecbd73ba25869fb841f3503c1753af9a323d963a2b3150ef40ff07486f39377acdec878b2c054c1fa51de9afe01bb 87340 autotools-dev_20220109.1.tar.xz
+
+
+Package: b43-fwcutter
+Format: 3.0 (quilt)
+Binary: b43-fwcutter, firmware-b43-installer, firmware-b43legacy-installer
+Architecture: any all
+Version: 1:019-8
+Priority: optional
+Section: utils
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 13), debconf, po-debconf
+Homepage: https://wireless.wiki.kernel.org/en/users/drivers/b43
+Vcs-Browser: https://salsa.debian.org/debian/b43-fwcutter
+Vcs-Git: https://salsa.debian.org/debian/b43-fwcutter.git
+Directory: pool/main/b/b43-fwcutter
+Package-List:
+ b43-fwcutter deb contrib/utils optional arch=any
+ firmware-b43-installer deb contrib/kernel optional arch=all
+ firmware-b43legacy-installer deb contrib/kernel optional arch=all
+Files:
+ e7fe0249bfe204b92f2eb48adb6524aa 2098 b43-fwcutter_019-8.dsc
+ 19d1f4226a625756726bdf7ed5dc2a0a 46769 b43-fwcutter_019.orig.tar.bz2
+ 5914a3efc2cda59e119dd3db95e2565c 20176 b43-fwcutter_019-8.debian.tar.xz
+Checksums-Sha1:
+ 0cd6a1e5f5d8b6f1badf0f00e7d7242bc59d59bf 2098 b43-fwcutter_019-8.dsc
+ 64198fd2885b0eb0f8968ce3dc2037545b67f065 46769 b43-fwcutter_019.orig.tar.bz2
+ ff4db470641e33629342ad5c9e65a9f7680db11f 20176 b43-fwcutter_019-8.debian.tar.xz
+Checksums-Sha256:
+ b4323c0dfe70d85a62238ba2eca86c3b7ce75919924e2b51ef0f681841db3ab7 2098 b43-fwcutter_019-8.dsc
+ d6ea85310df6ae08e7f7e46d8b975e17fc867145ee249307413cfbe15d7121ce 46769 b43-fwcutter_019.orig.tar.bz2
+ 6083451ea45d5a64d7231ec80a50f7c25ff739206e1664b5ddf88d27c20f18b0 20176 b43-fwcutter_019-8.debian.tar.xz
+Checksums-Sha512:
+ e2293edf621c59b0ffea773d1fa4274a6f0a0dc198fb0fb5a9b9511c6ad03c9e14c32ae6dee6dd8c8253cc55e5466719e010908bc05d5e702b8355cedded60ca 2098 b43-fwcutter_019-8.dsc
+ 2a439d1583d1ee7b13dd6a7526b78b216073e044c3934adf6615b8d2ca9a4b8c74db9791182d27baf1690b5c5ff6ce1a9c8dd4fb796e47939d055fef5bb37960 46769 b43-fwcutter_019.orig.tar.bz2
+ e3f55b2b287384c7457efc680fcb33ed4696faa14efd7f63ff2996ffa473fd988fa5abf86c8c2edc0318374455e164e9aa0c8901c49546cb519b0549a81ac7e5 20176 b43-fwcutter_019-8.debian.tar.xz
+
+Package: x-kit
+Format: 1.0
+Binary: python3-xkit
+Architecture: all
+Version: 0.5.0ubuntu6
+Priority: optional
+Section: python
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Alberto Milone (tseliot) <albertomilone@alice.it>
+Standards-Version: 3.8.0
+Build-Depends: debhelper (>= 7), python3-all, intltool, dh-python
+Vcs-Bzr: https://code.launchpad.net/~albertomilone/xorgparser/main/
+Directory: pool/main/x/x-kit
+Package-List:
+ python3-xkit deb python optional arch=all
+Files:
+ c2899358c7177c9098bec32e0dea0443 1643 x-kit_0.5.0ubuntu6.dsc
+ 70618a450c4a8a63bc8da94b24a8763a 45906 x-kit_0.5.0ubuntu6.tar.gz
+Checksums-Sha1:
+ 90ead95a89822d8eb32e1ddd584a33e3ca3a418f 1643 x-kit_0.5.0ubuntu6.dsc
+ 16936028a6d58a8a0dc6bd4149ef52d9fe93cf96 45906 x-kit_0.5.0ubuntu6.tar.gz
+Checksums-Sha256:
+ 81c18d4233b1624d91b628da9502cf9b984f9603dcdedcb50cd7f516d29ba296 1643 x-kit_0.5.0ubuntu6.dsc
+ 82eba40794a8b7dedd8e7d0d26978e871b1cdfe79001688aed3d9b2c08e71d14 45906 x-kit_0.5.0ubuntu6.tar.gz
+Checksums-Sha512:
+ 809ee4ff263f5ad3789da0e40400f9539880086bb292410342cb43d50ce042ea9862b6246ac3c39410cca79122120902b4ead8cfe2af765bec4694744e84a340 1643 x-kit_0.5.0ubuntu6.dsc
+ b2aa9681b29f73f8d6e75f57e8d555b557da61e3618b1f308a1633e6b3815683f8978461a8575412cf2e844a0d8b4c3e9eebce0eb2120513174027b640b58908 45906 x-kit_0.5.0ubuntu6.tar.gz
+
+Package: x11-apps
+Format: 1.0
+Binary: x11-apps
+Architecture: any
+Version: 7.7+9
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), pkg-config, bison, libpng-dev, libx11-dev (>= 2:1.0.0), libx11-xcb-dev, libxaw7-dev (>= 1:1.0.1), libxcb-damage0-dev, libxcb-present-dev (>= 1.9), libxcb-xfixes0-dev, libxcursor-dev (>= 1.1.5.2), libxext-dev (>= 1:1.0.0), libxft-dev (>= 2.1.8.2-6), libxi-dev (>= 2:1.7), libxkbfile-dev (>= 1:1.0.1), libxmuu-dev (>= 1:1.0.1), libxrender-dev (>= 1:0.9.0.2-2), libxt-dev (>= 1:1.1.0), libxmu-dev, xbitmaps, x11proto-dev, quilt, xutils-dev (>= 1:7.5+4), man-db
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/x11-apps
+Vcs-Git: https://salsa.debian.org/xorg-team/app/x11-apps.git
+Directory: pool/main/x/x11-apps
+Package-List:
+ x11-apps deb x11 optional arch=any
+Files:
+ 293204653c7050118271c180ba3a798d 1992 x11-apps_7.7+9.dsc
+ d5388042374a484fbf551c8add05f6c9 4787126 x11-apps_7.7+9.tar.gz
+Checksums-Sha1:
+ 855e9bfb9679fddf5b129895678b7f82b2e81bfa 1992 x11-apps_7.7+9.dsc
+ 731f4574d92472cce9a0456b817d0811811fee57 4787126 x11-apps_7.7+9.tar.gz
+Checksums-Sha256:
+ 152873179c21c65dc6e35a6b374fc41021ccc0ff85ddb1e65a53295ac6b2733f 1992 x11-apps_7.7+9.dsc
+ a0aa997208a43d5224e1c55f84b2f25cf15fcec38172b178016f65ccb6d5ff33 4787126 x11-apps_7.7+9.tar.gz
+Checksums-Sha512:
+ 609a8bb2d3cc1add991166f93f8eaca15a9ac0ca6e18e7cbcffd735bfe4e7283e3f2dec5a2cfd4b7ff9ad8b66b973a0d6e927434b4d756d1f822f874c1ed1d6d 1992 x11-apps_7.7+9.dsc
+ 1a35164402b881df15249899add29b555923bc53044b436cf139bd3b27a0f9f4e48f00a9e672e8dc6504c7c3a58eb821a1fb598bac67c38dedeeb80c9a284a6e 4787126 x11-apps_7.7+9.tar.gz
+
+Package: x11-session-utils
+Format: 1.0
+Binary: x11-session-utils
+Architecture: any
+Version: 7.7+5
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.6.0
+Build-Depends: dpkg-dev (>= 1.16.1), debhelper-compat (= 13), pkg-config, libice-dev, libsm-dev, libxaw7-dev (>= 1:1.0.1), libxmuu-dev, libxt-dev (>= 1:1.0.0), libx11-dev, x11proto-dev, quilt, xutils-dev (>= 1:7.5+4)
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/x11-session-utils
+Vcs-Git: https://salsa.debian.org/xorg-team/app/x11-session-utils.git
+Directory: pool/main/x/x11-session-utils
+Package-List:
+ x11-session-utils deb x11 optional arch=any
+Files:
+ c8f2b725bb0db31e75cfa422aca4ca41 1780 x11-session-utils_7.7+5.dsc
+ 650d47466fe5e4f60cbe2f58c945b08f 621824 x11-session-utils_7.7+5.tar.gz
+Checksums-Sha1:
+ e97aa07e61c26d00c1d2d20ce6d97db443a0ca23 1780 x11-session-utils_7.7+5.dsc
+ 11f004c6897bc048c621b1fd83dce6d9599f39aa 621824 x11-session-utils_7.7+5.tar.gz
+Checksums-Sha256:
+ c63cd3923a01e9be15ea82082ddcef61fd36f8fe91379438797d9d72e2788459 1780 x11-session-utils_7.7+5.dsc
+ f153909b15c529d8e0c5629be90b4f12a0d27966b8e2284f1d01403b917b6ba7 621824 x11-session-utils_7.7+5.tar.gz
+Checksums-Sha512:
+ cdaec60bb80c89c37114f55196e2c6c0ce62cd785e0163d11cd989c9e2579d0afaf25ac60820f5b1b09a903a5785d2489a01c81a3b66a05a7bc6d3e6c0acfaf5 1780 x11-session-utils_7.7+5.dsc
+ 3039cd16bf8937e55a6eaa01e59ca73954d382d8e0d4214a92208ef03986cce90797da7d1bc0a3ec5ea5fc67b2a2d358140949c1b1119a4239da275d5dc65192 621824 x11-session-utils_7.7+5.tar.gz
+
+Package: x11-utils
+Format: 1.0
+Binary: x11-utils
+Architecture: any
+Version: 7.7+5build2
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: dpkg-dev (>= 1.16.1), debhelper-compat (= 12), quilt, xutils-dev (>= 1:7.5+4), pkg-config, libx11-dev (>= 2:1.0.0), libxaw7-dev (>= 1:1.0.1), libxext-dev (>= 1:1.0.0), libxft-dev (>= 2.1.8.2-6), libxi-dev (>= 1:1.0.0-3), libxkbfile-dev, libxmuu-dev (>= 1:1.0.1), libxrender-dev (>= 1:0.9.0.2-2), libxt-dev (>= 1:1.0.99.1), libxtst-dev (>= 1:1.0.1), libxxf86dga-dev (>= 1:1.0.1), libxv-dev (>= 1:1.0.1), libxxf86vm-dev (>= 1:1.0.0), libxcomposite-dev, libgl1-mesa-dev, libxinerama-dev (>= 1:1.0.1), libfontenc-dev, libxcb1-dev (>= 1.6), libx11-xcb-dev, libxcb-shape0-dev, libxrandr-dev (>= 2:1.2), gettext, x11proto-dev
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/x11-utils
+Vcs-Git: https://salsa.debian.org/xorg-team/app/x11-utils.git
+Directory: pool/main/x/x11-utils
+Package-List:
+ x11-utils deb x11 optional arch=any
+Files:
+ 8934b4dcc1d98d3e48647a54720b665d 2268 x11-utils_7.7+5build2.dsc
+ c78478f778153efe843fbd194206ba29 3125956 x11-utils_7.7+5build2.tar.gz
+Checksums-Sha1:
+ e0108f913df5e96919a25135774aef91325f80cd 2268 x11-utils_7.7+5build2.dsc
+ 2d0a737b58a4f562561cc147e4b358389701b885 3125956 x11-utils_7.7+5build2.tar.gz
+Checksums-Sha256:
+ ef5a60baabf5761b7d27463855194db507b5eb79574d3327118f1de4585dfc78 2268 x11-utils_7.7+5build2.dsc
+ 61a35f7f16c266a0ba39d52d34c8b21502748803174dfe7add311c0a380666e5 3125956 x11-utils_7.7+5build2.tar.gz
+Checksums-Sha512:
+ e68c1af663661b76c7b9de8bde848b7c54d94d8470075f4413219c6fa58edb72174eec0eeef972faca590b3829627f3e8684f4993fd7fa11cd540349debffbc8 2268 x11-utils_7.7+5build2.dsc
+ 7057a73fbd9b1e8ce3769069b3d332cd78c688c0f8129719fb3029cd210c9b0f5eabe7fdd3a5f34ce73b0d65ba9b147f905cff34c724d105487b4be69ea18d9d 3125956 x11-utils_7.7+5build2.tar.gz
+
+Package: x11-xkb-utils
+Format: 1.0
+Binary: x11-xkb-utils, x11-xkb-utils-udeb
+Architecture: any
+Version: 7.7+7
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 13), pkg-config, libx11-dev (>= 2:1.3.3-2), libxaw7-dev (>= 1:1.0.1), libxkbfile-dev (>= 1:1.0.6-2), libxrandr-dev, bison, quilt, xutils-dev (>= 1:7.5+4), x11proto-dev
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/x11-xkb-utils
+Vcs-Git: https://salsa.debian.org/xorg-team/app/x11-xkb-utils.git
+Directory: pool/main/x/x11-xkb-utils
+Package-List:
+ x11-xkb-utils deb x11 optional arch=any
+ x11-xkb-utils-udeb udeb debian-installer optional arch=any
+Files:
+ 00c088d519b4b8af9a7a7abf4c7da0b3 1846 x11-xkb-utils_7.7+7.dsc
+ a63dc858fe1771a266c85edac7dfac77 1065033 x11-xkb-utils_7.7+7.tar.gz
+Checksums-Sha1:
+ 6fb7668ef8f1917a288cb6c74e378fe28e996d08 1846 x11-xkb-utils_7.7+7.dsc
+ 2316a57d12f22d5c936805676774a1577245f923 1065033 x11-xkb-utils_7.7+7.tar.gz
+Checksums-Sha256:
+ bdd5db28c3a5207ba2639b5951457770197cbfd17fde1f757c2007de31d8824f 1846 x11-xkb-utils_7.7+7.dsc
+ 1091d5ae3a9ec94ff81070306a1085b9834ff00028f8e412041b055ee9d7ed2b 1065033 x11-xkb-utils_7.7+7.tar.gz
+Checksums-Sha512:
+ d54ff2223038119005e3ac2eac59eb259af12bcc52e0bc4f9492a1ba76f6ab47ff444b99f7059fa40b0b90452c11a83375d4c7154f93db008ec019d021ba7b95 1846 x11-xkb-utils_7.7+7.dsc
+ e22595f8cbd933ed8be84fb6b8f8dee71de7519b0dc4b30daed9370501bdd6fef44a1b4cfd620de272369b3f76a3fc9ec394a8a3d6becac1d2178d8aaefa7634 1065033 x11-xkb-utils_7.7+7.tar.gz
+
+Package: x11-xserver-utils
+Format: 1.0
+Binary: x11-xserver-utils
+Architecture: any
+Version: 7.7+9build1
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 12), pkg-config, x11proto-core-dev (>= 7.0.25), libx11-dev (>= 2:1.0.0), libxaw7-dev (>= 1:1.0.1), libxext-dev (>= 1:1.0.0), libxi-dev (>= 1:1.0.0-3), libxmuu-dev (>= 1:1.0.1), libxrandr-dev (>= 2:1.4.0), libxt-dev (>= 1:1.0.0), libxxf86vm-dev (>= 1:1.0.0), xbitmaps, quilt, x11proto-input-dev (>= 1.4), xutils-dev (>= 1:7.5+4), libxcursor-dev
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/x11-xserver-utils
+Vcs-Git: https://salsa.debian.org/xorg-team/app/x11-xserver-utils
+Directory: pool/main/x/x11-xserver-utils
+Package-List:
+ x11-xserver-utils deb x11 optional arch=any
+Files:
+ 2c11114028b558705c0adb75e13b3087 2073 x11-xserver-utils_7.7+9build1.dsc
+ 5a4a5b18288f2b1c053f9272362c4a05 2706607 x11-xserver-utils_7.7+9build1.tar.gz
+Checksums-Sha1:
+ 62b6e08521df4b7458468b37ac8ff64e98a6c787 2073 x11-xserver-utils_7.7+9build1.dsc
+ 61065d2a56ca2730727de573051f05877439b39a 2706607 x11-xserver-utils_7.7+9build1.tar.gz
+Checksums-Sha256:
+ aed8ebbfe978659ec1852b5b5468e296d7cda9999f3736b32eb57924a108ae59 2073 x11-xserver-utils_7.7+9build1.dsc
+ 29600f4667768ae96445d629fe15e2dd3df7dd43fbc45b52a4ec652153622069 2706607 x11-xserver-utils_7.7+9build1.tar.gz
+Checksums-Sha512:
+ ba11551fd8c685d2d44e31985648e89e9114ea992a1dbe60bb5a687ccd37a0d0537131ddb132764fb0ca392c4237bd6013de980b178e0e5ad82f5c9f89af00f0 2073 x11-xserver-utils_7.7+9build1.dsc
+ bd3451973b75f555d87522a64187eb518e02f238293b6e2d61cfc064d5721665aeda50372604cc81f4f640a234b717c10d6c9d6f2a6c0b767a62630d3c490143 2706607 x11-xserver-utils_7.7+9build1.tar.gz
+
+Package: xauth
+Format: 1.0
+Binary: xauth
+Architecture: any
+Version: 1:1.1.2-1
+Priority: standard
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.1.1
+Build-Depends: debhelper-compat (= 13), quilt, pkg-config, libx11-dev, libxext-dev, libxmuu-dev, xutils-dev, cmdtest <!nocheck>
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/xauth
+Vcs-Git: https://salsa.debian.org/xorg-team/app/xauth.git
+Directory: pool/main/x/xauth
+Package-List:
+ xauth deb x11 optional arch=any
+Files:
+ 3ddb81485b9671731c051d2ec8d4bb29 1840 xauth_1.1.2-1.dsc
+ 175393129a38e5153bc7901a47c1f66c 214621 xauth_1.1.2.orig.tar.gz
+ dbce0e2c3147625628b1d80f4122184a 18091 xauth_1.1.2-1.diff.gz
+Checksums-Sha1:
+ 9d1085fcd53efb0d7433e12c3d8e2a9835a791eb 1840 xauth_1.1.2-1.dsc
+ 4403eaaf86574473ac35507a9842854be341ac98 214621 xauth_1.1.2.orig.tar.gz
+ 50b70facb49d03cc88ed5800815946bc13eef071 18091 xauth_1.1.2-1.diff.gz
+Checksums-Sha256:
+ 5b6f718530b68c385368bae7267e7dd0044882290e7b3e4fbe6d63bb8d65c9f0 1840 xauth_1.1.2-1.dsc
+ 84d27a1023d8da524c134f424b312e53cb96e08871f96868aa20316bfcbbc054 214621 xauth_1.1.2.orig.tar.gz
+ 6afd6f9a3c9b6320e4b523bbe6e5ff3960d59310c9b0efc8b6496d39144710ed 18091 xauth_1.1.2-1.diff.gz
+Checksums-Sha512:
+ ec8325cddc322a10064a9ee996c2bfe1d83759cf09947c4c9bca09ae30e2a4c7c502ec266dc3f8e06d714a68f3a54d34841c42a3cfe9a5a6a746c8f55c9856cd 1840 xauth_1.1.2-1.dsc
+ 9de9cec29e453824aad43824ff961ae5eada6604a190bc353bb665c40c6a1d40d436c44bf50209686c681c6adea6a08f456e02365de8f0feb3fa8a8fc01f5577 214621 xauth_1.1.2.orig.tar.gz
+ 2835e10e8ef17349d6213a76b28e8643f9bf5dd70de7a84ebe6fbcb21666ce0dba28cdfb8d04b9d4820447f4dbc94bbc217d573373ed2b83b09f5582c53b2920 18091 xauth_1.1.2-1.diff.gz
+
+Package: xbitmaps
+Format: 1.0
+Binary: xbitmaps
+Architecture: all
+Version: 1.1.1-2.1ubuntu1
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Cyril Brulebois <kibi@debian.org>
+Standards-Version: 3.8.3
+Build-Depends: debhelper (>= 7), xutils-dev (>= 1:7.5~), automake
+Vcs-Browser: http://git.debian.org/?p=pkg-xorg/data/xbitmaps.git
+Vcs-Git: git://git.debian.org/git/pkg-xorg/data/xbitmaps
+Directory: pool/main/x/xbitmaps
+Package-List:
+ xbitmaps deb x11 optional arch=all
+Files:
+ da2dda682fe85e326772a4e8ddd7c65d 1354 xbitmaps_1.1.1-2.1ubuntu1.dsc
+ 288bbe310db67280a9e2e5ebc5602595 140011 xbitmaps_1.1.1.orig.tar.gz
+ 87b4ade71cbc2e58ac913666c54779d0 13485 xbitmaps_1.1.1-2.1ubuntu1.diff.gz
+Checksums-Sha1:
+ 5ea6b83afea85948d6f322de5cbea7875a61ea06 1354 xbitmaps_1.1.1-2.1ubuntu1.dsc
+ 8d82a88652ac1743f57497bfd97c2b5c066f506a 140011 xbitmaps_1.1.1.orig.tar.gz
+ 1c68f8225ddc797f80d43e374079ee0e1606e6bd 13485 xbitmaps_1.1.1-2.1ubuntu1.diff.gz
+Checksums-Sha256:
+ ae8b5a1258959d9c5e2bfb9c61f68e7b1af361a9f16560cdd1ca090f61a38a3a 1354 xbitmaps_1.1.1-2.1ubuntu1.dsc
+ 3bc89e05be4179ce4d3dbba1ae554da4591d41f7a489d9e2735a18cfd8378188 140011 xbitmaps_1.1.1.orig.tar.gz
+ acbf1b6730aa047fde7ae10d6df8380605dac440a53bba5279c81c2e5f438567 13485 xbitmaps_1.1.1-2.1ubuntu1.diff.gz
+Checksums-Sha512:
+ 4ec40d27ca3a7e581c69c976c42270b24852c2b30b694001a2b37a12d4d7cfecdd1b300b0957c89b0b6b3f62c901e375c9aadd1e9213890b505da3b2ebb8276c 1354 xbitmaps_1.1.1-2.1ubuntu1.dsc
+ f3899f9bedab41c0545f115ab9a1b1bb79a6e9f676309dff312dfae3056f517e3a930f1bd7427835586502ef67f4ddb7040117293a35ceac034b52266b2bc05b 140011 xbitmaps_1.1.1.orig.tar.gz
+ 2c669e0a1bafa5601ccb159f58edea59c305149902a9efd42ecbb5d83701e78908edb0b11e9b34babbdfea6f75c9236e2c6e4b2211dedb6a6697d66b69851e94 13485 xbitmaps_1.1.1-2.1ubuntu1.diff.gz
+
+Package: xcb-util
+Format: 3.0 (quilt)
+Binary: libxcb-util1, libxcb-util-dev, libxcb-util0-dev
+Architecture: any
+Version: 0.4.0-1build2
+Priority: extra
+Section: libdevel
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Arnaud Fontaine <arnau@debian.org>
+Standards-Version: 4.5.1
+Build-Depends: debhelper-compat (= 12), libxcb1-dev (>= 1.6), gperf, pkg-config, xutils-dev
+Homepage: http://xcb.freedesktop.org
+Vcs-Browser: https://salsa.debian.org/xorg-team/lib/xcb-util.git
+Vcs-Git: https://salsa.debian.org/xorg-team/lib/xcb-util.git
+Directory: pool/main/x/xcb-util
+Package-List:
+ libxcb-util-dev deb libdevel optional arch=any
+ libxcb-util0-dev deb oldlibs optional arch=any
+ libxcb-util1 deb libs optional arch=any
+Files:
+ 055e99c08ae5fb76fddebfdadf5490cf 2217 xcb-util_0.4.0-1build2.dsc
+ 157d82738aa89934b6adaf3ca508a0f5 362923 xcb-util_0.4.0.orig.tar.gz
+ cf25c9de1440b14b776def64467adc73 4580 xcb-util_0.4.0-1build2.debian.tar.xz
+Checksums-Sha1:
+ 25ac6b536d1b2b87f3428022ab6560bc88cfa671 2217 xcb-util_0.4.0-1build2.dsc
+ 43f889324a1564b682e107130c43643ce3e724b2 362923 xcb-util_0.4.0.orig.tar.gz
+ 2ba6e4484b998629befb790fd58154da103e67ab 4580 xcb-util_0.4.0-1build2.debian.tar.xz
+Checksums-Sha256:
+ e403336044c8227452becee1fe6d305db747ac507013a66e70f42e6a4123311b 2217 xcb-util_0.4.0-1build2.dsc
+ 0ed0934e2ef4ddff53fcc70fc64fb16fe766cd41ee00330312e20a985fd927a7 362923 xcb-util_0.4.0.orig.tar.gz
+ 035077ebaeeee92ff0a7f2f1d97d2b96d0148c0007f2f689d63ed9bd013aaf98 4580 xcb-util_0.4.0-1build2.debian.tar.xz
+Checksums-Sha512:
+ 7f6245706540e51b10661a4880e395456170ef6b766052124397be2346552f6e1875501e47cb5981a748c5bbd59b019b65755974b8a732b55c083f9a1b0fb41f 2217 xcb-util_0.4.0-1build2.dsc
+ bf9182c3b412984d9a8d4ec2d55a1fbae55722175effce4af7dd1094bac49e8ef20580ee6fbf025c651529346869650656451bdb0b5adbc4ba24a94b41c53240 362923 xcb-util_0.4.0.orig.tar.gz
+ 6077ba9e6ee7a4e8e182d129777d42f0dfd9fea556fd8ef9b1dc83ef16d9a3bd680df9d10927bac25f51357707b11a94821782cf71d32077a24df0f32625e4d6 4580 xcb-util_0.4.0-1build2.debian.tar.xz
+
+Package: xcb-util-image
+Format: 3.0 (quilt)
+Binary: libxcb-image0, libxcb-image0-dev
+Architecture: any
+Version: 0.4.0-2
+Priority: extra
+Section: libdevel
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Arnaud Fontaine <arnau@debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), libxcb1-dev (>= 1.6), libxcb-util0-dev, libxcb-shm0-dev, pkg-config, x11proto-dev, xutils-dev
+Homepage: https://xcb.freedesktop.org
+Vcs-Browser: https://salsa.debian.org/xorg-team/lib/xcb-util-image
+Vcs-Git: https://salsa.debian.org/xorg-team/lib/xcb-util-image.git
+Directory: pool/main/x/xcb-util-image
+Package-List:
+ libxcb-image0 deb libs optional arch=any
+ libxcb-image0-dev deb libdevel optional arch=any
+Files:
+ bd4ba5b393ee940fbcd4d8cf0bec777b 2121 xcb-util-image_0.4.0-2.dsc
+ 08fe8ffecc8d4e37c0ade7906b3f4c87 327891 xcb-util-image_0.4.0.orig.tar.bz2
+ 5f07b668feb5f283f893aeaac6c4d488 4508 xcb-util-image_0.4.0-2.debian.tar.xz
+Checksums-Sha1:
+ dafbeac115c8c98a0526fc767169950c5a5c7166 2121 xcb-util-image_0.4.0-2.dsc
+ c9c9361781911a47b28f74fc6ebe0abd1273fae4 327891 xcb-util-image_0.4.0.orig.tar.bz2
+ 6e633183ce87f01366267f873e6d7851d627d364 4508 xcb-util-image_0.4.0-2.debian.tar.xz
+Checksums-Sha256:
+ 6a01c919e437b18ecd00c02c7ed1a5b0ff85cd0e3f7effd89ac8226a3fa5e299 2121 xcb-util-image_0.4.0-2.dsc
+ 2db96a37d78831d643538dd1b595d7d712e04bdccf8896a5e18ce0f398ea2ffc 327891 xcb-util-image_0.4.0.orig.tar.bz2
+ cf7d3d2ee9b462c93ba51f95857e2044b5e1b5d91bb5b88be71b2d1aacc2f025 4508 xcb-util-image_0.4.0-2.debian.tar.xz
+Checksums-Sha512:
+ c250ffb5a26543a0e0ca4ce43c475a4ea9c91adc2ebf50e92d5b32b44f8caa90a803afc0d76e745d76e1959b291cc3a3d9b6389313917433ff01d036646f1079 2121 xcb-util-image_0.4.0-2.dsc
+ 9b7202c054e1160f9ca97a86be1210d9fb47f2119f89ca85f15f20909cca884bfe0cb88e3e71c75b65e1a0a72b980066ccac810e41a91db895c74dde77440d4f 327891 xcb-util-image_0.4.0.orig.tar.bz2
+ c90fe1cedae869052a19d0058b33b89bb9e511b5b98021b685268adb5725f8cc5fc9b73a8ff4db0317266fa9924b3b44817c9de17d78c2c91b7c63cb01e3ea21 4508 xcb-util-image_0.4.0-2.debian.tar.xz
+
+Package: xcb-util-keysyms
+Format: 3.0 (quilt)
+Binary: libxcb-keysyms1, libxcb-keysyms1-dev
+Architecture: any
+Version: 0.4.0-1build3
+Priority: extra
+Section: libdevel
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Julien Danjou <acid@debian.org>, Arnaud Fontaine <arnau@debian.org>
+Standards-Version: 3.9.6
+Build-Depends: cdbs (>= 0.4.93~), debhelper (>= 8.1.3), libxcb1-dev (>= 1.6), pkg-config, dh-autoreconf, x11proto-core-dev (>= 7.0.8), xutils-dev
+Homepage: http://xcb.freedesktop.org
+Vcs-Browser: http://git.debian.org/?p=pkg-xorg/lib/xcb-util-keysyms.git
+Vcs-Git: git://git.debian.org/pkg-xorg/lib/xcb-util-keysyms.git
+Directory: pool/main/x/xcb-util-keysyms
+Package-List:
+ libxcb-keysyms1 deb libs extra arch=any
+ libxcb-keysyms1-dev deb libdevel extra arch=any
+Files:
+ 62796a5683d9a3dfe6df8e61a715c7e4 2315 xcb-util-keysyms_0.4.0-1build3.dsc
+ 1022293083eec9e62d5659261c29e367 289880 xcb-util-keysyms_0.4.0.orig.tar.bz2
+ 4b828716d62cd36a0d4c70c90d7b3cbe 4460 xcb-util-keysyms_0.4.0-1build3.debian.tar.xz
+Checksums-Sha1:
+ 94ed2208fd6f959e2fc57cce3a81bb769bc1e229 2315 xcb-util-keysyms_0.4.0-1build3.dsc
+ ff02ee8ac22c53848af50c0a6a6b00feb002c1cb 289880 xcb-util-keysyms_0.4.0.orig.tar.bz2
+ 62110c3babd4295d9591d1b7fa7c01d6b139c18f 4460 xcb-util-keysyms_0.4.0-1build3.debian.tar.xz
+Checksums-Sha256:
+ 5a83beb9ffb67c550e9dd89a2dfdc814176be49f50b51838525c8baf20457a5a 2315 xcb-util-keysyms_0.4.0-1build3.dsc
+ 0ef8490ff1dede52b7de533158547f8b454b241aa3e4dcca369507f66f216dd9 289880 xcb-util-keysyms_0.4.0.orig.tar.bz2
+ 23dfbb54ff32bd0b0a67da70793e5496fa7e0334eea37388532d1981c2f34597 4460 xcb-util-keysyms_0.4.0-1build3.debian.tar.xz
+Checksums-Sha512:
+ fbbc69e8fc1e5651b4e10d35745030ec737655632646df0c845a478c912388cb4e44998b1e7d776b0ad5f1d2819f8fbc2e8de5c0bb8322d86fb79736c8e69739 2315 xcb-util-keysyms_0.4.0-1build3.dsc
+ b14b3100c3ae2379f9df799c0780a1ee39267101e58e4c1c6f390f039348ca2b370bb1df203b9bc68a170d664188d9c73e3553a7ba24d98abea3ed353e8dc0c4 289880 xcb-util-keysyms_0.4.0.orig.tar.bz2
+ 7d701908440a108a3596e0db04def48b97f15748a0c79aff2f624d32bdc5a5bda7130da764c6b0d5af0fa61f8453682e67b2565ca5442cc4ed5693b2da37cd4e 4460 xcb-util-keysyms_0.4.0-1build3.debian.tar.xz
+
+Package: xcb-util-renderutil
+Format: 3.0 (quilt)
+Binary: libxcb-render-util0, libxcb-render-util0-dev
+Architecture: any
+Version: 0.3.9-1build3
+Priority: extra
+Section: libdevel
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Julien Danjou <acid@debian.org>, Arnaud Fontaine <arnau@debian.org>
+Standards-Version: 3.9.5
+Build-Depends: cdbs (>= 0.4.93~), debhelper (>= 9), dh-autoreconf, libxcb1-dev (>= 1.6), libxcb-render0-dev, pkg-config, libtool, autotools-dev, autoconf, automake, xutils-dev
+Homepage: http://xcb.freedesktop.org
+Vcs-Browser: http://git.debian.org/?p=pkg-xorg/lib/xcb-util-renderutil.git
+Vcs-Git: git://git.debian.org/pkg-xorg/lib/xcb-util-renderutil.git
+Directory: pool/main/x/xcb-util-renderutil
+Package-List:
+ libxcb-render-util0 deb libs extra arch=any
+ libxcb-render-util0-dev deb libdevel extra arch=any
+Files:
+ 26ce3764dd3a6ae76f27a38ffc831425 2388 xcb-util-renderutil_0.3.9-1build3.dsc
+ 468b119c94da910e1291f3ffab91019a 292898 xcb-util-renderutil_0.3.9.orig.tar.bz2
+ 9cbbf0e98afd0e1ecb9318e9c04e7373 4512 xcb-util-renderutil_0.3.9-1build3.debian.tar.xz
+Checksums-Sha1:
+ 7de7da03f6131b228740e1eb968a6e2e1e66a3c9 2388 xcb-util-renderutil_0.3.9-1build3.dsc
+ cb533b1d039f833f070e7d6398c221a31d30d5e2 292898 xcb-util-renderutil_0.3.9.orig.tar.bz2
+ f26af327e91edd649f7f06d2df09b810a302fdf2 4512 xcb-util-renderutil_0.3.9-1build3.debian.tar.xz
+Checksums-Sha256:
+ baff0b59d348632f66f60cbdd7f75a38353bc69eb64ccd1252879598347bf168 2388 xcb-util-renderutil_0.3.9-1build3.dsc
+ c6e97e48fb1286d6394dddb1c1732f00227c70bd1bedb7d1acabefdd340bea5b 292898 xcb-util-renderutil_0.3.9.orig.tar.bz2
+ ff35b6b5a8d009d7f607f447eec42a1ec2de5186f38e01a43485294188c5170c 4512 xcb-util-renderutil_0.3.9-1build3.debian.tar.xz
+Checksums-Sha512:
+ 10796a3b60c7be42cf56d9740b8b09fbc9b4ef9acabcba3b296c5d2a6d6a4e62d7d20a77498871126d8e9efdf6b59bf555a10a965965a4811a0e02e0faf2ffe0 2388 xcb-util-renderutil_0.3.9-1build3.dsc
+ 24b567992ecde7e69a406efd0ffb62266610d73b4dc0e5c71093221090fa134c14b850680d1d28dc1f8f4a6f497b4118491e1894ec7c73d2c6ce959d106771cc 292898 xcb-util-renderutil_0.3.9.orig.tar.bz2
+ c1e70a302730bfba55f50ca5ed59e0066c1d64e61a4d5cadae8d83b687c6b031ccc3892113a4d7966261c6be2d8d305852b24950b8b8593da3c925d822f12f0e 4512 xcb-util-renderutil_0.3.9-1build3.debian.tar.xz
+
+Package: xcb-util-wm
+Format: 3.0 (quilt)
+Binary: libxcb-icccm4, libxcb-icccm4-dev, libxcb-ewmh2, libxcb-ewmh-dev
+Architecture: any
+Version: 0.4.1-1.1build2
+Priority: extra
+Section: libdevel
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Julien Danjou <acid@debian.org>, Arnaud Fontaine <arnau@debian.org>
+Standards-Version: 3.9.3
+Build-Depends: cdbs (>= 0.4.93~), debhelper (>= 8.1.3), dh-autoreconf, libxcb1-dev (>= 1.6), pkg-config, m4, libtool, autotools-dev, autoconf, automake, xutils-dev (>= 1:7.7~1~)
+Homepage: https://xcb.freedesktop.org
+Vcs-Browser: https://salsa.debian.org/xorg-team/lib/xcb-util-wm
+Vcs-Git: https://salsa.debian.org/xorg-team/lib/xcb-util-wm.git
+Directory: pool/main/x/xcb-util-wm
+Package-List:
+ libxcb-ewmh-dev deb libdevel optional arch=any
+ libxcb-ewmh2 deb libs optional arch=any
+ libxcb-icccm4 deb libs optional arch=any
+ libxcb-icccm4-dev deb libdevel optional arch=any
+Files:
+ 457193d886f59a9d7ad9a68afdd39c37 2428 xcb-util-wm_0.4.1-1.1build2.dsc
+ 0831399918359bf82930124fa9fd6a9b 395835 xcb-util-wm_0.4.1.orig.tar.gz
+ 987b0ab7ee8230c16b7eecc8300abc45 4620 xcb-util-wm_0.4.1-1.1build2.debian.tar.xz
+Checksums-Sha1:
+ c01de96e5463eddb581a081ab99b3b177e33c84b 2428 xcb-util-wm_0.4.1-1.1build2.dsc
+ 387c9b17a7352a19188b9353adbe5e7fdc01ef2a 395835 xcb-util-wm_0.4.1.orig.tar.gz
+ 0112830e2ab00969aa262f1e6c9fa1ec73031608 4620 xcb-util-wm_0.4.1-1.1build2.debian.tar.xz
+Checksums-Sha256:
+ 0c0993c06aa5e20950245d9a8aca3deeb7aa2129ecaf0783bbf37ce5a0ae60be 2428 xcb-util-wm_0.4.1-1.1build2.dsc
+ 038b39c4bdc04a792d62d163ba7908f4bb3373057208c07110be73c1b04b8334 395835 xcb-util-wm_0.4.1.orig.tar.gz
+ cbf5ce21c783753ad6a783addbefc732e5955ce7f5f81af51b03a258d04befda 4620 xcb-util-wm_0.4.1-1.1build2.debian.tar.xz
+Checksums-Sha512:
+ c0c79b4eada24dbc52d3d05749917a2b25311496f7d85150cca13f746a2aace4f8e5ddadc6731a167a2ac06f0e947dbd2e4a308fe35bffea37dead9058f34429 2428 xcb-util-wm_0.4.1-1.1build2.dsc
+ 063d852367088a7129aacce95e7d81cb0925b146191e1114171e58f5a65dcb8cc7f4fb5a9ecb49e9da2e2d8be75375f5cfaafc04b756179750e230fb486b9e22 395835 xcb-util-wm_0.4.1.orig.tar.gz
+ e70396fdbdb6729a09fbfeee14e82411ba67d92571f2518c22195ea8bddfab8bc0d8ada51850e265ac27acf8affcc8f93583c0cc4ea5356e52dbf40c3e8c9008 4620 xcb-util-wm_0.4.1-1.1build2.debian.tar.xz
+
+Package: xcursor-themes
+Format: 1.0
+Binary: xcursor-themes
+Architecture: all
+Version: 1.0.6-0ubuntu1
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.8.3.0
+Build-Depends: debhelper (>= 9), dh-autoreconf, quilt, pkg-config, x11-apps | xcursorgen, libxcursor-dev, automake, xutils-dev (>= 1:7.5~1)
+Vcs-Browser: https://salsa.debian.org/xorg-team/data/xcursor-themes
+Vcs-Git: https://salsa.debian.org/xorg-team/data/xcursor-themes.git
+Directory: pool/main/x/xcursor-themes
+Package-List:
+ xcursor-themes deb x11 optional arch=all
+Files:
+ dcc6b51a02c21cdf179f82f9b5638b78 1445 xcursor-themes_1.0.6-0ubuntu1.dsc
+ 76f7f7706118e8faa53ba2901762391d 2562225 xcursor-themes_1.0.6.orig.tar.gz
+ c4f418d6cd338305f94b71676a807248 9245 xcursor-themes_1.0.6-0ubuntu1.diff.gz
+Checksums-Sha1:
+ e6ee32bccfe3247d5168596ea767bdf2d29ab2ab 1445 xcursor-themes_1.0.6-0ubuntu1.dsc
+ 916ef26cd1b41f12f80d0ad5ec7f176277b60267 2562225 xcursor-themes_1.0.6.orig.tar.gz
+ 7bb76b48bc930c59363439f7b79e7a07755640f4 9245 xcursor-themes_1.0.6-0ubuntu1.diff.gz
+Checksums-Sha256:
+ 043fd5b5eff97c78d738bab3df4958f1a9d04ddd4d864e76c775933d22f3062d 1445 xcursor-themes_1.0.6-0ubuntu1.dsc
+ 22638f7bd6257adf889d25af9c8a7b2cfdcf5a5e18339d25fbb092dbf6c663c1 2562225 xcursor-themes_1.0.6.orig.tar.gz
+ 56b9d2181f0f891da34b0aa902260e175224a476e290e3046e37548096b3f023 9245 xcursor-themes_1.0.6-0ubuntu1.diff.gz
+Checksums-Sha512:
+ ccf93cd9c8515bb55bb41cb2705ed671427ee6a55b3b8f06a4e8aeb6fb630b4532c62b8ce7454163489d0c55d201b52fa8a96c020953e38debeffe2e022b94bd 1445 xcursor-themes_1.0.6-0ubuntu1.dsc
+ 6afe6a3126f9104f3cbf2001c2a972dfdf615660ec57ad455ea24f79b12c493b8eeec542edf7293b34083d1669baeb6b9ad9cb303f646c6704a67675aa3cfb9c 2562225 xcursor-themes_1.0.6.orig.tar.gz
+ a460ccfa86d1cde269237c878f0c62363fd8d97b2e7f46ef3d033617aeffadbf04972abcff9243f6599968f0c384665783656bb8e5a98e74bd480b0e9dd15e69 9245 xcursor-themes_1.0.6-0ubuntu1.diff.gz
+
+Package: xdg-dbus-proxy
+Format: 3.0 (quilt)
+Binary: xdg-dbus-proxy, xdg-dbus-proxy-tests
+Architecture: any
+Version: 0.1.4-3
+Priority: optional
+Section: misc
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Uploaders: Simon McVittie <smcv@debian.org>,
+Standards-Version: 4.6.1
+Build-Depends: dbus-daemon <!nocheck>, debhelper-compat (= 13), docbook-xml, docbook-xsl, libglib2.0-dev, meson, xsltproc
+Testsuite: autopkgtest
+Homepage: https://github.com/flatpak/xdg-dbus-proxy
+Vcs-Browser: https://salsa.debian.org/debian/xdg-dbus-proxy
+Vcs-Git: https://salsa.debian.org/debian/xdg-dbus-proxy.git
+Directory: pool/main/x/xdg-dbus-proxy
+Package-List:
+ xdg-dbus-proxy deb admin optional arch=any
+ xdg-dbus-proxy-tests deb admin optional arch=any
+Files:
+ efa433ba0762d6e384fcea07ad90650e 2319 xdg-dbus-proxy_0.1.4-3.dsc
+ 89d166170e871b3288e8980aee599ae4 122112 xdg-dbus-proxy_0.1.4.orig.tar.xz
+ 8ed43d0ac84a00aea7ca66b122121008 4880 xdg-dbus-proxy_0.1.4-3.debian.tar.xz
+Checksums-Sha1:
+ 24c221e6220882a2da3d15b57c1c6ef5621cfbbf 2319 xdg-dbus-proxy_0.1.4-3.dsc
+ b64d4c4d2c3e947b7edbe5b423eddcc5d2fbdcfb 122112 xdg-dbus-proxy_0.1.4.orig.tar.xz
+ 21818eba835d66e966ad501feb3506f0290fa00c 4880 xdg-dbus-proxy_0.1.4-3.debian.tar.xz
+Checksums-Sha256:
+ ecb3d589667669389db0d4bf240b62c7078307fcaca4d84269367e045ee3c799 2319 xdg-dbus-proxy_0.1.4-3.dsc
+ 1ec0eab53d1e49966d722352bcfd51ac402dce5190baedc749a8541e761670ab 122112 xdg-dbus-proxy_0.1.4.orig.tar.xz
+ f2e9f91816f137916128c2bde2acb9f882d395257610f5b64e5a04daa1f50566 4880 xdg-dbus-proxy_0.1.4-3.debian.tar.xz
+Checksums-Sha512:
+ 6d4bb73176dc16ff4b8e8cdbdbd55a96c1df40372064a7d54acba5db672c9ca31bff03f41ff0fe044b49f730bcb35fac89a82d438ab19dd82e18e56506d94b38 2319 xdg-dbus-proxy_0.1.4-3.dsc
+ d50fa916d07f23e080ab53cf290b5d6db73cfd8262253a48b9f012ce6c182e201d0a67efaeb7f28a844d3ef146aa48936dfbe4279a59b909a6dc4419d5f15b04 122112 xdg-dbus-proxy_0.1.4.orig.tar.xz
+ 313c0ade5de61b5454553efe81ff64e8db684f209859435d245919591edbadd4866d325d4c001b61a8a68a154958ac32a8dc2211aa18b79244e21824b766b94f 4880 xdg-dbus-proxy_0.1.4-3.debian.tar.xz
+Testsuite-Triggers: gnome-desktop-testing
+Dgit: 66a0884901fbbe414fae62f912a298b77d92d891 debian archive/debian/0.1.4-3 https://git.dgit.debian.org/xdg-dbus-proxy
+
+Package: xdg-desktop-portal
+Format: 3.0 (quilt)
+Binary: xdg-desktop-portal, xdg-desktop-portal-dev, xdg-desktop-portal-tests
+Architecture: any all
+Version: 1.16.0-2ubuntu1
+Priority: optional
+Section: misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Uploaders:  Simon McVittie <smcv@debian.org>,
+Standards-Version: 4.6.1
+Build-Depends: dbus-daemon, debhelper-compat (= 13), geoclue-2.0 <!nocheck>, fuse3 <!nocheck>, libcap2-bin <!nocheck>, libgdk-pixbuf-2.0-dev | libgdk-pixbuf2.0-dev, libgeoclue-2-dev (>= 2.5.2), libflatpak-dev (>= 1.5.0), libfuse3-dev (>= 3.10.0), libglib2.0-dev, libjson-glib-dev, libpipewire-0.3-dev (>= 0.3.10), libportal-dev (>= 0.3), libsystemd-dev, meson (>= 0.56.2), pipewire (>= 0.3.10) <!nocheck>, procps <!nocheck>, python3 <!nocheck>, python3-gi <!nocheck>, xmlto
+Testsuite: autopkgtest
+Homepage: https://github.com/flatpak/xdg-desktop-portal
+Vcs-Browser: https://salsa.debian.org/debian/xdg-desktop-portaltree/ubuntu/master
+Vcs-Git: https://salsa.debian.org/debian/xdg-desktop-portal.git -b ubuntu/master
+Directory: pool/main/x/xdg-desktop-portal
+Package-List:
+ xdg-desktop-portal deb admin optional arch=linux-any
+ xdg-desktop-portal-dev deb admin optional arch=all
+ xdg-desktop-portal-tests deb admin optional arch=any
+Files:
+ 4b1dc01037c74b9987091739d2717a20 2988 xdg-desktop-portal_1.16.0-2ubuntu1.dsc
+ 3312781f8f0ed772c52c05c010690283 250524 xdg-desktop-portal_1.16.0.orig.tar.xz
+ a6a5f7326f58aa7920e67290f63e5500 18160 xdg-desktop-portal_1.16.0-2ubuntu1.debian.tar.xz
+Checksums-Sha1:
+ 7f70fdfbd07da0c25011c43eacde2e69bb35ee17 2988 xdg-desktop-portal_1.16.0-2ubuntu1.dsc
+ 311dbb43400b2a660c45274f74f2fd5244ae5f0e 250524 xdg-desktop-portal_1.16.0.orig.tar.xz
+ d4537d312a83b75282d01f5bf79b3af37dffbbf4 18160 xdg-desktop-portal_1.16.0-2ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 50c9edb411bbb0681529090a68eb3c8ae4a16ce46422e8afdf47e06cd25b6e84 2988 xdg-desktop-portal_1.16.0-2ubuntu1.dsc
+ 5b41a5915c11851493d8c33b9783f147a0a6f419db80ad760e84cd3420fd8c19 250524 xdg-desktop-portal_1.16.0.orig.tar.xz
+ 3c1072ee840b41cc7d950b8bddbb3bcdf1742a934fe281afb28972ef02bedb62 18160 xdg-desktop-portal_1.16.0-2ubuntu1.debian.tar.xz
+Checksums-Sha512:
+ eef786a6bbcd2a0997994f447b9fb9e6aad877f018b9f40cda1765d055c7d2f076f5b4d20d893341ff60a7da6f3b6601f9e88a01a2efd3b7642b9ee67269ad93 2988 xdg-desktop-portal_1.16.0-2ubuntu1.dsc
+ f7e7e96d3a6757901fbc4c0310aac0afbf37882c279a2859e06f63528049cd9b50dd2d55445d1386f03f62557c1a2ec81d4ee081200367d6269d2dffc75f0912 250524 xdg-desktop-portal_1.16.0.orig.tar.xz
+ adb9d2d3cff535927a08f6a807e77a2ff5a007cc6a653f067bc20323f7bcce9fc8a33de14ae0dbd8f353c52158972f0895c68264e016ed8cc86eac6d06788290 18160 xdg-desktop-portal_1.16.0-2ubuntu1.debian.tar.xz
+Testsuite-Triggers: gnome-desktop-testing
+Debian-Vcs-Browser: https://salsa.debian.org/debian/xdg-desktop-portal
+Debian-Vcs-Git: https://salsa.debian.org/debian/xdg-desktop-portal.git
+
+Package: xdg-desktop-portal-gnome
+Format: 3.0 (quilt)
+Binary: xdg-desktop-portal-gnome
+Architecture: linux-any
+Version: 44~beta-1ubuntu1
+Priority: optional
+Section: misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Uploaders: Simon McVittie <smcv@debian.org>, Jeremy Bicha <jbicha@ubuntu.com>
+Standards-Version: 4.6.1
+Build-Depends: debhelper-compat (= 13), dh-sequence-gnome, gsettings-desktop-schemas-dev (>= 41), libfontconfig-dev, libadwaita-1-dev, libglib2.0-dev (>= 2.44), libgnome-desktop-4-dev, libgnome-bg-4-dev, libgtk-4-dev (>= 4.0), meson (>= 0.57.0), systemd (>= 242), xdg-desktop-portal-dev (>= 1.15.0), xmlto
+Homepage: https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome
+Vcs-Browser: https://salsa.debian.org/gnome-team/xdg-desktop-portal-gnome
+Vcs-Git: https://salsa.debian.org/gnome-team/xdg-desktop-portal-gnome.git
+Directory: pool/main/x/xdg-desktop-portal-gnome
+Package-List:
+ xdg-desktop-portal-gnome deb gnome optional arch=linux-any
+Files:
+ fb419bad9e66724087cb03f72f0d409c 2547 xdg-desktop-portal-gnome_44~beta-1ubuntu1.dsc
+ 28faf1d43fed8d25772752a12d8e4ad8 127580 xdg-desktop-portal-gnome_44~beta.orig.tar.xz
+ 22e8e3921c3fb2d57a8f88a315b15873 11068 xdg-desktop-portal-gnome_44~beta-1ubuntu1.debian.tar.xz
+Checksums-Sha1:
+ 45b62ff149c0f9ba0318bb721b28a6b633c5124a 2547 xdg-desktop-portal-gnome_44~beta-1ubuntu1.dsc
+ ced31af04e756a97be717afb3aa2679f07abd7db 127580 xdg-desktop-portal-gnome_44~beta.orig.tar.xz
+ 05fe46ef870384c058413179cb33e1248b6abf7e 11068 xdg-desktop-portal-gnome_44~beta-1ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ ca1aa3ee6f3fc7d4c0adf0392fd8fea4d8bbf272ef7bed3665690b4df5dd1d51 2547 xdg-desktop-portal-gnome_44~beta-1ubuntu1.dsc
+ 83a1909f03ce1e6fab072bf7f136a14159b149c7399b091f901f0d0f467855e2 127580 xdg-desktop-portal-gnome_44~beta.orig.tar.xz
+ a688e1426c45c19cbaaead62f80daaeac25b9601b823b7cde7c8985e7f2fb168 11068 xdg-desktop-portal-gnome_44~beta-1ubuntu1.debian.tar.xz
+Checksums-Sha512:
+ 3174c2d2ba5007ed2a5440c9ce0378bd82a89175b34e7e9a98af83364f03cbd65f6e777a133c6947d5952dc420b79669acc5563d6e41bcd9c77b78f1195c6805 2547 xdg-desktop-portal-gnome_44~beta-1ubuntu1.dsc
+ a36a1d4774e8558b511744f25bc7eb7a9f40b03ae210e10b370d854afcdc03ee9bd4b1b978fb45113ebd13a68e570d947f11b5ef9166aa3d84222ce961059a27 127580 xdg-desktop-portal-gnome_44~beta.orig.tar.xz
+ 68be701b16fa73dac8f982dc1852f4b8c04d4ce7c1182a2fdfa03e8f8d6432464cceecf086999b4f92178974adcd2583a79b2e9ac474f3216c696df8051277a3 11068 xdg-desktop-portal-gnome_44~beta-1ubuntu1.debian.tar.xz
+
+Package: xdg-desktop-portal-gtk
+Format: 3.0 (quilt)
+Binary: xdg-desktop-portal-gtk
+Architecture: linux-any
+Version: 1.14.1-1
+Priority: optional
+Section: misc
+Maintainer: Utopia Maintenance Team <pkg-utopia-maintainers@lists.alioth.debian.org>
+Uploaders: Simon McVittie <smcv@debian.org>,
+Standards-Version: 4.6.1
+Build-Depends: dbus, debhelper-compat (= 13), gsettings-desktop-schemas-dev, libdbus-1-dev, libfontconfig-dev, libglib2.0-dev, libgtk-3-dev, xdg-desktop-portal-dev (>= 1.14.0), xmlto
+Homepage: https://flatpak.org/
+Vcs-Browser: https://salsa.debian.org/debian/xdg-desktop-portal-gtk
+Vcs-Git: https://salsa.debian.org/debian/xdg-desktop-portal-gtk.git
+Directory: pool/main/x/xdg-desktop-portal-gtk
+Package-List:
+ xdg-desktop-portal-gtk deb gnome optional arch=linux-any
+Files:
+ ad80b3c1eeb37713627f6c4e6bfee442 2338 xdg-desktop-portal-gtk_1.14.1-1.dsc
+ 91a3a21cd0b24d59a0f977508717159a 393964 xdg-desktop-portal-gtk_1.14.1.orig.tar.xz
+ 4fead98e7d6360e25983616905a7b242 5504 xdg-desktop-portal-gtk_1.14.1-1.debian.tar.xz
+Checksums-Sha1:
+ 4cf615a09452c6b085c70c6b73148af1a08bc72c 2338 xdg-desktop-portal-gtk_1.14.1-1.dsc
+ af54c175f8e4591e916fc25dc56e6ac406c1f39c 393964 xdg-desktop-portal-gtk_1.14.1.orig.tar.xz
+ 88ccb4db6b136b739d9d7cc956e2341dc3521e6f 5504 xdg-desktop-portal-gtk_1.14.1-1.debian.tar.xz
+Checksums-Sha256:
+ 5f606639d6eea556e4c08921f1c737d43b3714783dd3309aa2c58d574bfc6f7c 2338 xdg-desktop-portal-gtk_1.14.1-1.dsc
+ 3ee2a992187eabb237a76170a7dead2a3bcea2edbf59344647cc0d1c640a5700 393964 xdg-desktop-portal-gtk_1.14.1.orig.tar.xz
+ cf14650a0675f251d24ae5a38745f763292516ccc038f850e1f6d626e0790411 5504 xdg-desktop-portal-gtk_1.14.1-1.debian.tar.xz
+Checksums-Sha512:
+ 12b7a77a487ecfda02cb9c5498a14b208074c3c8d3014a28fb0d5e3da8af081ca78db0aeb0340b0aea02042b4a5fcae886d17e0813d7fa6dfdc99d097a4d1656 2338 xdg-desktop-portal-gtk_1.14.1-1.dsc
+ d8b487e8fc7d8c1f0f41eb3ee28377b2f77af9c65569b5dbaee785ae40c163929da8b13b39b032e25631515cb8e7218129c8bbffe25692e85c7b8e9269024325 393964 xdg-desktop-portal-gtk_1.14.1.orig.tar.xz
+ 08564dcae9f4fd9787e700e94594f7464e1380a29154279049a10ef514cae64fbade4e70704f2945d9e25ed7b4a3bf2c67e36632ac81b0269a28d7a5a0174507 5504 xdg-desktop-portal-gtk_1.14.1-1.debian.tar.xz
+Dgit: 52f3802edb7d13b1568cc0e52bb9e7eb5791c342 debian archive/debian/1.14.1-1 https://git.dgit.debian.org/xdg-desktop-portal-gtk
+
+Package: xdg-user-dirs
+Format: 3.0 (quilt)
+Binary: xdg-user-dirs
+Architecture: any
+Version: 0.18-1
+Priority: important
+Section: utils
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Uploaders: Iain Lane <laney@debian.org>, Jordi Mallach <jordi@debian.org>, Matthias Klumpp <mak@debian.org>, Michael Biebl <biebl@debian.org>, Sebastian Dröge <slomo@debian.org>
+Standards-Version: 4.6.1
+Build-Depends: debhelper-compat (= 13), docbook-xml, docbook-xsl, gnome-pkg-tools (>= 0.19.8), xsltproc
+Homepage: https://www.freedesktop.org/wiki/Software/xdg-user-dirs
+Vcs-Browser: https://salsa.debian.org/gnome-team/xdg-user-dirs
+Vcs-Git: https://salsa.debian.org/gnome-team/xdg-user-dirs.git
+Directory: pool/main/x/xdg-user-dirs
+Package-List:
+ xdg-user-dirs deb utils optional arch=any
+Files:
+ 392deba4ea2b00b1e5a516445c80389e 2182 xdg-user-dirs_0.18-1.dsc
+ dc7decea7ffb58cd067eff1fe1798cae 273556 xdg-user-dirs_0.18.orig.tar.gz
+ 57428d4e31f149649e5aab564564f27b 4448 xdg-user-dirs_0.18-1.debian.tar.xz
+Checksums-Sha1:
+ a38b9b06845c8d126b7e8bd367c4a08f07edbb68 2182 xdg-user-dirs_0.18-1.dsc
+ 58587270fb85f33ec6d7ca194c48ddc82488e6d3 273556 xdg-user-dirs_0.18.orig.tar.gz
+ 4966973c030d110fb32ab4f77ad9db32666d16f0 4448 xdg-user-dirs_0.18-1.debian.tar.xz
+Checksums-Sha256:
+ ad366c644dcd081b82175a10a3b7bf4ab40603ee1b548d23797ed92c42a99a06 2182 xdg-user-dirs_0.18-1.dsc
+ ec6f06d7495cdba37a732039f9b5e1578bcb296576fde0da40edb2f52220df3c 273556 xdg-user-dirs_0.18.orig.tar.gz
+ ec600e795bf18f38b8918e93e685a20b7482eda3ddabb3debbf1104f691ad6b1 4448 xdg-user-dirs_0.18-1.debian.tar.xz
+Checksums-Sha512:
+ a2b332572cbcbf3a6ac0cc815a9f8215db0e3bc78ffe112922dffdbc81777a5ef57e8caa9a492650bab0b60c94e2d8482e121af3992a4bb660570bdbf248e84e 2182 xdg-user-dirs_0.18-1.dsc
+ f523b2ba4f840a3c2a5730f72182fb5bb798187db769bfb7d36e9f780442813278a2c1bad656b4fb38428131241a51d07200a62b4d7b935d49a74be53f969716 273556 xdg-user-dirs_0.18.orig.tar.gz
+ a981987294cd107aea4cd037a938dd86f3d942a85645fd234409670f8142f6f79b1453b4a877a830b242656995db2af3ab8652ae765af6378672be85964339df 4448 xdg-user-dirs_0.18-1.debian.tar.xz
+
+Package: xdg-user-dirs-gtk
+Format: 3.0 (quilt)
+Binary: xdg-user-dirs-gtk
+Architecture: any
+Version: 0.11-1
+Priority: optional
+Section: utils
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Uploaders: Jeremy Bicha <jbicha@ubuntu.com>, Michael Biebl <biebl@debian.org>, Sebastian Dröge <slomo@debian.org>
+Standards-Version: 4.6.1
+Build-Depends: debhelper-compat (= 13), dh-sequence-gnome, intltool, libgtk-3-dev, xdg-user-dirs
+Homepage: http://www.freedesktop.org/wiki/Software/xdg-user-dirs
+Vcs-Browser: https://salsa.debian.org/gnome-team/xdg-user-dirs-gtk
+Vcs-Git: https://salsa.debian.org/gnome-team/xdg-user-dirs-gtk.git
+Directory: pool/main/x/xdg-user-dirs-gtk
+Package-List:
+ xdg-user-dirs-gtk deb utils optional arch=any
+Files:
+ cac88e6d94b5a35f35c25e65eaf81c1e 2154 xdg-user-dirs-gtk_0.11-1.dsc
+ e30bf46fca8b7467643fb1998841873a 126488 xdg-user-dirs-gtk_0.11.orig.tar.xz
+ 30dd9a1d5b3ab61ab42cd62af585628f 4080 xdg-user-dirs-gtk_0.11-1.debian.tar.xz
+Checksums-Sha1:
+ bb149d47da1b1734ef2019c28d15e619197d5c76 2154 xdg-user-dirs-gtk_0.11-1.dsc
+ 4327e083be37370b18f44a54c3ff490839a7617c 126488 xdg-user-dirs-gtk_0.11.orig.tar.xz
+ b262203aeb937552211c759cd5f7b60572a6e669 4080 xdg-user-dirs-gtk_0.11-1.debian.tar.xz
+Checksums-Sha256:
+ 9a349b6377a6875b8a747d0dbc5f7857f9deecd5c2b6cff3aef4ab636c8d6d11 2154 xdg-user-dirs-gtk_0.11-1.dsc
+ 534bd563d3c0e3f8dcbf3578cb8ab0e49d3ba41c966d477c8af9438364121e7d 126488 xdg-user-dirs-gtk_0.11.orig.tar.xz
+ 58bbeb40ca5f48561f5dd04c909e33883dd3366bc8f19b232108fa2717b13385 4080 xdg-user-dirs-gtk_0.11-1.debian.tar.xz
+Checksums-Sha512:
+ 25f2f1ce912776880af415a288a853616c07e8c87f7afbeb56a6bb2c0a39e1781d68e06cfd11e4d2fb8d5251399fdca7c0e8c79d67caafcabaec0ac2faee566a 2154 xdg-user-dirs-gtk_0.11-1.dsc
+ 2a650c6372126f807ac90fb0508e1b11636b38b5960a3037b547e9f1bb1a6b82653f20da7d5aae1144eebec040e3af89a02fbf70c1768724019b384f6d9cf85a 126488 xdg-user-dirs-gtk_0.11.orig.tar.xz
+ e3bdefe7c9bd322408bce5473527c890f037e20f9f29aeab19288ce00961ee8a7df9d4f7bff9fe9bb5f6c29791efb1588040b72299e44ed034df738bf68bec01 4080 xdg-user-dirs-gtk_0.11-1.debian.tar.xz
+
+Package: xdg-utils
+Format: 3.0 (quilt)
+Binary: xdg-utils
+Architecture: all
+Version: 1.1.3-4.1ubuntu3
+Priority: optional
+Section: utils
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian freedesktop.org maintainers <pkg-freedesktop-maintainers@lists.alioth.debian.org>
+Uploaders:  Per Olofsson <pelle@debian.org>, Nicholas Guriev <guriev-ns@ya.ru>,
+Standards-Version: 4.5.1
+Build-Depends: debhelper-compat (= 12)
+Build-Depends-Indep: mawk | awk, w3m | links | lynx, xmlto
+Testsuite: autopkgtest
+Homepage: https://www.freedesktop.org/wiki/Software/xdg-utils/
+Vcs-Browser: https://salsa.debian.org/freedesktop-team/xdg-utils
+Vcs-Git: https://salsa.debian.org/freedesktop-team/xdg-utils.git
+Directory: pool/main/x/xdg-utils
+Package-List:
+ xdg-utils deb utils optional arch=all
+Files:
+ 5d4f9d74e53f46f50b1e88d3989d8c51 1898 xdg-utils_1.1.3-4.1ubuntu3.dsc
+ 902042508b626027a3709d105f0b63ff 297170 xdg-utils_1.1.3.orig.tar.gz
+ 80f37ec18350fa1d5ba9117f85fddd1c 17136 xdg-utils_1.1.3-4.1ubuntu3.debian.tar.xz
+Checksums-Sha1:
+ 5b517a98b0a634e40eec6fa50969535ebe3afde8 1898 xdg-utils_1.1.3-4.1ubuntu3.dsc
+ 98294cf332c341b85e481d98e9ea59357fe1efc7 297170 xdg-utils_1.1.3.orig.tar.gz
+ 96c103213d750cc1b3e5260c37074af6a314de2f 17136 xdg-utils_1.1.3-4.1ubuntu3.debian.tar.xz
+Checksums-Sha256:
+ 1f097d3045b46dd32a90e5338d245cb0a4c852ccfb5a072d950a95dd2a18c0ab 1898 xdg-utils_1.1.3-4.1ubuntu3.dsc
+ d798b08af8a8e2063ddde6c9fa3398ca81484f27dec642c5627ffcaa0d4051d9 297170 xdg-utils_1.1.3.orig.tar.gz
+ bab05dd61e53f3af163868071391094151459b40c77dc572b1f9da89a0e1747f 17136 xdg-utils_1.1.3-4.1ubuntu3.debian.tar.xz
+Checksums-Sha512:
+ 56fb2976bf7afd9662851028b92134078722d732d4d7af85b6e95bc5554da86e83772a07b9834b7b42a0f6e28e02bcefe9e98948516b0710350e2ae5a4506783 1898 xdg-utils_1.1.3-4.1ubuntu3.dsc
+ d1f819a211eb4104a90dfdc6fedcb640fd46b15ccfc8762266f8f538c49d74cb00027b8c1af991fb2a200acb4379986ae375700e06a2aa08fb41a38f883acb3e 297170 xdg-utils_1.1.3.orig.tar.gz
+ 2c1798d8ddbb684e540fde613f603e8d48e6e61683275e93c37b31a10e2823b7cdbcff41116be9d9a7f1cecfe244d416f25e7c9cd5dbc3f773d99e8cd0827a86 17136 xdg-utils_1.1.3-4.1ubuntu3.debian.tar.xz
+Testsuite-Triggers: bash, dash, make
+
+Package: xf86-input-wacom
+Format: 3.0 (quilt)
+Binary: xserver-xorg-input-wacom
+Architecture: linux-any
+Version: 1:1.1.0-1ubuntu1
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Boyuan Yang <byang@debian.org>
+Standards-Version: 4.6.1
+Build-Depends: debhelper-compat (= 13), libudev-dev, libx11-dev, libxi-dev, libxinerama-dev, libxrandr-dev, pkg-config, xserver-xorg-dev, xutils-dev
+Homepage: https://linuxwacom.github.io/
+Vcs-Browser: https://salsa.debian.org/debian/xf86-input-wacom
+Vcs-Git: https://salsa.debian.org/debian/xf86-input-wacom.git
+Directory: pool/main/x/xf86-input-wacom
+Package-List:
+ xserver-xorg-input-wacom deb x11 optional arch=linux-any
+Files:
+ d4deb9e5f67fd03dcbe24abb8b75c36c 1812 xf86-input-wacom_1.1.0-1ubuntu1.dsc
+ 2339215dc92b7cbbcbd7cceabc4f384f 645948 xf86-input-wacom_1.1.0.orig.tar.bz2
+ 297bf978e9983f7070362da6e253b1be 195 xf86-input-wacom_1.1.0.orig.tar.bz2.asc
+ 82d812e81e268145d69fecf0b01e6afa 12160 xf86-input-wacom_1.1.0-1ubuntu1.debian.tar.xz
+Checksums-Sha1:
+ 00a533e34157d258e7397020f03648d04c3ad19a 1812 xf86-input-wacom_1.1.0-1ubuntu1.dsc
+ 63faa93d9bb206ca24396e1450b8f5fcca822547 645948 xf86-input-wacom_1.1.0.orig.tar.bz2
+ 033be9c182e644c2ad4ce01e9de9c7e20798deab 195 xf86-input-wacom_1.1.0.orig.tar.bz2.asc
+ 4e1f586513711b8ea83e3ba451cc8a98906b4c91 12160 xf86-input-wacom_1.1.0-1ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 113660eb5ff2778feadabdc207955055e9717275f3d4fad100658230ae41becd 1812 xf86-input-wacom_1.1.0-1ubuntu1.dsc
+ 23b674067f344de22bcbb4bac885c43df54c5e841f6dade7c9d18ba7ce297a12 645948 xf86-input-wacom_1.1.0.orig.tar.bz2
+ 0da1d5a209261e653f4a85faae190f2824755cbab7e6adbc9fc97cd4e1a3b4f7 195 xf86-input-wacom_1.1.0.orig.tar.bz2.asc
+ da63e5accbde32217ba84bad73524e04db6d998bfd4d649dd0a1007f074b5e28 12160 xf86-input-wacom_1.1.0-1ubuntu1.debian.tar.xz
+Checksums-Sha512:
+ 117307259020021869d65429a0cedaa3e26f6ed6611d45d12f9f8e40dc45e67df7c24723af0ab91d508958a792e9ca142db79d560feb6e9ab58d214300bee459 1812 xf86-input-wacom_1.1.0-1ubuntu1.dsc
+ d4ca8d5ea5e328c6e6b4bdb3d0ca23dee0bdb960e79f4422483d456330f9c88ea7579da4fba192fd250b23d7db1b7f40ad8ef0127f334c580030858edcbb9f4d 645948 xf86-input-wacom_1.1.0.orig.tar.bz2
+ 4c7c55c39a897c409c146b8e52563c002b9a5394931d5665164440cae811d68c70c743766026dfab251a463984ed7855a2d7c30316f4e9e1d51541b847dd473d 195 xf86-input-wacom_1.1.0.orig.tar.bz2.asc
+ 2d6792c1c721d8cf85182b7f1794392e9ac5142c6ae6d496ef5f362f42c3790e63b6751eb1182dcbac235c9e56e42652ab39750728e13938cc2982e93ae56476 12160 xf86-input-wacom_1.1.0-1ubuntu1.debian.tar.xz
+
+Package: xfonts-base
+Format: 1.0
+Binary: xfonts-base
+Architecture: all
+Version: 1:1.0.5+nmu1
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.8.3
+Build-Depends: debhelper (>= 10.8)
+Build-Depends-Indep: pkg-config, xfonts-utils, xutils-dev
+Vcs-Browser: https://salsa.debian.org/xorg-team/font/xfonts-base
+Vcs-Git: https://salsa.debian.org/xorg-team/font/xfonts-base.git
+Directory: pool/main/x/xfonts-base
+Package-List:
+ xfonts-base deb fonts optional arch=all
+Files:
+ 4d523d6171796d5315a02ebccae79e4b 1759 xfonts-base_1.0.5+nmu1.dsc
+ af8ea4391176863a800c4315e8bd4309 6680462 xfonts-base_1.0.5+nmu1.tar.gz
+Checksums-Sha1:
+ c9d846d51cd35149e398b90ecd5ebef7c5c836a9 1759 xfonts-base_1.0.5+nmu1.dsc
+ 2dc74052b799a745e806144f4b3345df72315ec5 6680462 xfonts-base_1.0.5+nmu1.tar.gz
+Checksums-Sha256:
+ 375c7a7b5e905a9964fe6aa22789aeb51f61560ea419b00a94efe508fe38f7fd 1759 xfonts-base_1.0.5+nmu1.dsc
+ d5aec0918e0e7067d6f70cc68f7c8136229ceda0afbcc83ae8a278a9c25bb1e5 6680462 xfonts-base_1.0.5+nmu1.tar.gz
+Checksums-Sha512:
+ 78e6f1cb79ff6c27df3b9e8adab3dcd245512cb763902f35ca11d6a9089245283ff9852082742124319d5bb5b71fa431584d5f9c48cbca257c0f688f0e77efb4 1759 xfonts-base_1.0.5+nmu1.dsc
+ 76f4e61680a68fe7ab727b1e4084b1ae66ce3b83a0bd9727641ff1ed286541dbfff39654def406310e74b3e17ce6b37223e2a99ae00428cf260cb11b3d291b41 6680462 xfonts-base_1.0.5+nmu1.tar.gz
+Dgit: 7de660144c2472184aec211ea42e9e3abbb8038f debian archive/debian/1%1.0.5+nmu1 https://git.dgit.debian.org/xfonts-base
+
+Package: xfonts-encodings
+Format: 1.0
+Binary: xfonts-encodings
+Architecture: all
+Version: 1:1.0.5-0ubuntu2
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.8.3
+Build-Depends: debhelper (>= 7)
+Build-Depends-Indep: pkg-config, xfonts-utils (>= 1:7.6~), autoconf, automake, xutils-dev (>= 1:7.5+1)
+Vcs-Browser: http://git.debian.org/?p=pkg-xorg/font/xfonts-encodings.git
+Vcs-Git: git://git.debian.org/git/pkg-xorg/font/xfonts-encodings.git
+Directory: pool/main/x/xfonts-encodings
+Package-List:
+ xfonts-encodings deb x11 optional arch=all
+Files:
+ 61d41cb902881bb817101d82c283edb9 1464 xfonts-encodings_1.0.5-0ubuntu2.dsc
+ 49d10bdd1bb53b6051b6c630b627b249 790741 xfonts-encodings_1.0.5.orig.tar.gz
+ dadf7fff0ca72179eaf4482ccfc7fb30 14293 xfonts-encodings_1.0.5-0ubuntu2.diff.gz
+Checksums-Sha1:
+ 676e0da478bb8a80115d4c5b4450db9955f24c1e 1464 xfonts-encodings_1.0.5-0ubuntu2.dsc
+ f0397607b67abfadc00251d069149fc363890e55 790741 xfonts-encodings_1.0.5.orig.tar.gz
+ 76a6be0d29402234298b857c8e405415d4c395f2 14293 xfonts-encodings_1.0.5-0ubuntu2.diff.gz
+Checksums-Sha256:
+ ede41e05bf2df0e95f613351013178f406e9041382e5c2abeced162a2f8e10ed 1464 xfonts-encodings_1.0.5-0ubuntu2.dsc
+ 66f524ab53acdd0823265e1b1a894f8652c928ae75a18b39aafd6a2d4a5577b0 790741 xfonts-encodings_1.0.5.orig.tar.gz
+ d946c93b7014c6eacd9a537add008a3a19fce73a01923083978a3c39ab591fb4 14293 xfonts-encodings_1.0.5-0ubuntu2.diff.gz
+Checksums-Sha512:
+ f4fad2eae6113ed446e02e3ad150a3a6ae12ceda3deca509099732991654d9b24cc5923ecd31db01620fc77699ed264e103827d37651bcdc527a38288e52b675 1464 xfonts-encodings_1.0.5-0ubuntu2.dsc
+ 9e444ebeed0f667eb1a50d226c9953d1b3b55cb15415c4cb32ec33fd081cc62ae7df5e2925cff51d5dd14cdd82c212ba655e81ea5f83a6bf30b3031d38ccc602 790741 xfonts-encodings_1.0.5.orig.tar.gz
+ e8ab10530deea9bca07c98cce0ae8b6bee759902b03ff3bd16f84e9c2b324e1782d1e0bccbfecc1d7302944d15f632748b77dec53e6e9bc803485e7a3508e197 14293 xfonts-encodings_1.0.5-0ubuntu2.diff.gz
+
+Package: xfonts-scalable
+Format: 1.0
+Binary: xfonts-scalable
+Architecture: all
+Version: 1:1.0.3-1.3
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.8.3
+Build-Depends: debhelper-compat (= 13), xfonts-utils (>= 1:7.6~), automake, autoconf, xutils-dev (>= 1:7.5+1), pkg-config
+Vcs-Browser: https://salsa.debian.org/xorg-team/font/xfonts-scalable
+Vcs-Git: https://salsa.debian.org/xorg-team/font/xfonts-scalable.git
+Directory: pool/main/x/xfonts-scalable
+Package-List:
+ xfonts-scalable deb fonts optional arch=all
+Files:
+ 846d40ebd534f9d676880c1c7dbcebd4 1956 xfonts-scalable_1.0.3-1.3.dsc
+ ff91738c4d3646d7999e00aa9923f2a0 450458 xfonts-scalable_1.0.3.orig.tar.gz
+ e12f5a38ca811383454df5c96670bfca 15014 xfonts-scalable_1.0.3-1.3.diff.gz
+Checksums-Sha1:
+ fb97d65f0ab461d35a10ce60c7f06d117dacc1b6 1956 xfonts-scalable_1.0.3-1.3.dsc
+ a57248a1c373b527444307b26769ca042febae48 450458 xfonts-scalable_1.0.3.orig.tar.gz
+ e47d842655e79ac612e9b801b32853ab1f7cb9f3 15014 xfonts-scalable_1.0.3-1.3.diff.gz
+Checksums-Sha256:
+ e3595c5835a9a8f176800deb566738f17996b9a3e24dee604ab1c7b1c8f3ecae 1956 xfonts-scalable_1.0.3-1.3.dsc
+ 3399b7586c18be509cdaeceeebf754b861faa1d8799dda1aae01aeb2a7a30f01 450458 xfonts-scalable_1.0.3.orig.tar.gz
+ ae22605d94fe3d49565e77b7f23d7a89a561c2b5cd93e9764442a7610b00b931 15014 xfonts-scalable_1.0.3-1.3.diff.gz
+Checksums-Sha512:
+ 66a605aa393afe4ea13c5a12cb17cb72d1cdc375b8fb8f53758cbd1aba6dd37ca5fce7a8868805a6cff13adf563f734c6286945b17279c77bc2bf19c7556a435 1956 xfonts-scalable_1.0.3-1.3.dsc
+ b988030e8d021dba33012b66bd0b98470c0e7232ea101af205c8165b84671133e8b558a3e6b133f3c6355e00d8b504ee8294485a23a978085ba405a8565c98c9 450458 xfonts-scalable_1.0.3.orig.tar.gz
+ 559ccbab39c3cb8f84601ad05a0ddc955e6738030207e22424e27242c8c4366c5d0c0179a8fb658196b38b5b36429c89d092ded6a610f12ae6d59398ea737fc4 15014 xfonts-scalable_1.0.3-1.3.diff.gz
+
+Package: xfonts-utils
+Format: 1.0
+Binary: xfonts-utils
+Architecture: any
+Version: 1:7.7+6build2
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9), pkg-config, quilt, autotools-dev, libx11-dev (>= 2:1.0.0), x11proto-core-dev (>= 7.0.25), libfreetype6-dev, libfontenc-dev, xutils-dev (>= 1:7.5+4), x11proto-fonts-dev
+Vcs-Browser: https://salsa.debian.org/xorg-team/font/xfonts-utils
+Vcs-Git: https://salsa.debian.org/xorg-team/font/xfonts-utils
+Directory: pool/main/x/xfonts-utils
+Package-List:
+ xfonts-utils deb x11 optional arch=any
+Files:
+ 03f3dbe76d554bd448315964f5d630c0 1856 xfonts-utils_7.7+6build2.dsc
+ 43d10d5dc6e78a60056e4cee743c1aa2 846921 xfonts-utils_7.7+6build2.tar.gz
+Checksums-Sha1:
+ 780b208bd3aaeb905ab04d56a946952218c112bc 1856 xfonts-utils_7.7+6build2.dsc
+ f9d795c614a9c12b6603aa0988186cfda1f2c175 846921 xfonts-utils_7.7+6build2.tar.gz
+Checksums-Sha256:
+ 16778227083df129ae04d7dbaaf5b61d8e35bfa4e7da13ca0dd957b36b707062 1856 xfonts-utils_7.7+6build2.dsc
+ afc12fd9c2719b3544d8b3d71415060062dc271b1f26589f2c00698b58ca886e 846921 xfonts-utils_7.7+6build2.tar.gz
+Checksums-Sha512:
+ 28fb48af69f33401a5665c2a5891d49dca1cb1706a251f1b4dd0585bba4b366d280cd6412164318ae61b1b7cb9fbe1386e0ffee657aa7cf50baceb75f760a6ee 1856 xfonts-utils_7.7+6build2.dsc
+ fc382af3b2432edd786e022882cae5391bf770def2ed2e4723de8623f572807d7ad99c49911fe90ddd5a1bc792033df985c694b29d5b940ffc830df30cf5f704 846921 xfonts-utils_7.7+6build2.tar.gz
+
+Package: xfsdump
+Format: 3.0 (quilt)
+Binary: xfsdump
+Architecture: any
+Version: 3.1.11-0.1
+Priority: optional
+Section: admin
+Maintainer: Nathan Scott <nathans@debian.org>
+Uploaders: Anibal Monsalve Salazar <anibal@debian.org>
+Standards-Version: 3.8.1
+Build-Depends: xfslibs-dev (>= 3.0.0), uuid-dev, libattr1-dev (>= 2.4.14), libncurses-dev, autoconf, debhelper (>= 5), gettext, libtool, autotools-dev
+Directory: pool/main/x/xfsdump
+Package-List:
+ xfsdump deb admin optional arch=any
+Files:
+ 9307f35ad0934cc60cb78cd604f01a96 1692 xfsdump_3.1.11-0.1.dsc
+ 917ab38a6fa76d8f98bcf596cb1895e8 862337 xfsdump_3.1.11.orig.tar.gz
+ 2fbb9c6a3ceaf748de5c4af83b5f3aa4 5272 xfsdump_3.1.11-0.1.debian.tar.xz
+Checksums-Sha1:
+ 6e94c3bff5fdf684c7b8e8a447057677e4cbeefa 1692 xfsdump_3.1.11-0.1.dsc
+ f65f48b194cc52691d2fdbe957ddd565e1f51ac7 862337 xfsdump_3.1.11.orig.tar.gz
+ b67fd8f988dc1fd7155ff7705f743d411f8d7805 5272 xfsdump_3.1.11-0.1.debian.tar.xz
+Checksums-Sha256:
+ bb0f4a762f9a5af7bf6d6929bc9f053abf3c85a2c1c9ede2e5105ba52f5d99a0 1692 xfsdump_3.1.11-0.1.dsc
+ 62923283bb1af849eabba6de71b9f24b09c4ac652fcbc03f902d75332bc22e9a 862337 xfsdump_3.1.11.orig.tar.gz
+ 912466e4a34458012530acbac289a71f80a3b8792b9ac61d4a5d75ab2aca58f9 5272 xfsdump_3.1.11-0.1.debian.tar.xz
+Checksums-Sha512:
+ 8baf1dfc52c27bda5f045c30434bd92c1fc51c928a50499d6a9c4167e31e52a8094c0dd8a6c7c90e8ae28d17f75666066011a36ec6834f814b83d0ab2205e161 1692 xfsdump_3.1.11-0.1.dsc
+ 986dd18bac5924bfa0fc85fd53b7c01fb4f361cf54a0b96b9096585f540c9e48aab798cadb5e4f2d377b64db5878f4dd3a0c42f9683bb3d81f5080b886a8781f 862337 xfsdump_3.1.11.orig.tar.gz
+ a34d6ef1735a46b73afb399b2e4952d6729ae85ddd699b63f715cab0ec280f0f175529e5ace807f09e9598bc3d52ba07cfcc450f30ee0c0b14202119b913d96a 5272 xfsdump_3.1.11-0.1.debian.tar.xz
+
+Package: xfsprogs
+Format: 3.0 (quilt)
+Binary: xfsprogs, xfslibs-dev, xfsprogs-udeb
+Architecture: linux-any
+Version: 6.1.0-1ubuntu1
+Priority: optional
+Section: admin
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: XFS Development Team <linux-xfs@vger.kernel.org>
+Uploaders: Nathan Scott <nathans@debian.org>, Anibal Monsalve Salazar <anibal@debian.org>, Bastian Germann <bage@debian.org>
+Standards-Version: 4.0.0
+Build-Depends: libinih-dev (>= 53), uuid-dev, dh-autoreconf, debhelper (>= 5), gettext, libtool, libedit-dev, libblkid-dev (>= 2.17), linux-libc-dev, libdevmapper-dev, libattr1-dev, libicu-dev, pkg-config, liburcu-dev
+Homepage: https://xfs.wiki.kernel.org/
+Directory: pool/main/x/xfsprogs
+Package-List:
+ xfslibs-dev deb libdevel optional arch=linux-any
+ xfsprogs deb admin optional arch=linux-any
+ xfsprogs-udeb udeb debian-installer optional arch=linux-any
+Files:
+ 619714277f0bc7e923abc59643ae4046 2117 xfsprogs_6.1.0-1ubuntu1.dsc
+ 267f09f8b2b0c286d49693841f48400c 1322908 xfsprogs_6.1.0.orig.tar.xz
+ 4f55440268c7b15b525f2f902ecb8a46 14076 xfsprogs_6.1.0-1ubuntu1.debian.tar.xz
+Checksums-Sha1:
+ 7ce23464df370cf69b02ddd307246101e077ce99 2117 xfsprogs_6.1.0-1ubuntu1.dsc
+ 1df880341fe1280ffafae5c387ba01720ae0fd12 1322908 xfsprogs_6.1.0.orig.tar.xz
+ 2299551ec67f418f1ab83c3e3d6c61b3b7648c55 14076 xfsprogs_6.1.0-1ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 22146f54ef28ae650923b4f03cf30d3c3b5feb5041dcd4036569645d209f224e 2117 xfsprogs_6.1.0-1ubuntu1.dsc
+ eceb9015c4ebefa56fa85faff756ccb51ed2cf9c39ba239767f8e78705e85251 1322908 xfsprogs_6.1.0.orig.tar.xz
+ 6deb0df56c59fdfb7e6bab9ad9c5d56029b2b4e42b23f7f98263fa34235eb7e1 14076 xfsprogs_6.1.0-1ubuntu1.debian.tar.xz
+Checksums-Sha512:
+ 42346eae83464fd495bb130bb4fc51a5b8f3516d56ba61f0bfc9b7a3c1fabf3c1ddab4b33eb33fd1131289e689884e49d09a33ff110482a772c7f90186928cf6 2117 xfsprogs_6.1.0-1ubuntu1.dsc
+ 6b6896ea2312836642fc3536aa47c1b96074c495dfa5876ebf06370f8b64d36df6149798153f86bb6ba3fde54354694f74ee72446dd4c6ab509013d82d25e8b0 1322908 xfsprogs_6.1.0.orig.tar.xz
+ 980df1e7e1471bb824b9324d933c6077ee2555c595144f499914aabe9babd0d7afecf731e3266c18a37e6616d40d1242b77c71551314368669e217dbf833ab1c 14076 xfsprogs_6.1.0-1ubuntu1.debian.tar.xz
+
+Package: xft
+Format: 1.0
+Binary: libxft2, libxft2-udeb, libxft-dev
+Architecture: any
+Version: 2.3.6-1
+Priority: optional
+Section: devel
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), libfontconfig1-dev, libfreetype6-dev, libx11-dev (>= 2:1.3.3-2), libxrender-dev (>= 1:0.9.5-2), zlib1g-dev | libz-dev, quilt, xutils-dev (>= 1:7.5+4)
+Vcs-Browser: https://salsa.debian.org/xorg-team/lib/xft
+Vcs-Git: https://salsa.debian.org/xorg-team/lib/xft
+Directory: pool/main/x/xft
+Package-List:
+ libxft-dev deb libdevel optional arch=any
+ libxft2 deb libs optional arch=any
+ libxft2-udeb udeb debian-installer optional arch=any
+Files:
+ ada6686e1dca9fd4f9c4dc063b4a0eb8 2006 xft_2.3.6-1.dsc
+ 59f23d3b150a2c3f8a691997da905663 447498 xft_2.3.6.orig.tar.gz
+ 1ce97c9f0afbf1c63da29c862a828dc1 17995 xft_2.3.6-1.diff.gz
+Checksums-Sha1:
+ 25964f1c731e8827baf6f8c3a58ddf25c339a59a 2006 xft_2.3.6-1.dsc
+ b07e4b6c9d22d91a3544728bf4d8bd64a12bf03c 447498 xft_2.3.6.orig.tar.gz
+ 26bb9a20713fa6853d55b4712bcf7070f36e9970 17995 xft_2.3.6-1.diff.gz
+Checksums-Sha256:
+ 252220495bd12fac30d8f1b1994916beaed9c5149138dcc62e230fee17339530 2006 xft_2.3.6-1.dsc
+ b7e59f69e0bbabe9438088775f7e5a7c16a572e58b11f9722519385d38192df5 447498 xft_2.3.6.orig.tar.gz
+ 9d4c64fc52626134a3f753df88fceaba0cb460bd9b56544f0e42178deca77019 17995 xft_2.3.6-1.diff.gz
+Checksums-Sha512:
+ 701e98ed66c560422e40f21b1fec9c71d1f80ab9be2e88441d55fc9204ece2791f44e9af0144f1a5290606fb264cdc248c557b61d97a4a849604534b347240b4 2006 xft_2.3.6-1.dsc
+ 291bec2cc297a6e39baff5c2dec37017f37f97b438468a6d6b66f496a9987936da6ee2e3ace77e4527d8c5fd09e1dd731b2f042fa74880f667b8a03a913512d2 447498 xft_2.3.6.orig.tar.gz
+ a31b78e7c273a53b89209b4ec54498d539594adc02cb54773b9aedd20435fb89c0b3879f6fdd8908516ed5897a2653b880ace41d7ad932b00e33de91f267d91b 17995 xft_2.3.6-1.diff.gz
+
+Package: xinit
+Format: 1.0
+Binary: xinit
+Architecture: any
+Version: 1.4.1-0ubuntu4
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 9), dh-autoreconf, pkg-config, libx11-dev (>= 2:1.0.0), quilt, automake, x11proto-core-dev (>= 7.0.17), xutils-dev (>= 1:7.7+3)
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/xinit
+Vcs-Git: https://salsa.debian.org/xorg-team/app/xinit.git
+Directory: pool/main/x/xinit
+Package-List:
+ xinit deb x11 optional arch=any
+Files:
+ 18f83cbfe81d6742752e8573d3a17cfc 2003 xinit_1.4.1-0ubuntu4.dsc
+ a2cb5a85e221901703f85ee343ed3662 223315 xinit_1.4.1.orig.tar.gz
+ 30419ce59bfdb09c6964df05924b29c5 21991 xinit_1.4.1-0ubuntu4.diff.gz
+Checksums-Sha1:
+ 47a12e440ee8d0365cd6f653f4a1dc2ae103d629 2003 xinit_1.4.1-0ubuntu4.dsc
+ 32f092505dc4576fcf814025933d0785c2f9e6dd 223315 xinit_1.4.1.orig.tar.gz
+ 99636e266d45e5c42933a53399bd10c06b6d2d6a 21991 xinit_1.4.1-0ubuntu4.diff.gz
+Checksums-Sha256:
+ 7dce168f05d6b22aa3f7c0741bd5f4b9de52fd1b007d08ed5bdc8954ab2ac6cf 2003 xinit_1.4.1-0ubuntu4.dsc
+ ca33ec3de6c39589c753620e5b3bcbc8277218b949bfa2df727779b03a8d2357 223315 xinit_1.4.1.orig.tar.gz
+ 5140d0b84662bce097ced91e4a5a283c09aa81b9f660ca05d9c4009d0d816f1b 21991 xinit_1.4.1-0ubuntu4.diff.gz
+Checksums-Sha512:
+ a3f9b91cb49d1d2a0e892be27a9d1b75f640d7f700560948fec763890e64d20e503ca0ac3f200287ef0b160f281a26d264323e731d58968ed8950bbc1b599ef3 2003 xinit_1.4.1-0ubuntu4.dsc
+ c228c910b09eafc4a6bb7450c6d3431daaba56389c1a3fee3755fbea13a4a9056964f43bb664d18ba933b21dc8d50997591edf67da4d9890881b0b5263796da2 223315 xinit_1.4.1.orig.tar.gz
+ c9b456ca7907a35067d708cda4e436cd9fa9d41812430bc7006d5aa291077491023ab1d9eede2c61c8eddea2973919be2e9ff010df61bff7c917f3f4d701e9fd 21991 xinit_1.4.1-0ubuntu4.diff.gz
+
+Package: xinput
+Format: 1.0
+Binary: xinput
+Architecture: any
+Version: 1.6.3-1build2
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 12), libx11-dev, libxi-dev (>= 2:1.5.99.1), libxext-dev, libxinerama-dev, libxrandr-dev, x11proto-input-dev (>= 2.1.99.1), pkg-config, xutils-dev
+Vcs-Browser: https://salsa.debian.org/xorg-team/app/xinput
+Vcs-Git: https://salsa.debian.org/xorg-team/app/xinput.git
+Directory: pool/main/x/xinput
+Package-List:
+ xinput deb x11 optional arch=any
+Files:
+ 0bd01331e50b011a47ffee8ec4509214 2272 xinput_1.6.3-1build2.dsc
+ 7d1562909e0a32225671b425ba6f7a39 203936 xinput_1.6.3.orig.tar.gz
+ 7518b638f45f3e6da71c10372fa10988 195 xinput_1.6.3.orig.tar.gz.asc
+ abf01f76c3f2da1b7e12c1a1ffeea911 7224 xinput_1.6.3-1build2.diff.gz
+Checksums-Sha1:
+ a1e5485b5d4576073d689210bf8bf22302c9ef62 2272 xinput_1.6.3-1build2.dsc
+ 6fed797704eaba52a7220dd8cdc32142df1a60b9 203936 xinput_1.6.3.orig.tar.gz
+ 0d647b84cfe4ab4f38923db107fd0e5b56f06a5c 195 xinput_1.6.3.orig.tar.gz.asc
+ 4bcb1f654da3d1da6fe6cdb779855af04ea31a0b 7224 xinput_1.6.3-1build2.diff.gz
+Checksums-Sha256:
+ 5a3f28004616902b0e0425a8cc568994865cd28760dbcd8fb27120325bb0be50 2272 xinput_1.6.3-1build2.dsc
+ 9f29f9bfe387c5a3d582f9edc8c5a753510ecc6fdfb154c03b5cea5975b10ce4 203936 xinput_1.6.3.orig.tar.gz
+ a51c84393cf951e3157e4202385157ada392de9657c1d4b1f7f2f260cba839da 195 xinput_1.6.3.orig.tar.gz.asc
+ 54fb0fd417aa9e0f51de1a89bf22541d4cd9b55b290e66b37530c59f49165e9b 7224 xinput_1.6.3-1build2.diff.gz
+Checksums-Sha512:
+ 777c26d702f8727952eff83475ee757a662ea01f08d4da9237e4ebc3f80d2f49d8bcdd9d102ad40a4c0fa617901c67a143b131714402dd710a1f7c761d01f41e 2272 xinput_1.6.3-1build2.dsc
+ f2d61288b87505add5909aace7d51d99f5c7b1a8fad5475316da371f74d5b616ae261660c81851bec595c5d716fead3e40d8fc0cc7d2234c2b04db2b24e25da8 203936 xinput_1.6.3.orig.tar.gz
+ 6a459af044b3001cc95d16412b6232c1fe6f5f6fc86201964e264c7d008d6b19a4692151299893a1fdeadb7e09e27ba313fb14e5f1c7f120b6c3f7a102c5317c 195 xinput_1.6.3.orig.tar.gz.asc
+ 58a4bc4c35a7d63d552955ab38ac381029d1732fa699387d8670a8861a99b0864800d524ff9822871688b8068292049061186fb90739a2270192efc3b63bc7f4 7224 xinput_1.6.3-1build2.diff.gz
+
+Package: xkeyboard-config
+Format: 1.0
+Binary: xkb-data, xkb-data-udeb
+Architecture: all
+Version: 2.38-0ubuntu1
+Priority: important
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 12), meson, quilt
+Build-Depends-Indep: gettext-base, libxml-parser-perl, x11-xkb-utils, libglib2.0-dev, xsltproc, xutils-dev (>= 1:7.6+2)
+Homepage: https://www.freedesktop.org/Software/XKeyboardConfig
+Vcs-Browser: https://salsa.debian.org/xorg-team/data/xkeyboard-config
+Vcs-Git: https://salsa.debian.org/xorg-team/data/xkeyboard-config.git
+Directory: pool/main/x/xkeyboard-config
+Package-List:
+ xkb-data deb x11 optional arch=all
+ xkb-data-udeb udeb debian-installer optional arch=all
+Files:
+ 78beae2563a60c995891a204a9b261bb 1881 xkeyboard-config_2.38-0ubuntu1.dsc
+ e718d67048fdb24ee7edb7cb57d99df9 1662066 xkeyboard-config_2.38.orig.tar.gz
+ 7d74fde5ee87a742d995c76dae7fc35d 17940 xkeyboard-config_2.38-0ubuntu1.diff.gz
+Checksums-Sha1:
+ 4491d632431f62633e5bbc28ba0260c06fb4884f 1881 xkeyboard-config_2.38-0ubuntu1.dsc
+ ed434bc146c616660a72415b24b69dfbf608a6eb 1662066 xkeyboard-config_2.38.orig.tar.gz
+ 3039e6fdd4f6b027725167702a3dd36f569f3b97 17940 xkeyboard-config_2.38-0ubuntu1.diff.gz
+Checksums-Sha256:
+ 1e975a5b1a9ee5c195f1353a72fadcd930b2d130c791de0ef7f6f3ba6947fde7 1881 xkeyboard-config_2.38-0ubuntu1.dsc
+ b693c30cc6c8b26c2fb566113489161445ea41f54a0325312568a0d5309fddfe 1662066 xkeyboard-config_2.38.orig.tar.gz
+ 4344f72f28166826edcd99dd25e1397fb17568eb0ee0f3f914aeab219f1717ea 17940 xkeyboard-config_2.38-0ubuntu1.diff.gz
+Checksums-Sha512:
+ 313eabe07351210964c583c35ebf88fd48bb617bf3f1aef0c23fbcefdaf8b178bf8be7ab1f408dae804e701dde75e75799edcedb841076efcb7b4c44f770e060 1881 xkeyboard-config_2.38-0ubuntu1.dsc
+ 44ab42d3086aa98dd4ce63d2dc874d9ede9d29953322fe4067dc65c95c2ac371dff17ae2207d3e564384a455abd70aec01558d3f77e44416e3272563b2fad533 1662066 xkeyboard-config_2.38.orig.tar.gz
+ 1e2835d25aab7b3b5b422033e7882c43ff87ca2f769de456df7af44dae569e0f3e16acde7e9a47fc3f91789026b95e1e297eb6ac5373ee4b7bb30a8ff39e8392 17940 xkeyboard-config_2.38-0ubuntu1.diff.gz
+
+Package: xml-core
+Format: 3.0 (native)
+Binary: xml-core
+Architecture: all
+Version: 0.18+nmu1
+Priority: optional
+Section: text
+Maintainer: Debian XML-SGML group <debian-sgml@lists.debian.org>
+Uploaders: Joseph Herlant <aerostitch@debian.org>
+Standards-Version: 4.3.0
+Build-Depends: debhelper-compat (= 12)
+Build-Depends-Indep: perl
+Vcs-Browser: https://salsa.debian.org/xml-sgml-team/xml-core
+Vcs-Git: https://salsa.debian.org/xml-sgml-team/xml-core.git
+Directory: pool/main/x/xml-core
+Package-List:
+ xml-core deb text optional arch=all
+Files:
+ b8f806f5e9b4c4ebe867c3ab70f01d91 1632 xml-core_0.18+nmu1.dsc
+ 9ad79379414efcd26c3d81236c11343b 21312 xml-core_0.18+nmu1.tar.xz
+Checksums-Sha1:
+ 6b5edf3d8d0f6687e45f22fc287618fcc1fbf152 1632 xml-core_0.18+nmu1.dsc
+ 8b794e500dead39f60ab95f1e181370e7a28fcb8 21312 xml-core_0.18+nmu1.tar.xz
+Checksums-Sha256:
+ 3b4bc034193f99750141611ae1c836c6b742c88ed0af1420051f3fcae30bf5ae 1632 xml-core_0.18+nmu1.dsc
+ 3e07592404b8ac38924fb650227cf5c9dcfc9933bd632eb4430635cd54898471 21312 xml-core_0.18+nmu1.tar.xz
+Checksums-Sha512:
+ 1c3a335850618902a71478ee26136848e7de12f1ec090cca0598d1a2e4810f3fa5b97d65fd058752e904c1073a36785bef3b088ce34623de290e3c80c971b69b 1632 xml-core_0.18+nmu1.dsc
+ 568a3e73acb64db8074e88813a6f64c9839a92e9afba6bbb90e5852e2cc6565636e380ba87fec6d29aa6b4eaa896131ef2d404ed3811443a4df1c6bdb3d1545b 21312 xml-core_0.18+nmu1.tar.xz
+
+Package: xmlsec1
+Format: 3.0 (quilt)
+Binary: libxmlsec1-dev, libxmlsec1, libxmlsec1-openssl, libxmlsec1-gnutls, libxmlsec1-nss, libxmlsec1-gcrypt, xmlsec1, libxmlsec1-doc
+Architecture: any all
+Version: 1.2.37-2
+Priority: optional
+Section: text
+Maintainer: Debian XML/SGML Group <debian-xml-sgml-pkgs@lists.alioth.debian.org>
+Uploaders:  John V. Belmonte <jbelmonte@debian.org>, Rene Engelhard <rene@debian.org>,
+Standards-Version: 4.1.4
+Build-Depends: debhelper (>= 11), help2man, libgcrypt20-dev, libgnutls28-dev, libnss3-dev (>= 2:3.72-2), libssl-dev, libxml2-dev, libxslt1-dev, pkg-config
+Build-Depends-Indep: gtk-doc-tools, man2html-base, xsltproc
+Build-Conflicts: libnspr4-dev (<< 2:4.32-3)
+Homepage: https://www.aleksey.com/xmlsec/
+Vcs-Browser: https://salsa.debian.org/xml-sgml-team/xmlsec1
+Vcs-Git: https://salsa.debian.org/xml-sgml-team/xmlsec1.git
+Directory: pool/main/x/xmlsec1
+Package-List:
+ libxmlsec1 deb libs optional arch=any
+ libxmlsec1-dev deb libdevel optional arch=any
+ libxmlsec1-doc deb text optional arch=all
+ libxmlsec1-gcrypt deb libs optional arch=any
+ libxmlsec1-gnutls deb libs optional arch=any
+ libxmlsec1-nss deb libs optional arch=any
+ libxmlsec1-openssl deb libs optional arch=any
+ xmlsec1 deb text optional arch=any
+Files:
+ ed9bb5093dd4c77a2e4e217432df47e6 2634 xmlsec1_1.2.37-2.dsc
+ c670563de88cf7455a8036650fbec584 2039332 xmlsec1_1.2.37.orig.tar.gz
+ 0081ca72edf2f37557cd48cfa90b69dc 14348 xmlsec1_1.2.37-2.debian.tar.xz
+Checksums-Sha1:
+ 920132e366e9b3e24786ba69318232d006900355 2634 xmlsec1_1.2.37-2.dsc
+ fa6bb084fe201d5279455eb0da230cbc7d36cd7a 2039332 xmlsec1_1.2.37.orig.tar.gz
+ f19f1485d8e6f2dd1ff3fddde0f482a33b4273c3 14348 xmlsec1_1.2.37-2.debian.tar.xz
+Checksums-Sha256:
+ f3f22ab92762d66f605bf8567c0ea813cd8b0355c7dbc1dffcfb0e29167fb5ca 2634 xmlsec1_1.2.37-2.dsc
+ a75ba7aa698ebb6e1a7ed914896de27888c4f5cdf549cc0856e31585b4110c3c 2039332 xmlsec1_1.2.37.orig.tar.gz
+ 00f3452ddfb7a24763e6cf7323457a9f5fc757258e6dd1e13e9904c462e6b04e 14348 xmlsec1_1.2.37-2.debian.tar.xz
+Checksums-Sha512:
+ 28bda9ab93d3f5fc25d73641af0f0f93f8efbf6ac03b42a550322542c2155dac68693ca9e9ecd96fd1614cbc00e9f6000e7a8b3fbed1d42c8df60834c06d8215 2634 xmlsec1_1.2.37-2.dsc
+ 80c431ddf24fdce26952e875c0779651ab498c2532b5627bd3e911d5ee5f5430db216918a354e4f6026a6a712634800a2969c4e0801aeb101bb1a0726df44777 2039332 xmlsec1_1.2.37.orig.tar.gz
+ 42d1ce27bf8e520d79c4bd3cc263aab93f3b718612ad57ca3e445061d13e9618c96cecda26c62bc1900aee984f1102dd8f8400816de804628dec46a58dc93235 14348 xmlsec1_1.2.37-2.debian.tar.xz
+
+Package: xorg
+Format: 1.0
+Binary: x11-common, xserver-xorg, xserver-xorg-video-all, xserver-xorg-input-all, xorg, xorg-dev, xbase-clients, xutils
+Architecture: any all
+Version: 1:7.7+23ubuntu2
+Priority: optional
+Section: x11
+Maintainer: Ubuntu X-SWAT <ubuntu-x@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: dpkg (>= 1.16.1), debhelper-compat (= 12), po-debconf, asciidoc
+Homepage: https://www.x.org/
+Vcs-Browser: https://salsa.debian.org/xorg-team/debian/xorg
+Vcs-Git: https://salsa.debian.org/xorg-team/debian/xorg
+Directory: pool/main/x/xorg
+Package-List:
+ x11-common deb x11 optional arch=all
+ xbase-clients deb x11 optional arch=all
+ xorg deb x11 optional arch=any
+ xorg-dev deb x11 optional arch=all
+ xserver-xorg deb x11 optional arch=any
+ xserver-xorg-input-all deb x11 optional arch=any
+ xserver-xorg-video-all deb x11 optional arch=any
+ xutils deb x11 optional arch=all
+Files:
+ 963a8a0d396589d1579225c28fd6cb10 2095 xorg_7.7+23ubuntu2.dsc
+ 0b77fe705b06bcb3db5a612c9c8c43ce 301762 xorg_7.7+23ubuntu2.tar.gz
+Checksums-Sha1:
+ 1bb45736786fdd136762456191f97a62134d9962 2095 xorg_7.7+23ubuntu2.dsc
+ b413b847d747693b5ecf36ff1f1e2cd0e557335f 301762 xorg_7.7+23ubuntu2.tar.gz
+Checksums-Sha256:
+ 60fde2e08a27c61f46320a1ccf057ab4fdd983e08c9ab5b603b010259514deb0 2095 xorg_7.7+23ubuntu2.dsc
+ cc30e97fee09a9a8db16931e9eb8b39c37e0699136a8a8d31898ae414a3c4f74 301762 xorg_7.7+23ubuntu2.tar.gz
+Checksums-Sha512:
+ f4befc0dd73c66f56856f16c4dc4051f58af50bd8819469df4bb309817952e00f2f4e29776282f85eeaef18a77fdd42cb1cfcb9a69432c4680b216039b37e480 2095 xorg_7.7+23ubuntu2.dsc
+ 379e60ab57cc4f9adbf1f59295fca3930bbd638f4100d08c9f1f78bd6ef063e3396385b841e66389771c4ba5825875d738b9aa4b4dc2e3f79d0537415ac0852a 301762 xorg_7.7+23ubuntu2.tar.gz
+
+Package: xorg-docs
+Format: 1.0
+Binary: xorg-docs-core, xorg-docs
+Architecture: all
+Version: 1:1.7.1-1.2
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 9), dh-autoreconf, quilt, pkg-config, xorg-sgml-doctools (>= 1:1.8), docbook-xml, automake, autoconf, xutils-dev (>= 1:7.6+2), xmlto (>= 0.0.22), fop, w3m
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-xorg/doc/xorg-docs.git
+Vcs-Git: git://anonscm.debian.org/git/pkg-xorg/doc/xorg-docs
+Directory: pool/main/x/xorg-docs
+Package-List:
+ xorg-docs deb doc optional arch=all
+ xorg-docs-core deb doc optional arch=all
+Files:
+ a28474b1deba03421e420dafda44e2a8 2015 xorg-docs_1.7.1-1.2.dsc
+ ca689ccbf8ebc362afbe5cc5792a4abd 499355 xorg-docs_1.7.1.orig.tar.gz
+ e85d4735b97cf5588997397e82b65c5a 13228 xorg-docs_1.7.1-1.2.diff.gz
+Checksums-Sha1:
+ d3d3a74e97ce3d110ab5e507d969fd9ef0cd9f4c 2015 xorg-docs_1.7.1-1.2.dsc
+ 87abe9a03806c63a4bf3797610e7a3c30a0b9cda 499355 xorg-docs_1.7.1.orig.tar.gz
+ d3734bd3910a6b74fb3bc8889669b905a1397261 13228 xorg-docs_1.7.1-1.2.diff.gz
+Checksums-Sha256:
+ 18e6b7b6031a86d4cb87715accf935a8c6b1468b99933c9ac76b14f0708b8946 2015 xorg-docs_1.7.1-1.2.dsc
+ 360707db2ba48f6deeb53d570deca9fa98218af48ead4a726a67f63e3ef63816 499355 xorg-docs_1.7.1.orig.tar.gz
+ 6610cc936c174ce4934ec00183feda0143b8adb0ab360395524b9c8f4a09f73e 13228 xorg-docs_1.7.1-1.2.diff.gz
+Checksums-Sha512:
+ 197dbc91959fb6cb3d5465cd33a123f87ca07c3a8f7f83c03d9adeda156a735cae46d04b20d66d001aced06ea8b3ed9464bdd3cc8c1112652c4066395c521d83 2015 xorg-docs_1.7.1-1.2.dsc
+ cf8b409fcdc724bcce21370a43010964e88a1209fd51e7495343ec2e305e7bab2e0a5f075bee8aac997020653d1be95c7b9cf2c649605d27e1a61938bd18854f 499355 xorg-docs_1.7.1.orig.tar.gz
+ a1301a67111e0865aa908725c014dec9d5d8b3666005b64dd78ea762e9ed0aad060723b8bbd75d11241e8b0b21691e97289abeddc40bcdd151a44aa45179e202 13228 xorg-docs_1.7.1-1.2.diff.gz
+
+Package: xorg-server
+Format: 1.0
+Binary: xserver-xorg-core, xserver-xorg-core-udeb, xserver-xorg-dev, xnest, xvfb, xserver-xephyr, xserver-common, xorg-server-source, xserver-xorg-legacy
+Architecture: any all
+Version: 2:21.1.6-1ubuntu1
+Priority: optional
+Section: x11
+Maintainer: Ubuntu X-SWAT <ubuntu-x@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 3.9.8
+Build-Depends: debhelper-compat (= 12), po-debconf, quilt, pkg-config, bison, flex, xauth, xutils-dev (>= 1:7.6+4), xfonts-utils (>= 1:7.5+1), x11proto-dev (>= 2021.5), xtrans-dev (>= 1.3.5), libxau-dev (>= 1:1.0.5-2), libxcvt-dev, libxdmcp-dev (>= 1:0.99.1), libxfont-dev (>= 1:2.0.1), libxkbfile-dev (>= 1:0.99.1), libpixman-1-dev (>= 0.27.2), libpciaccess-dev (>= 0.12.901), libgcrypt-dev, nettle-dev, libudev-dev (>= 151-3) [linux-any], libselinux1-dev (>= 2.0.80) [linux-any], libaudit-dev [linux-any], libdrm-dev (>= 2.4.107-5~) [!hurd-i386], libgl1-mesa-dev (>= 9.2), mesa-common-dev, libunwind-dev [amd64 arm64 armel armhf hppa i386 ia64 mips64 mips64el mipsel powerpc powerpcspe ppc64 ppc64el sh4], libxmuu-dev (>= 1:0.99.1), libxext-dev (>= 1:0.99.1), libx11-dev (>= 2:1.6), libxrender-dev (>= 1:0.9.0), libxi-dev (>= 2:1.8), libxpm-dev (>= 1:3.5.3), libxaw7-dev (>= 1:0.99.1), libxt-dev (>= 1:0.99.1), libxmu-dev (>= 1:0.99.1), libxtst-dev (>= 1:0.99.1), libxres-dev (>= 1:0.99.1), libxfixes-dev (>= 1:3.0.0), libxv-dev, libxinerama-dev, libxshmfence-dev (>= 1.1) [!hurd-i386], libepoxy-dev (>= 1.5.4) [linux-any kfreebsd-any], libegl1-mesa-dev [linux-any kfreebsd-any], libgbm-dev (>= 10.2) [linux-any kfreebsd-any], libx11-xcb-dev, libxcb1-dev, libxcb-xkb-dev, libxcb-shape0-dev, libxcb-render0-dev, libxcb-render-util0-dev, libxcb-util0-dev, libxcb-image0-dev, libxcb-icccm4-dev, libxcb-shm0-dev, libxcb-keysyms1-dev, libxcb-randr0-dev, libxcb-xv0-dev, libxcb-glx0-dev, libxcb-xf86dri0-dev (>= 1.6), xkb-data, x11-xkb-utils, libbsd-dev, libdbus-1-dev (>= 1.0) [linux-any], libsystemd-dev [linux-any], libffi-dev
+Build-Depends-Indep: xz-utils
+Homepage: https://www.x.org/
+Vcs-Browser: https://salsa.debian.org/xorg-team/xserver/xorg-server
+Vcs-Git: https://salsa.debian.org/xorg-team/xserver/xorg-server.git
+Directory: pool/main/x/xorg-server
+Package-List:
+ xnest deb x11 optional arch=any
+ xorg-server-source deb x11 optional arch=all
+ xserver-common deb x11 optional arch=all
+ xserver-xephyr deb x11 optional arch=any
+ xserver-xorg-core deb x11 optional arch=any
+ xserver-xorg-core-udeb udeb debian-installer optional arch=any profile=!noudeb
+ xserver-xorg-dev deb x11 optional arch=any
+ xserver-xorg-legacy deb x11 optional arch=any
+ xvfb deb x11 optional arch=any
+Files:
+ 24df3258e124309bff158250a2d2a045 4344 xorg-server_21.1.6-1ubuntu1.dsc
+ be772aaebe95efd46cf893df925d1146 8977302 xorg-server_21.1.6.orig.tar.gz
+ a35364e666d080b84c3c39c876d44562 195 xorg-server_21.1.6.orig.tar.gz.asc
+ 909a80a3e72f5229ccb3505708e1ca29 228661 xorg-server_21.1.6-1ubuntu1.diff.gz
+Checksums-Sha1:
+ 19e59847971dcb622151b9090f90e6dd7c0741ba 4344 xorg-server_21.1.6-1ubuntu1.dsc
+ 36c26ae5d701a9463384d039551a18e6c31088a7 8977302 xorg-server_21.1.6.orig.tar.gz
+ 234cc0c7d7d11a796fd0ff20df3b0e6be3e625f1 195 xorg-server_21.1.6.orig.tar.gz.asc
+ 75cafee1cc15dfdab6a3932020deae02161b1732 228661 xorg-server_21.1.6-1ubuntu1.diff.gz
+Checksums-Sha256:
+ fa862d5334ffe77f255e8517dc8e50253a0f1d02dc873fc9a0f3feacd367fc84 4344 xorg-server_21.1.6-1ubuntu1.dsc
+ 6f9c73ccc50e2731adac17671c8e33687738c8cd556b49ecb9f410ce7217be11 8977302 xorg-server_21.1.6.orig.tar.gz
+ 36baeb500286dc6e4bac35be11a8902c91c50f4e966753924c398346ff8a741d 195 xorg-server_21.1.6.orig.tar.gz.asc
+ 37e013992ef90aede93fc371933988f22410acc4cfd73c52efaaec417dd17ac5 228661 xorg-server_21.1.6-1ubuntu1.diff.gz
+Checksums-Sha512:
+ af42be6bd67952d1247307161917afa21dba6ec11f864c693b5f2b13aa73e4d38df30f8de89b5c855a16715d2612f5bf54d7d39509d343fd52f58f5212072728 4344 xorg-server_21.1.6-1ubuntu1.dsc
+ 4f87e7837b66c24c1e04a82c252dfef83a49a8886c9e2b23f6fecb5eb1c7fa4aaadc6802e0f0dc13ecb5eef324e966ccccda0c182bf04824876f69508e282bac 8977302 xorg-server_21.1.6.orig.tar.gz
+ 9fb4699c8818d8f390af2fe3dc6c877159322e6222d84bd07816253d3acdd4d25f9ac7f1e7a877feac2f8eebd345bdf640310c9125e0eb6a6ff814032edcd968 195 xorg-server_21.1.6.orig.tar.gz.asc
+ f39098fef5afa8b473fce1190ff00bd98f2efee694683183bc75eaedd148298375352f7a9e081e28109a7f1c6ff1a33072968c78099c37cf3515a38cd85329c4 228661 xorg-server_21.1.6-1ubuntu1.diff.gz
+
+Package: xorg-sgml-doctools
+Format: 1.0
+Binary: xorg-sgml-doctools
+Architecture: all
+Version: 1:1.11-1.1
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Cyril Brulebois <kibi@debian.org>
+Standards-Version: 3.9.1
+Build-Depends: debhelper (>= 8), dh-autoreconf, quilt, pkg-config, xutils-dev (>= 1:7.5+4)
+Vcs-Browser: http://git.debian.org/?p=pkg-xorg/doc/xorg-sgml-doctools.git
+Vcs-Git: git://git.debian.org/git/pkg-xorg/doc/xorg-sgml-doctools
+Directory: pool/main/x/xorg-sgml-doctools
+Package-List:
+ xorg-sgml-doctools deb x11 optional arch=all
+Files:
+ cb654be26b841c249466d88e7a58202b 1987 xorg-sgml-doctools_1.11-1.1.dsc
+ 51cf4c6b476e2b98a068fea6975b9b21 150367 xorg-sgml-doctools_1.11.orig.tar.gz
+ cbf1be867f1ea7b560a6febe8f5477a2 3296 xorg-sgml-doctools_1.11-1.1.diff.gz
+Checksums-Sha1:
+ 5009402317d7d2dd269f06bff0cec4059692fe1a 1987 xorg-sgml-doctools_1.11-1.1.dsc
+ cb2a2ce7040269b9a74f972780c85a490dd4e78f 150367 xorg-sgml-doctools_1.11.orig.tar.gz
+ 822fb7019cbf117e7defa682078ccd4bb291458c 3296 xorg-sgml-doctools_1.11-1.1.diff.gz
+Checksums-Sha256:
+ 6aac68e597386c10b02646d2026a833d301749a938701f4ca8efd4d19ad34295 1987 xorg-sgml-doctools_1.11-1.1.dsc
+ 986326d7b4dd2ad298f61d8d41fe3929ac6191c6000d6d7e47a8ffc0c34e7426 150367 xorg-sgml-doctools_1.11.orig.tar.gz
+ 0c11e15d4f9aaacd38452a6a37d064f1a07058dcead7ab1e2aca223ec0a94d11 3296 xorg-sgml-doctools_1.11-1.1.diff.gz
+Checksums-Sha512:
+ 1682e1a4d4be1bfb1242adfa22b2764a9425b035cbfae9fd58925d4904eb301fe48bf92fc5935e973d7653db001ab221a8eac8cc5e2840d5a2e0cb4f1bb4895c 1987 xorg-sgml-doctools_1.11-1.1.dsc
+ a2386e41a8e2f7deaded61e00eaeab922647c0d0f4e36268c4337dc71d2412b0ec433140d080a0fd118b6112ed0a4f960280f932fe8d4a90ea9dc8bedf1eb75e 150367 xorg-sgml-doctools_1.11.orig.tar.gz
+ 0ea09f6de75cf649fb82705a0470e5ba04edbe59ccfa26132e60120e04036b86e9ff47785fdcee2499fa005cbbdfc9e04ebdca619d0253ea558e2fe5501b9ec4 3296 xorg-sgml-doctools_1.11-1.1.diff.gz
+
+Package: xorgproto
+Format: 1.0
+Binary: x11proto-dev, x11proto-core-dev, x11proto-dri2-dev, x11proto-fonts-dev, x11proto-gl-dev, x11proto-input-dev, x11proto-kb-dev, x11proto-present-dev, x11proto-randr-dev, x11proto-record-dev, x11proto-render-dev, x11proto-scrnsaver-dev, x11proto-video-dev, x11proto-xext-dev, x11proto-xf86dga-dev, x11proto-xf86dri-dev, x11proto-xf86vidmode-dev, x11proto-xinerama-dev
+Architecture: all
+Version: 2022.1-1
+Priority: optional
+Section: misc
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 12), quilt, xutils-dev (>= 1:7.6+2), pkg-config, xmlto, xorg-sgml-doctools (>= 1:1.8), w3m, xsltproc
+Homepage: https://www.x.org/
+Vcs-Browser: https://salsa.debian.org/xorg-team/proto/xorgproto.git
+Vcs-Git: https://salsa.debian.org/xorg-team/proto/xorgproto.git
+Directory: pool/main/x/xorgproto
+Package-List:
+ x11proto-core-dev deb oldlibs optional arch=all
+ x11proto-dev deb x11 optional arch=all
+ x11proto-dri2-dev deb oldlibs optional arch=all
+ x11proto-fonts-dev deb oldlibs optional arch=all
+ x11proto-gl-dev deb oldlibs optional arch=all
+ x11proto-input-dev deb oldlibs optional arch=all
+ x11proto-kb-dev deb oldlibs optional arch=all
+ x11proto-present-dev deb oldlibs optional arch=all
+ x11proto-randr-dev deb oldlibs optional arch=all
+ x11proto-record-dev deb oldlibs optional arch=all
+ x11proto-render-dev deb oldlibs optional arch=all
+ x11proto-scrnsaver-dev deb oldlibs optional arch=all
+ x11proto-video-dev deb oldlibs optional arch=all
+ x11proto-xext-dev deb oldlibs optional arch=all
+ x11proto-xf86dga-dev deb oldlibs optional arch=all
+ x11proto-xf86dri-dev deb oldlibs optional arch=all
+ x11proto-xf86vidmode-dev deb oldlibs optional arch=all
+ x11proto-xinerama-dev deb oldlibs optional arch=all
+Files:
+ 29aa4f9fce40950b5fdd8f08bc277310 3410 xorgproto_2022.1-1.dsc
+ ff0a74e3fb31757811216386384c997b 1107316 xorgproto_2022.1.orig.tar.gz
+ 01b62b9e34461d47d918039cb9d6cecd 195 xorgproto_2022.1.orig.tar.gz.asc
+ ac324301e8861ff500e942af614eff76 23288 xorgproto_2022.1-1.diff.gz
+Checksums-Sha1:
+ cddeb2457aa21e09816b39ed7dde6d8ce4d60b45 3410 xorgproto_2022.1-1.dsc
+ 78ddd13f911eb11dbc205e9077b6c48e17088ce5 1107316 xorgproto_2022.1.orig.tar.gz
+ ce8b1f345932e8f0e427a423db1e628e13b9361d 195 xorgproto_2022.1.orig.tar.gz.asc
+ f6ddb7f01b277041ac36024ce6f0ec9152d48578 23288 xorgproto_2022.1-1.diff.gz
+Checksums-Sha256:
+ f7422a97f3c67ad50559fbdb4eba362002e9dcda090e9ae6bc999245298e6dbe 3410 xorgproto_2022.1-1.dsc
+ 2a399e77d98fe53e9056726a1934b62cbaa6c41d7b1f41a354911b0925363343 1107316 xorgproto_2022.1.orig.tar.gz
+ 5d9077f618efacf21669930cc38bdf58585676ef3ba57ee9ff5364d410cd21b4 195 xorgproto_2022.1.orig.tar.gz.asc
+ a314356d8c46e4cacf3ef38e904f071efffaa614a7f05019fc4d7e832f5cbe73 23288 xorgproto_2022.1-1.diff.gz
+Checksums-Sha512:
+ cd5dae5e527d42a2d54eb1adf2028af45462567849937d740fd9e46f9c8f080264c49928d44300ea4d4e77978292b57513c9112054da6da17bd02068f61c5d37 3410 xorgproto_2022.1-1.dsc
+ e34404eb9f7edfebdecbf38c66491fbca91929c59b5762d3266b2808cdae3f4e65589001d29bf5374effc56173a5467f5a107bf4fe05acae69839b841e83f72c 1107316 xorgproto_2022.1.orig.tar.gz
+ 8a975a43434c40af2cdc781aad4dbb8ff2d1730fe6a04b431800d19a81b1fbf53e29503f8226c6579d7335c7250842b4c6eb5e8ee4f1b0f08bb7e87b12b50b3c 195 xorgproto_2022.1.orig.tar.gz.asc
+ 062da8e99882e4b3a6527ec92fb1faace09a7586c30a699af13be1b4f00af076e9d60054e2f61e21425203c5175a51f919dcea81a8e7b0562a8b8eb341b1dc77 23288 xorgproto_2022.1-1.diff.gz
+
+Package: xserver-xorg-input-libinput
+Format: 1.0
+Binary: xserver-xorg-input-libinput, xserver-xorg-input-libinput-dev, xserver-xorg-input-libinput-udeb
+Architecture: linux-any all
+Version: 1.2.1-1
+Priority: optional
+Section: misc
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Timo Aaltonen <tjaalton@debian.org>,
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), libinput-dev (>= 1.4.901), libudev-dev, pkg-config, quilt, x11proto-dev (>= 2021.5), xserver-xorg-dev (>= 2:1.15.99), xutils-dev
+Homepage: https://www.x.org
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-input-libinput
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-input-libinput.git
+Directory: pool/main/x/xserver-xorg-input-libinput
+Package-List:
+ xserver-xorg-input-libinput deb x11 optional arch=linux-any
+ xserver-xorg-input-libinput-dev deb libdevel optional arch=all
+ xserver-xorg-input-libinput-udeb udeb debian-installer optional arch=linux-any
+Files:
+ 1f7876af1bc275c31bdb1f6b085221cf 2734 xserver-xorg-input-libinput_1.2.1-1.dsc
+ 9ec409b0b1f5adad577f48ebe1bbb638 461051 xserver-xorg-input-libinput_1.2.1.orig.tar.gz
+ af1b04c08f73a85f161f6348701f9f97 195 xserver-xorg-input-libinput_1.2.1.orig.tar.gz.asc
+ 931f546f6be85cc3d650a4136390c740 16247 xserver-xorg-input-libinput_1.2.1-1.diff.gz
+Checksums-Sha1:
+ 21cf3bcdd29136526e37e7c92f57dd26cc9f9284 2734 xserver-xorg-input-libinput_1.2.1-1.dsc
+ 48b306e18a62800bc9486a1da3cce345413ec0d4 461051 xserver-xorg-input-libinput_1.2.1.orig.tar.gz
+ d7c8adf7d6397c065840e730a94b2c0f9f662ece 195 xserver-xorg-input-libinput_1.2.1.orig.tar.gz.asc
+ 792633c30c25e75e7d26f5ea094f6a6a2ad76ada 16247 xserver-xorg-input-libinput_1.2.1-1.diff.gz
+Checksums-Sha256:
+ a77c1143dd8aee1970833eb9147b48f9b759ab0dab2c2de33a32690a5e9d413d 2734 xserver-xorg-input-libinput_1.2.1-1.dsc
+ ac37b3fd4685025d8a1864ee361b3d6c4e50689c9a5b86786ea1fa3eb997f3e5 461051 xserver-xorg-input-libinput_1.2.1.orig.tar.gz
+ b9eb04f1c5db81480333098f3b22469b1a9736ef7a9d5fcb62482608adef5151 195 xserver-xorg-input-libinput_1.2.1.orig.tar.gz.asc
+ 5b222ed4f954f3a45eb588ddfff43893fc6b06807156caf321b394f0672384f3 16247 xserver-xorg-input-libinput_1.2.1-1.diff.gz
+Checksums-Sha512:
+ fab8e8488cf72aae389f8ddbd476683d36426457639305590d9f22b48cdf69d7ff8eced1b97ffdf0c7cce6c286ce2b35a337d0e0bc2864cd96a8c6362a38436f 2734 xserver-xorg-input-libinput_1.2.1-1.dsc
+ d03e4c5d866b760783ec97822f0aa5e5b2bbb7ade2c9a6b33df7796198dd2bc7f35a97649d39bb41073ce3c701921b66444f303a3cb17440bdbbb3f017e85211 461051 xserver-xorg-input-libinput_1.2.1.orig.tar.gz
+ c005c708e811a11de7c74518a73ec5cc60ca203d6d56265d19a5147df3c5d42d1fec24d11f7ee4ea3efdf0c0a618d9d13796388de2b15cebcb5f17309bf834a9 195 xserver-xorg-input-libinput_1.2.1.orig.tar.gz.asc
+ dfe9afc1aaf760595db6e773d890d638e35437ea2f5909acbb88a322215ae1483a1e08732b10908131413ed1b1d3157f9278ff72e8ede4e7e6a1d10cc4d48e4e 16247 xserver-xorg-input-libinput_1.2.1-1.diff.gz
+
+Package: xserver-xorg-video-amdgpu
+Format: 1.0
+Binary: xserver-xorg-video-amdgpu
+Architecture: linux-any
+Version: 22.0.0-3
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Timo Aaltonen <tjaalton@debian.org>
+Standards-Version: 4.2.1
+Build-Depends: debhelper (>= 11), quilt, libdrm-dev (>= 2.4.89) [!hurd-i386], libgl1-mesa-dev | libgl-dev, libgbm-dev, libudev-dev [linux-any], pkg-config, x11proto-dev, xserver-xorg-dev (>= 2:1.16), xutils-dev (>= 1:7.5+4)
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-amdgpu.git
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-amdgpu.git
+Directory: pool/main/x/xserver-xorg-video-amdgpu
+Package-List:
+ xserver-xorg-video-amdgpu deb x11 optional arch=linux-any
+Files:
+ 1364ff65bc3c83a502dfebff8c5c63c8 2230 xserver-xorg-video-amdgpu_22.0.0-3.dsc
+ 73efb437f5eb29b2c52a9d82c7e15d72 552435 xserver-xorg-video-amdgpu_22.0.0.orig.tar.gz
+ b75c95a6be7e0d8b965762383159573d 20021 xserver-xorg-video-amdgpu_22.0.0-3.diff.gz
+Checksums-Sha1:
+ 76885e5a5578e4a46c50877419763d37e4f4ef69 2230 xserver-xorg-video-amdgpu_22.0.0-3.dsc
+ 6d5ba51571b3b4d110e7329b9a89c39590eed47f 552435 xserver-xorg-video-amdgpu_22.0.0.orig.tar.gz
+ aba899697b6d974372580a2d64a71b4e13e31355 20021 xserver-xorg-video-amdgpu_22.0.0-3.diff.gz
+Checksums-Sha256:
+ f3287eafc670db40302c4633a037b168966bfd9a9059020ba4e6a70abe26ea3b 2230 xserver-xorg-video-amdgpu_22.0.0-3.dsc
+ bc47a1a8854e790270fa5de2fb9dfe8558139b03d8f68ac1057dcd235d572dcc 552435 xserver-xorg-video-amdgpu_22.0.0.orig.tar.gz
+ e30b799e0830d0f5e2da0738438a6be4d6873ee6aa4de6ca902503db2a05166f 20021 xserver-xorg-video-amdgpu_22.0.0-3.diff.gz
+Checksums-Sha512:
+ b2b93ef2d47b76d474b3e0ba28c408f1f5e0693c8780e39f4015e306fc934341002beb5901dfa8ddb0107f0f906887623bf8471ab410fbc4bbe957e3c07124ab 2230 xserver-xorg-video-amdgpu_22.0.0-3.dsc
+ 8929fac8b99c907ff0bcfa9c38fac5369a7ce2fc0e3d1eb506aafadf7e2aaf020f3e1b9a72a46aa2dc5ef10a0ae681332fb230b6e8f1be3516cc4e8ea7c3d5af 552435 xserver-xorg-video-amdgpu_22.0.0.orig.tar.gz
+ 9d4d92aee3c4095222f4955492c13e8da1c700de2b95877519861267635cd41bd8c1228d7a34364a62c61acaa8e5653f7d2c8d3e2c8543b8b31e1c3c3b4d59a7 20021 xserver-xorg-video-amdgpu_22.0.0-3.diff.gz
+
+Package: xserver-xorg-video-ati
+Format: 1.0
+Binary: xserver-xorg-video-ati, xserver-xorg-video-radeon
+Architecture: any
+Version: 1:19.1.0-3
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.2.1
+Build-Depends: debhelper-compat (= 12), quilt, pkg-config, xserver-xorg-dev (>= 2:1.15.99), libgl1-mesa-dev | libgl-dev, libgbm-dev, libdrm-dev (>= 2.4.89) [!hurd-i386], libudev-dev [linux-any], x11proto-dev, xutils-dev (>= 1:7.5+4)
+Homepage: https://wiki.freedesktop.org/xorg/RadeonFeature/
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-ati.git
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-ati.git
+Directory: pool/main/x/xserver-xorg-video-ati
+Package-List:
+ xserver-xorg-video-ati deb x11 optional arch=any
+ xserver-xorg-video-radeon deb x11 optional arch=any
+Files:
+ b0ebe0f5ae2f088f2c9e9e75b8939468 2583 xserver-xorg-video-ati_19.1.0-3.dsc
+ c4172d2b6883a6e8e57c737248b3c9c8 1160362 xserver-xorg-video-ati_19.1.0.orig.tar.gz
+ fec4543f9bfe79418a753664f9f1a86f 195 xserver-xorg-video-ati_19.1.0.orig.tar.gz.asc
+ dfacebeeaf62fd90d758ecde6bf6a8fb 34444 xserver-xorg-video-ati_19.1.0-3.diff.gz
+Checksums-Sha1:
+ 55e56fca63c75a430c9e3b03819055e9e9439760 2583 xserver-xorg-video-ati_19.1.0-3.dsc
+ 6c5c06555c2aed695b28b5b5d617a994e9926410 1160362 xserver-xorg-video-ati_19.1.0.orig.tar.gz
+ eefd307f59e583909099355fc18f3baf615c107f 195 xserver-xorg-video-ati_19.1.0.orig.tar.gz.asc
+ 7dd4005799f5c22aca04c5c98fed33df02c017e7 34444 xserver-xorg-video-ati_19.1.0-3.diff.gz
+Checksums-Sha256:
+ 3fc585d7988ec3e8ca7b7cb9d84d212fd352ae23745a5620f0e69bf1a066fba1 2583 xserver-xorg-video-ati_19.1.0-3.dsc
+ c05c6e0c396a0148113f1836cfab7f2e43f784c9b7041f11e9cab40a4bc0c90f 1160362 xserver-xorg-video-ati_19.1.0.orig.tar.gz
+ b8dfa9170dedd0b309acfe9baccb57b5921100956fa5ab02b31e468782f8d256 195 xserver-xorg-video-ati_19.1.0.orig.tar.gz.asc
+ b81c97b958cd42e5a6afb69f6a3aee5e4b9cd266a0c92bd6771ebd5ed1316cfc 34444 xserver-xorg-video-ati_19.1.0-3.diff.gz
+Checksums-Sha512:
+ 4a943cc272b4a1ad0e307dc3071b238eeb6dd2927e32de7f1a3b21164584ee092141b5f029f907b54e4838b02fbc2d544b3b80f5f46bb4733e9f6fb7e8cb3f93 2583 xserver-xorg-video-ati_19.1.0-3.dsc
+ c382c68ed5f3a690b293e3b56dfdf71f5b279f52da6db925cb5302e595003f69451670fe1ec9546ad4d91cb328b367777f547757a69d70ed8b4ade75e613e302 1160362 xserver-xorg-video-ati_19.1.0.orig.tar.gz
+ e70b7213f83adb8cbc68ffbe0a2807afe38703be89895b6cff8f5da849c371321e127e970de126550edd763b31810612bc7a452187915c0a4b9e4b62d9ba9324 195 xserver-xorg-video-ati_19.1.0.orig.tar.gz.asc
+ 22203830c1661fc2e86d8cd38b3f20ed5888868cb15fd15b37d8d93d77d064f18aac7de10c571c36332e999b269e69afed7ffea50ce390859f905516a6f9ca0f 34444 xserver-xorg-video-ati_19.1.0-3.diff.gz
+
+Package: xserver-xorg-video-dummy
+Format: 1.0
+Binary: xserver-xorg-video-dummy
+Architecture: any
+Version: 1:0.4.0-1
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), quilt, pkg-config, xserver-xorg-dev (>= 2:21.1), x11proto-dev, xutils-dev
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-dummy
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-dummy.git
+Directory: pool/main/x/xserver-xorg-video-dummy
+Package-List:
+ xserver-xorg-video-dummy deb x11 optional arch=any
+Files:
+ 7baa597f2f231afbd2d4713c8aa5efec 2336 xserver-xorg-video-dummy_0.4.0-1.dsc
+ d932c1fc53bbf53eca8444d7fde7c469 380215 xserver-xorg-video-dummy_0.4.0.orig.tar.gz
+ f79afca05cb812d946ab72f167ee7c0d 358 xserver-xorg-video-dummy_0.4.0.orig.tar.gz.asc
+ 1dd17724e79b483c2431be0300f257c1 27720 xserver-xorg-video-dummy_0.4.0-1.diff.gz
+Checksums-Sha1:
+ dc7c10dc30e341bdfaba8570fbec933a385f3e67 2336 xserver-xorg-video-dummy_0.4.0-1.dsc
+ abb97726ab1008417a4b584cb849903be6ecadae 380215 xserver-xorg-video-dummy_0.4.0.orig.tar.gz
+ f4b6c9b23cf1e816303705b5e299de79e0bf1662 358 xserver-xorg-video-dummy_0.4.0.orig.tar.gz.asc
+ 69c0013bdf723b8953831d0840d1992753966e70 27720 xserver-xorg-video-dummy_0.4.0-1.diff.gz
+Checksums-Sha256:
+ 04753d33688cc37fca5e1c67384969adf2a680a5781aba42dc6be4431c5ca16b 2336 xserver-xorg-video-dummy_0.4.0-1.dsc
+ bbecddd599d6fbf0e2a40aa4a5baabaa2ea9690521ffc8e9a3c26e1172498197 380215 xserver-xorg-video-dummy_0.4.0.orig.tar.gz
+ 244072f0d6dace41ff1d1eea9b51c06b5e9f3bdfa9b693b650c0b6a14f3645ab 358 xserver-xorg-video-dummy_0.4.0.orig.tar.gz.asc
+ a338332ec6a2802f3521973f5c9d94b1aeffd91e62a1ada2604cbf657d99aed5 27720 xserver-xorg-video-dummy_0.4.0-1.diff.gz
+Checksums-Sha512:
+ 1b159432ad471a18491fa71e5b16c6dbe37ccd2525a8859dcb24a46f4ce31b6e3378a6ab6b1607ce3ad0d04f0c421b465f92fb925f968e76e1d586a96ccd78b0 2336 xserver-xorg-video-dummy_0.4.0-1.dsc
+ 84a16244e4940dc27edf7f6805fc0c0d59f732df2a17b5829c00a7dfdef87e2031f6ec4a6e1a195bf005add7bf2000bc9d853b22ea4226b82b23aaba06af1bc3 380215 xserver-xorg-video-dummy_0.4.0.orig.tar.gz
+ dfe9c42ece64eabba71bec3668da4c09cb11d017205bdc1d6635b2d5f4f4d512910cafa2d6a03643f7dd476fa7f0a403aed4069aeb133c3db4133b862b585500 358 xserver-xorg-video-dummy_0.4.0.orig.tar.gz.asc
+ 19ffef4c7bca51e0654da23c1d0b3caf87a0a58ed3e18f9b23e6010a7d191f5e8964f2e3b1c0f91b7adc228297e6c127c3dc697c15d64ba8bbd4e7fd395cff4c 27720 xserver-xorg-video-dummy_0.4.0-1.diff.gz
+
+Package: xserver-xorg-video-fbdev
+Format: 1.0
+Binary: xserver-xorg-video-fbdev, xserver-xorg-video-fbdev-udeb
+Architecture: any
+Version: 1:0.5.0-2build1
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), quilt, pkg-config, xserver-xorg-dev (>= 2:21.1), x11proto-dev, xutils-dev (>= 1:7.5+1)
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-fbdev
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-fbdev.git
+Directory: pool/main/x/xserver-xorg-video-fbdev
+Package-List:
+ xserver-xorg-video-fbdev deb x11 optional arch=any
+ xserver-xorg-video-fbdev-udeb udeb debian-installer optional arch=any
+Files:
+ 50c56c17169fcca87bc17d1dcce53ced 2580 xserver-xorg-video-fbdev_0.5.0-2build1.dsc
+ c1dc25fd8b1fc5756313c95fa6b65d9c 388054 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz
+ 69744738e962475677159596fb127f4f 705 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz.asc
+ 5416d1b8651ca1ed9c8ecf1061f4351a 9782 xserver-xorg-video-fbdev_0.5.0-2build1.diff.gz
+Checksums-Sha1:
+ 31f62445cc7cfb86cc2e4250651c46133f7a3b28 2580 xserver-xorg-video-fbdev_0.5.0-2build1.dsc
+ cb75ff1632b13a46691de70fee5e200ccec0fc84 388054 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz
+ 812a6a33ac01e80ba2b8a4a8cb54606e82580be6 705 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz.asc
+ 6330853d2569c3d2cfe6dc9566ccfc42d7d3d070 9782 xserver-xorg-video-fbdev_0.5.0-2build1.diff.gz
+Checksums-Sha256:
+ 5097f6d38471613073dd1a1b4e9e513987954c8234fad5d86dd8ff40ff4691c3 2580 xserver-xorg-video-fbdev_0.5.0-2build1.dsc
+ a31f62db237a5c25bb087713a22a867a9b7680833ce3b644ecd712887b7b1d62 388054 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz
+ 74ee2040a1da322256e3b317bb767d80b989119aebd1982b045f613706c9743a 705 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz.asc
+ 67ebb3373e5700a37e1f94da5b5b9e4851c6f887b38b85587cb9b4a32fda0357 9782 xserver-xorg-video-fbdev_0.5.0-2build1.diff.gz
+Checksums-Sha512:
+ c91a1e00f62db2432b05512dee8c1116d63fd82c6edb095f64607ef4ec9be217b454bb8c0162e6c9da8c8b192b316ee7d02d0ac75835a1e8f22ea27846e41a1e 2580 xserver-xorg-video-fbdev_0.5.0-2build1.dsc
+ aed59f23f376febb37b6ec0c62aaeba8979eee01018ea2211548827a622c06566aa729d59927c63c3ea126a929c4e050cc2eb7a5e6506f59c9edeecff130c46a 388054 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz
+ b97480311e9383357c5984e9a390bb486038884ad82c83231ef328ba8686fbe98754feffe78fb49a47eaf6bb41ed3b1d84970395e42e550610bac1000ef4d228 705 xserver-xorg-video-fbdev_0.5.0.orig.tar.gz.asc
+ ba1b6a3472940bc6ecf458861e125848be66a9224c24f51d3b1a89aa2322218dae0da57cdea1bb95c66ef37758da430707bf86d7902eb5a1ea6b0f2bea84407f 9782 xserver-xorg-video-fbdev_0.5.0-2build1.diff.gz
+
+Package: xserver-xorg-video-intel
+Format: 1.0
+Binary: xserver-xorg-video-intel
+Architecture: amd64 i386 kfreebsd-amd64 kfreebsd-i386 x32
+Version: 2:2.99.917+git20210115-1
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders:  Drew Parsons <dparsons@debian.org>, Michael Stapelberg <stapelberg@debian.org>, maximilian attems <maks@debian.org>, Vincent Cheng <vcheng@debian.org>,
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), pkg-config, xserver-xorg-dev (>= 2:21.1), x11proto-dev, libx11-dev, libdrm-dev (>= 2.4.23), libgl1-mesa-dev | libgl-dev, libpciaccess-dev (>= 0.8.0+git20071002), libxvmc-dev (>= 2:1.0.12), libxext-dev, libxfixes-dev, libx11-xcb-dev, libxcb-util0-dev, libxcb-dri2-0-dev, libudev-dev [linux-any], quilt, xutils-dev (>= 1:7.5+4), valgrind [amd64 arm64 armhf i386 mips mipsel mips64 mips64el powerpc ppc64 ppc64el s390x x32], libxinerama-dev, libxrandr-dev, libxdamage-dev, libxcursor-dev, libxtst-dev, libxrender-dev, libpixman-1-dev, libxss-dev
+Homepage: https://www.x.org/
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-intel
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-intel.git
+Directory: pool/main/x/xserver-xorg-video-intel
+Package-List:
+ xserver-xorg-video-intel deb x11 optional arch=amd64,i386,kfreebsd-amd64,kfreebsd-i386,x32
+Files:
+ 06e90d03ec7fa4417ecd06ab71b40487 2894 xserver-xorg-video-intel_2.99.917+git20210115-1.dsc
+ 5be91f808ad10342fe75de60ab8d7315 1664999 xserver-xorg-video-intel_2.99.917+git20210115.orig.tar.gz
+ f54bedebfe8711c2149bffc27aedc6a7 959230 xserver-xorg-video-intel_2.99.917+git20210115-1.diff.gz
+Checksums-Sha1:
+ 75d3788eb5fb2e0f6aa3ab489f58a0d12edd010a 2894 xserver-xorg-video-intel_2.99.917+git20210115-1.dsc
+ d33940921a05b937a1ae4160564e7d6b9ceb3f17 1664999 xserver-xorg-video-intel_2.99.917+git20210115.orig.tar.gz
+ fcb4898b8037f1253175e912ce3b9f8369ba0558 959230 xserver-xorg-video-intel_2.99.917+git20210115-1.diff.gz
+Checksums-Sha256:
+ 5b394a3726e7acee70793e5c938d5d11a6a80bdebb97b1c7e36bd4cfb8fd0503 2894 xserver-xorg-video-intel_2.99.917+git20210115-1.dsc
+ f0c7330e8625bcce3ba4b8a285868430c7e37df1ff381a3dce6c04cfea0eff34 1664999 xserver-xorg-video-intel_2.99.917+git20210115.orig.tar.gz
+ 6568c24036f1afdaddf0fc7897f18b637d70de47b197d744bb9b297d1e36da52 959230 xserver-xorg-video-intel_2.99.917+git20210115-1.diff.gz
+Checksums-Sha512:
+ 038e9f3d919d8cf80cd7daf0c6e2d9cec044f6c9db7acaf2bd387b8f92041e430cae1a9b93dc8211dd10fe1fae80f155c09d1fb312b7ba2e0864a70fdd302c07 2894 xserver-xorg-video-intel_2.99.917+git20210115-1.dsc
+ 25306a5bee5d5b39c7351555cc81785885a959418851f5ee867dabe25c90b5e768aaa3a465323dfcea1c66ac9837584a0e175da2c56bd99db1ad188f9efe1b5c 1664999 xserver-xorg-video-intel_2.99.917+git20210115.orig.tar.gz
+ 371af196d5db24c524579f7f349f54ac872f2b67ae650b59832f4ed7ffc61504d21ef6cbf513d74b515e257a29b7bb40902e0ef967217db88042873276a862f3 959230 xserver-xorg-video-intel_2.99.917+git20210115-1.diff.gz
+
+Package: xserver-xorg-video-nouveau
+Format: 1.0
+Binary: xserver-xorg-video-nouveau
+Architecture: linux-any
+Version: 1:1.0.17-2build1
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), pkg-config, xserver-xorg-dev (>= 2:21.1), x11proto-dev, libdrm-dev (>= 2.4.60), libudev-dev, xutils-dev, quilt (>= 0.63-8.2~)
+Homepage: https://nouveau.freedesktop.org/wiki/
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-nouveau
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-nouveau.git
+Directory: pool/main/x/xserver-xorg-video-nouveau
+Package-List:
+ xserver-xorg-video-nouveau deb x11 optional arch=linux-any
+Files:
+ 6b6b0f3acdde0a9eed473df6e71b0591 2618 xserver-xorg-video-nouveau_1.0.17-2build1.dsc
+ e4fe1a12f9cbc075b2200773099df96f 789193 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz
+ 5e2526c921e6602291d03360e6c0b6d9 488 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz.asc
+ 48dcb0e4a6951fc4e9db478ce1492d1d 51450 xserver-xorg-video-nouveau_1.0.17-2build1.diff.gz
+Checksums-Sha1:
+ 573e264af8efdda6ef0127663554e56ead2d4627 2618 xserver-xorg-video-nouveau_1.0.17-2build1.dsc
+ 642365f7a833ff1ae03d6a2c5eac660022dc44f7 789193 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz
+ b5e63be28cda96efc457642c4c9687f49b63bef1 488 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz.asc
+ 6badf729116c1ab904936d21986209b164778c33 51450 xserver-xorg-video-nouveau_1.0.17-2build1.diff.gz
+Checksums-Sha256:
+ 7dadaabcde361c992ad5aa2b2d8e2d93950a385b07edbf4476a92bb156e11556 2618 xserver-xorg-video-nouveau_1.0.17-2build1.dsc
+ 21e9233b2c6304b976c526729ba48660c16976a757a319fa95cc8a8605316105 789193 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz
+ 5bcdcdc8cebf8d3b2028eb1d7fd8070d693ccf653b4978984a4c2c1ced97eaf9 488 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz.asc
+ 6b29e40f882ff0c0130e82f3a0067436b2cd99bce5d7e14179c58820b22512ca 51450 xserver-xorg-video-nouveau_1.0.17-2build1.diff.gz
+Checksums-Sha512:
+ 827886385edc9aaeea9ecec3811ddd01f7e4937be22e1cc71a6a0c5d8f59f761f6b9477750425818c10e11dcc77594d907c039c6457a7d5d20839fe56d4c8017 2618 xserver-xorg-video-nouveau_1.0.17-2build1.dsc
+ 10336f521d39289b214ce640b8b7195f4709ab780a4057ba83d02c2f3b4f7c7b17e37cf5f3224c43bf39aa8939a8836be1ee9eb26901d713cb98d161db2375e9 789193 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz
+ 7a2307d2394abab44a12343047ff409dd85faab5b879953f28c826e6d4c379647f6d3a5e2a235e911b672a38186baeccd632e864c82360172b780d35fc813a2e 488 xserver-xorg-video-nouveau_1.0.17.orig.tar.gz.asc
+ 1d1ace3c5ecd02574abe61be6d1a47c9d79e2974b2aa98a43da9a999c71d1e67751d251f9e3368d7e30586679eb7a6c061840da7fac378a5f874e9cd0a40e194 51450 xserver-xorg-video-nouveau_1.0.17-2build1.diff.gz
+
+Package: xserver-xorg-video-qxl
+Format: 1.0
+Binary: xserver-xorg-video-qxl, xserver-xspice
+Architecture: any
+Version: 0.1.5+git20200331-3
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), pkg-config, dh-python, xserver-xorg-dev (>= 2:1.9.4), x11proto-dev, dpkg-dev (>= 1.14.17), xutils-dev (>= 1:7.5), quilt (>= 0.46-7~), libudev-dev [linux-any], libspice-protocol-dev (>= 0.12.2~), libspice-server-dev [amd64], libxext-dev, libxfont-dev, python3:any
+Homepage: https://www.spice-space.org/
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-qxl
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-qxl.git
+Directory: pool/main/x/xserver-xorg-video-qxl
+Package-List:
+ xserver-xorg-video-qxl deb x11 optional arch=any
+ xserver-xspice deb x11 optional arch=amd64
+Files:
+ 1c34619323f29a68c6a45a993949a0ef 2389 xserver-xorg-video-qxl_0.1.5+git20200331-3.dsc
+ 9bc6caca617a7c786651e832137885ca 171559 xserver-xorg-video-qxl_0.1.5+git20200331.orig.tar.gz
+ ea7865905f5582dd00aa20ffa3b4c58d 14469 xserver-xorg-video-qxl_0.1.5+git20200331-3.diff.gz
+Checksums-Sha1:
+ 5396d14e5ed53c8a29dded1249bb4b06176715ae 2389 xserver-xorg-video-qxl_0.1.5+git20200331-3.dsc
+ 6d22c926899adf45becf0535185b2353c7784d51 171559 xserver-xorg-video-qxl_0.1.5+git20200331.orig.tar.gz
+ d1e0c1d3f901cb3c72b2c85649abfa8887ef3dd1 14469 xserver-xorg-video-qxl_0.1.5+git20200331-3.diff.gz
+Checksums-Sha256:
+ dbba276ebe0d99a94597538e2b097558312fa4b5d77e92c9e1b2022199fc44b7 2389 xserver-xorg-video-qxl_0.1.5+git20200331-3.dsc
+ fc7ade672747ce7c314cf58da6c66d40235969a46c23a5d43d6edb0bbd88803e 171559 xserver-xorg-video-qxl_0.1.5+git20200331.orig.tar.gz
+ 51970ce29c60198dbe879551a76c4e1fe2045216b08095b9c1eac703466bbc54 14469 xserver-xorg-video-qxl_0.1.5+git20200331-3.diff.gz
+Checksums-Sha512:
+ c875d2a2f0afcc2e546f475d2f06afff7d351e858b13a3035904db5d11d4eba589d9d1c3b24feb86d420ef714aa7b740787048e7d153eccf92ab6fc8437c8636 2389 xserver-xorg-video-qxl_0.1.5+git20200331-3.dsc
+ ce37423cd4b09d299ebb9083dad756a3a31ced5cb5736dcea32527c1fe8ddaeb7a2a5b211a28291721cd3468e43e1191e4a60eff73f5d22cfcba0aa07dd3de35 171559 xserver-xorg-video-qxl_0.1.5+git20200331.orig.tar.gz
+ 78bb9ba8ac216dd92e5f04fc8e0dc3cbd67792c6b1e334a0793a65505912793103e96867349441317e35d41943bbfe81627895295addf9cb21f7a05c0beae361 14469 xserver-xorg-video-qxl_0.1.5+git20200331-3.diff.gz
+
+Package: xserver-xorg-video-vesa
+Format: 1.0
+Binary: xserver-xorg-video-vesa, xserver-xorg-video-vesa-udeb
+Architecture: any
+Version: 1:2.5.0-1build4
+Priority: optional
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 12), pkg-config, xserver-xorg-dev (>= 2:1.11), x11proto-dev, xutils-dev (>= 1:7.5+4), quilt, libpciaccess-dev (>= 0.12.901)
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-vesa
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-vesa.git
+Directory: pool/main/x/xserver-xorg-video-vesa
+Package-List:
+ xserver-xorg-video-vesa deb x11 optional arch=any
+ xserver-xorg-video-vesa-udeb udeb debian-installer optional arch=hurd-any,kfreebsd-any
+Files:
+ 13bb6975bbedf9239d803f653524a3b5 2617 xserver-xorg-video-vesa_2.5.0-1build4.dsc
+ 1cc6d82b149d3c2cf900e7771e154e1a 398587 xserver-xorg-video-vesa_2.5.0.orig.tar.gz
+ 46f1419a0ca7639a5f460564a5bfaf84 659 xserver-xorg-video-vesa_2.5.0.orig.tar.gz.asc
+ 481ed88533bf3c8b5f841bf8f244a49f 11420 xserver-xorg-video-vesa_2.5.0-1build4.diff.gz
+Checksums-Sha1:
+ 6b96e0bb6850ec1c02a67337ddcfc11e53889640 2617 xserver-xorg-video-vesa_2.5.0-1build4.dsc
+ 62ae49bf376c8b0652ddf320bb0f1c856dd0d56b 398587 xserver-xorg-video-vesa_2.5.0.orig.tar.gz
+ d1c9eadb9e67d540c8ef0adb073993ea19468e57 659 xserver-xorg-video-vesa_2.5.0.orig.tar.gz.asc
+ d84ef45cee24250c9d82ee4c57cf5719fc1a6c07 11420 xserver-xorg-video-vesa_2.5.0-1build4.diff.gz
+Checksums-Sha256:
+ 0388f8347d2b87a4e7db60e92e4fcd48de5c52da908eb3aa8fe183a4afaf0053 2617 xserver-xorg-video-vesa_2.5.0-1build4.dsc
+ be10771dbfdec9e8c4f1b56653b0e6b05b3e5f79c26507e3184ad27b4f00c09d 398587 xserver-xorg-video-vesa_2.5.0.orig.tar.gz
+ cd31765de523d5a35052fefeb0c315b99d588c312bb578ab49c3172c2601c47b 659 xserver-xorg-video-vesa_2.5.0.orig.tar.gz.asc
+ a6cf60975f8caf425a67648df46671716ec5a408bddd396e097adfd9d03f8ee3 11420 xserver-xorg-video-vesa_2.5.0-1build4.diff.gz
+Checksums-Sha512:
+ c56b80d60075637d84316169a17469d589af3255dc1dcca4d26a499f2ea4b182bf860517fbd8f8352f03c4a2b094b8c0a7acae9755f5c04f35060b3fe93882eb 2617 xserver-xorg-video-vesa_2.5.0-1build4.dsc
+ 446344bd7fb6f1f39561b5be1c7eaf95a8cb9804c8d292c4f899bfe2099c68d2480642205d8ba5338f7b7dda2830c0c5a9383973fd58a915611b78b15cc553c9 398587 xserver-xorg-video-vesa_2.5.0.orig.tar.gz
+ 57485b5552d0b856560e3f48f31e55a930fb4cfe1eab7814f1c59dc4804bc993f9dc1e3dd00b37bb8be150c14fcdf413babb17f926607d12fbd9c35638f74126 659 xserver-xorg-video-vesa_2.5.0.orig.tar.gz.asc
+ 6e9c1e2f434892693f23cc462d46d5800f9483244283771e1acdfd4a2ac916abc795ee946526e8b6b3126d5d6a226072e163e8d01726ec6dcf35cb7edd7feaef 11420 xserver-xorg-video-vesa_2.5.0-1build4.diff.gz
+
+Package: xserver-xorg-video-vmware
+Format: 1.0
+Binary: xserver-xorg-video-vmware
+Architecture: any-amd64 any-i386
+Version: 1:13.3.0-3.1
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 12), quilt, pkg-config, xserver-xorg-dev (>= 2:1.9.4), x11proto-dev, xutils-dev (>= 1:7.5+4), libdrm-dev [!hurd-i386], libudev-dev [linux-any], libxext-dev, libx11-dev, libxatracker-dev [linux-any]
+Vcs-Browser: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-vmware
+Vcs-Git: https://salsa.debian.org/xorg-team/driver/xserver-xorg-video-vmware.git
+Directory: pool/main/x/xserver-xorg-video-vmware
+Package-List:
+ xserver-xorg-video-vmware deb x11 optional arch=any-amd64,any-i386
+Files:
+ 1c09088fc5b08ae0397c75bb8e69dba1 2517 xserver-xorg-video-vmware_13.3.0-3.1.dsc
+ 7e78848fdb06d3b8110f3b9c6ecc1fdb 606792 xserver-xorg-video-vmware_13.3.0.orig.tar.gz
+ f12ad666a083bfb0830bbd396a629bcc 274 xserver-xorg-video-vmware_13.3.0.orig.tar.gz.asc
+ 9c3e2e884b69f4f5e787e5e5b727790d 13211 xserver-xorg-video-vmware_13.3.0-3.1.diff.gz
+Checksums-Sha1:
+ 552442a1e9fb0d187feae59999da6dc87bbbbbb3 2517 xserver-xorg-video-vmware_13.3.0-3.1.dsc
+ 73696210204f61f9a5ea1d923f481fef824cd5ea 606792 xserver-xorg-video-vmware_13.3.0.orig.tar.gz
+ ad1ee239135b2a7b8de0350cf66327cbee5efb5a 274 xserver-xorg-video-vmware_13.3.0.orig.tar.gz.asc
+ a0ead749774e2f9b9116223dfe8f3c6fae527ba0 13211 xserver-xorg-video-vmware_13.3.0-3.1.diff.gz
+Checksums-Sha256:
+ 1715a198689b4ab9104c64210176a7e9920b209ec22321b73824d11b42bb5152 2517 xserver-xorg-video-vmware_13.3.0-3.1.dsc
+ 3a29f105b331523e532542bf75d716526877ec6d5ba07b079ed245b02bd4d084 606792 xserver-xorg-video-vmware_13.3.0.orig.tar.gz
+ 23be5b9f5c1849be1e0f9c1045901095aba95a953812d34bb1f2e0bc33463366 274 xserver-xorg-video-vmware_13.3.0.orig.tar.gz.asc
+ 004813db7c8dab7d97addae65a7a20401bf6afe397f394def9d41d79c47eac85 13211 xserver-xorg-video-vmware_13.3.0-3.1.diff.gz
+Checksums-Sha512:
+ 7fd7d36c140b426fdd4ca1720fa62afbbb996a2a1f221fb7721c289903dd0e6f98ef7f1dc280f95d658338ff015b4cb5c442260a64ce642451628f253e8cb099 2517 xserver-xorg-video-vmware_13.3.0-3.1.dsc
+ 6abb75c54172a4a1139434d1c611af7f99c6641d9761edcdfddd6a1e9ef609fb88d3deef26c4ab07459501ec6679d20c99671194bacdc1b8263057e3fc524ea4 606792 xserver-xorg-video-vmware_13.3.0.orig.tar.gz
+ 212cf3c3c104f73e1a774e83e9e4ed86c10aaba8860d409edfedbe34bb744edc5eea38c401b205ecd955a9c7cfe95884238abee32c485dee52c7d30ff159e656 274 xserver-xorg-video-vmware_13.3.0.orig.tar.gz.asc
+ d44549aef2bd5bdbc1a9656d7484cd156973c3f6c97ba849131300edc8df463b86d3216a8bdbf2ae0b5c5ca4af7e76c1b755ba37e77ef5dcec7436a1ff98810a 13211 xserver-xorg-video-vmware_13.3.0-3.1.diff.gz
+
+Package: xtrans
+Format: 1.0
+Binary: xtrans-dev
+Architecture: all
+Version: 1.4.0-1
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Cyril Brulebois <kibi@debian.org>
+Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 12), quilt, automake, xutils-dev (>= 1:7.6+2), pkg-config, xmlto (>= 0.0.22), xorg-sgml-doctools (>= 1:1.8), w3m
+Vcs-Browser: https://salsa.debian.org/xorg-team/lib/xtrans
+Vcs-Git: https://salsa.debian.org/xorg-team/lib/xtrans.git
+Directory: pool/main/x/xtrans
+Package-List:
+ xtrans-dev deb x11 optional arch=all
+Files:
+ dd60185a92f21c165fb40def6552dacd 1919 xtrans_1.4.0-1.dsc
+ 0d8fe8de9eb7e733711835d139f906dc 225941 xtrans_1.4.0.orig.tar.gz
+ 930417fa182c2ca7d1306bea83c725c8 9522 xtrans_1.4.0-1.diff.gz
+Checksums-Sha1:
+ f25a0467ad76dd828fe75e7abf40d9d742b48767 1919 xtrans_1.4.0-1.dsc
+ b5d636c096a4ef3840b9d1dfef648c98a04a4dd0 225941 xtrans_1.4.0.orig.tar.gz
+ 76891cda428aab9ea37d85c115bed2601bb683a0 9522 xtrans_1.4.0-1.diff.gz
+Checksums-Sha256:
+ dd74ab9199e8f45215b566a9317cac7953bf063ce6893c185eccaf0fb4d84d8f 1919 xtrans_1.4.0-1.dsc
+ 48ed850ce772fef1b44ca23639b0a57e38884045ed2cbb18ab137ef33ec713f9 225941 xtrans_1.4.0.orig.tar.gz
+ 0dac18165654d79e0796b80fab4c1104998d29e6d0b098af0426a1d72399521e 9522 xtrans_1.4.0-1.diff.gz
+Checksums-Sha512:
+ ac171ce0f00e1741e97a4ddad630ccff69070c0ef60047071b3f940fad08cb468d5ded7b2d4f0f500aeda73f2b703d55a7a4bbe0d5fff88cc3381486a111f580 1919 xtrans_1.4.0-1.dsc
+ 21287ccf18fe2ebd458765496b026d175bf47c6e8e5c21d5b9ea17203967efc0cf6928fa2f3385d289a680c7002c3640e4731937029e99933c2a64bb9fab5326 225941 xtrans_1.4.0.orig.tar.gz
+ d6deaa9579fb61e6ffd296ffe6b083eb9de572001c0a5bc82229ecc3d50bf2ee2f6504b3daa533bd34f3d647d6bd2235728084ec0b59869f6446652b998797f7 9522 xtrans_1.4.0-1.diff.gz
+
+Package: xwayland
+Format: 3.0 (quilt)
+Binary: xwayland
+Architecture: linux-any
+Version: 2:22.1.8-1
+Priority: optional
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Uploaders: Timo Aaltonen <tjaalton@debian.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper-compat (= 13), meson, pkg-config, quilt, libdrm-dev (>= 2.4.89), libepoxy-dev, libgcrypt-dev, libgbm-dev, libnvidia-egl-wayland-dev, libpixman-1-dev, libxcvt-dev, libxfont-dev, libxkbfile-dev, libxshmfence-dev, libxv-dev, libwayland-dev, mesa-common-dev, x11proto-dev, xfonts-utils, xtrans-dev, wayland-protocols
+Homepage: https://www.x.org/
+Vcs-Browser: https://salsa.debian.org/xorg-team/wayland/xwayland
+Vcs-Git: https://salsa.debian.org/xorg-team/wayland/xwayland.git
+Directory: pool/main/x/xwayland
+Package-List:
+ xwayland deb x11 optional arch=linux-any
+Files:
+ 218371c9f7f59c806fb8634daea91eb9 2465 xwayland_22.1.8-1.dsc
+ 96879f938a91b0441ea784220159d843 1273668 xwayland_22.1.8.orig.tar.xz
+ 82858e19b2c48e2bb4a7b3fa119e6240 195 xwayland_22.1.8.orig.tar.xz.asc
+ 173058233d1e3ddc4b7d5bc759090974 35580 xwayland_22.1.8-1.debian.tar.xz
+Checksums-Sha1:
+ 2e1da756adea222c05f0c131bf6b4ba0dd153658 2465 xwayland_22.1.8-1.dsc
+ c8061b690c53472187c3bd5a6367d5c1cc0043d9 1273668 xwayland_22.1.8.orig.tar.xz
+ bfd1d9001e071a686b14b97de64836a34af292d6 195 xwayland_22.1.8.orig.tar.xz.asc
+ 382beeedb974f3ec96bf3a6361eb930ef65d1e01 35580 xwayland_22.1.8-1.debian.tar.xz
+Checksums-Sha256:
+ e66b17b4217a59ab85f629497068a79934c119f9cb97aa5650f691f91aafd6e4 2465 xwayland_22.1.8-1.dsc
+ d11eeee73290b88ea8da42a7d9350dedfaba856ce4ae44e58c045ad9ecaa2f73 1273668 xwayland_22.1.8.orig.tar.xz
+ f8c190e661718034777fe39ba1f755b91145621a0da67a2cd79425a28ac1b103 195 xwayland_22.1.8.orig.tar.xz.asc
+ a50c4220f83cd4e399ffe133085a7650c1c13d6a0151c456f7a2534a60f85f14 35580 xwayland_22.1.8-1.debian.tar.xz
+Checksums-Sha512:
+ ee07ab727f0fc13c91ea40613e6052cf644955463a803f999907c0bd2e2474c7448923b9d9e8487061e22ffe2983b1728bcf2f30a508a31e665dca3bc915ba8d 2465 xwayland_22.1.8-1.dsc
+ f52c6f99d8ef7605bc1c651d5ee5e306c12af30649a2d712b1c4c3cf4c7c80246ae24bd9ac39461d47aafc78f5d659446a459cd6259e05ef3128b204981d114a 1273668 xwayland_22.1.8.orig.tar.xz
+ 7bed6db5164f5b6bd429d81bc0463e4d9e2d7b3563acd195ab4a4904050fb94a3ed05870f8399f8f7ce845ff741bfe069520fcc6e4153cab361615d09434f204 195 xwayland_22.1.8.orig.tar.xz.asc
+ d89bfc9a907cd79d862904eb38d845df441512de03ffcef833784785624c9694de6bb4cce4e873de6772b563dccd88f6e61c035e65e9ad48c3bc7628a9aab4a7 35580 xwayland_22.1.8-1.debian.tar.xz
+
+Package: zvmcloudconnector
+Format: 3.0 (quilt)
+Binary: zvmcloudconnector-api, python3-zvmcloudconnector, zvmcloudconnector-common
+Architecture: all
+Version: 2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3
+Priority: optional
+Section: python
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Corey Bryant <corey.bryant@canonical.com>
+Standards-Version: 4.1.4
+Build-Depends: debhelper-compat (= 12), dh-python, openstack-pkg-tools (>= 85ubuntu3~), python3-all, python3-setuptools, python3-sphinx (>= 1.6.2)
+Build-Depends-Indep: python3-jsonschema (>= 2.3.0), python3-jwt (>= 1.0.1), python3-mock (>= 2.0.0), python3-netaddr (>= 0.7.5), python3-requests (>= 2.6.0), python3-routes (>= 2.2), python3-six (>= 1.9.0), python3-subunit (>= 1.0.0), python3-unittest2, python3-webob (>= 1:1.2.3), python3-yaml (>= 3.10), subunit, testrepository
+Testsuite: autopkgtest-pkg-python
+Homepage: https://github.com/mfcloud/python-zvm-sdk
+Vcs-Browser: https://git.launchpad.net/~ubuntu-server-dev/ubuntu/+source/zvmcloudconnector
+Vcs-Git: https://git.launchpad.net/~ubuntu-server-dev/ubuntu/+source/zvmcloudconnector
+Directory: pool/main/z/zvmcloudconnector
+Package-List:
+ python3-zvmcloudconnector deb net optional arch=all
+ zvmcloudconnector-api deb python optional arch=all
+ zvmcloudconnector-common deb python optional arch=all
+Files:
+ b5534be5b87876b8a6bdd4dbdcd9e678 3003 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.dsc
+ db19aec9bc5ae0f5cfeb80439ad53898 238562 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1.orig.tar.gz
+ c00680eeefd910e29073aa5e22c614c0 4028 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.debian.tar.xz
+Checksums-Sha1:
+ a657112fcc3dcd99c005ca42a84263686767d03f 3003 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.dsc
+ 5c8317e48f31b8abdc9c890b03832a50950a06bb 238562 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1.orig.tar.gz
+ 427d5c1366291d518ccd6903d5f3b80014f7eb66 4028 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.debian.tar.xz
+Checksums-Sha256:
+ c0185816fc483c8891bb19267667e395b18e1ad7d77e2878f248bf35d7ce92ba 3003 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.dsc
+ f24a37d5a0206e791398b6e7ae4698255cc6fa6e1d23548128259711b79ce7bf 238562 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1.orig.tar.gz
+ 9dcbae9103f46cdf8241d50a5e59ef57b54e2f0d79d214dbeeb5563ba76f6bd8 4028 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.debian.tar.xz
+Checksums-Sha512:
+ c94e930323cc7ea67083a4e7865d99c1c583bac3756780e184b8867178e27dc49d9f6475dea839c44f519851869eda407d24d5edf840cdf76c93d6fbdc6e1388 3003 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.dsc
+ 206776bd04ef547df530438efe6209db7374c33727d13269f6f3632aa69c74713b358e628dc4fab8afc6657ac65a17bd2ec4c6f2984385de2187581fd734e65c 238562 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1.orig.tar.gz
+ af8086742d6f0a46b4396316f74fe0d79a69a328b6bd4ac92b513ec22e1c4735afc07e2899545b4b22ce825d659be9d0762eb68d25da4b9b6426f8d5653670a6 4028 zvmcloudconnector_2.0.0~b1~git2019062011.4fc9142.really.1.4.1-0ubuntu3.debian.tar.xz
+

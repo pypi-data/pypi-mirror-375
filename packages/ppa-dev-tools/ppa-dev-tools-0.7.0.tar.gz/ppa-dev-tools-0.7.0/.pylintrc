@@ -1,0 +1,31 @@
+[MASTER]
+# --go-faster, use multiple processes to speed up Pylint
+jobs=2
+
+
+[MESSAGES CONTROL]
+# Name                         Disabled Because
+# ----                         ----------------
+# import-error                 Not all deps installed while testing
+# wrong-import-position        Interferes with standardized boilerplate style
+
+disable=import-error,
+	wrong-import-position
+
+
+[REPORTS]
+# Set the output format. Available formats are text, parseable, colorized, msvs
+output-format=colorized
+
+# Just the errors please, no full report
+reports=no
+
+
+[TYPECHECK]
+ignored-modules=pygit2,lazr.restfulclient,launchpadlib.*
+
+generated-members=apt_pkg.*
+
+
+[FORMAT]
+good-names=lp, pp, fp, d, e, f, i, j, k, m, n, p, v, w, x, y, z

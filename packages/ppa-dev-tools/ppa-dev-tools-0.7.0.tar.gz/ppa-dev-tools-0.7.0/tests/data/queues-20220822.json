@@ -1,0 +1,385 @@
+{
+  "ubuntu": {
+    "trusty": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": []
+    },
+    "xenial": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "bionic": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "focal": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "hirsute": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "impish": {
+      "amd64": [],
+      "ppc64el": [],
+      "i386": [],
+      "armhf": [],
+      "arm64": [],
+      "s390x": []
+    },
+    "jammy": {
+      "amd64": [],
+      "arm64": [],
+      "i386": [],
+      "s390x": [],
+      "ppc64el": [],
+      "armhf": []
+    },
+    "kinetic": {
+      "ppc64el": [],
+      "arm64": [],
+      "s390x": [],
+      "armhf": [],
+      "i386": [],
+      "amd64": []
+    }
+  },
+  "huge": {
+    "trusty": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": []
+    },
+    "xenial": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "bionic": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "focal": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "hirsute": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "impish": {
+      "amd64": [],
+      "ppc64el": [],
+      "i386": [],
+      "armhf": [],
+      "arm64": [],
+      "s390x": []
+    },
+    "jammy": {
+      "amd64": [],
+      "arm64": [],
+      "i386": [],
+      "s390x": [],
+      "ppc64el": [],
+      "armhf": []
+    },
+    "kinetic": {
+      "ppc64el": [
+        "x11iraf\n{\"submit-time\": \"2022-08-22 07:50:13\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x11vnc\n{\"submit-time\": \"2022-08-22 07:50:13\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x264\n{\"submit-time\": \"2022-08-22 07:50:13\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x265\n{\"submit-time\": \"2022-08-22 07:50:14\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x42-plugins\n{\"submit-time\": \"2022-08-22 07:50:14\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-core\n{\"submit-time\": \"2022-08-22 07:50:14\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-omega\n{\"submit-time\": \"2022-08-22 07:50:14\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xautolock\n{\"submit-time\": \"2022-08-22 07:50:15\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xbrzscale\n{\"submit-time\": \"2022-08-22 07:50:15\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xchain\n{\"submit-time\": \"2022-08-22 07:50:15\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xcolorsel\n{\"submit-time\": \"2022-08-22 07:50:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdelta3\n{\"submit-time\": \"2022-08-22 07:50:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdemorse\n{\"submit-time\": \"2022-08-22 07:50:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdg-dbus-proxy\n{\"submit-time\": \"2022-08-22 07:50:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdg-desktop-portal\n{\"submit-time\": \"2022-08-22 07:50:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdp-tools\n{\"submit-time\": \"2022-08-22 07:50:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xerces-c\n{\"submit-time\": \"2022-08-22 07:50:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xerial-sqlite-jdbc\n{\"submit-time\": \"2022-08-22 07:50:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xeus-python\n{\"submit-time\": \"2022-08-22 07:50:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xfig\n{\"submit-time\": \"2022-08-22 07:50:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xflip\n{\"submit-time\": \"2022-08-22 07:50:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xgboost\n{\"submit-time\": \"2022-08-22 07:50:18\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xilinx-runtime\n{\"submit-time\": \"2022-08-22 07:50:18\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xlbiff\n{\"submit-time\": \"2022-08-22 07:50:18\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xml-security-c\n{\"submit-time\": \"2022-08-22 07:50:18\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmltooling\n{\"submit-time\": \"2022-08-22 07:50:19\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmobar\n{\"submit-time\": \"2022-08-22 07:50:19\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmpp-dns\n{\"submit-time\": \"2022-08-22 07:50:19\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xorgxrdp\n{\"submit-time\": \"2022-08-22 07:50:19\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpad\n{\"submit-time\": \"2022-08-22 07:50:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpra\n{\"submit-time\": \"2022-08-22 07:50:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xq\n{\"submit-time\": \"2022-08-22 07:50:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xrayutilities\n{\"submit-time\": \"2022-08-22 07:50:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xrootconsole\n{\"submit-time\": \"2022-08-22 07:50:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xsel\n{\"submit-time\": \"2022-08-22 07:50:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xsnow\n{\"submit-time\": \"2022-08-22 07:50:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtables-addons\n{\"submit-time\": \"2022-08-22 07:50:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtail\n{\"submit-time\": \"2022-08-22 07:50:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xterm\n{\"submit-time\": \"2022-08-22 07:50:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtermcontrol\n{\"submit-time\": \"2022-08-22 07:50:22\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtrlock\n{\"submit-time\": \"2022-08-22 07:50:22\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x11vnc\n{\"submit-time\": \"2022-08-22 05:32:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x264\n{\"submit-time\": \"2022-08-22 05:32:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x265\n{\"submit-time\": \"2022-08-22 05:32:16\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x42-plugins\n{\"submit-time\": \"2022-08-22 05:32:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-bindings\n{\"submit-time\": \"2022-08-22 05:32:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-core\n{\"submit-time\": \"2022-08-22 05:32:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-omega\n{\"submit-time\": \"2022-08-22 05:32:17\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xautolock\n{\"submit-time\": \"2022-08-22 05:32:18\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xautomation\n{\"submit-time\": \"2022-08-22 05:32:18\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xbrzscale\n{\"submit-time\": \"2022-08-22 05:32:18\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xchain\n{\"submit-time\": \"2022-08-22 05:32:19\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdelta3\n{\"submit-time\": \"2022-08-22 05:32:19\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdemorse\n{\"submit-time\": \"2022-08-22 05:32:19\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdg-dbus-proxy\n{\"submit-time\": \"2022-08-22 05:32:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdg-desktop-portal\n{\"submit-time\": \"2022-08-22 05:32:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdp-tools\n{\"submit-time\": \"2022-08-22 05:32:20\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xerial-sqlite-jdbc\n{\"submit-time\": \"2022-08-22 05:32:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xeus-python\n{\"submit-time\": \"2022-08-22 05:32:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xfig\n{\"submit-time\": \"2022-08-22 05:32:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xflip\n{\"submit-time\": \"2022-08-22 05:32:21\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xfrisk\n{\"submit-time\": \"2022-08-22 05:32:22\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xgboost\n{\"submit-time\": \"2022-08-22 05:32:22\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xlbiff\n{\"submit-time\": \"2022-08-22 05:32:22\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xli\n{\"submit-time\": \"2022-08-22 05:32:22\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xml-security-c\n{\"submit-time\": \"2022-08-22 05:32:22\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmltooling\n{\"submit-time\": \"2022-08-22 05:32:23\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmobar\n{\"submit-time\": \"2022-08-22 05:32:23\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmoto\n{\"submit-time\": \"2022-08-22 05:32:23\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xorgxrdp\n{\"submit-time\": \"2022-08-22 05:32:24\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpa\n{\"submit-time\": \"2022-08-22 05:32:24\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpad\n{\"submit-time\": \"2022-08-22 05:32:25\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpra\n{\"submit-time\": \"2022-08-22 05:32:25\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xq\n{\"submit-time\": \"2022-08-22 05:32:25\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xrayutilities\n{\"submit-time\": \"2022-08-22 05:32:26\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xrootconsole\n{\"submit-time\": \"2022-08-22 05:32:26\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xsel\n{\"submit-time\": \"2022-08-22 05:32:26\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xsnow\n{\"submit-time\": \"2022-08-22 05:32:26\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtables-addons\n{\"submit-time\": \"2022-08-22 05:32:27\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtail\n{\"submit-time\": \"2022-08-22 05:32:27\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xterm\n{\"submit-time\": \"2022-08-22 05:32:27\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtermcontrol\n{\"submit-time\": \"2022-08-22 05:32:28\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtrlock\n{\"submit-time\": \"2022-08-22 05:32:28\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x11iraf\n{\"submit-time\": \"2022-08-22 07:25:42\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x264\n{\"submit-time\": \"2022-08-22 07:25:43\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x265\n{\"submit-time\": \"2022-08-22 07:25:44\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "x42-plugins\n{\"submit-time\": \"2022-08-22 07:25:45\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-bindings\n{\"submit-time\": \"2022-08-22 07:25:46\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-core\n{\"submit-time\": \"2022-08-22 07:25:46\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xapian-omega\n{\"submit-time\": \"2022-08-22 07:25:46\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xautomation\n{\"submit-time\": \"2022-08-22 07:25:47\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xbrzscale\n{\"submit-time\": \"2022-08-22 07:25:47\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xchain\n{\"submit-time\": \"2022-08-22 07:25:48\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xcolorsel\n{\"submit-time\": \"2022-08-22 07:25:48\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdelta3\n{\"submit-time\": \"2022-08-22 07:25:48\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdemorse\n{\"submit-time\": \"2022-08-22 07:25:49\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdg-dbus-proxy\n{\"submit-time\": \"2022-08-22 07:25:49\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdg-desktop-portal\n{\"submit-time\": \"2022-08-22 07:25:49\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xdp-tools\n{\"submit-time\": \"2022-08-22 07:25:49\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xerces-c\n{\"submit-time\": \"2022-08-22 07:25:49\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xerial-sqlite-jdbc\n{\"submit-time\": \"2022-08-22 07:25:50\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xfig\n{\"submit-time\": \"2022-08-22 07:25:50\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xflip\n{\"submit-time\": \"2022-08-22 07:25:50\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xfrisk\n{\"submit-time\": \"2022-08-22 07:25:50\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xgboost\n{\"submit-time\": \"2022-08-22 07:25:51\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xlbiff\n{\"submit-time\": \"2022-08-22 07:25:51\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xli\n{\"submit-time\": \"2022-08-22 07:25:51\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xml-security-c\n{\"submit-time\": \"2022-08-22 07:25:51\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmltooling\n{\"submit-time\": \"2022-08-22 07:25:52\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmobar\n{\"submit-time\": \"2022-08-22 07:25:52\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xmoto\n{\"submit-time\": \"2022-08-22 07:25:52\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xorgxrdp\n{\"submit-time\": \"2022-08-22 07:25:52\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpa\n{\"submit-time\": \"2022-08-22 07:25:52\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpad\n{\"submit-time\": \"2022-08-22 07:25:53\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xpra\n{\"submit-time\": \"2022-08-22 07:25:53\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xq\n{\"submit-time\": \"2022-08-22 07:25:53\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xrayutilities\n{\"submit-time\": \"2022-08-22 07:25:53\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xrootconsole\n{\"submit-time\": \"2022-08-22 07:25:54\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xsel\n{\"submit-time\": \"2022-08-22 07:25:54\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xsnow\n{\"submit-time\": \"2022-08-22 07:25:54\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtables-addons\n{\"submit-time\": \"2022-08-22 07:25:54\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtail\n{\"submit-time\": \"2022-08-22 07:25:54\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xterm\n{\"submit-time\": \"2022-08-22 07:25:55\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtermcontrol\n{\"submit-time\": \"2022-08-22 07:25:55\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}",
+        "xtrlock\n{\"submit-time\": \"2022-08-22 07:25:55\", \"triggers\": [\"glibc/2.36-0ubuntu2\", \"cross-toolchain-base/59ubuntu6\", \"glib2.0/2.73.3-1\", \"tracker/3.3.3-1\"]}"
+      ]
+    }
+  },
+  "ppa": {
+    "trusty": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": []
+    },
+    "xenial": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "bionic": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "focal": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "hirsute": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "impish": {
+      "amd64": [],
+      "ppc64el": [],
+      "i386": [],
+      "armhf": [],
+      "arm64": [],
+      "s390x": []
+    },
+    "jammy": {
+      "amd64": [],
+      "arm64": [],
+      "i386": [],
+      "s390x": [],
+      "ppc64el": [],
+      "armhf": []
+    },
+    "kinetic": {
+      "ppc64el": [],
+      "arm64": [],
+      "s390x": [],
+      "armhf": [
+        "dovecot {\"all-proposed\": \"1\", \"ppas\": [\"bryce/dovecot-merge-v1e2.3.19.1adfsg1-2\"], \"requester\": \"bryce\", \"submit-time\": \"2022-08-23 05:02:46\", \"triggers\": [\"dovecot/1:2.3.19.1+dfsg1-2ubuntu2~kinetic1\"]}"
+      ],
+      "i386": [],
+      "amd64": []
+    }
+  },
+  "upstream": {
+    "trusty": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": []
+    },
+    "xenial": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "bionic": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "focal": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "hirsute": {
+      "amd64": [],
+      "arm64": [],
+      "armhf": [],
+      "i386": [],
+      "ppc64el": [],
+      "s390x": []
+    },
+    "impish": {
+      "amd64": [],
+      "ppc64el": [],
+      "i386": [],
+      "armhf": [],
+      "arm64": [],
+      "s390x": []
+    },
+    "jammy": {
+      "amd64": [],
+      "arm64": [],
+      "i386": [],
+      "s390x": [],
+      "ppc64el": [],
+      "armhf": []
+    },
+    "kinetic": {
+      "ppc64el": [],
+      "arm64": [],
+      "s390x": [],
+      "armhf": [],
+      "i386": [],
+      "amd64": []
+    }
+  }
+}

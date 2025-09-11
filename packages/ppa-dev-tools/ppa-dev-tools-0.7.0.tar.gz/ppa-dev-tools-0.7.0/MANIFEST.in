@@ -1,0 +1,8 @@
+include LICENSE.GPLv2
+include *.md
+include tests/helpers.py
+include tests/data/*
+include tests/data/*/*
+include .flake8
+include .pylintrc
+include .gitignore

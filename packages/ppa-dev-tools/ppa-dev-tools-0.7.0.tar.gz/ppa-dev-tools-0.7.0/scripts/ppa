@@ -1,0 +1,1190 @@
+#!/usr/bin/env python3
+# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
+
+# Copyright (C) 2019 Bryce W. Harrington
+#
+# Released under GNU GPLv2 or later, read the file 'LICENSE.GPLv2+' for
+# more information.
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+# Author:  Bryce Harrington <bryce@canonical.com>
+
+'''PPA developer tools'''
+
+__example__ = '''
+Register a new PPA:
+  $ ppa create my-ppa
+
+Wait until all packages in the PPA have finished building:
+  $ ppa wait my-ppa
+
+Delete the PPA:
+  $ ppa destroy my-ppa
+
+Set the public description for a PPA from a file:
+  $ cat some-package/README | ppa desc ppa:my-name/my-ppa
+'''
+
+import os
+import sys
+import time
+import argparse
+import datetime
+from inspect import currentframe
+from textwrap import indent
+from typing import Any, Dict
+from distro_info import UbuntuDistroInfo
+from lazr.restfulclient.errors import BadRequest, Unauthorized
+
+try:
+    from ruamel.yaml import YAML, YAMLError
+    yaml=YAML(typ='unsafe', pure=True)
+    load_yaml = lambda file: yaml.load_all(file)
+except ImportError:
+    import yaml
+    load_yaml = lambda file: yaml.load_all(file, yaml.SafeLoader)
+    YAMLError = yaml.YAMLError
+
+
+if '__file__' in globals():
+    sys.path.insert(0, os.path.realpath(
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), "..")))
+
+from ppa._version import __version__
+from ppa.constants import (
+    ARCHES_PPA_ALL,
+    ARCHES_PPA_DEFAULT,
+    ARCHES_AUTOPKGTEST,
+    CREDENTIALS_FILENAME_DEFAULT,
+    DISTRO_UBUNTU_POCKETS,
+    LOCAL_REPOSITORY_PATH,
+    LOCAL_REPOSITORY_MIRRORING_DIRECTIONS,
+)
+from ppa.dict import unpack_to_dict
+from ppa.job import show_waiting, show_running
+from ppa.lp import Lp
+from ppa.ppa import (
+    get_ppa,
+    ppa_address_split,
+    Ppa,
+    PpaNotFoundError,
+    PendingReason
+)
+from ppa.ppa_group import PpaGroup, PpaAlreadyExists
+from ppa.repository import Repository
+from ppa.result import show_results
+from ppa.text import o2str, ansi_hyperlink
+from ppa.trigger import get_triggers, show_triggers
+
+import ppa.debug
+from ppa.debug import dbg, warn, error
+
+EX_NOTFOUND = 127
+EX_KEYBOARD_INTERRUPT = 130
+
+
+def load_yaml_as_dict(filename):
+    """Returns content of yaml-formatted file as a dictionary.
+
+    :rtype: dict
+    :returns: Content of file as a dict object.
+    """
+    d = dict()
+    with open(filename, 'r') as f:
+        for y in load_yaml(f.read()):
+            d.update(y)
+        return d
+
+
+def add_global_options(parser: argparse.ArgumentParser) -> None:
+    """Adds arguments to the given parser for generic options.
+
+    :param argparse.ArgumentParser parser: A parser or subparser.
+    """
+    parser.add_argument('-A', '--credentials',
+                        dest='credentials_filename', action='store',
+                        metavar='FILE',
+                        help="Location of oauth credentials file")
+    parser.add_argument('-C', '--config',
+                        dest='config_filename', action='store',
+                        default="~/.config/ppa-dev-tools/config.yml",
+                        metavar="FILE",
+                        help="Location of config file")
+    parser.add_argument('-D', '--debug',
+                        dest='debug', action='store_true',
+                        help="Turn on general debugging")
+    parser.add_argument('-V', '--version',
+                        action='version',
+                        version='%(prog)s {version}'.format(version=__version__),
+                        help="Version information")
+    parser.add_argument('--dry-run',
+                        dest='dry_run', action='store_true',
+                        help="Simulate command without modifying anything")
+    parser.add_argument('-v', '--verbose',
+                        dest='verbose', action='store_true',
+                        help="Print more information during processing")
+    parser.add_argument('-q', '--quiet',
+                        dest='quiet', action='store_true',
+                        help="Minimize output during processing")
+
+
+def add_basic_config_options(parser: argparse.ArgumentParser) -> None:
+    """Adds to a parser the command line options to configure the PPA.
+
+    The config options are supported by the 'create' and 'set' command,
+    to allow configuring the PPA at creation time, or after, respectively.
+
+    These options represent what can be set as a user from the Launchpad
+    web interface.
+
+    :param argparse.ArgumentParser parser: A parser or subparser.
+    """
+    # Architectures
+    parser.add_argument(
+        '-a', '--arches', '--arch', '--architectures',
+        dest="architectures",
+        action='store',
+        default=None,
+        help="Comma-separated list of hardware architectures to use"
+    )
+    parser.add_argument(
+        '--all-arches', '--all-architectures',
+        dest="architectures",
+        action='store_const',
+        const=','.join(ARCHES_PPA_ALL),
+        help="Enable all available architectures for the PPA"
+    )
+    parser.add_argument(
+        '--default-arches', '--default-architectures',
+        dest="architectures",
+        action='store_const',
+        const=','.join(ARCHES_PPA_DEFAULT),
+        help="Enable only the standard Launchpad default architectures"
+    )
+
+    # Displayname
+    parser.add_argument(
+        '--displayname',
+        dest="displayname",
+        action='store',
+        default=None,
+        help="A short title for the PPA's web page."
+    )
+
+    # Description
+    parser.add_argument(
+        '--description',
+        dest="description",
+        action='store',
+        default=None,
+        help="A short description of the archive.  URLs will be rendered as links.  (See also 'ppa desc'.)"
+    )
+
+    # Dependencies
+    parser.add_argument(
+        '--ppa-dependencies', '--ppa-depends',
+        dest="ppa_dependencies", action='store',
+        help="The set of other PPAs this PPA should use for satisfying build dependencies."
+    )
+
+    # Archive pocket
+    parser.add_argument(
+        '--pocket',
+        dest="pocket",
+        choices=DISTRO_UBUNTU_POCKETS,
+        help="The pocket used for the main Ubuntu archive dependency"
+    )
+
+    # Public/Private access
+    parser.add_argument(
+        '--private', '-P',
+        dest="private",
+        action='store_true',
+        help=(
+            "Restrict access to the PPA to its owner and subscribers. " +
+            "This can only be changed if the archive has never had any " +
+            "sources published and the owner/group has permission to do so."
+        )
+    )
+    parser.add_argument(
+        '--public',
+        dest="private",
+        action='store_false',
+        help="Allow access to the PPA to anyone."
+    )
+
+    # Publishing
+    parser.add_argument(
+        '--publish',
+        dest="publish", action='store_true',
+        help=("Allow built packages in the PPA to be made available for download.")
+    )
+    parser.add_argument(
+        '--no-publish',
+        dest="publish", action='store_false',
+        help=("Do not make packages in the PPA available for download.  " +
+              "They will still be built.")
+    )
+
+
+def create_arg_parser() -> argparse.ArgumentParser:
+    """Sets up the command line parser object.
+
+    :rtype: argparse.ArgumentParser
+    :returns: parser object, ready to run <parser>.parse_args().
+    """
+    progname = "ppa"
+    parser = argparse.ArgumentParser(
+        prog=progname,
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__example__)
+    add_global_options(parser)
+
+    subparser = parser.add_subparsers(
+        dest='command',
+        title='commands',
+        metavar="",
+    )
+
+    # Create Command
+    create_parser = subparser.add_parser(
+        'create',
+        argument_default=argparse.SUPPRESS,
+        help='Registers a new PPA in Launchpad.',
+        prog=f"{progname} create",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(create_parser)
+    create_parser.add_argument('ppa_name', metavar='ppa-name',
+                               action='store',
+                               help="Name of the PPA to be created")
+    create_parser.add_argument('--owner-name', '--owner', '--team-name', '--team', metavar='NAME',
+                               action='store',
+                               default=None,
+                               help="Person or team to create PPA under, if not specified via the ppa address (defaults to current LP user)")
+    add_basic_config_options(create_parser)
+
+    # Credentials Command
+    credentials_parser = subparser.add_parser(
+        'credentials',
+        argument_default=argparse.SUPPRESS,
+        help=(
+            "Store the Launchpad credentials to a file for manual use.  "
+            f"(Default: '{CREDENTIALS_FILENAME_DEFAULT}')"
+        ),
+        prog=f"{progname} credentials",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(credentials_parser)
+    credentials_parser.add_argument(
+        'ppa_name',
+        action='store',
+        nargs='?',
+        default='me',
+        help="Name of the PPA (optional)")
+
+    # Desc Command
+    desc_parser = subparser.add_parser(
+        'desc',
+        argument_default=argparse.SUPPRESS,
+        help="Sets the PPA's publically visible description text.",
+        prog=f"{progname} desc",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(desc_parser)
+    desc_parser.add_argument('ppa_name', metavar='ppa-name',
+                             action='store',
+                             help="Name of the PPA to describe")
+    desc_parser.add_argument('description',
+                             nargs=argparse.REMAINDER)
+
+    # Destroy Command
+    destroy_parser = subparser.add_parser(
+        'destroy',
+        argument_default=argparse.SUPPRESS,
+        help='Deletes the given PPA from Launchpad.',
+        prog=f"{progname} destroy",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(destroy_parser)
+    destroy_parser.add_argument('ppa_name', metavar='ppa-name',
+                                action='store',
+                                help="Name of the PPA to destroy")
+
+    # List Command
+    list_parser = subparser.add_parser(
+        'list',
+        argument_default=argparse.SUPPRESS,
+        help='Lists PPAs belonging to user, or the packages in a PPA.',
+        prog=f"{progname} list",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(list_parser)
+    list_parser.add_argument('ppa_name', metavar='ppa-name',
+                             action='store',
+                             nargs='?', default='me',
+                             help="Name of the PPA to list")
+
+    # Set Command
+    set_parser = subparser.add_parser(
+        'set',
+        argument_default=argparse.SUPPRESS,
+        help='Applies one or more configuration changes to the PPA.',
+        prog=f"{progname} set",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(set_parser)
+    set_parser.add_argument('ppa_name', metavar='ppa-name',
+                            action='store',
+                            help="Name of the PPA to be set config values on")
+    add_basic_config_options(set_parser)
+
+    # Show Command
+    show_parser = subparser.add_parser(
+        'show',
+        argument_default=argparse.SUPPRESS,
+        help='Displays config info about a PPA.',
+        prog=f"{progname} show",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        )
+    add_global_options(show_parser)
+    show_parser.add_argument('ppa_name', metavar='ppa-name',
+                             action='store',
+                             help="Name of the PPA to show")
+    show_parser.add_argument('-a', '--arches', '--arch', '--architectures',
+                             dest="architectures", action='store',
+                             default=None,
+                             help="Comma-separated list of hardware architectures to show")
+    show_parser.add_argument('-r', '--releases', '--release',
+                             dest="releases", action='store',
+                             default=None,
+                             help="Comma-separated list of Ubuntu release codenames to show")
+    show_parser.add_argument('-p', '--packages', '--package',
+                             dest="packages", action='store',
+                             help="Comma-separated list of source package names to show")
+
+    # Tests Command
+    tests_parser = subparser.add_parser(
+        'tests',
+        argument_default=argparse.SUPPRESS,
+        help='Summarizes autopkgtest results for the PPA, with links to trigger new test runs.',
+        prog=f"{progname} tests",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(tests_parser)
+    tests_parser.add_argument('ppa_name', metavar='ppa-name',
+                              action='store',
+                              default=None,
+                              help="Name of the PPA to view tests")
+    tests_parser.add_argument('-a', '--arches', '--arch', '--architectures',
+                              dest="architectures", action='store',
+                              default=None,
+                              help="Comma-separated list of hardware architectures to include")
+    tests_parser.add_argument('-r', '--releases', '--release',
+                              dest="releases", action='store',
+                              default=None,
+                              help="Comma-separated list of Ubuntu release codenames to show")
+    tests_parser.add_argument('-p', '--packages', '--package',
+                              dest="packages", action='store',
+                              default=None,
+                              help="Comma-separated list of source package names to show")
+    tests_parser.add_argument('-L', '--show-url', '--show-urls',
+                              dest='show_urls', action='store_true',
+                              default=None,
+                              help="Display unformatted trigger action URLs")
+    tests_parser.add_argument('--show-rdepends',
+                              dest='show_rdepends', action='store_true',
+                              default=None,
+                              help="Display test triggers for reverse dependencies")
+
+    # Wait Command
+    wait_parser = subparser.add_parser(
+        'wait',
+        argument_default=argparse.SUPPRESS,
+        help=(
+            'Polls status of packages in a PPA until they have all completed source '
+            'upload, binary building, and source and binary publication.'
+        ),
+        prog=f"{progname} wait",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    add_global_options(wait_parser)
+    wait_parser.add_argument('ppa_name', metavar='ppa-name',
+                             action='store',
+                             help="Name of the PPA to wait on")
+    wait_parser.add_argument('-l', '--log',
+                             dest="wait_logging", action='store_true',
+                             default=None,
+                             help="Print ongoing status to console (without screen clearing).")
+
+    return parser
+
+
+def create_lp(app_name: str, args: argparse.Namespace) -> Lp:
+    """Instantiate the Lp Launchpad Interface object.
+
+    Use credentials from the file specified by --credentials , if
+    provided.  If not, next try to use contents from the LP_CREDENTIALS
+    environment variable.  Last, leave creds undefined, and Lp will
+    handle website login and credentials caching automatically.
+
+    :param argparse.Namespace args: Command line arguments.
+    :rtype: Lp
+    :returns: Interface object for accessing the launchpad service.
+    """
+    if args.credentials_filename:
+        with open(args.credentials_filename, 'r') as f:
+            creds = f.read()
+    else:
+        creds = os.getenv("LP_CREDENTIALS")
+
+    return Lp(app_name, credentials=creds)
+
+
+DEFAULT_CONFIG = {
+    'debug': False,
+    'ppa_name': None,
+    'owner_name': None,
+    'wait_seconds': 10.0
+    }
+
+
+def create_config(lp: Lp, args: argparse.Namespace) -> Dict[str, Any]:
+    """Creates config object by loading from file and adding args.
+
+    This routine merges the command line parameter values with data
+    loaded from the program's YAML formatted configuration file at
+    ~/.config/ppa-dev-tools/config.yml (or as specified by the --config
+    parameter).
+
+    This permits setting static values in the config file(s), and using
+    the command line args for variable settings and overrides.
+
+    :param launchpadlib.service lp: The Launchpad service object.
+    :param Namespace args: The parsed args from ArgumentParser.
+    :rtype: dict
+    :returns: dict of configuration parameters and values, or None on error
+    """
+    config_path = os.path.expanduser(args.config_filename)
+    try:
+        config = load_yaml_as_dict(config_path)
+    except FileNotFoundError:
+        # Assume defaults
+        dbg("Using default config since no config file found at {config_path}")
+        config = dict(DEFAULT_CONFIG)
+    except OSError as err:
+        error(f"Could not open {config_path}: {str(err)}")
+        return None
+    except YAMLError as err:
+        error(f"Invalid config file {config_path}: {str(err)}")
+        return None
+
+    # Import command-specific (namespaced) config into the main dict
+    #   e.g. create.architectures = a,b,c
+    if args.command and args.command in config:
+        cmd_config = config[args.command]
+        if isinstance(cmd_config, dict):
+            config.update(cmd_config)
+            dbg(config)
+
+    # Map all non-empty elements from argparse Namespace into config dict
+    config.update({k: v for k, v in vars(args).items() if v is not None})
+
+    # Use defaults for any remaining parameters not yet configured
+    for k, v in DEFAULT_CONFIG.items():
+        config.setdefault(k, v)
+
+    if not hasattr(args, 'ppa_name'):
+        warn("No ppa name given")
+        return None
+
+    owner_name, ppa_name = ppa_address_split(args.ppa_name)
+    if owner_name:
+        # First use the owner if present in the PPA address itself,
+        # overriding any configured defaults or specified arguments.
+        config['owner_name'] = owner_name
+    elif config.get('owner_name'):
+        # Next use any owner name from config file or cli args.
+        pass
+    elif config.get('team_name'):
+        # Support legacy config term 'team_name' as alias for 'owner_name'
+        config['owner_name'] = config['team_name']
+        del config['team_name']
+    elif lp.me:
+        # Lastly, fallback to the current Launchpad username, if available.
+        config['owner_name'] = lp.me.name
+    else:
+        warn("No owning person or team identified for the PPA")
+        return None
+
+    if not ppa_name:
+        raise ValueError("Invalid ppa name '{args.ppa_name}'")
+    config['ppa_name'] = ppa_name
+
+    if args.dry_run:
+        config['dry_run'] = True
+
+    return unpack_config(config)
+
+
+def unpack_config(config):
+    """Process config elements needing comma split.
+
+    :param dict[str, Any] config: Configuration parameters.
+    :rtype: dict[str, Any]
+    :returns: The config but with certain comma-separated values
+        converted from strings to lists.
+    """
+    # Process config elements needing comma split
+    for param in ['ppa_dependencies', 'architectures', 'releases', 'packages']:
+        value = config.get(param, None)
+        if isinstance(value, str):
+            config[param] = list(unpack_to_dict(value).keys())
+    return config
+
+
+################
+### Commands ###
+################
+
+def command_create(lp: Lp, config: Dict[str, str]) -> int:
+    """Creates a new PPA in Launchpad.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    # Take description from stdin if it's not a tty
+    description = config.get('description')
+    if not description and not sys.stdin.isatty():
+        description = sys.stdin.read()
+
+    ppa_name = config.get('ppa_name')
+    if not ppa_name:
+        warn("Could not determine PPA name")
+        return os.EX_USAGE
+
+    owner_name = config.get('owner_name')
+    if not owner_name:
+        warn("Could not determine owning person or team LP username")
+        return os.EX_USAGE
+
+    architectures = config.get('architectures', ARCHES_PPA_ALL)
+
+    try:
+        if not config.get('dry_run', False):
+            ppa_group = PpaGroup(service=lp, name=owner_name)
+            the_ppa = ppa_group.create(
+                ppa_name,
+                ppa_description=description,
+                private=config.get('private', False)
+                )
+            the_ppa.set_publish(config.get('publish', None))
+            if architectures:
+                the_ppa.set_architectures(architectures)
+            arch_str = ', '.join(the_ppa.architectures)
+
+            ppa_addresses = config.get('ppa_dependencies', None)
+            if ppa_addresses:
+                the_ppa.set_dependencies(ppa_addresses)
+
+            if 'pocket' in config:
+                pocket = config['pocket']
+                # We need to validate as it could come from the config file.
+                if pocket in DISTRO_UBUNTU_POCKETS:
+                    the_ppa.set_pocket(pocket)
+                else:
+                    error(f'Invalid pocket specified: {pocket}')
+
+        else:
+            the_ppa = Ppa(ppa_name, owner_name, description)
+            arch_str = ', '.join(architectures)
+        if not config.get('quiet', False):
+            print(f"PPA '{the_ppa.ppa_name}' created for the following architectures:\n")
+            print(f"  {arch_str}\n")
+            print("The PPA can be viewed at:\n")
+            print(f"  {the_ppa.url}\n")
+            print("You can upload packages to this PPA using:\n")
+            print(f"  dput {the_ppa.address} <source.changes>\n")
+            print("Wait for the uploads to build and publish using:\n")
+            credentials_file=config.get('credentials_filename')
+            if credentials_file:
+                print(f"  ppa --credentials {credentials_file} wait {the_ppa.address}\n")
+            else:
+                print(f"  ppa wait {the_ppa.address}\n")
+            print("To add the repository and to your system:\n")
+            print(f"  sudo add-apt-repository -yus {the_ppa.address}")
+            print("  sudo apt-get install <package(s)>")
+        return os.EX_OK
+    except Unauthorized as e:
+        error(f"Insufficient authorization to create '{ppa_name}' under ownership of '{owner_name}'.")
+        return os.EX_NOPERM
+    except KeyError as e:
+        error(f"No such person or team '{owner_name}'")
+        return os.EX_NOUSER
+    except PpaAlreadyExists as e:
+        warn(o2str(e.message))
+        return os.EX_CANTCREAT
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_credentials(lp: Lp, config: Dict[str, str]) -> int:
+    """Saves login credentials to a file.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    try:
+        credentials_filename = config.get(
+            'credentials_filename',
+            CREDENTIALS_FILENAME_DEFAULT
+        )
+        lp.credentials.save_to_path(credentials_filename)
+        print(f"Launchpad credentials written to {credentials_filename}")
+        return os.EX_OK
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_desc(lp: Lp, config: Dict[str, str]) -> int:
+    """Sets the description for a PPA.
+
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    if not sys.stdin.isatty():
+        description = sys.stdin.read()
+    else:
+        description = ' '.join(config.get('description', None))
+
+    if not description or len(description) < 3:
+        warn('No description provided')
+        return os.EX_USAGE
+
+    try:
+        the_ppa = get_ppa(lp, config)
+        if config.get('dry_run', False):
+            print("dry_run: Set description to '{}'".format(description))
+            return os.EX_OK
+
+        return the_ppa.set_description(description)
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_destroy(lp: Lp, config: Dict[str, str]) -> int:
+    """Destroys the PPA.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    try:
+        the_ppa = get_ppa(lp, config)
+        if not config.get('dry_run'):
+            # Attempt deletion of the PPA
+            the_ppa.destroy()
+        return os.EX_OK
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_list(lp: Lp, config: Dict[str, str], filter_func=None) -> int:
+    """Lists the PPAs for the user or team.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    # TODO: Apply filters such as:
+    #  - Ones with packages for the given arch or codename
+    #  - filter_not_empty: Ones with packages
+    #  - filter_empty: Ones without packages
+    #  - filter_obsolete: Ones with only packages that are superseded
+    #  - filter_newer: Ones newer than a given date
+    #  - filter_older: Ones older than a given date
+    #  - Status of the PPAs
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    owner_name = config.get('owner_name')
+    if not owner_name:
+        if lp.me:
+            owner_name = lp.me.name
+        else:
+            warn("Could not determine owning person or team name")
+            return os.EX_USAGE
+
+    try:
+        ppa_group = PpaGroup(service=lp, name=owner_name)
+        for p in ppa_group.ppas:
+            print(p.address)
+        return os.EX_OK
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_exists(lp: Lp, config: Dict[str, str]) -> int:
+    """Checks if the named PPA exists in Launchpad.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    try:
+        the_ppa = get_ppa(lp, config)
+        if the_ppa.archive is not None:
+            return os.EX_OK
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    return 1
+
+
+def command_set(lp: Lp, config: Dict[str, str]) -> int:
+    """Sets one or more properties of PPA in Launchpad.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    try:
+        the_ppa = get_ppa(lp, config)
+
+        if 'architectures' in config:
+            architectures = config.get('architectures', None)
+            if architectures:
+                the_ppa.set_architectures(architectures)
+
+        if 'description' in config:
+            the_ppa.archive.description = config['description']
+
+        if 'displayname' in config:
+            the_ppa.archive.displayname = config['displayname']
+
+        ppa_addresses = config.get('ppa_dependencies', None)
+        if ppa_addresses:
+            the_ppa.set_dependencies(ppa_addresses)
+
+        if 'publish' in config:
+            the_ppa.archive.publish = config.get('publish')
+
+        if 'pocket' in config:
+            pocket = config['pocket']
+            # We need to validate as it could come from the config file.
+            if pocket in DISTRO_UBUNTU_POCKETS:
+                the_ppa.set_pocket(pocket)
+            else:
+                error(f'Invalid pocket specified: {pocket}')
+
+        the_ppa.set_private(config.get('private', None))
+
+        return the_ppa.archive.lp_save()
+    except Unauthorized as e:
+        if b'private' in e.content:
+            error(f"Insufficient authorization to change privacy for PPA '{the_ppa.name}'.")
+        else:
+            error(f"Insufficient authorization to modify PPA '{the_ppa.name}'.")
+        return os.EX_NOPERM
+    except PpaNotFoundError as e:
+        print(e)
+        return EX_NOTFOUND
+    except ValueError as e:
+        print(f"Error: {e}")
+        return os.EX_USAGE
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_show(lp: Lp, config: Dict[str, str]) -> int:
+    """Displays details about the given PPA.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    releases = config.get('releases', [])
+    architectures = config.get('architectures', [])
+    packages = config.get('packages', [])
+    try:
+        the_ppa = get_ppa(lp, config)
+        print(f"ppa:        {the_ppa.name}")
+        print(f"address:    {the_ppa.address}")
+        print(f"installation:")
+        print(f"    $ sudo add-apt-repository --enable-source --yes {the_ppa.name}")
+        print(f"removal:")
+        print(f"    $ sudo add-apt-repository --remove --yes {the_ppa.name}")
+        print("description:")
+        print(indent(the_ppa.description, 4))
+        print(f"url:        {the_ppa.url}")
+
+        print("sources:")
+        for series in releases or [None]:
+            for pub in the_ppa.get_source_publications(series):
+                if packages and (pub.package not in packages):
+                    continue
+                print("  - %-70s %s %s" % (
+                    f"{pub.package:<20}  {pub.version:<20} ",
+                    pub.status,
+                    series or '',
+                ))
+
+        # TODO: Only show binary details if specifically requested
+        print("binaries:")
+        distro = None
+        series = None
+        arch = None
+        total_downloads = 0
+        for series in releases or [None]:
+            for binary in the_ppa.get_binaries(None, series, None) or []:
+                # Skip uninteresting binaries
+                if not config.get('show-debug', False) and binary.is_debug:
+                    continue
+                if not config.get('show-superseded', False) and binary.status == 'Superseded':
+                    continue
+                if not config.get('show-deleted', False) and binary.status == 'Deleted':
+                    continue
+                if not config.get('show-obsolete', False) and binary.status == 'Obsolete':
+                    continue
+
+                # equivalent to distro_series.name but avoids querying launchpad.
+                distro_series_name = binary.distro_arch_series_link.rsplit("/", maxsplit=2)[-2]
+                print("  - %-48s %-8s %s %s %s %s %6d" % (
+                    f"{binary.binary_package_name:<20}  {binary.binary_package_version:<20} ",
+                    binary.distro_arch_series.architecture_tag,
+                    binary.component_name,
+                    binary.pocket,
+                    binary.status,
+                    distro_series_name,
+                    binary.getDownloadCount()))
+                total_downloads += binary.getDownloadCount()
+        print("downloads: %d" % (total_downloads))
+        return os.EX_OK
+    except PpaNotFoundError as e:
+        print(e)
+        return EX_NOTFOUND
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_wait(lp: Lp, config: Dict[str, str]) -> int:
+    """Blocks until all package builds are finished.
+
+    Polls Launchpad for build (and/or test) status on packages present in
+    the PPA.  Exits only when all packages have completed processing.
+
+    This is intended to be used in a workflow where packages are
+    uploaded to the PPA for building and/or testing, with additional
+    steps take once the packages have finished processing.  The wait
+    command allows the workflow to pause until the builds and/or tests
+    have finished.
+
+    The exit value of the wait command indicates if the processing was
+    successful, or if there were one or more failures.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    try:
+        wait_max_age_hours = config.get('wait_max_age_hours')
+        created_since_date = None
+        if wait_max_age_hours:
+            created_since_date = datetime.datetime.utcnow().replace(
+                tzinfo=datetime.timezone.utc
+            ) - datetime.timedelta(hours=int(wait_max_age_hours))
+        name = config.get('name')
+        the_ppa = get_ppa(lp, config)
+
+        waiting = True
+        bad_request_count = 0
+        while waiting:
+            try:
+                if not the_ppa.has_packages(created_since_date=created_since_date, name=name):
+                    print("Nothing present in PPA.  Waiting for new package uploads...")
+                    # TODO: Only wait a configurable amount of time (15 min?)
+                    waiting = True  # config['wait_for_packages']
+                else:
+                    pending_reason = the_ppa.pending_publications(
+                        created_since_date=created_since_date,
+                        name=name,
+                        logging=config.get('wait_logging', False),
+                    )
+                    waiting = bool(pending_reason)
+                    if config.get('exit_on_only_build_failure', False) and all(
+                            x == PendingReason.BUILD_FAILED for x in pending_reason):
+                        # If exiting due to not pending, return ok, else failure
+                        return 100 if pending_reason else os.EX_OK
+                bad_request_count = 0
+            except BadRequest as e:
+                if bad_request_count < 3:
+                    warn("BadRequest from Launchpad.  Retrying...")
+                    bad_request_count += 1
+                else:
+                    error(f"Launchpad failure: {e}")
+                    return os.EX_TEMPFAIL
+            time.sleep(config['wait_seconds'])
+        return os.EX_OK
+    except PpaNotFoundError as e:
+        print(e)
+        return EX_NOTFOUND
+    except ValueError as e:
+        print(f"Error: {e}")
+        return os.EX_USAGE
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+def command_tests(lp: Lp, config: Dict[str, str]) -> int:
+    """Displays testing status for the PPA.
+
+    :param Lp lp: The Launchpad wrapper object.
+    :param Dict[str, str] config: Configuration param:value map.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not lp:
+        return os.EX_UNAVAILABLE
+
+    apt_repository = None
+    if config.get("show_rdepends"):
+        local_dists_path = os.path.join(LOCAL_REPOSITORY_PATH, "dists")
+        try:
+            apt_repository = Repository(cache_dir=local_dists_path)
+        except FileNotFoundError as e:
+            error(f'Missing checkout\n{LOCAL_REPOSITORY_MIRRORING_DIRECTIONS}: {e}')
+            return EX_NOTFOUND
+
+    releases = config.get('releases', None)
+    if releases is None:
+        udi = UbuntuDistroInfo()
+        releases = udi.supported()
+        releases.extend(r for r in udi.supported_esm() if r not in releases)
+    if not isinstance(releases, list):
+        raise TypeError(f"Parameter releases={releases} not of type list")
+
+    packages = config.get('packages', None)
+    if (not packages is None) and (not isinstance(packages, list)):
+        raise TypeError(f"Parameter packages={packages} not of type list")
+
+    the_ppa = get_ppa(lp, config)
+    if not the_ppa.exists():
+        error(f"PPA {the_ppa.name} does not exist for user {the_ppa.owner_name}")
+        return EX_NOTFOUND
+
+    architectures = config.get('architectures', ARCHES_AUTOPKGTEST)
+    if not isinstance(architectures, list):
+        raise TypeError(f"Parameter architectures={architectures} not of type list")
+
+    try:
+        # Triggers
+        source_pub_triggers = []
+        for source_pub in the_ppa.get_source_publications():
+            series = source_pub.series
+            if series not in releases:
+                continue
+            pkg = source_pub.package
+            if packages and (pkg not in packages):
+                continue
+            ver = source_pub.version
+            triggers = get_triggers(pkg, ver, the_ppa, series, architectures)
+
+            if config.get("show_rdepends"):
+                # Construct suite object from repository.
+                # NOTE: If a package has been freshly added to 'proposed' it
+                #       will be missed since we consider only packages present
+                #       in the release pocket.
+                suite = apt_repository.get_suite(series, 'release')
+                if not suite:
+                    raise RuntimeError(
+                        f'No suite "{series}" in the local Apt cache'
+                    )
+
+                # Lookup rdepends for the package
+                source_package = suite.sources.get(pkg)
+                if not source_package:
+                    raise RuntimeError(
+                        f'No source package "{pkg}" in the local Apt cache for "{suite}"'
+                    )
+
+                rdepends_source_package_names = suite.dependent_packages(source_package)
+                for rdep_name in rdepends_source_package_names:
+                    rdep = suite.sources.get(rdep_name)
+                    if not rdep:
+                        raise RuntimeError(
+                            f'Undefined reverse dependency "{rdep_name}"'
+                        )
+
+                    triggers.extend([
+                        Trigger(pkg, ver, arch, series, the_ppa, rdep.name)
+                        for arch
+                        in architectures
+                    ])
+            source_pub_triggers.append((source_pub, triggers))
+
+        # Display triggers
+        print("* Triggers:")
+        for source_pub, triggers in source_pub_triggers:
+            series = source_pub.series
+            package = source_pub.package
+            version = source_pub.version
+            status = source_pub.status
+            url = f"https://launchpad.net/ubuntu/+source/{package}/{version}"
+            source_hyperlink = ansi_hyperlink(url, f"{series}/{package}/{version}")
+            print(f"  - Source {source_hyperlink}: {status}")
+            show_triggers(
+                triggers,
+                show_trigger_urls=config.get("show_urls"),
+                show_trigger_names=config.get("show_rdepends")
+            )
+
+        # Results
+        show_results(the_ppa.get_autopkgtest_results(releases, architectures, packages),
+                     config.get('show_urls'))
+
+        # Running Queue
+        show_running(sorted(the_ppa.get_autopkgtest_running(releases, packages),
+                            key=lambda k: str(k.submit_time)))
+
+        # Waiting Queue
+        show_waiting(the_ppa.get_autopkgtest_waiting(releases, packages))
+
+        return os.EX_OK
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    print("Unhandled error")
+    return 1
+
+
+COMMANDS = {
+    'create':        (command_create, None),
+    'credentials':   (command_credentials, None),
+    'desc':          (command_desc, None),
+    'destroy':       (command_destroy, None),
+    'list':          (command_list, None),
+    'set':           (command_set, None),
+    'show':          (command_show, None),
+    'tests':         (command_tests, None),
+    'wait':          (command_wait, None),
+    }
+
+
+def main(args: argparse.Namespace) -> int:
+    """Main entrypoint for the command.
+
+    :param argparse.Namespace args: Command line arguments.
+    :rtype: int
+    :returns: Status code OK (0) on success, non-zero on error.
+    """
+    if not args.command:
+        error("No command given.")
+        return os.EX_USAGE
+
+    try:
+        lp = create_lp('ppa-dev-tools', args)
+        config = create_config(lp, args)
+    except KeyboardInterrupt:
+        return EX_KEYBOARD_INTERRUPT
+    except ValueError as e:
+        error(e)
+        return os.EX_CONFIG
+    if not config:
+        return os.EX_CONFIG
+
+    ppa.debug.DEBUGGING = config.get('debug', False)
+
+    dbg("Configuration:")
+    dbg(config)
+
+    command = args.command
+    try:
+        func, param = COMMANDS[command]
+    except KeyError:
+        parser.error(f"No such command {command}")
+        return os.EX_USAGE
+    if param:
+        return func(lp, config, param)
+    return func(lp, config)
+
+
+if __name__ == "__main__":
+    # Option handling
+    parser = create_arg_parser()
+    args = parser.parse_args()
+
+    retval = main(args)
+    if retval == os.EX_USAGE:
+        print()
+        parser.print_help()
+    elif retval == EX_KEYBOARD_INTERRUPT:
+        sys.stderr.write(" (user interrupt)\n")
+    sys.exit(retval)
