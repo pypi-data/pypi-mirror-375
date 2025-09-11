@@ -1,0 +1,23 @@
+[project]
+name = "encfilex"
+version = "3.1"
+description = "EncFilex v3 - layered file encryption (Base64 -> AES-256-GCM -> XChaCha20-Poly1305)"
+authors = [
+    { name="AkuzzDev", email="akuzz.developer@gmail.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+dependencies = [
+    "argon2-cffi",
+    "cryptography",
+    "PyNaCl"
+]
+
+[project.scripts]
+encfilex = "EFX.main:efx"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
