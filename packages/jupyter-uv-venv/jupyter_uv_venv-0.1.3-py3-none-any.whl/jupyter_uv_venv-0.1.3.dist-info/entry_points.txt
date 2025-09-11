@@ -1,0 +1,7 @@
+[console_scripts]
+
+[gui_scripts]
+
+[kernelspecs]
+jupyter-uv-venv = jupyter_uv_venv.kernel:get_kernel_spec
+
