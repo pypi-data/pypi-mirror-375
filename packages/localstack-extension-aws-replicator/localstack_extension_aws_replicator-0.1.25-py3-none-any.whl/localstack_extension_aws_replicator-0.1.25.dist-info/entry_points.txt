@@ -1,0 +1,5 @@
+[localstack.extensions]
+aws-replicator = aws_replicator.server.extension:AwsReplicatorExtension
+
+[localstack.plugins.cli]
+aws-replicator = aws_replicator.client.cli:AwsReplicatorPlugin
