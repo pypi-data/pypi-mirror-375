@@ -1,0 +1,76 @@
+appId: "com.cprdspy.app"
+productName: "CPR波形可视化"
+copyright: "Copyright © 2023"
+
+directories:
+  output: "dist"
+  buildResources: "src/assets"
+
+files:
+  - "src/**/*"
+  - "node_modules/**/*"
+  - "package.json"
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+  - "!**/node_modules/*.d.ts"
+  - "!**/node_modules/.bin"
+  - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+  - "!.editorconfig"
+  - "!**/._*"
+  - "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}"
+  - "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}"
+  - "!**/{appveyor.yml,.travis.yml,circle.yml}"
+  - "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+  - "python/**/*"
+
+extraResources:
+  - from: "python"
+    to: "python"
+    filter: "**/*"
+
+asar: true
+
+win:
+  icon: "src/assets/icon.ico"
+  target:
+    - "nsis"
+  artifactName: "${productName}-Setup-${version}.${ext}"
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: "${productName}"
+
+mac:
+  icon: "src/assets/icon.icns"
+  category: "public.app-category.medical"
+  target:
+    - "dmg"
+  darkModeSupport: true
+
+dmg:
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: "link"
+      path: "/Applications"
+
+linux:
+  icon: "src/assets/icon.png"
+  target:
+    - "AppImage"
+    - "deb"
+  category: "Science;MedicalSoftware"
+  maintainer: "CPR波形可视化团队"
+
+publish:
+  provider: "github"
+  releaseType: "release"
+
+beforeBuild: "node prepare-python.js"

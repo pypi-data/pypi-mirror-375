@@ -1,0 +1,9 @@
+include LICENSE
+include README.md
+recursive-include cprdspy/CPR_js *.html *.js
+recursive-include cprdspy/CPR_matplotlib/image *
+recursive-include cprdspy/electron-app *
+recursive-exclude cprdspy/electron-app/node_modules *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.ipynb_checkpoints

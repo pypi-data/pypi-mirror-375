@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPR波形可视化</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">
+</head>
+
+<body>
+    <!-- 自定义标题栏 -->
+    <div class="titlebar">
+        <div class="titlebar-title">
+            <img src="assets/icon.png" alt="Logo" class="titlebar-logo">
+            <span>CPR波形可视化</span>
+        </div>
+        <div class="titlebar-controls">
+            <button id="minimize-btn" class="titlebar-button">
+                <i class="mdi mdi-window-minimize"></i>
+            </button>
+            <button id="maximize-btn" class="titlebar-button">
+                <i class="mdi mdi-window-maximize"></i>
+            </button>
+            <button id="close-btn" class="titlebar-button">
+                <i class="mdi mdi-close"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>功能菜单</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active" data-view="dashboard">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span>仪表盘</span>
+                    </li>
+                    <li class="nav-item" data-view="file-manager">
+                        <i class="mdi mdi-file-multiple"></i>
+                        <span>文件管理</span>
+                    </li>
+                    <li class="nav-item" data-view="settings">
+                        <i class="mdi mdi-cog"></i>
+                        <span>设置</span>
+                    </li>
+                    <li class="nav-item" data-view="about">
+                        <i class="mdi mdi-information"></i>
+                        <span>关于</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- 内容区 -->
+        <div class="content">
+            <!-- 加载状态 -->
+            <div id="loading" class="loading-container">
+                <div class="spinner"></div>
+                <p>正在启动Python服务器...</p>
+            </div>
+
+            <!-- 仪表盘视图 -->
+            <div id="dashboard-view" class="view active"></div>
+            <div class="view-header">
+                <h2>CPR波形仪表盘</h2>
+            </div>
+            <div class="dashboard-content"></div>
+            <iframe id="dash-frame" src="about:blank" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <!-- 文件管理视图 -->
+    <div id="file-manager-view" class="view">
+        <div class="view-header">
+            <h2>文件管理</h2>
+            <button id="import-file-btn" class="btn primary">
+                <i class="mdi mdi-upload"></i> 导入文件
+            </button>
+        </div>
+        <div class="file-list-container">
+            <table class="file-list">
+                <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th>大小</th>
+                        <th>日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="file-list-body">
+                    <!-- 文件列表将通过JavaScript动态填充 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 设置视图 -->
+    <div id="settings-view" class="view">
+        <div class="view-header">
+            <h2>设置</h2>
+        </div>
+        <div class="settings-content">
+            <div class="settings-group"></div>
+            @keyframes spin {
+            <div class="setting-item">
+                <label for="theme-select">主题</label>
+                <select id="theme-select">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="system">跟随系统</option>
+                </select>
+            </div>
+        </div>
+        <div class="settings-group"></div>
+        #error {
+        <div class="setting-item">
+            <label for="data-dir">数据目录</label>
+            <div class="input-with-button">
+                <input type="text" id="data-dir" readonly>
+                <button id="browse-data-dir" class="btn">浏览...</button>
+            </div>div>
+        </div>
+    </div>
+    <div class="settings-group">
+        <h3>高级设置</h3>
+        <div class="setting-item">
+            <label for="server-port">服务器端口</label>
+            <input type="number" id="server-port" min="1024" max="65535" value="8050">
+        </div>
+        <div class="setting-item checkbox"></div>
+        .error-icon {
+        <label for="start-with-system">开机启动</label>
+    </div>
+    </div>
+    <div class="settings-actions">
+        <button id="save-settings" class="btn primary">保存设置</button>
+        <button id="reset-settings" class="btn">重置</button>
+    </div>
+    </div>
+    </div>
+
+    <!-- 关于视图 -->
+    <div id="about-view" class="view">
+        <div class="view-header">
+            <h2>关于</h2>
+        </div>
+        <div class="about-content">
+            <div class="app-info">
+                <img src="assets/icon.png" alt="Logo" class="app-logo">
+                <h2>CPR波形可视化</h2>
+                <p class="version">版本 <span id="app-version">1.0.0</span></p>
+                <p class="description">
+                    CPR波形可视化是一款用于分析和展示心肺复苏过程中波形数据的工具，
+                    帮助医疗专业人员更好地理解和评估CPR质量。
+                </p>
+            </div>
+            <div class="tech-stack">
+                <h3>技术栈</h3>
+                <ul>
+                    <li>Electron</li>
+                    <li>Python</li>
+                    <li>Dash</li>
+                    <li>Plotly</li>
+                </ul>
+            </div>
+            <div class="links">
+                <button id="github-link" class="btn link">
+                    <i class="mdi mdi-github"></i> GitHub
+                </button>
+                <button id="docs-link" class="btn link">
+                    <i class="mdi mdi-book-open-page-variant"></i> 文档
+                </button>
+                <button id="check-updates" class="btn link">
+                    <i class="mdi mdi-update"></i> 检查更新
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- 状态栏 -->
+    <div class="statusbar">
+        <div class="status-item" id="server-status">
+            <i class="mdi mdi-circle"></i>
+            <span>服务器状态: 正在启动...</span>
+        </div>
+        <div class="status-item" id="memory-usage">
+            <i class="mdi mdi-memory"></i>
+            <span>内存: 计算中...</span>
+        </div>
+    </div>
+
+    <!-- 通知系统 -->
+    <div id="notification-container"></div>
+
+    <!-- 脚本 -->
+    <script src="renderer.js"></script>
+</body>
+
+</html>

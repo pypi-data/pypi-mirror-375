@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPR Dash App with Plotly.js</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        .inputs {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+
+        .inputs input {
+            display: block;
+            margin-bottom: 10px;
+            width: 90%;
+            padding: 5px;
+        }
+
+        .inputs button {
+            margin-top: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .chart {
+            flex: 2;
+            padding: 20px;
+        }
+
+        #plot {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 左侧输入框 -->
+        <div class="inputs">
+            <h1>CPR Dash App</h1>
+            <div id="input-container"></div>
+            <button id="plot-btn">绘制图表</button>
+            <button id="clear-btn">清除图表</button>
+        </div>
+        <!-- 右侧图表 -->
+        <div class="chart">
+            <div id="plot"></div>
+        </div>
+    </div>
+
+    <script>
+        // 动态生成输入框
+        const parameters = 8; // 假设有 8 个参数
+        const inputContainer = document.getElementById('input-container');
+        for (let i = 0; i < parameters; i++) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = `input-${i}`;
+            input.placeholder = `参数 ${i + 1}`;
+            inputContainer.appendChild(input);
+        }
+
+        // 初始化图表
+        let globalData = []; // 用于存储图表数据
+        const layout = {
+            title: 'CPR Dash App',
+            xaxis: { dtick: 1 },
+            yaxis: { dtick: 1 },
+            width: 800,
+            height: 800
+        };
+        Plotly.newPlot('plot', globalData, layout);
+
+        // 绘制图表按钮点击事件
+        document.getElementById('plot-btn').addEventListener('click', () => {
+            const inputs = [];
+            for (let i = 0; i < parameters; i++) {
+                const value = document.getElementById(`input-${i}`).value;
+                if (!value) {
+                    alert('请确保所有输入框都已填写。');
+                    return;
+                }
+                inputs.push(value);
+            }
+
+            try {
+                // 转换输入值为适当的类型（支持 eval 和 Math 表达式）
+                const convertedValues = inputs.map(value => {
+                    try {
+                        return eval(value); // 使用 eval 解析输入
+                    } catch {
+                        return value; // 如果解析失败，保留原始值
+                    }
+                });
+
+                // 模拟调用 CPR.flowers_flower_by_petal_multi 函数
+                const newTrace = generateMockData(convertedValues);
+
+                // 添加新数据到图表
+                Plotly.addTraces('plot', newTrace);
+            } catch (error) {
+                alert(`生成图表时出错：${error.message}`);
+            }
+        });
+
+        // 清除图表按钮点击事件
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            globalData = [];
+            Plotly.newPlot('plot', globalData, layout);
+            alert('图表已清除，请重新绘制。');
+        });
+
+        // 模拟 CPR.flowers_flower_by_petal_multi 函数
+        function generateMockData(params) {
+            const x = [];
+            const y = [];
+            for (let i = 0; i < 100; i++) {
+                x.push(i);
+                y.push(Math.sin(i / params[0]) * params[1]); // 示例公式
+            }
+            return {
+                x: x,
+                y: y,
+                mode: 'lines',
+                name: `Trace ${globalData.length}`
+            };
+        }
+    </script>
+</body>
+
+</html>
