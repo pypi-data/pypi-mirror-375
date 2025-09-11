@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+GzipCompressionMiddleware=swarmauri_middleware_gzipcompression:GzipCompressionMiddleware
+
