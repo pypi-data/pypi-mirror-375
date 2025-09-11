@@ -1,0 +1,35 @@
+Metadata-Version: 2.4
+Name: databend
+Version: 1.2.809
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Database
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: pdoc ; extra == 'docs'
+Requires-Dist: pytest ; extra == 'test'
+Requires-Dist: pandas ; extra == 'test'
+Requires-Dist: polars ; extra == 'test'
+Requires-Dist: pyarrow ; extra == 'test'
+Provides-Extra: benchmark
+Provides-Extra: docs
+Provides-Extra: test
+Summary: Official Python binding for Databend - The AI-Native Data Warehouse. Open-source alternative to Snowflake with near 100% SQL compatibility, native AI capabilities, and unified support for structured, semi-structured, and vector data.
+Keywords: databend,database,analytics,data-warehouse,sql,olap
+Author-email: Databend Labs <hi@databend.com>
+Maintainer-email: Databend Community <hi@databend.com>
+License: Apache-2.0
+Requires-Python: >=3.10
+Project-URL: Documentation, https://pypi.org/project/databend/
+Project-URL: Homepage, https://databend.com
+Project-URL: Repository, https://github.com/databendlabs/databend
