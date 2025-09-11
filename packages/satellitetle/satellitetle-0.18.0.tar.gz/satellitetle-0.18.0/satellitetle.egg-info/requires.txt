@@ -1,0 +1,10 @@
+requests
+sgp4~=2.25
+spacetrack~=1.4.0
+
+[:python_version < "3.13"]
+importlib-metadata
+
+[dev]
+flake8~=3.9.0
+tox~=4.12.1
