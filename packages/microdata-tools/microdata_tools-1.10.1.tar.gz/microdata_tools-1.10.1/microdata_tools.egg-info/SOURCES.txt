@@ -1,0 +1,10 @@
+LICENSE.md
+README.md
+pyproject.toml
+microdata_tools/__init__.py
+microdata_tools.egg-info/PKG-INFO
+microdata_tools.egg-info/SOURCES.txt
+microdata_tools.egg-info/dependency_links.txt
+microdata_tools.egg-info/requires.txt
+microdata_tools.egg-info/top_level.txt
+tests/conftest.py
