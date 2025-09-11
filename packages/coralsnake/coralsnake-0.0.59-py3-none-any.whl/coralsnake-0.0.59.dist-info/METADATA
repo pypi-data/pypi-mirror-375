@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: coralsnake
+Version: 0.0.59
+Summary: Transcriptome mapping utils
+Project-URL: Repository, https://github.com/y9c/coralsnake
+Author-email: Chang Ye <yech1990@gmail.com>
+License-Expression: GPL-3.0
+Keywords: mapping,transcriptome
+Requires-Python: ~=3.10
+Requires-Dist: dnaio>=1.2.1
+Requires-Dist: ncls>=0.0.68
+Requires-Dist: numpy>=1.26
+Requires-Dist: pyfamsa>=0.4
+Requires-Dist: pysam>=0.22
+Requires-Dist: rich-click>=1.8.3
+Requires-Dist: scipy>=1.14
+Description-Content-Type: text/markdown
+
+# Coralsnake
+
+[![Pypi Releases](https://img.shields.io/pypi/v/coralsnake.svg)](https://pypi.python.org/pypi/coralsnake)
+[![Downloads](https://pepy.tech/badge/coralsnake)](https://pepy.tech/project/coralsnake)
+
+<p align="center">
+    <picture>
+        <img alt="coralsnake logo" src="https://coralsnake.yech.science/coralsnake_DNA.png" style="width: 50%">
+    </picture>
+</p>
