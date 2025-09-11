@@ -1,0 +1,6 @@
+[peagen.plugins.signings]
+ed25519=swarmauri_signing_ed25519:Ed25519EnvelopeSigner
+
+[swarmauri.signings]
+Ed25519EnvelopeSigner=swarmauri_signing_ed25519:Ed25519EnvelopeSigner
+
