@@ -1,0 +1,14 @@
+name: segtree
+display_name: SegTree
+# use 'hidden' to remove plugin from napari hub search results
+visibility: public
+# see https://napari.org/stable/plugins/technical_references/manifest.html#fields for valid categories
+categories: ["Annotation", "Segmentation", "Acquisition"]
+contributions:
+  commands:
+    - id: segtree.ind_segm
+      python_name: segtree:individual_tree
+      title: Tree Segmentation
+  widgets:
+    - command: segtree.ind_segm
+      display_name: Individual Tree Segmentation
