@@ -1,0 +1,6 @@
+[peagen.plugins.key_providers]
+remote_jwks=swarmauri_keyprovider_remote_jwks.RemoteJwksKeyProvider:RemoteJwksKeyProvider
+
+[swarmauri.key_providers]
+RemoteJwksKeyProvider=swarmauri_keyprovider_remote_jwks.RemoteJwksKeyProvider:RemoteJwksKeyProvider
+
