@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
+
+  <browser:page
+      name="confirm-action"
+      for="*"
+      class="plone.protect.views.ConfirmView"
+      template="confirm.pt"
+      permission="zope2.View"
+      layer="plone.app.layout.interfaces.IPloneAppLayoutLayer"
+      />
+
+</configure>
