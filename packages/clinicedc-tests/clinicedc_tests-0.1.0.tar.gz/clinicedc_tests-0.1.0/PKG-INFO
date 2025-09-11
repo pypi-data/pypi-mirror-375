@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: clinicedc-tests
+Version: 0.1.0
+Summary: Shared test config and utils for clinicedc projects and related apps
+Keywords: django,clinicedc,edc,clinical trials,research,data management,esource
+Author: Erik van Widenfelt, Jonathan Willitts
+Author-email: Erik van Widenfelt <ew2789@gmail.com>, Jonathan Willitts <j.willitts@ucl.ac.uk>
+License-Expression: GPL-3.0-or-later
+License-File: LICENSE
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 5.2
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Maintainer: Erik van Widenfelt
+Maintainer-email: Erik van Widenfelt <ew2789@gmail.com>
+Requires-Python: >=3.12
+Project-URL: Changelog, https://github.com/clinicedc/clinicedc-tests/blob/main/CHANGES
+Project-URL: Documentation, https://github.com/clinicedc/clinicedc-tests/docs
+Project-URL: Homepage, https://github.com/clinicedc/clinicedc-tests
+Project-URL: Repository, https://github.com/clinicedc/clinicedc-tests.git
+Description-Content-Type: text/x-rst
+
+|pypi| |downloads| |clinicedc|
+
+.. |pypi| image:: https://img.shields.io/pypi/v/clinicedc-tests.svg
+    :target: https://pypi.python.org/pypi/clinicedc-tests
+
+.. |downloads| image:: https://pepy.tech/badge/clinicedc-tests
+   :target: https://pepy.tech/project/clinicedc-tests
+
+.. |clinicedc| image:: https://img.shields.io/badge/framework-Clinic_EDC-green
+   :alt:Made with clinicedc
+   :target: https://github.com/clinicedc
