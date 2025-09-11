@@ -1,0 +1,96 @@
+---
+title: auth
+sidebarTitle: auth
+---
+
+# `keycardai.oauth.http.auth`
+
+
+Authentication strategies for OAuth 2.0 clients.
+
+This module implements HTTP Authorization header strategies for OAuth 2.0
+client authentication with a clean protocol-based design.
+
+
+## Classes
+
+### `AuthStrategy` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L11" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+
+Protocol for OAuth 2.0 client authentication strategies.
+
+Defines the interface for setting the Authorization header in HTTP requests.
+All authentication strategies must implement this protocol.
+
+
+**Methods:**
+
+#### `apply_headers` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L18" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+```python
+apply_headers(self) -> dict[str, str]
+```
+
+Apply authentication headers to HTTP request.
+
+**Returns:**
+- Dictionary containing Authorization header and any other auth headers
+
+
+### `NoneAuth` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L27" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+
+No authentication strategy.
+
+Used when no authentication is required (e.g., public endpoints,
+dynamic client registration).
+
+
+**Methods:**
+
+#### `apply_headers` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L34" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+```python
+apply_headers(self) -> dict[str, str]
+```
+
+Apply no authentication headers.
+
+
+### `BasicAuth` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L39" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+
+HTTP Basic authentication strategy.
+
+Implements RFC 7617 HTTP Basic authentication using client credentials.
+
+
+**Methods:**
+
+#### `apply_headers` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L60" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+```python
+apply_headers(self) -> dict[str, str]
+```
+
+Apply HTTP Basic authentication header.
+
+
+### `BearerAuth` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L67" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+
+HTTP Bearer token authentication strategy.
+
+Implements RFC 6750 Bearer token authentication using access tokens.
+
+
+**Methods:**
+
+#### `apply_headers` <sup><a href="https://github.com/keycardai/python-sdk/blob/main/src/keycardai/oauth/http/auth.py#L84" target="_blank"><Icon icon="github" style="width: 14px; height: 14px;" /></a></sup>
+
+```python
+apply_headers(self) -> dict[str, str]
+```
+
+Apply Bearer token authentication header.
+

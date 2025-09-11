@@ -1,0 +1,176 @@
+---
+title: "FastMCP Integration"
+description: "How to use KeyCard OAuth with FastMCP servers for automated token exchange"
+---
+
+# FastMCP Integration
+
+Simple examples showing how to use KeyCard OAuth components with FastMCP for automated token exchange.
+
+## Installation
+
+```bash
+uv add keycardai-mcp-fastmcp keycardai-oauth fastmcp
+```
+
+## Core Components
+
+### 1. KeyCard Auth Provider
+
+Handles JWT authentication and user verification:
+
+```python
+from keycardai.mcp.integrations.fastmcp import KeycardAuthProvider
+
+auth_provider = KeycardAuthProvider(
+    zone_url="https://your-zone.keycard.cloud",
+    mcp_server_name="My Server",
+    mcp_server_url="https://your-server.com/mcp"
+)
+```
+
+### 2. Access Middleware
+
+Manages OAuth client registration and provides grant decorator for token exchange:
+
+```python
+from keycardai.mcp.integrations.fastmcp import AccessMiddleware
+
+access = AccessMiddleware(
+    zone_url="https://your-zone.keycard.cloud"
+)
+```
+
+### 3. Grant Decorator
+
+Automatically exchanges user tokens for resource-specific tokens:
+
+```python
+from keycardai.oauth.utils.bearer import create_auth_header
+# Access middleware provides grant decorator
+access = AccessMiddleware(zone_url="https://your-zone.keycard.cloud")
+
+@access.grant("https://api.example.com")
+async def my_tool(ctx: Context):
+    # ctx.get_state("keycardai").access() provides token responses
+    token = ctx.get_state("keycardai").access("https://api.example.com").access_token
+    headers = {"Authorization": create_auth_header(token)}
+    return {"headers": headers}
+
+```
+
+**Why this approach is best:**
+
+- ✅ **Clean decorator usage**: No namespace objects cluttering the decorator
+- ✅ **Flexible aliasing**: Use `import as` to handle conflicts when needed
+- ✅ **Pythonic**: Follows standard Python import patterns
+- ✅ **IDE-friendly**: Better autocomplete and type hints
+
+## Basic Server Setup
+
+```python
+from fastmcp import FastMCP, Context
+from keycardai.mcp.integrations.fastmcp import (
+    KeycardAuthProvider,
+    AccessMiddleware,
+)
+from keycardai.oauth.utils.bearer import create_auth_header
+import httpx
+
+# Create MCP server
+mcp = FastMCP("My Server")
+
+# Add authentication
+auth_provider = KeycardAuthProvider(
+    zone_url="https://your-zone.keycard.cloud",
+    mcp_server_name="My Server",
+    mcp_server_url="https://your-server.com/mcp"
+)
+mcp.add_auth_provider(auth_provider)
+
+# Add OAuth middleware
+access = AccessMiddleware(
+    zone_url="https://your-zone.keycard.cloud"
+)
+mcp.add_middleware(access)
+
+# Define tool with automatic token exchange
+@mcp.tool()
+@access.grant("https://www.googleapis.com/calendar/v3")
+async def get_calendar_events(ctx: Context, maxResults: int = 10) -> dict:
+    """Get user's calendar events."""
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+            headers={"Authorization": create_auth_header(ctx.get_state("keycardai").access("https://www.googleapis.com/calendar/v3").access_token)},
+            params={"maxResults": maxResults}
+        )
+        response.raise_for_status()
+        return response.json()
+
+# Run server
+if __name__ == "__main__":
+    mcp.run(transport="http", port=8000, path="/mcp")
+```
+
+## Configuration
+
+Set environment variables:
+
+```bash
+export ZONE_URL="https://your-zone.keycard.cloud"
+export MCP_SERVER_URL="https://your-server.com/mcp"
+export MCP_SERVER_NAME="My Server"
+```
+
+## Multiple Resource Access
+
+Access multiple APIs with a single decorator:
+
+```python
+@mcp.tool()
+@access.grant(["https://www.googleapis.com/calendar/v3", "https://www.googleapis.com/drive/v3"])
+async def get_calendar_and_drive(ctx: Context):
+    from keycardai.oauth.utils.bearer import create_auth_header
+    calendar_token = ctx.get_state("keycardai").access("https://www.googleapis.com/calendar/v3").access_token
+    drive_token = ctx.get_state("keycardai").access("https://www.googleapis.com/drive/v3").access_token
+    calendar_headers = {"Authorization": create_auth_header(calendar_token)}
+    drive_headers = {"Authorization": create_auth_header(drive_token)}
+    return {
+        "calendar_headers": calendar_headers,
+        "drive_headers": drive_headers
+    }
+
+# Or access them separately with single resource grants
+@mcp.tool()
+@access.grant("https://www.googleapis.com/calendar/v3")
+async def get_calendar(ctx: Context):
+    from keycardai.oauth.utils.bearer import create_auth_header
+    token = ctx.get_state("keycardai").access("https://www.googleapis.com/calendar/v3").access_token
+    headers = {"Authorization": create_auth_header(token)}
+    return {"calendar_headers": headers}
+```
+
+## Error Handling
+
+```python
+from keycardai.oauth import OAuthError
+
+@mcp.tool()
+@access.grant("https://api.example.com")
+async def api_call(ctx: Context):
+    try:
+        # Your API call here
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                "https://api.example.com/data",
+                headers={"Authorization": create_auth_header(ctx.get_state("keycardai").access("https://api.example.com").access_token)}
+            )
+            response.raise_for_status()
+            return response.json()
+    except OAuthError as e:
+        return {"error": f"OAuth error: {e}"}
+    except Exception as e:
+        return {"error": f"API error: {e}"}
+```
+
