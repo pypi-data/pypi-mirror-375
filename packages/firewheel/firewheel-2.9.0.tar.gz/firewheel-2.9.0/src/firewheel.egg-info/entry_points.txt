@@ -1,0 +1,5 @@
+[console_scripts]
+firewheel = firewheel.cli.firewheel_cli:main
+get_fw_tab_completion_script = firewheel.cli.completion.prepare_completion_script:print_completion_script_path
+mcg = firewheel.control.utils.new_model_component:main
+prep_fw_tab_completion = firewheel.cli.completion.prepare_completion_script:main
