@@ -1,0 +1,9 @@
+_target_: lobster.data.UMELightningDataModule
+datasets: ???
+max_length: ???
+transforms:
+root: ${oc.env:LOBSTER_DATA_DIR}
+seed: 
+batch_size: 32
+pin_memory: true
+num_workers: 4
