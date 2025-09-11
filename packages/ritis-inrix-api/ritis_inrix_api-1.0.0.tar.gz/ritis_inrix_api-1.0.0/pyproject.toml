@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ritis_inrix_api"
+version = "1.0.0"
+authors = [
+  { name="Shawn Strasser", email="shawn.strasser@odot.oregon.gov" },
+]
+description = "Automated download of XD Segment data from RITIS or INRIX API, for daily or real time processing."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "requests",
+  "duckdb",
+  "pandas",
+  "pyarrow",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
