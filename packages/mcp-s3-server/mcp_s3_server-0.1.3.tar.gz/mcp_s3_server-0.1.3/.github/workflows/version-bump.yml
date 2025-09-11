@@ -1,0 +1,75 @@
+# DISABLED - Manual version bumping instead
+# name: Auto Version Bump (DEPRECATED)
+
+# on:
+#   push:
+#     branches: [main]
+#     paths-ignore:
+#       - 'pyproject.toml'
+#       - '.github/**'
+#       - 'README.md'
+#       - 'CHANGELOG.md'
+
+jobs:
+  version-bump:
+    runs-on: ubuntu-latest
+    if: |
+      ${{ !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[version bump]') }}
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+    
+    - name: Set up Python
+      run: uv python install 3.11
+    
+    - name: Install dependencies
+      run: |
+        uv add --dev bump2version
+        uv sync
+    
+    - name: Configure git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+    
+    - name: Determine version bump type
+      id: bump-type
+      run: |
+        if [[ "${{ github.event.head_commit.message }}" == *"BREAKING CHANGE"* ]] || [[ "${{ github.event.head_commit.message }}" == *"!"* ]]; then
+          echo "type=major" >> $GITHUB_OUTPUT
+        elif [[ "${{ github.event.head_commit.message }}" == feat* ]] || [[ "${{ github.event.head_commit.message }}" == *"feat:"* ]]; then
+          echo "type=minor" >> $GITHUB_OUTPUT
+        else
+          echo "type=patch" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Bump version
+      id: bump-version
+      run: |
+        uv run bump2version ${{ steps.bump-type.outputs.type }} --verbose
+        # Get the new version from pyproject.toml
+        NEW_VERSION=$(grep '^version = ' pyproject.toml | sed 's/version = "\(.*\)"/\1/')
+        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+        echo "New version: $NEW_VERSION"
+    
+    - name: Push changes
+      run: |
+        git push origin main --follow-tags
+    
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ steps.bump-version.outputs.new_version }}
+        release_name: Release v${{ steps.bump-version.outputs.new_version }}
+        draft: false
+        prerelease: false
