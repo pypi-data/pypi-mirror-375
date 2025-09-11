@@ -1,0 +1,136 @@
+from __future__ import annotations
+from datetime import datetime
+import uuid
+from typing import Any, Callable, Dict, Iterable, Optional, Sequence, Tuple, Union
+
+from sqlalchemy import String, Boolean, DateTime, JSON, Text, text
+from svc_infra.db.sql.types import GUID
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.ext.mutable import MutableDict, MutableList
+
+from fastapi_users.password import PasswordHelper
+
+from svc_infra.db.sql.base import ModelBase
+from svc_infra.db.sql.uniq import make_unique_sql_indexes
+from svc_infra.db.sql.uniq_hooks import dedupe_sql_service
+from svc_infra.api.fastapi.db.sql.base import SqlRepository
+
+# --- local password helper must be defined before class (used by property) ---
+_pwd = PasswordHelper()
+
+# ------------------------------ Model ------------------------------
+
+class ${AuthEntity}(ModelBase):
+    __tablename__ = "${auth_table_name}"
+
+    id: Mapped[uuid.UUID] = mapped_column(GUID(), primary_key=True, default=uuid.uuid4)
+
+    email: Mapped[str] = mapped_column(String(320), index=True, nullable=False)
+    full_name: Mapped[Optional[str]] = mapped_column(String(255))
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    is_superuser: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+
+    # auth state
+    password_hash: Mapped[str] = mapped_column(String(512), nullable=False)
+
+    # Write-only facade over password
+    @property
+    def password(self) -> str:
+        raise AttributeError("password is write-only")
+
+    @password.setter
+    def password(self, raw: str) -> None:
+        self.password_hash = _pwd.hash(raw)
+
+    last_login: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    disabled_reason: Mapped[Optional[str]] = mapped_column(Text)
+
+    # org / roles / mfa
+    tenant_id: Mapped[Optional[str]] = mapped_column(String(64), index=True)
+    roles: Mapped[list[str]] = mapped_column(MutableList.as_mutable(JSON), default=list)
+    mfa_enabled: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+
+    # misc (avoid attr name 'metadata' clash)
+    extra: Mapped[dict] = mapped_column("metadata", MutableDict.as_mutable(JSON), default=dict)
+
+    # auditing (DB-side timestamps)
+    created_at = mapped_column(DateTime(timezone=True),
+                               server_default=text("CURRENT_TIMESTAMP"),
+                               nullable=False)
+    updated_at = mapped_column(DateTime(timezone=True),
+                               server_default=text("CURRENT_TIMESTAMP"),
+                               onupdate=text("CURRENT_TIMESTAMP"),
+                               nullable=False)
+
+    def __repr__(self) -> str:
+        return f"<${AuthEntity} id={self.id} email={self.email!r}>"
+
+# --- Uniqueness policy --------------------------------------------------------
+
+# Unique indexes, including case-insensitive and/or tenant-scoped.
+for _ix in make_unique_sql_indexes(
+    ${AuthEntity},
+    unique_ci=["email"],            # case-insensitive unique email
+    tenant_field="tenant_id",       # scoped by tenant if provided
+):
+    # Registered with Table metadata (alembic/autogenerate will pick them up)
+    pass
+
+# --- Auth service factory ------------------------------------------------------
+
+PreHook = Callable[[Dict[str, Any]], Dict[str, Any]]
+ColumnSpec = Union[str, Sequence[str]]
+
+def _map_auth_fields(data: Dict[str, Any]) -> Dict[str, Any]:
+    """Normalize inbound payload for the auth model."""
+    d = dict(data)
+    # password -> password_hash
+    if "password" in d:
+        d["password_hash"] = _pwd.hash(d.pop("password"))
+    # metadata(alias) -> extra(column)
+    if "metadata" in d:
+        d["extra"] = d.pop("metadata")
+    # roles default
+    d.setdefault("roles", [])
+    return d
+
+def _compose(*hooks: Optional[PreHook]) -> PreHook:
+    """Chain multiple pre-hooks left-to-right, skipping Nones."""
+    def _runner(payload: Dict[str, Any]) -> Dict[str, Any]:
+        out = payload
+        for h in hooks:
+            if h:
+                out = h(out)
+        return out
+    return _runner
+
+def create_auth_service(
+    repo: SqlRepository,
+    *,
+    # Uniqueness settings (rarely changed)
+    unique_ci: Iterable[ColumnSpec] = ("email",),
+    tenant_field: Optional[str] = "tenant_id",
+    # Optional: caller can inject extra transforms/validation
+    extra_pre_create: Optional[PreHook] = None,
+    extra_pre_update: Optional[PreHook] = None,
+    # Optional: customize 409 messages per spec if you want
+    messages: Optional[dict[Tuple[str, ...], str]] = None,
+):
+    """
+    Build an auth-aware Service that:
+      • Hashes passwords and maps payload fields (pre_create / pre_update)
+      • Enforces case-insensitive unique email (optionally tenant-scoped)
+      • Returns 409s like: "Record with email='x' already exists."
+    """
+    pre_create = _compose(_map_auth_fields, extra_pre_create)
+    pre_update = _compose(_map_auth_fields, extra_pre_update)
+
+    return dedupe_sql_service(
+        repo,
+        unique_ci=unique_ci,
+        tenant_field=tenant_field,
+        messages=messages,
+        pre_create=pre_create,
+        pre_update=pre_update,
+    )
