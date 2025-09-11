@@ -1,0 +1,50 @@
+Metadata-Version: 2.3
+Name: cppref
+Version: 0.1.0
+Summary: Refer to the cppreference with this cli!
+Requires-Dist: fire>=0.7.1
+Requires-Dist: lxml>=6.0.0
+Requires-Dist: playwright>=1.55.0
+Requires-Dist: toml>=0.10.2
+Requires-Dist: tqdm>=4.67.1
+Requires-Dist: types-lxml>=2025.3.30
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+# cppref
+
+A cli pragram for cpp programmers to lookup cppreference!
+
+> [!Info]
+> This project is under development, pull requests are welcomed.
+
+## Expected Features
+
+- Syntax highlight support
+- Easy to integrate with fzf
+- Shipped with neovim plugin which can be integrated with fzf-lua.nvim
+- Cache pages on the fly or cache pages once and for all.
+- Import / export data files so that offline machines are able to access
+
+## Q&A
+
+- Q: Why not `cppman`?
+- A: cppman use regex to format document, whereas this project format document
+by parsing html using xpath.
+
+## Bugs
+
+Please report bugs under the github issues section.
+
+## TODO
+
+- [ ] parse html correctly
+  - [x] `<p>`: text
+  - [x] `<div>`: text
+  - [x] `<h3>`: section header
+  - [x] `<ol>` ordered list
+  - [x] `<ul>` unordered list
+  - [ ] `<table>` table
+  - [ ] more tags ...
+- [ ] Visit pages Syncly.
+- [ ] Cache pages Asyncly.
