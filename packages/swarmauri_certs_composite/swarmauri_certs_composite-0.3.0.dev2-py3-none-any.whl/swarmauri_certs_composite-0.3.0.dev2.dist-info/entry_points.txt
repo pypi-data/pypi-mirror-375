@@ -1,0 +1,6 @@
+[peagen.plugins.certs]
+composite=swarmauri_certs_composite:CompositeCertService
+
+[swarmauri.certs]
+CompositeCertService=swarmauri_certs_composite:CompositeCertService
+
