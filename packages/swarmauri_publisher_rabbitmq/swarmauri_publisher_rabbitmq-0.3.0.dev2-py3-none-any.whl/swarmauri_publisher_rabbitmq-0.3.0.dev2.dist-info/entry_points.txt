@@ -1,0 +1,3 @@
+[swarmauri.publishers]
+RabbitMQPublisher=swarmauri_publisher_rabbitmq.rabbitmq_publisher:RabbitMQPublisher
+
