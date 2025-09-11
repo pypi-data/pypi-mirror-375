@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+flask_react/__init__.py
+flask_react/cli.py
+flask_react/exceptions.py
+flask_react/extension.py
+flask_react/node_renderer.py
+flask_react_ssr.egg-info/PKG-INFO
+flask_react_ssr.egg-info/SOURCES.txt
+flask_react_ssr.egg-info/dependency_links.txt
+flask_react_ssr.egg-info/entry_points.txt
+flask_react_ssr.egg-info/requires.txt
+flask_react_ssr.egg-info/top_level.txt
+tests/test_flask_react.py
