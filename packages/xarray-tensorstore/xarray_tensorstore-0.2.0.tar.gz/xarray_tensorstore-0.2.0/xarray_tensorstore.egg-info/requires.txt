@@ -1,0 +1,10 @@
+numpy
+xarray
+zarr
+tensorstore
+
+[tests]
+absl-py
+pandas
+pytest
+dask
