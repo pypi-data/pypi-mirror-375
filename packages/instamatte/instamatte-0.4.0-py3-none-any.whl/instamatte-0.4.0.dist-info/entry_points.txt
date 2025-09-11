@@ -1,0 +1,2 @@
+[console_scripts]
+instamatte = instamatte.cli:cli_application
