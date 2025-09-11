@@ -1,0 +1,82 @@
+Metadata-Version: 2.4
+Name: pyquarks
+Version: 0.0.0.1
+Summary: Delivering small additions which matter
+Home-page: https://github.com/Prospy006/pyquarks
+Author: Prospy006
+Maintainer: Prospy006
+License: MIT
+Project-URL: Homepage, https://prospy006.github.com/
+Project-URL: Repository, https://github.com/Prospy006/pyquarks
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Dynamic: home-page
+
+![PyQuarks Banner](./res/img/PyQuarks-Banner.png)
+
+# PyQuarks
+
+**PyQuarks** is a compact, modular Python library for general-purpose data manipulation. Whether you're sorting, searching, transforming, or analyzing, PyQuarks offers a clean and reliable foundation for working with data.
+
+This project is a curated library of reusable logic, organized for clarity, built for simplicity. While currently focused on core algorithmic tools, the long-term goal is to evolve PyQuarks into a lightweight framework for structured data workflows.
+
+## Features
+
+- **Core Modules**: Includes essential algorithms for sorting, searching, filtering, and transformation.
+- **Zero Dependencies**: Built entirely with standard Python, no external libraries required.
+- **Modular Structure**: Functions and classes are grouped logically for easy access and reuse.
+- **Scalable Design**: Written with extensibility in mind, ready to grow as needed.
+
+## Use Cases
+
+- Rapid prototyping of algorithmic logic
+- Educational reference for learning or teaching Python algorithms
+- Lightweight utilities for data manipulation tasks
+- Foundation for future library expansion
+
+## Roadmap
+
+- CLI interface for running selected modules
+- Optional configuration system for chaining operations
+- Expanded documentation and examples
+
+## Vision
+
+PyQuarks is about clarity, utility, and control. It’s a personal project built under constraints, with the goal of creating something useful, maintainable, and expandable.
+
+## Getting Started
+
+To start using PyQuarks, install via pip or clone the repository and explore the available [modules](./MODULES.md).
+
+### PyPI (pip):
+```bash
+pip install pyquarks
+```
+
+### Clone Git
+```bash
+git clone https://github.com/Prospy006/pyquarks.git
+cd pyquarks
+```
+
+### Example usage:
+
+```py
+import pyquarks
+
+# Create a linked list
+ll = pq.LinkedList()
+
+# Insert values
+ll.insert(420)
+ll.insert(69)
+ll.insert(6)
+
+# Display list
+ll.display() # output: [420, 69, 6]
+
+# Delete byval or byind
+ll.delete_byval(6) # deletes last value
+ll.delete_byind(0) # deletes first value
+ll.display() # output: [69]
+```
