@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: softapi
+Version: 0.2.3
+Summary: Scaffold no-boilerplate FastAPI apps with sane defaults
+Author-email: Your Name <you@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/suhanapthn24/softapi
+Project-URL: Repository, https://github.com/suhanapthn24/softapi
+Project-URL: Issues, https://github.com/suhanapthn24/softapi/issues
+Keywords: fastapi,scaffold,backend,api,starter
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Framework :: FastAPI
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: typer>=0.12.0
+Requires-Dist: jinja2>=3.1.4
+Dynamic: license-file
+
+# FastAPI Starter
+
+## Quickstart (CLI)
+```bash
+pip install softapi
+softapi myapp --fastapi --jwt --db sqlite   # or: --db postgres, add --alembic, --docker, --colab
+cd myapp
+
+python -m venv .venv
+# Windows: .\.venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+
+cp .env.example .env            # Windows (PowerShell): copy .env.example .env
+pip install -r requirements.txt
+uvicorn app.main:app --reload   # or: uvicorn app.main:create_app --factory --reload
