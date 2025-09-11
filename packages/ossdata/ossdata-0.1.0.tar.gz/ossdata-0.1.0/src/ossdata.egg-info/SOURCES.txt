@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/ossdata/__init__.py
+src/ossdata/cli.py
+src/ossdata/core.py
+src/ossdata.egg-info/PKG-INFO
+src/ossdata.egg-info/SOURCES.txt
+src/ossdata.egg-info/dependency_links.txt
+src/ossdata.egg-info/entry_points.txt
+src/ossdata.egg-info/requires.txt
+src/ossdata.egg-info/top_level.txt

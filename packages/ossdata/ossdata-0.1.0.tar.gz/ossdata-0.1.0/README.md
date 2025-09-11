@@ -1,0 +1,111 @@
+# ossdata 🚀
+
+`ossdata` 是一个命令行工具，用于将 Hugging Face 上的 SWE（Software Engineering）类数据集（如 [SWE-bench](https://github.com/princeton-nlp/SWE-bench)）高效同步到私有 OSS（对象存储服务），并提供便捷的查询与统一的读取接口。每条数据将夹带 `docker_image` 字段，便于各个 agent 框架统一 rollout。
+
+---
+
+## 🌟 功能特性
+
+- **一键上传**：从 Hugging Face / JSON lines 加载数据集并推送到 OSS。
+- **版本管理**：使用 `split@revision` 构成唯一 `version`，支持多版本管理。
+- **灵活查询**：
+  - 列出所有数据集
+  - 查看某个数据集的所有版本
+  - 查看某版本下的所有 `instance_id`
+  - 根据 `instance_id` 和 `key` 快速获取字段值（如 `problem_statement`, `patch` 等）
+- **结构化存储**：在 OSS 中按 `/{name}/{version}/{instance_id}.json` 组织数据，便于集成训练/评测流水线。
+
+---
+
+## 📦 安装与配置
+
+```bash
+pip install git+http://gitlab.alibaba-inc.com/Qwen-Coder/ossdata.git
+
+export OSS_ACCESS_KEY_ID=""
+export OSS_ACCESS_KEY_SECRET=""
+export OSS_REGION="ap-southeast-1"
+export OSS_ENDPOINT="https://oss-ap-southeast-1-internal.aliyuncs.com"
+```
+
+---
+
+## 🛠️ 使用方法
+
+### 1. 上传数据集到 OSS
+
+```bash
+ossdata upload \
+  --name "princeton-nlp/SWE-bench" \
+  --split "test" \
+  [--docker-image-prefix "code-agi-sg-docker-registry-vpc.ap-southeast-1.cr.aliyuncs.com/eflops/swe-rebench:"] \
+  [--revision "{revision}"]
+```
+
+- 如果 `name` 以 .jsonl 结尾，则认为这是个 jsonl 文件；否则，从 HuggingFace 读取。
+- 数据将被分片上传至 OSS，并按照 `/{name}/{version}/{instance_id}.json` 建立索引。如果提供了 `revision`，则`version` 将被记录为：`{split}@{revision}`，否则只有 `{split}`。
+- 如果提供了`docker-image-prefix`，则每条数据将带有 `docker_image` 字段，内容是 `{docker-image-prefix}{instance_id}`。
+
+---
+
+### 2. 查看数据集列表
+
+```bash
+ossdata ls
+```
+
+输出示例：
+```
+princeton-nlp/SWE-bench
+swebench/verified
+```
+
+---
+
+### 3. 查看某个数据集的所有版本
+
+```bash
+ossdata ls --name "SWE-Env/SWE-Env"
+```
+
+输出示例：
+```
+v1
+test
+```
+
+---
+
+### 4. 查看某版本下的所有 instance ID
+
+```bash
+ossdata ls --name "princeton-nlp/SWE-bench_Verified" --version "test"
+```
+
+输出示例：
+```
+pandas__pandas-44271
+scipy__scipy-16864
+numpy__numpy-12039
+```
+
+---
+
+### 5. 获取某个实例
+
+支持数据集的各种字段，如 `problem_statement`, `patch`, `docker_image`
+
+```bash
+ossdata get \
+  --instance-id "pandas__pandas-44271" \
+  --name "princeton-nlp/SWE-bench" \
+  --version "test" \
+  [--key "problem_statement"]
+```
+
+- 如果提供了 key，则输出指定字段；否则，输出所有 json 内容。
+
+---
+
+> Built with ❤️ for AI coding research.
+```
