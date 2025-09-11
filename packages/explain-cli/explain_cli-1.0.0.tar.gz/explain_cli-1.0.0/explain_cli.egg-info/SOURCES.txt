@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+explain_cli/__init__.py
+explain_cli/cli.py
+explain_cli/config.json
+explain_cli/config.py
+explain_cli/styles.py
+explain_cli.egg-info/PKG-INFO
+explain_cli.egg-info/SOURCES.txt
+explain_cli.egg-info/dependency_links.txt
+explain_cli.egg-info/entry_points.txt
+explain_cli.egg-info/requires.txt
+explain_cli.egg-info/top_level.txt
