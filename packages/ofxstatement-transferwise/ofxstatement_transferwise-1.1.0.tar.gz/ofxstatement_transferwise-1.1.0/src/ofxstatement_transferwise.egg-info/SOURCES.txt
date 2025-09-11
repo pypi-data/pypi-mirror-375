@@ -1,0 +1,16 @@
+MANIFEST.in
+Makefile
+Pipfile
+Pipfile.lock
+README.md
+pyproject.toml
+src/ofxstatement_transferwise.egg-info/PKG-INFO
+src/ofxstatement_transferwise.egg-info/SOURCES.txt
+src/ofxstatement_transferwise.egg-info/dependency_links.txt
+src/ofxstatement_transferwise.egg-info/entry_points.txt
+src/ofxstatement_transferwise.egg-info/requires.txt
+src/ofxstatement_transferwise.egg-info/top_level.txt
+src/ofxstatement_wise/__init__.py
+src/ofxstatement_wise/wise.py
+tests/sample-statement.csv
+tests/test_transferwise.py
