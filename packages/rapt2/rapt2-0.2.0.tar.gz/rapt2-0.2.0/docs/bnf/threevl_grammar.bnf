@@ -1,0 +1,10 @@
+; Grammar rules for 3VL relational algebra.
+; Uses rules from core_grammar.bnf
+
+; NULL
+
+defined_op ::= "defined"
+
+defined_condition ::= defined_op "(" operand ")"
+
+condition ::= condition | defined_condition
