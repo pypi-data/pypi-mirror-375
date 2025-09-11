@@ -1,0 +1,101 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="plone.rfc822"
+    >
+
+  <!-- Standard IFromUnicode marshaler -->
+  <adapter factory=".defaultfields.UnicodeFieldMarshaler" />
+
+  <!-- Text, TextLine, Password, SourceText may be ASCII safe -->
+  <adapter
+      factory=".defaultfields.UnicodeValueFieldMarshaler"
+      for="*
+           zope.schema.interfaces.INativeString"
+      />
+  <!-- ASCII Field marshaller -->
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema.interfaces.IASCII"
+      />
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema.interfaces.IASCIILine"
+      />
+
+  <!-- Bool and Choice omit to declare that they supports IFromUnicode in zope.schema 3.3 -->
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema.interfaces.IBool"
+      />
+  <!-- We need this as a workaround for this issue:
+      https://github.com/zopefoundation/zope.schema/issues/80
+    -->
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema._bootstrapfields.Bool"
+      />
+  <adapter
+      factory=".defaultfields.UnicodeValueFieldMarshaler"
+      for="*
+           zope.schema.interfaces.IChoice"
+      />
+
+  <!-- Int, Float, and Decimal are ASCII safe -->
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema.interfaces.IInt"
+      />
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema.interfaces.IFloat"
+      />
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema.interfaces.IDecimal"
+      />
+
+  <!-- Somehow this is necessary because these are in _bootstrapfields -->
+  <adapter
+      factory=".defaultfields.UnicodeValueFieldMarshaler"
+      for="*
+           zope.schema.Text"
+      />
+  <adapter
+      factory=".defaultfields.UnicodeValueFieldMarshaler"
+      for="*
+           zope.schema.TextLine"
+      />
+  <adapter
+      factory=".defaultfields.UnicodeValueFieldMarshaler"
+      for="*
+           zope.schema.Password"
+      />
+  <adapter
+      factory=".defaultfields.ASCIISafeFieldMarshaler"
+      for="*
+           zope.schema.Int"
+      />
+
+  <adapter factory=".defaultfields.BytesFieldMarshaler" />
+  <adapter factory=".defaultfields.DatetimeMarshaler" />
+  <adapter factory=".defaultfields.DateMarshaler" />
+  <adapter factory=".defaultfields.TimedeltaMarshaler" />
+  <adapter factory=".defaultfields.CollectionMarshaler" />
+
+  <!-- Configure plone.supermodel handler if available -->
+  <utility
+      factory=".supermodel.PrimaryFieldMetadataHandler"
+      name="plone.rfc822.marshal"
+      zcml:condition="installed plone.supermodel"
+      />
+
+</configure>

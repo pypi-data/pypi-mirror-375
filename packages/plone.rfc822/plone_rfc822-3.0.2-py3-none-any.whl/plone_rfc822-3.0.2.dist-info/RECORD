@@ -1,0 +1,16 @@
+plone.rfc822-3.0.2-py3.13-nspkg.pth,sha256=BLI1R3lEMKmzB6WWJhK4b_5KSuPKCxbAXDyPjqDJtdY,462
+plone/rfc822/__init__.py,sha256=T4coA-61KZgCuV53HKJ4V82hKR3lwV4r7Y7ON_Rb9RA,454
+plone/rfc822/_utils.py,sha256=WSRE78fOTGam3ndizgZp4mRU4DEbnCoqdd9_23uVIPA,8994
+plone/rfc822/configure.zcml,sha256=qqjoZNUxlnUcK4BxaGUnDkQ6RoXE5Omt3LcFzIsFKrU,2936
+plone/rfc822/defaultfields.py,sha256=D8lE-WXR4hB7kK_VeTh1NJkgQNASxXz6PaKehskvKmY,9971
+plone/rfc822/fields.rst,sha256=WHwBtZLig4p3066mT22dmWDLT5rchUM_eEHZCEUSTjk,13908
+plone/rfc822/interfaces.py,sha256=tKqneJ63WfVulhZt8jxxSsi-lN27vxmUti4OFACXiWw,7514
+plone/rfc822/message.rst,sha256=A4G6lqMS8tT5L1WhBqoqQUVC_NEfBbOJcgj5S71rltE,21366
+plone/rfc822/supermodel.py,sha256=3OLItgHLjo1D_F1JdPCNUGjr7qpSFLYDsGa6unYq_X8,1211
+plone/rfc822/supermodel.rst,sha256=lg8H25ulAjh_6z2sfBWdKG78qJpE--loKa6L8dicSW0,2816
+plone/rfc822/tests.py,sha256=5jlMxk12rSN76o-UWrFlgj6ya4bbS0-lnkSTOlw5K8o,1048
+plone_rfc822-3.0.2.dist-info/METADATA,sha256=OII_zUv9Y4Jt7b7zg1lctrGbPKWj9zkYPsyPK5bgtLI,32941
+plone_rfc822-3.0.2.dist-info/WHEEL,sha256=SmOxYU7pzNKBqASvQJ7DjX3XGUF92lrGhMb3R6_iiqI,91
+plone_rfc822-3.0.2.dist-info/namespace_packages.txt,sha256=56bqrkG-vurYD0l15D71FPiDL7L3QqkfRWkYkdyS7WM,6
+plone_rfc822-3.0.2.dist-info/top_level.txt,sha256=56bqrkG-vurYD0l15D71FPiDL7L3QqkfRWkYkdyS7WM,6
+plone_rfc822-3.0.2.dist-info/RECORD,,
