@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "smartbindb"
+version = "4.12.8"
+description = "A powerful Asynchronous Python library for getting bins database by country name or bank name, also supports bin lookup, supporting bots, MTProto API frameworks, and Python scripts"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "Proprietary" }
+authors = [
+    { name = "ISmartCoder", email = "abirxdhackz.info.me@gmail.com" }
+]
+author = "ISmartCoder"
+author_email = "abirxdhackz.info.me@gmail.com"
+keywords = [
+    "bin", "database", "bank", "country", "lookup", "async", 
+    "bot", "mtproto", "telegram-bot", "python-library"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Database",
+    "Topic :: Internet :: WWW/HTTP",
+    "Framework :: AsyncIO",
+]
+dependencies = [
+    "pycountry",
+    "pycountry-convert"
+]
+
+[project.urls]
+Homepage = "https://github.com/abirxdhack"
+Documentation = "https://abirxdhack.github.io/SmartBinDBDocs/"
+Download = "https://pypi.org/project/smartbindb/"
+"PyPI" = "https://pypi.org/project/smartbindb/"
+
+[tool.hatch.build]
+include = [
+    "smartbindb/**/*.py",
+    "smartbindb/data/smartbin.db",
+    "README.md",
+    "LICENSE"
+]
+
+[tool.hatch.build.targets.wheel]
+universal = true
