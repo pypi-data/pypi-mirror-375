@@ -1,0 +1,76 @@
+Metadata-Version: 2.4
+Name: firewheel_repo_linux
+Version: 3.0.0
+Summary: This repository contains FIREWHEEL Model Components related to Linux and Linux specific applications.
+Author-email: FIREWHEEL Developers <firewheel@sandia.gov>
+License: Apache License (2.0)
+Project-URL: Homepage, https://www.sandia.gov/emulytics
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Telecommunications Industry
+Classifier: Intended Audience :: Science/Research
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Internet
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Security
+Classifier: Topic :: System :: Clustering
+Classifier: Topic :: System :: Distributed Computing
+Classifier: Topic :: System :: Emulators
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: Utilities
+Requires-Python: >=3.8
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+Requires-Dist: firewheel>=2.9.0
+Requires-Dist: firewheel-repo-base
+Dynamic: license-file
+
+.. _linux_mc_repo:
+
+********************
+firewheel_repo_linux
+********************
+
+This repository contains FIREWHEEL Model Components related to Linux and Linux specific applications.
+Currently, there are generic Linux-related MCs as well as MCs related to several Ubuntu distributions.
+
+Building Images
+===============
+
+Due to licensing limitations, we are currently unable to provide the expected binary files (VM Resources nor Images) that are used within these model components.
+For the VM Resources, we have provided an `INSTALL <https://sandialabs.github.io/firewheel/tutorials/install_file.html>`__ script to reproducibly recreate them, when possible.
+However, for images, users will need to follow the `Image Creation Tutorial <https://sandialabs.github.io/firewheel/tutorials/image.html>`__ to create compatible images.
+The following images are referenced within this repository:
+
+Located in ``linux.ubuntu1404``
+-------------------------------
+- `Ubuntu 14.04.5 Server <http://old-releases.ubuntu.com/releases/14.04.5/>`_
+- `Ubuntu 14.04.5 Desktop <http://old-releases.ubuntu.com/releases/14.04.5/>`_
+
+Located in ``linux.ubuntu1604``
+-------------------------------
+- `Ubuntu 16.04.4 Server <http://old-releases.ubuntu.com/releases/16.04.4/>`_
+- `Ubuntu 16.04.4 Desktop <http://old-releases.ubuntu.com/releases/16.04.4/>`_
+
+Located in ``linux.ubuntu1804``
+-------------------------------
+* `Ubuntu 18.04.5 Server <http://old-releases.ubuntu.com/releases/18.04.5/>`_
+* `Ubuntu 18.04.5 Desktop <http://old-releases.ubuntu.com/releases/18.04.5/>`_
+
+Located in ``linux.ubuntu2204``
+-------------------------------
+- `Ubuntu 22.04 Server <https://releases.ubuntu.com/jammy/>`_
+- `Ubuntu 22.04 Desktop <https://releases.ubuntu.com/jammy/>`_
+
