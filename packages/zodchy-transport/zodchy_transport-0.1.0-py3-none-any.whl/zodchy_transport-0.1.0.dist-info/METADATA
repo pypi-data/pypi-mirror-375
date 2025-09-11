@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: zodchy-transport
+Version: 0.1.0
+Summary: Transport pattern for zodchy architecture
+Home-page: https://github.com/smairon/zodchy-transport
+Author: Smairon
+Author-email: man@smairon.ru
+Requires-Python: >=3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: faststream (>=0.5,<0.6)
+Requires-Dist: zodchy (>=0,<1)
+Project-URL: Repository, https://github.com/smairon/zodchy-transport
+Description-Content-Type: text/markdown
+
+# Zodchy transport
+
+## Installation
+```bash
+pip install zodchy-transport
+```
+Also you have to install broker for faststeam. Ex:
+
+```bash
+pip install faststeam[rabbit]
+```
+
