@@ -1,0 +1,3 @@
+from pyvqnet.tensor import QTensor as QTensor
+
+def unique_wires(whole_wires, act_on_wires): ...

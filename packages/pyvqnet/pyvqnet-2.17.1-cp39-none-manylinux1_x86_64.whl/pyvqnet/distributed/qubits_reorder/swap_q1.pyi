@@ -1,0 +1,19 @@
+def check_bit(variable: int, position: int) -> bool: ...
+def check_map(N, new_map) -> None: ...
+def check_mpi_np(mpi_np, global_qubits_num) -> None: ...
+def swap_global_global_q1(Comm, data, cur_map, new_map, local_qubits_num: int = 3, global_qubits_num: int = 2): ...
+def swap_local_global_q1(Comm, data, local_qubits_num: int = 3, global_qubits_num: int = 2, swap_global_index: int = 4, swap_local_index: int = 0):
+    """
+    swap_global_index should be convert to reverse order.
+    swap_local_index  should be convert to reverse order.
+
+    q0  -1
+    q1  -2
+    q2  -3
+    q3  -4
+    q4  -5
+
+    states = [q5 q4 q3 q2 q1 ]
+    """
+def compute_source_destination(num_qubits, num_ranks, myrank, old_inverse_map, new_direct_map, new_inverse_map, old_direct_map): ...
+def calc_dst_source(num_qubits, cur_map, new_map, num_ranks, i): ...
