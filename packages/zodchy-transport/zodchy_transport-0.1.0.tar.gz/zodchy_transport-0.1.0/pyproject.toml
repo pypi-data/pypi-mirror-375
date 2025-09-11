@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "zodchy-transport"
+version = "0.1.0"
+description = "Transport pattern for zodchy architecture"
+authors = ["Smairon <man@smairon.ru>"]
+readme = "README.md"
+repository = "https://github.com/smairon/zodchy-transport"
+packages = [{ include = "zodchy_transport" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+zodchy = "^0"
+faststream = "^0.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+disable_error_code = "import-untyped"
