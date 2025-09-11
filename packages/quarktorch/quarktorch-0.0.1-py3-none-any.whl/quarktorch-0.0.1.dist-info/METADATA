@@ -1,0 +1,49 @@
+Metadata-Version: 2.3
+Name: quarktorch
+Version: 0.0.1
+Summary: The smallest torch in the ML universe.
+Author: SyJarvis
+Author-email: 1755115828@qq.com
+Requires-Python: >=3.8
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Description-Content-Type: text/markdown
+
+<center><h2>🚀 QuarkTorch: The smallest torch in the ML universe.</h2></center>
+
+
+## Install
+
+* Install from source (Recommend)
+
+```bash
+cd quarktorch
+pip install -e .
+```
+* Install from PyPI
+```bash
+pip install quarktorch
+```
+
+## Quick Start
+
+
+## 🌟Citation
+
+```python
+@article{guo2025quarktorch,
+title={QuarkTorch: The smallest torch in the ML universe.},
+author={Runke Zhong},
+year={2025}
+}
+```
+**保持热爱，奔赴星海！**
+
+*这个世界上唯有两样东西能让我们的心灵感到深深的震撼：一是我们头上灿烂的星空，一是我们内心崇高的道德法则*
+
+
