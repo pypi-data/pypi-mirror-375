@@ -1,0 +1,16 @@
+setuptools
+plone.autoform
+plone.registry
+plone.subrequest
+plone.supermodel
+Products.CMFCore
+Unidecode>=1.0.22
+Zope
+zope.globalrequest
+
+[test]
+plone.app.contenttypes[test]
+plone.app.multilingual
+plone.app.testing
+plone.base
+zope.browserresource
