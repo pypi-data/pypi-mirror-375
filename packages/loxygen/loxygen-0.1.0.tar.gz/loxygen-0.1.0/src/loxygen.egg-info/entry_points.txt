@@ -1,0 +1,6 @@
+[console_scripts]
+loxtest = loxtest.cli:main
+loxygen = loxygen.__main__:main
+
+[pytest11]
+lox_tester_plugin = loxtest.plugin
