@@ -1,0 +1,15 @@
+AccessControl
+Acquisition>=4.0.1
+Products.CMFCore
+ZODB
+Zope
+five.localsitemanager
+persistent
+setuptools
+zope.intid
+zope.component
+zope.event
+zope.interface
+zope.lifecycleevent
+zope.keyreference
+zope.location
