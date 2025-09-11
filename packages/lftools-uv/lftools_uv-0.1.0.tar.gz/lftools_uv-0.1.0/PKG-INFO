@@ -1,0 +1,271 @@
+Metadata-Version: 2.4
+Name: lftools-uv
+Version: 0.1.0
+Summary: Linux Foundation Release Engineering Tools
+Project-URL: Homepage, https://docs.releng.linuxfoundation.org/projects/lftools-uv
+Project-URL: Bug Tracker, https://github.com/lfit/lftools-uv/issues
+Project-URL: Documentation, https://docs.releng.linuxfoundation.org/projects/lftools-uv
+Project-URL: GitHub Pages, https://modeseven-lfit.github.io/lftools-uv/
+Project-URL: Source Code, https://github.com/lfit/lftools-uv
+Project-URL: Repository, https://github.com/lfit/lftools-uv
+Project-URL: Changelog, https://github.com/lfit/lftools-uv/releases
+Author-email: LF Release Engineering <releng@linuxfoundation.org>
+Maintainer-email: LF Release Engineering <releng@linuxfoundation.org>
+License: EPL-1.0 OR Apache-2.0
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: Eclipse Public License 1.0 (EPL-1.0)
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.8
+Requires-Dist: appdirs
+Requires-Dist: aspy-yaml
+Requires-Dist: attrs
+Requires-Dist: beautifulsoup4
+Requires-Dist: boto3
+Requires-Dist: bs4
+Requires-Dist: certifi
+Requires-Dist: cfgv
+Requires-Dist: chardet
+Requires-Dist: click
+Requires-Dist: defusedxml
+Requires-Dist: deprecated
+Requires-Dist: dnspython
+Requires-Dist: docker
+Requires-Dist: email-validator
+Requires-Dist: filelock
+Requires-Dist: gitpython
+Requires-Dist: httplib2
+Requires-Dist: identify
+Requires-Dist: idna
+Requires-Dist: jinja2
+Requires-Dist: jsonschema
+Requires-Dist: lxml
+Requires-Dist: multi-key-dict
+Requires-Dist: munch
+Requires-Dist: nodeenv
+Requires-Dist: oauth2client
+Requires-Dist: openstacksdk>=2.1.0
+Requires-Dist: pbr
+Requires-Dist: pyasn1
+Requires-Dist: pyasn1-modules
+Requires-Dist: pygerrit2
+Requires-Dist: pygithub
+Requires-Dist: pyjwt
+Requires-Dist: pyrsistent
+Requires-Dist: python-jenkins
+Requires-Dist: pyyaml
+Requires-Dist: requests>=2.32.0
+Requires-Dist: rsa
+Requires-Dist: ruamel-yaml
+Requires-Dist: ruamel-yaml-clib
+Requires-Dist: six
+Requires-Dist: soupsieve
+Requires-Dist: tabulate
+Requires-Dist: toml
+Requires-Dist: tqdm
+Requires-Dist: urllib3<3.0.0,>=2.2.3
+Requires-Dist: websocket-client
+Requires-Dist: wrapt
+Requires-Dist: xdg
+Provides-Extra: all
+Requires-Dist: bandit; extra == 'all'
+Requires-Dist: black; extra == 'all'
+Requires-Dist: boto3-stubs; extra == 'all'
+Requires-Dist: isort; extra == 'all'
+Requires-Dist: mypy; extra == 'all'
+Requires-Dist: osc-lib~=2.2.0; extra == 'all'
+Requires-Dist: pre-commit; extra == 'all'
+Requires-Dist: pytest-click>=1.1.0; extra == 'all'
+Requires-Dist: pytest-cov>=5.0.0; extra == 'all'
+Requires-Dist: pytest-datafiles>=3.0.0; extra == 'all'
+Requires-Dist: pytest-mock>=3.14.0; extra == 'all'
+Requires-Dist: pytest-responses>=0.5.1; extra == 'all'
+Requires-Dist: pytest>=8.3.0; extra == 'all'
+Requires-Dist: python-ldap~=3.1.0; extra == 'all'
+Requires-Dist: ruff; extra == 'all'
+Requires-Dist: safety; extra == 'all'
+Requires-Dist: tox; extra == 'all'
+Requires-Dist: types-deprecated; extra == 'all'
+Requires-Dist: types-httplib2; extra == 'all'
+Requires-Dist: types-jsonschema; extra == 'all'
+Requires-Dist: types-pyxdg; extra == 'all'
+Requires-Dist: types-pyyaml; extra == 'all'
+Requires-Dist: types-requests; extra == 'all'
+Requires-Dist: types-six; extra == 'all'
+Requires-Dist: types-tabulate; extra == 'all'
+Requires-Dist: types-tqdm; extra == 'all'
+Provides-Extra: dev
+Requires-Dist: bandit; extra == 'dev'
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: boto3-stubs; extra == 'dev'
+Requires-Dist: isort; extra == 'dev'
+Requires-Dist: mypy; extra == 'dev'
+Requires-Dist: pre-commit; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Requires-Dist: safety; extra == 'dev'
+Requires-Dist: tox; extra == 'dev'
+Requires-Dist: types-deprecated; extra == 'dev'
+Requires-Dist: types-httplib2; extra == 'dev'
+Requires-Dist: types-jsonschema; extra == 'dev'
+Requires-Dist: types-pyxdg; extra == 'dev'
+Requires-Dist: types-pyyaml; extra == 'dev'
+Requires-Dist: types-requests; extra == 'dev'
+Requires-Dist: types-six; extra == 'dev'
+Requires-Dist: types-tabulate; extra == 'dev'
+Requires-Dist: types-tqdm; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: furo; extra == 'docs'
+Requires-Dist: sphinx>=4.0.0; extra == 'docs'
+Requires-Dist: sphinxcontrib-programoutput; extra == 'docs'
+Provides-Extra: ldap
+Requires-Dist: python-ldap~=3.1.0; extra == 'ldap'
+Provides-Extra: openstack
+Requires-Dist: osc-lib~=2.2.0; extra == 'openstack'
+Provides-Extra: test
+Requires-Dist: pytest-click>=1.1.0; extra == 'test'
+Requires-Dist: pytest-cov>=5.0.0; extra == 'test'
+Requires-Dist: pytest-datafiles>=3.0.0; extra == 'test'
+Requires-Dist: pytest-mock>=3.14.0; extra == 'test'
+Requires-Dist: pytest-responses>=0.5.1; extra == 'test'
+Requires-Dist: pytest>=8.3.0; extra == 'test'
+Description-Content-Type: text/markdown
+
+<!--
+SPDX-License-Identifier: EPL-1.0
+SPDX-FileCopyrightText: 2025 The Linux Foundation
+-->
+
+# LF Tools UV
+
+This project's documentation is available on ReadTheDocs (RTD) and GitHub Pages:
+
+- **Official Documentation**: <https://lf-releng-tools.readthedocs.io>
+- **GitHub Pages**: <https://modeseven-lfit.github.io/lftools-uv/>
+
+LF Tools UV is a collection of scripts and utilities that are useful to Linux
+Foundation projects' CI and Releng related activities. We try to create
+these tools to be as generic as possible such that they are reusable in other
+CI environments.
+
+## Installation
+
+### Using uv (Recommended)
+
+This project uses [uv](https://docs.astral.sh/uv/) for fast Python package management.
+
+1. Install uv:
+
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+2. Install lftools-uv:
+
+   ```bash
+   uv pip install lftools-uv
+   ```
+
+3. Or install with all extras for development:
+
+   ```bash
+   uv pip install "lftools-uv[all]"
+   ```
+
+### Using pip
+
+```bash
+pip install lftools-uv
+```
+
+## Development Setup
+
+### Prerequisites
+
+- Python 3.8+
+- uv (recommended) or pip
+
+### Quick Start with uv
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/lfit/lftools-uv.git
+   cd lftools-uv
+   ```
+
+2. Install development dependencies:
+
+   ```bash
+   make install-dev
+   # or manually:
+   uv sync --extra dev --extra test --extra docs --extra ldap --extra openstack
+   ```
+
+3. Run tests:
+
+   ```bash
+   make test
+   # or manually:
+   uv run pytest
+   ```
+
+4. Format and lint code:
+
+   ```bash
+   make format
+   make lint
+   ```
+
+### Available Make Targets
+
+- `make help` - Show all available targets
+- `make install` - Install project dependencies
+- `make install-dev` - Install with all development dependencies
+- `make test` - Run tests
+- `make lint` - Run linting
+- `make format` - Format code
+- `make build` - Build package
+- `make docs` - Build documentation
+- `make clean` - Clean build artifacts
+- `make all` - Run full development pipeline
+
+### Ubuntu Dependencies
+
+For development on Ubuntu, you may need:
+
+- build-essential
+- python3-dev
+- libldap2-dev
+- libsasl2-dev
+- libssl-dev
+
+## Repository Information
+
+### Development Repository
+
+For development and testing, we maintain this project at:
+
+- **Development**: `https://github.com/modeseven-lfit/lftools-uv.git`
+
+### Production Repository
+
+Once tested and approved, we publish releases from:
+
+- **Production**: `https://github.com/lfit/lftools-uv.git`
+
+### Local Git Setup
+
+Configure your local git remote for the development repository:
+
+```bash
+git remote -v
+# origin  https://github.com/modeseven-lfit/lftools-uv.git (fetch)
+# origin  https://github.com/modeseven-lfit/lftools-uv.git (push)
+```
