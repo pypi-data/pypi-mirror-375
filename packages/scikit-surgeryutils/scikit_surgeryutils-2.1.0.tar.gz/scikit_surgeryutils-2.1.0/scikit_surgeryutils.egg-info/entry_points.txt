@@ -1,0 +1,10 @@
+[console_scripts]
+sksurgerycharucotest = sksurgeryutils.ui.sksurgerycharucotest_command_line:main
+sksurgerymakecalibrationdots = sksurgeryutils.ui.sksurgerymakecalibrationdots_command_line:main
+sksurgeryrendermodelslikecamera = sksurgeryutils.ui.sksurgeryrendermodelslikecamera_command_line:main
+sksurgeryreslice = sksurgeryutils.ui.sksurgeryreslice_command_line:main
+sksurgerytextoverlay = sksurgeryutils.ui.sksurgerytextoverlay_command_line:main
+sksurgerytransformpolydata = sksurgeryutils.ui.sksurgeryrendermodelslikecamera_command_line:main
+sksurgeryvideocalibration = sksurgeryutils.ui.sksurgeryvideocalibration_command_line:main
+sksurgeryvideocalibrationchecker = sksurgeryutils.ui.sksurgeryvideocalibrationchecker_command_line:main
+sksurgeryvideolag = sksurgeryutils.ui.sksurgeryvideolag_command_line:main
