@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/prisma_sdk/_init_.py
+src/prisma_sdk/client.py
+src/prisma_sdk.egg-info/PKG-INFO
+src/prisma_sdk.egg-info/SOURCES.txt
+src/prisma_sdk.egg-info/dependency_links.txt
+src/prisma_sdk.egg-info/requires.txt
+src/prisma_sdk.egg-info/top_level.txt
+tests/test_client.py
