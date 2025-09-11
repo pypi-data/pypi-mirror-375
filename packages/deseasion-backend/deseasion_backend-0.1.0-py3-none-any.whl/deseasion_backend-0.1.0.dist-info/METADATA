@@ -1,0 +1,177 @@
+Metadata-Version: 2.4
+Name: deseasion-backend
+Version: 0.1.0
+Summary: Backend for the DeSEAsion application stack
+Author: Antoine Mallegol
+Author-email: Nicolas Duminy <nicolas.duminy@imt-atlantique.fr>
+Maintainer-email: Nicolas Duminy <nicolas.duminy@imt-atlantique.fr>
+License-Expression: EUPL-1.2
+Project-URL: Homepage, https://deseasion-2227c9.gitlab.io
+Project-URL: Source, https://gitlab.com/decide.imt-atlantique/deseasion
+Project-URL: Issues, https://gitlab.com/decide.imt-atlantique/deseasion/-/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: affine==2.4.0
+Requires-Dist: amqp==5.2.0
+Requires-Dist: aniso8601==9.0.1
+Requires-Dist: apispec==6.6.1
+Requires-Dist: apispec-webframeworks==1.1.0
+Requires-Dist: asttokens==2.4.1
+Requires-Dist: async-timeout==4.0.3
+Requires-Dist: attrs==23.2.0
+Requires-Dist: beautifulsoup4==4.12.3
+Requires-Dist: billiard==4.2.0
+Requires-Dist: blinker==1.7.0
+Requires-Dist: celery==5.3.6
+Requires-Dist: certifi==2023.11.17
+Requires-Dist: charset-normalizer==3.3.2
+Requires-Dist: click==8.1.7
+Requires-Dist: click-didyoumean==0.3.0
+Requires-Dist: click-plugins==1.1.1
+Requires-Dist: click-repl==0.3.0
+Requires-Dist: cligj==0.7.2
+Requires-Dist: decorator==5.1.1
+Requires-Dist: docutils==0.20.1
+Requires-Dist: executing==2.0.1
+Requires-Dist: fiona==1.9.5
+Requires-Dist: flasgger==0.9.7.1
+Requires-Dist: flask==3.0.1
+Requires-Dist: flask-migrate==4.0.5
+Requires-Dist: flask-restful==0.3.10
+Requires-Dist: flask-sqlalchemy==3.1.1
+Requires-Dist: geoalchemy2==0.14.3
+Requires-Dist: geopandas==0.14.2
+Requires-Dist: greenlet==3.0.3
+Requires-Dist: idna==3.6
+Requires-Dist: imagesize==1.4.1
+Requires-Dist: iniconfig==2.0.0
+Requires-Dist: itsdangerous==2.1.2
+Requires-Dist: jedi==0.19.1
+Requires-Dist: jinja2==3.1.3
+Requires-Dist: jsonschema==4.21.1
+Requires-Dist: jsonschema-specifications==2023.12.1
+Requires-Dist: kombu==5.3.5
+Requires-Dist: lxml==5.2.1
+Requires-Dist: mako==1.3.0
+Requires-Dist: markupsafe==2.1.4
+Requires-Dist: marshmallow==3.20.2
+Requires-Dist: marshmallow-oneofschema==3.1.0
+Requires-Dist: marshmallow-sqlalchemy==0.30.0
+Requires-Dist: matplotlib-inline==0.1.6
+Requires-Dist: mistune==3.0.2
+Requires-Dist: numpy==1.26.3
+Requires-Dist: packaging==23.2
+Requires-Dist: pandas==2.2.0
+Requires-Dist: parso==0.8.3
+Requires-Dist: passlib==1.7.4
+Requires-Dist: pexpect==4.9.0
+Requires-Dist: pluggy==1.3.0
+Requires-Dist: prompt-toolkit==3.0.43
+Requires-Dist: psycopg2==2.9.9
+Requires-Dist: ptyprocess==0.7.0
+Requires-Dist: pulp==2.8.0
+Requires-Dist: pure-eval==0.2.2
+Requires-Dist: pygments==2.17.2
+Requires-Dist: pyjwt==2.8.0
+Requires-Dist: pyparsing==3.1.1
+Requires-Dist: pyproj==3.6.1
+Requires-Dist: python-dateutil==2.8.2
+Requires-Dist: pytz==2023.3.post1
+Requires-Dist: pyyaml==6.0.1
+Requires-Dist: rasterio==1.3.9
+Requires-Dist: redis==5.0.1
+Requires-Dist: referencing==0.34.0
+Requires-Dist: requests==2.31.0
+Requires-Dist: rpds-py==0.18.0
+Requires-Dist: rtree==1.3.0
+Requires-Dist: scipy==1.12.0
+Requires-Dist: shapely==2.0.2
+Requires-Dist: simplejson==3.19.2
+Requires-Dist: six==1.16.0
+Requires-Dist: snowballstemmer==2.2.0
+Requires-Dist: snuggs==1.4.7
+Requires-Dist: soupsieve==2.5
+Requires-Dist: sqlalchemy==2.0.25
+Requires-Dist: stack-data==0.6.3
+Requires-Dist: traitlets==5.14.1
+Requires-Dist: typing-extensions==4.9.0
+Requires-Dist: tzdata==2023.4
+Requires-Dist: urllib3==2.1.0
+Requires-Dist: vine==5.1.0
+Requires-Dist: wcwidth==0.2.13
+Requires-Dist: werkzeug==3.0.1
+Dynamic: license-file
+
+# deSEAsion
+
+deSEAsion is a collaborative support tool for maritime decision making.
+
+## deseasion-backend
+
+This package contains its backend, as the namespace package `deseasion.backend`.
+It can be installed simply:
+
+```bash
+pip install deseasion-backend
+```
+
+Alternatively, you can install it from its source repository:
+
+```bash
+git clone https://gitlab.com/decide.imt-atlantique/deseasion.git
+cd deseasion/backend
+pip install .
+```
+
+It is not meant to be used outside a docker container with the whole application stack.
+We are only distributing this package so the backend can be easily expanded by users with specific needs for which the generic deSEAsion backend is not enough.
+
+However, you can test the backend easily. It needs an `instance/config.py` file in the directory in which you will run it which you can either copy from `deseasion/backend/instance-example` or generate from the `deseasion/backend` directory using the bash script `configure-backend.sh`.
+In the latter case, you will need to supply at least the following environment variables:
+
+```bash
+DB_URI             # URI of the Postgresql/PostGIS database
+CELERY_BROKER_URL  # URL of the Redis broker used by celery to communicate with the backend
+```
+
+Once setup, you can run the backend with:
+
+```bash
+python -m deseasion.backend.app
+# or
+ENV FLASK_APP=deseasion.backend.app
+flask run
+```
+
+You can run a celery worker from the same directory (sharing the same `instance/config.py` file) with:
+
+```bash
+celery -A deseasion.backend.app.celery worker
+```
+
+## Copyright and licence
+
+deSEAsion is copyrighted (C) 2016-2025 by IMT Atlantique Bretagne Pays de la Loire
+and Service hydrographique et océanographique de la marine (Shom).
+Licensed under the European Union Public Licence (EUPL) v1.2.
+
+Please refer to the file LICENCE containing the text of the EUPL v1.2.
+
+You may also obtain a copy of the license at:
+https://joinup.ec.europa.eu/software/page/eupl
+
+For more information on this license, please refer to:
+
+  - European Union Public Licence:
+    https://joinup.ec.europa.eu/collection/eupl/eupl-guidelines-faq-infographics
+
+
+## Documentation
+
+See the [documentation](https://deseasion-2227c9.gitlab.io) if you need any information
+about the project, how to install or contribute to it.
