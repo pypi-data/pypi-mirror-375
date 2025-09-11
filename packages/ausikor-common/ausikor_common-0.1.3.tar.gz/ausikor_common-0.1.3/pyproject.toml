@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ausikor-common"   # PyPI에 표시될 이름
+version = "0.1.3"
+description = "My first common utils"
+authors = [
+    { name = "Park Jungkwan", email = "pakjkwan@gmail.com" }
+]
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.9"
+dependencies = [
+  "pydantic>=2.7",
+  "httpx>=0.27",
+  "python-jose[cryptography]>=3.3.0",
+  "loguru>=0.7.2",
+  "psycopg2-binary>=2.9",
+]
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff", "mypy", "build", "twine"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ausikor_common*"]
+
+[tool.ruff]
+line-length = 100
+
+[project.urls]
+"Homepage" = "https://github.com/labzang/ausikor-common"
+"Bug Tracker" = "https://github.com/labzang/ausikor-common/issues" 
