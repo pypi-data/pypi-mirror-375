@@ -1,0 +1,3 @@
+[console_scripts]
+bundestag = bundestag.cli.__main__:app
+get_xlsx_uris = bundestag.get_xlsx_uris:app
