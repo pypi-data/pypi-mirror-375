@@ -1,0 +1,154 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seo-sentinel"
+dynamic = ["version"]
+description = "SEO Sentinel is a comprehensive automated SEO auditing tool that crawls websites, detects SEO issues, and generates detailed HTML reports for website optimization."
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Nayan Das", email = "nayanchandradas@hotmail.com" }
+]
+maintainers = [
+    { name = "Nayan Das", email = "nayanchandradas@hotmail.com" }
+]
+requires-python = ">=3.8"
+keywords = [
+    "seo", 
+    "crawler", 
+    "auditor", 
+    "website-analysis", 
+    "python", 
+    "seo-sentinel",
+    "web-scraping",
+    "performance-analysis",
+    "metadata-analysis"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "Environment :: Console",
+    "Natural Language :: English"
+]
+
+dependencies = [
+    "beautifulsoup4>=4.12.0,<5.0.0",
+    "requests>=2.31.0,<3.0.0",
+    "tqdm>=4.65.0,<5.0.0",
+    "jinja2>=3.1.0,<4.0.0",
+    "urllib3>=1.26.0,<3.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0"
+]
+performance = [
+    "aiohttp>=3.8.0",
+    "asyncio>=3.4.3"
+]
+export = [
+    "pandas>=1.5.0",
+    "openpyxl>=3.1.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/nayandas69/SEO-Sentinel"
+Repository = "https://github.com/nayandas69/SEO-Sentinel"
+Documentation = "https://github.com/nayandas69/SEO-Sentinel#readme"
+Issues = "https://github.com/nayandas69/SEO-Sentinel/issues"
+Changelog = "https://github.com/nayandas69/SEO-Sentinel/releases"
+"Bug Reports" = "https://github.com/nayandas69/SEO-Sentinel/issues"
+"Feature Requests" = "https://github.com/nayandas69/SEO-Sentinel/issues"
+Discord = "https://discord.gg/skHyssu"
+"Author Website" = "https://nayandas69.github.io/link-in-bio"
+
+[project.scripts]
+seo-sentinel = "seose:main"
+seose = "seose:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "seose.__version__"}
+
+[tool.setuptools]
+py-modules = ["seose"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["seose*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config -v"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests"
+]
+
+[tool.coverage.run]
+source = ["seose"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:"
+]
