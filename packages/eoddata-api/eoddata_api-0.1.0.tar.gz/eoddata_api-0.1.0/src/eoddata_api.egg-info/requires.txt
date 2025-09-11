@@ -1,0 +1,9 @@
+requests<3,>=2.32.0
+
+[dev]
+pytest>=6.0
+pytest-cov
+pytest-mock
+black
+flake8
+mypy
