@@ -1,0 +1,11 @@
+include *.txt
+include *.md
+include pyproject.toml
+
+recursive-include docs *
+recursive-include src *
+
+global-exclude *pyc
+
+recursive-exclude news *
+exclude news
