@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "django_secrets"
+version = "2.0.0"
+description = ""
+authors = ["Andy Grabow <andy@freilandkiwis.de>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+six = "^1.11"
+Django = ">=2.2.27"
+
+[tool.poetry.group.dev.dependencies]
+ipdb = "^0.13.9"
+codecov = "^2.0"
+pytest = "^8.4.2"
+wheel = "^0.45.1"
