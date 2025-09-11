@@ -1,0 +1,21 @@
+[version]
+current = "0.3.1"
+regex = '''
+  (?P<major>\d+)
+  \.
+  (?P<minor>\d+)
+  \.
+  (?P<patch>\d+)
+'''
+
+[git]
+message_template = "Bump to {new_version}"
+tag_template = "{new_version}"
+
+[[file]]
+src = "src/arcae/__init__.py"
+search = "__version__ = \"{current_version}\""
+
+[[file]]
+src = "pyproject.toml"
+search = "version = \"{current_version}\""

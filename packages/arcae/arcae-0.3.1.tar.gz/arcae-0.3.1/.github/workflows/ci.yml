@@ -1,0 +1,240 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+    - main
+    tags:
+    - "*"
+  pull_request:
+  schedule:
+    - cron: '30 2 * * 1,4' # Every Monday and Thursday @ 2h30am UTC
+
+env:
+  HOST_PYTHON_VERSION: "3.12"
+  VCPKG_BINARY_SOURCES: "clear;x-aws,${{ secrets.VCPKG_CACHE_URL }},readwrite"
+  VCPKG_INSTALLED_DIR: /tmp/vcpkg_installed
+  ARTIFACT_NAME: wheel
+  WHEEL_PYTHON_VERSIONS: "3.10 3.11 3.12 3.13"
+  PR_WHEEL_PYTHON_VERSIONS: "3.10 3.13"
+
+jobs:
+  build-sdist:
+    name: Build Source Distribution
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Set up Python ${{ env.HOST_PYTHON_VERSION }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.HOST_PYTHON_VERSION }}
+
+      - name: Upgrade pip and install build
+        run: python -m pip install -U pip build
+
+      - name: Checkout source
+        uses: actions/checkout@v5
+
+      - name: Build source distribution
+        run: python -m build --sdist
+
+      - name: Upload wheel artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}-source
+          path: ./dist/*.tar.gz
+
+  cpp-tests:
+    name: Execute C++ test cases
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    env:
+      VCPKG_TARGET_TRIPLET: "x64-linux-dynamic-cxx20-abi1-rel"
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v5
+
+      - name: Set up Python ${{ env.HOST_PYTHON_VERSION }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.HOST_PYTHON_VERSION }}
+
+      - name: Install C++ Compiler and cmake
+        run: |
+          sudo apt -y update
+          sudo apt -y install build-essential cmake
+          python -m pip install -U pip
+          python -m pip install pyarrow
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5.0.0
+        with:
+          role-to-assume: ${{ secrets.GHA_ROLE_ARN }}
+          aws-region: af-south-1
+          output-env-credentials: true
+
+      - name: Build C++ libraries and tests
+        run: |
+          cmake -S . -B build
+          cmake --build build
+
+      - name: Execute C++ tests
+        run: |
+          cd build
+          ctest --verbose
+
+      # - name: Debug with tmate on failure
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
+
+
+  build-wheels:
+    name: Build wheels for ${{ matrix.os_short }}-${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    permissions:
+      id-token: write
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-22.04", "macos-13", "macos-14", "ubuntu-22.04-arm"]
+        is_main_or_release:
+          - ${{ contains(github.ref, 'main') || startsWith(github.ref, 'refs/tags')}}
+        include:
+          - os: ubuntu-22.04
+            os_short: linux
+            arch: x86_64
+            triplet: "x64-linux-dynamic-cxx20-abi1-rel"
+            extra_build: "manylinux_x86_64"
+          - os: ubuntu-22.04-arm
+            os_short: linux
+            arch: aarch64
+            triplet: "arm64-linux-dynamic-cxx20-abi1-rel"
+            extra_build: "manylinux_aarch64"
+          - os: macos-13
+            os_short: macos
+            arch: x86_64
+            deployment_target: "13.0"
+            triplet: "x64-osx-dynamic-cxx20-abi1-rel"
+            extra_build: "macosx_x86_64"
+          - os: macos-14
+            os_short: macos
+            arch: arm64
+            deployment_target: "14.0"
+            triplet: "arm64-osx-dynamic-cxx20-abi1-rel"
+            extra_build: "macosx_arm64"
+    steps:
+      - name: Set up Python ${{ env.HOST_PYTHON_VERSION }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.HOST_PYTHON_VERSION }}
+
+      - name: Upgrade pip and install virtualenv
+        run: python -m pip install -U pip virtualenv
+
+      - name: Checkout source
+        uses: actions/checkout@v5
+
+      - name: Construct CIBW_BUILD string
+        id: cibw-build
+        shell: bash
+        run: |
+          if [[ ${{ matrix.is_main_or_release }} == true ]]; then
+            WHEEL_VERSIONS="${{ env.WHEEL_PYTHON_VERSIONS }}"
+          else
+            WHEEL_VERSIONS="${{ env.PR_WHEEL_PYTHON_VERSIONS }}"
+          fi
+
+          CIBW_BUILD=""
+          for version in ${WHEEL_VERSIONS}; do
+            CP_VERSION=$(echo $version | sed 's/\.//g')
+            CIBW_BUILD="${CIBW_BUILD} cp${CP_VERSION}-${{ matrix.extra_build }}*"
+          done
+          echo "cibw_build=$CIBW_BUILD" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5.0.0
+        with:
+          role-to-assume: ${{ secrets.GHA_ROLE_ARN }}
+          aws-region: af-south-1
+          output-env-credentials: true
+
+      - name: Run cibuildwheel
+        env:
+          CIBW_BUILD: ${{ steps.cibw-build.outputs.cibw_build }}
+          CIBW_ENVIRONMENT: >
+            VCPKG_BINARY_SOURCES="${{ env.VCPKG_BINARY_SOURCES }}"
+            AWS_REGION=${{ env.AWS_REGION }}
+            AWS_DEFAULT_REGION=${{ env.AWS_DEFAULT_REGION }}
+            AWS_ACCESS_KEY_ID=${{ env.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY=${{ env.AWS_SECRET_ACCESS_KEY }}
+            AWS_SESSION_TOKEN=${{ env.AWS_SESSION_TOKEN }}
+            CMAKE_ARGS=-DBUILD_TESTING=OFF
+            VCPKG_FORCE_SYSTEM_BINARIES=1
+            VCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
+            VCPKG_INSTALLED_DIR=${{ env.VCPKG_INSTALLED_DIR }}
+            LD_LIBRARY_PATH=${{ env.VCPKG_INSTALLED_DIR }}/${{ matrix.triplet }}/lib
+            MACOSX_DEPLOYMENT_TARGET=${{ matrix.deployment_target }}
+        uses: pypa/cibuildwheel@v3.1.4
+
+      - name: Upload wheel artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}-${{ matrix.os_short }}-${{ matrix.arch }}
+          path: ./wheelhouse/*.whl
+
+      # - name: Debug with tmate on failure
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
+
+  upload-to-test-pypi:
+    name: Upload release to Test PyPI
+    needs: [build-sdist, build-wheels]
+    runs-on: ubuntu-latest
+    environment:
+      name: release-test
+    permissions:
+      id-token: write
+    steps:
+      - name: Download distribution artifacts
+        uses: actions/download-artifact@v5
+        with:
+          pattern: ${{ env.ARTIFACT_NAME }}-*
+          merge-multiple: true
+          path: dist
+
+      - name: List artifacts
+        run: ls -lh dist
+
+      - name: Publish package distributions to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+        continue-on-error: true
+
+  upload-to-pypi:
+    name: Upload release to PyPI
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+    needs: [build-sdist, build-wheels]
+    runs-on: ubuntu-latest
+    environment:
+      name: release
+    permissions:
+      id-token: write
+    steps:
+      - name: Download distribution artifacts
+        uses: actions/download-artifact@v5
+        with:
+          pattern: ${{ env.ARTIFACT_NAME }}-*
+          merge-multiple: true
+          path: dist
+
+      - name: List artifacts
+        run: ls -lh dist
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
