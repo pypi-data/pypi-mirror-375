@@ -1,0 +1,7 @@
+ipywidgets>=7.0.0
+
+[dev]
+pre-commit
+
+[test]
+solara[pytest]

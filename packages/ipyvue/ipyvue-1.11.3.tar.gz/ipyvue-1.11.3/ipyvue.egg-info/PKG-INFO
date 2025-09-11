@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: ipyvue
+Version: 1.11.3
+Summary: Jupyter widgets base for Vue libraries
+Home-page: https://github.com/widgetti/ipyvue
+Author: Mario Buikhuizen, Maarten Breddels
+Author-email: mbuikhuizen@gmail.com, maartenbreddels@gmail.com
+License: MIT
+Keywords: ipython,jupyter,widgets
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: IPython
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Multimedia :: Graphics
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Provides-Extra: test
+Provides-Extra: dev
+License-File: LICENSE
+
+Jupyter widgets base for Vue libraries
