@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+requires-python = ">= 3.9"
+name = "wagtail-custom-code-editor"
+version = "1.0.6"
+dependencies = [
+    "django>=4.2",
+    "wagtail>=7.0"
+]
+description = "An Ace Editor that works in Wagtail CMS"
+readme = "README.md"
+authors = [
+    {name = "Amin Shazrin", email = "aminshazrin@yahoo.com"},
+]
+keywords = [
+    "wagtail",
+    "cms",
+    "custom-code-editor",
+    "ace-editor",
+    "editor",
+    "code",
+    "acejs",
+    "wagtailcms",
+    "wagtail-cms",
+    "field",
+    "field-block",
+]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.0",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 1",
+    "Framework :: Wagtail :: 2",
+    "Framework :: Wagtail :: 3",
+    "Framework :: Wagtail :: 4",
+    "Framework :: Wagtail :: 5",
+    "Framework :: Wagtail :: 6",
+    "Framework :: Wagtail :: 7",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+license = {file = "LICENSE"}
+
+[project.urls]
+Homepage = "https://github.com/ammein/wagtail-custom-code-editor"
