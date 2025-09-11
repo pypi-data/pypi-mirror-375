@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: this_is_message_tel
+Version: 0.4
+Summary: A lightweight Python library for generating random User-Agent headers for anonymity and testing.
+Author: Super
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.6
+Dynamic: author
+Dynamic: classifier
+Dynamic: requires-python
+Dynamic: summary
