@@ -1,0 +1,12 @@
+PyYAML>=6.0
+
+[dev]
+pytest>=6.0
+pytest-cov
+black
+isort
+flake8
+
+[web]
+flask>=2.0.0
+werkzeug>=2.0.0
