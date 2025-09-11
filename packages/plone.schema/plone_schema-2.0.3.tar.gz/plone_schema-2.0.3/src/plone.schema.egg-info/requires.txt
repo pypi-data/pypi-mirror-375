@@ -1,0 +1,15 @@
+jsonschema
+setuptools
+z3c.form
+zope.i18nmessageid
+zope.interface
+zope.component
+zope.schema
+
+[schemaeditor]
+plone.schemaeditor
+
+[supermodel]
+plone.supermodel
+
+[test]
