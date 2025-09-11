@@ -1,0 +1,24 @@
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "primitives"
+version = "0.1.0"
+description = "Shared PLC-style primitives in Python"
+authors = [{name="Neil Doell", email="neil@vococo.ca"}]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = []
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/primitives"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/primitives/py.typed" = "primitives/py.typed"
+
+[tool.ruff.lint.per-file-ignores]
+"primitives/__init__.py" = ["F403", "F405"]
+
