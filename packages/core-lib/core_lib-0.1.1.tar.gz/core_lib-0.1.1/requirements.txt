@@ -1,0 +1,40 @@
+#Core lib
+hydra-core==1.2
+python-dateutil
+PyJWT
+argh
+pytimeparse
+parsedatetime
+omegaconf
+neo4j
+redis
+click
+
+# Connectors
+sqlalchemy==1.4.44
+alembic
+pymysql
+psycopg2-binary
+pysolr
+pymongo
+python-memcached
+cryptography
+boto3
+geoalchemy2
+shapely
+setuptools
+
+
+# web
+django
+flask
+flask_cors
+requests
+
+
+# Test
+python-dotenv
+moto==3.1.4
+freezegun
+mongomock
+flask_wtf

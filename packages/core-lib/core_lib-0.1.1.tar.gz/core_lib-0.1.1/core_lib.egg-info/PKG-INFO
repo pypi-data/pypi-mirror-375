@@ -1,0 +1,75 @@
+Metadata-Version: 2.4
+Name: core-lib
+Version: 0.1.1
+Summary: basic onion architecture library utils
+Home-page: https://github.com/shay-te/core-lib
+Author: Shay Tessler
+Author-email: shay.te@gmail.com
+License: MIT
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: hydra-core==1.2
+Requires-Dist: python-dateutil
+Requires-Dist: PyJWT
+Requires-Dist: argh
+Requires-Dist: pytimeparse
+Requires-Dist: parsedatetime
+Requires-Dist: omegaconf
+Requires-Dist: neo4j
+Requires-Dist: redis
+Requires-Dist: click
+Requires-Dist: sqlalchemy==1.4.44
+Requires-Dist: alembic
+Requires-Dist: pymysql
+Requires-Dist: psycopg2-binary
+Requires-Dist: pysolr
+Requires-Dist: pymongo
+Requires-Dist: python-memcached
+Requires-Dist: cryptography
+Requires-Dist: boto3
+Requires-Dist: geoalchemy2
+Requires-Dist: shapely
+Requires-Dist: setuptools
+Requires-Dist: django
+Requires-Dist: flask
+Requires-Dist: flask_cors
+Requires-Dist: requests
+Requires-Dist: python-dotenv
+Requires-Dist: moto==3.1.4
+Requires-Dist: freezegun
+Requires-Dist: mongomock
+Requires-Dist: flask_wtf
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+[![PyPI](https://img.shields.io/pypi/v/core-lib)](https://pypi.org/project/core-lib/)
+![PyPI - License](https://img.shields.io/pypi/l/core-lib)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/core-lib)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/core-lib.svg)](https://pypistats.org/packages/core-lib)
+
+# Core-Lib
+CoreLib provides basic simple classes for creating a WEB Application as a Library using the Onion Architecture. [1](https://www.codeguru.com/csharp/csharp/cs_misc/designtechniques/understanding-onion-architecture.html) [2](https://www.google.com/search?sxsrf=ACYBGNT0NhYbUZLnDQbC9b6uPBqjZmjwgw%3A1579104811273&ei=KzofXuOfEO3IgwfngLPwAg&q=onion+Architecture&oq=onion+Architecture&gs_l=psy-ab.12...0.0..109691...0.0..0.0.0.......0......gws-wiz.oEYi3afxy_c&ved=0ahUKEwij4drq_4XnAhVt5OAKHWfADC4Q4dUDCAs)   
+
+Read the documentation for `Core-Lib` [here](https://shay-te.github.io/core-lib/)
+
+## License
+Core-Lib is licenced under [MIT](https://github.com/shay-te/core-lib/blob/master/LICENSE)
+
+# Running tests
+`python -m unittest discover -v`
