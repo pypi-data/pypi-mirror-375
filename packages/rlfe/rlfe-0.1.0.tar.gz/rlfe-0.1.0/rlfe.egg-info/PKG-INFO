@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: rlfe
+Version: 0.1.0
+Summary: RL Forever - A minimal reinforcement learning package
+Author-email: Mohammad <mohammad@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/username/rlf
+Project-URL: Repository, https://github.com/username/rlf
+Project-URL: Issues, https://github.com/username/rlf/issues
+Keywords: reinforcement learning,machine learning,ai
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+
+# RL Forever (rlf)
+
+A minimal reinforcement learning package. Simple and forever!
+
+## Installation
+
+```bash
+pip install rlf
+```
+
+## Quick Start
+
+```python
+from rlf import hello_rl_forever, VERSION_INFO
+
+# Say hello
+print(hello_rl_forever())
+print(VERSION_INFO)
+```
+
+## Features
+
+- Minimal and lightweight
+- Easy to use
+- No complex dependencies
+
+## License
+
+MIT License

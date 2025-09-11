@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rlfe"
+version = "0.1.0"
+description = "RL Forever - A minimal reinforcement learning package"
+readme = "README.md"
+authors = [{name = "Mohammad", email = "mohammad@example.com"}]
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["reinforcement learning", "machine learning", "ai"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/username/rlf"
+Repository = "https://github.com/username/rlf"
+Issues = "https://github.com/username/rlf/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black",
+    "flake8",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rlf*"]
+
+[tool.setuptools.package-data]
+rlf = ["*.txt", "*.md"]
