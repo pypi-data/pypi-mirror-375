@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.12"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crystrat"
+version = "0.0.1"
+description = "Ultra-clean, fast, and safe live trading framework for complex crypto strategies."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+authors = [
+  { name = "Crystrat Team" }
+]
+dependencies = [
+  "pydantic>=2.6",
+  "PyYAML>=6.0.1",
+  "aiohttp>=3.9",
+]
+
+[project.scripts]
+crystrat = "crystrat.cli.main:main"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build]
+ignore-vcs = true
+include = [
+  "src/crystrat/**",
+  "README.md",
+  "LICENSE*",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/crystrat"]

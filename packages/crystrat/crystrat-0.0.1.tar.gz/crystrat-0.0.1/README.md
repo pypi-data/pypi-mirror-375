@@ -1,0 +1,45 @@
+# Crystrat
+
+Ultra-clean, fast, and safe live trading framework for complex strategies.
+
+Milestones M0–M2 are implemented: bootstrap, Crypto.com market data (trades/bars/books) with metrics, and a paper OMS/Execution pipeline.
+
+## Quick Start
+
+- Create venv and install editable:
+  - PowerShell: `python -m venv .venv; .\.venv\Scripts\Activate.ps1; pip install -e .`
+  - If the `crystrat` script is not on PATH, use `python -m crystrat.cli.main`.
+- Configure `config.example.yaml`:
+  - `exchanges: [cryptocom]` to enable live market data
+  - `bar_intervals: [1m]` to build OHLCV bars
+  - `book_depth: 50` for L2 depth
+
+## Run Examples
+
+- Print trades (Crypto.com):
+  - `python -m crystrat.cli.main run --config config.example.yaml --strategy examples.print_trades:PrintTrades`
+- Print bars (requires `bar_intervals`):
+  - `python -m crystrat.cli.main run --config config.example.yaml --strategy examples.print_bars:PrintBars`
+- Demo order (paper OMS, fills at top-of-book):
+  - `python -m crystrat.cli.main run --config config.example.yaml --strategy examples.demo_order:DemoOrder`
+- Minimal starter:
+  - `python -m crystrat.cli.main run --config config.example.yaml --strategy examples.simple_strategy:MyStrat`
+
+## Commands
+
+- `crystrat run` loads config and strategy, starts the runtime.
+- `crystrat status` prints basic environment and version.
+
+## Layout
+
+- `src/crystrat/infra/*` event bus, logging, config, metrics
+- `src/crystrat/connect/crypto_com/*` Crypto.com REST + WS connectors
+- `src/crystrat/marketdata/*` MD runtime and OHLCV
+- `src/crystrat/exec/*` OMS/Execution (router, paper broker, risk)
+- `src/crystrat/strategy/*` Strategy base + loader
+- `src/crystrat/cli/*` CLI entrypoints
+- `examples/*` demo strategies
+- `tests/*` minimal sanity tests
+
+Refer to `plan.txt` and `TODO.md` for the detailed roadmap and progress.
+
