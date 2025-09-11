@@ -1,0 +1,92 @@
+Metadata-Version: 2.3
+Name: compose-to-render
+Version: 0.1.0
+Summary: Bridge the gap between local development and production. Intelligently convert docker-compose.yml to production-ready render.yaml Blueprints.
+License: MIT
+Keywords: render,docker-compose,iac,devops,cli
+Author: Khoa ngominhkhoa2006@gmail.com
+Requires-Python: >=3.10,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: click (==8.1.3)
+Requires-Dist: rich (>=13.5.2,<14.0.0)
+Requires-Dist: ruamel-yaml (>=0.17.32,<0.18.0)
+Requires-Dist: typer[all] (>=0.12.3,<0.13.0)
+Project-URL: Repository, https://github.com/minhkhoango/compose-to-render
+Description-Content-Type: text/markdown
+
+# compose-to-render
+
+Intelligently convert `docker-compose.yml` to production-ready `render.yaml` Blueprints for Render.
+
+## Quick Start
+
+### Installation
+```bash
+pip install compose-to-render
+```
+
+### Usage
+```bash
+compose-to-render
+```
+The tool will generate a render.yaml file in the same directory
+
+## Example
+
+This tool converts this:
+
+`docker-compose.yml` (Your Local Dev)
+```yml
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - logvolume:/var/log
+  redis:
+    image: redis:alpine
+
+volumes:
+  logvolume:
+```
+
+Into this:
+`render.yaml` (Production on Render)
+```yaml
+services:
+  - name: web
+    type: web
+    autoDeploy: true
+    dockerfilePath: Dockerfile
+    disks:
+      - name: logvolume
+        mountPath: /var/log
+    buildFilter:
+      paths:
+        - ./**
+    ports: '5000'
+  - name: redis
+    type: pserv
+    autoDeploy: true
+    image:
+      url: redis:alpine
+      owner: docker
+```
+
+## Features
+
+- Intelligent service type detection (Web vs. Private Services)
+- Named volume to Render Disk conversion
+- Environment variable and `env_file` mapping
+- Warnings for unsupported docker-compose keys
+
+## License
+
+**MIT License**
+
