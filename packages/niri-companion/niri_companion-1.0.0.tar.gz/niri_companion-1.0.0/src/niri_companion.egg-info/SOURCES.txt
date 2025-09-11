@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/companion/config.py
+src/companion/genconfig.py
+src/companion/ipcext.py
+src/companion/workspaces.py
+src/niri_companion.egg-info/PKG-INFO
+src/niri_companion.egg-info/SOURCES.txt
+src/niri_companion.egg-info/dependency_links.txt
+src/niri_companion.egg-info/entry_points.txt
+src/niri_companion.egg-info/requires.txt
+src/niri_companion.egg-info/top_level.txt
