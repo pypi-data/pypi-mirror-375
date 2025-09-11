@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+recursive-include reboot *.py
+recursive-include reboot py.typed
+recursive-include api *.py *.proto *.pyi
+exclude tests
