@@ -1,0 +1,5 @@
+[console_scripts]
+download_redcap = redcap_toolbox.download_redcap:main
+download_redcap_report = redcap_toolbox.download_redcap_report:main
+split_redcap_data = redcap_toolbox.split_redcap_data:main
+update_redcap_diff = redcap_toolbox.update_redcap_diff:main
