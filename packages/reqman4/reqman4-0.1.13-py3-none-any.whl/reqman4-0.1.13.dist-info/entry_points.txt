@@ -1,0 +1,4 @@
+[console_scripts]
+reqman4 = reqman4.main:command
+rq = reqman4.main:command
+
