@@ -1,0 +1,64 @@
+Metadata-Version: 2.3
+Name: swarmauri_keyprovider_local
+Version: 0.2.0.dev2
+Summary: In-memory key provider for development and testing
+License: Apache-2.0
+Author: Swarmauri
+Author-email: opensource@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Security :: Cryptography
+Classifier: Intended Audience :: Developers
+Requires-Dist: cryptography
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Description-Content-Type: text/markdown
+
+![Swamauri Logo](https://res.cloudinary.com/dbjmpekvl/image/upload/v1730099724/Swarmauri-logo-lockup-2048x757_hww01w.png)
+
+# Swarmauri Local Key Provider
+
+Provides a simple in-memory key provider for development and testing.
+
+## Installation
+
+```bash
+pip install swarmauri_keyprovider_local
+```
+
+## Usage
+
+```python
+import asyncio
+from swarmauri_keyprovider_local import LocalKeyProvider
+from swarmauri_core.keys.types import (
+    ExportPolicy,
+    KeyAlg,
+    KeyClass,
+    KeySpec,
+)
+from swarmauri_core.crypto.types import KeyUse
+
+
+async def run_example() -> str:
+    provider = LocalKeyProvider()
+    spec = KeySpec(
+        klass=KeyClass.symmetric,
+        alg=KeyAlg.AES256_GCM,
+        uses=(KeyUse.ENCRYPT,),
+        export_policy=ExportPolicy.SECRET_WHEN_ALLOWED,
+    )
+    created = await provider.create_key(spec)
+    fetched = await provider.get_key(created.kid, include_secret=True)
+    print(f"Retrieved key: {fetched.kid}")
+
+
+asyncio.run(run_example())
+```
+
