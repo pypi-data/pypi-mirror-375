@@ -1,0 +1,11 @@
+.coverage
+build
+dist
+htmlcov
+world.egg-info
+coverage.xml
+diffcov.html
+*~
+/.pdm.toml
+/__pypackages__/
+/.pdm-python
