@@ -1,0 +1,48 @@
+# pyproject.toml
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "phrappy"
+version = "0.1.0"
+description = "Unofficial typed Python Client for the Phrase TMS (Memsource) API."
+readme = "README.md"
+authors = [{ name = "Henrik Kühnemann", email = "hk@yellownape.se" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+]
+keywords = ["phrase", "api", "translation", "localization", "tms"]
+dependencies = [
+    "httpx>=0.28.1", "pydantic>=2.0.0,<3.0.0"
+]
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["ruff>=0.12.11","pytest>=8","pytest-asyncio>=0.23","pytest-httpx>=0.30","pytest-recording>=0.13.1","python-dotenv>=1.1.0"]
+
+[project.urls]
+Homepage = "https://github.com/kuhnemann/phrappy"
+
+
+[tool.bumpver]
+current_version = "0.1.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = [
+    'current_version = "{version}"',
+    'version = "{version}"',
+]
+
+"src/phrappy/_meta.py" = ["{version}"]
+
