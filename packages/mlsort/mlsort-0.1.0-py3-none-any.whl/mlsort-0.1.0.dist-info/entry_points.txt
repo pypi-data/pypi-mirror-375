@@ -1,0 +1,5 @@
+[console_scripts]
+mlsort-bench-compare = mlsort.cli_bench_compare:main
+mlsort-bench-install = mlsort.cli_bench_install:main
+mlsort-init = mlsort.cli_init:main
+mlsort-optimize-cutoffs = mlsort.cli_optimize_cutoffs:main
