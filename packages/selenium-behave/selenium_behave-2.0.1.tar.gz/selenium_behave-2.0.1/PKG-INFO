@@ -1,0 +1,34 @@
+Metadata-Version: 2.4
+Name: selenium-behave
+Version: 2.0.1
+Summary: Custom Behave BDD + Selenium framework template
+Author-email: Lovemesh <Lovemesh.1@gmail.com>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: behave
+Requires-Dist: boto3
+Requires-Dist: python-dotenv
+Requires-Dist: PyYAML
+Requires-Dist: requests
+Requires-Dist: allure-behave
+Requires-Dist: selenium
+Requires-Dist: beautifulsoup4
+Requires-Dist: openpyxl
+Requires-Dist: behave-html-formatter
+Requires-Dist: pillow
+Requires-Dist: sounddevice
+Requires-Dist: SpeechRecognition
+Requires-Dist: gtts
+Requires-Dist: pyglet
+Requires-Dist: imagehash
+Dynamic: license-file
+
+# selenium-behave
+
+A reusable Behave + Selenium step library.
+
+## Installation
+```bash
+pip install selenium-behave
