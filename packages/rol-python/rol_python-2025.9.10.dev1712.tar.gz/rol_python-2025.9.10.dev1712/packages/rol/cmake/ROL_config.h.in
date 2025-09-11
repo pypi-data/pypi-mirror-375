@@ -1,0 +1,21 @@
+
+/******************
+ * Config Options *
+ ******************/
+
+/* Define for runtime debug checking support. */
+#cmakedefine HAVE_ROL_DEBUG
+
+/* Define for performance timer support. */
+#cmakedefine ROL_TIMERS
+
+/* Define for python interface support. */
+#cmakedefine ENABLE_PYBIND11_PYROL
+
+/* Define support for automated ParameterList validation. */
+#cmakedefine ENABLE_PARAMETERLIST_VALIDATION
+
+/* Define the Fortran name mangling to be used for BLAS/LAPACK */
+#ifndef F77_BLAS_MANGLE
+ #define F77_BLAS_MANGLE@F77_BLAS_MANGLE@
+#endif
