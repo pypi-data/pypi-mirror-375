@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: mcp-ip2location
+Version: 0.1.5
+Summary: Add your description here
+Requires-Python: >=3.10
+Requires-Dist: mcp[cli]>=1.13.1
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: qqwry-py3==1.2.1
