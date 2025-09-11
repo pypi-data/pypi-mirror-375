@@ -1,0 +1,10 @@
+Metadata-Version: 2.3
+Name: ncmi-idc-extract-interfaces
+Version: 1.2.1
+Summary: NCMI IDC Extract Interfaces. Used in the warehouse extract API, and (soon) the warehouse-extract python client.
+Author: Petridis, Ross (NCMI, Hobart)
+Author-email: Petridis, Ross (NCMI, Hobart) <Ross.Petridis@csiro.au>
+Requires-Dist: pydantic
+Requires-Dist: pydantic-settings
+Requires-Dist: pydantic[email]
+Requires-Python: >=3.10, <3.14
