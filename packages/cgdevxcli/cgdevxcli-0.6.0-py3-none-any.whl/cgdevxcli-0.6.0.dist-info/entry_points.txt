@@ -1,0 +1,4 @@
+[console_scripts]
+build=cli.build:install
+cgdevxcli=cli.__main__:entry_point
+
