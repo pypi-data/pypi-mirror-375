@@ -1,0 +1,205 @@
+[project]
+name = "annofabapi"
+dynamic = ["version"]
+description = "Python Client Library of Annofab WebAPI (https://annofab.com/docs/api/)"
+authors = [{ name = "Kurusugawa Computer Inc." }]
+requires-python = ">=3.9"
+readme = "README.md"
+license = "MIT"
+keywords = [
+    "annofab",
+    "api",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Utilities",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"    
+]
+dependencies = [
+    "requests",
+    "isodate",
+    "python-dateutil",
+    "backoff",
+    "dataclasses-json",
+    "more-itertools",
+    "pydantic>=2,<3",
+]
+
+[project.optional-dependencies]
+segmentation = [
+    "numpy",
+    "pillow",
+]
+
+[project.urls]
+Repository = "https://github.com/kurusugawa-computer/annofab-api-python-client"
+
+[dependency-groups]
+test = [
+    "pytest>=8,<9",
+    "pytest-xdist",
+    "pytest-cov",
+]
+linter = [
+    "ruff>=0.12 ; python_version >= '3.12'",
+    "mypy>=1,<2 ; python_version >= '3.12'",
+    "pylint>=3,<4 ; python_version >= '3.12'",
+    "types-requests",
+    "types-python-dateutil",
+    "types-dataclasses",
+]
+documentation = [
+    "sphinx>=8,<9 ; python_version >= '3.12'",
+    "pydata-sphinx-theme ; python_version >= '3.12'",
+]
+dev = [
+    "ipython",
+    "numpy>=2.1 ; python_version >= '3.13'",
+]
+
+[tool.uv]
+default-groups = [
+    "test",
+    "linter",
+    "documentation",
+    "dev",
+]
+
+[tool.mypy]
+# スタブが無いパッケージのエラーは無視させる.サードパーティのライブラリに型情報がないケースもあるため
+ignore_missing_imports = true
+# 型ヒントが付いていない関数もチェックする
+check_untyped_defs = true
+warn_unused_configs = true
+warn_unreachable = true
+
+
+exclude = [
+    'annofabapi/pydantic_models/.*\.py',
+]
+show_column_numbers = true
+
+[tool.ruff]
+target-version = "py39"
+line-length = 150
+exclude = [
+    "annofabapi/__init__.py",
+]
+
+[tool.ruff.lint]
+exclude = [
+    'annofabapi/pydantic_models/.*\.py',
+]
+
+ignore = [
+    "FA100", # `future-rewritable-type-annotation` : Python3.8をサポートしている間は無視する。
+    "PD002", #すでにpandasで`inplace=True`はいろんなところで使っているため
+    "RUF001", # 全角記号など`ambiguous unicode character`も使いたいため
+    "RUF002",# 全角記号など`ambiguous unicode character`も使いたいため
+    "RUF003",# 全角記号など`ambiguous unicode character`も使いたいため
+    "PLC1901", # compare-to-empty-string : `if a == "`のように空文字列で直接比較したいときがあるため
+    "PLR2004", # magic-value-comparison: listのサイズで判定するときがよくあるため
+    "ANN002", # missing-type-args
+    "ANN003", # missing-type-kwargs
+    "ERA", # : 役立つこともあるが、コメントアウトしていないコードも警告されるので無視する
+    "TD", # flake8-todos
+    "FIX", # flake8-fixme
+    "SIM108", # if-else-block-instead-of-if-exp, 三項演算子が読みにくい場合もあるので無視する
+    "UP045", # non-pep604-annotation-optional: Python 3.9をサポートしている間は無視する。
+
+    # 以下のルールはコードに合っていないので無効化した
+    "RSE", # flake8-raise
+    "D", # pydocstyle, Docstringを中途半端にしか書いていないので、除外する
+    "C90", # mccabe
+    "T20", # flake8-print
+    "SLF", #  flake8-self
+    "BLE", # flake8-blind-except
+    "FBT", # flake8-boolean-trap
+    "TRY", # tryceratops
+    "COM", # flake8-commas
+    "S", # flake8-bandit
+    "EM",#flake8-errmsg
+    "EXE", # flake8-executable
+    "ICN", # flake8-import-conventions
+    "RET", #flake8-return
+    "TCH", # flake8-type-checking
+    "PTH", #pathlibを使わないコードが多いので、除外する
+    "ISC", #flake8-implicit-str-concat
+    "N", # pep8-naming
+    "PT", # flake8-pytest-style
+]
+
+select = [
+    "ALL"
+]
+
+[tool.ruff.lint.per-file-ignores]
+# テストコードはチェックを緩和する
+"tests/**.py" = [
+    "PGH",  # pygrep-hooks
+    "DTZ",  # flake8-datetimez
+    "ANN",  # flake8-annotations
+    "E501",  # line-too-long
+    "RUF100",  # unused-noqa
+    "G004", # logging-f-string
+    "SIM", #flake8-simplify
+    "PLC2401", # non-ascii-name, メソッド名に日本語を利用するため
+    "RUF059", # unused-unpacked-variable
+]
+
+
+# 以下のファイルは自動生成されるので、いくかのルールを無視する
+"annofabapi/generated*.py" = [
+    "A002",  # builtin-argument-shadowing
+    "ANN401", # any-type
+    "E501", # line-too-long
+    "W293",  # blank-line-with-whitespace
+    "W291", # trailing-whitespace
+]
+"annofabapi/models.py" = [
+    "A002",  # builtin-argument-shadowing
+    "ANN401", # any-type
+    "E501", # line-too-long
+    "W293",  # blank-line-with-whitespace
+    "W291", # trailing-whitespace
+]
+
+# "annofabapi/pydantic_models/*.py" = ["ALL"]
+
+"annofabapi/pydantic_models/*.py" = [
+    "A",  # flake8-builtins
+    "E501", # line-too-long
+    # "W293",  # blank-line-with-whitespace
+    # "W291", # trailing-whitespace
+    "UP007", # non-pep604-annotation-union
+    "UP006", # non-pep585-annotation
+    "UP035", #  deprecated-import
+    "E402", # module-level-imports
+    "C4",  # nnecessary-literal-set
+    "F841",
+    "ANN",  # flake8-annotations
+    "PLR",  # Pylint Refactor
+    "PERF",  # Perflint
+    "F811",  # redefined-while-unused
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"

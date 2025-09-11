@@ -1,0 +1,12 @@
+{
+    "terminal.integrated.allowChords": false, // terminal上でEmacsキーバインドを使うための設定
+    "python.languageServer": "Pylance",
+    "python.analysis.completeFunctionParens": true,
+    "python.testing.autoTestDiscoverOnSaveEnabled": false,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+
+}
