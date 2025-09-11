@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+CachedJWKSVerifier=swarmauri_middleware_jwksverifier:CachedJWKSVerifier
+
