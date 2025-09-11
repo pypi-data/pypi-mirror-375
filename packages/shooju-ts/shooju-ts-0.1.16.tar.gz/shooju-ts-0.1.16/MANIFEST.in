@@ -1,0 +1,11 @@
+include README.rst
+include MANIFEST.in
+include setup.py
+include tests/tests.py
+include tests/sample.json
+include lib/*.c
+include lib/*.h
+include python/*.c
+include python/*.h
+include sjts/*.c
+include sjts/*.h
