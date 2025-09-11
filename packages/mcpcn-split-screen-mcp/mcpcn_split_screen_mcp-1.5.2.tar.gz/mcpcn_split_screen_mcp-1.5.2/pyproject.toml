@@ -1,0 +1,53 @@
+[project]
+name = "mcpcn-split-screen-mcp"
+version = "1.5.2"
+description = "Model Context Protocol Server via Cross-Platform (Mac & Windows) Split Screen Functions"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Beta"}
+]
+license = {file = "LICENSE"}
+keywords = ["mcp", "split-screen", "window-management", "tiling", "windows", "macos", "cross-platform", "desktop-productivity", "pywin32"]
+dependencies = [
+    "mcp>=0.1.0",
+    
+    # Windows-only (only installed when sys_platform == "win32")
+    'pywin32>=306; sys_platform == "win32"',
+    
+    # macOS-only (only installed when sys_platform == "darwin")
+    'pyobjc-core>=10.1,<11; sys_platform == "darwin"',
+    'pyobjc-framework-Cocoa>=10.1,<11; sys_platform == "darwin"',
+    'pyobjc-framework-Quartz>=10.1,<11; sys_platform == "darwin"',
+    'pyobjc-framework-ApplicationServices>=10.1,<11; sys_platform == "darwin"'
+]
+
+[project.urls]
+Homepage = "https://github.com/Beta0415/computer-split-screen-mcp"
+Repository = "https://github.com/Beta0415/computer-split-screen-mcp"
+Documentation = "https://github.com/Beta0415/computer-split-screen-mcp#readme"
+Issues = "https://github.com/Beta0415/computer-split-screen-mcp/issues"
+
+[project.scripts]
+computer-split-screen-mcp = "splitscreen_mcp.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/splitscreen_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src/splitscreen_mcp/**/*.py",
+    "/README.md",
+    "/LICENSE",
+    "/pyproject.toml"
+]
+
+[dependency-groups]
+dev = [
+    "build>=1.3.0",
+    "twine>=6.1.0",
+]
