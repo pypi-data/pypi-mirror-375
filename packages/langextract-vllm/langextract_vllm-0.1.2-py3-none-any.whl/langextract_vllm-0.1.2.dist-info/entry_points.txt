@@ -1,0 +1,5 @@
+[console_scripts]
+langextract-vllm-test = langextract_vllm.test:main
+
+[langextract.providers]
+vllm = langextract_vllm.provider:VLLMLanguageModel
