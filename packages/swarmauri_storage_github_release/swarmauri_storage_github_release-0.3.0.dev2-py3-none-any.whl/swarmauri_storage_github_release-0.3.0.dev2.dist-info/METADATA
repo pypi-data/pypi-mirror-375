@@ -1,0 +1,48 @@
+Metadata-Version: 2.3
+Name: swarmauri_storage_github_release
+Version: 0.3.0.dev2
+Summary: GitHub Release storage adapter for Peagen
+License: Apache-2.0
+Author: Jacob Stewart
+Author-email: jacob@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Requires-Dist: PyGithub
+Requires-Dist: peagen
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_standard
+Description-Content-Type: text/markdown
+
+# Swarmauri GitHub Release Storage Adapter
+
+Stores artifacts as assets on a GitHub release for use with Peagen.
+
+## Installation
+
+```bash
+# pip install swarmauri_storage_github_release (when published)
+```
+
+## Usage
+
+```python
+from swarmauri_storage_github_release import GithubReleaseStorageAdapter
+from pydantic import SecretStr
+import io
+
+adapter = GithubReleaseStorageAdapter(
+    token=SecretStr("ghp_..."),
+    org="my-org",
+    repo="my-repo",
+    tag="v1.0.0",
+)
+uri = adapter.upload("artifact.txt", io.BytesIO(b"data"))
+print(uri)
+```
+
