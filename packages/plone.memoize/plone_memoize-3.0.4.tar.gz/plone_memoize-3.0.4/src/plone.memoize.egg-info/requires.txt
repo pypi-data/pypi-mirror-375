@@ -1,0 +1,11 @@
+setuptools
+zope.annotation
+zope.component
+zope.globalrequest
+zope.interface
+zope.ramcache
+
+[test]
+zope.configuration
+zope.publisher
+zope.testing
