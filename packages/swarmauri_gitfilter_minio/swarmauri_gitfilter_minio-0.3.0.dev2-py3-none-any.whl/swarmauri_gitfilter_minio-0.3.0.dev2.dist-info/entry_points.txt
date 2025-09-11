@@ -1,0 +1,6 @@
+[peagen.plugins.git_filters]
+minio=swarmauri_gitfilter_minio.minio_filter:MinioFilter
+
+[swarmauri.git_filters]
+MinioFilter=swarmauri_gitfilter_minio.minio_filter:MinioFilter
+
