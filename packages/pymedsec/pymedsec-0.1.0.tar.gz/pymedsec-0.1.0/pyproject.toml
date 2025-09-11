@@ -1,0 +1,160 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pymedsec"
+version = "0.1.0"
+description = "HIPAA/GDPR-ready medical image sanitization and encryption library with blockchain audit anchoring"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "PyMedSec Contributors", email = "opensource@pymedsec.org"}
+]
+maintainers = [
+    {name = "PyMedSec Development Team", email = "dev@pymedsec.org"}
+]
+keywords = ["medical", "imaging", "security", "hipaa", "gdpr", "encryption", "dicom", "blockchain"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "cryptography>=41.0.0",
+    "pydicom>=2.3.0",
+    "Pillow>=9.0.0",
+    "python-dateutil>=2.8.0",
+    "pyyaml>=6.0",
+    "click>=8.0.0",
+    "numpy>=1.20.0",
+    "importlib-resources>=5.0.0; python_version<'3.9'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "build>=0.10.0",
+    "twine>=4.0.0",
+    "safety>=2.3.0",
+    "bandit[toml]>=1.7.0",
+    "pre-commit>=3.0.0",
+]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.3.0",
+    "myst-parser>=2.0.0",
+    "sphinx-autodoc-typehints>=1.23.0",
+    "sphinx-copybutton>=0.5.0",
+]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+all = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytesseract>=0.3.0",
+    "boto3>=1.26.0",
+    "hvac>=1.0.0",
+    "web3>=6.0.0",
+]
+ocr = [
+    "pytesseract>=0.3.0",
+]
+aws = [
+    "boto3>=1.26.0",
+]
+vault = [
+    "hvac>=1.0.0",
+]
+blockchain = [
+    "web3>=6.0.0",
+]
+
+[project.scripts]
+pymedsec = "pymedsec.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Faerque/pymedsec"
+Documentation = "https://pymedsec.readthedocs.io/"
+Repository = "https://github.com/Faerque/pymedsec.git"
+Issues = "https://github.com/Faerque/pymedsec/issues"
+Security = "https://github.com/Faerque/pymedsec/security/policy"
+Changelog = "https://github.com/Faerque/pymedsec/blob/main/CHANGELOG.md"
+"Source Code" = "https://github.com/Faerque/pymedsec"
+
+[tool.setuptools.packages.find]
+include = ["pymedsec*"]
+
+[tool.setuptools.package-data]
+pymedsec = ["py.typed", "policies/*.yaml"]
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["pymedsec"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs"]
+skips = ["B101", "B601", "B603", "B607", "B608", "B324"]  # Skip common dev/test issues
+
+[tool.flake8]
+max-line-length = 120
+ignore = ["E203", "W503", "F401", "F541", "E501", "F841", "W291", "W293"]
+per-file-ignores = [
+    "__init__.py:F401",
+    "tests/*:F401,F841,E501,W291,W293",
+    "*/conftest.py:E501"
+]
+exclude = [
+    ".git",
+    "__pycache__", 
+    ".pytest_cache",
+    "build",
+    "dist",
+    "*.egg-info"
+]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
