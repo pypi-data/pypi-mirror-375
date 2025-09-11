@@ -1,0 +1,19 @@
+Metadata-Version: 2.3
+Name: vy-lambda-tools
+Version: 0.5.1
+Summary: 
+Author: Nicolas Harlem Eide
+Author-email: nicolas@harlemeide.net
+Requires-Python: >=3.12,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: aws-lambda-powertools (>=3.20.0,<4.0.0)
+Requires-Dist: boto3 (>=1.40.26,<2.0.0)
+Requires-Dist: boto3-stubs[dynamodb,ssm] (>=1.40.27,<2.0.0)
+Requires-Dist: python-json-logger (>=3.3.0,<4.0.0)
+Description-Content-Type: text/plain
+
+= Vy Lambda Tools
+
+This repo contains the library we use to work with lambdas in Python.
