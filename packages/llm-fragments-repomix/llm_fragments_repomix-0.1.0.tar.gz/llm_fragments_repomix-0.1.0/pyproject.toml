@@ -1,0 +1,26 @@
+[project]
+name = "llm-fragments-repomix"
+version = "0.1.0"
+description = "Load repository contents as LLM fragments using Repomix"
+readme = "README.md"
+authors = [{name = "Amolith"}]
+license = "Apache-2.0"
+requires-python = ">=3.9"
+dependencies = [
+    "llm"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://git.sr.ht/~amolith/llm-fragments-repomix"
+Changelog = "https://git.sr.ht/~amolith/llm-fragments-repomix/refs"
+Issues = "https://todo.sr.ht/~amolith/public-tracker"
+
+[project.entry-points.llm]
+fragments_repomix = "llm_fragments_repomix"
+
+[project.optional-dependencies]
+test = ["pytest"]
