@@ -1,0 +1,12 @@
+# PoC mode settings
+poc:
+  # Data settings for CIFAR10
+  data_cache_dir: "./.data_cache"
+  partition_method: "hetero"
+  partition_alpha: 10.
+  random_seed: 42
+
+  optimizer: "dsgd"
+
+  # Number of clients to launch
+  worker_num: 2
