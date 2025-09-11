@@ -1,0 +1,22 @@
+[project]
+name = "keyvault-env"
+version = "1.0.5"
+description = "Upload secrets from a .env file to Azure Key Vault and fetch them easily."
+readme = "README.md"
+authors = [
+  { name = "Hrishikesh Kalola", email = "hackathon.hrishi@gmail.com" },
+  { name = "Dhiraj Kumar", email = "salesforce.dhiraj@gmail.com" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = [
+  "azure-identity>=1.12.0",
+  "azure-keyvault-secrets>=4.6.0",
+  "python-dotenv>=1.0.0"
+]
+
+[project.urls]
+Dhiraj-LinkedIn = "https://www.linkedin.com/in/ai-dhiraj/"
+Dhiraj-Github = "https://github.com/airanger-paperchase"
+Hrishikesh-LinkedIn = "https://www.linkedin.com/in/hrishk/"
+Hrishikesh-GitHub = "https://github.com/hrishi-008"
