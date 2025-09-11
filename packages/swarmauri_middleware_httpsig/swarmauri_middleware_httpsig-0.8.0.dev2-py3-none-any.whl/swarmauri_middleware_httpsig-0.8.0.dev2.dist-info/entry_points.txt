@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+HttpSigMiddleware=swarmauri_middleware_httpsig:HttpSigMiddleware
+
