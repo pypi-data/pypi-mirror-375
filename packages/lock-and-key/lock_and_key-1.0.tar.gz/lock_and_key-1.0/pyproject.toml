@@ -1,0 +1,119 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lock-and-key"
+dynamic = ["version"]
+description = "Comprehensive cloud security scanner for IAM and resource-based policies"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "WinterShadow", email = "wolf@cyberwolf.dev" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "boto3",
+  "pydantic",
+  "click",
+  "rich"
+]
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "flake8", 
+  "isort",
+  "mypy",
+  "boto3-stubs",
+  "mypy-boto3-iam",
+  "mypy-boto3-s3",
+  "mypy-boto3-sts",
+  "mypy-boto3-lambda",
+  "mypy-boto3-dynamodb",
+  "mypy-boto3-sns",
+  "mypy-boto3-sqs",
+  "mypy-boto3-glue",
+  "pytest",
+  "coverage[toml]>=6.5"
+]
+
+[project.scripts]
+lock-and-key = "lock_and_key.cli:cli"
+
+[project.urls]
+Documentation = "https://github.com/WinterShadow/lock-and-key#readme"
+Issues = "https://github.com/WinterShadow/lock-and-key/issues"
+Source = "https://github.com/WinterShadow/lock-and-key"
+
+[tool.hatch.version]
+path = "lock_and_key/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "coverage[toml]>=6.5",
+  "pytest",
+]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
+]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13"]
+
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:lock_and_key tests}"
+
+[tool.coverage.run]
+source_pkgs = ["lock_and_key", "tests"]
+branch = true
+parallel = true
+omit = [
+  "lock_and_key/__about__.py",
+]
+
+[tool.coverage.paths]
+lock_and_key = ["lock_and_key", "*/lock-and-key/lock_and_key"]
+tests = ["tests", "*/lock-and-key/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true

@@ -1,0 +1,11 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+dist
+build
+.eggs
+*.egg-info
+tests/__pycache__
+lock_and_key/__pycache__
