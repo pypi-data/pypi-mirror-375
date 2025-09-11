@@ -1,0 +1,2 @@
+[console_scripts]
+endnote-xml-export = endnote_exporter.cli:main
