@@ -1,0 +1,6 @@
+[peagen.plugins.mre_cryptos]
+ecdh_es_a128kw=swarmauri_mre_crypto_ecdh_es_kw:EcdhEsA128KwMreCrypto
+
+[swarmauri.mre_cryptos]
+EcdhEsA128KwMreCrypto=swarmauri_mre_crypto_ecdh_es_kw:EcdhEsA128KwMreCrypto
+
