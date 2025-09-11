@@ -1,0 +1,15 @@
+python-dateutil
+setuptools
+zope.component
+zope.interface
+zope.schema
+
+[supermodel]
+plone.supermodel
+
+[test]
+plone.testing
+plone.supermodel
+zope.annotation
+zope.configuration
+persistent
