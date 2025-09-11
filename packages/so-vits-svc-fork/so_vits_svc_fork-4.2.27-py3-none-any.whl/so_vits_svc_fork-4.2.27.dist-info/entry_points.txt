@@ -1,0 +1,3 @@
+[console_scripts]
+svc = so_vits_svc_fork.__main__:cli
+svcg = so_vits_svc_fork.gui:main
