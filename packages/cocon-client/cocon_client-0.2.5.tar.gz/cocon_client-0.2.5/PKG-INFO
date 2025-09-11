@@ -1,0 +1,368 @@
+Metadata-Version: 2.4
+Name: cocon_client
+Version: 0.2.5
+Summary: Async client for Televic CoCon conference API
+Project-URL: Homepage, https://github.com/3P-Technologies/cocon_client
+Project-URL: Issues, https://github.com/3P-Technologies/cocon_client/issues
+Project-URL: Source, https://github.com/3P-Technologies/cocon_client
+Project-URL: Commercial License, https://www.trepi.it/en/contacts/
+License: Copyright (C) 2025 3P Technologies S.r.l.
+        
+        This project is dual-licensed. By obtaining, using, modifying, or
+        distributing this software, you must choose one of the following two
+        licensing options and comply fully with its terms:
+        
+        1. Open Source License
+           -------------------
+           This software is licensed under the GNU Lesser General Public License
+           version 3.0 or (at your option) any later version ("LGPL-3.0-or-later").
+        
+           A copy of the full license text is provided below and is also available at:
+           https://www.gnu.org/licenses/lgpl-3.0.html
+        
+           SPDX-License-Identifier: LGPL-3.0-or-later
+        
+           Under this option:
+           - You may use, link, and distribute the software in open-source or
+             proprietary projects, provided you comply with all LGPL terms.
+           - Any modifications you make to this library itself must be released under
+             the LGPL-3.0-or-later (or a compatible license).
+        
+        
+        2. Commercial License
+           ------------------
+           As an alternative to the LGPL-3.0-or-later license, this software is
+           available under a commercial license agreement granted by the copyright
+           holder. The commercial license is a separate, negotiated contract.
+        
+           The commercial license provides, but is not limited to, rights such as:
+           - Use of this software in closed-source projects without copyleft
+             obligations
+           - Keeping modifications private without publishing source code
+           - Custom licensing terms tailored to organizational or product needs
+           - Optional support, maintenance, or warranty terms
+        
+           To obtain a commercial license, you must enter into a written agreement
+           with the copyright holder. Contact:
+        
+               3P Technologies S.r.l.
+               contact@trepi.it
+               www.trepi.it
+        
+        
+        --- Full LGPL-3.0-or-later license follows ---
+        
+        GNU LESSER GENERAL PUBLIC LICENSE
+                               Version 3, 29 June 2007
+        
+         Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+         Everyone is permitted to copy and distribute verbatim copies
+         of this license document, but changing it is not allowed.
+        
+        
+          This version of the GNU Lesser General Public License incorporates
+        the terms and conditions of version 3 of the GNU General Public
+        License, supplemented by the additional permissions listed below.
+        
+          0. Additional Definitions.
+        
+          As used herein, "this License" refers to version 3 of the GNU Lesser
+        General Public License, and the "GNU GPL" refers to version 3 of the GNU
+        General Public License.
+        
+          "The Library" refers to a covered work governed by this License,
+        other than an Application or a Combined Work as defined below.
+        
+          An "Application" is any work that makes use of an interface provided
+        by the Library, but which is not otherwise based on the Library.
+        Defining a subclass of a class defined by the Library is deemed a mode
+        of using an interface provided by the Library.
+        
+          A "Combined Work" is a work produced by combining or linking an
+        Application with the Library.  The particular version of the Library
+        with which the Combined Work was made is also called the "Linked
+        Version".
+        
+          The "Minimal Corresponding Source" for a Combined Work means the
+        Corresponding Source for the Combined Work, excluding any source code
+        for portions of the Combined Work that, considered in isolation, are
+        based on the Application, and not on the Linked Version.
+        
+          The "Corresponding Application Code" for a Combined Work means the
+        object code and/or source code for the Application, including any data
+        and utility programs needed for reproducing the Combined Work from the
+        Application, but excluding the System Libraries of the Combined Work.
+        
+          1. Exception to Section 3 of the GNU GPL.
+        
+          You may convey a covered work under sections 3 and 4 of this License
+        without being bound by section 3 of the GNU GPL.
+        
+          2. Conveying Modified Versions.
+        
+          If you modify a copy of the Library, and, in your modifications, a
+        facility refers to a function or data to be supplied by an Application
+        that uses the facility (other than as an argument passed when the
+        facility is invoked), then you may convey a copy of the modified
+        version:
+        
+           a) under this License, provided that you make a good faith effort to
+           ensure that, in the event an Application does not supply the
+           function or data, the facility still operates, and performs
+           whatever part of its purpose remains meaningful, or
+        
+           b) under the GNU GPL, with none of the additional permissions of
+           this License applicable to that copy.
+        
+          3. Object Code Incorporating Material from Library Header Files.
+        
+          The object code form of an Application may incorporate material from
+        a header file that is part of the Library.  You may convey such object
+        code under terms of your choice, provided that, if the incorporated
+        material is not limited to numerical parameters, data structure
+        layouts and accessors, or small macros, inline functions and templates
+        (ten or fewer lines in length), you do both of the following:
+        
+           a) Give prominent notice with each copy of the object code that the
+           Library is used in it and that the Library and its use are
+           covered by this License.
+        
+           b) Accompany the object code with a copy of the GNU GPL and this license
+           document.
+        
+          4. Combined Works.
+        
+          You may convey a Combined Work under terms of your choice that,
+        taken together, effectively do not restrict modification of the
+        portions of the Library contained in the Combined Work and reverse
+        engineering for debugging such modifications, if you also do each of
+        the following:
+        
+           a) Give prominent notice with each copy of the Combined Work that
+           the Library is used in it and that the Library and its use are
+           covered by this License.
+        
+           b) Accompany the Combined Work with a copy of the GNU GPL and this license
+           document.
+        
+           c) For a Combined Work that displays copyright notices during
+           execution, include the copyright notice for the Library among
+           these notices, as well as a reference directing the user to the
+           copies of the GNU GPL and this license document.
+        
+           d) Do one of the following:
+        
+               0) Convey the Minimal Corresponding Source under the terms of this
+               License, and the Corresponding Application Code in a form
+               suitable for, and under terms that permit, the user to
+               recombine or relink the Application with a modified version of
+               the Linked Version to produce a modified Combined Work, in the
+               manner specified by section 6 of the GNU GPL for conveying
+               Corresponding Source.
+        
+               1) Use a suitable shared library mechanism for linking with the
+               Library.  A suitable mechanism is one that (a) uses at run time
+               a copy of the Library already present on the user's computer
+               system, and (b) will operate properly with a modified version
+               of the Library that is interface-compatible with the Linked
+               Version.
+        
+           e) Provide Installation Information, but only if you would otherwise
+           be required to provide such information under section 6 of the
+           GNU GPL, and only to the extent that such information is
+           necessary to install and execute a modified version of the
+           Combined Work produced by recombining or relinking the
+           Application with a modified version of the Linked Version. (If
+           you use option 4d0, the Installation Information must accompany
+           the Minimal Corresponding Source and Corresponding Application
+           Code. If you use option 4d1, you must provide the Installation
+           Information in the manner specified by section 6 of the GNU GPL
+           for conveying Corresponding Source.)
+        
+          5. Combined Libraries.
+        
+          You may place library facilities that are a work based on the
+        Library side by side in a single library together with other library
+        facilities that are not Applications and are not covered by this
+        License, and convey such a combined library under terms of your
+        choice, if you do both of the following:
+        
+           a) Accompany the combined library with a copy of the same work based
+           on the Library, uncombined with any other library facilities,
+           conveyed under the terms of this License.
+        
+           b) Give prominent notice with the combined library that part of it
+           is a work based on the Library, and explaining where to find the
+           accompanying uncombined form of the same work.
+        
+          6. Revised Versions of the GNU Lesser General Public License.
+        
+          The Free Software Foundation may publish revised and/or new versions
+        of the GNU Lesser General Public License from time to time. Such new
+        versions will be similar in spirit to the present version, but may
+        differ in detail to address new problems or concerns.
+        
+          Each version is given a distinguishing version number. If the
+        Library as you received it specifies that a certain numbered version
+        of the GNU Lesser General Public License "or any later version"
+        applies to it, you have the option of following the terms and
+        conditions either of that published version or of any later version
+        published by the Free Software Foundation. If the Library as you
+        received it does not specify a version number of the GNU Lesser
+        General Public License, you may choose any version of the GNU Lesser
+        General Public License ever published by the Free Software Foundation.
+        
+          If the Library as you received it specifies that a proxy can decide
+        whether future versions of the GNU Lesser General Public License shall
+        apply, that proxy's public statement of acceptance of any version is
+        permanent authorization for you to choose that version for the
+        Library.
+License-File: AUTHORS.md
+License-File: LICENSE
+License-File: NOTICE.md
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Typing :: Typed
+Requires-Python: >=3.11
+Requires-Dist: aiohttp
+Description-Content-Type: text/markdown
+
+[![release](https://github.com/MarcoMiano/cocon_client/actions/workflows/release.yml/badge.svg)](https://github.com/MarcoMiano/cocon_client/actions/workflows/release.yml)
+# Televic CoCon Client
+
+> An asynchronous Python client for interacting with the Televic CoCon REST API.
+
+This library provides a type-safe interface for communicating with a Televic CoCon
+server. It supports long-polling for event notifications, command dispatching with
+automatic retries and clean shutdown of background tasks.
+
+---
+
+## ✨ Features
+
+- Async-friendly with `async with` support
+- Long-polling notification handling
+- Automatic command retries with exponential backoff
+- Configurable behaviour (timeouts, polling interval, retries)
+- Typed and documented public API
+- Minimal external dependencies
+
+---
+
+## 📦 Installation
+
+The project requires **Python 3.11+**.
+
+```bash
+pip install cocon_client
+```
+
+To work on the library locally:
+
+```bash
+git clone https://github.com/MarcoMiano/cocon_client.git
+cd cocon_client
+pip install -e .
+```
+
+---
+
+## 🚀 Usage
+
+### Creating a client and subscribing to models
+
+```python
+import asyncio
+from cocon_client import CoConClient, Model
+
+async def handle_notification(data: dict) -> None:
+    print("Received:", data)
+
+async def main() -> None:
+    async with CoConClient("192.168.1.100", handler=handle_notification) as client:
+        await client.subscribe([Model.DELEGATE, Model.MICROPHONE])
+        await asyncio.sleep(10)
+
+asyncio.run(main())
+```
+
+### Sending commands
+
+Commands are queued and retried automatically:
+
+```python
+response = await client.send("SomeCommand", {"param": "value"})
+```
+
+### Parsing raw notifications
+
+The helper `parse_notification` converts raw payloads into typed data classes
+defined in `parser.py`:
+
+```python
+from cocon_client import parse_notification, Delegates
+
+async def handle_notification(data: dict) -> None:
+    model = parse_notification(data)
+    if isinstance(model, Delegates):
+        print("Delegates:", model.delegates)
+```
+
+---
+
+## ⚙️ Configuration
+
+You can override default behaviour using the `Config` dataclass:
+
+```python
+from cocon_client import Config, CoConClient
+
+custom_config = Config(
+    poll_interval=2.0,
+    max_retries=10,
+    session_timeout=10.0,
+)
+
+client = CoConClient("host", config=custom_config)
+```
+
+---
+
+## 🧰 Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on how to report issues,
+submit patches, and extend the parser with new models.  
+By contributing, you agree to the dual-licensing model (LGPL-3.0-or-later or
+Commercial) described in the contributing guidelines.
+
+---
+
+## 📄 License
+
+This project is dual-licensed:
+
+- **Open Source License:**  
+  GNU Lesser General Public License v3.0 or later (LGPL-3.0-or-later).  
+  See [LICENSE](./LICENSE) for the full license text.
+
+- **Commercial License:**  
+  Available for organizations that cannot, or prefer not to, comply with LGPL
+  terms. This option allows use in closed-source projects under custom terms.  
+  Contact **3P Technologies S.r.l.** at **contact@trepi.it / www.trepi.it**
+  for details.
+
+---
+
+## Disclaimer
+
+See [NOTICE.md](NOTICE.md) for disclaimers regarding Televic CoCon.
+
+---
+
+## 🛠 Maintainers
+
+Developed and maintained by **3P Technologies Srl**.

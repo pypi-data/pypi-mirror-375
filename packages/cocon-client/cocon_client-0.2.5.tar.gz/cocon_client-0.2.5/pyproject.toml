@@ -1,0 +1,52 @@
+# pyproject.toml (PEP 621 layout)
+[build-system]
+requires = [
+    "hatchling>=1.27",
+    "hatch-vcs>=0.5.0"
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "cocon_client"
+description = "Async client for Televic CoCon conference API"
+readme = { file = "README.md", content-type = "text/markdown" }
+dynamic = ["version"]
+requires-python = ">=3.11"
+dependencies = ["aiohttp"]
+license = { file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/3P-Technologies/cocon_client"
+Issues = "https://github.com/3P-Technologies/cocon_client/issues"
+Source = "https://github.com/3P-Technologies/cocon_client"
+"Commercial License" = "https://www.trepi.it/en/contacts/"
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "cocon_client/_version.py"
+fallback-version = "0.0.0"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cocon_client"]
+include = ["cocon_client/py.typed"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "cocon_client",
+    "README.md",
+    "pyproject.toml",
+    "LICENSE*", 
+    "AUTHORS.md",
+    "CONTRIBUTING.md",
+    "NOTICE.md",
+    ]
