@@ -1,0 +1,62 @@
+Metadata-Version: 2.4
+Name: python-geotiepoints
+Version: 1.8.0
+Summary: Interpolation of geographic tiepoints in Python
+Home-page: https://github.com/pytroll/python-geotiepoints
+Author: Adam Dybbroe, Martin Raspaud
+Author-email: martin.raspaud@smhi.se
+License: GPL-3.0-or-later
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Cython
+Classifier: Topic :: Scientific/Engineering
+Classifier: Programming Language :: Python :: Free Threading :: 1 - Unstable
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: pandas
+Provides-Extra: tests
+Requires-Dist: pytest; extra == "tests"
+Requires-Dist: pytest-cov; extra == "tests"
+Requires-Dist: h5py; extra == "tests"
+Requires-Dist: xarray; extra == "tests"
+Requires-Dist: dask[array]; extra == "tests"
+Requires-Dist: pyproj; extra == "tests"
+Requires-Dist: pyresample; extra == "tests"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+python-geotiepoints
+===================
+
+[![Build Status](https://github.com/pytroll/python-geotiepoints/workflows/CI/badge.svg?branch=main)](https://github.com/pytroll/python-geotiepoints/actions?query=workflow%3A%22CI%22)
+[![Coverage Status](https://coveralls.io/repos/github/pytroll/python-geotiepoints/badge.svg?branch=main)](https://coveralls.io/github/pytroll/python-geotiepoints?branch=main)
+
+
+Python-geotiepoints is a python module that interpolates (and extrapolates if
+needed) geographical tiepoints into a larger geographical grid. This is usefull
+when the full resolution lon/lat grid is needed while only a lower resolution
+grid of tiepoints was provided.
+
+Some helper functions are provided to accomodate for satellite data, but the
+package should be generic enough to be used for any kind of data.
+
+In addition we have added a fast multilinear interpolation of regular gridded
+data using Cython.
+
+Adam & Martin
+May 2017, NorrkÃ¶ping, Sweden
