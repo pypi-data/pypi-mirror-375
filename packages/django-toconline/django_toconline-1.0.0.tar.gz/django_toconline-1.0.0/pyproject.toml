@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "django-toconline"
+version = "1.0.0"
+description = "Django integration for the TOC Online API"
+authors = ["Daniel Pinto <dmp593@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/dmp593/django-toconline"
+readme = "README.md"
+package-mode = true
+keywords = ["Django", "TOC Online", "API"]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Application Frameworks"
+]
+
+packages = [
+    { include = "toconline/**/*.py" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
