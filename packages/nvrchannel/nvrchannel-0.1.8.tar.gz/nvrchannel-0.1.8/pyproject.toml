@@ -1,0 +1,46 @@
+[project]
+name = "NVRChannel"
+version = "0.1.8"
+requires-python = ">=3.10,<4.0"
+
+
+license = "MIT"
+authors = [{ name = "Daniel Dunn" }]
+readme = "README.md"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+]
+
+dependencies = [
+        "opencv-python",
+        "Pillow",
+        "icemedia",
+        "scullery",
+        "zeep",
+        "huggingface-hub",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.14,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+wheel-exclude = ["*.dev.excalidraw.svg", "**/.ruff_cache"]
+module-root=""
+module-name=["NVRChannel"]
+
+
+
+[tool.ruff]
+line-length = 80
+target-version = "py311"
+
+
+[tool.coverage.run]
+# omit the deprecated old file and system gstreamer
+omit = ["*/thirdparty/*", "*/selftest/*", "/usr/lib/**","**/.mypy_cache"]
+sigterm = true
+
+[tool.coverage.report]
+exclude_also = ["if TYPE_CHECKING"]
+
