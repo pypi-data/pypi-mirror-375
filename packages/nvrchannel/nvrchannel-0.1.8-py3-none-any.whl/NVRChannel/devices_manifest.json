@@ -1,0 +1,8 @@
+{
+    "devices": {
+        "NVRChannel": {
+            "submodule": "NVRChannel",
+            "description": "NVR support for live streaming, recording, and live video analytics. Supports rtsp://, file://x.jpg, webcam, and screen(xorg only)"
+        }
+    }
+}
