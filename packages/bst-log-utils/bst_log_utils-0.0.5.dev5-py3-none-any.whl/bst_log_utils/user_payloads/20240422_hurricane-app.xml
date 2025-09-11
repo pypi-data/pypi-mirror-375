@@ -1,0 +1,628 @@
+<App>
+  <PayloadDataList>
+  <!-- Hurricane Controller Overview -->
+   <Channel>
+      <Number>0</Number>
+      <Action>STATUS</Action>
+      <Fields>
+         <Field>
+            <name>Controller Type</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+                        <note>      Controller Types:
+                        0=None
+                        1=Heading Hold
+                        2=Eyewall Tracking
+                        3=Inflow
+                        4=Center Fix</note>
+         </Field>
+         <Field>
+            <name>Controller Status</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+						<note>      Controller status:  
+                        0=Deactivated
+                        1=Stopped
+                        2=Running</note>
+         </Field> 
+         <Field>
+            <name>Nav Mode</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Navigation Mode:
+                        h=Heading
+                        w=Waypoint
+                        i=Invalid</note>
+         </Field>     
+         <Field>
+            <name>Aircraft Heading</name>
+            <unit>OTHER</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current aircraft heading (degrees True)</note>
+         </Field> 
+         <Field>
+            <name>Command Heading</name>
+            <unit>OTHER</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current commanded heading (degrees True)</note>
+         </Field>  
+         <Field>
+            <name>Aircraft Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current aircraft altitude (meters)</note>
+         </Field> 
+         <Field>
+            <name>Command Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current commanded altitude (meters)</note>
+         </Field> 
+      </Fields>
+   </Channel>
+   
+   <!-- Heading Hold Control -->  
+   <Channel>
+      <Number>1</Number>
+      <Action>COMMAND</Action>
+      <Fields>
+         <Field>
+            <name>Heading Controller Status</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+						<note>      Set controller status:  
+                        0=deactivate hurricane control
+                        2=start</note>
+         </Field><Field>
+            <name>Command Heading</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Set Command Heading (degrees True)</note>
+         </Field>  
+         <Field>
+            <name>Command Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Set Command Altitude (meters)</note>
+         </Field>    
+      </Fields>
+   </Channel>
+
+   <!-- Eyewall Tracking Telemetry -->  
+   <Channel>
+      <Number>2</Number>
+      <Action>STATUS</Action>
+      <Fields>
+         <Field>
+            <name>Eyewall Tracker Status</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+						<note>      Controller status:  
+                        0=Deactivated
+                        1=Stopped
+                        2=Running</note>
+         </Field>
+         <Field>
+            <name>Eyewall Tracker Algorithm</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Eyewall Tracking Algorithm:
+                        a=Alignment
+                        z=Left/Right</note>
+         </Field> 
+         <Field>
+            <name>Eyewall Tracker Mode</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Controller Mode:
+                        i=Intercepting
+                        t=Tracking</note>
+         </Field> 
+         <Field>
+            <name>Leg Direction</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Current Leg Direction:
+                        l=Left
+                        r=Right</note>
+         </Field>     
+         <Field>
+            <name>Aircraft Heading</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Aircraft Heading (Degrees True)</note>
+         </Field> 
+         <Field>
+            <name>Command Heading</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Commanded Heading (Degrees True)</note>
+         </Field>
+         <Field>
+            <name>Aircraft Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current aircraft altitude (meters)</note>
+         </Field> 
+         <Field>
+            <name>Command Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current commanded altitude (meters)</note>
+         </Field>
+         <Field>
+            <name>Wind Direction</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Wind Direction -- Going To (Degrees True)</note>
+         </Field> 
+         <Field>
+            <name>Wind Speed</name>
+            <unit>METERS_PER_SECOND</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Windspeed</note>
+         </Field>
+         <Field>
+            <name>Decreasing Wind Trend</name>
+            <unit>OTHER</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Percentage of measured decreases
+                        in windspeed over wind trend length</note>
+         </Field>  
+         <Field>
+            <name>Outer Loop Timer</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Outer Loop Timer</note>
+         </Field> 
+      </Fields>
+   </Channel> 
+   
+   <!-- Eyewall Tracking Control -->  
+   <Channel>
+      <Number>3</Number>
+      <Action>COMMAND</Action>
+      <Fields>
+         <Field>
+            <name>Eyewall Tracker Status</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+						<note>      Set controller status:  
+                        0=deactivate hurricane control
+                        1=stop
+                        2=start</note>
+         </Field>
+         <Field>
+            <name>Eyewall Tracker Algorithm</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Eyewall tracking algorithm:  
+                        a=Alignment
+                        z=Left/Right</note>
+         </Field>
+         <Field>
+            <name>Eyewall Tracker Mode</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Set operating mode:  
+                        i=Intercept Eyewall
+                        t=Track Eyewall</note>
+         </Field>
+         <Field>
+            <name>Leg Direction</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Set leg direction (n/a for Alignment Controller):  
+                        l=Left
+                        r=Right</note>
+         </Field> 
+         <Field>
+            <name>Initial Heading</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Desired heading (degrees True) of the 
+                        initial inbound leg for the center fix pattern</note>
+         </Field>
+         <Field>
+            <name>Pattern Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Altitude at which center 
+                        fix pattern should be flown</note>
+         </Field>
+         <Field>
+            <name>Left Turn Deviation</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Left-Right Controller: Deviation to the 
+                        left of wind direction when 
+                        tracking left across eyewall.  
+                        Alignment Controller: Alignment offset angle.</note>
+         </Field>
+         <Field>
+            <name>Right Turn Deviation</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Left-Right Controller: Deviation to the 
+                        right of wind direction when 
+                        tracking right across eyewall.  
+                        Alignment Controller: n/a.  </note>
+         </Field>
+         <Field>
+            <name>Eyewall Entry Windspeed</name>
+            <unit>METERS_PER_SECOND</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Windspeed below which controller 
+                        will not enter Tracking Mode  </note>
+         </Field>
+         <Field>
+            <name>Heading Adjustment Interval</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Period at which the heading is adjusted during
+                        intercepting and tracking modes.</note>
+         </Field>
+         <Field>
+            <name>Wind Averaging Length</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Length in seconds of sliding window 
+                        averaging of wind measurements</note>
+         </Field>
+         <Field>
+            <name>Wind Trend Length</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Duration over which the controller 
+                        should measure decreasing windspeed 
+                        to identify eyewall passage</note>
+         </Field>
+         <Field>
+            <name>Wind Trend Fraction</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Percentage of decreasing windpseed measurements 
+                        over the wind trend length to 
+                        identify eyewall passage</note>
+         </Field>
+         <Field>
+            <name>Intercept Offset</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Offset in degrees from the wind direction the 
+                        controller uses while intercepting the eyewall</note>
+         </Field>
+         <Field>
+            <name>Time for Turn</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Time in seconds that wind measurements 
+                        should be ignored after a turn to 
+                        allow aircraft to stabilize.</note>
+         </Field>         
+      </Fields>
+   </Channel>
+   
+   <!-- Center Fix Telemetry -->
+   <Channel>
+      <Number>4</Number>
+      <Action>STATUS</Action>
+      <Fields>
+         <Field>
+            <name>Center Finder Status</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+						<note>      Controller status:  
+                        0=Deactivated
+                        1=Stopped
+                        2=Running</note>
+         </Field> 
+         <Field>
+            <name>Nav Mode</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Navigation Mode:
+                        h=Heading
+                        w=Waypoint
+                        i=Invalid</note>
+         </Field>
+         <Field>
+            <name>Leg of Pattern</name>
+            <unit>OTHER</unit>
+            <type>CHAR</type>
+            <size>1</size>
+						<note>      Current leg of the center fix pattern:
+                        i=Inbound
+                        o=Outbound</note>
+         </Field>
+         <Field>
+            <name>Aircraft Heading</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current aircraft heading (degrees True)</note>
+         </Field> 
+         <Field>
+            <name>Command Heading</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current commanded aircraft heading (degrees True)</note>
+         </Field>
+         <Field>
+            <name>Aircraft Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current aircraft altitude (meters)</note>
+         </Field> 
+         <Field>
+            <name>Command Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Current commanded altitude (meters)</note>
+         </Field>
+         <Field>
+            <name>Wind Direction</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Wind direction (degrees True)</note>
+         </Field> 
+         <Field>
+            <name>Leg Initial Wind Direction</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Wind direction at the start of current inbound leg</note>
+         </Field> 
+         <Field>
+            <name>Windspeed</name>
+            <unit>METERS_PER_SECOND</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Windspeed in meters per second</note>
+         </Field>  
+         <Field>
+            <name>Increasing Wind Trend</name>
+            <unit>OTHER</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Percentage of measured decreases
+                        in windspeed over wind trend length</note>
+         </Field>
+         <Field>
+            <name>Leg Low Windspeed</name>
+            <unit>METERS_PER_SECOND</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Lowest measured windspeed for current leg</note>
+         </Field> 
+         <Field>
+            <name>Low Windspeed Longitude</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Longitude of the point where lowest windspeed was measured on this leg</note>
+         </Field>
+         <Field>
+            <name>Low Windspeed Latitude</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Latitude of the point where lowest windspeed was measured on this leg</note>
+         </Field>
+         <Field>
+            <name>Hurricane Center Longitude</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Longitude of the last measured hurricane center</note>
+         </Field>
+         <Field>
+            <name>Hurricane Center Latitude</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Latitude of the last measured hurricane center</note>
+         </Field>
+         
+         <Field>
+            <name>Hurricane Center Time</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Time of the last hurricane center fix</note>
+         </Field>
+         <Field>
+            <name>Outer Loop Timer</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Outer loop timer</note>
+         </Field> 
+         
+      </Fields>
+   </Channel> 
+
+   <!-- Center Fix Control -->
+   <Channel>
+      <Number>5</Number>
+      <Action>COMMAND</Action>
+      <Fields>
+         <Field>
+            <name>Center Finder Status</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+						<note>      Set controller status:  
+                        0=deactivate hurricane control
+                        2=start</note>
+         </Field> 
+         <Field>
+            <name>Hurricane Center Longitude</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Last hurricane center longitude</note>
+         </Field>
+         <Field>
+            <name>Hurricane Center Latitude</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Last hurricane center latitude</note>
+         </Field>
+         <Field>
+            <name>Elapsed Time</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Time elapsed since last estimate of
+                        hurricane center</note>
+         </Field>
+         <Field>
+            <name>Hurricane Direction</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Direction of storm movement in degrees True</note>
+         </Field>
+         <Field>
+            <name>Hurricane Speed</name>
+            <unit>METERS_PER_SECOND</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Speed of storm movement in knots</note>
+         </Field>
+         <Field>
+            <name>Pattern Altitude</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Altitude at which center fix pattern 
+                        should be flown</note>
+         </Field>
+         <Field>
+            <name>Start Index</name>
+            <unit>OTHER</unit>
+            <type>UINT8</type>
+            <size>1</size>
+						<note>      Waypoint number of inbound leg start waypoint</note>
+         </Field>
+         <Field>
+            <name>Intercept Offset</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Offset (degrees) from the wind direction for turns
+                        during the center-finding inbound leg</note>
+         </Field>
+         <Field>
+            <name>Initial Inbound Course</name>
+            <unit>DEGREES</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Desired heading (degrees True) of the initial 
+                        inbound leg for the center fix pattern</note>
+         </Field>
+         <Field>
+            <name>Inbound Leg Length</name>
+            <unit>METERS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Length of inbound legs of the center fix 
+                        pattern in meters</note>
+         </Field>
+         <Field>
+            <name>Heading Adjustment Interval</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Period at which the heading should be adjusted 
+                        on inbound leg to "hunt" for hurricane center.</note>
+         </Field>
+         <Field>
+            <name>Wind Averaging Length</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Length in seconds of sliding window averaging
+                        of wind measurements</note>
+         </Field>
+         <Field>
+            <name>Wind Trend Length</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Duration over which the controller 
+                        should measure decreasing windspeed 
+                        to identify eyewall passage</note>
+         </Field>
+         <Field>
+            <name>Wind Trend Fraction</name>
+            <unit>OTHER</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Percentage of decreasing windpseed measurements 
+                        over the wind trend length to 
+                        identify eyewall passage</note>
+         </Field>
+         <Field>
+            <name>Time for Turn</name>
+            <unit>SECONDS</unit>
+            <type>FLOAT</type>
+            <size>1</size>
+						<note>      Time in seconds that wind measurements should 
+                        be ignored after a turn to allow aircraft to stabilize.</note>
+         </Field>
+         
+      </Fields>
+   </Channel>
+
+  </PayloadDataList>
+  <PayloadSerial>
+        <baudRate>128000</baudRate>
+        <serialInterface>INTERFACE_AP_FUNCTION</serialInterface>
+	</PayloadSerial>
+</App>
