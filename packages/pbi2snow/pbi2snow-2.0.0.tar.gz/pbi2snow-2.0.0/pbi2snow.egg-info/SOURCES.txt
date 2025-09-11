@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+pbi2snow/__init__.py
+pbi2snow/cli.py
+pbi2snow/extract.py
+pbi2snow/sqlgen.py
+pbi2snow/translator.py
+pbi2snow.egg-info/PKG-INFO
+pbi2snow.egg-info/SOURCES.txt
+pbi2snow.egg-info/dependency_links.txt
+pbi2snow.egg-info/entry_points.txt
+pbi2snow.egg-info/requires.txt
+pbi2snow.egg-info/top_level.txt
