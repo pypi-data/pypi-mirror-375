@@ -1,0 +1,27 @@
+name: process_target_file_pattern
+description: "# output-upload-to-cos Uploads a file to any S3 compliant Cloud Object Storage – CLAIMED V0.1"
+
+inputs:
+- {name: log_level, type: String, description: "update log level", default: "INFO"}
+- {name: target, type: String, description: "target in format: cos://access_key_id:secret_access_key@endpoint/bucket/path"}
+- {name: source_file_pattern, type: String, description: "source folder and file pattern (glob)"}
+- {name: find_recursive, type: Boolean, description: "find_recursive, if True, will search for files in subfolders specified in source_file_pattern. Default is True", default: "True'"}
+- {name: process_target_file_pattern, type: String, description: "process source file path on target using regex. Default is None", default: "None"}
+
+
+outputs:
+
+
+implementation:
+    container:
+        image: romeokienzler/claimed-process_target_file_pattern:0.8
+        command:
+        - sh
+        - -ec
+        - |
+          ipython ./claimed_upload-to-cos.ipynb log_level="${0}" target="${1}" source_file_pattern="${2}" find_recursive="${3}" process_target_file_pattern="${4}" 
+        - {inputValue: log_level}
+        - {inputValue: target}
+        - {inputValue: source_file_pattern}
+        - {inputValue: find_recursive}
+        - {inputValue: process_target_file_pattern}
