@@ -1,0 +1,439 @@
+Metadata-Version: 2.1
+Name: banana-nft-sdk
+Version: 2.0.0
+Summary: 🍌 Revolutionary AI-powered NFT SDK with nano-banana multimodal intelligence
+Home-page: https://github.com/banana-nft/sdk
+Author: BananaNFT Team
+Author-email: hello@banana-nft.ai
+Project-URL: Bug Reports, https://github.com/banana-nft/sdk/issues
+Project-URL: Source, https://github.com/banana-nft/sdk
+Project-URL: Documentation, https://banana-nft.ai/docs
+Keywords: nft,ai,art,blockchain,collection,generator,banana,nano-banana,multimodal
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Multimedia :: Graphics
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Provides-Extra: docs
+License-File: LICENSE
+
+# 🦙 Recreate.ai NFT SDK
+
+**The easiest way to generate AI-powered NFT collections in Python.**
+
+Transform any image into stylized NFT collections using OpenRouter, Gemini, or OpenAI. No complex setup required!
+
+[![PyPI version](https://badge.fury.io/py/recreate-nft-sdk.svg)](https://badge.fury.io/py/recreate-nft-sdk)
+[![Python versions](https://img.shields.io/pypi/pyversions/recreate-nft-sdk.svg)](https://pypi.org/project/recreate-nft-sdk/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+pip install recreate-nft-sdk
+```
+
+### Basic Usage
+
+```python
+from recreate_nft import RecreateNFT
+
+# Initialize with your API key (OpenRouter, Gemini, or OpenAI)
+nft = RecreateNFT(api_key="your_openrouter_key")
+
+# Generate a single styled image
+result = nft.create_image("photo.jpg", style="adventure_time")
+result.save_image("styled_photo.jpg")
+
+# Generate full NFT collection
+collection = nft.create_collection(
+    image_path="photo.jpg",
+    style="crypto_punks", 
+    collection_size=40,
+    name="My Punk Collection"
+)
+
+# Save collection to disk
+nft.save_collection(collection, "my_nft_collection/")
+
+# Deploy to blockchain (mock)
+deployment = nft.deploy_collection(collection, "ethereum")
+print(f"Deployed! OpenSea URL: {deployment.opensea_url}")
+```
+
+That's it! 🎉
+
+## ✨ Features
+
+- **🎨 15+ Styles**: Adventure Time, Rick & Morty, CryptoPunks, Bored Apes, Anime, and more
+- **🤖 Multi-AI Support**: OpenRouter, Google Gemini, OpenAI
+- **🚀 Easy Collection Generation**: Generate 10-100 NFTs with automatic rarity distribution
+- **🎯 Smart Trait System**: 10+ trait categories per style with realistic rarity
+- **🌐 Multi-Network**: Ethereum, Polygon, Base, Arbitrum support
+- **💾 Export Ready**: Save images + metadata in OpenSea-compatible format
+- **🔧 CLI Tool**: Command-line interface for quick operations
+- **📱 Lightweight**: Minimal dependencies, maximum performance
+
+## 🎨 Supported Styles
+
+### Cartoon Network & Animation
+- **adventure_time** - Mathematical Land of Ooo aesthetic
+- **rick_morty** - Interdimensional sci-fi chaos
+- **gravity_falls** - Mysterious Pacific Northwest vibes
+- **steven_universe** - Gem magic with pastel colors
+- **simpsons** - Classic Springfield yellow
+- **south_park** - Cut-out paper animation
+
+### Crypto Collections
+- **crypto_punks** - 8-bit pixel art rebels
+- **bored_apes** - Yacht Club premium vibes
+- **azuki** - Anime streetwear aesthetic
+- **labubu** - Designer toy collectible cuteness
+
+### Artistic Styles
+- **anime** - Japanese animation style
+- **cartoon** - Western cartoon style
+- **realistic** - Photorealistic rendering
+- **pixel** - 8-bit pixel art
+- **watercolor** - Artistic painting style
+
+## 📖 Complete Examples
+
+### Single Image Generation
+
+```python
+from recreate_nft import RecreateNFT
+
+# Initialize client
+nft = RecreateNFT(
+    api_key="your_openrouter_key",
+    provider="openrouter"  # or "gemini", "openai"
+)
+
+# Create styled image
+result = nft.create_image(
+    image_path="my_photo.jpg",
+    style="adventure_time",
+    aspect_ratio="1:1"
+)
+
+# Save result
+result.save_image("adventure_time_style.jpg")
+print(f"✅ Created {result.style_id} style image!")
+```
+
+### NFT Collection Generation
+
+```python
+from recreate_nft import RecreateNFT, RaritySettings
+
+# Custom rarity distribution
+rarity = RaritySettings(
+    common=50,      # 50%
+    uncommon=30,    # 30%
+    rare=15,        # 15% 
+    legendary=5     # 5%
+)
+
+# Generate collection
+collection = nft.create_collection(
+    image_path="base_image.jpg",
+    style="crypto_punks",
+    collection_size=100,
+    name="My Punk Collection",
+    description="AI-generated punk-style NFT collection",
+    rarity_settings=rarity
+)
+
+# Analyze results
+print(collection.summary())
+
+# Access individual NFTs
+for token in collection.legendary_tokens:
+    print(f"Legendary NFT #{token.token_id}: {len(token.traits)} traits")
+    token.save_image(f"legendary_{token.token_id}.png")
+
+# Save entire collection
+nft.save_collection(collection, "punk_collection_output/")
+```
+
+### Advanced Collection Analysis
+
+```python
+# Detailed collection analysis
+print(f"📊 Collection: {collection.name}")
+print(f"🎨 Style: {collection.style}")
+print(f"📈 Total NFTs: {len(collection.tokens)}")
+
+# Rarity breakdown
+rarities = ["common", "uncommon", "rare", "legendary"]
+for rarity in rarities:
+    tokens = collection.get_tokens_by_rarity(rarity)
+    percentage = collection.get_rarity_percentage(rarity)
+    print(f"   • {rarity.title()}: {len(tokens)} NFTs ({percentage:.1f}%)")
+
+# Find rarest NFT
+legendary_nfts = collection.legendary_tokens
+if legendary_nfts:
+    rarest = max(legendary_nfts, key=lambda t: len(t.traits))
+    print(f"🏆 Rarest NFT: #{rarest.token_id} with {len(rarest.traits)} traits")
+```
+
+### Blockchain Deployment
+
+```python
+# Deploy to different networks
+networks = ["ethereum", "polygon", "base", "arbitrum"]
+
+for network in networks:
+    try:
+        deployment = nft.deploy_collection(collection, network)
+        
+        if deployment.success:
+            print(f"✅ {network.title()}: {deployment.contract_address}")
+            print(f"   OpenSea: {deployment.opensea_url}")
+            print(f"   Cost: {deployment.deployment_cost}")
+        
+    except Exception as e:
+        print(f"❌ {network} deployment failed: {e}")
+```
+
+## 🖥️ CLI Usage
+
+The SDK includes a powerful command-line interface:
+
+```bash
+# Install with CLI support
+pip install recreate-nft-sdk
+
+# Set your API key
+export RECREATE_API_KEY="your_openrouter_key"
+
+# Generate single image
+recreate-nft create-image photo.jpg adventure_time --output styled.jpg
+
+# Generate NFT collection
+recreate-nft create-collection photo.jpg crypto_punks \
+    --size 50 \
+    --name "My Collection" \
+    --output-dir my_nfts/ \
+    --rare 20 \
+    --legendary 5
+
+# List available styles
+recreate-nft list-styles
+
+# Deploy collection
+recreate-nft deploy collection_metadata.json ethereum
+```
+
+## 🔧 Configuration
+
+### API Provider Setup
+
+**OpenRouter** (Recommended):
+```python
+nft = RecreateNFT(
+    api_key="sk-or-v1-...",
+    provider="openrouter"
+)
+```
+
+**Google Gemini**:
+```python
+nft = RecreateNFT(
+    api_key="your_gemini_key",
+    provider="gemini"
+)
+```
+
+**OpenAI**:
+```python
+nft = RecreateNFT(
+    api_key="sk-...",
+    provider="openai"
+)
+```
+
+### Environment Variables
+
+```bash
+# Primary API key
+export RECREATE_API_KEY="your_api_key"
+
+# Alternative names
+export OPENROUTER_API_KEY="your_openrouter_key"
+export GEMINI_API_KEY="your_gemini_key" 
+export OPENAI_API_KEY="your_openai_key"
+
+# Custom backend (if self-hosting)
+export RECREATE_BACKEND_URL="http://localhost:8000"
+```
+
+### Custom Backend
+
+```python
+# Use custom Recreate backend
+nft = RecreateNFT(
+    api_key="your_key",
+    backend_url="https://your-backend.com"
+)
+```
+
+## 🎯 Rarity System
+
+The SDK uses a realistic rarity distribution system:
+
+| Rarity | Default % | Traits | Visual |
+|--------|-----------|---------|---------|
+| Common | 60% | 1-3 traits | Gray |
+| Uncommon | 25% | 2-4 traits | Blue |
+| Rare | 12% | 3-5 traits | Orange |
+| Legendary | 3% | 4-6+ traits | Purple |
+
+### Custom Rarity Settings
+
+```python
+from recreate_nft import RaritySettings
+
+# Create custom distribution
+custom_rarity = RaritySettings(
+    common=40,
+    uncommon=35, 
+    rare=20,
+    legendary=5
+)
+
+collection = nft.create_collection(
+    "image.jpg", 
+    "bored_apes",
+    rarity_settings=custom_rarity
+)
+```
+
+## 📁 Output Format
+
+The SDK generates OpenSea-compatible metadata:
+
+```
+my_collection/
+├── collection_metadata.json      # Collection info
+├── nft_001.png                   # NFT images
+├── nft_001_metadata.json         # Individual metadata
+├── nft_002.png
+├── nft_002_metadata.json
+└── ...
+```
+
+**Metadata Example**:
+```json
+{
+  "name": "My Collection #1",
+  "description": "NFT #1 from My Collection", 
+  "image": "nft_001.png",
+  "attributes": [
+    {"trait_type": "Background", "value": "Candy Kingdom"},
+    {"trait_type": "Mood", "value": "Algebraic"},
+    {"trait_type": "Accessory", "value": "Finn's Hat"}
+  ],
+  "rarity": "rare"
+}
+```
+
+## 🔍 Error Handling
+
+```python
+from recreate_nft import RecreateNFT, RecreateError, APIError, ValidationError
+
+try:
+    nft = RecreateNFT(api_key="invalid_key")
+    result = nft.create_image("photo.jpg", "adventure_time")
+    
+except ValidationError as e:
+    print(f"Invalid input: {e}")
+except APIError as e:
+    print(f"API error: {e}")
+except RecreateError as e:
+    print(f"SDK error: {e}")
+```
+
+## 🚀 Performance Tips
+
+1. **Batch Operations**: Generate collections in one call rather than individual images
+2. **Image Optimization**: The SDK automatically optimizes images to 1024px max
+3. **Progress Tracking**: Use `show_progress=True` for long operations
+4. **Error Recovery**: The SDK handles API timeouts and retries automatically
+
+## 🔒 Security
+
+- API keys are never logged or stored
+- Image data is processed securely via HTTPS
+- No persistent data storage
+- Rate limiting handled automatically
+
+## 📚 API Reference
+
+### RecreateNFT Class
+
+#### `__init__(api_key, provider, backend_url)`
+Initialize the client.
+
+#### `create_image(image_path, style, aspect_ratio) -> ImageResult`
+Generate single styled image.
+
+#### `create_collection(image_path, style, collection_size, ...) -> NFTCollection`
+Generate NFT collection with rarity traits.
+
+#### `deploy_collection(collection, network) -> DeploymentResult`
+Deploy collection to blockchain.
+
+#### `save_collection(collection, output_dir)`
+Save collection to disk.
+
+#### `list_styles() -> List[str]`
+Get supported styles.
+
+#### `list_networks() -> List[str]`
+Get supported networks.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md).
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 🆘 Support
+
+- 📖 [Documentation](https://recreate-nft-sdk.readthedocs.io/)
+- 🐛 [Bug Reports](https://github.com/recreate-ai/nft-sdk/issues)
+- 💬 [Discord Community](https://discord.gg/recreate-ai)
+- 📧 [Email Support](mailto:support@recreate.ai)
+
+## 🌟 Examples Gallery
+
+Check out amazing collections created with the SDK:
+
+- [Adventure Time Punks](examples/adventure_time_punks/)
+- [Rick & Morty Apes](examples/rick_morty_apes/) 
+- [Pixel Art Labubus](examples/pixel_labubus/)
+- [Watercolor Unicorns](examples/watercolor_unicorns/)
+
+---
+
+**Made with 🦙 by the Recreate.ai team**
+
+Transform any image into an NFT collection in minutes, not months!

@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include example.py
+include sample_image.txt
+recursive-include banana_nft *.py
+global-exclude __pycache__
+global-exclude *.py[co]
