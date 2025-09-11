@@ -1,0 +1,3 @@
+[console_scripts]
+litpose=lightning_pose.cli.main:main
+
