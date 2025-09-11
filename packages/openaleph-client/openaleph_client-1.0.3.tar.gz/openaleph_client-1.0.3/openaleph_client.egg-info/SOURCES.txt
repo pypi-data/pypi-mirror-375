@@ -1,0 +1,17 @@
+LICENSE
+README.md
+pyproject.toml
+openaleph/__init__.py
+openaleph/api.py
+openaleph/cli.py
+openaleph/crawldir.py
+openaleph/errors.py
+openaleph/fetchdir.py
+openaleph/settings.py
+openaleph/util.py
+openaleph_client.egg-info/PKG-INFO
+openaleph_client.egg-info/SOURCES.txt
+openaleph_client.egg-info/dependency_links.txt
+openaleph_client.egg-info/entry_points.txt
+openaleph_client.egg-info/requires.txt
+openaleph_client.egg-info/top_level.txt
