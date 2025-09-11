@@ -1,0 +1,2 @@
+[console_scripts]
+docker-diff = docker_diff_pkg.cli:main
