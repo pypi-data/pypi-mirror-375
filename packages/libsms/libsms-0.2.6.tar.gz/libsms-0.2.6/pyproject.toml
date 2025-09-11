@@ -1,0 +1,125 @@
+[project]
+name = "libsms"
+version = "0.2.6"
+description = "Interacting with the Simulating Microbial Systems (SMS Atlantis) API"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.116.1",
+    "httpx>=0.28.1",
+    "orjson>=3.11.3",
+    "polars[all]>=1.33.1",
+    "pydantic>=2.11.7",
+    "requests>=2.32.5",
+    "tqdm>=4.67.1",
+]
+
+# [tool.setuptools]
+# packages = ["libsms", "tests"]
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8.16",
+    "deptry>=0.23.1",
+    "mypy>=1.17.1",
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.1.0",
+    "pytest-cov>=7.0.0",
+    "testcontainers>=4.13.0",
+    "tox>=4.30.2",
+    "types-pyyaml>=6.0.12.20250822",
+    "types-requests>=2.32.4.20250809",
+    "types-tqdm>=4.67.0.20250809",
+]
+docs = [
+    "sphinx>=8.2.3",
+    "sphinx-autodoc-typehints>=3.2.0",
+    "sphinx-rtd-theme>=3.0.2",
+]
+notebooks = [
+    "marimo>=0.15.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+addopts = "--cov-report=html"
+
+[tool.mypy]
+files = ["src/libsms", "src/tests"]
+strict = true
+exclude = ['^libsms/clients/.*', '^notebooks/.*', '^src/libsms/clients/.*']
+
+[tool.deptry]
+exclude = [".venv/*", "notebooks/*"]
+ignore = ["DEP002", "DEP003", "DEP004"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+]
+ignore = [
+    "B904",
+    "RUF012",
+    "TRY002",
+    "TRY003",
+    "TRY201",
+    "TRY300",
+    "UP006",
+    "S113",
+    "S101",
+    "SIM118",
+    "A001"
+]
+exclude = [".venv/*", "notebooks/*", "src/libsms/clients/*"]
+
+[tool.ruff.format]
+preview = true
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["sms_api", "client"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
