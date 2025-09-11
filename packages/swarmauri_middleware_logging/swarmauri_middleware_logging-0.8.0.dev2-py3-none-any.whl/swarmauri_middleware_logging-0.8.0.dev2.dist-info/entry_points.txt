@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+LoggingMiddleware=swarmauri_middleware_logging:LoggingMiddleware
+
