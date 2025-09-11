@@ -1,0 +1,8 @@
+pyproject.toml
+src/generateweather/__init__.py
+src/generateweather/generateweather.py
+src/generateweather.egg-info/PKG-INFO
+src/generateweather.egg-info/SOURCES.txt
+src/generateweather.egg-info/dependency_links.txt
+src/generateweather.egg-info/top_level.txt
+tests/testCheck.py
