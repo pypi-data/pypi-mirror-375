@@ -1,0 +1,44 @@
+numpy>=1.5.1
+scipy
+
+[all]
+black==24.8.0
+identify>=1.4.20
+myst-parser
+pre-commit
+pypandoc>=1.6.3
+pytest
+pytest-cov
+pytest-flake8
+sphinx-autobuild
+sphinx<6,>=3.5.4
+sphinx_book_theme
+
+[all:python_version < "3.6"]
+watchdog<1.0.0
+
+[all:python_version >= "3.6"]
+readthedocs-sphinx-search
+
+[dev]
+black==24.8.0
+identify>=1.4.20
+pre-commit
+
+[docs]
+myst-parser
+pypandoc>=1.6.3
+sphinx<6,>=3.5.4
+sphinx-autobuild
+sphinx_book_theme
+
+[docs:python_version < "3.6"]
+watchdog<1.0.0
+
+[docs:python_version >= "3.6"]
+readthedocs-sphinx-search
+
+[test]
+pytest
+pytest-cov
+pytest-flake8
