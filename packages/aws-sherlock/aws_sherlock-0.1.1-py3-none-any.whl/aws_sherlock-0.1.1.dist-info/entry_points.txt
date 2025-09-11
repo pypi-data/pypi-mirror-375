@@ -1,0 +1,3 @@
+[console_scripts]
+sherlock=aws_sherlock.__main__:main
+
