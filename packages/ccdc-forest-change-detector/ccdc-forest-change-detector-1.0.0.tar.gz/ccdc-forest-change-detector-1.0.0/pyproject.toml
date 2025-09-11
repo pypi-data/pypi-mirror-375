@@ -1,0 +1,44 @@
+
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ccdc-forest-change-detector"
+version = "1.0.0"
+description = "Una librería para detección de cambios forestales usando CCDC con Google Earth Engine"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Tu Nombre", email = "tu.email@example.com"},
+]
+keywords = ["earth engine", "remote sensing", "forest monitoring", "CCDC", "change detection"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+dependencies = [
+    "earthengine-api>=0.1.380",
+    "geemap>=0.24.0",
+    "ipywidgets>=8.0.0",
+    "pandas>=1.5.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/tuusuario/ccdc-forest-change-detector"
+"Bug Reports" = "https://github.com/tuusuario/ccdc-forest-change-detector/issues"
+"Source" = "https://github.com/tuusuario/ccdc-forest-change-detector"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ccdc_forest_detector*"]
+exclude = ["tests*"]
