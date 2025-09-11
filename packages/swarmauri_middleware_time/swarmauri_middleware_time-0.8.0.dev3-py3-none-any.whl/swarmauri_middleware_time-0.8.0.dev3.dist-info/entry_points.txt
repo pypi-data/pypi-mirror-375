@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+TimerMiddleware=swarmauri_middleware_time:TimerMiddleware
+
