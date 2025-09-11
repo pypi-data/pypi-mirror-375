@@ -1,0 +1,122 @@
+from django import forms
+from wagtail.contrib.forms.forms import FormBuilder
+
+from headless_waf_builder.forms.widgets.checkbox_input_widget import CheckboxInput
+from headless_waf_builder.forms.widgets.html_output_widget import HTMLOutputWidget
+from headless_waf_builder.forms.widgets.side_by_side_checkbox_select_multiple_widget import \
+    SideBySideCheckboxSelectWidget
+from headless_waf_builder.forms.widgets.side_by_side_radio_select_widget import SideBySideRadioSelectWidget
+
+
+class AdvancedFormBuilder(FormBuilder):
+
+    def create_singleline_field(self, field, options):
+        if field.max_length:
+            options['max_length'] = field.max_length
+        else:
+            options['max_length'] = 255
+        return forms.CharField(**options)
+
+    def create_phone_field(self, field, options):
+        if field.max_length:
+            options['max_length'] = field.max_length
+        else:
+            options['max_length'] = 255
+
+        options['widget'] = forms.TextInput(
+            attrs={
+                'data-phone-field': True,
+            },
+        )
+        return forms.CharField(**options)
+
+    def create_simpledate_field(self, field, options):
+        widget_attrs = {
+            'required': field.required,
+            'placeholder': 'DD/MM/YYYY',
+            'maxlength': 10,
+            'data-simple-date-field': True,
+        }
+
+        if field.minimum_age:
+            widget_attrs['data-minimum-age'] = field.minimum_age
+
+        if field.maximum_age:
+            widget_attrs['data-maximum-age'] = field.maximum_age
+
+        options['widget'] = forms.TextInput(
+            attrs=widget_attrs,
+        )
+
+        return forms.CharField(**options)
+
+    def create_email_field(self, field, options):
+        if field.max_length:
+            options['max_length'] = field.max_length
+        return forms.EmailField(**options)
+
+    def create_url_field(self, field, options):
+        if field.max_length:
+            options['max_length'] = field.max_length
+        return forms.URLField(**options)
+
+    def create_html_field(self, field, options):
+        options['widget'] = HTMLOutputWidget(
+            html_value=field.html_value,
+        )
+        return forms.Field(**options)
+
+    def create_dropdown_field(self, field, options):
+        options['choices'] = list(map(
+            lambda x: (x.get('value', '').strip(), x.get('value', '').strip()),
+            field.choices
+        ))
+        if field.empty_label:
+            options['choices'] = [('', field.empty_label)] + options['choices']
+
+        return forms.ChoiceField(**options)
+
+    def create_checkboxes_field(self, field, options):
+        options['choices'] = list(map(
+            lambda x: (x.get('value', '').strip(), x.get('value', '').strip()),
+            field.choices
+        ))
+        options['initial'] = list(map(
+            lambda x: x.get('value', '').strip(),
+            field.default_value
+        ))
+        if field.display_side_by_side:
+            return forms.MultipleChoiceField(
+                widget=SideBySideCheckboxSelectWidget, **options
+            )
+        else:
+            return forms.MultipleChoiceField(
+                widget=forms.CheckboxSelectMultiple, **options
+            )
+
+    def create_checkbox_field(self, field, options):
+        options['widget'] = CheckboxInput(
+            display_checkbox_label=field.display_checkbox_label
+        )
+        return forms.BooleanField(**options)
+
+
+    def create_radio_field(self, field, options):
+
+        options['choices'] = list(map(
+            lambda x: (x.get('value', '').strip(), x.get('value', '').strip()),
+            field.choices
+        ))
+
+        if field.display_side_by_side:
+            return forms.ChoiceField(widget=SideBySideRadioSelectWidget, **options)
+        else:
+            return forms.ChoiceField(widget=forms.RadioSelect, **options)
+
+
+    def create_multiselect_field(self, field, options):
+        options['choices'] = list(map(
+            lambda x: (x.get('value', '').strip(), x.get('value', '').strip()),
+            field.choices
+        ))
+        return forms.MultipleChoiceField(**options)
