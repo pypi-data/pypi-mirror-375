@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlexlog"
+version = "0.1.0"
+description = "A one liner for ML explainability"
+authors = [{name = "Dhruva", email = "rahuldhruva.k9@gmail.com"}]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "pandas",
+    "shap",
+    "scikit-learn",
+    "xgboost",
+    "lightgbm"
+]
+
+[project.urls]
+Homepage = "https://github.com/Dhruva-123/exlog"
+
