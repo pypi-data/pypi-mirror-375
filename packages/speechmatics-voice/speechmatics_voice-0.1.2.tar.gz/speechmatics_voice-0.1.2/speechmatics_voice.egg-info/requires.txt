@@ -1,0 +1,12 @@
+speechmatics-rt
+
+[dev]
+black
+ruff
+mypy
+pre-commit
+pytest
+pytest-asyncio
+pytest-cov
+pytest-mock
+build
