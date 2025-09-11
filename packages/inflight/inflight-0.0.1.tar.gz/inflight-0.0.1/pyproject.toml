@@ -1,0 +1,24 @@
+[build-system]
+requires = [
+    "setuptools >= 77.0.3",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inflight"
+version = "0.0.1"
+description = "Prototyping..."
+authors = [
+  { name = "Vytautas Liuolia", email = "vytautas.liuolia@gmail.com" },
+]
+license = "Apache-2.0"
+readme = "README.rst"
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/vytas7"

@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: inflight
+Version: 0.0.1
+Summary: Prototyping...
+Author-email: Vytautas Liuolia <vytautas.liuolia@gmail.com>
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/vytas7
+Classifier: Development Status :: 1 - Planning
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/x-rst
+
+A prototype WSGI/ASGI application server. Nothing to see here yet.
