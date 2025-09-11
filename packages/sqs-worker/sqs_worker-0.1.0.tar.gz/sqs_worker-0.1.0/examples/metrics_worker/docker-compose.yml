@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SQS_ENDPOINT_URL=http://aws-local:4566
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    depends_on:
+    - aws-local
+  aws-local:
+     image: localstack/localstack:latest
+     ports:
+       - "127.0.0.1:4566:4566"                  
+       - "127.0.0.1:4510-4559:4510-4559"
+     stdin_open: true
+     tty: true
+volumes:
+  data-volume:
