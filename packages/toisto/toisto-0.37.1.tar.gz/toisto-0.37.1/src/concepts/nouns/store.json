@@ -1,0 +1,98 @@
+{
+    "concepts": {
+        "store": {
+            "example": "alice works in a store"
+        },
+        "department store": {
+            "hypernym": "store"
+        },
+        "home appliance store": {
+            "hypernym": "store"
+        },
+        "alice works in a store": {
+            "involves": "store"
+        }
+    },
+    "labels": {
+        "en": [
+            {
+                "concept": "store",
+                "label": {
+                    "singular": "store",
+                    "plural": "stores"
+                }
+            },
+            {
+                "concept": "department store",
+                "label": {
+                    "singular": "department store",
+                    "plural": "department stores"
+                },
+                "roots": "store"
+            },
+            {
+                "concept": "home appliance store",
+                "label": "home appliance store",
+                "roots": "store"
+            },
+            {
+                "concept": "alice works in a store",
+                "label": "Alice works in a store.",
+                "roots": "store"
+            }
+        ],
+        "fi": [
+            {
+                "concept": "store",
+                "label": {
+                    "singular": "kauppa",
+                    "plural": "kaupat"
+                }
+            },
+            {
+                "concept": "department store",
+                "label": {
+                    "singular": "tavaratalo",
+                    "plural": "tavaratalot"
+                },
+                "roots": "talo"
+            },
+            {
+                "concept": "home appliance store",
+                "label": "kodinkoneliike"
+            },
+            {
+                "concept": "alice works in a store",
+                "label": "Alice on töissä kaupassa.",
+                "roots": "kauppa"
+            }
+        ],
+        "nl": [
+            {
+                "concept": "store",
+                "label": {
+                    "singular": "de winkel",
+                    "plural": "de winkels"
+                }
+            },
+            {
+                "concept": "department store",
+                "label": {
+                    "singular": "het warenhuis",
+                    "plural": "de warenhuizen"
+                },
+                "roots": "het huis"
+            },
+            {
+                "concept": "home appliance store",
+                "label": "de winkel voor huishoudelijke apparaten",
+                "roots": "de winkel"
+            },
+            {
+                "concept": "alice works in a store",
+                "label": "Alice werkt in een winkel.",
+                "roots": "de winkel"
+            }
+        ]
+    }
+}
