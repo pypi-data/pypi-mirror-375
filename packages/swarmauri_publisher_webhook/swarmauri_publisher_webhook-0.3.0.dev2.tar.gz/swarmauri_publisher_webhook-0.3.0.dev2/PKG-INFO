@@ -1,0 +1,42 @@
+Metadata-Version: 2.3
+Name: swarmauri_publisher_webhook
+Version: 0.3.0.dev2
+Summary: A Webhook publisher implementation for Swarmauri.
+License: Apache-2.0
+Author: Jacob Stewart
+Author-email: jacob@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_standard
+Description-Content-Type: text/markdown
+
+# Swarmauri Webhook Publisher
+
+A Swarmauri component for publishing messages to an HTTP webhook endpoint.
+
+## Installation
+
+```bash
+pip install swarmauri_publisher_webhook
+```
+
+## Usage
+
+```python
+from swarmauri_publisher_webhook import WebhookPublisher
+
+publisher = WebhookPublisher(url="https://your-webhook-endpoint.com/hook")
+
+publisher.publish(
+    channel="my_data_stream",
+    payload={"message": "Hello, webhook!", "value": 123}
+)
+```
+
