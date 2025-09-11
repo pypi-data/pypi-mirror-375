@@ -1,0 +1,52 @@
+# softdata
+
+**softdata** is the "data in, ready out" layer of Soft Tech Talks.
+One-liners to load, clean, and split your dataset with safe defaults and friendly errors.
+
+```python
+from softdata import load, clean, split
+
+df = load("iris")                           # or load("csv", path="students.csv")
+df = clean(df, impute="median", encode="auto")
+Xtr, Xval, Xte, y = split(df, target="species", strategy="stratified")
+```
+
+## Install (local)
+
+```bash
+pip install -e .
+# or build: python -m build  (needs `pip install build`)
+```
+
+## API
+
+### `load(source, **kwargs)`
+- Built-ins: `"iris"`, `"wine"`, `"breast_cancer"` (scikit-learn toys)
+- Files: `"csv"` (needs `path=`), `"parquet"` (needs `path=`)
+
+### `clean(df, impute="median", encode="auto", drop_leaky=None, datetime_auto=True)`
+- Detects numeric/categorical/date columns
+- Imputes numeric (median/mean) and categorical (most frequent)
+- Encodes categorical columns with one-hot (drop-first) when `encode="auto"`
+- Preserves the original target column (do encoding only on features)
+
+### `split(df, target, strategy="auto", test_size=0.2, val_size=0.1, random_state=42)`
+- If `strategy="auto"`, uses stratified split for discrete targets (<= 20 unique values), else random
+- Returns `X_train, X_val, X_test, y_dict` where `y_dict` has `"train"|"val"|"test"`
+
+## Example
+
+```python
+from softdata import load, clean, split
+df = load("iris")
+df = clean(df)
+Xtr, Xval, Xte, y = split(df, target="target")
+print(Xtr.shape, Xval.shape, Xte.shape)
+```
+
+## Tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest -q
+```
