@@ -1,0 +1,6 @@
+[peagen.plugins.cryptos]
+composite=swarmauri_crypto_composite:CompositeCrypto
+
+[swarmauri.cryptos]
+CompositeCrypto=swarmauri_crypto_composite:CompositeCrypto
+
