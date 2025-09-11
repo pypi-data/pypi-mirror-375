@@ -1,0 +1,41 @@
+site_name: bundestag
+site_url: https://eschmidt42.github.io/bundestag/
+repo_url: https://github.com/eschmidt42/bundestag/
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - How to use: how-to-use.md
+  - Analysis:
+    - Embeddings: analysis-highlights.md
+    - Fraktionszwang: fraktionszwang.md
+  - Documentation:
+    - cli:
+      - __main__: bundestag/cli/__main__.md
+      - download: bundestag/cli/download.md
+      - transform: bundestag/cli/transform.md
+      - utils: bundestag/cli/utils.md
+    - data:
+      - __init__: bundestag/data.md
+      - download:
+        - abgeordnetenwatch: bundestag/data/download/abgeordnetenwatch.md
+        - bundestag_sheets: bundestag/data/download/bundestag_sheets.md
+        - huggingface: bundestag/data/download/huggingface.md
+      - transform:
+        - abgeordnetenwatch: bundestag/data/transform/abgeordnetenwatch.md
+        - bundestag_sheets: bundestag/data/transform/bundestag_sheets.md
+      - utils: bundestag/data/utils.md
+    - gui: bundestag/gui.md
+    - fine_logging: bundestag/fine_logging.md
+    - paths: bundestag/paths.md
+    - poll_clustering: bundestag/poll_clustering.md
+    - schemas: bundestag/schemas.md
+    - similarity: bundestag/similarity.md
+    - vote_prediction: bundestag/vote_prediction.md
+theme:
+  name: readthedocs
+  collapse_navigation: true
+
+plugins:
+  - mkdocstrings
+watch:
+  - .  # reload docs for any file changes

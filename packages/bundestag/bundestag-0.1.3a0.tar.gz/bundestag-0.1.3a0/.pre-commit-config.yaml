@@ -1,0 +1,49 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+    - id: check-yaml
+    - id: trailing-whitespace
+    - id: check-added-large-files
+      args: ['--maxkb=3000']
+    - id: check-case-conflict
+    - id: check-executables-have-shebangs
+    - id: check-merge-conflict
+    - id: check-toml
+    - id: detect-private-key
+    - id: end-of-file-fixer
+    - id: name-tests-test
+      args: ['--pytest-test-first']
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.12.8
+    hooks:
+    # Run the linter.
+    - id: ruff-check
+      types_or: [ python, pyi ]
+      args: [ --select, "I,F401", --fix ]
+    # Run the formatter.
+    - id: ruff-format
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.8.1
+    hooks:
+    - id: nbstripout
+      args:
+          [
+            "--extra-keys",
+            "metadata.interpreter metadata.kernelspec cell.metadata.pycharm",
+          ]
+  - repo: local
+    hooks:
+    - id: pip-audit-uv
+      name: pip-audit using uv's venv
+      language: system
+      entry: uv run pip-audit
+      pass_filenames: false
+    - id: tests
+      name: tests
+      entry: make test
+      pass_filenames: false
+      require_serial: true
+      language: system
+      types_or: [python, pyi]

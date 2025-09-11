@@ -1,0 +1,75 @@
+[project]
+name = "bundestag"
+version = "0.1.3a"
+description = "Download, parse and analyse votes in the german federal parliament, aka 'Bundestag'"
+readme = "README.md"
+authors = [
+    { name = "eschmidt42", email = "11818904+eschmidt42@users.noreply.github.com" }
+]
+requires-python = ">=3.10.0"
+dependencies = [
+    "beautifulsoup4>=4.12.2",
+    "fastexcel>=0.14.0",
+    "fastparquet>=2023.2.0",
+    "pandas",
+    "openpyxl>=3.1.2",
+    "frictionless>=5.11.1",
+    "matplotlib>=3.7.1",
+    "polars>=1.32.3",
+    "pyarrow>=21.0.0",
+    "pydantic>=1.10.7",
+    "rich>=12.6.0",
+    "typer>=0.7.0",
+    "xlrd>=2.0.1",
+    "xlsxwriter>=3.2.5",
+    "httpx>=0.28.1",
+    "pydantic-settings>=2.10.1",
+    "selenium>=4.35.0",
+    "urllib3>=1.26.15",
+]
+# https://github.com/astral-sh/uv/issues/9011
+optional-dependencies = { ml = [
+    "fastcore>=1.5.29",
+    "fastai>=2.7.12",
+    "gensim>=4.3.1",
+    "scikit-learn>=1.2.2",
+    "spacy>=3.5.2",
+    "seaborn>=0.12.2",
+    "plotnine>=0.15.0",
+    "numpy>=1.24.2",
+] }
+
+[project.scripts]
+bundestag = "bundestag.cli.__main__:app"
+get_xlsx_uris = "bundestag.get_xlsx_uris:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+
+ml = [
+    "bundestag[ml]",
+]
+dev = [
+    "ipywidgets>=8.0.6",
+    "jupyterlab>=3.6.3",
+]
+tests = [
+    "coverage>=7.2.3",
+    "dirty-equals>=0.9.0",
+    "inline-snapshot>=0.27.2",
+    "pip-audit>=2.5.5",
+    "pre-commit>=3.2.2",
+    "pytest>=7.3.1",
+]
+docs = [
+    "mkdocs>=1.4.2",
+    "mkdocstrings[python]>=0.21.2",
+]
+
+binder = [
+    {include-group = "dev"},
+    {include-group = "ml"},
+]
