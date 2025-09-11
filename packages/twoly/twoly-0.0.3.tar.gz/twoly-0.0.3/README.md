@@ -1,0 +1,122 @@
+# Twoly
+
+2ly python module providing helpers to quickly connect [2ly](https://github.com/2ly-ai/2ly) to your agents in Python.
+
+# Usage
+
+Install the module
+
+```bash
+pip install twoly
+```
+
+Connects your LangGraph agent:
+
+```python
+# Import TwolyMCP
+from twoly import TwolyMCP
+mcp = TwolyMCP("my-runtime")
+tools = await mcp.get_langchain_tools()
+agent = create_react_agent(llm, tools)
+await mcp.stop()
+```
+
+Under the hood our connector leverages [Langchain MCP adapters](https://github.com/langchain-ai/langchain-mcp-adapters). You can also use our variant which is strictly based on the [Official MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) (see [Twoly without Langchain MCP Adapter](#twoly-without-langchain-mcp-adapter)).
+
+## Twoly lifecycle
+
+Twoly connector will start an MCP Server lazily when you first call `get_langchain_tools()` or when the agent call a given tool. In practice the call to retrieve the list of tools must always come first.
+
+Since this is an async task, we provide a way to instantiate TwolyMCP with `async` and thus it will automatically stop itself when the agent is done.
+
+```python
+async def main():
+    async with TwolyMCP("My agent name") as mcp:
+        tools = await mcp.get_langchain_tools()
+        agent = create_react_agent(llm, tools)
+        agent_response = await agent.ainvoke() # as usual
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+# Twoly without Langchain MCP Adapter
+
+Simply replace `TwolyMCP` with `TwolyMCPWithoutAdapter`. The API is identical.
+
+```python
+```python
+async def main():
+    async with TwolyMCPWithoutAdapter("My agent name") as mcp:
+        tools = await mcp.get_langchain_tools()
+        agent = create_react_agent(llm, tools)
+        agent_response = await agent.ainvoke() # as usual
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## Usage examples
+
+* [examples/list_tools.py](examples/list_tools.py): list tools available for a given 2ly agent
+* [examples/langgraph.py](examples/langgraph.py): connect 2ly to a LangGraph agent
+* [examples/langgraph_without_adapter.py](examples/langgraph_without_adapter.py): another LangGraph example but without Langchain adapter
+
+### Options
+
+Both variants accept optional configuration to control how the MCP runtime is started via `npx` and how the client behaves:
+
+```python
+from twoly import TwolyMCP, TwolyMCPWithoutAdapter
+
+options = {
+  "workspace": "my-workspace-id",           # forwarded to runtime as WORKSPACE_ID
+  "nats_servers": "nats://localhost:4222",  # NATS URL used by runtime
+  "version": "latest",                      # @2ly/runtime version for npx
+  "startup_timeout_seconds": 20.0,            # wait for initialize()
+  "log_level": "info",                       # forwarded to runtime as LOG_LEVEL
+}
+
+mcp = TwolyMCP("my-runtime", options)
+# or
+mcp = TwolyMCPWithoutAdapter("my-runtime", options)
+```
+
+# Development
+
+## Prepare your venv
+
+```bash
+cd packages/twoly
+python3.11 -m venv .venv # any version python3.10+ will do
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -e ".[all]"
+```
+
+## Execute tests
+
+```bash
+pytest
+```
+
+## Build locally
+
+```bash
+python -m build
+```
+
+## Test local installation
+
+```bash
+# update the filename to the build version
+pip install dist/twoly-0.0.2-py3-none-any.whl --force-reinstall
+```
+
+## Run the examples
+
+```bash
+python examples/list_tools.py
+python examples/langgraph.py
+python examples/langgraph_without_adapter.py
+```
