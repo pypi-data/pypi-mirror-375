@@ -1,0 +1,2 @@
+[console_scripts]
+compress-hdf5 = esrf_data_compressor.cli:main
