@@ -1,0 +1,55 @@
+[project]
+name = "safentic"
+version = "1.0.6"
+description = "Safentic SDK for AI agent runtime enforcement interception."
+authors = [{ name = "Safentic", email = "contact@safentic.com" }]
+readme = "README.md"
+license = "LicenseRef-Proprietary"  # SPDX-compatible custom license
+requires-python = ">=3.10"
+
+dependencies = [
+    "PyYAML",
+    "langchain",
+    "langchain-community",
+    "langchain-openai",
+    "openai",
+    "python-dotenv",
+    "sentence-transformers==3.2.1",
+    "requests",
+    "SQLAlchemy"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "coverage",
+    "black",
+    "isort",
+    "ruff",
+    "mypy",
+    "pip-audit-extra",
+    "types-requests",
+    "types-PyYAML"
+]
+
+[project.urls]
+Homepage = "https://safentic.com"
+
+[project.scripts]
+safentic = "safentic.cli.main:main"
+
+[tool.setuptools.packages.find]
+include = ["safentic*"]
+exclude = ["config", "integrations", "safentic_poc", "policy_file_docs"]
+
+[tool.setuptools]
+license-files = ["LICENSE.txt"]
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"

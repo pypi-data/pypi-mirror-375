@@ -1,0 +1,21 @@
+# requirements/requirements-dev.txt
+
+# Pull in the SDK/runtime deps (relative to THIS file)
+-r requirements.txt
+
+# Testing
+pytest
+coverage
+
+# Formatting / linting / typing
+black
+isort
+ruff
+mypy
+
+# Security auditing
+pip-audit-extra
+
+# Type stubs
+types-requests
+types-PyYAML

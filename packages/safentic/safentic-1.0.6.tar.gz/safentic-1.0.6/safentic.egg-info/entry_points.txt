@@ -1,0 +1,2 @@
+[console_scripts]
+safentic = safentic.cli.main:main

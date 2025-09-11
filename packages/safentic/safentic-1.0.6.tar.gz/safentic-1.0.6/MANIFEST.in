@@ -1,0 +1,15 @@
+# Essentials
+include LICENSE.txt
+include README.md
+include setup.py
+include pyproject.toml
+include requirements/requirements.txt
+include requirements/requirements-dev.txt
+include requirements/constraints.txt
+
+# Include all relevant files inside safentic package
+recursive-include safentic *.py *.txt *.yaml *.yml
+
+# Ignore tests and cache
+prune tests
+global-exclude __pycache__ *.py[cod] *.pyo
