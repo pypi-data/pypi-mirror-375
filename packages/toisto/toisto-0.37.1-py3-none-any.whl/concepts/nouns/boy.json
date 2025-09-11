@@ -1,0 +1,28 @@
+{
+    "concepts": {
+        "boy": {
+            "antonym": "girl",
+            "hypernym": "man"
+        }
+    },
+    "labels": {
+        "en": [
+            {
+                "concept": "boy",
+                "label": {
+                    "singular": "boy",
+                    "plural": "boys"
+                }
+            }
+        ],
+        "nl": [
+            {
+                "concept": "boy",
+                "label": {
+                    "singular": "de jongen",
+                    "plural": "de jongens"
+                }
+            }
+        ]
+    }
+}
