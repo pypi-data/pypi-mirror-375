@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentregistry>
+  <adapters />
+  <utilities>
+    <utility id="portal_diff"
+             factory="Products.CMFDiffTool.CMFDiffTool.CMFDiffTool"
+             interface="Products.CMFDiffTool.interfaces.IDiffTool"
+    />
+  </utilities>
+</componentregistry>
