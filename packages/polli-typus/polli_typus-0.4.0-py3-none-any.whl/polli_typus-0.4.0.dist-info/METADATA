@@ -1,0 +1,235 @@
+Metadata-Version: 2.4
+Name: polli-typus
+Version: 0.4.0
+Summary: Taxonomic types, projections and async taxonomy services for Polli-Labs.
+Project-URL: Homepage, https://github.com/polli-labs/typus
+Project-URL: Issues, https://github.com/polli-labs/typus/issues
+Author-email: Polli-Labs <caleb@polli.ai>
+License-Expression: MIT
+License-File: LICENSE
+Keywords: ecology,pydantic,sqlalchemy,taxonomy
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Requires-Python: >=3.10
+Requires-Dist: pandas<3,>=2.0
+Requires-Dist: polars<2,>=0.20
+Requires-Dist: pydantic<3,>=2.7
+Requires-Dist: rapidfuzz<4,>=3.6
+Requires-Dist: requests<4,>=2.32
+Requires-Dist: sqlalchemy[asyncio]<3,>=2.0
+Provides-Extra: dev
+Requires-Dist: aiosqlite>=0.19; extra == 'dev'
+Requires-Dist: asyncpg>=0.29; extra == 'dev'
+Requires-Dist: mkdocs-material<10,>=9.5; extra == 'dev'
+Requires-Dist: mkdocs<2,>=1.6; extra == 'dev'
+Requires-Dist: pre-commit>=3.7; extra == 'dev'
+Requires-Dist: pyarrow<17,>=16; extra == 'dev'
+Requires-Dist: pytest-asyncio>=0.23; extra == 'dev'
+Requires-Dist: pytest-httpserver>=1.0; extra == 'dev'
+Requires-Dist: pytest>=8.2; extra == 'dev'
+Requires-Dist: ruff==0.4.4; extra == 'dev'
+Requires-Dist: tqdm>=4.66; extra == 'dev'
+Provides-Extra: docs
+Requires-Dist: mkdocs-material<10,>=9.5; extra == 'docs'
+Requires-Dist: mkdocs<2,>=1.6; extra == 'docs'
+Provides-Extra: pgvector
+Requires-Dist: psycopg-binary>=3.1; extra == 'pgvector'
+Provides-Extra: postgres
+Requires-Dist: asyncpg>=0.29; extra == 'postgres'
+Provides-Extra: sqlite
+Requires-Dist: aiosqlite>=0.19; extra == 'sqlite'
+Description-Content-Type: text/markdown
+
+![TwitterBanner\_SkyHyperpole2\_1991](https://github.com/user-attachments/assets/be996e61-d7f0-42aa-a38b-dae32e8f40f7)
+
+# Typus
+
+[![CI](https://github.com/polli-labs/typus/actions/workflows/ci.yml/badge.svg)](https://github.com/polli-labs/typus/actions/workflows/ci.yml)
+
+**Shared taxonomy & geo‑temporal types for the Polli‑Labs ecological stack**
+
+Typus centralises every domain object that the rest of our platform —
+`linnaeus`, `pollinalysis-server`, dashboards … — needs: taxon records,
+clades, hierarchical classification results, projection helpers and async
+database services. Anything that speaks taxonomy imports **Typus** and stays DRY.
+
+---
+
+## Features
+
+* **Wide ancestry view** – `expanded_taxa` ORM exposes each rank (L10 → L70)
+  on a single row for constant‑time lineage queries.
+* **Async services** – `PostgresTaxonomyService` (ltree) &
+  `SQLiteTaxonomyService` (fixture) share one interface.
+* **Pydantic v2 models** – `Taxon`, `Clade`,
+  `HierarchicalClassificationResult`, all JSON‑Schema‑exportable.
+* **Projection utils** – lat/lon ↔ unit‑sphere, cyclical‑time features,
+  multi‑scale elevation sinusoids.
+* **Optional drivers only when you need them** – install
+  `polli-typus[postgres]` or `[sqlite]`; core install stays lightweight.
+* **Offline SQLite loader** – `typus-load-sqlite` CLI builds and caches the offline dataset
+
+---
+
+## Requirements
+
+* Python **≥ 3.10**
+
+---
+
+## Installation
+
+### Core (no DB drivers)
+
+```bash
+uv pip install polli-typus        # import typus
+```
+
+### With Postgres backend
+
+```bash
+uv pip install "polli-typus[postgres]"    # adds asyncpg
+```
+
+### With SQLite only (CI, offline, sandboxes)
+
+```bash
+uv pip install "polli-typus[sqlite]"
+```
+
+### Development / tests / lint
+
+```bash
+uv pip install -e ".[dev,sqlite]"   # pytest, pytest-asyncio, ruff, pre-commit, aiosqlite …
+```
+
+Install with plain pip:
+
+```bash
+pip install -e ".[dev,sqlite]"
+```
+
+---
+
+## Quick start
+
+### SQLite (recommended for getting started)
+
+```bash
+# Download or build the expanded taxonomy dataset locally (~475MB sqlite / ~440MB tsv.gz)
+# The loader creates recommended indexes by default for fast name search
+typus-load-sqlite --sqlite expanded_taxa.sqlite
+```
+
+```python
+from pathlib import Path
+from typus.services import SQLiteTaxonomyService
+
+svc = SQLiteTaxonomyService(Path("expanded_taxa.sqlite"))
+bee = await svc.get_taxon(630955)           # Anthophila
+print(bee.scientific_name, bee.rank_level)  # Anthophila RankLevel.L32
+```
+
+You can also load on-demand in code (will download if missing):
+
+```python
+from pathlib import Path
+from typus.services import load_expanded_taxa, SQLiteTaxonomyService
+
+db_path = load_expanded_taxa(Path("expanded_taxa.sqlite"))  # create_indexes=True by default
+svc = SQLiteTaxonomyService(db_path)
+```
+
+### Name search (v0.4.0+)
+
+```python
+# Scientific prefix match
+taxa = await svc.search_taxa("Apis", scopes={"scientific"}, match="prefix")
+
+# Vernacular (common name) exact
+taxa = await svc.search_taxa("honey bee", scopes={"vernacular"}, match="exact")
+```
+
+### Elevation (Postgres only)
+
+```python
+import os
+from typus import PostgresRasterElevation
+
+dsn = os.getenv("ELEVATION_DSN") or os.getenv("TYPUS_TEST_DSN")
+elev = PostgresRasterElevation(dsn, raster_table=os.getenv("ELEVATION_TABLE", "elevation_raster"))
+
+la = await elev.elevation(34.0522, -118.2437)
+vals = await elev.elevations([
+    (34.0522, -118.2437),  # LA
+    (0.0, -30.0),          # ocean (likely None)
+])
+```
+
+### Geo helpers
+
+```python
+from typus import latlon_to_unit_sphere
+print(latlon_to_unit_sphere(31.5, -110.4))  # → x, y, z on S²
+```
+
+### Postgres (optional for production deployments)
+
+```python
+from typus import PostgresTaxonomyService
+svc = PostgresTaxonomyService("postgresql+asyncpg://user:pw@host/db")
+bee = await svc.get_taxon(630955)
+```
+
+---
+
+## Developer guide
+
+* **Lint & tests (one‑liner)**
+
+  ```bash
+  ruff format . && ruff check . && pytest -q
+  ```
+
+* **Format whole repo**
+
+  ```bash
+  ruff format .
+  ```
+
+* **JSON Schemas** – `python -m typus.export_schemas` → `typus/schemas/`
+
+* **SQLite fixture** – `python scripts/gen_fixture_sqlite.py`
+
+* **Pre‑commit hooks** – `pre-commit install`
+
+### Environment Variables
+
+- `TYPUS_TEST_DSN`: Postgres DSN for tests and perf harness (e.g., `postgresql+asyncpg://user:pw@host/db`).
+- `POSTGRES_DSN`: Alternate Postgres DSN; used if `TYPUS_TEST_DSN` is unset.
+- `ELEVATION_DSN`: Optional DSN override for elevation tests; falls back to `TYPUS_TEST_DSN`.
+- `ELEVATION_TABLE`: Elevation raster table name (default: `elevation_raster`).
+- `TYPUS_ELEVATION_TEST`: Set `1` to enable guarded elevation tests.
+- Perf harness:
+  - `TYPUS_PERF_WRITE=1`: write report to `dev/agents/perf_report.md`.
+  - `TYPUS_PERF_VERIFY=1`: enable result sanity checks.
+  - `TYPUS_PERF_EXPLAIN=1`: append PG EXPLAIN snippets.
+
+---
+
+## Publishing (maintainers)
+
+See `build/typus_publish.md` for tag → TestPyPI → PyPI workflow.
+
+---
+
+## License
+
+MIT © 2025 Polli Labs

@@ -1,0 +1,3 @@
+[console_scripts]
+typus-load-sqlite = typus.services.sqlite_loader:main
+typus-pg-ensure-indexes = typus.services.pg_index_helper:cli
