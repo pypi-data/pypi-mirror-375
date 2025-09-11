@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Report</title>
+    <style>
+        body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: 20px auto; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .header { background-color: #007bff; color: white; padding: 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 20px; }
+        .footer { background-color: #f4f4f4; color: #666; padding: 15px; text-align: center; font-size: 12px; border-top: 1px solid #ddd; }
+        h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; margin-top: 30px; }
+        details { border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; }
+        summary { padding: 10px; font-weight: bold; cursor: pointer; background-color: #f9f9f9; }
+        .details-content { padding: 15px; border-top: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+        .info-link { display: inline-block; margin-left: 4px; text-decoration: none; border: 1px solid #999; color: #555; background:#f7f7f7; border-radius: 50%; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; font-weight: 700; cursor: help; }
+        .glossary { font-size: 13px; }
+        .glossary h3 { margin-top: 24px; }
+        .glossary dt { font-weight: 700; }
+        .glossary dd { margin: 0 0 10px 0; color: #444; }
+        .legend { background:#fafafa; border:1px solid #eee; padding:10px; border-radius:6px; margin-top:15px; font-size:13px; }
+        .legend .item { margin-right:8px; display:inline-block; }
+        .legend .label { margin-right:3px; color:#333; }
+        .back-to-top { display:inline-block; margin: 6px 0 16px 0; font-size:12px; color:#007bff; text-decoration:none; }
+        /* Badge chips to avoid inline conditional CSS */
+        .chip { display:inline-block; padding: 3px 8px; border-radius:999px; font-weight:600; font-size:12px; }
+        .chip-bullish { background:#e8f5e9; color:#1b5e20; }
+        .chip-bearish { background:#ffebee; color:#c62828; }
+        .chip-neutral { background:#eceff1; color:#455a64; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Stock & Mutual Fund Analysis Report</h1>
+            <p>{{ report_date }}</p>
+        </div>
+        <div class="content">
+            <div id="top"></div>
+            <div class="legend">
+                <strong>Metrics Legend:</strong>
+                <span class="item"><span class="label">RSI</span><a class="info-link" href="#glossary-rsi" title="What is RSI?">i</a></span>
+                <span class="item"><span class="label">SMA</span><a class="info-link" href="#glossary-sma" title="What is SMA?">i</a></span>
+                <span class="item"><span class="label">EMA</span><a class="info-link" href="#glossary-ema" title="What is EMA?">i</a></span>
+                <span class="item"><span class="label">MACD</span><a class="info-link" href="#glossary-macd" title="What is MACD?">i</a></span>
+                <span class="item"><span class="label">Bollinger</span><a class="info-link" href="#glossary-bollinger" title="What are Bollinger Bands?">i</a></span>
+                <span class="item"><span class="label">P/E</span><a class="info-link" href="#glossary-pe" title="What is P/E?">i</a></span>
+                <span class="item"><span class="label">P/B</span><a class="info-link" href="#glossary-pb" title="What is P/B?">i</a></span>
+                <span class="item"><span class="label">P/S</span><a class="info-link" href="#glossary-ps" title="What is P/S?">i</a></span>
+                <span class="item"><span class="label">PEG</span><a class="info-link" href="#glossary-peg" title="What is PEG?">i</a></span>
+                <span class="item"><span class="label">CAGR</span><a class="info-link" href="#glossary-cagr" title="What is CAGR?">i</a></span>
+                <span class="item"><span class="label">Drawdown</span><a class="info-link" href="#glossary-drawdown" title="What is Drawdown?">i</a></span>
+                <span class="item"><span class="label">Volatility</span><a class="info-link" href="#glossary-stddev" title="What is Volatility?">i</a></span>
+                <span class="item"><span class="label">Support</span><a class="info-link" href="#glossary-support" title="What is Support?">i</a></span>
+                <span class="item"><span class="label">Resistance</span><a class="info-link" href="#glossary-resistance" title="What is Resistance?">i</a></span>
+                <span class="item"><span class="label">YTM</span><a class="info-link" href="#glossary-ytm" title="What is YTM?">i</a></span>
+                <span class="item"><span class="label">Duration</span><a class="info-link" href="#glossary-duration" title="What is Duration?">i</a></span>
+                <span class="item"><span class="label">Convexity</span><a class="info-link" href="#glossary-convexity" title="What is Convexity?">i</a></span>
+                <span class="item"><span class="label">Current Yield</span><a class="info-link" href="#glossary-current-yield" title="What is Current Yield?">i</a></span>
+                <span class="item"><span class="label">Accrued</span><a class="info-link" href="#glossary-accrued" title="What is Accrued Interest?">i</a></span>
+                <span class="item"><span class="label">Dirty/Clean</span><a class="info-link" href="#glossary-dirty-clean" title="Dirty vs Clean Price">i</a></span>
+                <span class="item"><span class="label">Spread</span><a class="info-link" href="#glossary-spread" title="What is Spread?">i</a></span>
+            </div>
+            <h2>Market Indices Analysis</h2>
+            {% if analysis.index_results %}
+            <table>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Index Name</th>
+                    <th>Close</th>
+                    <th>SMA 20</th>
+                    <th>SMA 50</th>
+                    <th>200D MA</th>
+                    <th>1W</th>
+                    <th>1M</th>
+                    <th>Trend (SMA20/50)</th>
+                    <th>1D Change</th>
+                    <th>RSI (14)</th>
+                </tr>
+                {% for index in analysis.index_results %}
+                {% set index_name = {
+                    '^NSEI': 'NIFTY 50',
+                    '^CNXBL': 'NIFTY LargeMidcap 250',
+                    '^CRSMID': 'NIFTY Midcap 150',
+                    '^CRSSML': 'NIFTY Smallcap 250'
+                }.get(index.symbol, index.name) %}
+                <tr>
+                    <td>{{ index.symbol }}</td>
+                    <td>{{ index_name }}</td>
+                    <td>{% if index.technical_indicators.close is number %}{{ index.technical_indicators.close|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if index.technical_indicators.sma_20 is number %}{{ index.technical_indicators.sma_20|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if index.technical_indicators.sma_50 is number %}{{ index.technical_indicators.sma_50|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if index.technical_indicators.sma_200 is number %}{{ index.technical_indicators.sma_200|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if index.technical_indicators.weekly_return is number %}{{ index.technical_indicators.weekly_return|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if index.technical_indicators.monthly_return is number %}{{ index.technical_indicators.monthly_return|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>
+                        {% set cross = index.technical_indicators.sma_20_50_crossover %}
+                        {% if cross %}
+                            {% set chip_class = 'chip-neutral' %}
+                            {% if cross == 'bullish' %}{% set chip_class = 'chip-bullish' %}{% elif cross == 'bearish' %}{% set chip_class = 'chip-bearish' %}{% endif %}
+                            <span class="chip {{ chip_class }}">
+                                {% if cross == 'bullish' %}Bullish 20>50{% elif cross == 'bearish' %}Bearish 20<50{% else %}Neutral{% endif %}
+                            </span>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set dr = index.technical_indicators.daily_return %}
+                        {% if dr is number %}
+                            {% set chip_class = 'chip-neutral' %}
+                            {% if dr > 0 %}{% set chip_class = 'chip-bullish' %}{% elif dr < 0 %}{% set chip_class = 'chip-bearish' %}{% endif %}
+                            <span class="chip {{ chip_class }}">
+                                {% if dr > 0 %}▲{% elif dr < 0 %}▼{% else %}•{% endif %}
+                                {{ dr|round(2) }}%
+                            </span>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>{% if index.technical_indicators.rsi is number %}{{ index.technical_indicators.rsi|round(2) }}{% else %}N/A{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No index data available.</p>
+            {% endif %}
+
+            <h2>Stock Analysis Summary</h2>
+            <table class="summary-table">
+                <tr>
+                    <th>Stock</th>
+                    <th>Current Price</th>
+                    <th>1D Change</th>
+                    <th>1Y CAGR</th>
+                    <th>3Y CAGR</th>
+                    <th>5Y CAGR</th>
+                    <th>RSI (14)</th>
+                    <th>50D MA</th>
+                    <th>200D MA</th>
+                    <th>P/E</th>
+                    <th>P/B</th>
+                    <th>P/S</th>
+                    <th>PEG</th>
+                    <th>Recommendation</th>
+                </tr>
+                {% for result in analysis.stock_results %}
+                <tr>
+                    <td>{{ result.symbol }}</td>
+                    <td>{% if result.technical_indicators.close is number %}{{ result.technical_indicators.close|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>
+                        {% set dr = result.technical_indicators.daily_return %}
+                        {% if dr is number %}
+                            {% set chip_class = 'chip-neutral' %}
+                            {% if dr > 0 %}{% set chip_class = 'chip-bullish' %}{% elif dr < 0 %}{% set chip_class = 'chip-bearish' %}{% endif %}
+                            <span class="chip {{ chip_class }}">{% if dr > 0 %}▲{% elif dr < 0 %}▼{% else %}•{% endif %} {{ dr|round(2) }}%</span>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>{% if result.technical_indicators.cagr_1y is number %}{{ result.technical_indicators.cagr_1y|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.cagr_3y is number %}{{ result.technical_indicators.cagr_3y|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.cagr_5y is number %}{{ result.technical_indicators.cagr_5y|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.rsi is number %}{{ result.technical_indicators.rsi|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.sma_50 is number %}{{ result.technical_indicators.sma_50|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.technical_indicators.sma_200 is number %}{{ result.technical_indicators.sma_200|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.fundamental_metrics.pe_ratio is number %}{{ result.fundamental_metrics.pe_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.fundamental_metrics.pb_ratio is number %}{{ result.fundamental_metrics.pb_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.fundamental_metrics.price_to_sales is number %}{{ result.fundamental_metrics.price_to_sales|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if result.fundamental_metrics.peg_ratio is number %}{{ result.fundamental_metrics.peg_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{{ result.recommendation.action if result.recommendation else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            {% if analysis.stock_results and analysis.stock_results|length > 0 %}
+            {% set sorted_by_change = analysis.stock_results|sort(attribute='technical_indicators.daily_return', reverse=true) %}
+            {% set top_gainers = sorted_by_change[:5] %}
+            {% set sorted_by_change_asc = analysis.stock_results|sort(attribute='technical_indicators.daily_return') %}
+            {% set top_losers = sorted_by_change_asc[:5] %}
+
+            <h3>Top 5 Gainers & Losers (1D)</h3>
+            <table class="summary-table">
+                <tr>
+                    <th colspan="3">Top 5 Gainers</th>
+                    <th></th>
+                    <th colspan="3">Top 5 Losers</th>
+                </tr>
+                <tr>
+                    <th>Stock</th><th>1D Change</th><th>Price</th>
+                    <th></th>
+                    <th>Stock</th><th>1D Change</th><th>Price</th>
+                </tr>
+                {% for i in range(0, 5) %}
+                <tr>
+                    <td>{% if top_gainers|length > i %}{{ top_gainers[i].symbol }}{% else %}-{% endif %}</td>
+                    <td>{% if top_gainers|length > i and top_gainers[i].technical_indicators.daily_return is number %}{{ top_gainers[i].technical_indicators.daily_return|round(2) }}%{% else %}-{% endif %}</td>
+                    <td>{% if top_gainers|length > i and top_gainers[i].technical_indicators.close is number %}{{ top_gainers[i].technical_indicators.close|round(2) }}{% else %}-{% endif %}</td>
+                    <td></td>
+                    <td>{% if top_losers|length > i %}{{ top_losers[i].symbol }}{% else %}-{% endif %}</td>
+                    <td>{% if top_losers|length > i and top_losers[i].technical_indicators.daily_return is number %}{{ top_losers[i].technical_indicators.daily_return|round(2) }}%{% else %}-{% endif %}</td>
+                    <td>{% if top_losers|length > i and top_losers[i].technical_indicators.close is number %}{{ top_losers[i].technical_indicators.close|round(2) }}{% else %}-{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+
+            <h2>Detailed Stock Analysis</h2>
+            {% for result in analysis.stock_results %}
+            <details open>
+                <summary style="font-size: 1.2em; font-weight: bold;">{{ result.symbol }} - {{ result.metadata['info']['longName'] }}</summary>
+                <div class="details-content">
+                    <h3>Summary</h3>
+                    <table class="summary-table">
+                        <tr>
+                            <th>Current Price</th>
+                            <th>1D Change</th>
+                            <th>RSI (14)</th>
+                            <th>50D MA</th>
+                            <th>200D MA</th>
+                            <th>P/E</th>
+                            <th>P/B</th>
+                            <th>P/S</th>
+                            <th>PEG</th>
+                        </tr>
+                        <tr>
+                            <td>{% if result.technical_indicators.close is number %}{{ result.technical_indicators.close|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>
+                                {% set dr = result.technical_indicators.daily_return %}
+                                {% if dr is number %}
+                                    {% set chip_class = 'chip-neutral' %}
+                                    {% if dr > 0 %}{% set chip_class = 'chip-bullish' %}{% elif dr < 0 %}{% set chip_class = 'chip-bearish' %}{% endif %}
+                                    <span class="chip {{ chip_class }}">{% if dr > 0 %}▲{% elif dr < 0 %}▼{% else %}•{% endif %} {{ dr|round(2) }}%</span>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>{% if result.technical_indicators.rsi is number %}{{ result.technical_indicators.rsi|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.technical_indicators.sma_50 is number %}{{ result.technical_indicators.sma_50|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.technical_indicators.sma_200 is number %}{{ result.technical_indicators.sma_200|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.fundamental_metrics.pe_ratio is number %}{{ result.fundamental_metrics.pe_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.fundamental_metrics.pb_ratio is number %}{{ result.fundamental_metrics.pb_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.fundamental_metrics.price_to_sales is number %}{{ result.fundamental_metrics.price_to_sales|round(2) }}{% else %}N/A{% endif %}</td>
+                            <td>{% if result.fundamental_metrics.peg_ratio is number %}{{ result.fundamental_metrics.peg_ratio|round(2) }}{% else %}N/A{% endif %}</td>
+                        </tr>
+                    </table>
+
+                    <h3>Detailed Analysis</h3>
+                    <table class="detailed-table">
+                        <tr><th>Metric</th><th>Value</th><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Close</td><td>{% if result.technical_indicators.close is number %}{{ result.technical_indicators.close|round(2) }}{% else %}N/A{% endif %}</td><td>Daily Return</td><td>{% if result.technical_indicators.daily_return is number %}{{ result.technical_indicators.daily_return|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>SMA 20 <span title="Simple Moving Average over 20 days" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.sma_20 is number %}{{ result.technical_indicators.sma_20|round(2) }}{% else %}N/A{% endif %}</td><td>SMA 50 <span title="Simple Moving Average over 50 days" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.sma_50 is number %}{{ result.technical_indicators.sma_50|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>SMA 200 <span title="Simple Moving Average over 200 days (long-term)" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.sma_200 is number %}{{ result.technical_indicators.sma_200|round(2) }}{% else %}N/A{% endif %}</td><td>EMA 20 <span title="Exponential Moving Average over 20 days" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.ema_20 is number %}{{ result.technical_indicators.ema_20|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>EMA 50 <span title="Exponential Moving Average over 50 days" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.ema_50 is number %}{{ result.technical_indicators.ema_50|round(2) }}{% else %}N/A{% endif %}</td><td>RSI <span title="Relative Strength Index (14): Momentum oscillator; >70 overbought, <30 oversold" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.rsi is number %}{{ result.technical_indicators.rsi|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>MACD <span title="Moving Average Convergence Divergence" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.macd is number %}{{ result.technical_indicators.macd|round(2) }}{% else %}N/A{% endif %}</td><td>MACD Signal <span title="Signal line for MACD" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.macd_signal is number %}{{ result.technical_indicators.macd_signal|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Middle <span title="20-day moving average used in Bollinger Bands" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.bollinger.middle is number %}{{ result.technical_indicators.bollinger.middle|round(2) }}{% else %}N/A{% endif %}</td><td>Bollinger Upper <span title="Upper band: Middle + 2 standard deviations" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.bollinger.upper is number %}{{ result.technical_indicators.bollinger.upper|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Lower <span title="Lower band: Middle - 2 standard deviations" style="font-size:11px; color:#666; cursor:help">&#9432;</span></td><td>{% if result.technical_indicators.bollinger.lower is number %}{{ result.technical_indicators.bollinger.lower|round(2) }}{% else %}N/A{% endif %}</td><td>Volume</td><td>{{ '{:,.0f}'.format(result.technical_indicators.volume) if result.technical_indicators.volume is not none else 'N/A' }}</td></tr>
+                        <tr><td>P/E</td><td>{% if result.fundamental_metrics.pe_ratio is number %}{{ result.fundamental_metrics.pe_ratio|round(2) }}{% else %}N/A{% endif %}</td><td>P/B</td><td>{% if result.fundamental_metrics.pb_ratio is number %}{{ result.fundamental_metrics.pb_ratio|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>P/S</td><td>{% if result.fundamental_metrics.price_to_sales is number %}{{ result.fundamental_metrics.price_to_sales|round(2) }}{% else %}N/A{% endif %}</td><td>PEG</td><td>{% if result.fundamental_metrics.peg_ratio is number %}{{ result.fundamental_metrics.peg_ratio|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Market Cap</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.market_cap) if result.fundamental_metrics.market_cap is not none else 'N/A' }}</td><td>Enterprise Value</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.enterprise_value) if result.fundamental_metrics.enterprise_value is not none else 'N/A' }}</td></tr>
+                        <tr><td>Price to Sales</td><td>{% if result.fundamental_metrics.price_to_sales is number %}{{ result.fundamental_metrics.price_to_sales|round(2) }}{% else %}N/A{% endif %}</td><td>Profit Margins</td><td>{% if result.fundamental_metrics.profit_margins is number %}{{ result.fundamental_metrics.profit_margins|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Revenue Growth</td><td>{% if result.fundamental_metrics.revenue_growth is number %}{{ result.fundamental_metrics.revenue_growth|round(2) }}{% else %}N/A{% endif %}</td><td>Earnings Growth</td><td>{% if result.fundamental_metrics.earnings_growth is number %}{{ result.fundamental_metrics.earnings_growth|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Debt to Equity</td><td>{% if result.fundamental_metrics.debt_to_equity is number %}{{ result.fundamental_metrics.debt_to_equity|round(2) }}{% else %}N/A{% endif %}</td><td>Total Debt</td><td>{{ '{:,.0f}'.format(result.fundamental_metrics.total_debt) if result.fundamental_metrics.total_debt is not none else 'N/A' }}</td></tr>
+                        <tr><td>Payout Ratio</td><td>{% if result.fundamental_metrics.payout_ratio is number %}{{ result.fundamental_metrics.payout_ratio|round(2) }}{% else %}N/A{% endif %}</td><td></td><td></td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No stock data available.</p>
+            {% endfor %}
+
+            <h2>Mutual Fund Summary</h2>
+            {% if analysis.mutual_fund_summaries %}
+            <table class="summary-table">
+                <tr>
+                    <th>Fund</th>
+                    <th>RSI (14)</th>
+                    <th>1Y CAGR</th>
+                    <th>3Y CAGR</th>
+                    <th>5Y CAGR</th>
+                    <th>Volatility</th>
+                </tr>
+                {% for summary in analysis.mutual_fund_summaries %}
+                <tr>
+                    <td>{{ summary.name }}</td>
+                    <td>{% if summary.rsi is number %}{{ summary.rsi|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if summary.cagr_1y is number %}{{ summary.cagr_1y|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if summary.cagr_3y is number %}{{ summary.cagr_3y|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if summary.cagr_5y is number %}{{ summary.cagr_5y|round(2) }}%{% else %}N/A{% endif %}</td>
+                    <td>{% if summary.annual_volatility is number %}{{ summary.annual_volatility|round(2) }}%{% else %}N/A{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No mutual fund data available.</p>
+            {% endif %}
+
+            <h2>Mutual Fund Analysis</h2>
+            {% for summary in analysis.mutual_fund_summaries %}
+            <details open>
+                <summary style="font-size: 1.2em; font-weight: bold;">{{ summary.name }}</summary>
+                <div class="details-content">
+                    <h3>Performance Metrics</h3>
+                    <table>
+                        <tr><th>Period</th><th>CAGR</th></tr>
+                        <tr><td>1 Year</td><td>{% if summary.cagr_1y is number %}{{ summary.cagr_1y|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>3 Years</td><td>{% if summary.cagr_3y is number %}{{ summary.cagr_3y|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>5 Years</td><td>{% if summary.cagr_5y is number %}{{ summary.cagr_5y|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                    </table>
+
+                    <h3>Indicators</h3>
+                    <table>
+                        <tr><th>Indicator</th><th>Value</th></tr>
+                        <tr><td>RSI (14)</td><td>{% if summary.rsi is number %}{{ summary.rsi|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>20-Day MA</td><td>{% if summary.ma_20 is number %}{{ summary.ma_20|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>20-Day Std Dev</td><td>{% if summary['20d_std'] is number %}{{ summary['20d_std']|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Support</td><td>{% if summary.support is number %}{{ summary.support|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Resistance</td><td>{% if summary.resistance is number %}{{ summary.resistance|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Upper</td><td>{% if summary.upper_band is number %}{{ summary.upper_band|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Bollinger Lower</td><td>{% if summary.lower_band is number %}{{ summary.lower_band|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                    </table>
+
+                    <h3>Risk Analysis</h3>
+                    <table>
+                        <tr><th>Metric</th><th>Value</th></tr>
+                        <tr><td>Max Drawdown</td><td>{% if summary.max_drawdown is number %}{{ summary.max_drawdown|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Standard Deviation</td><td>{% if summary.annual_volatility is number %}{{ summary.annual_volatility|round(2) }}%{% else %}N/A{% endif %}</td></tr>
+                    </table>
+                </div>
+            </details>
+            {% else %}
+            <p>No mutual fund data available.</p>
+            {% endfor %}
+
+            {% if analysis.bond_results and analysis.bond_results|length > 0 %}
+            <h2>Corporate Bonds Summary</h2>
+            <table class="summary-table">
+                <tr>
+                    <th>ISIN</th>
+                    <th>Issuer</th>
+                    <th>Coupon %</th>
+                    <th>Maturity</th>
+                    <th>Clean Price</th>
+                    <th>Dirty Price</th>
+                    <th>Accrued</th>
+                    <th>YTM %</th>
+                    <th>YTC %</th>
+                    <th>YTW %</th>
+                    <th>Current Yield %</th>
+                    <th>Mod Duration</th>
+                    <th>Convexity</th>
+                    <th>Spread (bps)</th>
+                    <th>Qty</th>
+                    <th>Market Value</th>
+                    <th>Next Call</th>
+                </tr>
+                {% for b in analysis.bond_results %}
+                <tr>
+                    <td>{{ b.isin }}</td>
+                    <td>{{ b.issuer }}</td>
+                    <td>{% if b.coupon is number %}{{ b.coupon|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{{ b.maturity_date }}</td>
+                    <td>{% if b.clean_price is number %}{{ b.clean_price|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.dirty_price is number %}{{ b.dirty_price|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.accrued_interest is number %}{{ b.accrued_interest|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.ytm is number %}{{ b.ytm|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.ytc is number %}{{ b.ytc|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.ytw is number %}{{ b.ytw|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.current_yield is number %}{{ b.current_yield|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.modified_duration is number %}{{ b.modified_duration|round(3) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.convexity is number %}{{ b.convexity|round(3) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if b.spread is number %}{{ (b.spread * 100)|round(1) }}{% else %}N/A{% endif %}</td>
+                    <td>{{ b.quantity or 0 }}</td>
+                    <td>{% if b.market_value is number %}{{ b.market_value|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{{ b.next_call_date or 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            {% if analysis.bond_portfolio %}
+            <h3>Corporate Bond Portfolio Summary</h3>
+            <table class="summary-table">
+                <tr>
+                    <th>Total Bonds</th>
+                    <th>Total Market Value</th>
+                    <th>Weighted Mod Duration</th>
+                    <th>Weighted Convexity</th>
+                </tr>
+                <tr>
+                    <td>{{ analysis.bond_portfolio.count }}</td>
+                    <td>{% if analysis.bond_portfolio.total_market_value is number %}{{ analysis.bond_portfolio.total_market_value|round(2) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if analysis.bond_portfolio.weighted_modified_duration is number %}{{ analysis.bond_portfolio.weighted_modified_duration|round(3) }}{% else %}N/A{% endif %}</td>
+                    <td>{% if analysis.bond_portfolio.weighted_convexity is number %}{{ analysis.bond_portfolio.weighted_convexity|round(3) }}{% else %}N/A{% endif %}</td>
+                </tr>
+            </table>
+            {% endif %}
+
+            <h3>Corporate Bonds - Details</h3>
+            {% for b in analysis.bond_results %}
+            <details>
+                <summary style="font-size: 1.1em; font-weight: bold;">{{ b.issuer }} ({{ b.isin }})</summary>
+                <div class="details-content">
+                    <table class="detailed-table">
+                        <tr><th>Field</th><th>Value</th><th>Field</th><th>Value</th></tr>
+                        <tr><td>ISIN</td><td>{{ b.isin }}</td><td>Issuer</td><td>{{ b.issuer }}</td></tr>
+                        <tr><td>Coupon %</td><td>{% if b.coupon is number %}{{ b.coupon|round(2) }}{% else %}N/A{% endif %}</td><td>Frequency</td><td>{{ b.frequency }}</td></tr>
+                        <tr><td>Maturity</td><td>{{ b.maturity_date }}</td><td>Face Value</td><td>{% if b.face_value is number %}{{ b.face_value|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Day Count</td><td>{{ b.day_count }}</td><td>Rating</td><td>{{ b.rating or 'N/A' }}</td></tr>
+                        <tr><td>Settlement</td><td>{{ b.settlement_date or 'N/A' }}</td><td>Clean Price</td><td>{% if b.clean_price is number %}{{ b.clean_price|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Accrued</td><td>{% if b.accrued_interest is number %}{{ b.accrued_interest|round(2) }}{% else %}N/A{% endif %}</td><td>Dirty Price</td><td>{% if b.dirty_price is number %}{{ b.dirty_price|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>YTM %</td><td>{% if b.ytm is number %}{{ b.ytm|round(2) }}{% else %}N/A{% endif %}</td><td>YTC %</td><td>{% if b.ytc is number %}{{ b.ytc|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>YTW %</td><td>{% if b.ytw is number %}{{ b.ytw|round(2) }}{% else %}N/A{% endif %}</td><td>Current Yield %</td><td>{% if b.current_yield is number %}{{ b.current_yield|round(2) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Macaulay Duration</td><td>{% if b.macaulay_duration is number %}{{ b.macaulay_duration|round(3) }}{% else %}N/A{% endif %}</td><td>Modified Duration</td><td>{% if b.modified_duration is number %}{{ b.modified_duration|round(3) }}{% else %}N/A{% endif %}</td></tr>
+                        <tr><td>Convexity</td><td>{% if b.convexity is number %}{{ b.convexity|round(3) }}{% else %}N/A{% endif %}</td><td>Spread (bps)</td><td>{% if b.spread is number %}{{ (b.spread * 100)|round(1) }}{% else %}N/A{% endif %}</td></tr>
+                    </table>
+                </div>
+            </details>
+            {% endfor %}
+            {% endif %}
+            <div class="glossary" id="metrics-glossary">
+                <h2>Metrics Glossary</h2>
+                <dl>
+                    <dt id="glossary-pe">P/E (Price-to-Earnings)</dt>
+                    <dd>Price per share divided by earnings per share.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-pb">P/B (Price-to-Book)</dt>
+                    <dd>Market price divided by book value per share.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-ps">P/S (Price-to-Sales)</dt>
+                    <dd>Stock price divided by sales per share.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-peg">PEG (Price/Earnings-to-Growth)</dt>
+                    <dd>PEG = (P/E) / (EPS growth). Lower values can indicate better value for the growth rate.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-rsi">RSI (Relative Strength Index)</dt>
+                    <dd>Momentum oscillator; values above 70 may indicate overbought, below 30 oversold.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-sma">SMA (Simple Moving Average)</dt>
+                    <dd>Average of prices over a set window (e.g., 50D, 200D) indicating trend.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-ema">EMA (Exponential Moving Average)</dt>
+                    <dd>Moving average that weights recent prices more heavily.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-macd">MACD</dt>
+                    <dd>Difference between two EMAs with a signal line; used to identify momentum shifts.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-bollinger">Bollinger Bands</dt>
+                    <dd>Bands at ±2 standard deviations from a moving average, indicating volatility.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-cagr">CAGR (Compound Annual Growth Rate)</dt>
+                    <dd>Mean annual growth rate of an investment over a specified time period.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-drawdown">Max Drawdown</dt>
+                    <dd>Largest observed loss from a peak to a trough before a new peak is attained.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-stddev">Volatility (Std Dev)</dt>
+                    <dd>Annualized standard deviation of returns; higher values imply higher risk.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-support">Support</dt>
+                    <dd>A price level where a downtrend can be expected to pause due to demand.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-resistance">Resistance</dt>
+                    <dd>A price level where an uptrend can be expected to pause due to supply.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-ytm">YTM (Yield to Maturity)</dt>
+                    <dd>Annualized return assuming the bond is held to maturity and coupons are reinvested at the same rate.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-duration">Duration</dt>
+                    <dd>Price sensitivity to yield changes. Modified duration approximates % price change for a 1% yield move.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-convexity">Convexity</dt>
+                    <dd>Measures the curvature of the price-yield relationship; improves duration estimate for larger moves.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-current-yield">Current Yield</dt>
+                    <dd>Annual coupon divided by current clean price.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-accrued">Accrued Interest</dt>
+                    <dd>Interest earned since the last coupon date, payable by the buyer to the seller.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-dirty-clean">Dirty vs Clean Price</dt>
+                    <dd>Clean price excludes accrued interest; dirty price includes it (dirty = clean + accrued).</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-spread">Spread</dt>
+                    <dd>Difference between bond YTM and benchmark yield (e.g., government bond), often quoted in basis points.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-ytc">YTC (Yield-to-Call)</dt>
+                    <dd>Annualized yield assuming the bond is called at the next call date at the call price.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-ytw">YTW (Yield-to-Worst)</dt>
+                    <dd>The lowest yield among YTM, YTC, and yield-to-put (if applicable) across relevant dates.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                    <dt id="glossary-market-value">Market Value</dt>
+                    <dd>Position value = Dirty Price/100 × Face Value × Quantity.</dd>
+                    <a class="back-to-top" href="#top">Back to Top ↑</a>
+                </dl>
+            </div>
+
+        </div>
+        <div class="footer">
+            <p>&copy; {{ report_date[:4] }} Stock Analysis Toolkit. All Rights Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
