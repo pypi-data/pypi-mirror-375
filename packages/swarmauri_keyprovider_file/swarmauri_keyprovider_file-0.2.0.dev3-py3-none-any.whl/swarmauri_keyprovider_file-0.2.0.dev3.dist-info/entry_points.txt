@@ -1,0 +1,6 @@
+[peagen.plugins.key_providers]
+file=swarmauri_keyprovider_file.FileKeyProvider:FileKeyProvider
+
+[swarmauri.key_providers]
+FileKeyProvider=swarmauri_keyprovider_file.FileKeyProvider:FileKeyProvider
+
