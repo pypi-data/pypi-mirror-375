@@ -1,0 +1,8 @@
+Metadata-Version: 2.2
+Name: hcle_py
+Version: 0.1.0
+Summary: A High-performance C++ Learning Environment
+Author-Email: Hal Kolb <hal@kolb.com>
+Requires-Dist: numpy
+Requires-Dist: gymnasium
+
