@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: walnutpi
+Version: 1.0.1
+Summary: A module to import all walnutpi libs
+Project-URL: Homepage, https://github.com/sc-bin/
+Project-URL: Repository, https://github.com/sc-bin/
+Author-email: sc-bin <3335447573@qq.com>
+License-Expression: MIT
+License-File: LICENSE
+Keywords: embedded,library,walnutpi
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Build Tools
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# walnutpi.lib
