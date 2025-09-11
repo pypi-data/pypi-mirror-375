@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: mlexlog
+Version: 0.1.1
+Summary: A one liner for ML explainability
+Author-email: Dhruva <rahuldhruva.k9@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/Dhruva-123/exlog
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: pandas>=2.0
+Requires-Dist: shap
+Requires-Dist: scikit-learn>=1.3
+Requires-Dist: xgboost>=1.7
+Requires-Dist: lightgbm>=4.0
+Provides-Extra: torch
+Requires-Dist: torch>=2.0; extra == "torch"
+Provides-Extra: tensorflow
+Requires-Dist: tensorflow>=2.15; extra == "tensorflow"
