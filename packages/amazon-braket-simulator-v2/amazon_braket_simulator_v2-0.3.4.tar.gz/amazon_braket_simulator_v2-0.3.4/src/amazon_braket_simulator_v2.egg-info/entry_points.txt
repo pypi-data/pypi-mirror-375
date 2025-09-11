@@ -1,0 +1,3 @@
+[braket.simulators]
+braket_dm_v2 = braket.simulator_v2.density_matrix_simulator_v2:DensityMatrixSimulatorV2
+braket_sv_v2 = braket.simulator_v2.state_vector_simulator_v2:StateVectorSimulatorV2
