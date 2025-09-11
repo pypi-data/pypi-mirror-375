@@ -1,0 +1,2 @@
+VERSION: str
+CUDA_VERSION: str
