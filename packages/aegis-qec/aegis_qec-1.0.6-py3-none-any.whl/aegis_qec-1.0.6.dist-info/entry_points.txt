@@ -1,0 +1,5 @@
+[console_scripts]
+aegis-export-header = main_export_header:main
+aegis-metrics = main_metrics:main
+aegis-run = main:main
+aegis-threshold = main_threshold:main
