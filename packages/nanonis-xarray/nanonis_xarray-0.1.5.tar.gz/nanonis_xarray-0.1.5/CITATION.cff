@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: nanonis-xarray
+message: If you use this software, please cite it using the metadata in CITATION.cff.
+type: software
+authors:
+  - given-names: Angelo
+    family-names: Peronio
+    orcid: "https://orcid.org/0000-0001-9756-5670"
+license: MIT
+abstract: >-
+  nanonis_xarray is a xarray plugin to read spectroscopy measurements
+  saved in text format (.dat) by a Nanonis Mimea SPM control system
+  from SPECS Surface Nano Analysis GmbH.
+keywords:
+  - python
+  - xarray
+  - STM
+  - AFM
+  - STS
+  - SPS
+  - STM-IETS
+  - Specs
+  - Nanonis
+  - Mimea
+  - dat
+url: "https://github.com/angelo-peronio/nanonis-xarray"
+repository-code: "https://github.com/angelo-peronio/nanonis-xarray"
+repository-artifact: "https://pypi.org/project/nanonis-xarray/"
+version: 0.1.5
+date-released: "2025-09-10"
