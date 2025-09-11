@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: pypeeringmanager
+Version: 1.1.2
+Summary: Peering-Manager API client library
+Home-page: https://github.com/vista-/pypeeringmanager
+Author: vista
+Author-email: vista@birb.network
+License: Apache2
+Keywords: peering-manager,peeringmanager,network-automation
+Classifier: Intended Audience :: Developers
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 2
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pynetbox>=6.1.3
+Dynamic: license-file
+
+# PyPeeringManager
+
+This client library for Peering-Manager is based off of `pynetbox` (https://github.com/digitalocean/pynetbox)
+and can be used in a similar manner.
+
+Peering-Manager's models can be reached through the `peering`, `net` and `extras` attributes of the API object.
