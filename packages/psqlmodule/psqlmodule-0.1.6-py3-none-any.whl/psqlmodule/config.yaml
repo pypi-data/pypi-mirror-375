@@ -1,0 +1,6 @@
+logging:
+  backup_count: 5
+  file_size_mb: 5
+  format: '[%(asctime)s %(process)d %(module)s %(levelname)s]# %(message)s'
+  level: DEBUG
+  log_file: logs/execution.log
