@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+NOTICE
+README.md
+pyproject.toml
+pysisense/__init__.py
+pysisense/access_management.py
+pysisense/dashboard.py
+pysisense/datamodel.py
+pysisense/migration.py
+pysisense/sisenseclient.py
+pysisense/utils.py
+pysisense.egg-info/PKG-INFO
+pysisense.egg-info/SOURCES.txt
+pysisense.egg-info/dependency_links.txt
+pysisense.egg-info/requires.txt
+pysisense.egg-info/top_level.txt
