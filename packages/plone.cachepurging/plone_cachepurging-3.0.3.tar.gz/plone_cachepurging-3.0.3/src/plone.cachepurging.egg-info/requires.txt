@@ -1,0 +1,15 @@
+setuptools
+plone.registry
+requests
+z3c.caching
+Zope
+zope.annotation
+zope.component
+zope.event
+zope.globalrequest
+zope.i18nmessageid
+zope.interface
+zope.schema
+zope.testing
+
+[test]
