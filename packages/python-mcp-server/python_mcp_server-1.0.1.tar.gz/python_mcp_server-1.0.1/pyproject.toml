@@ -1,0 +1,71 @@
+[project]
+name = "python-mcp-server"
+version = "1.0.1"
+description = "A world-class Python interpreter MCP server with session management, health monitoring, and FastMCP middleware"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=1.0.0",
+    "uvicorn>=0.30.0",
+    "jupyter_client>=8.0.0",
+    "matplotlib>=3.7.0",
+    "pandas>=2.0.0",
+    "ipykernel>=6.25.0",
+    "psutil>=5.9.0",
+    "pathlib>=1.0.1",
+]
+
+authors = [
+    { name = "DeadMeme5441", email = "deadunderscorememe@gmail.com" }
+]
+
+keywords = [
+  "mcp", "fastmcp", "jupyter", "python-interpreter", "session-management", "health-monitoring", "mcp-server"
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11", 
+  "Programming Language :: Python :: 3.12",
+  "Framework :: AsyncIO",
+  "Framework :: FastAPI",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+  "License :: OSI Approved :: MIT License",
+]
+
+[project.urls]
+Homepage = "https://deadmeme5441.github.io/python-mcp-server/"
+Repository = "https://github.com/deadmeme5441/python-mcp-server"
+Issues = "https://github.com/deadmeme5441/python-mcp-server/issues"
+Documentation = "https://deadmeme5441.github.io/python-mcp-server/"
+Changelog = "https://github.com/deadmeme5441/python-mcp-server/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+docs = [
+    "mkdocs",
+    "mkdocs-material", 
+    "mkdocs-llmstxt",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.24.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+python-mcp-server = "python_mcp_server.server:main"
+
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/python_mcp_server"]
