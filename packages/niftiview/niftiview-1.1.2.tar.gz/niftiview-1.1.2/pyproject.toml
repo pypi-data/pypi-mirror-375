@@ -1,0 +1,32 @@
+[tool.poetry]
+name = 'niftiview'
+version = '1.1.2'
+description = 'View volumetric images in Python 🧠'
+authors = ['codingfisch <l_fisc17@wwu.de>']
+license = 'MIT'
+readme = 'README.md'
+repository = 'https://github.com/codingfisch/niftiview'
+classifiers = [
+    'Programming Language :: Python :: 3',
+    'Operating System :: OS Independent',
+    'Intended Audience :: Science/Research'
+]
+
+[tool.poetry.dependencies]
+python = '^3.9'
+nibabel = '*'
+pillow = '*'
+cmap = '*'
+tqdm = '*'
+affine-image = '*'
+colorbar = '>=0.2.0'
+
+[tool.poetry.dev-dependencies]
+matplotlib = '*'
+
+[tool.poetry.scripts]
+niftiview-cli = 'niftiview.cli:main'
+
+[build-system]
+requires = ['poetry-core']
+build-backend = 'poetry.core.masonry.api'
