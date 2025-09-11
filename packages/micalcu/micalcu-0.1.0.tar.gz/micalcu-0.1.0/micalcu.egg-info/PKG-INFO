@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: micalcu
+Version: 0.1.0
+Summary: Ejemplo: from calculadora import MiCalculadora
+Author-email: Pedro Shiguihara <p.shiguihara@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/pshiguihara/micalcu
+Keywords: calculator,example,teaching
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# micalcu: un proyectp PyPi
+
+El objetivo de este proyecto es extender funcionalidad para realizar `pip install` y utilizar las funcionalidades de manera rápida y fácil.
+
+Paquete de ejemplo. Uso:
+
+```python
+from calculadora import MiCalculadora
+print(MiCalculadora(2, 3).sumar())  # 5
+```
+
