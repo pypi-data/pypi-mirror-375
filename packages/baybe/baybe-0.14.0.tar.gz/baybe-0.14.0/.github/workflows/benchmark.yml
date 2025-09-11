@@ -1,0 +1,124 @@
+name: Benchmark
+
+on:
+  release:
+    types:
+      - published
+      
+  workflow_dispatch:
+    inputs:
+      group_selection:
+        description: "Group of Benchmarks to Run:"
+        required: true
+        default: "All"
+        type: choice
+        options:
+          - "All"
+          - "Transfer Learning"
+          - "Synthetic"
+          - "Non Transfer Learning"
+
+env:
+  TRANSFER_LEARNING_BENCHMARKS: '["aryl_halide_CT_IM_tl","aryl_halide_IP_CP_tl","aryl_halide_CT_I_BM_tl","direct_arylation_tl_temperature","easom_tl_47_negate_noise5","hartmann_tl_3_20_15","michalewicz_tl_continuous"]'
+  SYNTHETIC_BENCHMARKS: '["synthetic_2C1D_1C","hartmann_3d_discretized","hartmann_6d","hartmann_3d"]'
+  ALL_BENCHMARKS: '["direct_arylation_multi_batch","direct_arylation_single_batch","aryl_halide_CT_IM_tl","aryl_halide_IP_CP_tl","aryl_halide_CT_I_BM_tl","direct_arylation_tl_temperature","easom_tl_47_negate_noise5","hartmann_tl_3_20_15","michalewicz_tl_continuous","synthetic_2C1D_1C","hartmann_3d_discretized","hartmann_6d","hartmann_3d"]'
+  NON_TL_BENCHMARKS: '["direct_arylation_multi_batch","direct_arylation_single_batch","synthetic_2C1D_1C","hartmann_3d_discretized","hartmann_6d","hartmann_3d"]'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      benchmarks_to_execute: ${{ steps.set_benchmarks.outputs.benchmarks_to_execute }}
+    env:
+      RUN_GROUP: ${{ github.event.inputs.group_selection || 'All' }}
+    steps:
+      - name: Build matrix from group
+        id: build_matrix_from_group
+        run: |
+          benchmarks_to_execute='{"benchmark_list": []}'
+
+          if [ "$RUN_GROUP" = "Transfer Learning" ]; then
+            benchmarks_to_execute='{"benchmark_list": ${{ env.TRANSFER_LEARNING_BENCHMARKS }} }'
+          fi
+          if [ "$RUN_GROUP" = "Non Transfer Learning" ]; then
+            benchmarks_to_execute='{"benchmark_list": ${{ env.NON_TL_BENCHMARKS }} }'
+          fi
+          if [ "$RUN_GROUP" = "Synthetic" ]; then
+            benchmarks_to_execute='{"benchmark_list": ${{ env.SYNTHETIC_BENCHMARKS }} }'
+          fi
+          if [ "$RUN_GROUP" = "All" ]; then
+            benchmarks_to_execute='{"benchmark_list": ${{ env.ALL_BENCHMARKS }} }'
+          fi
+
+          echo "benchmarks_to_execute=$benchmarks_to_execute" >> "$GITHUB_ENV"
+
+
+      - name: Set benchmarks output
+        id: set_benchmarks
+        run: |
+          echo 'benchmarks_to_execute=${{ env.benchmarks_to_execute }}' >> "$GITHUB_OUTPUT"
+          number_of_tasks=$(echo '${{ env.benchmarks_to_execute }}' | jq '.benchmark_list | length')
+
+          if [ "$number_of_tasks" -le 0 ]; then
+            echo "Please run at least one benchmark"
+            exit 1
+          fi
+
+  add-runner:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix: ${{ fromJson(needs.prepare.outputs.benchmarks_to_execute) }}
+    steps:
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-session-name: Github_Add_Runner
+          aws-region: eu-central-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Execute Lambda function
+        run: |
+          aws lambda invoke --function-name jit_runner_register_and_create_runner_container  --cli-binary-format raw-in-base64-out --payload '{"github_api_secret": "${{ steps.generate-token.outputs.token }}", "count_container":  1, "container_compute": "M", "repository": "${{ github.repository }}" }'  response.json
+
+          if ! grep -q '"statusCode": 200' response.json; then
+            echo "Lambda function failed. statusCode is not 200."
+            exit 1
+          fi
+
+  benchmark-test:
+    name: run
+    needs: [prepare, add-runner]
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare.outputs.benchmarks_to_execute) }}
+    timeout-minutes: 1440
+    env:
+      BAYBE_BENCHMARKING_PERSISTENCE_PATH: ${{ secrets.TEST_RESULT_S3_BUCKET }}
+      BAYBE_PARALLEL_SIMULATION_RUNS: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        id: setup-python
+        with:
+          python-version: "3.10"
+      - name: Benchmark
+        run: |
+          pip install '.[benchmarking]'
+          python -W ignore -m benchmarks --benchmark-list "${{ matrix.benchmark_list }}"

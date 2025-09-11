@@ -1,0 +1,163 @@
+name: Regular Checks
+on:
+  schedule:
+    # Run roughly every 15 days at 02:08 UTC
+    - cron: '8 2 1,16 * *'
+  workflow_dispatch:
+
+env:
+  COVERAGE_OVERALL_THRESH: 70      # threshold for overall coverage check
+  COVERAGE_INDIVIDUAL_THRESH: 45   # threshold for individual coverage check
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  reminder:
+    runs-on: ubuntu-latest
+    name: "Reminder"
+    continue-on-error: true
+    permissions:
+      issues: write
+    steps:
+      - name: check reminders and notify
+        uses: agrc/reminder-action@v1
+
+  # Warns about broken links in the docs. Especially useful for
+  # those that point to our own github.io page (linkcheck is disabled in the
+  # CI pipeline, because the respective pages are yet to be created at that time).
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.10"}
+      - name: Build Docs
+        run: |
+          pip install tox-uv
+          tox -e docs-py310 -- -r
+
+  lint:
+    strategy:
+      fail-fast: false
+      matrix:
+        py-version: [ {semantic: '3.10', tox: 'py310'},
+                      {semantic: '3.11', tox: 'py311'},
+                      {semantic: '3.12', tox: 'py312'},
+                      {semantic: '3.13', tox: 'py313'} ]
+    name: Lint ${{ matrix.py-version.semantic }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: setup-python
+        with:
+          python-version: ${{ matrix.py-version.semantic }}
+      - name: Run linting
+        run: |
+          pip install tox-uv
+          tox -e lint-${{ matrix.py-version.tox }}
+
+  typecheck:
+    needs: [lint]
+    strategy:
+      fail-fast: false
+      matrix:
+        py-version: [ {semantic: '3.10', tox: 'py310'},
+                      {semantic: '3.11', tox: 'py311'},
+                      {semantic: '3.12', tox: 'py312'},
+                      {semantic: '3.13', tox: 'py313'} ]
+    name: Type Check ${{ matrix.py-version.semantic }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: setup-python
+        with:
+          python-version: ${{ matrix.py-version.semantic }}
+      - name: Run type check
+        run: |
+          pip install tox-uv
+          tox -e mypy-${{ matrix.py-version.tox }}
+
+  audit:
+    needs: [lint]
+    strategy:
+      fail-fast: false
+      matrix:
+        py-version: [ {semantic: '3.10', tox: 'py310'},
+                      {semantic: '3.11', tox: 'py311'},
+                      {semantic: '3.12', tox: 'py312'},
+                      {semantic: '3.13', tox: 'py313'} ]
+    name: Audit ${{ matrix.py-version.semantic }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: setup-python
+        with:
+          python-version: ${{ matrix.py-version.semantic }}
+      - name: Run pip-audit
+        run: |
+          pip install tox-uv
+          tox -e audit-${{ matrix.py-version.tox }}
+
+  coretest:
+    needs: [typecheck, audit]
+    strategy:
+      fail-fast: false
+      matrix:
+        py-version: [ {semantic: '3.10', tox: 'py310'},
+                      {semantic: '3.11', tox: 'py311'},
+                      {semantic: '3.12', tox: 'py312'},
+                      {semantic: '3.13', tox: 'py313'} ]
+    name: Core Tests ${{ matrix.py-version.semantic }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: setup-python
+        with:
+          python-version: ${{ matrix.py-version.semantic }}
+      - name: Run core tests
+        run: |
+          pip install tox-uv
+          tox -e coretest-${{ matrix.py-version.tox }}
+
+  fulltest:
+    needs: [typecheck, audit]
+    strategy:
+      fail-fast: false
+      matrix:
+        py-version: [ {semantic: '3.10', tox: 'py310'},
+                      {semantic: '3.11', tox: 'py311'},
+                      {semantic: '3.12', tox: 'py312'},
+                      {semantic: '3.13', tox: 'py313'} ]
+    name: Full Tests ${{ matrix.py-version.semantic }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: setup-python
+        with:
+          python-version: ${{ matrix.py-version.semantic }}
+      - name: Run full tests
+        run: |
+          pip install tox-uv
+          tox -e fulltest-${{ matrix.py-version.tox }} -- --cov-report=xml
+      - name: "Assert Overall Coverage"
+        run: |
+          pip install coverage
+          coverage report --fail-under=${{ env.COVERAGE_OVERALL_THRESH }}
+      - name: "Assert Individual Coverage"
+        shell: bash
+        run: |
+          coverage report |
+          grep -E -o '[0-9]+%' |
+          tr -d '%' |
+          sed '$d' |
+          awk '{if ( $1<${{ env.COVERAGE_INDIVIDUAL_THRESH }} ) exit 1 }'
