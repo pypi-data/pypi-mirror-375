@@ -1,0 +1,12 @@
+[console_scripts]
+kiso = kiso.__main__:kiso
+
+[kiso.deployment]
+htcondor = kiso.htcondor.__init__
+
+[kiso.experiment]
+pegasus = kiso.workflow.__init__
+
+[kiso.software]
+apptainer = kiso.apptainer.__init__
+docker = kiso.docker.__init__
