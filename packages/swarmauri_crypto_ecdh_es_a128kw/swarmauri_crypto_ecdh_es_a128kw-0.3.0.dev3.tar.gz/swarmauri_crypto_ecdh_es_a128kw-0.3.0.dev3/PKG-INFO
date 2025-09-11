@@ -1,0 +1,31 @@
+Metadata-Version: 2.3
+Name: swarmauri_crypto_ecdh_es_a128kw
+Version: 0.3.0.dev3
+Summary: ECDH-ES+A128KW crypto provider for Swarmauri
+License: Apache-2.0
+Author: Swarmauri
+Author-email: opensource@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Security :: Cryptography
+Classifier: Intended Audience :: Developers
+Requires-Dist: cryptography
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Description-Content-Type: text/markdown
+
+# swarmauri_crypto_ecdh_es_a128kw
+
+ECDH-ES+A128KW key wrapping provider for Swarmauri.
+
+This plugin implements key wrapping and unwrapping using the
+ECDH-ES key agreement scheme combined with AES Key Wrap using a
+128-bit key. It exposes the `ECDHESA128KWCrypto` class which
+conforms to the `ICrypto` contract.
+
