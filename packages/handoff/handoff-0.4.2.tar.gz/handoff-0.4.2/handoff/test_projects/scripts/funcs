@@ -1,0 +1,187 @@
+#!/bin/bash
+
+export RESET="\033[0m"
+export RED="\033[91m"
+export GREEN="\033[32m"
+export BLUE="\033[34m"
+export YELLOW="\033[33m"
+export BLINK="\033[5m"
+export DIM="\033[2m"
+
+BEGINQUOTE='```shell'
+QUOTE='```'
+PROMPT_STYLE="$GREEN $BLINK"
+PROMPT_CHAR="> "
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    DATE_MINUS_7='$(date -I -d "-7 day")'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    DATE_MINUS_7='$(date -v -7d +%F)'
+fi
+
+ListDir() {
+if [[ -z $2 ]]; then STYLE=$DIM; else STYLE=$2; fi
+if [[ ! $MODE = "auto" ]]; then echo -e $STYLE$QUOTE; else echo $BEGINQUOTE; fi
+echo "> ls -l $1"
+if [[ ! $MODE = "auto" ]]; then echo -e $QUOTE$RESET; else echo $QUOTE; fi
+if [[ ! $MODE = "auto" ]]; then echo -e $STYLE$QUOTE; else echo $BEGINQUOTE; fi
+echo
+for i in `ls $1`; do echo " $i"; done
+if [[ ! $MODE = "auto" ]]; then echo -e $QUOTE$RESET; else echo $QUOTE; fi
+}
+
+Cat() {
+if [[ -z $2 ]]; then STYLE=$DIM; else STYLE=$2; fi
+if [[ ! $MODE = "auto" ]]; then echo -e $STYLE$QUOTE; else echo $BEGINQUOTE; fi
+echo "> cat $1"
+if [[ ! $MODE = "auto" ]]; then echo -e $QUOTE$RESET; else echo $QUOTE; fi
+echo
+if [[ ! $MODE = "auto" ]]; then echo -e $STYLE$QUOTE; else echo $BEGINQUOTE; fi
+cat $1
+echo
+if [[ ! $MODE = "auto" ]]; then echo -e $QUOTE$RESET; else echo $QUOTE; fi
+}
+
+Run() {
+if [[ -z $2 ]]; then STYLE=$DIM; else STYLE=$2; fi
+if [[ ! -z $3 ]];then h=$3; else if [[ ! -z $HEADTAIL_LIMIT ]]; then h=$HEADTAIL_LIMIT; else h=0; fi; fi
+if [[ ! $MODE = "auto" ]]; then echo -e $STYLE$QUOTE; else echo $BEGINQUOTE; echo; fi
+if [[ $h -lt 1 ]]; then eval "$1"; else eval "$1" | (head -n ${h}; t=`tail -n $h`; if [[ `echo "$t" | wc -l` -gt 1 ]]; then echo .; echo .; echo .; echo "$t"; fi); fi
+# if [[ $h -lt 1 ]]; then eval "$1"; else eval "$1" | (sed -u ${h}q; t=`tail -n $h`; if [[ `echo "$t" | wc -l` -gt 1 ]]; then echo .; echo .; echo .; echo "$t"; fi); fi
+if [[ ! $MODE = "auto" ]]; then echo -e $QUOTE$RESET; else echo $QUOTE; fi
+}
+
+Command() {
+if [[ ! $MODE = "auto" ]]; then
+  echo -e $GREEN    "$1"$RESET
+  echo '    Hint: type "skip" to skip. "lazy" to run it without typing the command. type "quit" exit this tutorial.'
+  echo
+  read -p "> "
+  while [[ ! $REPLY = $1 && ! $REPLY = "skip" && ! $REPLY = "lazy" && ! $REPLY = "quit" ]]
+  do
+    echo Hmm...you did not enter correctly, try again.
+    read -p "> "
+  done
+fi
+if [[ $REPLY = "quit" ]]; then
+  echo "bye!"
+  exit 0
+fi
+if [[ $MODE = "auto" || $REPLY = $1 || $REPLY = "lazy" ]]; then
+  if [[ ! $MODE = "auto" ]]; then echo -e $STYLE$QUOTE; else echo $BEGINQUOTE; fi
+  echo "> $1"
+  if [[ ! $MODE = "auto" ]]; then echo -e $QUOTE$RESET; else echo $QUOTE; fi
+  Run "$1" "$2" "$3"
+fi
+}
+
+Code() {
+if [[ -z $2 ]]; then STYLE=$DIM; else STYLE=$2; fi
+if [[ ! $MODE = "auto" ]]; then echo -e $STYLE$QUOTE; else echo $BEGINQUOTE; fi
+echo -e $1
+if [[ ! $MODE = "auto" ]]; then echo -e $QUOTE$RESET; else echo $QUOTE; fi
+}
+
+Prompt() {
+if [[ ! $MODE = "auto" ]]; then
+echo -e $1$PROMPT_STYLE; read -p $PROMPT_CHAR -n 1 -r; echo -e $RESET
+if [[ $REPLY =~ ^[Qq]$ ]]
+then
+    echo "bye!"
+    exit 0
+fi
+else
+echo
+fi
+}
+
+Choose() {
+echo $1
+IFS=$'\n' read -r -d '' -a OPTIONS < <( eval $1 )
+i=1
+for s in ${OPTIONS[@]}; do echo "- [$i] $s"; i=$((i+1)); done
+
+read -p "> " -n 1
+while [[ ( "$REPLY" -lt 1 || "$REPLY" -gt ${#OPTIONS[@]} ) ]]
+do
+    echo Hmm...you did not enter the number expected. Plesae try again.
+    read -p "> "
+done
+echo
+CHOICE=$(($REPLY-1))
+}
+
+CheckAws() {
+a=`cat ~/.aws/credentials`
+if [[ ! -f ~/.aws/credentials ]]
+then
+echo "
+Hmm...it looks like you don't have ~/.aws/credentials file set up from
+the previous tutorial. 
+"
+echo -e $GREEN; read -p "Woud you like to go back? (Y/n) " -n 1 -r; echo -e $RESET  # Prompt
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Nn]$ ]]
+then
+    echo "OK!"
+    echo
+    scripts/aws_get_started/03_set_up_aws_account
+    exit 0
+fi
+fi
+}
+
+ChooseAwsProfile() {
+if [[ -z AWS_PROFILE ]]
+then
+echo "
+First we tell AWS which account profile we want to use. Which one would you like to use?
+"
+Choose 'cat ~/.aws/credentials |grep "\[" | sed "s/\[\(.*\)]/\1/" && printf "\0"'
+echo "
+Running this to select the profile:
+"
+Command "export AWS_PROFILE=${OPTIONS[$CHOICE]}"
+fi
+}
+
+Thanks() {
+if [[ ! $MODE = "auto" ]]; then
+echo "
+Great! This concludes this section of the tutorial.
+
+Thanks for completing this section of tutorial. Oh, before you go,
+do you use Twitter? Can you do me a favor and let your fellow engineers know about handoff?
+"
+
+echo -e $GREEN; read -p "Open your browser to auto-draft your tweet? (y/N) " -n 1 -r; echo -e $RESET  # Prompt
+echo    # (optional) move to a new line
+
+URL="https://twitter.com/intent/tweet?text=Engineers%21%20This%20is%20awesome.%20Just%20do%0Apip%20install%20handoff%0Aand%0Ahandoff%20quick_start%20make%0AAnd%20see%20what%20happens.%20https%3A%2F%2Fdev.handoff.cloud"
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+open $URL
+else
+echo "OK! In case you change your mind, here is the link to auto-draft your tweets (you can edit before you tweet)"
+echo -e $GREEN$URL$RESET
+fi
+fi
+}
+
+Continue () {
+if [[ ! $MODE = "auto" ]]; then
+echo -e $GREEN; read -p "Continue? (Y/n) " -n 1 -r; echo -e $RESET  # Prompt
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Nn]$ ]]
+then
+    echo "OK!"
+    echo "Remember that you can continue by"
+    echo -e $GREEN    ./projects/start$RESET
+    echo
+    echo "bye!"
+    exit 0
+else
+$1
+fi
+fi
+}
