@@ -1,0 +1,27 @@
+
+[project]
+name = "mitac-project"
+version = "0.1.4"
+description = ""
+authors = [
+    {name = "ff",email = "abc@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas (>=2.3.2,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "mitac_project", from = "src"}]
+name = "mitac-project"
+description = "My Python library"
+license = "MIT"
+readme = "README.md"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+
