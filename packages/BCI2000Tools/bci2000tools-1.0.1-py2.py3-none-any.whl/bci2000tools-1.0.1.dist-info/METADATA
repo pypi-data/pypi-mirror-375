@@ -1,0 +1,59 @@
+Metadata-Version: 2.1
+Name: BCI2000Tools
+Version: 1.0.1
+Summary: A suite of Python tools for working with BCI2000 data files, processing chains, and live sessions
+Home-page: https://bci2000.org
+License: GPL v3+
+Description-Content-Type: text/x-rst
+Requires-Dist: numpy
+
+
+This toolbox is part of BCI2000, a platform for real-time biosignal acquisition,
+analysis and feedback for brain-computer interfacing and related neurotechnologies.
+These files provide a mixed collection of tools for reading BCI2000 .dat files,
+for performing simple analyses of biosignal data, and for interacting with a
+running BCI2000 session.
+
+BCI2000Tools' relationship with your BCI2000 distribution
+=========================================================
+
+Some of BCI2000Tools' functionality (reading ``.dat`` files, rudimentary signal
+analysis, computing spatial filters, plotting, ...) is self-contained. For this
+reason, we decided to release BCI2000Tools as a self-contained package on PyPI,
+to take its place in the Python-centric ecosystem.
+
+By contrast, some of the toolbox's functionality relies on BCI2000 binaries that
+are not included in the PyPI release: for example, the ``BCI2000Tools.Chain``
+submodule is designed as a Python wrapper around the C++-compiled binaries found
+in the ``tools/cmdline`` subdirectory of a full BCI2000 distribution;
+``BCI2000Tools.Remote`` is a wrapper around BCI2000's ``prog/BCI2000Remote.py``,
+which in turn wraps a dynamic library from, and sends messages to the binaries in,
+the ``prog`` directory. For this reason, the canonical way to install and manage
+BCI2000Tools is not via PyPI at all, but via the bci2000.org subversion repository::
+
+    # (1) register for a free username on bci2000.org;
+    # (2) install an svn client; then:
+    svn checkout https://bci2000.org/svn/trunk  bci2000-svn
+    cd bci2000-svn/tools/python  # BCI2000Tools and its setup.py both live here
+    python -m pip install -e .   # install in-place ("editable")
+
+and if you do it that way, and leave BCI2000Tools in that location, BCI2000Tools
+will automatically find the corresponding ``tools/cmdline/*`` and ``prog/*``
+elements (provided you have built them).
+
+If you install another way (e.g. from PyPI via a standard non-editable install,
+``python -m pip install BCI2000Tools``), you would need to specify the root
+directory of your BCI2000 distribution explicitly---certainly before you import
+``BCI2000Tools.Remote`` and ideally also before you import ``BCI2000Tools.Chain``.
+Here is how to do that::
+
+    from BCI2000Tools import bci2000root
+    bci2000root('/PATH/TO/BCI2000/DISTRO/WITH/BINARIES')
+    
+    from BCI2000Tools.Remote import BCI2000
+    from BCI2000Tools.Chain import bci2000chain
+
+If you do ``from BCI2000Tools.AllTools import *`` Python will attempt to import
+all the submodules, and you will see a message telling you which imports did and
+did not succeed, along with any reasons for failure.
+
