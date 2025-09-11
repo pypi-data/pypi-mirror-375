@@ -1,0 +1,69 @@
+# EncFilex (EFX) v3
+
+🔒 **EncFilex (EFX)** adalah sistem enkripsi file modern dengan lapisan ganda:  
+1. Base64 Encoding (opsional)  
+2. AES-256-GCM  
+3. XChaCha20-Poly1305  
+
+Dirancang supaya **file apa pun** (teks, gambar, video, dokumen) bisa dienkripsi aman dan hanya bisa dibuka dengan password yang benar.
+
+---
+
+## ✨ Fitur
+- 🔐 **AES-256-GCM** untuk keamanan simetris
+- ⚡ **XChaCha20-Poly1305** untuk tambahan keamanan & nonce panjang
+- 📦 Mendukung **file biner besar** (image, video, doc, dll.)
+- 🛡️ Password-based key derivation pakai **Argon2**
+- 🎯 Bisa dipakai via **Python API** atau **Command Line (CLI)**
+
+---
+
+## 📦 Instalasi
+Install dari PyPI:
+
+```bash
+pip install encfilex
+```
+
+---
+
+## 🚀 Pemakaian
+
+### 1. API (dalam Python)
+
+```python
+from encfilex import encrypt_file, decrypt_file
+
+# Enkripsi
+encrypt_file("secret.png", "secret.efx", "super-password")
+
+# Dekripsi
+decrypt_file("secret.efx", "recovered.png", "super-password")
+```
+
+### 2. Command Line (CLI)
+Setelah install, tersedia perintah encfilex.
+
+#### Enkripsi file
+```bash
+encfilex encrypt secret.png secret.efx --password super-password
+```
+
+#### Dekripsi file
+```bash
+encfilex decrypt secret.efx secret.png --password super-password
+```
+
+---
+
+## ⚠️ Catatan
+- Jangan lupa jaga password baik-baik.
+- Jika hilang, file tidak bisa dipulihkan (tanpa backdoor).
+- Ukuran file hasil enkripsi bisa lebih besar ±30% dari aslinya (karena metadata + Base64 opsional).
+- Minimal Python 3.9+ disarankan.
+
+---
+
+## 📜 Lisensi
+Dirilis di bawah lisensi MIT.  
+Made with LOVE by Azzam Jauzi (AkzDev).
