@@ -1,0 +1,2 @@
+[console_scripts]
+clean = pylibsparseir.clean_build_artifacts:clean_build_artifacts
