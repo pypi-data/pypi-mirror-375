@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+SessionMiddleware=swarmauri_middleware_session:SessionMiddleware
+
