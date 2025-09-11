@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: bsit-dizzy
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: rdflib>=7.1.4
+Dynamic: license-file
+
+# BSIT Dizzy
+
+This project builds a module `dizzy.py` which is a part of the BACnet Semantic
+Interoperability Toolkit (BSIT) for constructing ASHRAE 223 models of HVAC
+systems.
+
