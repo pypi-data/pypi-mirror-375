@@ -1,0 +1,46 @@
+Metadata-Version: 2.3
+Name: rdpairs
+Version: 0.1.0
+Summary: 
+Author: DeYing Zhang
+Author-email: legendzdy@dingtalk.com
+Requires-Python: >=3.10
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: basebio (>=0.4.8)
+Requires-Dist: typer (>=0.15.1,<0.16.0)
+Description-Content-Type: text/markdown
+
+# rdpairs
+This is a Python package for working with paired-end read data.
+
+<!-- TOC -->
+
+- [rdpairs](#rdpairs)
+- [Overview](#overview)
+- [Requirements](#requirements)
+
+<!-- /TOC -->
+
+# Overview
+
+rdpairs is a Python package for working with paired-end read data. It provides a set of tools for working with paired-end reads, including:
+
+# Requirements
+
+1. Python 3.10+
+2. Python modules:
+    - pandas
+    - numpy
+    - scipy
+    - sklearn
+    - matplotlib
+    - seaborn
+    - pysam
+3. minimap2
+4. samtools
+5. bedtools
+
