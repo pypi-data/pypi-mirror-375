@@ -1,0 +1,2 @@
+[console_scripts]
+finter-agent = src.cli:main

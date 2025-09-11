@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "finter": {
+      "type": "http",
+      "url": "https://finter.mcp.qore.so/mcp/"
+    }
+  }
+}
