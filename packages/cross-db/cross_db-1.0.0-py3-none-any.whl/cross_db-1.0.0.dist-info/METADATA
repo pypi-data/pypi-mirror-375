@@ -1,0 +1,21 @@
+Metadata-Version: 2.3
+Name: cross-db
+Version: 1.0.0
+Summary: Simple wrapper that allows me to quickly connect to the database.
+License: MIT
+Author: Fedor Sulitskiy
+Author-email: fedor@crosstech.co.uk
+Requires-Python: >=3.11,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: cloud-sql-python-connector[pg8000] (>=1.10.0,<2.0.0)
+Requires-Dist: pandas (>=2.2.3,<3.0.0)
+Requires-Dist: psycopg2-binary (>=2.9.10,<3.0.0)
+Description-Content-Type: text/markdown
+
+# Py-Database-Library
+Simple wrapper that allows me to quickly connect to the database.
+
