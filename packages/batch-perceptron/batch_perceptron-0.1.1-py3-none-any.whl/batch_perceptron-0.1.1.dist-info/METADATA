@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: batch-perceptron
+Version: 0.1.1
+Summary: A batch perceptron implementation using numpy and scikit-learn
+Author: ABDULLAH AL MAMUN
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+
+A batch perceptron implementation using numpy and scikit-learn. 
