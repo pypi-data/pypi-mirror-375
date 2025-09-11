@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel", "pillow", "typer"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Media4de"
+version = "0.1.0"
+description = "Tools for image/media editing for Desktop Environments"
+authors = [
+  { name="Benjamin Carpenter", email="b.carpenter@epcc.ed.ac.uk" },
+]
+# readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "GPL-3.0-only"
+license-files = ["LICEN[CS]E*"]
+
+#   [project.urls]
+#   Homepage = "https://github.com/pypa/sampleproject"
+#   Issues = "https://github.com/pypa/sampleproject/issues"

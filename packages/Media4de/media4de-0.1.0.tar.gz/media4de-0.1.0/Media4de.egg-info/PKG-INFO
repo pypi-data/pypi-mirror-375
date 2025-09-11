@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: Media4de
+Version: 0.1.0
+Summary: Tools for image/media editing for Desktop Environments
+Author-email: Benjamin Carpenter <b.carpenter@epcc.ed.ac.uk>
+License-Expression: GPL-3.0-only
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+License-File: LICENCE
+Dynamic: license-file
