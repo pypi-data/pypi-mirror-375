@@ -1,0 +1,10 @@
+sigma/backends/loki/__init__.py,sha256=OEJtIB9Y9xOuJZIDg1sAJQLcLJrYTv6oMXvGKhgWriA,102
+sigma/backends/loki/deferred.py,sha256=y7xDcHJg5DdUYRJehXL7V--fYyktS4tlLDuDcdTSabA,3375
+sigma/backends/loki/loki.py,sha256=n6DVRIKiwEy7fQi1Av2Zb4l3XCTmkyJXo20xVC9AwGY,54654
+sigma/pipelines/loki/__init__.py,sha256=c28-xcc54iziUgV9YPvhS8-o2Rwzdf6zRgkjHRStMlo,566
+sigma/pipelines/loki/loki.py,sha256=rUkuYryOvUlMS2-lU2SGXe8D7ptr_fbQlIvTSlaYIbA,17189
+sigma/shared.py,sha256=IT4PlrAICXKDvd2z6-RnhMwEcHw5OD0qXPBdKlZhk_U,4136
+pysigma_backend_loki-0.13.0rc1.dist-info/LICENSE,sha256=wcxDGvuisODwz3zLEDLQ4B8Wg6StayW1SY30i4u6wdA,598
+pysigma_backend_loki-0.13.0rc1.dist-info/METADATA,sha256=IiyStafKVWM-_MwdtfKoQamm-9xlXBBTBV65Z_qA3Oo,6628
+pysigma_backend_loki-0.13.0rc1.dist-info/WHEEL,sha256=sP946D7jFCHeNz5Iq4fL4Lu-PrWrFsgfLXbbkciIZwg,88
+pysigma_backend_loki-0.13.0rc1.dist-info/RECORD,,
