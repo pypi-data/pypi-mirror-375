@@ -1,0 +1,6 @@
+[peagen.plugins.mre_cryptos]
+shamir=swarmauri_mre_crypto_shamir:ShamirMreCrypto
+
+[swarmauri.mre_cryptos]
+ShamirMreCrypto=swarmauri_mre_crypto_shamir:ShamirMreCrypto
+
