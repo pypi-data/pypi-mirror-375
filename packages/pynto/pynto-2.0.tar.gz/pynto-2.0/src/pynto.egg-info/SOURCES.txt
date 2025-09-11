@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/pynto/__init__.py
+src/pynto/__main__.py
+src/pynto/database.py
+src/pynto/periods.py
+src/pynto/tools.py
+src/pynto/vocabulary.py
+src/pynto.egg-info/PKG-INFO
+src/pynto.egg-info/SOURCES.txt
+src/pynto.egg-info/dependency_links.txt
+src/pynto.egg-info/requires.txt
+src/pynto.egg-info/top_level.txt
+tests/test.py
