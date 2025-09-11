@@ -1,0 +1,49 @@
+
+seed: 10
+lmax: 1500
+lmax_pad: 500
+result_name: MM_041121
+
+spectra:
+  - name: white_10
+    type: white
+    noise: 10.0
+
+  - name: constant_dl_1
+    type: white_dl
+    noise: 3.0
+
+geometries:
+  - name: fullsky_10arc_car
+    type: fullsky
+    proj: car
+    res_arcmin: 10.0
+
+  - name: cutsky_realistic
+    type: pickle
+    filename: cutsky_geometry_scaled_20x_9.4_arcminute_pixel_shape_wcs_tuple.pkl
+
+extracts:
+  - name: cut_center_0
+    type: slice
+    box_deg: [[-5,-5],[5,5]]
+
+  - name: cut_span_100_1
+    type: slice
+    box_deg: [[-5,100],[5,110]]
+    
+  - name: cut_span_180_1_rev
+    type: slice
+    box_deg: [[-5,185],[5,175]]
+
+  - name: cut_span_180_2_rev
+    type: slice
+    box_deg: [[-5,-185],[5,-175]]
+    
+  - name: cut_span_180_1
+    type: slice
+    box_deg: [[-5,175],[5,185]]
+
+  - name: cut_span_180_2
+    type: slice
+    box_deg: [[-5,-175],[5,-185]]
