@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling>=1.26.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tintelligence-color-utils"
+version = "0.1.0"
+description = "Utility functions for working with colors (conversion, manipulation, validation)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+  { name = "tintelligence" }
+]
+keywords = ["color", "colors", "color-conversion", "rgb", "hsl", "lab", "lch"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Typing :: Typed"
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Tintelligence-App/color-utils"
+Repository = "https://github.com/Tintelligence-App/color-utils"
+Issues = "https://github.com/Tintelligence-App/color-utils/issues"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "build>=1.2.1",
+]
+qt_pyside6 = [
+  "PySide6>=6.5",
+]
+qt_pyqt6 = [
+  "PyQt6>=6.5",
+]
+
+[tool.hatch.version]
+path = "src/color_utils/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src/color_utils",
+  "/README.md",
+  "/LICENSE"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/color_utils"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
