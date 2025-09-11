@@ -1,0 +1,83 @@
+Metadata-Version: 2.1
+Name: langchain-snowflake
+Version: 0.2.1
+Summary: An integration package connecting Snowflake and LangChain
+Home-page: https://github.com/langchain-ai/langchain-snowflake
+License: MIT
+Requires-Python: >=3.9,<3.12
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Provides-Extra: key-pair
+Requires-Dist: aiohttp (>=3.9.0,<4.0.0)
+Requires-Dist: cryptography (>=42.0.0,<43.0.0) ; extra == "key-pair"
+Requires-Dist: langchain (>=0.3.27,<0.4.0)
+Requires-Dist: langchain-core (>=0.3.75,<0.4.0)
+Requires-Dist: langgraph (>=0.6.4,<0.7.0)
+Requires-Dist: langgraph-prebuilt (>=0.6.4,<0.7.0)
+Requires-Dist: langsmith (>=0.4.21,<0.5.0)
+Requires-Dist: pydantic (>=2.7.0,<3.0.0)
+Requires-Dist: snowflake (>=0.8.0,<1.0)
+Requires-Dist: snowflake-snowpark-python (>=1.20.0,<2.0.0)
+Project-URL: Repository, https://github.com/langchain-ai/langchain-snowflake
+Project-URL: Release Notes, https://github.com/langchain-ai/langchain-snowflake/releases
+Project-URL: Source Code, https://github.com/langchain-ai/langchain-snowflake/tree/main/libs/snowflake
+Description-Content-Type: text/markdown
+
+# LangChain Snowflake
+
+LangChain integration for Snowflake Cortex AI. Native support for chat models, tools, and retrieval with production-ready authentication.
+
+## Production Ready
+
+- 50+ comprehensive tests covering core functionality
+- Native tool calling with Cortex Complete
+- Structured output support (Pydantic, TypedDict, JSON)
+- Complete async/await implementation
+- All authentication methods supported
+
+## Features
+
+- Chat models with tool calling support
+- Cortex Search retrieval with relevance assessment
+- Complete toolkit for 6 Cortex AI functions
+- Async support for high-performance applications
+- Agent patterns following LangChain standards
+- Multiple authentication methods
+- LangSmith tracing integration
+
+## Installation
+
+```bash
+pip install langchain-snowflake
+```
+
+## LangSmith Tracing
+
+```bash
+export LANGCHAIN_TRACING_V2=true
+export LANGCHAIN_API_KEY=your-langsmith-api-key
+export LANGCHAIN_PROJECT=snowflake-cortex
+```
+
+## Documentation
+
+- [Getting Started](docs/getting_started.ipynb)
+- [Snowflake Workflows](docs/snowflake_workflows.ipynb)
+- [Advanced Patterns](docs/advanced_patterns.ipynb)
+
+## Contributing
+
+See [Development.md](Development.md) for setup and guidelines.
+
+## License
+
+MIT License
+
+## Support
+
+- Check documentation notebooks in `docs/`
+- Report issues on GitHub
+- Join community discussions
