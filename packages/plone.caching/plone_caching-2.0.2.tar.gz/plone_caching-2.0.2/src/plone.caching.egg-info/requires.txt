@@ -1,0 +1,8 @@
+setuptools
+plone.registry
+plone.transformchain
+Zope
+z3c.caching[zcml]
+
+[test]
+plone.testing
