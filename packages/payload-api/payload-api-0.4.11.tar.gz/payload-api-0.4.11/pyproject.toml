@@ -1,0 +1,55 @@
+[project]
+name = "payload-api"
+version = "0.4.11"
+description = "Payload Python Library"
+authors = [
+    { name = "Payload", email = "help@payload.com" },
+]
+dependencies = [
+    "requests",
+    "six",
+    "urllib3>=1.26.5",
+    "importlib-metadata",
+]
+requires-python = ">=3.7"
+readme = "README.md"
+
+[project.license]
+text = "MIT"
+
+[project.urls]
+Homepage = "https://payload.com"
+Documentation = "https://docs.payload.com"
+Repository = "https://github.com/payload-code/payload-python"
+
+[build-system]
+requires = [
+    "pdm-pep517>=1.0.0",
+]
+build-backend = "pdm.pep517.api"
+
+[tool.pdm]
+allow_prereleases = true
+source = [
+    { name = "pypi", url = "https://pypi.org/simple", verify_ssl = true },
+]
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "black",
+    "pathlib",
+    "pytest",
+    "python-dateutil",
+    "mock",
+    "pylint",
+]
+
+[tool.pdm.scripts._]
+env_file = ".env"
+
+[tool.black]
+line-length = 96
+target-version = [
+    "py311",
+]
+skip-string-normalization = true
