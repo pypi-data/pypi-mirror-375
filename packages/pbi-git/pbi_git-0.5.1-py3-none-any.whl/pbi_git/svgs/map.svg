@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Mock Map — Bubble Overlay</title>
+  <desc id="desc">Schematic world map with graticule and bubble markers; legends included.</desc>
+
+  <!-- Card container -->
+  <rect x="10" y="10" width="700" height="400" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+
+  <!-- Title -->
+  <text x="30" y="44" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" fill="#111">
+    Sales by Location (Mock)
+  </text>
+  <text x="30" y="64" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#666">
+    Bubble size ~ value • Colors ~ category
+  </text>
+
+  <!-- Map viewport -->
+  <g transform="translate(20,60)">
+    <!-- Water -->
+    <rect x="0" y="0" width="480" height="320" fill="#F5F8FF" stroke="#dfe7f3"/>
+
+    <!-- Graticule -->
+    <g stroke="#e8eef7" stroke-width="1">
+      <line x1="0"   y1="0" x2="0"   y2="320"/>
+      <line x1="80"  y1="0" x2="80"  y2="320"/>
+      <line x1="160" y1="0" x2="160" y2="320"/>
+      <line x1="240" y1="0" x2="240" y2="320"/>
+      <line x1="320" y1="0" x2="320" y2="320"/>
+      <line x1="400" y1="0" x2="400" y2="320"/>
+      <line x1="480" y1="0" x2="480" y2="320"/>
+      <line x1="0" y1="0"   x2="480" y2="0"/>
+      <line x1="0" y1="80"  x2="480" y2="80"/>
+      <line x1="0" y1="160" x2="480" y2="160"/>
+      <line x1="0" y1="240" x2="480" y2="240"/>
+      <line x1="0" y1="320" x2="480" y2="320"/>
+    </g>
+
+    <!-- Schematic land (very simplified silhouettes) -->
+    <g fill="#DFE9F5" stroke="#CBD9EA" stroke-width="1">
+      <!-- North America -->
+      <path d="M78,160
+               C70,130 92,110 130,98
+               C160,88 190,88 210,100
+               C230,112 230,128 212,140
+               C194,152 178,160 160,172
+               C142,184 120,196 104,194
+               C88,192 82,180 78,160 Z"/>
+      <!-- Greenland -->
+      <path d="M168,64 C182,56 204,58 212,70 C218,80 208,94 190,96 C176,98 162,86 168,64 Z"/>
+      <!-- South America -->
+      <path d="M170,208
+               C188,212 196,230 192,246
+               C186,270 178,292 166,300
+               C156,306 148,298 152,286
+               C156,272 154,260 144,246
+               C134,232 138,214 154,208
+               C160,206 164,206 170,208 Z"/>
+      <!-- Europe / North Africa -->
+      <path d="M240,120
+               C262,110 292,106 318,112
+               C342,118 358,128 360,140
+               C362,154 350,162 330,166
+               C306,170 284,170 266,162
+               C246,152 236,140 240,120 Z"/>
+      <!-- Africa -->
+      <path d="M284,168
+               C298,170 314,178 322,194
+               C334,218 334,242 322,262
+               C312,278 288,282 276,266
+               C262,246 254,226 258,204
+               C262,182 270,170 284,168 Z"/>
+      <!-- Middle East / West Asia -->
+      <path d="M330,154
+               C352,152 376,160 388,176
+               C396,186 392,198 378,202
+               C360,208 340,204 330,192
+               C322,182 322,160 330,154 Z"/>
+      <!-- Asia -->
+      <path d="M320,120
+               C348,112 382,114 410,124
+               C436,134 452,150 452,168
+               C452,186 438,198 414,202
+               C388,206 362,198 344,184
+               C326,170 314,148 320,120 Z"/>
+      <!-- Australia -->
+      <path d="M404,250
+               C418,246 440,250 456,260
+               C468,268 464,282 446,284
+               C428,286 410,280 402,270
+               C398,264 398,254 404,250 Z"/>
+      <!-- Antarctica (hint) -->
+      <path d="M40,308 C120,314 220,316 320,314 C380,312 440,306 476,304
+               C470,312 458,320 430,322 C340,326 240,326 160,324 C90,322 60,318 40,308 Z" opacity="0.4"/>
+    </g>
+
+    <!-- Zoom controls (mock) -->
+    <g transform="translate(440,10)" stroke="#cfd8e3">
+      <rect x="0" y="0" width="30" height="60" rx="6" fill="#ffffff" stroke="#e1e8f0"/>
+      <line x1="8" y1="20" x2="22" y2="20" stroke="#8aa8c2" stroke-width="2"/>
+      <line x1="15" y1="13" x2="15" y2="27" stroke="#8aa8c2" stroke-width="2"/>
+      <line x1="8" y1="42" x2="22" y2="42" stroke="#8aa8c2" stroke-width="2"/>
+    </g>
+
+    <!-- Bubble markers -->
+    <circle cx="127" cy="149" r="12" fill="#4C9AFF" stroke="#ffffff" stroke-width="2"/>
+    <text x="145" y="145" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#111">A — 200</text>
+
+    <circle cx="273" cy="131" r="10" fill="#2DBD7E" stroke="#ffffff" stroke-width="2"/>
+    <text x="291" y="127" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#111">B — 160</text>
+
+    <circle cx="420" cy="158" r="8" fill="#FFB86B" stroke="#ffffff" stroke-width="2"/>
+    <text x="438" y="154" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#111">C — 120</text>
+
+    <circle cx="180" cy="247" r="6" fill="#9B6BFF" stroke="#ffffff" stroke-width="2"/>
+    <text x="198" y="243" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#111">D — 90</text>
+
+    <circle cx="460" cy="264" r="5" fill="#8E9BAA" stroke="#ffffff" stroke-width="2"/>
+    <text x="478" y="260" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#111">E — 70</text>
+  </g>
+
+  <!-- Legends -->
+  <g transform="translate(520,84)" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#222">
+    <text x="0" y="0" font-weight="600">Legend</text>
+    <rect x="0" y="12" width="12" height="12" fill="#4C9AFF"/><text x="18" y="22">A</text>
+    <rect x="0" y="30" width="12" height="12" fill="#2DBD7E"/><text x="18" y="40">B</text>
+    <rect x="0" y="48" width="12" height="12" fill="#FFB86B"/><text x="18" y="58">C</text>
+    <rect x="0" y="66" width="12" height="12" fill="#9B6BFF"/><text x="18" y="76">D</text>
+    <rect x="0" y="84" width="12" height="12" fill="#8E9BAA"/><text x="18" y="94">E</text>
+  </g>
+
+  <g transform="translate(520,206)" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#222">
+    <text x="0" y="0" font-weight="600">Value</text>
+    <g transform="translate(0,24)">
+      <circle cx="10" cy="20" r="6" fill="none" stroke="#9aa7b4"/><text x="28" y="24">≈ 80</text>
+      <circle cx="10" cy="56" r="10" fill="none" stroke="#9aa7b4"/><text x="28" y="60">≈ 150</text>
+      <circle cx="10" cy="100" r="12" fill="none" stroke="#9aa7b4"/><text x="28" y="104">≈ 200</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="30" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#888">
+    Mock visualization • Simplified land shapes (not to scale)
+  </text>
+</svg>

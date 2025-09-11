@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="300" viewBox="0 0 500 300">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#fff"/>
+
+  <!-- Axes -->
+  <line x1="50" y1="250" x2="450" y2="250" stroke="#333" stroke-width="2"/>
+  <line x1="50" y1="20" x2="50" y2="250" stroke="#333" stroke-width="2"/>
+
+  <!-- Grid lines and labels -->
+  <g font-family="Arial" font-size="12" fill="#555">
+    <line x1="50" y1="200" x2="450" y2="200" stroke="#eee"/>
+    <text x="40" y="204" text-anchor="end">50</text>
+    <line x1="50" y1="150" x2="450" y2="150" stroke="#eee"/>
+    <text x="40" y="154" text-anchor="end">100</text>
+    <line x1="50" y1="100" x2="450" y2="100" stroke="#eee"/>
+    <text x="40" y="104" text-anchor="end">150</text>
+    <line x1="50" y1="50" x2="450" y2="50" stroke="#eee"/>
+    <text x="40" y="54" text-anchor="end">200</text>
+  </g>
+
+  <!-- Bars (stacked, value = pixel height) -->
+  <!-- Category A: Series1=80, Series2=40 -->
+  <rect x="90" y="170" width="60" height="80" fill="#4C9AFF"/>
+  <rect x="90" y="130" width="60" height="40" fill="#2DBD7E"/>
+  <text x="120" y="124" text-anchor="middle" font-size="12" fill="#000">120</text>
+
+  <!-- Category B: Series1=60, Series2=80 -->
+  <rect x="200" y="190" width="60" height="60" fill="#4C9AFF"/>
+  <rect x="200" y="110" width="60" height="80" fill="#2DBD7E"/>
+  <text x="230" y="104" text-anchor="middle" font-size="12" fill="#000">140</text>
+
+  <!-- Category C: Series1=100, Series2=70 -->
+  <rect x="310" y="150" width="60" height="100" fill="#4C9AFF"/>
+  <rect x="310" y="80" width="60" height="70" fill="#2DBD7E"/>
+  <text x="340" y="74" text-anchor="middle" font-size="12" fill="#000">170</text>
+
+  <!-- Category labels -->
+  <g font-family="Arial" font-size="13" fill="#000">
+    <text x="120" y="270" text-anchor="middle">Category A</text>
+    <text x="230" y="270" text-anchor="middle">Category B</text>
+    <text x="340" y="270" text-anchor="middle">Category C</text>
+  </g>
+
+  <!-- Legend -->
+  <g font-family="Arial" font-size="12" fill="#000">
+    <rect x="380" y="30" width="15" height="15" fill="#4C9AFF"/>
+    <text x="400" y="42">Series 1</text>
+    <rect x="380" y="50" width="15" height="15" fill="#2DBD7E"/>
+    <text x="400" y="62">Series 2</text>
+  </g>
+</svg>

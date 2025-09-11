@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" width="600" height="220" role="img" aria-labelledby="titleDesc">
+  <title id="titleDesc">Two stacked horizontal bar chart with 1 unit = 1 pixel</title>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Axes -->
+  <line x1="150" y1="180" x2="560" y2="180" stroke="#333" stroke-width="2"/>
+  <line x1="150" y1="40" x2="150" y2="180" stroke="#333" stroke-width="2"/>
+
+  <!-- Grid lines & x labels -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#555">
+    <line x1="200" y1="40" x2="200" y2="180" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="200" y="195" text-anchor="middle">50</text>
+
+    <line x1="250" y1="40" x2="250" y2="180" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="250" y="195" text-anchor="middle">100</text>
+
+    <line x1="300" y1="40" x2="300" y2="180" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="300" y="195" text-anchor="middle">150</text>
+
+    <line x1="350" y1="40" x2="350" y2="180" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="350" y="195" text-anchor="middle">200</text>
+
+    <line x1="400" y1="40" x2="400" y2="180" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="400" y="195" text-anchor="middle">250</text>
+  </g>
+
+  <!-- Bar 1 -->
+  <rect x="150" y="60" width="80" height="40" fill="#4C9AFF"/>
+  <rect x="230" y="60" width="90" height="40" fill="#2DBD7E"/>
+  <rect x="320" y="60" width="60" height="40" fill="#FFB86B"/>
+
+  <!-- Values for bar 1 -->
+  <text x="190" y="85" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">80</text>
+  <text x="275" y="85" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">90</text>
+  <text x="350" y="85" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">60</text>
+  <text x="140" y="85" text-anchor="end" font-family="Arial" font-size="13" fill="#222">Bar 1</text>
+
+  <!-- Bar 2 -->
+  <rect x="150" y="120" width="50" height="40" fill="#4C9AFF"/>
+  <rect x="200" y="120" width="120" height="40" fill="#2DBD7E"/>
+  <rect x="320" y="120" width="70" height="40" fill="#FFB86B"/>
+
+  <!-- Values for bar 2 -->
+  <text x="175" y="145" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">50</text>
+  <text x="260" y="145" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">120</text>
+  <text x="355" y="145" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">70</text>
+  <text x="140" y="145" text-anchor="end" font-family="Arial" font-size="13" fill="#222">Bar 2</text>
+
+  <!-- Chart title -->
+  <text x="150" y="20" font-family="Arial" font-size="14" fill="#111">Two Stacked Horizontal Bars (1px per unit)</text>
+
+  <!-- Legend -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#222">
+    <rect x="420" y="10" width="12" height="12" fill="#4C9AFF"/>
+    <text x="438" y="20">Category A</text>
+
+    <rect x="420" y="28" width="12" height="12" fill="#2DBD7E"/>
+    <text x="438" y="38">Category B</text>
+
+    <rect x="420" y="46" width="12" height="12" fill="#FFB86B"/>
+    <text x="438" y="56">Category C</text>
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="260" viewBox="0 0 640 260" role="img" aria-labelledby="title desc">
+  <title id="title">Power BI Text Box — Mock</title>
+  <desc id="desc">Title, subtitle, body text, bullets, and a link styled like a Power BI text box.</desc>
+
+  <!-- Container -->
+  <rect x="16" y="16" width="608" height="228" rx="10" fill="#ffffff" stroke="#e6e6e6"/>
+
+  <!-- Title -->
+  <text x="32" y="58"
+        font-family="Segoe UI, Arial, sans-serif"
+        font-size="24" font-weight="600" fill="#111">
+    Quarterly Highlights
+  </text>
+
+  <!-- Subtitle -->
+  <text x="32" y="82"
+        font-family="Segoe UI, Arial, sans-serif"
+        font-size="13" fill="#666" letter-spacing="0.2">
+    FY25 Q3 • Draft
+  </text>
+
+  <!-- Divider (optional) -->
+  <line x1="32" y1="96" x2="608" y2="96" stroke="#efefef"/>
+
+  <!-- Body paragraph -->
+  <text x="32" y="120"
+        font-family="Segoe UI, Arial, sans-serif"
+        font-size="14" fill="#222">
+    <tspan x="32" dy="0">Revenue up 8% QoQ; churn down 1.2 pp; ASP +$3.</tspan>
+    <tspan x="32" dy="20">Marketing CAC stable; inventory turns improved.</tspan>
+  </text>
+
+  <!-- Bullets -->
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#222">
+    <text x="32" y="164">• <tspan dx="6">Top regions: NA, EMEA</tspan></text>
+    <text x="32" y="186">• <tspan dx="6">Risks: FX volatility; supply constraints</tspan></text>
+  </g>
+
+  <!-- Link-style text -->
+  <text x="32" y="212"
+        font-family="Segoe UI, Arial, sans-serif"
+        font-size="14" fill="#1368CE" text-decoration="underline">
+    See detailed report
+  </text>
+
+  <!-- Resize hint (subtle, optional) -->
+  <path d="M612,232 l0,-10 l-10,0" fill="none" stroke="#d9d9d9" stroke-width="2"/>
+</svg>

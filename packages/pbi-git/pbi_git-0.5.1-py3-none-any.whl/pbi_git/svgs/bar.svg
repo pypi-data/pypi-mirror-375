@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="600" height="320" role="img" aria-labelledby="titleDesc">
+  <title id="titleDesc">Bar chart with 1 unit = 1 pixel</title>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Axes -->
+  <line x1="60" y1="260" x2="560" y2="260" stroke="#333" stroke-width="2"/>
+  <line x1="60" y1="40"  x2="60"  y2="260" stroke="#333" stroke-width="2"/>
+
+  <!-- Grid lines & y labels -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#555">
+    <line x1="60" y1="210" x2="560" y2="210" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="30" y="214" text-anchor="end">50</text>
+
+    <line x1="60" y1="160" x2="560" y2="160" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="30" y="164" text-anchor="end">100</text>
+
+    <line x1="60" y1="110" x2="560" y2="110" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="30" y="114" text-anchor="end">150</text>
+
+    <line x1="60" y1="60" x2="560" y2="60" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="30" y="64" text-anchor="end">200</text>
+  </g>
+
+  <!-- Bars (1 unit = 1px height, baseline at y=260) -->
+  <!-- Category A: 130 -->
+  <rect x="110" y="130" width="80" height="130" rx="4" fill="#4C9AFF"/>
+  <text x="150" y="122" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">130</text>
+  <text x="150" y="284" text-anchor="middle" font-family="Arial" font-size="13" fill="#222">Category A</text>
+
+  <!-- Category B: 200 -->
+  <rect x="260" y="60" width="80" height="200" rx="4" fill="#2DBD7E"/>
+  <text x="300" y="52" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">200</text>
+  <text x="300" y="284" text-anchor="middle" font-family="Arial" font-size="13" fill="#222">Category B</text>
+
+  <!-- Category C: 60 -->
+  <rect x="410" y="200" width="80" height="60" rx="4" fill="#FFB86B"/>
+  <text x="450" y="192" text-anchor="middle" font-family="Arial" font-size="12" fill="#222">60</text>
+  <text x="450" y="284" text-anchor="middle" font-family="Arial" font-size="13" fill="#222">Category C</text>
+
+  <!-- Chart title -->
+  <text x="60" y="16" font-family="Arial" font-size="14" fill="#111">Sample Bar Chart (1px per unit)</text>
+
+  <!-- Legend -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#222">
+    <rect x="420" y="10" width="12" height="12" fill="#4C9AFF"/>
+    <text x="438" y="20">Category A</text>
+
+    <rect x="420" y="28" width="12" height="12" fill="#2DBD7E"/>
+    <text x="438" y="38">Category B</text>
+
+    <rect x="420" y="46" width="12" height="12" fill="#FFB86B"/>
+    <text x="438" y="56">Category C</text>
+  </g>
+</svg>

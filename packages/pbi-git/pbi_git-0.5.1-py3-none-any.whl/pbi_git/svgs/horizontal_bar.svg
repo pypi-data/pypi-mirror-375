@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="600" height="320" role="img" aria-labelledby="titleDesc">
+  <title id="titleDesc">Horizontal bar chart with 1 unit = 1 pixel</title>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Axes -->
+  <line x1="150" y1="40" x2="150" y2="260" stroke="#333" stroke-width="2"/>
+  <line x1="150" y1="260" x2="560" y2="260" stroke="#333" stroke-width="2"/>
+
+  <!-- Grid lines & x labels -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#555">
+    <line x1="200" y1="40" x2="200" y2="260" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="200" y="276" text-anchor="middle">50</text>
+
+    <line x1="250" y1="40" x2="250" y2="260" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="250" y="276" text-anchor="middle">100</text>
+
+    <line x1="300" y1="40" x2="300" y2="260" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="300" y="276" text-anchor="middle">150</text>
+
+    <line x1="350" y1="40" x2="350" y2="260" stroke="#e6e6e6" stroke-width="1"/>
+    <text x="350" y="276" text-anchor="middle">200</text>
+  </g>
+
+  <!-- Bars (1 unit = 1px width, baseline at x=150) -->
+  <!-- Category A: 130 -->
+  <rect x="150" y="60" width="130" height="40" rx="4" fill="#4C9AFF"/>
+  <text x="288" y="85" text-anchor="end" font-family="Arial" font-size="12" fill="#222">130</text>
+  <text x="140" y="85" text-anchor="end" font-family="Arial" font-size="13" fill="#222">Category A</text>
+
+  <!-- Category B: 200 -->
+  <rect x="150" y="120" width="200" height="40" rx="4" fill="#2DBD7E"/>
+  <text x="348" y="145" text-anchor="end" font-family="Arial" font-size="12" fill="#222">200</text>
+  <text x="140" y="145" text-anchor="end" font-family="Arial" font-size="13" fill="#222">Category B</text>
+
+  <!-- Category C: 60 -->
+  <rect x="150" y="180" width="60" height="40" rx="4" fill="#FFB86B"/>
+  <text x="208" y="205" text-anchor="end" font-family="Arial" font-size="12" fill="#222">60</text>
+  <text x="140" y="205" text-anchor="end" font-family="Arial" font-size="13" fill="#222">Category C</text>
+
+  <!-- Chart title -->
+  <text x="150" y="20" font-family="Arial" font-size="14" fill="#111">Sample Horizontal Bar Chart (1px per unit)</text>
+
+  <!-- Legend -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#222">
+    <rect x="420" y="10" width="12" height="12" fill="#4C9AFF"/>
+    <text x="438" y="20">Category A</text>
+
+    <rect x="420" y="28" width="12" height="12" fill="#2DBD7E"/>
+    <text x="438" y="38">Category B</text>
+
+    <rect x="420" y="46" width="12" height="12" fill="#FFB86B"/>
+    <text x="438" y="56">Category C</text>
+  </g>
+</svg>
