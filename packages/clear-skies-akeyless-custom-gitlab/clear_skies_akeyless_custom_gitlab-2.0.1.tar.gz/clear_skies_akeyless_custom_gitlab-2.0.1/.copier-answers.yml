@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v0.0.30
+_src_path: gh:clearskies-akeyless-custom-producers/template
+author_email: tom.nijboer@cimpress.com
+author_name: Tom Nijboer
+docs_modules_location: modules/producers
+service_display_name: Gitlab
+service_name: gitlab
+service_supports_revocation: true
+service_supports_rotation: true
+site_base_url: https://clearskies.info

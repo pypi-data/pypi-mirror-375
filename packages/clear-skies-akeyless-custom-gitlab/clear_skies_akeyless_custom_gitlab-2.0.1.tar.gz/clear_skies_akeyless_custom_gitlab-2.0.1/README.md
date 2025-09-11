@@ -1,0 +1,115 @@
+# gitlab
+
+Gitlab dynamic producer for Akeyless
+
+The payload for this producer looks like:
+
+```json
+{
+  "id": 12345,
+  "personal_access_token": "YOUR_PERSONAL_ACCESS_TOKEN",
+  "group_id": 67890,
+  "scopes": ["read_api"],
+  "access_level": 20,
+  "api_url": "https://gitlab.com/api/v4"
+}
+```
+
+Call `clearskies_akeyless_custom_gitlab.build_clearskies_akeyless_custom_gitlab_producer()` to initialize the create/rotate/revoke endpoints.  You can
+optionally provide the `url` parameter which will add a prefix to the endpoints.  This can then be attached to a
+[clearskies context](https://clearskies.info/docs/context/index.html) or an [endpoint group](https://clearskies.info/docs/endpoint-groups/endpoint-groups.html):
+
+If used as a producer, it will use the provided credentials to fetch and return Gitlab credentials or tokens. It can also rotate the credentials you provide. Additionally, it supports revoking credentials when they are no longer needed.
+
+## Payload Schema
+
+The main payload for this producer must include:
+
+- `id` (int): Required. The ID of the GitLab group access token.
+- `personal_access_token` (str): Required. Personal access token with permissions to manage group access tokens.
+- `group_id` (int): Required. The GitLab group ID for which the token is managed.
+- `scopes` (list[str]): Required. List of permission scopes for the token (default: ["read_api"]).
+- `access_level` (int): Required. Access level for the token (default: 20, Reporter).
+- `api_url` (str): Optional. Base URL for the GitLab API (default: "https://gitlab.com/api/v4").
+- `allowed_scopes` (list[str]): Optional. **Required if using `requested_scopes` in the input payload.** Restricts which scopes can be requested via the producer.
+- `allowed_group_ids` (list[int]): Optional. **Required if using `requested_group_id` in the input payload.** Restricts which group IDs can be requested via the producer.
+
+## Input Payload Schema
+
+You can also provide an input payload with additional parameters:
+
+- `requested_group_id` (int): Optional. The group ID requested for token operations. If used, you must set `allowed_group_ids` in the main payload to restrict which groups can be requested.
+- `cache_id` (str): Optional. An identifier for caching purposes.
+- `requested_scopes` (list[str]): Optional. List of scopes requested for the token. If used, you must set `allowed_scopes` in the main payload to restrict which scopes can be requested.
+
+**Note:** If you use `requested_group_id` or `requested_scopes` in the input payload, you must set the corresponding allowed fields in the main payload to enforce restrictions.
+
+
+```bash
+# Install uv if not already installed
+uv add clear-skies-akeyless-custom-gitlab
+```
+
+```bash
+pip install clear-skies-akeyless-custom-gitlab
+```
+
+or
+
+```bash
+pipenv install clear-skies-akeyless-custom-gitlab
+```
+
+or
+
+```bash
+poetry add clear-skies-akeyless-custom-gitlab
+```
+
+## Development
+
+To set up your development environment with pre-commit hooks:
+
+```bash
+# Install uv if not already installed
+pip install uv
+
+# Create a virtual environment and install all dependencies (including dev)
+uv sync
+
+
+# Install dev dependencies (including ruff, black, mypy) in the project environment
+uv pip install .[dev]
+
+# Install pre-commit hooks
+uv run pre-commit install
+
+# Optionally, run pre-commit on all files
+uv run pre-commit run --all-files
+```
+
+## Usage Example
+
+```python
+import clearskies
+import clearskies_akeyless_custom_gitlab
+
+producer = clearskies_akeyless_custom_gitlab.build_clearskies_akeyless_custom_gitlab_producer()
+
+wsgi = clearskies.contexts.WsgiRef(producer)
+wsgi()
+```
+
+Which you can test directly using calls like:
+
+```bash
+curl 'http://localhost:9090/sync/create' -d '{"payload":"{\"id\":12345,\"personal_access_token\":\"YOUR_PERSONAL_ACCESS_TOKEN\",\"group_id\":67890,\"scopes\":[\"read_api\"],\"access_level\":20}"}'
+
+curl 'http://localhost:8080/sync/rotate' -d '{"payload":"{\"id\":12345,\"personal_access_token\":\"YOUR_PERSONAL_ACCESS_TOKEN\",\"group_id\":67890,\"scopes\":[\"read_api\"],\"access_level\":20}"}'
+
+curl 'http://localhost:8080/sync/revoke' -d '{"payload":"{\"placeholder\":\"YOUR_VALUE_HERE\"}"}'
+
+```
+
+**NOTE:** Akeyless doesn't store your payload as JSON, even when you put in a JSON payload.  Instead, it ends up as a stringified-json
+(hence the escaped apostrophes in the above example commands).  This is normal, and normally invisible to you, unless you try to invoke the endpoints yourself.
