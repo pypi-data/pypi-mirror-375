@@ -1,0 +1,31 @@
+## [1.4.1](https://github.com/phantomcyber/splunk-soar-sdk/compare/1.4.0...1.4.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* cleanup based on pytest and pr review ([8de0911](https://github.com/phantomcyber/splunk-soar-sdk/commit/8de0911de5c1929aaed898ea81e92a38b7a03974))
+* convert illegal field names to aliases when converting asset or action params ([9cde111](https://github.com/phantomcyber/splunk-soar-sdk/commit/9cde111dfb245fb8e2604e59a8a4fc8512768b7d))
+* normalize_field_names removes leading underscores ([3880b09](https://github.com/phantomcyber/splunk-soar-sdk/commit/3880b09f438c8734c506c146cbe5cdd4521219cd))
+* update converted apps to use the default python versions ([156853c](https://github.com/phantomcyber/splunk-soar-sdk/commit/156853cfe3376ab89f37692e52dc343468a314af))
+* use correct datatypes for default asset values when converting ([c2838ff](https://github.com/phantomcyber/splunk-soar-sdk/commit/c2838ff172517d7f38650692f8e6e61176268382))
+* when deserializing action params, treat them as optional by default ([d2d3b48](https://github.com/phantomcyber/splunk-soar-sdk/commit/d2d3b48ddd1ded8a6b432d33f6867fb394fe17ab))
+
+
+
+
+
+## [1.4.1](https://github.com/phantomcyber/splunk-soar-sdk/compare/1.4.0...1.4.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* cleanup based on pytest and pr review ([8de0911](https://github.com/phantomcyber/splunk-soar-sdk/commit/8de0911de5c1929aaed898ea81e92a38b7a03974))
+* convert illegal field names to aliases when converting asset or action params ([9cde111](https://github.com/phantomcyber/splunk-soar-sdk/commit/9cde111dfb245fb8e2604e59a8a4fc8512768b7d))
+* normalize_field_names removes leading underscores ([3880b09](https://github.com/phantomcyber/splunk-soar-sdk/commit/3880b09f438c8734c506c146cbe5cdd4521219cd))
+* update converted apps to use the default python versions ([156853c](https://github.com/phantomcyber/splunk-soar-sdk/commit/156853cfe3376ab89f37692e52dc343468a314af))
+* use correct datatypes for default asset values when converting ([c2838ff](https://github.com/phantomcyber/splunk-soar-sdk/commit/c2838ff172517d7f38650692f8e6e61176268382))
+* when deserializing action params, treat them as optional by default ([d2d3b48](https://github.com/phantomcyber/splunk-soar-sdk/commit/d2d3b48ddd1ded8a6b432d33f6867fb394fe17ab))
+
+
+
+
