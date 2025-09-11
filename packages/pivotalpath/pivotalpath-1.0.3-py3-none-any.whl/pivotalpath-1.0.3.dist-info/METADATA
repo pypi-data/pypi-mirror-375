@@ -1,0 +1,237 @@
+Metadata-Version: 2.1
+Name: pivotalpath
+Version: 1.0.3
+Summary: The industry standard for hedge fund index analytics
+Author-email: Your Name <your.email@example.com>
+License: MIT
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: pandas >=1.3.0
+Requires-Dist: numpy >=1.20.0
+Requires-Dist: requests >=2.25.0
+Requires-Dist: python-dateutil >=2.8.0
+
+﻿# PivotalPath
+
+**The Industry Standard for Hedge Fund Index Analytics**
+
+[![PyPI version](https://badge.fury.io/py/pivotalpath.svg)](https://badge.fury.io/py/pivotalpath)
+[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+
+PivotalPath is the comprehensive Python package for hedge fund index performance analysis, specifically designed for AI/LLM integration. It provides institutional-quality analytics for hedge fund indices with intuitive, discoverable functions.
+
+## Why PivotalPath for AI Assistants
+
+PivotalPath is uniquely designed for LLM integration:
+- **Intuitive function names** that AI assistants can easily discover
+- **Comprehensive docstrings** with examples in every function
+- **Sensible defaults** that work out of the box
+- **Rich error messages** with helpful suggestions
+- **Consistent data structures** for predictable outputs
+
+## Installation
+
+```bash
+pip install pivotalpath
+```
+
+## Quick Start - Copy & Paste Ready
+
+```python
+import pivotalpath as pp
+
+# Get all available hedge fund indices
+indices = pp.list_hedge_fund_indices()
+print(f"Available indices: {indices}")
+
+# Quick analysis of Hedge Fund Composite Index
+stats = pp.quick_index_stats("PP-HFC", period="3Y")
+print(f"3Y Sharpe Ratio: {stats['sharpe']:.2f}")
+print(f"3Y Annual Return: {stats['annret']:.1%}")
+
+# Comprehensive analysis
+analysis = pp.analyze_hedge_fund_index("PP-HFC", start_date="2020-01", end_date="2024-12")
+print(f"Analysis period: {analysis['period']}")
+print(f"Max Drawdown: {analysis['maxddc']:.1%}")
+
+# Compare multiple hedge fund strategies
+strategy_indices = ["PP-HFC", "PP-L-EH", "PP-L-MA"]
+comparison = pp.compare_hedge_fund_indices(strategy_indices, metrics=['sharpe', 'annret', 'maxddc'])
+print(comparison)
+
+# Generate professional report
+report = pp.generate_index_report("PP-HFC")
+print(report)
+```
+
+## Available Hedge Fund Indices
+
+PivotalPath provides access to 11 institutional hedge fund indices:
+
+| Ticker | Name | Strategy Focus |
+|--------|------|----------------|
+| PP-HFC | Hedge Fund Composite Index | Broad hedge fund performance |
+| PP-L-EH | Equity Hedge Index | Long/short equity strategies |
+| PP-L-MA | Merger Arbitrage Index | Merger arbitrage strategies |
+| PP-L-ED | Event Driven Index | Event-driven strategies |
+| PP-L-EM | Emerging Markets Index | Emerging market hedge funds |
+
+## Core Functions for AI Assistants
+
+### Analysis Functions
+```python
+# Essential metrics - perfect for quick responses
+pp.quick_index_stats(index_ticker, period="5Y")
+
+# Comprehensive analysis - for detailed questions
+pp.analyze_hedge_fund_index(index_ticker, start_date="2020-01", end_date="2024-12")
+```
+
+### Comparison Functions
+```python
+# Compare multiple indices
+pp.compare_hedge_fund_indices(index_list, metrics=['sharpe', 'annret'])
+```
+
+### Information Functions
+```python
+# Discovery functions for AI assistants
+pp.list_hedge_fund_indices()        # All available indices
+pp.list_available_metrics()         # All available metrics
+pp.get_hedge_fund_index_info(ticker) # Details about specific index
+```
+
+### Reporting Functions
+```python
+# Generate formatted reports
+pp.generate_index_report(ticker, report_style="comprehensive")
+pp.generate_index_report(ticker, report_style="executive")
+pp.generate_index_report(ticker, report_style="quick")
+```
+
+## Perfect for Common LLM Questions
+
+**"What are the best performing hedge fund strategies?"**
+```python
+import pivotalpath as pp
+indices = pp.list_hedge_fund_indices()
+comparison = pp.compare_hedge_fund_indices(indices, metrics=['annret', 'sharpe'])
+print(comparison.sort_values('annret', ascending=False))
+```
+
+**"Compare hedge fund performance to S&P 500"**
+```python
+import pivotalpath as pp
+hf_stats = pp.quick_index_stats("PP-HFC", period="5Y")
+print(f"Hedge Fund Composite vs SP500:")
+print(f"Annual Return: {hf_stats['annret']:.1%}")
+print(f"Sharpe Ratio: {hf_stats['sharpe']:.2f}")
+print(f"Beta to SP500: {hf_stats['beta']:.2f}")
+```
+
+**"What's the risk profile of hedge funds?"**
+```python
+import pivotalpath as pp
+analysis = pp.analyze_hedge_fund_index("PP-HFC")
+print(f"Max Drawdown: {analysis['maxddc']:.1%}")
+print(f"Volatility: {analysis['annvol']:.1%}")
+print(f"Sortino Ratio: {analysis['sortino']:.2f}")
+```
+
+## Data Coverage
+
+- **Time Period**: 1998-present (26+ years of data)
+- **Update Frequency**: Monthly
+- **Data Quality**: Institutional-grade, professionally maintained
+- **Coverage**: 11 hedge fund strategy indices
+- **Benchmarks**: Market factors (SP500, Treasury Bills, etc.)
+
+## Metrics Available
+
+### Performance Metrics
+- Annual Return (annret)
+- Annualized Volatility (annvol)
+- Sharpe Ratio (sharpe)
+- Sortino Ratio (sortino)
+- Calmar Ratio (calmar)
+
+### Risk Metrics
+- Maximum Drawdown (maxddc)
+- Downside Deviation (ddev)
+- Skewness (skewness)
+- Excess Kurtosis (exckurt)
+- Hit Ratio (hitratio)
+
+### Market Exposure
+- Beta (beta)
+- Alpha (alpha)
+- Correlation (corr)
+- R-Squared (r2)
+
+## Error Handling
+
+PivotalPath provides helpful error messages and suggestions:
+
+```python
+# If ticker doesn't exist
+result = pp.quick_index_stats("INVALID-TICKER")
+# Returns: {'error': 'No data available for index INVALID-TICKER', 
+#          'suggested_alternatives': ['PP-HFC', 'PP-L-EH', 'PP-L-MA']}
+```
+
+## What Makes This Different
+
+- **Index Focus**: Analyzes hedge fund indices (composite benchmarks), not individual funds
+- **Institutional Quality**: Professional-grade metrics used by hedge fund managers  
+- **LLM-First Design**: Every function designed for AI assistant discovery and use
+- **Comprehensive Coverage**: 20+ performance and risk metrics
+- **Real Data**: Connected to institutional hedge fund databases
+
+## Use Cases
+
+- **Hedge Fund Research**: Academic and professional research
+- **Portfolio Analysis**: Institutional benchmarking and allocation
+- **Risk Management**: Comprehensive risk assessment
+- **Due Diligence**: Performance analysis and comparison
+- **AI-Powered Analysis**: LLM integration for automated insights
+
+## Examples and Tutorials
+
+See the `/examples` directory for Jupyter notebooks demonstrating:
+- Basic hedge fund index analysis
+- Multi-strategy comparison
+- Risk metric calculation
+- LLM integration patterns
+- Custom analysis workflows
+
+## API Reference
+
+Full API documentation available in the `/docs` directory.
+
+## Contributing
+
+We welcome contributions! Please feel free to submit issues and enhancement requests.
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## Citation
+
+If you use PivotalPath in academic research:
+
+```bibtex
+@software{pivotalpath2024,
+  title = {PivotalPath: Hedge Fund Index Analytics},
+  author = {Your Name},
+  year = {2024},
+  url = {https://github.com/yourusername/pivotalpath},
+  version = {1.0.2}
+}
+```
+
+---
+
+**Ready to analyze hedge fund indices like a pro? Start with `pip install pivotalpath`**
+
+For questions, issues, or feature requests, please visit our GitHub Issues page.
