@@ -1,0 +1,12 @@
+plone.caching
+python-dateutil
+setuptools
+z3c.caching
+Zope
+Products.BTreeFolder2
+Products.CMFCore
+Products.GenericSetup
+
+[test]
+plone.app.testing
+plone.testing
