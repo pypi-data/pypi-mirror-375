@@ -1,0 +1,54 @@
+Metadata-Version: 2.4
+Name: image-converter-sarif
+Version: 0.1.0
+Summary: A simple Python package for converting image formats
+Author-email: Your Name <your.email@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/yourusername/image-converter
+Project-URL: Repository, https://github.com/yourusername/image-converter
+Project-URL: Issues, https://github.com/yourusername/image-converter/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: Pillow>=8.0.0
+Dynamic: license-file
+
+# Image Converter
+
+A simple Python package for converting images between different formats using Pillow.
+
+## Installation
+
+```bash
+pip install image-converter
+```
+
+## Usage
+
+```python
+from image_converter import convert_image
+
+convert_image('input.png', 'output.jpg', 'JPEG')
+```
+
+## Function
+
+- `convert_image(input_path, output_path, output_format='JPEG')`: Converts the image at input_path to the specified format and saves it to output_path.
+
+## Dependencies
+
+- Pillow
+
+## License
+
+MIT License
