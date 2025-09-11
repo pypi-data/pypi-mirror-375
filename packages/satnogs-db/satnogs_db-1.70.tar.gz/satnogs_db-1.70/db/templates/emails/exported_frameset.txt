@@ -1,0 +1,10 @@
+{% extends 'emails/base.txt' %}
+
+{% block main %}
+Your download request for frames of satellite with Satellite Identifier "{{ data.sat_id }}" is ready!
+
+{{ data.url }}
+
+All data are public and freely distributed under the Creative Commons Atribution-Share Alike v4.0 license - https://creativecommons.org/licenses/by-sa/4.0/
+
+{% endblock %}

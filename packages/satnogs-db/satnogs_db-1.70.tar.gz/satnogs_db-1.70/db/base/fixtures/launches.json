@@ -1,0 +1,18 @@
+[
+    {
+        "model": "base.launch",
+        "pk": 1,
+        "fields": {
+            "name": "SpaceX F9 Transporter-9 - Vandenberg",
+            "forum_thread_url": "https://community.libre.space/t/spacex-f9-transporter-9-vandenberg-2023-11-11-18-47-utc/10942"
+        }
+    },
+    {
+        "model": "base.launch",
+        "pk": 2,
+        "fields": {
+            "name": "Chang Zheng-2D",
+            "forum_thread_url": "https://community.libre.space/t/chang-zheng-2d-2021-10-14/8794"
+        }
+    }
+]

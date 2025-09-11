@@ -1,0 +1,24 @@
+<table id="transmitter-history-table" class="table table-sm display responsive dataTable no-footer dtr-column" width="100%">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-priority="3">Date of submission</th>
+            <th data-sortable="true" data-priority="3">Date of review</th>
+            <th data-sortable="true" data-priority="4">User</th>
+            <th data-sortable="true" data-priority="4">Reviewer</th>
+            <th data-sortable="true" data-priority="4">Verdict</th>
+            <th data-sortable="true" data-priority="4">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in transmitter_history_items %}
+        <tr class="{% if entry.approved %}suggestion-row-approved{% else %}suggestion-row-rejected{% endif %}">
+            <td>{{ entry.created|date:'Y-m-d H:i' }}</td>
+            <td>{{ entry.reviewed|date:'Y-m-d H:i' }}</td>
+            <td>{% if entry.created_by %}{{ entry.created_by }}{% else %} - {% endif %}</td>
+            <td>{% if entry.reviewer %}{{ entry.reviewer }}{% else %} - {% endif %}</td>
+            <td>{% if entry.approved %}Approved{% else %}Rejected{% endif %}</td>
+            <td><a class="px-3" href="{% url 'transmitter-reviewed-suggestion-detail' suggestion_id=entry.id %}"><i class="fa fa-arrow-right"></i></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

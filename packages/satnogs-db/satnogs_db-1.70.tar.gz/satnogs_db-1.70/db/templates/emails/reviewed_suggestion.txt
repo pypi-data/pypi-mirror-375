@@ -1,0 +1,24 @@
+{% extends 'emails/base.txt' %}
+
+{% block main %}
+{% if suggestion.approved %}
+We are glad to inform you that your suggestion for {% if suggestion_type == 'satellite' %}satellite "{{ suggestion }}"{% else %}transmitter of satellite "{{ suggestion.satellite }}"{% endif %} has been approved.
+
+Link to {% if suggestion_type == 'satellite' %}satellite {{ url }}{% else %}transmitters of the satellite {{ url }}{% endif %}
+{% if suggestion.review_message %}
+Approval note:
+{{ suggestion.review_message }}
+{% endif %}
+Thank you for your contribution!
+{% else %}
+Thank you for your contribution, unfortunately your suggestion for {% if suggestion_type == 'satellite' %}satellite "{{ suggestion }}"{% else %}transmitter of satellite "{{ suggestion.satellite }}"{% endif %} has been rejected.
+
+Link to {% if suggestion_type == 'satellite' %}satellite {{ url }}{% else %}transmitters of the satellite {{ url }}{% endif %}
+{% if suggestion.review_message %}
+Rejection reason:
+{{ suggestion.review_message }}
+{% endif %}
+We encourage you to fix possible issues and make a new suggestion.
+Don't hesitate to contact us in https://community.libre.space if you need any further support.
+{% endif %}
+{% endblock %}

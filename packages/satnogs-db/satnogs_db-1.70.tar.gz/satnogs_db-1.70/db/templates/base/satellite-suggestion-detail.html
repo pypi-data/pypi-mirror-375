@@ -1,0 +1,486 @@
+{% extends "base.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block title %} - Suggestion for Satellite {{ satellite_entry }}{% endblock %}
+
+{% block css %}
+{% if showmap %}
+<link rel="stylesheet" href="{% static 'lib/maplibre-gl/dist/maplibre-gl.css' %}">
+{% endif %}
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/flag-icon-css/css/flag-icon.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/chart.js/Chart.min.css' %}">
+{% endblock %}
+
+{% block top-menu-left %}
+<div class="d-flex flex-column">
+    {% if is_new %}
+    <span class="h4 mb-0 mr-3 d-none d-md-block">Suggestion for New Satellite</span>
+    {% else %}
+    <span class="h4 mb-0 mr-3 d-none d-md-block">Suggested Edit for Satellite</span>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block top-menu-center %}
+
+<ul class="navbar-nav nav nav-pills" data-widget="treeview" role="menu" data-accordion="false" id="tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview"
+      aria-selected="true" aria-label="Overview"><i class="nav-icon fas fa-table-list"></i>
+      <p class="d-none d-lg-inline-block text-sm">Overview</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if is_new %}disabled{% endif %}" id="diff-tab" data-toggle="tab" href="#diff" role="tab" aria-controls="diff"
+      aria-selected="false" aria-label="Difference">
+      <i class="nav-icon fas fa-table-columns"></i>
+      <p class="d-none d-lg-inline-block text-sm">Difference</p>
+    </a>
+  </li>
+</ul>
+{% endblock %}
+
+{% block top-menu-right %}
+{% if request.user.is_authenticated and not is_reviewed %}
+<ul class="navbar-nav nav nav-pills">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" aria-label="Edit Menu">
+      <i class="nav-icon fas fa-edit"></i>
+      <p class="d-none d-lg-inline-block text-sm">Actions</p>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% if satellite_entry.created_by == request.user %}
+        <a class="dropdown-item d-flex align-items-center" href="{% url 'modify_suggestion' suggestion_type='satellite' suggestion_id=satellite_entry.id %}"><i class="nav-icon fas fa-pen-to-square mr-2"></i>Modify Suggestion</a>
+        {% else %}
+        <a class="dropdown-item d-flex align-items-center" href="{% url 'new_suggestion' %}?mode=copy&type=satellite&from={{satellite_entry.pk}}"><i class="nav-icon fas fa-pen-to-square mr-2"></i>Add to Suggestion</a>
+        {% endif %}
+        {% if satellite_entry.created_by == request.user or perms.base.delete_satellitesuggestion %}
+        <button id="remove-button" class="dropdown-item d-flex align-items-center" data-toggle="modal" data-target="#confirmRemoveModal"><i class="nav-icon fas fa-trash mr-2"></i>Remove Suggestion</button>
+        {% endif %}
+        {% if perms.base.approve_satellitesuggestion %}
+        <button type="button" class="dropdown-item d-flex align-items-center" data-toggle="modal" data-target="#reviewModal">
+            <i class="nav-icon fas fa-gavel mr-2"></i> Review Suggestion
+        </button>
+        {% endif %}
+    </div>
+  </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block top %}
+<span class="h4 mb-0">{% if is_new %}
+    <span class="h4 mb-0 mr-3 d-none d-md-block">Suggestion for New Satellite</span>
+    {% else %}
+    <span class="h4 mb-0 mr-3 d-none d-md-block">Suggested Edit for Satellite</span>
+    {% endif %}</span>
+{% endblock %}
+
+{% block content %}
+<div class="row h-100 pl-2 pr-3">
+    <div class="col-12 mx-2 pt-3 d-flex justify-content-between mb-3">
+        <div class="d-flex flex-column">
+            <span><b>Suggested by </b> {{ satellite_entry.created_by|default:'-' }} <b>on: </b>{{ satellite_entry.created|date:'Y-m-d H:i' }}</span>
+            <span><b>Citation: </b>{{ satellite_entry.citation }}</span>
+            {% if is_reviewed %}
+            <span><b>Verdict: </b>{% if satellite_entry.approved %}Approved{% else %}Rejected{% endif %}</span>
+            <span><b>Reviewed by </b> {{ satellite_entry.reviewd_by|default:'-' }} <b>on: </b>{{ satellite_entry.reviewed|date:'Y-m-d H:i' }}</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-12 tab-content mx-2 pt-3" id="myTabContent">
+        <!-- Overview -->
+        <div class="tab-pane fade show active mx-1" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+            <table class="w-100 table-striped">
+                <tr>
+                    <td class="font-weight-bold p-2">Name</td>
+                    <td>
+                        {% if not is_new %}
+                        <a href="{% url 'satellite' sat_id=satellite_entry.satellite_identifier.sat_id %}"><span class="h5">{{ satellite_entry.name }}</span></a>
+                        {% else %}
+                        <span class="h5">{{ satellite_entry.name }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">NORAD ID</td>
+                    <td>{{ satellite_entry.norad_cat_id|default:'-'}}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Followed NORAD ID</td>
+                    <td>{{ satellite_entry.norad_follow_id|default:'-'}}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Alternative Names</td>
+                    <td>{{ satellite_entry.names|default:'-'}}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Description</td>
+                    <td>{{ satellite_entry.description|default:'-'}}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Owner/Operator</td>
+                    <td>
+                        {% if satellite_entry.operator.website and satellite_entry.operator.name %}
+                        <a href="{{ satellite_entry.operator.website }}">{{ satellite_entry.operator.name}}</a>
+                        {% else %}
+                        {{ satellite_entry.operator.name|default:'-'}}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Status</td>
+                    <td> {% if satellite_entry.status == 'alive' %}
+                        <img height="32" src="{% static 'img/status_alive.png' %}" alt="Operational">
+                        {% elif satellite_entry.status == 're-entered' %}
+                        <img height="32" src="{% static 'img/status_decayed.png' %}" alt="Decayed">
+                        {% elif satellite_entry.status == 'dead' %}
+                        <img height="32" src="{% static 'img/status_dead.png' %}" alt="Malfunctioning">
+                        {% elif satellite_entry.status == 'future' %}
+                        <img height="32" src="{% static 'img/status_future.png' %}" alt="Future">
+                        {% else %}
+                        <img height="32" src="{% static 'img/status_unknown.png' %}" alt="Unknown">
+                        {% endif %}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Countries of Origin</td>
+                    <td>{% for country in satellite_entry.countries %}
+                        <span class="align-middle flag-icon flag-icon-{{ country.code|lower }}"></span>
+                      {% endfor %}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Website</td>
+                    <td>
+                        {% if satellite_entry.website %}
+                        <a href="{{ satellite_entry.website }}">{{ satellite_entry.website }}</a>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Dashboard URL</td>
+                    <td>
+                        {% if satellite_entry.dashboard_url %}
+                        <a href="{{ satellite_entry.dashboard_url }}">{{ satellite_entry.dashboard_url }}</a>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold p-2">Launch Date</td>
+                    <td>{{ satellite_entry.launched|default:'-'}}</td>
+                </tr>
+                {% if satellite_entry.launched and satellite_entry.launch %}
+                <tr>
+                    <td class="font-weight-bold p-2">Launch</td>
+                    <td><a href="{% url 'launch' launch_id=satellite_entry.launch_id %}">{{  satellite_entry.launch.name }}</a></td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td class="font-weight-bold p-2">Deploy Date</td>
+                    <td>{{ satellite_entry.deployed|default:'-'}}</td>
+                </tr>
+                {% if satellite_entry.status == 're-entered' %}
+                <tr>
+                    <td class="font-weight-bold p-2">Re-entry Date</td>
+                    <td>{{ satellite_entry.decayed|default:'-'}}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td class="font-weight-bold p-2">Image</td>
+                    <td><img class="my-auto py-2" height="64" src="{{ satellite_entry.get_image }}" alt="{{ satellite_entry.name }}" class="satellite-img-full mb-3"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Diff Section -->
+        {% if not is_new %}
+        <div class="tab-pane fade" id="diff" role="tabpanel" aria-labelledby="diff-tab">
+            <table class="w-100 table-striped">
+                <thead>
+                    <tr>
+                        <th class="py-3 px-2">Field</th>
+                        <th class="py-3 px-2">{% if is_reviewed %}Previous{% else %}Current Value{% endif %}</th>
+                        <th class="py-3 px-2">Suggested</th>
+                    </tr>
+                    <tr>
+                        <th class="border-bottom bg-secondary border-top"></th>
+                        <th class="border-bottom bg-secondary border-top"></th>
+                        <th class="border-bottom bg-secondary border-top"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if current_entry.name != satellite_entry.name %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Name</td>
+                        <td><a href="{% url 'satellite' sat_id=current_entry.satellite_identifier.sat_id %}"><span class="h5">{{ current_entry.name }}</span></td>
+                        <td><a href="{% url 'satellite' sat_id=satellite_entry.satellite_identifier.sat_id %}"><span class="h5">{{ satellite_entry.name }}</span></td>
+                    </tr>
+                    {% endif %}
+                    {% if current_entry.norad_cat_id != satellite_entry.norad_cat_id %}
+                    <tr>
+                        <td class="font-weight-bold p-2">NORAD ID</td>
+                        <td>{{ current_entry.norad_cat_id|default:'-'}}</td>
+                        <td>{{ satellite_entry.norad_cat_id|default:'-'}}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.norad_follow_id != satellite_entry.norad_follow_id %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Followed NORAD ID</td>
+                        <td>{{ current_entry.norad_follow_id|default:'-'}}</td>
+                        <td>{{ satellite_entry.norad_follow_id|default:'-'}}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.names != satellite_entry.names %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Alternative Names</td>
+                        <td>{{ current_entry.names|default:'-'}}</td>
+                        <td>{{ satellite_entry.names|default:'-'}}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.description != satellite_entry.description %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Description</td>
+                        <td>{{ current_entry.description|default:'-'}}</td>
+                        <td>{{ satellite_entry.description|default:'-'}}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.operator != satellite_entry.operator %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Owner/Operator</td>
+                        <td>
+                            {% if current_entry.operator.website and current_entry.operator.name %}
+                            <a href="{{ current_entry.operator.website }}">{{ current_entry.operator.name}}</a>
+                            {% else %}
+                            {{ current_entry.operator.name|default:'-'}}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if satellite_entry.operator.website and satellite_entry.operator.name %}
+                            <a href="{{ satellite_entry.operator.website }}">{{ satellite_entry.operator.name}}</a>
+                            {% else %}
+                            {{ satellite_entry.operator.name|default:'-'}}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.status != satellite_entry.status %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Status</td>
+                        <td>
+                            {% if current_entry.status == 'alive' %}
+                            <img height="32" src="{% static 'img/status_alive.png' %}" alt="Operational">
+                            {% elif current_entry.status == 're-entered' %}
+                            <img height="32" src="{% static 'img/status_decayed.png' %}" alt="Decayed">
+                            {% elif current_entry.status == 'dead' %}
+                            <img height="32" src="{% static 'img/status_dead.png' %}" alt="Malfunctioning">
+                            {% elif current_entry.status == 'future' %}
+                            <img height="32" src="{% static 'img/status_future.png' %}" alt="Future">
+                            {% else %}
+                            <img height="32" src="{% static 'img/status_unknown.png' %}" alt="Unknown">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if satellite_entry.status == 'alive' %}
+                            <img height="32" src="{% static 'img/status_alive.png' %}" alt="Operational">
+                            {% elif satellite_entry.status == 're-entered' %}
+                            <img height="32" src="{% static 'img/status_decayed.png' %}" alt="Decayed">
+                            {% elif satellite_entry.status == 'dead' %}
+                            <img height="32" src="{% static 'img/status_dead.png' %}" alt="Malfunctioning">
+                            {% elif satellite_entry.status == 'future' %}
+                            <img height="32" src="{% static 'img/status_future.png' %}" alt="Future">
+                            {% else %}
+                            <img height="32" src="{% static 'img/status_unknown.png' %}" alt="Unknown">
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.countries.all|length != satellite_entry.countries.all|length or current_entry.countries.all|unordered_list != satellite_entry.countries.all|unordered_list %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Countries of Origin</td>
+                        <td>
+                            {% for country in current_entry.countries.all %}
+                            <span class="align-middle flag-icon flag-icon-{{ country.code|lower }}"></span>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for country in satellite_entry.countries.all %}
+                            <span class="align-middle flag-icon flag-icon-{{ country.code|lower }}"></span>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.website != satellite_entry.website %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Website</td>
+                        <td>
+                            {% if current_entry.website %}
+                            <a href="{{ current_entry.website }}">{{ current_entry.website }}</a>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if satellite_entry.website %}
+                            <a href="{{ satellite_entry.website }}">{{ satellite_entry.website }}</a>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.dashboard_url != satellite_entry.dashboard_url %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Dashboard URL</td>
+                        <td>
+                            {% if current_entry.dashboard_url %}
+                            <a href="{{ current_entry.dashboard_url }}">{{ current_entry.dashboard_url }}</a>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if satellite_entry.dashboard_url %}
+                            <a href="{{ satellite_entry.dashboard_url }}">{{ satellite_entry.dashboard_url }}</a>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.launched != satellite_entry.launched %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Launch Date</td>
+                        <td>{{ current_entry.launched|default:'-'}}</td>
+                        <td>{{ satellite_entry.launched|default:'-'}}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.launch_id != satellite_entry.launch_id %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Launch</td>
+                        <td>
+                            <a href="{% url 'launch' launch_id=current_entry.launch_id %}">{{ current_entry.launch.name }}</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'launch' launch_id=satellite_entry.launch_id %}">{{ satellite_entry.launch.name }}</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.deployed != satellite_entry.deployed %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Deploy Date</td>
+                        <td>{{ current_entry.deployed|default:'-'}}</td>
+                        <td>{{ satellite_entry.deployed|default:'-'}}</td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.decayed != satellite_entry.decayed %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Re-entry Date</td>
+                        <td>{{ current_entry.decayed|default:'-' }}
+                        </td>
+                        <td>
+                            {{ satellite_entry.decayed|default:'-' }}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if current_entry.get_image != satellite_entry.get_image %}
+                    <tr>
+                        <td class="font-weight-bold p-2">Image</td>
+                        <td>
+                            <img class="my-auto py-2" height="64" src="{{ current_entry.get_image }}" alt="{{ current_entry.name }}" class="satellite-img-full mb-3">
+                        </td>
+                        <td>
+                            <img class="my-auto py-2" height="64" src="{{ satellite_entry.get_image }}" alt="{{ satellite_entry.name }}" class="satellite-img-full mb-3">
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if satellite_entry.created_by == request.user or perms.base.delete_satellitesuggestion %}
+<div class="modal fade" id="confirmRemoveModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form method="post" action="{% url 'remove-suggestion' %}">
+          {% csrf_token %}
+          <input type="hidden" name="suggestion_type" value="satellite">
+          <input type="hidden" name="suggestion_id" value="{{ satellite_entry.id }}">
+          <div class="modal-header">
+            <h5 id="confirmModalLabel" class="modal-title">Confirm Removal</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this suggestion?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">Remove</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% if perms.base.approve_satellitesuggestion %}
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">Review Suggestion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{% url 'satellite_suggestion_handler' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <input type="hidden" name="pk" value="{{ satellite_entry.pk }}">
+                    <div class="form-group">
+                        <label for="verdict">Verdict</label>
+                        <select class="form-control" id="verdict" name="verdict" required>
+                            <option value="approve">Approve</option>
+                            <option value="reject">Reject</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-message">Review Message</label>
+                        <textarea class="form-control" id="review-message" name="review_message" rows="3" placeholder="Provide reason for approval or rejection"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

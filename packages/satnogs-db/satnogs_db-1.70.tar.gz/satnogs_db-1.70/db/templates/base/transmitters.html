@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - Transmitters{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block top-menu-left %}
+<span class="h4 mb-0 mr-3 text-truncate d-none d-md-block">Transmitters</span>
+{% endblock %}
+
+{% block top-menu-center %}
+
+<ul class="navbar-nav nav nav-pills" data-widget="treeview" role="menu" data-accordion="false" id="tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list"
+      aria-selected="true" aria-label="List"><i class="nav-icon fas fa-th-list"></i>
+      <p class="d-none d-lg-inline-block text-sm">List</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="spectrum-tab" data-toggle="tab" href="#spectrum" role="tab" aria-controls="spectrum"
+      aria-selected="false" aria-label="Spectrum"><i class="nav-icon fas fa-barcode"></i>
+      <p class="d-none d-lg-inline-block text-sm">Spectrum</p>
+    </a>
+  </li>
+</ul>
+{% endblock %}
+
+{% block top-menu-right %}
+{% if request.user.is_authenticated %}
+<ul class="navbar-nav nav nav-pills" data-widget="treeview" role="menu" data-accordion="false" id="tabs" role="tablist">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" aria-label="Actions Menu">
+      <i class="nav-icon fas fa-edit"></i>
+      <p class="d-none d-lg-inline-block text-sm">Actions</p>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item d-flex align-items-center" href="{% url 'new_suggestion' %}?type=transmitter" aria-label="Suggest new transmitter">
+        <i class="nav-icon mr-2 fas fa-plus-square"></i>
+        <p class="mb-0">Suggest New Transmitter</p>
+      </a>
+    </div>
+  </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block top %}
+<span class="h4 mb-0">Transmitters</span>
+{% endblock %}
+
+{% block content %}
+
+<div class="row h-100 pl-2 pr-3">
+  <!-- The following div is managed by the tab menus -->
+  <div class="col-12 tab-content mx-2 pt-3" id="myTabContent">
+
+    <!-- List panel -->
+    <div class="tab-pane fade show active mx-1" id="list" role="tabpanel" aria-labelledby="list-tab">
+      <table id="transmitters" class="table table-sm display responsive table-striped" width="100%">
+        <thead>
+          <tr>
+            <th data-priority="1"></th>
+            <th data-visible="false" data-priority="20">UUID</th>
+            <th data-sortable="true" data-priority="1">Satellite</th>
+            <th data-sortable="true" data-priority="4">Type</th>
+            <th data-sortable="true" data-priority="1">Description</th>
+            <th data-sortable="true" data-priority="2">Downlink</th>
+            <th data-sortable="true" data-visible="false" data-priority="10">Downlink Drift</th>
+            <th data-sortable="true" data-visible="false" data-priority="10">Uplink</th>
+            <th data-sortable="true" data-visible="false" data-priority="10">Uplink Drift</th>
+            <th data-sortable="true" data-visible="false" data-priority="10">Inverted</th>
+            <th data-sortable="true" data-priority="3">Mode</th>
+            <th data-sortable="true" data-priority="4">Baud</th>
+            <th data-sortable="true" data-priority="10">Service</th>
+            <th data-sortable="true" data-priority="10">Status</th>
+            <th data-sortable="true" data-visible="false" data-priority="30">Unconfirmed</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trans in transmitters %}
+          <tr>
+            <td class='details-control'>
+              <i class="fa fa-plus-square" aria-hidden="true"></i>
+            </td>
+
+            <td>{{ trans.uuid }}</td>
+            <td>
+              {% if trans.satellite__satellite_entry__norad_cat_id %}
+              <a href="{% url 'satellite' sat_id=trans.satellite__satellite_identifier__sat_id %}">
+                {{ trans.satellite__satellite_entry__norad_cat_id }} {{ trans.satellite__satellite_entry__name }}
+              </a>
+              {% else %}
+              {{ trans.satellite__satellite_entry }}
+              {% endif %}
+            </td>
+            <td>{{ trans.type }}</td>
+            <td>{{ trans.description }}</td>
+            <td class="frequency">{{ trans.downlink_low }}</td>
+            <td>{{ trans.downlink_drift }}</td>
+            <td class="frequency">{{ trans.uplink }}</td>
+            <td>{{ trans.uplink_drift }}</td>
+            <td>{{ trans.invert }}</td>
+            <td>{{ trans.downlink_mode__name }}</td>
+            <td>{{ trans.baud }}</td>
+            <td>{{ trans.service }}</td>
+            <td>{{ trans.status }}</td>
+            <td>{{ trans.unconfirmed }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Spectrum panel -->
+    <div class="tab-pane fade mx-1" id="spectrum" role="tabpanel" aria-labelledby="spectrum-tab">
+      <div class="p-3">
+        <div id="spectrum-filters">
+          <div class="d-flex">
+            <div id="transmitter-status-dropdown" class="dropdown mr-1">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="transmitter-status-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Show Transmitters: All
+              </button>
+              <div class="dropdown-menu transmitter-status-filter" aria-labelledby="transmitter-status-filter">
+                <button data-val="all" class="dropdown-item transmitter-status-filter-option" >All</button>
+                <button data-val="active" class="dropdown-item transmitter-status-filter-option" >Active</button>
+                <button data-val="inactive" class="dropdown-item transmitter-status-filter-option" >Inactive</button>
+              </div>
+            </div>
+            <div id="satellite-status-dropdown" class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="satellite-status-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Show Satellites: Alive
+              </button>
+              <div class="dropdown-menu satellite-status-filter" aria-labelledby="satellite-status-filter">
+                <button data-val="all" class="dropdown-item satellite-status-filter-option">All</button>
+                <button data-val="alive" class="dropdown-item satellite-status-filter-option">Alive</button>
+                <button data-val="re-entered" class="dropdown-item satellite-status-filter-option">Re-entered</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="transmitters-chart-container">
+        <div id="spectrum-spinner" class="spinner-border ml-3 mb-3" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="p-3">
+        <button type="button" class="btn btn-primary" id="zoom-all">
+          <i class="fas fa-search"></i> All</button>
+        <button type="button" class="btn btn-primary" id="zoom-vhf">
+          <i class="fas fa-search"></i> VHF Amateur</button>
+        <button type="button" class="btn btn-primary" id="zoom-uhf">
+          <i class="fas fa-search"></i> UHF Amateur</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'lib/admin-lte/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-buttons/js/buttons.colVis.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'lib/d3/dist/d3.min.js' %}"></script>
+<script src="{% static 'js/datatables-natural.js' %}"></script>
+<script src="{% static 'js/transmitters-chart.js' %}"></script>
+<script src="{% static 'js/transmitters.js' %}"></script>
+<script src="{% static 'js/transmitters-invalid-toggle.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block title %} - {{ launch.name }}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/chart.js/Chart.min.css' %}">
+{% endblock %}
+
+{% block top-menu-left %}
+<span class="h4 mb-0 mr-3 text-truncate d-none d-md-block">{{ launch.name }}</span>
+{% endblock %}
+
+{% block top-menu-right %}
+<ul class="navbar-nav nav nav-pills" data-widget="treeview" role="menu" data-accordion="false" id="tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+      aria-selected="true" aria-label="Information"><i class="nav-icon fas fa-rocket"></i>
+      <p class="d-none d-lg-inline-block text-sm">Info</p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="satellites-tab" data-toggle="tab" href="#satellites" role="tab"
+      aria-controls="satellites" aria-selected="false" aria-label="Satellites">
+      <i class="nav-icon fas fa-satellite-dish"></i>
+        <span class="badge badge-satnogs-primary navbar-badge">{{ launch.satellites_count }}</span>
+      <p class="d-none d-lg-inline-block text-sm">Satellites</p>
+    </a>
+  </li>
+</ul>
+{% endblock %}
+
+{% block top %}
+<span class="h4 mb-0">{{ launch.name }}</span>
+{% endblock %}
+
+{% block content %}
+<div class="row h-100 pl-2 pr-3">
+  <!-- The following div is managed by the tab menus -->
+  <div class="col-12 tab-content mx-2 pt-3" id="myTabContent">
+
+    <!-- Profile panel -->
+    <div class="tab-pane fade show active mx-1" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="card-columns">
+        <!-- Launch Information -->
+        <div class="card card-info">
+          <div class="card-header card-satnogs-header">
+            Launch information
+          </div>
+          <div class="card-body">
+            <dl class="row">
+              <dt class="col-sm-5">Name</dt>
+              <dd class="col-sm-7">{{ launch.name }}</dd>
+              {% if launch.launched %}
+              <dt class="col-sm-5">Launch Date</dt>
+              <dd class="col-sm-7">{{ launch.launch_date }}</dd>
+              {% endif %}
+              <dt class="col-sm-5">Number of Satellites</dt>
+              <dd class="col-sm-7">{{ launch.satellites_count }}</dd>
+            </dl>
+          </div>
+        </div>
+        <!-- Launch Links -->
+        <div class="card card-info">
+          <div class="card-header card-satnogs-header">
+            Launch Links
+          </div>
+          <div class="card-body text-center">
+            <a class="btn btn-info m-1 satnogs-link-btn"
+              href="{{ launch.forum_thread_url }}" target="_blank"
+              aria-label="Forum Thread"
+              role="button">
+              Forum Thread
+              <i class="mr-2 fas fa-external-link-alt"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Satellites panel -->
+    <div class="tab-pane fade" id="satellites" role="tabpanel" aria-labelledby="satellites-tab">
+      <div class="container-fluid card-deck">
+        <div class="col-12 col-md-6 my-2">
+          <div class="card card-info">
+            <div class="card-header card-satnogs-header">
+              <i class="fas fa-satellite-dish"></i>
+              Satellites
+            </div>
+            <div class="card-body text-sm">
+              <table class="table table-sm table-borderless">
+                <thead>
+                  <tr>
+                    <th>Satellite Identifier</th>
+                    <th>Name</th>
+                    <th>NORAD</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for sat in satellites %}
+                  <tr>
+                    <td><a href="{% url 'satellite' sat_id=sat.satellite_identifier__sat_id %}">{{ sat.satellite_identifier__sat_id }}</a></td>
+                    <td><a href="{% url 'satellite' sat_id=sat.satellite_identifier__sat_id %}">{{ sat.satellite_entry__name|upper }}</a></td>
+                    <td><a href="{% url 'satellite' sat_id=sat.satellite_identifier__sat_id %}">{{ sat.satellite_entry__norad_cat_id }}</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

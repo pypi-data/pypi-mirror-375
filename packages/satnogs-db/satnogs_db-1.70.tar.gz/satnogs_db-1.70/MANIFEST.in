@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+recursive-include db/base/fixtures *
+recursive-include db/static *
+recursive-include db/templates *
+recursive-include docs *

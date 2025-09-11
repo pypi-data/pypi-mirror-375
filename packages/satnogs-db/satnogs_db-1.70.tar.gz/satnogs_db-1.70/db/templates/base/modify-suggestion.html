@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load tags %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} - Modify Suggestion{% endblock %}
+
+{% block top-menu-left %}
+<span class="h4 mb-0 mr-3 d-none d-md-block">Modify Suggestion</span>
+{% endblock %}
+
+{% block top %}
+<span class="h4 mb-0">Modify Suggestion</span>
+{% endblock %}
+
+{% block content %}
+<div class="container p-3">
+    <div id="form-container">
+        {% if suggestion_type == 'satellite' %}
+            {% include "base/satellite-suggestion-form.html" %}
+        {% else %}
+        {% include "base/transmitter-suggestion-form.html" %}
+        <script src="{% static 'js/transmitter_modal.js' %}"></script>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'lib/admin-lte/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/chart.js/Chart.bundle.min.js' %}"></script>
+<script src="{% static 'js/transmitter_modal.js' %}"></script>
+<script src="{% static 'js/modify-suggestion.js' %}"></script>
+{% endblock %}
