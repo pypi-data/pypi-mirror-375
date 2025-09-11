@@ -1,0 +1,91 @@
+Metadata-Version: 2.4
+Name: handoff
+Version: 0.4.2
+Summary: Deploy configurable unix pipeline jobs serverlessly.
+Author: Daigo Tanaka
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://handoff.cloud
+Project-URL: Documentation, https://dev.handoff.cloud
+Classifier: Development Status :: 4 - Beta
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+License-File: AUTHORS.md
+Requires-Dist: attrs==25.3.0
+Requires-Dist: boto3==1.40.22
+Requires-Dist: botocore==1.40.22
+Requires-Dist: docker==7.1.0
+Requires-Dist: jinja2==3.1.6
+Requires-Dist: jsonschema==4.25.1
+Requires-Dist: lxml==6.0.1
+Requires-Dist: packaging==25.0
+Requires-Dist: psutil==7.0.0
+Requires-Dist: pygit2==1.13.0
+Requires-Dist: pygithub==1.59.1
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: pyyaml==6.0.2
+Requires-Dist: requests==2.32.5
+Requires-Dist: s3transfer==0.13.1
+Dynamic: license-file
+
+[![Build Status](https://travis-ci.com/anelendata/handoff.svg?branch=master)](https://travis-ci.com/anelendata/handoff)
+[![Documentation Status](https://readthedocs.org/projects/handoffcloud/badge/?version=latest)](https://dev.handoff.cloud/en/latest/?badge=latest)
+
+# handoff core
+
+👉 For a fully managed service, checkout [handoff.cloud website](https://handoff.cloud)
+
+<img src="https://github.com/anelendata/handoff/raw/master/assets/this_is_handoff.png"/>
+
+## What is it?
+
+handoff ([repository](https://github.com/anelendata/handoff))
+is a single command that let you quickly orchestrate the data pipeline on
+a serverless platform such as AWS Fargate.
+
+Deploying on a serverless platform saves you from the need for managing servers
+and paying for idling virtual machines. The serverless configuration could be
+very complicated, so handoff takes care of it under the hood so you can focus on
+the pipeline logic.
+
+Features and benefits:
+
+1. Container orchestration (AWS Elastic Continer Service)
+2. Extended serverless task execution (AWS Fargate, vs. AWS Lambda's 15min limit)
+3. CRON Scheduling (AWS EventBridge)
+4. Configuration and secret management (AWS Systems Manager Parameter Store)
+5. Simple switch between production and devlopment stages
+6. Docker image management (AWS Elastic Container Registry)
+7. Artifacts management (AWS Simple Cloud Storage)
+8. Log management (AWS CloudWatch)
+9. Shared resource management (Virtual Private Cloud, Security Group)
+10. No need to pay and maintain a dedicated virtual instances!
+
+Note: With the unified handoff command, we are planning to support multi-cloud
+deployment experience (Azure and Google Cloud Platform).
+
+## Get started easily
+
+Check out [the super quick example](https://dev.handoff.cloud/en/latest/quick_example.html)
+and [tutorial](https://dev.handoff.cloud/en/latest/tutorial.html).
+
+## Open Source handoff Recipes!
+
+We will upload more and more [recipes](https://github.com/anelendata/handoff_recipe) that you can use and learn from!
+
+# About this project
+
+This project is developed by
+ANELEN and friends. Please check out the ANELEN's
+[open innovation philosophy and other projects](https://anelen.co/open-source.html)
+
+![ANELEN](https://avatars.githubusercontent.com/u/13533307?s=400&u=a0d24a7330d55ce6db695c5572faf8f490c63898&v=4)
+---
+
+Copyright &copy; 2020~ Anelen Co., LLC

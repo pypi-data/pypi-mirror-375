@@ -1,0 +1,100 @@
+#!/bin/bash
+MODE=$1
+if [[ -z $2 ]];then HEADTAIL_LIMIT=0; else HEADTAIL_LIMIT=$2;fi
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/../.."
+source scripts/funcs
+
+echo "## Virtual environment and install
+
+Let's make a little more practical data pipeline application. In this section,
+we will retrieve currency exchange rates and write out to CSV file.
+
+We will install singer.io (https://singer.io), a data collection framework,
+in Python vitual environment.
+"
+
+Prompt "Ready? (Hit q at prompt to quit anytime. Any other key to proceed.)"
+
+echo "
+We will use 04_install project. Here is project.yml:
+"
+
+Cat "04_install/project.yml" $DIM 0
+
+Prompt
+
+echo "
+What's new here is the installs section that lists the shell command to
+install the necessary program for this project.
+
+For each install, you can set venv key to set the name of the Python virtual
+environment. This helps avoid the dependency conflicts among Python programs.
+
+(The deploy and schedule sections in the file are irrelevant in this section.
+We will use it later.)
+"
+
+Prompt
+
+echo "
+The project runs a pipeline that is a shell equivalent to
+
+    tap-exchangeratehost | python files/stats_collector.py | target-csv
+"
+
+Prompt
+
+echo '
+Before we can run this, we need to install a couple of Python packages:
+tap-exchangeratehost and target-csv. The `install` section contains the 
+installation commands. Also notice `venv` entries for each command. handoff
+can create Python virtual enviroment for each command to avoid conflicting
+dependencies among the packages.
+
+To install, run this command:
+'
+
+Command "handoff workspace install -p 04_install -w workspace_04"
+
+Prompt
+
+echo "Now, if you look at tap-config.json under files folder,
+"
+
+Cat "04_install/files/tap-config.json"
+
+Prompt
+
+echo "...you will notice {{ start_date }} variable but it is not defined in
+project.yml. That is because I did not want to hardcode a particular date.
+Instead, let's fill a value when we run handoff run command.
+
+The following command, for example, sets the start_date as 7 days ago:
+"
+
+Command "handoff run local -p 04_install -w workspace_04 -v start_date=$DATE_MINUS_7"
+
+Prompt
+
+echo "
+
+This task should have created a CSV file in artifacts directory:
+"
+
+Run "ls workspace_04/artifacts | grep csv" $DIM 0
+
+Prompt
+
+Thanks
+
+echo "
+We learned how to install Pythonn packages and in this section.
+The exchange rate application is more practical use of handoff.
+04_install project fetched the data from an API and store the data to the
+destination (CSV file).
+
+In the next section, we will learn a little more advanced flow logic
+such as foreach and fork.
+"
+
+Continue scripts/aws_get_started/03_control_flow
