@@ -1,0 +1,6 @@
+ipykernel
+jupyter_client
+kernel_driver>=0.0.6
+
+[test]
+pytest
