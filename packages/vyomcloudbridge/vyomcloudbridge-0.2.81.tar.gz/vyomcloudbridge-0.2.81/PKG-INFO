@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: vyomcloudbridge
+Version: 0.2.81
+Summary: A communication service for vyom cloud
+Author: Vyom OS Admin
+Author-email: admin@vyomos.org
+Requires-Python: >=3.6
+License-File: LICENSE
+Requires-Dist: paho-mqtt
+Requires-Dist: awsiotsdk>=1.22.1
+Requires-Dist: build>=1.2.2.post1
+Requires-Dist: cv-bridge>=1.13.0.post0
+Requires-Dist: empy==3.3.4
+Requires-Dist: numpy<2.0,>=1.24.3
+Requires-Dist: opencv-python<4.12,>=4.11.0.86
+Requires-Dist: paho-mqtt==2.1.0
+Requires-Dist: pika>=1.3.2
+Requires-Dist: psutil>=5.9.0
+Requires-Dist: requests>=2.32.3
+Requires-Dist: twine>=6.1.0
+Requires-Dist: pymavlink>=2.4.47
+Provides-Extra: lite
+Provides-Extra: full
+Dynamic: author
+Dynamic: author-email
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
