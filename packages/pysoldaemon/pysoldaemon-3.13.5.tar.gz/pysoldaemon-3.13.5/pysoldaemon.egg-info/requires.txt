@@ -1,0 +1,10 @@
+greenlet
+gevent
+pysolbase>=3.13.0
+
+[test]
+unittest-xml-reporting
+pylint
+twine
+tox
+toml
