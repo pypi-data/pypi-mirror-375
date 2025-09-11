@@ -1,0 +1,8 @@
+pandas>=1.0
+polars>=0.19
+nltk>=3.8
+
+[dev]
+pytest>=7.0
+build>=0.10
+twine>=4.0
