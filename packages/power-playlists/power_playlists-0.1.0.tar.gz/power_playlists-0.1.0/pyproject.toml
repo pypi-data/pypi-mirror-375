@@ -1,0 +1,128 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "power-playlists"
+dynamic = ["version"]
+description = "A Python CLI tool for creating dynamic Spotify playlists using YAML configuration files"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Erik Krogen", email = "erikkrogen@gmail.com"},
+]
+keywords = ["spotify", "playlists", "music", "cli", "yaml", "automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Unix",
+    "Operating System :: POSIX", 
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "Click>=8.0,<9",
+    "lockfile>=0.12",
+    "psutil>=5.9,<6",
+    "python-daemon>=3.0,<4",
+    "python-dateutil>=2.8.1,<3",
+    "PyYAML>=6.0,<7",
+    "setuptools>=65.0",
+    "spotipy>=2.24.0,<3",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest~=7.4.4",
+]
+docs = [
+    "pdoc>=15.0.0",
+]
+dev = [
+    "power-playlists[test,docs]",
+]
+
+[project.scripts]
+power-playlists = "power_playlists.main:cli"
+
+[project.urls]
+Homepage = "https://github.com/xkrogen/power-playlists/"
+Repository = "https://github.com/xkrogen/power-playlists"
+"Bug Tracker" = "https://github.com/xkrogen/power-playlists/issues"
+"Documentation" = "https://xkrogen.github.io/power-playlists/"
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = { local_scheme = "no-local-version" }
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/power_playlists/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/power_playlists"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/docs",
+    "/samples",
+    "README.md",
+    "LICENSE",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["T20"]  # Allow print statements in tests
+"src/**/_version.py" = ["ALL"]  # Ignore all linting in auto-generated version files
+
+[tool.mypy]
+python_version = "3.12"
+# Use default strict MyPy settings
+
+[[tool.mypy.overrides]]
+module = [
+    "spotipy.*",
+    "lockfile.*", 
+    "psutil.*",
+    "daemon.*",
+]
+ignore_missing_imports = true
+
+[dependency-groups]
+dev = [
+    "hatch-vcs>=0.5.0",
+    "mypy>=1.17.1",
+    "ruff>=0.12.11",
+    "types-psutil>=7.0.0.20250822",
+    "types-python-dateutil>=2.9.0.20250822",
+    "types-pyyaml>=6.0.12.20250822",
+]
