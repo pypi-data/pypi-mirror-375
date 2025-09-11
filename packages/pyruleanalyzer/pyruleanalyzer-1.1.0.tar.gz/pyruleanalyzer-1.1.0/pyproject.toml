@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyruleanalyzer"
+version = "1.1.0"
+description = ""
+authors = [{ name = "GrupoCybersegurancaVirtus" }]
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">= 3.7"
+dependencies = ["numpy", "pandas", "scikit-learn", "matplotlib"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "sphinx-autobuild",
+    "sphinx_rtd_theme",
+    "sphinxcontrib-bibtex",
+]
+
+[project.urls]
+Homepage = "https://github.com/GrupoCybersegurancaVirtus/pyruleanalyzer"
+Documentation = "https://grupocybersegurancavirtus.github.io/pyruleanalyzer/"

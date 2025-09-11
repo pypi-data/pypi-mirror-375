@@ -1,0 +1,38 @@
+Metadata-Version: 2.4
+Name: pyruleanalyzer
+Version: 1.1.0
+Author: GrupoCybersegurancaVirtus
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/GrupoCybersegurancaVirtus/pyruleanalyzer
+Project-URL: Documentation, https://grupocybersegurancavirtus.github.io/pyruleanalyzer/
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Provides-Extra: docs
+Requires-Dist: sphinx; extra == "docs"
+Requires-Dist: sphinx-autobuild; extra == "docs"
+Requires-Dist: sphinx_rtd_theme; extra == "docs"
+Requires-Dist: sphinxcontrib-bibtex; extra == "docs"
+Dynamic: license-file
+
+# PyRuleAnalyzer
+
+PyRuleAnalyzer is a Python-based tool designed to support rule extraction, analysis, and simplification from decision tree and random forest models. It provides a comprehensive pipeline to generate interpretable models, remove redundancies, and evaluate model accuracy and interpretability.
+
+Key functionalities include:
+
+- Extracting decision rules from Random Forests and Decision Trees.
+
+- Identifying and removing redundant and duplicate rules.
+
+- Evaluating initial and simplified models through classification accuracy, confusion matrices, and interpretability metrics.
+
+- Computing sparsity and interpretability scores to assess model complexity and understandability.
+
+For guides on installation and usage refer to the documentation on https://grupocybersegurancavirtus.github.io/pyruleanalyzer/
