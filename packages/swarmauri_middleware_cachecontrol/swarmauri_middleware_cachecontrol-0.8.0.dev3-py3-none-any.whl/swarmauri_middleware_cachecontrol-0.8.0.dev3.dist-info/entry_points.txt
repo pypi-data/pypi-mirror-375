@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+CacheControlMiddleware=swarmauri_middleware_cachecontrol:CacheControlMiddleware
+
