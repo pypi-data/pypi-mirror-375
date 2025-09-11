@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=71.1.0","setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plexutil"
+version = "2.1.2"
+requires-python = ">=3.12.10"
+authors = [
+  {name = "Carlos Florez", email = "carlos@florez.co.uk"}
+]
+maintainers = [
+  {name = "Carlos Florez", email = "carlos@florez.co.uk"}
+]
+description = ""
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "PlexAPI==4.15.7",
+  "alive-progress==3.1.5",
+  "pyyaml==6.0.1",
+  "toml==0.10.2",
+  "pywin32==306;sys_platform == 'win32'",
+  "jsonschema==4.23.0",
+  "peewee==3.17.7",
+  "colorlog==6.4.0",
+  "keyring==25.5.0",
+  "cryptography==44.0.1"
+]
+
+[project.scripts]
+plexutil = "plexutil.__main__:main"
+
+[project.urls]
+Repository = "https://github.com/florez-carlos/plexutil"
