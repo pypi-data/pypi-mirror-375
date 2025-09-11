@@ -1,0 +1,2 @@
+[console_scripts]
+tree-sitter-delphi = delphi_tree_sitter.cli:main
