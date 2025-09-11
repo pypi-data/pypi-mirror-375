@@ -1,0 +1,129 @@
+Metadata-Version: 2.4
+Name: hyv-touch
+Version: 0.1.0
+Summary: Rich-powered interactive touch REPL for introspection and debugging
+Project-URL: Homepage, https://github.com/yourname/rich-touch
+Project-URL: Repository, https://github.com/yourname/rich-touch
+Project-URL: Issues, https://github.com/yourname/rich-touch/issues
+Author: Hyv
+License: MIT
+License-File: LICENSE
+Keywords: cli,debugger,introspection,repl,rich
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Debuggers
+Classifier: Topic :: Terminals
+Requires-Python: >=3.9
+Requires-Dist: rich>=13.7
+Requires-Dist: typing-extensions>=4.8; python_version < '3.11'
+Provides-Extra: dev
+Requires-Dist: black>=24.3; extra == 'dev'
+Requires-Dist: build>=1.2.1; extra == 'dev'
+Requires-Dist: mypy>=1.9; extra == 'dev'
+Requires-Dist: ruff>=0.5; extra == 'dev'
+Requires-Dist: twine>=5.0; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# touch
+
+Rich-powered terminal “micro-debugger” for Python.
+
+- Inspect values with pretty, readable output.
+- Peek the source of functions/classes with highlighted snippets.
+- Wrap functions so every call prints a compact, useful trace.
+- Hot-edit functions in your editor and swap them in at runtime.
+- Open a scratch file, write code, inject it straight into your scope.
+
+All from a tiny toolkit that plays nicely with your console.
+
+## Install
+
+```bash
+pip install hyv-touch
+```
+
+Python 3.9+ recommended.
+
+## TL;DR
+
+```python
+from touch import touch, embrace
+
+
+# Wrap functions for pretty call/return/exception panels:
+orig = embrace(globals())         # wraps everything in this scope
+
+
+
+# Start an interactive loop over your current environment:
+# Usually you want this at the point you want to inspect. Ex. at a `except` block.
+touch(globals(), locals())
+
+# If you used embrace() once touch is done 
+release(globals(), orig)          # restore originals
+
+
+# ------------- [ Inside the touch REPL ] ------------- #
+
+# Pretty value inspection:
+feel({"a": 1, "b": [2, 3, 4]})
+feel(some_object) # Specially useful in objects, functions and Exceptions
+
+# Show source snippet 
+source(some_function) 
+
+
+# Live-edit a function in VS Code 
+edit(some_function) # by default has `touch's` scope, or pass `scope=globals()` 
+
+# Open a temp file in VS Code, write new helpers, inject into scope:
+retouch()
+
+# If changes we're made to main file or it's dependencies, you can reload with:
+# This will add any new symbols to the current scope, but will not overwrite existing ones.
+tickle()
+
+var_name # will show var_name's value 
+function() # will call function() 
+
+$exec a = (1, 2, 3)  # run statements with $exec prefix or use retouch() for more complex actions
+```
+
+## Why use this
+
+You want quick, legible debugging without committing to a full debugger session. `touch` gives you:
+
+- **Readable output** (Rich panels, tables, syntax highlighting)
+- **Low friction** (one-liners, minimal API)
+- **Reversibility** (wrappers can be released, edits are temporary)
+- **Hot-editing** (Test and tweak without restarting or losing state)
+- **Versatility** (All language and state available at all times)
+
+
+## Editor integration
+
+- **VS Code**: requires the `code` CLI on PATH. In VS Code, run “Shell Command: Install ‘code’ command” from the Command Palette.
+- **Other editors**: set `$EDITOR` to your editor’s CLI. `edit()` and `retouch()` will use it when VS Code isn’t available.
+
+## Examples
+run `python -m touch.demo [--demo | --interactive]` to see a demo script showcasing `touch` features.
+
+
+## Limits and notes
+
+- Builtins and C-extensions don’t have Python source to show or edit.
+- Editing nested closures can lose captured locals if you move them; keep edited functions top-level or use in-place file editing.
+- The temporary trace hook used for line breakpoints is restored after each call and won’t clobber other tracers.
+- Executing code you type or edit runs in your process. Don’t paste untrusted code.
+
+
+## License
+
+MIT

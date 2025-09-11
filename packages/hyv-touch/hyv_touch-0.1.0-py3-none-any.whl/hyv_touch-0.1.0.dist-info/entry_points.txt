@@ -1,0 +1,2 @@
+[console_scripts]
+touch = touch.__main__:main
