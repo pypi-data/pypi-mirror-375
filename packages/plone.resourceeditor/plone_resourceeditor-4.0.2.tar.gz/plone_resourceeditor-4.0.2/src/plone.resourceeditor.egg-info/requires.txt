@@ -1,0 +1,9 @@
+plone.base
+plone.resource
+plone.staticresources
+setuptools
+Products.CMFCore
+Zope
+
+[test]
+plone.app.testing

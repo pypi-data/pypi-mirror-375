@@ -1,0 +1,34 @@
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     xmlns:metal="http://xml.zope.org/namespaces/metal"
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     class="info"
+     xml:lang="en"
+     tal:define="
+       info options/info;
+       props info/properties;
+     "
+>
+  <img src=""
+       tal:condition="exists:info/preview"
+       tal:attributes="
+         src info/preview;
+       "
+  />
+  <p class="discreet details">
+    <b i18n:translate="file_preview_date_modified">Date Modified</b>:
+    <span tal:replace="props/dateModified"></span>
+    <span tal:condition="not:props/dateModified"
+          i18n:translate=""
+    >n/a</span>
+    <br />
+    <b i18n:translate="file_preview_size">Size</b>:
+    <span tal:condition="exists:props/size"
+          tal:replace="props/size"
+    ></span>
+    <span tal:condition="not:exists:props/size"
+          i18n:translate=""
+    >n/a</span>
+  </p>
+</div>
