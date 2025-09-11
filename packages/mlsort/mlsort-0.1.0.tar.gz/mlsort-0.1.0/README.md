@@ -1,0 +1,85 @@
+# mlsort
+
+ML-guided sorting backend selector. Chooses between Python Timsort, NumPy sorts, and integer-only counting/radix based on cheap, sampled properties of your data. Defaults are safe; selection only activates for large arrays.
+
+## Install
+
+```bash
+pip install mlsort
+```
+
+Optionally initialize thresholds and optimized cutoffs (recommended once per machine/user):
+
+```bash
+mlsort-init  # all params optional; see below
+```
+
+## Quick usage
+
+Top-level API:
+
+```python
+from mlsort import sort, select_algorithm
+
+data = [3, 1, 2, 5, 4]
+algo = select_algorithm(data)   # e.g., 'timsort' or a NumPy backend
+out = sort(data)                # returns a new sorted list
+
+# Options compatible with Python sort()
+out_desc = sort(data, reverse=True)
+out_by_len = sort(["aa", "b", "cccc"], key=len)  # forces builtin Timsort
+```
+
+Behavior summary:
+- Mixed/object/string inputs default to builtin Timsort for safety and compatibility.
+- Passing a key function forces builtin Timsort (NumPy/counting/radix do not support key).
+- reverse=True is supported for all backends; for non-Timsort, results are reversed after sorting.
+- For small arrays, Timsort is used; for medium arrays, NumPy quicksort; the ML decision runs only for very large arrays.
+
+## CLI: initialize thresholds (optional)
+
+```bash
+mlsort-init \
+	--samples 1200 \         # training samples (default 1200)
+	--max-n 200000 \         # max array size to consider (default 200000)
+	--seed 42 \              # default from MLSORT_SEED or 42
+	--artifacts /path/to/cache  # default MLSORT_ARTIFACTS_DIR or OS cache
+```
+
+This writes `thresholds.json` under the artifacts directory and optimizes two size thresholds:
+- cutoff_n: below this, always use Timsort.
+- activation_n: only run ML decision at/above this size; between cutoff and activation use a fast default (NumPy quicksort).
+
+## Configuration
+
+Use environment variables to control behavior:
+
+- MLSORT_ARTIFACTS_DIR: directory for cached artifacts (default: OS cache, e.g., `~/Library/Caches/mlsort` on macOS).
+- MLSORT_ENABLE_INSTALL_BENCH=1: allow benchmarking during lazy first-use initialization.
+- MLSORT_INIT_ON_IMPORT=1: opt-in to run a short init automatically on first import if artifacts are missing.
+- MLSORT_SEED=...: deterministic random seed for benchmarking.
+- MLSORT_DEBUG=1: debug logs showing the selected algorithm and paths.
+
+## Supported algorithms
+
+- Python Timsort (`list.sort`)
+- NumPy quicksort and mergesort
+- Counting sort (integers only; guarded by range to avoid large memory)
+- Radix LSD sort (integers only)
+
+## Safety and limits
+
+- Always-safe fallback: if selection fails or types are unsupported, we use builtin Timsort.
+- Type handling: strings/bytes/mixed objects use Timsort. Numeric-only arrays may use NumPy or integer algorithms.
+- Resource bounds: counting/radix only used when safe; decision is skipped for small/medium arrays to avoid overhead.
+
+## Python versions
+
+Tested on Python 3.9–3.11 in CI.
+
+## Troubleshooting
+
+- Selection slower than a single baseline: ensure you ran `mlsort-init` and that your data sizes reach the activation threshold. For mostly small arrays, Timsort/NumPy will be chosen automatically.
+- Custom cache location: set `MLSORT_ARTIFACTS_DIR` before running `mlsort-init` or your program.
+- Need full control: call `select_algorithm(...)` to see what would be chosen, then run your preferred sort.
+
