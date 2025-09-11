@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "epoch-protos"
+version = "2.0.2"
+description = "Protocol Buffer definitions for EpochFolio models"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "EpochLab", email = "dev@epochlab.ai"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Software Development :: Code Generators",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "protobuf>=3.21.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "mypy>=1.0.0",
+]
+pydantic = [
+    "pydantic>=2.0.0",
+    "typing-extensions>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/epochlab/epoch-protos"
+"Bug Reports" = "https://github.com/epochlab/epoch-protos/issues"
+"Source" = "https://github.com/epochlab/epoch-protos"
+
+[tool.setuptools]
+packages = ["epoch_protos"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["*.proto", "*.pyi"]

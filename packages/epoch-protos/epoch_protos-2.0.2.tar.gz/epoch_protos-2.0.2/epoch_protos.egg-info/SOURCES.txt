@@ -1,0 +1,17 @@
+pyproject.toml
+setup.py
+epoch_protos/__init__.py
+epoch_protos/chart_def_pb2.py
+epoch_protos/chart_def_pb2.pyi
+epoch_protos/common_pb2.py
+epoch_protos/common_pb2.pyi
+epoch_protos/table_def_pb2.py
+epoch_protos/table_def_pb2.pyi
+epoch_protos/tearsheet_pb2.py
+epoch_protos/tearsheet_pb2.pyi
+epoch_protos.egg-info/PKG-INFO
+epoch_protos.egg-info/SOURCES.txt
+epoch_protos.egg-info/dependency_links.txt
+epoch_protos.egg-info/not-zip-safe
+epoch_protos.egg-info/requires.txt
+epoch_protos.egg-info/top_level.txt

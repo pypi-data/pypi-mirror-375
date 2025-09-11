@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: epoch-protos
+Version: 2.0.2
+Summary: Protocol Buffer definitions for EpochFolio models
+Home-page: https://github.com/epochlab/epoch-protos
+Author: EpochLab
+Author-email: EpochLab <dev@epochlab.ai>
+License: MIT
+Project-URL: Homepage, https://github.com/epochlab/epoch-protos
+Project-URL: Bug Reports, https://github.com/epochlab/epoch-protos/issues
+Project-URL: Source, https://github.com/epochlab/epoch-protos
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: protobuf>=3.21.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Provides-Extra: pydantic
+Requires-Dist: pydantic>=2.0.0; extra == "pydantic"
+Requires-Dist: typing-extensions>=4.0.0; extra == "pydantic"
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
