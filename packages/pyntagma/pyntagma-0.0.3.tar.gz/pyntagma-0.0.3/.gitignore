@@ -1,0 +1,8 @@
+*__pycache__*
+*.claude
+*.pytest_cache
+*CLAUDE*
+*.vscode
+*.venv
+site/*
+pyrightconfig.json
