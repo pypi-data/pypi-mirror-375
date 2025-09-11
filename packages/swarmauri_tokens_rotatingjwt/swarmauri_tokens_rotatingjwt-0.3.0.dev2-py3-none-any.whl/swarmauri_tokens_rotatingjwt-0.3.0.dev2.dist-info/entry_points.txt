@@ -1,0 +1,6 @@
+[peagen.plugins.tokens]
+rotating_jwt=swarmauri_tokens_rotatingjwt:RotatingJWTTokenService
+
+[swarmauri.tokens]
+RotatingJWTTokenService=swarmauri_tokens_rotatingjwt:RotatingJWTTokenService
+
