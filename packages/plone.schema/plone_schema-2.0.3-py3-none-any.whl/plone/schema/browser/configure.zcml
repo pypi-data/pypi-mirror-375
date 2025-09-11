@@ -1,0 +1,34 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    i18n_domain="plone"
+    >
+
+  <include
+      package="z3c.form"
+      file="meta.zcml"
+      />
+  <include package="z3c.form" />
+
+  <adapter factory=".uri.URIFieldWidget" />
+  <adapter factory=".email.EmailFieldWidget" />
+  <adapter factory=".jsonfield.JSONFieldWidget" />
+
+  <z3c:widgetTemplate
+      widget=".uri.IURIWidget"
+      template="templates/uri_display.pt"
+      layer="..interfaces.IFormLayer"
+      mode="display"
+      />
+
+  <z3c:widgetTemplate
+      widget=".email.IEmailWidget"
+      template="templates/email_display.pt"
+      layer="..interfaces.IFormLayer"
+      mode="display"
+      />
+
+  <adapter factory=".jsonfield.JSONDataConverter" />
+
+</configure>
