@@ -1,0 +1,59 @@
+Metadata-Version: 2.4
+Name: licensespring_hardware_id_generator
+Version: 1.2.0
+Summary: LicenseSpring hardware ID generator
+License: LicenseSpring Hardware ID Generator License Agreement (LHIGLA)
+Classifier: License :: Other/Proprietary License
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: license-file
+Dynamic: summary
+
+# LicenseSpring Hardware ID Generator
+
+The LicenseSpring Hardware ID Generator offers stable cross-platform hardware ID generation.
+
+This Python wrapper, and the library provided with it are licensed under the LicenseSpring Hardware ID Generator License Agreement (LHIGLA).
+
+## Installation
+
+Install the `licensespring_hardware_id_generator` library:
+
+```
+pip install licensespring_hardware_id_generator
+```
+
+## Requirements
+
+`python>=3.8`
+
+## Examples
+
+The library exposes one Enum and three functions:
+
+### Enum
+- `HardwareIdAlgorithm`: Defines the available hardware ID generation algorithms.
+### Functions
+- `get_hardware_id`: Computes and returns the hardware identifier using the specified algorithm.
+- `get_logs`: Returns a list of log strings and clears the log buffer.
+- `get_version`: Retrieves the version of the hardware ID generator library.
+
+```python
+from licensespring_hardware_id_generator import HardwareIdAlgorithm, get_hardware_id, get_logs, get_version
+
+version = get_version()
+hardware_id = get_hardware_id(HardwareIdAlgorithm.Default)
+logs = get_logs()
+
+print("Version:", version)
+print("Hardware ID:", hardware_id)
+print("Logs:")
+for log_line in logs:
+    print(log_line)
+```
