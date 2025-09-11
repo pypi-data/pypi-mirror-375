@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = 'rstgen'
+dynamic = ["version"]
+description = "Pythonic API for generating reStructuredText."
+requires-python = ">= 3.8"
+dependencies = ['synodal', 'docutils']
+
+# scripts=['synodal.py']
+readme = "README.rst"
+# py_modules = ['synodal']
+
+license = {file = "COPYING"}
+authors = [
+  {name='Rumma & Ko Ltd', email="info@saffre-rumma.net"},
+  {name='Luc Saffre', email="luc@saffre-rumma.net"},
+]
+
+classifiers= [
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: GNU Affero General Public License v3',
+    'Operating System :: OS Independent'
+]
+
+[project.urls]
+
+Homepage = "https://www.lino-framework.org"
+Repository = "https://gitlab.com/lino-framework/rstgen"
+
+[project.optional-dependencies]
+
+testing = [
+  "pytest", "pytest-html", "pytest-forked", "pytest-env"
+]
+
+dev = [
+    "hatch",
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.hatch.version]
+path = "rstgen/__init__.py"

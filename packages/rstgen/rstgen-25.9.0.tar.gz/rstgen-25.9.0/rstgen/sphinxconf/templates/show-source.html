@@ -1,0 +1,16 @@
+{% if 'url' in SETUP_INFO %}
+<a href="{{SETUP_INFO['url']}}/-/blob/{{project.get_xconfig('default_branch')}}/docs/{{ pagename|e }}.rst?plain=1"
+  rel="nofollow">{{_("Source code")}}</a>.
+<br>
+{% endif %}
+{#
+{% if public_url %}
+{%- set url = public_url + "/" + get_page_url(language, pagename) -%}
+Online link: <a href="{{url}}">{{url}}</a>.
+{% endif %}
+#}
+{#
+Share on <a href="https://www.facebook.com/sharer/sharer.php?u={{url|e}}" target="_blank">
+Facebook</a>
+or <a href="http://twitter.com/share/tweet/?url={{url|e}}" target="_blank">Twitter</a>.
+#}
