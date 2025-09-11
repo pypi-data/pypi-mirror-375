@@ -1,0 +1,54 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "structural_starterkit"
+authors = [{name = "Connor Ferster", email = "connor@structuralpython.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: Apache Software License"]
+dynamic = ["version", "description"]
+
+dependencies = [
+    "numpy",
+    "pandas",
+    "openpyxl",
+    "lxml",
+    "shapely>=2.0.0",
+    "matplotlib",
+    "plotly",
+    "sectionproperties>=3.5.0",
+    "concreteproperties>=0.6.4",
+    "pycba>=0.5.2",
+    "PyNiteFEA==1.1.2",
+    "scipy",
+    "handcalcs",
+    "more-itertools",
+    "forallpeople",
+    "pytest",
+    "rich",
+    "tqdm",
+    "papermodels",
+    "xlwings",
+    "IPython",
+    "ipywidgets",
+    "ipykernel",
+    "jupyterlab",
+    "jupyterlab-mathjax3",
+    "nbconvert",
+    "python-docx",
+    "pynite-tools>=0.6.4",
+    "sectionproperties-tools>=0.2.0",
+    "millrun>=0.1.0",
+    "jsonchain>=0.1.0",
+    "papermill>=2.6.0",
+    "great-tables>=0.17.0",
+    "xl-engine>=0.1.1",
+]
+
+[project.urls]
+Home = "https://github.com/structuralpython/structural_starterkit"
+
+[project.scripts]
+starterkit_verify = "structural_starterkit.__main__:check_installs"
