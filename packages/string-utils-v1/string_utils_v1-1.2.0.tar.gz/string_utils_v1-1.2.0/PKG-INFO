@@ -1,0 +1,58 @@
+Metadata-Version: 2.4
+Name: string-utils-v1
+Version: 1.2.0
+Summary: A simple Python package for string utility functions
+Author-email: Sarif Mia <sarifmia.ofc@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/sarifmia/string-utils
+Project-URL: Repository, https://github.com/sarifmia/string-utils
+Project-URL: Issues, https://github.com/sarifmia/string-utils/issues
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# String Utils
+
+A simple Python package for string utility functions.
+
+## Installation
+
+```bash
+pip install string-utils-v1
+```
+
+## Usage
+
+```python
+from string_utils import reverse, capitalize_words, is_palindrome
+
+result = reverse("hello")
+print(result)  # olleh
+
+result = capitalize_words("hello world")
+print(result)  # Hello World
+
+result = is_palindrome("racecar")
+print(result)  # True
+```
+
+## Functions
+
+- `reverse(s)`: Returns the reverse of the string s
+- `capitalize_words(s)`: Capitalizes the first letter of each word in s
+- `is_palindrome(s)`: Checks if s is a palindrome
+
+## License
+
+MIT License
