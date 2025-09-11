@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: promptimus-chromadb-store
+Version: 0.1.0
+Summary: A plugin with chromadb vector store for promptimus.
+Author-email: ailadin <korzhukandrew@gmail.com>
+Requires-Python: >=3.12
+Requires-Dist: chromadb>=1.0.15
+Requires-Dist: pydantic-settings>=2.10.1
+Requires-Dist: pydantic>=2.10.4
