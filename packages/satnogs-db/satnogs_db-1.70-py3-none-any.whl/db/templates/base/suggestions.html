@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - Suggestion List{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/flag-icon-css/css/flag-icon.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/admin-lte/plugins/select2/css/select2.min.css' %}">
+{% endblock %}
+
+{% block top-menu-left %}
+<span class="h4 mb-0 mr-3 d-none d-md-block">Suggestions</span>
+{% endblock %}
+
+{% block top-menu-center %}
+<ul class="navbar-nav nav nav-pills" data-widget="treeview" role="menu" data-accordion="false" id="tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="satellites-tab" data-toggle="tab" href="#satellites" role="tab" aria-controls="satellites"
+        aria-selected="true" aria-label="Satellites"><i class="nav-icon fas fa-satellite"></i>
+            <p class="d-none d-lg-inline-block text-sm">Satellites</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="transmitters-tab" data-toggle="tab" href="#transmitters" role="tab" aria-controls="transmitters"
+        aria-selected="false" aria-label="Transmitters"><i class="nav-icon fas fa-satellite-dish"></i>
+            <p class="d-none d-lg-inline-block text-sm">Transmitters</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" id="spectrum-tab" data-toggle="tab" href="#launches" role="tab" aria-controls="launches"
+        aria-selected="false" aria-label="Launches"><i class="nav-icon fas fa-rocket"></i>
+            <p class="d-none d-lg-inline-block text-sm">Launches</p>
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block top-menu-right %}
+{% if request.user.is_authenticated %}
+<ul class="navbar-nav nav nav-pills" data-widget="treeview" role="menu" data-accordion="false" id="tabs" role="tablist">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" aria-label="Actions Menu">
+      <i class="nav-icon fas fa-edit"></i>
+      <p class="d-none d-lg-inline-block text-sm">Actions</p>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item d-flex align-items-center" href="{% url 'new_suggestion' %}?type=satellite" aria-label="Suggest new satellite">
+        <i class="nav-icon mr-2 fas fa-plus-square"></i>
+        <p class="mb-0">Suggest New Satellite</p>
+      </a>
+      <a class="dropdown-item d-flex align-items-center" href="{% url 'new_suggestion' %}?type=transmitter" aria-label="Suggest new transmitter">
+        <i class="nav-icon mr-2 fas fa-plus-square"></i>
+        <p class="mb-0">Suggest New Transmitter</p>
+      </a>
+    </div>
+  </li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block top %}
+<span class="h4 mb-0">Suggestions</span>
+{% endblock %}
+
+{% block content %}
+<div class="p-3 tab-content">
+
+    <!-- Satellites panel -->
+    <div class="tab-pane fade show active mx-1" id="satellites" role="tabpanel" aria-labelledby="satellites-tab">
+        <table id="satellites-table" class="table table-sm display responsive table-striped dataTable no-footer dtr-column" width="100%">
+        <thead>
+            <tr>
+                <th data-sortable="true" data-priority="3">Date of submission</th>
+                <th data-sortable="true" data-priority="2">Satellite</th>
+                <th data-sortable="true" data-priority="4">User</th>
+                <th data-sortable="true" data-priority="5">New/Existing</th>
+                <th data-sortable="false" data-priority="1">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in satellites %}
+            <tr>
+                <td>{{ entry.created|date:'Y-m-d H:i' }}</td>
+                <td>
+                    <a href="{% url 'satellite' sat_id=entry.satellite_identifier %}">{{ entry.name }} ({{ entry.norad_cat_id }}) | {{entry.satellite_identifier }}</a>
+                </td>
+                <td>{% if entry.created_by %}{{ entry.created_by }}{% else %} - {% endif %}</td>
+                <td>
+                    {% if entry.is_new %}
+                    New
+                    {% else %}
+                    Existing
+                    {% endif %}
+                </td>
+                <td><a class="px-3" href="{% url 'satellite-suggestion-detail' suggestion_id=entry.id %}"><i class="fa fa-arrow-right"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+    <!-- Transmitters panel -->
+    <div class="tab-pane fade mx-1" id="transmitters" role="tabpanel" aria-labelledby="transmitters-tab">
+        <table id="transmitters-table" class="table table-sm display responsive table-striped dataTable no-footer dtr-column" width="100%">
+            <thead>
+                <tr>
+                    <th data-sortable="true" data-priority="3">Date of submission</th>
+                    <th data-sortable="true" data-priority="2">UUID</th>
+                    <th data-sortable="true" data-priority="2">Satellite</th>
+                    <th data-sortable="false" data-priority="6">Description</th>
+                    <th data-sortable="true" data-priority="6">Downlink</th>
+                    <th data-sortable="true" data-priority="4">User</th>
+                    <th data-sortable="true" data-priority="5">New/Existing</th>
+                    <th data-sortable="false" data-priority="1">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in transmitters %}
+                <tr>
+                    <td>{{ entry.created|date:'Y-m-d H:i' }}</td>
+                    <td>{{ entry.uuid }}</td>
+                    <td>
+                        <a href="{% url 'satellite' sat_id=entry.satellite.satellite_identifier %}">{{ entry.satellite }}</a>
+                    </td>
+                    <td>{{ entry.description }}</td>
+                    <td class="frequency">{{ entry.downlink_low }}</td>
+                    <td>{% if entry.created_by %}{{ entry.created_by }}{% else %} - {% endif %}</td>
+                    <td>
+                        {% if entry.is_new %}
+                        New
+                        {% else %}
+                        Existing
+                        {% endif %}
+                    </td>
+                    <td><a class="px-3" href="{% url 'transmitter-suggestion-detail' suggestion_id=entry.id %}"><i class="fa fa-arrow-right"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'lib/admin-lte/plugins/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-buttons/js/buttons.colVis.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/datatables-natural.js' %}"></script>
+<script src="{% static 'js/suggestions.js' %}"></script>
+{% endblock %}

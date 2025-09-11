@@ -1,0 +1,80 @@
+Metadata-Version: 2.4
+Name: satnogs-db
+Version: 1.70
+Summary: SatNOGS DB
+Home-page: https://gitlab.com/librespacefoundation/satnogs/satnogs-db
+Author: SatNOGS project
+Author-email: dev@satnogs.org
+License: AGPLv3
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Telecommunications Industry
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Communications :: Ham Radio
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+License-File: LICENSE
+Requires-Dist: Django~=4.2.0
+Requires-Dist: django-shortuuidfield~=0.1.0
+Requires-Dist: celery~=5.3.0
+Requires-Dist: Pillow~=10.4.0
+Requires-Dist: mysqlclient~=2.2.0
+Requires-Dist: eventlet==0.36.0
+Requires-Dist: gunicorn[eventlet]~=21.2.0
+Requires-Dist: redis~=5.0.0
+Requires-Dist: hiredis~=2.3.0
+Requires-Dist: sentry-sdk~=1.5.0
+Requires-Dist: python-decouple~=3.8.0
+Requires-Dist: dj-database-url~=2.1.0
+Requires-Dist: python-dotenv~=1.0.0
+Requires-Dist: django-csp~=3.8.0
+Requires-Dist: django-cors-headers~=4.6.0
+Requires-Dist: django-allauth~=0.61.0
+Requires-Dist: django-crispy-forms~=2.1.0
+Requires-Dist: crispy-bootstrap4~=2024.1
+Requires-Dist: social-auth-app-django~=5.4.0
+Requires-Dist: python-jose[cryptography]~=3.3.0
+Requires-Dist: django_compressor~=4.4.0
+Requires-Dist: djangorestframework~=3.15.0
+Requires-Dist: drf-spectacular~=0.27.0
+Requires-Dist: Markdown~=3.6.0
+Requires-Dist: django-filter~=24.2
+Requires-Dist: sgp4~=2.25.0
+Requires-Dist: satellitetle~=0.18.0
+Requires-Dist: influxdb~=5.3.0
+Requires-Dist: django-widget-tweaks~=1.5.0
+Requires-Dist: django-bootstrap-modal-forms~=3.0.0
+Requires-Dist: fontawesomefree~=6.6.0
+Requires-Dist: satnogs-decoders~=1.0
+Requires-Dist: simplejson~=3.19.0
+Requires-Dist: h5py~=3.12.0
+Requires-Dist: pyzmq~=26.2.0
+Requires-Dist: nanoid~=2.0.0
+Requires-Dist: requests~=2.32.0
+Requires-Dist: django-countries~=7.4.0
+Requires-Dist: PyLD~=2.0.0
+Requires-Dist: django-debug-toolbar~=4.3.0
+Requires-Dist: versioneer~=0.29.0
+Provides-Extra: dev
+Requires-Dist: build~=0.10.0; extra == "dev"
+Requires-Dist: factory-boy~=3.3.0; extra == "dev"
+Requires-Dist: pytest-celery; extra == "dev"
+Requires-Dist: pytest-cov~=5.0.0; extra == "dev"
+Requires-Dist: pytest-django~=4.8.0; extra == "dev"
+Requires-Dist: pytest-forked~=1.6.0; extra == "dev"
+Requires-Dist: pytest-xdist~=3.5.0; extra == "dev"
+Requires-Dist: docopts~=0.6.0; extra == "dev"
+Requires-Dist: tox~=4.14.0; extra == "dev"
+Requires-Dist: flake8~=7.0.0; extra == "dev"
+Requires-Dist: isort~=5.13.0; extra == "dev"
+Requires-Dist: yapf~=0.40.0; extra == "dev"
+Requires-Dist: pylint~=3.1.0; extra == "dev"
+Requires-Dist: pylint_django~=2.5.0; extra == "dev"
+Requires-Dist: sphinx-rtd-theme~=2.0.0; extra == "dev"
+Requires-Dist: twine~=5.0.0; extra == "dev"
+Dynamic: license-file

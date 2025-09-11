@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load tags %}
+{% load static %}
+
+{% block title %} New Suggestion{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'lib/choices.js/public/assets/styles/base.min.css' %}">
+<link rel="stylesheet" href="{% static 'lib/choices.js/public/assets/styles/choices.min.css' %}">
+{% endblock %}
+
+{% block top-menu-left %}
+<span class="h4 mb-0 mr-3 d-none d-md-block">New Suggestion</span>
+{% endblock %}
+
+{% block top %}
+<span class="h4 mb-0">New Suggestion</span>
+{% endblock %}
+
+{% block content %}
+<div class="container p-3">
+    {% if suggestion_mode == "create" %}
+    <div id="suggestion-type-select-div" class="input-group my-1 p-3" style="">
+        <label class="input-group-prepend input-group-text" for="suggestion-type-select">Type</label>
+        <select name="suggestion_type" placeholder="Type" class="form-control select-dropdown-icon" id="suggestion-type-select" {% if suggestion_type %}disabled{% endif %}>
+            <option value="satellite" {% if not suggestion_type or suggestion_type == 'satellite' %}selected{% endif %}>Satellite</option>
+            <option value="transmitter" {% if suggestion_type == 'transmitter' %}selected{% endif %}>Transmitter</option>
+            <option value="launch" disabled>Launch</option>
+        </select>
+        <div class="">
+        </div>
+    </div>
+
+    <div id="satellite-select-div" class="input-group my-1 p-3" style="display: {% if suggestion_type == 'transmitter' %}flex{% else %} none{% endif %}">
+        <label class="input-group-prepend input-group-text" for="satellite-select">Satellite</label>
+        <select name="satellite" placeholder="Satellite" class="form-control" id="satellite-select" {% if suggestion_type == 'transmitter' and sat_id %}disabled{% endif %}>
+            {% if suggestion_type == 'transmitter' and satellite %}
+            <option value="{{ satellite.id }}">{{ satellite.satellite_entry__norad_cat_id }} - {{ satellite.satellite_entry__name }}</option>
+            {% endif %}
+        </select>
+    </div>
+    {% endif %}
+
+    {% if suggestion_type == 'transmitter' %}
+    <!-- This button is destroyed when the transmitter form loads, and is replaced with the one in 'transmitter-suggestion-form.html' -->
+    <button id="cancelButton" type="button" class="ml-3 btn btn-danger">
+        Cancel
+    </button>
+    {% endif %}
+
+    <div id="form-container" data-copy-from-pk="{{ copy_from_pk }}" data-satellite-entry-pk="{{ sat_entry_pk }}" data-transmitter-pk="{{ transmitter_pk }}"  {% if suggestion_type %}data-type="{{ suggestion_type }}"{% endif %} data-mode="{{ suggestion_mode }}"></div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'lib/admin-lte/plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'lib/admin-lte/plugins/chart.js/Chart.bundle.min.js' %}"></script>
+<script src="{% static 'lib/choices.js/public/assets/scripts/choices.js' %}"></script>
+<script src="{% static 'js/transmitter_modal.js' %}"></script>
+<script src="{% static 'js/new-suggestion.js' %}"></script>
+{% endblock %}
