@@ -1,0 +1,60 @@
+Metadata-Version: 2.3
+Name: nipanel
+Version: 0.1.0.dev1
+Summary: NI Panel client for Python
+License: MIT
+Keywords: nipanel,panels
+Author: NI
+Author-email: opensource@ni.com
+Maintainer: Mike Prosser
+Maintainer-email: mike.prosser@emerson.com
+Requires-Python: >=3.9
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Manufacturing
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Requires-Dist: debugpy (>=1.8.1)
+Requires-Dist: grpcio (>=1.49.0,<2.0)
+Requires-Dist: ni-grpc-extensions (>=0.1.0.dev1)
+Requires-Dist: ni-measurementlink-discovery-v1-client (>=0.1.0dev0)
+Requires-Dist: ni-panels-v1-proto (>=0.1.0dev1)
+Requires-Dist: ni-protobuf-types (>=0.1.0dev4)
+Requires-Dist: nitypes (>=0.1.0dev8)
+Requires-Dist: numpy (>=1.22)
+Requires-Dist: protobuf (>=4.21)
+Requires-Dist: streamlit (>=1.24)
+Requires-Dist: typing-extensions (>=4.13.2)
+Project-URL: Repository, https://github.com/ni/nipanel-python
+Description-Content-Type: text/markdown
+
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [About](#about)
+  - [Operating System Support](#operating-system-support)
+  - [Python Version Support](#python-version-support)
+
+# About
+
+`nipanel` is a Python package that provides support for creating and controlling measurement and visualization panels.
+
+NI created and supports this package.
+
+## Operating System Support
+
+`nipanel` supports Windows and Linux operating systems.
+
+## Python Version Support
+
+`nipanel` supports CPython 3.9+.
+
