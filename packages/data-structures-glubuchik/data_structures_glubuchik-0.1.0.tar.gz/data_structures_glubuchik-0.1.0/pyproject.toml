@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=79.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "data-structures-glubuchik"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["data_structures_glubuchik"]
