@@ -1,0 +1,4 @@
+[console_scripts]
+benchmark-pixell-runner = pixell.scripts.benchmark_pixell_runner:main
+benchmark-pixell = pixell.scripts.benchmark_pixell:main
+
