@@ -1,0 +1,25 @@
+[project]
+name = "codeaira-python"
+version = "0.1.0"
+description = "A Python client library for the CodeAira API"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+dependencies = [
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+    "requests>=2.32.5",
+]
+authors = [
+    {name = "karthik", email = "rskarthik96@gmail.com"},
+]
+
+[dependency-groups]
+dev = [
+    "autopep8>=2.3.2",
+    "flake8>=7.3.0",
+    "jupyterlab>=4.4.7",
+    "lsprotocol>=2025.0.0",
+    "pygls>=1.0.2",
+    "rope>=1.14.0",
+]
