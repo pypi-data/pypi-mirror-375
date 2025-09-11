@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bench-logging-handler"
+version = "0.1.0"
+description = "A benchmarking logging handler that provides structured logging, performance measurement, and automatic stack traces"
+authors = [
+  { name = "KeonHo Park", email = "imguno0629@gmail.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+dependencies = [
+    "psutil>=5.8.0",
+]
+keywords = ["logging", "structured", "benchmark",  "monitoring"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Logging",
+    "Topic :: System :: Monitoring",
+]
+
+[project.urls]
+Repository = "https://github.com/imguno/bench-logging-handler"
+Issues = "https://github.com/imguno/bench-logging-handler/issues"
+Documentation = "https://github.com/imguno/bench-logging-handler#readme"
+
+
+
+[tool.setuptools.packages.find]
+include = ["bench_logging_handler*"]
+
