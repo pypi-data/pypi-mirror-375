@@ -1,0 +1,120 @@
+<nc_var_key>
+  <var>
+    <varname>ch4_src_lat</varname>
+    <ncvarname>ch4_src_0001_lat</ncvarname>
+    <vartype>f8</vartype>
+    <units>degrees_north</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name>Latitude of the source</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>ch4_src_lon</varname>
+    <ncvarname>ch4_src_0001_lon</ncvarname>
+    <vartype>f8</vartype>
+    <units>degrees_east</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name>Longitude of the source</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>ch4_src_alt</varname>
+    <ncvarname>ch4_src_0001_alt</ncvarname>
+    <vartype>f8</vartype>
+    <units>m</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name>Altitude MSL of the emission source</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>ch4_src_agl</varname>
+    <ncvarname>ch4_src_0001_agl</ncvarname>
+    <vartype>f8</vartype>
+    <units>m</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name>Height above ground of emission source</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>flight_leg</varname>
+    <ncvarname>flight_leg</ncvarname>
+    <vartype>S1</vartype>
+    <units>Num-Leg</units>
+    <coordinates></coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>bgn</varname>
+    <ncvarname>bgn</ncvarname>
+    <vartype>f8</vartype>
+    <units>sec</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>end</varname>
+    <ncvarname>end</ncvarname>
+    <vartype>f8</vartype>
+    <units>sec</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>bgn_utc</varname>
+    <ncvarname>bgn_utc</ncvarname>
+    <vartype>S1</vartype>
+    <units>Y-M-D H:M:S</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>end_utc</varname>
+    <ncvarname>end_utc</ncvarname>
+    <vartype>S1</vartype>
+    <units>Y-M-D H:M:S</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>flight_track</varname>
+    <ncvarname>flight_track</ncvarname>
+    <vartype>S1</vartype>
+    <units>Leg</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+
+  <var>
+    <varname>canopy_height</varname>
+    <ncvarname>canopy_height</ncvarname>
+    <vartype>f4</vartype>
+    <units>meters</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name>Estimated canopy height from notes file</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>boundary_layer</varname>
+    <ncvarname>boundary_layer</ncvarname>
+    <vartype>f4</vartype>
+    <units>meters</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name>Boundary Layer from notes file</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>utc</varname>
+    <ncvarname>utc</ncvarname>
+    <vartype>f4</vartype>
+    <units>hours</units>
+    <coordinates>flight_leg</coordinates>
+    <long_name>UTC offset to local time</long_name>
+    <processing_level> </processing_level>
+  </var>
+</nc_var_key>

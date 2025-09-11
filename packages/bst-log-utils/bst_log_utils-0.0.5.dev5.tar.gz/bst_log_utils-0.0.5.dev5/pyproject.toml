@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+bst_log_utils = [
+    "*.xml",
+    "*.mat",
+    "user_payloads/*.xml"
+]
+
+[project]
+name = "bst_log_utils"
+version = "0.0.5-dev5"
+authors = [
+	  { name="Maciej Stachura", email="stachura@blackswifttech.com" },
+	  { name="Jack Elston", email="elstonj@blackswifttech.com" },
+]
+description = "Black Swift Technologies Log Parsing Tools"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+	    "Programming Language :: Python :: 3",
+        "Operating System :: POSIX",
+]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.urls]
+Homepage = "https://bst/aero"
+Issues = "https://bst.aero/support"

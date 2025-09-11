@@ -1,0 +1,183 @@
+<nc_var_key>
+  <var>
+    <varname>lat</varname>
+    <ncvarname>lat</ncvarname>
+    <vartype>f4</vartype>
+    <units>degrees_north</units>
+    <coordinates></coordinates>
+    <long_name>Latitude</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>lon</varname>
+    <ncvarname>lon</ncvarname>
+    <vartype>f4</vartype>
+    <units>degrees_east</units>
+    <coordinates></coordinates>
+    <long_name>Longitude</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>altitude</varname>
+    <ncvarname>altitude</ncvarname>
+    <vartype>f8</vartype>
+    <units>meters</units>
+    <coordinates></coordinates>
+    <long_name>Altitude</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>time</varname>
+    <ncvarname>time</ncvarname>
+    <vartype>f8</vartype>
+    <units>seconds since 1970-01-01T00:00:00Z</units>
+    <coordinates></coordinates>
+    <long_name>Time</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>air_temperature</varname>
+    <ncvarname>air_temperature</ncvarname>
+    <vartype>f8</vartype>
+    <units>Kelvin</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Air Temperature</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>dew_point_temperature</varname>
+    <ncvarname>dew_point_temperature</ncvarname>
+    <vartype>f8</vartype>
+    <units>Kelvin</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Dew Point Temperature</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>relative_humidity</varname>
+    <ncvarname>relative_humidity</ncvarname>
+    <vartype>f8</vartype>
+    <units>%</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Relative Humidity</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>pressure</varname>
+    <ncvarname>pressure</ncvarname>
+    <vartype>f8</vartype>
+    <units>Pa</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Atmospheric Pressure</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>wind_speed</varname>
+    <ncvarname>wind_speed</ncvarname>
+    <vartype>f8</vartype>
+    <units>m/s</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Wind Speed</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>wind_direction</varname>
+    <ncvarname>wind_direction</ncvarname>
+    <vartype>f8</vartype>
+    <units>degrees</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Wind Direction</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>wind_u</varname>
+    <ncvarname>wind_u</ncvarname>
+    <vartype>f8</vartype>
+    <units>m/s</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>wind_v</varname>
+    <ncvarname>wind_v</ncvarname>
+    <vartype>f8</vartype>
+    <units>m s-1</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>wind_w</varname>
+    <ncvarname>wind_w</ncvarname>
+    <vartype>f8</vartype>
+    <units>m s-1</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name></long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>laseralt</varname>
+    <ncvarname>laseralt</ncvarname>
+    <vartype>f8</vartype>
+    <units>m</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>laser_height_corrected_with_attitude</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>height</varname>
+    <ncvarname>height</ncvarname>
+    <vartype>f8</vartype>
+    <units>m</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>vertical_distance_above_the_surface</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>tas</varname>
+    <ncvarname>tas</ncvarname>
+    <vartype>f8</vartype>
+    <units>m/s</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>True Airspeed</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>yaw</varname>
+    <ncvarname>heading</ncvarname>
+    <vartype>f8</vartype>
+    <units>rad</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Aircraft heading or yaw</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>aptime</varname>
+    <ncvarname>aptime</ncvarname>
+    <vartype>f8</vartype>
+    <units>seconds</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Autopilot Time</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>ch4_src_flow</varname>
+    <ncvarname>ch4_src_flow</ncvarname>
+    <vartype>f8</vartype>
+    <standard_name>ch4_src_flow</standard_name>
+    <units>slpm</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Flow Rate of the Source</long_name>
+    <processing_level> </processing_level>
+  </var>
+  <var>
+    <varname>ch4_ppb</varname>
+    <ncvarname>ch4_ppb</ncvarname>
+    <vartype>f8</vartype>
+    <units>ppb</units>
+    <coordinates>lat lon altitude time</coordinates>
+    <long_name>Concentration Measurement</long_name>
+    <processing_level> </processing_level>
+  </var>
+</nc_var_key>
