@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phoneverify-cameroon"
+dynamic = ["version"]
+description = "Validation des numéros mobile money camerounais (MTN et Orange)"
+readme = "README.md"
+authors = [
+    {name = "Djoko Christian", email = "djoko.dev.pro@gmail.com"}
+]
+license = {text = "MIT"}
+keywords = ["cameroon", "mobile money", "phone validation", "mtn", "orange", "fintech"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules", 
+    "Topic :: Communications :: Telephony",
+    "Topic :: Office/Business :: Financial",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0", 
+    "flake8>=3.8",
+    "build>=0.7.0",
+    "twine>=3.0.0",
+]
+test = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/djoko-christian/phoneverify-cameroon"
+Documentation = "https://github.com/djoko-christian/phoneverify-cameroon#readme"
+Repository = "https://github.com/djoko-christian/phoneverify-cameroon"
+"Bug Tracker" = "https://github.com/djoko-christian/phoneverify-cameroon/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "phoneverify_cameroon.__version__"}
+
+[tool.setuptools.packages.find]
+exclude = ["tests*", "apps*", "phone_verify_mobile_money_cm*"]
+
+[tool.setuptools.package-data]
+phoneverify_cameroon = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "--cov=phoneverify_cameroon --cov-report=html --cov-report=term-missing"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
