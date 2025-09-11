@@ -1,0 +1,5 @@
+platformdirs
+
+[:python_version < "3.10"]
+importlib_metadata>=3.8
+zipp
