@@ -1,0 +1,73 @@
+Metadata-Version: 2.3
+Name: secop-cli
+Version: 0.1.0
+Summary: Скриптовый интерфейс Secop
+Author: Valeria Zaborovskaia, valeria.zaborovskaya@vkteam.ru
+Requires-Python: >=3.11,<3.12
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Requires-Dist: pydantic (>=2.9.0,<3)
+Requires-Dist: pymongo (>=4.11.3,<5.0.0)
+Requires-Dist: pytest (>=8.3.2,<9.0.0)
+Requires-Dist: pyyaml (>=6,<7)
+Requires-Dist: requests (>=2.22.0,<3.0.0)
+Requires-Dist: responses (>=0.25.3,<0.26.0)
+Requires-Dist: typer (>=0.12.3,<0.13.0)
+Description-Content-Type: text/markdown
+
+# secop-cli
+
+[![PyPI](https://img.shields.io/pypi/v/secop-cli?color=blue&label=PyPI)](https://pypi.org/project/secop-cli/)
+[![TestPyPI](https://img.shields.io/badge/TestPyPI-latest-orange)](https://test.pypi.org/project/secop-cli/)
+![Python](https://img.shields.io/badge/python-3.11%2B-brightgreen)
+
+CLI для работы с хранилищем Docker-образов компонентов **Secop**.  
+Позволяет просматривать образы, фильтровать их по компонентам и добавлять новые из YAML/JSON-манифестов.
+
+---
+
+## Установка
+
+Из [PyPI](https://pypi.org/project/secop-cli/):
+
+```bash
+pip install secop-cli
+```
+
+## Использование
+
+```shell
+secop-cli --help
+```
+
+### Список образов
+
+Получить все образы
+```shell
+secop-cli images list
+```
+
+Отфильтровать по компоненту
+
+```shell
+secop-cli images list --component <component-name>
+```
+
+### Добавить образ
+```shell
+secop-cli images insert --file image.yaml
+```
+
+где `image.yaml` имеет следующую структуру:
+```yaml
+id: some_id_str
+component: some_component_str
+template: some_template_str
+cloud:
+  big_indexer:
+    name: image_name
+    version: image_name
+    registry: registry
+    login: token
+```
+
