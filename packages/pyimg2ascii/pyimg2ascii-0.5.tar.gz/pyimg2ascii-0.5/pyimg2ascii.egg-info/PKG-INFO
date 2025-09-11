@@ -1,0 +1,97 @@
+Metadata-Version: 2.4
+Name: pyimg2ascii
+Version: 0.5
+Summary: Convert images to ASCII art
+Home-page: https://github.com/abhirammdh/pyimg2ascii
+Author: Devulapalli Abhiram
+Author-email: abhiramdevulapalli8@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pillow
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# pyimg2asciii  
+
+Convert images into ASCII art with a simple Python library.  
+
+---
+
+##  Installation  
+
+##   Terminal
+
+```bash
+pip install pyimg2asciii
+```
+##  Google Colab
+---
+
+```bash
+!pip install pyimg2asciii
+```
+
+---
+
+##  Usage  
+
+### Example 1: Print ASCII art in terminal
+```python
+from image2ascii import convert_image_to_ascii
+
+# Convert image to ASCII
+ascii_art = convert_image_to_ascii("input.jpg", new_width=80)
+
+# Print result
+print(ascii_art)
+```
+
+---
+
+### Example 2: Save ASCII art to file
+```python
+from image2ascii import convert_image_to_ascii
+
+ascii_art = convert_image_to_ascii("input.jpg", new_width=100)
+
+with open("ascii_output.txt", "w") as f:
+    f.write(ascii_art)
+```
+
+---
+
+##  Parameters  
+
+- **`image_path`** *(str)* → Path to input image.  
+- **`new_width`** *(int, optional)* → Width of ASCII art (default: 100).  
+
+---
+
+##  Example Output  
+
+If you run the library on an image, you’ll get ASCII art like:  
+
+```
+@@@@@@@@@@%%%%###****
+@@@@@@%%%%####***+++
+@@@%%%####***++++=--
+```
+
+---
+
+##  License  
+
+MIT License © 2025  
+
+Created by D.Abhiram 😊
