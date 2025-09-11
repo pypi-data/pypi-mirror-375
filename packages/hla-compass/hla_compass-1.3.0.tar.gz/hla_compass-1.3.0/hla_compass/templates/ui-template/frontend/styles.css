@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== SCIENTIFIC PLATFORM STYLING ===== */
+
+/* Smooth theme transitions */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; /* Better number display */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff; /* Default to light background */
+  color: rgba(0, 0, 0, 0.88);
+}
+
+/* ===== SCIENTIFIC DATA DISPLAY ===== */
+
+/* Scientific number formatting */
+.scientific-number {
+  font-variant-numeric: tabular-nums;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+/* Scientific input styling */
+.scientific-input {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Data tables optimized for scientific data */
+.scientific-table {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.scientific-table th {
+  background: var(--ant-color-bg-container);
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--ant-color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.scientific-table td {
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--ant-color-border-secondary);
+  font-variant-numeric: tabular-nums; /* Better number alignment */
+}
+
+.scientific-table-container {
+  background: var(--ant-color-bg-container);
+  border: 1px solid var(--ant-color-border);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.scientific-table-container:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--ant-color-primary-border);
+}
+
+/* ===== MODULE CONTAINER STYLING ===== */
+
+/* Scientific module containers */
+.module-container {
+  background: var(--ant-color-bg-container);
+  border: 1px solid var(--ant-color-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+}
+
+.module-container:hover {
+  border-color: var(--ant-color-primary-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Module header styling */
+.module-header {
+  border-bottom: 2px solid var(--ant-color-border);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.module-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ant-color-text);
+  margin: 0;
+}
+
+/* ===== ANT DESIGN CUSTOMIZATIONS FOR SCIENCE ===== */
+
+/* Card styling for scientific modules */
+.ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.ant-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Input styling for scientific data entry */
+.ant-input, .ant-textarea {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== CSS VARIABLES FOR SCIENTIFIC THEMING ===== */
+:root {
+  --color-surface-primary: #ffffff;
+  --color-surface-secondary: #f5f5f5;
+  --color-surface-tertiary: #e8e8e8;
+  --color-data-primary: #0052cc;
+  --color-data-secondary: #17a2b8;
+  --color-data-accent: #28a745;
+  --color-data-warning: #ffc107;
+  --color-data-danger: #dc3545;
+}
+
+.dark-theme {
+  --color-surface-primary: #1f1f1f;
+  --color-surface-secondary: #2a2a2a;
+  --color-surface-tertiary: #3a3a3a;
+  --color-data-primary: #4d91ff;
+  --color-data-secondary: #5bc0de;
+  --color-data-accent: #5cb85c;
+  --color-data-warning: #f0ad4e;
+  --color-data-danger: #d9534f;
+}
+
+/* ===== ACCESSIBILITY FOR SCIENTIFIC USERS ===== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .scientific-table-container {
+    border: 2px solid var(--ant-color-border);
+  }
+
+  .ant-card {
+    border: 2px solid var(--ant-color-border);
+  }
+}
