@@ -1,0 +1,10 @@
+[peagen.plugins.mre_cryptos]
+pgp_mre=swarmauri_mre_crypto_pgp.pgp_mre:PGPMreCrypto
+pgp_seal=swarmauri_mre_crypto_pgp:PGPSealMreCrypto
+pgp_sealed_cek=swarmauri_mre_crypto_pgp.pgp_sealed_cek_mre:PGPSealedCekMreCrypto
+
+[swarmauri.mre_cryptos]
+PGPMreCrypto=swarmauri_mre_crypto_pgp.pgp_mre:PGPMreCrypto
+PGPSealMreCrypto=swarmauri_mre_crypto_pgp:PGPSealMreCrypto
+PGPSealedCekMreCrypto=swarmauri_mre_crypto_pgp.pgp_sealed_cek_mre:PGPSealedCekMreCrypto
+
