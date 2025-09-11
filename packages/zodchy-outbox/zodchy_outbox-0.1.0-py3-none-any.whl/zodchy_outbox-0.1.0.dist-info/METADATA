@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: zodchy-outbox
+Version: 0.1.0
+Summary: Outbox pattern for zodchy architecture
+Home-page: https://github.com/smairon/zodchy-outbox
+Author: Smairon
+Author-email: man@smairon.ru
+Requires-Python: >=3.11,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: sqlalchemy_schema_factory (>=0,<1)
+Requires-Dist: zodchy (>=0,<1)
+Requires-Dist: zodchy-alchemy (>=0,<1)
+Project-URL: Repository, https://github.com/smairon/zodchy-outbox
+Description-Content-Type: text/markdown
+
+# Zodchy outbox
