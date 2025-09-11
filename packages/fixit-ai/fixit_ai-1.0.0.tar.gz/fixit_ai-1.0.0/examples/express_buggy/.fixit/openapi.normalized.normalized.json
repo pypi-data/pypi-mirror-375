@@ -1,0 +1,129 @@
+{
+  "info": {
+    "description": "Auto-generated OpenAPI spec from Express.js routes",
+    "title": "Express API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/api/auth/login": {
+      "post": {
+        "deprecated": false,
+        "description": "Auto-generated from Express route: POST /api/auth/login",
+        "endpoint_id": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "POST /api/auth/login"
+      }
+    },
+    "/api/users": {
+      "post": {
+        "deprecated": false,
+        "description": "Auto-generated from Express route: POST /api/users",
+        "endpoint_id": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "POST /api/users"
+      }
+    },
+    "/api/users/:id": {},
+    "/api/users/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "Auto-generated from Express route: GET /api/users/:id",
+        "endpoint_id": "",
+        "parameters": [
+          {
+            "deprecated": false,
+            "description": "Path parameter: id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "GET /api/users/:id"
+      }
+    },
+    "/health": {
+      "get": {
+        "deprecated": false,
+        "description": "Auto-generated from Express route: GET /health",
+        "endpoint_id": "",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          }
+        },
+        "summary": "GET /health"
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Development server",
+      "url": "http://localhost:3000"
+    }
+  ]
+}

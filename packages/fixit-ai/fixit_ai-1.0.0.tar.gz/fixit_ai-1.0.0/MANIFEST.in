@@ -1,0 +1,82 @@
+# Include documentation and configuration files
+include README.md
+include LICENSE
+include CHANGELOG.md
+include pyproject.toml
+
+# Include documentation directory
+recursive-include docs *.md
+recursive-include docs *.rst
+recursive-include docs *.txt
+
+# Include example applications (for development/reference) - EXCLUDE node_modules
+recursive-include examples *.py
+include examples/express_buggy/app.js
+include examples/express_buggy/package.json
+include examples/express_buggy/openapi.json
+include examples/express_buggy/openapi.yaml
+recursive-include examples/fastapi_buggy *.py
+recursive-include examples *.json
+recursive-include examples *.yaml
+recursive-include examples *.yml
+recursive-include examples *.md
+recursive-include examples *.txt
+
+# Include template files
+recursive-include src/fixit **/*.j2
+recursive-include src/fixit **/*.jinja2
+recursive-include src/fixit **/*.template
+
+# Include static assets and data files
+recursive-include src/fixit **/*.json
+recursive-include src/fixit **/*.yaml
+recursive-include src/fixit **/*.yml
+recursive-include src/fixit **/*.txt
+recursive-include src/fixit **/*.js
+recursive-include src/fixit **/*.css
+recursive-include src/fixit **/*.html
+
+# Include test fixtures (for reference)
+recursive-include tests/fixtures *.json
+recursive-include tests/fixtures *.yaml
+recursive-include tests/fixtures *.yml
+
+# Exclude development and build artifacts
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude .pytest_cache
+global-exclude .mypy_cache
+global-exclude .coverage
+global-exclude .tox
+global-exclude .git*
+global-exclude .DS_Store
+global-exclude Thumbs.db
+
+# Exclude NPM dependencies and build artifacts
+exclude examples/**/node_modules
+recursive-exclude examples node_modules
+global-exclude node_modules
+prune examples/express_buggy/node_modules
+
+# Exclude development configuration
+exclude .pre-commit-config.yaml
+exclude .gitignore
+exclude .env*
+exclude docker-compose*.yml
+exclude Dockerfile*
+exclude Makefile
+
+# Exclude IDE files
+global-exclude .vscode
+global-exclude .idea
+global-exclude *.swp
+global-exclude *.swo
+global-exclude *~
+
+# Exclude temporary and log files
+global-exclude *.log
+global-exclude *.tmp
+global-exclude *.temp
+global-exclude .fixit/

@@ -1,0 +1,145 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fixit-ai"
+version = "1.0.0"
+description = "AI-Powered API Testing Agent with Zero-Config Onboarding for OpenAPI-First Development"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+  { name = "Ashish Prajapati" },
+  { name = "Gauri Baheti" },
+  { name = "Khushali Dukhande" },
+  { name = "Om Mohite"}
+]
+maintainers = [
+  { name = "Ashiiish-88", email = "prajapatiashish661@gmail.com" },
+  { name = "ommo007", email = "omamohite@gmail.com" }
+]
+keywords = [
+  "api", "testing", "openapi", "fastapi", "express", "ai", "llm", 
+  "security", "automation", "testing-framework", "hackathon", 
+  "offline", "local-llm", "chatgpt-oss"
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Operating System :: OS Independent",
+  "Environment :: Console",
+  "Framework :: FastAPI",
+  "Framework :: Pytest",
+]
+
+dependencies = [
+  # Core CLI & UI
+  "typer[all]>=0.12.3,<0.17",
+  "rich>=13.7,<15.0",
+  
+  # HTTP & API clients
+  "httpx>=0.27,<0.29",
+  "requests>=2.31.0",
+  "urllib3>=2.0.0",
+  
+  # Testing framework
+  "pytest>=8.3,<9.0",
+  
+  # Templating & rendering
+  "jinja2>=3.1,<4.0",
+  
+  # Data validation & models
+  "pydantic>=2.7,<3.0",
+  
+  # OpenAPI processing
+  "prance>=23.6.21,<24.0",
+  "schemathesis>=4.1.0,<5.0",
+  
+  # YAML & JSON processing
+  "ruamel.yaml>=0.18.6",
+  "jsonschema>=4.22.0",
+  
+  # Resilience & retry logic
+  "tenacity>=8.2.0",
+  
+  # Diff utilities
+  "unidiff>=0.7.5"
+]
+
+[project.urls]
+Homepage = "https://github.com/Fixit-Local-AI-Agent/Fixit.AI"
+Documentation = "https://github.com/Fixit-Local-AI-Agent/Fixit.AI/wiki"
+Repository = "https://github.com/Fixit-Local-AI-Agent/Fixit.AI"
+"Bug Tracker" = "https://github.com/Fixit-Local-AI-Agent/Fixit.AI/issues"
+Discussions = "https://github.com/Fixit-Local-AI-Agent/Fixit.AI/discussions"
+Changelog = "https://github.com/Fixit-Local-AI-Agent/Fixit.AI/blob/main/CHANGELOG.md"
+"Source Code" = "https://github.com/Fixit-Local-AI-Agent/Fixit.AI"
+
+[project.optional-dependencies]
+dev = [
+  "black>=24.4.2",
+  "ruff>=0.5.2",
+  "mypy>=1.10.0",
+  "pytest-cov>=6.0.0",
+  "pre-commit>=3.7.0",
+  "deptry>=0.16.1"
+]
+
+examples = [
+  "fastapi>=0.111.0",
+  "uvicorn>=0.30.0",
+  "pydantic[email]>=2.7.0"
+]
+
+llm-providers = [
+  # Local LLM integrations for AI-powered analysis
+  "openai>=1.30.0",      # OpenAI-compatible API clients (LM Studio, etc.)
+  "ollama>=0.2.0",       # Ollama integration 
+  "llama-cpp-python>=0.2.77"  # Direct llama.cpp integration
+]
+
+all = [
+  # Include all optional dependencies
+  "fixit-ai[dev,examples,llm-providers]"
+]
+
+[project.scripts]
+fixit = "fixit.cli.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+fixit = [
+  "*.json",
+  "*.j2", 
+  "**/*.txt",
+  "**/*.js"
+]
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+warn_unused_ignores = true
+warn_redundant_casts = true
+ignore_missing_imports = true
