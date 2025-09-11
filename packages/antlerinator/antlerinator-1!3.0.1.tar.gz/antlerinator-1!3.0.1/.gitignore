@@ -1,0 +1,12 @@
+__pycache__
+*.py[co]
+build
+dist
+*.egg-info
+.DS_Store
+.idea
+.cache
+.pytest_cache
+.tox
+.coverage*
+docs/_build
