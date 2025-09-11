@@ -1,0 +1,7 @@
+recursive-include plone *
+include *.rst LICENSE.GPL LICENSE.txt
+exclude .coveragerc
+global-exclude *.pyc
+include pyproject.toml
+recursive-exclude news *
+exclude news
