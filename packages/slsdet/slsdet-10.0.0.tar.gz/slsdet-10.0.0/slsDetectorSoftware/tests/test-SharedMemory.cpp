@@ -1,0 +1,257 @@
+// SPDX-License-Identifier: LGPL-3.0-or-other
+// Copyright (C) 2021 Contributors to the SLS Detector Package
+
+#define DISABLE_STATIC_ASSERT // to be able to test obsolete shm without isValid
+#include "SharedMemory.h"
+#include "catch.hpp"
+#include "sls/string_utils.h"
+#include <filesystem>
+
+namespace sls {
+
+struct Data {
+    int shmversion{SHM_IS_VALID_CHECK_VERSION};
+    int x;
+    double y;
+    char mess[50];
+    bool isValid{true};
+};
+
+struct ObsoleteData {
+    int shmversion{SHM_IS_VALID_CHECK_VERSION - 10};
+    int x;
+    double y;
+    char mess[50];
+};
+
+struct ObsoleteCtbData {
+    int x;
+    double y;
+    char mess[50];
+};
+
+void freeShm(const int dindex, const int mIndex) {
+    SharedMemory<Data> shm(dindex, mIndex);
+    if (shm.exists()) {
+        shm.removeSharedMemory();
+    }
+}
+
+constexpr int shm_id = 10;
+const std::string file_path =
+    std::string("/dev/shm/slsDetectorPackage_detector_") +
+    std::to_string(shm_id);
+
+TEST_CASE("Free obsolete (without isValid)", "[detector][shm]") {
+
+    // ensure its clean to start
+    freeShm(shm_id, -1);
+
+    {
+        // create actual shm and free
+        SharedMemory<Data> shm(shm_id, -1);
+        shm.createSharedMemory();
+        REQUIRE(std::filesystem::exists(file_path) == true);
+        REQUIRE(shm.memoryHasValidFlag() == true);
+        REQUIRE_NOTHROW(freeShm(shm_id, -1));
+        REQUIRE(std::filesystem::exists(file_path) == false);
+    }
+
+    {
+        // create obsolete and free
+        SharedMemory<ObsoleteData> shm(shm_id, -1);
+        shm.createSharedMemory();
+        REQUIRE(std::filesystem::exists(file_path) == true);
+        shm.unmapSharedMemory();
+    }
+
+    {
+        SharedMemory<Data> shm(shm_id, -1);
+        shm.openSharedMemory(false);
+        REQUIRE(shm.memoryHasValidFlag() == false);
+        REQUIRE_NOTHROW(freeShm(shm_id, -1));
+        REQUIRE(std::filesystem::exists(file_path) == false);
+    }
+
+    {
+        // create obsolete ctb (without shmversion) and free
+        SharedMemory<ObsoleteCtbData> shm(shm_id, -1);
+        shm.createSharedMemory();
+        REQUIRE(std::filesystem::exists(file_path) == true);
+        shm.unmapSharedMemory();
+    }
+    {
+        SharedMemory<Data> shm(shm_id, -1);
+        shm.openSharedMemory(false);
+        REQUIRE(shm.memoryHasValidFlag() == false);
+        REQUIRE_NOTHROW(freeShm(shm_id, -1));
+        REQUIRE(std::filesystem::exists(file_path) == false);
+    }
+}
+
+TEST_CASE("Create SharedMemory read and write", "[detector][shm]") {
+    SharedMemory<Data> shm(shm_id, -1);
+    if (shm.exists()) {
+        shm.removeSharedMemory();
+    }
+    shm.createSharedMemory();
+
+    const char *env_p = std::getenv("SLSDETNAME");
+    std::string env_name = env_p ? ("_" + std::string(env_p)) : "";
+    CHECK(shm.getName() == std::string("/slsDetectorPackage_detector_") +
+                               std::to_string(shm_id) + env_name);
+    shm()->x = 3;
+    shm()->y = 5.7;
+    strcpy_safe(shm()->mess, "Some string");
+
+    CHECK(shm()->x == 3);
+    CHECK(shm()->y == 5.7);
+    CHECK(std::string(shm()->mess) == "Some string");
+
+    shm.removeSharedMemory();
+
+    CHECK(shm.exists() == false);
+}
+
+TEST_CASE("Open existing SharedMemory and read", "[detector][shm]") {
+    {
+        SharedMemory<Data> shm(shm_id, -1);
+        if (shm.exists()) {
+            shm.removeSharedMemory();
+        }
+        shm.createSharedMemory();
+        shm()->x = 3;
+        shm()->y = 5.9;
+    }
+
+    SharedMemory<Data> shm2(shm_id, -1);
+    shm2.openSharedMemory(true);
+    CHECK(shm2()->y == 5.9);
+
+    shm2.removeSharedMemory();
+}
+
+TEST_CASE("Creating a second shared memory with the same name throws",
+          "[detector][shm]") {
+
+    SharedMemory<Data> shm0(shm_id, -1);
+    SharedMemory<Data> shm1(shm_id, -1);
+
+    shm0.createSharedMemory();
+    CHECK_THROWS(shm1.createSharedMemory());
+    shm0.removeSharedMemory();
+}
+
+TEST_CASE("Open two shared memories to the same place", "[detector][shm]") {
+
+    // Create the first shared memory
+    SharedMemory<Data> shm(shm_id, -1);
+    shm.createSharedMemory();
+    shm()->x = 5;
+    CHECK(shm()->x == 5);
+
+    // Open the second shared memory with the same name
+    SharedMemory<Data> shm2(shm_id, -1);
+    shm2.openSharedMemory(true);
+    CHECK(shm2()->x == 5);
+    CHECK(shm.getName() == shm2.getName());
+
+    // Check that they still point to the same place
+    shm2()->x = 7;
+    CHECK(shm()->x == 7);
+
+    // Remove only needs to be done once since they refer
+    // to the same memory
+    shm2.removeSharedMemory();
+    CHECK(shm.exists() == false);
+    CHECK(shm2.exists() == false);
+}
+
+TEST_CASE("Move SharedMemory", "[detector][shm]") {
+    const char *env_p = std::getenv("SLSDETNAME");
+    std::string env_name = env_p ? ("_" + std::string(env_p)) : "";
+
+    SharedMemory<Data> shm(shm_id, -1);
+    CHECK(shm.getName() == std::string("/slsDetectorPackage_detector_") +
+                               std::to_string(shm_id) + env_name);
+    shm.createSharedMemory();
+    shm()->x = 9;
+
+    SharedMemory<Data> shm2(shm_id + 1, -1);
+    shm2 = std::move(shm); // shm is now a moved from object!
+
+    CHECK(shm2()->x == 9);
+    REQUIRE_THROWS(
+        shm()); // trying to access should throw instead of returning a nullptr
+    CHECK(shm2.getName() == std::string("/slsDetectorPackage_detector_") +
+                                std::to_string(shm_id) + env_name);
+    shm2.removeSharedMemory();
+}
+
+TEST_CASE("Create several shared memories", "[detector][shm]") {
+    const char *env_p = std::getenv("SLSDETNAME");
+    std::string env_name = env_p ? ("_" + std::string(env_p)) : "";
+
+    constexpr int N = 5;
+    std::vector<SharedMemory<Data>> v;
+    v.reserve(N);
+    for (int i = 0; i != N; ++i) {
+        v.emplace_back(shm_id + i, -1);
+        CHECK(v[i].exists() == false);
+        v[i].createSharedMemory();
+        v[i]()->x = i;
+        CHECK(v[i]()->x == i);
+    }
+
+    for (int i = 0; i != N; ++i) {
+        CHECK(v[i]()->x == i);
+        CHECK(v[i].getName() == std::string("/slsDetectorPackage_detector_") +
+                                    std::to_string(i + shm_id) + env_name);
+    }
+
+    for (int i = 0; i != N; ++i) {
+        v[i].removeSharedMemory();
+        CHECK(v[i].exists() == false);
+    }
+}
+
+TEST_CASE("Create create a shared memory with a tag") {
+    const char *env_p = std::getenv("SLSDETNAME");
+    std::string env_name = env_p ? ("_" + std::string(env_p)) : "";
+
+    SharedMemory<Data> shm(0, -1, "ctbdacs");
+    REQUIRE(shm.getName() ==
+            "/slsDetectorPackage_detector_0" + env_name + "_ctbdacs");
+}
+
+TEST_CASE("Create create a shared memory with a tag when SLSDETNAME is set") {
+
+    // if SLSDETNAME is already set we unset it but
+    // save the value
+    std::string old_slsdetname;
+    if (getenv(SHM_ENV_NAME))
+        old_slsdetname = getenv(SHM_ENV_NAME);
+    unsetenv(SHM_ENV_NAME);
+    setenv(SHM_ENV_NAME, "myprefix", 1);
+
+    SharedMemory<Data> shm(0, -1, "ctbdacs");
+    REQUIRE(shm.getName() == "/slsDetectorPackage_detector_0_myprefix_ctbdacs");
+
+    // Clean up after us
+    if (old_slsdetname.empty())
+        unsetenv(SHM_ENV_NAME);
+    else
+        setenv(SHM_ENV_NAME, old_slsdetname.c_str(), 1);
+}
+
+TEST_CASE("Access to already freed shm object", "[detector][shm]") {
+    SharedMemory<Data> shm(shm_id, -1);
+    shm.createSharedMemory();
+    shm()->x = 10;
+
+    freeShm(shm_id, -1);
+    CHECK(shm.exists() == false);
+    REQUIRE_THROWS(shm()); // trying to access should throw
+}
+
+} // namespace sls
