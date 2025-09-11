@@ -1,0 +1,35 @@
+Metadata-Version: 2.3
+Name: swarmauri_keyprovider_pkcs11
+Version: 0.3.0.dev3
+Summary: PKCS#11 hardware-backed key provider for Swarmauri
+License: Apache-2.0
+Author: Swarmauri
+Author-email: opensource@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Security :: Cryptography
+Classifier: Intended Audience :: Developers
+Requires-Dist: cryptography
+Requires-Dist: python-pkcs11
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Description-Content-Type: text/markdown
+
+![Swamauri Logo](https://res.cloudinary.com/dbjmpekvl/image/upload/v1730099724/Swarmauri-logo-lockup-2048x757_hww01w.png)
+
+# Swarmauri PKCS#11 Key Provider
+
+Hardware-backed key provider using PKCS#11 devices.
+
+## Installation
+
+```bash
+pip install swarmauri_keyprovider_pkcs11
+```
+
