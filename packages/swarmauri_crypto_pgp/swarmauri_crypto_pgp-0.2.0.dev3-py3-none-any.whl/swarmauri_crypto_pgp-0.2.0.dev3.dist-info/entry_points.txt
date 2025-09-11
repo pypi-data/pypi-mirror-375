@@ -1,0 +1,6 @@
+[peagen.plugins.cryptos]
+pgp=swarmauri_crypto_pgp:PGPCrypto
+
+[swarmauri.cryptos]
+PGPCrypto=swarmauri_crypto_pgp:PGPCrypto
+
