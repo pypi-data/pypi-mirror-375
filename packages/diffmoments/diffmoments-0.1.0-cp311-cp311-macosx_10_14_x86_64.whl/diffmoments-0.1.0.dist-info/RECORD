@@ -1,0 +1,17 @@
+diffmoments_ext.cpython-311-darwin.so,sha256=VuuI2PSKkXsTiD53k3hBcUhTRYX27ZQG9HfLV86j7Vw,7440592
+diffmoments-0.1.0.dist-info/RECORD,,
+diffmoments-0.1.0.dist-info/WHEEL,sha256=nQdXGhY40Y-ZfZUAJRbQ15N6HB4BNndbYqJdoTx0nFc,143
+diffmoments-0.1.0.dist-info/METADATA,sha256=0C_E8PNT7zkR8y2mXcLTtPkAjGnCRRlY0U7AW86zLEw,9698
+diffmoments-0.1.0.dist-info/licenses/LICENSE,sha256=nk3CtMSaHPYzsC0GRaeuzXzqnwwSn1V4nC-sKTcat-4,1501
+diffmoments/__init__.py,sha256=0u7XfpJC4wZuqURXd7w7x-N4DVH6tuToG55sBTbWaGk,24
+diffmoments/extension.py,sha256=Jovk1b47DHwVU6uiOqHH-HwXGP9VxgvcYw5zcZcUUKs,756
+diffmoments/drjit/__init__.py,sha256=h3d4I-NHBkgSS47CdYLea0mwjyKWc_OS6RAsZhFBMBg,158
+diffmoments/drjit/bounds.py,sha256=Aov1CrnEpQU1DcrqtL0UWimt-TX9MvscsIdakUB6Nrg,5334
+diffmoments/torch/moment_problem.py,sha256=VCoBWp4KO4gTLcBQxBqmFF_l71mJABvJwpTBCitTfis,6761
+diffmoments/torch/__init__.py,sha256=xFYyY8tO4U85OVT-08PuKJMkgLg0AmqMZeG8srWSSJ0,231
+diffmoments/torch/polynomial.py,sha256=wzg1U4JSML37WXcAgN14sBxIIWu--zKqEaCjYbM9awA,5556
+diffmoments/torch/bounds.py,sha256=KEwyLSJnnnZqmyAuH4YkkMIrNt5mUU1w4Mp3IeQCP7Q,6745
+diffmoments/torch/ad/__init__.py,sha256=eW3NyuON1Rb3BZMOglT1ERq8iUok2FkTzB5kCFOpBHc,21
+diffmoments/torch/ad/bounds.py,sha256=bXUgIziyDqj9udaOu5Sz4XYug8ldvx8NYWUlH8BresU,5280
+diffmoments/np/__init__.py,sha256=h3d4I-NHBkgSS47CdYLea0mwjyKWc_OS6RAsZhFBMBg,158
+diffmoments/np/bounds.py,sha256=wHY-c-5xUfga2uvpVSD5K_VcpK0PWtb2XM5IyZ5f66k,5074
