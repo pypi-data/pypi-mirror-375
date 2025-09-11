@@ -1,0 +1,3 @@
+include README.md
+recursive-include tarko_agent_ui *.py
+recursive-include tarko_agent_ui/static *
