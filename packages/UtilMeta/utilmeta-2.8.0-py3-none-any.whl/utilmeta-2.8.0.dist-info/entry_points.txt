@@ -1,0 +1,3 @@
+[console_scripts]
+meta = utilmeta.bin.meta:main
+utilmeta = utilmeta.bin.meta:main
