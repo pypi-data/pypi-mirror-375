@@ -1,0 +1,92 @@
+Metadata-Version: 2.4
+Name: pysolmeters
+Version: 3.13.6
+Summary: pysolmeters
+Home-page: https://github.com/champax/pysolmeters
+Author: Laurent Champagnac
+Author-email: Laurent Champagnac <champagnac.laurent@gmail.com>, Laurent Labatut <laurent@labatut.net>
+Maintainer-email: Laurent Champagnac <champagnac.laurent@gmail.com>, Laurent Labatut <laurent@labatut.net>
+License: GPL-3.0
+Project-URL: Homepage, https://github.com/champax/pysolmeters
+Project-URL: Repository, https://github.com/champax/pysolmeters
+Keywords: python,gevent
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Other Environment
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Natural Language :: English
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: pysolbase>=3.13.0
+Requires-Dist: ujson
+Requires-Dist: greenlet
+Requires-Dist: gevent
+Provides-Extra: test
+Requires-Dist: unittest-xml-reporting; extra == "test"
+Requires-Dist: pylint; extra == "test"
+Requires-Dist: twine; extra == "test"
+Requires-Dist: tox; extra == "test"
+Requires-Dist: toml; extra == "test"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+
+pysolmeters
+============
+
+Welcome to pysol
+
+Copyright (C) 2013/2025 Laurent Labatut / Laurent Champagnac
+
+pysolmeters is a set of python helpers to populate and get counters, anywhere in the code.
+
+It can be used to instrument low-level APIs and validate stuff with unit testing or push counters toward some monitoring softwares.
+
+Internally, it uses AtomicIntSafe, AtomicFloatSafe and DelayToCountSafe classes, wrapped by a static class Meters, which exposes helper methods.
+
+Usage
+===============
+
+To increment integers and floats :
+
+```
+Meters.aii("int_counter")
+Meters.afi("float_counter")
+```
+
+To get integers and floats :
+
+```
+vi = Meters.aig("int_counter")
+vf = Meters.afg("float_counter")
+```
+
+To put millis toward DelayToCount :
+
+```
+Meters.dtci("dtc1", 0.5)
+```
+
+To get DelayToCount instance
+
+```
+dtc1 = Meters.dtcg("dtc1")
+```
+
+To write all counters to logger :
+
+```
+Meters.write_to_logger()
+```
+
+To reset all counters :
+
+```
+Meters.reset()
+```
+
