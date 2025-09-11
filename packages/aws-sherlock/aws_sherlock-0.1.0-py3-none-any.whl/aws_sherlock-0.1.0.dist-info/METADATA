@@ -1,0 +1,111 @@
+Metadata-Version: 2.3
+Name: aws-sherlock
+Version: 0.1.0
+Summary: A powerful CLI tool for analyzing AWS CloudWatch Logs with ease
+License: MIT License
+         
+         Copyright (c) 2025 Eric Villa
+         
+         Permission is hereby granted, free of charge, to any person obtaining a copy
+         of this software and associated documentation files (the "Software"), to deal
+         in the Software without restriction, including without limitation the rights
+         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+         copies of the Software, and to permit persons to whom the Software is
+         furnished to do so, subject to the following conditions:
+         
+         The above copyright notice and this permission notice shall be included in all
+         copies or substantial portions of the Software.
+         
+         THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+         IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+         FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+         LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+         SOFTWARE.
+Keywords: aws,cloudwatch,logs,cli,analysis
+Author: Eric Villa
+Author-email: eric.villa91@gmail.com
+Requires-Python: >=3.13
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: boto3 (>=1.40.27,<2.0.0)
+Requires-Dist: click (>=8.2.1,<9.0.0)
+Description-Content-Type: text/markdown
+
+# Sherlock 🔍
+
+A powerful CLI tool for analyzing AWS CloudWatch Logs with ease.
+
+## Description
+
+Sherlock is a Python-based command-line tool that helps you filter, analyze, and export AWS CloudWatch Logs. It provides an intuitive interface to search through your logs with custom filters and export them to readable formats with human-readable timestamps.
+
+## Features
+
+- 🔍 Filter CloudWatch Logs by time range and custom patterns
+- 📅 Convert timestamps to human-readable date formats
+- 📝 Export logs to text files with structured formatting
+- ⚡ Fast and efficient log processing
+- 🛡️ Built-in AWS authentication support
+
+## Installation
+
+### From PyPI
+```bash
+pip install sherlock
+```
+
+## Configuration
+
+Make sure you have AWS credentials configured.
+
+Required permissions:
+- `logs:FilterLogEvents`
+- `logs:DescribeLogGroups`
+
+## Usage
+```bash
+sherlock --log-group "my-log-group" --start "2025-09-10T12:00:00Z" --end "2025-09-10T12:15:00Z" --region "eu-central-1" --filter-pattern "UnwantedException"
+```
+
+### Options
+
+| Option | Description | Required | Default |
+|--------|-------------|----------|---------|
+| `--log-group` | CloudWatch Log Group name | Yes | - |
+| `--start-time` | Start time for filtering (ISO8601 format) | Yes | - |
+| `--end-time` | End time for filtering (ISO8601 format) | Yes | - |
+| `--region` | End time for filtering (ISO8601 format) | Yes | - |
+| `--filter-pattern` | CloudWatch filter pattern | No | "" |
+| `--output` | Output file name | No | `logs.txt` |
+
+### Time Format
+
+Time parameters (`--start-time` and `--end-time`) must be in ISO8601 format:
+
+- `2025-09-10T14:30:00Z` (UTC timezone)
+- `2025-09-10T14:30:00+02:00` (with timezone offset)
+- `2025-09-10T14:30:00.123Z` (with milliseconds)
+
+## Output Format
+
+The exported logs include the following columns:
+1. **Timestamp** - Original timestamp in milliseconds
+2. **Date** - Human-readable date (YYYY-MM-DD HH:MM:SS)
+3. **Log Stream** - CloudWatch log stream name
+4. **Message** - The actual log message
+
+Example output:
+```
+1757506004044	2025-09-10 14:06:44	my-log-group/3cb6c84259584af3be92688fc6f809eb	ERROR: Application failure occurred
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+**Eric Villa** - [eric@besharp.it](mailto:eric.villa91@gmail.com)
