@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: neemuds
+Version: 2.16.19
+Summary: NEEMUDS Python tool suite.
+Home-page: 
+License: 3-clause BSD 2.0
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3
+License-File: LICENSE.md
+Requires-Dist: numpy>=2
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: py3toolset==1.2.19
+Requires-Dist: py3sac==1.1.5
+Requires-Dist: pysacio==1.0.7
+Requires-Dist: pygaussianfilter==1.4.3
+Requires-Dist: neemuds_mcmc==2.43.5
+Requires-Dist: pymineos==1.2.3
+Requires-Dist: pydisper96==1.2.4
+Dynamic: classifier
+Dynamic: description
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+Full documentation coming soon
