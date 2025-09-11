@@ -1,0 +1,17 @@
+[bandit]
+exclude_dirs = ["tests", "venv", "dist", "build", "__pycache__", ".git", ".kiro"]
+skips = ["B101"]  # Skip assert_used test for test files
+severity = ["high", "medium", "low"]
+
+[bandit.blacklist]
+# Mathematical operations may use eval-like functions safely
+# B307: Use of possibly insecure function - consider using safer alternatives
+# This is acceptable for mathematical expression parsing with SymPy
+
+[bandit.hardcoded_password_string]
+# Exclude test files and configuration examples
+word_list = ["tests/", "examples/", "docs/"]
+
+[bandit.assert_used]
+# Skip assert statements in test files
+skips = ["*test*.py", "tests/*"]

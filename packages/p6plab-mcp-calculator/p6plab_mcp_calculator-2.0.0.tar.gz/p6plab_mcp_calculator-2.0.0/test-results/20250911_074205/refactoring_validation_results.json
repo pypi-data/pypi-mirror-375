@@ -1,0 +1,265 @@
+{
+  "suite_name": "Calculator Refactoring",
+  "summary": {
+    "total": 36,
+    "passed": 35,
+    "failed": 0,
+    "warnings": 1,
+    "skipped": 0,
+    "success_rate": 97.22222222222221
+  },
+  "results": [
+    {
+      "name": "comprehensive_validation",
+      "status": "passed",
+      "message": "All core tests passed",
+      "details": {},
+      "timestamp": 1757547963.8317509
+    },
+    {
+      "name": "module_calculator.server",
+      "status": "passed",
+      "message": "Module importable",
+      "details": {},
+      "timestamp": 1757547963.888274
+    },
+    {
+      "name": "module_calculator.services",
+      "status": "passed",
+      "message": "Module importable",
+      "details": {},
+      "timestamp": 1757547963.8882802
+    },
+    {
+      "name": "module_calculator.repositories",
+      "status": "passed",
+      "message": "Module importable",
+      "details": {},
+      "timestamp": 1757547963.8882828
+    },
+    {
+      "name": "module_calculator.strategies",
+      "status": "passed",
+      "message": "Module importable",
+      "details": {},
+      "timestamp": 1757547963.898885
+    },
+    {
+      "name": "module_calculator.core",
+      "status": "passed",
+      "message": "Module importable",
+      "details": {},
+      "timestamp": 1757547963.89889
+    },
+    {
+      "name": "file_size_compliance",
+      "status": "warning",
+      "message": "Large files found: [('calculator/core/calculus.py', 1228), ('calculator/server/app.py', 1143), ('calculator/services/arithmetic.py', 978)]",
+      "details": {},
+      "timestamp": 1757547964.6048992
+    },
+    {
+      "name": "service_interface_ArithmeticService",
+      "status": "passed",
+      "message": "Has process method",
+      "details": {},
+      "timestamp": 1757547964.606814
+    },
+    {
+      "name": "service_interface_MatrixService",
+      "status": "passed",
+      "message": "Has process method",
+      "details": {},
+      "timestamp": 1757547964.606826
+    },
+    {
+      "name": "service_interface_StatisticsService",
+      "status": "passed",
+      "message": "Has process method",
+      "details": {},
+      "timestamp": 1757547964.6068292
+    },
+    {
+      "name": "service_interface_CalculusService",
+      "status": "passed",
+      "message": "Has process method",
+      "details": {},
+      "timestamp": 1757547964.606832
+    },
+    {
+      "name": "config_get_precision",
+      "status": "passed",
+      "message": "Returns: int",
+      "details": {},
+      "timestamp": 1757547964.606837
+    },
+    {
+      "name": "config_get_cache_size",
+      "status": "passed",
+      "message": "Returns: int",
+      "details": {},
+      "timestamp": 1757547964.6068401
+    },
+    {
+      "name": "config_get_max_computation_time",
+      "status": "passed",
+      "message": "Returns: int",
+      "details": {},
+      "timestamp": 1757547964.606842
+    },
+    {
+      "name": "config_is_caching_enabled",
+      "status": "passed",
+      "message": "Returns: bool",
+      "details": {},
+      "timestamp": 1757547964.606844
+    },
+    {
+      "name": "config_is_performance_monitoring_enabled",
+      "status": "passed",
+      "message": "Returns: bool",
+      "details": {},
+      "timestamp": 1757547964.6068459
+    },
+    {
+      "name": "performance_add",
+      "status": "passed",
+      "message": "Completed in 0.000s",
+      "details": {},
+      "timestamp": 1757547964.6072059
+    },
+    {
+      "name": "performance_determinant",
+      "status": "passed",
+      "message": "Completed in 0.000s",
+      "details": {},
+      "timestamp": 1757547964.607281
+    },
+    {
+      "name": "performance_mean",
+      "status": "passed",
+      "message": "Completed in 0.002s",
+      "details": {},
+      "timestamp": 1757547964.609607
+    },
+    {
+      "name": "caching_consistency",
+      "status": "passed",
+      "message": "Results match",
+      "details": {},
+      "timestamp": 1757547964.6096299
+    },
+    {
+      "name": "caching_performance",
+      "status": "passed",
+      "message": "Cache hit faster: 0.000s vs 0.000s",
+      "details": {},
+      "timestamp": 1757547964.609631
+    },
+    {
+      "name": "security_validation_error",
+      "status": "passed",
+      "message": "Validation error raised correctly",
+      "details": {},
+      "timestamp": 1757547964.609706
+    },
+    {
+      "name": "security_computation_error",
+      "status": "passed",
+      "message": "Computation error raised correctly",
+      "details": {},
+      "timestamp": 1757547964.6097229
+    },
+    {
+      "name": "security_empty_input",
+      "status": "passed",
+      "message": "Empty input rejected",
+      "details": {},
+      "timestamp": 1757547964.609731
+    },
+    {
+      "name": "legacy_import_calculator.core.basic",
+      "status": "passed",
+      "message": "Legacy import works",
+      "details": {},
+      "timestamp": 1757547964.609739
+    },
+    {
+      "name": "legacy_import_calculator.core.matrix",
+      "status": "passed",
+      "message": "Legacy import works",
+      "details": {},
+      "timestamp": 1757547964.6097422
+    },
+    {
+      "name": "legacy_import_calculator.core.statistics",
+      "status": "passed",
+      "message": "Legacy import works",
+      "details": {},
+      "timestamp": 1757547964.6097438
+    },
+    {
+      "name": "legacy_import_calculator.core.calculus",
+      "status": "passed",
+      "message": "Legacy import works",
+      "details": {},
+      "timestamp": 1757547964.6097448
+    },
+    {
+      "name": "legacy_interface",
+      "status": "passed",
+      "message": "Legacy calculation works",
+      "details": {},
+      "timestamp": 1757547964.610361
+    },
+    {
+      "name": "legacy_health",
+      "status": "passed",
+      "message": "Legacy health check works",
+      "details": {},
+      "timestamp": 1757547964.610367
+    },
+    {
+      "name": "doc_docs/ARCHITECTURE.md",
+      "status": "passed",
+      "message": "Exists (20907 bytes)",
+      "details": {},
+      "timestamp": 1757547964.610432
+    },
+    {
+      "name": "doc_docs/DEVELOPER_GUIDE.md",
+      "status": "passed",
+      "message": "Exists (30299 bytes)",
+      "details": {},
+      "timestamp": 1757547964.610454
+    },
+    {
+      "name": "doc_docs/TROUBLESHOOTING.md",
+      "status": "passed",
+      "message": "Exists (19658 bytes)",
+      "details": {},
+      "timestamp": 1757547964.610476
+    },
+    {
+      "name": "doc_docs/API_REFERENCE.md",
+      "status": "passed",
+      "message": "Exists (25651 bytes)",
+      "details": {},
+      "timestamp": 1757547964.610494
+    },
+    {
+      "name": "doc_docs/MIGRATION.md",
+      "status": "passed",
+      "message": "Exists (10023 bytes)",
+      "details": {},
+      "timestamp": 1757547964.610513
+    },
+    {
+      "name": "doc_README.md",
+      "status": "passed",
+      "message": "Exists (52321 bytes)",
+      "details": {},
+      "timestamp": 1757547964.610525
+    }
+  ]
+}

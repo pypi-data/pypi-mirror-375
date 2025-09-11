@@ -1,0 +1,375 @@
+{
+  "arithmetic": {
+    "add": {
+      "avg_ms": 0.02622330968733877,
+      "median_ms": 0.026166992029175162,
+      "min_ms": 0.02591699012555182,
+      "max_ms": 0.027790985768660903,
+      "std_dev": 0.00026142441878312977,
+      "ops_per_sec": 38134.01175988184
+    },
+    "multiply": {
+      "avg_ms": 0.0062666903249919415,
+      "median_ms": 0.006250018486753106,
+      "min_ms": 0.005999987479299307,
+      "max_ms": 0.007333990652114153,
+      "std_dev": 0.00015708990864263188,
+      "ops_per_sec": 159573.8656515289
+    },
+    "power": {
+      "avg_ms": 0.005146969633642584,
+      "median_ms": 0.00508299854118377,
+      "min_ms": 0.004875008016824722,
+      "max_ms": 0.010792020475491881,
+      "std_dev": 0.000585748265102397,
+      "ops_per_sec": 194289.0809892511
+    },
+    "factorial": {
+      "avg_ms": 0.004975370829924941,
+      "median_ms": 0.004999979864805937,
+      "min_ms": 0.004790985258296132,
+      "max_ms": 0.005207984941080213,
+      "std_dev": 0.00010721590940323862,
+      "ops_per_sec": 200990.04359341113
+    },
+    "sqrt": {
+      "avg_ms": 0.0049491095705889165,
+      "median_ms": 0.004917004844173789,
+      "min_ms": 0.004790985258296132,
+      "max_ms": 0.005958019755780697,
+      "std_dev": 0.00012580637173506594,
+      "ops_per_sec": 202056.5489078484
+    },
+    "sine": {
+      "avg_ms": 0.00499448855407536,
+      "median_ms": 0.004999994416721165,
+      "min_ms": 0.0048340007197111845,
+      "max_ms": 0.0051670067477971315,
+      "std_dev": 6.482282879897083e-05,
+      "ops_per_sec": 200220.70111343602
+    },
+    "cosine": {
+      "avg_ms": 0.004940392100252211,
+      "median_ms": 0.004917004844173789,
+      "min_ms": 0.004832982085645199,
+      "max_ms": 0.005165988113731146,
+      "std_dev": 6.489104251595302e-05,
+      "ops_per_sec": 202413.083760892
+    },
+    "log": {
+      "avg_ms": 0.004980329831596464,
+      "median_ms": 0.004999979864805937,
+      "min_ms": 0.0048330111894756556,
+      "max_ms": 0.0051670067477971315,
+      "std_dev": 6.790657260242771e-05,
+      "ops_per_sec": 200789.91428554564
+    }
+  },
+  "matrix": {
+    "5x5": {
+      "add": {
+        "avg_ms": 0.007086539990268648,
+        "median_ms": 0.007041002390906215,
+        "min_ms": 0.006832997314631939,
+        "max_ms": 0.00825000461190939,
+        "ops_per_sec": 141112.58828331123,
+        "successful_ops": 50,
+        "total_attempts": 50
+      },
+      "multiply": {
+        "avg_ms": 0.007364899502135813,
+        "median_ms": 0.0073334958869963884,
+        "min_ms": 0.007166003342717886,
+        "max_ms": 0.007708003977313638,
+        "ops_per_sec": 135779.17793854498,
+        "successful_ops": 50,
+        "total_attempts": 50
+      },
+      "determinant": {
+        "avg_ms": 0.006412341026589274,
+        "median_ms": 0.00635450123809278,
+        "min_ms": 0.006165995728224516,
+        "max_ms": 0.00695799826644361,
+        "ops_per_sec": 155949.2852693613,
+        "successful_ops": 50,
+        "total_attempts": 50
+      },
+      "transpose": {
+        "avg_ms": 0.004231678904034197,
+        "median_ms": 0.004208995960652828,
+        "min_ms": 0.00404199818149209,
+        "max_ms": 0.0045000051613897085,
+        "ops_per_sec": 236312.8258731227,
+        "successful_ops": 50,
+        "total_attempts": 50
+      }
+    },
+    "10x10": {
+      "add": {
+        "avg_ms": 0.01311647822149098,
+        "median_ms": 0.013040989870205522,
+        "min_ms": 0.01291598891839385,
+        "max_ms": 0.016125006368383765,
+        "ops_per_sec": 76239.9771580094,
+        "successful_ops": 50,
+        "total_attempts": 50
+      },
+      "multiply": {
+        "avg_ms": 0.013412439730018377,
+        "median_ms": 0.013415992725640535,
+        "min_ms": 0.013249984476715326,
+        "max_ms": 0.013707991456612945,
+        "ops_per_sec": 74557.65096650539,
+        "successful_ops": 50,
+        "total_attempts": 50
+      },
+      "determinant": {
+        "avg_ms": 0.00925494241528213,
+        "median_ms": 0.009208015399053693,
+        "min_ms": 0.009041978046298027,
+        "max_ms": 0.010208023013547063,
+        "ops_per_sec": 108050.37515401069,
+        "successful_ops": 50,
+        "total_attempts": 50
+      },
+      "transpose": {
+        "avg_ms": 0.007546540582552552,
+        "median_ms": 0.007499998901039362,
+        "min_ms": 0.007208000170066953,
+        "max_ms": 0.008167000487446785,
+        "ops_per_sec": 132511.04781864947,
+        "successful_ops": 50,
+        "total_attempts": 50
+      }
+    },
+    "20x20": {
+      "add": {
+        "avg_ms": 0.035620800917968154,
+        "median_ms": 0.035041492083109915,
+        "min_ms": 0.03304099664092064,
+        "max_ms": 0.042166997445747256,
+        "ops_per_sec": 28073.484431271485,
+        "successful_ops": 10,
+        "total_attempts": 10
+      },
+      "multiply": {
+        "avg_ms": 0.039674699655734,
+        "median_ms": 0.039249498513527215,
+        "min_ms": 0.03875000402331352,
+        "max_ms": 0.042041006963700056,
+        "ops_per_sec": 25204.97971445827,
+        "successful_ops": 10,
+        "total_attempts": 10
+      },
+      "determinant": {
+        "avg_ms": 0.01942919916473329,
+        "median_ms": 0.019208498997613788,
+        "min_ms": 0.018874998204410076,
+        "max_ms": 0.021665997337549925,
+        "ops_per_sec": 51468.92527691721,
+        "successful_ops": 10,
+        "total_attempts": 10
+      },
+      "transpose": {
+        "avg_ms": 0.021124898921698332,
+        "median_ms": 0.02133350062649697,
+        "min_ms": 0.019167026039212942,
+        "max_ms": 0.021540996385738254,
+        "ops_per_sec": 47337.50460566016,
+        "successful_ops": 10,
+        "total_attempts": 10
+      }
+    }
+  },
+  "statistics": {
+    "100_items": {
+      "mean": {
+        "avg_ms": 0.026280778693035245,
+        "median_ms": 0.026249996153637767,
+        "throughput_items_per_ms": 3805.0622916474435,
+        "ops_per_sec": 38050.622916474436
+      },
+      "median": {
+        "avg_ms": 0.005771658616140485,
+        "median_ms": 0.005790992872789502,
+        "throughput_items_per_ms": 17326.042070532254,
+        "ops_per_sec": 173260.42070532253
+      },
+      "std_dev": {
+        "avg_ms": 0.040188299608416855,
+        "median_ms": 0.03997948078904301,
+        "throughput_items_per_ms": 2488.2864160556933,
+        "ops_per_sec": 24882.864160556932
+      },
+      "variance": {
+        "avg_ms": 0.039264161605387926,
+        "median_ms": 0.0391670037060976,
+        "throughput_items_per_ms": 2546.8517831863687,
+        "ops_per_sec": 25468.51783186369
+      },
+      "descriptive_stats": {
+        "avg_ms": 0.5889458203455433,
+        "median_ms": 0.5819579964736477,
+        "throughput_items_per_ms": 169.79490565249026,
+        "ops_per_sec": 1697.9490565249025
+      }
+    },
+    "1000_items": {
+      "mean": {
+        "avg_ms": 0.22878503950778395,
+        "median_ms": 0.22800049919169396,
+        "throughput_items_per_ms": 4370.915170639805,
+        "ops_per_sec": 4370.915170639805
+      },
+      "median": {
+        "avg_ms": 0.04268156015314162,
+        "median_ms": 0.042665982618927956,
+        "throughput_items_per_ms": 23429.321618328755,
+        "ops_per_sec": 23429.321618328755
+      },
+      "std_dev": {
+        "avg_ms": 0.3038790595019236,
+        "median_ms": 0.30387501465156674,
+        "throughput_items_per_ms": 3290.7828582827037,
+        "ops_per_sec": 3290.7828582827037
+      },
+      "variance": {
+        "avg_ms": 0.3145349002443254,
+        "median_ms": 0.3080000024056062,
+        "throughput_items_per_ms": 3179.297430025148,
+        "ops_per_sec": 3179.297430025148
+      },
+      "descriptive_stats": {
+        "avg_ms": 1.3761799572966993,
+        "median_ms": 1.3678329851245508,
+        "throughput_items_per_ms": 726.6491527491443,
+        "ops_per_sec": 726.6491527491443
+      }
+    },
+    "10000_items": {
+      "mean": {
+        "avg_ms": 2.2707498021190986,
+        "median_ms": 2.272812489536591,
+        "throughput_items_per_ms": 4403.831717024855,
+        "ops_per_sec": 440.3831717024855
+      },
+      "median": {
+        "avg_ms": 0.39850439643487334,
+        "median_ms": 0.4001460038125515,
+        "throughput_items_per_ms": 25093.826039217303,
+        "ops_per_sec": 2509.3826039217306
+      },
+      "std_dev": {
+        "avg_ms": 3.0024041974684224,
+        "median_ms": 2.993270492879674,
+        "throughput_items_per_ms": 3330.664141900626,
+        "ops_per_sec": 333.0664141900626
+      },
+      "variance": {
+        "avg_ms": 2.9888166958699003,
+        "median_ms": 2.987124986248091,
+        "throughput_items_per_ms": 3345.8057209793133,
+        "ops_per_sec": 334.5805720979313
+      },
+      "descriptive_stats": {
+        "avg_ms": 9.4465540983947,
+        "median_ms": 9.432332997675985,
+        "throughput_items_per_ms": 1058.5870673941677,
+        "ops_per_sec": 105.85870673941676
+      }
+    }
+  },
+  "calculus": {
+    "derivative_1": {
+      "operation": "derivative",
+      "params": "{'expression': 'x^3 + 2*x^2 + x + 1', 'variable': 'x'}",
+      "avg_ms": 3.709472849732265,
+      "median_ms": 3.693541497341357,
+      "min_ms": 3.6633329873438925,
+      "max_ms": 3.8732919783797115,
+      "ops_per_sec": 269.58008334585224,
+      "successful_ops": 20
+    },
+    "integral_2": {
+      "operation": "integral",
+      "params": "{'expression': '2*x + 1', 'variable': 'x'}",
+      "avg_ms": 0.7054792018607259,
+      "median_ms": 0.7028125110082328,
+      "min_ms": 0.6959169986657798,
+      "max_ms": 0.7344589976128191,
+      "ops_per_sec": 1417.4762308548081,
+      "successful_ops": 20
+    },
+    "integral_3": {
+      "operation": "integral",
+      "params": "{'expression': '2*x + 1', 'variable': 'x', 'lower_limit': 0, 'upper_limit': 2}",
+      "avg_ms": 3.1178041972452775,
+      "median_ms": 3.1161875085672364,
+      "min_ms": 2.8878329903818667,
+      "max_ms": 3.5012089938391,
+      "ops_per_sec": 320.7385508312375,
+      "successful_ops": 20
+    },
+    "limit_4": {
+      "operation": "limit",
+      "params": "{'expression': 'sin(x)/x', 'variable': 'x', 'approach_value': '0'}",
+      "avg_ms": 0.841514504281804,
+      "median_ms": 0.8399994985666126,
+      "min_ms": 0.833584024803713,
+      "max_ms": 0.8557500259485096,
+      "ops_per_sec": 1188.3336471466484,
+      "successful_ops": 20
+    },
+    "taylor_series_5": {
+      "operation": "taylor_series",
+      "params": "{'expression': 'sin(x)', 'variable': 'x', 'center': 0, 'order': 5}",
+      "avg_ms": 4.511839599581435,
+      "median_ms": 4.4889584969496354,
+      "min_ms": 4.25633299164474,
+      "max_ms": 4.878167004790157,
+      "ops_per_sec": 221.6390848851919,
+      "successful_ops": 20
+    }
+  },
+  "caching": {
+    "cache_miss": {
+      "avg_ms": 0.008924899157136679,
+      "median_ms": 0.005812005838379264
+    },
+    "cache_hit": {
+      "avg_ms": 0.005354100721888244,
+      "median_ms": 0.005271009285934269
+    },
+    "speedup_factor": 1.6669277663474944
+  },
+  "concurrent": {
+    "concurrency_1": {
+      "total_time_ms": 0.14983300934545696,
+      "avg_operation_time_ms": 0.017707992810755968,
+      "max_operation_time_ms": 0.017707992810755968,
+      "throughput_ops_per_sec": 6674.0967452264595,
+      "concurrency_level": 1
+    },
+    "concurrency_10": {
+      "total_time_ms": 0.16754199168644845,
+      "avg_operation_time_ms": 0.006979092722758651,
+      "max_operation_time_ms": 0.010082992957904935,
+      "throughput_ops_per_sec": 59686.52932522614,
+      "concurrency_level": 10
+    },
+    "concurrency_50": {
+      "total_time_ms": 0.5144589813426137,
+      "avg_operation_time_ms": 0.006260041263885796,
+      "max_operation_time_ms": 0.009125011274591088,
+      "throughput_ops_per_sec": 97189.47829331714,
+      "concurrency_level": 50
+    },
+    "concurrency_100": {
+      "total_time_ms": 0.9695840126369148,
+      "avg_operation_time_ms": 0.006116668810136616,
+      "max_operation_time_ms": 0.008708011591807008,
+      "throughput_ops_per_sec": 103137.01411808192,
+      "concurrency_level": 100
+    }
+  }
+}
