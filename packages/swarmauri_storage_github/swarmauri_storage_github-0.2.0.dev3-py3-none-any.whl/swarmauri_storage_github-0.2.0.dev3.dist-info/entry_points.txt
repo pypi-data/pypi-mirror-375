@@ -1,0 +1,6 @@
+[peagen.plugins.storage_adapters]
+github=swarmauri_storage_github.github_storage_adapter:GithubStorageAdapter
+
+[swarmauri.storage_adapters]
+GithubStorageAdapter=swarmauri_storage_github.github_storage_adapter:GithubStorageAdapter
+
