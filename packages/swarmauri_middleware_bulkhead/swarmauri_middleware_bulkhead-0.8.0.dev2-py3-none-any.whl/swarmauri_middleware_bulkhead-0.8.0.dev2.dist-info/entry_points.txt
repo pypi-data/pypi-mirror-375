@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+BulkheadMiddleware=swarmauri_middleware_bulkhead:BulkheadMiddleware
+
