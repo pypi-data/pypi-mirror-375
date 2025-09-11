@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: filehandls
+Version: 0.1.1
+Summary: A simple file handling library by Lucas
+Author: Lucas
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# filehandls
+
+A simple Python library to handle files (read, write, delete, exists).
+
+## Install
+```bash
+pip install filehandls

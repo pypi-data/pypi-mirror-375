@@ -1,0 +1,1 @@
+from .core import write, read, exists, delete, append
