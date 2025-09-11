@@ -1,0 +1,26 @@
+[project]
+name = "dispcat"
+version = "0.1.0"
+description = "A CLI tool to display random cat images in separate windows on your screen, with optional frameless mode."
+authors = [
+    {name = "Paul Chupot",email = "paul.chupot@edu.escp.eu"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "click (>=8.2.1,<9.0.0)",
+    "matplotlib (>=3.10.6,<4.0.0)",
+    "requests (>=2.32.5,<3.0.0)",
+    "pillow (>=11.3.0,<12.0.0)",
+    "pyqt5 (>=5.15.11,<6.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "dispcat", from = "src"}]
+
+[tool.poetry.scripts]
+dispcat = "dispcat.cli:dispcat"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
