@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: wolflive
+Version: 0.0.1
+Summary: WOLFApi-TS ported to Python (async-first).
+Author-email: Converted by <noreply@example.com>
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: aiohttp>=3.8
+Requires-Dist: websocket-client>=1.6
+Requires-Dist: requests>=2.0
+Dynamic: license-file
+
+# wolflive
+
+Python port of **WOLFApi-TS**, offering:
+
+- Async-first client using `aiohttp` & websockets.
+- Sync adapter (`requests` + `websocket-client`).
+- Compatible method names (e.g., `sendMessage`) and pythonic aliases (`send_message`).
+
+## Installation
+
+```bash
+pip install wolflive  # or pip install /path/to/wolflive_project
