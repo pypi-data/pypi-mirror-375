@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skey-lib"  # must be unique on PyPI
+version = "0.2.0"
+description = "SKey PyPI package"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+  {name = "Bradford Arrington", email = "bradla8@yahoo.com"}
+]
+
+[project.urls]
+Homepage = "https://github.com/bradla/python-skey"

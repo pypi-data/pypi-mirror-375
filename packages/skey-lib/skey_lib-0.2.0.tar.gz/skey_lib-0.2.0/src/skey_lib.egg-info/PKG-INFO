@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: skey-lib
+Version: 0.2.0
+Summary: SKey PyPI package
+Author-email: Bradford Arrington <bradla8@yahoo.com>
+License: MIT
+Project-URL: Homepage, https://github.com/bradla/python-skey
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+SKey Python package published on PyPI.
+
+## Installation
+
+```bash
+pip install skey-lib
