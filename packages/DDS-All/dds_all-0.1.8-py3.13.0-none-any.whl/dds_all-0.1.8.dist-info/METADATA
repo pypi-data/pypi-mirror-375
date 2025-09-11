@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: DDS_All
+Version: 0.1.8
+Summary: 为解决不同版本Python的兼容性问题，提供多版本的预编译二进制文件。
+Author: JackyJia
+Requires-Python: >=3.9, <3.13
+Dynamic: author
+Dynamic: requires-python
+Dynamic: summary
