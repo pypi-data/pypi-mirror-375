@@ -1,0 +1,1 @@
+from .upsampling import SmoothUpSampling1D, SmoothUpSampling2D, SmoothUpSampling3D
