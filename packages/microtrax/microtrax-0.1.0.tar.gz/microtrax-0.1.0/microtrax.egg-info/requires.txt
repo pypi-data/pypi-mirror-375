@@ -1,0 +1,16 @@
+numpy
+matplotlib
+plotly>=5.0.0
+pandas
+fastapi
+uvicorn[standard]
+psutil
+pillow
+
+[dev]
+pytest
+pytest-cov
+ruff
+
+[gpu]
+nvidia-ml-py3
