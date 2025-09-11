@@ -1,0 +1,15 @@
+name: orseg
+display_name: Orseg
+# use 'hidden' to remove plugin from napari hub search results
+visibility: public
+# see https://napari.org/stable/plugins/technical_references/manifest.html#fields for valid categories
+# categories: []
+
+contributions:
+  commands:
+    - id: orseg.ind_segm
+      python_name: orseg:individual_tree
+      title: Tree Segmentation
+  widgets:
+    - command: orseg.ind_segm
+      display_name: Individual Tree Segmentation

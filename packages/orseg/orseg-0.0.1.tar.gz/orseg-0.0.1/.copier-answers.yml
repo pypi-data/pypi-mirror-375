@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v1.1.0
+_src_path: https://github.com/napari/napari-plugin-template
+display_name: Orseg
+email: herearii.metuarea@gmail.com
+full_name: Herearii Metuarea
+github_repository_url: https://github.com/hereariim/orseg
+github_username_or_organization: hereariim
+include_reader_plugin: false
+include_sample_data_plugin: false
+include_widget_plugin: true
+include_writer_plugin: false
+install_dependabot: true
+install_precommit: true
+license: BSD-3
+module_name: orseg
+plugin_name: orseg
+short_description: Segtree is a plugin designed for the segmentation of individual
+    trees from imagery. It isolates tree in ovelapping tree context.
