@@ -1,0 +1,57 @@
+{
+  "header": {
+    "author": "Zaihua Ji, zji@ucar.edu",
+    "date": "03/23/2010",
+    "description": "table of icoads IMMA data for identify a table index ID"
+  },
+  "database": "rdadb",
+  "schema": "cntldb",
+  "name": "itidx",
+  "pkey": "iidx",
+  "column": [
+    {
+      "name": "iidx",
+      "type": "bigint",
+      "pkey": "PRIMARY KEY",
+      "comment": "icoads record id"
+    },
+    {
+      "name": "suid",
+      "type": "char(4)",
+      "comment": "last 4 chars of Report ID"
+    },
+    {
+      "name": "rn3",
+      "type": "smallint",
+      "comment": "uida.rn3, >= 0"
+    },
+    {
+      "name": "date",
+      "type": "date",
+      "notnull": "NOT NULL",
+      "comment": "UTC date of the record"
+    },
+    {
+      "name": "tidx",
+      "type": "smallint",
+      "notnull": "NOT NULL",
+      "comment": "icoads table index id"
+    }
+  ],
+  "index": [
+    {
+      "name": "itidx_idx_1",
+      "column": "suid, rn3",
+      "unique": "UNIQUE"
+    },
+    {
+      "name": "itidx_idx_2",
+      "column": "date"
+    },
+    {
+      "name": "itidx_idx_3",
+      "column": "tidx"
+    }
+  ],
+  "comment": "ICOADS TABLE INDEX ID"
+}
