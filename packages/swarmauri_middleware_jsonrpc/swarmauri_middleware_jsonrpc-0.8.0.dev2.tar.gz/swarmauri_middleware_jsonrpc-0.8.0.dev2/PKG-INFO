@@ -1,0 +1,57 @@
+Metadata-Version: 2.3
+Name: swarmauri_middleware_jsonrpc
+Version: 0.8.0.dev2
+Summary: Middleware for validating basic JSON-RPC requests
+License: Apache-2.0
+Author: Jacob Stewart
+Author-email: jacob@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Requires-Dist: fastapi
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_standard
+Description-Content-Type: text/markdown
+
+![Swamauri Logo](https://res.cloudinary.com/dbjmpekvl/image/upload/v1730099724/Swarmauri-logo-lockup-2048x757_hww01w.png)
+
+<p align="center">
+    <a href="https://pypi.org/project/swarmauri_middleware_jsonrpc/">
+        <img src="https://img.shields.io/pypi/dm/swarmauri_middleware_jsonrpc" alt="PyPI - Downloads"/>
+    </a>
+    <a href="https://hits.sh/github.com/swarmauri/swarmauri-sdk/tree/master/pkgs/standards/swarmauri_middleware_jsonrpc/">
+        <img alt="Hits" src="https://hits.sh/github.com/swarmauri/swarmauri-sdk/tree/master/pkgs/standards/swarmauri_middleware_jsonrpc.svg"/>
+    </a>
+    <a href="https://pypi.org/project/swarmauri_middleware_jsonrpc/">
+        <img src="https://img.shields.io/pypi/pyversions/swarmauri_middleware_jsonrpc" alt="PyPI - Python Version"/>
+    </a>
+    <a href="https://pypi.org/project/swarmauri_middleware_jsonrpc/">
+        <img src="https://img.shields.io/pypi/l/swarmauri_middleware_jsonrpc" alt="PyPI - License"/>
+    </a>
+    <a href="https://pypi.org/project/swarmauri_middleware_jsonrpc/">
+        <img src="https://img.shields.io/pypi/v/swarmauri_middleware_jsonrpc?label=swarmauri_middleware_jsonrpc&color=green" alt="PyPI - swarmauri_middleware_jsonrpc"/>
+    </a>
+</p>
+
+---
+
+# Swarmauri Middleware JsonRpc
+
+Middleware that performs simple validation of JSON-RPC requests.
+
+## Usage
+
+```python
+from fastapi import FastAPI
+from swarmauri_middleware_jsonrpc import JsonRpcMiddleware
+
+app = FastAPI()
+app.middleware("http")(JsonRpcMiddleware().dispatch)
+```
+
