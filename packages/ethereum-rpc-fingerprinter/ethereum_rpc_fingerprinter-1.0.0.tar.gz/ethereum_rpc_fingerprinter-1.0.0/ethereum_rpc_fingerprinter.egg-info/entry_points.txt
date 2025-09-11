@@ -1,0 +1,3 @@
+[console_scripts]
+erf = ethereum_rpc_fingerprinter:cli
+ethereum-rpc-fingerprinter = ethereum_rpc_fingerprinter:cli
