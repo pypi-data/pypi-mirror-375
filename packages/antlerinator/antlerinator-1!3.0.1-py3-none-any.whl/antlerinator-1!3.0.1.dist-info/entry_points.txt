@@ -1,0 +1,9 @@
+[console_scripts]
+antlerinator-download = antlerinator.download:execute
+
+[distutils.commands]
+build_antlr = antlerinator.build_antlr:build_antlr
+clean_antlr = antlerinator.build_antlr:clean_antlr
+
+[setuptools.finalize_distribution_options]
+antlerinator = antlerinator.build_antlr:register
