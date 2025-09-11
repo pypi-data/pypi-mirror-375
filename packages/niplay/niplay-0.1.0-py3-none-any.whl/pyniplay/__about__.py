@@ -1,0 +1,6 @@
+__title__ = "pyniplay"
+__version__ = "0.1.0"
+__description__ = "Threaded music playback tool for Python"
+__author__ = "Max"
+__url_project__ = "https://github.com/xmaxrayx/pyniplay"
+__url_Author__ = "https://github.com/xmaxrayx"
