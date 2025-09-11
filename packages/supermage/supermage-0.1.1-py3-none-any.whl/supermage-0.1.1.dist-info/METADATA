@@ -1,0 +1,76 @@
+Metadata-Version: 2.4
+Name: supermage
+Version: 0.1.1
+Summary: SMBH masses from ALMA observations of gas kinematics
+Home-page: 
+Author: Michael James Yantovski Barth
+Author-email: mjb299@pitt.edu
+License: Unlicense
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.5.1
+Requires-Dist: scipy
+Provides-Extra: docs
+Requires-Dist: myst-parser; extra == "docs"
+Requires-Dist: pypandoc>=1.6.3; extra == "docs"
+Requires-Dist: readthedocs-sphinx-search; python_version >= "3.6" and extra == "docs"
+Requires-Dist: sphinx<6,>=3.5.4; extra == "docs"
+Requires-Dist: sphinx-autobuild; extra == "docs"
+Requires-Dist: sphinx_book_theme; extra == "docs"
+Requires-Dist: watchdog<1.0.0; python_version < "3.6" and extra == "docs"
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: pytest-flake8; extra == "test"
+Provides-Extra: dev
+Requires-Dist: black==24.8.0; extra == "dev"
+Requires-Dist: identify>=1.4.20; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Provides-Extra: all
+Requires-Dist: black==24.8.0; extra == "all"
+Requires-Dist: identify>=1.4.20; extra == "all"
+Requires-Dist: myst-parser; extra == "all"
+Requires-Dist: pre-commit; extra == "all"
+Requires-Dist: pypandoc>=1.6.3; extra == "all"
+Requires-Dist: pytest; extra == "all"
+Requires-Dist: pytest-cov; extra == "all"
+Requires-Dist: pytest-flake8; extra == "all"
+Requires-Dist: readthedocs-sphinx-search; python_version >= "3.6" and extra == "all"
+Requires-Dist: sphinx-autobuild; extra == "all"
+Requires-Dist: sphinx<6,>=3.5.4; extra == "all"
+Requires-Dist: sphinx_book_theme; extra == "all"
+Requires-Dist: watchdog<1.0.0; python_version < "3.6" and extra == "all"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+[![CI](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/mjyb16/supermage/blob/master/SuperMAGE%20logo_text.svg" width="70%" height="70%">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/mjyb16/supermage/blob/master/SuperMAGE%20logo_text.svg" width="70%" height="70%">
+  <img alt="SuperMAGE logo" src="https://github.com/mjyb16/supermage/blob/master/SuperMAGE%20logo_text.svg" width="70%">
+</picture>
+
+# supermage
+SuperMAGE: **Super**massive black hole **ma**sses from **g**as kin**e**matics
+
+
+NOTE: Active development. Non-functioning and untested code may occur. For notebooks, see other repo.
