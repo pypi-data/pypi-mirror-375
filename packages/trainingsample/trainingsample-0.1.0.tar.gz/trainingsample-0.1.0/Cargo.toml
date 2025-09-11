@@ -1,0 +1,35 @@
+[dependencies]
+anyhow = "1.0"
+fastrand = "2.0"
+ffmpeg-next = {version = "7.0", optional = true}
+image = {version = "0.25", features = ["png", "jpeg", "webp"]}
+imageproc = "0.25"
+ndarray = "0.16"
+numpy = {version = "0.22", optional = true}
+# Python bindings (optional)
+pyo3 = {version = "0.22", features = ["extension-module"], optional = true}
+rayon = "1.8"
+
+[features]
+default = ["video"]
+python-bindings = ["pyo3", "numpy"]
+video = ["ffmpeg-next"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "trainingsample"
+
+[package]
+authors = ["bghira <bghira@users.noreply.github.com>"]
+description = "High-performance Rust reimplementation of GIL-blocking video/image operations"
+edition = "2021"
+license = "MIT"
+name = "trainingsample"
+version = "0.1.0"
+readme = "README.md"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
