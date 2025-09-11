@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: oarepo-theme
+Version: 1.0.0.dev1
+Summary: SemanticUI Invenio app theme overlay for NRP repositories
+Project-URL: Documentation, https://github.com/oarepo/theme#readme
+Project-URL: Issues, https://github.com/oarepo/theme/issues
+Project-URL: Source, https://github.com/oarepo/theme
+Project-URL: Homepage, https://github.com/oarepo/theme
+Author-email: "CESNET a.l.e." <bauer@cesnet.cz>
+License-Expression: MIT
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.13
+Requires-Dist: oarepo[rdm,tests]<14,>=13
+Provides-Extra: tests
+Requires-Dist: oarepo-runtime; extra == 'tests'
+Description-Content-Type: text/markdown
+
+# theme
+SemanticUI Invenio app theme overlay for NRP repositories

@@ -1,0 +1,84 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "oarepo-theme"
+dynamic = ["version"]
+description = 'SemanticUI Invenio app theme overlay for NRP repositories'
+readme = "README.md"
+requires-python = ">=3.13"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "CESNET a.l.e.", email = "bauer@cesnet.cz" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "oarepo[rdm,tests]>=13,<14"
+]
+
+[project.optional-dependencies]
+tests = [
+    "oarepo-runtime",
+]
+
+[project.urls]
+Documentation = "https://github.com/oarepo/theme#readme"
+Issues = "https://github.com/oarepo/theme/issues"
+Source = "https://github.com/oarepo/theme"
+Homepage = "https://github.com/oarepo/theme"
+
+
+[tool.hatch.version]
+path = "oarepo_theme/__init__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:oarepo_theme tests}"
+
+[tool.coverage.run]
+source_pkgs = ["oarepo_theme", "tests"]
+branch = true
+parallel = true
+omit = [
+  "oarepo_theme/__init__.py",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+    "oarepo_theme"
+]
+
+[tool.coverage.paths]
+oarepo_theme = ["oarepo_theme", "*/oarepo-theme/oarepo_theme"]
+tests = ["tests", "*/oarepo-theme/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[project.entry-points."invenio_assets.webpack"]
+oarepo_theme = "oarepo_theme.webpack:theme"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/oarepo_theme",
+]
