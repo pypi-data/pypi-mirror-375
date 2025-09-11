@@ -1,0 +1,6 @@
+[peagen.plugins.signings]
+secp256k1=swarmauri_signing_secp256k1:Secp256k1EnvelopeSigner
+
+[swarmauri.signings]
+Secp256k1EnvelopeSigner=swarmauri_signing_secp256k1:Secp256k1EnvelopeSigner
+
