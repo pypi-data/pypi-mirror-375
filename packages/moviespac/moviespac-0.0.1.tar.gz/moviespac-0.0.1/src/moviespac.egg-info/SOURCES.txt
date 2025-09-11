@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/moviespac/__init__.py
+src/moviespac/film_client.py
+src/moviespac/film_config.py
+src/moviespac.egg-info/PKG-INFO
+src/moviespac.egg-info/SOURCES.txt
+src/moviespac.egg-info/dependency_links.txt
+src/moviespac.egg-info/requires.txt
+src/moviespac.egg-info/top_level.txt
+src/moviespac/schemas/__init__.py
+src/moviespac/schemas/schemas.py

@@ -1,0 +1,27 @@
+[build-system]                       # 1) Bloc qui dit à 'pip/build' comment construire ton package
+requires = ["setuptools>=80.9.0"]    # 2) Dépendance de construction : on utilise setuptools (version min 80.9.0)
+build-backend = "setuptools.build_meta"  # 3) Backend de build : l’implémentation fournie par setuptools
+
+[project]                             # 4) Métadonnées "PEP 621" de ton projet (affichées sur PyPI)
+name = "moviespac"                      # 5) Nom du package sur PyPI (unique).
+version = "0.0.1"                     # 6) Version publique. Doit être incrémentée à chaque release sur PyPI
+authors = [                           # 7) Auteurs (liste). S’affiche sur PyPI
+  { name="Ulrich Boris NIADA", email="ulrich.niada24@inphb.ci" },    # 8) Nom de l’auteur 
+]
+description = "SDK Python pour accéder à l’API MovieLens"  # 9) Résumé (courte description)
+readme = "README.md"                  # 10) Longue description (Markdown), affichée sur PyPI
+requires-python = ">=3.10"            # 11) Version minimale de Python supportée
+classifiers = [                       # 12) Classifications normalisées (affinage de la recherche PyPI)
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [                      # 13) Dépendances installées automatiquement avec ton package
+       'httpx>=0.28.1',               # 14) Client HTTP
+       'pydantic>=2.11.3',            # 15) Modèles/validation
+       'backoff>=2.2.1',              # 16) retries/backoff
+       'numpy>=2.2.4',                # 17) Utilisé par pandas ; lourd pour un SDK "léger"
+       'pandas>=2.2.3',               # 18) DataFrame
+       'python-dotenv',               # 19) Chargement d’ENV
+]
