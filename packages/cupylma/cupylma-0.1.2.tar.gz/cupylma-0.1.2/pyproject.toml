@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cupylma"
+version = "0.1.2"
+dependencies = [
+  "nvidia-cupynumeric",
+  "torch",
+  "torchvision",
+  "nvtx"
+]
+authors = [
+  { name="Xianghao Wang", email="wang.xianghao@outlook.com" },
+]
+description = "cuPyLMA: a Multi-GPU Levenberg-Marquardt Optimizer powered by cuPyNumeric"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3"
+]
+
+[project.urls]
+Homepage = "https://github.com/wang-xianghao/cuPyLMA"
+Issues = "https://github.com/wang-xianghao/cuPyLMA/issues"
+
+[tool.setuptools]
+packages = ["cupylma"]
