@@ -1,0 +1,41 @@
+Metadata-Version: 2.3
+Name: swarmauri_keyprovider_hierarchical
+Version: 0.3.0.dev2
+Summary: Hierarchical key provider for Swarmauri
+License: Apache-2.0
+Author: Swarmauri
+Author-email: opensource@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Security :: Cryptography
+Classifier: Intended Audience :: Developers
+Provides-Extra: aws
+Provides-Extra: pkcs11
+Requires-Dist: boto3 ; extra == "aws"
+Requires-Dist: pkcs11 ; extra == "pkcs11"
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_keyprovider_local
+Description-Content-Type: text/markdown
+
+![Swamauri Logo](https://res.cloudinary.com/dbjmpekvl/image/upload/v1730099724/Swarmauri-logo-lockup-2048x757_hww01w.png)
+
+# Swarmauri Hierarchical Key Provider
+
+Plugin providing a policy-driven composite key provider capable of routing
+key operations across multiple child providers. It implements the
+`IKeyProvider` interface and exposes a single `HierarchicalKeyProvider`
+class.
+
+## Installation
+
+```bash
+pip install swarmauri_keyprovider_hierarchical
+```
+

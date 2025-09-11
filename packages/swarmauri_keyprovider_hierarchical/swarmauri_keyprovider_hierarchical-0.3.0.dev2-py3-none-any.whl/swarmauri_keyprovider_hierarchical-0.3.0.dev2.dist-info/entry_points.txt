@@ -1,0 +1,6 @@
+[peagen.plugins.key_providers]
+hierarchical=swarmauri_keyprovider_hierarchical.HierarchicalKeyProvider:HierarchicalKeyProvider
+
+[swarmauri.key_providers]
+HierarchicalKeyProvider=swarmauri_keyprovider_hierarchical.HierarchicalKeyProvider:HierarchicalKeyProvider
+
