@@ -1,0 +1,59 @@
+Metadata-Version: 2.3
+Name: zdx
+Version: 0.2.0.dev2
+Summary: Z Doc Builder Experience by Swarmauri
+License: Apache-2.0
+Keywords: mkdocs,documentation,swarmauri,docs,doc builder
+Author: Jacob Stewart
+Author-email: jacob@swarmauri.com
+Requires-Python: >=3.12,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: griffe-typingdoc
+Requires-Dist: mkdocs
+Requires-Dist: mkdocs-autorefs
+Requires-Dist: mkdocs-gen-files
+Requires-Dist: mkdocs-literate-nav
+Requires-Dist: mkdocs-material (>=9.6.4,<10.0.0)
+Requires-Dist: mkdocstrings[python] (>=0.28.1,<0.29.0)
+Requires-Dist: pyyaml (>=6.0)
+Requires-Dist: ruff (>=0.5)
+Description-Content-Type: text/markdown
+
+![Swamauri Logo](https://res.cloudinary.com/dbjmpekvl/image/upload/v1730099724/Swarmauri-logo-lockup-2048x757_hww01w.png)
+
+# ZDX
+
+Z Doc Builder Experience by Swarmauri. Reusable tooling to build and serve MkDocs-based documentation sites for Swarmauri projects.
+
+## Features
+
+- Material for MkDocs configuration
+- mkdocstrings support for API reference generation
+- Dockerfile for containerized deployments
+
+## Getting Started
+
+1. Place your documentation sources in a dedicated directory (e.g., `docs/swarmauri-sdk`).
+2. Customize `mkdocs.yml` and `api_manifest.yaml` for your project.
+3. Install `zdx` and use the `zdx` CLI to build and preview the site.
+
+
+## CLI Usage
+
+### Generate from a manifest
+```bash
+zdx generate --docs-dir /path/to/docs --manifest api_manifest.yaml
+```
+
+### Serve the site
+```bash
+zdx serve --docs-dir /path/to/docs
+```
+
+### Generate and serve together
+```bash
+zdx serve --generate --docs-dir /path/to/docs --manifest api_manifest.yaml
+```
+
