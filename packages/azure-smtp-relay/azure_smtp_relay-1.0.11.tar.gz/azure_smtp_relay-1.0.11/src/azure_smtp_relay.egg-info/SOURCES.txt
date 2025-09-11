@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/azure_smtp_relay/__init__.py
+src/azure_smtp_relay/__main__.py
+src/azure_smtp_relay/address_list.py
+src/azure_smtp_relay/config.py
+src/azure_smtp_relay/handler.py
+src/azure_smtp_relay/relay.py
+src/azure_smtp_relay/toml_config_mgr.py
+src/azure_smtp_relay.egg-info/PKG-INFO
+src/azure_smtp_relay.egg-info/SOURCES.txt
+src/azure_smtp_relay.egg-info/dependency_links.txt
+src/azure_smtp_relay.egg-info/requires.txt
+src/azure_smtp_relay.egg-info/top_level.txt
