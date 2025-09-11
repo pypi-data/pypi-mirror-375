@@ -1,0 +1,6 @@
+
+[:python_version < "3.11"]
+typing-extensions
+
+[:python_version >= "3.0" and python_version < "3.12"]
+numpy
