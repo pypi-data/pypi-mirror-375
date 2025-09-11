@@ -1,0 +1,109 @@
+Metadata-Version: 2.4
+Name: fastapi-router-viz
+Version: 0.1.10
+Summary: Visualize FastAPI application's routing tree and dependencies
+Project-URL: Homepage, https://github.com/allmonday/fastapi-router-viz
+Project-URL: Source, https://github.com/allmonday/fastapi-router-viz
+Author-email: Tangkikodo <allmonday@126.com>
+License: MIT
+License-File: LICENSE
+Keywords: fastapi,openapi,routing,visualization
+Classifier: Framework :: FastAPI
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Requires-Dist: fastapi>=0.110
+Provides-Extra: dev
+Requires-Dist: pytest; extra == 'dev'
+Requires-Dist: ruff; extra == 'dev'
+Requires-Dist: uvicorn; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# fastapi-router-viz
+
+Visualize FastAPI application's routes and inner dependencies inside response_models.
+
+> This repo is still in early stage.
+
+
+[![Video Title](https://img.youtube.com/vi/9ywdMt1wPOY/0.jpg)](https://www.youtube.com/watch?v=9ywdMt1wPOY)
+
+
+## Installation
+
+```bash
+pip install fastapi-router-viz
+# or
+uv add fastapi-router-viz
+```
+
+## Command Line Usage
+
+```bash
+# Basic usage - assumes your FastAPI app is named 'app' in app.py
+router-viz tests/demo.py
+
+# Specify custom app variable name
+router-viz tests/demo.py --app app
+
+# group & highlight your schems as lightblue which located in service modules
+router-viz tests/demo.py --app app --service_prefixes tests.service
+
+# filter tag name
+router-viz tests/demo.py --app app --tags page
+
+# filter schema name, display related nodes
+router-viz tests/demo.py --app app --schema Task
+
+# show fields
+router-viz tests/demo.py --app app --show_fields
+
+# Custom output file
+router-viz tests/demo.py -o my_visualization.dot
+
+# Show help
+router-viz --help
+
+# Show version
+router-viz --version
+```
+
+The tool will generate a DOT file that you can render using Graphviz:
+
+```bash
+# Install graphviz
+brew install graphviz  # macOS
+apt-get install graphviz  # Ubuntu/Debian
+
+# Render the graph
+dot -Tpng router_viz.dot -o router_viz.png
+
+# Or view online at: https://dreampuf.github.io/GraphvizOnline/
+```
+
+or you can open router_viz.dot with vscode extension `graphviz interactive preview`
+
+<img width="1062" height="283" alt="image" src="https://github.com/user-attachments/assets/d8134277-fa84-444a-b6cd-1287e477a83e" />
+
+`--show_fields` to display details
+
+<img width="1329" height="592" alt="image" src="https://github.com/user-attachments/assets/d5dceee8-995b-4dab-a016-46fa98e74d77" />
+
+
+## Next
+
+- [ ] support programmatic usage
+- [ ] support dataclass
+- [ ] user can generate nodes/edges manually and connect to generated ones
+- [ ] add configuration for highlight (optional)
+- [ ] group schemas by module hierarchy
+- [ ] make a explorer dashboard, provide list of routes, schemas, to make it easy to switch and search
+- [ ] integration with pydantic-resolve
+    - [ ] show difference between resolve, post fields
+    - [ ] strikethrough for excluded fields
+    - [ ] display loader as edges
