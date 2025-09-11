@@ -1,0 +1,41 @@
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "setuptools-git-versioning>=2.0,<3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "get_conn_by_id"
+dynamic = ["version"]
+authors = [
+  { name="Cody Xiaozhan Yang", email="x.yang@cloudfmgroup.com" },
+]
+description = "A library used to get the connections from different environments."
+keywords = ["connections"]
+# readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+license = {file = "LICENSE"}
+
+[tool.setuptools-git-versioning]
+enabled = true
+version_file = "VERSION"
+# count_commits_from_version_file = true
+# dev_template = "{tag}.{ccount}"  # <--- note {branch} here
+# dirty_template = "{tag}.{ccount}"
+# version_callback = "fetch_sharepoint_info.version:get_version"
+
+# [tool.setuptools.dynamic]
+# version = {attr = "__version__"}
+
+# [project.urls]
+# Homepage = "https://github.com/pypa/sampleproject"
+# Issues = "https://github.com/pypa/sampleproject/issues"
+
+
+
+# [tool.setuptools_scm]
+# version_file = "cache_return/_version.py"
