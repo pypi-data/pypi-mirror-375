@@ -1,0 +1,47 @@
+{% extends 'yangsuite/base-cui.html' %}
+{% load static %}
+{% block cui-css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/cui-standard-1.3.3.min.css' %}"/>
+{% endblock %}
+{% block breadcrumbs %}<li><span>Help</span></li>{% endblock %}
+{% block page-title %}Help: {{ document.title }}{% endblock %}
+{% block body %}
+{% csrf_token %}
+<div class="content">
+  <div class="container-fluid">
+    <div style="float: right; border: 1px solid #dfdfdf; padding: 1em">
+      <h3>YANG Suite Documentation</h3>
+      <div role="search">
+        <form id="rtd-search-form" class="wy-form" action="/help/search/" method="get">
+          <input type="text" name="q" placeholder="Search docs" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+      </div>
+      <ul>
+        {% for section, section_data in toctree.items %}
+        <li><a href="{% url 'help' section=section %}">
+            {{ section_data.title }}</a></li>
+        <ul>
+          {% for item in section_data.items %}
+          <li><a href="{% url 'help' section=section document=item.content %}">
+              {{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endfor %}
+      </ul>
+    </div>
+    {% if document.prev %}
+    <div>
+      Previous: <a href="{{ document.prev.link }}">{{ document.prev.title }}</a>
+    </div>
+    {% endif %}
+    {% autoescape off %}{{ document.body }}{% endautoescape %}
+    {% if document.next %}
+    <div>
+      Next: <a href="{{ document.next.link }}">{{ document.next.title }}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock body %}

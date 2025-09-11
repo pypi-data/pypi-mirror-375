@@ -1,0 +1,9 @@
+{% extends 'registration/base.html' %}
+{% block body %}
+  <div class="col-6 offset-3">
+    <h3 class="alert alert--success">Thanks for using YANG Suite!</h3>
+    <div class="text-center">
+      <a href="{% url 'login' %}" class="btn btn-default" role="button">Log in again?</a>
+    </div>
+  </div>
+{% endblock body %}

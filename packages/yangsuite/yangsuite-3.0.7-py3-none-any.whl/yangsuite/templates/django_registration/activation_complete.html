@@ -1,0 +1,13 @@
+{% extends "django_registration/base.html" %}
+{% block body %}
+<div class="col-6 offset-3">
+  <h3>Account activated!</h3>
+  <div class="alert alert--success">
+    <div class="alert__icon icon-check-outline"></div>
+    <div class="alert__message">
+      Your YANG Suite account is successfully activated.
+      Click&nbsp;<a href="{% url 'login' %}">here to login</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

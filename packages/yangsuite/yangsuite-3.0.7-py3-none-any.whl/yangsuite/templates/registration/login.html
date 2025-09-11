@@ -1,0 +1,51 @@
+{% extends 'registration/base.html' %}
+{% block body %}
+  <div class="col-6 offset-3">
+    <h3>Log in to YANG Suite</h3>
+    {% for error in form.non_field_errors %}
+      <p class="alert alert-danger text-center">
+        {{ error }}
+      </p>
+    {% endfor %}
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p class="alert alert-warning text-center">
+          Your account doesn't have access to this page. To proceed, please
+          login with an account that has access.
+        </p>
+      {% else %}
+        <p class="alert alert-info text-center">Please login to access this page.</p>
+      {% endif %}
+    {% endif %}
+    <form class="ui-widget" action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="form-group__text">
+          <td>{{ form.username.label_tag }}</td>
+          <td>{{ form.username }}</td>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-group__text">
+          <td>{{ form.password.label_tag }}</td>
+          <td>{{ form.password }}</td>
+        </div>
+      </div>
+      <input type="hidden" name="next" value="{{ next }}" />
+      <p class="text-center">
+        <input type="submit" class="btn btn-primary" value="Login" />
+      </p>
+
+      {% if registration_open %}
+      <div class="alert alert--info">
+        Not registered ?&nbsp;
+          <a href="{% url 'ys_user_register' %}">Create an account.</a>
+      </div>
+      {% endif %}
+
+      <div class="alert alert--warning">
+        <a href="{% url 'password_reset' %}">Lost your password?</a>
+      </div>
+    </form>
+  </div>
+{% endblock body %}

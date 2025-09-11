@@ -1,0 +1,170 @@
+/*
+ * Overrides of defaults set in cui-standard.css, jquery-ui.css, and elsewhere
+ * for YANG Suite's purposes
+ */
+
+.ui-progressbar-text {
+    /* We display text status within this div */
+    position: relative;
+    top: 12px;
+    left: 1rem;
+    white-space: nowrap;
+    color: #58585b;
+    text-shadow: 1px 1px 0 white, -1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white;
+    line-height: 0;
+    z-index: 100;
+}
+
+/*
+ * For some reason the line-height is set quite high for sidebar items,
+ * causing wrapped items (such as several 'Help' menu items) to display
+ * very oddly. Fix that.
+ */
+.cui .sidebar a {
+    line-height:inherit;
+}
+
+.cui .form-group {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.cui .header-breadcrumbs {
+    margin: 2px 0 18px;
+}
+
+ .cui .header-heading .page-title {
+    margin-top: 6px;
+}
+
+.cui .ui-accordion .ui-accordion-header {
+    font-weight: 400;
+}
+
+.cui .ui-dialog .ui-dialog-titlebar {
+    background: #049fd9;  /* CUI "Cisco Blue" */
+}
+
+.cui .ui-progressbar .ui-progressbar-value {
+    background: #64bbe3;  /* CUI "Status Blue" */
+    margin: 0px;
+}
+
+/* Make jquery-ui elements use same fonts as the rest of the page */
+.cui .ui-widget {
+    font-family: CiscoSans,Arial,sans-serif;
+    font-size: 1.4rem;
+}
+
+/* Make jquery-ui dialogs float over (not behind) the side navbar */
+.cui .ui-front {
+    z-index: 2000;
+}
+
+.cui .ui-widget input,
+.cui .ui-widget select,
+.cui .ui-widget textarea,
+.cui .ui-widget button {
+    font-family: CiscoSans,Arial,sans-serif;
+}
+
+.cui .ui-widget-content {
+    background: #ffffff;
+}
+
+.cui .ui-widget-header {
+    border: 1px solid transparent;
+    background: #64bbe3;  /* CUI "Status Blue" */
+    color: #ffffff;
+}
+
+.cui .ui-state-default,
+.cui .ui-widget-content .ui-state-default,
+.cui .ui-widget-header .ui-state-default {
+    border: 1px solid transparent;
+    background: #7f7f86;  /* CUI "Dark Gray 4" */
+}
+
+.cui .ui-state-hover,
+.cui .ui-widget-content .ui-state-hover,
+.cui .ui-widget-header .ui-state-hover,
+.cui .ui-state-focus,
+.cui .ui-widget-content .ui-state-focus,
+.cui .ui-widget-header .ui-state-focus {
+    border: 1px solid transparent;
+    background: #626469;  /* CUI "Dark Gray 3" */
+}
+
+.cui .ui-state-active,
+.cui .ui-widget-content .ui-state-active,
+.cui .ui-widget-header .ui-state-active {
+    border: 1px solid transparent;
+    background: #049fd9;  /* CUI "Cisco Blue" */
+}
+
+.cui .ui-corner-all,
+.cui .ui-corner-top,
+.cui .ui-corner-left,
+.cui .ui-corner-tl {
+    border-top-left-radius: 2rem;
+}
+
+.cui .ui-corner-all,
+.cui .ui-corner-top,
+.cui .ui-corner-right,
+.cui .ui-corner-tr {
+    border-top-right-radius: 2rem;
+}
+
+.cui .ui-corner-all,
+.cui .ui-corner-bottom,
+.cui .ui-corner-left,
+.cui .ui-corner-bl {
+    border-bottom-left-radius: 2rem;
+}
+
+.cui .ui-corner-all,
+.cui .ui-corner-bottom,
+.cui .ui-corner-right,
+.cui .ui-corner-br {
+    border-bottom-right-radius: 2rem;
+}
+
+.cui .ui-widget-overlay {
+    background: #58585b;
+}
+
+.cui a.headerlink {
+    visibility: hidden;
+}
+
+.cui *:hover > a.headerlink {
+    visibility: visible;
+}
+
+/* Formatting of markup on inline help pages to match CUI standards */
+
+.cui div.admonition {
+    padding: 10px;
+    border-left-width: 48px !important;
+    border-radius: 2px;
+}
+
+.cui div.admonition p.admonition-title {
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+.cui div.admonition p.last {
+    margin-bottom: 0px;
+}
+
+.cui div.warning {
+    border: 1px solid #fbab18;
+    background: rgba(251,171,24,.01);
+}
+
+.cui div.note {
+    border: 1px solid #00bceb;
+    background: rgba(0,188,235,.01);
+}

@@ -1,0 +1,147 @@
+{% extends 'yangsuite/base-cui.html' %}
+{% load static %}
+{% block javascript %}
+<script src="{% static 'yangsuite/js/plugins.js' %}"></script>
+{% endblock javascript %}
+{% block cui-css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/cui-standard-1.3.3.min.css' %}" />
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'yangsuite/css/yangsuite_plugins.css' %}" />
+{% endblock css %}
+{% block breadcrumbs %}<li><span>Plugins</span></li>{% endblock %}
+{% block page-title %}YANG Suite plugins{% endblock %}
+{% block body %}
+<div class="content">
+  <table class="plugins-table table table--wrap table--bordered">
+    <tbody>
+      <tr>
+        <th colspan="5" class="plugin-section-header">Core YANG Suite plugins</th>
+      </tr>
+      <tr>
+        <th colspan="2" class="package-name">Package name</th>
+        <th class="description">Description</th>
+        <th class="installed-version">Installed version</th>
+        <th class="latest-version">Pre-release</th>
+      </tr>
+    </tbody>
+    <tbody id="core-plugins">
+      <!-- to be populated by js -->
+    </tbody>
+    <tbody>
+      <tr>
+        <th colspan="5" class="plugin-section-header">Installed optional plugins</th>
+      </tr>
+      <tr>
+        <th colspan="2" class="package-name">Package name</th>
+        <th class="description">Description</th>
+        <th class="installed-version">Installed version</th>
+        <th class="latest-version">Pre-releases</th>
+      </tr>
+    </tbody>
+    <tbody id="extra-plugins">
+      <!-- to be populated by js -->
+    </tbody>
+    <tr>
+      <td colspan="3">
+        <!-- <select name="snapshots-select" id="snapshots-select">
+        </select> -->
+        <button id="rollback-plugins" class="btn btn-default">
+          Restore Previous Versions</button>
+      </td>
+      <td> <button id="update-plugins" class="btn btn-default">
+          Update all plugins to latest</button></td>
+      <td>
+        <button id="install-pre-plugins" class="btn btn-default">
+          Install pre-releases</button>
+      </td>
+    </tr>
+    <tbody>
+      <tr>
+        <th colspan="5" class="plugin-section-header">Additional plugins not currently installed</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th class="package-name">Package name</th>
+        <th class="description" colspan="3">Description</th>
+      </tr>
+    </tbody>
+    <tbody id="available-plugins">
+      <!-- to be populated by js -->
+    </tbody>
+    <tr>
+      <td colspan="5">
+        <button id="install-plugin" class="btn btn-default">
+          Install selected plugin</button>
+      </td>
+    </tr>
+    <tr>
+      <th colspan="5" class="plugin-section-header">Full Python environment details</th>
+    </tr>
+    <tr>
+      <td colspan="5" id="python-version"></td>
+    </tr>
+    <tr>
+      <th colspan="5">Installed Python modules</th>
+    </tr>
+    <tr>
+      <td colspan="5">
+        <ul class="list--unstyled" style="columns: 3" id="python-modules"></ul>
+      </td>
+    </tr>
+  </table>
+</div>
+{% endblock body %}
+{% block script %}
+<script>
+  $(function () {
+    // plugins.getSnapshots();
+    plugins.getInstalledPlugins().done(plugins.getAvailablePlugins());
+
+    $.when(getPromise("/yangsuite/plugins/report")).then(function (retObj) {
+      let output = $("<div>");
+      $('#python-version').text("Python " + retObj.report.python.version);
+      $("#python-modules").empty();
+      $.each(retObj.report.modules, function (name, version) {
+        $("#python-modules").append('<li><span class="text-bold">' + name + "</span>: " + version + "</li>");
+      });
+    });
+
+    $("#update-plugins").click(async function () {
+      $('#update-plugins').prop('disabled', true);
+      try {
+        await plugins.updatePlugins();
+      } finally {
+        $('#update-plugins').prop('disabled', false);
+      }
+    });
+
+    $("#install-pre-plugins").click(async function () {
+      $('#install-pre-plugins').prop('disabled', true);
+      try {
+        await plugins.installPreRealeases();
+      } finally {
+        $('#install-pre-plugins').prop('disabled', false);
+      }
+    });
+
+    $("#install-plugin").click(async function () {
+      $('#install-plugin').prop('disabled', true);
+      try {
+        await plugins.installPlugin();
+      } finally {
+        $('#install-plugin').prop('disabled', false);
+      }
+    });
+
+    $("#rollback-plugins").click(async function () {
+      $('#rollback-plugins').prop('disabled', true);
+      try {
+        await plugins.loadSnapshot();
+      } finally {
+        $('#rollback-plugins').prop('disabled', false);
+      }
+    });
+  });
+</script>
+{% endblock script %}

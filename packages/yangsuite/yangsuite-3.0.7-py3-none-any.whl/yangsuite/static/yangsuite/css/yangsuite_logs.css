@@ -1,0 +1,33 @@
+.log_table td {
+    /* Slightly de-emphasize all columns except the message */
+    color: DimGray;
+}
+
+.log_table td.message {
+    /* hanging indent when wrapping long lines */
+    text-indent: -8px;
+    padding-left: 16px;
+    color: black;
+    width: 100%;
+}
+
+.log_table td.message p {
+    /* remove usual vertical space between paragraphs */
+    margin: 0;
+}
+
+.log_table td.timestamp,
+.log_table td.modulename,
+.log_table td.lineno,
+.log_table td.funcName
+{
+    font-family: monospace;
+    white-space: nowrap;
+    font-size: small;
+}
+
+.lineno {
+    text-align: right;
+}
+
+

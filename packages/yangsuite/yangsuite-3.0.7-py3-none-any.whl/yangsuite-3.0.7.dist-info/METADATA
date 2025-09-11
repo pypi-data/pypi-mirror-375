@@ -1,0 +1,72 @@
+Metadata-Version: 2.4
+Name: yangsuite
+Version: 3.0.7
+Summary: YANG module tooling (RFC 7950).
+Home-page: https://developer.cisco.com
+Author: YANG Suite development team
+Author-email: yangsuite-support-ext@cisco.com
+License: Cisco General Terms
+Project-URL: Homepage, https://developer.cisco.com/yangsuite
+Project-URL: Documentation, https://developer.cisco.com/docs/yangsuite/
+Project-URL: Release-notes, https://github.com/CiscoDevNet/yangsuite/blob/main/RELEASE_NOTES.md
+Requires-Python: >3.7
+License-File: LICENSE.txt
+Requires-Dist: setuptools>=68.0.0
+Requires-Dist: wheel
+Requires-Dist: appdirs>=1.4.3
+Requires-Dist: python-json-logger>0.1.10
+Requires-Dist: python-slugify<5.0.0,>=4.0.0
+Requires-Dist: packaging>=19.0
+Requires-Dist: whitenoise<5.0.0,>=4.1.2
+Requires-Dist: PyGithub
+Requires-Dist: docutils
+Requires-Dist: markupsafe>2.1
+Requires-Dist: channels[daphne]
+Requires-Dist: django<5.0.0,>3.2.0
+Requires-Dist: django-registration>=3
+Requires-Dist: djangorestframework
+Requires-Dist: markdown
+Requires-Dist: django-filter
+Requires-Dist: yangsuite-filemanager
+Requires-Dist: yangsuite-devices
+Requires-Dist: yangsuite-netconf
+Requires-Dist: yangsuite-yangtree
+Requires-Dist: beautifulsoup4
+Requires-Dist: celery>=5.1
+Requires-Dist: django-cors-headers
+Requires-Dist: requests
+Requires-Dist: docker
+Requires-Dist: python-dotenv
+Requires-Dist: numpy==1.24.4
+Requires-Dist: pandas==1.5.3
+Requires-Dist: openpyxl
+Requires-Dist: xlsxwriter
+Requires-Dist: deepdiff==4.0.7
+Requires-Dist: regex
+Requires-Dist: cryptography>=40.0.2
+Requires-Dist: pyOpenSSL>=21.0.0
+Requires-Dist: paramiko>2.4.3
+Requires-Dist: netmiko>2.4.1
+Requires-Dist: textfsm>=1.1.0
+Requires-Dist: pexpect>=4.6.0
+Requires-Dist: gitpython>=2.1.9
+Requires-Dist: networkx>=2.0
+Requires-Dist: scp<1.0
+Requires-Dist: jsonfield
+Requires-Dist: channels-redis
+Requires-Dist: python-dateutil
+Requires-Dist: ncclient>=0.6.4
+Requires-Dist: lxml>=4.3.0
+Requires-Dist: djproxy>=2.3.4
+Requires-Dist: sly
+Requires-Dist: yamlordereddictloader
+Requires-Dist: xeger
+Requires-Dist: pyang
+Requires-Dist: jinja2>=2.10
+Requires-Dist: python-socketio
+Requires-Dist: PyYAML
+Requires-Dist: pyasn1==0.6.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: license-file

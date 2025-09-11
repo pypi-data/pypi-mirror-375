@@ -1,0 +1,21 @@
+
+.cui .plugins-table code {
+    color: black;
+    white-space: nowrap;
+}
+
+.cui .plugins-table tr th {
+    white-space: nowrap;
+}
+
+/* Style it like a <h3> */
+.plugins-table .plugin-section-header {
+    font-size: 25px;
+    font-weight: 200;
+    border-top: none;
+}
+
+.plugins-table td.description, .plugins-table th.description {
+    white-space: pre-wrap;
+    width: 100%;
+}
