@@ -1,0 +1,255 @@
+#This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+# For deployment, it will be necessary to create a PyPI API token and store it as a secret
+# https://docs.github.com/en/actions/reference/encrypted-secrets
+
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [published]
+  repository_dispatch:
+    types: [create-release]
+
+
+env:
+  MRTRIX_HOME: /opt/mrtrix3
+  MRTRIX_INSTALL: /opt/mrtrix3/install
+  MRTRIX_VERSION: 3.0.4
+  SUBPKG_NAME: v3_1
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11, 3.13]
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+    - name: Set Git User
+      # checkout@v2 adds a header that makes branch protection report errors
+      # because the Github action bot is not a collaborator on the repo
+      run: |
+        git config --global user.email "auto@github-actions"
+        git config --global user.name "GitHub Actions Runner"
+    - name: Install dependencies
+      run: |
+          sudo apt-get update
+          sudo apt-get install clang qt6-base-dev libglvnd-dev libeigen3-dev zlib1g-dev libfftw3-dev ninja-build
+    - name: Run sccache-cache
+      uses: mozilla-actions/sccache-action@v0.0.3
+    - name: Get CMake
+      uses: lukka/get-cmake@latest
+      with:
+        cmakeVersion: '3.16.3'
+    - name: Print CMake version
+      run: cmake --version
+
+    - name: Create MRtrix install directory
+      run: |
+        sudo mkdir -p ${{ env.MRTRIX_INSTALL }}
+        sudo chown $USER ${{ env.MRTRIX_INSTALL }}
+
+    - name: Cache MRtrix Install
+      id: cache-install
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.MRTRIX_INSTALL }}
+        key: mrtrix-${{ env.MRTRIX_VERSION }}-${{ runner.os }}
+
+    - name: Clone latest MRtrix and switch to latest tag
+      run: |
+        mkdir $MRTRIX_HOME
+        sudo chown -R $USER $MRTRIX_HOME
+        git clone https://github.com/tclose/mrtrix3.git $MRTRIX_HOME/src
+        cd $MRTRIX_HOME/src
+        git checkout print-pydra-dev
+        git tag -a $MRTRIX_VERSION -m"Tag used to create a pydra-task-mrtrix3 release"
+        git describe --abbrev=0
+# echo "MRTRIX_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+# git checkout $MRTRIX_VERSION
+    - name: configure
+      run: |
+        cd $MRTRIX_HOME/src
+        cmake \
+        -B build \
+        -G Ninja \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D MRTRIX_BUILD_TESTS=ON \
+        -D MRTRIX_STL_DEBUGGING=ON \
+        -D MRTRIX_WARNINGS_AS_ERRORS=ON \
+        -D CMAKE_C_COMPILER=clang \
+        -D CMAKE_CXX_COMPILER=clang++ \
+        -D CMAKE_INSTALL_PREFIX=$MRTRIX_INSTALL
+    - name: Build Mrtrix
+      run: |
+        cd $MRTRIX_HOME/src
+        cmake --build build
+    - name: Install Mrtrix
+      run: |
+        cd $MRTRIX_HOME/src
+        cmake --install build
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Unset header
+      # checkout@v2 adds a header that makes branch protection report errors
+      # because the Github action bot is not a collaborator on the repo
+      run: git config --local --unset http.https://github.com/.extraheader
+    - name: Fetch tags
+      run: git fetch --prune --unshallow
+    - name: Strip auto package from gitignore so it is included in package
+      run: |
+        sed -i '/\/pydra\/tasks\/mrtrix3\/${{ env.SUBPKG_NAME }}/d' .gitignore
+    - name: Set PATH Variable
+      run: echo "PATH=$PATH:$MRTRIX_INSTALL/bin" >> $GITHUB_ENV
+    - name: Set LD_LIBRARY_PATH Variable
+      run: echo "LD_LIBRARY_PATH=$MRTRIX_INSTALL/lib" >> $GITHUB_ENV
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+    - name: Install task package
+      run: >
+        pip install
+        -e ./related-packages/fileformats
+        -e ./related-packages/fileformats-extras
+        -e '.[test]'
+    - name: Install development Pydra
+      run: pip install --no-deps git+https://github.com/nipype/pydra.git@develop
+    - name: Test with pytest
+      run: pytest -sv pydra/tasks/mrtrix3 --cov pydra.tasks.mrtrix3 --cov-report xml
+    - uses: codecov/codecov-action@v2
+      if: ${{ always() }}
+
+  deploy-fileformats:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    - name: Unset header
+      # checkout@v2 adds a header that makes branch protection report errors
+      # because the Github action bot is not a collaborator on the repo
+      run: git config --local --unset http.https://github.com/.extraheader
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install build tools
+      run: python -m pip install build twine
+    - name: Build source and wheel distributions
+      run: python -m build ./related-packages/fileformats
+    - name: Check distributions
+      run: twine check ./related-packages/fileformats/dist/*
+    - name: Check for PyPI token on tag
+      id: deployable
+      if: github.event_name == 'release' || github.event_name == 'repository_dispatch'
+      env:
+        PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}"
+      run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
+    - name: Upload to PyPI
+      if: steps.deployable.outputs.DEPLOY
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}
+        packages-dir: ./related-packages/fileformats/dist
+
+  deploy-fileformats-extras:
+    needs: [deploy-fileformats]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0
+    - name: Unset header
+      # checkout@v2 adds a header that makes branch protection report errors
+      # because the Github action bot is not a collaborator on the repo
+      run: git config --local --unset http.https://github.com/.extraheader
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install build tools
+      run: python -m pip install build twine
+    - name: Build source and wheel distributions
+      run: python -m build ./related-packages/fileformats-extras
+    - name: Check distributions
+      run: twine check ./related-packages/fileformats-extras/dist/*
+    - name: Check for PyPI token on tag
+      id: deployable
+      if: github.event_name == 'release' || github.event_name == 'repository_dispatch'
+      env:
+        PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}"
+      run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
+    - name: Upload to PyPI
+      if: steps.deployable.outputs.DEPLOY
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}
+        packages-dir: ./related-packages/fileformats-extras/dist
+
+  deploy:
+    needs: [test, deploy-fileformats, deploy-fileformats-extras]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Set up Git user
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+    - name: Unset header
+      # checkout@v2 adds a header that makes branch protection report errors
+      # because the Github action bot is not a collaborator on the repo
+      run: git config --local --unset http.https://github.com/.extraheader
+    - name: Strip auto package from gitignore so it is included in package
+      run: |
+        sed -i '/\/pydra\/tasks\/mrtrix3\/${{ env.SUBPKG_NAME }}/d' .gitignore
+    - name: Set up Python 3
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.x
+    - name: Install build tools
+      run: python -m pip install --upgrade pip twine build
+    - name: Build source and wheel distributions
+      run: python -m build
+    - name: Check distributions
+      run: twine check dist/*
+    - name: Upload sdist
+      uses: actions/upload-artifact@v4
+      with:
+        name: SDist
+        path: dist/*.tar.gz
+    # Deploy on tags if PYPI_API_TOKEN is defined in the repository secrets.
+    # Secrets are not accessible in the if: condition [0], so set an output variable [1]
+    # [0] https://github.community/t/16928
+    # [1] https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-output-parameter
+    - name: Check for PyPI token on tag
+      id: deployable
+      if: github.event_name == 'release' || github.event_name == 'repository_dispatch'
+      env:
+        PYPI_API_TOKEN: "${{ secrets.PYPI_API_TOKEN }}"
+      run: if [ -n "$PYPI_API_TOKEN" ]; then echo ::set-output name=DEPLOY::true; fi
+    - name: Upload to PyPI
+      if: steps.deployable.outputs.DEPLOY
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
+        packages-dir: dist/

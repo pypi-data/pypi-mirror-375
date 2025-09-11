@@ -1,0 +1,98 @@
+Metadata-Version: 2.4
+Name: pydra-tasks-mrtrix3
+Version: 3.1.0a2
+Summary: pydra-tasks-mrtrix3 contains Pydra task specifications for MRtrix3 tools
+Author-email: "Thomas G. Close" <tom.g.close@gmail.com>
+Maintainer-email: "Thomas G. Close" <tom.g.close@gmail.com>
+License:    Copyright 2022 Nipype developers
+        
+           Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at
+        
+               http://www.apache.org/licenses/LICENSE-2.0
+        
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.
+License-File: LICENSE
+Keywords: pydra
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering
+Requires-Python: >=3.11
+Requires-Dist: fileformats-medimage-mrtrix3>=3.0.4a5
+Requires-Dist: numpy
+Requires-Dist: pydra
+Provides-Extra: dev
+Requires-Dist: attrs>=23.1.0; extra == 'dev'
+Requires-Dist: black; extra == 'dev'
+Requires-Dist: black>=22.12.0; extra == 'dev'
+Requires-Dist: click>=8.1.3; extra == 'dev'
+Requires-Dist: fileformats-extras>=0.12.1; extra == 'dev'
+Requires-Dist: pre-commit; extra == 'dev'
+Requires-Dist: tqdm; extra == 'dev'
+Provides-Extra: doc
+Requires-Dist: packaging; extra == 'doc'
+Requires-Dist: sphinx-rtd-theme; extra == 'doc'
+Requires-Dist: sphinx>=2.1.2; extra == 'doc'
+Requires-Dist: sphinxcontrib-apidoc~=0.3.0; extra == 'doc'
+Requires-Dist: sphinxcontrib-napoleon; extra == 'doc'
+Requires-Dist: sphinxcontrib-versioning; extra == 'doc'
+Provides-Extra: test
+Requires-Dist: codecov; extra == 'test'
+Requires-Dist: fileformats-medimage-mrtrix3-extras; extra == 'test'
+Requires-Dist: pytest-cov; extra == 'test'
+Requires-Dist: pytest-env; extra == 'test'
+Requires-Dist: pytest-rerunfailures; extra == 'test'
+Requires-Dist: pytest-xdist; extra == 'test'
+Requires-Dist: pytest>=4.4.0; extra == 'test'
+Description-Content-Type: text/x-rst
+
+==============================
+Pydra task package for mrtrix3
+==============================
+
+.. image:: https://github.com/nipype/pydra-mrtrix3/actions/workflows/pythonpackage.yaml/badge.svg
+   :target: https://github.com/nipype/pydra-mrtrix3/actions/workflows/pythonpackage.yaml
+.. image:: https://codecov.io/gh/nipype/pydra-mrtrix3/branch/main/graph/badge.svg?token=UIS0OGPST7
+   :target: https://codecov.io/gh/nipype/pydra-mrtrix3
+.. image:: https://img.shields.io/pypi/pyversions/pydra-mrtrix3.svg
+   :target: https://pypi.python.org/pypi/pydra-mrtrix3/
+   :alt: Supported Python versions
+.. image:: https://img.shields.io/pypi/v/pydra-mrtrix3.svg
+   :target: https://pypi.python.org/pypi/pydra-mrtrix3/
+   :alt: Latest Version
+
+
+This package contains a collection of Pydra task interfaces for the mrtrix3 toolkit.
+
+
+Generation of interfaces
+------------------------
+
+Task interfaces are automatically generated from the MRtrix3 source code using the
+`generate.py` script, with the exception of a few interfaces that are manually
+written.
+
+Developer installation
+----------------------
+
+First install the package in editable mode
+
+.. code-block::
+
+   $ pip install -e .[test]
+
+This package comes with a battery of automatically generated test modules. They can be launched using
+
+.. code-block::
+
+   $ pytest --doctest-modules pydra/tasks/*

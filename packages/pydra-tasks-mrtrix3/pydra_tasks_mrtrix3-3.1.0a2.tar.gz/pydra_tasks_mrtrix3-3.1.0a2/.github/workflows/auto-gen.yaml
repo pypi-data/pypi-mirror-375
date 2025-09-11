@@ -1,0 +1,153 @@
+#This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+# For deployment, it will be necessary to create a PyPI API token and store it as a secret
+# https://docs.github.com/en/actions/reference/encrypted-secrets
+
+name: CI/CD
+
+
+on:
+    workflow_dispatch: # Trigger this workflow manually or via a repository dispatch event
+    repository_dispatch:
+        types: [auto-gen]
+
+
+env:
+  MRTRIX_HOME: /opt/mrtrix3
+  MRTRIX_INSTALL: /opt/mrtrix3/install
+  MRTRIX_VERSION: 3.1.0
+  SUBPKG_NAME: v3_1
+
+jobs:
+
+  generate:
+
+    runs-on: ubuntu-latest
+
+    env:
+      CFLAGS: -Werror
+      QT_SELECT: qt6
+      SCCACHE_GHA_ENABLED: "true"
+      SCCACHE_CACHE_SIZE: "2G"
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set Git User
+        # checkout@v2 adds a header that makes branch protection report errors
+        # because the Github action bot is not a collaborator on the repo
+        run: |
+          git config --global user.email "dummy@email.com"
+          git config --global user.name "Dummy User"
+      - name: Unset header
+        # checkout@v2 adds a header that makes branch protection report errors
+        # because the Github action bot is not a collaborator on the repo
+        run: git config --local --unset http.https://github.com/.extraheader
+      - name: Fetch tags
+        run: git fetch --prune --unshallow
+      - name: Create auto-gen tag
+        run: git tag -a old-auto-gen -m "Old point of auto-generation"
+      - name: Checkout auto-gen branch
+        run: git checkout auto-gen
+      - name: install dependencies
+        run: |
+           sudo apt-get update
+           sudo apt-get install clang qt6-base-dev libglvnd-dev libeigen3-dev zlib1g-dev libfftw3-dev ninja-build
+      - name: Run sccache-cache
+        uses: mozilla-actions/sccache-action@v0.0.3
+      - name: Get CMake
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: '3.16.3'
+      - name: Print CMake version
+        run: cmake --version
+      - name: Create MRtrix install directory
+        run: |
+            sudo mkdir -p ${{ env.MRTRIX_INSTALL }}
+            sudo chown $USER ${{ env.MRTRIX_INSTALL }}
+      - name: Cache MRtrix Install
+        id: cache-install
+        uses: actions/cache@v4
+        with:
+            path: ${{ env.MRTRIX_INSTALL }}
+            key: mrtrix-${{ env.MRTRIX_VERSION }}-${{ runner.os }}
+      - name: Clone latest MRtrix and switch to latest tag
+        run: |
+          mkdir $MRTRIX_HOME
+          sudo chown -R $USER $MRTRIX_HOME
+          git clone https://github.com/tclose/mrtrix3.git $MRTRIX_HOME/src
+          cd $MRTRIX_HOME/src
+          git checkout print-pydra-dev
+          git tag -a $MRTRIX_VERSION -m"Tag used to create a pydra-task-mrtrix3 release"
+          git describe --abbrev=0
+# echo "MRTRIX_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+# git checkout $MRTRIX_VERSION
+      - name: configure
+        run: |
+          cd $MRTRIX_HOME/src
+          cmake \
+          -B build \
+          -G Ninja \
+          -D CMAKE_BUILD_TYPE=Release \
+          -D MRTRIX_BUILD_TESTS=ON \
+          -D MRTRIX_STL_DEBUGGING=ON \
+          -D MRTRIX_WARNINGS_AS_ERRORS=ON \
+          -D CMAKE_C_COMPILER=clang \
+          -D CMAKE_CXX_COMPILER=clang++ \
+          -D CMAKE_INSTALL_PREFIX=$MRTRIX_INSTALL
+      - name: Build Mrtrix
+        run: |
+          cd $MRTRIX_HOME/src
+          cmake --build build
+      - name: Install Mrtrix
+        run: |
+          cd $MRTRIX_HOME/src
+          cmake --install build
+      - name: Set PATH Variable
+        run: echo "PATH=$PATH:$MRTRIX_INSTALL/bin" >> $GITHUB_ENV
+      - name: Set LD_LIBRARY_PATH Variable
+        run: echo "LD_LIBRARY_PATH=$MRTRIX_INSTALL/lib" >> $GITHUB_ENV
+      - name: Change back to the root directory
+        run: cd ..
+      - name: Set up Python
+        uses: actions/setup-python@v5
+      - name: Install Python build dependencies
+        run: |
+          python -m pip install --upgrade pip
+      - name: Install pydra-auto-gen requirements
+        run: >
+          pip install
+          -e related-packages/fileformats
+          -e related-packages/fileformats-extras
+          -e .[dev,test]
+      - name: Install development Pydra
+        run: pip install --no-deps git+https://github.com/nipype/pydra.git@develop
+      - name: Generate task specifications
+        run: >
+          ./generate.py
+          $MRTRIX_INSTALL/bin
+          $(pwd)
+          $MRTRIX_VERSION
+          --raise-errors
+          --latest
+      - name: Commit changes to auto-gen branch
+        run: |
+          git add .
+          git commit -m "Refresh of auto-generated task specifications"
+          git push
+      - name: Rebase main on auto-gen
+        run: |
+          git checkout main
+          git checkout -b re-auto-gen
+          git rebase old-auto-gen --onto auto-gen
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+            branch: re-auto-gen
+            title: 'Rebase of main on re-auto-generated tasks'
+            body: 'This PR rebases the main branch on the re-auto-gen branch to include newly regenerated Pydra tasks.'
+            base: main
+            commit-message: 'Rebase main on auto-gen'
+            labels: auto-gen
