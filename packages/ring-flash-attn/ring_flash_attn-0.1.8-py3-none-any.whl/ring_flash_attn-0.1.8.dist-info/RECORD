@@ -1,0 +1,16 @@
+ring_flash_attn/__init__.py,sha256=pssT6BYXxx8sedVF_Ql29eFSwTNBXlFA5L8p6ok_OTM,1069
+ring_flash_attn/llama3_flash_attn_varlen.py,sha256=s7mnCi-ajtF8sXOxjRPf1wqwulNrXIZlIviP999P4Vo,14445
+ring_flash_attn/ring_flash_attn.py,sha256=D9BPJ7A5uIqS3xU8XXv28R6Fr6_KDzBxdluC3MJg4LI,8107
+ring_flash_attn/ring_flash_attn_varlen.py,sha256=DOjQvJVzfyQrAvR4F9tDVLPAP0V9WexFMMEq3A4uAas,9740
+ring_flash_attn/stripe_flash_attn.py,sha256=D0t0NbMw3fOBHsIN_-_IcmlQUgSa0Uv0qKLhBMEcyk0,11202
+ring_flash_attn/triton_utils.py,sha256=1JXTAzQa9nbH-2bf4nkEEKk37ckF2RUSIJ4ixgNlASA,3638
+ring_flash_attn/utils.py,sha256=xBmH3XvXhiHn7Yq8DKh9FNyU1cGJDcyd7kYKHraBCvM,5399
+ring_flash_attn/zigzag_ring_flash_attn.py,sha256=2vzJ8EthDQFo6Di3g0NEr_cZTKLvy2Lh7B5lL_u0tlM,9754
+ring_flash_attn/zigzag_ring_flash_attn_varlen.py,sha256=RsRFdnDJdaSlJHC2QbVAm9JgPPLW07Hs6amz7E6VTVs,15177
+ring_flash_attn/adapters/__init__.py,sha256=wQeTBhJYGHjdC6dMtHmwOj1eOw47mYpWhk3Bk8qEUEs,93
+ring_flash_attn/adapters/hf_adapter.py,sha256=IDI0NG4B52pkWEquPtvImArfJIsxgoTYuRXkWCNoWPQ,13908
+ring_flash_attn-0.1.8.dist-info/licenses/LICENSE,sha256=zi4TkL-FHTHAh7XnXUy0o4OoME2qMwJD73whAPxFS6c,1056
+ring_flash_attn-0.1.8.dist-info/METADATA,sha256=RppvG352ouMTlflQYoqPVBJ1stEUp6vFACXn-rLMVEk,9414
+ring_flash_attn-0.1.8.dist-info/WHEEL,sha256=_zCd3N1l69ArxyTb8rzEoP9TpbYXkqRFSNOD5OuxnTs,91
+ring_flash_attn-0.1.8.dist-info/top_level.txt,sha256=-sq9U2RwmdrEFCEW5kCcEczC_b_fLWUlHrgfOtJh480,16
+ring_flash_attn-0.1.8.dist-info/RECORD,,
