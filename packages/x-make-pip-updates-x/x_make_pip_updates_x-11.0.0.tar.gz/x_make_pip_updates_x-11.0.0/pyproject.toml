@@ -1,0 +1,7 @@
+[project]
+name = "x_make_pip_updates_x"
+version = "11.0.0"
+description = "Makes pip package updates."
+authors = [{name = "RRGM of the Primus Pilus Night Watch AI Corporation", email = "eye4357@outlook.com"}]
+license = "MIT"
+dependencies = []
