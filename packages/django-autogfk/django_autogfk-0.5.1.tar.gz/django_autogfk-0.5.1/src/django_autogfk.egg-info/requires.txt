@@ -1,0 +1,14 @@
+Django>=4.2
+
+[dev]
+pytest>=8.3.4
+pytest-django>=4.10.0
+
+[jazzmin]
+jazzmin>=1.14.0
+
+[polymorphic]
+django-polymorphic>=4.1.0
+
+[select2]
+django-select2>=8.4.1
