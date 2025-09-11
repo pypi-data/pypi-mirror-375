@@ -1,0 +1,11 @@
+[console_scripts]
+ocb = ou_container_builder.__main__:app
+ou-container-builder = ou_container_builder.__main__:app
+
+[ou_container_builder]
+code_server = ou_container_builder.packs.code_server
+ipykernel = ou_container_builder.packs.ipykernel
+irkernel = ou_container_builder.packs.irkernel
+jupyterlab = ou_container_builder.packs.jupyterlab
+notebook = ou_container_builder.packs.notebook
+xfce4 = ou_container_builder.packs.xfce4

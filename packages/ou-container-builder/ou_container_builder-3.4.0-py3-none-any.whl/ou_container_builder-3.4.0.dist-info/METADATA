@@ -1,0 +1,69 @@
+Metadata-Version: 2.4
+Name: ou-container-builder
+Version: 3.4.0
+Project-URL: Documentation, https://github.com/unknown/ou-container-builder#readme
+Project-URL: Issues, https://github.com/unknown/ou-container-builder/issues
+Project-URL: Source, https://github.com/unknown/ou-container-builder
+Author-email: Mark Hall <mark.hall@work.room3b.eu>
+License-Expression: MIT
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.10
+Requires-Dist: jinja2<4,>=3
+Requires-Dist: pydantic<3,>=2
+Requires-Dist: pyyaml<7,>=6
+Requires-Dist: rich<14,>=13
+Requires-Dist: typer
+Description-Content-Type: text/markdown
+
+# OU Container Builder
+
+Documentation for the OU Container Builder can be found here: https://docs.ocl.open.ac.uk/container-builder/v3
+
+# Install and Run
+
+
+
+## Development
+
+The OU Container Builder has the following dependencies:
+
+* [Python](https://www.python.org/) 3.10 or 3.11 (higher may also work, but is not tested)
+* [Hatch](https://hatch.pypa.io/latest/)
+* [pre-commit]()
+
+After installing these, use the following command to run the tests
+
+```
+hatch run test
+```
+
+To run the builder itself use
+
+```
+hatch shell
+```
+
+and then you can run
+
+```
+ocb
+```
+
+to run the development version of the code.
+
+### Code Style
+
+The OU Container Builder uses [Black](https://black.readthedocs.io/en/stable/) and [Ruff](https://docs.astral.sh/ruff/)
+to enforce a code style.
+
+To automatically check that any committed code follows the code style, install a git pre-commit hook using
+the following command:
+
+```
+pre-commit install
+```
