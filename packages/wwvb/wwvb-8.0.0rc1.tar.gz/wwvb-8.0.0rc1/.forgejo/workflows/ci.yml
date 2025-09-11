@@ -1,0 +1,65 @@
+# SPDX-FileCopyrightText: 2021-2025 Jeff Epler
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: Test wwvbpy
+
+on:
+  push:
+  pull_request:
+  release:
+    types:
+      - created  # forgejo does not document the value "created"
+      - published
+
+# (may not be used by forgejo, but is ignored for now)
+concurrency:
+  group: ${{ forge.workflow }}-${{ forge.ref_name }}-${{ forge.event_name }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: codeberg-tiny
+    container:
+      image: docker.io/library/python:3-trixie
+    steps:
+    - name: Set up node
+      run: apt-get update && apt-get install -y --no-install-recommends nodejs
+
+    - uses: actions/checkout@v4
+
+    - name: Set up uv
+      run: pip install --break-system-packages uv
+
+    - name: Run main tests
+      run: |
+        for version in 3.9 3.10 3.11 3.12 3.13; do
+          echo "::group::Test with Python $version"
+          uv venv --python $version _venv_${version}
+          . _venv_${version}/bin/activate
+          uv pip install -r requirements-dev.txt
+          env PYTHONPATH=src python -mcoverage run -p -m unittest discover -s test
+          deactivate
+          echo "::endgroup::"
+        done
+
+        for version in 3.13; do
+          echo "::group::Aggregate coverage and run final checks"
+          . _venv_${version}/bin/activate
+          make -j $(nproc) -O mypy test_venv
+          python -mcoverage combine -q
+          python -mcoverage json --include "src/**/*.py"
+          python -mcoverage report --fail-under=100 --include "src/**/*.py"
+          prek --all-files
+          deactivate
+          echo "::endgroup::"
+        done
+
+    - name: Upload Coverage as artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        path: coverage.json
+
+    - name: Check build directory size
+      run: du -shx

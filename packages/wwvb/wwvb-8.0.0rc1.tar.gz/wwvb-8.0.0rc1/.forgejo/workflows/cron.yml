@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2021-2024 Jeff Epler
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: Update DUT1 data
+
+on:
+  schedule:
+    - cron: '0 10 2 * *'
+  workflow_dispatch:
+
+jobs:
+  update-dut1:
+    permissions: write-all
+    runs-on: codeberg-tiny
+    container:
+      image: docker.io/library/python:3-trixie
+    steps:
+    - name: Set up node
+      run: apt-get update && apt-get install -y --no-install-recommends nodejs
+
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: pip install -e .
+
+    - name: Update DUT1 data
+      run: python -m wwvb.updateiers --dist
+
+    - name: Test
+      run: python -munittest discover -s test
+
+    - name: Commit updates
+      run: |
+        git config user.name "${FORGEJO_ACTOR} (actions cron)"
+        git config user.email "${FORGEJO_ACTOR}@noreply.invalid"
+        if git commit -m"update iersdata" src/wwvb/iersdata.json; then git push origin; fi
