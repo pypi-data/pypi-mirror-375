@@ -1,0 +1,33 @@
+Metadata-Version: 2.4
+Name: hardcore-restore
+Version: 0.0.1
+Summary: Restore death in a minecraft hardcore world. Should work on all platforms with java edition, but wasn't tested.
+Project-URL: Homepage, https://gitlab.com/leswell/hardcore-restore/-/blob/main/README.md
+Project-URL: Repository, https://gitlab.com/leswell/hardcore-restore
+Author-email: Simofi Levente <simofilevente+pypi@gmail.com>
+Maintainer-email: Simofi Levente <simofilevente+pypi@gmail.com>
+License-Expression: GPL-3.0-or-later
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: Typing :: Typed
+Requires-Python: >=3.10
+Requires-Dist: black
+Requires-Dist: nbtlib
+Requires-Dist: typer
+Description-Content-Type: text/markdown
+
+> Tested only on linux, minecraft 1.21.8, but should work on all platforms with java edition.
+
+1. make sure you have python installed
+2. download using pip install `pip install hardcore-reset`
+3. run `hardcore-restore WORLDNAME`
+
+you can specify coordinates to move your character if you died in a wrong place.
+
+write me if you tested on other platforms, thanks.
+
+# Backup
+by default a backup of the world is zipped in the saves directory.
+
+# Contribution
+if you want to contribute, check out [webNBT](https://irath96.github.io/webNBT/)
