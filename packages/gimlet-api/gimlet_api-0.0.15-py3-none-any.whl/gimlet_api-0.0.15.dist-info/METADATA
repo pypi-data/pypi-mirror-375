@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: gimlet-api
+Author: Gimlet Labs, Inc.
+Author-email: support@gimletlabs.ai
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Typing :: Typed
+Requires-Python: >=3
+Requires-Dist: protobuf
+Requires-Dist: grpcio
+Requires-Dist: torch>=2.6.0
+Requires-Dist: torch-mlir-gml
+Requires-Dist: numpy<2.0.0
+Requires-Dist: rich
+Requires-Dist: transformers>=4.53.0
+Requires-Dist: tokenizers>=0.21.0
+Requires-Dist: safetensors-mlir
+Requires-Dist: packaging
+Version: 0.0.15
+
+UNKNOWN
