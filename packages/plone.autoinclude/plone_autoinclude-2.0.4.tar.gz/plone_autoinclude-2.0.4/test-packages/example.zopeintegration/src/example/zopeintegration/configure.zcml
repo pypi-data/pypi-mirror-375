@@ -1,0 +1,8 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <autoIncludePlugins target="zope" file="configure.zcml" />
+
+  <!-- FOR TESTS: This is configure.zcml from example.zopeintegration. -->
+
+</configure>

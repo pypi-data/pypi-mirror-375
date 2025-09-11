@@ -1,0 +1,8 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta">
+
+  <meta:provides feature="metaoverrides" />
+  <!-- FOR TESTS: This is meta.zcml from example.metaoverrides. -->
+
+</configure>

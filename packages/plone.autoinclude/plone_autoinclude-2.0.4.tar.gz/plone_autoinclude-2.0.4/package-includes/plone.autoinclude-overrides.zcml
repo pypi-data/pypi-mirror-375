@@ -1,0 +1,4 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+  <includeOverrides package="Products.CMFPlone" file="overrides.zcml" />
+  <autoIncludePluginsOverrides target="plone" file="overrides.zcml" />
+</configure>

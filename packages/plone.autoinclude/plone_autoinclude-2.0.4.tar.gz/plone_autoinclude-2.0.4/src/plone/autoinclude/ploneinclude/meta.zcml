@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+  xmlns:meta="http://namespaces.zope.org/meta">
+  <!-- With the plone*.zcml files, it is easier to use this package
+       in a Plone version which does not use plone.autoinclude yet. -->
+  <!-- 1. Disable the original z3c.autoinclude. -->
+  <meta:provides feature="disable-autoinclude" />
+  <!-- 2. Load CMFPlone meta, so the order in which zcml is loaded stays mostly the same. -->
+  <include package="Products.CMFPlone" file="meta.zcml" />
+  <!-- 3. Load plone.autoinclude meta, so autoIncludePlugins is defined. -->
+  <include package="plone.autoinclude" file="meta.zcml" />
+  <!-- 4. Automatically include the meta.zcml of all plone plugins. -->
+  <autoIncludePlugins target="plone" file="meta.zcml" />
+</configure>

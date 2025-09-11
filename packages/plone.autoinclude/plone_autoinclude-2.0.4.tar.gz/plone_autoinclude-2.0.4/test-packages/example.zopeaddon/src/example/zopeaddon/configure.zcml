@@ -1,0 +1,8 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <include package=".browser" />
+
+  <!-- FOR TESTS: This is configure.zcml from example.zopeaddon. -->
+
+</configure>

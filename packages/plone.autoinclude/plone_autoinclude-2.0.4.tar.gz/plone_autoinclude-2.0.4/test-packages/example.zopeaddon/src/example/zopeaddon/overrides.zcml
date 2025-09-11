@@ -1,0 +1,8 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <include package=".browser" file="browser-overrides.zcml" />
+
+  <!-- FOR TESTS: This is overrides.zcml from example.zopeaddon. -->
+
+</configure>

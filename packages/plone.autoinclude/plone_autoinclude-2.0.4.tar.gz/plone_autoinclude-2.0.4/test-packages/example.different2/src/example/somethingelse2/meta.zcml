@@ -1,0 +1,9 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta">
+
+  <meta:provides feature="different2" />
+
+  <!-- FOR TESTS: This is meta.zcml from example.different2. -->
+
+</configure>

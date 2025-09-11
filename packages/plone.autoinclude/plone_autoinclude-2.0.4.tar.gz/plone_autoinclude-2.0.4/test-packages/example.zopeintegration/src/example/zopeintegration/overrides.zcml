@@ -1,0 +1,8 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <autoIncludePluginsOverrides target="zope" file="overrides.zcml" />
+
+  <!-- FOR TESTS: This is overrides.zcml from example.zopeintegration. -->
+
+</configure>

@@ -1,0 +1,23 @@
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/pure-python
+include *.rst
+include *.txt
+include buildout.cfg
+include LICENSE.GPL
+include tox.ini
+
+recursive-include src *.pt
+recursive-include src *.py
+recursive-include src *.rst
+recursive-include src *.txt
+recursive-include src *.zcml
+
+# Not sure if we want to include this, but it is needed if we want to run tests:
+graft test-packages
+# Not sure if we want to include this either, it is just a temporary example:
+recursive-include package-includes *.zcml
+# check-manifest in the tox lint job may complain about these when you run jobs in parallel:
+global-exclude *.pyc *.pyo
+include pyproject.toml
+recursive-exclude news *
+exclude news
