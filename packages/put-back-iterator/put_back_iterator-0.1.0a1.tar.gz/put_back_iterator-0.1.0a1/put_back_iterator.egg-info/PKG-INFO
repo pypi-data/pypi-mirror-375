@@ -1,0 +1,109 @@
+Metadata-Version: 2.4
+Name: put-back-iterator
+Version: 0.1.0a1
+Summary: A drop-in replacement for `iter(iterable)` that allows **putting items back** after consuming them. Ideal for parsing, lexing, and other scenarios requiring lookahead or backtracking.
+Author-email: Jifeng Wu <jifengwu2k@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/jifengwu2k/put-back-iterator
+Project-URL: Bug Tracker, https://github.com/jifengwu2k/put-back-iterator/issues
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=2
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: typing; python_version < "3.5"
+Dynamic: license-file
+
+# `put-back-iterator`
+
+A drop-in replacement for `iter(iterable)` that allows **putting items back** after consuming them. Ideal for parsing, lexing, and other scenarios requiring lookahead or backtracking.
+
+## Why Use This?
+
+Python's built-in iterators don't support pushing items back, forcing workarounds like:
+
+- Rebuilding iterators with `itertools.chain`
+- Using lists/deques as buffers
+- Complex state tracking
+
+This package solves it with:
+
+- ✅ **Simple API**: `.put_back(item)` and `.has_next()`
+- ✅ **Compatibility with `iter(iterable)`**: Works with any iterable (`str`, `list`, generators, etc.)
+- ✅ **Python 2/3 compatible**
+
+## Quick Start
+
+```python
+# coding=utf-8
+from __future__ import print_function
+from put_back_iterator import PutBackIterator
+
+# Wrap any iterable
+it = PutBackIterator([1, 2, 3])
+
+# Consume an item
+print(next(it))  # 1
+
+# Put it back for later
+it.put_back(1)
+
+# Check if more items exist (without consuming)
+print(it.has_next())  # True
+
+# Iterate as usual
+print(list(it))  # [1, 2, 3]
+```
+
+## Use Cases
+
+### 1. **Parsing/Tokenizing**
+
+```
+tokens = PutBackIterator(tokenize(source_code))
+while tokens.has_next():
+    token = next(tokens)
+    if token == 'IF':
+        # Peek ahead without consuming
+        if tokens.has_next() and next(tokens) == 'EOF':
+            tokens.put_back('EOF')
+            handle_incomplete_if()
+```
+
+### 2. **Backtracking Algorithms**
+
+```
+def backtrack(it):
+    item = next(it)
+    if not is_valid(item):
+        it.put_back(item)  # Try alternative path
+        return fallback()
+```
+
+### 3. **Stream Processing**
+
+```
+for chunk in PutBackIterator(stream):
+    if needs_retry(chunk):
+        chunk = modify(chunk)
+        it.put_back(chunk)  # Reprocess
+```
+
+## API Reference
+
+### **`PutBackIterator(iterable)`** Wraps an iterable.,Compatible with `iter(iterable)`.
+
+### Methods
+
+- **`.put_back(item: T) -> None`** Pushes an item back into the iterator (LIFO order).
+- **`.has_next() -> bool`** Returns `True` if more items exist (peeks without consuming).
+- **`.__iter__()` and `.__next__()` / `.next()`** Compatible with Python 2/3 iterator protocol.
+
+## Contributing
+
+Contributions are welcome! Please submit pull requests or open issues on the GitHub repository.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

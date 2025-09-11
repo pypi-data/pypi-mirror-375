@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "put-back-iterator"
+version = "0.1.0a1"
+description = "A drop-in replacement for `iter(iterable)` that allows **putting items back** after consuming them. Ideal for parsing, lexing, and other scenarios requiring lookahead or backtracking."
+readme = "README.md"
+requires-python = ">=2"
+license = "MIT"
+authors = [
+  { name="Jifeng Wu", email="jifengwu2k@gmail.com" }
+]
+classifiers = [
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "typing; python_version < '3.5'"
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/jifengwu2k/put-back-iterator"
+"Bug Tracker" = "https://github.com/jifengwu2k/put-back-iterator/issues"
