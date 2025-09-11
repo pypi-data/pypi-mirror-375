@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dconfusion"
+version = "0.1.2"
+description = "A package for working with confusion matrices. It can pretty print a confusion matrix, its frequencies and various other metrics."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Surya Gundavarapu", email = "surya_gundavarapu@yahoo.com" }
+]
+maintainers = [
+    { name = "Matthew Lanham", email = "mlanham1@butler.edu" },
+    { name = "Aadya Pawar", email = "pawar17@purdue.edu" },
+]
+keywords = ["confusion", "matrix"]
+
+[project.urls]
+ Homepage = "https://github.com/sgundava/dconfusion"
+# Documentation = "https://my-awesome-package.readthedocs.io/"
+ Repository = "https://github.com/sgundava/dconfusion"
+# Issues = "https://github.com/yourusername/my-awesome-package/issues"
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
