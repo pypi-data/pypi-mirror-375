@@ -1,0 +1,207 @@
+Metadata-Version: 2.3
+Name: smart-app-framework
+Version: 2.4.0rc6
+Summary: Python-фреймворк, который позволяет создавать смартапы для виртуальных ассистентов Салют.
+Author: Salute Developers
+Author-email: developer@sberdevices.ru
+Requires-Python: >=3.8.1,<3.12
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Provides-Extra: ml
+Requires-Dist: Jinja2 (==3.0.3)
+Requires-Dist: PyYAML (==6.0.1)
+Requires-Dist: TatSu (==5.8.3)
+Requires-Dist: aiohttp (==3.10.5)
+Requires-Dist: aiokafka (==0.8.1)
+Requires-Dist: boto (==2.49.0)
+Requires-Dist: cachetools (==5.3.0)
+Requires-Dist: certifi (>=2024.7.4)
+Requires-Dist: croniter (==1.3.7)
+Requires-Dist: dill (==0.3.6)
+Requires-Dist: freezegun (==1.1.0)
+Requires-Dist: ics (==0.6)
+Requires-Dist: kafka-python (==2.0.2)
+Requires-Dist: keras (==2.12.0) ; extra == "ml"
+Requires-Dist: lazy (==1.5)
+Requires-Dist: lxml (==4.9.2)
+Requires-Dist: nltk (==3.9.1)
+Requires-Dist: numpy (==1.23.5)
+Requires-Dist: objgraph (==3.4.1)
+Requires-Dist: prometheus-client (==0.11.0)
+Requires-Dist: protobuf (==3.20.3)
+Requires-Dist: psutil (==5.9.4)
+Requires-Dist: pyignite (==0.6.1)
+Requires-Dist: pymorphy2 (==0.8)
+Requires-Dist: pymorphy2_dicts (==2.4.393442.3710985)
+Requires-Dist: python-dateutil (==2.7.3)
+Requires-Dist: python-decouple (==3.4)
+Requires-Dist: python-json-logger (==0.1.11)
+Requires-Dist: requests (>=2.32.2)
+Requires-Dist: rusenttokenize (==0.0.5)
+Requires-Dist: scikit-learn (==1.1.2) ; (python_version < "3.11") and (extra == "ml")
+Requires-Dist: scikit-learn (==1.2.0) ; (python_version == "3.11") and (extra == "ml")
+Requires-Dist: setuptools (==75.2.0)
+Requires-Dist: tabulate (==0.9.0)
+Requires-Dist: tensorflow (==2.12.0) ; (sys_platform == "darwin" and platform_machine == "x86_64") and (extra == "ml")
+Requires-Dist: tensorflow (==2.12.0) ; (sys_platform == "linux" and platform_machine == "x86_64") and (extra == "ml")
+Requires-Dist: tensorflow-aarch64 (==2.12.0) ; (sys_platform == "linux" and platform_machine == "aarch64") and (extra == "ml")
+Requires-Dist: tensorflow-macos (==2.12.0) ; (sys_platform == "darwin" and platform_machine == "arm64") and (extra == "ml")
+Requires-Dist: timeout-decorator (==0.4.1)
+Requires-Dist: tqdm (>=4.66.3)
+Requires-Dist: twisted (==24.11.0)
+Requires-Dist: urllib3 (>=2.0.0)
+Description-Content-Type: text/markdown
+
+# SmartApp Framework
+
+**SmartApp Framework** - это Python-фреймворк, который позволяет создавать смартапы для виртуальных ассистентов Салют. 
+
+
+## Оглавление
+   * [Конфигурация](#Конфигурация)
+     * [Фреймворк и смартапы](#Фреймворк)
+     * [Инструменты фреймворка](#Инструменты)
+     * [Рекомендованные требования](#Рекомендованные)
+   * [Настройка фреймворка](#Настройка)
+     * [Обновление фреймворка](#Обновление)
+     * [Установка фреймворка](#Установка)
+     * [Создание проекта](#Создание)
+     * [Тестирование онлайн](#Тестирование) 
+     * [Тестирование офлайн](#Тестирование)    
+   * [Документация](#Документация)
+   * [Обратная связь](#Обратная)
+
+____
+
+# Конфигурация
+
+## Фреймворк и смартапы
+
+Смартап - это приложение для виртуального ассистента Салют. С помощью смартапов пользователи могут вызвать такси, узнать погоду, управлять устройствами умного дома, записаться в салон красоты и совершить прочие действия, которые можно доверить ассистенту. 
+
+Виртуальный ассистент понимает текущие намерения пользователя и для каждой его реплики подбирает соответствующий запрос на выполнение ([интент](#TODO: вставить ссылку)). Поведение смартапа для различных интентов описывается с помощью сценариев. Интенты и сценарии связываются через смартапы, написанные на SmartApp Framework. 
+
+
+## Инструменты фреймворка
+
+Фреймворк содержит следующие инструменты:
+
+* инструменты для создания сценариев;
+* решения для автоматического тестирования;
+* демо-приложение для просмотра примеров реализации; 
+* готовые механизмы для слот-филлинга и извлечения сущностей из текста. 
+
+
+## Рекомендованные требования
+
+* Linux, Mac OS или Windows (необходима установка [Conda](https://docs.conda.io/en/latest/)).
+* 512 МБ свободной памяти.
+* Python 3.9 - 3.11.
+
+____
+
+
+
+# Настройка фреймворка
+
+## Обновление фреймворка
+
+Для перехода на новую версию фреймворка выполните в терминале следующие команды:
+
+```bash
+python3 -m pip uninstall -y smart-app-framework
+python3 -m pip install git+https://github.com/salute-developers/smart_app_framework@main
+```
+
+При переходе на версию фреймворка >=1.0.7.rc4 со старым смартапом необходимо в директории смартапа из файла ```static/.text_normalizer_resources/static_workdata.json``` удалить строки 'Ё на Е'.
+
+При переходе на версию фреймворка >=1.0.8rc15 со старым смартапом необходимо проверить соблюдение асинхронных
+интерфейсов методами классов-наследников классов Action, Requirement, FieldFillerDescription, Scenario, HandlerBase, 
+SmartAppModel, BaseMainLoop.
+
+## Установка фреймворка
+
+Для установки фреймворка выполните в терминале следующую команду:
+
+```bash
+python3 -m pip install git+https://github.com/salute-developers/smart_app_framework@main
+```
+
+## Создание проекта
+
+Для создания проекта выполните в терминале следующую команду:
+```bash
+python3 -m smart_kit create_app <YOUR_APP_NAME>
+```
+После этого в текущей директории появится каталог с проектом. Он уже содержит в себе всё необходимое для запуска минимального приложения, включая базовый сценарий hello_scenario. Описание сценариев и форм можно найти в <YOUR_APP_NAME>/static/references/.
+
+
+## Тестирование онлайн
+
+Для тестирования онлайн вам понадобится мобильное приложение Салют или собственное устройство, на котором будет запускаться смартап. Для такого тестирования:
+
+1. Запустите в терминале dev сервер:
+
+```bash
+python3 manage.py run_app
+```
+
+2. Передайте в интернет порт. Для этого потребуется внешний IP-адрес. Если у вас его нет, воспользуйтесь специальными сервисами (например, Ngrok).
+3. Зарегистрируйтесь в кабинете разработчика - [SmartApp Studio](#TODO: вставить ссылку).
+4. Создайте в [SmartApp Studio](#TODO: вставить ссылку) свой смартап. 
+5. Перейдите в настройки смартапа и укажите в поле "Настройки вебхука" адрес вашего сервера. Сохраните изменения.
+6. Запустите свой смартап с помощью фразы "Запусти <имя приложения>". 
+
+В терминале должны появиться записи о входящем сообщении, а ассистент ответит приветствием согласно сценарию hello_scenario.
+
+
+## Тестирование офлайн
+
+Ниже представлен пример команды для терминала при тестировании офлайн и пример ответа, который выводится на экране: 
+```console
+localhost:~$ python <YOUR_APP_NAME>/manage.py local_testing
+Текущий сценарий: hello_scenario
+Привет! Введите help или ? для вызова списка команд.
+> set intent run_app // смена интента на другой. По умолчанию имя сценария совпадает с именем интента
+intent = run_app
+> Привет
+pronounceText: Как тебя зовут?
+```
+
+
+## Тестирование сценариев
+
+Для тестирования обработки вашим навыком приходящих сообщений воспользуйтесь 
+```console
+python3 manage.py tests --run static/references/tests
+```
+
+
+____
+
+
+
+# Документация
+
+Вы можете ознакомиться с подробной документацией по работе со SmartApp Framework в [справочнике разработчика](#TODO: вставить ссылку).
+
+# Разработка
+
+## Запуск тестов
+
+Для тестов используется `unittests`.
+Тесты находятся в директории `tests`
+
+```shell
+python -m unittest discover -s tests -v
+```
+
+# Обратная связь
+
+C вопросами и предложениями пишите нам по адресу [#TODO: вставить почту] или вступайте в 
+наш Telegram канал - [SmartMarket Community](https://t.me/smartmarket_community). 
+

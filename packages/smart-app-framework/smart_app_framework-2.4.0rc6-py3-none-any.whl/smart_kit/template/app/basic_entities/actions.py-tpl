@@ -1,0 +1,24 @@
+from typing import Union, Dict, Any, Optional, List
+
+from core.basic_models.actions.basic_actions import Action
+from core.text_preprocessing.preprocessing_result import TextPreprocessingResult
+from core.basic_models.actions.command import Command
+from scenarios.user.user_model import User
+
+
+class CustomAction(Action):
+    """Действие, которое может быть запущено из сценария
+
+    Для использования в сценариях, описанных в формате json, необходимо зарегистрировать новый тип Action в
+    CustomAppResources. По умолчанию, данный action зарегистрирован под типом "custom_action".
+    """
+    def __init__(self, items: Dict[str, Any], id: Optional[str] = None):
+        super().__init__(items, id)
+        items = items or {}  # поля в вызове действия из json-описания приходят сюда
+        self.test_param = items.get("test_param")
+
+    async def run(self, user: User, text_preprocessing_result: TextPreprocessingResult,
+                  params: Optional[Dict[str, Union[str, float, int]]] = None) -> List[Command]:
+        commands = []
+        # тело действия
+        return commands
