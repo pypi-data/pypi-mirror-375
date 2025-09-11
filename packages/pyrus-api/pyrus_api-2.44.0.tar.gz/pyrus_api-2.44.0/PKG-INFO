@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: pyrus-api
+Version: 2.44.0
+Project-URL: Repository, https://github.com/simplygoodsoftware/pyrusapi-python
+Project-URL: Changelog, https://github.com/simplygoodsoftware/pyrusapi-python/blob/master/CHANGELOG.md
+License-File: LICENSE.txt
+Requires-Dist: jsonpickle
+Requires-Dist: requests
