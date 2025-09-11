@@ -1,0 +1,196 @@
+from pathlib import Path
+
+import pytest
+from pydantic import ValidationError
+
+from ..adapters.array import ArrayAdapter
+from ..adapters.mapping import MapAdapter
+from ..client import Context, from_context
+from ..config import Config, parse_configs
+from ..server.app import build_app_from_config
+
+tree = MapAdapter({"example": ArrayAdapter.from_array([1, 2, 3])})
+
+
+def test_root():
+    "One tree served at top level"
+    config = {
+        "trees": [
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/",
+            },
+        ]
+    }
+    with Context.from_app(build_app_from_config(config)) as context:
+        client = from_context(context)
+        assert list(client) == ["example"]
+
+
+def test_single_nested():
+    "One tree served nested one layer down"
+    config = {
+        "trees": [
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/b",
+            },
+        ]
+    }
+    with Context.from_app(build_app_from_config(config)) as context:
+        client = from_context(context)
+        assert list(client) == ["a"]
+        assert list(client["a"]) == ["b"]
+        assert list(client["a"]["b"]) == ["example"]
+
+
+def test_single_deeply_nested():
+    "One tree served nested many layers down"
+    config = {
+        "trees": [
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/b/c/d/e",
+            },
+        ]
+    }
+    with Context.from_app(build_app_from_config(config)) as context:
+        client = from_context(context)
+        assert list(client) == ["a"]
+        assert list(client["a"]) == ["b"]
+        assert list(client["a"]["b"]) == ["c"]
+        assert list(client["a"]["b"]["c"]) == ["d"]
+        assert list(client["a"]["b"]["c"]["d"]) == ["e"]
+        assert list(client["a"]["b"]["c"]["d"]["e"]) == ["example"]
+
+
+def test_many_nested():
+    config = {
+        "trees": [
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/b",
+            },
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/c",
+            },
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/d/e",
+            },
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/d/f",
+            },
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/d/g/h",
+            },
+            {
+                "tree": f"{__name__}:tree",
+                "path": "/a/d/g/i",
+            },
+        ],
+    }
+    with Context.from_app(build_app_from_config(config)) as context:
+        client = from_context(context)
+        assert list(client["a"]["b"]) == ["example"]
+        assert list(client["a"]["c"]) == ["example"]
+        assert list(client["a"]["d"]["e"]) == ["example"]
+        assert list(client["a"]["d"]["f"]) == ["example"]
+        assert list(client["a"]["d"]["g"]["h"]) == ["example"]
+        assert list(client["a"]["d"]["g"]["i"]) == ["example"]
+
+
+def test_extra_files(tmpdir):
+    import yaml
+
+    config = {"trees": [{"path": "/", "tree": "tiled.examples.generated_minimal:tree"}]}
+    with open(tmpdir / "config.yml", "w") as config_file:
+        yaml.dump(config, config_file)
+    with open(tmpdir / "README.md", "w") as extra_file:
+        extra_file.write("# Example")
+    parse_configs(str(tmpdir))
+
+
+def test_multi_file_conflict(tmpdir):
+    import yaml
+
+    conf1 = {"trees": [{"path": "/", "tree": "tiled.examples.generated_minimal:tree"}]}
+    conf2 = {"trees": [{"path": "/", "tree": "tiled.examples.generated_minimal:tree"}]}
+    with open(tmpdir / "conf1.yml", "w") as c1:
+        yaml.dump(conf1, c1)
+    with open(tmpdir / "conf2.yml", "w") as c2:
+        yaml.dump(conf2, c2)
+    with pytest.raises(ValueError, match="Duplicate configuration for {'trees'}"):
+        parse_configs(tmpdir)
+
+
+@pytest.mark.parametrize(
+    "path,error",
+    [
+        ("", ValidationError),  # Assumes no config files in root of tmpdir -> no trees
+        ("non-existent-file", FileNotFoundError),
+    ],
+)
+def test_invalid_config_file_path(tmpdir: Path, path: str, error: type[Exception]):
+    with pytest.raises(error):
+        parse_configs(tmpdir / path)
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "example_configs/toy_authentication.yml",
+        "example_configs/google_auth.yml",
+        "example_configs/multiple_providers.yml",
+        "example_configs/orcid_auth.yml",
+        "example_configs/saml.yml",
+        "example_configs/single_catalog_single_user.yml",
+        "example_configs/small_single_user_demo.yml",
+    ],
+)
+def test_example_configs(path):
+    parse_configs(path)
+
+
+def test_pydantic_config():
+    Config.model_validate({"trees": []})
+
+
+def test_duplicate_auth_providers():
+    with pytest.raises(ValidationError, match="provider names must be unique"):
+        Config.model_validate(
+            {
+                "authentication": {
+                    "providers": [
+                        {
+                            "provider": "one",
+                            "authenticator": "tiled.authenticators:DummyAuthenticator",
+                        },
+                        {
+                            "provider": "one",
+                            "authenticator": "tiled.authenticators:DictionaryAuthenticator",
+                        },
+                    ]
+                }
+            }
+        )
+
+
+@pytest.mark.parametrize(
+    "paths", [("/", "/one"), ("/one/", "/one/two"), ("one/two", "one"), ("one", "one")]
+)
+def test_overlapping_trees(paths: tuple[str, ...]):
+    with pytest.raises(ValidationError, match="cannot be subpaths of each other"):
+        Config.model_validate(
+            {"trees": [{"tree": "catalog", "path": path} for path in paths]}
+        )
+
+
+def test_empty_api_key():
+    with pytest.raises(
+        ValidationError, match=r"should match pattern '\[a-zA-Z0-9\]\+'"
+    ):
+        Config.model_validate({"authentication": {"single_user_api_key": ""}})
