@@ -1,0 +1,111 @@
+Metadata-Version: 2.4
+Name: tsml
+Version: 0.8.0
+Summary: A development sandbox for time series machine learning algorithms which dont fit into aeon.
+Author-email: Matthew Middlehurst <m.b.middlehurst@soton.ac.uk>
+Maintainer-email: Matthew Middlehurst <m.b.middlehurst@soton.ac.uk>
+License: BSD 3-Clause License
+        
+        Copyright (c) The Time Series Machine Learning (tsml) developers.
+        All rights reserved.
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are met:
+        
+        1. Redistributions of source code must retain the above copyright notice, this
+           list of conditions and the following disclaimer.
+        
+        2. Redistributions in binary form must reproduce the above copyright notice,
+           this list of conditions and the following disclaimer in the documentation
+           and/or other materials provided with the distribution.
+        
+        3. Neither the name of the copyright holder nor the names of its
+           contributors may be used to endorse or promote products derived from
+           this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+        AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+        IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+        DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+        SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+        OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        
+Project-URL: homepage, https://www.timeseriesclassification.com/
+Project-URL: repository, https://github.com/time-series-machine-learning/tsml-py/
+Keywords: data-science,machine-learning,scikit-learn,time-series,time-series-classification,time-series-regression,time-series-clustering
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Topic :: Scientific/Engineering
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Operating System :: MacOS
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: <3.14,>=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: aeon>=1.0.0
+Requires-Dist: numba>=0.55.0
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: scipy>=1.9.0
+Requires-Dist: pandas>=1.5.3
+Requires-Dist: scikit-learn>=1.0.0
+Requires-Dist: packaging>=20.0
+Provides-Extra: all-extras
+Requires-Dist: grailts; extra == "all-extras"
+Requires-Dist: scikit-fda>=0.7.0; (python_version > "3.9" and python_version < "3.13") and extra == "all-extras"
+Requires-Dist: statsmodels>=0.12.1; extra == "all-extras"
+Requires-Dist: wildboar<=1.2.0; extra == "all-extras"
+Provides-Extra: unstable-extras
+Requires-Dist: mrsqm>=0.0.7; (platform_system == "Linux" and python_version < "3.12") and extra == "unstable-extras"
+Requires-Dist: mrseql<0.1.0,>=0.0.4; (platform_system == "Linux" and python_version < "3.12") and extra == "unstable-extras"
+Provides-Extra: dev
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-randomly; extra == "dev"
+Requires-Dist: pytest-timeout; extra == "dev"
+Requires-Dist: pytest-xdist[psutil]; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: pytest-rerunfailures; extra == "dev"
+Dynamic: license-file
+
+[![github-actions-release](https://img.shields.io/github/actions/workflow/status/time-series-machine-learning/tsml-py/release.yml?logo=github&label=build%20%28release%29)](https://github.com/time-series-machine-learning/tsml-py/actions/workflows/release.yml)
+[![github-actions-main](https://img.shields.io/github/actions/workflow/status/time-series-machine-learning/tsml-py/periodic_tests.yml?logo=github&branch=main&label=build%20%28main%29)](https://github.com/time-series-machine-learning/tsml-py/actions/workflows/periodic_tests.yml)
+[![pypi](https://img.shields.io/pypi/v/tsml?logo=pypi&color=blue)](https://pypi.org/project/tsml/)
+[![!conda](https://img.shields.io/conda/vn/conda-forge/tsml?logo=anaconda&color=blue)](https://anaconda.org/conda-forge/tsml)
+[![python-versions](https://img.shields.io/pypi/pyversions/tsml?logo=python)](https://www.python.org/)
+[![black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![license](https://img.shields.io/badge/license-BSD%203--Clause-green?logo=style)](https://github.com/time-series-machine-learning/tsml-py/blob/main/LICENSE)
+
+# tsml-py
+
+A repository for in-development time series machine learning algorithms and other odd
+bits by Matthew Middlehurst.
+
+Please see [`tsml_eval`](https://github.com/time-series-machine-learning/tsml-eval) and
+[`aeon`](https://github.com/aeon-toolkit/aeon) for more developed and stable packages. This package
+is more of a sandbox for testing out new ideas and algorithms. It may contain some
+algorithms and implementations that are not available in the other toolkits.
+
+The current release of `tsml` is v0.8.0.
+
+## Installation
+
+`tsml` is available on PyPI and can be installed via pip:
+
+```console
+pip install tsml
+```
+
+## Acknowledgements
+
+This work is supported by the UK Engineering and Physical Sciences Research Council
+(EPSRC) EP/W030756/1
