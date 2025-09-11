@@ -1,0 +1,28 @@
+Metadata-Version: 2.4
+Name: srctypes
+Version: 0.0.1
+Summary: Type annotations for source code languages and file formats
+Project-URL: Homepage, https://github.com/straydragon/srctypes
+Project-URL: Repository, https://github.com/straydragon/srctypes
+Project-URL: Issues, https://github.com/straydragon/srctypes/issues
+Author-email: straydragon <straydragonl@foxmail.com>
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Text Processing :: Markup
+Classifier: Typing :: Typed
+Requires-Python: >=3.6
+Requires-Dist: typing-extensions>=4.1.1
+Description-Content-Type: text/markdown
+
+# srctypes

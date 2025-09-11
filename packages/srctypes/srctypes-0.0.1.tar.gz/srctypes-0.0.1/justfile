@@ -1,0 +1,152 @@
+# srctypes Justfile
+# Run commands with: just <command>
+
+# Load environment variables from .env file
+set dotenv-load := true
+
+# Default recipe
+default:
+    @just --list
+
+# Build the package
+build *BUILD_FLAGS="":
+    uv build {{ BUILD_FLAGS }}
+
+# Clean build artifacts
+clean:
+    rm -rf dist/
+
+# Test package installation locally
+test:
+    uv run --with . --no-project -- python -c "import srctypes; print('✅ Import successful')"
+    uv run --with . --no-project -- python -c "import srctypes; print('📦 Available types:', len([attr for attr in dir(srctypes) if not attr.startswith('_')])); print('Sample types:', srctypes.js, srctypes.py, srctypes.sql)"
+
+# Set package version
+version version_arg="patch":
+    uv version {{ version_arg }}
+
+# Publish to PyPI
+publish:
+    #!/usr/bin/env bash
+    set -e
+    
+    echo "🔍 Checking .env file..."
+    if [ ! -f .env ]; then
+        echo "❌ .env file not found. Please copy .env.example to .env and configure your PyPI token."
+        exit 1
+    fi
+    
+    echo "🔍 Checking PyPI token..."
+    if [ -z "$UV_PUBLISH_TOKEN" ]; then
+        echo "❌ UV_PUBLISH_TOKEN not set in .env file"
+        exit 1
+    fi
+    
+    echo "🧹 Cleaning previous builds..."
+    just clean
+    
+    echo "📦 Building package..."
+    just build
+    
+    echo "🧪 Testing package..."
+    just test
+    
+    echo "🚀 Publishing to PyPI..."
+    uv publish
+    
+    echo "✅ Package published successfully!"
+
+# Publish to Test PyPI
+publish-test:
+    #!/usr/bin/env bash
+    set -e
+    
+    echo "🔍 Checking .env file..."
+    if [ ! -f .env ]; then
+        echo "❌ .env file not found. Please copy .env.example to .env and configure your test PyPI token."
+        exit 1
+    fi
+    
+    echo "🔍 Checking Test PyPI token..."
+    if [ -z "$UV_PUBLISH_TEST_TOKEN" ]; then
+        echo "❌ UV_PUBLISH_TEST_TOKEN not set in .env file"
+        exit 1
+    fi
+    
+    echo "🧹 Cleaning previous builds..."
+    just clean
+    
+    echo "📦 Building package..."
+    just build
+    
+    echo "🧪 Testing package..."
+    just test
+    
+    echo "🚀 Publishing to Test PyPI..."
+    UV_PUBLISH_TOKEN="$UV_PUBLISH_TEST_TOKEN" uv publish --index testpypi
+    
+    echo "✅ Package published to Test PyPI successfully!"
+    echo "🔗 View at: https://test.pypi.org/project/srctypes/"
+
+# Complete release workflow (bump version + publish)
+release type="patch":
+    #!/usr/bin/env bash
+    set -e
+    
+    echo "🚀 Starting release workflow ({{ type }})..."
+    
+    echo "📦 Bumping version..."
+    just version {{ type }}
+    
+    echo "🚀 Publishing..."
+    just publish
+    
+    echo "✅ Release completed successfully!"
+
+# Show package info
+info:
+    @echo "📦 Package: srctypes"
+    @echo "📋 Version: $(uv version --no-sync 2>/dev/null | awk '{print $2}' || echo 'unknown')"
+    @echo "🔧 Python: $(python --version)"
+    @echo "📦 UV: $(uv --version)"
+
+# Install development dependencies
+dev-setup:
+    uv pip install -e .
+    echo "✅ Development setup complete"
+
+# Format code (if you add formatting tools)
+fmt:
+    @echo "No formatting tools configured"
+
+# Run linting (if you add linters)
+lint:
+    @echo "No linters configured"
+
+# Check if everything is ready for release
+check-release:
+    #!/usr/bin/env bash
+    set -e
+    
+    echo "🔍 Checking release readiness..."
+    
+    # Check .env file
+    if [ ! -f .env ]; then
+        echo "❌ .env file missing"
+        exit 1
+    fi
+    
+    # Check PyPI token
+    if [ -z "$UV_PUBLISH_TOKEN" ]; then
+        echo "❌ UV_PUBLISH_TOKEN not configured"
+        exit 1
+    fi
+    
+    # Check if package builds
+    just clean
+    just build
+    
+    # Check if package works
+    just test
+    
+    echo "✅ All checks passed! Ready for release"

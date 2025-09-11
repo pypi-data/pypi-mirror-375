@@ -1,0 +1,49 @@
+[project]
+name = "srctypes"
+version = "0.0.1"
+description = "Type annotations for source code languages and file formats"
+readme = "README.md"
+authors = [
+    { name = "straydragon", email = "straydragonl@foxmail.com" }
+]
+requires-python = ">=3.6"
+dependencies = [
+    "typing-extensions>=4.1.1",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/straydragon/srctypes"
+Repository = "https://github.com/straydragon/srctypes"
+Issues = "https://github.com/straydragon/srctypes/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "/.gitignore",
+    "/.python-version",
+    "/uv.lock",
+    "/.claude",
+    "/dist",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/srctypes"]
