@@ -1,0 +1,22 @@
+# Python package related
+/build/
+/dist/
+/rpmautospec.egg-info/
+
+# Visual Studio Code configuration
+/.vscode
+
+# Coverage related
+/htmlcov/
+/coverage.xml
+.coverage
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Sphinx Docs Build
+/doc/_build/
+
+# Generated or unpackaged test data
+/tests/test-data/repodata/dummy-test-package-gloster/
