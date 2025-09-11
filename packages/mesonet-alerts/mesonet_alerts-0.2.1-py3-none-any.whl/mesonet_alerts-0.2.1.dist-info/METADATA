@@ -1,0 +1,492 @@
+Metadata-Version: 2.4
+Name: mesonet-alerts
+Version: 0.2.1
+Summary: Shared email alerting, retries, and volume-drop checks for Mesonet workers
+Project-URL: Homepage, https://github.com/dwd94/mesonet-alerts
+Author-email: Dawood Siddiq <dawood.siddiq@codingcops.com>
+License: Proprietary
+Keywords: alerts,dynamodb,email,jinja2,retry
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Typing :: Typed
+Requires-Python: >=3.11
+Requires-Dist: boto3>=1.33
+Requires-Dist: jinja2>=3.1
+Requires-Dist: python-dotenv>=1.0.0
+Provides-Extra: dev
+Requires-Dist: mypy>=1.7.0; extra == 'dev'
+Requires-Dist: pytest-cov>=4.1.0; extra == 'dev'
+Requires-Dist: pytest-mock>=3.11.0; extra == 'dev'
+Requires-Dist: pytest>=7.4.3; extra == 'dev'
+Requires-Dist: python-dotenv>=1.0.1; extra == 'dev'
+Requires-Dist: ruff>=0.1.6; extra == 'dev'
+Description-Content-Type: text/markdown
+
+# Mesonet Alerts Package
+
+A production-ready shared Python package for email alerting across mesonet microservices. Provides HTML + plaintext email templates, DynamoDB-backed configuration, SMTP integration, alert persistence, retry helpers, and volume drop detection.
+
+## 🚀 Quick Start
+
+### Installation
+
+Add to your service's `pyproject.toml`:
+
+```toml
+[project]
+dependencies = [
+    "mesonet_alerts @ file://../common/mesonet_alerts"
+]
+```
+
+### Environment Variables
+
+```bash
+# SMTP Configuration (required for email sending)
+ALERTS_SMTP_HOST=localhost
+ALERTS_SMTP_PORT=1025
+ALERTS_SMTP_USER=                    # Optional for local dev
+ALERTS_SMTP_PASS=                    # Optional for local dev
+ALERTS_FROM="alerts@local.test"
+ALERTS_TO="admin@local.test,kevin@local.test"
+
+# Optional persistence
+ALERTS_TABLE_NAME=alerts             # Enable DynamoDB persistence
+
+# Volume monitoring
+EXPECTED_RECORDS_PER_PROVIDER_PER_HOUR=100
+```
+
+### Basic Usage
+
+```python
+from mesonet_alerts import EmailAlerter, AlertStore, run_with_retries
+
+# Initialize components
+emailer = EmailAlerter()
+store = AlertStore()
+
+# Send an alert
+context = {
+    "stage": "ingest",
+    "severity": "ERROR", 
+    "provider": "colorado",
+    "run_id": "run_123",
+    "error": "Connection timeout"
+}
+
+emailer.send("process_failure", "Alert: Colorado Ingest Failed", context)
+
+# Store alert with deduplication
+store.put_alert(
+    provider="colorado",
+    stage="ingest", 
+    severity="ERROR",
+    code="CONNECTION_TIMEOUT",
+    message="Failed to connect to provider",
+    dedupe_key="timeout#colorado#run_123"
+)
+```
+
+## 🗄️ DynamoDB-Backed Configuration
+
+Version 0.2.0+ supports loading email configuration and templates from DynamoDB, providing centralized configuration management.
+
+### Configuration Table Setup
+
+Create a DynamoDB table for email configuration:
+
+```bash
+# Create config table
+aws dynamodb create-table \
+  --table-name MesonetEmailConfig \
+  --attribute-definitions AttributeName=config_pk,AttributeType=S AttributeName=config_sk,AttributeType=S \
+  --key-schema AttributeName=config_pk,KeyType=HASH AttributeName=config_sk,KeyType=RANGE \
+  --billing-mode PAY_PER_REQUEST
+
+# Insert configuration
+aws dynamodb put-item \
+  --table-name MesonetEmailConfig \
+  --item '{
+    "config_pk": {"S": "email_config"},
+    "config_sk": {"S": "active"},
+    "smtp": {"M": {"host": {"S": "smtp.gmail.com"}, "port": {"N": "587"}, "user": {"S": "alerts@company.com"}, "pass": {"S": "app_password"}, "from": {"S": "alerts@company.com"}}},
+    "recipients": {"M": {"list": {"L": [{"S": "admin@company.com"}, {"S": "team@company.com"}]}}},
+    "templates": {"M": {
+      "process_failure": {"M": {"html": {"S": "<html><body><h2 style=\"color:#dc3545\">Process Failure</h2><p>Provider: {{provider}}</p><p>Error: {{error}}</p></body></html>"}, "text": {"S": "Process Failure\\nProvider: {{provider}}\\nError: {{error}}"}}},
+      "provider_empty_data": {"M": {"html": {"S": "<html><body><h2 style=\"color:#ffc107\">No Data</h2><p>Provider {{provider}} returned no data</p></body></html>"}, "text": {"S": "No Data\\nProvider {{provider}} returned no data"}}},
+      "harmonize_failure": {"M": {"html": {"S": "<html><body><h2 style=\"color:#dc3545\">Harmonize Failed</h2><p>Provider: {{provider}}</p></body></html>"}, "text": {"S": "Harmonize Failed\\nProvider: {{provider}}"}}},
+      "volume_drop": {"M": {"html": {"S": "<html><body><h2 style=\"color:#e67e22\">Volume Drop</h2><p>{{drop_pct}}% drop detected</p></body></html>"}, "text": {"S": "Volume Drop\\n{{drop_pct}}% drop detected"}}}
+    }}
+  }'
+```
+
+### Using DynamoDB Configuration
+
+```python
+import boto3
+from mesonet_alerts import EmailAlerter, AlertStore, ConfigRepository
+
+# Initialize DynamoDB client
+dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
+
+# Initialize with DynamoDB-backed configuration
+config_repo = ConfigRepository(dynamodb_client, 'MesonetEmailConfig')
+emailer = EmailAlerter(config_repo=config_repo)
+alert_store = AlertStore(table_name='MesonetAlerts', dynamodb_client=dynamodb_client)
+
+# Templates and SMTP settings are now loaded from DynamoDB
+emailer.send("process_failure", "Alert: Process Failed", context)
+```
+
+### Environment Variables for DynamoDB
+
+```bash
+# DynamoDB configuration
+EMAIL_CONFIG_TABLE=MesonetEmailConfig
+ALERTS_TABLE_NAME=MesonetAlerts
+AWS_REGION=us-east-1
+
+# Fallback environment variables (used if DynamoDB config fails)
+ALERTS_SMTP_HOST=smtp.gmail.com
+ALERTS_SMTP_PORT=587
+# ... other SMTP settings
+```
+
+## 📧 Email Templates
+
+The package includes four pre-built templates with eye-catching HTML + plaintext versions:
+
+- **`process_failure`** - General processing failures
+- **`provider_empty_data`** - Empty data warnings  
+- **`harmonize_failure`** - Data harmonization errors
+- **`volume_drop`** - Volume drop alerts
+
+### Template Variables
+
+All templates support these variables:
+
+```python
+context = {
+    "stage": "ingest",           # Processing stage
+    "severity": "ERROR",         # ERROR, WARN, INFO
+    "provider": "colorado",      # Provider name
+    "run_id": "run_123",        # Optional run identifier
+    "trace_id": "trace_456",    # Optional trace identifier
+    "error": "Error message",    # Error details
+    "attempts": 3,              # Number of attempts
+    "timestamp_iso": "2025-01-15T10:30:00Z",
+    
+    # Volume drop specific
+    "expected": 100,            # Expected record count
+    "actual": 75,              # Actual record count  
+    "drop_pct": "25.0",        # Drop percentage
+    "window_start": "2025-01-15 13:00 UTC",
+    "window_end": "2025-01-15 14:00 UTC",
+}
+```
+
+## 🔄 Retry Helpers
+
+### Basic Retry Usage
+
+```python
+from mesonet_alerts.retry import run_with_retries, ProviderEmptyDataError
+
+def fetch_provider_data():
+    # Your data fetching logic
+    data = api_client.get_data()
+    if not data:
+        raise ProviderEmptyDataError("No data returned")
+    return data
+
+def is_retryable_error(e):
+    return isinstance(e, (ProviderEmptyDataError, ConnectionError))
+
+try:
+    data = run_with_retries(fetch_provider_data, is_retryable_error, attempts=3)
+except ProviderEmptyDataError:
+    # Handle final failure after retries
+    pass
+```
+
+### Decorator Usage
+
+```python
+from mesonet_alerts.retry import retry_on_exceptions
+
+@retry_on_exceptions(ProviderEmptyDataError, ConnectionError)
+def fetch_with_auto_retry():
+    return api_client.get_data()
+```
+
+## 📊 Volume Drop Detection
+
+```python
+from datetime import datetime, timezone, timedelta
+from mesonet_alerts.dropcheck import check_and_alert_volume_drop
+
+# Define time window
+now = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+window_end = now
+window_start = now - timedelta(hours=1)
+
+# Check for volume drops
+check_and_alert_volume_drop(
+    provider="colorado",
+    stage="harmonize",
+    actual_count=75,        # Only 75 records processed
+    expected_count=100,     # Expected 100 records
+    threshold=0.20,         # Alert on >20% drop
+    window_start=window_start,
+    window_end=window_end,
+    emailer=emailer,
+    store=store
+)
+```
+
+## 🏗️ Integration Examples
+
+### Ingest Worker Integration
+
+```python
+from mesonet_alerts.emailer import EmailAlerter
+from mesonet_alerts.store import AlertStore
+from mesonet_alerts.retry import run_with_retries, ProviderEmptyDataError
+
+emailer = EmailAlerter()
+store = AlertStore()
+
+def _is_retryable(e: Exception) -> bool:
+    return isinstance(e, ProviderEmptyDataError) or "timeout" in str(e).lower()
+
+def fetch_and_process_with_alerts(provider: str, run_id: str, trace_id: str):
+    def _do():
+        data = fetch_from_provider(provider)  # your existing call
+        if not data:
+            raise ProviderEmptyDataError(f"Empty data from {provider}")
+        return process_data(data)
+
+    try:
+        return run_with_retries(_do, _is_retryable, attempts=3)
+    except ProviderEmptyDataError as e:
+        ctx = {
+            "stage": "ingest", "severity": "WARN", "provider": provider, 
+            "run_id": run_id, "trace_id": trace_id, "error": str(e), "attempts": 3
+        }
+        emailer.send("provider_empty_data", f"[INGEST] Empty data: {provider}", ctx)
+        store.put_alert(
+            provider=provider, stage="ingest", severity="WARN", 
+            code="PROVIDER_EMPTY", message="Empty data after retries", 
+            metadata=ctx, dedupe_key=f"empty#{provider}#{run_id}"
+        )
+        raise
+    except Exception as e:
+        ctx = {
+            "stage": "ingest", "severity": "ERROR", "provider": provider,
+            "run_id": run_id, "trace_id": trace_id, "error": str(e), "attempts": 3
+        }
+        emailer.send("process_failure", f"[INGEST] Failure: {provider}", ctx)
+        store.put_alert(
+            provider=provider, stage="ingest", severity="ERROR",
+            code="INGEST_FAILURE", message="Ingest failure after retries",
+            metadata=ctx, dedupe_key=f"ingestfail#{provider}#{run_id}"
+        )
+        raise
+```
+
+### Harmonize Worker Integration
+
+```python
+from datetime import datetime, timezone, timedelta
+from mesonet_alerts.emailer import EmailAlerter
+from mesonet_alerts.store import AlertStore  
+from mesonet_alerts.dropcheck import check_and_alert_volume_drop
+
+emailer = EmailAlerter()
+store = AlertStore()
+
+# After harmonization run completes
+now = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+window_end = now
+window_start = now - timedelta(hours=1)
+
+actual_count = count_harmonized_records(provider, window_start, window_end)  # your logic
+check_and_alert_volume_drop(
+    provider=provider,
+    stage="harmonize", 
+    actual_count=actual_count,
+    expected_count=None,  # use ENV default for now
+    threshold=0.20,
+    window_start=window_start,
+    window_end=window_end,
+    emailer=emailer,
+    store=store
+)
+```
+
+## 🧪 Local Development Testing
+
+### Prerequisites
+
+1. Build the wheel:
+   ```bash
+   cd micro-services/common/mesonet_alerts
+   python -m build  # or uv build
+   ```
+
+2. Install into workers (already done in pyproject.toml):
+   ```toml
+   dependencies = [
+       "mesonet-alerts @ file://../common/mesonet_alerts/dist/mesonet_alerts-0.1.0-py3-none-any.whl"
+   ]
+   ```
+
+### Usage (Local Dev)
+
+**Terminal 1 - Start Debug SMTP Server:**
+```bash
+export $(grep -v '^#' .env.dev | xargs)
+./scripts/run_debug_smtp.sh
+```
+
+**Terminal 2 - Test Ingest Alerts:**
+```bash
+export $(grep -v '^#' .env.dev | xargs)
+cd micro-services/mesonet_ingest_worker
+python scripts/test_ingest_alerts.py
+```
+
+**Terminal 3 - Test Harmonize Alerts:**
+```bash
+export $(grep -v '^#' .env.dev | xargs)
+cd micro-services/mesonet_harmonize-worker
+python scripts/test_harmonize_alerts.py
+```
+
+**Expected Output:**
+- Terminal 1 should print full HTML+text email bodies
+- Terminal 2/3 should show "✅ Alert sent" messages
+- You should see nicely formatted emails with inline CSS
+
+### Environment Variables for Testing
+
+```bash
+# Override test parameters
+TEST_PROVIDER=colorado        # Provider name for tests
+TEST_ACTUAL=70               # Actual record count (harmonize test)
+TEST_EXPECTED=100            # Expected record count (harmonize test)
+```
+
+## 🗄️ DynamoDB Schema
+
+If `ALERTS_TABLE_NAME` is set, alerts are persisted with this schema:
+
+```
+Table: alerts
+PK: alert_pk (String) = "{provider}#{stage}" 
+SK: timestamp (String, ISO8601)
+Attributes:
+  - severity (String): ERROR, WARN, INFO
+  - code (String): PROVIDER_EMPTY, INGEST_FAILURE, etc.
+  - message (String): Human-readable message
+  - metadata (Map): Additional context data
+  - status (String): OPEN (default)
+  - ttl (Number): Unix timestamp for auto-deletion
+  - dedupe_key (String): Optional deduplication key
+  - provider (String): Provider name
+  - stage (String): Processing stage
+```
+
+## 🧪 Development
+
+### Running Tests
+
+```bash
+# Install dev dependencies
+uv sync --dev
+
+# Run tests
+pytest tests/ -v
+
+# With coverage
+pytest tests/ --cov=src --cov-report=html
+```
+
+### Local SMTP Testing
+
+```bash
+# Start local SMTP server for testing
+python -m smtpd -c DebuggingServer -n localhost:1025
+
+# Or use MailHog (recommended)
+docker run -p 1025:1025 -p 8025:8025 mailhog/mailhog
+# View emails at http://localhost:8025
+```
+
+## 🔮 Future Enhancements
+
+The package includes commented hooks for future features:
+
+### Database-Backed Configuration
+```python
+# TODO: Implement in config.py
+EmailConfigRepo.get_active_config()  # SMTP from DB
+RecipientRoutingRepo.get_recipients(provider, severity)  # Smart routing
+```
+
+### Template Overrides
+```python  
+# TODO: Implement in templates.py
+TemplateRepo.get(template_name, format_type)  # Custom templates from DB
+```
+
+### EventBridge/SNS Integration
+```python
+# TODO: Implement in store.py  
+AlertEventPublisher.publish_alert_event(alert_data)  # Fan-out to external systems
+```
+
+### Provider-Specific Volume Expectations
+```python
+# TODO: Implement in dropcheck.py
+VolumeExpectationRepo.get_expected_volume(provider, stage, hours)  # Smart baselines
+```
+
+## 📋 API Reference
+
+### EmailAlerter
+
+- `__init__(config=None, recipients=None)` - Initialize with optional config override
+- `send(template, subject, context, recipients=None)` - Send alert email
+- `resolve_recipients(provider, severity)` - Future: smart recipient routing
+
+### AlertStore
+
+- `__init__(table_name=None)` - Initialize with optional table name
+- `put_alert(provider, stage, severity, code, message, metadata=None, dedupe_key=None, ttl_seconds=86400)` - Store alert
+- `get_recent_alerts(provider, stage, hours=24)` - Retrieve recent alerts
+
+### Retry Functions
+
+- `run_with_retries(fn, is_retryable, attempts=3, backoffs=[1,3,9])` - Execute with retry logic
+- `retry_on_exceptions(*exception_types)` - Decorator for auto-retry
+- `is_network_error(e)`, `is_rate_limit_error(e)`, `is_provider_error(e)` - Error classifiers
+
+### Volume Drop Detection
+
+- `check_and_alert_volume_drop(**kwargs)` - Check and alert on volume drops
+- `get_volume_trend(provider, stage, hours_back=24, store=None)` - Analyze volume trends (placeholder)
+
+## 🔒 Security Notes
+
+- Credentials are read from environment variables only
+- SMTP passwords are not logged
+- DynamoDB uses IAM roles for authentication
+- All database operations use conditional writes for consistency
+- TTL automatically expires old alerts
+
+## 📄 License
+
+MIT License - see LICENSE file for details. 
