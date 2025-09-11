@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAPI Converter - 在线转换工具</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+        }
+        .upload-area.dragover {
+            border-color: #007bff;
+            background-color: #e3f2fd;
+        }
+        .config-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .preview-section {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .api-preview {
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+        .loading {
+            display: none;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <div class="container">
+                        <a class="navbar-brand" href="#">
+                            <i class="fas fa-exchange-alt me-2"></i>
+                            OpenAPI Converter
+                        </a>
+                        <span class="navbar-text">
+                            在线 OpenAPI 转换工具
+                        </span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <!-- 步骤指示器 -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary step-btn active" data-step="1">
+                                <i class="fas fa-upload me-2"></i>上传文件
+                            </button>
+                            <button type="button" class="btn btn-outline-primary step-btn" data-step="2">
+                                <i class="fas fa-cog me-2"></i>配置选项
+                            </button>
+                            <button type="button" class="btn btn-outline-primary step-btn" data-step="3">
+                                <i class="fas fa-download me-2"></i>下载结果
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤 1: 上传文件 -->
+            <div class="step active" id="step1">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-upload me-2"></i>
+                                    上传 OpenAPI 文件
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="upload-area" id="uploadArea">
+                                    <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                    <h5>拖拽文件到此处或点击选择</h5>
+                                    <p class="text-muted">支持 .yaml 和 .yml 格式的 OpenAPI 文件</p>
+                                    <input type="file" id="fileInput" accept=".yaml,.yml" style="display: none;">
+                                    <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                                        <i class="fas fa-folder-open me-2"></i>选择文件
+                                    </button>
+                                </div>
+                                
+                                <div id="fileInfo" class="mt-3" style="display: none;">
+                                    <div class="alert alert-success">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <span id="fileName"></span> 上传成功
+                                    </div>
+                                    <button type="button" class="btn btn-success" onclick="nextStep()">
+                                        <i class="fas fa-arrow-right me-2"></i>下一步：配置选项
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤 2: 配置选项 -->
+            <div class="step" id="step2">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-cog me-2"></i>
+                                    配置转换选项
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="config-section">
+                                    <h6><i class="fas fa-headers me-2"></i>标准 Headers</h6>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" id="standardHeaders" rows="6" 
+                                                  placeholder="每行一个 header，格式：Header-Name: value 或 Header-Name;"></textarea>
+                                        <small class="form-text text-muted">
+                                            每行一个 header，支持带值或不带值的格式
+                                        </small>
+                                    </div>
+                                    
+                                    <h6><i class="fas fa-code me-2"></i>其他配置</h6>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="contentType" class="form-label">Content-Type</label>
+                                            <input type="text" class="form-control" id="contentType" value="application/json">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="apiVersion" class="form-label">API 版本</label>
+                                            <input type="text" class="form-control" id="apiVersion" value="0.0.1">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                                        <i class="fas fa-arrow-left me-2"></i>上一步
+                                    </button>
+                                    <button type="button" class="btn btn-info" onclick="previewConversion()">
+                                        <i class="fas fa-eye me-2"></i>预览转换
+                                    </button>
+                                    <button type="button" class="btn btn-success" onclick="convertApi()">
+                                        <i class="fas fa-magic me-2"></i>开始转换
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤 3: 下载结果 -->
+            <div class="step" id="step3">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-download me-2"></i>
+                                    转换结果
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="conversionResult">
+                                    <!-- 转换结果将在这里显示 -->
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                                        <i class="fas fa-arrow-left me-2"></i>上一步
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="resetConverter()">
+                                        <i class="fas fa-redo me-2"></i>重新开始
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 预览区域 -->
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h5><i class="fas fa-eye me-2"></i>转换预览</h5>
+                <div id="previewContent">
+                    <!-- 预览内容将在这里显示 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="loading position-fixed top-50 start-50 translate-middle">
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">加载中...</span>
+            </div>
+            <p class="mt-2">处理中，请稍候...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentStep = 1;
+        let uploadedFile = null;
+        let configData = {};
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeUpload();
+            loadDefaultConfig();
+        });
+
+        // 初始化上传功能
+        function initializeUpload() {
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+
+            // 点击上传区域
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            // 文件选择
+            fileInput.addEventListener('change', handleFileSelect);
+
+            // 拖拽上传
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+        }
+
+        // 处理文件选择
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+
+        // 处理文件
+        function handleFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            showLoading();
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.success) {
+                    uploadedFile = data.filename;
+                    document.getElementById('fileName').textContent = data.filename;
+                    document.getElementById('fileInfo').style.display = 'block';
+                } else {
+                    alert('上传失败: ' + data.error);
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                alert('上传失败: ' + error.message);
+            });
+        }
+
+        // 加载默认配置
+        function loadDefaultConfig() {
+            fetch('/config/template')
+            .then(response => response.json())
+            .then(data => {
+                const headers = data.standard_headers || [];
+                document.getElementById('standardHeaders').value = headers.join('\n');
+                document.getElementById('contentType').value = data.content_type || 'application/json';
+                document.getElementById('apiVersion').value = data.api_version || '0.0.1';
+            });
+        }
+
+        // 步骤切换
+        function nextStep() {
+            if (currentStep < 3) {
+                currentStep++;
+                updateStepDisplay();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        }
+
+        function updateStepDisplay() {
+            // 更新步骤按钮
+            document.querySelectorAll('.step-btn').forEach((btn, index) => {
+                if (index + 1 <= currentStep) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // 更新步骤内容
+            document.querySelectorAll('.step').forEach((step, index) => {
+                if (index + 1 === currentStep) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+
+        // 预览转换
+        function previewConversion() {
+            if (!uploadedFile) {
+                alert('请先上传文件');
+                return;
+            }
+
+            const config = getConfigData();
+            
+            showLoading();
+
+            fetch('/preview', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    filename: uploadedFile,
+                    config: config
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.success) {
+                    showPreview(data);
+                } else {
+                    alert('预览失败: ' + data.error);
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                alert('预览失败: ' + error.message);
+            });
+        }
+
+        // 显示预览
+        function showPreview(data) {
+            const previewSection = document.getElementById('previewSection');
+            const previewContent = document.getElementById('previewContent');
+            
+            let html = `
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    共找到 ${data.total_apis} 个 API 接口
+                </div>
+            `;
+
+            Object.entries(data.preview_apis).forEach(([name, api]) => {
+                html += `
+                    <div class="api-preview">
+                        <h6><i class="fas fa-code me-2"></i>${api.name}</h6>
+                        <p><strong>端点:</strong> ${api.method} ${api.endpoint}</p>
+                        <p><strong>CURL 预览:</strong></p>
+                        <pre class="bg-light p-2 rounded"><code>${api.curl_preview}</code></pre>
+                    </div>
+                `;
+            });
+
+            previewContent.innerHTML = html;
+            previewSection.style.display = 'block';
+        }
+
+        // 执行转换
+        function convertApi() {
+            if (!uploadedFile) {
+                alert('请先上传文件');
+                return;
+            }
+
+            const config = getConfigData();
+            
+            showLoading();
+
+            fetch('/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    filename: uploadedFile,
+                    config: config
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.success) {
+                    showConversionResult(data);
+                    nextStep();
+                } else {
+                    alert('转换失败: ' + data.error);
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                alert('转换失败: ' + error.message);
+            });
+        }
+
+        // 显示转换结果
+        function showConversionResult(data) {
+            const resultDiv = document.getElementById('conversionResult');
+            resultDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    ${data.message}
+                </div>
+                <div class="text-center">
+                    <a href="${data.download_url}" class="btn btn-success btn-lg">
+                        <i class="fas fa-download me-2"></i>下载转换结果
+                    </a>
+                </div>
+            `;
+        }
+
+        // 获取配置数据
+        function getConfigData() {
+            const headers = document.getElementById('standardHeaders').value
+                .split('\n')
+                .filter(line => line.trim())
+                .map(line => line.trim());
+
+            return {
+                standard_headers: headers,
+                content_type: document.getElementById('contentType').value,
+                api_version: document.getElementById('apiVersion').value
+            };
+        }
+
+        // 重置转换器
+        function resetConverter() {
+            currentStep = 1;
+            uploadedFile = null;
+            configData = {};
+            
+            document.getElementById('fileInput').value = '';
+            document.getElementById('fileInfo').style.display = 'none';
+            document.getElementById('previewSection').style.display = 'none';
+            document.getElementById('conversionResult').innerHTML = '';
+            
+            loadDefaultConfig();
+            updateStepDisplay();
+        }
+
+        // 显示/隐藏加载提示
+        function showLoading() {
+            document.querySelector('.loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.querySelector('.loading').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

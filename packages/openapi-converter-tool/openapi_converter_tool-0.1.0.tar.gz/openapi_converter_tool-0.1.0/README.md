@@ -1,0 +1,326 @@
+# Converter
+
+独立的 OpenAPI 3.0.1 到项目 API 格式转换工具
+
+## 📁 项目结构
+
+```
+openapi-converter/
+├── src/                          # 核心源代码
+│   ├── __init__.py              # 包初始化文件
+│   ├── cli.py                   # 命令行接口
+│   ├── config.py                # 配置管理
+│   ├── openapi-converter.py             # 核心转换逻辑
+│   └── web_app.py               # Web 应用
+├── templates/                    # Web 应用模板
+│   └── index.html               # Web 应用 HTML 模板
+├── examples/                     # 示例文件
+│   └── openapi_template.yaml    # 示例 OpenAPI 文件
+├── Makefile                      # 构建和开发命令
+├── README.md                     # 主要文档
+├── requirements.txt              # Python 依赖
+└── setup.py                      # 包配置和安装脚本
+```
+
+### 目录说明
+
+#### `src/` - 核心源代码
+- **`__init__.py`** - 包初始化文件，定义包的主要接口
+- **`cli.py`** - 命令行接口实现，提供 `openapi-converter` 和 `openapi-converter-web` 命令
+- **`config.py`** - 配置管理模块，处理转换参数和配置文件
+- **`openapi-converter.py`** - 核心转换逻辑，实现 OpenAPI 到项目格式的转换
+- **`web_app.py`** - Flask Web 应用，提供可视化转换界面
+
+#### `templates/` - Web 应用模板
+- **`index.html`** - Web 应用的 HTML 模板，提供用户友好的转换界面
+
+#### `examples/` - 示例文件
+- **`openapi_template.yaml`** - 示例 OpenAPI 文件，用于演示和测试转换功能
+
+#### 根目录文件
+- **`Makefile`** - 构建、测试、开发相关的命令集合
+- **`README.md`** - 项目主要文档，包含使用说明和示例
+- **`requirements.txt`** - Python 包依赖列表
+- **`setup.py`** - 包配置和安装脚本，定义如何打包和安装工具
+
+### 设计理念
+
+#### 1. 功能分离
+- **核心功能** (`src/`) - 所有业务逻辑集中在源代码目录
+- **Web 模板** (`templates/`) - Flask Web 应用模板独立管理
+- **示例数据** (`examples/`) - 示例和测试文件独立管理
+
+#### 2. 清晰层次
+- **源代码** - 所有 Python 模块集中在 `src/` 目录，便于维护和扩展
+- **Web 模板** - Flask 模板文件独立管理，支持 Web 界面开发
+- **示例数据** - 示例和测试文件独立管理，便于用户学习和测试
+
+#### 3. 易于维护
+- **模块化设计** - 每个文件职责单一，便于理解和修改
+- **标准化结构** - 遵循 Python 包的标准结构，便于开发和部署
+- **文档完整** - 每个目录都有明确的用途说明，便于新开发者理解
+
+## 🚀 快速开始
+
+### 安装
+```bash
+pip install openapi-openapi-converter-tool
+```
+
+### 使用方式
+
+#### 方式一：命令行转换（推荐）
+```bash
+# 基本转换
+openapi-openapi-converter convert your-api.yaml
+
+# 指定输出目录
+openapi-openapi-converter convert your-api.yaml -o api/explore
+
+# 使用配置文件
+openapi-openapi-converter config init
+openapi-openapi-converter convert your-api.yaml -c openapi-converter-config.yaml
+```
+
+#### 方式二：Web 可视化界面
+```bash
+# 启动 Web 应用
+openapi-openapi-converter-web
+
+# 指定端口
+openapi-openapi-converter-web 8080
+```
+
+然后打开浏览器访问：http://localhost:5000
+
+## 📋 常用命令
+
+```bash
+# 基本命令
+openapi-converter --version                    # 查看版本
+openapi-converter --help                      # 查看帮助
+openapi-converter convert --help              # 转换帮助
+openapi-converter config --help               # 配置帮助
+openapi-converter-web --help                  # Web 应用帮助
+
+# 转换命令
+openapi-converter convert input.yaml          # 转换到默认目录
+openapi-converter convert input.yaml -o api/  # 转换到指定目录
+openapi-converter convert input.yaml -c config.yaml  # 使用配置文件
+
+# 配置管理
+openapi-converter config init                 # 创建配置文件
+openapi-converter config show                 # 显示当前配置
+
+# Web 应用
+openapi-converter-web                         # 启动（默认端口 5000）
+openapi-converter-web 8080                    # 启动（指定端口）
+```
+
+## 🔧 配置
+
+### 创建配置文件
+```bash
+openapi-converter config init
+```
+
+### 配置文件示例
+```yaml
+# openapi-converter-config.yaml
+conversion:
+  standard_headers:
+    Content-Type: application/json
+    Accept: application/json
+    User-Agent: MyApp/1.0
+  content_type: application/json
+  output_dir: api
+  file_naming: kebab-case
+```
+
+## 📁 输出结果
+
+转换后会生成如下结构的文件：
+```
+api/
+├── users.yaml              # GET /users
+├── users_post.yaml         # POST /users  
+├── users_{id}.yaml         # GET /users/{id}
+└── users_{id}_put.yaml     # PUT /users/{id}
+```
+
+每个文件包含：
+- 请求方法、路径、参数
+- 请求体结构
+- 响应结构
+- 示例 curl 命令
+
+## 🛠️ 故障排除
+
+### 端口冲突（macOS）
+```bash
+# 使用其他端口
+openapi-converter-web 8080
+
+# 或关闭 AirPlay Receiver
+# 系统偏好设置 -> 通用 -> 隔空投送与接力 -> 关闭 AirPlay Receiver
+```
+
+### 端口管理工具
+```bash
+# 使用系统命令查找端口
+lsof -i :5000
+netstat -an | grep 5000
+
+# 使用 Makefile 检查端口
+make port-check PORT=5000
+
+# 使用 Makefile 释放端口
+make port-kill PORT=5000
+```
+
+### 常见错误
+- **文件不存在**：检查文件路径是否正确
+- **权限问题**：检查输出目录的写入权限
+- **端口被占用**：使用其他端口或释放被占用的端口
+
+## 📚 使用示例
+
+### 示例 1：基本转换
+```bash
+# 1. 安装
+pip install openapi-converter
+
+# 2. 转换
+openapi-converter convert petstore.yaml
+
+# 3. 查看结果
+ls api/
+```
+
+### 示例 2：批量转换
+```bash
+for file in openapi/*.yaml; do
+    openapi-converter convert "$file" -o "api/$(basename "$file" .yaml)"
+done
+```
+
+### 示例 3：Web 界面使用
+```bash
+# 1. 启动服务
+openapi-converter-web 8080
+
+# 2. 打开浏览器
+# http://localhost:8080
+
+# 3. 上传文件、配置选项、下载结果
+```
+
+## 🔧 开发指南
+
+### 项目扩展
+
+#### 添加新功能
+1. **核心功能** - 在 `src/` 目录下添加新的 Python 模块
+2. **Web 模板** - 在 `templates/` 目录下添加新的 Flask 模板
+3. **示例数据** - 在 `examples/` 目录下添加新的示例文件
+
+#### 修改现有功能
+1. **核心逻辑** - 修改 `src/` 目录下的相应模块
+2. **Web 界面** - 修改 `templates/` 目录下的模板文件
+3. **示例数据** - 修改 `examples/` 目录下的示例文件
+
+#### 测试和验证
+```bash
+# 运行演示
+make demo
+
+# 启动 Web 应用测试
+make web
+
+# 代码检查
+make lint
+
+# 代码格式化
+make format
+```
+
+### 开发环境设置
+```bash
+# 克隆项目
+git clone <repository-url>
+cd openapi-converter
+
+# 安装开发依赖
+make install-dev
+
+# 安装工具包（开发模式）
+make install
+
+# 运行测试
+make test
+```
+
+## 🎯 最佳实践
+
+### 文件组织
+```
+project/
+├── openapi/
+│   ├── petstore.yaml
+│   └── user-api.yaml
+├── api/                    # 转换输出目录
+│   ├── pets/
+│   └── users/
+└── config/
+    └── openapi-converter-config.yaml
+```
+
+### 版本控制
+```bash
+# 忽略输出目录
+echo "api/" >> .gitignore
+
+# 保留配置文件
+git add openapi-converter-config.yaml
+```
+
+## 🔍 高级用法
+
+### 自定义转换规则
+编辑配置文件来自定义：
+- 请求头
+- 内容类型
+- 文件命名
+- 输出格式
+
+### 集成到 CI/CD
+```yaml
+# .github/workflows/convert-api.yml
+- name: Convert OpenAPI
+  run: |
+    pip install openapi-converter
+    openapi-converter convert api-spec.yaml -o generated-api/
+```
+
+## 🏗️ 开发
+
+### 安装开发版本
+```bash
+git clone <repository>
+cd openapi-converter
+pip install -e .
+```
+
+### 运行测试
+```bash
+make test
+```
+
+### 代码格式化
+```bash
+make format
+```
+
+## 许可证
+
+MIT License

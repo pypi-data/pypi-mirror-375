@@ -1,0 +1,3 @@
+[console_scripts]
+openapi-converter = src.cli:main
+openapi-converter-web = src.web_app:main

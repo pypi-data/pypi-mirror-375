@@ -1,0 +1,1016 @@
+openapi: 3.0.1
+info:
+  title: mds
+  description: ''
+  version: 1.0.0
+tags:
+  - name: explore
+paths:
+  /v1/explore/questionnaire/isShowQuestionnaire:
+    post:
+      summary: 是否展示入口
+      deprecated: false
+      description: ''
+      tags:
+        - explore
+      parameters:
+        - name: X-App-version
+          in: header
+          description: app版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: app版本
+        - name: X-Os-version
+          in: header
+          description: 操作系统版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统版本
+        - name: X-Country
+          in: header
+          description: 国家
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 国家
+        - name: X-Language
+          in: header
+          description: 语言
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 语言
+        - name: X-Timezone
+          in: header
+          description: 时间地区
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 时间地区
+        - name: X-Os
+          in: header
+          description: 操作系统类型,android,ios
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统类型,android,ios
+        - name: X-Client-Timestamp
+          in: header
+          description: 客户端时间戳
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端时间戳
+        - name: X-Phone-Model
+          in: header
+          description: 手机类型
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 手机类型
+        - name: User-Agent
+          in: header
+          description: 用户代理
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户代理
+        - name: X-Auth-Token
+          in: header
+          description: 用户请求token
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户请求token
+        - name: X-Open-Udid
+          in: header
+          description: 跨平台唯一标识
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 跨平台唯一标识
+        - name: X-Request-Id
+          in: header
+          description: 请求ID，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 请求ID，网关注入，客户端无需关注
+        - name: X-Real-Ip
+          in: header
+          description: 客户端IP，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端IP，网关注入，客户端无需关注
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqIsShowQuestionnaire'
+      responses:
+        '200':
+          description: 成功响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespIsShowQuestionnaire'
+          headers: {}
+      security: []
+      x-sub-group: bothSupported
+  /v1/explore/questionnaire/getQuestionnaire:
+    post:
+      summary: 获取问卷
+      deprecated: false
+      description: ''
+      tags:
+        - explore
+      parameters:
+        - name: X-App-version
+          in: header
+          description: app版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: app版本
+        - name: X-Os-version
+          in: header
+          description: 操作系统版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统版本
+        - name: X-Country
+          in: header
+          description: 国家
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 国家
+        - name: X-Language
+          in: header
+          description: 语言
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 语言
+        - name: X-Timezone
+          in: header
+          description: 时间地区
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 时间地区
+        - name: X-Os
+          in: header
+          description: 操作系统类型,android,ios
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统类型,android,ios
+        - name: X-Client-Timestamp
+          in: header
+          description: 客户端时间戳
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端时间戳
+        - name: X-Phone-Model
+          in: header
+          description: 手机类型
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 手机类型
+        - name: User-Agent
+          in: header
+          description: 用户代理
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户代理
+        - name: X-Auth-Token
+          in: header
+          description: 用户请求token
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户请求token
+        - name: X-Open-Udid
+          in: header
+          description: 跨平台唯一标识
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 跨平台唯一标识
+        - name: X-Request-Id
+          in: header
+          description: 请求ID，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 请求ID，网关注入，客户端无需关注
+        - name: X-Real-Ip
+          in: header
+          description: 客户端IP，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端IP，网关注入，客户端无需关注
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqGetQuestionnaire'
+      responses:
+        '200':
+          description: 成功响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespGetQuestionnaire'
+          headers: {}
+      security: []
+      x-sub-group: bothSupported
+  /v1/explore/questionnaire/submitQuestionnaire:
+    post:
+      summary: 提交问卷
+      deprecated: false
+      description: ''
+      tags:
+        - explore
+      parameters:
+        - name: X-App-version
+          in: header
+          description: app版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: app版本
+        - name: X-Os-version
+          in: header
+          description: 操作系统版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统版本
+        - name: X-Country
+          in: header
+          description: 国家
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 国家
+        - name: X-Language
+          in: header
+          description: 语言
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 语言
+        - name: X-Timezone
+          in: header
+          description: 时间地区
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 时间地区
+        - name: X-Os
+          in: header
+          description: 操作系统类型,android,ios
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统类型,android,ios
+        - name: X-Client-Timestamp
+          in: header
+          description: 客户端时间戳
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端时间戳
+        - name: X-Phone-Model
+          in: header
+          description: 手机类型
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 手机类型
+        - name: User-Agent
+          in: header
+          description: 用户代理
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户代理
+        - name: X-Auth-Token
+          in: header
+          description: 用户请求token
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户请求token
+        - name: X-Open-Udid
+          in: header
+          description: 跨平台唯一标识
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 跨平台唯一标识
+        - name: X-Request-Id
+          in: header
+          description: 请求ID，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 请求ID，网关注入，客户端无需关注
+        - name: X-Real-Ip
+          in: header
+          description: 客户端IP，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端IP，网关注入，客户端无需关注
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqSubmitQuestionnaire'
+      responses:
+        '200':
+          description: 成功响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespSubmitQuestionnaire'
+          headers: {}
+      security: []
+      x-sub-group: bothSupported
+  /v1/explore/questionnaire/getQuestionnaireResult:
+    post:
+      summary: 获取问卷结果
+      deprecated: false
+      description: ''
+      tags:
+        - explore
+      parameters:
+        - name: X-App-version
+          in: header
+          description: app版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: app版本
+        - name: X-Os-version
+          in: header
+          description: 操作系统版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统版本
+        - name: X-Country
+          in: header
+          description: 国家
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 国家
+        - name: X-Language
+          in: header
+          description: 语言
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 语言
+        - name: X-Timezone
+          in: header
+          description: 时间地区
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 时间地区
+        - name: X-Os
+          in: header
+          description: 操作系统类型,android,ios
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统类型,android,ios
+        - name: X-Client-Timestamp
+          in: header
+          description: 客户端时间戳
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端时间戳
+        - name: X-Phone-Model
+          in: header
+          description: 手机类型
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 手机类型
+        - name: User-Agent
+          in: header
+          description: 用户代理
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户代理
+        - name: X-Auth-Token
+          in: header
+          description: 用户请求token
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户请求token
+        - name: X-Open-Udid
+          in: header
+          description: 跨平台唯一标识
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 跨平台唯一标识
+        - name: X-Request-Id
+          in: header
+          description: 请求ID，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 请求ID，网关注入，客户端无需关注
+        - name: X-Real-Ip
+          in: header
+          description: 客户端IP，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端IP，网关注入，客户端无需关注
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqGetQuestionnaireResult'
+      responses:
+        '200':
+          description: 成功响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespGetQuestionnaireResult'
+          headers: {}
+      security: []
+      x-sub-group: bothSupported
+  /v1/explore/microscape/list:
+    post:
+      summary: 获取探索Micro Escape列表
+      deprecated: false
+      description: ''
+      tags:
+        - explore
+      parameters:
+        - name: X-App-version
+          in: header
+          description: app版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: app版本
+        - name: X-Os-version
+          in: header
+          description: 操作系统版本
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统版本
+        - name: X-Country
+          in: header
+          description: 国家
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 国家
+        - name: X-Language
+          in: header
+          description: 语言
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 语言
+        - name: X-Timezone
+          in: header
+          description: 时间地区
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 时间地区
+        - name: X-Os
+          in: header
+          description: 操作系统类型,android,ios
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 操作系统类型,android,ios
+        - name: X-Client-Timestamp
+          in: header
+          description: 客户端时间戳
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端时间戳
+        - name: X-Phone-Model
+          in: header
+          description: 手机类型
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 手机类型
+        - name: User-Agent
+          in: header
+          description: 用户代理
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户代理
+        - name: X-Auth-Token
+          in: header
+          description: 用户请求token
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 用户请求token
+        - name: X-Open-Udid
+          in: header
+          description: 跨平台唯一标识
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 跨平台唯一标识
+        - name: X-Request-Id
+          in: header
+          description: 请求ID，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 请求ID，网关注入，客户端无需关注
+        - name: X-Real-Ip
+          in: header
+          description: 客户端IP，网关注入，客户端无需关注
+          required: false
+          example: ''
+          schema:
+            type: string
+            description: 客户端IP，网关注入，客户端无需关注
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReqListExploreMicroEscape'
+      responses:
+        '200':
+          description: 成功响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespListExploreMicroEscape'
+          headers: {}
+      security: []
+      x-sub-group: logined
+components:
+  schemas:
+    BasicResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 响应码
+        msg:
+          type: string
+          description: 响应消息
+    ReqIsShowQuestionnaire: &ref_0
+      type: object
+      properties: {}
+    RespIsShowQuestionnaire:
+      allOf:
+        - $ref: '#/components/schemas/BasicResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/RespDataIsShowQuestionnaire'
+    RespDataIsShowQuestionnaire:
+      type: object
+      properties:
+        isShow:
+          type: boolean
+          description: 是否展示
+        questionnaireStatusList:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionnaireStatusItem'
+    QuestionnaireStatusItem:
+      type: object
+      properties:
+        questionnaireId:
+          type: string
+          description: 问卷ID
+        entryStatus:
+          type: integer
+          description: 入口状态，1，显示入口，0，不展示入口
+        status:
+          type: integer
+          description: 状态，0:未做过,1:已完成
+        finishTimestamp:
+          type: integer
+          format: int64
+          description: 完成时间,秒级时间戳
+        updatedAtTimestamp:
+          type: integer
+          format: int64
+          description: 更新时间,秒级时间戳
+    ReqGetQuestionnaire: &ref_1
+      type: object
+      properties:
+        questionnaireId:
+          type: string
+          description: 问卷ID
+    RespGetQuestionnaire:
+      allOf:
+        - $ref: '#/components/schemas/BasicResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/RespDataGetQuestionnaire'
+    RespDataGetQuestionnaire:
+      type: object
+      properties:
+        questionnaireId:
+          type: string
+          description: 问卷ID
+        version:
+          type: string
+          description: 问卷版本号
+        title:
+          type: string
+          description: 问卷标题
+        subTitle:
+          type: string
+          description: 问卷副标题
+        guide:
+          type: array
+          items:
+            type: string
+          description: 问卷引导语
+        entryButtonText:
+          type: string
+          description: 入口按钮文本
+        backgroundImage:
+          type: string
+          description: 问卷背景图
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionItem'
+        updatedAtTimestamp:
+          type: integer
+          format: int64
+          description: 更新时间,秒级时间戳
+    ResultPage:
+      type: object
+      properties:
+        summary:
+          type: string
+          description: 结果页摘要
+        contentBlock:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentBlockItem'
+    ContentBlockItem:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 内容块标题
+        content:
+          type: string
+          description: 内容块内容
+        questionIndex:
+          type: array
+          items:
+            type: integer
+          description: 关联问题索引，用于配置结果页的答案图片的关联顺序
+    QuestionItem:
+      type: object
+      properties:
+        questionId:
+          type: string
+          description: 问题ID
+        questionType:
+          type: integer
+          description: 问题类型，1:单选 2:多选 3:填空
+        title:
+          type: string
+          description: 问题标题
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptionItem'
+    OptionItem:
+      type: object
+      properties:
+        index:
+          type: integer
+          description: 选项索引
+        text:
+          type: string
+          description: 选项文本
+        image:
+          type: string
+          description: 选项图片
+        x:
+          type: number
+          format: double
+          description: X轴值
+        'y':
+          type: number
+          format: double
+          description: Y轴值
+        z:
+          type: number
+          format: double
+          description: Z轴值
+    ReqSubmitQuestionnaire:
+      type: object
+      properties:
+        questionnaireId:
+          type: string
+          description: 问卷ID
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnswerItem'
+        xTotal:
+          type: number
+          format: double
+          description: X轴总分
+        yTotal:
+          type: number
+          format: double
+          description: Y轴总分
+        zTotal:
+          type: number
+          format: double
+          description: Z轴总分
+    AnswerItem:
+      type: object
+      properties:
+        questionId:
+          type: string
+          description: 问题ID
+        optionIndex:
+          type: integer
+          description: 选项索引
+        x:
+          type: number
+          format: double
+          description: X轴值
+        'y':
+          type: number
+          format: double
+          description: Y轴值
+        z:
+          type: number
+          format: double
+          description: Z轴值
+    RespSubmitQuestionnaire:
+      allOf:
+        - $ref: '#/components/schemas/BasicResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/RespDataSubmitQuestionnaire'
+    RespDataSubmitQuestionnaire: *ref_0
+    ReqGetQuestionnaireResult: *ref_1
+    RespGetQuestionnaireResult:
+      allOf:
+        - $ref: '#/components/schemas/BasicResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/RespDataGetQuestionnaireResult'
+    RespDataGetQuestionnaireResult:
+      type: object
+      properties:
+        questionnaireId:
+          type: string
+          description: 问卷ID
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionItem'
+        resultQuadrant:
+          $ref: '#/components/schemas/QuestionnaireQuadrantItem'
+          description: 问卷结果维度
+        answerList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnswerItem'
+        xTotal:
+          type: number
+          format: double
+          description: X 轴总分
+        yTotal:
+          type: number
+          format: double
+          description: Y 轴总分
+        zTotal:
+          type: number
+          format: double
+          description: Z 轴总分
+        resultId:
+          type: string
+          description: 结果ID
+    QuestionnaireQuadrantItem:
+      type: object
+      properties:
+        x:
+          type: integer
+          description: X 轴， 正负值， 正数表示向右，负数表示向左
+        'y':
+          type: integer
+          description: Y 轴， 正负值， 正数表示向上，负数表示向下
+        z:
+          type: integer
+          description: Z 轴， 正负值， 正数表示向前，负数表示向后
+        label:
+          type: string
+          description: 画像标签
+        portrait:
+          type: string
+          description: 画像头像
+        keywords:
+          type: array
+          items:
+            type: string
+          description: 画像关键词
+        description:
+          type: string
+          description: 画像描述
+        recommendations:
+          type: array
+          items:
+            type: string
+          description: 画像推荐香型
+        resultPage:
+          $ref: '#/components/schemas/ResultPage'
+    ReqListExploreMicroEscape:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: 页码
+        size:
+          type: integer
+          description: 页面大小
+    RespListExploreMicroEscape:
+      allOf:
+        - $ref: '#/components/schemas/BasicResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/RespDataListExploreMicroEscape'
+    RespDataListExploreMicroEscape:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExploreMicroEscapeItem'
+          description: Micro Escape列表
+    ExploreMicroEscapeItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID
+        title:
+          type: string
+          description: 标题
+        cover:
+          type: string
+          description: 封面
+        mainBackgroundColor:
+          type: string
+          description: 主背景色
+        introduction:
+          type: string
+          description: 介绍
+        lrc:
+          type: string
+          description: 歌词
+        video:
+          type: string
+          description: 视频
+        videoDuration:
+          type: integer
+          description: 视频时长
+        audio:
+          type: string
+          description: 音频
+        audioDuration:
+          type: integer
+          description: 音频时长
+        fragranceLevel:
+          type: string
+          description: 香调级别
+        emotionalTag:
+          $ref: '#/components/schemas/EmotionalTagItem'
+          description: 情感标签
+    EmotionalTagItem:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 标题
+        backgroundColor:
+          type: string
+          description: 背景色
+        quote:
+          type: string
+          description: 引用
+        author:
+          type: string
+          description: 作者
+        workDuration:
+          type: integer
+          description: 工作时长
+        restDuration:
+          type: integer
+          description: 间歇时长
+  securitySchemes: {}
+servers: []
+security: []
