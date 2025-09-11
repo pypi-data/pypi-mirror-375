@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DevWorksDjangoLib"
+version = "0.0.1" # remove `version` field if dynamic is used!
+#dynamic = ["version"]  # The version will be provided dynamically
+description = "DevWorks Django Library"
+authors = [
+    { name = "Sambor Czarski", email = "sam.czarski@gmail.com" }
+]
+dependencies = ["pydash"]
+
+[project.scripts]
+format_logging = "devworks_commands_helpers:format_logging"
+
+[tool.setuptools_scm]
+write_to = "DevWorksDjangoLib/_version.py"
