@@ -1,0 +1,13 @@
+greenlet
+gevent
+pytz
+pysolbase>=3.13.0
+geventhttpclient
+urllib3
+
+[test]
+unittest-xml-reporting
+pylint
+twine
+tox
+toml
