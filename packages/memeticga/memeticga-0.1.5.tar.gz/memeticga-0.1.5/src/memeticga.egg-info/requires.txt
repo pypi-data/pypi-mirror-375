@@ -1,0 +1,16 @@
+numpy>=1.14.5
+deap>=0.8
+tqdm>=2.2.4
+
+[dev]
+pytest>=7.0
+pytest-cov
+hypothesis
+ruff>=0.0.282
+black>=23.0.0
+isort>=5.0.0
+mypy>=1.9
+cloudpickle>=2.0.0
+
+[mp]
+cloudpickle>=2.0.0
