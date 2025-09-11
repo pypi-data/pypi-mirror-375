@@ -1,0 +1,33 @@
+# packages/ddex-parser/bindings/python/Cargo.toml
+[package]
+name = "ddex-parser-python"
+version = "0.1.0"
+edition = "2021"
+authors = ["Kevin Marques Moo"]
+license = "MIT"
+publish = false
+readme = "README.md"
+
+[lib]
+name = "ddex_parser"
+crate-type = ["cdylib"]
+
+[dependencies]
+ddex-core = { path = "../../../core" }
+ddex-parser = { path = "../.." }
+
+pyo3 = { workspace = true, features = ["extension-module", "abi3-py38"] }
+pyo3-asyncio-0-21 = { version = "0.21", features = ["tokio-runtime"], package = "pyo3-asyncio-0-21" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+tokio = { workspace = true, features = ["rt", "rt-multi-thread"] }
+pythonize = "0.21"
+numpy = { version = "0.21", optional = true }
+
+[features]
+default = ["dataframe"]
+dataframe = ["numpy"]
+
+[build-dependencies]
+pyo3-build-config = "0.21"
