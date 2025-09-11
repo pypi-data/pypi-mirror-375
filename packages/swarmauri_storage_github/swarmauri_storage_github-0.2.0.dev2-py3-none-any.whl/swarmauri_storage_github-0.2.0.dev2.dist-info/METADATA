@@ -1,0 +1,40 @@
+Metadata-Version: 2.3
+Name: swarmauri_storage_github
+Version: 0.2.0.dev2
+Summary: GitHub storage adapter stub for Peagen
+License: Apache-2.0
+Author: Jacob Stewart
+Author-email: jacob@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Requires-Dist: peagen
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_standard
+Description-Content-Type: text/markdown
+
+# Swarmauri GitHub Storage Adapter
+
+Simplified storage adapter for Peagen that records uploads as `github://` URIs.
+
+## Installation
+
+```bash
+# pip install swarmauri_storage_github (when published)
+```
+
+## Usage
+
+```python
+from swarmauri_storage_github import GithubStorageAdapter
+
+adapter = GithubStorageAdapter()
+uri = adapter.upload("README.md", "my-org/my-repo/README.md")
+print(uri)
+```
+
