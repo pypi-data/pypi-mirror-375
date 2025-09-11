@@ -1,0 +1,2 @@
+[console_scripts]
+trackscan = trackscan.cli:main
