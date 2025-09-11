@@ -1,0 +1,47 @@
+[project]
+name = "libsms"
+version = "0.2.1"
+description = "Interacting with the Simulating Microbial Systems (SMS Atlantis) API"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.116.1",
+    "httpx>=0.28.1",
+    "orjson>=3.11.3",
+    "polars[all]>=1.33.1",
+    "pydantic>=2.11.7",
+    "requests>=2.32.5",
+]
+
+[tool.setuptools]
+packages = ["libsms"]
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8.16",
+    "deptry>=0.23.1",
+    "mypy>=1.17.1",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.1.0",
+    "pytest-cov>=7.0.0",
+    "tox>=4.30.2",
+    "types-pyyaml>=6.0.12.20250822",
+    "types-requests>=2.32.4.20250809",
+]
+docs = [
+    "sphinx>=8.2.3",
+    "sphinx-autodoc-typehints>=3.2.0",
+    "sphinx-rtd-theme>=3.0.2",
+]
+notebooks = [
+    "marimo>=0.15.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+addopts = "--cov-report=html"
+
