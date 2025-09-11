@@ -1,0 +1,6 @@
+[peagen.plugins.cryptos]
+paramiko_crypto=swarmauri_crypto_paramiko:ParamikoCrypto
+
+[swarmauri.cryptos]
+ParamikoCrypto=swarmauri_crypto_paramiko:ParamikoCrypto
+
