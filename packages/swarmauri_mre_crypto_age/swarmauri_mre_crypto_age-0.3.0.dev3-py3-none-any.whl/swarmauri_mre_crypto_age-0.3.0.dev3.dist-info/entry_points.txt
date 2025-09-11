@@ -1,0 +1,6 @@
+[peagen.plugins.mre_cryptos]
+age_mre=swarmauri_mre_crypto_age:AgeMreCrypto
+
+[swarmauri.mre_cryptos]
+AgeMreCrypto=swarmauri_mre_crypto_age:AgeMreCrypto
+
