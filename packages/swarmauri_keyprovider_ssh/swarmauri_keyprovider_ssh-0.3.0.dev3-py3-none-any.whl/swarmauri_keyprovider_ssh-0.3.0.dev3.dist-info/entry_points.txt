@@ -1,0 +1,6 @@
+[peagen.plugins.key_providers]
+ssh=swarmauri_keyprovider_ssh.SshKeyProvider:SshKeyProvider
+
+[swarmauri.key_providers]
+SshKeyProvider=swarmauri_keyprovider_ssh.SshKeyProvider:SshKeyProvider
+
