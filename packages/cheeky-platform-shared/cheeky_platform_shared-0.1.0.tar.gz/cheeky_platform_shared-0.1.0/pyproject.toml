@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cheeky-platform-shared"
+version = "0.1.0"
+description = "Shared utilities for Cheeky Platform - AI-powered Shopify analytics"
+requires-python = ">=3.10"
+authors = [
+    {name = "Cheeky Platform Team", email = "team@cheeky.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["cheeky", "shopify", "analytics", "ai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "httpx>=0.25.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/cheeky-platform/cheeky-platform"
+"Bug Reports" = "https://github.com/cheeky-platform/cheeky-platform/issues"
+"Source" = "https://github.com/cheeky-platform/cheeky-platform"
+
+[tool.setuptools]
+py-modules = ["__init__", "llm", "prompts"]
