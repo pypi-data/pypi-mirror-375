@@ -1,0 +1,2 @@
+[console_scripts]
+scikit-surgeryarucotracker = sksurgeryarucotracker.__main__:main
