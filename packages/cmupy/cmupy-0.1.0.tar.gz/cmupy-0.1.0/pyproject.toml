@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cmupy"
+version = "0.1.0"
+description = "A Python package for computational utilities"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {file = "LICENSE"}
+authors = [
+    {name = "SanzioDinelli", email = "sanzio.magalhae@gmail.com"},
+]
+keywords = ["ruff", "computational", "utilities", "cli"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/sanziolopes-cmu/cmupy"
+Documentation = "https://github.com/sanziolopes-cmu/cmupy#readme"
+Repository = "https://github.com/sanziolopes-cmu/cmupy"
+Issues = "https://github.com/sanziolopes-cmu/cmupy/issues"
+
+[project.scripts]
+cmupy = "cmupy.cli:main"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
