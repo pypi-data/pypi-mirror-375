@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/y_sweet_sdk/__init__.py
+src/y_sweet_sdk/connection.py
+src/y_sweet_sdk/error.py
+src/y_sweet_sdk/update.py
+src/y_sweet_sdk.egg-info/PKG-INFO
+src/y_sweet_sdk.egg-info/SOURCES.txt
+src/y_sweet_sdk.egg-info/dependency_links.txt
+src/y_sweet_sdk.egg-info/requires.txt
+src/y_sweet_sdk.egg-info/top_level.txt
+tests/test_y_sweet.py
