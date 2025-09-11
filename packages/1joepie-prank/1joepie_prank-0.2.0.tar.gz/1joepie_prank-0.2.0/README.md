@@ -1,0 +1,40 @@
+# 1joepie-prank (import as `joepie_tools`) — Release v0.2.0 (Test-ready)
+
+**Safe, fun prank toolkit** that opens fake "hacker" GUIs (progressbars, matrix-effect, fake terminals, file dumps).
+This is purely visual — it does not access your filesystem, does not perform network calls, and performs no destructive actions.
+
+## Quick install (development)
+```bash
+git clone <repo>
+cd 1joepie-prank
+python -m pip install --upgrade build twine
+python -m pip install -e .
+```
+
+## Quick usage (python)
+```python
+from joepie_tools.hackerprank import fake_hack_screen, fake_matrix, fake_terminal, fake_file_dump, fake_warning_popup
+fake_hack_screen(num_windows=3, duration=8)
+fake_matrix(duration=10)
+fake_terminal(duration=8)
+fake_file_dump(duration=6)
+fake_warning_popup(message="Just a friendly prank!", duration=5)
+```
+
+## CLI (after `pip install -e .`)
+```
+python -m joepie_tools.cli hack -n 4 -d 10
+python -m joepie_tools.cli matrix -d 12
+python -m joepie_tools.cli term -d 8
+python -m joepie_tools.cli dump -d 6
+python -m joepie_tools.cli popup -m "Just kidding!" -d 4
+```
+
+## Build & test (TestPyPI)
+1. Build: `python -m build`
+2. Upload to TestPyPI: `python -m twine upload --repository testpypi dist/*`
+3. Install from TestPyPI to verify: `pip install --index-url https://test.pypi.org/simple/ 1joepie-prank`
+
+## Safety
+This is a prank toolkit intended for fun. Do not use to impersonate malicious activity or to scare people in serious contexts.
+Always tell people afterwards it was a joke.

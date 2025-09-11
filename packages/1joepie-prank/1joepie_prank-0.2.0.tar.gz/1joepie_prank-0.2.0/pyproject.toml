@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "1joepie-prank"
+version = "0.2.0"
+description = "Joepie's prank tools: safe fake hacker GUIs, terminals and effects"
+readme = "README.md"
+authors = [{name="Noah", email="noah@example.com"}]
+license = "MIT"
+dependencies = []
+keywords = ["prank","gui","fun","fake","toy"]
