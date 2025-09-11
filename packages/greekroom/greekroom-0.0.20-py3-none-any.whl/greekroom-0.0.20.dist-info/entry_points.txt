@@ -1,0 +1,5 @@
+[console_scripts]
+gr-repeated-words = greekroom.owl.repeated_words:main
+gr-test-wb-file-props = greekroom.gr_utilities.test.test_wb_file_props:main
+gr-wb-file-props = greekroom.gr_utilities.wb_file_props:main
+
