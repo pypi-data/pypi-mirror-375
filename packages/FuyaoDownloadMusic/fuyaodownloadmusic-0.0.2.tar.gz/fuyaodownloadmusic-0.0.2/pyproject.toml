@@ -1,0 +1,28 @@
+[build-system]
+
+# 打包工具依赖：setuptools 版本需 >=61.0（支持 PEP 621）
+requires = ["setuptools>=61.0", "wheel>0.37.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+
+name = "FuyaoDownloadMusic"
+version = "0.0.2"
+authors = [
+    { name = "fuyao-norway", email = "1959415641@qq.com" },
+    { name = "fuyao-ziqiu", email = "1987239025@qq.com" },
+    { name = "fuyaoteam", email = "fuyaoteam@gmail.com" }
+]
+description = "一个用于从主流音乐平台下载音乐的第三方库"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+dependencies = [
+    "requests>=2.32.5",
+]
+classifiers = [# 分类信息（与PyPI过滤相关）
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+urls = { "Repository" = "https://github.com/fuyao-lhw/FuyaoDownloadMusic" }
