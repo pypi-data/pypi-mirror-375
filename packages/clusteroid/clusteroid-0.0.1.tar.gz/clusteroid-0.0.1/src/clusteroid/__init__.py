@@ -1,0 +1,4 @@
+"""
+clusteroid - Ceph management tool.
+"""
+
