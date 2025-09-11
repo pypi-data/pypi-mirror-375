@@ -1,0 +1,17 @@
+.cache/
+build
+dist
+**/*.tmp
+**.egg-info
+**/__pycache__
+**.pyc
+**/.mypy_cache
+**/.pytest_cache
+.idea/
+.nicegui/
+.envrc
+.env
+.venv
+.DS_Store
+**/gen_templates/
+bin/

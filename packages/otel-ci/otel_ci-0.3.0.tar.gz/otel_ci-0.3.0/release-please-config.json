@@ -1,0 +1,14 @@
+{
+    "packages": {
+      ".": {
+        "package-name": "otel-ci",
+        "release-type": "python",
+        "changelog-path": "CHANGELOG.md",
+        "exclude-paths": [
+            "tests/",
+	        ".github/"
+        ],
+        "initial-version": "0.2.0"
+      }
+    }
+}
