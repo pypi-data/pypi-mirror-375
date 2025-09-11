@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+RateLimitMiddleware=swarmauri_middleware_ratelimit:RateLimitMiddleware
+
