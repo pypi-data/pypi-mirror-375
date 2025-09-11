@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+sl_pos2_api/__init__.py
+sl_pos2_api/admin_auth.py
+sl_pos2_api/app_auth.py
+sl_pos2_api/common.py
+sl_pos2_api/order_api.py
+sl_pos2_api.egg-info/PKG-INFO
+sl_pos2_api.egg-info/SOURCES.txt
+sl_pos2_api.egg-info/dependency_links.txt
+sl_pos2_api.egg-info/requires.txt
+sl_pos2_api.egg-info/top_level.txt
+sl_pos2_api/utils/__init__.py
