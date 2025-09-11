@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: pyvqnet
+Version: 2.17.1
+Summary: Python wrapper for VQNET
+License-File: LICENSE
+Requires-Dist: setuptools
+Requires-Dist: numpy <2.0,>=1.18.5
+Requires-Dist: joblib >=1.1.0
+Requires-Dist: pyqpanda3
+Requires-Dist: scipy >=1.9.3
+Requires-Dist: bson
+Requires-Dist: rustworkx >=0.13.2
+Requires-Dist: Pillow >=10.2.0
+Requires-Dist: hjson
+Requires-Dist: Cython >=3.0.0
+Requires-Dist: packaging
+

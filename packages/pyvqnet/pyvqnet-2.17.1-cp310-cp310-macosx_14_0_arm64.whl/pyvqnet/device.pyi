@@ -1,0 +1,9 @@
+from ._core.vqnet import GetGPUDeviceCount as GetGPUDeviceCount, GetGPUFreeMemSize as GetGPUFreeMemSize, if_gpu_compiled as if_gpu_compiled, if_mpi_compiled as if_mpi_compiled, if_nccl_compiled as if_nccl_compiled, maybe_set_cuda_lazy_init as maybe_set_cuda_lazy_init
+from _typeshed import Incomplete
+
+def get_gpu_max_count(): ...
+
+DEV_GPU_MAX: Incomplete
+
+def get_gpu_free_mem(device_id): ...
+def get_readable_device_str(device_int): ...
