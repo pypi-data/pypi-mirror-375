@@ -1,0 +1,65 @@
+Metadata-Version: 2.4
+Name: ciounreal
+Version: 0.2.0b1
+Summary: Unreal plugin for Conductor Cloud Rendering Platform.
+Home-page: https://github.com/ConductorTechnologies/ciounreal
+Author: Conductor
+Author-email: info@conductortech.com
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Multimedia :: Graphics :: 3D Rendering
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: ciocore<9.0.0,>=8.3.3
+Requires-Dist: cioseq<1.0.0,>=0.1.14
+Requires-Dist: p4python==2024.1.2625398
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+# Conductor plugin for Unreal
+
+Unreal Engine plugin to manage MovieRenderPipeline submissions to Conductor's cloud service. 
+
+Supported software: Unreal Engine 5 and higher
+
+
+## Development
+
+See [DEVELOPMENT](DEVELOPMENT.md) for more information.
+
+## Changelog
+
+## Version:0.2.0-beta.1 -- 10 September 2025
+
+* Added Perforce variable fields to expedite user submission
+
+## Version:0.1.5 -- 27 May 2025
+
+* Additional formatting for upload time statistics so text does not overflow
+
+## Version:0.1.4 -- 27 May 2025
+
+* Ensures multi-job submission data is accurate by populating the Manifest Queue at upload time
+
+## Version:0.1.3 -- 16 May 2025
+
+* Submit only enabled Movie Render Queue Jobs for rendering
+
+## Version:0.1.2 -- 14 May 2025
+
+*  Ensure render execution by filtering and submitting to only Windows instances
+
+## Version:0.1.1 -- 21 Mar 2025
+
+*  Supports plugin installation through the Conductor Companion App
+
+## Version:0.1.0 -- 15 Jan 2025
+
+*  Ensure Unreal render engine compatibility by only displaying single GPU instance types

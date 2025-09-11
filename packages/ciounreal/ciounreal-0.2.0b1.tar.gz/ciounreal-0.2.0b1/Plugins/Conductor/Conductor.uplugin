@@ -1,0 +1,40 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Conductor",
+	"Description": "Submit jobs to to the Conductor cloud rendering service.",
+	"Category": "Rendering",
+	"CreatedBy": "Conductor",
+	"CreatedByURL": "https://www.conductortech.com",
+	"DocsURL": "PlaceHolder",
+	"MarketplaceURL": "PlaceHolder",
+	"SupportURL": "PlaceHolder",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"EnabledByDefault": true,
+	"Plugins":
+	[
+		{
+			"Name": "PythonScriptPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "MovieRenderPipeline",
+			"Enabled": true
+		},
+		{
+			"Name": "EditorScriptingUtilities",
+			"Enabled": true
+		}
+	],
+	"Modules": [
+		{
+			"Name": "Conductor",
+			"Type": "UncookedOnly",
+			"PlatformAllowList": [ "Win64" ]
+		}
+	]
+}
