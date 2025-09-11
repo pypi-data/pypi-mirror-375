@@ -1,0 +1,12 @@
+LICENSE.txt
+README.md
+pyproject.toml
+pocketvec/__init__.py
+pocketvec/core.py
+pocketvec/io_utils.py
+pocketvec/similarity.py
+pocketvec.egg-info/PKG-INFO
+pocketvec.egg-info/SOURCES.txt
+pocketvec.egg-info/dependency_links.txt
+pocketvec.egg-info/requires.txt
+pocketvec.egg-info/top_level.txt
