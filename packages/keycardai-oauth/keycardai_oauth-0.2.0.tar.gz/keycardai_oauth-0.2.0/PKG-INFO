@@ -1,0 +1,70 @@
+Metadata-Version: 2.4
+Name: keycardai-oauth
+Version: 0.2.0
+Summary: A Python SDK for OAuth 2.0 functionality implementing multiple OAuth 2.0 standards
+Project-URL: Homepage, https://github.com/keycardai/python-sdk
+Project-URL: Repository, https://github.com/keycardai/python-sdk
+Project-URL: Documentation, https://docs.keycardai.com
+Project-URL: Issues, https://github.com/keycardai/python-sdk/issues
+Author-email: KeyCard AI <support@keycard.ai>
+License: MIT
+Keywords: authentication,oauth,oauth2,security,tokens
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Internet :: WWW/HTTP :: Session
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Requires-Dist: httpx>=0.28.1
+Requires-Dist: pydantic>=2.11.7
+Provides-Extra: test
+Requires-Dist: pytest-asyncio>=1.1.0; extra == 'test'
+Requires-Dist: pytest>=8.4.1; extra == 'test'
+Description-Content-Type: text/markdown
+
+# KeyCard AI OAuth SDK
+
+A comprehensive Python SDK for OAuth 2.0 functionality implementing multiple OAuth 2.0 standards for enterprise-grade token management.
+
+## Installation
+
+```bash
+uv add keycardai-oauth
+```
+
+## Quick Start
+
+```python
+from keycardai.oauth import Client
+
+with Client("https://oauth.example.com/token") as client:
+    response = await client.exchange_token(
+        subject_token="original_token",
+        subject_token_type=TokenTypes.ACCESS_TOKEN,
+        resource="https://api.example.com"
+    )
+
+```
+
+## Development
+
+This package is part of the [KeycardAI Python SDK workspace](../../README.md). 
+
+To develop:
+
+```bash
+# From workspace root
+uv sync
+uv run --package keycardai-oauth pytest
+```
+
+## License
+
+MIT License - see [LICENSE](../../LICENSE) file for details.
