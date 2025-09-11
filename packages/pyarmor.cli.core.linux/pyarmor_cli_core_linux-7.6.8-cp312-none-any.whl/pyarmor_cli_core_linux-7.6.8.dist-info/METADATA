@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: pyarmor.cli.core.linux
+Version: 7.6.8
+Summary: Provide pre-built extension modules `pytransform3` and `pyarmor_runtime` for Pyarmor
+Home-page: https://github.com/dashingsoft/pyarmor
+Author: Jondy Zhao
+Author-email: pyarmor@163.com
+License: Free To Use But Restricted
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: Free To Use But Restricted
+Classifier: Operating System :: Android
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: Utilities
+Classifier: Topic :: Security
+Classifier: Topic :: System :: Software Distribution
+
