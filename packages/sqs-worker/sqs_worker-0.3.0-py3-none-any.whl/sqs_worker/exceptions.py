@@ -1,0 +1,4 @@
+class RetryLaterException(
+    Exception,
+):
+    pass
