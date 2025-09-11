@@ -1,0 +1,2 @@
+[console_scripts]
+otel-ci = otel_ci.cli:main
