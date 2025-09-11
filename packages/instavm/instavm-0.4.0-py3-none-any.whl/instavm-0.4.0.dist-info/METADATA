@@ -1,0 +1,288 @@
+Metadata-Version: 2.4
+Name: instavm
+Version: 0.4.0
+Summary: A simple API client for code execution
+Home-page: http://instavm.io
+Author: InstaVM Team
+Author-email: hello@instavm.io
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# InstaVM Client
+
+A comprehensive Python client library for InstaVM's code execution and browser automation APIs.
+
+## Features
+
+- **Code Execution**: Run Python, Bash, and other languages in secure cloud environments
+- **Browser Automation**: Control web browsers for testing, scraping, and automation
+- **Session Management**: Automatic session creation and server-side expiration
+- **File Operations**: Upload files to execution environments
+- **Async Support**: Execute commands asynchronously for long-running tasks
+- **Error Handling**: Comprehensive exception handling for different failure modes
+
+## Installation
+
+You can install the package using pip:
+```bash
+pip install instavm
+```
+
+## Quick Start
+
+### Code Execution
+```python
+from instavm import InstaVM, ExecutionError, NetworkError
+
+# Create client with automatic session management
+client = InstaVM(api_key='your_api_key')
+
+try:
+    # Execute a command
+    result = client.execute("print(100**100)")
+    print(result)
+
+    # Get usage info for the session
+    usage = client.get_usage()
+    print(usage)
+
+except ExecutionError as e:
+    print(f"Code execution failed: {e}")
+except NetworkError as e:
+    print(f"Network issue: {e}")
+finally:
+    client.close_session()
+```
+
+### File Upload
+```python
+from instavm import InstaVM
+
+client = InstaVM(api_key='your_api_key')
+
+# Upload a file to the execution environment
+result = client.upload_file("local_script.py", "/remote/path/script.py")
+print(result)
+
+# Execute the uploaded file
+execution_result = client.execute("python /remote/path/script.py", language="bash")
+print(execution_result)
+```
+
+### Error Handling
+```python
+from instavm import InstaVM, AuthenticationError, RateLimitError, SessionError
+
+try:
+    client = InstaVM(api_key='invalid_key')
+except AuthenticationError:
+    print("Invalid API key")
+except RateLimitError:
+    print("Rate limit exceeded - try again later")
+except SessionError as e:
+    print(f"Session error: {e}")
+```
+
+### Async Execution
+```python
+from instavm import InstaVM
+
+client = InstaVM(api_key='your_api_key')
+
+# Execute command asynchronously (returns task ID)
+result = client.execute_async("sleep 5 && echo 'Long task complete!'", language="bash")
+task_id = result['task_id']
+print(f"Task {task_id} is running in background...")
+
+# Note: Task status checking requires OAuth2 authentication
+# Use execute() for immediate results
+```
+
+## Browser Automation
+
+### Basic Browser Usage
+```python
+from instavm import InstaVM
+
+client = InstaVM(api_key='your_api_key')
+
+# Create browser session
+session_id = client.create_browser_session(1920, 1080)
+print(f"Browser session: {session_id}")
+
+# Navigate to a webpage
+nav_result = client.browser_navigate("https://example.com", session_id)
+print(f"Navigation: {nav_result}")
+
+# Take screenshot (returns base64 string)
+screenshot = client.browser_screenshot(session_id)
+print(f"Screenshot size: {len(screenshot)} characters")
+
+# Extract page elements
+elements = client.browser_extract_elements(session_id, "title", attributes=["text"])
+print(f"Page title: {elements}")
+
+# Interact with page
+client.browser_scroll(session_id, y=200)
+client.browser_click("button#submit", session_id)
+client.browser_fill("input[name='email']", "test@example.com", session_id)
+
+# Sessions auto-expire on server side (no explicit close needed)
+# But you can close manually if desired:
+# client.close_browser_session(session_id)
+```
+
+### Browser Manager (High-Level Interface)
+```python
+from instavm import InstaVM
+
+client = InstaVM(api_key='your_api_key')
+
+# Create managed browser session
+browser_session = client.browser.create_session(1366, 768)
+print(f"Managed session: {browser_session.session_id}")
+
+# Use session object for operations
+browser_session.navigate("https://example.com")
+browser_session.click("button#submit")
+browser_session.fill("input[name='email']", "test@example.com")
+browser_session.type("textarea", "Hello world!")
+
+# Take screenshot
+screenshot = browser_session.screenshot()
+print(f"Screenshot: {len(screenshot)} chars")
+
+# Extract elements
+titles = browser_session.extract_elements("h1", attributes=["text"])
+print(f"H1 elements: {titles}")
+
+# Close session when done
+browser_session.close()
+```
+
+### Convenience Methods (Auto-Session)
+```python
+from instavm import InstaVM
+
+client = InstaVM(api_key='your_api_key')
+
+# These methods auto-create a browser session if needed
+client.browser.navigate("https://example.com")
+screenshot = client.browser.screenshot()
+elements = client.browser.extract_elements("title")
+
+print(f"Auto-session screenshot: {len(screenshot)} chars")
+print(f"Elements found: {elements}")
+```
+
+### Available Browser Methods
+
+**Session Management:**
+- `create_browser_session(width, height, user_agent)` - Create new browser session
+- `get_browser_session(session_id)` - Get session information  
+- `list_browser_sessions()` - List active sessions
+- `close_browser_session(session_id)` - Close session (optional - sessions auto-expire)
+
+**Navigation & Interaction:**
+- `browser_navigate(url, session_id, timeout)` - Navigate to URL
+- `browser_click(selector, session_id, force, timeout)` - Click element
+- `browser_type(selector, text, session_id, delay, timeout)` - Type text
+- `browser_fill(selector, value, session_id, timeout)` - Fill form field
+- `browser_scroll(session_id, selector, x, y)` - Scroll page or element
+- `browser_wait(condition, session_id, selector, timeout)` - Wait for condition
+
+**Data Extraction:**
+- `browser_screenshot(session_id, full_page, clip, format)` - Take screenshot
+- `browser_extract_elements(session_id, selector, attributes)` - Extract DOM elements
+
+### Browser Error Handling
+```python
+from instavm import (
+    InstaVM, BrowserSessionError, BrowserInteractionError, 
+    ElementNotFoundError, BrowserTimeoutError, QuotaExceededError
+)
+
+client = InstaVM(api_key='your_api_key')
+
+try:
+    session_id = client.create_browser_session(1920, 1080)
+    client.browser_navigate("https://example.com", session_id)
+    client.browser_click("button#nonexistent", session_id)
+    
+except BrowserSessionError:
+    print("Browser session error - may be down or quota exceeded")
+except ElementNotFoundError as e:
+    print(f"Element not found: {e}")
+except BrowserTimeoutError:
+    print("Browser operation timed out")
+except BrowserInteractionError as e:
+    print(f"Browser interaction failed: {e}")
+```
+
+## Complete Automation Example
+```python
+from instavm import InstaVM
+import base64
+
+def web_automation_example():
+    client = InstaVM(api_key='your_api_key')
+    
+    # 1. Execute setup code
+    setup = client.execute("""
+import json
+data = {"timestamp": "2024-01-01", "status": "starting"}
+print(json.dumps(data))
+    """, language="python")
+    print("Setup result:", setup)
+    
+    # 2. Browser automation
+    session_id = client.create_browser_session(1920, 1080)
+    
+    # Navigate and interact
+    client.browser_navigate("https://httpbin.org/forms/post", session_id) 
+    client.browser_fill("input[name='custname']", "Test User", session_id)
+    client.browser_fill("input[name='custemail']", "test@example.com", session_id)
+    
+    # Take screenshot before submission
+    screenshot = client.browser_screenshot(session_id)
+    
+    # Save screenshot
+    with open("automation_screenshot.png", "wb") as f:
+        f.write(base64.b64decode(screenshot))
+    
+    # Get page info
+    elements = client.browser_extract_elements(session_id, "input", attributes=["name", "value"])
+    
+    # 3. Process results
+    analysis = client.execute(f"""
+elements_count = {len(elements)}
+screenshot_size = {len(screenshot)}
+print(f"Found {{elements_count}} form elements")
+print(f"Screenshot size: {{screenshot_size}} characters")
+print("Automation completed successfully")
+    """, language="python")
+    
+    return {
+        "setup": setup,
+        "elements": elements,
+        "analysis": analysis,
+        "screenshot_saved": True
+    }
+
+# Run automation
+result = web_automation_example()
+print("Final result:", result)
+```
