@@ -1,0 +1,8 @@
+graft src/zlib_ng/zlib-ng
+prune docs
+prune benchmark_scripts
+prune .github
+exclude requirements-docs.txt
+exclude codecov.yml
+exclude .readthedocs.yml
+exclude .git*
