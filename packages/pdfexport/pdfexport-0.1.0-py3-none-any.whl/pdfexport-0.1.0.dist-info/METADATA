@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: pdfexport
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.12
+Requires-Dist: fastmcp>=0.2.0
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pypdf>=4.0.0
+Requires-Dist: pywin32>=306; sys_platform == 'win32'
+Description-Content-Type: text/markdown
+
+uv run pdf-export
+uv run mcp dev server.py
