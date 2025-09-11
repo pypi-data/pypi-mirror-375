@@ -1,0 +1,7 @@
+[peagen.plugins.storage_adapters]
+file=swarmauri_storage_file.file_storage_adapter:FileStorageAdapter
+file_storage_adapter=swarmauri_storage_file.file_storage_adapter:FileStorageAdapter
+
+[swarmauri.storage_adapters]
+FileStorageAdapter=swarmauri_storage_file.file_storage_adapter:FileStorageAdapter
+
