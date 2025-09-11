@@ -1,0 +1,6 @@
+[peagen.plugins.git_filters]
+file=swarmauri_gitfilter_file.file_filter:FileFilter
+
+[swarmauri.git_filters]
+FileFilter=swarmauri_gitfilter_file.file_filter:FileFilter
+
