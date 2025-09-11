@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: gitstack
+Version: 0.1.0
+Summary: An advanced modern version control system
+License-File: LICENSE.md
+Requires-Dist: click
+Requires-Dist: tabulate
+
