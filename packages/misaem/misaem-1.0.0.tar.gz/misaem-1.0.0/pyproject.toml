@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "misaem"
+version = "1.0.0"
+authors = [
+  { name="Christophe Muller", email="mullerchristophe21@gmail.com" },
+]
+description = "A logistic regression model with missing data handling using the SAEM algorithm."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Information Analysis"
+]
+dependencies = [
+    "numpy>=1.20.0",
+    "scikit-learn>=1.5",
+    "tqdm>=4.0"
+]
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black",
+    "flake8"
+]
+
+
+[project.urls]
+Homepage = "https://github.com/ChristopheMuller/misaem_python"
+Issues = "https://github.com/ChristopheMuller/misaem_python/issues"
+
+[tool.pytest.ini_options]
+addopts = "-v"
+testpaths = [
+    "tests",
+]
