@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+src/alb_target_group/__init__.py
+src/alb_target_group/alb_target_group_stack.py
+src/alb_target_group.egg-info/PKG-INFO
+src/alb_target_group.egg-info/SOURCES.txt
+src/alb_target_group.egg-info/dependency_links.txt
+src/alb_target_group.egg-info/not-zip-safe
+src/alb_target_group.egg-info/requires.txt
+src/alb_target_group.egg-info/top_level.txt
+tests/__init__.py
+tests/test_alb_target_group.py
