@@ -1,0 +1,1 @@
+from mosamatic2.core.pipelines.defaultpipeline import DefaultPipeline
