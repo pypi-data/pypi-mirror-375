@@ -1,0 +1,9 @@
+amplfi>=0.5.5
+ml4gw>=0.7.4
+jsonargparse~=4.40
+h5py~=3.12
+numpy<2.0.0
+matplotlib==3.9.4
+gwpy==3.0.12
+ligo-skymap<3,>=2.2.2
+huggingface_hub~=0.30
