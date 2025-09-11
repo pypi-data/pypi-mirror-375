@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: qti2latex
+Version: 0.1.0
+Summary: Convert QTI (Canvas) to LaTeX exam. Designed to work with text2qti, but should also work with quiz files exported from Canvas.
+Author: breed
+Requires-Python: >=3.6
+Requires-Dist: pypandoc
