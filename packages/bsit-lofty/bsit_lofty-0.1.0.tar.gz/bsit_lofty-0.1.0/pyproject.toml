@@ -1,0 +1,14 @@
+[project]
+name = "bsit-lofty"
+version = "0.1.0"
+description = "BACnet Semantic Interoperability Toolkit - Lofty - Real Estate Core"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "rdflib>=7.1.4",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.13.0",
+]
