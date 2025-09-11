@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trackscan"
+version = "0.0.2"
+description = "Post-processing and analysis of cell track data"
+readme = "README.md"
+requires-python = ">=3.6"
+authors = [
+    { name = "Chris Viets" }
+]
+dependencies = [
+    "numpy",
+    "matplotlib"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/cviets/trackscan"
+"Bug Tracker" = "https://github.com/cviets/trackscan/issues"
+
+[project.scripts]
+trackscan = "trackscan.cli:main"
