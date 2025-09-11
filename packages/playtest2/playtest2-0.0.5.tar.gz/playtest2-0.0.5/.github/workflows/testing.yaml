@@ -1,0 +1,43 @@
+name: Run tests
+
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pypa/hatch@install
+      - name: Run tests
+        run: hatch test --randomize --all -vv --doctest-modules
+  
+  examples-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: getgauge/setup-gauge@master
+        with:
+          gauge-plugins: python
+      - name: Install playtest2
+        run: |
+          python -m venv .venv --upgrade-deps
+          source .venv/bin/activate
+          python -m pip install .
+          cd example
+          playtest2 setup
+      - name: Debug information
+        run: |
+          source .venv/bin/activate
+          which python
+          python -m site
+          cat example/env/default/python.properties
+      - name: Run validation
+        run: |
+          source .venv/bin/activate
+          cd example
+          gauge validate specs
