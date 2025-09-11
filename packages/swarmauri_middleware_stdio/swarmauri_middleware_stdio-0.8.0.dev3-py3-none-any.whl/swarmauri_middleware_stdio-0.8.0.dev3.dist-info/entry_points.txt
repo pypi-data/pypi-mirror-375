@@ -1,0 +1,3 @@
+[swarmauri.middlewares]
+StdioMiddleware=swarmauri_middleware_stdio:StdioMiddleware
+
