@@ -1,0 +1,12 @@
+numpy
+scipy
+pandas
+
+[tests]
+pytest
+pytest-cov
+h5py
+xarray
+dask[array]
+pyproj
+pyresample
