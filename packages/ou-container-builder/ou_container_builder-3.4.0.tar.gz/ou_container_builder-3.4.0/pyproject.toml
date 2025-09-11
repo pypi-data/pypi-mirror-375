@@ -1,0 +1,159 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ou-container-builder"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = []
+authors = [{ name = "Mark Hall", email = "mark.hall@work.room3b.eu" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "PyYAML>=6,<7",
+  "Jinja2>=3,<4",
+  "typer",
+  "rich>=13,<14",
+  "pydantic>=2,<3",
+]
+
+[project.urls]
+Documentation = "https://github.com/unknown/ou-container-builder#readme"
+Issues = "https://github.com/unknown/ou-container-builder/issues"
+Source = "https://github.com/unknown/ou-container-builder"
+
+[project.scripts]
+ou-container-builder = "ou_container_builder.__main__:app"
+ocb = "ou_container_builder.__main__:app"
+
+[project.entry-points.ou_container_builder]
+code_server = "ou_container_builder.packs.code_server"
+jupyterlab = "ou_container_builder.packs.jupyterlab"
+ipykernel = "ou_container_builder.packs.ipykernel"
+irkernel = "ou_container_builder.packs.irkernel"
+xfce4 = "ou_container_builder.packs.xfce4"
+notebook = "ou_container_builder.packs.notebook"
+
+[tool.hatch.version]
+path = "ou_container_builder/__about__.py"
+
+[tool.hatch.envs.default]
+extra-dependencies = [
+  "coverage[toml]>=6.5",
+  "jupyter-book>=1,<2",
+  "ou-book-theme>=1.1.1,<2",
+  "pytest",
+  "ruff==0.12.9",
+]
+[tool.hatch.envs.default.scripts]
+docs = "jb build docs {args}"
+docs-server = "jb obt serve docs {args}"
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+demo = "cd tests/demos && ./demo-tests.sh {args}"
+cov-report = ["- coverage combine", "coverage report"]
+cov = ["test-cov", "cov-report"]
+cov-xml = ["- coverage combine", "coverage xml"]
+cov-auto = ["test-cov", "cov-xml"]
+style = "ruff check {args:.}"
+format = "ruff format {args:.}"
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.10", "3.11"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+exclude = ["ou_container_builder/core/server/startup.py"]
+
+[tool.ruff.lint]
+select = [
+  "A",
+  "ARG",
+  "B",
+  "C",
+  "DTZ",
+  "E",
+  "EM",
+  "F",
+  "FBT",
+  "I",
+  "ICN",
+  "ISC",
+  "N",
+  "PLC",
+  "PLE",
+  "PLR",
+  "PLW",
+  "Q",
+  "RUF",
+  "S",
+  "T",
+  "TID",
+  "UP",
+  "W",
+  "YTT",
+]
+ignore = [
+  # Allow non-abstract empty methods in abstract base classes
+  "B027",
+  # Allow boolean positional values in function calls, like `dict.get(... True)`
+  "FBT003",
+  # Ignore single-line concatentation
+  "ISC001",
+  # Ignore checks for possible passwords
+  "S105",
+  "S106",
+  "S107",
+  # Ignore complexity
+  "C901",
+  "PLR0911",
+  "PLR0912",
+  "PLR0913",
+  "PLR0915",
+]
+unfixable = [
+  # Don't touch unused imports
+  "F401",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ou_container_builder"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+"tests/**/*" = ["PLR2004", "S101", "TID252"]
+
+[tool.coverage.run]
+source_pkgs = ["ou_container_builder"]
+branch = true
+parallel = true
+omit = [
+  "ou_container_builder/__about__.py",
+  "ou_container_builder/core/server/startup.py",
+]
+
+[tool.coverage.paths]
+ou_container_builder = [
+  "ou_container_builder",
+  "*/ou-container-builder/ou_container_builder",
+]
+tests = ["tests", "*/ou-container-builder/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+skip_covered = true
+show_missing = true

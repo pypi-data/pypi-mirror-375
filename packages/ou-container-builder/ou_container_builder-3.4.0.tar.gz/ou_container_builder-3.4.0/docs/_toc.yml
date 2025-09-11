@@ -1,0 +1,78 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts:
+  - caption: User Guide
+    maxdepth: 1
+    chapters:
+      - file: user/installation
+      - file: user/commands
+      - file: user/configuration/index
+        sections:
+          - file: user/configuration/module
+          - file: user/configuration/image
+          - file: user/configuration/server
+          - file: user/configuration/content
+          - file: user/configuration/packages
+          - file: user/configuration/web_apps
+          - file: user/configuration/scripts
+          - file: user/configuration/services
+          - file: user/configuration/sources
+          - file: user/configuration/environment
+          - file: user/configuration/jupyter_server_config
+          - file: user/configuration/args
+          - file: user/configuration/output_blocks
+      - file: user/packs/index
+        sections:
+          - file: user/packs/code_server
+          - file: user/packs/ipykernel
+          - file: user/packs/irkernel
+          - file: user/packs/jupyterlab
+          - file: user/packs/notebook
+          - file: user/packs/xfce4
+      - file: changelog.md
+  - caption: Developer Guide
+    maxdepth: 1
+    chapters:
+      - file: developer/output_block_weights
+      - file: developer/startup_script_weights
+      - file: developer/paths
+      - file: developer/api/index
+        sections:
+          - file: developer/api/ou_container_builder
+          - file: developer/api/ou_container_builder.__about__
+          - file: developer/api/ou_container_builder.__main__
+          - file: developer/api/ou_container_builder.cli
+            sections:
+              - file: developer/api/ou_container_builder.cli.base
+              - file: developer/api/ou_container_builder.cli.build
+              - file: developer/api/ou_container_builder.cli.clean
+              - file: developer/api/ou_container_builder.cli.generate
+              - file: developer/api/ou_container_builder.cli.version
+          - file: developer/api/ou_container_builder.core
+            sections:
+              - file: developer/api/ou_container_builder.core.apt
+              - file: developer/api/ou_container_builder.core.args
+              - file: developer/api/ou_container_builder.core.base
+              - file: developer/api/ou_container_builder.core.content
+              - file: developer/api/ou_container_builder.core.environment
+              - file: developer/api/ou_container_builder.core.python
+              - file: developer/api/ou_container_builder.core.rust
+              - file: developer/api/ou_container_builder.core.scripts
+              - file: developer/api/ou_container_builder.core.server
+              - file: developer/api/ou_container_builder.core.services
+              - file: developer/api/ou_container_builder.core.sources
+              - file: developer/api/ou_container_builder.core.user
+              - file: developer/api/ou_container_builder.core.webapp
+          - file: developer/api/ou_container_builder.packs
+            sections:
+              - file: developer/api/ou_container_builder.packs.code_server
+              - file: developer/api/ou_container_builder.packs.ipykernel
+              - file: developer/api/ou_container_builder.packs.jupyterlab
+              - file: developer/api/ou_container_builder.packs.notebook
+              - file: developer/api/ou_container_builder.packs.xfce4
+          - file: developer/api/ou_container_builder.settings
+          - file: developer/api/ou_container_builder.state
+          - file: developer/api/ou_container_builder.util

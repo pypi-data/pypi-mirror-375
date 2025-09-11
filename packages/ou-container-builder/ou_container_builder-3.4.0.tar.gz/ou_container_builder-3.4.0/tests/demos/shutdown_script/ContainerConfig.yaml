@@ -1,0 +1,15 @@
+version: "3"
+module:
+  code: ShutdownScript
+  presentation: "1"
+image:
+  user: test
+server:
+  access_token: test
+  default_url: /
+scripts:
+  - stage: shutdowns
+    name: shutdown-notification
+    commands:
+      - "#!/bin/bash"
+      - echo "Shutting down"

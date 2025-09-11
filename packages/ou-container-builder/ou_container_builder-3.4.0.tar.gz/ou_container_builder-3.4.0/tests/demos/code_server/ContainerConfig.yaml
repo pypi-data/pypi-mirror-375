@@ -1,0 +1,14 @@
+version: "3"
+module:
+  code: CodeServerDemo
+  presentation: "1"
+image:
+  user: test
+packs:
+  code_server:
+    extensions:
+      - ms-python.python
+  jupyterlab: {}
+server:
+  default_url: /lab
+  access_token: test

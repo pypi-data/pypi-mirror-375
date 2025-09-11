@@ -1,0 +1,13 @@
+version: "3"
+module:
+  code: JupyterlabDemo
+  presentation: "1"
+image:
+  user: test
+packs:
+  jupyterlab:
+    version: 4
+  ipykernel: {}
+server:
+  access_token: test
+  default_url: /lab

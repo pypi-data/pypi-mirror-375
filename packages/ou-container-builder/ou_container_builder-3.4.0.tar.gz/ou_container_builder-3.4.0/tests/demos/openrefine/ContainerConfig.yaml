@@ -1,0 +1,37 @@
+version: "3"
+module:
+  code: OpenRefineDemo
+  presentation: "1"
+image:
+  user: test
+packages:
+  apt:
+    build:
+      - wget
+    deploy:
+      - openjdk-17-jdk
+scripts:
+  - stage: build
+    commands:
+      - wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/releases/download/3.7.7/openrefine-linux-3.7.7.tar.gz
+      - mkdir /var/openrefine
+      - tar -xzf openrefine-linux-3.7.7.tar.gz --directory /var/openrefine
+web_apps:
+  - path: openrefine
+    options:
+      command:
+        - /var/openrefine/openrefine-3.7.7/refine
+        - -i
+        - 0.0.0.0
+        - -p
+        - "{port}"
+        - -d
+        - /home/test/OpenRefine
+      timeout: 120
+server:
+  default_url: /openrefine
+  access_token: test
+docker_blocks:
+  deploy:
+    - block: COPY --from=base /var/openrefine /var/openrefine
+      weight: 2001

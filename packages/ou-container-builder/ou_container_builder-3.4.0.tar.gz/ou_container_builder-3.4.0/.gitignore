@@ -1,0 +1,13 @@
+.vscode
+*.egg-info
+__pycache__
+.tox
+.pytest_cache
+.DS_Store
+_build
+.ruff_cache
+dist
+.coverage*
+.mypy_cache
+tmp
+coverage.xml
