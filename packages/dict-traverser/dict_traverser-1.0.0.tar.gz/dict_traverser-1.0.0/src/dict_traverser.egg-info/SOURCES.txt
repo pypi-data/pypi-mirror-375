@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/dict_traverser/__init__.py
+src/dict_traverser/dict_traverser.py
+src/dict_traverser.egg-info/PKG-INFO
+src/dict_traverser.egg-info/SOURCES.txt
+src/dict_traverser.egg-info/dependency_links.txt
+src/dict_traverser.egg-info/requires.txt
+src/dict_traverser.egg-info/top_level.txt
+tests/test_access.py
+tests/test_updates.py
