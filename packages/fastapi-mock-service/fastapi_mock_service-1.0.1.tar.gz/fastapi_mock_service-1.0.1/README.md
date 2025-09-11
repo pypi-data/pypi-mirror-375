@@ -1,0 +1,426 @@
+# FastAPI Mock Service
+
+[![PyPI version](https://badge.fury.io/py/fastapi-mock-service.svg)](https://badge.fury.io/py/fastapi-mock-service)
+[![Python Version](https://img.shields.io/pypi/pyversions/fastapi-mock-service.svg)](https://pypi.org/project/fastapi-mock-service/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**Professional FastAPI mock service library with built-in load testing infrastructure, real-time metrics, and
+interactive dashboard.**
+
+Perfect for:
+
+- **API Development & Testing**
+- **Load Testing Infrastructure**
+- **Service Virtualization**
+- **Performance Monitoring**
+- **Development & Integration Testing**
+
+## Features
+
+### Core Features
+
+- **FastAPI-style decorators** - Familiar `@mock.get()`, `@mock.post()` syntax
+- **Automatic parameter validation** - Built-in request validation with custom error handlers
+- **Flexible response configuration** - Support for custom error codes and response formats
+- **Database integration** - SQLite-based test results storage
+
+### Load Testing & Monitoring
+
+- **Built-in Prometheus metrics** - Request counts, response times, error rates
+- **Real-time dashboard** - Interactive web UI with live charts
+- **Multiple chart views** - Overview, per-endpoint, and error code analysis
+- **Test session management** - Start/stop tests with automatic reporting
+
+### Professional UI
+
+- **Responsive dashboard** - Modern web interface for monitoring
+- **Collapsible sections** - Organized, space-efficient layout
+- **Real-time updates** - Live metrics and request logs
+- **Export capabilities** - Test results and metrics export
+
+## Installation
+
+```bash
+pip install fastapi-mock-service
+```
+
+## Quick Start
+
+### Basic Usage
+
+```python
+from fastapi_mock_service import MockService
+from pydantic import BaseModel
+
+# Create mock service
+mock = MockService()
+
+class User(BaseModel):
+    id: int
+    name: str
+    email: str
+
+# Simple endpoint
+@mock.get("/api/users/{user_id}")
+def get_user(user_id: int):
+    return User(id=user_id, name=f"User {user_id}", email=f"user{user_id}@example.com")
+
+# Run the service
+if __name__ == "__main__":
+    mock.run()
+```
+
+### Advanced Usage with Custom Error Codes
+
+```python
+from fastapi_mock_service import MockService
+from pydantic import BaseModel
+from typing import List, Optional, Dict
+from datetime import datetime, timezone
+
+# Create mock service
+mock = MockService()
+
+# Define custom error codes
+API_ERRORS = {
+    "validation": {"code": "API.01000", "message": "Validation error"},
+    "not_found": {"code": "API.01001", "message": "Resource not found"},
+    "unauthorized": {"code": "API.01002", "message": "Unauthorized access"},
+    "server_error": {"code": "API.01003", "message": "Internal server error"},
+}
+
+# Response models
+class StandardResult(BaseModel):
+    timestamp: str
+    status: int
+    code: str
+    message: str
+
+class UserResponse(BaseModel):
+    result: StandardResult
+    data: Optional[dict] = None
+
+def create_responses_from_errors(error_dict: Dict, success_code: str) -> List[Dict]:
+    """Dynamically create response list from error dictionary"""
+    responses = [{"code": success_code, "description": "Success"}]
+    for error_key, error_info in error_dict.items():
+        responses.append({
+            "code": error_info["code"],
+            "description": error_info["message"]
+        })
+    return responses
+
+def create_validation_handler(error_code: str, response_class):
+    """Create custom validation error handler"""
+    def handler(missing_params, endpoint_path, service_name):
+        result = StandardResult(
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            status=200,
+            code=error_code,
+            message=f"Missing required parameters: {', '.join(missing_params)}"
+        )
+        return response_class(result=result, data=None)
+    return handler
+
+# Create responses and validation handler
+API_RESPONSES = create_responses_from_errors(API_ERRORS, "API.00000")
+validation_handler = create_validation_handler("API.01000", UserResponse)
+
+# Advanced endpoint with error handling
+@mock.get("/api/v1/users/{user_id}",
+          responses=API_RESPONSES,
+          tags=["users"],
+          validation_error_handler=validation_handler)
+def get_user(user_id: int):
+    """Get user with advanced error handling"""
+    
+    # Custom logic for different scenarios
+    if user_id <= 0:
+        return UserResponse(
+            result=StandardResult(
+                timestamp=datetime.now(timezone.utc).isoformat(),
+                status=200,
+                code="API.01000",
+                message="Invalid user ID"
+            ),
+            data=None
+        )
+    
+    if user_id > 1000:
+        return UserResponse(
+            result=StandardResult(
+                timestamp=datetime.now(timezone.utc).isoformat(),
+                status=200,
+                code="API.01001", 
+                message="User not found"
+            ),
+            data=None
+        )
+    
+    # Success response
+    return UserResponse(
+        result=StandardResult(
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            status=200,
+            code="API.00000",
+            message="OK"
+        ),
+        data={"id": user_id, "name": f"User {user_id}", "email": f"user{user_id}@example.com"}
+    )
+
+if __name__ == "__main__":
+    mock.run()
+```
+
+## Command Line Interface
+
+### Generate Examples
+
+```bash
+# Create basic example
+fastapi-mock init basic_example.py
+
+# Create advanced example with error codes
+fastapi-mock init advanced_example.py --advanced
+```
+
+### Run Mock Service
+
+```bash
+# Run with default settings
+fastapi-mock run my_mock.py
+
+# Run with custom port
+fastapi-mock run my_mock.py --port 9000
+
+# Run with auto-reload for development
+fastapi-mock run my_mock.py --reload
+```
+
+## Dashboard & Monitoring
+
+Once your mock service is running, access:
+
+- **Dashboard**: `http://localhost:8000` - Interactive monitoring interface
+- **Prometheus Metrics**: `http://localhost:8000/metrics` - Raw metrics data
+- **API Documentation**: `http://localhost:8000/docs` - Auto-generated OpenAPI docs
+
+### Dashboard Features
+
+- **Test Management**: Start/stop load tests with one click
+- **Real-time Charts**: Multiple views (overview, per-endpoint, error codes)
+- **Request Logs**: Live request/response logging with timestamps
+- **Metrics**: Request counts, response times, error rates
+- **Endpoint Registry**: All registered endpoints with possible responses
+- **Collapsible Sections**: Organized, space-efficient interface
+
+## Load Testing Integration
+
+### Built-in Test Management
+
+```python
+# The dashboard provides buttons for:
+# - Start Test: Activates mock endpoints and begins metrics collection
+# - Stop Test: Generates comprehensive test report
+# - Reset Metrics: Clears all collected data
+
+# Metrics automatically collected:
+# - Total requests per endpoint
+# - Response time distribution  
+# - Error code frequency
+# - Request rate (RPS)
+```
+
+### Integration with Load Testing Tools
+
+```bash
+# Use with popular load testing tools:
+
+# curl
+curl -s "http://localhost:8000/api/users/123"
+
+# Apache Bench
+ab -n 1000 -c 10 http://localhost:8000/api/users/123
+
+# wrk
+wrk -t4 -c100 -d30s http://localhost:8000/api/users/123
+```
+
+## API Reference
+
+### MockService Class
+
+```python
+from fastapi_mock_service import MockService
+
+mock = MockService(db_url="sqlite://custom.db")  # Optional custom database
+```
+
+### Decorators
+
+All decorators support the same parameters:
+
+```python
+@mock.get(path, responses=None, tags=None, validation_error_handler=None)
+@mock.post(path, responses=None, tags=None, validation_error_handler=None)  
+@mock.put(path, responses=None, tags=None, validation_error_handler=None)
+@mock.delete(path, responses=None, tags=None, validation_error_handler=None)
+@mock.patch(path, responses=None, tags=None, validation_error_handler=None)
+```
+
+**Parameters:**
+
+- `path` (str): URL path pattern (supports FastAPI path parameters)
+- `responses` (List[Dict], optional): List of possible responses for UI display
+- `tags` (List[str], optional): Tags for grouping endpoints in dashboard
+- `validation_error_handler` (Callable, optional): Custom validation error handler
+
+### Response Configuration
+
+```python
+# Define possible responses for dashboard display
+responses = [
+    {"code": "SUCCESS.00000", "description": "Operation successful"},
+    {"code": "ERROR.01000", "description": "Validation failed"},
+    {"code": "ERROR.01001", "description": "Resource not found"},
+]
+
+@mock.get("/api/endpoint", responses=responses, tags=["api-v1"])
+def my_endpoint():
+    # Your mock implementation
+    pass
+```
+
+## Use Cases
+
+### 1. **API Development**
+
+Mock external dependencies while developing your application:
+
+```python
+# Mock external payment service
+@mock.post("/payments/process")
+def process_payment(payment_data: PaymentRequest):
+    # Simulate different payment scenarios
+    if payment_data.amount > 10000:
+        return {"status": "declined", "reason": "amount_exceeded"}
+    return {"status": "approved", "transaction_id": "tx_123"}
+```
+
+### 2. **Load Testing**
+
+Create realistic load testing scenarios:
+
+```python
+# Mock with realistic delays and error rates
+import random
+import time
+
+@mock.get("/api/heavy-operation")
+def heavy_operation():
+    # Simulate processing time
+    time.sleep(random.uniform(0.1, 0.5))
+    
+    # Simulate 5% error rate
+    if random.random() < 0.05:
+        return {"error": "temporary_failure"}, 500
+    
+    return {"result": "success", "data": "processed"}
+```
+
+### 3. **Integration Testing**
+
+Mock multiple services with consistent behavior:
+
+```python
+# User service mock
+@mock.get("/users/{user_id}", tags=["users"])
+def get_user(user_id: int):
+    return {"id": user_id, "name": f"User {user_id}"}
+
+# Order service mock  
+@mock.get("/orders/{order_id}", tags=["orders"])
+def get_order(order_id: int):
+    return {"id": order_id, "user_id": 1, "status": "completed"}
+```
+
+## Metrics & Monitoring
+
+### Available Metrics
+
+The service automatically exposes Prometheus metrics:
+
+- `http_requests_total` - Total HTTP requests by method, endpoint, and status
+- `http_request_duration_seconds` - Request duration histogram
+- `test_requests_total` - Test-specific request counter
+- `test_code_total` - Requests grouped by response code
+- `test_endpoint_total` - Requests per endpoint during tests
+
+### Custom Metrics Integration
+
+```python
+from prometheus_client import Counter, Histogram
+
+# Define custom metrics
+custom_counter = Counter('my_custom_operations_total', 'Custom operations')
+custom_histogram = Histogram('my_operation_duration_seconds', 'Operation duration')
+
+@mock.post("/api/custom-operation")
+def custom_operation():
+    with custom_histogram.time():
+        # Your operation here
+        custom_counter.inc()
+        return {"status": "completed"}
+```
+
+## Development
+
+### Project Structure
+
+```
+fastapi_mock_service/
+├── __init__.py          # Main exports
+├── mock_service.py      # Core MockService class
+├── cli.py              # Command-line interface
+└── templates/
+    └── dashboard.html   # Web dashboard template
+```
+
+### Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
+
+### Development Setup
+
+```bash
+git clone https://github.com/yourusername/fastapi-mock-service
+cd fastapi-mock-service
+pip install -e ".[dev]"
+pytest
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+- **Documentation**: [GitHub README](https://github.com/yourusername/fastapi-mock-service#readme)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/fastapi-mock-service/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/fastapi-mock-service/discussions)
+
+## Acknowledgments
+
+Built with:
+
+- [FastAPI](https://fastapi.tiangolo.com/) - Modern, fast web framework
+- [Prometheus Client](https://github.com/prometheus/client_python) - Metrics collection
+- [Tortoise ORM](https://tortoise.github.io/) - Async ORM for test results
+- [Chart.js](https://www.chartjs.org/) - Interactive charts in dashboard
+
+---
+**Made with ❤️ for the API development and testing community**
