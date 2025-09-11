@@ -1,0 +1,11 @@
+name: ntp.time_server
+attributes:
+    depends: []
+    provides: []
+model_components:
+    depends:
+        - linux.base_objects
+        - linux.ubuntu
+model_component_objects: model_component_objects.py
+vm_resources:
+    - vm_resources/ntp-trusty-server.tgz

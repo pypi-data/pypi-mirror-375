@@ -1,0 +1,19 @@
+---
+install_flag: "{{ mc_dir }}/.ntp.installed"
+download_dir: "{{ mc_dir }}/vm_resources"
+parents:
+  - name: "ntp-server"
+    tarball: "ntp-trusty-server.tgz"
+
+files:
+  - parent: "ntp-server"
+    dest: "libopts25_5.18-2ubuntu2_amd64.deb"
+    url: "https://launchpadlibrarian.net/159722862/libopts25_5.18-2ubuntu2_amd64.deb"
+    sha256: "79033a7a4d9f08f4489e00e9a052baeb821fb8cc7f95b0cc8218eda715635c2f"
+  - parent: "ntp-server"
+    dest: "ntp_4.2.6.p5+dfsg-3ubuntu2.14.04.13_amd64.deb"
+    url: "https://launchpadlibrarian.net/377462140/ntp_4.2.6.p5+dfsg-3ubuntu2.14.04.13_amd64.deb"
+    sha256: "10355626f9b9c71cb2649fdda1d58e4ec01f4a5074f54049b9730d1d4b55cc98"
+
+required_files:
+  - destination: "{{ download_dir }}/ntp-trusty-server.tgz"
