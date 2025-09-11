@@ -1,0 +1,41 @@
+Metadata-Version: 2.4
+Name: kinfer-sim
+Version: 0.0.91
+Summary: The kinfer-sim project
+Home-page: https://github.com/kscalelabs/kinfer-sim
+Author: K-Scale Labs
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: kscale
+Requires-Dist: kinfer
+Requires-Dist: mujoco
+Requires-Dist: mujoco-scenes
+Requires-Dist: kmv
+Requires-Dist: numpy
+Requires-Dist: omegaconf
+Requires-Dist: scipy
+Requires-Dist: mediapy
+Requires-Dist: typed-argparse
+Requires-Dist: askin
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: darglint; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Dynamic: author
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# kinfer-sim
+
+Viewer for running K-Infer models in simulation.
+
+For more information, see the documentation [here](https://docs.kscale.dev/docs/simulate)

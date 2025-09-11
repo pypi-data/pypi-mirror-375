@@ -1,0 +1,13 @@
+# requirements.txt
+
+kscale
+kinfer
+mujoco
+mujoco-scenes
+kmv
+numpy
+omegaconf
+scipy
+mediapy
+typed-argparse
+askin

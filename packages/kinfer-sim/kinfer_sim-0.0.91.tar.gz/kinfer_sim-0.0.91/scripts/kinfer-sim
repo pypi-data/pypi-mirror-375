@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# if [[ "$OSTYPE" == "darwin"* ]]; then
+#     mjpython -m kinfer_sim.server "$@"
+# else
+#     python -m kinfer_sim.server "$@"
+# fi
+
+python -m kinfer_sim.server "$@"
