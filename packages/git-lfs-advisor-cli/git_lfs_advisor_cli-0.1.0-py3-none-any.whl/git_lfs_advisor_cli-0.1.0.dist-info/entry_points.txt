@@ -1,0 +1,2 @@
+[console_scripts]
+git-lfs-advisor = get_lfs_advisor_cli.cli:main
