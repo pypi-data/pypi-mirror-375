@@ -1,0 +1,67 @@
+[project]
+name = "discord-py-suite"
+version = "0.1.0"
+description = "Discord MCP Server - Complete Discord integration for Model Context Protocol"
+readme = "README.md"
+authors = [
+    { name = "sachicali", email = "calingasan.vinchi@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "py-cord>=2.6.1",
+    "loguru>=0.7.3",
+    "fastmcp>=2.12.0",
+    "pydantic>=2.11.7",
+    "python-dotenv>=1.1.1",
+    "aiohttp>=3.9.0",
+    "discord-py>=2.6.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+discord-py-suite = "src.main:main"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[tool.uv.sources]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+select = ["E", "F", "W", "I", "N", "UP", "S", "B", "A", "C4", "DTZ", "EM", "G", "PIE", "T20", "Q"]
+ignore = ["S101", "S603", "S607"]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
