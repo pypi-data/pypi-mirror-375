@@ -1,0 +1,6 @@
+from RSPileScripting.generated_python_files.pile_section_services import PrestressedConcreteDesignerCoreService_pb2_grpc as PrestressedConcreteDesignerCoreService_pb2_grpc
+from RSPileScripting.PileSection.ConcreteDesigner.CoreBaseClass import CoreBaseClass
+
+class PrestressedConcreteCore(CoreBaseClass):
+	def _create_stub(self):
+		return PrestressedConcreteDesignerCoreService_pb2_grpc.PrestressedConcreteDesignerCoreServiceStub(self._client.channel)

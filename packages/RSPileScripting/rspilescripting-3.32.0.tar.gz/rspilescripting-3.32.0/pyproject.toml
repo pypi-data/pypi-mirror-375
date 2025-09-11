@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75.6.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RSPileScripting"
+version = "3.32.0"
+dependencies = [
+    "grpcio >=1.68.1",
+    "protobuf >=5.26.1,<6.0dev",
+    "pandas >= 2.2.3"
+]
+description = "Client library for interacting with RSPile through python"
+authors = [
+  { name = "Rocscience" },
+]
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering",
+]
+license = { text = "MIT License" }
+keywords = ["Rocscience", "RSPile", "Scripting", "RocScript", "Geotechnical", "Pile Analysis"]
+
+[project.urls]
+Homepage = "https://www.rocscience.com/help/rspile/documentation/scripting/scripting-overview"
+Documentation = "https://rocscience.github.io/rspile-scripting/"

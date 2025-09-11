@@ -1,0 +1,6 @@
+from RSPileScripting.generated_python_files.pile_section_services import ReinforcedConcreteDesignerCasingService_pb2_grpc as CasingService_pb2_grpc
+from RSPileScripting.PileSection.ConcreteDesigner.CasingBaseClass import CasingBaseClass
+
+class ReinforcedConcreteCasing(CasingBaseClass):
+	def _create_stub(self):
+		return CasingService_pb2_grpc.ReinforcedConcreteDesignerCasingServiceStub(self._client.channel)

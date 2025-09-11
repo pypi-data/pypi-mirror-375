@@ -1,0 +1,6 @@
+from RSPileScripting.generated_python_files.pile_section_services import ReinforcedConcreteDesignerCoreService_pb2_grpc as ReinforcedConcreteDesignerCoreService_pb2_grpc
+from RSPileScripting.PileSection.ConcreteDesigner.CoreBaseClass import CoreBaseClass
+
+class ReinforcedConcreteCore(CoreBaseClass):
+	def _create_stub(self):
+		return ReinforcedConcreteDesignerCoreService_pb2_grpc.ReinforcedConcreteDesignerCoreServiceStub(self._client.channel)
