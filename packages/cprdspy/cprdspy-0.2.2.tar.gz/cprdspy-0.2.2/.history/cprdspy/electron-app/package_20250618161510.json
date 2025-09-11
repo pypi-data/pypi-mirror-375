@@ -1,0 +1,90 @@
+{
+    "name": "cpr-waves-visualizer",
+    "version": "1.0.0",
+    "description": "CPR波形可视化桌面应用",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "node prepare-python.js && electron-builder",
+        "build:win": "node prepare-python.js && electron-builder --win",
+        "build:mac": "node prepare-python.js && electron-builder --mac",
+        "build:linux": "node prepare-python.js && electron-builder --linux",
+        "postinstall": "electron-builder install-app-deps"
+    },
+    "keywords": [
+        "electron",
+        "dash",
+        "python",
+        "visualization",
+        "medical",
+        "cpr"
+    ],
+    "author": "CPR波形可视化团队",
+    "license": "MIT",
+    "dependencies": {
+        "electron-is-dev": "^2.0.0",
+        "electron-log": "^4.4.8",
+        "electron-store": "^8.1.0",
+        "find-process": "^1.4.7",
+        "fs-extra": "^11.1.1",
+        "tree-kill": "^1.2.2"
+    },
+    "devDependencies": {
+        "canvas": "2.9.0",
+        "electron": "^25.3.1",
+        "electron-builder": "^24.6.3"
+    },
+    "build": {
+        "appId": "com.cprdspy.app",
+        "productName": "CPR波形可视化",
+        "directories": {
+            "output": "dist",
+            "buildResources": "src/assets"
+        },
+        "files": [
+            "src/**/*",
+            "node_modules/**/*",
+            "package.json"
+        ],
+        "extraResources": [
+            {
+                "from": "python",
+                "to": "python",
+                "filter": [
+                    "**/*"
+                ]
+            }
+        ],
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "icon": "src/assets/icon.ico"
+        },
+        "mac": {
+            "target": [
+                "dmg"
+            ],
+            "icon": "src/assets/icon.icns",
+            "category": "public.app-category.medical"
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb"
+            ],
+            "icon": "src/assets/icon.png",
+            "category": "Science;MedicalSoftware"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true
+        },
+        "publish": {
+            "provider": "github",
+            "releaseType": "release"
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "name": "cpr-waves-app",
+    "version": "1.0.0",
+    "description": "CPR波形可视化桌面应用",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder",
+        "postinstall": "electron-builder install-app-deps"
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^28.1.0",
+        "electron-builder": "^24.9.1"
+    },
+    "dependencies": {
+        "electron-is-dev": "^2.0.0",
+        "electron-log": "^5.0.1",
+        "electron-store": "^8.1.0",
+        "find-process": "^1.4.7"
+    },
+    "build": {
+        "appId": "com.cpr.waves",
+        "productName": "CPR波形可视化",
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "src/**/*",
+            "package.json"
+        ],
+        "extraResources": [
+            {
+                "from": "python",
+                "to": "python",
+                "filter": [
+                    "**/*"
+                ]
+            }
+        ],
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "icon": "src/assets/icon.ico"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "createDesktopShortcut": true
+        }
+    }
+}

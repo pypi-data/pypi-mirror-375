@@ -1,0 +1,104 @@
+/* 全局样式 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* 导航链接样式 */
+.nav-link {
+    background: none;
+    border: none;
+    padding: 8px 15px;
+    color: #495057;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s;
+    border-radius: 4px;
+}
+
+.nav-link:hover {
+    color: #007bff;
+    background-color: #e9ecef;
+}
+
+/* 导航按钮样式 */
+.nav-button {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 文件列表样式 */
+#file-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#file-list-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#file-list-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#file-list-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 通知区域样式 */
+#notification-area>div {
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 按钮悬停效果 */
+button {
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* 功能说明卡片样式 */
+.feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .nav-button {
+        width: 100% !important;
+        margin: 5px 0 !important;
+    }
+
+    #file-list-container {
+        max-height: 200px !important;
+    }
+}

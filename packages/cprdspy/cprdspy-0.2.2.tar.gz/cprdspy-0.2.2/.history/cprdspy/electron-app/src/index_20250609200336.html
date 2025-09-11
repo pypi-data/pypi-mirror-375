@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPR波形可视化</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        /* 自定义标题栏 */
+        .title-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 32px;
+            background-color: #2c3e50;
+            color: white;
+            -webkit-app-region: drag;
+            /* 允许拖动窗口 */
+            user-select: none;
+        }
+
+        .title-bar-left {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .title-bar-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .title-bar-title {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .title-bar-controls {
+            display: flex;
+            -webkit-app-region: no-drag;
+            /* 控制按钮不应该拖动窗口 */
+        }
+
+        .title-bar-control {
+            width: 46px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .title-bar-control:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .title-bar-control.close:hover {
+            background-color: #e81123;
+        }
+
+        /* 内容区域 */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            z-index: 10;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: #333;
+        }
+
+        #error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            z-index: 11;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .error-icon {
+            font-size: 48px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e74c3c;
+        }
+
+        .error-message {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+            max-width: 500px;
+        }
+
+        .retry-button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .retry-button:hover {
+            background-color: #2980b9;
+        }
+
+        /* webview样式 */
+        #webview {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+            /* 初始隐藏，等待加载完成 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 自定义标题栏 -->
+    <div class="title-bar">
+        <div class="title-bar-left">
+            <img src="assets/icon.png" alt="Logo" class="title-bar-icon">
+            <span class="title-bar-title">CPR波形可视化</span>
+        </div>
+        <div class="title-bar-controls">
+            <div class="title-bar-control" id="minimize-btn">
+                <svg width="10" height="1" viewBox="0 0 10 1">
+                    <path d="M0 0h10v1H0z" fill="white" />
+                </svg>
+            </div>
+            <div class="title-bar-control" id="maximize-btn">
+                <svg width="10" height="10" viewBox="0 0 10 10">
+                    <path d="M0 0v10h10V0H0zm1 1h8v8H1V1z" fill="white" />
+                </svg>
+            </div>
+            <div class="title-bar-control close" id="close-btn">
+                <svg width="10" height="10" viewBox="0 0 10 10">
+                    <path d="M1 0L0 1l4 4-4 4 1 1 4-4 4 4 1-1-4-4 4-4-1-1-4 4-4-4z" fill="white" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content">
+        <!-- 加载指示器 -->
+        <div id="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">正在加载应用...</div>
+        </div>
+
+        <!-- 错误显示 -->
+        <div id="error">
+            <div class="error-icon">⚠️</div>
+            <div class="error-title">加载失败</div>
+            <div class="error-message" id="error-message">无法连接到应用服务器。请检查您的网络连接或重启应用。</div>
+            <button class="retry-button" id="retry-btn">重试</button>
+        </div>
+
+        <!-- Dash应用webview -->
+        <webview id="webview" src="about:blank" nodeintegration></webview>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const minimizeBtn = document.getElementById('minimize-btn');
+        const maximizeBtn = document.getElementById('maximize-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const webview = document.getElementById('webview');
+        const loading = document.getElementById('loading');
+        const error = document.getElementById('error');
+        const errorMessage = document.getElementById('error-message');
+        const retryBtn = document.getElementById('retry-btn');
+
+        // 窗口控制
+        minimizeBtn.addEventListener('click', () => {
+            window.electronAPI.minimizeWindow();
+        });
+
+        maximizeBtn.addEventListener('click', () => {
+            window.electronAPI.maximizeWindow();
+        });
+
+        closeBtn.addEventListener('click', () => {
+            window.electronAPI.closeWindow();
+        });
+
+        // 重试按钮
+        retryBtn.addEventListener('click', () => {
+            error.style.display = 'none';
+            loading.style.display = 'flex';
+            loadWebview();
+        });
+
+        // 监听服务器状态
+        window.electronAPI.onServerStatus((status) => {
+            if (status.status === 'running') {
+                loadWebview(status.url);
+            } else {
+                showError('服务器未运行: ' + status.message);
+            }
+        });
+
+        // 加载webview
+        function loadWebview(url = 'http://localhost:8050') {
+            webview.src = url;
+
+            // 监听webview事件
+            webview.addEventListener('did-start-loading', () => {
+                loading.style.display = 'flex';
+                webview.style.display = 'none';
+            });
+
+            webview.addEventListener('did-finish-load', () => {
+                loading.style.display = 'none';
+                webview.style.display = 'block';
+            });
+
+            webview.addEventListener('did-fail-load', (event) => {
+                if (event.errorCode !== -3) { // 忽略中止错误
+                    showError(`加载失败: ${event.errorDescription} (${event.errorCode})`);
+                }
+            });
+
+            // 设置超时
+            setTimeout(() => {
+                if (loading.style.display !== 'none') {
+                    showError('连接超时。请检查服务器是否正在运行。');
+                }
+            }, 30000);
+        }
+
+        // 显示错误
+        function showError(message) {
+            loading.style.display = 'none';
+            webview.style.display = 'none';
+            error.style.display = 'flex';
+            errorMessage.textContent = message;
+        }
+
+        // 处理webview中的链接
+        webview.addEventListener('new-window', (event) => {
+            window.electronAPI.openExternal(event.url);
+        });
+    </script>
+</body>
+
+</html>
