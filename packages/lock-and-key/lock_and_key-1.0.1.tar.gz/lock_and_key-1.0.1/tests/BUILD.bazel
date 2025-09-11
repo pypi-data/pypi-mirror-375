@@ -1,0 +1,31 @@
+load("@rules_python//python:defs.bzl", "py_test")
+load("@pip//:requirements.bzl", "requirement")
+
+py_library(
+    name = "lock_and_key_tests",
+    srcs = glob(["**/*.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lock_and_key:lock_and_key",
+        requirement("click"),
+        requirement("rich"),
+        requirement("pydantic"),
+        requirement("boto3"),
+        requirement("boto3-stubs"),
+        requirement("mypy-boto3-iam"),
+        requirement("mypy-boto3-lambda"),
+        requirement("mypy-boto3-dynamodb"),
+        requirement("mypy-boto3-sts"),
+        requirement("mypy-boto3-sns"),
+        requirement("mypy-boto3-sqs"),
+        requirement("mypy-boto3-s3"),
+        requirement("mypy-boto3-glue"),
+    ],
+)
+
+[py_test(
+    name = test_file.replace("/", "_").replace(".py", "").replace("test_", "", 1),
+    srcs = [test_file] + ([test_file.rsplit("/", 1)[0] + "/__init__.py"] if "/" in test_file else []),
+    main = test_file,
+    deps = [":lock_and_key_tests"],
+) for test_file in glob(["test_*.py", "**/test_*.py"])]

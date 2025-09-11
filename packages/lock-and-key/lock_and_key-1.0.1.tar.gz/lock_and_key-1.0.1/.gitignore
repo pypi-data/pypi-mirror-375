@@ -1,0 +1,9 @@
+/key.json
+.env/
+dist/
+bazel-*
+auth.bazelrc
+**/__pycache__/**
+lock_and_key/core/__pycache__/
+reports/
+auth.aws

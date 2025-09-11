@@ -1,0 +1,42 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_python//python:defs.bzl", "py_binary")
+load("@pip//:requirements.bzl", "requirement")
+py_binary(
+    name = "runner",
+    srcs = ["runner.py"],
+    main = "runner.py",
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("black"),
+        requirement("isort"),
+        requirement("flake8"),
+        requirement("mypy"),
+        requirement("pydantic"),
+        requirement("click"),
+        requirement("rich"),
+        requirement("boto3"),
+        requirement("boto3-stubs"),
+        requirement("mypy-boto3-s3"),
+        requirement("mypy-boto3-iam"),
+        requirement("mypy-boto3-lambda"),
+        requirement("mypy-boto3-dynamodb"),
+        requirement("mypy-boto3-sts"),
+        requirement("mypy-boto3-sns"),
+        requirement("mypy-boto3-sqs"),
+        requirement("mypy-boto3-glue"),
+    ],
+)
+
+# Format script
+py_binary(
+    name = "format",
+    srcs = ["format.py"],
+    main = "format.py",
+    deps = [
+        ":runner",
+    ],
+    data = [
+        "//lock_and_key:all_py_files",
+    ],
+)
