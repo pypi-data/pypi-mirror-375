@@ -1,0 +1,6 @@
+[peagen.plugins.signings]
+hmac=swarmauri_signing_hmac:HmacEnvelopeSigner
+
+[swarmauri.signings]
+HmacEnvelopeSigner=swarmauri_signing_hmac:HmacEnvelopeSigner
+

@@ -1,0 +1,54 @@
+Metadata-Version: 2.3
+Name: swarmauri_signing_hmac
+Version: 0.3.0.dev3
+Summary: HMAC-based signer for Swarmauri
+License: Apache-2.0
+Author: Swarmauri
+Author-email: opensource@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Security :: Cryptography
+Classifier: Intended Audience :: Developers
+Provides-Extra: cbor
+Requires-Dist: cbor2 ; extra == "cbor"
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Description-Content-Type: text/markdown
+
+![Swamauri Logo](https://res.cloudinary.com/dbjmpekvl/image/upload/v1730099724/Swarmauri-logo-lockup-2048x757_hww01w.png)
+
+# Swarmauri Signing HMAC
+
+An HMAC-based signer implementing the `ISigning` interface for detached
+signatures over raw bytes and canonicalized envelopes.
+
+Features:
+- JSON canonicalization (always available)
+- Optional CBOR canonicalization via `cbor2`
+- Detached signatures using standard library `hmac`
+
+## Installation
+
+```bash
+pip install swarmauri_signing_hmac
+```
+
+## Usage
+
+```python
+from swarmauri_signing_hmac import HmacEnvelopeSigner
+
+signer = HmacEnvelopeSigner()
+# create a KeyRef for a secret; see swarmauri_core for details
+```
+
+## Entry Point
+
+The signer registers under the `swarmauri.signings` entry point as `HmacEnvelopeSigner`.
+
