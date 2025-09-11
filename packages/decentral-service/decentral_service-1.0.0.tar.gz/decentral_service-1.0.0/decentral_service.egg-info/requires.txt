@@ -1,0 +1,11 @@
+flask>=3.1.2
+flask-cors>=6.0.1
+psutil>=7.0.0
+requests>=2.31.0
+
+[dev]
+pytest>=6.0
+pytest-cov>=2.0
+black>=21.0
+flake8>=3.8
+mypy>=0.800
