@@ -1,0 +1,56 @@
+[tool.poetry]
+name = "tubed"
+version = "0.2.0"
+description = "Youtube downloader"
+authors = ["Mousa Zeid Baker"]
+packages = [
+    { include = "tubed", from = "src" },
+]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/MousaZeidBaker/tubed"
+repository = "https://github.com/MousaZeidBaker/tubed"
+keywords=[
+    "YouTube",
+    "download",
+    "downloader",
+    "tube",
+    "tubed",
+    "video",
+    "audio",
+    "mp3",
+    "mp4",
+]
+classifiers=[
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+include = ["LICENSE"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+typer = "^0.17.4"
+pytubefix = "^9.5.0"
+
+[tool.poetry.dev-dependencies]
+black = "^25.1.0"
+isort = "^6.0.1"
+flake8 = "^7.3.0"
+flake8-black = "^0.3.6"
+flake8-isort = "^6.1.2"
+pre-commit = "^4.3.0"
+
+[tool.poetry.scripts]
+tubed = "tubed.main:app"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 80
+
+[tool.isort]
+profile = "black"
