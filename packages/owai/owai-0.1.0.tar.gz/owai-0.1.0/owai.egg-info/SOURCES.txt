@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+boi/__init__.py
+boi/transcribe.py
+owai/__init__.py
+owai/transcribe.py
+owai.egg-info/PKG-INFO
+owai.egg-info/SOURCES.txt
+owai.egg-info/dependency_links.txt
+owai.egg-info/requires.txt
+owai.egg-info/top_level.txt
