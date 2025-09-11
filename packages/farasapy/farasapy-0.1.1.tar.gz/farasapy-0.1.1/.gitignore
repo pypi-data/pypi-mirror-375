@@ -1,0 +1,21 @@
+.vscode/
+__pycache__/
+*.py[cod]
+farasa/__pycache__/
+venv/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+.cache
+*.log
+*.pot
+farasa_bin_obselete/
+lib/
+build/
+dist/
+*.egg-info/
+farasa/farasa_bin/
+farasa/__obselete.py
+downloaded_jars/*
