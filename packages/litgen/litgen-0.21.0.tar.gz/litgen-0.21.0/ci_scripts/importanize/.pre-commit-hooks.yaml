@@ -1,0 +1,10 @@
+---
+
+- id: importanize
+  name: importanize
+  description: Organize python imports
+  entry: importanize
+  language: python
+  language_version: python3
+  types: [python]
+  args: [-v, --no-auto-pipe]

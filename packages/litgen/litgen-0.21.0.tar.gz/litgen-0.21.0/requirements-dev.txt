@@ -1,0 +1,29 @@
+# Tools to ensure code quality
+pre-commit
+black
+mypy
+pytest
+pytest-cov
+ruff
+
+# numpy is used by the generated bindings (when using arrays)
+numpy
+
+# snakeviz only for profiling (see Build.md)
+snakeviz
+
+# For deployment to PyPI
+twine
+
+# for litgen-book (doc with jupyter-book)
+jupyter
+notebook
+jupyter-book
+jupyter-black
+Pygments
+types-Pygments
+
+# probably not needed anymore
+# Flask
+# patch
+# importanize

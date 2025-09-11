@@ -1,0 +1,40 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: 00_00_intro
+
+
+parts:
+  - caption: Installation
+    chapters:
+      - file: 01_05_00_install_or_online
+      - file: 01_05_05_online
+      - file: litgen_template/README
+
+  - caption: Bindings - Advanced Topics
+    chapters:
+     - file: 02_00_00_first_steps
+     - file: 02_03_00_options
+     - file: 02_05_00_headers
+     - file: 02_05_10_amalgamation
+     - file: 03_05_00_code_layout
+     - file: 04_05_00_names_translation
+     - file: 05_05_00_functions
+     - file: 06_05_00_classes
+     - file: 07_05_00_templates
+     - file: 07_05_00_enums
+     - file: 08_05_00_namespaces
+     - file: 08_10_00_custom_bindings
+     - file: 09_05_00_preprocessor
+     - file: 10_05_00_ignore_warnings
+     - file: 11_05_00_post_processing
+     - file: 12_05_00_srcml_issues
+
+  - caption: Litgen as C++ transformation tool
+    chapters:
+      - file: 20_00_00_cpp_intro
+      - file: 20_05_00_cpp_simple_transformations
+      - file: 20_20_00_install_srcml
+#      - file: 20_10_00_pimpl_my_class
+#      - file: 20_15_00_pimpl_online

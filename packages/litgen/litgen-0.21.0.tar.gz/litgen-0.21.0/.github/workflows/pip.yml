@@ -1,0 +1,45 @@
+name: "pip"
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+
+jobs:
+  build:
+    name: Build with Pip
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+        python-version: ["3.12"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: extractions/setup-just@v1
+
+      - name: Checkout submodules
+        run: git submodule update --init
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: pip install -r requirements-dev.txt
+        run: just install_requirements_dev
+
+      - name: pip install --verbose .
+        run: just install_litgen_editable
+
+      - name: black
+        run: just black
+
+      - name: mypy
+        run: just mypy
+
+      - name: integration_tests_pybind
+        run: just integration_tests_pybind
+
+      - name: integration_tests_nanobind
+        run: just integration_tests_nanobind

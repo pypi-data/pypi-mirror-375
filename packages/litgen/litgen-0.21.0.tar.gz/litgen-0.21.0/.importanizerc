@@ -1,0 +1,27 @@
+{
+  "formatter": "grouped",
+  "groups": [
+    {"type": "stdlib"},
+    {"type": "sitepackages"},
+    {"type": "packages",
+     "packages": ["codemanip"]},
+    {"type": "packages",
+     "packages": ["srcmlcpp"]},
+    {"type": "packages",
+     "packages": ["litgen"]},
+    {"type": "remainder"},
+    {"type": "local"}
+  ],
+  "exclude": [
+    "ci_scripts",
+    ".venv/*py",
+    "venv/*.py",
+    "build/*.py",
+    "ci_scripts/*.py",
+    "_skbuild/*.py",
+    "*/_skbuild/*.py",
+    "*/pybind11/*.py",
+    "*/__init__.py"
+  ],
+  "allow_plugins": true
+}

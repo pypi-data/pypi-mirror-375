@@ -1,0 +1,25 @@
+dist: xenial
+sudo: false
+branches:
+  only:
+    - master
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.cache/pre-commit
+
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "pypy3.6-7.1.1"
+
+# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install:
+  - pip install tox-travis
+  - pip install coveralls
+
+# command to run tests, e.g. python setup.py test
+script: tox
+
+after_success: coveralls
