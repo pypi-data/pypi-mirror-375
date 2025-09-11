@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
+
+  <adapter factory=".lockable.TTWLockable" />
+
+  <include
+      package="Products.CMFCore"
+      file="configure.zcml"
+      />
+
+  <include
+      package="z3c.jbot"
+      file="meta.zcml"
+      zcml:condition="installed z3c.jbot"
+      />
+
+  <browser:jbotDeprecated
+      dictionary=".jbot_deprecations"
+      zcml:condition="have jbot-deprecations"
+      />
+
+  <browser:page
+      name="plone_lock_operations"
+      for=".interfaces.ITTWLockable"
+      class=".browser.locking.LockingOperations"
+      allowed_attributes="create_lock safe_unlock force_unlock refresh_lock"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      name="plone_lock_info"
+      for=".interfaces.ITTWLockable"
+      class=".browser.locking.LockingInformation"
+      allowed_attributes="is_locked is_locked_for_current_user lock_is_stealable lock_info"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="plone_lock_info"
+      for="*"
+      class=".browser.locking.LockingInformationFallback"
+      allowed_attributes="is_locked is_locked_for_current_user lock_is_stealable lock_info"
+      permission="zope2.View"
+      />
+
+</configure>
