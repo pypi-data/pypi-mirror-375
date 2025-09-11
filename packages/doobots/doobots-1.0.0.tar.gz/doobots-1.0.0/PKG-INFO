@@ -1,0 +1,30 @@
+Metadata-Version: 2.4
+Name: doobots
+Version: 1.0.0
+Summary: Helpers do DooBots para execução de código do usuário
+Author: Dootax
+License: MIT
+Project-URL: Homepage, https://github.com/Dootax/doobots-python
+Project-URL: Source, https://github.com/Dootax/doobots-python
+Keywords: doobots,dootax
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# DooBots - Python
+
+Aqui ficam as classes helpers para facilitar o desenvolvimento de scripts Python a serem executados no DooBots.
+
+## Executar os Testes
+
+```shell
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+./run-tests.sh
+```
