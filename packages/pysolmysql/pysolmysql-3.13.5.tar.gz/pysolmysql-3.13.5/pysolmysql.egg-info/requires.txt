@@ -1,0 +1,13 @@
+greenlet
+gevent
+pysolbase>=3.13.0
+pysolmeters>=3.13.0
+pymysql
+ujson
+
+[test]
+unittest-xml-reporting
+pylint
+twine
+tox
+toml
