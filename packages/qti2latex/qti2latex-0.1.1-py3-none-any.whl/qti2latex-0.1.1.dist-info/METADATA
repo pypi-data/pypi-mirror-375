@@ -1,0 +1,46 @@
+Metadata-Version: 2.4
+Name: qti2latex
+Version: 0.1.1
+Summary: Convert QTI (Canvas) to LaTeX exam. Designed to work with text2qti, but should also work with quiz files exported from Canvas.
+Author: breed
+License-Expression: 0BSD
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Education
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Education :: Testing
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: pypandoc
+
+# qti2latex - Convert QTI XML to LaTeX exam file
+
+qti2latex converts a QTI XML file (version 1.2) to a LaTeX exam file.
+it is designed to work with text2qti (https://github.com/gpoore/text2qti), which does not support all possible question types.
+it should work with export QTI files from canvas for supported question types.
+it uses the exam document class (https://ctan.org/pkg/exam).
+
+## Supported Question Types
+- Multiple Choice (single answer)
+- Multiple Choice (multiple answers)
+- True/False 
+- Short Answer
+- Numerical
+- Essay
+
+## Bonus questions
+
+QTI doesn't support bonus questions, a question that starts with `bonus X points` will be treated as a bonus question worth X points.
+
+## Flow to get a LaTeX exam file from a markdown text file
+
+starting with a markdown text file called exam.md:
+
+```bash
+text2qti exam.md
+qti2latex exam.zip
+pdflatex exam.tex
+pdflatex exam.tex
+pdflatex exam.tex
+```
