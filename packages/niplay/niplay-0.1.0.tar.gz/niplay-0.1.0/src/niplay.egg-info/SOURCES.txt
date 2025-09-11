@@ -1,0 +1,13 @@
+pyproject.toml
+src/main.py
+src/niplay.egg-info/PKG-INFO
+src/niplay.egg-info/SOURCES.txt
+src/niplay.egg-info/dependency_links.txt
+src/niplay.egg-info/entry_points.txt
+src/niplay.egg-info/top_level.txt
+src/pyniplay/__about__.py
+src/pyniplay/__init__.py
+src/pyniplay/cli.py
+src/pyniplay/niplayThread.py
+src/pyniplay/niplay_process.py
+src/tests/testNiplayThreadKill.py
