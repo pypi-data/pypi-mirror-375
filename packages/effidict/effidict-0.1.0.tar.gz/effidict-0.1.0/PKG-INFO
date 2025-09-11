@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: effidict
+Version: 0.1.0
+Summary: Fast Python package providing enhanced dictionary-like data structures with advanced caching capabilities.
+Author-email: Isra Mekki <isra.mekki@helmholtz-munich.de>, Lisa Barros de Andrade e Sousa <lisa.barros.andrade.sousa@gmail.com>, Francesco Campi <francesco.campi@helmholtz-munich.de>
+Maintainer-email: Isra Mekki <isra.mekki@helmholtz-munich.de>
+Project-URL: documentation, https://oligo-designer-toolsuite.readthedocs.io/
+Project-URL: repository, https://github.com/HelmholtzAI-Consultants-Munich/oligo-designer-toolsuite
+Keywords: data structures,efficient dictionary
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file
