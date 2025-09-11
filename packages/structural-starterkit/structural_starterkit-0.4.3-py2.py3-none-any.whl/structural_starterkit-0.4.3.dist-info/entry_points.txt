@@ -1,0 +1,3 @@
+[console_scripts]
+starterkit_verify=structural_starterkit.__main__:check_installs
+
