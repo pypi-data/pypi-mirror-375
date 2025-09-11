@@ -1,0 +1,15 @@
+.gitignore
+LICENSE.txt
+pyproject.toml
+readme.md
+setup.cfg
+tox.ini
+src/niton_tools/__init__.py
+src/niton_tools/niton_measurement_dict.csv
+src/niton_tools/niton_tools.py
+src/niton_tools.egg-info/PKG-INFO
+src/niton_tools.egg-info/SOURCES.txt
+src/niton_tools.egg-info/dependency_links.txt
+src/niton_tools.egg-info/not-zip-safe
+src/niton_tools.egg-info/requires.txt
+src/niton_tools.egg-info/top_level.txt
