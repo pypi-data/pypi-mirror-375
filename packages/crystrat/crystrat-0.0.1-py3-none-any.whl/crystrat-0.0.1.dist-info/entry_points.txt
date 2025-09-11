@@ -1,0 +1,2 @@
+[console_scripts]
+crystrat = crystrat.cli.main:main
