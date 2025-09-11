@@ -1,0 +1,9 @@
+fastapi==0.116.1  # Web框架
+starlette==0.47.3 #FastAPI的底层框架
+uvicorn[standard]==0.35.0  # ASGI服务器
+pydantic-settings==2.10.1  # 配置管理
+loguru==0.7.3  # 异步日志库
+sqlalchemy==2.0.43 # ORM框架
+redis==6.4.0  # Redis客户端
+pydantic==2.11.7 # 数据验证库
+pyyaml==6.0.2 #YAML解析库
