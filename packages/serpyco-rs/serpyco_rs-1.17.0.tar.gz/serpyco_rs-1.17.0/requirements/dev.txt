@@ -1,0 +1,8 @@
+pytest
+attrs
+maturin>=1,<2
+pytz
+python-dateutil
+multidict
+tzdata; sys_platform == 'win32'
+nox
