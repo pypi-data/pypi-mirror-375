@@ -1,0 +1,24 @@
+# Test
+mock
+test_server
+coverage
+coveralls
+pytest-cov
+pytest-xdist
+pytest
+
+# Devel
+pkginfo
+bumpversion
+twine
+build
+
+# Docs
+sphinx
+
+# Types and Linters
+ruff; python_version >= "3.0"
+mypy; python_version >= "3.0"
+pylint; python_version >= "3.0"
+types-six; python_version >= "3.0"
+types-pytz; python_version >= "3.0"
