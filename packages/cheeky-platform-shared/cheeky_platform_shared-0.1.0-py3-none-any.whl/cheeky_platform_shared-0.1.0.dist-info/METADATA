@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: cheeky-platform-shared
+Version: 0.1.0
+Summary: Shared utilities for Cheeky Platform - AI-powered Shopify analytics
+Author-email: Cheeky Platform Team <team@cheeky.com>
+License: MIT
+Project-URL: Homepage, https://github.com/cheeky-platform/cheeky-platform
+Project-URL: Bug Reports, https://github.com/cheeky-platform/cheeky-platform/issues
+Project-URL: Source, https://github.com/cheeky-platform/cheeky-platform
+Keywords: cheeky,shopify,analytics,ai
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: httpx>=0.25.0
+
+# cheeky-platform-shared
+
+Shared utilities for the Cheeky Platform - AI-powered Shopify analytics.
+
+## Installation
+
+```bash
+pip install cheeky-platform-shared
+```
+
+## Usage
+
+```python
+from cheeky_shared import openai_chat_text, format_analysis_prompt
+
+# Use the utilities in your code
+result = await openai_chat_text(prompt="Analyze this store...")
+```
+
+## License
+
+MIT
