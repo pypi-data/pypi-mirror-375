@@ -1,0 +1,42 @@
+Metadata-Version: 2.3
+Name: tigrbl-client
+Version: 0.2.0.dev2
+Summary: A client for Tigrbl servers by Swarmauri.
+License: Apache-2.0
+Author: Swarmauri Team
+Author-email: team@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Dist: fastapi (>=0.100.0)
+Requires-Dist: pydantic (>=2.0.0)
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Requires-Dist: swarmauri_standard
+Description-Content-Type: text/markdown
+
+![Tigrbl Logo](../../../assets/tigrbl_full_logo.png)
+
+<p align="center">
+    <a href="https://pypi.org/project/tigrbl_client/">
+        <img src="https://img.shields.io/pypi/dm/tigrbl_client" alt="PyPI - Downloads"/></a>
+    <a href="https://hits.sh/github.com/swarmauri/swarmauri-sdk/tree/master/pkgs/standards/tigrbl_client/">
+        <img alt="Hits" src="https://hits.sh/github.com/swarmauri/swarmauri-sdk/tree/master/pkgs/standards/tigrbl_client.svg"/></a>
+    <a href="https://pypi.org/project/tigrbl_client/">
+        <img src="https://img.shields.io/pypi/pyversions/tigrbl_client" alt="PyPI - Python Version"/></a>
+    <a href="https://pypi.org/project/tigrbl_client/">
+        <img src="https://img.shields.io/pypi/l/tigrbl_client" alt="PyPI - License"/></a>
+    <a href="https://pypi.org/project/tigrbl_client/">
+        <img src="https://img.shields.io/pypi/v/tigrbl_client?label=tigrbl_client&color=green" alt="PyPI - tigrbl_client"/></a>
+</p>
+
+---
+
+# Tigrbl Client
+Simple HTTP client for interacting with Tigrbl services. Tigrbl exposes
+operations under resource-based namespaces such as ``api.core.Users.create``
+or ``api.rpc.Users.login`` which can be invoked using this client.
+
