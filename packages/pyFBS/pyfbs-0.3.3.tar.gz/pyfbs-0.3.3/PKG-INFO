@@ -1,0 +1,98 @@
+Metadata-Version: 2.4
+Name: pyFBS
+Version: 0.3.3
+Summary: pyFBS: A Python package for Frequency Based Substructuring and Transfer Path Analysis
+Author-email: "Tomaž Bregar, Ahmed El Mahmoudi, Miha Kodrič, Domen Ocepek, Francesco Trainotti, Miha Pogačar, Mert Göldeli, Tim Vrtač, Jure Korbar, Oliver Zobel" <info.pyfbs@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://pyfbs.readthedocs.io/en/master/intro.html
+Requires-Python: >=3.11
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+License-File: AUTHORS.rst
+Requires-Dist: numpy
+Requires-Dist: ansys-mapdl-reader
+Requires-Dist: ansys-dpf-core
+Requires-Dist: ansys-dpf-post
+Requires-Dist: pyuff
+Requires-Dist: pyvista
+Requires-Dist: pyvistaqt
+Requires-Dist: pandas
+Requires-Dist: scipy
+Requires-Dist: tqdm
+Requires-Dist: keyboard
+Requires-Dist: requests
+Requires-Dist: openpyxl
+Requires-Dist: pyts
+Requires-Dist: altair
+Requires-Dist: matplotlib
+Requires-Dist: h5py
+Requires-Dist: PyQt5
+Requires-Dist: imageio
+Requires-Dist: polyrat
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: pytest-qt; extra == "dev"
+Requires-Dist: codecov; extra == "dev"
+Requires-Dist: coverage; extra == "dev"
+Requires-Dist: qtpy; extra == "dev"
+Requires-Dist: scooby; extra == "dev"
+Requires-Dist: nbconvert; extra == "dev"
+Requires-Dist: jupyterlab; extra == "dev"
+Dynamic: license-file
+
+.. image:: https://gitlab.com/pyFBS/pyFBS/-/raw/master/docs/logo/logo-big.png
+	:align: right
+	:width: 300
+
+pyFBS
+-----
+	
+pyFBS is a Python package for Frequency Based Substructuring, Transfer Path Analysis and also, as a new addition, multi-reference modal identification. 
+It enables the user to use state-of-the-art dynamic substructuring methodologies in an intuitive manner. 
+
+With the package also basic and application examples are provided, together with real datasets so you can directly try out the capabilities of the pyFBS.
+
+|pypi| |docs| |codequality| |MIT|
+
+Features
+--------
+
+* 3D display
+
+* FRF synthetization
+
+* Virtual Point Transformation
+
+* System Equivalent Model Mixing
+
+* Singular Vector Transformation
+
+* Experimental Modal Analysis
+
+For more information on features, basic and application examples check out the `documentation`_. 
+
+Citation
+--------
+A paper about the pyFBS will be submitted to the Journal of Open Source Software journal. If you will be using pyFBS in your scientific research, please consider citing the paper.
+
+License
+-------
+Licensed under the MIT license.
+
+.. _documentation: https://pyfbs.readthedocs.io/en/latest/intro.html
+
+.. |pypi| image:: https://img.shields.io/pypi/v/pyfbs?style=flat-square
+   :target: https://pypi.org/project/pyfbs/
+
+.. |docs| image:: https://readthedocs.org/projects/pyfbs/badge/?version=latest
+   :target: https://pyfbs.readthedocs.io/en/latest/?badge=latest
+
+.. |MIT| image:: https://img.shields.io/badge/License-MIT-yellow.svg
+   :target: https://opensource.org/licenses/MIT
+   
+.. |codecov| image:: https://codecov.io/gl/pyFBS/pyFBS/branch/\x6d6173746572/graph/badge.svg?token=XSGM89JGMF
+   :target: https://codecov.io/gl/pyFBS/pyFBS
+
+.. |codequality| image:: https://app.codacy.com/project/badge/Grade/dbb59e10c07543b6b61c083a09eac500    
+   :target: https://www.codacy.com/gl/pyFBS/pyFBS/dashboard?utm_source=gitlab.com&amp;utm_medium=referral&amp;utm_content=pyFBS/pyFBS&amp;utm_campaign=Badge_Grade
