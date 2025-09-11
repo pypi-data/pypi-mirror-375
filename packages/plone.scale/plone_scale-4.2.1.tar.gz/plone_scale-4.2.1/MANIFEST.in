@@ -1,0 +1,9 @@
+include *.rst
+include pyproject.toml
+
+recursive-include src *
+
+global-exclude *pyc
+
+recursive-exclude news *
+exclude news
