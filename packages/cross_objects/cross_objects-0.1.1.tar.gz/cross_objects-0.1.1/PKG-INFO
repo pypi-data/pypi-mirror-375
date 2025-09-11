@@ -1,0 +1,20 @@
+Metadata-Version: 2.3
+Name: cross_objects
+Version: 0.1.1
+Summary: Helper for downloading railway objects.
+License: MIT
+Author: Fedor Sulitskiy
+Author-email: fedor@crosstech.co.uk
+Requires-Python: >=3.11,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: geopandas (>=1.1.1,<2.0.0)
+Requires-Dist: google-cloud-storage (>=3.3.1,<4.0.0)
+Requires-Dist: tqdm (>=4.67.1,<5.0.0)
+Description-Content-Type: text/markdown
+
+# Py-Objects-Library
+Helper for downloading railway objects.
