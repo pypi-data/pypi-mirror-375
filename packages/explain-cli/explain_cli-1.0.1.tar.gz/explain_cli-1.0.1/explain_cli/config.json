@@ -1,0 +1,21 @@
+{
+  "ai_provider": "gemini",
+  "verbosity": "hyperdetailed",
+  "providers": {
+    "gemini": {
+      "command": [
+        "gemini",
+        "-p"
+      ],
+      "description": "Google Gemini CLI"
+    },
+    "claude": {
+      "command": [
+        "claude",
+        "-c",
+        "-p"
+      ],
+      "description": "Claude Code"
+    }
+  }
+}

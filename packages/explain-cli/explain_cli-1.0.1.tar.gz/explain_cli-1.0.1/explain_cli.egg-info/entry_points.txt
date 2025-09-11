@@ -1,0 +1,2 @@
+[console_scripts]
+explain = explain_cli.cli:main
