@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: easy_yfinance
+Version: 0.1.0
+Summary: YFinance için kolay kullanım araçları (Plotly destekli)
+Home-page: https://github/aribilgiogr/easy_yfinance
+Author: Arı Bilgi
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: yfinance
+Requires-Dist: pandas
+Requires-Dist: plotly
+Dynamic: author
+Dynamic: classifier
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
