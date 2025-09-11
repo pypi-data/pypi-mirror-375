@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: rvimage
+Version: 0.1.3
+Summary: Pydantic types to facilitate writing prediction APIs integrated into the image annotation tool RV Image
+Project-URL: Repository, https://github.com/bertiqwerty/rvimage
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=2.3.0
+Requires-Dist: opencv-python-headless>=4.11.0.86
+Requires-Dist: pydantic>=2.11.7
+Requires-Dist: scipy>=1.15.3
+
+# RV Image
+
+This package contains Pydantic types to facilitate writing prediction APIs integrated into the image annotation tool 
+[RV Image](https://github.com/bertiqwerty/rvimage).
