@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kx_publish_pypi"
+dynamic = ["version"]
+description = "A friendly CLI tool to check and publish Python packages to TestPyPI/PyPI"
+authors = [
+    { name = "ABUELTAYEF Khader", email = "abueltayef.khader@gmail.com" }
+]
+maintainers = [
+    { name = "ABUELTAYEF Khader", email = "abueltayef.khader.main@hotmail.com" }
+]
+keywords = ["publish", "cli", "pypi", "packaging", "release", "kx"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools"
+]
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+
+dependencies = [
+    "click>=8.1",
+    "rich>=13.0",
+    "tomli>=2.0; python_version<'3.11'",
+    "keyring>=24.0",
+    "twine>=4.0",
+    "build>=1.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/Khader-X/kx-publish-pypi"
+Repository = "https://github.com/Khader-X/kx-publish-pypi"
+"Bug Tracker" = "https://github.com/Khader-X/kx-publish-pypi/issues"
+Website = "https://KhaderX.com/"
+Organization = "https://github.com/Khader-X"
+Author = "https://github.com/KhaderX-com"
+PyPI = "https://pypi.org/user/KhaderX/"
+Blog = "https://khaderabueltayef.blogspot.com/"
+Gravatar = "https://gravatar.com/voiddevotedlyf473f5471f"
+
+[project.scripts]
+kx-publish-pypi = "kx_publish_pypi.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "kx_publish_pypi.__version__.__version__"}
