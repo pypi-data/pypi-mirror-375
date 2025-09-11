@@ -1,0 +1,4 @@
+[console_scripts]
+bump_version=scripts.version:bump_version
+etch_version=scripts.version:write_in_library
+
