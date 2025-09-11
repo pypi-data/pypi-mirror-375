@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+src/pytest_pexpect/__init__.py
+src/pytest_pexpect/pexpect_plugin.py
+src/pytest_pexpect.egg-info/PKG-INFO
+src/pytest_pexpect.egg-info/SOURCES.txt
+src/pytest_pexpect.egg-info/dependency_links.txt
+src/pytest_pexpect.egg-info/entry_points.txt
+src/pytest_pexpect.egg-info/requires.txt
+src/pytest_pexpect.egg-info/top_level.txt
+tests/test_pexpect.py
+tests/test_plugin.py
