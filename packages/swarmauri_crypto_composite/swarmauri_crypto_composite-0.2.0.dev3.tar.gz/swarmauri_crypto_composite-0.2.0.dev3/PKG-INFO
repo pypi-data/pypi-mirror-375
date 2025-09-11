@@ -1,0 +1,60 @@
+Metadata-Version: 2.3
+Name: swarmauri_crypto_composite
+Version: 0.2.0.dev3
+Summary: Algorithm-routing crypto provider for Swarmauri
+License: Apache-2.0
+Author: Swarmauri
+Author-email: opensource@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Security :: Cryptography
+Classifier: Intended Audience :: Developers
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Description-Content-Type: text/markdown
+
+![Swamauri Logo](https://res.cloudinary.com/dbjmpekvl/image/upload/v1730099724/Swarmauri-logo-lockup-2048x757_hww01w.png)
+
+<p align="center">
+    <a href="https://pypi.org/project/swarmauri_crypto_composite/">
+        <img src="https://img.shields.io/pypi/dm/swarmauri_crypto_composite" alt="PyPI - Downloads"/></a>
+    <a href="https://hits.sh/github.com/swarmauri/swarmauri-sdk/tree/master/pkgs/standards/swarmauri_crypto_composite/">
+        <img alt="Hits" src="https://hits.sh/github.com/swarmauri/swarmauri-sdk/tree/master/pkgs/standards/swarmauri_crypto_composite.svg"/></a>
+    <a href="https://pypi.org/project/swarmauri_crypto_composite/">
+        <img src="https://img.shields.io/pypi/pyversions/swarmauri_crypto_composite" alt="PyPI - Python Version"/></a>
+    <a href="https://pypi.org/project/swarmauri_crypto_composite/">
+        <img src="https://img.shields.io/pypi/l/swarmauri_crypto_composite" alt="PyPI - License"/></a>
+    <a href="https://pypi.org/project/swarmauri_crypto_composite/">
+        <img src="https://img.shields.io/pypi/v/swarmauri_crypto_composite?label=swarmauri_crypto_composite&color=green" alt="PyPI - swarmauri_crypto_composite"/></a>
+</p>
+
+---
+
+## Swarmauri Crypto Composite
+
+Algorithm-routing crypto provider delegating to child providers based on requested algorithms.
+
+## Installation
+
+```bash
+pip install swarmauri_crypto_composite
+```
+
+## Usage
+
+```python
+from swarmauri_crypto_composite import CompositeCrypto
+
+crypto = CompositeCrypto([...])  # pass in other ICrypto providers
+```
+
+## Entry point
+
+The provider is registered under the `swarmauri.cryptos` entry-point as `CompositeCrypto`.
+
