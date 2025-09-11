@@ -1,0 +1,80 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "panthera-broadcaster"
+dynamic = ["version"]
+description = "Simple broadcast channels."
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = ">=3.8"
+authors = [{ name = "DanTolken" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Topic :: Internet :: WWW/HTTP",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "anyio>=3.4.0,<5",
+    "typing_extensions>=3.10.0; python_version < '3.10'",
+]
+
+[project.optional-dependencies]
+redis = ["redis"]
+postgres = ["asyncpg"]
+kafka = ["aiokafka"]
+test = ["pytest", "pytest-asyncio"]
+
+[project.urls]
+Homepage = "https://github.com/encode/broadcaster"
+
+[tool.hatch.version]
+path = "broadcaster/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = ["/broadcaster"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["broadcaster"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "FA", "UP"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[tool.mypy]
+strict = true
+python_version = "3.8"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+addopts = "-rxXs"
+markers = "copied_from(source, changes=None): mark test as copied from somewhere else, along with a description of changes made to accodomate e.g. our test setup"
+
+[tool.coverage.run]
+source_pkgs = ["broadcaster", "tests"]
+
+[tool.coverage.report]
+fail_under = 78
+show_missing = true
+skip_covered = true
