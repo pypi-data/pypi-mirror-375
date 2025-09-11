@@ -1,0 +1,11 @@
+Acquisition
+setuptools
+zope.component
+zope.browserpage
+zope.interface
+zope.lifecycleevent
+zope.publisher
+
+[test]
+zope.configuration
+zope.event
