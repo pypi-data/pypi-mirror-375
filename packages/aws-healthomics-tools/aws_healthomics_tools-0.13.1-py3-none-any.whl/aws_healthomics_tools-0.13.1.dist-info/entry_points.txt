@@ -1,0 +1,3 @@
+[console_scripts]
+aws-healthomics-tools=omics.cli.command_router:main
+
