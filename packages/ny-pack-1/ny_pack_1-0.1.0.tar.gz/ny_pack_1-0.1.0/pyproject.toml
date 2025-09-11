@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ny_pack_1"
+version = "0.1.0"
+requires-python = ">=3.9"
+description = "My first package!"
+readme = "README.md"
+authors = [
+    {name = "Nikhil Yadav", email = "nikhilyadav.uk@gmail.com"},
+]
+maintainers = [
+  {name = "Nikhil Yadav", email = "nikhilyadav.uk@gmail.com"}
+]
+license = {file = "LICENSE.txt"}
+keywords = [
+    "Nikhil"
+]
+classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "License :: OSI Approved :: BSD License",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: MacOS :: MacOS X",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/nikhilyadav-git/python-package-101"
+Documentation = "https://github.com/nikhilyadav-git/python-package-101/README.md"
+
+[project.scripts]
+print_bash_cmd = "ny_pack_1.__main__:main"
