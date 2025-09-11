@@ -1,0 +1,39 @@
+[project]
+name = "keyboardviz"
+version = "1.0.0"
+description = "A minimal Python library for generating keyboard layout visualizations with custom key mappings."
+readme = "README.md"
+authors = [
+    { name = "Jo. Adly", email = "youssefadly237@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "cairosvg>=2.8.2",
+    "svgwrite>=1.4.3",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.11,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pylint>=3.3.8",
+]
+
+keywords = ["keyboard", "visualizer", "image"]
+
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12"
+]
+
+[project.urls]
+Homepage = "https://github.com/youssefadly237/keyboardviz"
+Repository = "https://github.com/youssefadly237/keyboardviz"
+Issues = "https://github.com/youssefadly237/keyboardviz/issues"
+Changelog = "https://github.com/youssefadly237/keyboardviz/releases"
