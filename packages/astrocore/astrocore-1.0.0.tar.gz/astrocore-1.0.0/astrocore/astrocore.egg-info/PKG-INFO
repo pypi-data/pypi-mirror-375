@@ -1,0 +1,37 @@
+Metadata-Version: 2.4
+Name: astrocore
+Version: 1.0.0
+Summary: Generalized core numerical algorithms originally intended for astrophysical purposes.
+Home-page: https://github.com/RandomKiddo/astrocore
+Author: Neil Ghugare
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Astrocore
+
+Generalized core numerical algorithms originally intended for astrophysical purposes.
+
+See the wiki for information on how to use this package [here](https://github.com/RandomKiddo/astrocore/wiki). Trust me, the wiki looks much better than this page!
+
+Currently implemented aspects:
+
+1. Inversions
+   1. Newton-Raphson
+   2. Brent-Dekker
+   3. Secant
+   4. Bisection
+   5. Hybrid (Custom Definition)
