@@ -1,0 +1,122 @@
+Metadata-Version: 2.4
+Name: FuyaoDownloadMusic
+Version: 0.0.1
+Summary: 一个用于从主流音乐平台下载音乐的第三方库
+Author-email: fuyao-norway <1959415641@qq.com>, fuyao-ziqiu <1987239025@qq.com>, fuyaoteam <fuyaoteam@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2025 luo hongwei
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Repository, https://github.com/fuyao-lhw/FuyaoDownloadMusic
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.32.5
+Dynamic: license-file
+
+# FuyaoDownloadMusic
+一个可以从主流音乐平台下载音乐的第三方库
+
+# 下载
+```cmd
+pip install FuyaoDownloadMusic
+```
+
+# 使用
+1.选择音乐源：目前支持网易云（netease）
+
+2.音乐源对应的搜索、获取、下载的参数
+```python
+SEARCH_PARAMS = {
+    "keyword": "知我",
+    "limit": 30
+}
+
+SONG_URL_PARAMS = {
+    "songId": 1394167216,
+}
+
+DOWNLOAD_SONG_PARAMS = {
+    "songUrl": "",
+    "songName": "知我",
+    "songAuthors": "",
+    "songSavePath": "",
+}
+```
+
+3.代码样例
+```python
+from FuyaoDownloadMusic.download import DownloadMusic
+
+COOKIE_STR = {
+    "netease": "MUSIC_U",  # 获取网易的MUSIC_U
+}
+
+
+
+dm = DownloadMusic(
+    musicSrcKey="netease",  # 音乐源
+    cookieStr="...",  # 音乐平台的会员关键cookie
+)
+
+# search
+dm.search({
+    "keyword": "知我",
+    "limit": 30
+})
+# return songId、songName、songAuthors
+
+# get song url
+dm.getSongUrl({
+    "songId": 1394167216,
+})
+# return songUrl
+
+
+# download music
+dm.downloadMusic({
+    "songUrl": "https://....",
+    "songName": "知我",
+    "songAuthors": "...",
+    "songSavePath": "E:/music",
+})
+
+```
+
+# 注意
+- 需要node环境,且在项目根目录安装 crypto-js 库
+
+
+# 更新日志
+
+版本说明：
+```text
+0.0.1:
+    0:发行版本
+    0:开发版本
+    1:测试版本
+```
+
+## v0.0.1
+1.音乐源: 网易(netease)
+2.对网易云的api做逆向,目前提供网易的vip的cookie,但是不负责其稳定性,如需要稳定vip请自己获取
