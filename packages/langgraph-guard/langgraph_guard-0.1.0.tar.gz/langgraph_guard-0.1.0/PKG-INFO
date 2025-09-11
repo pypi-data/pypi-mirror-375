@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: langgraph-guard
+Version: 0.1.0
+Summary: Langgraph Agent Guard integration with AISecure
+Author-email: Aryaka Networks <sid.padmanabhuni@aryaka.com>
+License-Expression: Apache-2.0
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: httpx>=0.24
+Requires-Dist: pydantic>=2.0
+Requires-Dist: langchain-core>=0.2.0
+
+# langgraph-guard
+
+LangGraph Guard integration with AISecure GenAI Protect.
