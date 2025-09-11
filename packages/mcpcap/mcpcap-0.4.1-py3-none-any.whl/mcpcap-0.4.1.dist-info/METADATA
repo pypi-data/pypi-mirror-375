@@ -1,0 +1,322 @@
+Metadata-Version: 2.4
+Name: mcpcap
+Version: 0.4.1
+Summary: A modular Python MCP Server for analyzing PCAP files
+Author: mcpcap contributors
+License: MIT
+Project-URL: Homepage, https://github.com/mcpcap/mcpcap
+Project-URL: Repository, https://github.com/mcpcap/mcpcap
+Project-URL: Issues, https://github.com/mcpcap/mcpcap/issues
+Keywords: pcap,network,analysis,mcp,dns
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: System :: Networking :: Monitoring
+Classifier: Topic :: Security
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastmcp
+Requires-Dist: scapy
+Requires-Dist: requests
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: setuptools-scm[toml]; extra == "test"
+Provides-Extra: dev
+Requires-Dist: setuptools-scm[toml]; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=7.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme; extra == "docs"
+Requires-Dist: myst-parser; extra == "docs"
+Requires-Dist: sphinx-autodoc-typehints; extra == "docs"
+Requires-Dist: sphinx-copybutton; extra == "docs"
+Requires-Dist: linkify-it-py; extra == "docs"
+Dynamic: license-file
+
+# mcpcap
+
+![mcpcap logo](https://raw.githubusercontent.com/mcpcap/mcpcap/main/readme-assets/mcpcap-logo.png)
+
+A modular Python MCP (Model Context Protocol) Server for analyzing PCAP files. mcpcap enables LLMs to read and analyze network packet captures from local or remote sources, providing structured JSON responses about network traffic.
+
+## Overview
+
+mcpcap uses a modular architecture to analyze different network protocols found in PCAP files. Each module focuses on a specific protocol, allowing for targeted analysis and easy extensibility. The server leverages the powerful scapy library for packet parsing and analysis.
+
+### Key Features
+
+- **Modular Architecture**: Easily extensible to support new protocols
+- **Local & Remote PCAP Support**: Read files from local directories or HTTP servers
+- **Scapy Integration**: Leverages scapy's comprehensive packet parsing capabilities
+- **MCP Server**: Integrates seamlessly with LLM clients via Model Context Protocol
+- **JSON Responses**: Structured data format for easy LLM consumption
+
+## Installation
+
+mcpcap requires Python 3.10 or greater.
+
+### Using pip
+
+```bash
+pip install mcpcap
+```
+
+### Using uv
+
+```bash
+uv add mcpcap
+```
+
+### Using uvx (for one-time usage)
+
+```bash
+uvx mcpcap
+```
+
+## Quick Start
+
+1. **Start the MCP Server**:
+
+   **Local PCAP file:**
+   ```bash
+   mcpcap --pcap-path /path/to/specific/file.pcap
+   ```
+
+   **Local PCAP directory:**
+   ```bash
+   mcpcap --pcap-path /path/to/pcap/files
+   ```
+
+   **Remote PCAP file:**
+   ```bash
+   mcpcap --pcap-url https://example.com/sample.pcap
+   ```
+
+   **With advanced options:**
+   ```bash
+   mcpcap --pcap-path /path/to/pcaps --max-packets 100 --protocols dns
+   ```
+
+2. **Connect your LLM client** to the MCP server
+
+3. **Ask questions** about your network traffic:
+   - "What domain was queried the most in the DNS traffic?"
+   - "Show me all DNS queries for example.com"
+   - "What are the top 5 queried domains?"
+
+## Modules
+
+mcpcap supports multiple protocol analysis modules:
+
+### DNS Module
+
+The DNS module analyzes Domain Name System packets in PCAP files.
+
+**Capabilities**:
+
+- Extract DNS queries and responses
+- Identify queried domains and subdomains
+- Analyze query types (A, AAAA, MX, etc.)
+- Track query frequency and patterns
+- Identify DNS servers used
+
+### DHCP Module
+
+The DHCP module analyzes Dynamic Host Configuration Protocol packets in PCAP files.
+
+**Capabilities**:
+
+- Track DHCP transactions (DISCOVER, OFFER, REQUEST, ACK)
+- Identify DHCP clients and servers
+- Monitor IP address assignments and lease information
+- Analyze DHCP options and configurations
+- Detect DHCP anomalies and security issues
+
+**Example Usage**:
+
+```bash
+# Analyze DHCP traffic only
+mcpcap --pcap-path /path/to/dhcp.pcap --modules dhcp
+
+# Analyze both DNS and DHCP
+mcpcap --pcap-path /path/to/mixed.pcap --modules dns,dhcp
+```
+
+## Configuration
+
+### PCAP Sources
+
+mcpcap supports multiple ways to specify PCAP data sources:
+
+**Local PCAP File**:
+```bash
+mcpcap --pcap-path /local/path/to/specific.pcap
+```
+
+**Local Directory**:
+```bash
+mcpcap --pcap-path /local/path/to/pcaps
+```
+
+**Remote PCAP File (Direct Link)**:
+```bash
+mcpcap --pcap-url https://wiki.wireshark.org/uploads/dns.cap
+```
+
+**Remote Directory Listing**:
+```bash
+mcpcap --pcap-url http://example.com/pcaps/
+```
+
+### Analysis Options
+
+**Module Selection**:
+```bash
+# Single module
+mcpcap --modules dns --pcap-path /path/to/files
+
+# Multiple modules
+mcpcap --modules dns,dhcp --pcap-path /path/to/files
+```
+
+**Protocol Selection** (automatically matches loaded modules):
+```bash
+# DNS analysis only
+mcpcap --modules dns --pcap-path /path/to/files
+
+# DHCP analysis only  
+mcpcap --modules dhcp --pcap-path /path/to/files
+
+# Both DNS and DHCP analysis
+mcpcap --modules dns,dhcp --pcap-path /path/to/files
+```
+
+**Packet Limiting** (for large files):
+```bash
+mcpcap --max-packets 1000 --pcap-path /path/to/files
+```
+
+**Combined Options**:
+```bash
+mcpcap --pcap-path /data/capture.pcap --max-packets 500 --modules dns,dhcp
+```
+
+## CLI Reference
+
+```bash
+mcpcap [--pcap-path PATH | --pcap-url URL] [OPTIONS]
+```
+
+**Source Options** (choose one):
+- `--pcap-path PATH`: Local PCAP file or directory
+- `--pcap-url URL`: Remote PCAP file URL or directory listing
+
+**Analysis Options**:
+- `--modules MODULES`: Comma-separated modules to load (default: dns)
+  - Available modules: `dns`, `dhcp`
+  - Protocols are automatically set to match loaded modules
+- `--max-packets N`: Maximum packets to analyze per file (default: unlimited)
+
+**Examples**:
+```bash
+# Analyze specific file
+mcpcap --pcap-path ./capture.pcap
+
+# Remote file with packet limit
+mcpcap --pcap-url https://example.com/dns.cap --max-packets 100
+
+# Directory with DHCP analysis
+mcpcap --pcap-path /captures --modules dhcp
+```
+
+## Example
+
+An example PCAP file (`dns.pcap`) containing DNS traffic is included in the `examples/` directory to help you get started.
+
+## Architecture
+
+mcpcap's modular design makes it easy to extend support for new protocols:
+
+1. **Core Engine**: Handles PCAP file loading and basic packet processing
+2. **Protocol Modules**: Individual modules for specific protocols (DNS, etc.)
+3. **MCP Interface**: Translates between LLM queries and packet analysis results
+4. **Output Formatter**: Converts analysis results to structured JSON
+
+### Adding New Modules
+
+New protocol modules can be added by:
+
+1. Implementing the module interface
+2. Defining scapy display filters for the protocol
+3. Creating analysis functions specific to the protocol
+4. Registering the module with the core engine
+
+Future modules might include:
+
+- BGP (Border Gateway Protocol)
+- HTTP/HTTPS traffic analysis
+- TCP connection tracking
+- And more!
+
+## Remote Access
+
+mcpcap supports reading PCAP files from remote HTTP servers in two modes:
+
+**Direct File Access**: Point directly to a PCAP file URL
+```bash
+mcpcap --pcap-url https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/dns.cap
+```
+
+**Directory Listing**: Parse HTML directory listings to find PCAP files
+```bash
+mcpcap --pcap-url http://server.com/pcap-files/
+```
+
+**Supported File Types**: `.pcap`, `.pcapng`, `.cap`
+
+**Current Limitations**:
+- HTTP/HTTPS only (no authentication)
+- Directory listings require standard HTML format
+- Files are downloaded temporarily for analysis
+
+Future versions may include support for Basic Authentication and other security mechanisms.
+
+## Contributing
+
+Contributions are welcome! Whether you want to:
+
+- Add support for new protocols
+- Improve existing modules
+- Enhance the MCP interface
+- Add new features
+
+Please feel free to open issues and submit pull requests.
+
+## License
+
+MIT
+
+## Requirements
+
+- Python 3.10+
+- scapy (packet parsing and analysis)
+- requests (HTTP remote file access)
+- fastmcp (MCP server framework)
+- All dependencies are automatically installed via pip
+
+## Documentation
+
+Full documentation is available at [docs.mcpcap.ai](https://docs.mcpcap.ai)
+
+## Support
+
+For questions, issues, or feature requests, please open an issue on GitHub.
