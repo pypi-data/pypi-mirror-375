@@ -1,0 +1,9 @@
+docopt
+packaging
+python-dateutil
+pythonanywhere_core==0.2.7
+requests
+schema
+snakesay==0.10.4
+tabulate
+typer
