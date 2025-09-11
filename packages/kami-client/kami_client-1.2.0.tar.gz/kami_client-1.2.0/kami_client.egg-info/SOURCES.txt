@@ -1,0 +1,17 @@
+.gitignore
+.releaserc.js
+CHANGELOG.md
+README.md
+package.json
+pyproject.toml
+.github/workflows/pypi-publish.yml
+.github/workflows/release.yml
+kami/__init__.py
+kami/client.py
+kami/exceptions.py
+kami/types.py
+kami_client.egg-info/PKG-INFO
+kami_client.egg-info/SOURCES.txt
+kami_client.egg-info/dependency_links.txt
+kami_client.egg-info/requires.txt
+kami_client.egg-info/top_level.txt
