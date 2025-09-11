@@ -1,0 +1,8 @@
+numpy>=1.20.0
+scikit-learn>=0.24.0
+MDAnalysis>=2.0.0
+shapeGMMTorch>=2.0.0
+torch>=2.2.2
+
+[dev]
+pytest>=7.0
