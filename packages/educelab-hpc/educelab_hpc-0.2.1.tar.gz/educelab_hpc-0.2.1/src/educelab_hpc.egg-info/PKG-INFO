@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: educelab-hpc
+Version: 0.2.1
+Summary: A Python module providing helper functions for working in HPC environments
+Home-page: https://gitlab.com/educelab/educelab-hpc
+Download-URL: https://gitlab.com/educelab/educelab-hpc
+Author: Seth Parker
+Author-email: c.seth.parker@uky.edu
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: OS Independent
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+License-File: NOTICE
+Dynamic: download-url
+Dynamic: license-file
+
+# EduceLab HPC
+
+`educelab-hpc` is a Python module providing helper functions for working in HPC
+environments.
