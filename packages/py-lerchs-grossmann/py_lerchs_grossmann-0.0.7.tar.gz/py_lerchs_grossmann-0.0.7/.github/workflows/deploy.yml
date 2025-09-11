@@ -1,0 +1,41 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Hatch and MkDocs
+        run: |
+          pipx install hatch
+          pip install mkdocs mkdocs-material mkdocstrings[python]
+
+      - name: Build package
+        run: hatch build
+
+      - name: Publicar en Test PyPI
+        env:
+          HATCH_INDEX_USER: __token__
+          HATCH_INDEX_AUTH: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        run: hatch publish
+
+      - name: Build documentación
+        run: mkdocs build
+
+      - name: Deploy documentación a GitHub Pages
+        run: mkdocs gh-deploy --force
