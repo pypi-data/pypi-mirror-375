@@ -1,0 +1,14 @@
+folium
+geopandas
+ipyleaflet
+localtileserver
+mapclassify
+matplotlib
+numpy
+setuptools
+
+[all]
+pypackage_example[extra]
+
+[extra]
+pandas
