@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: x_make_pypi_x
+Version: 11.0.0
+Summary: Makes PyPI packages.
+Author-email: RRGM of the Primus Pilus Night Watch AI Corporation <eye4357@outlook.com>
+License-Expression: MIT
+Requires-Dist: markdown
+Requires-Dist: pdfkit
