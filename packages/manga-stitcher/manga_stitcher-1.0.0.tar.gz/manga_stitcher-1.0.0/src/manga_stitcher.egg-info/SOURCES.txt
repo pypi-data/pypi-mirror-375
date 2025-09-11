@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/manga_stitcher/__init__.py
+src/manga_stitcher/__main__.py
+src/manga_stitcher/cli.py
+src/manga_stitcher/manga_stitcher.py
+src/manga_stitcher.egg-info/PKG-INFO
+src/manga_stitcher.egg-info/SOURCES.txt
+src/manga_stitcher.egg-info/dependency_links.txt
+src/manga_stitcher.egg-info/entry_points.txt
+src/manga_stitcher.egg-info/top_level.txt
