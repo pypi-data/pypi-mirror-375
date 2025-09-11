@@ -1,0 +1,16 @@
+numpy>=1.25
+pillow
+
+[geotiff]
+rasterio>=1.0
+
+[tests]
+xarray
+dask[array]
+pyproj
+pyresample
+pytest
+
+[xarray]
+xarray
+dask[array]
