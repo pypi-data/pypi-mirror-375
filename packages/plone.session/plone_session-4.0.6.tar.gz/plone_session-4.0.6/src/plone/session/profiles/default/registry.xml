@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<registry>
+  <!--
+  ===============================
+  Resource Registry Configuration
+  ===============================
+  -->
+  <records interface="plone.base.interfaces.IBundleRegistry"
+           prefix="plone.bundles/plone-session"
+  >
+    <value key="enabled">True</value>
+    <value key="jscompilation">++resource++plone.session.refreshsupport.js</value>
+    <!-- This is a pseudo CSS generating a link in the Head .
+         The way to trigger the session refresh should be refactored at some point.
+    -->
+    <value key="csscompilation">acl_users/session/refresh?session_refresh=true&amp;type=css&amp;minutes=5</value>
+    <value key="expression">python: member is not None</value>
+    <value key="depends">plone</value>
+    <value key="load_async">False</value>
+    <value key="load_defer">False</value>
+  </records>
+
+</registry>

@@ -1,0 +1,10 @@
+plone.keyring
+plone.protect
+Products.GenericSetup
+Products.PluggableAuthService
+setuptools
+Zope
+
+[test]
+plone.app.testing
+zope.publisher

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <!-- Note: it is good to create upgrade steps in this package,
+       but the upgrade to 1002 is done in plone.app.upgrade,
+       for Plone 6.0.0a4.  There we have code to properly remove
+       old bundles with old settings. -->
+  <version>1003</version>
+</metadata>

@@ -1,0 +1,11 @@
+include *.rst
+include pyproject.toml
+
+graft docs
+graft iis-login
+graft src
+
+global-exclude *pyc
+
+recursive-exclude news *
+exclude news
