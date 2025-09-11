@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sqs-worker"
+version = "0.2.0"
+description = "Manage workers triggered by AWS SQS messages"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+authors = [
+    { name = "badihio", email = "" },
+]
+keywords = ["aws", "sqs", "worker", "queue", "message"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Distributed Computing",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.40.27",
+    "boto3-stubs[sqs]>=1.40.26",
+    "obsv-tools>=0.1.0",
+    "pydantic>=2.11.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/badihio/sqs-worker"
+Repository = "https://github.com/badihio/sqs-worker"
+Issues = "https://github.com/badihio/sqs-worker/issues"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
