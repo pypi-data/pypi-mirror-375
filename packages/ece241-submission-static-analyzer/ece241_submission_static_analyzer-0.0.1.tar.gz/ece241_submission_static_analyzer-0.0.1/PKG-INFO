@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: ece241_submission_static_analyzer
+Version: 0.0.1
+Summary: A package that performs static analysis on code submissions.
+Author-email: Zibin Chen <chenzibin2017@outlook.com>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
