@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "zodchy-outbox"
+version = "0.1.0"
+description = "Outbox pattern for zodchy architecture"
+authors = ["Smairon <man@smairon.ru>"]
+readme = "README.md"
+repository = "https://github.com/smairon/zodchy-outbox"
+packages = [{ include = "zodchy_outbox" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+zodchy = "^0"
+sqlalchemy_schema_factory = "^0"
+zodchy-alchemy = "^0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+disable_error_code = "import-untyped"
