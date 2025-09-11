@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+lotterybr/__init__.py
+lotterybr/get_data.py
+lotterybr/translate_data.py
+lotterybr.egg-info/PKG-INFO
+lotterybr.egg-info/SOURCES.txt
+lotterybr.egg-info/dependency_links.txt
+lotterybr.egg-info/not-zip-safe
+lotterybr.egg-info/requires.txt
+lotterybr.egg-info/top_level.txt
+tests/test_get_data.py
