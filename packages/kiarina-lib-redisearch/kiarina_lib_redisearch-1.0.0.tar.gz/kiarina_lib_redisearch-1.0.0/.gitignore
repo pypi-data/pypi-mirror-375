@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# uv
+.uv_cache/
+
+# Virtual environments & config
+.venv/
+.env
+
+# IDE
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+
+# Project specific
+*.log
+tmp/
+ai.yaml
+
+# Test data
+tests/data/large/
+
+# mise tasks (always include)
+!mise-tasks/
+!mise-tasks/**
