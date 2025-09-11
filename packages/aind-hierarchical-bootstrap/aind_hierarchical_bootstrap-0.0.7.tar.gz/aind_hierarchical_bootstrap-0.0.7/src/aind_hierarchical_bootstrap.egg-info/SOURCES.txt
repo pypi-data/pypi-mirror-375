@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/aind_hierarchical_bootstrap/__init__.py
+src/aind_hierarchical_bootstrap/bootstrap.py
+src/aind_hierarchical_bootstrap/make_dataset.py
+src/aind_hierarchical_bootstrap/speed_test.py
+src/aind_hierarchical_bootstrap/stats.py
+src/aind_hierarchical_bootstrap.egg-info/PKG-INFO
+src/aind_hierarchical_bootstrap.egg-info/SOURCES.txt
+src/aind_hierarchical_bootstrap.egg-info/dependency_links.txt
+src/aind_hierarchical_bootstrap.egg-info/requires.txt
+src/aind_hierarchical_bootstrap.egg-info/top_level.txt
+tests/test_example.py
