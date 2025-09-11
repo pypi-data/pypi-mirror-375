@@ -1,0 +1,9 @@
+setuptools
+plone.base
+Zope
+
+[test]
+plone.app.contenttypes[test]
+plone.app.testing
+plone.dexterity
+plone.testing
