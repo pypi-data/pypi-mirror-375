@@ -1,0 +1,157 @@
+Metadata-Version: 2.4
+Name: xraylarch
+Version: 2025.3.0
+Summary: Synchrotron X-ray data analysis in python
+Author-email: Matthew Newville <newville@cars.uchicago.edu>, Mauro Rovezzi <mauro.rovezzi@esrf.fr>, Bruce Ravel <bravel@nist.gov>, Margaret Koker <margaret.koker@lawrence.edu>
+License-Expression: MIT
+Project-URL: Homepage,  https://github.com/xraypy/xraylarch
+Project-URL: Documentation, https://xraypy.github.io/xraylarch/
+Project-URL: Tracker, https://github.com/xraypy/xraylarch/issues
+Keywords: X-ray,XAS,XRF,XRD,Physics,Fitting
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.23
+Requires-Dist: scipy>=1.12
+Requires-Dist: lmfit>=1.3.1
+Requires-Dist: asteval>=1.0.6
+Requires-Dist: uncertainties>=3.2.1
+Requires-Dist: pyshortcuts>=1.9.5
+Requires-Dist: xraydb>=4.5.6
+Requires-Dist: larixite>=2025.5.1
+Requires-Dist: silx>=0.15.2
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: sqlalchemy_utils
+Requires-Dist: h5py>=3.5
+Requires-Dist: hdf5plugin
+Requires-Dist: pillow>=8.3.2
+Requires-Dist: numdifftools>=0.9.41
+Requires-Dist: packaging
+Requires-Dist: pip
+Requires-Dist: pyyaml
+Requires-Dist: tomli
+Requires-Dist: tomli_w
+Requires-Dist: termcolor
+Requires-Dist: dill
+Requires-Dist: imageio
+Requires-Dist: charset-normalizer
+Requires-Dist: requests
+Requires-Dist: scikit-image
+Requires-Dist: scikit-learn
+Requires-Dist: psutil
+Requires-Dist: fabio
+Requires-Dist: pyfai
+Requires-Dist: tabulate
+Provides-Extra: dev
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pytest-xvfb; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: coverage; extra == "dev"
+Provides-Extra: doc
+Requires-Dist: Sphinx; extra == "doc"
+Requires-Dist: sphinx-copybutton; extra == "doc"
+Requires-Dist: sphinxcontrib-video; extra == "doc"
+Requires-Dist: sphinxcontrib-bibtex; extra == "doc"
+Requires-Dist: sphinxcontrib-argdoc; extra == "doc"
+Provides-Extra: wxgui
+Requires-Dist: wxpython>=4.2.2; extra == "wxgui"
+Requires-Dist: wxmplot>=2025.1.5; extra == "wxgui"
+Requires-Dist: wxutils>=0.3.6; extra == "wxgui"
+Requires-Dist: darkdetect; extra == "wxgui"
+Provides-Extra: qtgui
+Requires-Dist: PyQt5; extra == "qtgui"
+Requires-Dist: pyqtwebengine; extra == "qtgui"
+Requires-Dist: pyqtgraph; extra == "qtgui"
+Provides-Extra: epics
+Requires-Dist: pyepics>=3.5.7; extra == "epics"
+Requires-Dist: psycopg2-binary; extra == "epics"
+Provides-Extra: jupyter
+Requires-Dist: jupyter_core>=5.0; extra == "jupyter"
+Requires-Dist: jupyter_client; extra == "jupyter"
+Requires-Dist: jupyter_server; extra == "jupyter"
+Requires-Dist: notebook; extra == "jupyter"
+Requires-Dist: nbformat; extra == "jupyter"
+Requires-Dist: ipywidgets; extra == "jupyter"
+Requires-Dist: plotly; extra == "jupyter"
+Requires-Dist: bokeh; extra == "jupyter"
+Requires-Dist: py3dmol; extra == "jupyter"
+Provides-Extra: larix
+Requires-Dist: xraylarch[jupyter,wxgui]; extra == "larix"
+Provides-Extra: all
+Requires-Dist: xraylarch[dev,doc,epics,jupyter,qtgui,wxgui]; extra == "all"
+Dynamic: license-file
+
+## Larch:  Data Analysis Tools for X-ray Spectroscopy and More
+
+
+[![A](https://github.com/xraypy/xraylarch/actions/workflows/test-ubuntu.yml/badge.svg)](https://github.com/xraypy/xraylarch/actions/workflows/test-ubuntu.yml)
+[![B](https://github.com/xraypy/xraylarch/actions/workflows/test-windows.yml/badge.svg)](https://github.com/xraypy/xraylarch/actions/workflows/test-windows.yml)
+
+
+Larch is an open-source library and set of applications for
+visualizing, processing, and analyzing X-ray absorption and
+fluorescence spectroscopy data from synchrotron beamlines.  While its
+origins and emphasis are in X-ray absorption fine-structure
+spectroscopy (XAS), including X-ray absorption near-edge spectroscopy
+(XANES) and extended X-ray absorption fine-structure spectroscopy
+(EXAFS), it also supports visualization and analysis tools for several
+related X-ray measurement modes.  These include X-ray fluorescence
+(XRF) spectra and XRF and X-ray diffraction (XRD) images as collected
+at scanning X-ray microprobe beamlines.
+
+Larch is written in Python, and makes heavy use of the excellent
+scientific Python libraries.  It can be used as a Python library, or
+through one of several Graphical User Interfaces, including Larix, and
+others listed in the table below.
+
+Larch is distributed under the MIT licence.  It has been under active
+and open development for more than a decade, and is built on XAFS
+analysis tools that go back to the 1990s.  Development is done
+primarily at the University of Chicago, with support from the US
+National Science Foundation, and the US Departmen of Energy.
+
+The best citable reference for Larch is https://doi.org/10.1088/1742-6596/430/1/012007
+
+## Larch Applications
+
+These applications installed with Larch, in addition to a basic Python
+library. Here, GUI = Graphical User Interface, CLI = Command Line
+Interface, and `beta` indicates a work in progress.
+
+
+| Application Name  | GUI/CLI    | Description                                            |
+| ----------------- |----------- | ------------------------------------------------------ |
+| larch             | CLI        | simple shell command-line interface                    |
+| Larch GUI         | GUI        | enhanced command-line interface with data browser      |
+| Larix             | GUI        | XAFS Processing and Analysis: XANES pre-edge peak      |
+|                   |            | fitting, linear analysis, PCA/LASSO, EXAFS processing  |
+|                   |            | Running Feff, fitting EXAFS data to Feff paths.        |
+| GSE Map Viewer    | GUI        | XRF Map Viewer for GSECARS X-ray microprobe data.      |
+| larch_xrf         | GUI        | Display and analyze XRF Spectra.                       |
+| larch_xrd1d       | GUI        | Display and work with 1-D XRD patterns, integrate XRD  |
+|                   |            | images, search for XRD patterns of known structures    |
+| feff6l            | CLI        | Feff 6 EXAFS calculations                              |
+| feff8l            | CLI        | Feff 8 EXAFS calculations (no XANES)                   |
+| qtrixs            | GUI `beta` | Display RIXS planes, take profiles                     |
+
+
+
+In addition, the applications built with it also use a built-in
+Python-like macro language for interactive and batch processing.  This
+embedded "miniPython" language is intended to be very easy to use for
+novices while also being complete enough to automate data processing
+and analysis and to encourage and facilitate a gentle transition to
+transition from GUI-only analyses to scripted and programmatic
+analysis of larger data sets, and allows Larch to be run as a service,
+interacting with other processes or languages via XML-RPC.
