@@ -1,0 +1,19 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+recursive-include fastapi_mock_service *.html *.css *.js *.py
+recursive-include examples *.py *.md
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .DS_Store
+exclude .gitignore
+exclude .git/*
+exclude .github/*
+exclude tests/*
+exclude main.py
+exclude run.py
+exclude example_customer_atomic.py
+exclude requirements.txt
+exclude prompt.md
+exclude test_results.db
+prune __pycache__
