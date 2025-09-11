@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name="hardcore-restore"
+version="0.0.1"
+
+authors = [
+  { name="Simofi Levente", email="simofilevente+pypi@gmail.com" },
+]
+
+maintainers = [
+  { name="Simofi Levente", email="simofilevente+pypi@gmail.com" },
+]
+
+
+description = "Restore death in a minecraft hardcore world. Should work on all platforms with java edition, but wasn't tested."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 3 - Alpha",
+    "Typing :: Typed",
+]
+
+license = "GPL-3.0-or-later"
+license-files = ["LICEN[CS]E*", "PolyForm-Noncommercial-1.0.0.md"]
+
+dependencies = [
+  "typer",
+  "black",
+  "nbtlib"
+]
+
+[project.scripts]
+hardcore-restore = "hardcore_restore.cli:main"
+
+
+[project.urls]
+Homepage = "https://gitlab.com/leswell/hardcore-restore/-/blob/main/README.md"
+# Documentation = "https://readthedocs.org"
+Repository = "https://gitlab.com/leswell/hardcore-restore"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hardcore_restore"]
+
+[tool.hatch.envs.default]
+dependencies =[
+  "black"
+]
