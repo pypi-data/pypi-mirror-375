@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+setup.py
+datapress/__init__.py
+datapress/client.py
+datapress.egg-info/PKG-INFO
+datapress.egg-info/SOURCES.txt
+datapress.egg-info/dependency_links.txt
+datapress.egg-info/requires.txt
+datapress.egg-info/top_level.txt
+tests/__init__.py
+tests/conftest.py
+tests/test_client.py
+tests/test_integration.py
