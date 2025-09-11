@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: types-scrapy
+Version: 0.1.0
+Summary: Typing stubs for Scrapy
+Author-email: Rabii Atrach <mr.atrach@icloud.com>
+License-Expression: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# types-scrapy
+Typing stubs for [Scrapy](https://scrapy.org).
+
+## Installation
+```bash
+pip install types-scrapy
+
