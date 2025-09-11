@@ -1,0 +1,114 @@
+[tool.poetry]
+name = "pesapal_client"
+version = "v0.1.1"
+description = "A Typed Python client for the Pesapal API with sync/async support, order submission, IPN management, and optional CLI tools."
+authors = ["Ibrahim Kirabo <kiraboibra268@gmail.com>"]
+repository = "https://github.com/kiraboibrahim/pesapal-client"
+documentation = "https://kiraboibrahim.github.io/pesapal-client/"
+readme = "README.md"
+packages = [{ include = "pesapal_client" }]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+httpx = "^0.28.1"
+pydantic = { extras = ["email"], version = "^2.11.7" }
+pydantic-extra-types = "^2.10.5"
+pycountry = "^24.6.1"
+pyjwt = "^2.10.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+deptry = "^0.16.2"
+mypy = "^1.5.1"
+pre-commit = "^3.4.0"
+tox = "^4.11.1"
+respx = "^0.22.0"
+ruff = "^0.12.12"
+python-dotenv = "^1.1.1"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.4.2"
+mkdocs-material = "^9.2.7"
+mkdocstrings = { extras = ["python"], version = "^0.26.1" }
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+files = ["pesapal_client"]
+disallow_untyped_defs = "True"
+disallow_any_unimported = "True"
+no_implicit_optional = "True"
+check_untyped_defs = "True"
+warn_return_any = "True"
+warn_unused_ignores = "True"
+show_error_codes = "True"
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["live: marks tests as requiring live API access"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+fix = true
+lint.select = [
+  # flake8-2020
+  "YTT",
+  # flake8-bandit
+  "S",
+  # flake8-bugbear
+  "B",
+  # flake8-builtins
+  "A",
+  # flake8-comprehensions
+  "C4",
+  # flake8-debugger
+  "T10",
+  # flake8-simplify
+  "SIM",
+  # isort
+  "I",
+  # mccabe
+  "C90",
+  # pycodestyle
+  "E",
+  "W",
+  # pyflakes
+  "F",
+  # pygrep-hooks
+  "PGH",
+  # pyupgrade
+  "UP",
+  # ruff
+  "RUF",
+  # tryceratops
+  "TRY",
+]
+lint.ignore = [
+  # LineTooLong
+  "E501",
+  # DoNotAssignLambda
+  "E731",
+]
+
+[tool.ruff.format]
+preview = true
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["pesapal_client"]
+
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["S105", "S106"]
