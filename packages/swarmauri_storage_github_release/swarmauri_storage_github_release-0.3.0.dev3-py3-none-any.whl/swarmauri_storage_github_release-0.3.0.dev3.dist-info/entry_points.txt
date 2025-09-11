@@ -1,0 +1,6 @@
+[peagen.plugins.storage_adapters]
+gh_release=swarmauri_storage_github_release.gh_release_storage_adapter:GithubReleaseStorageAdapter
+
+[swarmauri.storage_adapters]
+GithubReleaseStorageAdapter=swarmauri_storage_github_release.gh_release_storage_adapter:GithubReleaseStorageAdapter
+
