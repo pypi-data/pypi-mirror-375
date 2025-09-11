@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: pysolhttpclient
+Version: 3.13.5
+Summary: pysolhttpclient
+Home-page: https://github.com/champax/pysolhttpclient
+Author: Laurent Champagnac
+Author-email: Laurent Champagnac <champagnac.laurent@gmail.com>, Laurent Labatut <laurent@labatut.net>
+Maintainer-email: Laurent Champagnac <champagnac.laurent@gmail.com>, Laurent Labatut <laurent@labatut.net>
+License: GPL-3.0
+Project-URL: Homepage, https://github.com/champax/pysolhttpclient
+Project-URL: Repository, https://github.com/champax/pysolhttpclient
+Keywords: python,gevent
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Other Environment
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Natural Language :: English
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: greenlet
+Requires-Dist: gevent
+Requires-Dist: pytz
+Requires-Dist: pysolbase>=3.13.0
+Requires-Dist: geventhttpclient
+Requires-Dist: urllib3
+Provides-Extra: test
+Requires-Dist: unittest-xml-reporting; extra == "test"
+Requires-Dist: pylint; extra == "test"
+Requires-Dist: twine; extra == "test"
+Requires-Dist: tox; extra == "test"
+Requires-Dist: toml; extra == "test"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+
+pysolhttpclient
+============
+
+Welcome to pysol
+
+Copyright (C) 2013/2025 Laurent Labatut / Laurent Champagnac
+
+pysolhttpclient is a set an HTTP client Apis
+
+They are gevent based
+They support urllib3 and geventhttpclient implementations
+They support http and https
+They support http proxy (tested with squid)
+
+HttpResponse.headers is a dict, from string to string (direct header access) or from string to list (in case the same header is present several times in the http response)
+

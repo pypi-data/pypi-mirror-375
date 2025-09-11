@@ -1,0 +1,15 @@
+# gevent stack
+greenlet
+gevent
+
+# date
+pytz
+
+# pysol
+pysolbase>=3.13.0
+
+# http
+geventhttpclient
+
+# urllib
+urllib3
