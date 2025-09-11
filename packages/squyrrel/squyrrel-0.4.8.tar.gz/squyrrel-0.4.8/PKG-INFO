@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: squyrrel
+Version: 0.4.8
+Summary: Python library for scanning and lazy importing of classes, modules and packages. Including sql parser, builder and an Orm.
+Home-page: https://github.com/LotharSpiegel/squyrrel
+Download-URL: https://github.com/LotharSpiegel/squyrrel/archive/v0.4.8.tar.gz
+Author: Lothar Spiegel
+Author-email: l.spiegel@gmx.at
+Project-URL: Bug Reports, https://github.com/LotharSpiegel/squyrrel/issues
+Project-URL: Source, https://github.com/LotharSpiegel/squyrrel
+Keywords: python packages import
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# Squyrrel
+
+## Installation
+
+```$ pip install squyrrel```
+
+## Run from command line
+
+Example:
+```$ manage.py load_package squyrrel```
+
+## Deploy new Squyrrel version to Pipy
+To release a new version on the [PyPi Python Package Index](https://pypi.org/), follow these steps: 
+
+* Delete files in dist folder (in case there is a dist folder in the root dir of the project and it contains files) 
+* Update version number (as you see fit) in setup.py and possibly commit this update as 'update version' or sth.
+* Run 
+```
+$ setup.py sdist
+``` 
+on the cmd line in your project root. This will create (or fill) the dist folder (creating a tar.gz archive)
+* Run
+```
+$ twine upload dist/*
+```
+on the cmd line in your project root. This will upload the archive created in the previous step to you pypi package repository
+(and thus making the new release available through pip install <pypi_repo_name>
