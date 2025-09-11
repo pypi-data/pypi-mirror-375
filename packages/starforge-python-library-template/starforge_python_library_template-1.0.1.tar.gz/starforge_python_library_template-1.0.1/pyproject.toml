@@ -1,0 +1,104 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "starforge-python-library-template"
+version = "1.0.1"
+description = "A Python library template for Starforge projects"
+readme = "README.md"
+license-files = ["LICENSE"]
+authors = [
+    {name = "Starforge Worker", email = "star.forge.worker@gmail.com"}
+]
+maintainers = [
+    {name = "Starforge Worker", email = "star.forge.worker@gmail.com"}
+]
+keywords = ["template", "library", "python", "starforge"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Testing",
+]
+requires-python = ">=3.10"
+dependencies = [
+
+]
+
+[project.optional-dependencies]
+dev = [
+    "pylint>=3.0.0",
+    "coverage>=7.0.0",
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+    "build>=0.10.0",
+    "twine>=4.0.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/starforge-universe/python-library-template"
+Documentation = "https://python-library-template.readthedocs.io/"
+Repository = "https://github.com/starforge-universe/python-library-template"
+"Bug Tracker" = "https://github.com/starforge-universe/python-library-template/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["starforge_library_template*"]
+
+[project.scripts]
+starforge_library_template = "starforge_library_template.__main__:main"
+
+[project.entry-points."console_scripts"]
+starforge_library_template = "starforge_library_template.__main__:main"
+
+
+
+[tool.pylint.messages_control]
+disable = [
+
+]
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.pylint.basic]
+good-names = ["i", "j", "k", "ex", "Run", "_"]
+
+[tool.coverage.run]
+source = ["starforge_library_template"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
