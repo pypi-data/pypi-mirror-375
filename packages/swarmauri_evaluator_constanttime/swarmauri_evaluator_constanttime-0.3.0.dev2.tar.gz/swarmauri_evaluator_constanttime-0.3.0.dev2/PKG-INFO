@@ -1,0 +1,23 @@
+Metadata-Version: 2.3
+Name: swarmauri_evaluator_constanttime
+Version: 0.3.0.dev2
+Summary: Evaluator that detects timing side channels using fixed-vs-random test
+License: Apache-2.0
+Keywords: swarmauri,evaluator,constant time,side channel,timing
+Author: SwarmAuri Team
+Author-email: info@swarmauri.com
+Requires-Python: >=3.10,<3.13
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Development Status :: 3 - Alpha
+Requires-Dist: swarmauri_base
+Requires-Dist: swarmauri_core
+Description-Content-Type: text/markdown
+
+# swarmauri_evaluator_constanttime
+
+Evaluator that detects timing side channels using a simple fixed-vs-random test.
+
