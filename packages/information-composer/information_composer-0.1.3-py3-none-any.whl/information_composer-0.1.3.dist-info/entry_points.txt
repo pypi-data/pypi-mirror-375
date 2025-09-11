@@ -1,0 +1,3 @@
+[console_scripts]
+md-llm-filter = information_composer.llm_filter.cli.main:main
+pdf-validator = information_composer.pdf.cli.main:main
