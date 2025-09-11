@@ -1,0 +1,2 @@
+[console_scripts]
+chromedriver-path = py_chromedriver_autoinstaller.utils:print_chromedriver_path
