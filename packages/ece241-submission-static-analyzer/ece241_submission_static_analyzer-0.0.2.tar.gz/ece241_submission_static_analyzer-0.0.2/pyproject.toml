@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ece241_submission_static_analyzer"
+version = "0.0.2"
+authors = [{ name = "Zibin Chen", email = "chenzibin2017@outlook.com" }]
+description = "A package that performs static analysis on code submissions."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
