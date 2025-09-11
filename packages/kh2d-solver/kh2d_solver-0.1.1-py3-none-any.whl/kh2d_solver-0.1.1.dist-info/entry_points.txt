@@ -1,0 +1,3 @@
+[console_scripts]
+kh2d-simulate=kh2d_solver.cli:main
+
