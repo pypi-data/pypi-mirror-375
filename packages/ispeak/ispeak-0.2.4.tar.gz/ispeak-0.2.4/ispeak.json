@@ -1,0 +1,60 @@
+{
+  "ispeak": {
+    "binary": null,
+    "push_to_talk_key": "shift_l",
+    "push_to_talk_key_delay": 0.3,
+    "escape_key": "esc",
+    "log_file": null,
+    "output": "keyboard",
+    "recording_indicator": ";",
+    "delete_keyword": ["delete", "undo"],
+    "delete_key": null,
+    "strip_whitespace": true
+  },
+  "stt": {
+    "model": "tiny",
+    "language": "auto",
+    "beam_size": 5,
+    "compute_type": "auto",
+    "download_root": null,
+    "enable_realtime_transcription": false,
+    "ensure_sentence_ends_with_period": true,
+    "ensure_sentence_starting_uppercase": true,
+    "initial_prompt": null,
+    "no_log_file": true,
+    "normalize_audio": true,
+    "spinner": false
+  },
+
+  "plugin": {
+
+    "replace": {
+      "use": false,
+      "order": 0,
+      "settings": {
+        "iSpeak": "ispeak"
+      }
+    },
+
+    "text2num": {
+      "use": false,
+      "order": 1,
+      "settings": {
+        "lang": "en",
+        "threshold": 0.0
+      }
+    },
+
+    "num2words": {
+      "use": false,
+      "order": 2,
+      "settings": {
+        "lang": "en",
+        "to": "ordinal",
+        "min": null,
+        "max": null
+      }
+    }
+
+  }
+}
