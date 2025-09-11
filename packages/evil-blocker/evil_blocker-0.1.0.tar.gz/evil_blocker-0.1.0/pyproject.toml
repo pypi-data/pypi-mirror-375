@@ -1,0 +1,17 @@
+[project]
+name = "evil-blocker"
+version = "0.1.0"
+description = "protect your personal server from abusive activity"
+readme = "README.md"
+authors = [
+    { name = "ZhuangYumin", email = "zymx@pm.me" }
+]
+requires-python = ">=3.12.11"
+dependencies = []
+
+[project.scripts]
+evil-blocker = "evil_blocker:main"
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
