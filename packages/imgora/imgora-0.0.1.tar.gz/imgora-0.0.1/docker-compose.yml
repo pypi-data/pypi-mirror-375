@@ -1,0 +1,20 @@
+services:
+  imagor:
+    image: shumc/imagor:latest
+    ports:
+      - "8018:8000"
+    environment:
+      - PORT=8000
+      - DEBUG=1
+      - IMAGOR_SECRET=my_key
+      - IMAGOR_UNSAFE=1
+      - IMAGOR_SIGNER_TYPE=sha256
+      # - IMAGOR_SIGNER_TRUNCATE=40
+
+  thumbor:
+    image: ghcr.io/minimalcompact/thumbor:7.7.4
+    ports:
+      - "8019:80"
+    environment:
+      - SECURITY_KEY=my_key
+      - ALLOW_UNSAFE_URL=1
