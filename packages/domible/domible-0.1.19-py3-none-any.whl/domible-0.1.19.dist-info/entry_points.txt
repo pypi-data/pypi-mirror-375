@@ -1,0 +1,3 @@
+[console_scripts]
+dicli=domible.scripts.dicli.main:run
+
