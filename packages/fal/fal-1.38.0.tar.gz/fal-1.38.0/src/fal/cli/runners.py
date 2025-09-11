@@ -1,0 +1,219 @@
+from __future__ import annotations
+
+import json
+from datetime import timedelta
+from typing import List
+
+from fal.sdk import RunnerInfo, RunnerState
+
+from ._utils import get_client
+from .parser import FalClientParser, SinceAction, get_output_parser
+
+
+def runners_table(runners: List[RunnerInfo]):
+    from rich.table import Table
+
+    table = Table()
+    table.add_column("Alias")
+    table.add_column("Runner ID")
+    table.add_column("In Flight\nRequests")
+    table.add_column("Expires In")
+    table.add_column("Uptime")
+    table.add_column("Revision")
+    table.add_column("State")
+
+    for runner in runners:
+        external_metadata = runner.external_metadata
+        present = external_metadata.get("present_in_group", True)
+
+        num_leases_with_request = len(
+            [
+                lease
+                for lease in external_metadata.get("leases", [])
+                if lease.get("request_id") is not None
+            ]
+        )
+
+        in_flight = str(runner.in_flight_requests)
+        missing_leases = runner.in_flight_requests - num_leases_with_request
+        if missing_leases > 0:
+            # Show a small indicator of in flight requests that are not visible in the
+            # leases lists
+            # This can be due to race conditions, so only important to report if it's
+            # consistent
+            in_flight = f"{in_flight} [dim]({missing_leases})[/]"
+
+        uptime = timedelta(
+            seconds=int(runner.uptime.total_seconds()),
+        )
+        table.add_row(
+            runner.alias,
+            # Mark lost runners in red
+            runner.runner_id if present else f"[red]{runner.runner_id}[/]",
+            in_flight,
+            (
+                "N/A"
+                if runner.expiration_countdown is None
+                else f"{runner.expiration_countdown}s"
+            ),
+            f"{uptime} ({uptime.total_seconds():.0f}s)",
+            runner.revision,
+            runner.state.value,
+        )
+
+    return table
+
+
+def runners_requests_table(runners: list[RunnerInfo]):
+    from rich.table import Table
+
+    table = Table()
+    table.add_column("Runner ID")
+    table.add_column("Request ID")
+    table.add_column("Caller ID")
+
+    for runner in runners:
+        for lease in runner.external_metadata.get("leases", []):
+            if not (req_id := lease.get("request_id")):
+                continue
+
+            table.add_row(
+                runner.runner_id,
+                req_id,
+                lease.get("caller_user_id") or "",
+            )
+
+    return table
+
+
+def _kill(args):
+    client = get_client(args.host, args.team)
+    with client.connect() as connection:
+        connection.kill_runner(args.id)
+
+
+def _list_json(args, runners: list[RunnerInfo]):
+    json_runners = [
+        {
+            "alias": r.alias,
+            "runner_id": r.runner_id,
+            "in_flight_requests": r.in_flight_requests,
+            "expiration_countdown": r.expiration_countdown,
+            "uptime_seconds": int(r.uptime.total_seconds()),
+            "revision": r.revision,
+            "state": r.state.value,
+        }
+        for r in runners
+    ]
+
+    res = {
+        "runners": json_runners,
+    }
+    args.console.print(json.dumps(res))
+
+
+def _list(args):
+    client = get_client(args.host, args.team)
+    with client.connect() as connection:
+        start_time = getattr(args, "since", None)
+        runners = connection.list_runners(start_time=start_time)
+
+        if getattr(args, "state", None):
+            states = set(args.state)
+            if "all" not in states:
+                runners = [r for r in runners if r.state.value in states]
+        pending_runners = [
+            runner for runner in runners if runner.state == RunnerState.PENDING
+        ]
+        setup_runners = [
+            runner for runner in runners if runner.state == RunnerState.SETUP
+        ]
+        dead_runners = [
+            runner for runner in runners if runner.state == RunnerState.DEAD
+        ]
+        if args.output == "pretty":
+            args.console.print(
+                "Runners: "
+                + str(
+                    len(runners)
+                    - len(pending_runners)
+                    - len(setup_runners)
+                    - len(dead_runners)
+                )
+            )
+            args.console.print(f"Runners Pending: {len(pending_runners)}")
+            args.console.print(f"Runners Setting Up: {len(setup_runners)}")
+            args.console.print(runners_table(runners))
+
+            requests_table = runners_requests_table(runners)
+            args.console.print(f"Requests: {len(requests_table.rows)}")
+            args.console.print(requests_table)
+        elif args.output == "json":
+            _list_json(args, runners)
+        else:
+            raise AssertionError(f"Invalid output format: {args.output}")
+
+
+def _add_kill_parser(subparsers, parents):
+    kill_help = "Kill a runner."
+    parser = subparsers.add_parser(
+        "kill",
+        description=kill_help,
+        help=kill_help,
+        parents=parents,
+    )
+    parser.add_argument(
+        "id",
+        help="Runner ID.",
+    )
+    parser.set_defaults(func=_kill)
+
+
+def _add_list_parser(subparsers, parents):
+    list_help = "List runners."
+    parser = subparsers.add_parser(
+        "list",
+        description=list_help,
+        help=list_help,
+        parents=[*parents, get_output_parser()],
+    )
+    parser.add_argument(
+        "--since",
+        default=None,
+        action=SinceAction,
+        limit="1 day",
+        help=(
+            "Show dead runners since the given time. "
+            "Accepts 'now', relative like '30m', '1h', '1d', "
+            "or an ISO timestamp. Max 24 hours."
+        ),
+    )
+    parser.add_argument(
+        "--state",
+        choices=["all", "running", "pending", "setup", "dead"],
+        nargs="+",
+        default=None,
+        help=("Filter by runner state(s). Choose one or more, or 'all'(default)."),
+    )
+    parser.set_defaults(func=_list)
+
+
+def add_parser(main_subparsers, parents):
+    runners_help = "Manage fal runners."
+    parser = main_subparsers.add_parser(
+        "runners",
+        description=runners_help,
+        help=runners_help,
+        parents=parents,
+        aliases=["machine"],  # backwards compatibility
+    )
+
+    subparsers = parser.add_subparsers(
+        title="Commands",
+        metavar="command",
+        required=True,
+        parser_class=FalClientParser,
+    )
+
+    _add_kill_parser(subparsers, parents)
+    _add_list_parser(subparsers, parents)
