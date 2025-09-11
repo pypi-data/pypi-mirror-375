@@ -1,0 +1,112 @@
+name: Publish to PyPI and GitHub Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  bump-version-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Committer
+        if: github.actor == 'github-actions[bot]'
+        run: |
+          echo "Commit made by GitHub Actions. Exiting workflow."
+          exit 0
+
+      - name: Bump Version and Push Tag
+        id: bump_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: main
+          default_bump: patch
+          tag_prefix: 'v'
+          skip_ci: true
+
+      - name: Update VERSION File
+        run: |
+          echo "${{ steps.bump_version.outputs.new_version }}" > VERSION
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add VERSION
+          git commit -m "🔄 Version to v${{ steps.bump_version.outputs.new_version }} [skip ci]" || echo "No changes to commit"
+          git push origin main || echo "Push failed or nothing to push"
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.bump_version.outputs.new_version }}
+          release_name: Release v${{ steps.bump_version.outputs.new_version }}
+          body: "Release version v${{ steps.bump_version.outputs.new_version }}"
+          draft: false
+          prerelease: false
+
+      - name: Fetch all tags so setuptools_scm can detect the tag
+        run: |
+          git fetch --all --tags --prune
+          echo "Tags in repo:"
+          git tag --list
+          echo "Describe:"
+          git describe --tags --long || true
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Build Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools_scm build twine
+
+      - name: Build prompture
+        env:
+          # fallback: force setuptools_scm to use the bumped version if tag isn't seen
+          SETUPTOOLS_SCM_PRETEND_VERSION: ${{ steps.bump_version.outputs.new_version }}
+        run: |
+          python -m build -o dist/prompture
+
+      - name: Publish prompture to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          python -m pip install --upgrade twine
+          ls -al dist/prompture
+          python -m twine upload dist/prompture/* --non-interactive
+
+      ### Build & Publish wrapper ###
+      - name: Build llm-to-json (wrapper)
+        working-directory: packages/llm_to_json
+        env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: ${{ steps.bump_version.outputs.new_version }}
+        run: |
+          python -m build -o ../../dist/llm_to_json
+
+      - name: Publish llm-to-json to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN_LLM_TO_JSON }}
+        run: |
+          python -m twine upload dist/llm_to_json/* --non-interactive
