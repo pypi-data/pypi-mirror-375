@@ -1,0 +1,9 @@
+[console_scripts]
+shift = shift_converter:main
+shift-cloud = shift_cloud_cli:main
+shift-compress = pdf_compressor:main
+shift-convert = shift_converter:main
+shift-edit = pdf_editor:main
+shift-ocr = pdf_ocr:main
+shift-pages = pdf_page_manager:main
+shift-web = main:app
