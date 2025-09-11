@@ -1,0 +1,14 @@
+build
+dist
+MANIFEST
+.idea
+.vscode
+cmake-build-debug
+CMakeLists.txt
+pytun_pmd3/_version.py
+*.egg-info
+*.bak
+*.pyc
+*.o
+*.so
+*.swp
