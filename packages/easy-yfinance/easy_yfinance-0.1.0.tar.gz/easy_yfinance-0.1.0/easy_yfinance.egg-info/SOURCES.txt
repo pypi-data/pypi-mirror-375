@@ -1,0 +1,13 @@
+LICENSE
+README.md
+setup.py
+easy_yfinance/__init__.py
+easy_yfinance/core.py
+easy_yfinance/plotting.py
+easy_yfinance.egg-info/PKG-INFO
+easy_yfinance.egg-info/SOURCES.txt
+easy_yfinance.egg-info/dependency_links.txt
+easy_yfinance.egg-info/requires.txt
+easy_yfinance.egg-info/top_level.txt
+tests/test_core.py
+tests/test_plotting.py
