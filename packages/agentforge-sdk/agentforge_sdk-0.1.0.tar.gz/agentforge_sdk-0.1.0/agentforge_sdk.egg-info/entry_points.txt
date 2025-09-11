@@ -1,0 +1,2 @@
+[console_scripts]
+ag-cli = agentforge_sdk.cli:main

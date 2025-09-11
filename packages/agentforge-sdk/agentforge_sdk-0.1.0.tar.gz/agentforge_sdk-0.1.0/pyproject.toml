@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentforge_sdk"
+version = "0.1.0"
+description = "A plugin-based agent framework with CLI"
+readme = "README.md"
+authors = [
+    { name = "Ostovar", email = "csg53520@gmail.com" }
+]
+license = { text = "MIT" }
+dependencies = [
+    "click"
+]
+
+[project.scripts]
+ag-cli = "agentforge_sdk.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
