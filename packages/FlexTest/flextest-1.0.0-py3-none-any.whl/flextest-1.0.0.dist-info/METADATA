@@ -1,0 +1,57 @@
+Metadata-Version: 2.3
+Name: FlexTest
+Version: 1.0.0
+Summary: A easy-to-use Python unit testing library, designed for beginners and ready to use out of the box.
+License: MIT
+Keywords: Flex,Test,FlexTest
+Author: qiufeng
+Author-email: appleidqiufeng@outlook.com
+Requires-Python: >=3.8,<4.0
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Requires-Dist: colorama (>=0.4.0,<0.5.0)
+Project-URL: Changelog, https://github.com/qiufengcute/FlexTest/blob/main/CHANGELOG.md
+Project-URL: Homepage, https://github.com/qiufengcute/FlexTest
+Project-URL: Repository, https://github.com/qiufengcute/FlexTest
+Description-Content-Type: text/markdown
+
+# FlexTest
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+
+A easy-to-use Python unit testing library, designed for beginners and ready to use out of the box.
+
+## 📦 Installation
+```bash
+pip install FlexTest
+```
+
+## 📜 Changelog
+See [CHANGELOG.md](https://github.com/qiufengcute/FlexTest/blob/main/CHANGELOG.md)
+
+## QuickStart
+```Python
+from FlexTest import TestEq, TestIs, TestEr, TestCustom, summary
+
+# Basic equality test
+TestEq("Addition test", lambda a, b: a + b, 2, 3, expected=5)
+
+# Object identity test
+TestIs("Singleton test", lambda: None, expected=None)
+
+# Exception test
+TestEr("Division by zero test", lambda a, b: a / b, 1, 0, expected_exception=ZeroDivisionError)
+
+# Custom test
+TestCustom("Even number test", lambda x: x % 2 == 0, 4)
+
+# Output test results
+summary()
+```
+
