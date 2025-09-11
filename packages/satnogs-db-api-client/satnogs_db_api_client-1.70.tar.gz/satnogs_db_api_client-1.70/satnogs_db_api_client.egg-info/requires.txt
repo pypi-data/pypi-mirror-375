@@ -1,0 +1,10 @@
+urllib3~=2.5.0
+python-dateutil~=2.9.0
+pydantic~=2.11.0
+typing-extensions~=4.14.0
+versioneer~=0.29.0
+
+[dev]
+build~=1.2.0
+tox~=4.27.0
+twine~=6.1.0
