@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "balanced-group-system"
+version = "0.1.0"
+description = "A management system to create balanced groups of participants"
+authors = ["Joshua Si <josh.j.si@proton.me>"]
+
+[tool.poetry.dependencies]
+python = "^3.9.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^6.2.2"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
