@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hikvision-isapi-utils"
+version = "0.1.0"
+authors = [
+    { name = "sunbo", email = "1443584939@qq.com" },
+]
+description = "A Python library for interacting with Hikvision devices via ISAPI."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "requests>=2.25.0",
+    "httpx>=0.24.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/sunbos/hikvision-isapi-utils"
+"Repository" = "https://github.com/sunbos/hikvision-isapi-utils"

@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/hikvision_isapi_utils/__init__.py
+src/hikvision_isapi_utils/asyncclient.py
+src/hikvision_isapi_utils/client.py
+src/hikvision_isapi_utils.egg-info/PKG-INFO
+src/hikvision_isapi_utils.egg-info/SOURCES.txt
+src/hikvision_isapi_utils.egg-info/dependency_links.txt
+src/hikvision_isapi_utils.egg-info/requires.txt
+src/hikvision_isapi_utils.egg-info/top_level.txt

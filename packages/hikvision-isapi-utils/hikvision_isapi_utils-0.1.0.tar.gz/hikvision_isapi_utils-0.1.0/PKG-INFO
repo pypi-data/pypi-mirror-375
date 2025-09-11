@@ -1,0 +1,86 @@
+Metadata-Version: 2.4
+Name: hikvision-isapi-utils
+Version: 0.1.0
+Summary: A Python library for interacting with Hikvision devices via ISAPI.
+Author-email: sunbo <1443584939@qq.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/sunbos/hikvision-isapi-utils
+Project-URL: Repository, https://github.com/sunbos/hikvision-isapi-utils
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests>=2.25.0
+Requires-Dist: httpx>=0.24.0
+Dynamic: license-file
+
+# hikvision-isapi-utils
+
+一个用于与海康威视 (Hikvision) 设备进行通信的 Python 库，支持同步和异步操作。
+
+## 安装
+
+```bash
+pip install hikvision-isapi-utils
+```
+
+## 快速开始
+
+### 同步客户端
+
+```python
+from hikvision_isapi_utils import Client
+
+# 创建客户端
+client = Client(
+    ip="192.168.1.64",
+    username="admin",
+    password="your_password",
+    protocol="http"
+)
+
+# 发送请求
+response = client._request("GET", "/ISAPI/System/deviceInfo")
+print(response.text)
+
+# 关闭客户端
+client.close()
+```
+
+### 异步客户端
+
+```python
+import asyncio
+from hikvision_isapi_utils import AsyncClient
+
+async def main():
+    async with AsyncClient(
+        ip="192.168.1.64",
+        username="admin",
+        password="your_password",
+        protocol="http"
+    ) as client:
+        response = await client._request("GET", "/ISAPI/System/deviceInfo")
+        print(response.text)
+
+# 运行异步函数
+asyncio.run(main())
+```
+
+## 依赖
+
+*   Python >= 3.8
+*   `requests`
+*   `httpx`
+
+## 许可证
+
+本项目采用 MIT 许可证。详情请见 `LICENSE` 文件。
