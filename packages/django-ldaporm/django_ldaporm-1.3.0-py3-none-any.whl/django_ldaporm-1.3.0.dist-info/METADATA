@@ -1,0 +1,55 @@
+Metadata-Version: 2.4
+Name: django-ldaporm
+Version: 1.3.0
+Summary: A Django ORM-like interface for ldap objectclasses
+Author-email: Caltech IMSS ADS <imss-ads-staff@caltech.edu>
+Project-URL: Homepage, https://github.com/caltechads/django-ldaporm
+Project-URL: Documentation, https://django-ldaporm.readthedocs.io/en/latest/
+Project-URL: Issues, https://github.com/caltechads/django-ldaporm/issues
+Keywords: django,ldap
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 4.2
+Classifier: Framework :: Django :: 5
+Classifier: Framework :: Django :: 5.1
+Classifier: Framework :: Django :: 5.2
+Classifier: Natural Language :: English
+Classifier: Topic :: Database
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Typing :: Typed
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+License-File: AUTHORS.txt
+Requires-Dist: pytz>=2019.3
+Requires-Dist: ldap_filter>=0.2.2
+Requires-Dist: python-ldap>=3.2.0
+Requires-Dist: pyasn1>=0.6.1
+Requires-Dist: asn1>=3.1.0
+Dynamic: license-file
+
+# django-ldaporm
+
+`django-ldaporm` provides  Django ORM-like module that allows you to treat ldap
+object classes like RDBMS tables.  This allows you to use Django forms, fields
+and views natively with ldap models.
+
+## Installing django-ldaporm
+
+`django-ldaporm` is a pure python package.  As such, it can be installed in the
+usual python ways.  For the following instructions, either install it into your
+global python install, or use a python [virtual
+environment](https://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/)
+to install it without polluting your global python environment.
+
+### Install via pip
+
+    pip install django-ldaporm
