@@ -1,0 +1,9 @@
+rule infer
+  command = /Users/pascal/dvp/OpenSource/ImGuiWork/_Bundle/litgen/venv/bin/python3.12 -m pytype.single --imports_info $imports --module-name $module --platform darwin -V 3.12 -o $out --no-report-errors --nofail --quick $in
+  description = infer $module
+rule check
+  command = /Users/pascal/dvp/OpenSource/ImGuiWork/_Bundle/litgen/venv/bin/python3.12 -m pytype.single --imports_info $imports --module-name $module --platform darwin -V 3.12 -o $out --analyze-annotated --nofail --quick $in
+  description = check $module
+build /Users/pascal/dvp/OpenSource/ImGuiWork/_Bundle/litgen/src/litgen/tests/internal/adapted_types/.pytype/pyi/litgen/tests/internal/adapted_types/test_poub.pyi: check /Users/pascal/dvp/OpenSource/ImGuiWork/_Bundle/litgen/src/litgen/tests/internal/adapted_types/test_poub.py
+  imports = /Users/pascal/dvp/OpenSource/ImGuiWork/_Bundle/litgen/src/litgen/tests/internal/adapted_types/.pytype/imports/litgen.tests.internal.adapted_types.test_poub.imports
+  module = litgen.tests.internal.adapted_types.test_poub
