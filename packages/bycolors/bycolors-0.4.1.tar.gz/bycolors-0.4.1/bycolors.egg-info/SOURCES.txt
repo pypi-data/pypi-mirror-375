@@ -1,0 +1,17 @@
+README.md
+setup.py
+bycolors/__config__.py
+bycolors/__init__.py
+bycolors/by_palette.py
+bycolors/cmap.py
+bycolors/color_class.py
+bycolors/palette.py
+bycolors/utils.py
+bycolors.egg-info/PKG-INFO
+bycolors.egg-info/SOURCES.txt
+bycolors.egg-info/dependency_links.txt
+bycolors.egg-info/top_level.txt
+bycolors/tests/__init__.py
+bycolors/tests/test_base_palette.py
+bycolors/tests/test_by_palette.py
+bycolors/tests/test_color_class.py
