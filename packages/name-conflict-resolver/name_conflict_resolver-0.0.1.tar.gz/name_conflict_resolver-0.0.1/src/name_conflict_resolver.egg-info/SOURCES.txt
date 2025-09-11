@@ -1,0 +1,11 @@
+.gitignore
+README.md
+example.py
+pyproject.toml
+.github/workflows/package.yml
+src/name_conflict_resolver/__init__.py
+src/name_conflict_resolver/name_conflict_resolver.py
+src/name_conflict_resolver.egg-info/PKG-INFO
+src/name_conflict_resolver.egg-info/SOURCES.txt
+src/name_conflict_resolver.egg-info/dependency_links.txt
+src/name_conflict_resolver.egg-info/top_level.txt
