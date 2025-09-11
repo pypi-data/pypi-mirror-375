@@ -1,0 +1,12 @@
+LICENSE
+NOTICE.txt
+README.md
+pyproject.toml
+esql_parser/EsqlBaseLexer.py
+esql_parser/EsqlBaseParser.py
+esql_parser/EsqlBaseParserListener.py
+esql_parser.egg-info/PKG-INFO
+esql_parser.egg-info/SOURCES.txt
+esql_parser.egg-info/dependency_links.txt
+esql_parser.egg-info/requires.txt
+esql_parser.egg-info/top_level.txt
