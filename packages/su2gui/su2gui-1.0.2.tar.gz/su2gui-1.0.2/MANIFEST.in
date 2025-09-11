@@ -1,0 +1,5 @@
+include su2gui-main/JsonSchema.json
+include su2gui-main/su2_validation_schema.json
+graft su2gui-main/img
+graft su2gui-main/icons
+graft su2gui-main/user

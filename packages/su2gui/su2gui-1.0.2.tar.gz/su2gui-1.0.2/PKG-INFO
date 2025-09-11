@@ -1,0 +1,27 @@
+Metadata-Version: 2.4
+Name: su2gui
+Version: 1.0.2
+Summary: SU2GUI is a Python-based GUI for SU2 simulation setup, execution, and analysis.
+License: GPL-3.0
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+License-File: LICENSE.txt
+Requires-Dist: jsonschema>=4.19.1
+Requires-Dist: pandas>=2.1.0
+Requires-Dist: trame>=3.2.0
+Requires-Dist: trame-client>=2.12.0
+Requires-Dist: trame-components>=2.2.0
+Requires-Dist: trame-markdown>=3.0.0
+Requires-Dist: trame-matplotlib>=2.0.0
+Requires-Dist: trame-server>=2.12.0
+Requires-Dist: trame-vtk>=2.5.0
+Requires-Dist: trame-vuetify>=2.3.0
+Requires-Dist: vtk>=9.2.0
+Dynamic: classifier
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
