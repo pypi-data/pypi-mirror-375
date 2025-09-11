@@ -1,0 +1,74 @@
+Metadata-Version: 2.4
+Name: python_toolbox
+Version: 1.2.6
+Summary: A collection of Python tools for various tasks
+Author: Ram Rachum
+Author-email: ram@rachum.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Utilities
+License-File: LICENSE
+Requires-Dist: setuptools
+Provides-Extra: tests
+Requires-Dist: docutils>=0.8; extra == "tests"
+Requires-Dist: pytest; extra == "tests"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: license
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: summary
+
+
+The Python Toolbox is a collection of Python tools for various tasks. It
+contains:
+
+ - ``python_toolbox.caching``: Tools for caching functions, class instances and
+    properties.
+
+ - ``python_toolbox.cute_iter_tools``: Tools for manipulating iterables. Adds
+    useful functions not found in Python's built-in ``itertools``.
+
+ - ``python_toolbox.context_management``: Pimping up your context managers.
+
+ - ``python_toolbox.emitting``: A publisher-subscriber framework that doesn't
+    abuse strings.
+
+ - And many, *many* more! The Python Toolbox contains **100+** useful
+   little tools.
+
+
+Documentation: http://python-toolbox.readthedocs.io
+
+Python Toolbox on GitHub: https://github.com/cool-RR/python_toolbox
+
+Python Toolbox on PyPI: https://pypi.python.org/pypi/python_toolbox
+
+Tests
+=====
+
+Test can be run by running the ``_test_python_toolbox.py`` script that's
+installed automatically with the Python Toolbox.
+
+When ``python_toolbox`` isn't installed, you may run ``pytest`` at the repo
+root to run the tests.
+
+
+-------------------------------------------------------
+
+The Python Toolbox was created by Ram Rachum. I provide
+`Development services in Python and Django <https://chipmunkdev.com>`_.
+
+
