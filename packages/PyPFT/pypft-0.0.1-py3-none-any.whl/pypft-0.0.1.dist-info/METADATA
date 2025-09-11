@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: PyPFT
+Version: 0.0.1
+Summary: Polar Fourier Transform for Reconstruction of Polar MR images
+Project-URL: Homepage, https://github.com/GhDamghani/PyPFT
+Project-URL: Issues, https://github.com/GhDamghani/PyPFT/issues
+Author-email: Hossein Ghasem Damghani <hghdamghani@gmail.com>
+License-Expression: MIT
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+
+# PyPFT
+Polar Fourier Transform for Reconstruction of Polar MR images
