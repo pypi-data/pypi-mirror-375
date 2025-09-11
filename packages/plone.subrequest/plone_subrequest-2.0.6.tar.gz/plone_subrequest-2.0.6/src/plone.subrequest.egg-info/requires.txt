@@ -1,0 +1,9 @@
+setuptools
+plone.protect
+Zope
+
+[test]
+five.localsitemanager
+manuel
+plone.testing[zope]
+zope.configuration
