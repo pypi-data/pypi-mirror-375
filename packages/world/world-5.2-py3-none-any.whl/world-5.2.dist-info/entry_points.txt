@@ -1,0 +1,2 @@
+[console_scripts]
+world = world.__main__:main
